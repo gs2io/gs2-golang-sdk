@@ -1,4 +1,4 @@
-module app
+module github.com/gs2io/gs2-golang-sdk
 
 go 1.15
 
