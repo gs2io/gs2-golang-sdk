@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package experience
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -111,16 +115,16 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 type DeleteNamespaceResult struct {
-	/** 削除したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 削除したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -129,20 +133,20 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeExperienceModelMastersResult struct {
-	/** 経験値の種類マスターのリスト */
-	Items *[]*ExperienceModelMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 経験値の種類マスターのリスト */
+	Items         *[]*ExperienceModelMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeExperienceModelMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeExperienceModelMastersAsyncResult struct {
@@ -151,16 +155,16 @@ type DescribeExperienceModelMastersAsyncResult struct {
 }
 
 type CreateExperienceModelMasterResult struct {
-	/** 作成した経験値の種類マスター */
-	Item *ExperienceModelMaster `json:"item"`
+    /** 作成した経験値の種類マスター */
+	Item         *ExperienceModelMaster	`json:"item"`
 }
 
 func (p *CreateExperienceModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateExperienceModelMasterAsyncResult struct {
@@ -169,16 +173,16 @@ type CreateExperienceModelMasterAsyncResult struct {
 }
 
 type GetExperienceModelMasterResult struct {
-	/** 経験値の種類マスター */
-	Item *ExperienceModelMaster `json:"item"`
+    /** 経験値の種類マスター */
+	Item         *ExperienceModelMaster	`json:"item"`
 }
 
 func (p *GetExperienceModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetExperienceModelMasterAsyncResult struct {
@@ -187,16 +191,16 @@ type GetExperienceModelMasterAsyncResult struct {
 }
 
 type UpdateExperienceModelMasterResult struct {
-	/** 更新した経験値の種類マスター */
-	Item *ExperienceModelMaster `json:"item"`
+    /** 更新した経験値の種類マスター */
+	Item         *ExperienceModelMaster	`json:"item"`
 }
 
 func (p *UpdateExperienceModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateExperienceModelMasterAsyncResult struct {
@@ -205,16 +209,16 @@ type UpdateExperienceModelMasterAsyncResult struct {
 }
 
 type DeleteExperienceModelMasterResult struct {
-	/** 削除した経験値の種類マスター */
-	Item *ExperienceModelMaster `json:"item"`
+    /** 削除した経験値の種類マスター */
+	Item         *ExperienceModelMaster	`json:"item"`
 }
 
 func (p *DeleteExperienceModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteExperienceModelMasterAsyncResult struct {
@@ -223,15 +227,15 @@ type DeleteExperienceModelMasterAsyncResult struct {
 }
 
 type DescribeExperienceModelsResult struct {
-	/** 経験値・ランクアップ閾値モデルのリスト */
-	Items *[]*ExperienceModel `json:"items"`
+    /** 経験値・ランクアップ閾値モデルのリスト */
+	Items         *[]*ExperienceModel	`json:"items"`
 }
 
 func (p *DescribeExperienceModelsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DescribeExperienceModelsAsyncResult struct {
@@ -240,16 +244,16 @@ type DescribeExperienceModelsAsyncResult struct {
 }
 
 type GetExperienceModelResult struct {
-	/** 経験値・ランクアップ閾値モデル */
-	Item *ExperienceModel `json:"item"`
+    /** 経験値・ランクアップ閾値モデル */
+	Item         *ExperienceModel	`json:"item"`
 }
 
 func (p *GetExperienceModelResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetExperienceModelAsyncResult struct {
@@ -258,20 +262,20 @@ type GetExperienceModelAsyncResult struct {
 }
 
 type DescribeThresholdMastersResult struct {
-	/** ランクアップ閾値マスターのリスト */
-	Items *[]*ThresholdMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ランクアップ閾値マスターのリスト */
+	Items         *[]*ThresholdMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeThresholdMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeThresholdMastersAsyncResult struct {
@@ -280,16 +284,16 @@ type DescribeThresholdMastersAsyncResult struct {
 }
 
 type CreateThresholdMasterResult struct {
-	/** 作成したランクアップ閾値マスター */
-	Item *ThresholdMaster `json:"item"`
+    /** 作成したランクアップ閾値マスター */
+	Item         *ThresholdMaster	`json:"item"`
 }
 
 func (p *CreateThresholdMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateThresholdMasterAsyncResult struct {
@@ -298,16 +302,16 @@ type CreateThresholdMasterAsyncResult struct {
 }
 
 type GetThresholdMasterResult struct {
-	/** ランクアップ閾値マスター */
-	Item *ThresholdMaster `json:"item"`
+    /** ランクアップ閾値マスター */
+	Item         *ThresholdMaster	`json:"item"`
 }
 
 func (p *GetThresholdMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetThresholdMasterAsyncResult struct {
@@ -316,16 +320,16 @@ type GetThresholdMasterAsyncResult struct {
 }
 
 type UpdateThresholdMasterResult struct {
-	/** 更新したランクアップ閾値マスター */
-	Item *ThresholdMaster `json:"item"`
+    /** 更新したランクアップ閾値マスター */
+	Item         *ThresholdMaster	`json:"item"`
 }
 
 func (p *UpdateThresholdMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateThresholdMasterAsyncResult struct {
@@ -334,16 +338,16 @@ type UpdateThresholdMasterAsyncResult struct {
 }
 
 type DeleteThresholdMasterResult struct {
-	/** 削除したランクアップ閾値マスター */
-	Item *ThresholdMaster `json:"item"`
+    /** 削除したランクアップ閾値マスター */
+	Item         *ThresholdMaster	`json:"item"`
 }
 
 func (p *DeleteThresholdMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteThresholdMasterAsyncResult struct {
@@ -352,16 +356,16 @@ type DeleteThresholdMasterAsyncResult struct {
 }
 
 type ExportMasterResult struct {
-	/** 現在有効な経験値設定 */
-	Item *CurrentExperienceMaster `json:"item"`
+    /** 現在有効な経験値設定 */
+	Item         *CurrentExperienceMaster	`json:"item"`
 }
 
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type ExportMasterAsyncResult struct {
@@ -370,16 +374,16 @@ type ExportMasterAsyncResult struct {
 }
 
 type GetCurrentExperienceMasterResult struct {
-	/** 現在有効な経験値設定 */
-	Item *CurrentExperienceMaster `json:"item"`
+    /** 現在有効な経験値設定 */
+	Item         *CurrentExperienceMaster	`json:"item"`
 }
 
 func (p *GetCurrentExperienceMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCurrentExperienceMasterAsyncResult struct {
@@ -388,16 +392,16 @@ type GetCurrentExperienceMasterAsyncResult struct {
 }
 
 type UpdateCurrentExperienceMasterResult struct {
-	/** 更新した現在有効な経験値設定 */
-	Item *CurrentExperienceMaster `json:"item"`
+    /** 更新した現在有効な経験値設定 */
+	Item         *CurrentExperienceMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentExperienceMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentExperienceMasterAsyncResult struct {
@@ -406,16 +410,16 @@ type UpdateCurrentExperienceMasterAsyncResult struct {
 }
 
 type UpdateCurrentExperienceMasterFromGitHubResult struct {
-	/** 更新した現在有効な経験値設定 */
-	Item *CurrentExperienceMaster `json:"item"`
+    /** 更新した現在有効な経験値設定 */
+	Item         *CurrentExperienceMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentExperienceMasterFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentExperienceMasterFromGitHubAsyncResult struct {
@@ -424,20 +428,20 @@ type UpdateCurrentExperienceMasterFromGitHubAsyncResult struct {
 }
 
 type DescribeStatusesResult struct {
-	/** ステータスのリスト */
-	Items *[]*Status `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ステータスのリスト */
+	Items         *[]*Status	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeStatusesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeStatusesAsyncResult struct {
@@ -446,20 +450,20 @@ type DescribeStatusesAsyncResult struct {
 }
 
 type DescribeStatusesByUserIdResult struct {
-	/** ステータスのリスト */
-	Items *[]*Status `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ステータスのリスト */
+	Items         *[]*Status	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeStatusesByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeStatusesByUserIdAsyncResult struct {
@@ -468,16 +472,16 @@ type DescribeStatusesByUserIdAsyncResult struct {
 }
 
 type GetStatusResult struct {
-	/** ステータス */
-	Item *Status `json:"item"`
+    /** ステータス */
+	Item         *Status	`json:"item"`
 }
 
 func (p *GetStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetStatusAsyncResult struct {
@@ -486,16 +490,16 @@ type GetStatusAsyncResult struct {
 }
 
 type GetStatusByUserIdResult struct {
-	/** ステータス */
-	Item *Status `json:"item"`
+    /** ステータス */
+	Item         *Status	`json:"item"`
 }
 
 func (p *GetStatusByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetStatusByUserIdAsyncResult struct {
@@ -504,26 +508,26 @@ type GetStatusByUserIdAsyncResult struct {
 }
 
 type GetStatusWithSignatureResult struct {
-	/** ステータス */
-	Item *Status `json:"item"`
-	/** 検証対象のオブジェクト */
-	Body *string `json:"body"`
-	/** 署名 */
-	Signature *string `json:"signature"`
+    /** ステータス */
+	Item         *Status	`json:"item"`
+    /** 検証対象のオブジェクト */
+	Body         *core.String	`json:"body"`
+    /** 署名 */
+	Signature         *core.String	`json:"signature"`
 }
 
 func (p *GetStatusWithSignatureResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Body != nil {
-		data["Body"] = p.Body
-	}
-	if p.Signature != nil {
-		data["Signature"] = p.Signature
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Body != nil {
+     data["Body"] = p.Body
+    }
+    if p.Signature != nil {
+     data["Signature"] = p.Signature
+    }
+    return &data
 }
 
 type GetStatusWithSignatureAsyncResult struct {
@@ -532,16 +536,16 @@ type GetStatusWithSignatureAsyncResult struct {
 }
 
 type AddExperienceByUserIdResult struct {
-	/** 加算後のステータス */
-	Item *Status `json:"item"`
+    /** 加算後のステータス */
+	Item         *Status	`json:"item"`
 }
 
 func (p *AddExperienceByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type AddExperienceByUserIdAsyncResult struct {
@@ -550,16 +554,16 @@ type AddExperienceByUserIdAsyncResult struct {
 }
 
 type SetExperienceByUserIdResult struct {
-	/** 更新後のステータス */
-	Item *Status `json:"item"`
+    /** 更新後のステータス */
+	Item         *Status	`json:"item"`
 }
 
 func (p *SetExperienceByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type SetExperienceByUserIdAsyncResult struct {
@@ -568,16 +572,16 @@ type SetExperienceByUserIdAsyncResult struct {
 }
 
 type AddRankCapByUserIdResult struct {
-	/** 加算後のステータス */
-	Item *Status `json:"item"`
+    /** 加算後のステータス */
+	Item         *Status	`json:"item"`
 }
 
 func (p *AddRankCapByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type AddRankCapByUserIdAsyncResult struct {
@@ -586,16 +590,16 @@ type AddRankCapByUserIdAsyncResult struct {
 }
 
 type SetRankCapByUserIdResult struct {
-	/** 更新後のステータス */
-	Item *Status `json:"item"`
+    /** 更新後のステータス */
+	Item         *Status	`json:"item"`
 }
 
 func (p *SetRankCapByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type SetRankCapByUserIdAsyncResult struct {
@@ -604,16 +608,16 @@ type SetRankCapByUserIdAsyncResult struct {
 }
 
 type DeleteStatusByUserIdResult struct {
-	/** ステータス */
-	Item *Status `json:"item"`
+    /** ステータス */
+	Item         *Status	`json:"item"`
 }
 
 func (p *DeleteStatusByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteStatusByUserIdAsyncResult struct {
@@ -622,16 +626,16 @@ type DeleteStatusByUserIdAsyncResult struct {
 }
 
 type AddExperienceByStampSheetResult struct {
-	/** 加算後のステータス */
-	Item *Status `json:"item"`
+    /** 加算後のステータス */
+	Item         *Status	`json:"item"`
 }
 
 func (p *AddExperienceByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type AddExperienceByStampSheetAsyncResult struct {
@@ -640,16 +644,16 @@ type AddExperienceByStampSheetAsyncResult struct {
 }
 
 type AddRankCapByStampSheetResult struct {
-	/** 加算後のステータス */
-	Item *Status `json:"item"`
+    /** 加算後のステータス */
+	Item         *Status	`json:"item"`
 }
 
 func (p *AddRankCapByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type AddRankCapByStampSheetAsyncResult struct {
@@ -658,16 +662,16 @@ type AddRankCapByStampSheetAsyncResult struct {
 }
 
 type SetRankCapByStampSheetResult struct {
-	/** 更新後のステータス */
-	Item *Status `json:"item"`
+    /** 更新後のステータス */
+	Item         *Status	`json:"item"`
 }
 
 func (p *SetRankCapByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type SetRankCapByStampSheetAsyncResult struct {

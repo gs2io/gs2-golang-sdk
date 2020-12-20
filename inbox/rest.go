@@ -50,13 +50,13 @@ func describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -80,10 +80,10 @@ func (p Gs2InboxRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -129,13 +129,13 @@ func createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -151,53 +151,53 @@ func (p Gs2InboxRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.IsAutomaticDeletingEnabled != nil {
-		bodies["isAutomaticDeletingEnabled"] = *request.IsAutomaticDeletingEnabled
-	}
-	if request.ReceiveMessageScript != nil {
-		bodies["receiveMessageScript"] = request.ReceiveMessageScript.ToDict()
-	}
-	if request.ReadMessageScript != nil {
-		bodies["readMessageScript"] = request.ReadMessageScript.ToDict()
-	}
-	if request.DeleteMessageScript != nil {
-		bodies["deleteMessageScript"] = request.DeleteMessageScript.ToDict()
-	}
-	if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
-		bodies["queueNamespaceId"] = *request.QueueNamespaceId
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
-	if request.ReceiveNotification != nil {
-		bodies["receiveNotification"] = request.ReceiveNotification.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.IsAutomaticDeletingEnabled != nil {
+        bodies["isAutomaticDeletingEnabled"] = *request.IsAutomaticDeletingEnabled
+    }
+    if request.ReceiveMessageScript != nil {
+        bodies["receiveMessageScript"] = request.ReceiveMessageScript.ToDict()
+    }
+    if request.ReadMessageScript != nil {
+        bodies["readMessageScript"] = request.ReadMessageScript.ToDict()
+    }
+    if request.DeleteMessageScript != nil {
+        bodies["deleteMessageScript"] = request.DeleteMessageScript.ToDict()
+    }
+    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
+        bodies["queueNamespaceId"] = *request.QueueNamespaceId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+    if request.ReceiveNotification != nil {
+        bodies["receiveNotification"] = request.ReceiveNotification.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -235,13 +235,13 @@ func getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -255,19 +255,19 @@ func (p Gs2InboxRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -313,13 +313,13 @@ func getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -333,19 +333,19 @@ func (p Gs2InboxRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -391,13 +391,13 @@ func updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -411,57 +411,57 @@ func (p Gs2InboxRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.IsAutomaticDeletingEnabled != nil {
-		bodies["isAutomaticDeletingEnabled"] = *request.IsAutomaticDeletingEnabled
-	}
-	if request.ReceiveMessageScript != nil {
-		bodies["receiveMessageScript"] = request.ReceiveMessageScript.ToDict()
-	}
-	if request.ReadMessageScript != nil {
-		bodies["readMessageScript"] = request.ReadMessageScript.ToDict()
-	}
-	if request.DeleteMessageScript != nil {
-		bodies["deleteMessageScript"] = request.DeleteMessageScript.ToDict()
-	}
-	if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
-		bodies["queueNamespaceId"] = *request.QueueNamespaceId
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
-	if request.ReceiveNotification != nil {
-		bodies["receiveNotification"] = request.ReceiveNotification.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.IsAutomaticDeletingEnabled != nil {
+        bodies["isAutomaticDeletingEnabled"] = *request.IsAutomaticDeletingEnabled
+    }
+    if request.ReceiveMessageScript != nil {
+        bodies["receiveMessageScript"] = request.ReceiveMessageScript.ToDict()
+    }
+    if request.ReadMessageScript != nil {
+        bodies["readMessageScript"] = request.ReadMessageScript.ToDict()
+    }
+    if request.DeleteMessageScript != nil {
+        bodies["deleteMessageScript"] = request.DeleteMessageScript.ToDict()
+    }
+    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
+        bodies["queueNamespaceId"] = *request.QueueNamespaceId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+    if request.ReceiveNotification != nil {
+        bodies["receiveNotification"] = request.ReceiveNotification.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -499,13 +499,13 @@ func deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -519,19 +519,19 @@ func (p Gs2InboxRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -577,13 +577,13 @@ func describeMessagesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeMessagesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeMessagesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeMessagesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeMessagesAsyncResult{
 		result: &result,
@@ -597,11 +597,11 @@ func (p Gs2InboxRestClient) DescribeMessagesAsync(
 	callback chan<- DescribeMessagesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/message"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -612,13 +612,13 @@ func (p Gs2InboxRestClient) DescribeMessagesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeMessagesAsyncHandler(
 		p,
@@ -664,13 +664,13 @@ func describeMessagesByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeMessagesByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeMessagesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeMessagesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeMessagesByUserIdAsyncResult{
 		result: &result,
@@ -684,11 +684,11 @@ func (p Gs2InboxRestClient) DescribeMessagesByUserIdAsync(
 	callback chan<- DescribeMessagesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/message"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -702,10 +702,10 @@ func (p Gs2InboxRestClient) DescribeMessagesByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeMessagesByUserIdAsyncHandler(
 		p,
@@ -751,13 +751,13 @@ func sendMessageByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SendMessageByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SendMessageByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SendMessageByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SendMessageByUserIdAsyncResult{
 		result: &result,
@@ -771,51 +771,51 @@ func (p Gs2InboxRestClient) SendMessageByUserIdAsync(
 	callback chan<- SendMessageByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/message"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.ReadAcquireActions != nil {
-		var _readAcquireActions []*map[string]interface{}
-		for _, item := range *request.ReadAcquireActions {
-			_readAcquireActions = append(_readAcquireActions, item.ToDict())
-		}
-		bodies["readAcquireActions"] = _readAcquireActions
-	}
-	if request.ExpiresAt != nil {
-		bodies["expiresAt"] = *request.ExpiresAt
-	}
-	if request.ExpiresTimeSpan != nil {
-		bodies["expiresTimeSpan"] = request.ExpiresTimeSpan.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ReadAcquireActions != nil {
+        var _readAcquireActions []*map[string]interface {}
+        for _, item := range *request.ReadAcquireActions {
+            _readAcquireActions = append(_readAcquireActions, item.ToDict())
+        }
+        bodies["readAcquireActions"] = _readAcquireActions
+    }
+    if request.ExpiresAt != nil {
+        bodies["expiresAt"] = *request.ExpiresAt
+    }
+    if request.ExpiresTimeSpan != nil {
+        bodies["expiresTimeSpan"] = request.ExpiresTimeSpan.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go sendMessageByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -853,13 +853,13 @@ func getMessageAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetMessageResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetMessageAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetMessageAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetMessageAsyncResult{
 		result: &result,
@@ -873,27 +873,27 @@ func (p Gs2InboxRestClient) GetMessageAsync(
 	callback chan<- GetMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/{messageName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.MessageName != nil {
-		path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{messageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.MessageName != nil {
+        path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{messageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getMessageAsyncHandler(
 		p,
@@ -939,13 +939,13 @@ func getMessageByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetMessageByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetMessageByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetMessageByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetMessageByUserIdAsyncResult{
 		result: &result,
@@ -959,29 +959,29 @@ func (p Gs2InboxRestClient) GetMessageByUserIdAsync(
 	callback chan<- GetMessageByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/{messageName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.MessageName != nil {
-		path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{messageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.MessageName != nil {
+        path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{messageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getMessageByUserIdAsyncHandler(
 		p,
@@ -1027,13 +1027,13 @@ func receiveGlobalMessageAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ReceiveGlobalMessageResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ReceiveGlobalMessageAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ReceiveGlobalMessageAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ReceiveGlobalMessageAsyncResult{
 		result: &result,
@@ -1047,33 +1047,33 @@ func (p Gs2InboxRestClient) ReceiveGlobalMessageAsync(
 	callback chan<- ReceiveGlobalMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/{messageName}/globalMessage/receive"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go receiveGlobalMessageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1111,13 +1111,13 @@ func receiveGlobalMessageByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ReceiveGlobalMessageByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ReceiveGlobalMessageByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ReceiveGlobalMessageByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ReceiveGlobalMessageByUserIdAsyncResult{
 		result: &result,
@@ -1131,35 +1131,35 @@ func (p Gs2InboxRestClient) ReceiveGlobalMessageByUserIdAsync(
 	callback chan<- ReceiveGlobalMessageByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/{messageName}/globalMessage/receive"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go receiveGlobalMessageByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1197,13 +1197,13 @@ func openMessageAsyncHandler(
 	asyncResult := <-internalCallback
 	var result OpenMessageResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- OpenMessageAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- OpenMessageAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- OpenMessageAsyncResult{
 		result: &result,
@@ -1217,38 +1217,38 @@ func (p Gs2InboxRestClient) OpenMessageAsync(
 	callback chan<- OpenMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/{messageName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.MessageName != nil {
-		path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{messageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.MessageName != nil {
+        path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{messageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go openMessageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1286,13 +1286,13 @@ func openMessageByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result OpenMessageByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- OpenMessageByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- OpenMessageByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- OpenMessageByUserIdAsyncResult{
 		result: &result,
@@ -1306,40 +1306,40 @@ func (p Gs2InboxRestClient) OpenMessageByUserIdAsync(
 	callback chan<- OpenMessageByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/{messageName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.MessageName != nil {
-		path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{messageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.MessageName != nil {
+        path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{messageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go openMessageByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1377,13 +1377,13 @@ func readMessageAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ReadMessageResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ReadMessageAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ReadMessageAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ReadMessageAsyncResult{
 		result: &result,
@@ -1397,45 +1397,45 @@ func (p Gs2InboxRestClient) ReadMessageAsync(
 	callback chan<- ReadMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/{messageName}/read"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.MessageName != nil {
-		path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{messageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.MessageName != nil {
+        path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{messageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Config != nil {
-		var _config []*map[string]interface{}
-		for _, item := range *request.Config {
-			_config = append(_config, item.ToDict())
-		}
-		bodies["config"] = _config
-	}
+    var bodies = core.Bodies{}
+    if request.Config != nil {
+        var _config []*map[string]interface {}
+        for _, item := range *request.Config {
+            _config = append(_config, item.ToDict())
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go readMessageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1473,13 +1473,13 @@ func readMessageByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ReadMessageByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ReadMessageByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ReadMessageByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ReadMessageByUserIdAsyncResult{
 		result: &result,
@@ -1493,47 +1493,47 @@ func (p Gs2InboxRestClient) ReadMessageByUserIdAsync(
 	callback chan<- ReadMessageByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/{messageName}/read"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.MessageName != nil {
-		path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{messageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.MessageName != nil {
+        path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{messageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Config != nil {
-		var _config []*map[string]interface{}
-		for _, item := range *request.Config {
-			_config = append(_config, item.ToDict())
-		}
-		bodies["config"] = _config
-	}
+    var bodies = core.Bodies{}
+    if request.Config != nil {
+        var _config []*map[string]interface {}
+        for _, item := range *request.Config {
+            _config = append(_config, item.ToDict())
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go readMessageByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1571,13 +1571,13 @@ func deleteMessageAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteMessageResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteMessageAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteMessageAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteMessageAsyncResult{
 		result: &result,
@@ -1591,27 +1591,27 @@ func (p Gs2InboxRestClient) DeleteMessageAsync(
 	callback chan<- DeleteMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/{messageName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.MessageName != nil {
-		path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{messageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.MessageName != nil {
+        path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{messageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go deleteMessageAsyncHandler(
 		p,
@@ -1657,13 +1657,13 @@ func deleteMessageByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteMessageByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteMessageByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteMessageByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteMessageByUserIdAsyncResult{
 		result: &result,
@@ -1677,29 +1677,29 @@ func (p Gs2InboxRestClient) DeleteMessageByUserIdAsync(
 	callback chan<- DeleteMessageByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/{messageName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.MessageName != nil {
-		path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{messageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.MessageName != nil {
+        path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{messageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteMessageByUserIdAsyncHandler(
 		p,
@@ -1745,13 +1745,13 @@ func openByStampTaskAsyncHandler(
 	asyncResult := <-internalCallback
 	var result OpenByStampTaskResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- OpenByStampTaskAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- OpenByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- OpenByStampTaskAsyncResult{
 		result: &result,
@@ -1767,29 +1767,29 @@ func (p Gs2InboxRestClient) OpenByStampTaskAsync(
 	path := "/stamp/open"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go openByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1827,13 +1827,13 @@ func exportMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ExportMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ExportMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ExportMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -1847,19 +1847,19 @@ func (p Gs2InboxRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go exportMasterAsyncHandler(
 		p,
@@ -1905,13 +1905,13 @@ func getCurrentMessageMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCurrentMessageMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCurrentMessageMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCurrentMessageMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCurrentMessageMasterAsyncResult{
 		result: &result,
@@ -1925,19 +1925,19 @@ func (p Gs2InboxRestClient) GetCurrentMessageMasterAsync(
 	callback chan<- GetCurrentMessageMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getCurrentMessageMasterAsyncHandler(
 		p,
@@ -1983,13 +1983,13 @@ func updateCurrentMessageMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCurrentMessageMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentMessageMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentMessageMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentMessageMasterAsyncResult{
 		result: &result,
@@ -2003,33 +2003,33 @@ func (p Gs2InboxRestClient) UpdateCurrentMessageMasterAsync(
 	callback chan<- UpdateCurrentMessageMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Settings != nil && *request.Settings != "" {
-		bodies["settings"] = *request.Settings
-	}
+    var bodies = core.Bodies{}
+    if request.Settings != nil && *request.Settings != "" {
+        bodies["settings"] = *request.Settings
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentMessageMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2067,13 +2067,13 @@ func updateCurrentMessageMasterFromGitHubAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCurrentMessageMasterFromGitHubResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentMessageMasterFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentMessageMasterFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentMessageMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2087,33 +2087,33 @@ func (p Gs2InboxRestClient) UpdateCurrentMessageMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentMessageMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentMessageMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2151,13 +2151,13 @@ func describeGlobalMessageMastersAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeGlobalMessageMastersResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeGlobalMessageMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeGlobalMessageMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeGlobalMessageMastersAsyncResult{
 		result: &result,
@@ -2171,11 +2171,11 @@ func (p Gs2InboxRestClient) DescribeGlobalMessageMastersAsync(
 	callback chan<- DescribeGlobalMessageMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/globalMessage"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2186,10 +2186,10 @@ func (p Gs2InboxRestClient) DescribeGlobalMessageMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeGlobalMessageMastersAsyncHandler(
 		p,
@@ -2235,13 +2235,13 @@ func createGlobalMessageMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateGlobalMessageMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateGlobalMessageMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateGlobalMessageMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateGlobalMessageMasterAsyncResult{
 		result: &result,
@@ -2255,49 +2255,49 @@ func (p Gs2InboxRestClient) CreateGlobalMessageMasterAsync(
 	callback chan<- CreateGlobalMessageMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/globalMessage"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.ReadAcquireActions != nil {
-		var _readAcquireActions []*map[string]interface{}
-		for _, item := range *request.ReadAcquireActions {
-			_readAcquireActions = append(_readAcquireActions, item.ToDict())
-		}
-		bodies["readAcquireActions"] = _readAcquireActions
-	}
-	if request.ExpiresTimeSpan != nil {
-		bodies["expiresTimeSpan"] = request.ExpiresTimeSpan.ToDict()
-	}
-	if request.ExpiresAt != nil {
-		bodies["expiresAt"] = *request.ExpiresAt
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ReadAcquireActions != nil {
+        var _readAcquireActions []*map[string]interface {}
+        for _, item := range *request.ReadAcquireActions {
+            _readAcquireActions = append(_readAcquireActions, item.ToDict())
+        }
+        bodies["readAcquireActions"] = _readAcquireActions
+    }
+    if request.ExpiresTimeSpan != nil {
+        bodies["expiresTimeSpan"] = request.ExpiresTimeSpan.ToDict()
+    }
+    if request.ExpiresAt != nil {
+        bodies["expiresAt"] = *request.ExpiresAt
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createGlobalMessageMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2335,13 +2335,13 @@ func getGlobalMessageMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetGlobalMessageMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetGlobalMessageMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetGlobalMessageMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetGlobalMessageMasterAsyncResult{
 		result: &result,
@@ -2355,24 +2355,24 @@ func (p Gs2InboxRestClient) GetGlobalMessageMasterAsync(
 	callback chan<- GetGlobalMessageMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/globalMessage/{globalMessageName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.GlobalMessageName != nil {
-		path = strings.ReplaceAll(path, "{globalMessageName}", core.ToString(*request.GlobalMessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{globalMessageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.GlobalMessageName != nil {
+        path = strings.ReplaceAll(path, "{globalMessageName}", core.ToString(*request.GlobalMessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{globalMessageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getGlobalMessageMasterAsyncHandler(
 		p,
@@ -2418,13 +2418,13 @@ func updateGlobalMessageMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateGlobalMessageMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateGlobalMessageMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateGlobalMessageMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateGlobalMessageMasterAsyncResult{
 		result: &result,
@@ -2438,51 +2438,51 @@ func (p Gs2InboxRestClient) UpdateGlobalMessageMasterAsync(
 	callback chan<- UpdateGlobalMessageMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/globalMessage/{globalMessageName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.GlobalMessageName != nil {
-		path = strings.ReplaceAll(path, "{globalMessageName}", core.ToString(*request.GlobalMessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{globalMessageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.GlobalMessageName != nil {
+        path = strings.ReplaceAll(path, "{globalMessageName}", core.ToString(*request.GlobalMessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{globalMessageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.ReadAcquireActions != nil {
-		var _readAcquireActions []*map[string]interface{}
-		for _, item := range *request.ReadAcquireActions {
-			_readAcquireActions = append(_readAcquireActions, item.ToDict())
-		}
-		bodies["readAcquireActions"] = _readAcquireActions
-	}
-	if request.ExpiresTimeSpan != nil {
-		bodies["expiresTimeSpan"] = request.ExpiresTimeSpan.ToDict()
-	}
-	if request.ExpiresAt != nil {
-		bodies["expiresAt"] = *request.ExpiresAt
-	}
+    var bodies = core.Bodies{}
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ReadAcquireActions != nil {
+        var _readAcquireActions []*map[string]interface {}
+        for _, item := range *request.ReadAcquireActions {
+            _readAcquireActions = append(_readAcquireActions, item.ToDict())
+        }
+        bodies["readAcquireActions"] = _readAcquireActions
+    }
+    if request.ExpiresTimeSpan != nil {
+        bodies["expiresTimeSpan"] = request.ExpiresTimeSpan.ToDict()
+    }
+    if request.ExpiresAt != nil {
+        bodies["expiresAt"] = *request.ExpiresAt
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateGlobalMessageMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2520,13 +2520,13 @@ func deleteGlobalMessageMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteGlobalMessageMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteGlobalMessageMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteGlobalMessageMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteGlobalMessageMasterAsyncResult{
 		result: &result,
@@ -2540,24 +2540,24 @@ func (p Gs2InboxRestClient) DeleteGlobalMessageMasterAsync(
 	callback chan<- DeleteGlobalMessageMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/globalMessage/{globalMessageName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.GlobalMessageName != nil {
-		path = strings.ReplaceAll(path, "{globalMessageName}", core.ToString(*request.GlobalMessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{globalMessageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.GlobalMessageName != nil {
+        path = strings.ReplaceAll(path, "{globalMessageName}", core.ToString(*request.GlobalMessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{globalMessageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteGlobalMessageMasterAsyncHandler(
 		p,
@@ -2603,13 +2603,13 @@ func describeGlobalMessagesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeGlobalMessagesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeGlobalMessagesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeGlobalMessagesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeGlobalMessagesAsyncResult{
 		result: &result,
@@ -2623,19 +2623,19 @@ func (p Gs2InboxRestClient) DescribeGlobalMessagesAsync(
 	callback chan<- DescribeGlobalMessagesAsyncResult,
 ) {
 	path := "/{namespaceName}/globalMessage"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeGlobalMessagesAsyncHandler(
 		p,
@@ -2681,13 +2681,13 @@ func getGlobalMessageAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetGlobalMessageResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetGlobalMessageAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetGlobalMessageAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetGlobalMessageAsyncResult{
 		result: &result,
@@ -2701,24 +2701,24 @@ func (p Gs2InboxRestClient) GetGlobalMessageAsync(
 	callback chan<- GetGlobalMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/globalMessage/{globalMessageName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.GlobalMessageName != nil {
-		path = strings.ReplaceAll(path, "{globalMessageName}", core.ToString(*request.GlobalMessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{globalMessageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.GlobalMessageName != nil {
+        path = strings.ReplaceAll(path, "{globalMessageName}", core.ToString(*request.GlobalMessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{globalMessageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getGlobalMessageAsyncHandler(
 		p,
@@ -2764,13 +2764,13 @@ func getReceivedByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetReceivedByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetReceivedByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetReceivedByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetReceivedByUserIdAsyncResult{
 		result: &result,
@@ -2784,24 +2784,24 @@ func (p Gs2InboxRestClient) GetReceivedByUserIdAsync(
 	callback chan<- GetReceivedByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/received"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getReceivedByUserIdAsyncHandler(
 		p,
@@ -2847,13 +2847,13 @@ func updateReceivedByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateReceivedByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateReceivedByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateReceivedByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateReceivedByUserIdAsyncResult{
 		result: &result,
@@ -2867,42 +2867,42 @@ func (p Gs2InboxRestClient) UpdateReceivedByUserIdAsync(
 	callback chan<- UpdateReceivedByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/received"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.ReceivedGlobalMessageNames != nil {
-		var _receivedGlobalMessageNames []string
-		for _, item := range *request.ReceivedGlobalMessageNames {
-			_receivedGlobalMessageNames = append(_receivedGlobalMessageNames, item)
-		}
-		bodies["receivedGlobalMessageNames"] = _receivedGlobalMessageNames
-	}
+    var bodies = core.Bodies{}
+    if request.ReceivedGlobalMessageNames != nil {
+        var _receivedGlobalMessageNames []core.String
+        for _, item := range *request.ReceivedGlobalMessageNames {
+            _receivedGlobalMessageNames = append(_receivedGlobalMessageNames, item)
+        }
+        bodies["receivedGlobalMessageNames"] = _receivedGlobalMessageNames
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateReceivedByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2940,13 +2940,13 @@ func deleteReceivedByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteReceivedByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteReceivedByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteReceivedByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteReceivedByUserIdAsyncResult{
 		result: &result,
@@ -2960,24 +2960,24 @@ func (p Gs2InboxRestClient) DeleteReceivedByUserIdAsync(
 	callback chan<- DeleteReceivedByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/received"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteReceivedByUserIdAsyncHandler(
 		p,

@@ -50,13 +50,13 @@ func describeStacksAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeStacksResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeStacksAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeStacksAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeStacksAsyncResult{
 		result: &result,
@@ -80,10 +80,10 @@ func (p Gs2DeployRestClient) DescribeStacksAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeStacksAsyncHandler(
 		p,
@@ -129,13 +129,13 @@ func createStackAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateStackResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateStackAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateStackAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateStackAsyncResult{
 		result: &result,
@@ -151,32 +151,32 @@ func (p Gs2DeployRestClient) CreateStackAsync(
 	path := "/stack"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Template != nil && *request.Template != "" {
-		bodies["template"] = *request.Template
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Template != nil && *request.Template != "" {
+        bodies["template"] = *request.Template
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createStackAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -214,13 +214,13 @@ func createStackFromGitHubAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateStackFromGitHubResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateStackFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateStackFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateStackFromGitHubAsyncResult{
 		result: &result,
@@ -236,32 +236,32 @@ func (p Gs2DeployRestClient) CreateStackFromGitHubAsync(
 	path := "/stack/from_git_hub"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createStackFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -299,13 +299,13 @@ func validateAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ValidateResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ValidateAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ValidateAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ValidateAsyncResult{
 		result: &result,
@@ -321,26 +321,26 @@ func (p Gs2DeployRestClient) ValidateAsync(
 	path := "/stack/validate"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Template != nil && *request.Template != "" {
-		bodies["template"] = *request.Template
-	}
+    var bodies = core.Bodies{}
+    if request.Template != nil && *request.Template != "" {
+        bodies["template"] = *request.Template
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go validateAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -378,13 +378,13 @@ func getStackStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetStackStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetStackStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetStackStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetStackStatusAsyncResult{
 		result: &result,
@@ -398,19 +398,19 @@ func (p Gs2DeployRestClient) GetStackStatusAsync(
 	callback chan<- GetStackStatusAsyncResult,
 ) {
 	path := "/stack/{stackName}/status"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getStackStatusAsyncHandler(
 		p,
@@ -456,13 +456,13 @@ func getStackAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetStackResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetStackAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetStackAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetStackAsyncResult{
 		result: &result,
@@ -476,19 +476,19 @@ func (p Gs2DeployRestClient) GetStackAsync(
 	callback chan<- GetStackAsyncResult,
 ) {
 	path := "/stack/{stackName}"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getStackAsyncHandler(
 		p,
@@ -534,13 +534,13 @@ func updateStackAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateStackResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateStackAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateStackAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateStackAsyncResult{
 		result: &result,
@@ -554,36 +554,36 @@ func (p Gs2DeployRestClient) UpdateStackAsync(
 	callback chan<- UpdateStackAsyncResult,
 ) {
 	path := "/stack/{stackName}"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Template != nil && *request.Template != "" {
-		bodies["template"] = *request.Template
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Template != nil && *request.Template != "" {
+        bodies["template"] = *request.Template
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateStackAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -621,13 +621,13 @@ func updateStackFromGitHubAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateStackFromGitHubResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateStackFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateStackFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateStackFromGitHubAsyncResult{
 		result: &result,
@@ -641,36 +641,36 @@ func (p Gs2DeployRestClient) UpdateStackFromGitHubAsync(
 	callback chan<- UpdateStackFromGitHubAsyncResult,
 ) {
 	path := "/stack/{stackName}/from_git_hub"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateStackFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -708,13 +708,13 @@ func deleteStackAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteStackResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteStackAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteStackAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteStackAsyncResult{
 		result: &result,
@@ -728,19 +728,19 @@ func (p Gs2DeployRestClient) DeleteStackAsync(
 	callback chan<- DeleteStackAsyncResult,
 ) {
 	path := "/stack/{stackName}"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteStackAsyncHandler(
 		p,
@@ -786,13 +786,13 @@ func forceDeleteStackAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ForceDeleteStackResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ForceDeleteStackAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ForceDeleteStackAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ForceDeleteStackAsyncResult{
 		result: &result,
@@ -806,19 +806,19 @@ func (p Gs2DeployRestClient) ForceDeleteStackAsync(
 	callback chan<- ForceDeleteStackAsyncResult,
 ) {
 	path := "/stack/{stackName}/force"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go forceDeleteStackAsyncHandler(
 		p,
@@ -864,13 +864,13 @@ func deleteStackResourcesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteStackResourcesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteStackResourcesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteStackResourcesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteStackResourcesAsyncResult{
 		result: &result,
@@ -884,19 +884,19 @@ func (p Gs2DeployRestClient) DeleteStackResourcesAsync(
 	callback chan<- DeleteStackResourcesAsyncResult,
 ) {
 	path := "/stack/{stackName}/resources"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteStackResourcesAsyncHandler(
 		p,
@@ -942,13 +942,13 @@ func deleteStackEntityAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteStackEntityResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteStackEntityAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteStackEntityAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteStackEntityAsyncResult{
 		result: &result,
@@ -962,19 +962,19 @@ func (p Gs2DeployRestClient) DeleteStackEntityAsync(
 	callback chan<- DeleteStackEntityAsyncResult,
 ) {
 	path := "/stack/{stackName}/entity"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteStackEntityAsyncHandler(
 		p,
@@ -1020,13 +1020,13 @@ func describeResourcesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeResourcesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeResourcesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeResourcesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeResourcesAsyncResult{
 		result: &result,
@@ -1040,11 +1040,11 @@ func (p Gs2DeployRestClient) DescribeResourcesAsync(
 	callback chan<- DescribeResourcesAsyncResult,
 ) {
 	path := "/stack/{stackName}/resource"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1055,10 +1055,10 @@ func (p Gs2DeployRestClient) DescribeResourcesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeResourcesAsyncHandler(
 		p,
@@ -1104,13 +1104,13 @@ func getResourceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetResourceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetResourceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetResourceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetResourceAsyncResult{
 		result: &result,
@@ -1124,24 +1124,24 @@ func (p Gs2DeployRestClient) GetResourceAsync(
 	callback chan<- GetResourceAsyncResult,
 ) {
 	path := "/stack/{stackName}/resource/{resourceName}"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
-	if request.ResourceName != nil {
-		path = strings.ReplaceAll(path, "{resourceName}", core.ToString(*request.ResourceName))
-	} else {
-		path = strings.ReplaceAll(path, "{resourceName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
+    if request.ResourceName != nil {
+        path = strings.ReplaceAll(path, "{resourceName}", core.ToString(*request.ResourceName))
+    } else {
+        path = strings.ReplaceAll(path, "{resourceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getResourceAsyncHandler(
 		p,
@@ -1187,13 +1187,13 @@ func describeEventsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeEventsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeEventsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeEventsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeEventsAsyncResult{
 		result: &result,
@@ -1207,11 +1207,11 @@ func (p Gs2DeployRestClient) DescribeEventsAsync(
 	callback chan<- DescribeEventsAsyncResult,
 ) {
 	path := "/stack/{stackName}/event"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1222,10 +1222,10 @@ func (p Gs2DeployRestClient) DescribeEventsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeEventsAsyncHandler(
 		p,
@@ -1271,13 +1271,13 @@ func getEventAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetEventResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetEventAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetEventAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetEventAsyncResult{
 		result: &result,
@@ -1291,24 +1291,24 @@ func (p Gs2DeployRestClient) GetEventAsync(
 	callback chan<- GetEventAsyncResult,
 ) {
 	path := "/stack/{stackName}/event/{eventName}"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
-	if request.EventName != nil {
-		path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
-	} else {
-		path = strings.ReplaceAll(path, "{eventName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
+    if request.EventName != nil {
+        path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
+    } else {
+        path = strings.ReplaceAll(path, "{eventName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getEventAsyncHandler(
 		p,
@@ -1354,13 +1354,13 @@ func describeOutputsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeOutputsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeOutputsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeOutputsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeOutputsAsyncResult{
 		result: &result,
@@ -1374,11 +1374,11 @@ func (p Gs2DeployRestClient) DescribeOutputsAsync(
 	callback chan<- DescribeOutputsAsyncResult,
 ) {
 	path := "/stack/{stackName}/output"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1389,10 +1389,10 @@ func (p Gs2DeployRestClient) DescribeOutputsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeOutputsAsyncHandler(
 		p,
@@ -1438,13 +1438,13 @@ func getOutputAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetOutputResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetOutputAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetOutputAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetOutputAsyncResult{
 		result: &result,
@@ -1458,24 +1458,24 @@ func (p Gs2DeployRestClient) GetOutputAsync(
 	callback chan<- GetOutputAsyncResult,
 ) {
 	path := "/stack/{stackName}/output/{outputName}"
-	if request.StackName != nil {
-		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
-	} else {
-		path = strings.ReplaceAll(path, "{stackName}", "null")
-	}
-	if request.OutputName != nil {
-		path = strings.ReplaceAll(path, "{outputName}", core.ToString(*request.OutputName))
-	} else {
-		path = strings.ReplaceAll(path, "{outputName}", "null")
-	}
+    if request.StackName != nil {
+        path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+    } else {
+        path = strings.ReplaceAll(path, "{stackName}", "null")
+    }
+    if request.OutputName != nil {
+        path = strings.ReplaceAll(path, "{outputName}", core.ToString(*request.OutputName))
+    } else {
+        path = strings.ReplaceAll(path, "{outputName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getOutputAsyncHandler(
 		p,

@@ -50,13 +50,13 @@ func describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -80,10 +80,10 @@ func (p Gs2ChatRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -129,13 +129,13 @@ func createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -151,53 +151,53 @@ func (p Gs2ChatRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.AllowCreateRoom != nil {
-		bodies["allowCreateRoom"] = *request.AllowCreateRoom
-	}
-	if request.PostMessageScript != nil {
-		bodies["postMessageScript"] = request.PostMessageScript.ToDict()
-	}
-	if request.CreateRoomScript != nil {
-		bodies["createRoomScript"] = request.CreateRoomScript.ToDict()
-	}
-	if request.DeleteRoomScript != nil {
-		bodies["deleteRoomScript"] = request.DeleteRoomScript.ToDict()
-	}
-	if request.SubscribeRoomScript != nil {
-		bodies["subscribeRoomScript"] = request.SubscribeRoomScript.ToDict()
-	}
-	if request.UnsubscribeRoomScript != nil {
-		bodies["unsubscribeRoomScript"] = request.UnsubscribeRoomScript.ToDict()
-	}
-	if request.PostNotification != nil {
-		bodies["postNotification"] = request.PostNotification.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.AllowCreateRoom != nil {
+        bodies["allowCreateRoom"] = *request.AllowCreateRoom
+    }
+    if request.PostMessageScript != nil {
+        bodies["postMessageScript"] = request.PostMessageScript.ToDict()
+    }
+    if request.CreateRoomScript != nil {
+        bodies["createRoomScript"] = request.CreateRoomScript.ToDict()
+    }
+    if request.DeleteRoomScript != nil {
+        bodies["deleteRoomScript"] = request.DeleteRoomScript.ToDict()
+    }
+    if request.SubscribeRoomScript != nil {
+        bodies["subscribeRoomScript"] = request.SubscribeRoomScript.ToDict()
+    }
+    if request.UnsubscribeRoomScript != nil {
+        bodies["unsubscribeRoomScript"] = request.UnsubscribeRoomScript.ToDict()
+    }
+    if request.PostNotification != nil {
+        bodies["postNotification"] = request.PostNotification.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -235,13 +235,13 @@ func getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -255,19 +255,19 @@ func (p Gs2ChatRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -313,13 +313,13 @@ func getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -333,19 +333,19 @@ func (p Gs2ChatRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -391,13 +391,13 @@ func updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -411,57 +411,57 @@ func (p Gs2ChatRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.AllowCreateRoom != nil {
-		bodies["allowCreateRoom"] = *request.AllowCreateRoom
-	}
-	if request.PostMessageScript != nil {
-		bodies["postMessageScript"] = request.PostMessageScript.ToDict()
-	}
-	if request.CreateRoomScript != nil {
-		bodies["createRoomScript"] = request.CreateRoomScript.ToDict()
-	}
-	if request.DeleteRoomScript != nil {
-		bodies["deleteRoomScript"] = request.DeleteRoomScript.ToDict()
-	}
-	if request.SubscribeRoomScript != nil {
-		bodies["subscribeRoomScript"] = request.SubscribeRoomScript.ToDict()
-	}
-	if request.UnsubscribeRoomScript != nil {
-		bodies["unsubscribeRoomScript"] = request.UnsubscribeRoomScript.ToDict()
-	}
-	if request.PostNotification != nil {
-		bodies["postNotification"] = request.PostNotification.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.AllowCreateRoom != nil {
+        bodies["allowCreateRoom"] = *request.AllowCreateRoom
+    }
+    if request.PostMessageScript != nil {
+        bodies["postMessageScript"] = request.PostMessageScript.ToDict()
+    }
+    if request.CreateRoomScript != nil {
+        bodies["createRoomScript"] = request.CreateRoomScript.ToDict()
+    }
+    if request.DeleteRoomScript != nil {
+        bodies["deleteRoomScript"] = request.DeleteRoomScript.ToDict()
+    }
+    if request.SubscribeRoomScript != nil {
+        bodies["subscribeRoomScript"] = request.SubscribeRoomScript.ToDict()
+    }
+    if request.UnsubscribeRoomScript != nil {
+        bodies["unsubscribeRoomScript"] = request.UnsubscribeRoomScript.ToDict()
+    }
+    if request.PostNotification != nil {
+        bodies["postNotification"] = request.PostNotification.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -499,13 +499,13 @@ func deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -519,19 +519,19 @@ func (p Gs2ChatRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -577,13 +577,13 @@ func describeRoomsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeRoomsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeRoomsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeRoomsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeRoomsAsyncResult{
 		result: &result,
@@ -597,11 +597,11 @@ func (p Gs2ChatRestClient) DescribeRoomsAsync(
 	callback chan<- DescribeRoomsAsyncResult,
 ) {
 	path := "/{namespaceName}/room"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -612,10 +612,10 @@ func (p Gs2ChatRestClient) DescribeRoomsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeRoomsAsyncHandler(
 		p,
@@ -661,13 +661,13 @@ func createRoomAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateRoomResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateRoomAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateRoomAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateRoomAsyncResult{
 		result: &result,
@@ -681,49 +681,49 @@ func (p Gs2ChatRestClient) CreateRoomAsync(
 	callback chan<- CreateRoomAsyncResult,
 ) {
 	path := "/{namespaceName}/room/user"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.Password != nil && *request.Password != "" {
-		bodies["password"] = *request.Password
-	}
-	if request.WhiteListUserIds != nil {
-		var _whiteListUserIds []string
-		for _, item := range *request.WhiteListUserIds {
-			_whiteListUserIds = append(_whiteListUserIds, item)
-		}
-		bodies["whiteListUserIds"] = _whiteListUserIds
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.Password != nil && *request.Password != "" {
+        bodies["password"] = *request.Password
+    }
+    if request.WhiteListUserIds != nil {
+        var _whiteListUserIds []core.String
+        for _, item := range *request.WhiteListUserIds {
+            _whiteListUserIds = append(_whiteListUserIds, item)
+        }
+        bodies["whiteListUserIds"] = _whiteListUserIds
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go createRoomAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -761,13 +761,13 @@ func createRoomFromBackendAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateRoomFromBackendResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateRoomFromBackendAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateRoomFromBackendAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateRoomFromBackendAsyncResult{
 		result: &result,
@@ -781,49 +781,49 @@ func (p Gs2ChatRestClient) CreateRoomFromBackendAsync(
 	callback chan<- CreateRoomFromBackendAsyncResult,
 ) {
 	path := "/{namespaceName}/room"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.Password != nil && *request.Password != "" {
-		bodies["password"] = *request.Password
-	}
-	if request.WhiteListUserIds != nil {
-		var _whiteListUserIds []string
-		for _, item := range *request.WhiteListUserIds {
-			_whiteListUserIds = append(_whiteListUserIds, item)
-		}
-		bodies["whiteListUserIds"] = _whiteListUserIds
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.Password != nil && *request.Password != "" {
+        bodies["password"] = *request.Password
+    }
+    if request.WhiteListUserIds != nil {
+        var _whiteListUserIds []core.String
+        for _, item := range *request.WhiteListUserIds {
+            _whiteListUserIds = append(_whiteListUserIds, item)
+        }
+        bodies["whiteListUserIds"] = _whiteListUserIds
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createRoomFromBackendAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -861,13 +861,13 @@ func getRoomAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetRoomResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetRoomAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetRoomAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetRoomAsyncResult{
 		result: &result,
@@ -881,24 +881,24 @@ func (p Gs2ChatRestClient) GetRoomAsync(
 	callback chan<- GetRoomAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getRoomAsyncHandler(
 		p,
@@ -944,13 +944,13 @@ func updateRoomAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateRoomResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateRoomAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateRoomAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateRoomAsyncResult{
 		result: &result,
@@ -964,48 +964,48 @@ func (p Gs2ChatRestClient) UpdateRoomAsync(
 	callback chan<- UpdateRoomAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.Password != nil && *request.Password != "" {
-		bodies["password"] = *request.Password
-	}
-	if request.WhiteListUserIds != nil {
-		var _whiteListUserIds []string
-		for _, item := range *request.WhiteListUserIds {
-			_whiteListUserIds = append(_whiteListUserIds, item)
-		}
-		bodies["whiteListUserIds"] = _whiteListUserIds
-	}
+    var bodies = core.Bodies{}
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.Password != nil && *request.Password != "" {
+        bodies["password"] = *request.Password
+    }
+    if request.WhiteListUserIds != nil {
+        var _whiteListUserIds []core.String
+        for _, item := range *request.WhiteListUserIds {
+            _whiteListUserIds = append(_whiteListUserIds, item)
+        }
+        bodies["whiteListUserIds"] = _whiteListUserIds
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateRoomAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1043,13 +1043,13 @@ func deleteRoomAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteRoomResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteRoomAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteRoomAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteRoomAsyncResult{
 		result: &result,
@@ -1063,27 +1063,27 @@ func (p Gs2ChatRestClient) DeleteRoomAsync(
 	callback chan<- DeleteRoomAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/user"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go deleteRoomAsyncHandler(
 		p,
@@ -1129,13 +1129,13 @@ func deleteRoomFromBackendAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteRoomFromBackendResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteRoomFromBackendAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteRoomFromBackendAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteRoomFromBackendAsyncResult{
 		result: &result,
@@ -1149,16 +1149,16 @@ func (p Gs2ChatRestClient) DeleteRoomFromBackendAsync(
 	callback chan<- DeleteRoomFromBackendAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1166,10 +1166,10 @@ func (p Gs2ChatRestClient) DeleteRoomFromBackendAsync(
 		queryStrings["userId"] = core.ToString(*request.UserId)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteRoomFromBackendAsyncHandler(
 		p,
@@ -1215,13 +1215,13 @@ func describeMessagesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeMessagesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeMessagesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeMessagesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeMessagesAsyncResult{
 		result: &result,
@@ -1235,16 +1235,16 @@ func (p Gs2ChatRestClient) DescribeMessagesAsync(
 	callback chan<- DescribeMessagesAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/message"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1258,10 +1258,10 @@ func (p Gs2ChatRestClient) DescribeMessagesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeMessagesAsyncHandler(
 		p,
@@ -1307,13 +1307,13 @@ func postAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PostResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PostAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PostAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PostAsyncResult{
 		result: &result,
@@ -1327,47 +1327,47 @@ func (p Gs2ChatRestClient) PostAsync(
 	callback chan<- PostAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/message"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Category != nil {
-		bodies["category"] = *request.Category
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.Password != nil && *request.Password != "" {
-		bodies["password"] = *request.Password
-	}
+    var bodies = core.Bodies{}
+    if request.Category != nil {
+        bodies["category"] = *request.Category
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.Password != nil && *request.Password != "" {
+        bodies["password"] = *request.Password
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go postAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1405,13 +1405,13 @@ func postByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PostByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PostByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PostByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PostByUserIdAsyncResult{
 		result: &result,
@@ -1425,49 +1425,49 @@ func (p Gs2ChatRestClient) PostByUserIdAsync(
 	callback chan<- PostByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/message/user/{userId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Category != nil {
-		bodies["category"] = *request.Category
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.Password != nil && *request.Password != "" {
-		bodies["password"] = *request.Password
-	}
+    var bodies = core.Bodies{}
+    if request.Category != nil {
+        bodies["category"] = *request.Category
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.Password != nil && *request.Password != "" {
+        bodies["password"] = *request.Password
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go postByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1505,13 +1505,13 @@ func getMessageAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetMessageResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetMessageAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetMessageAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetMessageAsyncResult{
 		result: &result,
@@ -1525,29 +1525,29 @@ func (p Gs2ChatRestClient) GetMessageAsync(
 	callback chan<- GetMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/message/{messageName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
-	if request.MessageName != nil {
-		path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{messageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
+    if request.MessageName != nil {
+        path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{messageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getMessageAsyncHandler(
 		p,
@@ -1593,13 +1593,13 @@ func deleteMessageAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteMessageResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteMessageAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteMessageAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteMessageAsyncResult{
 		result: &result,
@@ -1613,29 +1613,29 @@ func (p Gs2ChatRestClient) DeleteMessageAsync(
 	callback chan<- DeleteMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/message/{messageName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
-	if request.MessageName != nil {
-		path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
-	} else {
-		path = strings.ReplaceAll(path, "{messageName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
+    if request.MessageName != nil {
+        path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
+    } else {
+        path = strings.ReplaceAll(path, "{messageName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteMessageAsyncHandler(
 		p,
@@ -1681,13 +1681,13 @@ func describeSubscribesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeSubscribesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeSubscribesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeSubscribesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeSubscribesAsyncResult{
 		result: &result,
@@ -1701,11 +1701,11 @@ func (p Gs2ChatRestClient) DescribeSubscribesAsync(
 	callback chan<- DescribeSubscribesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/room/subscribe"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1716,13 +1716,13 @@ func (p Gs2ChatRestClient) DescribeSubscribesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeSubscribesAsyncHandler(
 		p,
@@ -1768,13 +1768,13 @@ func describeSubscribesByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeSubscribesByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeSubscribesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeSubscribesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeSubscribesByUserIdAsyncResult{
 		result: &result,
@@ -1788,16 +1788,16 @@ func (p Gs2ChatRestClient) DescribeSubscribesByUserIdAsync(
 	callback chan<- DescribeSubscribesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/room/subscribe"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1808,10 +1808,10 @@ func (p Gs2ChatRestClient) DescribeSubscribesByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeSubscribesByUserIdAsyncHandler(
 		p,
@@ -1857,13 +1857,13 @@ func describeSubscribesByRoomNameAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeSubscribesByRoomNameResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeSubscribesByRoomNameAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeSubscribesByRoomNameAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeSubscribesByRoomNameAsyncResult{
 		result: &result,
@@ -1877,16 +1877,16 @@ func (p Gs2ChatRestClient) DescribeSubscribesByRoomNameAsync(
 	callback chan<- DescribeSubscribesByRoomNameAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/subscribe"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1897,10 +1897,10 @@ func (p Gs2ChatRestClient) DescribeSubscribesByRoomNameAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeSubscribesByRoomNameAsyncHandler(
 		p,
@@ -1946,13 +1946,13 @@ func subscribeAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SubscribeResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SubscribeAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SubscribeAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SubscribeAsyncResult{
 		result: &result,
@@ -1966,45 +1966,45 @@ func (p Gs2ChatRestClient) SubscribeAsync(
 	callback chan<- SubscribeAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/room/{roomName}/subscribe"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.NotificationTypes != nil {
-		var _notificationTypes []*map[string]interface{}
-		for _, item := range *request.NotificationTypes {
-			_notificationTypes = append(_notificationTypes, item.ToDict())
-		}
-		bodies["notificationTypes"] = _notificationTypes
-	}
+    var bodies = core.Bodies{}
+    if request.NotificationTypes != nil {
+        var _notificationTypes []*map[string]interface {}
+        for _, item := range *request.NotificationTypes {
+            _notificationTypes = append(_notificationTypes, item.ToDict())
+        }
+        bodies["notificationTypes"] = _notificationTypes
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go subscribeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2042,13 +2042,13 @@ func subscribeByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SubscribeByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SubscribeByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SubscribeByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SubscribeByUserIdAsyncResult{
 		result: &result,
@@ -2062,47 +2062,47 @@ func (p Gs2ChatRestClient) SubscribeByUserIdAsync(
 	callback chan<- SubscribeByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/room/{roomName}/subscribe"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.NotificationTypes != nil {
-		var _notificationTypes []*map[string]interface{}
-		for _, item := range *request.NotificationTypes {
-			_notificationTypes = append(_notificationTypes, item.ToDict())
-		}
-		bodies["notificationTypes"] = _notificationTypes
-	}
+    var bodies = core.Bodies{}
+    if request.NotificationTypes != nil {
+        var _notificationTypes []*map[string]interface {}
+        for _, item := range *request.NotificationTypes {
+            _notificationTypes = append(_notificationTypes, item.ToDict())
+        }
+        bodies["notificationTypes"] = _notificationTypes
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go subscribeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2140,13 +2140,13 @@ func getSubscribeAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetSubscribeResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSubscribeAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSubscribeAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetSubscribeAsyncResult{
 		result: &result,
@@ -2160,27 +2160,27 @@ func (p Gs2ChatRestClient) GetSubscribeAsync(
 	callback chan<- GetSubscribeAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/room/{roomName}/subscribe"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getSubscribeAsyncHandler(
 		p,
@@ -2226,13 +2226,13 @@ func getSubscribeByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetSubscribeByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSubscribeByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSubscribeByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetSubscribeByUserIdAsyncResult{
 		result: &result,
@@ -2246,29 +2246,29 @@ func (p Gs2ChatRestClient) GetSubscribeByUserIdAsync(
 	callback chan<- GetSubscribeByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/room/{roomName}/subscribe"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getSubscribeByUserIdAsyncHandler(
 		p,
@@ -2314,13 +2314,13 @@ func updateNotificationTypeAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNotificationTypeResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNotificationTypeAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNotificationTypeAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNotificationTypeAsyncResult{
 		result: &result,
@@ -2334,45 +2334,45 @@ func (p Gs2ChatRestClient) UpdateNotificationTypeAsync(
 	callback chan<- UpdateNotificationTypeAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/room/{roomName}/subscribe/notification"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.NotificationTypes != nil {
-		var _notificationTypes []*map[string]interface{}
-		for _, item := range *request.NotificationTypes {
-			_notificationTypes = append(_notificationTypes, item.ToDict())
-		}
-		bodies["notificationTypes"] = _notificationTypes
-	}
+    var bodies = core.Bodies{}
+    if request.NotificationTypes != nil {
+        var _notificationTypes []*map[string]interface {}
+        for _, item := range *request.NotificationTypes {
+            _notificationTypes = append(_notificationTypes, item.ToDict())
+        }
+        bodies["notificationTypes"] = _notificationTypes
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go updateNotificationTypeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2410,13 +2410,13 @@ func updateNotificationTypeByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNotificationTypeByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNotificationTypeByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNotificationTypeByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNotificationTypeByUserIdAsyncResult{
 		result: &result,
@@ -2430,47 +2430,47 @@ func (p Gs2ChatRestClient) UpdateNotificationTypeByUserIdAsync(
 	callback chan<- UpdateNotificationTypeByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/room/{roomName}/subscribe/notification"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.NotificationTypes != nil {
-		var _notificationTypes []*map[string]interface{}
-		for _, item := range *request.NotificationTypes {
-			_notificationTypes = append(_notificationTypes, item.ToDict())
-		}
-		bodies["notificationTypes"] = _notificationTypes
-	}
+    var bodies = core.Bodies{}
+    if request.NotificationTypes != nil {
+        var _notificationTypes []*map[string]interface {}
+        for _, item := range *request.NotificationTypes {
+            _notificationTypes = append(_notificationTypes, item.ToDict())
+        }
+        bodies["notificationTypes"] = _notificationTypes
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateNotificationTypeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2508,13 +2508,13 @@ func unsubscribeAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UnsubscribeResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UnsubscribeAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnsubscribeAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UnsubscribeAsyncResult{
 		result: &result,
@@ -2528,27 +2528,27 @@ func (p Gs2ChatRestClient) UnsubscribeAsync(
 	callback chan<- UnsubscribeAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/room/{roomName}/subscribe"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go unsubscribeAsyncHandler(
 		p,
@@ -2594,13 +2594,13 @@ func unsubscribeByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UnsubscribeByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UnsubscribeByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnsubscribeByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UnsubscribeByUserIdAsyncResult{
 		result: &result,
@@ -2614,29 +2614,29 @@ func (p Gs2ChatRestClient) UnsubscribeByUserIdAsync(
 	callback chan<- UnsubscribeByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/room/{roomName}/subscribe"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RoomName != nil {
-		path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
-	} else {
-		path = strings.ReplaceAll(path, "{roomName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RoomName != nil {
+        path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
+    } else {
+        path = strings.ReplaceAll(path, "{roomName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go unsubscribeByUserIdAsyncHandler(
 		p,

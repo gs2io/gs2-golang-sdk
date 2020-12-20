@@ -16,27 +16,31 @@ permissions and limitations under the License.
 
 package auth
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type LoginResult struct {
-	/** アクセストークン */
-	Token *string `json:"token"`
-	/** ユーザーID */
-	UserId *string `json:"userId"`
-	/** 有効期限 */
-	Expire *int64 `json:"expire"`
+    /** アクセストークン */
+	Token         *core.String	`json:"token"`
+    /** ユーザーID */
+	UserId         *core.String	`json:"userId"`
+    /** 有効期限 */
+	Expire         *int64	`json:"expire"`
 }
 
 func (p *LoginResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Token != nil {
-		data["Token"] = p.Token
-	}
-	if p.UserId != nil {
-		data["UserId"] = p.UserId
-	}
-	if p.Expire != nil {
-		data["Expire"] = p.Expire
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Token != nil {
+     data["Token"] = p.Token
+    }
+    if p.UserId != nil {
+     data["UserId"] = p.UserId
+    }
+    if p.Expire != nil {
+     data["Expire"] = p.Expire
+    }
+    return &data
 }
 
 type LoginAsyncResult struct {
@@ -45,26 +49,26 @@ type LoginAsyncResult struct {
 }
 
 type LoginBySignatureResult struct {
-	/** アクセストークン */
-	Token *string `json:"token"`
-	/** ユーザーID */
-	UserId *string `json:"userId"`
-	/** 有効期限 */
-	Expire *int64 `json:"expire"`
+    /** アクセストークン */
+	Token         *core.String	`json:"token"`
+    /** ユーザーID */
+	UserId         *core.String	`json:"userId"`
+    /** 有効期限 */
+	Expire         *int64	`json:"expire"`
 }
 
 func (p *LoginBySignatureResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Token != nil {
-		data["Token"] = p.Token
-	}
-	if p.UserId != nil {
-		data["UserId"] = p.UserId
-	}
-	if p.Expire != nil {
-		data["Expire"] = p.Expire
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Token != nil {
+     data["Token"] = p.Token
+    }
+    if p.UserId != nil {
+     data["UserId"] = p.UserId
+    }
+    if p.Expire != nil {
+     data["Expire"] = p.Expire
+    }
+    return &data
 }
 
 type LoginBySignatureAsyncResult struct {

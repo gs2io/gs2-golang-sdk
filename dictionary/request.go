@@ -21,204 +21,208 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	Name         *string            `json:"name"`
-	Description  *string            `json:"description"`
-	LogSetting   *LogSetting        `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	EntryScript *ScriptSetting	`json:"entryScript"`
+	DuplicateEntryScript *ScriptSetting	`json:"duplicateEntryScript"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	Description   *string            `json:"description"`
-	LogSetting    *LogSetting        `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Description *core.String	`json:"description"`
+	EntryScript *ScriptSetting	`json:"entryScript"`
+	DuplicateEntryScript *ScriptSetting	`json:"duplicateEntryScript"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type DescribeEntryModelsRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetEntryModelRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	EntryName     *string            `json:"entryName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	EntryName *core.String	`json:"entryName"`
 }
 
 type DescribeEntryModelMastersRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	PageToken     *string            `json:"pageToken"`
-	Limit         *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateEntryModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	Name          *string            `json:"name"`
-	Description   *string            `json:"description"`
-	Metadata      *string            `json:"metadata"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	Metadata *core.String	`json:"metadata"`
 }
 
 type GetEntryModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	EntryName     *string            `json:"entryName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	EntryName *core.String	`json:"entryName"`
 }
 
 type UpdateEntryModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	EntryName     *string            `json:"entryName"`
-	Description   *string            `json:"description"`
-	Metadata      *string            `json:"metadata"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	EntryName *core.String	`json:"entryName"`
+	Description *core.String	`json:"description"`
+	Metadata *core.String	`json:"metadata"`
 }
 
 type DeleteEntryModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	EntryName     *string            `json:"entryName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	EntryName *core.String	`json:"entryName"`
 }
 
 type DescribeEntriesRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeEntriesByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type AddEntriesByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	EntryModelNames        *[]string          `json:"entryModelNames"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	EntryModelNames *[]core.String	`json:"entryModelNames"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetEntryRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	EntryModelName         *string            `json:"entryModelName"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	EntryModelName *core.String	`json:"entryModelName"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetEntryByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	EntryModelName         *string            `json:"entryModelName"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	EntryModelName *core.String	`json:"entryModelName"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetEntryWithSignatureRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	EntryModelName         *string            `json:"entryModelName"`
-	KeyId                  *string            `json:"keyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	EntryModelName *core.String	`json:"entryModelName"`
+	KeyId *core.String	`json:"keyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetEntryWithSignatureByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	EntryModelName         *string            `json:"entryModelName"`
-	KeyId                  *string            `json:"keyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	EntryModelName *core.String	`json:"entryModelName"`
+	KeyId *core.String	`json:"keyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type ResetByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type AddEntriesByStampSheetRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	StampSheet             *string            `json:"stampSheet"`
-	KeyId                  *string            `json:"keyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StampSheet *core.String	`json:"stampSheet"`
+	KeyId *core.String	`json:"keyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type ExportMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetCurrentEntryMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateCurrentEntryMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	Settings      *string            `json:"settings"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Settings *core.String	`json:"settings"`
 }
 
 type UpdateCurrentEntryMasterFromGitHubRequest struct {
-	RequestId       *core.RequestId        `json:"requestId"`
-	ContextStack    *core.ContextStack     `json:"contextStack"`
-	NamespaceName   *string                `json:"namespaceName"`
-	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CheckoutSetting *GitHubCheckoutSetting	`json:"checkoutSetting"`
 }

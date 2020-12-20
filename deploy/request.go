@@ -21,127 +21,127 @@ import (
 )
 
 type DescribeStacksRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateStackRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	Name         *string            `json:"name"`
-	Description  *string            `json:"description"`
-	Template     *string            `json:"template"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	Template *core.String	`json:"template"`
 }
 
 type CreateStackFromGitHubRequest struct {
-	RequestId       *core.RequestId        `json:"requestId"`
-	ContextStack    *core.ContextStack     `json:"contextStack"`
-	Name            *string                `json:"name"`
-	Description     *string                `json:"description"`
-	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	CheckoutSetting *GitHubCheckoutSetting	`json:"checkoutSetting"`
 }
 
 type ValidateRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	Template     *string            `json:"template"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Template *core.String	`json:"template"`
 }
 
 type GetStackStatusRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	StackName    *string            `json:"stackName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
 }
 
 type GetStackRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	StackName    *string            `json:"stackName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
 }
 
 type UpdateStackRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	StackName    *string            `json:"stackName"`
-	Description  *string            `json:"description"`
-	Template     *string            `json:"template"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
+	Description *core.String	`json:"description"`
+	Template *core.String	`json:"template"`
 }
 
 type UpdateStackFromGitHubRequest struct {
-	RequestId       *core.RequestId        `json:"requestId"`
-	ContextStack    *core.ContextStack     `json:"contextStack"`
-	StackName       *string                `json:"stackName"`
-	Description     *string                `json:"description"`
-	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
+	Description *core.String	`json:"description"`
+	CheckoutSetting *GitHubCheckoutSetting	`json:"checkoutSetting"`
 }
 
 type DeleteStackRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	StackName    *string            `json:"stackName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
 }
 
 type ForceDeleteStackRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	StackName    *string            `json:"stackName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
 }
 
 type DeleteStackResourcesRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	StackName    *string            `json:"stackName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
 }
 
 type DeleteStackEntityRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	StackName    *string            `json:"stackName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
 }
 
 type DescribeResourcesRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	StackName    *string            `json:"stackName"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type GetResourceRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	StackName    *string            `json:"stackName"`
-	ResourceName *string            `json:"resourceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
+	ResourceName *core.String	`json:"resourceName"`
 }
 
 type DescribeEventsRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	StackName    *string            `json:"stackName"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type GetEventRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	StackName    *string            `json:"stackName"`
-	EventName    *string            `json:"eventName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
+	EventName *core.String	`json:"eventName"`
 }
 
 type DescribeOutputsRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	StackName    *string            `json:"stackName"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type GetOutputRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	StackName    *string            `json:"stackName"`
-	OutputName   *string            `json:"outputName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StackName *core.String	`json:"stackName"`
+	OutputName *core.String	`json:"outputName"`
 }

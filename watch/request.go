@@ -21,42 +21,42 @@ import (
 )
 
 type GetChartRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	Metrics      *string            `json:"metrics"`
-	Grn          *string            `json:"grn"`
-	Queries      *[]string          `json:"queries"`
-	By           *string            `json:"by"`
-	Timeframe    *string            `json:"timeframe"`
-	Size         *string            `json:"size"`
-	Format       *string            `json:"format"`
-	Aggregator   *string            `json:"aggregator"`
-	Style        *string            `json:"style"`
-	Title        *string            `json:"title"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Metrics *core.String	`json:"metrics"`
+	Grn *core.String	`json:"grn"`
+	Queries *[]core.String	`json:"queries"`
+	By *core.String	`json:"by"`
+	Timeframe *core.String	`json:"timeframe"`
+	Size *core.String	`json:"size"`
+	Format *core.String	`json:"format"`
+	Aggregator *core.String	`json:"aggregator"`
+	Style *core.String	`json:"style"`
+	Title *core.String	`json:"title"`
 }
 
 type GetCumulativeRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	Name         *string            `json:"name"`
-	ResourceGrn  *string            `json:"resourceGrn"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Name *core.String	`json:"name"`
+	ResourceGrn *core.String	`json:"resourceGrn"`
 }
 
 type DescribeBillingActivitiesRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	Year         *int32             `json:"year"`
-	Month        *int32             `json:"month"`
-	Service      *string            `json:"service"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Year *int32	`json:"year"`
+	Month *int32	`json:"month"`
+	Service *core.String	`json:"service"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type GetBillingActivityRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	Year         *int32             `json:"year"`
-	Month        *int32             `json:"month"`
-	Service      *string            `json:"service"`
-	ActivityType *string            `json:"activityType"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Year *int32	`json:"year"`
+	Month *int32	`json:"month"`
+	Service *core.String	`json:"service"`
+	ActivityType *core.String	`json:"activityType"`
 }

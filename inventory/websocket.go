@@ -49,13 +49,13 @@ func (p Gs2InventoryWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -68,33 +68,33 @@ func (p Gs2InventoryWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "namespace",
-			"function":    "describeNamespaces",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "namespace",
+    		"function": "describeNamespaces",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -131,13 +131,13 @@ func (p Gs2InventoryWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -150,45 +150,45 @@ func (p Gs2InventoryWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "namespace",
-			"function":    "createNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "namespace",
+    		"function": "createNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.AcquireScript != nil {
-		bodies["acquireScript"] = request.AcquireScript.ToDict()
-	}
-	if request.OverflowScript != nil {
-		bodies["overflowScript"] = request.OverflowScript.ToDict()
-	}
-	if request.ConsumeScript != nil {
-		bodies["consumeScript"] = request.ConsumeScript.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.AcquireScript != nil {
+        bodies["acquireScript"] = request.AcquireScript.ToDict()
+    }
+    if request.OverflowScript != nil {
+        bodies["overflowScript"] = request.OverflowScript.ToDict()
+    }
+    if request.ConsumeScript != nil {
+        bodies["consumeScript"] = request.ConsumeScript.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -225,13 +225,13 @@ func (p Gs2InventoryWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -244,30 +244,30 @@ func (p Gs2InventoryWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "namespace",
-			"function":    "getNamespaceStatus",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "namespace",
+    		"function": "getNamespaceStatus",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -304,13 +304,13 @@ func (p Gs2InventoryWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -323,30 +323,30 @@ func (p Gs2InventoryWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "namespace",
-			"function":    "getNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "namespace",
+    		"function": "getNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -383,13 +383,13 @@ func (p Gs2InventoryWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -402,45 +402,45 @@ func (p Gs2InventoryWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "namespace",
-			"function":    "updateNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "namespace",
+    		"function": "updateNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.AcquireScript != nil {
-		bodies["acquireScript"] = request.AcquireScript.ToDict()
-	}
-	if request.OverflowScript != nil {
-		bodies["overflowScript"] = request.OverflowScript.ToDict()
-	}
-	if request.ConsumeScript != nil {
-		bodies["consumeScript"] = request.ConsumeScript.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.AcquireScript != nil {
+        bodies["acquireScript"] = request.AcquireScript.ToDict()
+    }
+    if request.OverflowScript != nil {
+        bodies["overflowScript"] = request.OverflowScript.ToDict()
+    }
+    if request.ConsumeScript != nil {
+        bodies["consumeScript"] = request.ConsumeScript.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -477,13 +477,13 @@ func (p Gs2InventoryWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -496,30 +496,30 @@ func (p Gs2InventoryWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "namespace",
-			"function":    "deleteNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "namespace",
+    		"function": "deleteNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -556,13 +556,13 @@ func (p Gs2InventoryWebSocketClient) describeInventoryModelMastersAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeInventoryModelMastersResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeInventoryModelMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeInventoryModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeInventoryModelMastersAsyncResult{
 		result: &result,
@@ -575,36 +575,36 @@ func (p Gs2InventoryWebSocketClient) DescribeInventoryModelMastersAsync(
 	request *DescribeInventoryModelMastersRequest,
 	callback chan<- DescribeInventoryModelMastersAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventoryModelMaster",
-			"function":    "describeInventoryModelMasters",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventoryModelMaster",
+    		"function": "describeInventoryModelMasters",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeInventoryModelMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -641,13 +641,13 @@ func (p Gs2InventoryWebSocketClient) createInventoryModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateInventoryModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateInventoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateInventoryModelMasterAsyncResult{
 		result: &result,
@@ -660,48 +660,48 @@ func (p Gs2InventoryWebSocketClient) CreateInventoryModelMasterAsync(
 	request *CreateInventoryModelMasterRequest,
 	callback chan<- CreateInventoryModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventoryModelMaster",
-			"function":    "createInventoryModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventoryModelMaster",
+    		"function": "createInventoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.InitialCapacity != nil {
-		bodies["initialCapacity"] = *request.InitialCapacity
-	}
-	if request.MaxCapacity != nil {
-		bodies["maxCapacity"] = *request.MaxCapacity
-	}
-	if request.ProtectReferencedItem != nil {
-		bodies["protectReferencedItem"] = *request.ProtectReferencedItem
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.InitialCapacity != nil {
+        bodies["initialCapacity"] = *request.InitialCapacity
+    }
+    if request.MaxCapacity != nil {
+        bodies["maxCapacity"] = *request.MaxCapacity
+    }
+    if request.ProtectReferencedItem != nil {
+        bodies["protectReferencedItem"] = *request.ProtectReferencedItem
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createInventoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -738,13 +738,13 @@ func (p Gs2InventoryWebSocketClient) getInventoryModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetInventoryModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetInventoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetInventoryModelMasterAsyncResult{
 		result: &result,
@@ -757,33 +757,33 @@ func (p Gs2InventoryWebSocketClient) GetInventoryModelMasterAsync(
 	request *GetInventoryModelMasterRequest,
 	callback chan<- GetInventoryModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventoryModelMaster",
-			"function":    "getInventoryModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventoryModelMaster",
+    		"function": "getInventoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getInventoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -820,13 +820,13 @@ func (p Gs2InventoryWebSocketClient) updateInventoryModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateInventoryModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateInventoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateInventoryModelMasterAsyncResult{
 		result: &result,
@@ -839,48 +839,48 @@ func (p Gs2InventoryWebSocketClient) UpdateInventoryModelMasterAsync(
 	request *UpdateInventoryModelMasterRequest,
 	callback chan<- UpdateInventoryModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventoryModelMaster",
-			"function":    "updateInventoryModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventoryModelMaster",
+    		"function": "updateInventoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.InitialCapacity != nil {
-		bodies["initialCapacity"] = *request.InitialCapacity
-	}
-	if request.MaxCapacity != nil {
-		bodies["maxCapacity"] = *request.MaxCapacity
-	}
-	if request.ProtectReferencedItem != nil {
-		bodies["protectReferencedItem"] = *request.ProtectReferencedItem
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.InitialCapacity != nil {
+        bodies["initialCapacity"] = *request.InitialCapacity
+    }
+    if request.MaxCapacity != nil {
+        bodies["maxCapacity"] = *request.MaxCapacity
+    }
+    if request.ProtectReferencedItem != nil {
+        bodies["protectReferencedItem"] = *request.ProtectReferencedItem
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateInventoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -917,13 +917,13 @@ func (p Gs2InventoryWebSocketClient) deleteInventoryModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteInventoryModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteInventoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteInventoryModelMasterAsyncResult{
 		result: &result,
@@ -936,33 +936,33 @@ func (p Gs2InventoryWebSocketClient) DeleteInventoryModelMasterAsync(
 	request *DeleteInventoryModelMasterRequest,
 	callback chan<- DeleteInventoryModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventoryModelMaster",
-			"function":    "deleteInventoryModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventoryModelMaster",
+    		"function": "deleteInventoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteInventoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -999,13 +999,13 @@ func (p Gs2InventoryWebSocketClient) describeInventoryModelsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeInventoryModelsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeInventoryModelsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeInventoryModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeInventoryModelsAsyncResult{
 		result: &result,
@@ -1018,30 +1018,30 @@ func (p Gs2InventoryWebSocketClient) DescribeInventoryModelsAsync(
 	request *DescribeInventoryModelsRequest,
 	callback chan<- DescribeInventoryModelsAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventoryModel",
-			"function":    "describeInventoryModels",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventoryModel",
+    		"function": "describeInventoryModels",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeInventoryModelsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1078,13 +1078,13 @@ func (p Gs2InventoryWebSocketClient) getInventoryModelAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetInventoryModelResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetInventoryModelAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetInventoryModelAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetInventoryModelAsyncResult{
 		result: &result,
@@ -1097,33 +1097,33 @@ func (p Gs2InventoryWebSocketClient) GetInventoryModelAsync(
 	request *GetInventoryModelRequest,
 	callback chan<- GetInventoryModelAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventoryModel",
-			"function":    "getInventoryModel",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventoryModel",
+    		"function": "getInventoryModel",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getInventoryModelAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1160,13 +1160,13 @@ func (p Gs2InventoryWebSocketClient) describeItemModelMastersAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeItemModelMastersResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeItemModelMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeItemModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeItemModelMastersAsyncResult{
 		result: &result,
@@ -1179,39 +1179,39 @@ func (p Gs2InventoryWebSocketClient) DescribeItemModelMastersAsync(
 	request *DescribeItemModelMastersRequest,
 	callback chan<- DescribeItemModelMastersAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemModelMaster",
-			"function":    "describeItemModelMasters",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemModelMaster",
+    		"function": "describeItemModelMasters",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeItemModelMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1248,13 +1248,13 @@ func (p Gs2InventoryWebSocketClient) createItemModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateItemModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateItemModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateItemModelMasterAsyncResult{
 		result: &result,
@@ -1267,51 +1267,51 @@ func (p Gs2InventoryWebSocketClient) CreateItemModelMasterAsync(
 	request *CreateItemModelMasterRequest,
 	callback chan<- CreateItemModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemModelMaster",
-			"function":    "createItemModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemModelMaster",
+    		"function": "createItemModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.StackingLimit != nil {
-		bodies["stackingLimit"] = *request.StackingLimit
-	}
-	if request.AllowMultipleStacks != nil {
-		bodies["allowMultipleStacks"] = *request.AllowMultipleStacks
-	}
-	if request.SortValue != nil {
-		bodies["sortValue"] = *request.SortValue
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.StackingLimit != nil {
+        bodies["stackingLimit"] = *request.StackingLimit
+    }
+    if request.AllowMultipleStacks != nil {
+        bodies["allowMultipleStacks"] = *request.AllowMultipleStacks
+    }
+    if request.SortValue != nil {
+        bodies["sortValue"] = *request.SortValue
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1348,13 +1348,13 @@ func (p Gs2InventoryWebSocketClient) getItemModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetItemModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetItemModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetItemModelMasterAsyncResult{
 		result: &result,
@@ -1367,36 +1367,36 @@ func (p Gs2InventoryWebSocketClient) GetItemModelMasterAsync(
 	request *GetItemModelMasterRequest,
 	callback chan<- GetItemModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemModelMaster",
-			"function":    "getItemModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemModelMaster",
+    		"function": "getItemModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1433,13 +1433,13 @@ func (p Gs2InventoryWebSocketClient) updateItemModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateItemModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateItemModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateItemModelMasterAsyncResult{
 		result: &result,
@@ -1452,51 +1452,51 @@ func (p Gs2InventoryWebSocketClient) UpdateItemModelMasterAsync(
 	request *UpdateItemModelMasterRequest,
 	callback chan<- UpdateItemModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemModelMaster",
-			"function":    "updateItemModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemModelMaster",
+    		"function": "updateItemModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.StackingLimit != nil {
-		bodies["stackingLimit"] = *request.StackingLimit
-	}
-	if request.AllowMultipleStacks != nil {
-		bodies["allowMultipleStacks"] = *request.AllowMultipleStacks
-	}
-	if request.SortValue != nil {
-		bodies["sortValue"] = *request.SortValue
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.StackingLimit != nil {
+        bodies["stackingLimit"] = *request.StackingLimit
+    }
+    if request.AllowMultipleStacks != nil {
+        bodies["allowMultipleStacks"] = *request.AllowMultipleStacks
+    }
+    if request.SortValue != nil {
+        bodies["sortValue"] = *request.SortValue
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1533,13 +1533,13 @@ func (p Gs2InventoryWebSocketClient) deleteItemModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteItemModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteItemModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteItemModelMasterAsyncResult{
 		result: &result,
@@ -1552,36 +1552,36 @@ func (p Gs2InventoryWebSocketClient) DeleteItemModelMasterAsync(
 	request *DeleteItemModelMasterRequest,
 	callback chan<- DeleteItemModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemModelMaster",
-			"function":    "deleteItemModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemModelMaster",
+    		"function": "deleteItemModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1618,13 +1618,13 @@ func (p Gs2InventoryWebSocketClient) describeItemModelsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeItemModelsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeItemModelsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeItemModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeItemModelsAsyncResult{
 		result: &result,
@@ -1637,33 +1637,33 @@ func (p Gs2InventoryWebSocketClient) DescribeItemModelsAsync(
 	request *DescribeItemModelsRequest,
 	callback chan<- DescribeItemModelsAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemModel",
-			"function":    "describeItemModels",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemModel",
+    		"function": "describeItemModels",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeItemModelsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1700,13 +1700,13 @@ func (p Gs2InventoryWebSocketClient) getItemModelAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetItemModelResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetItemModelAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetItemModelAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetItemModelAsyncResult{
 		result: &result,
@@ -1719,36 +1719,36 @@ func (p Gs2InventoryWebSocketClient) GetItemModelAsync(
 	request *GetItemModelRequest,
 	callback chan<- GetItemModelAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemModel",
-			"function":    "getItemModel",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemModel",
+    		"function": "getItemModel",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getItemModelAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1785,13 +1785,13 @@ func (p Gs2InventoryWebSocketClient) exportMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ExportMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ExportMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ExportMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -1804,30 +1804,30 @@ func (p Gs2InventoryWebSocketClient) ExportMasterAsync(
 	request *ExportMasterRequest,
 	callback chan<- ExportMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "currentItemModelMaster",
-			"function":    "exportMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "currentItemModelMaster",
+    		"function": "exportMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1864,13 +1864,13 @@ func (p Gs2InventoryWebSocketClient) getCurrentItemModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCurrentItemModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCurrentItemModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCurrentItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCurrentItemModelMasterAsyncResult{
 		result: &result,
@@ -1883,30 +1883,30 @@ func (p Gs2InventoryWebSocketClient) GetCurrentItemModelMasterAsync(
 	request *GetCurrentItemModelMasterRequest,
 	callback chan<- GetCurrentItemModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "currentItemModelMaster",
-			"function":    "getCurrentItemModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "currentItemModelMaster",
+    		"function": "getCurrentItemModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getCurrentItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1943,13 +1943,13 @@ func (p Gs2InventoryWebSocketClient) updateCurrentItemModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCurrentItemModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentItemModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentItemModelMasterAsyncResult{
 		result: &result,
@@ -1962,33 +1962,33 @@ func (p Gs2InventoryWebSocketClient) UpdateCurrentItemModelMasterAsync(
 	request *UpdateCurrentItemModelMasterRequest,
 	callback chan<- UpdateCurrentItemModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "currentItemModelMaster",
-			"function":    "updateCurrentItemModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "currentItemModelMaster",
+    		"function": "updateCurrentItemModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Settings != nil && *request.Settings != "" {
-		bodies["settings"] = *request.Settings
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Settings != nil && *request.Settings != "" {
+        bodies["settings"] = *request.Settings
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateCurrentItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2025,13 +2025,13 @@ func (p Gs2InventoryWebSocketClient) updateCurrentItemModelMasterFromGitHubAsync
 	asyncResult := <-internalCallback
 	var result UpdateCurrentItemModelMasterFromGitHubResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentItemModelMasterFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentItemModelMasterFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentItemModelMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2044,33 +2044,33 @@ func (p Gs2InventoryWebSocketClient) UpdateCurrentItemModelMasterFromGitHubAsync
 	request *UpdateCurrentItemModelMasterFromGitHubRequest,
 	callback chan<- UpdateCurrentItemModelMasterFromGitHubAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "currentItemModelMaster",
-			"function":    "updateCurrentItemModelMasterFromGitHub",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "currentItemModelMaster",
+    		"function": "updateCurrentItemModelMasterFromGitHub",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateCurrentItemModelMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2107,13 +2107,13 @@ func (p Gs2InventoryWebSocketClient) describeInventoriesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeInventoriesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeInventoriesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeInventoriesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeInventoriesAsyncResult{
 		result: &result,
@@ -2126,39 +2126,39 @@ func (p Gs2InventoryWebSocketClient) DescribeInventoriesAsync(
 	request *DescribeInventoriesRequest,
 	callback chan<- DescribeInventoriesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventory",
-			"function":    "describeInventories",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventory",
+    		"function": "describeInventories",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go p.describeInventoriesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2195,13 +2195,13 @@ func (p Gs2InventoryWebSocketClient) describeInventoriesByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeInventoriesByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeInventoriesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeInventoriesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeInventoriesByUserIdAsyncResult{
 		result: &result,
@@ -2214,39 +2214,39 @@ func (p Gs2InventoryWebSocketClient) DescribeInventoriesByUserIdAsync(
 	request *DescribeInventoriesByUserIdRequest,
 	callback chan<- DescribeInventoriesByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventory",
-			"function":    "describeInventoriesByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventory",
+    		"function": "describeInventoriesByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeInventoriesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2283,13 +2283,13 @@ func (p Gs2InventoryWebSocketClient) getInventoryAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetInventoryResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetInventoryAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetInventoryAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetInventoryAsyncResult{
 		result: &result,
@@ -2302,36 +2302,36 @@ func (p Gs2InventoryWebSocketClient) GetInventoryAsync(
 	request *GetInventoryRequest,
 	callback chan<- GetInventoryAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventory",
-			"function":    "getInventory",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventory",
+    		"function": "getInventory",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go p.getInventoryAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2368,13 +2368,13 @@ func (p Gs2InventoryWebSocketClient) getInventoryByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetInventoryByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetInventoryByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetInventoryByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetInventoryByUserIdAsyncResult{
 		result: &result,
@@ -2387,36 +2387,36 @@ func (p Gs2InventoryWebSocketClient) GetInventoryByUserIdAsync(
 	request *GetInventoryByUserIdRequest,
 	callback chan<- GetInventoryByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventory",
-			"function":    "getInventoryByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventory",
+    		"function": "getInventoryByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getInventoryByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2453,13 +2453,13 @@ func (p Gs2InventoryWebSocketClient) addCapacityByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AddCapacityByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AddCapacityByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddCapacityByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AddCapacityByUserIdAsyncResult{
 		result: &result,
@@ -2472,39 +2472,39 @@ func (p Gs2InventoryWebSocketClient) AddCapacityByUserIdAsync(
 	request *AddCapacityByUserIdRequest,
 	callback chan<- AddCapacityByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventory",
-			"function":    "addCapacityByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventory",
+    		"function": "addCapacityByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.AddCapacityValue != nil {
-		bodies["addCapacityValue"] = *request.AddCapacityValue
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.AddCapacityValue != nil {
+        bodies["addCapacityValue"] = *request.AddCapacityValue
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.addCapacityByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2541,13 +2541,13 @@ func (p Gs2InventoryWebSocketClient) setCapacityByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetCapacityByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SetCapacityByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetCapacityByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SetCapacityByUserIdAsyncResult{
 		result: &result,
@@ -2560,39 +2560,39 @@ func (p Gs2InventoryWebSocketClient) SetCapacityByUserIdAsync(
 	request *SetCapacityByUserIdRequest,
 	callback chan<- SetCapacityByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventory",
-			"function":    "setCapacityByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventory",
+    		"function": "setCapacityByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.NewCapacityValue != nil {
-		bodies["newCapacityValue"] = *request.NewCapacityValue
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.NewCapacityValue != nil {
+        bodies["newCapacityValue"] = *request.NewCapacityValue
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.setCapacityByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2629,13 +2629,13 @@ func (p Gs2InventoryWebSocketClient) deleteInventoryByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteInventoryByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteInventoryByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteInventoryByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteInventoryByUserIdAsyncResult{
 		result: &result,
@@ -2648,36 +2648,36 @@ func (p Gs2InventoryWebSocketClient) DeleteInventoryByUserIdAsync(
 	request *DeleteInventoryByUserIdRequest,
 	callback chan<- DeleteInventoryByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventory",
-			"function":    "deleteInventoryByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventory",
+    		"function": "deleteInventoryByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteInventoryByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2714,13 +2714,13 @@ func (p Gs2InventoryWebSocketClient) addCapacityByStampSheetAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AddCapacityByStampSheetResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AddCapacityByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddCapacityByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AddCapacityByStampSheetAsyncResult{
 		result: &result,
@@ -2733,33 +2733,33 @@ func (p Gs2InventoryWebSocketClient) AddCapacityByStampSheetAsync(
 	request *AddCapacityByStampSheetRequest,
 	callback chan<- AddCapacityByStampSheetAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventory",
-			"function":    "addCapacityByStampSheet",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventory",
+    		"function": "addCapacityByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.addCapacityByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2796,13 +2796,13 @@ func (p Gs2InventoryWebSocketClient) setCapacityByStampSheetAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetCapacityByStampSheetResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SetCapacityByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetCapacityByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SetCapacityByStampSheetAsyncResult{
 		result: &result,
@@ -2815,33 +2815,33 @@ func (p Gs2InventoryWebSocketClient) SetCapacityByStampSheetAsync(
 	request *SetCapacityByStampSheetRequest,
 	callback chan<- SetCapacityByStampSheetAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "inventory",
-			"function":    "setCapacityByStampSheet",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "inventory",
+    		"function": "setCapacityByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.setCapacityByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2878,13 +2878,13 @@ func (p Gs2InventoryWebSocketClient) describeItemSetsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeItemSetsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeItemSetsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeItemSetsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeItemSetsAsyncResult{
 		result: &result,
@@ -2897,42 +2897,42 @@ func (p Gs2InventoryWebSocketClient) DescribeItemSetsAsync(
 	request *DescribeItemSetsRequest,
 	callback chan<- DescribeItemSetsAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "describeItemSets",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "describeItemSets",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go p.describeItemSetsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2969,13 +2969,13 @@ func (p Gs2InventoryWebSocketClient) describeItemSetsByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeItemSetsByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeItemSetsByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeItemSetsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeItemSetsByUserIdAsyncResult{
 		result: &result,
@@ -2988,42 +2988,42 @@ func (p Gs2InventoryWebSocketClient) DescribeItemSetsByUserIdAsync(
 	request *DescribeItemSetsByUserIdRequest,
 	callback chan<- DescribeItemSetsByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "describeItemSetsByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "describeItemSetsByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeItemSetsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3060,13 +3060,13 @@ func (p Gs2InventoryWebSocketClient) getItemSetAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetItemSetResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetItemSetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetItemSetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetItemSetAsyncResult{
 		result: &result,
@@ -3079,42 +3079,42 @@ func (p Gs2InventoryWebSocketClient) GetItemSetAsync(
 	request *GetItemSetRequest,
 	callback chan<- GetItemSetAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "getItemSet",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "getItemSet",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go p.getItemSetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3151,13 +3151,13 @@ func (p Gs2InventoryWebSocketClient) getItemSetByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetItemSetByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetItemSetByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetItemSetByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetItemSetByUserIdAsyncResult{
 		result: &result,
@@ -3170,42 +3170,42 @@ func (p Gs2InventoryWebSocketClient) GetItemSetByUserIdAsync(
 	request *GetItemSetByUserIdRequest,
 	callback chan<- GetItemSetByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "getItemSetByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "getItemSetByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getItemSetByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3242,13 +3242,13 @@ func (p Gs2InventoryWebSocketClient) getItemWithSignatureAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetItemWithSignatureResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetItemWithSignatureAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetItemWithSignatureAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetItemWithSignatureAsyncResult{
 		result: &result,
@@ -3261,45 +3261,45 @@ func (p Gs2InventoryWebSocketClient) GetItemWithSignatureAsync(
 	request *GetItemWithSignatureRequest,
 	callback chan<- GetItemWithSignatureAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "getItemWithSignature",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "getItemWithSignature",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go p.getItemWithSignatureAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3336,13 +3336,13 @@ func (p Gs2InventoryWebSocketClient) getItemWithSignatureByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetItemWithSignatureByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetItemWithSignatureByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetItemWithSignatureByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetItemWithSignatureByUserIdAsyncResult{
 		result: &result,
@@ -3355,45 +3355,45 @@ func (p Gs2InventoryWebSocketClient) GetItemWithSignatureByUserIdAsync(
 	request *GetItemWithSignatureByUserIdRequest,
 	callback chan<- GetItemWithSignatureByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "getItemWithSignatureByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "getItemWithSignatureByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getItemWithSignatureByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3430,13 +3430,13 @@ func (p Gs2InventoryWebSocketClient) acquireItemSetByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AcquireItemSetByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AcquireItemSetByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcquireItemSetByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AcquireItemSetByUserIdAsyncResult{
 		result: &result,
@@ -3449,51 +3449,51 @@ func (p Gs2InventoryWebSocketClient) AcquireItemSetByUserIdAsync(
 	request *AcquireItemSetByUserIdRequest,
 	callback chan<- AcquireItemSetByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "acquireItemSetByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "acquireItemSetByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.AcquireCount != nil {
-		bodies["acquireCount"] = *request.AcquireCount
-	}
-	if request.ExpiresAt != nil {
-		bodies["expiresAt"] = *request.ExpiresAt
-	}
-	if request.CreateNewItemSet != nil {
-		bodies["createNewItemSet"] = *request.CreateNewItemSet
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.AcquireCount != nil {
+        bodies["acquireCount"] = *request.AcquireCount
+    }
+    if request.ExpiresAt != nil {
+        bodies["expiresAt"] = *request.ExpiresAt
+    }
+    if request.CreateNewItemSet != nil {
+        bodies["createNewItemSet"] = *request.CreateNewItemSet
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.acquireItemSetByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3530,13 +3530,13 @@ func (p Gs2InventoryWebSocketClient) consumeItemSetAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ConsumeItemSetResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ConsumeItemSetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ConsumeItemSetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ConsumeItemSetAsyncResult{
 		result: &result,
@@ -3549,45 +3549,45 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetAsync(
 	request *ConsumeItemSetRequest,
 	callback chan<- ConsumeItemSetAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "consumeItemSet",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "consumeItemSet",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ConsumeCount != nil {
-		bodies["consumeCount"] = *request.ConsumeCount
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ConsumeCount != nil {
+        bodies["consumeCount"] = *request.ConsumeCount
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go p.consumeItemSetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3624,13 +3624,13 @@ func (p Gs2InventoryWebSocketClient) consumeItemSetByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ConsumeItemSetByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ConsumeItemSetByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ConsumeItemSetByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ConsumeItemSetByUserIdAsyncResult{
 		result: &result,
@@ -3643,45 +3643,45 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetByUserIdAsync(
 	request *ConsumeItemSetByUserIdRequest,
 	callback chan<- ConsumeItemSetByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "consumeItemSetByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "consumeItemSetByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ConsumeCount != nil {
-		bodies["consumeCount"] = *request.ConsumeCount
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ConsumeCount != nil {
+        bodies["consumeCount"] = *request.ConsumeCount
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.consumeItemSetByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3718,13 +3718,13 @@ func (p Gs2InventoryWebSocketClient) describeReferenceOfAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeReferenceOfResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeReferenceOfAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeReferenceOfAsyncResult{
 		result: &result,
@@ -3737,42 +3737,42 @@ func (p Gs2InventoryWebSocketClient) DescribeReferenceOfAsync(
 	request *DescribeReferenceOfRequest,
 	callback chan<- DescribeReferenceOfAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "describeReferenceOf",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "describeReferenceOf",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go p.describeReferenceOfAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3809,13 +3809,13 @@ func (p Gs2InventoryWebSocketClient) describeReferenceOfByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeReferenceOfByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeReferenceOfByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeReferenceOfByUserIdAsyncResult{
 		result: &result,
@@ -3828,42 +3828,42 @@ func (p Gs2InventoryWebSocketClient) DescribeReferenceOfByUserIdAsync(
 	request *DescribeReferenceOfByUserIdRequest,
 	callback chan<- DescribeReferenceOfByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "describeReferenceOfByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "describeReferenceOfByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeReferenceOfByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3900,13 +3900,13 @@ func (p Gs2InventoryWebSocketClient) getReferenceOfAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetReferenceOfResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetReferenceOfAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetReferenceOfAsyncResult{
 		result: &result,
@@ -3919,45 +3919,45 @@ func (p Gs2InventoryWebSocketClient) GetReferenceOfAsync(
 	request *GetReferenceOfRequest,
 	callback chan<- GetReferenceOfAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "getReferenceOf",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "getReferenceOf",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		bodies["referenceOf"] = *request.ReferenceOf
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go p.getReferenceOfAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3994,13 +3994,13 @@ func (p Gs2InventoryWebSocketClient) getReferenceOfByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetReferenceOfByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetReferenceOfByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetReferenceOfByUserIdAsyncResult{
 		result: &result,
@@ -4013,45 +4013,45 @@ func (p Gs2InventoryWebSocketClient) GetReferenceOfByUserIdAsync(
 	request *GetReferenceOfByUserIdRequest,
 	callback chan<- GetReferenceOfByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "getReferenceOfByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "getReferenceOfByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		bodies["referenceOf"] = *request.ReferenceOf
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getReferenceOfByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4088,13 +4088,13 @@ func (p Gs2InventoryWebSocketClient) verifyReferenceOfAsyncHandler(
 	asyncResult := <-internalCallback
 	var result VerifyReferenceOfResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- VerifyReferenceOfAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- VerifyReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- VerifyReferenceOfAsyncResult{
 		result: &result,
@@ -4107,48 +4107,48 @@ func (p Gs2InventoryWebSocketClient) VerifyReferenceOfAsync(
 	request *VerifyReferenceOfRequest,
 	callback chan<- VerifyReferenceOfAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "verifyReferenceOf",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "verifyReferenceOf",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		bodies["referenceOf"] = *request.ReferenceOf
-	}
-	if request.VerifyType != nil && *request.VerifyType != "" {
-		bodies["verifyType"] = *request.VerifyType
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
+    if request.VerifyType != nil && *request.VerifyType != "" {
+        bodies["verifyType"] = *request.VerifyType
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go p.verifyReferenceOfAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4185,13 +4185,13 @@ func (p Gs2InventoryWebSocketClient) verifyReferenceOfByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result VerifyReferenceOfByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- VerifyReferenceOfByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- VerifyReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- VerifyReferenceOfByUserIdAsyncResult{
 		result: &result,
@@ -4204,48 +4204,48 @@ func (p Gs2InventoryWebSocketClient) VerifyReferenceOfByUserIdAsync(
 	request *VerifyReferenceOfByUserIdRequest,
 	callback chan<- VerifyReferenceOfByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "verifyReferenceOfByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "verifyReferenceOfByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		bodies["referenceOf"] = *request.ReferenceOf
-	}
-	if request.VerifyType != nil && *request.VerifyType != "" {
-		bodies["verifyType"] = *request.VerifyType
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
+    if request.VerifyType != nil && *request.VerifyType != "" {
+        bodies["verifyType"] = *request.VerifyType
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.verifyReferenceOfByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4282,13 +4282,13 @@ func (p Gs2InventoryWebSocketClient) addReferenceOfAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AddReferenceOfResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AddReferenceOfAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AddReferenceOfAsyncResult{
 		result: &result,
@@ -4301,45 +4301,45 @@ func (p Gs2InventoryWebSocketClient) AddReferenceOfAsync(
 	request *AddReferenceOfRequest,
 	callback chan<- AddReferenceOfAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "addReferenceOf",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "addReferenceOf",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		bodies["referenceOf"] = *request.ReferenceOf
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go p.addReferenceOfAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4376,13 +4376,13 @@ func (p Gs2InventoryWebSocketClient) addReferenceOfByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AddReferenceOfByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AddReferenceOfByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AddReferenceOfByUserIdAsyncResult{
 		result: &result,
@@ -4395,45 +4395,45 @@ func (p Gs2InventoryWebSocketClient) AddReferenceOfByUserIdAsync(
 	request *AddReferenceOfByUserIdRequest,
 	callback chan<- AddReferenceOfByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "addReferenceOfByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "addReferenceOfByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		bodies["referenceOf"] = *request.ReferenceOf
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.addReferenceOfByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4470,13 +4470,13 @@ func (p Gs2InventoryWebSocketClient) deleteReferenceOfAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteReferenceOfResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteReferenceOfAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteReferenceOfAsyncResult{
 		result: &result,
@@ -4489,45 +4489,45 @@ func (p Gs2InventoryWebSocketClient) DeleteReferenceOfAsync(
 	request *DeleteReferenceOfRequest,
 	callback chan<- DeleteReferenceOfAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "deleteReferenceOf",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "deleteReferenceOf",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		bodies["referenceOf"] = *request.ReferenceOf
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go p.deleteReferenceOfAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4564,13 +4564,13 @@ func (p Gs2InventoryWebSocketClient) deleteReferenceOfByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteReferenceOfByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteReferenceOfByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteReferenceOfByUserIdAsyncResult{
 		result: &result,
@@ -4583,45 +4583,45 @@ func (p Gs2InventoryWebSocketClient) DeleteReferenceOfByUserIdAsync(
 	request *DeleteReferenceOfByUserIdRequest,
 	callback chan<- DeleteReferenceOfByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "deleteReferenceOfByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "deleteReferenceOfByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		bodies["referenceOf"] = *request.ReferenceOf
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteReferenceOfByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4658,13 +4658,13 @@ func (p Gs2InventoryWebSocketClient) deleteItemSetByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteItemSetByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteItemSetByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteItemSetByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteItemSetByUserIdAsyncResult{
 		result: &result,
@@ -4677,42 +4677,42 @@ func (p Gs2InventoryWebSocketClient) DeleteItemSetByUserIdAsync(
 	request *DeleteItemSetByUserIdRequest,
 	callback chan<- DeleteItemSetByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "deleteItemSetByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "deleteItemSetByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		bodies["inventoryName"] = *request.InventoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		bodies["itemName"] = *request.ItemName
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteItemSetByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4749,13 +4749,13 @@ func (p Gs2InventoryWebSocketClient) acquireItemSetByStampSheetAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AcquireItemSetByStampSheetResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AcquireItemSetByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcquireItemSetByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AcquireItemSetByStampSheetAsyncResult{
 		result: &result,
@@ -4768,33 +4768,33 @@ func (p Gs2InventoryWebSocketClient) AcquireItemSetByStampSheetAsync(
 	request *AcquireItemSetByStampSheetRequest,
 	callback chan<- AcquireItemSetByStampSheetAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "acquireItemSetByStampSheet",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "acquireItemSetByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.acquireItemSetByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4831,13 +4831,13 @@ func (p Gs2InventoryWebSocketClient) addReferenceOfItemSetByStampSheetAsyncHandl
 	asyncResult := <-internalCallback
 	var result AddReferenceOfItemSetByStampSheetResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AddReferenceOfItemSetByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddReferenceOfItemSetByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AddReferenceOfItemSetByStampSheetAsyncResult{
 		result: &result,
@@ -4850,33 +4850,33 @@ func (p Gs2InventoryWebSocketClient) AddReferenceOfItemSetByStampSheetAsync(
 	request *AddReferenceOfItemSetByStampSheetRequest,
 	callback chan<- AddReferenceOfItemSetByStampSheetAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "addReferenceOfItemSetByStampSheet",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "addReferenceOfItemSetByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.addReferenceOfItemSetByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4913,13 +4913,13 @@ func (p Gs2InventoryWebSocketClient) deleteReferenceOfItemSetByStampSheetAsyncHa
 	asyncResult := <-internalCallback
 	var result DeleteReferenceOfItemSetByStampSheetResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteReferenceOfItemSetByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteReferenceOfItemSetByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteReferenceOfItemSetByStampSheetAsyncResult{
 		result: &result,
@@ -4932,33 +4932,33 @@ func (p Gs2InventoryWebSocketClient) DeleteReferenceOfItemSetByStampSheetAsync(
 	request *DeleteReferenceOfItemSetByStampSheetRequest,
 	callback chan<- DeleteReferenceOfItemSetByStampSheetAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "deleteReferenceOfItemSetByStampSheet",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "deleteReferenceOfItemSetByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteReferenceOfItemSetByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4995,13 +4995,13 @@ func (p Gs2InventoryWebSocketClient) consumeItemSetByStampTaskAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ConsumeItemSetByStampTaskResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ConsumeItemSetByStampTaskAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ConsumeItemSetByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ConsumeItemSetByStampTaskAsyncResult{
 		result: &result,
@@ -5014,33 +5014,33 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetByStampTaskAsync(
 	request *ConsumeItemSetByStampTaskRequest,
 	callback chan<- ConsumeItemSetByStampTaskAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "consumeItemSetByStampTask",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "consumeItemSetByStampTask",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.consumeItemSetByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -5077,13 +5077,13 @@ func (p Gs2InventoryWebSocketClient) verifyReferenceOfByStampTaskAsyncHandler(
 	asyncResult := <-internalCallback
 	var result VerifyReferenceOfByStampTaskResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- VerifyReferenceOfByStampTaskAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- VerifyReferenceOfByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- VerifyReferenceOfByStampTaskAsyncResult{
 		result: &result,
@@ -5096,33 +5096,33 @@ func (p Gs2InventoryWebSocketClient) VerifyReferenceOfByStampTaskAsync(
 	request *VerifyReferenceOfByStampTaskRequest,
 	callback chan<- VerifyReferenceOfByStampTaskAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "inventory",
-			"component":   "itemSet",
-			"function":    "verifyReferenceOfByStampTask",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "itemSet",
+    		"function": "verifyReferenceOfByStampTask",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.verifyReferenceOfByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)

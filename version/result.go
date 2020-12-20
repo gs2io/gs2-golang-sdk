@@ -16,11 +16,15 @@ permissions and limitations under the License.
 
 package version
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         *[]*Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -58,7 +62,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *string	`json:"status"`
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -132,7 +136,7 @@ type DescribeVersionModelMastersResult struct {
     /** バージョンマスターのリスト */
 	Items         *[]*VersionModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeVersionModelMastersResult) ToDict() *map[string]interface{} {
@@ -261,7 +265,7 @@ type DescribeAcceptVersionsResult struct {
     /** 承認したバージョンのリスト */
 	Items         *[]*AcceptVersion	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeAcceptVersionsResult) ToDict() *map[string]interface{} {
@@ -283,7 +287,7 @@ type DescribeAcceptVersionsByUserIdResult struct {
     /** 承認したバージョンのリスト */
 	Items         *[]*AcceptVersion	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeAcceptVersionsByUserIdResult) ToDict() *map[string]interface{} {
@@ -401,7 +405,7 @@ type DeleteAcceptVersionByUserIdAsyncResult struct {
 
 type CheckVersionResult struct {
     /** プロジェクトトークン */
-	ProjectToken         *string	`json:"projectToken"`
+	ProjectToken         *core.String	`json:"projectToken"`
     /** バージョンの検証結果のリスト */
 	Warnings         *[]*Status	`json:"warnings"`
     /** バージョンの検証結果のリスト */
@@ -427,7 +431,7 @@ type CheckVersionAsyncResult struct {
 
 type CheckVersionByUserIdResult struct {
     /** プロジェクトトークン */
-	ProjectToken         *string	`json:"projectToken"`
+	ProjectToken         *core.String	`json:"projectToken"`
     /** バージョンの検証結果のリスト */
 	Warnings         *[]*Status	`json:"warnings"`
     /** バージョンの検証結果のリスト */
@@ -453,9 +457,9 @@ type CheckVersionByUserIdAsyncResult struct {
 
 type CalculateSignatureResult struct {
     /** ボディ */
-	Body         *string	`json:"body"`
+	Body         *core.String	`json:"body"`
     /** 署名 */
-	Signature         *string	`json:"signature"`
+	Signature         *core.String	`json:"signature"`
 }
 
 func (p *CalculateSignatureResult) ToDict() *map[string]interface{} {

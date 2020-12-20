@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package inbox
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -111,16 +115,16 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 type DeleteNamespaceResult struct {
-	/** 削除したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 削除したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -129,20 +133,20 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeMessagesResult struct {
-	/** メッセージのリスト */
-	Items *[]*Message `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** メッセージのリスト */
+	Items         *[]*Message	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeMessagesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeMessagesAsyncResult struct {
@@ -151,20 +155,20 @@ type DescribeMessagesAsyncResult struct {
 }
 
 type DescribeMessagesByUserIdResult struct {
-	/** メッセージのリスト */
-	Items *[]*Message `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** メッセージのリスト */
+	Items         *[]*Message	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeMessagesByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeMessagesByUserIdAsyncResult struct {
@@ -173,16 +177,16 @@ type DescribeMessagesByUserIdAsyncResult struct {
 }
 
 type SendMessageByUserIdResult struct {
-	/** 作成したメッセージ */
-	Item *Message `json:"item"`
+    /** 作成したメッセージ */
+	Item         *Message	`json:"item"`
 }
 
 func (p *SendMessageByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type SendMessageByUserIdAsyncResult struct {
@@ -191,16 +195,16 @@ type SendMessageByUserIdAsyncResult struct {
 }
 
 type GetMessageResult struct {
-	/** メッセージ */
-	Item *Message `json:"item"`
+    /** メッセージ */
+	Item         *Message	`json:"item"`
 }
 
 func (p *GetMessageResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetMessageAsyncResult struct {
@@ -209,16 +213,16 @@ type GetMessageAsyncResult struct {
 }
 
 type GetMessageByUserIdResult struct {
-	/** メッセージ */
-	Item *Message `json:"item"`
+    /** メッセージ */
+	Item         *Message	`json:"item"`
 }
 
 func (p *GetMessageByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetMessageByUserIdAsyncResult struct {
@@ -227,15 +231,15 @@ type GetMessageByUserIdAsyncResult struct {
 }
 
 type ReceiveGlobalMessageResult struct {
-	/** 受信したメッセージ一覧 */
-	Item *[]*Message `json:"item"`
+    /** 受信したメッセージ一覧 */
+	Item         *[]*Message	`json:"item"`
 }
 
 func (p *ReceiveGlobalMessageResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+    }
+    return &data
 }
 
 type ReceiveGlobalMessageAsyncResult struct {
@@ -244,15 +248,15 @@ type ReceiveGlobalMessageAsyncResult struct {
 }
 
 type ReceiveGlobalMessageByUserIdResult struct {
-	/** 受信したメッセージ一覧 */
-	Item *[]*Message `json:"item"`
+    /** 受信したメッセージ一覧 */
+	Item         *[]*Message	`json:"item"`
 }
 
 func (p *ReceiveGlobalMessageByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+    }
+    return &data
 }
 
 type ReceiveGlobalMessageByUserIdAsyncResult struct {
@@ -261,16 +265,16 @@ type ReceiveGlobalMessageByUserIdAsyncResult struct {
 }
 
 type OpenMessageResult struct {
-	/** メッセージ */
-	Item *Message `json:"item"`
+    /** メッセージ */
+	Item         *Message	`json:"item"`
 }
 
 func (p *OpenMessageResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type OpenMessageAsyncResult struct {
@@ -279,16 +283,16 @@ type OpenMessageAsyncResult struct {
 }
 
 type OpenMessageByUserIdResult struct {
-	/** メッセージ */
-	Item *Message `json:"item"`
+    /** メッセージ */
+	Item         *Message	`json:"item"`
 }
 
 func (p *OpenMessageByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type OpenMessageByUserIdAsyncResult struct {
@@ -297,21 +301,21 @@ type OpenMessageByUserIdAsyncResult struct {
 }
 
 type ReadMessageResult struct {
-	/** メッセージ */
-	Item *Message `json:"item"`
-	/** スタンプシート */
-	StampSheet *string `json:"stampSheet"`
+    /** メッセージ */
+	Item         *Message	`json:"item"`
+    /** スタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
 }
 
 func (p *ReadMessageResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    return &data
 }
 
 type ReadMessageAsyncResult struct {
@@ -320,21 +324,21 @@ type ReadMessageAsyncResult struct {
 }
 
 type ReadMessageByUserIdResult struct {
-	/** メッセージ */
-	Item *Message `json:"item"`
-	/** スタンプシート */
-	StampSheet *string `json:"stampSheet"`
+    /** メッセージ */
+	Item         *Message	`json:"item"`
+    /** スタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
 }
 
 func (p *ReadMessageByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    return &data
 }
 
 type ReadMessageByUserIdAsyncResult struct {
@@ -346,8 +350,8 @@ type DeleteMessageResult struct {
 }
 
 func (p *DeleteMessageResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteMessageAsyncResult struct {
@@ -359,8 +363,8 @@ type DeleteMessageByUserIdResult struct {
 }
 
 func (p *DeleteMessageByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteMessageByUserIdAsyncResult struct {
@@ -369,21 +373,21 @@ type DeleteMessageByUserIdAsyncResult struct {
 }
 
 type OpenByStampTaskResult struct {
-	/** メッセージ */
-	Item *Message `json:"item"`
-	/** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack *string `json:"newContextStack"`
+    /** メッセージ */
+	Item         *Message	`json:"item"`
+    /** スタンプタスクの実行結果を記録したコンテキスト */
+	NewContextStack         *core.String	`json:"newContextStack"`
 }
 
 func (p *OpenByStampTaskResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.NewContextStack != nil {
-		data["NewContextStack"] = p.NewContextStack
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.NewContextStack != nil {
+     data["NewContextStack"] = p.NewContextStack
+    }
+    return &data
 }
 
 type OpenByStampTaskAsyncResult struct {
@@ -392,16 +396,16 @@ type OpenByStampTaskAsyncResult struct {
 }
 
 type ExportMasterResult struct {
-	/** 現在有効なグローバルメッセージ設定 */
-	Item *CurrentMessageMaster `json:"item"`
+    /** 現在有効なグローバルメッセージ設定 */
+	Item         *CurrentMessageMaster	`json:"item"`
 }
 
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type ExportMasterAsyncResult struct {
@@ -410,16 +414,16 @@ type ExportMasterAsyncResult struct {
 }
 
 type GetCurrentMessageMasterResult struct {
-	/** 現在有効なグローバルメッセージ設定 */
-	Item *CurrentMessageMaster `json:"item"`
+    /** 現在有効なグローバルメッセージ設定 */
+	Item         *CurrentMessageMaster	`json:"item"`
 }
 
 func (p *GetCurrentMessageMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCurrentMessageMasterAsyncResult struct {
@@ -428,16 +432,16 @@ type GetCurrentMessageMasterAsyncResult struct {
 }
 
 type UpdateCurrentMessageMasterResult struct {
-	/** 更新した現在有効なグローバルメッセージ設定 */
-	Item *CurrentMessageMaster `json:"item"`
+    /** 更新した現在有効なグローバルメッセージ設定 */
+	Item         *CurrentMessageMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentMessageMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentMessageMasterAsyncResult struct {
@@ -446,16 +450,16 @@ type UpdateCurrentMessageMasterAsyncResult struct {
 }
 
 type UpdateCurrentMessageMasterFromGitHubResult struct {
-	/** 更新した現在有効なグローバルメッセージ設定 */
-	Item *CurrentMessageMaster `json:"item"`
+    /** 更新した現在有効なグローバルメッセージ設定 */
+	Item         *CurrentMessageMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentMessageMasterFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentMessageMasterFromGitHubAsyncResult struct {
@@ -464,20 +468,20 @@ type UpdateCurrentMessageMasterFromGitHubAsyncResult struct {
 }
 
 type DescribeGlobalMessageMastersResult struct {
-	/** 全ユーザに向けたメッセージのリスト */
-	Items *[]*GlobalMessageMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 全ユーザに向けたメッセージのリスト */
+	Items         *[]*GlobalMessageMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeGlobalMessageMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeGlobalMessageMastersAsyncResult struct {
@@ -486,16 +490,16 @@ type DescribeGlobalMessageMastersAsyncResult struct {
 }
 
 type CreateGlobalMessageMasterResult struct {
-	/** 作成した全ユーザに向けたメッセージ */
-	Item *GlobalMessageMaster `json:"item"`
+    /** 作成した全ユーザに向けたメッセージ */
+	Item         *GlobalMessageMaster	`json:"item"`
 }
 
 func (p *CreateGlobalMessageMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateGlobalMessageMasterAsyncResult struct {
@@ -504,16 +508,16 @@ type CreateGlobalMessageMasterAsyncResult struct {
 }
 
 type GetGlobalMessageMasterResult struct {
-	/** 全ユーザに向けたメッセージ */
-	Item *GlobalMessageMaster `json:"item"`
+    /** 全ユーザに向けたメッセージ */
+	Item         *GlobalMessageMaster	`json:"item"`
 }
 
 func (p *GetGlobalMessageMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetGlobalMessageMasterAsyncResult struct {
@@ -522,16 +526,16 @@ type GetGlobalMessageMasterAsyncResult struct {
 }
 
 type UpdateGlobalMessageMasterResult struct {
-	/** 全ユーザに向けたメッセージ */
-	Item *GlobalMessageMaster `json:"item"`
+    /** 全ユーザに向けたメッセージ */
+	Item         *GlobalMessageMaster	`json:"item"`
 }
 
 func (p *UpdateGlobalMessageMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateGlobalMessageMasterAsyncResult struct {
@@ -543,8 +547,8 @@ type DeleteGlobalMessageMasterResult struct {
 }
 
 func (p *DeleteGlobalMessageMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteGlobalMessageMasterAsyncResult struct {
@@ -553,15 +557,15 @@ type DeleteGlobalMessageMasterAsyncResult struct {
 }
 
 type DescribeGlobalMessagesResult struct {
-	/** 全ユーザに向けたメッセージのリスト */
-	Items *[]*GlobalMessage `json:"items"`
+    /** 全ユーザに向けたメッセージのリスト */
+	Items         *[]*GlobalMessage	`json:"items"`
 }
 
 func (p *DescribeGlobalMessagesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DescribeGlobalMessagesAsyncResult struct {
@@ -570,16 +574,16 @@ type DescribeGlobalMessagesAsyncResult struct {
 }
 
 type GetGlobalMessageResult struct {
-	/** 全ユーザに向けたメッセージ */
-	Item *GlobalMessage `json:"item"`
+    /** 全ユーザに向けたメッセージ */
+	Item         *GlobalMessage	`json:"item"`
 }
 
 func (p *GetGlobalMessageResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetGlobalMessageAsyncResult struct {
@@ -588,16 +592,16 @@ type GetGlobalMessageAsyncResult struct {
 }
 
 type GetReceivedByUserIdResult struct {
-	/** 受信済みグローバルメッセージ名 */
-	Item *Received `json:"item"`
+    /** 受信済みグローバルメッセージ名 */
+	Item         *Received	`json:"item"`
 }
 
 func (p *GetReceivedByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetReceivedByUserIdAsyncResult struct {
@@ -609,8 +613,8 @@ type UpdateReceivedByUserIdResult struct {
 }
 
 func (p *UpdateReceivedByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type UpdateReceivedByUserIdAsyncResult struct {
@@ -622,8 +626,8 @@ type DeleteReceivedByUserIdResult struct {
 }
 
 func (p *DeleteReceivedByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteReceivedByUserIdAsyncResult struct {

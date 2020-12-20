@@ -50,13 +50,13 @@ func describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -80,10 +80,10 @@ func (p Gs2FriendRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -129,13 +129,13 @@ func createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -151,65 +151,65 @@ func (p Gs2FriendRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.FollowScript != nil {
-		bodies["followScript"] = request.FollowScript.ToDict()
-	}
-	if request.UnfollowScript != nil {
-		bodies["unfollowScript"] = request.UnfollowScript.ToDict()
-	}
-	if request.SendRequestScript != nil {
-		bodies["sendRequestScript"] = request.SendRequestScript.ToDict()
-	}
-	if request.CancelRequestScript != nil {
-		bodies["cancelRequestScript"] = request.CancelRequestScript.ToDict()
-	}
-	if request.AcceptRequestScript != nil {
-		bodies["acceptRequestScript"] = request.AcceptRequestScript.ToDict()
-	}
-	if request.RejectRequestScript != nil {
-		bodies["rejectRequestScript"] = request.RejectRequestScript.ToDict()
-	}
-	if request.DeleteFriendScript != nil {
-		bodies["deleteFriendScript"] = request.DeleteFriendScript.ToDict()
-	}
-	if request.UpdateProfileScript != nil {
-		bodies["updateProfileScript"] = request.UpdateProfileScript.ToDict()
-	}
-	if request.FollowNotification != nil {
-		bodies["followNotification"] = request.FollowNotification.ToDict()
-	}
-	if request.ReceiveRequestNotification != nil {
-		bodies["receiveRequestNotification"] = request.ReceiveRequestNotification.ToDict()
-	}
-	if request.AcceptRequestNotification != nil {
-		bodies["acceptRequestNotification"] = request.AcceptRequestNotification.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.FollowScript != nil {
+        bodies["followScript"] = request.FollowScript.ToDict()
+    }
+    if request.UnfollowScript != nil {
+        bodies["unfollowScript"] = request.UnfollowScript.ToDict()
+    }
+    if request.SendRequestScript != nil {
+        bodies["sendRequestScript"] = request.SendRequestScript.ToDict()
+    }
+    if request.CancelRequestScript != nil {
+        bodies["cancelRequestScript"] = request.CancelRequestScript.ToDict()
+    }
+    if request.AcceptRequestScript != nil {
+        bodies["acceptRequestScript"] = request.AcceptRequestScript.ToDict()
+    }
+    if request.RejectRequestScript != nil {
+        bodies["rejectRequestScript"] = request.RejectRequestScript.ToDict()
+    }
+    if request.DeleteFriendScript != nil {
+        bodies["deleteFriendScript"] = request.DeleteFriendScript.ToDict()
+    }
+    if request.UpdateProfileScript != nil {
+        bodies["updateProfileScript"] = request.UpdateProfileScript.ToDict()
+    }
+    if request.FollowNotification != nil {
+        bodies["followNotification"] = request.FollowNotification.ToDict()
+    }
+    if request.ReceiveRequestNotification != nil {
+        bodies["receiveRequestNotification"] = request.ReceiveRequestNotification.ToDict()
+    }
+    if request.AcceptRequestNotification != nil {
+        bodies["acceptRequestNotification"] = request.AcceptRequestNotification.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -247,13 +247,13 @@ func getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -267,19 +267,19 @@ func (p Gs2FriendRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -325,13 +325,13 @@ func getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -345,19 +345,19 @@ func (p Gs2FriendRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -403,13 +403,13 @@ func updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -423,69 +423,69 @@ func (p Gs2FriendRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.FollowScript != nil {
-		bodies["followScript"] = request.FollowScript.ToDict()
-	}
-	if request.UnfollowScript != nil {
-		bodies["unfollowScript"] = request.UnfollowScript.ToDict()
-	}
-	if request.SendRequestScript != nil {
-		bodies["sendRequestScript"] = request.SendRequestScript.ToDict()
-	}
-	if request.CancelRequestScript != nil {
-		bodies["cancelRequestScript"] = request.CancelRequestScript.ToDict()
-	}
-	if request.AcceptRequestScript != nil {
-		bodies["acceptRequestScript"] = request.AcceptRequestScript.ToDict()
-	}
-	if request.RejectRequestScript != nil {
-		bodies["rejectRequestScript"] = request.RejectRequestScript.ToDict()
-	}
-	if request.DeleteFriendScript != nil {
-		bodies["deleteFriendScript"] = request.DeleteFriendScript.ToDict()
-	}
-	if request.UpdateProfileScript != nil {
-		bodies["updateProfileScript"] = request.UpdateProfileScript.ToDict()
-	}
-	if request.FollowNotification != nil {
-		bodies["followNotification"] = request.FollowNotification.ToDict()
-	}
-	if request.ReceiveRequestNotification != nil {
-		bodies["receiveRequestNotification"] = request.ReceiveRequestNotification.ToDict()
-	}
-	if request.AcceptRequestNotification != nil {
-		bodies["acceptRequestNotification"] = request.AcceptRequestNotification.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.FollowScript != nil {
+        bodies["followScript"] = request.FollowScript.ToDict()
+    }
+    if request.UnfollowScript != nil {
+        bodies["unfollowScript"] = request.UnfollowScript.ToDict()
+    }
+    if request.SendRequestScript != nil {
+        bodies["sendRequestScript"] = request.SendRequestScript.ToDict()
+    }
+    if request.CancelRequestScript != nil {
+        bodies["cancelRequestScript"] = request.CancelRequestScript.ToDict()
+    }
+    if request.AcceptRequestScript != nil {
+        bodies["acceptRequestScript"] = request.AcceptRequestScript.ToDict()
+    }
+    if request.RejectRequestScript != nil {
+        bodies["rejectRequestScript"] = request.RejectRequestScript.ToDict()
+    }
+    if request.DeleteFriendScript != nil {
+        bodies["deleteFriendScript"] = request.DeleteFriendScript.ToDict()
+    }
+    if request.UpdateProfileScript != nil {
+        bodies["updateProfileScript"] = request.UpdateProfileScript.ToDict()
+    }
+    if request.FollowNotification != nil {
+        bodies["followNotification"] = request.FollowNotification.ToDict()
+    }
+    if request.ReceiveRequestNotification != nil {
+        bodies["receiveRequestNotification"] = request.ReceiveRequestNotification.ToDict()
+    }
+    if request.AcceptRequestNotification != nil {
+        bodies["acceptRequestNotification"] = request.AcceptRequestNotification.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -523,13 +523,13 @@ func deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -543,19 +543,19 @@ func (p Gs2FriendRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -601,13 +601,13 @@ func describeProfilesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeProfilesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeProfilesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeProfilesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeProfilesAsyncResult{
 		result: &result,
@@ -621,11 +621,11 @@ func (p Gs2FriendRestClient) DescribeProfilesAsync(
 	callback chan<- DescribeProfilesAsyncResult,
 ) {
 	path := "/{namespaceName}/profile"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -636,10 +636,10 @@ func (p Gs2FriendRestClient) DescribeProfilesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeProfilesAsyncHandler(
 		p,
@@ -685,13 +685,13 @@ func getProfileAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetProfileResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetProfileAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetProfileAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetProfileAsyncResult{
 		result: &result,
@@ -705,22 +705,22 @@ func (p Gs2FriendRestClient) GetProfileAsync(
 	callback chan<- GetProfileAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/profile"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getProfileAsyncHandler(
 		p,
@@ -766,13 +766,13 @@ func getProfileByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetProfileByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetProfileByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetProfileByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetProfileByUserIdAsyncResult{
 		result: &result,
@@ -786,24 +786,24 @@ func (p Gs2FriendRestClient) GetProfileByUserIdAsync(
 	callback chan<- GetProfileByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/profile"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getProfileByUserIdAsyncHandler(
 		p,
@@ -849,13 +849,13 @@ func updateProfileAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateProfileResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateProfileAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateProfileAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateProfileAsyncResult{
 		result: &result,
@@ -869,42 +869,42 @@ func (p Gs2FriendRestClient) UpdateProfileAsync(
 	callback chan<- UpdateProfileAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/profile"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.PublicProfile != nil && *request.PublicProfile != "" {
-		bodies["publicProfile"] = *request.PublicProfile
-	}
-	if request.FollowerProfile != nil && *request.FollowerProfile != "" {
-		bodies["followerProfile"] = *request.FollowerProfile
-	}
-	if request.FriendProfile != nil && *request.FriendProfile != "" {
-		bodies["friendProfile"] = *request.FriendProfile
-	}
+    var bodies = core.Bodies{}
+    if request.PublicProfile != nil && *request.PublicProfile != "" {
+        bodies["publicProfile"] = *request.PublicProfile
+    }
+    if request.FollowerProfile != nil && *request.FollowerProfile != "" {
+        bodies["followerProfile"] = *request.FollowerProfile
+    }
+    if request.FriendProfile != nil && *request.FriendProfile != "" {
+        bodies["friendProfile"] = *request.FriendProfile
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go updateProfileAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -942,13 +942,13 @@ func updateProfileByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateProfileByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateProfileByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateProfileByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateProfileByUserIdAsyncResult{
 		result: &result,
@@ -962,44 +962,44 @@ func (p Gs2FriendRestClient) UpdateProfileByUserIdAsync(
 	callback chan<- UpdateProfileByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/profile"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.PublicProfile != nil && *request.PublicProfile != "" {
-		bodies["publicProfile"] = *request.PublicProfile
-	}
-	if request.FollowerProfile != nil && *request.FollowerProfile != "" {
-		bodies["followerProfile"] = *request.FollowerProfile
-	}
-	if request.FriendProfile != nil && *request.FriendProfile != "" {
-		bodies["friendProfile"] = *request.FriendProfile
-	}
+    var bodies = core.Bodies{}
+    if request.PublicProfile != nil && *request.PublicProfile != "" {
+        bodies["publicProfile"] = *request.PublicProfile
+    }
+    if request.FollowerProfile != nil && *request.FollowerProfile != "" {
+        bodies["followerProfile"] = *request.FollowerProfile
+    }
+    if request.FriendProfile != nil && *request.FriendProfile != "" {
+        bodies["friendProfile"] = *request.FriendProfile
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateProfileByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1037,13 +1037,13 @@ func deleteProfileByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteProfileByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteProfileByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteProfileByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteProfileByUserIdAsyncResult{
 		result: &result,
@@ -1057,24 +1057,24 @@ func (p Gs2FriendRestClient) DeleteProfileByUserIdAsync(
 	callback chan<- DeleteProfileByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/profile"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteProfileByUserIdAsyncHandler(
 		p,
@@ -1120,13 +1120,13 @@ func getPublicProfileAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetPublicProfileResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetPublicProfileAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetPublicProfileAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetPublicProfileAsyncResult{
 		result: &result,
@@ -1140,24 +1140,24 @@ func (p Gs2FriendRestClient) GetPublicProfileAsync(
 	callback chan<- GetPublicProfileAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/profile/public"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getPublicProfileAsyncHandler(
 		p,
@@ -1203,13 +1203,13 @@ func describeFollowsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeFollowsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeFollowsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeFollowsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeFollowsAsyncResult{
 		result: &result,
@@ -1223,11 +1223,11 @@ func (p Gs2FriendRestClient) DescribeFollowsAsync(
 	callback chan<- DescribeFollowsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/follow"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1241,13 +1241,13 @@ func (p Gs2FriendRestClient) DescribeFollowsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeFollowsAsyncHandler(
 		p,
@@ -1293,13 +1293,13 @@ func describeFollowsByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeFollowsByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeFollowsByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeFollowsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeFollowsByUserIdAsyncResult{
 		result: &result,
@@ -1313,16 +1313,16 @@ func (p Gs2FriendRestClient) DescribeFollowsByUserIdAsync(
 	callback chan<- DescribeFollowsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/follow"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1336,10 +1336,10 @@ func (p Gs2FriendRestClient) DescribeFollowsByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeFollowsByUserIdAsyncHandler(
 		p,
@@ -1385,13 +1385,13 @@ func getFollowAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetFollowResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetFollowAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetFollowAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetFollowAsyncResult{
 		result: &result,
@@ -1405,16 +1405,16 @@ func (p Gs2FriendRestClient) GetFollowAsync(
 	callback chan<- GetFollowAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/follow/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1422,13 +1422,13 @@ func (p Gs2FriendRestClient) GetFollowAsync(
 		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getFollowAsyncHandler(
 		p,
@@ -1474,13 +1474,13 @@ func getFollowByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetFollowByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetFollowByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetFollowByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetFollowByUserIdAsyncResult{
 		result: &result,
@@ -1494,21 +1494,21 @@ func (p Gs2FriendRestClient) GetFollowByUserIdAsync(
 	callback chan<- GetFollowByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/follow/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1516,10 +1516,10 @@ func (p Gs2FriendRestClient) GetFollowByUserIdAsync(
 		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getFollowByUserIdAsyncHandler(
 		p,
@@ -1565,13 +1565,13 @@ func followAsyncHandler(
 	asyncResult := <-internalCallback
 	var result FollowResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- FollowAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- FollowAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- FollowAsyncResult{
 		result: &result,
@@ -1585,38 +1585,38 @@ func (p Gs2FriendRestClient) FollowAsync(
 	callback chan<- FollowAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/follow/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go followAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1654,13 +1654,13 @@ func followByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result FollowByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- FollowByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- FollowByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- FollowByUserIdAsyncResult{
 		result: &result,
@@ -1674,40 +1674,40 @@ func (p Gs2FriendRestClient) FollowByUserIdAsync(
 	callback chan<- FollowByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/follow/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go followByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1745,13 +1745,13 @@ func unfollowAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UnfollowResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UnfollowAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnfollowAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UnfollowAsyncResult{
 		result: &result,
@@ -1765,27 +1765,27 @@ func (p Gs2FriendRestClient) UnfollowAsync(
 	callback chan<- UnfollowAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/follow/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go unfollowAsyncHandler(
 		p,
@@ -1831,13 +1831,13 @@ func unfollowByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UnfollowByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UnfollowByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnfollowByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UnfollowByUserIdAsyncResult{
 		result: &result,
@@ -1851,29 +1851,29 @@ func (p Gs2FriendRestClient) UnfollowByUserIdAsync(
 	callback chan<- UnfollowByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/follow/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go unfollowByUserIdAsyncHandler(
 		p,
@@ -1919,13 +1919,13 @@ func describeFriendsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeFriendsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeFriendsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeFriendsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeFriendsAsyncResult{
 		result: &result,
@@ -1939,11 +1939,11 @@ func (p Gs2FriendRestClient) DescribeFriendsAsync(
 	callback chan<- DescribeFriendsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/friend"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1957,13 +1957,13 @@ func (p Gs2FriendRestClient) DescribeFriendsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeFriendsAsyncHandler(
 		p,
@@ -2009,13 +2009,13 @@ func describeFriendsByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeFriendsByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeFriendsByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeFriendsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeFriendsByUserIdAsyncResult{
 		result: &result,
@@ -2029,16 +2029,16 @@ func (p Gs2FriendRestClient) DescribeFriendsByUserIdAsync(
 	callback chan<- DescribeFriendsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/friend"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2052,10 +2052,10 @@ func (p Gs2FriendRestClient) DescribeFriendsByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeFriendsByUserIdAsyncHandler(
 		p,
@@ -2101,13 +2101,13 @@ func getFriendAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetFriendResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetFriendAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetFriendAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetFriendAsyncResult{
 		result: &result,
@@ -2121,16 +2121,16 @@ func (p Gs2FriendRestClient) GetFriendAsync(
 	callback chan<- GetFriendAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/friend/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2138,13 +2138,13 @@ func (p Gs2FriendRestClient) GetFriendAsync(
 		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getFriendAsyncHandler(
 		p,
@@ -2190,13 +2190,13 @@ func getFriendByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetFriendByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetFriendByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetFriendByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetFriendByUserIdAsyncResult{
 		result: &result,
@@ -2210,21 +2210,21 @@ func (p Gs2FriendRestClient) GetFriendByUserIdAsync(
 	callback chan<- GetFriendByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/friend/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2232,10 +2232,10 @@ func (p Gs2FriendRestClient) GetFriendByUserIdAsync(
 		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getFriendByUserIdAsyncHandler(
 		p,
@@ -2281,13 +2281,13 @@ func deleteFriendAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteFriendResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteFriendAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteFriendAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteFriendAsyncResult{
 		result: &result,
@@ -2301,27 +2301,27 @@ func (p Gs2FriendRestClient) DeleteFriendAsync(
 	callback chan<- DeleteFriendAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/friend/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go deleteFriendAsyncHandler(
 		p,
@@ -2367,13 +2367,13 @@ func deleteFriendByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteFriendByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteFriendByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteFriendByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteFriendByUserIdAsyncResult{
 		result: &result,
@@ -2387,29 +2387,29 @@ func (p Gs2FriendRestClient) DeleteFriendByUserIdAsync(
 	callback chan<- DeleteFriendByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/friend/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteFriendByUserIdAsyncHandler(
 		p,
@@ -2455,13 +2455,13 @@ func describeSendRequestsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeSendRequestsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeSendRequestsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeSendRequestsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeSendRequestsAsyncResult{
 		result: &result,
@@ -2475,22 +2475,22 @@ func (p Gs2FriendRestClient) DescribeSendRequestsAsync(
 	callback chan<- DescribeSendRequestsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/sendBox"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeSendRequestsAsyncHandler(
 		p,
@@ -2536,13 +2536,13 @@ func describeSendRequestsByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeSendRequestsByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeSendRequestsByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeSendRequestsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeSendRequestsByUserIdAsyncResult{
 		result: &result,
@@ -2556,24 +2556,24 @@ func (p Gs2FriendRestClient) DescribeSendRequestsByUserIdAsync(
 	callback chan<- DescribeSendRequestsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/sendBox"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeSendRequestsByUserIdAsyncHandler(
 		p,
@@ -2619,13 +2619,13 @@ func getSendRequestAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetSendRequestResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSendRequestAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSendRequestAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetSendRequestAsyncResult{
 		result: &result,
@@ -2639,27 +2639,27 @@ func (p Gs2FriendRestClient) GetSendRequestAsync(
 	callback chan<- GetSendRequestAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/sendBox/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getSendRequestAsyncHandler(
 		p,
@@ -2705,13 +2705,13 @@ func getSendRequestByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetSendRequestByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSendRequestByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSendRequestByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetSendRequestByUserIdAsyncResult{
 		result: &result,
@@ -2725,29 +2725,29 @@ func (p Gs2FriendRestClient) GetSendRequestByUserIdAsync(
 	callback chan<- GetSendRequestByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/sendBox/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getSendRequestByUserIdAsyncHandler(
 		p,
@@ -2793,13 +2793,13 @@ func sendRequestAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SendRequestResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SendRequestAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SendRequestAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SendRequestAsyncResult{
 		result: &result,
@@ -2813,38 +2813,38 @@ func (p Gs2FriendRestClient) SendRequestAsync(
 	callback chan<- SendRequestAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/sendBox/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go sendRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2882,13 +2882,13 @@ func sendRequestByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SendRequestByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SendRequestByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SendRequestByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SendRequestByUserIdAsyncResult{
 		result: &result,
@@ -2902,40 +2902,40 @@ func (p Gs2FriendRestClient) SendRequestByUserIdAsync(
 	callback chan<- SendRequestByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/sendBox/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go sendRequestByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2973,13 +2973,13 @@ func deleteRequestAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteRequestResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteRequestAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteRequestAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteRequestAsyncResult{
 		result: &result,
@@ -2993,27 +2993,27 @@ func (p Gs2FriendRestClient) DeleteRequestAsync(
 	callback chan<- DeleteRequestAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/sendBox/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go deleteRequestAsyncHandler(
 		p,
@@ -3059,13 +3059,13 @@ func deleteRequestByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteRequestByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteRequestByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteRequestByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteRequestByUserIdAsyncResult{
 		result: &result,
@@ -3079,29 +3079,29 @@ func (p Gs2FriendRestClient) DeleteRequestByUserIdAsync(
 	callback chan<- DeleteRequestByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/sendBox/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteRequestByUserIdAsyncHandler(
 		p,
@@ -3147,13 +3147,13 @@ func describeReceiveRequestsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeReceiveRequestsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeReceiveRequestsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReceiveRequestsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeReceiveRequestsAsyncResult{
 		result: &result,
@@ -3167,22 +3167,22 @@ func (p Gs2FriendRestClient) DescribeReceiveRequestsAsync(
 	callback chan<- DescribeReceiveRequestsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inbox"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeReceiveRequestsAsyncHandler(
 		p,
@@ -3228,13 +3228,13 @@ func describeReceiveRequestsByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeReceiveRequestsByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeReceiveRequestsByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReceiveRequestsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeReceiveRequestsByUserIdAsyncResult{
 		result: &result,
@@ -3248,24 +3248,24 @@ func (p Gs2FriendRestClient) DescribeReceiveRequestsByUserIdAsync(
 	callback chan<- DescribeReceiveRequestsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inbox"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeReceiveRequestsByUserIdAsyncHandler(
 		p,
@@ -3311,13 +3311,13 @@ func getReceiveRequestAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetReceiveRequestResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetReceiveRequestAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetReceiveRequestAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetReceiveRequestAsyncResult{
 		result: &result,
@@ -3331,27 +3331,27 @@ func (p Gs2FriendRestClient) GetReceiveRequestAsync(
 	callback chan<- GetReceiveRequestAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inbox/{fromUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.FromUserId != nil {
-		path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{fromUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.FromUserId != nil {
+        path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{fromUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getReceiveRequestAsyncHandler(
 		p,
@@ -3397,13 +3397,13 @@ func getReceiveRequestByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetReceiveRequestByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetReceiveRequestByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetReceiveRequestByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetReceiveRequestByUserIdAsyncResult{
 		result: &result,
@@ -3417,29 +3417,29 @@ func (p Gs2FriendRestClient) GetReceiveRequestByUserIdAsync(
 	callback chan<- GetReceiveRequestByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inbox/{fromUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.FromUserId != nil {
-		path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{fromUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.FromUserId != nil {
+        path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{fromUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getReceiveRequestByUserIdAsyncHandler(
 		p,
@@ -3485,13 +3485,13 @@ func acceptRequestAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AcceptRequestResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AcceptRequestAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcceptRequestAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AcceptRequestAsyncResult{
 		result: &result,
@@ -3505,38 +3505,38 @@ func (p Gs2FriendRestClient) AcceptRequestAsync(
 	callback chan<- AcceptRequestAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inbox/{fromUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.FromUserId != nil {
-		path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{fromUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.FromUserId != nil {
+        path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{fromUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go acceptRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3574,13 +3574,13 @@ func acceptRequestByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AcceptRequestByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AcceptRequestByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcceptRequestByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AcceptRequestByUserIdAsyncResult{
 		result: &result,
@@ -3594,40 +3594,40 @@ func (p Gs2FriendRestClient) AcceptRequestByUserIdAsync(
 	callback chan<- AcceptRequestByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inbox/{fromUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.FromUserId != nil {
-		path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{fromUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.FromUserId != nil {
+        path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{fromUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go acceptRequestByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3665,13 +3665,13 @@ func rejectRequestAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RejectRequestResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RejectRequestAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RejectRequestAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RejectRequestAsyncResult{
 		result: &result,
@@ -3685,27 +3685,27 @@ func (p Gs2FriendRestClient) RejectRequestAsync(
 	callback chan<- RejectRequestAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inbox/{fromUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.FromUserId != nil {
-		path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{fromUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.FromUserId != nil {
+        path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{fromUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go rejectRequestAsyncHandler(
 		p,
@@ -3751,13 +3751,13 @@ func rejectRequestByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RejectRequestByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RejectRequestByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RejectRequestByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RejectRequestByUserIdAsyncResult{
 		result: &result,
@@ -3771,29 +3771,29 @@ func (p Gs2FriendRestClient) RejectRequestByUserIdAsync(
 	callback chan<- RejectRequestByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inbox/{fromUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.FromUserId != nil {
-		path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{fromUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.FromUserId != nil {
+        path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{fromUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go rejectRequestByUserIdAsyncHandler(
 		p,
@@ -3839,13 +3839,13 @@ func describeBlackListAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeBlackListResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBlackListAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBlackListAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeBlackListAsyncResult{
 		result: &result,
@@ -3859,22 +3859,22 @@ func (p Gs2FriendRestClient) DescribeBlackListAsync(
 	callback chan<- DescribeBlackListAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/blackList"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeBlackListAsyncHandler(
 		p,
@@ -3920,13 +3920,13 @@ func describeBlackListByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeBlackListByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBlackListByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBlackListByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeBlackListByUserIdAsyncResult{
 		result: &result,
@@ -3940,24 +3940,24 @@ func (p Gs2FriendRestClient) DescribeBlackListByUserIdAsync(
 	callback chan<- DescribeBlackListByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/blackList"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeBlackListByUserIdAsyncHandler(
 		p,
@@ -4003,13 +4003,13 @@ func registerBlackListAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RegisterBlackListResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RegisterBlackListAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RegisterBlackListAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RegisterBlackListAsyncResult{
 		result: &result,
@@ -4023,38 +4023,38 @@ func (p Gs2FriendRestClient) RegisterBlackListAsync(
 	callback chan<- RegisterBlackListAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/blackList/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go registerBlackListAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4092,13 +4092,13 @@ func registerBlackListByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RegisterBlackListByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RegisterBlackListByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RegisterBlackListByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RegisterBlackListByUserIdAsyncResult{
 		result: &result,
@@ -4112,40 +4112,40 @@ func (p Gs2FriendRestClient) RegisterBlackListByUserIdAsync(
 	callback chan<- RegisterBlackListByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/blackList/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go registerBlackListByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4183,13 +4183,13 @@ func unregisterBlackListAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UnregisterBlackListResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UnregisterBlackListAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnregisterBlackListAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UnregisterBlackListAsyncResult{
 		result: &result,
@@ -4203,27 +4203,27 @@ func (p Gs2FriendRestClient) UnregisterBlackListAsync(
 	callback chan<- UnregisterBlackListAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/blackList/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go unregisterBlackListAsyncHandler(
 		p,
@@ -4269,13 +4269,13 @@ func unregisterBlackListByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UnregisterBlackListByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UnregisterBlackListByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnregisterBlackListByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UnregisterBlackListByUserIdAsyncResult{
 		result: &result,
@@ -4289,29 +4289,29 @@ func (p Gs2FriendRestClient) UnregisterBlackListByUserIdAsync(
 	callback chan<- UnregisterBlackListByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/blackList/{targetUserId}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TargetUserId != nil {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TargetUserId != nil {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go unregisterBlackListByUserIdAsyncHandler(
 		p,

@@ -2069,7 +2069,7 @@ func (p Gs2VersionRestClient) CalculateSignatureAsync(
 	request *CalculateSignatureRequest,
 	callback chan<- CalculateSignatureAsyncResult,
 ) {
-	path := "/{namespaceName}/calculate/signature"
+	path := "/{namespaceName}/version/{versionName}/calculate/signature"
     if request.NamespaceName != nil {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {

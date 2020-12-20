@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package stamina
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -111,16 +115,16 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 type DeleteNamespaceResult struct {
-	/** 削除したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 削除したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -129,20 +133,20 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeStaminaModelMastersResult struct {
-	/** スタミナモデルマスターのリスト */
-	Items *[]*StaminaModelMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** スタミナモデルマスターのリスト */
+	Items         *[]*StaminaModelMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeStaminaModelMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeStaminaModelMastersAsyncResult struct {
@@ -151,16 +155,16 @@ type DescribeStaminaModelMastersAsyncResult struct {
 }
 
 type CreateStaminaModelMasterResult struct {
-	/** 作成したスタミナモデルマスター */
-	Item *StaminaModelMaster `json:"item"`
+    /** 作成したスタミナモデルマスター */
+	Item         *StaminaModelMaster	`json:"item"`
 }
 
 func (p *CreateStaminaModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateStaminaModelMasterAsyncResult struct {
@@ -169,16 +173,16 @@ type CreateStaminaModelMasterAsyncResult struct {
 }
 
 type GetStaminaModelMasterResult struct {
-	/** スタミナモデルマスター */
-	Item *StaminaModelMaster `json:"item"`
+    /** スタミナモデルマスター */
+	Item         *StaminaModelMaster	`json:"item"`
 }
 
 func (p *GetStaminaModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetStaminaModelMasterAsyncResult struct {
@@ -187,16 +191,16 @@ type GetStaminaModelMasterAsyncResult struct {
 }
 
 type UpdateStaminaModelMasterResult struct {
-	/** 更新したスタミナモデルマスター */
-	Item *StaminaModelMaster `json:"item"`
+    /** 更新したスタミナモデルマスター */
+	Item         *StaminaModelMaster	`json:"item"`
 }
 
 func (p *UpdateStaminaModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateStaminaModelMasterAsyncResult struct {
@@ -205,16 +209,16 @@ type UpdateStaminaModelMasterAsyncResult struct {
 }
 
 type DeleteStaminaModelMasterResult struct {
-	/** 削除したスタミナモデルマスター */
-	Item *StaminaModelMaster `json:"item"`
+    /** 削除したスタミナモデルマスター */
+	Item         *StaminaModelMaster	`json:"item"`
 }
 
 func (p *DeleteStaminaModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteStaminaModelMasterAsyncResult struct {
@@ -223,20 +227,20 @@ type DeleteStaminaModelMasterAsyncResult struct {
 }
 
 type DescribeMaxStaminaTableMastersResult struct {
-	/** スタミナの最大値テーブルマスターのリスト */
-	Items *[]*MaxStaminaTableMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** スタミナの最大値テーブルマスターのリスト */
+	Items         *[]*MaxStaminaTableMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeMaxStaminaTableMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeMaxStaminaTableMastersAsyncResult struct {
@@ -245,16 +249,16 @@ type DescribeMaxStaminaTableMastersAsyncResult struct {
 }
 
 type CreateMaxStaminaTableMasterResult struct {
-	/** 作成したスタミナの最大値テーブルマスター */
-	Item *MaxStaminaTableMaster `json:"item"`
+    /** 作成したスタミナの最大値テーブルマスター */
+	Item         *MaxStaminaTableMaster	`json:"item"`
 }
 
 func (p *CreateMaxStaminaTableMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateMaxStaminaTableMasterAsyncResult struct {
@@ -263,16 +267,16 @@ type CreateMaxStaminaTableMasterAsyncResult struct {
 }
 
 type GetMaxStaminaTableMasterResult struct {
-	/** スタミナの最大値テーブルマスター */
-	Item *MaxStaminaTableMaster `json:"item"`
+    /** スタミナの最大値テーブルマスター */
+	Item         *MaxStaminaTableMaster	`json:"item"`
 }
 
 func (p *GetMaxStaminaTableMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetMaxStaminaTableMasterAsyncResult struct {
@@ -281,16 +285,16 @@ type GetMaxStaminaTableMasterAsyncResult struct {
 }
 
 type UpdateMaxStaminaTableMasterResult struct {
-	/** 更新したスタミナの最大値テーブルマスター */
-	Item *MaxStaminaTableMaster `json:"item"`
+    /** 更新したスタミナの最大値テーブルマスター */
+	Item         *MaxStaminaTableMaster	`json:"item"`
 }
 
 func (p *UpdateMaxStaminaTableMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateMaxStaminaTableMasterAsyncResult struct {
@@ -299,16 +303,16 @@ type UpdateMaxStaminaTableMasterAsyncResult struct {
 }
 
 type DeleteMaxStaminaTableMasterResult struct {
-	/** 削除したスタミナの最大値テーブルマスター */
-	Item *MaxStaminaTableMaster `json:"item"`
+    /** 削除したスタミナの最大値テーブルマスター */
+	Item         *MaxStaminaTableMaster	`json:"item"`
 }
 
 func (p *DeleteMaxStaminaTableMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteMaxStaminaTableMasterAsyncResult struct {
@@ -317,20 +321,20 @@ type DeleteMaxStaminaTableMasterAsyncResult struct {
 }
 
 type DescribeRecoverIntervalTableMastersResult struct {
-	/** スタミナ回復間隔テーブルマスターのリスト */
-	Items *[]*RecoverIntervalTableMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** スタミナ回復間隔テーブルマスターのリスト */
+	Items         *[]*RecoverIntervalTableMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeRecoverIntervalTableMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeRecoverIntervalTableMastersAsyncResult struct {
@@ -339,16 +343,16 @@ type DescribeRecoverIntervalTableMastersAsyncResult struct {
 }
 
 type CreateRecoverIntervalTableMasterResult struct {
-	/** 作成したスタミナ回復間隔テーブルマスター */
-	Item *RecoverIntervalTableMaster `json:"item"`
+    /** 作成したスタミナ回復間隔テーブルマスター */
+	Item         *RecoverIntervalTableMaster	`json:"item"`
 }
 
 func (p *CreateRecoverIntervalTableMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateRecoverIntervalTableMasterAsyncResult struct {
@@ -357,16 +361,16 @@ type CreateRecoverIntervalTableMasterAsyncResult struct {
 }
 
 type GetRecoverIntervalTableMasterResult struct {
-	/** スタミナ回復間隔テーブルマスター */
-	Item *RecoverIntervalTableMaster `json:"item"`
+    /** スタミナ回復間隔テーブルマスター */
+	Item         *RecoverIntervalTableMaster	`json:"item"`
 }
 
 func (p *GetRecoverIntervalTableMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetRecoverIntervalTableMasterAsyncResult struct {
@@ -375,16 +379,16 @@ type GetRecoverIntervalTableMasterAsyncResult struct {
 }
 
 type UpdateRecoverIntervalTableMasterResult struct {
-	/** 更新したスタミナ回復間隔テーブルマスター */
-	Item *RecoverIntervalTableMaster `json:"item"`
+    /** 更新したスタミナ回復間隔テーブルマスター */
+	Item         *RecoverIntervalTableMaster	`json:"item"`
 }
 
 func (p *UpdateRecoverIntervalTableMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateRecoverIntervalTableMasterAsyncResult struct {
@@ -393,16 +397,16 @@ type UpdateRecoverIntervalTableMasterAsyncResult struct {
 }
 
 type DeleteRecoverIntervalTableMasterResult struct {
-	/** 削除したスタミナ回復間隔テーブルマスター */
-	Item *RecoverIntervalTableMaster `json:"item"`
+    /** 削除したスタミナ回復間隔テーブルマスター */
+	Item         *RecoverIntervalTableMaster	`json:"item"`
 }
 
 func (p *DeleteRecoverIntervalTableMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteRecoverIntervalTableMasterAsyncResult struct {
@@ -411,20 +415,20 @@ type DeleteRecoverIntervalTableMasterAsyncResult struct {
 }
 
 type DescribeRecoverValueTableMastersResult struct {
-	/** スタミナ回復量テーブルマスターのリスト */
-	Items *[]*RecoverValueTableMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** スタミナ回復量テーブルマスターのリスト */
+	Items         *[]*RecoverValueTableMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeRecoverValueTableMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeRecoverValueTableMastersAsyncResult struct {
@@ -433,16 +437,16 @@ type DescribeRecoverValueTableMastersAsyncResult struct {
 }
 
 type CreateRecoverValueTableMasterResult struct {
-	/** 作成したスタミナ回復量テーブルマスター */
-	Item *RecoverValueTableMaster `json:"item"`
+    /** 作成したスタミナ回復量テーブルマスター */
+	Item         *RecoverValueTableMaster	`json:"item"`
 }
 
 func (p *CreateRecoverValueTableMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateRecoverValueTableMasterAsyncResult struct {
@@ -451,16 +455,16 @@ type CreateRecoverValueTableMasterAsyncResult struct {
 }
 
 type GetRecoverValueTableMasterResult struct {
-	/** スタミナ回復量テーブルマスター */
-	Item *RecoverValueTableMaster `json:"item"`
+    /** スタミナ回復量テーブルマスター */
+	Item         *RecoverValueTableMaster	`json:"item"`
 }
 
 func (p *GetRecoverValueTableMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetRecoverValueTableMasterAsyncResult struct {
@@ -469,16 +473,16 @@ type GetRecoverValueTableMasterAsyncResult struct {
 }
 
 type UpdateRecoverValueTableMasterResult struct {
-	/** 更新したスタミナ回復量テーブルマスター */
-	Item *RecoverValueTableMaster `json:"item"`
+    /** 更新したスタミナ回復量テーブルマスター */
+	Item         *RecoverValueTableMaster	`json:"item"`
 }
 
 func (p *UpdateRecoverValueTableMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateRecoverValueTableMasterAsyncResult struct {
@@ -487,16 +491,16 @@ type UpdateRecoverValueTableMasterAsyncResult struct {
 }
 
 type DeleteRecoverValueTableMasterResult struct {
-	/** 削除したスタミナ回復量テーブルマスター */
-	Item *RecoverValueTableMaster `json:"item"`
+    /** 削除したスタミナ回復量テーブルマスター */
+	Item         *RecoverValueTableMaster	`json:"item"`
 }
 
 func (p *DeleteRecoverValueTableMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteRecoverValueTableMasterAsyncResult struct {
@@ -505,16 +509,16 @@ type DeleteRecoverValueTableMasterAsyncResult struct {
 }
 
 type ExportMasterResult struct {
-	/** 現在有効なスタミナマスター */
-	Item *CurrentStaminaMaster `json:"item"`
+    /** 現在有効なスタミナマスター */
+	Item         *CurrentStaminaMaster	`json:"item"`
 }
 
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type ExportMasterAsyncResult struct {
@@ -523,16 +527,16 @@ type ExportMasterAsyncResult struct {
 }
 
 type GetCurrentStaminaMasterResult struct {
-	/** 現在有効なスタミナマスター */
-	Item *CurrentStaminaMaster `json:"item"`
+    /** 現在有効なスタミナマスター */
+	Item         *CurrentStaminaMaster	`json:"item"`
 }
 
 func (p *GetCurrentStaminaMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCurrentStaminaMasterAsyncResult struct {
@@ -541,16 +545,16 @@ type GetCurrentStaminaMasterAsyncResult struct {
 }
 
 type UpdateCurrentStaminaMasterResult struct {
-	/** 更新した現在有効なスタミナマスター */
-	Item *CurrentStaminaMaster `json:"item"`
+    /** 更新した現在有効なスタミナマスター */
+	Item         *CurrentStaminaMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentStaminaMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentStaminaMasterAsyncResult struct {
@@ -559,16 +563,16 @@ type UpdateCurrentStaminaMasterAsyncResult struct {
 }
 
 type UpdateCurrentStaminaMasterFromGitHubResult struct {
-	/** 更新した現在有効なスタミナマスター */
-	Item *CurrentStaminaMaster `json:"item"`
+    /** 更新した現在有効なスタミナマスター */
+	Item         *CurrentStaminaMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentStaminaMasterFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentStaminaMasterFromGitHubAsyncResult struct {
@@ -577,15 +581,15 @@ type UpdateCurrentStaminaMasterFromGitHubAsyncResult struct {
 }
 
 type DescribeStaminaModelsResult struct {
-	/** スタミナモデルのリスト */
-	Items *[]*StaminaModel `json:"items"`
+    /** スタミナモデルのリスト */
+	Items         *[]*StaminaModel	`json:"items"`
 }
 
 func (p *DescribeStaminaModelsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DescribeStaminaModelsAsyncResult struct {
@@ -594,16 +598,16 @@ type DescribeStaminaModelsAsyncResult struct {
 }
 
 type GetStaminaModelResult struct {
-	/** スタミナモデル */
-	Item *StaminaModel `json:"item"`
+    /** スタミナモデル */
+	Item         *StaminaModel	`json:"item"`
 }
 
 func (p *GetStaminaModelResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetStaminaModelAsyncResult struct {
@@ -612,20 +616,20 @@ type GetStaminaModelAsyncResult struct {
 }
 
 type DescribeStaminasResult struct {
-	/** スタミナのリスト */
-	Items *[]*Stamina `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** スタミナのリスト */
+	Items         *[]*Stamina	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeStaminasResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeStaminasAsyncResult struct {
@@ -634,20 +638,20 @@ type DescribeStaminasAsyncResult struct {
 }
 
 type DescribeStaminasByUserIdResult struct {
-	/** スタミナのリスト */
-	Items *[]*Stamina `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** スタミナのリスト */
+	Items         *[]*Stamina	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeStaminasByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeStaminasByUserIdAsyncResult struct {
@@ -656,16 +660,21 @@ type DescribeStaminasByUserIdAsyncResult struct {
 }
 
 type GetStaminaResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *GetStaminaResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type GetStaminaAsyncResult struct {
@@ -674,16 +683,21 @@ type GetStaminaAsyncResult struct {
 }
 
 type GetStaminaByUserIdResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *GetStaminaByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type GetStaminaByUserIdAsyncResult struct {
@@ -692,16 +706,21 @@ type GetStaminaByUserIdAsyncResult struct {
 }
 
 type UpdateStaminaByUserIdResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *UpdateStaminaByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type UpdateStaminaByUserIdAsyncResult struct {
@@ -710,16 +729,21 @@ type UpdateStaminaByUserIdAsyncResult struct {
 }
 
 type ConsumeStaminaResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *ConsumeStaminaResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type ConsumeStaminaAsyncResult struct {
@@ -728,16 +752,21 @@ type ConsumeStaminaAsyncResult struct {
 }
 
 type ConsumeStaminaByUserIdResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *ConsumeStaminaByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type ConsumeStaminaByUserIdAsyncResult struct {
@@ -746,21 +775,26 @@ type ConsumeStaminaByUserIdAsyncResult struct {
 }
 
 type RecoverStaminaByUserIdResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
-	/** スタミナ値の上限を超えて受け取れずに GS2-Inbox に転送したスタミナ値 */
-	OverflowValue *int64 `json:"overflowValue"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
+    /** スタミナ値の上限を超えて受け取れずに GS2-Inbox に転送したスタミナ値 */
+	OverflowValue         *int64	`json:"overflowValue"`
 }
 
 func (p *RecoverStaminaByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.OverflowValue != nil {
-		data["OverflowValue"] = p.OverflowValue
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    if p.OverflowValue != nil {
+     data["OverflowValue"] = p.OverflowValue
+    }
+    return &data
 }
 
 type RecoverStaminaByUserIdAsyncResult struct {
@@ -769,16 +803,21 @@ type RecoverStaminaByUserIdAsyncResult struct {
 }
 
 type RaiseMaxValueByUserIdResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *RaiseMaxValueByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type RaiseMaxValueByUserIdAsyncResult struct {
@@ -787,16 +826,21 @@ type RaiseMaxValueByUserIdAsyncResult struct {
 }
 
 type SetMaxValueByUserIdResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *SetMaxValueByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type SetMaxValueByUserIdAsyncResult struct {
@@ -805,16 +849,21 @@ type SetMaxValueByUserIdAsyncResult struct {
 }
 
 type SetRecoverIntervalByUserIdResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *SetRecoverIntervalByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type SetRecoverIntervalByUserIdAsyncResult struct {
@@ -823,16 +872,21 @@ type SetRecoverIntervalByUserIdAsyncResult struct {
 }
 
 type SetRecoverValueByUserIdResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *SetRecoverValueByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type SetRecoverValueByUserIdAsyncResult struct {
@@ -841,16 +895,21 @@ type SetRecoverValueByUserIdAsyncResult struct {
 }
 
 type SetMaxValueByStatusResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *SetMaxValueByStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type SetMaxValueByStatusAsyncResult struct {
@@ -859,16 +918,21 @@ type SetMaxValueByStatusAsyncResult struct {
 }
 
 type SetRecoverIntervalByStatusResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *SetRecoverIntervalByStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type SetRecoverIntervalByStatusAsyncResult struct {
@@ -877,16 +941,21 @@ type SetRecoverIntervalByStatusAsyncResult struct {
 }
 
 type SetRecoverValueByStatusResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *SetRecoverValueByStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type SetRecoverValueByStatusAsyncResult struct {
@@ -898,8 +967,8 @@ type DeleteStaminaByUserIdResult struct {
 }
 
 func (p *DeleteStaminaByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteStaminaByUserIdAsyncResult struct {
@@ -908,21 +977,26 @@ type DeleteStaminaByUserIdAsyncResult struct {
 }
 
 type RecoverStaminaByStampSheetResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
-	/** スタミナ値の上限を超えて受け取れずに GS2-Inbox に転送したスタミナ値 */
-	OverflowValue *int64 `json:"overflowValue"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
+    /** スタミナ値の上限を超えて受け取れずに GS2-Inbox に転送したスタミナ値 */
+	OverflowValue         *int64	`json:"overflowValue"`
 }
 
 func (p *RecoverStaminaByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.OverflowValue != nil {
-		data["OverflowValue"] = p.OverflowValue
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    if p.OverflowValue != nil {
+     data["OverflowValue"] = p.OverflowValue
+    }
+    return &data
 }
 
 type RecoverStaminaByStampSheetAsyncResult struct {
@@ -931,16 +1005,21 @@ type RecoverStaminaByStampSheetAsyncResult struct {
 }
 
 type RaiseMaxValueByStampSheetResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *RaiseMaxValueByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type RaiseMaxValueByStampSheetAsyncResult struct {
@@ -949,16 +1028,21 @@ type RaiseMaxValueByStampSheetAsyncResult struct {
 }
 
 type SetMaxValueByStampSheetResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *SetMaxValueByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type SetMaxValueByStampSheetAsyncResult struct {
@@ -967,16 +1051,21 @@ type SetMaxValueByStampSheetAsyncResult struct {
 }
 
 type SetRecoverIntervalByStampSheetResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *SetRecoverIntervalByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type SetRecoverIntervalByStampSheetAsyncResult struct {
@@ -985,16 +1074,21 @@ type SetRecoverIntervalByStampSheetAsyncResult struct {
 }
 
 type SetRecoverValueByStampSheetResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
 }
 
 func (p *SetRecoverValueByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    return &data
 }
 
 type SetRecoverValueByStampSheetAsyncResult struct {
@@ -1003,21 +1097,26 @@ type SetRecoverValueByStampSheetAsyncResult struct {
 }
 
 type ConsumeStaminaByStampTaskResult struct {
-	/** スタミナ */
-	Item *Stamina `json:"item"`
-	/** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack *string `json:"newContextStack"`
+    /** スタミナ */
+	Item         *Stamina	`json:"item"`
+    /** スタミナモデル */
+	StaminaModel         *StaminaModel	`json:"staminaModel"`
+    /** スタンプタスクの実行結果を記録したコンテキスト */
+	NewContextStack         *core.String	`json:"newContextStack"`
 }
 
 func (p *ConsumeStaminaByStampTaskResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.NewContextStack != nil {
-		data["NewContextStack"] = p.NewContextStack
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StaminaModel != nil {
+     data["StaminaModel"] = p.StaminaModel.ToDict()
+    }
+    if p.NewContextStack != nil {
+     data["NewContextStack"] = p.NewContextStack
+    }
+    return &data
 }
 
 type ConsumeStaminaByStampTaskAsyncResult struct {

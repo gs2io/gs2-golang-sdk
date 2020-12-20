@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package script
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -114,8 +118,8 @@ type DeleteNamespaceResult struct {
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -124,20 +128,20 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeScriptsResult struct {
-	/** スクリプトのリスト */
-	Items *[]*Script `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** スクリプトのリスト */
+	Items         *[]*Script	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeScriptsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeScriptsAsyncResult struct {
@@ -146,16 +150,16 @@ type DescribeScriptsAsyncResult struct {
 }
 
 type CreateScriptResult struct {
-	/** 作成したスクリプト */
-	Item *Script `json:"item"`
+    /** 作成したスクリプト */
+	Item         *Script	`json:"item"`
 }
 
 func (p *CreateScriptResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateScriptAsyncResult struct {
@@ -164,16 +168,16 @@ type CreateScriptAsyncResult struct {
 }
 
 type CreateScriptFromGitHubResult struct {
-	/** 作成したスクリプト */
-	Item *Script `json:"item"`
+    /** 作成したスクリプト */
+	Item         *Script	`json:"item"`
 }
 
 func (p *CreateScriptFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateScriptFromGitHubAsyncResult struct {
@@ -182,16 +186,16 @@ type CreateScriptFromGitHubAsyncResult struct {
 }
 
 type GetScriptResult struct {
-	/** スクリプト */
-	Item *Script `json:"item"`
+    /** スクリプト */
+	Item         *Script	`json:"item"`
 }
 
 func (p *GetScriptResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetScriptAsyncResult struct {
@@ -200,16 +204,16 @@ type GetScriptAsyncResult struct {
 }
 
 type UpdateScriptResult struct {
-	/** 更新したスクリプト */
-	Item *Script `json:"item"`
+    /** 更新したスクリプト */
+	Item         *Script	`json:"item"`
 }
 
 func (p *UpdateScriptResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateScriptAsyncResult struct {
@@ -218,16 +222,16 @@ type UpdateScriptAsyncResult struct {
 }
 
 type UpdateScriptFromGitHubResult struct {
-	/** 更新したスクリプト */
-	Item *Script `json:"item"`
+    /** 更新したスクリプト */
+	Item         *Script	`json:"item"`
 }
 
 func (p *UpdateScriptFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateScriptFromGitHubAsyncResult struct {
@@ -239,8 +243,8 @@ type DeleteScriptResult struct {
 }
 
 func (p *DeleteScriptResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteScriptAsyncResult struct {
@@ -249,35 +253,35 @@ type DeleteScriptAsyncResult struct {
 }
 
 type InvokeScriptResult struct {
-	/** ステータスコード */
-	Code *int32 `json:"code"`
-	/** 戻り値 */
-	Result *string `json:"result"`
-	/** スクリプトの実行時間(ミリ秒) */
-	ExecuteTime *int32 `json:"executeTime"`
-	/** 費用の計算対象となった時間(秒) */
-	Charged *int32 `json:"charged"`
-	/** 標準出力の内容のリスト */
-	Output *[]string `json:"output"`
+    /** ステータスコード */
+	Code         *int32	`json:"code"`
+    /** 戻り値 */
+	Result         *core.String	`json:"result"`
+    /** スクリプトの実行時間(ミリ秒) */
+	ExecuteTime         *int32	`json:"executeTime"`
+    /** 費用の計算対象となった時間(秒) */
+	Charged         *int32	`json:"charged"`
+    /** 標準出力の内容のリスト */
+	Output         *[]core.String	`json:"output"`
 }
 
 func (p *InvokeScriptResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Code != nil {
-		data["Code"] = p.Code
-	}
-	if p.Result != nil {
-		data["Result"] = p.Result
-	}
-	if p.ExecuteTime != nil {
-		data["ExecuteTime"] = p.ExecuteTime
-	}
-	if p.Charged != nil {
-		data["Charged"] = p.Charged
-	}
-	if p.Output != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Code != nil {
+     data["Code"] = p.Code
+    }
+    if p.Result != nil {
+     data["Result"] = p.Result
+    }
+    if p.ExecuteTime != nil {
+     data["ExecuteTime"] = p.ExecuteTime
+    }
+    if p.Charged != nil {
+     data["Charged"] = p.Charged
+    }
+    if p.Output != nil {
+    }
+    return &data
 }
 
 type InvokeScriptAsyncResult struct {
@@ -286,35 +290,35 @@ type InvokeScriptAsyncResult struct {
 }
 
 type DebugInvokeResult struct {
-	/** ステータスコード */
-	Code *int32 `json:"code"`
-	/** 戻り値 */
-	Result *string `json:"result"`
-	/** スクリプトの実行時間(ミリ秒) */
-	ExecuteTime *int32 `json:"executeTime"`
-	/** 費用の計算対象となった時間(秒) */
-	Charged *int32 `json:"charged"`
-	/** 標準出力の内容のリスト */
-	Output *[]string `json:"output"`
+    /** ステータスコード */
+	Code         *int32	`json:"code"`
+    /** 戻り値 */
+	Result         *core.String	`json:"result"`
+    /** スクリプトの実行時間(ミリ秒) */
+	ExecuteTime         *int32	`json:"executeTime"`
+    /** 費用の計算対象となった時間(秒) */
+	Charged         *int32	`json:"charged"`
+    /** 標準出力の内容のリスト */
+	Output         *[]core.String	`json:"output"`
 }
 
 func (p *DebugInvokeResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Code != nil {
-		data["Code"] = p.Code
-	}
-	if p.Result != nil {
-		data["Result"] = p.Result
-	}
-	if p.ExecuteTime != nil {
-		data["ExecuteTime"] = p.ExecuteTime
-	}
-	if p.Charged != nil {
-		data["Charged"] = p.Charged
-	}
-	if p.Output != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Code != nil {
+     data["Code"] = p.Code
+    }
+    if p.Result != nil {
+     data["Result"] = p.Result
+    }
+    if p.ExecuteTime != nil {
+     data["ExecuteTime"] = p.ExecuteTime
+    }
+    if p.Charged != nil {
+     data["Charged"] = p.Charged
+    }
+    if p.Output != nil {
+    }
+    return &data
 }
 
 type DebugInvokeAsyncResult struct {

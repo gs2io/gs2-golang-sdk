@@ -21,221 +21,221 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	Name         *string            `json:"name"`
-	Description  *string            `json:"description"`
-	LogSetting   *LogSetting        `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	Description   *string            `json:"description"`
-	LogSetting    *LogSetting        `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Description *core.String	`json:"description"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type DescribeCountersRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	LimitName              *string            `json:"limitName"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	LimitName *core.String	`json:"limitName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeCountersByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	LimitName              *string            `json:"limitName"`
-	UserId                 *string            `json:"userId"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	LimitName *core.String	`json:"limitName"`
+	UserId *core.String	`json:"userId"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetCounterRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	LimitName              *string            `json:"limitName"`
-	CounterName            *string            `json:"counterName"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	LimitName *core.String	`json:"limitName"`
+	CounterName *core.String	`json:"counterName"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetCounterByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	LimitName              *string            `json:"limitName"`
-	UserId                 *string            `json:"userId"`
-	CounterName            *string            `json:"counterName"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	LimitName *core.String	`json:"limitName"`
+	UserId *core.String	`json:"userId"`
+	CounterName *core.String	`json:"counterName"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type CountUpRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	LimitName              *string            `json:"limitName"`
-	CounterName            *string            `json:"counterName"`
-	CountUpValue           *int32             `json:"countUpValue"`
-	MaxValue               *int32             `json:"maxValue"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	LimitName *core.String	`json:"limitName"`
+	CounterName *core.String	`json:"counterName"`
+	CountUpValue *int32	`json:"countUpValue"`
+	MaxValue *int32	`json:"maxValue"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type CountUpByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	LimitName              *string            `json:"limitName"`
-	CounterName            *string            `json:"counterName"`
-	UserId                 *string            `json:"userId"`
-	CountUpValue           *int32             `json:"countUpValue"`
-	MaxValue               *int32             `json:"maxValue"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	LimitName *core.String	`json:"limitName"`
+	CounterName *core.String	`json:"counterName"`
+	UserId *core.String	`json:"userId"`
+	CountUpValue *int32	`json:"countUpValue"`
+	MaxValue *int32	`json:"maxValue"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type DeleteCounterByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	LimitName              *string            `json:"limitName"`
-	UserId                 *string            `json:"userId"`
-	CounterName            *string            `json:"counterName"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	LimitName *core.String	`json:"limitName"`
+	UserId *core.String	`json:"userId"`
+	CounterName *core.String	`json:"counterName"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type CountUpByStampTaskRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	StampTask              *string            `json:"stampTask"`
-	KeyId                  *string            `json:"keyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StampTask *core.String	`json:"stampTask"`
+	KeyId *core.String	`json:"keyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type DeleteByStampSheetRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	StampSheet             *string            `json:"stampSheet"`
-	KeyId                  *string            `json:"keyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StampSheet *core.String	`json:"stampSheet"`
+	KeyId *core.String	`json:"keyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeLimitModelMastersRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	PageToken     *string            `json:"pageToken"`
-	Limit         *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateLimitModelMasterRequest struct {
-	RequestId       *core.RequestId    `json:"requestId"`
-	ContextStack    *core.ContextStack `json:"contextStack"`
-	NamespaceName   *string            `json:"namespaceName"`
-	Name            *string            `json:"name"`
-	Description     *string            `json:"description"`
-	Metadata        *string            `json:"metadata"`
-	ResetType       *string            `json:"resetType"`
-	ResetDayOfMonth *int32             `json:"resetDayOfMonth"`
-	ResetDayOfWeek  *string            `json:"resetDayOfWeek"`
-	ResetHour       *int32             `json:"resetHour"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	Metadata *core.String	`json:"metadata"`
+	ResetType *core.String	`json:"resetType"`
+	ResetDayOfMonth *int32	`json:"resetDayOfMonth"`
+	ResetDayOfWeek *core.String	`json:"resetDayOfWeek"`
+	ResetHour *int32	`json:"resetHour"`
 }
 
 type GetLimitModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	LimitName     *string            `json:"limitName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	LimitName *core.String	`json:"limitName"`
 }
 
 type UpdateLimitModelMasterRequest struct {
-	RequestId       *core.RequestId    `json:"requestId"`
-	ContextStack    *core.ContextStack `json:"contextStack"`
-	NamespaceName   *string            `json:"namespaceName"`
-	LimitName       *string            `json:"limitName"`
-	Description     *string            `json:"description"`
-	Metadata        *string            `json:"metadata"`
-	ResetType       *string            `json:"resetType"`
-	ResetDayOfMonth *int32             `json:"resetDayOfMonth"`
-	ResetDayOfWeek  *string            `json:"resetDayOfWeek"`
-	ResetHour       *int32             `json:"resetHour"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	LimitName *core.String	`json:"limitName"`
+	Description *core.String	`json:"description"`
+	Metadata *core.String	`json:"metadata"`
+	ResetType *core.String	`json:"resetType"`
+	ResetDayOfMonth *int32	`json:"resetDayOfMonth"`
+	ResetDayOfWeek *core.String	`json:"resetDayOfWeek"`
+	ResetHour *int32	`json:"resetHour"`
 }
 
 type DeleteLimitModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	LimitName     *string            `json:"limitName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	LimitName *core.String	`json:"limitName"`
 }
 
 type ExportMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetCurrentLimitMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateCurrentLimitMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	Settings      *string            `json:"settings"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Settings *core.String	`json:"settings"`
 }
 
 type UpdateCurrentLimitMasterFromGitHubRequest struct {
-	RequestId       *core.RequestId        `json:"requestId"`
-	ContextStack    *core.ContextStack     `json:"contextStack"`
-	NamespaceName   *string                `json:"namespaceName"`
-	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CheckoutSetting *GitHubCheckoutSetting	`json:"checkoutSetting"`
 }
 
 type DescribeLimitModelsRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetLimitModelRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	LimitName     *string            `json:"limitName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	LimitName *core.String	`json:"limitName"`
 }

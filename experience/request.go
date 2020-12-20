@@ -21,310 +21,312 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	Name                   *string            `json:"name"`
-	Description            *string            `json:"description"`
-	ExperienceCapScriptId  *string            `json:"experienceCapScriptId"`
-	ChangeExperienceScript *ScriptSetting     `json:"changeExperienceScript"`
-	ChangeRankScript       *ScriptSetting     `json:"changeRankScript"`
-	ChangeRankCapScript    *ScriptSetting     `json:"changeRankCapScript"`
-	LogSetting             *LogSetting        `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	ExperienceCapScriptId *core.String	`json:"experienceCapScriptId"`
+	ChangeExperienceScript *ScriptSetting	`json:"changeExperienceScript"`
+	ChangeRankScript *ScriptSetting	`json:"changeRankScript"`
+	ChangeRankCapScript *ScriptSetting	`json:"changeRankCapScript"`
+	OverflowExperienceScript *ScriptSetting	`json:"overflowExperienceScript"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	Description            *string            `json:"description"`
-	ExperienceCapScriptId  *string            `json:"experienceCapScriptId"`
-	ChangeExperienceScript *ScriptSetting     `json:"changeExperienceScript"`
-	ChangeRankScript       *ScriptSetting     `json:"changeRankScript"`
-	ChangeRankCapScript    *ScriptSetting     `json:"changeRankCapScript"`
-	LogSetting             *LogSetting        `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Description *core.String	`json:"description"`
+	ExperienceCapScriptId *core.String	`json:"experienceCapScriptId"`
+	ChangeExperienceScript *ScriptSetting	`json:"changeExperienceScript"`
+	ChangeRankScript *ScriptSetting	`json:"changeRankScript"`
+	ChangeRankCapScript *ScriptSetting	`json:"changeRankCapScript"`
+	OverflowExperienceScript *ScriptSetting	`json:"overflowExperienceScript"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type DescribeExperienceModelMastersRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	PageToken     *string            `json:"pageToken"`
-	Limit         *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateExperienceModelMasterRequest struct {
-	RequestId         *core.RequestId    `json:"requestId"`
-	ContextStack      *core.ContextStack `json:"contextStack"`
-	NamespaceName     *string            `json:"namespaceName"`
-	Name              *string            `json:"name"`
-	Description       *string            `json:"description"`
-	Metadata          *string            `json:"metadata"`
-	DefaultExperience *int64             `json:"defaultExperience"`
-	DefaultRankCap    *int64             `json:"defaultRankCap"`
-	MaxRankCap        *int64             `json:"maxRankCap"`
-	RankThresholdId   *string            `json:"rankThresholdId"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	Metadata *core.String	`json:"metadata"`
+	DefaultExperience *int64	`json:"defaultExperience"`
+	DefaultRankCap *int64	`json:"defaultRankCap"`
+	MaxRankCap *int64	`json:"maxRankCap"`
+	RankThresholdId *core.String	`json:"rankThresholdId"`
 }
 
 type GetExperienceModelMasterRequest struct {
-	RequestId      *core.RequestId    `json:"requestId"`
-	ContextStack   *core.ContextStack `json:"contextStack"`
-	NamespaceName  *string            `json:"namespaceName"`
-	ExperienceName *string            `json:"experienceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ExperienceName *core.String	`json:"experienceName"`
 }
 
 type UpdateExperienceModelMasterRequest struct {
-	RequestId         *core.RequestId    `json:"requestId"`
-	ContextStack      *core.ContextStack `json:"contextStack"`
-	NamespaceName     *string            `json:"namespaceName"`
-	ExperienceName    *string            `json:"experienceName"`
-	Description       *string            `json:"description"`
-	Metadata          *string            `json:"metadata"`
-	DefaultExperience *int64             `json:"defaultExperience"`
-	DefaultRankCap    *int64             `json:"defaultRankCap"`
-	MaxRankCap        *int64             `json:"maxRankCap"`
-	RankThresholdId   *string            `json:"rankThresholdId"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ExperienceName *core.String	`json:"experienceName"`
+	Description *core.String	`json:"description"`
+	Metadata *core.String	`json:"metadata"`
+	DefaultExperience *int64	`json:"defaultExperience"`
+	DefaultRankCap *int64	`json:"defaultRankCap"`
+	MaxRankCap *int64	`json:"maxRankCap"`
+	RankThresholdId *core.String	`json:"rankThresholdId"`
 }
 
 type DeleteExperienceModelMasterRequest struct {
-	RequestId      *core.RequestId    `json:"requestId"`
-	ContextStack   *core.ContextStack `json:"contextStack"`
-	NamespaceName  *string            `json:"namespaceName"`
-	ExperienceName *string            `json:"experienceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ExperienceName *core.String	`json:"experienceName"`
 }
 
 type DescribeExperienceModelsRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetExperienceModelRequest struct {
-	RequestId      *core.RequestId    `json:"requestId"`
-	ContextStack   *core.ContextStack `json:"contextStack"`
-	NamespaceName  *string            `json:"namespaceName"`
-	ExperienceName *string            `json:"experienceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ExperienceName *core.String	`json:"experienceName"`
 }
 
 type DescribeThresholdMastersRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	PageToken     *string            `json:"pageToken"`
-	Limit         *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateThresholdMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	Name          *string            `json:"name"`
-	Description   *string            `json:"description"`
-	Metadata      *string            `json:"metadata"`
-	Values        *[]int64           `json:"values"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	Metadata *core.String	`json:"metadata"`
+	Values *[]int64	`json:"values"`
 }
 
 type GetThresholdMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	ThresholdName *string            `json:"thresholdName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ThresholdName *core.String	`json:"thresholdName"`
 }
 
 type UpdateThresholdMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	ThresholdName *string            `json:"thresholdName"`
-	Description   *string            `json:"description"`
-	Metadata      *string            `json:"metadata"`
-	Values        *[]int64           `json:"values"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ThresholdName *core.String	`json:"thresholdName"`
+	Description *core.String	`json:"description"`
+	Metadata *core.String	`json:"metadata"`
+	Values *[]int64	`json:"values"`
 }
 
 type DeleteThresholdMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	ThresholdName *string            `json:"thresholdName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ThresholdName *core.String	`json:"thresholdName"`
 }
 
 type ExportMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetCurrentExperienceMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateCurrentExperienceMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	Settings      *string            `json:"settings"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Settings *core.String	`json:"settings"`
 }
 
 type UpdateCurrentExperienceMasterFromGitHubRequest struct {
-	RequestId       *core.RequestId        `json:"requestId"`
-	ContextStack    *core.ContextStack     `json:"contextStack"`
-	NamespaceName   *string                `json:"namespaceName"`
-	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CheckoutSetting *GitHubCheckoutSetting	`json:"checkoutSetting"`
 }
 
 type DescribeStatusesRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	ExperienceName         *string            `json:"experienceName"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ExperienceName *core.String	`json:"experienceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeStatusesByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	ExperienceName         *string            `json:"experienceName"`
-	UserId                 *string            `json:"userId"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ExperienceName *core.String	`json:"experienceName"`
+	UserId *core.String	`json:"userId"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetStatusRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	ExperienceName         *string            `json:"experienceName"`
-	PropertyId             *string            `json:"propertyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ExperienceName *core.String	`json:"experienceName"`
+	PropertyId *core.String	`json:"propertyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetStatusByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	ExperienceName         *string            `json:"experienceName"`
-	PropertyId             *string            `json:"propertyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	ExperienceName *core.String	`json:"experienceName"`
+	PropertyId *core.String	`json:"propertyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetStatusWithSignatureRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	ExperienceName         *string            `json:"experienceName"`
-	PropertyId             *string            `json:"propertyId"`
-	KeyId                  *string            `json:"keyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ExperienceName *core.String	`json:"experienceName"`
+	PropertyId *core.String	`json:"propertyId"`
+	KeyId *core.String	`json:"keyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type AddExperienceByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	ExperienceName         *string            `json:"experienceName"`
-	PropertyId             *string            `json:"propertyId"`
-	ExperienceValue        *int64             `json:"experienceValue"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	ExperienceName *core.String	`json:"experienceName"`
+	PropertyId *core.String	`json:"propertyId"`
+	ExperienceValue *int64	`json:"experienceValue"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type SetExperienceByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	ExperienceName         *string            `json:"experienceName"`
-	PropertyId             *string            `json:"propertyId"`
-	ExperienceValue        *int64             `json:"experienceValue"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	ExperienceName *core.String	`json:"experienceName"`
+	PropertyId *core.String	`json:"propertyId"`
+	ExperienceValue *int64	`json:"experienceValue"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type AddRankCapByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	ExperienceName         *string            `json:"experienceName"`
-	PropertyId             *string            `json:"propertyId"`
-	RankCapValue           *int64             `json:"rankCapValue"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	ExperienceName *core.String	`json:"experienceName"`
+	PropertyId *core.String	`json:"propertyId"`
+	RankCapValue *int64	`json:"rankCapValue"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type SetRankCapByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	ExperienceName         *string            `json:"experienceName"`
-	PropertyId             *string            `json:"propertyId"`
-	RankCapValue           *int64             `json:"rankCapValue"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	ExperienceName *core.String	`json:"experienceName"`
+	PropertyId *core.String	`json:"propertyId"`
+	RankCapValue *int64	`json:"rankCapValue"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type DeleteStatusByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	ExperienceName         *string            `json:"experienceName"`
-	PropertyId             *string            `json:"propertyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	ExperienceName *core.String	`json:"experienceName"`
+	PropertyId *core.String	`json:"propertyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type AddExperienceByStampSheetRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	StampSheet             *string            `json:"stampSheet"`
-	KeyId                  *string            `json:"keyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StampSheet *core.String	`json:"stampSheet"`
+	KeyId *core.String	`json:"keyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type AddRankCapByStampSheetRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	StampSheet             *string            `json:"stampSheet"`
-	KeyId                  *string            `json:"keyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StampSheet *core.String	`json:"stampSheet"`
+	KeyId *core.String	`json:"keyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type SetRankCapByStampSheetRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	StampSheet             *string            `json:"stampSheet"`
-	KeyId                  *string            `json:"keyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	StampSheet *core.String	`json:"stampSheet"`
+	KeyId *core.String	`json:"keyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }

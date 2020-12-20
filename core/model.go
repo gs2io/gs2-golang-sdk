@@ -15,6 +15,8 @@
  */
 package core
 
+import "encoding/json"
+
 type Region string
 type OwnerId string
 
@@ -116,3 +118,20 @@ type Notification struct {
 	Subject string `json:"subject"`
 	Payload string `json:"payload"`
 }
+
+type String string
+
+func (p *String) UnmarshalJSON(data []byte) error {
+	println(string(data))
+	if data[0] == '"' {
+		var d string
+		err := json.Unmarshal(data, &d)
+		if err != nil {
+			return err
+		}
+		data = []byte(d)
+	}
+	*p = String(data)
+	return nil
+}
+

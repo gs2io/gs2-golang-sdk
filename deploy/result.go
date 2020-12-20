@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package deploy
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeStacksResult struct {
-	/** スタックのリスト */
-	Items *[]*Stack `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** スタックのリスト */
+	Items         *[]*Stack	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeStacksResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeStacksAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeStacksAsyncResult struct {
 }
 
 type CreateStackResult struct {
-	/** 作成したスタック */
-	Item *Stack `json:"item"`
+    /** 作成したスタック */
+	Item         *Stack	`json:"item"`
 }
 
 func (p *CreateStackResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateStackAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateStackAsyncResult struct {
 }
 
 type CreateStackFromGitHubResult struct {
-	/** 作成したスタック */
-	Item *Stack `json:"item"`
+    /** 作成したスタック */
+	Item         *Stack	`json:"item"`
 }
 
 func (p *CreateStackFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateStackFromGitHubAsyncResult struct {
@@ -78,8 +82,8 @@ type ValidateResult struct {
 }
 
 func (p *ValidateResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type ValidateAsyncResult struct {
@@ -88,16 +92,16 @@ type ValidateAsyncResult struct {
 }
 
 type GetStackStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetStackStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetStackStatusAsyncResult struct {
@@ -106,16 +110,16 @@ type GetStackStatusAsyncResult struct {
 }
 
 type GetStackResult struct {
-	/** スタック */
-	Item *Stack `json:"item"`
+    /** スタック */
+	Item         *Stack	`json:"item"`
 }
 
 func (p *GetStackResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetStackAsyncResult struct {
@@ -124,16 +128,16 @@ type GetStackAsyncResult struct {
 }
 
 type UpdateStackResult struct {
-	/** 更新したスタック */
-	Item *Stack `json:"item"`
+    /** 更新したスタック */
+	Item         *Stack	`json:"item"`
 }
 
 func (p *UpdateStackResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateStackAsyncResult struct {
@@ -142,16 +146,16 @@ type UpdateStackAsyncResult struct {
 }
 
 type UpdateStackFromGitHubResult struct {
-	/** 更新したスタック */
-	Item *Stack `json:"item"`
+    /** 更新したスタック */
+	Item         *Stack	`json:"item"`
 }
 
 func (p *UpdateStackFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateStackFromGitHubAsyncResult struct {
@@ -160,16 +164,16 @@ type UpdateStackFromGitHubAsyncResult struct {
 }
 
 type DeleteStackResult struct {
-	/** 削除したスタック */
-	Item *Stack `json:"item"`
+    /** 削除したスタック */
+	Item         *Stack	`json:"item"`
 }
 
 func (p *DeleteStackResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteStackAsyncResult struct {
@@ -178,16 +182,16 @@ type DeleteStackAsyncResult struct {
 }
 
 type ForceDeleteStackResult struct {
-	/** 削除したスタック */
-	Item *Stack `json:"item"`
+    /** 削除したスタック */
+	Item         *Stack	`json:"item"`
 }
 
 func (p *ForceDeleteStackResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type ForceDeleteStackAsyncResult struct {
@@ -196,16 +200,16 @@ type ForceDeleteStackAsyncResult struct {
 }
 
 type DeleteStackResourcesResult struct {
-	/** リソースを削除したスタック */
-	Item *Stack `json:"item"`
+    /** リソースを削除したスタック */
+	Item         *Stack	`json:"item"`
 }
 
 func (p *DeleteStackResourcesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteStackResourcesAsyncResult struct {
@@ -214,16 +218,16 @@ type DeleteStackResourcesAsyncResult struct {
 }
 
 type DeleteStackEntityResult struct {
-	/** 削除したスタック */
-	Item *Stack `json:"item"`
+    /** 削除したスタック */
+	Item         *Stack	`json:"item"`
 }
 
 func (p *DeleteStackEntityResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteStackEntityAsyncResult struct {
@@ -232,20 +236,20 @@ type DeleteStackEntityAsyncResult struct {
 }
 
 type DescribeResourcesResult struct {
-	/** 作成されたのリソースのリスト */
-	Items *[]*Resource `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 作成されたのリソースのリスト */
+	Items         *[]*Resource	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeResourcesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeResourcesAsyncResult struct {
@@ -254,16 +258,16 @@ type DescribeResourcesAsyncResult struct {
 }
 
 type GetResourceResult struct {
-	/** 作成されたのリソース */
-	Item *Resource `json:"item"`
+    /** 作成されたのリソース */
+	Item         *Resource	`json:"item"`
 }
 
 func (p *GetResourceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetResourceAsyncResult struct {
@@ -272,20 +276,20 @@ type GetResourceAsyncResult struct {
 }
 
 type DescribeEventsResult struct {
-	/** 発生したイベントのリスト */
-	Items *[]*Event `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 発生したイベントのリスト */
+	Items         *[]*Event	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeEventsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeEventsAsyncResult struct {
@@ -294,16 +298,16 @@ type DescribeEventsAsyncResult struct {
 }
 
 type GetEventResult struct {
-	/** 発生したイベント */
-	Item *Event `json:"item"`
+    /** 発生したイベント */
+	Item         *Event	`json:"item"`
 }
 
 func (p *GetEventResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetEventAsyncResult struct {
@@ -312,20 +316,20 @@ type GetEventAsyncResult struct {
 }
 
 type DescribeOutputsResult struct {
-	/** アウトプットのリスト */
-	Items *[]*Output `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** アウトプットのリスト */
+	Items         *[]*Output	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeOutputsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeOutputsAsyncResult struct {
@@ -334,16 +338,16 @@ type DescribeOutputsAsyncResult struct {
 }
 
 type GetOutputResult struct {
-	/** アウトプット */
-	Item *Output `json:"item"`
+    /** アウトプット */
+	Item         *Output	`json:"item"`
 }
 
 func (p *GetOutputResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetOutputAsyncResult struct {

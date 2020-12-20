@@ -21,138 +21,138 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	Name         *string            `json:"name"`
-	Description  *string            `json:"description"`
-	LogSetting   *LogSetting        `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	Description   *string            `json:"description"`
-	LogSetting    *LogSetting        `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Description *core.String	`json:"description"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type DescribeKeysRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	PageToken     *string            `json:"pageToken"`
-	Limit         *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateKeyRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	Name          *string            `json:"name"`
-	Description   *string            `json:"description"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
 }
 
 type UpdateKeyRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	KeyName       *string            `json:"keyName"`
-	Description   *string            `json:"description"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	KeyName *core.String	`json:"keyName"`
+	Description *core.String	`json:"description"`
 }
 
 type GetKeyRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	KeyName       *string            `json:"keyName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	KeyName *core.String	`json:"keyName"`
 }
 
 type DeleteKeyRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	KeyName       *string            `json:"keyName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	KeyName *core.String	`json:"keyName"`
 }
 
 type EncryptRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	KeyName       *string            `json:"keyName"`
-	Data          *string            `json:"data"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	KeyName *core.String	`json:"keyName"`
+	Data *core.String	`json:"data"`
 }
 
 type DecryptRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	KeyName       *string            `json:"keyName"`
-	Data          *string            `json:"data"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	KeyName *core.String	`json:"keyName"`
+	Data *core.String	`json:"data"`
 }
 
 type DescribeGitHubApiKeysRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	PageToken     *string            `json:"pageToken"`
-	Limit         *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateGitHubApiKeyRequest struct {
-	RequestId         *core.RequestId    `json:"requestId"`
-	ContextStack      *core.ContextStack `json:"contextStack"`
-	NamespaceName     *string            `json:"namespaceName"`
-	Name              *string            `json:"name"`
-	Description       *string            `json:"description"`
-	ApiKey            *string            `json:"apiKey"`
-	EncryptionKeyName *string            `json:"encryptionKeyName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	ApiKey *core.String	`json:"apiKey"`
+	EncryptionKeyName *core.String	`json:"encryptionKeyName"`
 }
 
 type UpdateGitHubApiKeyRequest struct {
-	RequestId         *core.RequestId    `json:"requestId"`
-	ContextStack      *core.ContextStack `json:"contextStack"`
-	NamespaceName     *string            `json:"namespaceName"`
-	ApiKeyName        *string            `json:"apiKeyName"`
-	Description       *string            `json:"description"`
-	ApiKey            *string            `json:"apiKey"`
-	EncryptionKeyName *string            `json:"encryptionKeyName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ApiKeyName *core.String	`json:"apiKeyName"`
+	Description *core.String	`json:"description"`
+	ApiKey *core.String	`json:"apiKey"`
+	EncryptionKeyName *core.String	`json:"encryptionKeyName"`
 }
 
 type GetGitHubApiKeyRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	ApiKeyName    *string            `json:"apiKeyName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ApiKeyName *core.String	`json:"apiKeyName"`
 }
 
 type DeleteGitHubApiKeyRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	ApiKeyName    *string            `json:"apiKeyName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	ApiKeyName *core.String	`json:"apiKeyName"`
 }

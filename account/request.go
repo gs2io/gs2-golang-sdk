@@ -21,212 +21,212 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
-	RequestId                *core.RequestId    `json:"requestId"`
-	ContextStack             *core.ContextStack `json:"contextStack"`
-	Name                     *string            `json:"name"`
-	Description              *string            `json:"description"`
-	ChangePasswordIfTakeOver *bool              `json:"changePasswordIfTakeOver"`
-	CreateAccountScript      *ScriptSetting     `json:"createAccountScript"`
-	AuthenticationScript     *ScriptSetting     `json:"authenticationScript"`
-	CreateTakeOverScript     *ScriptSetting     `json:"createTakeOverScript"`
-	DoTakeOverScript         *ScriptSetting     `json:"doTakeOverScript"`
-	LogSetting               *LogSetting        `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	ChangePasswordIfTakeOver *bool	`json:"changePasswordIfTakeOver"`
+	CreateAccountScript *ScriptSetting	`json:"createAccountScript"`
+	AuthenticationScript *ScriptSetting	`json:"authenticationScript"`
+	CreateTakeOverScript *ScriptSetting	`json:"createTakeOverScript"`
+	DoTakeOverScript *ScriptSetting	`json:"doTakeOverScript"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId                *core.RequestId    `json:"requestId"`
-	ContextStack             *core.ContextStack `json:"contextStack"`
-	NamespaceName            *string            `json:"namespaceName"`
-	Description              *string            `json:"description"`
-	ChangePasswordIfTakeOver *bool              `json:"changePasswordIfTakeOver"`
-	CreateAccountScript      *ScriptSetting     `json:"createAccountScript"`
-	AuthenticationScript     *ScriptSetting     `json:"authenticationScript"`
-	CreateTakeOverScript     *ScriptSetting     `json:"createTakeOverScript"`
-	DoTakeOverScript         *ScriptSetting     `json:"doTakeOverScript"`
-	LogSetting               *LogSetting        `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Description *core.String	`json:"description"`
+	ChangePasswordIfTakeOver *bool	`json:"changePasswordIfTakeOver"`
+	CreateAccountScript *ScriptSetting	`json:"createAccountScript"`
+	AuthenticationScript *ScriptSetting	`json:"authenticationScript"`
+	CreateTakeOverScript *ScriptSetting	`json:"createTakeOverScript"`
+	DoTakeOverScript *ScriptSetting	`json:"doTakeOverScript"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type DescribeAccountsRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	PageToken     *string            `json:"pageToken"`
-	Limit         *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateAccountRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateTimeOffsetRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	TimeOffset             *int32             `json:"timeOffset"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	TimeOffset *int32	`json:"timeOffset"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetAccountRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type DeleteAccountRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type AuthenticationRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	KeyId                  *string            `json:"keyId"`
-	Password               *string            `json:"password"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	KeyId *core.String	`json:"keyId"`
+	Password *core.String	`json:"password"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeTakeOversRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeTakeOversByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type CreateTakeOverRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	Type                   *int32             `json:"type"`
-	UserIdentifier         *string            `json:"userIdentifier"`
-	Password               *string            `json:"password"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Type *int32	`json:"type"`
+	UserIdentifier *core.String	`json:"userIdentifier"`
+	Password *core.String	`json:"password"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type CreateTakeOverByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	Type                   *int32             `json:"type"`
-	UserIdentifier         *string            `json:"userIdentifier"`
-	Password               *string            `json:"password"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	Type *int32	`json:"type"`
+	UserIdentifier *core.String	`json:"userIdentifier"`
+	Password *core.String	`json:"password"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetTakeOverRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	Type                   *int32             `json:"type"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Type *int32	`json:"type"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetTakeOverByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	Type                   *int32             `json:"type"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	Type *int32	`json:"type"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type UpdateTakeOverRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	Type                   *int32             `json:"type"`
-	OldPassword            *string            `json:"oldPassword"`
-	Password               *string            `json:"password"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Type *int32	`json:"type"`
+	OldPassword *core.String	`json:"oldPassword"`
+	Password *core.String	`json:"password"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type UpdateTakeOverByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	Type                   *int32             `json:"type"`
-	OldPassword            *string            `json:"oldPassword"`
-	Password               *string            `json:"password"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	Type *int32	`json:"type"`
+	OldPassword *core.String	`json:"oldPassword"`
+	Password *core.String	`json:"password"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type DeleteTakeOverRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	Type                   *int32             `json:"type"`
-	UserIdentifier         *string            `json:"userIdentifier"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Type *int32	`json:"type"`
+	UserIdentifier *core.String	`json:"userIdentifier"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DeleteTakeOverByUserIdentifierRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	Type                   *int32             `json:"type"`
-	UserIdentifier         *string            `json:"userIdentifier"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	Type *int32	`json:"type"`
+	UserIdentifier *core.String	`json:"userIdentifier"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type DoTakeOverRequest struct {
-	RequestId      *core.RequestId    `json:"requestId"`
-	ContextStack   *core.ContextStack `json:"contextStack"`
-	NamespaceName  *string            `json:"namespaceName"`
-	Type           *int32             `json:"type"`
-	UserIdentifier *string            `json:"userIdentifier"`
-	Password       *string            `json:"password"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Type *int32	`json:"type"`
+	UserIdentifier *core.String	`json:"userIdentifier"`
+	Password *core.String	`json:"password"`
 }

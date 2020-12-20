@@ -50,13 +50,13 @@ func describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -80,10 +80,10 @@ func (p Gs2LogRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -129,13 +129,13 @@ func createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -151,53 +151,53 @@ func (p Gs2LogRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Type != nil && *request.Type != "" {
-		bodies["type"] = *request.Type
-	}
-	if request.GcpCredentialJson != nil && *request.GcpCredentialJson != "" {
-		bodies["gcpCredentialJson"] = *request.GcpCredentialJson
-	}
-	if request.BigQueryDatasetName != nil && *request.BigQueryDatasetName != "" {
-		bodies["bigQueryDatasetName"] = *request.BigQueryDatasetName
-	}
-	if request.LogExpireDays != nil {
-		bodies["logExpireDays"] = *request.LogExpireDays
-	}
-	if request.AwsRegion != nil && *request.AwsRegion != "" {
-		bodies["awsRegion"] = *request.AwsRegion
-	}
-	if request.AwsAccessKeyId != nil && *request.AwsAccessKeyId != "" {
-		bodies["awsAccessKeyId"] = *request.AwsAccessKeyId
-	}
-	if request.AwsSecretAccessKey != nil && *request.AwsSecretAccessKey != "" {
-		bodies["awsSecretAccessKey"] = *request.AwsSecretAccessKey
-	}
-	if request.FirehoseStreamName != nil && *request.FirehoseStreamName != "" {
-		bodies["firehoseStreamName"] = *request.FirehoseStreamName
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Type != nil && *request.Type != "" {
+        bodies["type"] = *request.Type
+    }
+    if request.GcpCredentialJson != nil && *request.GcpCredentialJson != "" {
+        bodies["gcpCredentialJson"] = *request.GcpCredentialJson
+    }
+    if request.BigQueryDatasetName != nil && *request.BigQueryDatasetName != "" {
+        bodies["bigQueryDatasetName"] = *request.BigQueryDatasetName
+    }
+    if request.LogExpireDays != nil {
+        bodies["logExpireDays"] = *request.LogExpireDays
+    }
+    if request.AwsRegion != nil && *request.AwsRegion != "" {
+        bodies["awsRegion"] = *request.AwsRegion
+    }
+    if request.AwsAccessKeyId != nil && *request.AwsAccessKeyId != "" {
+        bodies["awsAccessKeyId"] = *request.AwsAccessKeyId
+    }
+    if request.AwsSecretAccessKey != nil && *request.AwsSecretAccessKey != "" {
+        bodies["awsSecretAccessKey"] = *request.AwsSecretAccessKey
+    }
+    if request.FirehoseStreamName != nil && *request.FirehoseStreamName != "" {
+        bodies["firehoseStreamName"] = *request.FirehoseStreamName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("log").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -235,13 +235,13 @@ func getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -255,19 +255,19 @@ func (p Gs2LogRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -313,13 +313,13 @@ func getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -333,19 +333,19 @@ func (p Gs2LogRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -391,13 +391,13 @@ func updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -411,57 +411,57 @@ func (p Gs2LogRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Type != nil && *request.Type != "" {
-		bodies["type"] = *request.Type
-	}
-	if request.GcpCredentialJson != nil && *request.GcpCredentialJson != "" {
-		bodies["gcpCredentialJson"] = *request.GcpCredentialJson
-	}
-	if request.BigQueryDatasetName != nil && *request.BigQueryDatasetName != "" {
-		bodies["bigQueryDatasetName"] = *request.BigQueryDatasetName
-	}
-	if request.LogExpireDays != nil {
-		bodies["logExpireDays"] = *request.LogExpireDays
-	}
-	if request.AwsRegion != nil && *request.AwsRegion != "" {
-		bodies["awsRegion"] = *request.AwsRegion
-	}
-	if request.AwsAccessKeyId != nil && *request.AwsAccessKeyId != "" {
-		bodies["awsAccessKeyId"] = *request.AwsAccessKeyId
-	}
-	if request.AwsSecretAccessKey != nil && *request.AwsSecretAccessKey != "" {
-		bodies["awsSecretAccessKey"] = *request.AwsSecretAccessKey
-	}
-	if request.FirehoseStreamName != nil && *request.FirehoseStreamName != "" {
-		bodies["firehoseStreamName"] = *request.FirehoseStreamName
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Type != nil && *request.Type != "" {
+        bodies["type"] = *request.Type
+    }
+    if request.GcpCredentialJson != nil && *request.GcpCredentialJson != "" {
+        bodies["gcpCredentialJson"] = *request.GcpCredentialJson
+    }
+    if request.BigQueryDatasetName != nil && *request.BigQueryDatasetName != "" {
+        bodies["bigQueryDatasetName"] = *request.BigQueryDatasetName
+    }
+    if request.LogExpireDays != nil {
+        bodies["logExpireDays"] = *request.LogExpireDays
+    }
+    if request.AwsRegion != nil && *request.AwsRegion != "" {
+        bodies["awsRegion"] = *request.AwsRegion
+    }
+    if request.AwsAccessKeyId != nil && *request.AwsAccessKeyId != "" {
+        bodies["awsAccessKeyId"] = *request.AwsAccessKeyId
+    }
+    if request.AwsSecretAccessKey != nil && *request.AwsSecretAccessKey != "" {
+        bodies["awsSecretAccessKey"] = *request.AwsSecretAccessKey
+    }
+    if request.FirehoseStreamName != nil && *request.FirehoseStreamName != "" {
+        bodies["firehoseStreamName"] = *request.FirehoseStreamName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("log").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -499,13 +499,13 @@ func deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -519,19 +519,19 @@ func (p Gs2LogRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -577,13 +577,13 @@ func queryAccessLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result QueryAccessLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- QueryAccessLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- QueryAccessLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- QueryAccessLogAsyncResult{
 		result: &result,
@@ -597,11 +597,11 @@ func (p Gs2LogRestClient) QueryAccessLogAsync(
 	callback chan<- QueryAccessLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/access"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -621,10 +621,10 @@ func (p Gs2LogRestClient) QueryAccessLogAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go queryAccessLogAsyncHandler(
 		p,
@@ -670,13 +670,13 @@ func countAccessLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CountAccessLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CountAccessLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CountAccessLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CountAccessLogAsyncResult{
 		result: &result,
@@ -690,11 +690,11 @@ func (p Gs2LogRestClient) CountAccessLogAsync(
 	callback chan<- CountAccessLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/access/count"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -714,10 +714,10 @@ func (p Gs2LogRestClient) CountAccessLogAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go countAccessLogAsyncHandler(
 		p,
@@ -763,13 +763,13 @@ func queryIssueStampSheetLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result QueryIssueStampSheetLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- QueryIssueStampSheetLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- QueryIssueStampSheetLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- QueryIssueStampSheetLogAsyncResult{
 		result: &result,
@@ -783,11 +783,11 @@ func (p Gs2LogRestClient) QueryIssueStampSheetLogAsync(
 	callback chan<- QueryIssueStampSheetLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/issue/stamp/sheet"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -810,10 +810,10 @@ func (p Gs2LogRestClient) QueryIssueStampSheetLogAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go queryIssueStampSheetLogAsyncHandler(
 		p,
@@ -859,13 +859,13 @@ func countIssueStampSheetLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CountIssueStampSheetLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CountIssueStampSheetLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CountIssueStampSheetLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CountIssueStampSheetLogAsyncResult{
 		result: &result,
@@ -879,11 +879,11 @@ func (p Gs2LogRestClient) CountIssueStampSheetLogAsync(
 	callback chan<- CountIssueStampSheetLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/issue/stamp/sheet/count"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -906,10 +906,10 @@ func (p Gs2LogRestClient) CountIssueStampSheetLogAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go countIssueStampSheetLogAsyncHandler(
 		p,
@@ -955,13 +955,13 @@ func queryExecuteStampSheetLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result QueryExecuteStampSheetLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- QueryExecuteStampSheetLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- QueryExecuteStampSheetLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- QueryExecuteStampSheetLogAsyncResult{
 		result: &result,
@@ -975,11 +975,11 @@ func (p Gs2LogRestClient) QueryExecuteStampSheetLogAsync(
 	callback chan<- QueryExecuteStampSheetLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/execute/stamp/sheet"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1002,10 +1002,10 @@ func (p Gs2LogRestClient) QueryExecuteStampSheetLogAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go queryExecuteStampSheetLogAsyncHandler(
 		p,
@@ -1051,13 +1051,13 @@ func countExecuteStampSheetLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CountExecuteStampSheetLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CountExecuteStampSheetLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CountExecuteStampSheetLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CountExecuteStampSheetLogAsyncResult{
 		result: &result,
@@ -1071,11 +1071,11 @@ func (p Gs2LogRestClient) CountExecuteStampSheetLogAsync(
 	callback chan<- CountExecuteStampSheetLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/execute/stamp/sheet/count"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1098,10 +1098,10 @@ func (p Gs2LogRestClient) CountExecuteStampSheetLogAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go countExecuteStampSheetLogAsyncHandler(
 		p,
@@ -1147,13 +1147,13 @@ func queryExecuteStampTaskLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result QueryExecuteStampTaskLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- QueryExecuteStampTaskLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- QueryExecuteStampTaskLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- QueryExecuteStampTaskLogAsyncResult{
 		result: &result,
@@ -1167,11 +1167,11 @@ func (p Gs2LogRestClient) QueryExecuteStampTaskLogAsync(
 	callback chan<- QueryExecuteStampTaskLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/execute/stamp/task"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1194,10 +1194,10 @@ func (p Gs2LogRestClient) QueryExecuteStampTaskLogAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go queryExecuteStampTaskLogAsyncHandler(
 		p,
@@ -1243,13 +1243,13 @@ func countExecuteStampTaskLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CountExecuteStampTaskLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CountExecuteStampTaskLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CountExecuteStampTaskLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CountExecuteStampTaskLogAsyncResult{
 		result: &result,
@@ -1263,11 +1263,11 @@ func (p Gs2LogRestClient) CountExecuteStampTaskLogAsync(
 	callback chan<- CountExecuteStampTaskLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/execute/stamp/task/count"
-	if request.NamespaceName != nil {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1290,10 +1290,10 @@ func (p Gs2LogRestClient) CountExecuteStampTaskLogAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go countExecuteStampTaskLogAsyncHandler(
 		p,

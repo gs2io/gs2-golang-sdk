@@ -21,78 +21,78 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
-	RequestId          *core.RequestId      `json:"requestId"`
-	ContextStack       *core.ContextStack   `json:"contextStack"`
-	Name               *string              `json:"name"`
-	Description        *string              `json:"description"`
-	ServerType         *string              `json:"serverType"`
-	ServerSpec         *string              `json:"serverSpec"`
-	CreateNotification *NotificationSetting `json:"createNotification"`
-	LogSetting         *LogSetting          `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	ServerType *core.String	`json:"serverType"`
+	ServerSpec *core.String	`json:"serverSpec"`
+	CreateNotification *NotificationSetting	`json:"createNotification"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId          *core.RequestId      `json:"requestId"`
-	ContextStack       *core.ContextStack   `json:"contextStack"`
-	NamespaceName      *string              `json:"namespaceName"`
-	Description        *string              `json:"description"`
-	ServerType         *string              `json:"serverType"`
-	ServerSpec         *string              `json:"serverSpec"`
-	CreateNotification *NotificationSetting `json:"createNotification"`
-	LogSetting         *LogSetting          `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Description *core.String	`json:"description"`
+	ServerType *core.String	`json:"serverType"`
+	ServerSpec *core.String	`json:"serverSpec"`
+	CreateNotification *NotificationSetting	`json:"createNotification"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type DescribeRoomsRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	PageToken     *string            `json:"pageToken"`
-	Limit         *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type WantRoomRequest struct {
-	RequestId           *core.RequestId    `json:"requestId"`
-	ContextStack        *core.ContextStack `json:"contextStack"`
-	NamespaceName       *string            `json:"namespaceName"`
-	Name                *string            `json:"name"`
-	NotificationUserIds *[]string          `json:"notificationUserIds"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Name *core.String	`json:"name"`
+	NotificationUserIds *[]core.String	`json:"notificationUserIds"`
 }
 
 type GetRoomRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	RoomName      *string            `json:"roomName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	RoomName *core.String	`json:"roomName"`
 }
 
 type DeleteRoomRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	RoomName      *string            `json:"roomName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	RoomName *core.String	`json:"roomName"`
 }

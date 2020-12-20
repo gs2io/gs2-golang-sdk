@@ -16,23 +16,29 @@ permissions and limitations under the License.
 
 package version
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
+	NamespaceId *core.String   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
+	OwnerId *core.String   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *string   `json:"name"`
+	Name *core.String   `json:"name"`
     /** 説明文 */
-	Description *string   `json:"description"`
+	Description *core.String   `json:"description"`
     /** バージョンチェック通過後に改めて発行するプロジェクトトークンの権限判定に使用する ユーザ のGRN */
-	AssumeUserId *string   `json:"assumeUserId"`
+	AssumeUserId *core.String   `json:"assumeUserId"`
     /** バージョンを承認したときに実行するスクリプト */
 	AcceptVersionScript *ScriptSetting   `json:"acceptVersionScript"`
     /** バージョンチェック時 に実行されるスクリプト のGRN */
-	CheckVersionTriggerScriptId *string   `json:"checkVersionTriggerScriptId"`
+	CheckVersionTriggerScriptId *core.String   `json:"checkVersionTriggerScriptId"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
+    /** None */
+	Status *core.String   `json:"status"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -53,6 +59,7 @@ func (p *Namespace) ToDict() *map[string]interface{} {
     if p.LogSetting != nil {
         data["logSetting"] = *p.LogSetting.ToDict()
     }
+    data["status"] = p.Status
     data["createdAt"] = p.CreatedAt
     data["updatedAt"] = p.UpdatedAt
     return &data
@@ -60,25 +67,25 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type VersionModelMaster struct {
     /** バージョンマスター */
-	VersionModelId *string   `json:"versionModelId"`
+	VersionModelId *core.String   `json:"versionModelId"`
     /** バージョン名 */
-	Name *string   `json:"name"`
+	Name *core.String   `json:"name"`
     /** バージョンマスターの説明 */
-	Description *string   `json:"description"`
+	Description *core.String   `json:"description"`
     /** バージョンのメタデータ */
-	Metadata *string   `json:"metadata"`
+	Metadata *core.String   `json:"metadata"`
     /** バージョンアップを促すバージョン */
 	WarningVersion *Version   `json:"warningVersion"`
     /** バージョンチェックを蹴るバージョン */
 	ErrorVersion *Version   `json:"errorVersion"`
     /** 判定に使用するバージョン値の種類 */
-	Scope *string   `json:"scope"`
+	Scope *core.String   `json:"scope"`
     /** 現在のバージョン */
 	CurrentVersion *Version   `json:"currentVersion"`
     /** 判定するバージョン値に署名検証を必要とするか */
 	NeedSignature *bool   `json:"needSignature"`
     /** 署名検証に使用する暗号鍵 のGRN */
-	SignatureKeyId *string   `json:"signatureKeyId"`
+	SignatureKeyId *core.String   `json:"signatureKeyId"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -127,23 +134,23 @@ func (p *Version) ToDict() *map[string]interface{} {
 
 type VersionModel struct {
     /** バージョン設定 */
-	VersionModelId *string   `json:"versionModelId"`
+	VersionModelId *core.String   `json:"versionModelId"`
     /** バージョンの種類名 */
-	Name *string   `json:"name"`
+	Name *core.String   `json:"name"`
     /** バージョンの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
+	Metadata *core.String   `json:"metadata"`
     /** バージョンアップを促すバージョン */
 	WarningVersion *Version   `json:"warningVersion"`
     /** バージョンチェックを蹴るバージョン */
 	ErrorVersion *Version   `json:"errorVersion"`
     /** 判定に使用するバージョン値の種類 */
-	Scope *string   `json:"scope"`
+	Scope *core.String   `json:"scope"`
     /** 現在のバージョン */
 	CurrentVersion *Version   `json:"currentVersion"`
     /** 判定するバージョン値に署名検証を必要とするか */
 	NeedSignature *bool   `json:"needSignature"`
     /** 署名検証に使用する暗号鍵 のGRN */
-	SignatureKeyId *string   `json:"signatureKeyId"`
+	SignatureKeyId *core.String   `json:"signatureKeyId"`
 }
 
 func (p *VersionModel) ToDict() *map[string]interface{} {
@@ -168,11 +175,11 @@ func (p *VersionModel) ToDict() *map[string]interface{} {
 
 type AcceptVersion struct {
     /** 承認したバージョン */
-	AcceptVersionId *string   `json:"acceptVersionId"`
+	AcceptVersionId *core.String   `json:"acceptVersionId"`
     /** 承認したバージョン名 */
-	VersionName *string   `json:"versionName"`
+	VersionName *core.String   `json:"versionName"`
     /** ユーザーID */
-	UserId *string   `json:"userId"`
+	UserId *core.String   `json:"userId"`
     /** 承認したバージョン */
 	Version *Version   `json:"version"`
     /** 作成日時 */
@@ -214,13 +221,13 @@ func (p *Status) ToDict() *map[string]interface{} {
 
 type TargetVersion struct {
     /** バージョンの名前 */
-	VersionName *string   `json:"versionName"`
+	VersionName *core.String   `json:"versionName"`
     /** バージョン */
 	Version *Version   `json:"version"`
     /** ボディ */
-	Body *string   `json:"body"`
+	Body *core.String   `json:"body"`
     /** 署名 */
-	Signature *string   `json:"signature"`
+	Signature *core.String   `json:"signature"`
 }
 
 func (p *TargetVersion) ToDict() *map[string]interface{} {
@@ -236,13 +243,13 @@ func (p *TargetVersion) ToDict() *map[string]interface{} {
 
 type SignTargetVersion struct {
     /** None */
-	Region *string   `json:"region"`
+	Region *core.String   `json:"region"`
     /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
+	OwnerId *core.String   `json:"ownerId"`
     /** ネームスペース名 */
-	NamespaceName *string   `json:"namespaceName"`
+	NamespaceName *core.String   `json:"namespaceName"`
     /** バージョンの種類名 */
-	VersionName *string   `json:"versionName"`
+	VersionName *core.String   `json:"versionName"`
     /** バージョン */
 	Version *Version   `json:"version"`
 }
@@ -261,15 +268,15 @@ func (p *SignTargetVersion) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *string   `json:"region"`
+	Region *core.String   `json:"region"`
     /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
+	OwnerId *core.String   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
+	ResponseCacheId *core.String   `json:"responseCacheId"`
     /** None */
-	RequestHash *string   `json:"requestHash"`
+	RequestHash *core.String   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *string   `json:"result"`
+	Result *core.String   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -284,9 +291,9 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type CurrentVersionMaster struct {
     /** ネームスペース名 */
-	NamespaceName *string   `json:"namespaceName"`
+	NamespaceName *core.String   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *string   `json:"settings"`
+	Settings *core.String   `json:"settings"`
 }
 
 func (p *CurrentVersionMaster) ToDict() *map[string]interface{} {
@@ -298,13 +305,13 @@ func (p *CurrentVersionMaster) ToDict() *map[string]interface{} {
 
 type ScriptSetting struct {
     /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *string   `json:"triggerScriptId"`
+	TriggerScriptId *core.String   `json:"triggerScriptId"`
     /** 完了通知の通知先 */
-	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
+	DoneTriggerTargetType *core.String   `json:"doneTriggerTargetType"`
     /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
+	DoneTriggerScriptId *core.String   `json:"doneTriggerScriptId"`
     /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
+	DoneTriggerQueueNamespaceId *core.String   `json:"doneTriggerQueueNamespaceId"`
 }
 
 func (p *ScriptSetting) ToDict() *map[string]interface{} {
@@ -318,19 +325,19 @@ func (p *ScriptSetting) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *string   `json:"repositoryName"`
+	RepositoryName *core.String   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *string   `json:"sourcePath"`
+	SourcePath *core.String   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *string   `json:"referenceType"`
+	ReferenceType *core.String   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *string   `json:"commitHash"`
+	CommitHash *core.String   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *string   `json:"branchName"`
+	BranchName *core.String   `json:"branchName"`
     /** タグ名 */
-	TagName *string   `json:"tagName"`
+	TagName *core.String   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -347,7 +354,7 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package log
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -111,16 +115,16 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 type DeleteNamespaceResult struct {
-	/** 削除したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 削除したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -129,30 +133,30 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type QueryAccessLogResult struct {
-	/** アクセスログのリスト */
-	Items *[]*AccessLog `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
-	/** クエリ結果の総件数 */
-	TotalCount *int64 `json:"totalCount"`
-	/** 検索時にスキャンした総容量 */
-	ScanSize *int64 `json:"scanSize"`
+    /** アクセスログのリスト */
+	Items         *[]*AccessLog	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
+    /** クエリ結果の総件数 */
+	TotalCount         *int64	`json:"totalCount"`
+    /** 検索時にスキャンした総容量 */
+	ScanSize         *int64	`json:"scanSize"`
 }
 
 func (p *QueryAccessLogResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	if p.TotalCount != nil {
-		data["TotalCount"] = p.TotalCount
-	}
-	if p.ScanSize != nil {
-		data["ScanSize"] = p.ScanSize
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    if p.TotalCount != nil {
+     data["TotalCount"] = p.TotalCount
+    }
+    if p.ScanSize != nil {
+     data["ScanSize"] = p.ScanSize
+    }
+    return &data
 }
 
 type QueryAccessLogAsyncResult struct {
@@ -161,30 +165,30 @@ type QueryAccessLogAsyncResult struct {
 }
 
 type CountAccessLogResult struct {
-	/** アクセスログ集計のリスト */
-	Items *[]*AccessLogCount `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
-	/** クエリ結果の総件数 */
-	TotalCount *int64 `json:"totalCount"`
-	/** 検索時にスキャンした総容量 */
-	ScanSize *int64 `json:"scanSize"`
+    /** アクセスログ集計のリスト */
+	Items         *[]*AccessLogCount	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
+    /** クエリ結果の総件数 */
+	TotalCount         *int64	`json:"totalCount"`
+    /** 検索時にスキャンした総容量 */
+	ScanSize         *int64	`json:"scanSize"`
 }
 
 func (p *CountAccessLogResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	if p.TotalCount != nil {
-		data["TotalCount"] = p.TotalCount
-	}
-	if p.ScanSize != nil {
-		data["ScanSize"] = p.ScanSize
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    if p.TotalCount != nil {
+     data["TotalCount"] = p.TotalCount
+    }
+    if p.ScanSize != nil {
+     data["ScanSize"] = p.ScanSize
+    }
+    return &data
 }
 
 type CountAccessLogAsyncResult struct {
@@ -193,30 +197,30 @@ type CountAccessLogAsyncResult struct {
 }
 
 type QueryIssueStampSheetLogResult struct {
-	/** スタンプシート発行ログのリスト */
-	Items *[]*IssueStampSheetLog `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
-	/** クエリ結果の総件数 */
-	TotalCount *int64 `json:"totalCount"`
-	/** 検索時にスキャンした総容量 */
-	ScanSize *int64 `json:"scanSize"`
+    /** スタンプシート発行ログのリスト */
+	Items         *[]*IssueStampSheetLog	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
+    /** クエリ結果の総件数 */
+	TotalCount         *int64	`json:"totalCount"`
+    /** 検索時にスキャンした総容量 */
+	ScanSize         *int64	`json:"scanSize"`
 }
 
 func (p *QueryIssueStampSheetLogResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	if p.TotalCount != nil {
-		data["TotalCount"] = p.TotalCount
-	}
-	if p.ScanSize != nil {
-		data["ScanSize"] = p.ScanSize
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    if p.TotalCount != nil {
+     data["TotalCount"] = p.TotalCount
+    }
+    if p.ScanSize != nil {
+     data["ScanSize"] = p.ScanSize
+    }
+    return &data
 }
 
 type QueryIssueStampSheetLogAsyncResult struct {
@@ -225,30 +229,30 @@ type QueryIssueStampSheetLogAsyncResult struct {
 }
 
 type CountIssueStampSheetLogResult struct {
-	/** スタンプシート発行ログ集計のリスト */
-	Items *[]*IssueStampSheetLogCount `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
-	/** クエリ結果の総件数 */
-	TotalCount *int64 `json:"totalCount"`
-	/** 検索時にスキャンした総容量 */
-	ScanSize *int64 `json:"scanSize"`
+    /** スタンプシート発行ログ集計のリスト */
+	Items         *[]*IssueStampSheetLogCount	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
+    /** クエリ結果の総件数 */
+	TotalCount         *int64	`json:"totalCount"`
+    /** 検索時にスキャンした総容量 */
+	ScanSize         *int64	`json:"scanSize"`
 }
 
 func (p *CountIssueStampSheetLogResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	if p.TotalCount != nil {
-		data["TotalCount"] = p.TotalCount
-	}
-	if p.ScanSize != nil {
-		data["ScanSize"] = p.ScanSize
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    if p.TotalCount != nil {
+     data["TotalCount"] = p.TotalCount
+    }
+    if p.ScanSize != nil {
+     data["ScanSize"] = p.ScanSize
+    }
+    return &data
 }
 
 type CountIssueStampSheetLogAsyncResult struct {
@@ -257,30 +261,30 @@ type CountIssueStampSheetLogAsyncResult struct {
 }
 
 type QueryExecuteStampSheetLogResult struct {
-	/** スタンプシート実行ログのリスト */
-	Items *[]*ExecuteStampSheetLog `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
-	/** クエリ結果の総件数 */
-	TotalCount *int64 `json:"totalCount"`
-	/** 検索時にスキャンした総容量 */
-	ScanSize *int64 `json:"scanSize"`
+    /** スタンプシート実行ログのリスト */
+	Items         *[]*ExecuteStampSheetLog	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
+    /** クエリ結果の総件数 */
+	TotalCount         *int64	`json:"totalCount"`
+    /** 検索時にスキャンした総容量 */
+	ScanSize         *int64	`json:"scanSize"`
 }
 
 func (p *QueryExecuteStampSheetLogResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	if p.TotalCount != nil {
-		data["TotalCount"] = p.TotalCount
-	}
-	if p.ScanSize != nil {
-		data["ScanSize"] = p.ScanSize
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    if p.TotalCount != nil {
+     data["TotalCount"] = p.TotalCount
+    }
+    if p.ScanSize != nil {
+     data["ScanSize"] = p.ScanSize
+    }
+    return &data
 }
 
 type QueryExecuteStampSheetLogAsyncResult struct {
@@ -289,30 +293,30 @@ type QueryExecuteStampSheetLogAsyncResult struct {
 }
 
 type CountExecuteStampSheetLogResult struct {
-	/** スタンプシート実行ログ集計のリスト */
-	Items *[]*ExecuteStampSheetLogCount `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
-	/** クエリ結果の総件数 */
-	TotalCount *int64 `json:"totalCount"`
-	/** 検索時にスキャンした総容量 */
-	ScanSize *int64 `json:"scanSize"`
+    /** スタンプシート実行ログ集計のリスト */
+	Items         *[]*ExecuteStampSheetLogCount	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
+    /** クエリ結果の総件数 */
+	TotalCount         *int64	`json:"totalCount"`
+    /** 検索時にスキャンした総容量 */
+	ScanSize         *int64	`json:"scanSize"`
 }
 
 func (p *CountExecuteStampSheetLogResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	if p.TotalCount != nil {
-		data["TotalCount"] = p.TotalCount
-	}
-	if p.ScanSize != nil {
-		data["ScanSize"] = p.ScanSize
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    if p.TotalCount != nil {
+     data["TotalCount"] = p.TotalCount
+    }
+    if p.ScanSize != nil {
+     data["ScanSize"] = p.ScanSize
+    }
+    return &data
 }
 
 type CountExecuteStampSheetLogAsyncResult struct {
@@ -321,30 +325,30 @@ type CountExecuteStampSheetLogAsyncResult struct {
 }
 
 type QueryExecuteStampTaskLogResult struct {
-	/** スタンプタスク実行ログのリスト */
-	Items *[]*ExecuteStampTaskLog `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
-	/** クエリ結果の総件数 */
-	TotalCount *int64 `json:"totalCount"`
-	/** 検索時にスキャンした総容量 */
-	ScanSize *int64 `json:"scanSize"`
+    /** スタンプタスク実行ログのリスト */
+	Items         *[]*ExecuteStampTaskLog	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
+    /** クエリ結果の総件数 */
+	TotalCount         *int64	`json:"totalCount"`
+    /** 検索時にスキャンした総容量 */
+	ScanSize         *int64	`json:"scanSize"`
 }
 
 func (p *QueryExecuteStampTaskLogResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	if p.TotalCount != nil {
-		data["TotalCount"] = p.TotalCount
-	}
-	if p.ScanSize != nil {
-		data["ScanSize"] = p.ScanSize
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    if p.TotalCount != nil {
+     data["TotalCount"] = p.TotalCount
+    }
+    if p.ScanSize != nil {
+     data["ScanSize"] = p.ScanSize
+    }
+    return &data
 }
 
 type QueryExecuteStampTaskLogAsyncResult struct {
@@ -353,30 +357,30 @@ type QueryExecuteStampTaskLogAsyncResult struct {
 }
 
 type CountExecuteStampTaskLogResult struct {
-	/** スタンプタスク実行ログ集計のリスト */
-	Items *[]*ExecuteStampTaskLogCount `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
-	/** クエリ結果の総件数 */
-	TotalCount *int64 `json:"totalCount"`
-	/** 検索時にスキャンした総容量 */
-	ScanSize *int64 `json:"scanSize"`
+    /** スタンプタスク実行ログ集計のリスト */
+	Items         *[]*ExecuteStampTaskLogCount	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
+    /** クエリ結果の総件数 */
+	TotalCount         *int64	`json:"totalCount"`
+    /** 検索時にスキャンした総容量 */
+	ScanSize         *int64	`json:"scanSize"`
 }
 
 func (p *CountExecuteStampTaskLogResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	if p.TotalCount != nil {
-		data["TotalCount"] = p.TotalCount
-	}
-	if p.ScanSize != nil {
-		data["ScanSize"] = p.ScanSize
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    if p.TotalCount != nil {
+     data["TotalCount"] = p.TotalCount
+    }
+    if p.ScanSize != nil {
+     data["ScanSize"] = p.ScanSize
+    }
+    return &data
 }
 
 type CountExecuteStampTaskLogAsyncResult struct {

@@ -50,13 +50,13 @@ func getChartAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetChartResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetChartAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetChartAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetChartAsyncResult{
 		result: &result,
@@ -70,61 +70,61 @@ func (p Gs2WatchRestClient) GetChartAsync(
 	callback chan<- GetChartAsyncResult,
 ) {
 	path := "/chart/{metrics}"
-	if request.Metrics != nil {
-		path = strings.ReplaceAll(path, "{metrics}", core.ToString(*request.Metrics))
-	} else {
-		path = strings.ReplaceAll(path, "{metrics}", "null")
-	}
+    if request.Metrics != nil {
+        path = strings.ReplaceAll(path, "{metrics}", core.ToString(*request.Metrics))
+    } else {
+        path = strings.ReplaceAll(path, "{metrics}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Grn != nil && *request.Grn != "" {
-		bodies["grn"] = *request.Grn
-	}
-	if request.Queries != nil {
-		var _queries []string
-		for _, item := range *request.Queries {
-			_queries = append(_queries, item)
-		}
-		bodies["queries"] = _queries
-	}
-	if request.By != nil && *request.By != "" {
-		bodies["by"] = *request.By
-	}
-	if request.Timeframe != nil && *request.Timeframe != "" {
-		bodies["timeframe"] = *request.Timeframe
-	}
-	if request.Size != nil && *request.Size != "" {
-		bodies["size"] = *request.Size
-	}
-	if request.Format != nil && *request.Format != "" {
-		bodies["format"] = *request.Format
-	}
-	if request.Aggregator != nil && *request.Aggregator != "" {
-		bodies["aggregator"] = *request.Aggregator
-	}
-	if request.Style != nil && *request.Style != "" {
-		bodies["style"] = *request.Style
-	}
-	if request.Title != nil && *request.Title != "" {
-		bodies["title"] = *request.Title
-	}
+    var bodies = core.Bodies{}
+    if request.Grn != nil && *request.Grn != "" {
+        bodies["grn"] = *request.Grn
+    }
+    if request.Queries != nil {
+        var _queries []core.String
+        for _, item := range *request.Queries {
+            _queries = append(_queries, item)
+        }
+        bodies["queries"] = _queries
+    }
+    if request.By != nil && *request.By != "" {
+        bodies["by"] = *request.By
+    }
+    if request.Timeframe != nil && *request.Timeframe != "" {
+        bodies["timeframe"] = *request.Timeframe
+    }
+    if request.Size != nil && *request.Size != "" {
+        bodies["size"] = *request.Size
+    }
+    if request.Format != nil && *request.Format != "" {
+        bodies["format"] = *request.Format
+    }
+    if request.Aggregator != nil && *request.Aggregator != "" {
+        bodies["aggregator"] = *request.Aggregator
+    }
+    if request.Style != nil && *request.Style != "" {
+        bodies["style"] = *request.Style
+    }
+    if request.Title != nil && *request.Title != "" {
+        bodies["title"] = *request.Title
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getChartAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("watch").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -162,13 +162,13 @@ func getCumulativeAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCumulativeResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCumulativeAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCumulativeAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCumulativeAsyncResult{
 		result: &result,
@@ -182,33 +182,33 @@ func (p Gs2WatchRestClient) GetCumulativeAsync(
 	callback chan<- GetCumulativeAsyncResult,
 ) {
 	path := "/cumulative/{name}"
-	if request.Name != nil {
-		path = strings.ReplaceAll(path, "{name}", core.ToString(*request.Name))
-	} else {
-		path = strings.ReplaceAll(path, "{name}", "null")
-	}
+    if request.Name != nil {
+        path = strings.ReplaceAll(path, "{name}", core.ToString(*request.Name))
+    } else {
+        path = strings.ReplaceAll(path, "{name}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.ResourceGrn != nil && *request.ResourceGrn != "" {
-		bodies["resourceGrn"] = *request.ResourceGrn
-	}
+    var bodies = core.Bodies{}
+    if request.ResourceGrn != nil && *request.ResourceGrn != "" {
+        bodies["resourceGrn"] = *request.ResourceGrn
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getCumulativeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("watch").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -246,13 +246,13 @@ func describeBillingActivitiesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeBillingActivitiesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBillingActivitiesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBillingActivitiesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeBillingActivitiesAsyncResult{
 		result: &result,
@@ -266,16 +266,16 @@ func (p Gs2WatchRestClient) DescribeBillingActivitiesAsync(
 	callback chan<- DescribeBillingActivitiesAsyncResult,
 ) {
 	path := "/billingActivity/{year}/{month}"
-	if request.Year != nil {
-		path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
-	} else {
-		path = strings.ReplaceAll(path, "{year}", "null")
-	}
-	if request.Month != nil {
-		path = strings.ReplaceAll(path, "{month}", core.ToString(*request.Month))
-	} else {
-		path = strings.ReplaceAll(path, "{month}", "null")
-	}
+    if request.Year != nil {
+        path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
+    } else {
+        path = strings.ReplaceAll(path, "{year}", "null")
+    }
+    if request.Month != nil {
+        path = strings.ReplaceAll(path, "{month}", core.ToString(*request.Month))
+    } else {
+        path = strings.ReplaceAll(path, "{month}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -289,10 +289,10 @@ func (p Gs2WatchRestClient) DescribeBillingActivitiesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeBillingActivitiesAsyncHandler(
 		p,
@@ -338,13 +338,13 @@ func getBillingActivityAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetBillingActivityResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetBillingActivityAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBillingActivityAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetBillingActivityAsyncResult{
 		result: &result,
@@ -358,45 +358,45 @@ func (p Gs2WatchRestClient) GetBillingActivityAsync(
 	callback chan<- GetBillingActivityAsyncResult,
 ) {
 	path := "/billingActivity/{year}/{month}/{service}/{activityType}"
-	if request.Year != nil {
-		path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
-	} else {
-		path = strings.ReplaceAll(path, "{year}", "null")
-	}
-	if request.Month != nil {
-		path = strings.ReplaceAll(path, "{month}", core.ToString(*request.Month))
-	} else {
-		path = strings.ReplaceAll(path, "{month}", "null")
-	}
-	if request.Service != nil {
-		path = strings.ReplaceAll(path, "{service}", core.ToString(*request.Service))
-	} else {
-		path = strings.ReplaceAll(path, "{service}", "null")
-	}
-	if request.ActivityType != nil {
-		path = strings.ReplaceAll(path, "{activityType}", core.ToString(*request.ActivityType))
-	} else {
-		path = strings.ReplaceAll(path, "{activityType}", "null")
-	}
+    if request.Year != nil {
+        path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
+    } else {
+        path = strings.ReplaceAll(path, "{year}", "null")
+    }
+    if request.Month != nil {
+        path = strings.ReplaceAll(path, "{month}", core.ToString(*request.Month))
+    } else {
+        path = strings.ReplaceAll(path, "{month}", "null")
+    }
+    if request.Service != nil {
+        path = strings.ReplaceAll(path, "{service}", core.ToString(*request.Service))
+    } else {
+        path = strings.ReplaceAll(path, "{service}", "null")
+    }
+    if request.ActivityType != nil {
+        path = strings.ReplaceAll(path, "{activityType}", core.ToString(*request.ActivityType))
+    } else {
+        path = strings.ReplaceAll(path, "{activityType}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getBillingActivityAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("watch").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)

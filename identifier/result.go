@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package identifier
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeUsersResult struct {
-	/** ユーザのリスト */
-	Items *[]*User `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ユーザのリスト */
+	Items         *[]*User	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeUsersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeUsersAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeUsersAsyncResult struct {
 }
 
 type CreateUserResult struct {
-	/** 作成したユーザ */
-	Item *User `json:"item"`
+    /** 作成したユーザ */
+	Item         *User	`json:"item"`
 }
 
 func (p *CreateUserResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateUserAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateUserAsyncResult struct {
 }
 
 type UpdateUserResult struct {
-	/** 更新後のユーザ */
-	Item *User `json:"item"`
+    /** 更新後のユーザ */
+	Item         *User	`json:"item"`
 }
 
 func (p *UpdateUserResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateUserAsyncResult struct {
@@ -75,16 +79,16 @@ type UpdateUserAsyncResult struct {
 }
 
 type GetUserResult struct {
-	/** ユーザ */
-	Item *User `json:"item"`
+    /** ユーザ */
+	Item         *User	`json:"item"`
 }
 
 func (p *GetUserResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetUserAsyncResult struct {
@@ -96,8 +100,8 @@ type DeleteUserResult struct {
 }
 
 func (p *DeleteUserResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteUserAsyncResult struct {
@@ -106,20 +110,20 @@ type DeleteUserAsyncResult struct {
 }
 
 type DescribeSecurityPoliciesResult struct {
-	/** セキュリティポリシーのリスト */
-	Items *[]*SecurityPolicy `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** セキュリティポリシーのリスト */
+	Items         *[]*SecurityPolicy	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeSecurityPoliciesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeSecurityPoliciesAsyncResult struct {
@@ -128,20 +132,20 @@ type DescribeSecurityPoliciesAsyncResult struct {
 }
 
 type DescribeCommonSecurityPoliciesResult struct {
-	/** セキュリティポリシーのリスト */
-	Items *[]*SecurityPolicy `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** セキュリティポリシーのリスト */
+	Items         *[]*SecurityPolicy	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeCommonSecurityPoliciesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeCommonSecurityPoliciesAsyncResult struct {
@@ -150,16 +154,16 @@ type DescribeCommonSecurityPoliciesAsyncResult struct {
 }
 
 type CreateSecurityPolicyResult struct {
-	/** 作成したセキュリティポリシー */
-	Item *SecurityPolicy `json:"item"`
+    /** 作成したセキュリティポリシー */
+	Item         *SecurityPolicy	`json:"item"`
 }
 
 func (p *CreateSecurityPolicyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateSecurityPolicyAsyncResult struct {
@@ -168,16 +172,16 @@ type CreateSecurityPolicyAsyncResult struct {
 }
 
 type UpdateSecurityPolicyResult struct {
-	/** 更新後のセキュリティポリシー */
-	Item *SecurityPolicy `json:"item"`
+    /** 更新後のセキュリティポリシー */
+	Item         *SecurityPolicy	`json:"item"`
 }
 
 func (p *UpdateSecurityPolicyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateSecurityPolicyAsyncResult struct {
@@ -186,16 +190,16 @@ type UpdateSecurityPolicyAsyncResult struct {
 }
 
 type GetSecurityPolicyResult struct {
-	/** セキュリティポリシー */
-	Item *SecurityPolicy `json:"item"`
+    /** セキュリティポリシー */
+	Item         *SecurityPolicy	`json:"item"`
 }
 
 func (p *GetSecurityPolicyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetSecurityPolicyAsyncResult struct {
@@ -207,8 +211,8 @@ type DeleteSecurityPolicyResult struct {
 }
 
 func (p *DeleteSecurityPolicyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteSecurityPolicyAsyncResult struct {
@@ -217,20 +221,20 @@ type DeleteSecurityPolicyAsyncResult struct {
 }
 
 type DescribeIdentifiersResult struct {
-	/** クレデンシャルのリスト */
-	Items *[]*Identifier `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** クレデンシャルのリスト */
+	Items         *[]*Identifier	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeIdentifiersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeIdentifiersAsyncResult struct {
@@ -239,21 +243,21 @@ type DescribeIdentifiersAsyncResult struct {
 }
 
 type CreateIdentifierResult struct {
-	/** 作成したクレデンシャル */
-	Item *Identifier `json:"item"`
-	/** クライアントシークレット */
-	ClientSecret *string `json:"clientSecret"`
+    /** 作成したクレデンシャル */
+	Item         *Identifier	`json:"item"`
+    /** クライアントシークレット */
+	ClientSecret         *core.String	`json:"clientSecret"`
 }
 
 func (p *CreateIdentifierResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.ClientSecret != nil {
-		data["ClientSecret"] = p.ClientSecret
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.ClientSecret != nil {
+     data["ClientSecret"] = p.ClientSecret
+    }
+    return &data
 }
 
 type CreateIdentifierAsyncResult struct {
@@ -262,16 +266,16 @@ type CreateIdentifierAsyncResult struct {
 }
 
 type GetIdentifierResult struct {
-	/** クレデンシャル */
-	Item *Identifier `json:"item"`
+    /** クレデンシャル */
+	Item         *Identifier	`json:"item"`
 }
 
 func (p *GetIdentifierResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetIdentifierAsyncResult struct {
@@ -283,8 +287,8 @@ type DeleteIdentifierResult struct {
 }
 
 func (p *DeleteIdentifierResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteIdentifierAsyncResult struct {
@@ -293,20 +297,20 @@ type DeleteIdentifierAsyncResult struct {
 }
 
 type DescribePasswordsResult struct {
-	/** パスワードのリスト */
-	Items *[]*Password `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** パスワードのリスト */
+	Items         *[]*Password	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribePasswordsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribePasswordsAsyncResult struct {
@@ -315,16 +319,16 @@ type DescribePasswordsAsyncResult struct {
 }
 
 type CreatePasswordResult struct {
-	/** 作成したパスワード */
-	Item *Password `json:"item"`
+    /** 作成したパスワード */
+	Item         *Password	`json:"item"`
 }
 
 func (p *CreatePasswordResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreatePasswordAsyncResult struct {
@@ -333,16 +337,16 @@ type CreatePasswordAsyncResult struct {
 }
 
 type GetPasswordResult struct {
-	/** パスワード */
-	Item *Password `json:"item"`
+    /** パスワード */
+	Item         *Password	`json:"item"`
 }
 
 func (p *GetPasswordResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetPasswordAsyncResult struct {
@@ -354,8 +358,8 @@ type DeletePasswordResult struct {
 }
 
 func (p *DeletePasswordResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeletePasswordAsyncResult struct {
@@ -364,15 +368,15 @@ type DeletePasswordAsyncResult struct {
 }
 
 type GetHasSecurityPolicyResult struct {
-	/** セキュリティポリシーのリスト */
-	Items *[]*SecurityPolicy `json:"items"`
+    /** セキュリティポリシーのリスト */
+	Items         *[]*SecurityPolicy	`json:"items"`
 }
 
 func (p *GetHasSecurityPolicyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type GetHasSecurityPolicyAsyncResult struct {
@@ -381,15 +385,15 @@ type GetHasSecurityPolicyAsyncResult struct {
 }
 
 type AttachSecurityPolicyResult struct {
-	/** 新しくユーザーに割り当てたセキュリティポリシーのリスト */
-	Items *[]*SecurityPolicy `json:"items"`
+    /** 新しくユーザーに割り当てたセキュリティポリシーのリスト */
+	Items         *[]*SecurityPolicy	`json:"items"`
 }
 
 func (p *AttachSecurityPolicyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type AttachSecurityPolicyAsyncResult struct {
@@ -398,15 +402,15 @@ type AttachSecurityPolicyAsyncResult struct {
 }
 
 type DetachSecurityPolicyResult struct {
-	/** 剥奪したあとユーザーに引き続き割り当てられているセキュリティポリシーのリスト */
-	Items *[]*SecurityPolicy `json:"items"`
+    /** 剥奪したあとユーザーに引き続き割り当てられているセキュリティポリシーのリスト */
+	Items         *[]*SecurityPolicy	`json:"items"`
 }
 
 func (p *DetachSecurityPolicyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DetachSecurityPolicyAsyncResult struct {
@@ -415,26 +419,26 @@ type DetachSecurityPolicyAsyncResult struct {
 }
 
 type LoginResult struct {
-	/** プロジェクトトークン */
-	AccessToken *string `json:"accessToken"`
-	/** Bearer */
-	TokenType *string `json:"tokenType"`
-	/** 有効期間(秒) */
-	ExpiresIn *int32 `json:"expiresIn"`
+    /** プロジェクトトークン */
+	AccessToken         *core.String	`json:"accessToken"`
+    /** Bearer */
+	TokenType         *core.String	`json:"tokenType"`
+    /** 有効期間(秒) */
+	ExpiresIn         *int32	`json:"expiresIn"`
 }
 
 func (p *LoginResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.AccessToken != nil {
-		data["AccessToken"] = p.AccessToken
-	}
-	if p.TokenType != nil {
-		data["TokenType"] = p.TokenType
-	}
-	if p.ExpiresIn != nil {
-		data["ExpiresIn"] = p.ExpiresIn
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.AccessToken != nil {
+     data["AccessToken"] = p.AccessToken
+    }
+    if p.TokenType != nil {
+     data["TokenType"] = p.TokenType
+    }
+    if p.ExpiresIn != nil {
+     data["ExpiresIn"] = p.ExpiresIn
+    }
+    return &data
 }
 
 type LoginAsyncResult struct {
@@ -443,16 +447,16 @@ type LoginAsyncResult struct {
 }
 
 type LoginByUserResult struct {
-	/** プロジェクトトークン */
-	Item *ProjectToken `json:"item"`
+    /** プロジェクトトークン */
+	Item         *ProjectToken	`json:"item"`
 }
 
 func (p *LoginByUserResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type LoginByUserAsyncResult struct {

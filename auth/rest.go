@@ -50,13 +50,13 @@ func loginAsyncHandler(
 	asyncResult := <-internalCallback
 	var result LoginResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- LoginAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- LoginAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- LoginAsyncResult{
 		result: &result,
@@ -72,29 +72,29 @@ func (p Gs2AuthRestClient) LoginAsync(
 	path := "/login"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.TimeOffset != nil {
-		bodies["timeOffset"] = *request.TimeOffset
-	}
+    var bodies = core.Bodies{}
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TimeOffset != nil {
+        bodies["timeOffset"] = *request.TimeOffset
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go loginAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("auth").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("auth").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -132,13 +132,13 @@ func loginBySignatureAsyncHandler(
 	asyncResult := <-internalCallback
 	var result LoginBySignatureResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- LoginBySignatureAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- LoginBySignatureAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- LoginBySignatureAsyncResult{
 		result: &result,
@@ -154,35 +154,35 @@ func (p Gs2AuthRestClient) LoginBySignatureAsync(
 	path := "/login/signed"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
-	if request.Body != nil && *request.Body != "" {
-		bodies["body"] = *request.Body
-	}
-	if request.Signature != nil && *request.Signature != "" {
-		bodies["signature"] = *request.Signature
-	}
+    var bodies = core.Bodies{}
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+    if request.Body != nil && *request.Body != "" {
+        bodies["body"] = *request.Body
+    }
+    if request.Signature != nil && *request.Signature != "" {
+        bodies["signature"] = *request.Signature
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go loginBySignatureAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("auth").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("auth").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)

@@ -16,22 +16,49 @@ permissions and limitations under the License.
 
 package auth
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type AccessToken struct {
-	/** オーナーID */
-	OwnerId *string `json:"ownerId"`
-	/** アクセストークン */
-	Token *string `json:"token"`
-	/** ユーザーID */
-	UserId *string `json:"userId"`
-	/** 有効期限 */
-	Expire *int64 `json:"expire"`
+    /** オーナーID */
+	OwnerId *core.String   `json:"ownerId"`
+    /** アクセストークン */
+	Token *core.String   `json:"token"`
+    /** ユーザーID */
+	UserId *core.String   `json:"userId"`
+    /** 有効期限 */
+	Expire *int64   `json:"expire"`
 }
 
 func (p *AccessToken) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	data["ownerId"] = p.OwnerId
-	data["token"] = p.Token
-	data["userId"] = p.UserId
-	data["expire"] = p.Expire
-	return &data
+    var data = map[string]interface{}{}
+    data["ownerId"] = p.OwnerId
+    data["token"] = p.Token
+    data["userId"] = p.UserId
+    data["expire"] = p.Expire
+    return &data
+}
+
+type ResponseCache struct {
+    /** None */
+	Region *core.String   `json:"region"`
+    /** オーナーID */
+	OwnerId *core.String   `json:"ownerId"`
+    /** レスポンスキャッシュ のGRN */
+	ResponseCacheId *core.String   `json:"responseCacheId"`
+    /** None */
+	RequestHash *core.String   `json:"requestHash"`
+    /** APIの応答内容 */
+	Result *core.String   `json:"result"`
+}
+
+func (p *ResponseCache) ToDict() *map[string]interface{} {
+    var data = map[string]interface{}{}
+    data["region"] = p.Region
+    data["ownerId"] = p.OwnerId
+    data["responseCacheId"] = p.ResponseCacheId
+    data["requestHash"] = p.RequestHash
+    data["result"] = p.Result
+    return &data
 }

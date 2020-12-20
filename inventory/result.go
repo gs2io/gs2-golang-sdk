@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package inventory
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -111,16 +115,16 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 type DeleteNamespaceResult struct {
-	/** 削除したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 削除したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -129,20 +133,20 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeInventoryModelMastersResult struct {
-	/** インベントリモデルマスターのリスト */
-	Items *[]*InventoryModelMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** インベントリモデルマスターのリスト */
+	Items         *[]*InventoryModelMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeInventoryModelMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeInventoryModelMastersAsyncResult struct {
@@ -151,16 +155,16 @@ type DescribeInventoryModelMastersAsyncResult struct {
 }
 
 type CreateInventoryModelMasterResult struct {
-	/** 作成したインベントリモデルマスター */
-	Item *InventoryModelMaster `json:"item"`
+    /** 作成したインベントリモデルマスター */
+	Item         *InventoryModelMaster	`json:"item"`
 }
 
 func (p *CreateInventoryModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateInventoryModelMasterAsyncResult struct {
@@ -169,16 +173,16 @@ type CreateInventoryModelMasterAsyncResult struct {
 }
 
 type GetInventoryModelMasterResult struct {
-	/** インベントリモデルマスター */
-	Item *InventoryModelMaster `json:"item"`
+    /** インベントリモデルマスター */
+	Item         *InventoryModelMaster	`json:"item"`
 }
 
 func (p *GetInventoryModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetInventoryModelMasterAsyncResult struct {
@@ -187,16 +191,16 @@ type GetInventoryModelMasterAsyncResult struct {
 }
 
 type UpdateInventoryModelMasterResult struct {
-	/** 更新したインベントリモデルマスター */
-	Item *InventoryModelMaster `json:"item"`
+    /** 更新したインベントリモデルマスター */
+	Item         *InventoryModelMaster	`json:"item"`
 }
 
 func (p *UpdateInventoryModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateInventoryModelMasterAsyncResult struct {
@@ -205,16 +209,16 @@ type UpdateInventoryModelMasterAsyncResult struct {
 }
 
 type DeleteInventoryModelMasterResult struct {
-	/** 削除したインベントリモデルマスター */
-	Item *InventoryModelMaster `json:"item"`
+    /** 削除したインベントリモデルマスター */
+	Item         *InventoryModelMaster	`json:"item"`
 }
 
 func (p *DeleteInventoryModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteInventoryModelMasterAsyncResult struct {
@@ -223,15 +227,15 @@ type DeleteInventoryModelMasterAsyncResult struct {
 }
 
 type DescribeInventoryModelsResult struct {
-	/** インベントリモデルのリスト */
-	Items *[]*InventoryModel `json:"items"`
+    /** インベントリモデルのリスト */
+	Items         *[]*InventoryModel	`json:"items"`
 }
 
 func (p *DescribeInventoryModelsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DescribeInventoryModelsAsyncResult struct {
@@ -240,16 +244,16 @@ type DescribeInventoryModelsAsyncResult struct {
 }
 
 type GetInventoryModelResult struct {
-	/** インベントリモデル */
-	Item *InventoryModel `json:"item"`
+    /** インベントリモデル */
+	Item         *InventoryModel	`json:"item"`
 }
 
 func (p *GetInventoryModelResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetInventoryModelAsyncResult struct {
@@ -258,20 +262,20 @@ type GetInventoryModelAsyncResult struct {
 }
 
 type DescribeItemModelMastersResult struct {
-	/** アイテムモデルマスターのリスト */
-	Items *[]*ItemModelMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** アイテムモデルマスターのリスト */
+	Items         *[]*ItemModelMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeItemModelMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeItemModelMastersAsyncResult struct {
@@ -280,16 +284,16 @@ type DescribeItemModelMastersAsyncResult struct {
 }
 
 type CreateItemModelMasterResult struct {
-	/** 作成したアイテムモデルマスター */
-	Item *ItemModelMaster `json:"item"`
+    /** 作成したアイテムモデルマスター */
+	Item         *ItemModelMaster	`json:"item"`
 }
 
 func (p *CreateItemModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateItemModelMasterAsyncResult struct {
@@ -298,16 +302,16 @@ type CreateItemModelMasterAsyncResult struct {
 }
 
 type GetItemModelMasterResult struct {
-	/** アイテムモデルマスター */
-	Item *ItemModelMaster `json:"item"`
+    /** アイテムモデルマスター */
+	Item         *ItemModelMaster	`json:"item"`
 }
 
 func (p *GetItemModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetItemModelMasterAsyncResult struct {
@@ -316,16 +320,16 @@ type GetItemModelMasterAsyncResult struct {
 }
 
 type UpdateItemModelMasterResult struct {
-	/** 更新したアイテムモデルマスター */
-	Item *ItemModelMaster `json:"item"`
+    /** 更新したアイテムモデルマスター */
+	Item         *ItemModelMaster	`json:"item"`
 }
 
 func (p *UpdateItemModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateItemModelMasterAsyncResult struct {
@@ -334,16 +338,16 @@ type UpdateItemModelMasterAsyncResult struct {
 }
 
 type DeleteItemModelMasterResult struct {
-	/** 削除したアイテムモデルマスター */
-	Item *ItemModelMaster `json:"item"`
+    /** 削除したアイテムモデルマスター */
+	Item         *ItemModelMaster	`json:"item"`
 }
 
 func (p *DeleteItemModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteItemModelMasterAsyncResult struct {
@@ -352,15 +356,15 @@ type DeleteItemModelMasterAsyncResult struct {
 }
 
 type DescribeItemModelsResult struct {
-	/** アイテムモデルのリスト */
-	Items *[]*ItemModel `json:"items"`
+    /** アイテムモデルのリスト */
+	Items         *[]*ItemModel	`json:"items"`
 }
 
 func (p *DescribeItemModelsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DescribeItemModelsAsyncResult struct {
@@ -369,16 +373,16 @@ type DescribeItemModelsAsyncResult struct {
 }
 
 type GetItemModelResult struct {
-	/** None */
-	Item *ItemModel `json:"item"`
+    /** None */
+	Item         *ItemModel	`json:"item"`
 }
 
 func (p *GetItemModelResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetItemModelAsyncResult struct {
@@ -387,16 +391,16 @@ type GetItemModelAsyncResult struct {
 }
 
 type ExportMasterResult struct {
-	/** 現在有効な所持品マスター */
-	Item *CurrentItemModelMaster `json:"item"`
+    /** 現在有効な所持品マスター */
+	Item         *CurrentItemModelMaster	`json:"item"`
 }
 
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type ExportMasterAsyncResult struct {
@@ -405,16 +409,16 @@ type ExportMasterAsyncResult struct {
 }
 
 type GetCurrentItemModelMasterResult struct {
-	/** 現在有効な所持品マスター */
-	Item *CurrentItemModelMaster `json:"item"`
+    /** 現在有効な所持品マスター */
+	Item         *CurrentItemModelMaster	`json:"item"`
 }
 
 func (p *GetCurrentItemModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCurrentItemModelMasterAsyncResult struct {
@@ -423,16 +427,16 @@ type GetCurrentItemModelMasterAsyncResult struct {
 }
 
 type UpdateCurrentItemModelMasterResult struct {
-	/** 更新した現在有効な所持品マスター */
-	Item *CurrentItemModelMaster `json:"item"`
+    /** 更新した現在有効な所持品マスター */
+	Item         *CurrentItemModelMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentItemModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentItemModelMasterAsyncResult struct {
@@ -441,16 +445,16 @@ type UpdateCurrentItemModelMasterAsyncResult struct {
 }
 
 type UpdateCurrentItemModelMasterFromGitHubResult struct {
-	/** 更新した現在有効な所持品マスター */
-	Item *CurrentItemModelMaster `json:"item"`
+    /** 更新した現在有効な所持品マスター */
+	Item         *CurrentItemModelMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentItemModelMasterFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentItemModelMasterFromGitHubAsyncResult struct {
@@ -459,20 +463,20 @@ type UpdateCurrentItemModelMasterFromGitHubAsyncResult struct {
 }
 
 type DescribeInventoriesResult struct {
-	/** インベントリのリスト */
-	Items *[]*Inventory `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** インベントリのリスト */
+	Items         *[]*Inventory	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeInventoriesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeInventoriesAsyncResult struct {
@@ -481,20 +485,20 @@ type DescribeInventoriesAsyncResult struct {
 }
 
 type DescribeInventoriesByUserIdResult struct {
-	/** インベントリのリスト */
-	Items *[]*Inventory `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** インベントリのリスト */
+	Items         *[]*Inventory	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeInventoriesByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeInventoriesByUserIdAsyncResult struct {
@@ -503,16 +507,16 @@ type DescribeInventoriesByUserIdAsyncResult struct {
 }
 
 type GetInventoryResult struct {
-	/** インベントリ */
-	Item *Inventory `json:"item"`
+    /** インベントリ */
+	Item         *Inventory	`json:"item"`
 }
 
 func (p *GetInventoryResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetInventoryAsyncResult struct {
@@ -521,16 +525,16 @@ type GetInventoryAsyncResult struct {
 }
 
 type GetInventoryByUserIdResult struct {
-	/** インベントリ */
-	Item *Inventory `json:"item"`
+    /** インベントリ */
+	Item         *Inventory	`json:"item"`
 }
 
 func (p *GetInventoryByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetInventoryByUserIdAsyncResult struct {
@@ -539,16 +543,16 @@ type GetInventoryByUserIdAsyncResult struct {
 }
 
 type AddCapacityByUserIdResult struct {
-	/** キャパシティ加算後のインベントリ */
-	Item *Inventory `json:"item"`
+    /** キャパシティ加算後のインベントリ */
+	Item         *Inventory	`json:"item"`
 }
 
 func (p *AddCapacityByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type AddCapacityByUserIdAsyncResult struct {
@@ -557,16 +561,16 @@ type AddCapacityByUserIdAsyncResult struct {
 }
 
 type SetCapacityByUserIdResult struct {
-	/** 更新後のインベントリ */
-	Item *Inventory `json:"item"`
+    /** 更新後のインベントリ */
+	Item         *Inventory	`json:"item"`
 }
 
 func (p *SetCapacityByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type SetCapacityByUserIdAsyncResult struct {
@@ -575,16 +579,16 @@ type SetCapacityByUserIdAsyncResult struct {
 }
 
 type DeleteInventoryByUserIdResult struct {
-	/** インベントリ */
-	Item *Inventory `json:"item"`
+    /** インベントリ */
+	Item         *Inventory	`json:"item"`
 }
 
 func (p *DeleteInventoryByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteInventoryByUserIdAsyncResult struct {
@@ -593,16 +597,16 @@ type DeleteInventoryByUserIdAsyncResult struct {
 }
 
 type AddCapacityByStampSheetResult struct {
-	/** キャパシティ加算後のインベントリ */
-	Item *Inventory `json:"item"`
+    /** キャパシティ加算後のインベントリ */
+	Item         *Inventory	`json:"item"`
 }
 
 func (p *AddCapacityByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type AddCapacityByStampSheetAsyncResult struct {
@@ -611,16 +615,16 @@ type AddCapacityByStampSheetAsyncResult struct {
 }
 
 type SetCapacityByStampSheetResult struct {
-	/** 更新後のインベントリ */
-	Item *Inventory `json:"item"`
+    /** 更新後のインベントリ */
+	Item         *Inventory	`json:"item"`
 }
 
 func (p *SetCapacityByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type SetCapacityByStampSheetAsyncResult struct {
@@ -629,20 +633,20 @@ type SetCapacityByStampSheetAsyncResult struct {
 }
 
 type DescribeItemSetsResult struct {
-	/** 有効期限ごとのアイテム所持数量のリスト */
-	Items *[]*ItemSet `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 有効期限ごとのアイテム所持数量のリスト */
+	Items         *[]*ItemSet	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeItemSetsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeItemSetsAsyncResult struct {
@@ -651,20 +655,20 @@ type DescribeItemSetsAsyncResult struct {
 }
 
 type DescribeItemSetsByUserIdResult struct {
-	/** 有効期限ごとのアイテム所持数量のリスト */
-	Items *[]*ItemSet `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 有効期限ごとのアイテム所持数量のリスト */
+	Items         *[]*ItemSet	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeItemSetsByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeItemSetsByUserIdAsyncResult struct {
@@ -673,25 +677,25 @@ type DescribeItemSetsByUserIdAsyncResult struct {
 }
 
 type GetItemSetResult struct {
-	/** 有効期限毎の{model_name} */
-	Items *[]*ItemSet `json:"items"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** 有効期限毎の{model_name} */
+	Items         *[]*ItemSet	`json:"items"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *GetItemSetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type GetItemSetAsyncResult struct {
@@ -700,25 +704,25 @@ type GetItemSetAsyncResult struct {
 }
 
 type GetItemSetByUserIdResult struct {
-	/** 有効期限毎の{model_name} */
-	Items *[]*ItemSet `json:"items"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** 有効期限毎の{model_name} */
+	Items         *[]*ItemSet	`json:"items"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *GetItemSetByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type GetItemSetByUserIdAsyncResult struct {
@@ -727,35 +731,35 @@ type GetItemSetByUserIdAsyncResult struct {
 }
 
 type GetItemWithSignatureResult struct {
-	/** 有効期限毎の{model_name} */
-	Items *[]*ItemSet `json:"items"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
-	/** 署名対象のアイテムセット情報 */
-	Body *string `json:"body"`
-	/** 署名 */
-	Signature *string `json:"signature"`
+    /** 有効期限毎の{model_name} */
+	Items         *[]*ItemSet	`json:"items"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
+    /** 署名対象のアイテムセット情報 */
+	Body         *core.String	`json:"body"`
+    /** 署名 */
+	Signature         *core.String	`json:"signature"`
 }
 
 func (p *GetItemWithSignatureResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	if p.Body != nil {
-		data["Body"] = p.Body
-	}
-	if p.Signature != nil {
-		data["Signature"] = p.Signature
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    if p.Body != nil {
+     data["Body"] = p.Body
+    }
+    if p.Signature != nil {
+     data["Signature"] = p.Signature
+    }
+    return &data
 }
 
 type GetItemWithSignatureAsyncResult struct {
@@ -764,35 +768,35 @@ type GetItemWithSignatureAsyncResult struct {
 }
 
 type GetItemWithSignatureByUserIdResult struct {
-	/** 有効期限毎の{model_name} */
-	Items *[]*ItemSet `json:"items"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
-	/** 署名対象のアイテムセット情報 */
-	Body *string `json:"body"`
-	/** 署名 */
-	Signature *string `json:"signature"`
+    /** 有効期限毎の{model_name} */
+	Items         *[]*ItemSet	`json:"items"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
+    /** 署名対象のアイテムセット情報 */
+	Body         *core.String	`json:"body"`
+    /** 署名 */
+	Signature         *core.String	`json:"signature"`
 }
 
 func (p *GetItemWithSignatureByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	if p.Body != nil {
-		data["Body"] = p.Body
-	}
-	if p.Signature != nil {
-		data["Signature"] = p.Signature
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    if p.Body != nil {
+     data["Body"] = p.Body
+    }
+    if p.Signature != nil {
+     data["Signature"] = p.Signature
+    }
+    return &data
 }
 
 type GetItemWithSignatureByUserIdAsyncResult struct {
@@ -801,30 +805,30 @@ type GetItemWithSignatureByUserIdAsyncResult struct {
 }
 
 type AcquireItemSetByUserIdResult struct {
-	/** 加算後の有効期限ごとのアイテム所持数量のリスト */
-	Items *[]*ItemSet `json:"items"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
-	/** 所持数量の上限を超えて受け取れずに GS2-Inbox に転送したアイテムの数量 */
-	OverflowCount *int64 `json:"overflowCount"`
+    /** 加算後の有効期限ごとのアイテム所持数量のリスト */
+	Items         *[]*ItemSet	`json:"items"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
+    /** 所持数量の上限を超えて受け取れずに GS2-Inbox に転送したアイテムの数量 */
+	OverflowCount         *int64	`json:"overflowCount"`
 }
 
 func (p *AcquireItemSetByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	if p.OverflowCount != nil {
-		data["OverflowCount"] = p.OverflowCount
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    if p.OverflowCount != nil {
+     data["OverflowCount"] = p.OverflowCount
+    }
+    return &data
 }
 
 type AcquireItemSetByUserIdAsyncResult struct {
@@ -833,25 +837,25 @@ type AcquireItemSetByUserIdAsyncResult struct {
 }
 
 type ConsumeItemSetResult struct {
-	/** 消費後の有効期限ごとのアイテム所持数量のリスト */
-	Items *[]*ItemSet `json:"items"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** 消費後の有効期限ごとのアイテム所持数量のリスト */
+	Items         *[]*ItemSet	`json:"items"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *ConsumeItemSetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type ConsumeItemSetAsyncResult struct {
@@ -860,25 +864,25 @@ type ConsumeItemSetAsyncResult struct {
 }
 
 type ConsumeItemSetByUserIdResult struct {
-	/** 消費後の有効期限ごとのアイテム所持数量のリスト */
-	Items *[]*ItemSet `json:"items"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** 消費後の有効期限ごとのアイテム所持数量のリスト */
+	Items         *[]*ItemSet	`json:"items"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *ConsumeItemSetByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type ConsumeItemSetByUserIdAsyncResult struct {
@@ -887,30 +891,30 @@ type ConsumeItemSetByUserIdAsyncResult struct {
 }
 
 type DescribeReferenceOfResult struct {
-	/** この所持品の参照元リスト */
-	Items *[]string `json:"items"`
-	/** 有効期限ごとのアイテム所持数量 */
-	ItemSet *ItemSet `json:"itemSet"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** この所持品の参照元リスト */
+	Items         *[]core.String	`json:"items"`
+    /** 有効期限ごとのアイテム所持数量 */
+	ItemSet         *ItemSet	`json:"itemSet"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *DescribeReferenceOfResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ItemSet != nil {
-		data["ItemSet"] = p.ItemSet.ToDict()
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ItemSet != nil {
+     data["ItemSet"] = p.ItemSet.ToDict()
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type DescribeReferenceOfAsyncResult struct {
@@ -919,30 +923,30 @@ type DescribeReferenceOfAsyncResult struct {
 }
 
 type DescribeReferenceOfByUserIdResult struct {
-	/** この所持品の参照元リスト */
-	Items *[]string `json:"items"`
-	/** 有効期限ごとのアイテム所持数量 */
-	ItemSet *ItemSet `json:"itemSet"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** この所持品の参照元リスト */
+	Items         *[]core.String	`json:"items"`
+    /** 有効期限ごとのアイテム所持数量 */
+	ItemSet         *ItemSet	`json:"itemSet"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *DescribeReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ItemSet != nil {
-		data["ItemSet"] = p.ItemSet.ToDict()
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ItemSet != nil {
+     data["ItemSet"] = p.ItemSet.ToDict()
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type DescribeReferenceOfByUserIdAsyncResult struct {
@@ -951,30 +955,30 @@ type DescribeReferenceOfByUserIdAsyncResult struct {
 }
 
 type GetReferenceOfResult struct {
-	/** この所持品の参照元リスト */
-	Item *[]string `json:"item"`
-	/** 有効期限ごとのアイテム所持数量 */
-	ItemSet *ItemSet `json:"itemSet"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** この所持品の参照元リスト */
+	Item         *[]core.String	`json:"item"`
+    /** 有効期限ごとのアイテム所持数量 */
+	ItemSet         *ItemSet	`json:"itemSet"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *GetReferenceOfResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-	}
-	if p.ItemSet != nil {
-		data["ItemSet"] = p.ItemSet.ToDict()
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+    }
+    if p.ItemSet != nil {
+     data["ItemSet"] = p.ItemSet.ToDict()
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type GetReferenceOfAsyncResult struct {
@@ -983,30 +987,30 @@ type GetReferenceOfAsyncResult struct {
 }
 
 type GetReferenceOfByUserIdResult struct {
-	/** この所持品の参照元リスト */
-	Item *[]string `json:"item"`
-	/** 有効期限ごとのアイテム所持数量 */
-	ItemSet *ItemSet `json:"itemSet"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** この所持品の参照元リスト */
+	Item         *[]core.String	`json:"item"`
+    /** 有効期限ごとのアイテム所持数量 */
+	ItemSet         *ItemSet	`json:"itemSet"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *GetReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-	}
-	if p.ItemSet != nil {
-		data["ItemSet"] = p.ItemSet.ToDict()
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+    }
+    if p.ItemSet != nil {
+     data["ItemSet"] = p.ItemSet.ToDict()
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type GetReferenceOfByUserIdAsyncResult struct {
@@ -1015,30 +1019,30 @@ type GetReferenceOfByUserIdAsyncResult struct {
 }
 
 type VerifyReferenceOfResult struct {
-	/** この所持品の参照元リスト */
-	Item *[]string `json:"item"`
-	/** 有効期限ごとのアイテム所持数量 */
-	ItemSet *ItemSet `json:"itemSet"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** この所持品の参照元リスト */
+	Item         *[]core.String	`json:"item"`
+    /** 有効期限ごとのアイテム所持数量 */
+	ItemSet         *ItemSet	`json:"itemSet"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *VerifyReferenceOfResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-	}
-	if p.ItemSet != nil {
-		data["ItemSet"] = p.ItemSet.ToDict()
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+    }
+    if p.ItemSet != nil {
+     data["ItemSet"] = p.ItemSet.ToDict()
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type VerifyReferenceOfAsyncResult struct {
@@ -1047,30 +1051,30 @@ type VerifyReferenceOfAsyncResult struct {
 }
 
 type VerifyReferenceOfByUserIdResult struct {
-	/** この所持品の参照元リスト */
-	Item *[]string `json:"item"`
-	/** 有効期限ごとのアイテム所持数量 */
-	ItemSet *ItemSet `json:"itemSet"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** この所持品の参照元リスト */
+	Item         *[]core.String	`json:"item"`
+    /** 有効期限ごとのアイテム所持数量 */
+	ItemSet         *ItemSet	`json:"itemSet"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *VerifyReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-	}
-	if p.ItemSet != nil {
-		data["ItemSet"] = p.ItemSet.ToDict()
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+    }
+    if p.ItemSet != nil {
+     data["ItemSet"] = p.ItemSet.ToDict()
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type VerifyReferenceOfByUserIdAsyncResult struct {
@@ -1079,30 +1083,30 @@ type VerifyReferenceOfByUserIdAsyncResult struct {
 }
 
 type AddReferenceOfResult struct {
-	/** この所持品の参照元リスト */
-	Item *[]string `json:"item"`
-	/** 参照元追加後の有効期限ごとのアイテム所持数量 */
-	ItemSet *ItemSet `json:"itemSet"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** この所持品の参照元リスト */
+	Item         *[]core.String	`json:"item"`
+    /** 参照元追加後の有効期限ごとのアイテム所持数量 */
+	ItemSet         *ItemSet	`json:"itemSet"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *AddReferenceOfResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-	}
-	if p.ItemSet != nil {
-		data["ItemSet"] = p.ItemSet.ToDict()
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+    }
+    if p.ItemSet != nil {
+     data["ItemSet"] = p.ItemSet.ToDict()
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type AddReferenceOfAsyncResult struct {
@@ -1111,30 +1115,30 @@ type AddReferenceOfAsyncResult struct {
 }
 
 type AddReferenceOfByUserIdResult struct {
-	/** この所持品の参照元リスト */
-	Item *[]string `json:"item"`
-	/** 参照元追加後の有効期限ごとのアイテム所持数量 */
-	ItemSet *ItemSet `json:"itemSet"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** この所持品の参照元リスト */
+	Item         *[]core.String	`json:"item"`
+    /** 参照元追加後の有効期限ごとのアイテム所持数量 */
+	ItemSet         *ItemSet	`json:"itemSet"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *AddReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-	}
-	if p.ItemSet != nil {
-		data["ItemSet"] = p.ItemSet.ToDict()
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+    }
+    if p.ItemSet != nil {
+     data["ItemSet"] = p.ItemSet.ToDict()
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type AddReferenceOfByUserIdAsyncResult struct {
@@ -1143,30 +1147,30 @@ type AddReferenceOfByUserIdAsyncResult struct {
 }
 
 type DeleteReferenceOfResult struct {
-	/** この所持品の参照元リスト */
-	Item *[]string `json:"item"`
-	/** 参照元削除後の有効期限ごとのアイテム所持数量 */
-	ItemSet *ItemSet `json:"itemSet"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** この所持品の参照元リスト */
+	Item         *[]core.String	`json:"item"`
+    /** 参照元削除後の有効期限ごとのアイテム所持数量 */
+	ItemSet         *ItemSet	`json:"itemSet"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *DeleteReferenceOfResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-	}
-	if p.ItemSet != nil {
-		data["ItemSet"] = p.ItemSet.ToDict()
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+    }
+    if p.ItemSet != nil {
+     data["ItemSet"] = p.ItemSet.ToDict()
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type DeleteReferenceOfAsyncResult struct {
@@ -1175,30 +1179,30 @@ type DeleteReferenceOfAsyncResult struct {
 }
 
 type DeleteReferenceOfByUserIdResult struct {
-	/** この所持品の参照元リスト */
-	Item *[]string `json:"item"`
-	/** 参照元削除後の有効期限ごとのアイテム所持数量 */
-	ItemSet *ItemSet `json:"itemSet"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** この所持品の参照元リスト */
+	Item         *[]core.String	`json:"item"`
+    /** 参照元削除後の有効期限ごとのアイテム所持数量 */
+	ItemSet         *ItemSet	`json:"itemSet"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *DeleteReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-	}
-	if p.ItemSet != nil {
-		data["ItemSet"] = p.ItemSet.ToDict()
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+    }
+    if p.ItemSet != nil {
+     data["ItemSet"] = p.ItemSet.ToDict()
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type DeleteReferenceOfByUserIdAsyncResult struct {
@@ -1207,25 +1211,25 @@ type DeleteReferenceOfByUserIdAsyncResult struct {
 }
 
 type DeleteItemSetByUserIdResult struct {
-	/** 削除した有効期限ごとのアイテム所持数量のリスト */
-	Items *[]*ItemSet `json:"items"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** 削除した有効期限ごとのアイテム所持数量のリスト */
+	Items         *[]*ItemSet	`json:"items"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *DeleteItemSetByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type DeleteItemSetByUserIdAsyncResult struct {
@@ -1234,30 +1238,30 @@ type DeleteItemSetByUserIdAsyncResult struct {
 }
 
 type AcquireItemSetByStampSheetResult struct {
-	/** 加算後の有効期限ごとのアイテム所持数量のリスト */
-	Items *[]*ItemSet `json:"items"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
-	/** 所持数量の上限を超えて受け取れずに GS2-Inbox に転送したアイテムの数量 */
-	OverflowCount *int64 `json:"overflowCount"`
+    /** 加算後の有効期限ごとのアイテム所持数量のリスト */
+	Items         *[]*ItemSet	`json:"items"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
+    /** 所持数量の上限を超えて受け取れずに GS2-Inbox に転送したアイテムの数量 */
+	OverflowCount         *int64	`json:"overflowCount"`
 }
 
 func (p *AcquireItemSetByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	if p.OverflowCount != nil {
-		data["OverflowCount"] = p.OverflowCount
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    if p.OverflowCount != nil {
+     data["OverflowCount"] = p.OverflowCount
+    }
+    return &data
 }
 
 type AcquireItemSetByStampSheetAsyncResult struct {
@@ -1266,31 +1270,30 @@ type AcquireItemSetByStampSheetAsyncResult struct {
 }
 
 type AddReferenceOfItemSetByStampSheetResult struct {
-	/** この所持品の参照元 */
-	Item *string `json:"item"`
-	/** 参照元追加後の有効期限ごとのアイテム所持数量 */
-	ItemSet *ItemSet `json:"itemSet"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** この所持品の参照元リスト */
+	Item         *[]core.String	`json:"item"`
+    /** 参照元追加後の有効期限ごとのアイテム所持数量 */
+	ItemSet         *ItemSet	`json:"itemSet"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *AddReferenceOfItemSetByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item
-	}
-	if p.ItemSet != nil {
-		data["ItemSet"] = p.ItemSet.ToDict()
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+    }
+    if p.ItemSet != nil {
+     data["ItemSet"] = p.ItemSet.ToDict()
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type AddReferenceOfItemSetByStampSheetAsyncResult struct {
@@ -1299,31 +1302,30 @@ type AddReferenceOfItemSetByStampSheetAsyncResult struct {
 }
 
 type DeleteReferenceOfItemSetByStampSheetResult struct {
-	/** この所持品の参照元 */
-	Item *string `json:"item"`
-	/** 参照元削除後の有効期限ごとのアイテム所持数量 */
-	ItemSet *ItemSet `json:"itemSet"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
+    /** この所持品の参照元リスト */
+	Item         *[]core.String	`json:"item"`
+    /** 参照元削除後の有効期限ごとのアイテム所持数量 */
+	ItemSet         *ItemSet	`json:"itemSet"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
 }
 
 func (p *DeleteReferenceOfItemSetByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item
-	}
-	if p.ItemSet != nil {
-		data["ItemSet"] = p.ItemSet.ToDict()
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+    }
+    if p.ItemSet != nil {
+     data["ItemSet"] = p.ItemSet.ToDict()
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    return &data
 }
 
 type DeleteReferenceOfItemSetByStampSheetAsyncResult struct {
@@ -1332,30 +1334,30 @@ type DeleteReferenceOfItemSetByStampSheetAsyncResult struct {
 }
 
 type ConsumeItemSetByStampTaskResult struct {
-	/** 消費後の有効期限ごとのアイテム所持数量のリスト */
-	Items *[]*ItemSet `json:"items"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
-	/** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack *string `json:"newContextStack"`
+    /** 消費後の有効期限ごとのアイテム所持数量のリスト */
+	Items         *[]*ItemSet	`json:"items"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
+    /** スタンプタスクの実行結果を記録したコンテキスト */
+	NewContextStack         *core.String	`json:"newContextStack"`
 }
 
 func (p *ConsumeItemSetByStampTaskResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	if p.NewContextStack != nil {
-		data["NewContextStack"] = p.NewContextStack
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    if p.NewContextStack != nil {
+     data["NewContextStack"] = p.NewContextStack
+    }
+    return &data
 }
 
 type ConsumeItemSetByStampTaskAsyncResult struct {
@@ -1364,36 +1366,35 @@ type ConsumeItemSetByStampTaskAsyncResult struct {
 }
 
 type VerifyReferenceOfByStampTaskResult struct {
-	/** この所持品の参照元 */
-	Item *string `json:"item"`
-	/** 有効期限ごとのアイテム所持数量 */
-	ItemSet *ItemSet `json:"itemSet"`
-	/** アイテムモデル */
-	ItemModel *ItemModel `json:"itemModel"`
-	/** インベントリ */
-	Inventory *Inventory `json:"inventory"`
-	/** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack *string `json:"newContextStack"`
+    /** この所持品の参照元のリスト */
+	Item         *[]core.String	`json:"item"`
+    /** 有効期限ごとのアイテム所持数量 */
+	ItemSet         *ItemSet	`json:"itemSet"`
+    /** アイテムモデル */
+	ItemModel         *ItemModel	`json:"itemModel"`
+    /** インベントリ */
+	Inventory         *Inventory	`json:"inventory"`
+    /** スタンプタスクの実行結果を記録したコンテキスト */
+	NewContextStack         *core.String	`json:"newContextStack"`
 }
 
 func (p *VerifyReferenceOfByStampTaskResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item
-	}
-	if p.ItemSet != nil {
-		data["ItemSet"] = p.ItemSet.ToDict()
-	}
-	if p.ItemModel != nil {
-		data["ItemModel"] = p.ItemModel.ToDict()
-	}
-	if p.Inventory != nil {
-		data["Inventory"] = p.Inventory.ToDict()
-	}
-	if p.NewContextStack != nil {
-		data["NewContextStack"] = p.NewContextStack
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+    }
+    if p.ItemSet != nil {
+     data["ItemSet"] = p.ItemSet.ToDict()
+    }
+    if p.ItemModel != nil {
+     data["ItemModel"] = p.ItemModel.ToDict()
+    }
+    if p.Inventory != nil {
+     data["Inventory"] = p.Inventory.ToDict()
+    }
+    if p.NewContextStack != nil {
+     data["NewContextStack"] = p.NewContextStack
+    }
+    return &data
 }
 
 type VerifyReferenceOfByStampTaskAsyncResult struct {

@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package limit
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -111,16 +115,16 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 type DeleteNamespaceResult struct {
-	/** 削除したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 削除したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -129,20 +133,20 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeCountersResult struct {
-	/** カウンターのリスト */
-	Items *[]*Counter `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** カウンターのリスト */
+	Items         *[]*Counter	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeCountersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeCountersAsyncResult struct {
@@ -151,20 +155,20 @@ type DescribeCountersAsyncResult struct {
 }
 
 type DescribeCountersByUserIdResult struct {
-	/** カウンターのリスト */
-	Items *[]*Counter `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** カウンターのリスト */
+	Items         *[]*Counter	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeCountersByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeCountersByUserIdAsyncResult struct {
@@ -173,16 +177,16 @@ type DescribeCountersByUserIdAsyncResult struct {
 }
 
 type GetCounterResult struct {
-	/** カウンター */
-	Item *Counter `json:"item"`
+    /** カウンター */
+	Item         *Counter	`json:"item"`
 }
 
 func (p *GetCounterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCounterAsyncResult struct {
@@ -191,16 +195,16 @@ type GetCounterAsyncResult struct {
 }
 
 type GetCounterByUserIdResult struct {
-	/** カウンター */
-	Item *Counter `json:"item"`
+    /** カウンター */
+	Item         *Counter	`json:"item"`
 }
 
 func (p *GetCounterByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCounterByUserIdAsyncResult struct {
@@ -209,16 +213,16 @@ type GetCounterByUserIdAsyncResult struct {
 }
 
 type CountUpResult struct {
-	/** カウントを増やしたカウンター */
-	Item *Counter `json:"item"`
+    /** カウントを増やしたカウンター */
+	Item         *Counter	`json:"item"`
 }
 
 func (p *CountUpResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CountUpAsyncResult struct {
@@ -227,16 +231,16 @@ type CountUpAsyncResult struct {
 }
 
 type CountUpByUserIdResult struct {
-	/** カウントを増やしたカウンター */
-	Item *Counter `json:"item"`
+    /** カウントを増やしたカウンター */
+	Item         *Counter	`json:"item"`
 }
 
 func (p *CountUpByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CountUpByUserIdAsyncResult struct {
@@ -245,16 +249,16 @@ type CountUpByUserIdAsyncResult struct {
 }
 
 type DeleteCounterByUserIdResult struct {
-	/** カウンター */
-	Item *Counter `json:"item"`
+    /** カウンター */
+	Item         *Counter	`json:"item"`
 }
 
 func (p *DeleteCounterByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteCounterByUserIdAsyncResult struct {
@@ -263,21 +267,21 @@ type DeleteCounterByUserIdAsyncResult struct {
 }
 
 type CountUpByStampTaskResult struct {
-	/** カウントを増やしたカウンター */
-	Item *Counter `json:"item"`
-	/** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack *string `json:"newContextStack"`
+    /** カウントを増やしたカウンター */
+	Item         *Counter	`json:"item"`
+    /** スタンプタスクの実行結果を記録したコンテキスト */
+	NewContextStack         *core.String	`json:"newContextStack"`
 }
 
 func (p *CountUpByStampTaskResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.NewContextStack != nil {
-		data["NewContextStack"] = p.NewContextStack
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.NewContextStack != nil {
+     data["NewContextStack"] = p.NewContextStack
+    }
+    return &data
 }
 
 type CountUpByStampTaskAsyncResult struct {
@@ -286,16 +290,16 @@ type CountUpByStampTaskAsyncResult struct {
 }
 
 type DeleteByStampSheetResult struct {
-	/** カウンター */
-	Item *Counter `json:"item"`
+    /** カウンター */
+	Item         *Counter	`json:"item"`
 }
 
 func (p *DeleteByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteByStampSheetAsyncResult struct {
@@ -304,20 +308,20 @@ type DeleteByStampSheetAsyncResult struct {
 }
 
 type DescribeLimitModelMastersResult struct {
-	/** 回数制限の種類マスターのリスト */
-	Items *[]*LimitModelMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 回数制限の種類マスターのリスト */
+	Items         *[]*LimitModelMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeLimitModelMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeLimitModelMastersAsyncResult struct {
@@ -326,16 +330,16 @@ type DescribeLimitModelMastersAsyncResult struct {
 }
 
 type CreateLimitModelMasterResult struct {
-	/** 作成した回数制限の種類マスター */
-	Item *LimitModelMaster `json:"item"`
+    /** 作成した回数制限の種類マスター */
+	Item         *LimitModelMaster	`json:"item"`
 }
 
 func (p *CreateLimitModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateLimitModelMasterAsyncResult struct {
@@ -344,16 +348,16 @@ type CreateLimitModelMasterAsyncResult struct {
 }
 
 type GetLimitModelMasterResult struct {
-	/** 回数制限の種類マスター */
-	Item *LimitModelMaster `json:"item"`
+    /** 回数制限の種類マスター */
+	Item         *LimitModelMaster	`json:"item"`
 }
 
 func (p *GetLimitModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetLimitModelMasterAsyncResult struct {
@@ -362,16 +366,16 @@ type GetLimitModelMasterAsyncResult struct {
 }
 
 type UpdateLimitModelMasterResult struct {
-	/** 更新した回数制限の種類マスター */
-	Item *LimitModelMaster `json:"item"`
+    /** 更新した回数制限の種類マスター */
+	Item         *LimitModelMaster	`json:"item"`
 }
 
 func (p *UpdateLimitModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateLimitModelMasterAsyncResult struct {
@@ -380,16 +384,16 @@ type UpdateLimitModelMasterAsyncResult struct {
 }
 
 type DeleteLimitModelMasterResult struct {
-	/** 削除した回数制限の種類マスター */
-	Item *LimitModelMaster `json:"item"`
+    /** 削除した回数制限の種類マスター */
+	Item         *LimitModelMaster	`json:"item"`
 }
 
 func (p *DeleteLimitModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteLimitModelMasterAsyncResult struct {
@@ -398,16 +402,16 @@ type DeleteLimitModelMasterAsyncResult struct {
 }
 
 type ExportMasterResult struct {
-	/** 現在有効な回数制限設定 */
-	Item *CurrentLimitMaster `json:"item"`
+    /** 現在有効な回数制限設定 */
+	Item         *CurrentLimitMaster	`json:"item"`
 }
 
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type ExportMasterAsyncResult struct {
@@ -416,16 +420,16 @@ type ExportMasterAsyncResult struct {
 }
 
 type GetCurrentLimitMasterResult struct {
-	/** 現在有効な回数制限設定 */
-	Item *CurrentLimitMaster `json:"item"`
+    /** 現在有効な回数制限設定 */
+	Item         *CurrentLimitMaster	`json:"item"`
 }
 
 func (p *GetCurrentLimitMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCurrentLimitMasterAsyncResult struct {
@@ -434,16 +438,16 @@ type GetCurrentLimitMasterAsyncResult struct {
 }
 
 type UpdateCurrentLimitMasterResult struct {
-	/** 更新した現在有効な回数制限設定 */
-	Item *CurrentLimitMaster `json:"item"`
+    /** 更新した現在有効な回数制限設定 */
+	Item         *CurrentLimitMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentLimitMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentLimitMasterAsyncResult struct {
@@ -452,16 +456,16 @@ type UpdateCurrentLimitMasterAsyncResult struct {
 }
 
 type UpdateCurrentLimitMasterFromGitHubResult struct {
-	/** 更新した現在有効な回数制限設定 */
-	Item *CurrentLimitMaster `json:"item"`
+    /** 更新した現在有効な回数制限設定 */
+	Item         *CurrentLimitMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentLimitMasterFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentLimitMasterFromGitHubAsyncResult struct {
@@ -470,15 +474,15 @@ type UpdateCurrentLimitMasterFromGitHubAsyncResult struct {
 }
 
 type DescribeLimitModelsResult struct {
-	/** 回数制限の種類のリスト */
-	Items *[]*LimitModel `json:"items"`
+    /** 回数制限の種類のリスト */
+	Items         *[]*LimitModel	`json:"items"`
 }
 
 func (p *DescribeLimitModelsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DescribeLimitModelsAsyncResult struct {
@@ -487,16 +491,16 @@ type DescribeLimitModelsAsyncResult struct {
 }
 
 type GetLimitModelResult struct {
-	/** 回数制限の種類 */
-	Item *LimitModel `json:"item"`
+    /** 回数制限の種類 */
+	Item         *LimitModel	`json:"item"`
 }
 
 func (p *GetLimitModelResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetLimitModelAsyncResult struct {

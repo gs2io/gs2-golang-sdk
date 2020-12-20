@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package news
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -114,8 +118,8 @@ type DeleteNamespaceResult struct {
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -124,21 +128,21 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type PrepareUpdateCurrentNewsMasterResult struct {
-	/** アップロード後に結果を反映する際に使用するトークン */
-	UploadToken *string `json:"uploadToken"`
-	/** テンプレートアップロード処理の実行に使用するURL */
-	TemplateUploadUrl *string `json:"templateUploadUrl"`
+    /** アップロード後に結果を反映する際に使用するトークン */
+	UploadToken         *core.String	`json:"uploadToken"`
+    /** テンプレートアップロード処理の実行に使用するURL */
+	TemplateUploadUrl         *core.String	`json:"templateUploadUrl"`
 }
 
 func (p *PrepareUpdateCurrentNewsMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.UploadToken != nil {
-		data["UploadToken"] = p.UploadToken
-	}
-	if p.TemplateUploadUrl != nil {
-		data["TemplateUploadUrl"] = p.TemplateUploadUrl
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.UploadToken != nil {
+     data["UploadToken"] = p.UploadToken
+    }
+    if p.TemplateUploadUrl != nil {
+     data["TemplateUploadUrl"] = p.TemplateUploadUrl
+    }
+    return &data
 }
 
 type PrepareUpdateCurrentNewsMasterAsyncResult struct {
@@ -150,8 +154,8 @@ type UpdateCurrentNewsMasterResult struct {
 }
 
 func (p *UpdateCurrentNewsMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type UpdateCurrentNewsMasterAsyncResult struct {
@@ -160,16 +164,16 @@ type UpdateCurrentNewsMasterAsyncResult struct {
 }
 
 type PrepareUpdateCurrentNewsMasterFromGitHubResult struct {
-	/** アップロード後に結果を反映する際に使用するトークン */
-	UploadToken *string `json:"uploadToken"`
+    /** アップロード後に結果を反映する際に使用するトークン */
+	UploadToken         *core.String	`json:"uploadToken"`
 }
 
 func (p *PrepareUpdateCurrentNewsMasterFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.UploadToken != nil {
-		data["UploadToken"] = p.UploadToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.UploadToken != nil {
+     data["UploadToken"] = p.UploadToken
+    }
+    return &data
 }
 
 type PrepareUpdateCurrentNewsMasterFromGitHubAsyncResult struct {
@@ -178,25 +182,25 @@ type PrepareUpdateCurrentNewsMasterFromGitHubAsyncResult struct {
 }
 
 type DescribeNewsResult struct {
-	/** お知らせ記事のリスト */
-	Items *[]*News `json:"items"`
-	/** お知らせ記事データのハッシュ値 */
-	ContentHash *string `json:"contentHash"`
-	/** テンプレートデータのハッシュ値 */
-	TemplateHash *string `json:"templateHash"`
+    /** お知らせ記事のリスト */
+	Items         *[]*News	`json:"items"`
+    /** お知らせ記事データのハッシュ値 */
+	ContentHash         *core.String	`json:"contentHash"`
+    /** テンプレートデータのハッシュ値 */
+	TemplateHash         *core.String	`json:"templateHash"`
 }
 
 func (p *DescribeNewsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ContentHash != nil {
-		data["ContentHash"] = p.ContentHash
-	}
-	if p.TemplateHash != nil {
-		data["TemplateHash"] = p.TemplateHash
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ContentHash != nil {
+     data["ContentHash"] = p.ContentHash
+    }
+    if p.TemplateHash != nil {
+     data["TemplateHash"] = p.TemplateHash
+    }
+    return &data
 }
 
 type DescribeNewsAsyncResult struct {
@@ -205,25 +209,25 @@ type DescribeNewsAsyncResult struct {
 }
 
 type DescribeNewsByUserIdResult struct {
-	/** お知らせ記事のリスト */
-	Items *[]*News `json:"items"`
-	/** お知らせ記事データのハッシュ値 */
-	ContentHash *string `json:"contentHash"`
-	/** テンプレートデータのハッシュ値 */
-	TemplateHash *string `json:"templateHash"`
+    /** お知らせ記事のリスト */
+	Items         *[]*News	`json:"items"`
+    /** お知らせ記事データのハッシュ値 */
+	ContentHash         *core.String	`json:"contentHash"`
+    /** テンプレートデータのハッシュ値 */
+	TemplateHash         *core.String	`json:"templateHash"`
 }
 
 func (p *DescribeNewsByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.ContentHash != nil {
-		data["ContentHash"] = p.ContentHash
-	}
-	if p.TemplateHash != nil {
-		data["TemplateHash"] = p.TemplateHash
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.ContentHash != nil {
+     data["ContentHash"] = p.ContentHash
+    }
+    if p.TemplateHash != nil {
+     data["TemplateHash"] = p.TemplateHash
+    }
+    return &data
 }
 
 type DescribeNewsByUserIdAsyncResult struct {
@@ -232,25 +236,25 @@ type DescribeNewsByUserIdAsyncResult struct {
 }
 
 type WantGrantResult struct {
-	/** お知らせコンテンツにアクセスするために設定の必要なクッキー のリスト */
-	Items *[]*SetCookieRequestEntry `json:"items"`
-	/** お知らせコンテンツにアクセスするためのURL */
-	BrowserUrl *string `json:"browserUrl"`
-	/** ZIP形式のお知らせコンテンツにアクセスするためのURL Cookieの設定は不要 */
-	ZipUrl *string `json:"zipUrl"`
+    /** お知らせコンテンツにアクセスするために設定の必要なクッキー のリスト */
+	Items         *[]*SetCookieRequestEntry	`json:"items"`
+    /** お知らせコンテンツにアクセスするためのURL */
+	BrowserUrl         *core.String	`json:"browserUrl"`
+    /** ZIP形式のお知らせコンテンツにアクセスするためのURL Cookieの設定は不要 */
+	ZipUrl         *core.String	`json:"zipUrl"`
 }
 
 func (p *WantGrantResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.BrowserUrl != nil {
-		data["BrowserUrl"] = p.BrowserUrl
-	}
-	if p.ZipUrl != nil {
-		data["ZipUrl"] = p.ZipUrl
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.BrowserUrl != nil {
+     data["BrowserUrl"] = p.BrowserUrl
+    }
+    if p.ZipUrl != nil {
+     data["ZipUrl"] = p.ZipUrl
+    }
+    return &data
 }
 
 type WantGrantAsyncResult struct {
@@ -259,25 +263,25 @@ type WantGrantAsyncResult struct {
 }
 
 type WantGrantByUserIdResult struct {
-	/** お知らせコンテンツにアクセスするために設定の必要なクッキー のリスト */
-	Items *[]*SetCookieRequestEntry `json:"items"`
-	/** お知らせコンテンツにアクセスするためのURL */
-	BrowserUrl *string `json:"browserUrl"`
-	/** ZIP形式のお知らせコンテンツにアクセスするためのURL Cookieの設定は不要 */
-	ZipUrl *string `json:"zipUrl"`
+    /** お知らせコンテンツにアクセスするために設定の必要なクッキー のリスト */
+	Items         *[]*SetCookieRequestEntry	`json:"items"`
+    /** お知らせコンテンツにアクセスするためのURL */
+	BrowserUrl         *core.String	`json:"browserUrl"`
+    /** ZIP形式のお知らせコンテンツにアクセスするためのURL Cookieの設定は不要 */
+	ZipUrl         *core.String	`json:"zipUrl"`
 }
 
 func (p *WantGrantByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.BrowserUrl != nil {
-		data["BrowserUrl"] = p.BrowserUrl
-	}
-	if p.ZipUrl != nil {
-		data["ZipUrl"] = p.ZipUrl
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.BrowserUrl != nil {
+     data["BrowserUrl"] = p.BrowserUrl
+    }
+    if p.ZipUrl != nil {
+     data["ZipUrl"] = p.ZipUrl
+    }
+    return &data
 }
 
 type WantGrantByUserIdAsyncResult struct {

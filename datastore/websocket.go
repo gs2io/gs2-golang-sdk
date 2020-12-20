@@ -771,7 +771,7 @@ func (p Gs2DatastoreWebSocketClient) PrepareUploadAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []core.String
         for _, item := range *request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -875,7 +875,7 @@ func (p Gs2DatastoreWebSocketClient) PrepareUploadByUserIdAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []core.String
         for _, item := range *request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -970,7 +970,7 @@ func (p Gs2DatastoreWebSocketClient) UpdateDataObjectAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []core.String
         for _, item := range *request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -1068,7 +1068,7 @@ func (p Gs2DatastoreWebSocketClient) UpdateDataObjectByUserIdAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []core.String
         for _, item := range *request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -2300,6 +2300,88 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByUserIdAndDataObjectNameAnd
 ) (*PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult, error) {
 	callback := make(chan PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncResult, 1)
 	go p.PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2DatastoreWebSocketClient) restoreDataObjectAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- RestoreDataObjectAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RestoreDataObjectAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RestoreDataObjectResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RestoreDataObjectAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- RestoreDataObjectAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DatastoreWebSocketClient) RestoreDataObjectAsync(
+	request *RestoreDataObjectRequest,
+	callback chan<- RestoreDataObjectAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "restoreDataObject",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.DataObjectId != nil && *request.DataObjectId != "" {
+        bodies["dataObjectId"] = *request.DataObjectId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.restoreDataObjectAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DatastoreWebSocketClient) RestoreDataObject(
+	request *RestoreDataObjectRequest,
+) (*RestoreDataObjectResult, error) {
+	callback := make(chan RestoreDataObjectAsyncResult, 1)
+	go p.RestoreDataObjectAsync(
 		request,
 		callback,
 	)

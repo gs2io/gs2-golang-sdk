@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package quest
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** クエストを分類するカテゴリーのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** クエストを分類するカテゴリーのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したクエストを分類するカテゴリー */
-	Item *Namespace `json:"item"`
+    /** 作成したクエストを分類するカテゴリー */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** クエストを分類するカテゴリー */
-	Item *Namespace `json:"item"`
+    /** クエストを分類するカテゴリー */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したクエストを分類するカテゴリー */
-	Item *Namespace `json:"item"`
+    /** 更新したクエストを分類するカテゴリー */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -111,16 +115,16 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 type DeleteNamespaceResult struct {
-	/** 削除したクエストを分類するカテゴリー */
-	Item *Namespace `json:"item"`
+    /** 削除したクエストを分類するカテゴリー */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -129,20 +133,20 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeQuestGroupModelMastersResult struct {
-	/** クエストグループマスターのリスト */
-	Items *[]*QuestGroupModelMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** クエストグループマスターのリスト */
+	Items         *[]*QuestGroupModelMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeQuestGroupModelMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeQuestGroupModelMastersAsyncResult struct {
@@ -151,16 +155,16 @@ type DescribeQuestGroupModelMastersAsyncResult struct {
 }
 
 type CreateQuestGroupModelMasterResult struct {
-	/** 作成したクエストグループマスター */
-	Item *QuestGroupModelMaster `json:"item"`
+    /** 作成したクエストグループマスター */
+	Item         *QuestGroupModelMaster	`json:"item"`
 }
 
 func (p *CreateQuestGroupModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateQuestGroupModelMasterAsyncResult struct {
@@ -169,16 +173,16 @@ type CreateQuestGroupModelMasterAsyncResult struct {
 }
 
 type GetQuestGroupModelMasterResult struct {
-	/** クエストグループマスター */
-	Item *QuestGroupModelMaster `json:"item"`
+    /** クエストグループマスター */
+	Item         *QuestGroupModelMaster	`json:"item"`
 }
 
 func (p *GetQuestGroupModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetQuestGroupModelMasterAsyncResult struct {
@@ -187,16 +191,16 @@ type GetQuestGroupModelMasterAsyncResult struct {
 }
 
 type UpdateQuestGroupModelMasterResult struct {
-	/** 更新したクエストグループマスター */
-	Item *QuestGroupModelMaster `json:"item"`
+    /** 更新したクエストグループマスター */
+	Item         *QuestGroupModelMaster	`json:"item"`
 }
 
 func (p *UpdateQuestGroupModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateQuestGroupModelMasterAsyncResult struct {
@@ -205,16 +209,16 @@ type UpdateQuestGroupModelMasterAsyncResult struct {
 }
 
 type DeleteQuestGroupModelMasterResult struct {
-	/** 削除したクエストグループマスター */
-	Item *QuestGroupModelMaster `json:"item"`
+    /** 削除したクエストグループマスター */
+	Item         *QuestGroupModelMaster	`json:"item"`
 }
 
 func (p *DeleteQuestGroupModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteQuestGroupModelMasterAsyncResult struct {
@@ -223,20 +227,20 @@ type DeleteQuestGroupModelMasterAsyncResult struct {
 }
 
 type DescribeQuestModelMastersResult struct {
-	/** クエストモデルマスターのリスト */
-	Items *[]*QuestModelMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** クエストモデルマスターのリスト */
+	Items         *[]*QuestModelMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeQuestModelMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeQuestModelMastersAsyncResult struct {
@@ -245,16 +249,16 @@ type DescribeQuestModelMastersAsyncResult struct {
 }
 
 type CreateQuestModelMasterResult struct {
-	/** 作成したクエストモデルマスター */
-	Item *QuestModelMaster `json:"item"`
+    /** 作成したクエストモデルマスター */
+	Item         *QuestModelMaster	`json:"item"`
 }
 
 func (p *CreateQuestModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateQuestModelMasterAsyncResult struct {
@@ -263,16 +267,16 @@ type CreateQuestModelMasterAsyncResult struct {
 }
 
 type GetQuestModelMasterResult struct {
-	/** クエストモデルマスター */
-	Item *QuestModelMaster `json:"item"`
+    /** クエストモデルマスター */
+	Item         *QuestModelMaster	`json:"item"`
 }
 
 func (p *GetQuestModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetQuestModelMasterAsyncResult struct {
@@ -281,16 +285,16 @@ type GetQuestModelMasterAsyncResult struct {
 }
 
 type UpdateQuestModelMasterResult struct {
-	/** 更新したクエストモデルマスター */
-	Item *QuestModelMaster `json:"item"`
+    /** 更新したクエストモデルマスター */
+	Item         *QuestModelMaster	`json:"item"`
 }
 
 func (p *UpdateQuestModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateQuestModelMasterAsyncResult struct {
@@ -299,16 +303,16 @@ type UpdateQuestModelMasterAsyncResult struct {
 }
 
 type DeleteQuestModelMasterResult struct {
-	/** 削除したクエストモデルマスター */
-	Item *QuestModelMaster `json:"item"`
+    /** 削除したクエストモデルマスター */
+	Item         *QuestModelMaster	`json:"item"`
 }
 
 func (p *DeleteQuestModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteQuestModelMasterAsyncResult struct {
@@ -317,16 +321,16 @@ type DeleteQuestModelMasterAsyncResult struct {
 }
 
 type ExportMasterResult struct {
-	/** 現在有効なクエストマスター */
-	Item *CurrentQuestMaster `json:"item"`
+    /** 現在有効なクエストマスター */
+	Item         *CurrentQuestMaster	`json:"item"`
 }
 
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type ExportMasterAsyncResult struct {
@@ -335,16 +339,16 @@ type ExportMasterAsyncResult struct {
 }
 
 type GetCurrentQuestMasterResult struct {
-	/** 現在有効なクエストマスター */
-	Item *CurrentQuestMaster `json:"item"`
+    /** 現在有効なクエストマスター */
+	Item         *CurrentQuestMaster	`json:"item"`
 }
 
 func (p *GetCurrentQuestMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCurrentQuestMasterAsyncResult struct {
@@ -353,16 +357,16 @@ type GetCurrentQuestMasterAsyncResult struct {
 }
 
 type UpdateCurrentQuestMasterResult struct {
-	/** 更新した現在有効なクエストマスター */
-	Item *CurrentQuestMaster `json:"item"`
+    /** 更新した現在有効なクエストマスター */
+	Item         *CurrentQuestMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentQuestMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentQuestMasterAsyncResult struct {
@@ -371,16 +375,16 @@ type UpdateCurrentQuestMasterAsyncResult struct {
 }
 
 type UpdateCurrentQuestMasterFromGitHubResult struct {
-	/** 更新した現在有効なクエストマスター */
-	Item *CurrentQuestMaster `json:"item"`
+    /** 更新した現在有効なクエストマスター */
+	Item         *CurrentQuestMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentQuestMasterFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentQuestMasterFromGitHubAsyncResult struct {
@@ -389,20 +393,20 @@ type UpdateCurrentQuestMasterFromGitHubAsyncResult struct {
 }
 
 type DescribeProgressesByUserIdResult struct {
-	/** クエスト挑戦のリスト */
-	Items *[]*Progress `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** クエスト挑戦のリスト */
+	Items         *[]*Progress	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeProgressesByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeProgressesByUserIdAsyncResult struct {
@@ -411,16 +415,16 @@ type DescribeProgressesByUserIdAsyncResult struct {
 }
 
 type CreateProgressByUserIdResult struct {
-	/** クエスト挑戦 */
-	Item *Progress `json:"item"`
+    /** クエスト挑戦 */
+	Item         *Progress	`json:"item"`
 }
 
 func (p *CreateProgressByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateProgressByUserIdAsyncResult struct {
@@ -429,26 +433,26 @@ type CreateProgressByUserIdAsyncResult struct {
 }
 
 type GetProgressResult struct {
-	/** クエスト挑戦 */
-	Item *Progress `json:"item"`
-	/** クエストグループ */
-	QuestGroup *QuestGroupModel `json:"questGroup"`
-	/** クエストモデル */
-	Quest *QuestModel `json:"quest"`
+    /** クエスト挑戦 */
+	Item         *Progress	`json:"item"`
+    /** クエストグループ */
+	QuestGroup         *QuestGroupModel	`json:"questGroup"`
+    /** クエストモデル */
+	Quest         *QuestModel	`json:"quest"`
 }
 
 func (p *GetProgressResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.QuestGroup != nil {
-		data["QuestGroup"] = p.QuestGroup.ToDict()
-	}
-	if p.Quest != nil {
-		data["Quest"] = p.Quest.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.QuestGroup != nil {
+     data["QuestGroup"] = p.QuestGroup.ToDict()
+    }
+    if p.Quest != nil {
+     data["Quest"] = p.Quest.ToDict()
+    }
+    return &data
 }
 
 type GetProgressAsyncResult struct {
@@ -457,26 +461,26 @@ type GetProgressAsyncResult struct {
 }
 
 type GetProgressByUserIdResult struct {
-	/** クエスト挑戦 */
-	Item *Progress `json:"item"`
-	/** クエストグループ */
-	QuestGroup *QuestGroupModel `json:"questGroup"`
-	/** クエストモデル */
-	Quest *QuestModel `json:"quest"`
+    /** クエスト挑戦 */
+	Item         *Progress	`json:"item"`
+    /** クエストグループ */
+	QuestGroup         *QuestGroupModel	`json:"questGroup"`
+    /** クエストモデル */
+	Quest         *QuestModel	`json:"quest"`
 }
 
 func (p *GetProgressByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.QuestGroup != nil {
-		data["QuestGroup"] = p.QuestGroup.ToDict()
-	}
-	if p.Quest != nil {
-		data["Quest"] = p.Quest.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.QuestGroup != nil {
+     data["QuestGroup"] = p.QuestGroup.ToDict()
+    }
+    if p.Quest != nil {
+     data["Quest"] = p.Quest.ToDict()
+    }
+    return &data
 }
 
 type GetProgressByUserIdAsyncResult struct {
@@ -485,16 +489,21 @@ type GetProgressByUserIdAsyncResult struct {
 }
 
 type StartResult struct {
-	/** クエストの開始処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
+    /** クエストの開始処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *StartResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type StartAsyncResult struct {
@@ -503,16 +512,21 @@ type StartAsyncResult struct {
 }
 
 type StartByUserIdResult struct {
-	/** クエストの開始処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
+    /** クエストの開始処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *StartByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type StartByUserIdAsyncResult struct {
@@ -521,21 +535,26 @@ type StartByUserIdAsyncResult struct {
 }
 
 type EndResult struct {
-	/** クエスト挑戦 */
-	Item *Progress `json:"item"`
-	/** 報酬付与処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
+    /** クエスト挑戦 */
+	Item         *Progress	`json:"item"`
+    /** 報酬付与処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *EndResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type EndAsyncResult struct {
@@ -544,21 +563,26 @@ type EndAsyncResult struct {
 }
 
 type EndByUserIdResult struct {
-	/** クエスト挑戦 */
-	Item *Progress `json:"item"`
-	/** 報酬付与処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
+    /** クエスト挑戦 */
+	Item         *Progress	`json:"item"`
+    /** 報酬付与処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *EndByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type EndByUserIdAsyncResult struct {
@@ -567,16 +591,16 @@ type EndByUserIdAsyncResult struct {
 }
 
 type DeleteProgressResult struct {
-	/** クエスト挑戦 */
-	Item *Progress `json:"item"`
+    /** クエスト挑戦 */
+	Item         *Progress	`json:"item"`
 }
 
 func (p *DeleteProgressResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteProgressAsyncResult struct {
@@ -585,16 +609,16 @@ type DeleteProgressAsyncResult struct {
 }
 
 type DeleteProgressByUserIdResult struct {
-	/** クエスト挑戦 */
-	Item *Progress `json:"item"`
+    /** クエスト挑戦 */
+	Item         *Progress	`json:"item"`
 }
 
 func (p *DeleteProgressByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteProgressByUserIdAsyncResult struct {
@@ -603,16 +627,16 @@ type DeleteProgressByUserIdAsyncResult struct {
 }
 
 type CreateProgressByStampSheetResult struct {
-	/** クエスト挑戦 */
-	Item *Progress `json:"item"`
+    /** クエスト挑戦 */
+	Item         *Progress	`json:"item"`
 }
 
 func (p *CreateProgressByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateProgressByStampSheetAsyncResult struct {
@@ -621,21 +645,21 @@ type CreateProgressByStampSheetAsyncResult struct {
 }
 
 type DeleteProgressByStampTaskResult struct {
-	/** クエスト挑戦 */
-	Item *Progress `json:"item"`
-	/** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack *string `json:"newContextStack"`
+    /** クエスト挑戦 */
+	Item         *Progress	`json:"item"`
+    /** スタンプタスクの実行結果を記録したコンテキスト */
+	NewContextStack         *core.String	`json:"newContextStack"`
 }
 
 func (p *DeleteProgressByStampTaskResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.NewContextStack != nil {
-		data["NewContextStack"] = p.NewContextStack
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.NewContextStack != nil {
+     data["NewContextStack"] = p.NewContextStack
+    }
+    return &data
 }
 
 type DeleteProgressByStampTaskAsyncResult struct {
@@ -644,20 +668,20 @@ type DeleteProgressByStampTaskAsyncResult struct {
 }
 
 type DescribeCompletedQuestListsResult struct {
-	/** クエスト進行のリスト */
-	Items *[]*CompletedQuestList `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** クエスト進行のリスト */
+	Items         *[]*CompletedQuestList	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeCompletedQuestListsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeCompletedQuestListsAsyncResult struct {
@@ -666,20 +690,20 @@ type DescribeCompletedQuestListsAsyncResult struct {
 }
 
 type DescribeCompletedQuestListsByUserIdResult struct {
-	/** クエスト進行のリスト */
-	Items *[]*CompletedQuestList `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** クエスト進行のリスト */
+	Items         *[]*CompletedQuestList	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeCompletedQuestListsByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeCompletedQuestListsByUserIdAsyncResult struct {
@@ -688,16 +712,16 @@ type DescribeCompletedQuestListsByUserIdAsyncResult struct {
 }
 
 type GetCompletedQuestListResult struct {
-	/** クエスト進行 */
-	Item *CompletedQuestList `json:"item"`
+    /** クエスト進行 */
+	Item         *CompletedQuestList	`json:"item"`
 }
 
 func (p *GetCompletedQuestListResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCompletedQuestListAsyncResult struct {
@@ -706,16 +730,16 @@ type GetCompletedQuestListAsyncResult struct {
 }
 
 type GetCompletedQuestListByUserIdResult struct {
-	/** クエスト進行 */
-	Item *CompletedQuestList `json:"item"`
+    /** クエスト進行 */
+	Item         *CompletedQuestList	`json:"item"`
 }
 
 func (p *GetCompletedQuestListByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCompletedQuestListByUserIdAsyncResult struct {
@@ -724,16 +748,16 @@ type GetCompletedQuestListByUserIdAsyncResult struct {
 }
 
 type DeleteCompletedQuestListByUserIdResult struct {
-	/** クエスト進行 */
-	Item *CompletedQuestList `json:"item"`
+    /** クエスト進行 */
+	Item         *CompletedQuestList	`json:"item"`
 }
 
 func (p *DeleteCompletedQuestListByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteCompletedQuestListByUserIdAsyncResult struct {
@@ -742,15 +766,15 @@ type DeleteCompletedQuestListByUserIdAsyncResult struct {
 }
 
 type DescribeQuestGroupModelsResult struct {
-	/** クエストグループのリスト */
-	Items *[]*QuestGroupModel `json:"items"`
+    /** クエストグループのリスト */
+	Items         *[]*QuestGroupModel	`json:"items"`
 }
 
 func (p *DescribeQuestGroupModelsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DescribeQuestGroupModelsAsyncResult struct {
@@ -759,16 +783,16 @@ type DescribeQuestGroupModelsAsyncResult struct {
 }
 
 type GetQuestGroupModelResult struct {
-	/** クエストグループ */
-	Item *QuestGroupModel `json:"item"`
+    /** クエストグループ */
+	Item         *QuestGroupModel	`json:"item"`
 }
 
 func (p *GetQuestGroupModelResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetQuestGroupModelAsyncResult struct {
@@ -777,15 +801,15 @@ type GetQuestGroupModelAsyncResult struct {
 }
 
 type DescribeQuestModelsResult struct {
-	/** Noneのリスト */
-	Items *[]*QuestModel `json:"items"`
+    /** Noneのリスト */
+	Items         *[]*QuestModel	`json:"items"`
 }
 
 func (p *DescribeQuestModelsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DescribeQuestModelsAsyncResult struct {
@@ -794,16 +818,16 @@ type DescribeQuestModelsAsyncResult struct {
 }
 
 type GetQuestModelResult struct {
-	/** None */
-	Item *QuestModel `json:"item"`
+    /** None */
+	Item         *QuestModel	`json:"item"`
 }
 
 func (p *GetQuestModelResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetQuestModelAsyncResult struct {

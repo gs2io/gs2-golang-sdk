@@ -21,19 +21,19 @@ import (
 )
 
 type LoginRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	UserId                 *string            `json:"userId"`
-	TimeOffset             *int32             `json:"timeOffset"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserId *core.String	`json:"userId"`
+	TimeOffset *int32	`json:"timeOffset"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type LoginBySignatureRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	UserId                 *string            `json:"userId"`
-	KeyId                  *string            `json:"keyId"`
-	Body                   *string            `json:"body"`
-	Signature              *string            `json:"signature"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserId *core.String	`json:"userId"`
+	KeyId *core.String	`json:"keyId"`
+	Body *core.String	`json:"body"`
+	Signature *core.String	`json:"signature"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }

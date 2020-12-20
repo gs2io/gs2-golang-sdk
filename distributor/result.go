@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package distributor
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -111,16 +115,16 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 type DeleteNamespaceResult struct {
-	/** 削除したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 削除したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -129,20 +133,20 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeDistributorModelMastersResult struct {
-	/** 配信設定マスターのリスト */
-	Items *[]*DistributorModelMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 配信設定マスターのリスト */
+	Items         *[]*DistributorModelMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeDistributorModelMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeDistributorModelMastersAsyncResult struct {
@@ -151,16 +155,16 @@ type DescribeDistributorModelMastersAsyncResult struct {
 }
 
 type CreateDistributorModelMasterResult struct {
-	/** 作成した配信設定マスター */
-	Item *DistributorModelMaster `json:"item"`
+    /** 作成した配信設定マスター */
+	Item         *DistributorModelMaster	`json:"item"`
 }
 
 func (p *CreateDistributorModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateDistributorModelMasterAsyncResult struct {
@@ -169,16 +173,16 @@ type CreateDistributorModelMasterAsyncResult struct {
 }
 
 type GetDistributorModelMasterResult struct {
-	/** 配信設定マスター */
-	Item *DistributorModelMaster `json:"item"`
+    /** 配信設定マスター */
+	Item         *DistributorModelMaster	`json:"item"`
 }
 
 func (p *GetDistributorModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetDistributorModelMasterAsyncResult struct {
@@ -187,16 +191,16 @@ type GetDistributorModelMasterAsyncResult struct {
 }
 
 type UpdateDistributorModelMasterResult struct {
-	/** 更新した配信設定マスター */
-	Item *DistributorModelMaster `json:"item"`
+    /** 更新した配信設定マスター */
+	Item         *DistributorModelMaster	`json:"item"`
 }
 
 func (p *UpdateDistributorModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateDistributorModelMasterAsyncResult struct {
@@ -205,16 +209,16 @@ type UpdateDistributorModelMasterAsyncResult struct {
 }
 
 type DeleteDistributorModelMasterResult struct {
-	/** 削除した配信設定マスター */
-	Item *DistributorModelMaster `json:"item"`
+    /** 削除した配信設定マスター */
+	Item         *DistributorModelMaster	`json:"item"`
 }
 
 func (p *DeleteDistributorModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteDistributorModelMasterAsyncResult struct {
@@ -223,15 +227,15 @@ type DeleteDistributorModelMasterAsyncResult struct {
 }
 
 type DescribeDistributorModelsResult struct {
-	/** 配信設定のリスト */
-	Items *[]*DistributorModel `json:"items"`
+    /** 配信設定のリスト */
+	Items         *[]*DistributorModel	`json:"items"`
 }
 
 func (p *DescribeDistributorModelsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DescribeDistributorModelsAsyncResult struct {
@@ -240,16 +244,16 @@ type DescribeDistributorModelsAsyncResult struct {
 }
 
 type GetDistributorModelResult struct {
-	/** 配信設定 */
-	Item *DistributorModel `json:"item"`
+    /** 配信設定 */
+	Item         *DistributorModel	`json:"item"`
 }
 
 func (p *GetDistributorModelResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetDistributorModelAsyncResult struct {
@@ -258,16 +262,16 @@ type GetDistributorModelAsyncResult struct {
 }
 
 type ExportMasterResult struct {
-	/** 現在有効な配信設定 */
-	Item *CurrentDistributorMaster `json:"item"`
+    /** 現在有効な配信設定 */
+	Item         *CurrentDistributorMaster	`json:"item"`
 }
 
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type ExportMasterAsyncResult struct {
@@ -276,16 +280,16 @@ type ExportMasterAsyncResult struct {
 }
 
 type GetCurrentDistributorMasterResult struct {
-	/** 現在有効な配信設定 */
-	Item *CurrentDistributorMaster `json:"item"`
+    /** 現在有効な配信設定 */
+	Item         *CurrentDistributorMaster	`json:"item"`
 }
 
 func (p *GetCurrentDistributorMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCurrentDistributorMasterAsyncResult struct {
@@ -294,16 +298,16 @@ type GetCurrentDistributorMasterAsyncResult struct {
 }
 
 type UpdateCurrentDistributorMasterResult struct {
-	/** 更新した現在有効な配信設定 */
-	Item *CurrentDistributorMaster `json:"item"`
+    /** 更新した現在有効な配信設定 */
+	Item         *CurrentDistributorMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentDistributorMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentDistributorMasterAsyncResult struct {
@@ -312,16 +316,16 @@ type UpdateCurrentDistributorMasterAsyncResult struct {
 }
 
 type UpdateCurrentDistributorMasterFromGitHubResult struct {
-	/** 更新した現在有効な配信設定 */
-	Item *CurrentDistributorMaster `json:"item"`
+    /** 更新した現在有効な配信設定 */
+	Item         *CurrentDistributorMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentDistributorMasterFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentDistributorMasterFromGitHubAsyncResult struct {
@@ -330,26 +334,26 @@ type UpdateCurrentDistributorMasterFromGitHubAsyncResult struct {
 }
 
 type DistributeResult struct {
-	/** 処理した DistributeResource */
-	DistributeResource *DistributeResource `json:"distributeResource"`
-	/** 所持品がキャパシティをオーバーしたときに転送するプレゼントボックスのネームスペース のGRN */
-	InboxNamespaceId *string `json:"inboxNamespaceId"`
-	/** レスポンス内容 */
-	Result *string `json:"result"`
+    /** 処理した DistributeResource */
+	DistributeResource         *DistributeResource	`json:"distributeResource"`
+    /** 所持品がキャパシティをオーバーしたときに転送するプレゼントボックスのネームスペース のGRN */
+	InboxNamespaceId         *core.String	`json:"inboxNamespaceId"`
+    /** レスポンス内容 */
+	Result         *core.String	`json:"result"`
 }
 
 func (p *DistributeResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.DistributeResource != nil {
-		data["DistributeResource"] = p.DistributeResource.ToDict()
-	}
-	if p.InboxNamespaceId != nil {
-		data["InboxNamespaceId"] = p.InboxNamespaceId
-	}
-	if p.Result != nil {
-		data["Result"] = p.Result
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.DistributeResource != nil {
+     data["DistributeResource"] = p.DistributeResource.ToDict()
+    }
+    if p.InboxNamespaceId != nil {
+     data["InboxNamespaceId"] = p.InboxNamespaceId
+    }
+    if p.Result != nil {
+     data["Result"] = p.Result
+    }
+    return &data
 }
 
 type DistributeAsyncResult struct {
@@ -358,21 +362,21 @@ type DistributeAsyncResult struct {
 }
 
 type DistributeWithoutOverflowProcessResult struct {
-	/** 処理した DistributeResource */
-	DistributeResource *DistributeResource `json:"distributeResource"`
-	/** レスポンス内容 */
-	Result *string `json:"result"`
+    /** 処理した DistributeResource */
+	DistributeResource         *DistributeResource	`json:"distributeResource"`
+    /** レスポンス内容 */
+	Result         *core.String	`json:"result"`
 }
 
 func (p *DistributeWithoutOverflowProcessResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.DistributeResource != nil {
-		data["DistributeResource"] = p.DistributeResource.ToDict()
-	}
-	if p.Result != nil {
-		data["Result"] = p.Result
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.DistributeResource != nil {
+     data["DistributeResource"] = p.DistributeResource.ToDict()
+    }
+    if p.Result != nil {
+     data["Result"] = p.Result
+    }
+    return &data
 }
 
 type DistributeWithoutOverflowProcessAsyncResult struct {
@@ -381,21 +385,21 @@ type DistributeWithoutOverflowProcessAsyncResult struct {
 }
 
 type RunStampTaskResult struct {
-	/** タスクの実行結果を反映したコンテキストスタック */
-	ContextStack *string `json:"contextStack"`
-	/** レスポンス内容 */
-	Result *string `json:"result"`
+    /** タスクの実行結果を反映したコンテキストスタック */
+	ContextStack         *core.String	`json:"contextStack"`
+    /** レスポンス内容 */
+	Result         *core.String	`json:"result"`
 }
 
 func (p *RunStampTaskResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.ContextStack != nil {
-		data["ContextStack"] = p.ContextStack
-	}
-	if p.Result != nil {
-		data["Result"] = p.Result
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.ContextStack != nil {
+     data["ContextStack"] = p.ContextStack
+    }
+    if p.Result != nil {
+     data["Result"] = p.Result
+    }
+    return &data
 }
 
 type RunStampTaskAsyncResult struct {
@@ -404,16 +408,16 @@ type RunStampTaskAsyncResult struct {
 }
 
 type RunStampSheetResult struct {
-	/** レスポンス内容 */
-	Result *string `json:"result"`
+    /** レスポンス内容 */
+	Result         *core.String	`json:"result"`
 }
 
 func (p *RunStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Result != nil {
-		data["Result"] = p.Result
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Result != nil {
+     data["Result"] = p.Result
+    }
+    return &data
 }
 
 type RunStampSheetAsyncResult struct {
@@ -422,20 +426,20 @@ type RunStampSheetAsyncResult struct {
 }
 
 type RunStampSheetExpressResult struct {
-	/** スタンプタスクの実行結果 */
-	TaskResults *[]string `json:"taskResults"`
-	/** スタンプシートの実行結果レスポンス内容 */
-	SheetResult *string `json:"sheetResult"`
+    /** スタンプタスクの実行結果 */
+	TaskResults         *[]core.String	`json:"taskResults"`
+    /** スタンプシートの実行結果レスポンス内容 */
+	SheetResult         *core.String	`json:"sheetResult"`
 }
 
 func (p *RunStampSheetExpressResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.TaskResults != nil {
-	}
-	if p.SheetResult != nil {
-		data["SheetResult"] = p.SheetResult
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.TaskResults != nil {
+    }
+    if p.SheetResult != nil {
+     data["SheetResult"] = p.SheetResult
+    }
+    return &data
 }
 
 type RunStampSheetExpressAsyncResult struct {
@@ -444,21 +448,21 @@ type RunStampSheetExpressAsyncResult struct {
 }
 
 type RunStampTaskWithoutNamespaceResult struct {
-	/** タスクの実行結果を反映したコンテキストスタック */
-	ContextStack *string `json:"contextStack"`
-	/** レスポンス内容 */
-	Result *string `json:"result"`
+    /** タスクの実行結果を反映したコンテキストスタック */
+	ContextStack         *core.String	`json:"contextStack"`
+    /** レスポンス内容 */
+	Result         *core.String	`json:"result"`
 }
 
 func (p *RunStampTaskWithoutNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.ContextStack != nil {
-		data["ContextStack"] = p.ContextStack
-	}
-	if p.Result != nil {
-		data["Result"] = p.Result
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.ContextStack != nil {
+     data["ContextStack"] = p.ContextStack
+    }
+    if p.Result != nil {
+     data["Result"] = p.Result
+    }
+    return &data
 }
 
 type RunStampTaskWithoutNamespaceAsyncResult struct {
@@ -467,16 +471,16 @@ type RunStampTaskWithoutNamespaceAsyncResult struct {
 }
 
 type RunStampSheetWithoutNamespaceResult struct {
-	/** レスポンス内容 */
-	Result *string `json:"result"`
+    /** レスポンス内容 */
+	Result         *core.String	`json:"result"`
 }
 
 func (p *RunStampSheetWithoutNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Result != nil {
-		data["Result"] = p.Result
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Result != nil {
+     data["Result"] = p.Result
+    }
+    return &data
 }
 
 type RunStampSheetWithoutNamespaceAsyncResult struct {
@@ -485,20 +489,20 @@ type RunStampSheetWithoutNamespaceAsyncResult struct {
 }
 
 type RunStampSheetExpressWithoutNamespaceResult struct {
-	/** スタンプタスクの実行結果 */
-	TaskResults *[]string `json:"taskResults"`
-	/** スタンプシートの実行結果レスポンス内容 */
-	SheetResult *string `json:"sheetResult"`
+    /** スタンプタスクの実行結果 */
+	TaskResults         *[]core.String	`json:"taskResults"`
+    /** スタンプシートの実行結果レスポンス内容 */
+	SheetResult         *core.String	`json:"sheetResult"`
 }
 
 func (p *RunStampSheetExpressWithoutNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.TaskResults != nil {
-	}
-	if p.SheetResult != nil {
-		data["SheetResult"] = p.SheetResult
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.TaskResults != nil {
+    }
+    if p.SheetResult != nil {
+     data["SheetResult"] = p.SheetResult
+    }
+    return &data
 }
 
 type RunStampSheetExpressWithoutNamespaceAsyncResult struct {

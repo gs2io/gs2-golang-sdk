@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package exchange
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -111,16 +115,16 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 type DeleteNamespaceResult struct {
-	/** 削除したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 削除したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -129,15 +133,15 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeRateModelsResult struct {
-	/** 交換レートモデルのリスト */
-	Items *[]*RateModel `json:"items"`
+    /** 交換レートモデルのリスト */
+	Items         *[]*RateModel	`json:"items"`
 }
 
 func (p *DescribeRateModelsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DescribeRateModelsAsyncResult struct {
@@ -146,16 +150,16 @@ type DescribeRateModelsAsyncResult struct {
 }
 
 type GetRateModelResult struct {
-	/** 交換レートモデル */
-	Item *RateModel `json:"item"`
+    /** 交換レートモデル */
+	Item         *RateModel	`json:"item"`
 }
 
 func (p *GetRateModelResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetRateModelAsyncResult struct {
@@ -164,20 +168,20 @@ type GetRateModelAsyncResult struct {
 }
 
 type DescribeRateModelMastersResult struct {
-	/** 交換レートマスターのリスト */
-	Items *[]*RateModelMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 交換レートマスターのリスト */
+	Items         *[]*RateModelMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeRateModelMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeRateModelMastersAsyncResult struct {
@@ -186,16 +190,16 @@ type DescribeRateModelMastersAsyncResult struct {
 }
 
 type CreateRateModelMasterResult struct {
-	/** 作成した交換レートマスター */
-	Item *RateModelMaster `json:"item"`
+    /** 作成した交換レートマスター */
+	Item         *RateModelMaster	`json:"item"`
 }
 
 func (p *CreateRateModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateRateModelMasterAsyncResult struct {
@@ -204,16 +208,16 @@ type CreateRateModelMasterAsyncResult struct {
 }
 
 type GetRateModelMasterResult struct {
-	/** 交換レートマスター */
-	Item *RateModelMaster `json:"item"`
+    /** 交換レートマスター */
+	Item         *RateModelMaster	`json:"item"`
 }
 
 func (p *GetRateModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetRateModelMasterAsyncResult struct {
@@ -222,16 +226,16 @@ type GetRateModelMasterAsyncResult struct {
 }
 
 type UpdateRateModelMasterResult struct {
-	/** 更新した交換レートマスター */
-	Item *RateModelMaster `json:"item"`
+    /** 更新した交換レートマスター */
+	Item         *RateModelMaster	`json:"item"`
 }
 
 func (p *UpdateRateModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateRateModelMasterAsyncResult struct {
@@ -240,16 +244,16 @@ type UpdateRateModelMasterAsyncResult struct {
 }
 
 type DeleteRateModelMasterResult struct {
-	/** 削除した交換レートマスター */
-	Item *RateModelMaster `json:"item"`
+    /** 削除した交換レートマスター */
+	Item         *RateModelMaster	`json:"item"`
 }
 
 func (p *DeleteRateModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteRateModelMasterAsyncResult struct {
@@ -258,26 +262,26 @@ type DeleteRateModelMasterAsyncResult struct {
 }
 
 type ExchangeResult struct {
-	/** 交換レートモデル */
-	Item *RateModel `json:"item"`
-	/** 交換処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    /** 交換レートモデル */
+	Item         *RateModel	`json:"item"`
+    /** 交換処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *ExchangeResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type ExchangeAsyncResult struct {
@@ -286,26 +290,26 @@ type ExchangeAsyncResult struct {
 }
 
 type ExchangeByUserIdResult struct {
-	/** 交換レートモデル */
-	Item *RateModel `json:"item"`
-	/** 交換処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    /** 交換レートモデル */
+	Item         *RateModel	`json:"item"`
+    /** 交換処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *ExchangeByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type ExchangeByUserIdAsyncResult struct {
@@ -314,26 +318,26 @@ type ExchangeByUserIdAsyncResult struct {
 }
 
 type ExchangeByStampSheetResult struct {
-	/** 交換レートモデル */
-	Item *RateModel `json:"item"`
-	/** 交換処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    /** 交換レートモデル */
+	Item         *RateModel	`json:"item"`
+    /** 交換処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *ExchangeByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type ExchangeByStampSheetAsyncResult struct {
@@ -342,16 +346,16 @@ type ExchangeByStampSheetAsyncResult struct {
 }
 
 type ExportMasterResult struct {
-	/** 現在有効な交換レート設定 */
-	Item *CurrentRateMaster `json:"item"`
+    /** 現在有効な交換レート設定 */
+	Item         *CurrentRateMaster	`json:"item"`
 }
 
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type ExportMasterAsyncResult struct {
@@ -360,16 +364,16 @@ type ExportMasterAsyncResult struct {
 }
 
 type GetCurrentRateMasterResult struct {
-	/** 現在有効な交換レート設定 */
-	Item *CurrentRateMaster `json:"item"`
+    /** 現在有効な交換レート設定 */
+	Item         *CurrentRateMaster	`json:"item"`
 }
 
 func (p *GetCurrentRateMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCurrentRateMasterAsyncResult struct {
@@ -378,16 +382,16 @@ type GetCurrentRateMasterAsyncResult struct {
 }
 
 type UpdateCurrentRateMasterResult struct {
-	/** 更新した現在有効な交換レート設定 */
-	Item *CurrentRateMaster `json:"item"`
+    /** 更新した現在有効な交換レート設定 */
+	Item         *CurrentRateMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentRateMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentRateMasterAsyncResult struct {
@@ -396,16 +400,16 @@ type UpdateCurrentRateMasterAsyncResult struct {
 }
 
 type UpdateCurrentRateMasterFromGitHubResult struct {
-	/** 更新した現在有効な交換レート設定 */
-	Item *CurrentRateMaster `json:"item"`
+    /** 更新した現在有効な交換レート設定 */
+	Item         *CurrentRateMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentRateMasterFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentRateMasterFromGitHubAsyncResult struct {
@@ -414,21 +418,21 @@ type UpdateCurrentRateMasterFromGitHubAsyncResult struct {
 }
 
 type CreateAwaitByUserIdResult struct {
-	/** 交換待機 */
-	Item *Await `json:"item"`
-	/** 取得できるようになる日時 */
-	UnlockAt *int64 `json:"unlockAt"`
+    /** 交換待機 */
+	Item         *Await	`json:"item"`
+    /** 取得できるようになる日時 */
+	UnlockAt         *int64	`json:"unlockAt"`
 }
 
 func (p *CreateAwaitByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.UnlockAt != nil {
-		data["UnlockAt"] = p.UnlockAt
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.UnlockAt != nil {
+     data["UnlockAt"] = p.UnlockAt
+    }
+    return &data
 }
 
 type CreateAwaitByUserIdAsyncResult struct {
@@ -437,20 +441,20 @@ type CreateAwaitByUserIdAsyncResult struct {
 }
 
 type DescribeAwaitsResult struct {
-	/** 交換待機のリスト */
-	Items *[]*Await `json:"items"`
-	/** 次のページを取得するためのトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 交換待機のリスト */
+	Items         *[]*Await	`json:"items"`
+    /** 次のページを取得するためのトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeAwaitsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeAwaitsAsyncResult struct {
@@ -459,20 +463,20 @@ type DescribeAwaitsAsyncResult struct {
 }
 
 type DescribeAwaitsByUserIdResult struct {
-	/** 交換待機のリスト */
-	Items *[]*Await `json:"items"`
-	/** 次のページを取得するためのトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 交換待機のリスト */
+	Items         *[]*Await	`json:"items"`
+    /** 次のページを取得するためのトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeAwaitsByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeAwaitsByUserIdAsyncResult struct {
@@ -481,16 +485,16 @@ type DescribeAwaitsByUserIdAsyncResult struct {
 }
 
 type GetAwaitResult struct {
-	/** 交換待機 */
-	Item *Await `json:"item"`
+    /** 交換待機 */
+	Item         *Await	`json:"item"`
 }
 
 func (p *GetAwaitResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetAwaitAsyncResult struct {
@@ -499,16 +503,16 @@ type GetAwaitAsyncResult struct {
 }
 
 type GetAwaitByUserIdResult struct {
-	/** 交換待機 */
-	Item *Await `json:"item"`
+    /** 交換待機 */
+	Item         *Await	`json:"item"`
 }
 
 func (p *GetAwaitByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetAwaitByUserIdAsyncResult struct {
@@ -517,26 +521,26 @@ type GetAwaitByUserIdAsyncResult struct {
 }
 
 type AcquireResult struct {
-	/** 交換待機 */
-	Item *Await `json:"item"`
-	/** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    /** 交換待機 */
+	Item         *Await	`json:"item"`
+    /** 報酬取得処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *AcquireResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type AcquireAsyncResult struct {
@@ -545,26 +549,26 @@ type AcquireAsyncResult struct {
 }
 
 type AcquireByUserIdResult struct {
-	/** 交換待機 */
-	Item *Await `json:"item"`
-	/** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    /** 交換待機 */
+	Item         *Await	`json:"item"`
+    /** 報酬取得処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *AcquireByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type AcquireByUserIdAsyncResult struct {
@@ -573,26 +577,26 @@ type AcquireByUserIdAsyncResult struct {
 }
 
 type AcquireForceByUserIdResult struct {
-	/** 交換待機 */
-	Item *Await `json:"item"`
-	/** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    /** 交換待機 */
+	Item         *Await	`json:"item"`
+    /** 報酬取得処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *AcquireForceByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type AcquireForceByUserIdAsyncResult struct {
@@ -601,26 +605,26 @@ type AcquireForceByUserIdAsyncResult struct {
 }
 
 type SkipResult struct {
-	/** 交換待機 */
-	Item *Await `json:"item"`
-	/** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    /** 交換待機 */
+	Item         *Await	`json:"item"`
+    /** 報酬取得処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *SkipResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type SkipAsyncResult struct {
@@ -629,26 +633,26 @@ type SkipAsyncResult struct {
 }
 
 type SkipByUserIdResult struct {
-	/** 交換待機 */
-	Item *Await `json:"item"`
-	/** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    /** 交換待機 */
+	Item         *Await	`json:"item"`
+    /** 報酬取得処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *SkipByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type SkipByUserIdAsyncResult struct {
@@ -657,16 +661,16 @@ type SkipByUserIdAsyncResult struct {
 }
 
 type DeleteAwaitResult struct {
-	/** 交換待機 */
-	Item *Await `json:"item"`
+    /** 交換待機 */
+	Item         *Await	`json:"item"`
 }
 
 func (p *DeleteAwaitResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteAwaitAsyncResult struct {
@@ -675,16 +679,16 @@ type DeleteAwaitAsyncResult struct {
 }
 
 type DeleteAwaitByUserIdResult struct {
-	/** 交換待機 */
-	Item *Await `json:"item"`
+    /** 交換待機 */
+	Item         *Await	`json:"item"`
 }
 
 func (p *DeleteAwaitByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteAwaitByUserIdAsyncResult struct {
@@ -693,16 +697,16 @@ type DeleteAwaitByUserIdAsyncResult struct {
 }
 
 type CreateAwaitByStampSheetResult struct {
-	/** 交換待機 */
-	Item *Await `json:"item"`
+    /** 交換待機 */
+	Item         *Await	`json:"item"`
 }
 
 func (p *CreateAwaitByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateAwaitByStampSheetAsyncResult struct {
@@ -711,21 +715,21 @@ type CreateAwaitByStampSheetAsyncResult struct {
 }
 
 type DeleteAwaitByStampTaskResult struct {
-	/** 交換待機 */
-	Item *Await `json:"item"`
-	/** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack *string `json:"newContextStack"`
+    /** 交換待機 */
+	Item         *Await	`json:"item"`
+    /** スタンプタスクの実行結果を記録したコンテキスト */
+	NewContextStack         *core.String	`json:"newContextStack"`
 }
 
 func (p *DeleteAwaitByStampTaskResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.NewContextStack != nil {
-		data["NewContextStack"] = p.NewContextStack
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.NewContextStack != nil {
+     data["NewContextStack"] = p.NewContextStack
+    }
+    return &data
 }
 
 type DeleteAwaitByStampTaskAsyncResult struct {

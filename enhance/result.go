@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package enhance
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -111,16 +115,16 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 type DeleteNamespaceResult struct {
-	/** 削除したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 削除したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -129,15 +133,15 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeRateModelsResult struct {
-	/** 強化レートモデルのリスト */
-	Items *[]*RateModel `json:"items"`
+    /** 強化レートモデルのリスト */
+	Items         *[]*RateModel	`json:"items"`
 }
 
 func (p *DescribeRateModelsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DescribeRateModelsAsyncResult struct {
@@ -146,16 +150,16 @@ type DescribeRateModelsAsyncResult struct {
 }
 
 type GetRateModelResult struct {
-	/** 強化レートモデル */
-	Item *RateModel `json:"item"`
+    /** 強化レートモデル */
+	Item         *RateModel	`json:"item"`
 }
 
 func (p *GetRateModelResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetRateModelAsyncResult struct {
@@ -164,20 +168,20 @@ type GetRateModelAsyncResult struct {
 }
 
 type DescribeRateModelMastersResult struct {
-	/** 強化レートマスターのリスト */
-	Items *[]*RateModelMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 強化レートマスターのリスト */
+	Items         *[]*RateModelMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeRateModelMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeRateModelMastersAsyncResult struct {
@@ -186,16 +190,16 @@ type DescribeRateModelMastersAsyncResult struct {
 }
 
 type CreateRateModelMasterResult struct {
-	/** 作成した強化レートマスター */
-	Item *RateModelMaster `json:"item"`
+    /** 作成した強化レートマスター */
+	Item         *RateModelMaster	`json:"item"`
 }
 
 func (p *CreateRateModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateRateModelMasterAsyncResult struct {
@@ -204,16 +208,16 @@ type CreateRateModelMasterAsyncResult struct {
 }
 
 type GetRateModelMasterResult struct {
-	/** 強化レートマスター */
-	Item *RateModelMaster `json:"item"`
+    /** 強化レートマスター */
+	Item         *RateModelMaster	`json:"item"`
 }
 
 func (p *GetRateModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetRateModelMasterAsyncResult struct {
@@ -222,16 +226,16 @@ type GetRateModelMasterAsyncResult struct {
 }
 
 type UpdateRateModelMasterResult struct {
-	/** 更新した強化レートマスター */
-	Item *RateModelMaster `json:"item"`
+    /** 更新した強化レートマスター */
+	Item         *RateModelMaster	`json:"item"`
 }
 
 func (p *UpdateRateModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateRateModelMasterAsyncResult struct {
@@ -240,16 +244,16 @@ type UpdateRateModelMasterAsyncResult struct {
 }
 
 type DeleteRateModelMasterResult struct {
-	/** 削除した強化レートマスター */
-	Item *RateModelMaster `json:"item"`
+    /** 削除した強化レートマスター */
+	Item         *RateModelMaster	`json:"item"`
 }
 
 func (p *DeleteRateModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteRateModelMasterAsyncResult struct {
@@ -258,36 +262,36 @@ type DeleteRateModelMasterAsyncResult struct {
 }
 
 type DirectEnhanceResult struct {
-	/** 強化レートモデル */
-	Item *RateModel `json:"item"`
-	/** 強化処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-	/** 獲得経験値量 */
-	AcquireExperience *int64 `json:"acquireExperience"`
-	/** 経験値ボーナスの倍率(1.0=ボーナスなし) */
-	BonusRate *float32 `json:"bonusRate"`
+    /** 強化レートモデル */
+	Item         *RateModel	`json:"item"`
+    /** 強化処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+    /** 獲得経験値量 */
+	AcquireExperience         *int64	`json:"acquireExperience"`
+    /** 経験値ボーナスの倍率(1.0=ボーナスなし) */
+	BonusRate         *float32	`json:"bonusRate"`
 }
 
 func (p *DirectEnhanceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	if p.AcquireExperience != nil {
-		data["AcquireExperience"] = p.AcquireExperience
-	}
-	if p.BonusRate != nil {
-		data["BonusRate"] = p.BonusRate
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    if p.AcquireExperience != nil {
+     data["AcquireExperience"] = p.AcquireExperience
+    }
+    if p.BonusRate != nil {
+     data["BonusRate"] = p.BonusRate
+    }
+    return &data
 }
 
 type DirectEnhanceAsyncResult struct {
@@ -296,36 +300,36 @@ type DirectEnhanceAsyncResult struct {
 }
 
 type DirectEnhanceByUserIdResult struct {
-	/** 強化レートモデル */
-	Item *RateModel `json:"item"`
-	/** 強化処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-	/** 獲得経験値量 */
-	AcquireExperience *int64 `json:"acquireExperience"`
-	/** 経験値ボーナスの倍率(1.0=ボーナスなし) */
-	BonusRate *float32 `json:"bonusRate"`
+    /** 強化レートモデル */
+	Item         *RateModel	`json:"item"`
+    /** 強化処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+    /** 獲得経験値量 */
+	AcquireExperience         *int64	`json:"acquireExperience"`
+    /** 経験値ボーナスの倍率(1.0=ボーナスなし) */
+	BonusRate         *float32	`json:"bonusRate"`
 }
 
 func (p *DirectEnhanceByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	if p.AcquireExperience != nil {
-		data["AcquireExperience"] = p.AcquireExperience
-	}
-	if p.BonusRate != nil {
-		data["BonusRate"] = p.BonusRate
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    if p.AcquireExperience != nil {
+     data["AcquireExperience"] = p.AcquireExperience
+    }
+    if p.BonusRate != nil {
+     data["BonusRate"] = p.BonusRate
+    }
+    return &data
 }
 
 type DirectEnhanceByUserIdAsyncResult struct {
@@ -334,36 +338,36 @@ type DirectEnhanceByUserIdAsyncResult struct {
 }
 
 type DirectEnhanceByStampSheetResult struct {
-	/** 強化レートモデル */
-	Item *RateModel `json:"item"`
-	/** 強化処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-	/** 獲得経験値量 */
-	AcquireExperience *int64 `json:"acquireExperience"`
-	/** 経験値ボーナスの倍率(1.0=ボーナスなし) */
-	BonusRate *float32 `json:"bonusRate"`
+    /** 強化レートモデル */
+	Item         *RateModel	`json:"item"`
+    /** 強化処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+    /** 獲得経験値量 */
+	AcquireExperience         *int64	`json:"acquireExperience"`
+    /** 経験値ボーナスの倍率(1.0=ボーナスなし) */
+	BonusRate         *float32	`json:"bonusRate"`
 }
 
 func (p *DirectEnhanceByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	if p.AcquireExperience != nil {
-		data["AcquireExperience"] = p.AcquireExperience
-	}
-	if p.BonusRate != nil {
-		data["BonusRate"] = p.BonusRate
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    if p.AcquireExperience != nil {
+     data["AcquireExperience"] = p.AcquireExperience
+    }
+    if p.BonusRate != nil {
+     data["BonusRate"] = p.BonusRate
+    }
+    return &data
 }
 
 type DirectEnhanceByStampSheetAsyncResult struct {
@@ -372,20 +376,20 @@ type DirectEnhanceByStampSheetAsyncResult struct {
 }
 
 type DescribeProgressesByUserIdResult struct {
-	/** 強化実行のリスト */
-	Items *[]*Progress `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 強化実行のリスト */
+	Items         *[]*Progress	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeProgressesByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeProgressesByUserIdAsyncResult struct {
@@ -394,16 +398,16 @@ type DescribeProgressesByUserIdAsyncResult struct {
 }
 
 type CreateProgressByUserIdResult struct {
-	/** 強化実行 */
-	Item *Progress `json:"item"`
+    /** 強化実行 */
+	Item         *Progress	`json:"item"`
 }
 
 func (p *CreateProgressByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateProgressByUserIdAsyncResult struct {
@@ -412,21 +416,21 @@ type CreateProgressByUserIdAsyncResult struct {
 }
 
 type GetProgressResult struct {
-	/** 強化実行 */
-	Item *Progress `json:"item"`
-	/** 強化レートモデル */
-	RateModel *RateModel `json:"rateModel"`
+    /** 強化実行 */
+	Item         *Progress	`json:"item"`
+    /** 強化レートモデル */
+	RateModel         *RateModel	`json:"rateModel"`
 }
 
 func (p *GetProgressResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.RateModel != nil {
-		data["RateModel"] = p.RateModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.RateModel != nil {
+     data["RateModel"] = p.RateModel.ToDict()
+    }
+    return &data
 }
 
 type GetProgressAsyncResult struct {
@@ -435,21 +439,21 @@ type GetProgressAsyncResult struct {
 }
 
 type GetProgressByUserIdResult struct {
-	/** 強化実行 */
-	Item *Progress `json:"item"`
-	/** 強化レートモデル */
-	RateModel *RateModel `json:"rateModel"`
+    /** 強化実行 */
+	Item         *Progress	`json:"item"`
+    /** 強化レートモデル */
+	RateModel         *RateModel	`json:"rateModel"`
 }
 
 func (p *GetProgressByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.RateModel != nil {
-		data["RateModel"] = p.RateModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.RateModel != nil {
+     data["RateModel"] = p.RateModel.ToDict()
+    }
+    return &data
 }
 
 type GetProgressByUserIdAsyncResult struct {
@@ -458,21 +462,21 @@ type GetProgressByUserIdAsyncResult struct {
 }
 
 type StartResult struct {
-	/** 強化の開始処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    /** 強化の開始処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *StartResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type StartAsyncResult struct {
@@ -481,21 +485,21 @@ type StartAsyncResult struct {
 }
 
 type StartByUserIdResult struct {
-	/** 強化の開始処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    /** 強化の開始処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *StartByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type StartByUserIdAsyncResult struct {
@@ -504,36 +508,36 @@ type StartByUserIdAsyncResult struct {
 }
 
 type EndResult struct {
-	/** 強化実行 */
-	Item *Progress `json:"item"`
-	/** 報酬付与処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-	/** 獲得経験値量 */
-	AcquireExperience *int64 `json:"acquireExperience"`
-	/** 経験値ボーナスの倍率(1.0=ボーナスなし) */
-	BonusRate *float32 `json:"bonusRate"`
+    /** 強化実行 */
+	Item         *Progress	`json:"item"`
+    /** 報酬付与処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+    /** 獲得経験値量 */
+	AcquireExperience         *int64	`json:"acquireExperience"`
+    /** 経験値ボーナスの倍率(1.0=ボーナスなし) */
+	BonusRate         *float32	`json:"bonusRate"`
 }
 
 func (p *EndResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	if p.AcquireExperience != nil {
-		data["AcquireExperience"] = p.AcquireExperience
-	}
-	if p.BonusRate != nil {
-		data["BonusRate"] = p.BonusRate
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    if p.AcquireExperience != nil {
+     data["AcquireExperience"] = p.AcquireExperience
+    }
+    if p.BonusRate != nil {
+     data["BonusRate"] = p.BonusRate
+    }
+    return &data
 }
 
 type EndAsyncResult struct {
@@ -542,36 +546,36 @@ type EndAsyncResult struct {
 }
 
 type EndByUserIdResult struct {
-	/** 強化実行 */
-	Item *Progress `json:"item"`
-	/** 報酬付与処理の実行に使用するスタンプシート */
-	StampSheet *string `json:"stampSheet"`
-	/** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-	/** 獲得経験値量 */
-	AcquireExperience *int64 `json:"acquireExperience"`
-	/** 経験値ボーナスの倍率(1.0=ボーナスなし) */
-	BonusRate *float32 `json:"bonusRate"`
+    /** 強化実行 */
+	Item         *Progress	`json:"item"`
+    /** 報酬付与処理の実行に使用するスタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+    /** 獲得経験値量 */
+	AcquireExperience         *int64	`json:"acquireExperience"`
+    /** 経験値ボーナスの倍率(1.0=ボーナスなし) */
+	BonusRate         *float32	`json:"bonusRate"`
 }
 
 func (p *EndByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	if p.StampSheetEncryptionKeyId != nil {
-		data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-	}
-	if p.AcquireExperience != nil {
-		data["AcquireExperience"] = p.AcquireExperience
-	}
-	if p.BonusRate != nil {
-		data["BonusRate"] = p.BonusRate
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    if p.AcquireExperience != nil {
+     data["AcquireExperience"] = p.AcquireExperience
+    }
+    if p.BonusRate != nil {
+     data["BonusRate"] = p.BonusRate
+    }
+    return &data
 }
 
 type EndByUserIdAsyncResult struct {
@@ -580,16 +584,16 @@ type EndByUserIdAsyncResult struct {
 }
 
 type DeleteProgressResult struct {
-	/** 強化実行 */
-	Item *Progress `json:"item"`
+    /** 強化実行 */
+	Item         *Progress	`json:"item"`
 }
 
 func (p *DeleteProgressResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteProgressAsyncResult struct {
@@ -598,16 +602,16 @@ type DeleteProgressAsyncResult struct {
 }
 
 type DeleteProgressByUserIdResult struct {
-	/** 強化実行 */
-	Item *Progress `json:"item"`
+    /** 強化実行 */
+	Item         *Progress	`json:"item"`
 }
 
 func (p *DeleteProgressByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteProgressByUserIdAsyncResult struct {
@@ -616,16 +620,16 @@ type DeleteProgressByUserIdAsyncResult struct {
 }
 
 type CreateProgressByStampSheetResult struct {
-	/** 強化実行 */
-	Item *Progress `json:"item"`
+    /** 強化実行 */
+	Item         *Progress	`json:"item"`
 }
 
 func (p *CreateProgressByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateProgressByStampSheetAsyncResult struct {
@@ -634,21 +638,21 @@ type CreateProgressByStampSheetAsyncResult struct {
 }
 
 type DeleteProgressByStampTaskResult struct {
-	/** 強化実行 */
-	Item *Progress `json:"item"`
-	/** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack *string `json:"newContextStack"`
+    /** 強化実行 */
+	Item         *Progress	`json:"item"`
+    /** スタンプタスクの実行結果を記録したコンテキスト */
+	NewContextStack         *core.String	`json:"newContextStack"`
 }
 
 func (p *DeleteProgressByStampTaskResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.NewContextStack != nil {
-		data["NewContextStack"] = p.NewContextStack
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.NewContextStack != nil {
+     data["NewContextStack"] = p.NewContextStack
+    }
+    return &data
 }
 
 type DeleteProgressByStampTaskAsyncResult struct {
@@ -657,16 +661,16 @@ type DeleteProgressByStampTaskAsyncResult struct {
 }
 
 type ExportMasterResult struct {
-	/** 現在有効な強化レート設定 */
-	Item *CurrentRateMaster `json:"item"`
+    /** 現在有効な強化レート設定 */
+	Item         *CurrentRateMaster	`json:"item"`
 }
 
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type ExportMasterAsyncResult struct {
@@ -675,16 +679,16 @@ type ExportMasterAsyncResult struct {
 }
 
 type GetCurrentRateMasterResult struct {
-	/** 現在有効な強化レート設定 */
-	Item *CurrentRateMaster `json:"item"`
+    /** 現在有効な強化レート設定 */
+	Item         *CurrentRateMaster	`json:"item"`
 }
 
 func (p *GetCurrentRateMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCurrentRateMasterAsyncResult struct {
@@ -693,16 +697,16 @@ type GetCurrentRateMasterAsyncResult struct {
 }
 
 type UpdateCurrentRateMasterResult struct {
-	/** 更新した現在有効な強化レート設定 */
-	Item *CurrentRateMaster `json:"item"`
+    /** 更新した現在有効な強化レート設定 */
+	Item         *CurrentRateMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentRateMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentRateMasterAsyncResult struct {
@@ -711,16 +715,16 @@ type UpdateCurrentRateMasterAsyncResult struct {
 }
 
 type UpdateCurrentRateMasterFromGitHubResult struct {
-	/** 更新した現在有効な強化レート設定 */
-	Item *CurrentRateMaster `json:"item"`
+    /** 更新した現在有効な強化レート設定 */
+	Item         *CurrentRateMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentRateMasterFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentRateMasterFromGitHubAsyncResult struct {

@@ -21,337 +21,343 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	Name         *string            `json:"name"`
-	Description  *string            `json:"description"`
-	LogSetting   *LogSetting        `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	Description   *string            `json:"description"`
-	LogSetting    *LogSetting        `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Description *core.String	`json:"description"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type DescribeCategoryModelsRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetCategoryModelRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	CategoryName  *string            `json:"categoryName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
 }
 
 type DescribeCategoryModelMastersRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	PageToken     *string            `json:"pageToken"`
-	Limit         *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateCategoryModelMasterRequest struct {
-	RequestId                *core.RequestId    `json:"requestId"`
-	ContextStack             *core.ContextStack `json:"contextStack"`
-	NamespaceName            *string            `json:"namespaceName"`
-	Name                     *string            `json:"name"`
-	Description              *string            `json:"description"`
-	Metadata                 *string            `json:"metadata"`
-	MinimumValue             *int64             `json:"minimumValue"`
-	MaximumValue             *int64             `json:"maximumValue"`
-	OrderDirection           *string            `json:"orderDirection"`
-	Scope                    *string            `json:"scope"`
-	UniqueByUserId           *bool              `json:"uniqueByUserId"`
-	CalculateIntervalMinutes *int32             `json:"calculateIntervalMinutes"`
-	EntryPeriodEventId       *string            `json:"entryPeriodEventId"`
-	AccessPeriodEventId      *string            `json:"accessPeriodEventId"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	Metadata *core.String	`json:"metadata"`
+	MinimumValue *int64	`json:"minimumValue"`
+	MaximumValue *int64	`json:"maximumValue"`
+	OrderDirection *core.String	`json:"orderDirection"`
+	Scope *core.String	`json:"scope"`
+	UniqueByUserId *bool	`json:"uniqueByUserId"`
+	CalculateFixedTimingHour *int32	`json:"calculateFixedTimingHour"`
+	CalculateFixedTimingMinute *int32	`json:"calculateFixedTimingMinute"`
+	CalculateIntervalMinutes *int32	`json:"calculateIntervalMinutes"`
+	EntryPeriodEventId *core.String	`json:"entryPeriodEventId"`
+	AccessPeriodEventId *core.String	`json:"accessPeriodEventId"`
+	Generation *core.String	`json:"generation"`
 }
 
 type GetCategoryModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	CategoryName  *string            `json:"categoryName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
 }
 
 type UpdateCategoryModelMasterRequest struct {
-	RequestId                *core.RequestId    `json:"requestId"`
-	ContextStack             *core.ContextStack `json:"contextStack"`
-	NamespaceName            *string            `json:"namespaceName"`
-	CategoryName             *string            `json:"categoryName"`
-	Description              *string            `json:"description"`
-	Metadata                 *string            `json:"metadata"`
-	MinimumValue             *int64             `json:"minimumValue"`
-	MaximumValue             *int64             `json:"maximumValue"`
-	OrderDirection           *string            `json:"orderDirection"`
-	Scope                    *string            `json:"scope"`
-	UniqueByUserId           *bool              `json:"uniqueByUserId"`
-	CalculateIntervalMinutes *int32             `json:"calculateIntervalMinutes"`
-	EntryPeriodEventId       *string            `json:"entryPeriodEventId"`
-	AccessPeriodEventId      *string            `json:"accessPeriodEventId"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	Description *core.String	`json:"description"`
+	Metadata *core.String	`json:"metadata"`
+	MinimumValue *int64	`json:"minimumValue"`
+	MaximumValue *int64	`json:"maximumValue"`
+	OrderDirection *core.String	`json:"orderDirection"`
+	Scope *core.String	`json:"scope"`
+	UniqueByUserId *bool	`json:"uniqueByUserId"`
+	CalculateFixedTimingHour *int32	`json:"calculateFixedTimingHour"`
+	CalculateFixedTimingMinute *int32	`json:"calculateFixedTimingMinute"`
+	CalculateIntervalMinutes *int32	`json:"calculateIntervalMinutes"`
+	EntryPeriodEventId *core.String	`json:"entryPeriodEventId"`
+	AccessPeriodEventId *core.String	`json:"accessPeriodEventId"`
+	Generation *core.String	`json:"generation"`
 }
 
 type DeleteCategoryModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	CategoryName  *string            `json:"categoryName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
 }
 
 type DescribeSubscribesByCategoryNameRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeSubscribesByCategoryNameAndUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	UserId                 *string            `json:"userId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	UserId *core.String	`json:"userId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type SubscribeRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	TargetUserId           *string            `json:"targetUserId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	TargetUserId *core.String	`json:"targetUserId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type SubscribeByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	UserId                 *string            `json:"userId"`
-	TargetUserId           *string            `json:"targetUserId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	UserId *core.String	`json:"userId"`
+	TargetUserId *core.String	`json:"targetUserId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetSubscribeRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	TargetUserId           *string            `json:"targetUserId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	TargetUserId *core.String	`json:"targetUserId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetSubscribeByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	UserId                 *string            `json:"userId"`
-	TargetUserId           *string            `json:"targetUserId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	UserId *core.String	`json:"userId"`
+	TargetUserId *core.String	`json:"targetUserId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type UnsubscribeRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	TargetUserId           *string            `json:"targetUserId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	TargetUserId *core.String	`json:"targetUserId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type UnsubscribeByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	UserId                 *string            `json:"userId"`
-	TargetUserId           *string            `json:"targetUserId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	UserId *core.String	`json:"userId"`
+	TargetUserId *core.String	`json:"targetUserId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeScoresRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	ScorerUserId           *string            `json:"scorerUserId"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	ScorerUserId *core.String	`json:"scorerUserId"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeScoresByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	UserId                 *string            `json:"userId"`
-	ScorerUserId           *string            `json:"scorerUserId"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	UserId *core.String	`json:"userId"`
+	ScorerUserId *core.String	`json:"scorerUserId"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetScoreRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	ScorerUserId           *string            `json:"scorerUserId"`
-	UniqueId               *string            `json:"uniqueId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	ScorerUserId *core.String	`json:"scorerUserId"`
+	UniqueId *core.String	`json:"uniqueId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetScoreByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	UserId                 *string            `json:"userId"`
-	ScorerUserId           *string            `json:"scorerUserId"`
-	UniqueId               *string            `json:"uniqueId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	UserId *core.String	`json:"userId"`
+	ScorerUserId *core.String	`json:"scorerUserId"`
+	UniqueId *core.String	`json:"uniqueId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeRankingsRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	StartIndex             *int64             `json:"startIndex"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	StartIndex *int64	`json:"startIndex"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeRankingssByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	UserId                 *string            `json:"userId"`
-	StartIndex             *int64             `json:"startIndex"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	UserId *core.String	`json:"userId"`
+	StartIndex *int64	`json:"startIndex"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeNearRankingsRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	CategoryName  *string            `json:"categoryName"`
-	Score         *int64             `json:"score"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	Score *int64	`json:"score"`
 }
 
 type GetRankingRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	ScorerUserId           *string            `json:"scorerUserId"`
-	UniqueId               *string            `json:"uniqueId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	ScorerUserId *core.String	`json:"scorerUserId"`
+	UniqueId *core.String	`json:"uniqueId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetRankingByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	UserId                 *string            `json:"userId"`
-	ScorerUserId           *string            `json:"scorerUserId"`
-	UniqueId               *string            `json:"uniqueId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	UserId *core.String	`json:"userId"`
+	ScorerUserId *core.String	`json:"scorerUserId"`
+	UniqueId *core.String	`json:"uniqueId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type PutScoreRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	Score                  *int64             `json:"score"`
-	Metadata               *string            `json:"metadata"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	Score *int64	`json:"score"`
+	Metadata *core.String	`json:"metadata"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type PutScoreByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	CategoryName           *string            `json:"categoryName"`
-	UserId                 *string            `json:"userId"`
-	Score                  *int64             `json:"score"`
-	Metadata               *string            `json:"metadata"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CategoryName *core.String	`json:"categoryName"`
+	UserId *core.String	`json:"userId"`
+	Score *int64	`json:"score"`
+	Metadata *core.String	`json:"metadata"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type ExportMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetCurrentRankingMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateCurrentRankingMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	Settings      *string            `json:"settings"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Settings *core.String	`json:"settings"`
 }
 
 type UpdateCurrentRankingMasterFromGitHubRequest struct {
-	RequestId       *core.RequestId        `json:"requestId"`
-	ContextStack    *core.ContextStack     `json:"contextStack"`
-	NamespaceName   *string                `json:"namespaceName"`
-	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CheckoutSetting *GitHubCheckoutSetting	`json:"checkoutSetting"`
 }

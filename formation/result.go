@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package formation
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -111,16 +115,16 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 type DeleteNamespaceResult struct {
-	/** 削除したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 削除したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -129,20 +133,20 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeFormModelMastersResult struct {
-	/** フォームマスターのリスト */
-	Items *[]*FormModelMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** フォームマスターのリスト */
+	Items         *[]*FormModelMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeFormModelMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeFormModelMastersAsyncResult struct {
@@ -151,16 +155,16 @@ type DescribeFormModelMastersAsyncResult struct {
 }
 
 type CreateFormModelMasterResult struct {
-	/** 作成したフォームマスター */
-	Item *FormModelMaster `json:"item"`
+    /** 作成したフォームマスター */
+	Item         *FormModelMaster	`json:"item"`
 }
 
 func (p *CreateFormModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateFormModelMasterAsyncResult struct {
@@ -169,16 +173,16 @@ type CreateFormModelMasterAsyncResult struct {
 }
 
 type GetFormModelMasterResult struct {
-	/** フォームマスター */
-	Item *FormModelMaster `json:"item"`
+    /** フォームマスター */
+	Item         *FormModelMaster	`json:"item"`
 }
 
 func (p *GetFormModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetFormModelMasterAsyncResult struct {
@@ -187,16 +191,16 @@ type GetFormModelMasterAsyncResult struct {
 }
 
 type UpdateFormModelMasterResult struct {
-	/** 更新したフォームマスター */
-	Item *FormModelMaster `json:"item"`
+    /** 更新したフォームマスター */
+	Item         *FormModelMaster	`json:"item"`
 }
 
 func (p *UpdateFormModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateFormModelMasterAsyncResult struct {
@@ -205,16 +209,16 @@ type UpdateFormModelMasterAsyncResult struct {
 }
 
 type DeleteFormModelMasterResult struct {
-	/** 削除したフォームマスター */
-	Item *FormModelMaster `json:"item"`
+    /** 削除したフォームマスター */
+	Item         *FormModelMaster	`json:"item"`
 }
 
 func (p *DeleteFormModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteFormModelMasterAsyncResult struct {
@@ -223,15 +227,15 @@ type DeleteFormModelMasterAsyncResult struct {
 }
 
 type DescribeMoldModelsResult struct {
-	/** フォームの保存領域のリスト */
-	Items *[]*MoldModel `json:"items"`
+    /** フォームの保存領域のリスト */
+	Items         *[]*MoldModel	`json:"items"`
 }
 
 func (p *DescribeMoldModelsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DescribeMoldModelsAsyncResult struct {
@@ -240,16 +244,16 @@ type DescribeMoldModelsAsyncResult struct {
 }
 
 type GetMoldModelResult struct {
-	/** フォームの保存領域 */
-	Item *MoldModel `json:"item"`
+    /** フォームの保存領域 */
+	Item         *MoldModel	`json:"item"`
 }
 
 func (p *GetMoldModelResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetMoldModelAsyncResult struct {
@@ -258,20 +262,20 @@ type GetMoldModelAsyncResult struct {
 }
 
 type DescribeMoldModelMastersResult struct {
-	/** フォームの保存領域マスターのリスト */
-	Items *[]*MoldModelMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** フォームの保存領域マスターのリスト */
+	Items         *[]*MoldModelMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeMoldModelMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeMoldModelMastersAsyncResult struct {
@@ -280,16 +284,16 @@ type DescribeMoldModelMastersAsyncResult struct {
 }
 
 type CreateMoldModelMasterResult struct {
-	/** 作成したフォームの保存領域マスター */
-	Item *MoldModelMaster `json:"item"`
+    /** 作成したフォームの保存領域マスター */
+	Item         *MoldModelMaster	`json:"item"`
 }
 
 func (p *CreateMoldModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateMoldModelMasterAsyncResult struct {
@@ -298,16 +302,16 @@ type CreateMoldModelMasterAsyncResult struct {
 }
 
 type GetMoldModelMasterResult struct {
-	/** フォームの保存領域マスター */
-	Item *MoldModelMaster `json:"item"`
+    /** フォームの保存領域マスター */
+	Item         *MoldModelMaster	`json:"item"`
 }
 
 func (p *GetMoldModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetMoldModelMasterAsyncResult struct {
@@ -316,16 +320,16 @@ type GetMoldModelMasterAsyncResult struct {
 }
 
 type UpdateMoldModelMasterResult struct {
-	/** 更新したフォームの保存領域マスター */
-	Item *MoldModelMaster `json:"item"`
+    /** 更新したフォームの保存領域マスター */
+	Item         *MoldModelMaster	`json:"item"`
 }
 
 func (p *UpdateMoldModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateMoldModelMasterAsyncResult struct {
@@ -334,16 +338,16 @@ type UpdateMoldModelMasterAsyncResult struct {
 }
 
 type DeleteMoldModelMasterResult struct {
-	/** 削除したフォームの保存領域マスター */
-	Item *MoldModelMaster `json:"item"`
+    /** 削除したフォームの保存領域マスター */
+	Item         *MoldModelMaster	`json:"item"`
 }
 
 func (p *DeleteMoldModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteMoldModelMasterAsyncResult struct {
@@ -352,16 +356,16 @@ type DeleteMoldModelMasterAsyncResult struct {
 }
 
 type ExportMasterResult struct {
-	/** 現在有効なフォーム設定 */
-	Item *CurrentFormMaster `json:"item"`
+    /** 現在有効なフォーム設定 */
+	Item         *CurrentFormMaster	`json:"item"`
 }
 
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type ExportMasterAsyncResult struct {
@@ -370,16 +374,16 @@ type ExportMasterAsyncResult struct {
 }
 
 type GetCurrentFormMasterResult struct {
-	/** 現在有効なフォーム設定 */
-	Item *CurrentFormMaster `json:"item"`
+    /** 現在有効なフォーム設定 */
+	Item         *CurrentFormMaster	`json:"item"`
 }
 
 func (p *GetCurrentFormMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCurrentFormMasterAsyncResult struct {
@@ -388,16 +392,16 @@ type GetCurrentFormMasterAsyncResult struct {
 }
 
 type UpdateCurrentFormMasterResult struct {
-	/** 更新した現在有効なフォーム設定 */
-	Item *CurrentFormMaster `json:"item"`
+    /** 更新した現在有効なフォーム設定 */
+	Item         *CurrentFormMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentFormMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentFormMasterAsyncResult struct {
@@ -406,16 +410,16 @@ type UpdateCurrentFormMasterAsyncResult struct {
 }
 
 type UpdateCurrentFormMasterFromGitHubResult struct {
-	/** 更新した現在有効なフォーム設定 */
-	Item *CurrentFormMaster `json:"item"`
+    /** 更新した現在有効なフォーム設定 */
+	Item         *CurrentFormMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentFormMasterFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentFormMasterFromGitHubAsyncResult struct {
@@ -424,20 +428,20 @@ type UpdateCurrentFormMasterFromGitHubAsyncResult struct {
 }
 
 type DescribeMoldsResult struct {
-	/** 保存したフォームのリスト */
-	Items *[]*Mold `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 保存したフォームのリスト */
+	Items         *[]*Mold	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeMoldsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeMoldsAsyncResult struct {
@@ -446,20 +450,20 @@ type DescribeMoldsAsyncResult struct {
 }
 
 type DescribeMoldsByUserIdResult struct {
-	/** 保存したフォームのリスト */
-	Items *[]*Mold `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 保存したフォームのリスト */
+	Items         *[]*Mold	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeMoldsByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeMoldsByUserIdAsyncResult struct {
@@ -468,21 +472,21 @@ type DescribeMoldsByUserIdAsyncResult struct {
 }
 
 type GetMoldResult struct {
-	/** 保存したフォーム */
-	Item *Mold `json:"item"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
+    /** 保存したフォーム */
+	Item         *Mold	`json:"item"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
 }
 
 func (p *GetMoldResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    return &data
 }
 
 type GetMoldAsyncResult struct {
@@ -491,21 +495,21 @@ type GetMoldAsyncResult struct {
 }
 
 type GetMoldByUserIdResult struct {
-	/** 保存したフォーム */
-	Item *Mold `json:"item"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
+    /** 保存したフォーム */
+	Item         *Mold	`json:"item"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
 }
 
 func (p *GetMoldByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    return &data
 }
 
 type GetMoldByUserIdAsyncResult struct {
@@ -514,21 +518,21 @@ type GetMoldByUserIdAsyncResult struct {
 }
 
 type SetMoldCapacityByUserIdResult struct {
-	/** キャパシティを更新した保存したフォーム */
-	Item *Mold `json:"item"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
+    /** キャパシティを更新した保存したフォーム */
+	Item         *Mold	`json:"item"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
 }
 
 func (p *SetMoldCapacityByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    return &data
 }
 
 type SetMoldCapacityByUserIdAsyncResult struct {
@@ -537,21 +541,21 @@ type SetMoldCapacityByUserIdAsyncResult struct {
 }
 
 type AddMoldCapacityByUserIdResult struct {
-	/** キャパシティを更新した保存したフォーム */
-	Item *Mold `json:"item"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
+    /** キャパシティを更新した保存したフォーム */
+	Item         *Mold	`json:"item"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
 }
 
 func (p *AddMoldCapacityByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    return &data
 }
 
 type AddMoldCapacityByUserIdAsyncResult struct {
@@ -560,16 +564,16 @@ type AddMoldCapacityByUserIdAsyncResult struct {
 }
 
 type DeleteMoldResult struct {
-	/** 保存したフォーム */
-	Item *Mold `json:"item"`
+    /** 保存したフォーム */
+	Item         *Mold	`json:"item"`
 }
 
 func (p *DeleteMoldResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteMoldAsyncResult struct {
@@ -578,16 +582,16 @@ type DeleteMoldAsyncResult struct {
 }
 
 type DeleteMoldByUserIdResult struct {
-	/** 保存したフォーム */
-	Item *Mold `json:"item"`
+    /** 保存したフォーム */
+	Item         *Mold	`json:"item"`
 }
 
 func (p *DeleteMoldByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteMoldByUserIdAsyncResult struct {
@@ -596,21 +600,21 @@ type DeleteMoldByUserIdAsyncResult struct {
 }
 
 type AddCapacityByStampSheetResult struct {
-	/** キャパシティ加算後の保存したフォーム */
-	Item *Mold `json:"item"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
+    /** キャパシティ加算後の保存したフォーム */
+	Item         *Mold	`json:"item"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
 }
 
 func (p *AddCapacityByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    return &data
 }
 
 type AddCapacityByStampSheetAsyncResult struct {
@@ -619,21 +623,21 @@ type AddCapacityByStampSheetAsyncResult struct {
 }
 
 type SetCapacityByStampSheetResult struct {
-	/** 更新後の保存したフォーム */
-	Item *Mold `json:"item"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
+    /** 更新後の保存したフォーム */
+	Item         *Mold	`json:"item"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
 }
 
 func (p *SetCapacityByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    return &data
 }
 
 type SetCapacityByStampSheetAsyncResult struct {
@@ -642,20 +646,20 @@ type SetCapacityByStampSheetAsyncResult struct {
 }
 
 type DescribeFormsResult struct {
-	/** フォームのリスト */
-	Items *[]*Form `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** フォームのリスト */
+	Items         *[]*Form	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeFormsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeFormsAsyncResult struct {
@@ -664,20 +668,20 @@ type DescribeFormsAsyncResult struct {
 }
 
 type DescribeFormsByUserIdResult struct {
-	/** フォームのリスト */
-	Items *[]*Form `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** フォームのリスト */
+	Items         *[]*Form	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeFormsByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeFormsByUserIdAsyncResult struct {
@@ -686,31 +690,31 @@ type DescribeFormsByUserIdAsyncResult struct {
 }
 
 type GetFormResult struct {
-	/** フォーム */
-	Item *Form `json:"item"`
-	/** 保存したフォーム */
-	Mold *Mold `json:"mold"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
-	/** フォームモデル */
-	FormModel *FormModel `json:"formModel"`
+    /** フォーム */
+	Item         *Form	`json:"item"`
+    /** 保存したフォーム */
+	Mold         *Mold	`json:"mold"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
+    /** フォームモデル */
+	FormModel         *FormModel	`json:"formModel"`
 }
 
 func (p *GetFormResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Mold != nil {
-		data["Mold"] = p.Mold.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	if p.FormModel != nil {
-		data["FormModel"] = p.FormModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Mold != nil {
+     data["Mold"] = p.Mold.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    if p.FormModel != nil {
+     data["FormModel"] = p.FormModel.ToDict()
+    }
+    return &data
 }
 
 type GetFormAsyncResult struct {
@@ -719,31 +723,31 @@ type GetFormAsyncResult struct {
 }
 
 type GetFormByUserIdResult struct {
-	/** フォーム */
-	Item *Form `json:"item"`
-	/** 保存したフォーム */
-	Mold *Mold `json:"mold"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
-	/** フォームモデル */
-	FormModel *FormModel `json:"formModel"`
+    /** フォーム */
+	Item         *Form	`json:"item"`
+    /** 保存したフォーム */
+	Mold         *Mold	`json:"mold"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
+    /** フォームモデル */
+	FormModel         *FormModel	`json:"formModel"`
 }
 
 func (p *GetFormByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Mold != nil {
-		data["Mold"] = p.Mold.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	if p.FormModel != nil {
-		data["FormModel"] = p.FormModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Mold != nil {
+     data["Mold"] = p.Mold.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    if p.FormModel != nil {
+     data["FormModel"] = p.FormModel.ToDict()
+    }
+    return &data
 }
 
 type GetFormByUserIdAsyncResult struct {
@@ -752,41 +756,41 @@ type GetFormByUserIdAsyncResult struct {
 }
 
 type GetFormWithSignatureResult struct {
-	/** フォーム */
-	Item *Form `json:"item"`
-	/** 署名対象の値 */
-	Body *string `json:"body"`
-	/** 署名 */
-	Signature *string `json:"signature"`
-	/** 保存したフォーム */
-	Mold *Mold `json:"mold"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
-	/** フォームモデル */
-	FormModel *FormModel `json:"formModel"`
+    /** フォーム */
+	Item         *Form	`json:"item"`
+    /** 署名対象の値 */
+	Body         *core.String	`json:"body"`
+    /** 署名 */
+	Signature         *core.String	`json:"signature"`
+    /** 保存したフォーム */
+	Mold         *Mold	`json:"mold"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
+    /** フォームモデル */
+	FormModel         *FormModel	`json:"formModel"`
 }
 
 func (p *GetFormWithSignatureResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Body != nil {
-		data["Body"] = p.Body
-	}
-	if p.Signature != nil {
-		data["Signature"] = p.Signature
-	}
-	if p.Mold != nil {
-		data["Mold"] = p.Mold.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	if p.FormModel != nil {
-		data["FormModel"] = p.FormModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Body != nil {
+     data["Body"] = p.Body
+    }
+    if p.Signature != nil {
+     data["Signature"] = p.Signature
+    }
+    if p.Mold != nil {
+     data["Mold"] = p.Mold.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    if p.FormModel != nil {
+     data["FormModel"] = p.FormModel.ToDict()
+    }
+    return &data
 }
 
 type GetFormWithSignatureAsyncResult struct {
@@ -795,41 +799,41 @@ type GetFormWithSignatureAsyncResult struct {
 }
 
 type GetFormWithSignatureByUserIdResult struct {
-	/** フォーム */
-	Item *Form `json:"item"`
-	/** 署名対象の値 */
-	Body *string `json:"body"`
-	/** 署名 */
-	Signature *string `json:"signature"`
-	/** 保存したフォーム */
-	Mold *Mold `json:"mold"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
-	/** フォームモデル */
-	FormModel *FormModel `json:"formModel"`
+    /** フォーム */
+	Item         *Form	`json:"item"`
+    /** 署名対象の値 */
+	Body         *core.String	`json:"body"`
+    /** 署名 */
+	Signature         *core.String	`json:"signature"`
+    /** 保存したフォーム */
+	Mold         *Mold	`json:"mold"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
+    /** フォームモデル */
+	FormModel         *FormModel	`json:"formModel"`
 }
 
 func (p *GetFormWithSignatureByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Body != nil {
-		data["Body"] = p.Body
-	}
-	if p.Signature != nil {
-		data["Signature"] = p.Signature
-	}
-	if p.Mold != nil {
-		data["Mold"] = p.Mold.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	if p.FormModel != nil {
-		data["FormModel"] = p.FormModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Body != nil {
+     data["Body"] = p.Body
+    }
+    if p.Signature != nil {
+     data["Signature"] = p.Signature
+    }
+    if p.Mold != nil {
+     data["Mold"] = p.Mold.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    if p.FormModel != nil {
+     data["FormModel"] = p.FormModel.ToDict()
+    }
+    return &data
 }
 
 type GetFormWithSignatureByUserIdAsyncResult struct {
@@ -838,31 +842,31 @@ type GetFormWithSignatureByUserIdAsyncResult struct {
 }
 
 type SetFormByUserIdResult struct {
-	/** フォーム */
-	Item *Form `json:"item"`
-	/** 保存したフォーム */
-	Mold *Mold `json:"mold"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
-	/** フォームモデル */
-	FormModel *FormModel `json:"formModel"`
+    /** フォーム */
+	Item         *Form	`json:"item"`
+    /** 保存したフォーム */
+	Mold         *Mold	`json:"mold"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
+    /** フォームモデル */
+	FormModel         *FormModel	`json:"formModel"`
 }
 
 func (p *SetFormByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Mold != nil {
-		data["Mold"] = p.Mold.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	if p.FormModel != nil {
-		data["FormModel"] = p.FormModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Mold != nil {
+     data["Mold"] = p.Mold.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    if p.FormModel != nil {
+     data["FormModel"] = p.FormModel.ToDict()
+    }
+    return &data
 }
 
 type SetFormByUserIdAsyncResult struct {
@@ -871,31 +875,31 @@ type SetFormByUserIdAsyncResult struct {
 }
 
 type SetFormWithSignatureResult struct {
-	/** フォーム */
-	Item *Form `json:"item"`
-	/** 保存したフォーム */
-	Mold *Mold `json:"mold"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
-	/** フォームモデル */
-	FormModel *FormModel `json:"formModel"`
+    /** フォーム */
+	Item         *Form	`json:"item"`
+    /** 保存したフォーム */
+	Mold         *Mold	`json:"mold"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
+    /** フォームモデル */
+	FormModel         *FormModel	`json:"formModel"`
 }
 
 func (p *SetFormWithSignatureResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Mold != nil {
-		data["Mold"] = p.Mold.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	if p.FormModel != nil {
-		data["FormModel"] = p.FormModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Mold != nil {
+     data["Mold"] = p.Mold.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    if p.FormModel != nil {
+     data["FormModel"] = p.FormModel.ToDict()
+    }
+    return &data
 }
 
 type SetFormWithSignatureAsyncResult struct {
@@ -904,26 +908,31 @@ type SetFormWithSignatureAsyncResult struct {
 }
 
 type AcquireActionsToFormPropertiesResult struct {
-	/** フォーム */
-	Item *Form `json:"item"`
-	/** 保存したフォーム */
-	Mold *Mold `json:"mold"`
-	/** スタンプシート */
-	StampSheet *string `json:"stampSheet"`
+    /** フォーム */
+	Item         *Form	`json:"item"`
+    /** 保存したフォーム */
+	Mold         *Mold	`json:"mold"`
+    /** スタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *AcquireActionsToFormPropertiesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Mold != nil {
-		data["Mold"] = p.Mold.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Mold != nil {
+     data["Mold"] = p.Mold.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type AcquireActionsToFormPropertiesAsyncResult struct {
@@ -932,31 +941,31 @@ type AcquireActionsToFormPropertiesAsyncResult struct {
 }
 
 type DeleteFormResult struct {
-	/** フォーム */
-	Item *Form `json:"item"`
-	/** 保存したフォーム */
-	Mold *Mold `json:"mold"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
-	/** フォームモデル */
-	FormModel *FormModel `json:"formModel"`
+    /** フォーム */
+	Item         *Form	`json:"item"`
+    /** 保存したフォーム */
+	Mold         *Mold	`json:"mold"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
+    /** フォームモデル */
+	FormModel         *FormModel	`json:"formModel"`
 }
 
 func (p *DeleteFormResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Mold != nil {
-		data["Mold"] = p.Mold.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	if p.FormModel != nil {
-		data["FormModel"] = p.FormModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Mold != nil {
+     data["Mold"] = p.Mold.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    if p.FormModel != nil {
+     data["FormModel"] = p.FormModel.ToDict()
+    }
+    return &data
 }
 
 type DeleteFormAsyncResult struct {
@@ -965,31 +974,31 @@ type DeleteFormAsyncResult struct {
 }
 
 type DeleteFormByUserIdResult struct {
-	/** フォーム */
-	Item *Form `json:"item"`
-	/** 保存したフォーム */
-	Mold *Mold `json:"mold"`
-	/** フォームの保存領域 */
-	MoldModel *MoldModel `json:"moldModel"`
-	/** フォームモデル */
-	FormModel *FormModel `json:"formModel"`
+    /** フォーム */
+	Item         *Form	`json:"item"`
+    /** 保存したフォーム */
+	Mold         *Mold	`json:"mold"`
+    /** フォームの保存領域 */
+	MoldModel         *MoldModel	`json:"moldModel"`
+    /** フォームモデル */
+	FormModel         *FormModel	`json:"formModel"`
 }
 
 func (p *DeleteFormByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Mold != nil {
-		data["Mold"] = p.Mold.ToDict()
-	}
-	if p.MoldModel != nil {
-		data["MoldModel"] = p.MoldModel.ToDict()
-	}
-	if p.FormModel != nil {
-		data["FormModel"] = p.FormModel.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Mold != nil {
+     data["Mold"] = p.Mold.ToDict()
+    }
+    if p.MoldModel != nil {
+     data["MoldModel"] = p.MoldModel.ToDict()
+    }
+    if p.FormModel != nil {
+     data["FormModel"] = p.FormModel.ToDict()
+    }
+    return &data
 }
 
 type DeleteFormByUserIdAsyncResult struct {
@@ -998,26 +1007,31 @@ type DeleteFormByUserIdAsyncResult struct {
 }
 
 type AcquireActionToFormPropertiesByStampSheetResult struct {
-	/** フォーム */
-	Item *Form `json:"item"`
-	/** 保存したフォーム */
-	Mold *Mold `json:"mold"`
-	/** スタンプシート */
-	StampSheet *string `json:"stampSheet"`
+    /** フォーム */
+	Item         *Form	`json:"item"`
+    /** 保存したフォーム */
+	Mold         *Mold	`json:"mold"`
+    /** スタンプシート */
+	StampSheet         *core.String	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *AcquireActionToFormPropertiesByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Mold != nil {
-		data["Mold"] = p.Mold.ToDict()
-	}
-	if p.StampSheet != nil {
-		data["StampSheet"] = p.StampSheet
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Mold != nil {
+     data["Mold"] = p.Mold.ToDict()
+    }
+    if p.StampSheet != nil {
+     data["StampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+    }
+    return &data
 }
 
 type AcquireActionToFormPropertiesByStampSheetAsyncResult struct {

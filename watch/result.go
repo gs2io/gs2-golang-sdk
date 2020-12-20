@@ -16,17 +16,21 @@ permissions and limitations under the License.
 
 package watch
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type GetChartResult struct {
-	/** チャート */
-	Item *Chart `json:"item"`
+    /** チャート */
+	Item         *Chart	`json:"item"`
 }
 
 func (p *GetChartResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetChartAsyncResult struct {
@@ -35,16 +39,16 @@ type GetChartAsyncResult struct {
 }
 
 type GetCumulativeResult struct {
-	/** 累積値 */
-	Item *Cumulative `json:"item"`
+    /** 累積値 */
+	Item         *Cumulative	`json:"item"`
 }
 
 func (p *GetCumulativeResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCumulativeAsyncResult struct {
@@ -53,20 +57,20 @@ type GetCumulativeAsyncResult struct {
 }
 
 type DescribeBillingActivitiesResult struct {
-	/** 請求にまつわるアクティビティのリスト */
-	Items *[]*BillingActivity `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 請求にまつわるアクティビティのリスト */
+	Items         *[]*BillingActivity	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeBillingActivitiesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeBillingActivitiesAsyncResult struct {
@@ -75,16 +79,16 @@ type DescribeBillingActivitiesAsyncResult struct {
 }
 
 type GetBillingActivityResult struct {
-	/** 請求にまつわるアクティビティ */
-	Item *BillingActivity `json:"item"`
+    /** 請求にまつわるアクティビティ */
+	Item         *BillingActivity	`json:"item"`
 }
 
 func (p *GetBillingActivityResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetBillingActivityAsyncResult struct {

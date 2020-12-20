@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package matchmaking
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -111,16 +115,16 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 type DeleteNamespaceResult struct {
-	/** 削除したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 削除したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -129,20 +133,20 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeGatheringsResult struct {
-	/** ギャザリングのリスト */
-	Items *[]*Gathering `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ギャザリングのリスト */
+	Items         *[]*Gathering	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeGatheringsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeGatheringsAsyncResult struct {
@@ -151,16 +155,16 @@ type DescribeGatheringsAsyncResult struct {
 }
 
 type CreateGatheringResult struct {
-	/** ギャザリング */
-	Item *Gathering `json:"item"`
+    /** ギャザリング */
+	Item         *Gathering	`json:"item"`
 }
 
 func (p *CreateGatheringResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateGatheringAsyncResult struct {
@@ -169,16 +173,16 @@ type CreateGatheringAsyncResult struct {
 }
 
 type CreateGatheringByUserIdResult struct {
-	/** ギャザリング */
-	Item *Gathering `json:"item"`
+    /** ギャザリング */
+	Item         *Gathering	`json:"item"`
 }
 
 func (p *CreateGatheringByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateGatheringByUserIdAsyncResult struct {
@@ -187,16 +191,16 @@ type CreateGatheringByUserIdAsyncResult struct {
 }
 
 type UpdateGatheringResult struct {
-	/** ギャザリング */
-	Item *Gathering `json:"item"`
+    /** ギャザリング */
+	Item         *Gathering	`json:"item"`
 }
 
 func (p *UpdateGatheringResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateGatheringAsyncResult struct {
@@ -205,16 +209,16 @@ type UpdateGatheringAsyncResult struct {
 }
 
 type UpdateGatheringByUserIdResult struct {
-	/** ギャザリング */
-	Item *Gathering `json:"item"`
+    /** ギャザリング */
+	Item         *Gathering	`json:"item"`
 }
 
 func (p *UpdateGatheringByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateGatheringByUserIdAsyncResult struct {
@@ -223,21 +227,21 @@ type UpdateGatheringByUserIdAsyncResult struct {
 }
 
 type DoMatchmakingByPlayerResult struct {
-	/** ギャザリング */
-	Item *Gathering `json:"item"`
-	/** マッチメイキングの状態を保持するトークン */
-	MatchmakingContextToken *string `json:"matchmakingContextToken"`
+    /** ギャザリング */
+	Item         *Gathering	`json:"item"`
+    /** マッチメイキングの状態を保持するトークン */
+	MatchmakingContextToken         *core.String	`json:"matchmakingContextToken"`
 }
 
 func (p *DoMatchmakingByPlayerResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.MatchmakingContextToken != nil {
-		data["MatchmakingContextToken"] = p.MatchmakingContextToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.MatchmakingContextToken != nil {
+     data["MatchmakingContextToken"] = p.MatchmakingContextToken
+    }
+    return &data
 }
 
 type DoMatchmakingByPlayerAsyncResult struct {
@@ -246,21 +250,21 @@ type DoMatchmakingByPlayerAsyncResult struct {
 }
 
 type DoMatchmakingResult struct {
-	/** ギャザリング */
-	Item *Gathering `json:"item"`
-	/** マッチメイキングの状態を保持するトークン */
-	MatchmakingContextToken *string `json:"matchmakingContextToken"`
+    /** ギャザリング */
+	Item         *Gathering	`json:"item"`
+    /** マッチメイキングの状態を保持するトークン */
+	MatchmakingContextToken         *core.String	`json:"matchmakingContextToken"`
 }
 
 func (p *DoMatchmakingResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.MatchmakingContextToken != nil {
-		data["MatchmakingContextToken"] = p.MatchmakingContextToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.MatchmakingContextToken != nil {
+     data["MatchmakingContextToken"] = p.MatchmakingContextToken
+    }
+    return &data
 }
 
 type DoMatchmakingAsyncResult struct {
@@ -269,16 +273,16 @@ type DoMatchmakingAsyncResult struct {
 }
 
 type GetGatheringResult struct {
-	/** ギャザリング */
-	Item *Gathering `json:"item"`
+    /** ギャザリング */
+	Item         *Gathering	`json:"item"`
 }
 
 func (p *GetGatheringResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetGatheringAsyncResult struct {
@@ -287,16 +291,16 @@ type GetGatheringAsyncResult struct {
 }
 
 type CancelMatchmakingResult struct {
-	/** ギャザリング */
-	Item *Gathering `json:"item"`
+    /** ギャザリング */
+	Item         *Gathering	`json:"item"`
 }
 
 func (p *CancelMatchmakingResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CancelMatchmakingAsyncResult struct {
@@ -305,16 +309,16 @@ type CancelMatchmakingAsyncResult struct {
 }
 
 type CancelMatchmakingByUserIdResult struct {
-	/** ギャザリング */
-	Item *Gathering `json:"item"`
+    /** ギャザリング */
+	Item         *Gathering	`json:"item"`
 }
 
 func (p *CancelMatchmakingByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CancelMatchmakingByUserIdAsyncResult struct {
@@ -323,16 +327,16 @@ type CancelMatchmakingByUserIdAsyncResult struct {
 }
 
 type DeleteGatheringResult struct {
-	/** ギャザリング */
-	Item *Gathering `json:"item"`
+    /** ギャザリング */
+	Item         *Gathering	`json:"item"`
 }
 
 func (p *DeleteGatheringResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteGatheringAsyncResult struct {
@@ -341,20 +345,20 @@ type DeleteGatheringAsyncResult struct {
 }
 
 type DescribeRatingModelMastersResult struct {
-	/** レーティングモデルマスターのリスト */
-	Items *[]*RatingModelMaster `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** レーティングモデルマスターのリスト */
+	Items         *[]*RatingModelMaster	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeRatingModelMastersResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeRatingModelMastersAsyncResult struct {
@@ -363,16 +367,16 @@ type DescribeRatingModelMastersAsyncResult struct {
 }
 
 type CreateRatingModelMasterResult struct {
-	/** 作成したレーティングモデルマスター */
-	Item *RatingModelMaster `json:"item"`
+    /** 作成したレーティングモデルマスター */
+	Item         *RatingModelMaster	`json:"item"`
 }
 
 func (p *CreateRatingModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateRatingModelMasterAsyncResult struct {
@@ -381,16 +385,16 @@ type CreateRatingModelMasterAsyncResult struct {
 }
 
 type GetRatingModelMasterResult struct {
-	/** レーティングモデルマスター */
-	Item *RatingModelMaster `json:"item"`
+    /** レーティングモデルマスター */
+	Item         *RatingModelMaster	`json:"item"`
 }
 
 func (p *GetRatingModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetRatingModelMasterAsyncResult struct {
@@ -399,16 +403,16 @@ type GetRatingModelMasterAsyncResult struct {
 }
 
 type UpdateRatingModelMasterResult struct {
-	/** 更新したレーティングモデルマスター */
-	Item *RatingModelMaster `json:"item"`
+    /** 更新したレーティングモデルマスター */
+	Item         *RatingModelMaster	`json:"item"`
 }
 
 func (p *UpdateRatingModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateRatingModelMasterAsyncResult struct {
@@ -417,16 +421,16 @@ type UpdateRatingModelMasterAsyncResult struct {
 }
 
 type DeleteRatingModelMasterResult struct {
-	/** 削除したレーティングモデルマスター */
-	Item *RatingModelMaster `json:"item"`
+    /** 削除したレーティングモデルマスター */
+	Item         *RatingModelMaster	`json:"item"`
 }
 
 func (p *DeleteRatingModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteRatingModelMasterAsyncResult struct {
@@ -435,15 +439,15 @@ type DeleteRatingModelMasterAsyncResult struct {
 }
 
 type DescribeRatingModelsResult struct {
-	/** レーティングモデルのリスト */
-	Items *[]*RatingModel `json:"items"`
+    /** レーティングモデルのリスト */
+	Items         *[]*RatingModel	`json:"items"`
 }
 
 func (p *DescribeRatingModelsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type DescribeRatingModelsAsyncResult struct {
@@ -452,16 +456,16 @@ type DescribeRatingModelsAsyncResult struct {
 }
 
 type GetRatingModelResult struct {
-	/** レーティングモデル */
-	Item *RatingModel `json:"item"`
+    /** レーティングモデル */
+	Item         *RatingModel	`json:"item"`
 }
 
 func (p *GetRatingModelResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetRatingModelAsyncResult struct {
@@ -470,16 +474,16 @@ type GetRatingModelAsyncResult struct {
 }
 
 type ExportMasterResult struct {
-	/** 現在有効なレーティングマスター */
-	Item *CurrentRatingModelMaster `json:"item"`
+    /** 現在有効なレーティングマスター */
+	Item         *CurrentRatingModelMaster	`json:"item"`
 }
 
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type ExportMasterAsyncResult struct {
@@ -488,16 +492,16 @@ type ExportMasterAsyncResult struct {
 }
 
 type GetCurrentRatingModelMasterResult struct {
-	/** 現在有効なレーティングマスター */
-	Item *CurrentRatingModelMaster `json:"item"`
+    /** 現在有効なレーティングマスター */
+	Item         *CurrentRatingModelMaster	`json:"item"`
 }
 
 func (p *GetCurrentRatingModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetCurrentRatingModelMasterAsyncResult struct {
@@ -506,16 +510,16 @@ type GetCurrentRatingModelMasterAsyncResult struct {
 }
 
 type UpdateCurrentRatingModelMasterResult struct {
-	/** 更新した現在有効なレーティングマスター */
-	Item *CurrentRatingModelMaster `json:"item"`
+    /** 更新した現在有効なレーティングマスター */
+	Item         *CurrentRatingModelMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentRatingModelMasterResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentRatingModelMasterAsyncResult struct {
@@ -524,16 +528,16 @@ type UpdateCurrentRatingModelMasterAsyncResult struct {
 }
 
 type UpdateCurrentRatingModelMasterFromGitHubResult struct {
-	/** 更新した現在有効なレーティングマスター */
-	Item *CurrentRatingModelMaster `json:"item"`
+    /** 更新した現在有効なレーティングマスター */
+	Item         *CurrentRatingModelMaster	`json:"item"`
 }
 
 func (p *UpdateCurrentRatingModelMasterFromGitHubResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateCurrentRatingModelMasterFromGitHubAsyncResult struct {
@@ -542,20 +546,20 @@ type UpdateCurrentRatingModelMasterFromGitHubAsyncResult struct {
 }
 
 type DescribeRatingsResult struct {
-	/** レーティングのリスト */
-	Items *[]*Rating `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** レーティングのリスト */
+	Items         *[]*Rating	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeRatingsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeRatingsAsyncResult struct {
@@ -564,20 +568,20 @@ type DescribeRatingsAsyncResult struct {
 }
 
 type DescribeRatingsByUserIdResult struct {
-	/** レーティングのリスト */
-	Items *[]*Rating `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** レーティングのリスト */
+	Items         *[]*Rating	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeRatingsByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeRatingsByUserIdAsyncResult struct {
@@ -586,16 +590,16 @@ type DescribeRatingsByUserIdAsyncResult struct {
 }
 
 type GetRatingResult struct {
-	/** レーティング */
-	Item *Rating `json:"item"`
+    /** レーティング */
+	Item         *Rating	`json:"item"`
 }
 
 func (p *GetRatingResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetRatingAsyncResult struct {
@@ -604,16 +608,16 @@ type GetRatingAsyncResult struct {
 }
 
 type GetRatingByUserIdResult struct {
-	/** レーティング */
-	Item *Rating `json:"item"`
+    /** レーティング */
+	Item         *Rating	`json:"item"`
 }
 
 func (p *GetRatingByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetRatingByUserIdAsyncResult struct {
@@ -622,15 +626,15 @@ type GetRatingByUserIdAsyncResult struct {
 }
 
 type PutResultResult struct {
-	/** 更新後の{model_name}の一覧 */
-	Items *[]*Rating `json:"items"`
+    /** 更新後の{model_name}の一覧 */
+	Items         *[]*Rating	`json:"items"`
 }
 
 func (p *PutResultResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type PutResultAsyncResult struct {
@@ -639,16 +643,16 @@ type PutResultAsyncResult struct {
 }
 
 type DeleteRatingResult struct {
-	/** レーティング */
-	Item *Rating `json:"item"`
+    /** レーティング */
+	Item         *Rating	`json:"item"`
 }
 
 func (p *DeleteRatingResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteRatingAsyncResult struct {
@@ -657,26 +661,26 @@ type DeleteRatingAsyncResult struct {
 }
 
 type GetBallotResult struct {
-	/** 投票用紙 */
-	Item *Ballot `json:"item"`
-	/** 署名対象のデータ */
-	Body *string `json:"body"`
-	/** 署名データ */
-	Signature *string `json:"signature"`
+    /** 投票用紙 */
+	Item         *Ballot	`json:"item"`
+    /** 署名対象のデータ */
+	Body         *core.String	`json:"body"`
+    /** 署名データ */
+	Signature         *core.String	`json:"signature"`
 }
 
 func (p *GetBallotResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Body != nil {
-		data["Body"] = p.Body
-	}
-	if p.Signature != nil {
-		data["Signature"] = p.Signature
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Body != nil {
+     data["Body"] = p.Body
+    }
+    if p.Signature != nil {
+     data["Signature"] = p.Signature
+    }
+    return &data
 }
 
 type GetBallotAsyncResult struct {
@@ -685,26 +689,26 @@ type GetBallotAsyncResult struct {
 }
 
 type GetBallotByUserIdResult struct {
-	/** 投票用紙 */
-	Item *Ballot `json:"item"`
-	/** 署名対象のデータ */
-	Body *string `json:"body"`
-	/** 署名データ */
-	Signature *string `json:"signature"`
+    /** 投票用紙 */
+	Item         *Ballot	`json:"item"`
+    /** 署名対象のデータ */
+	Body         *core.String	`json:"body"`
+    /** 署名データ */
+	Signature         *core.String	`json:"signature"`
 }
 
 func (p *GetBallotByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Body != nil {
-		data["Body"] = p.Body
-	}
-	if p.Signature != nil {
-		data["Signature"] = p.Signature
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Body != nil {
+     data["Body"] = p.Body
+    }
+    if p.Signature != nil {
+     data["Signature"] = p.Signature
+    }
+    return &data
 }
 
 type GetBallotByUserIdAsyncResult struct {
@@ -713,16 +717,16 @@ type GetBallotByUserIdAsyncResult struct {
 }
 
 type VoteResult struct {
-	/** 投票用紙 */
-	Item *Ballot `json:"item"`
+    /** 投票用紙 */
+	Item         *Ballot	`json:"item"`
 }
 
 func (p *VoteResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type VoteAsyncResult struct {
@@ -731,16 +735,16 @@ type VoteAsyncResult struct {
 }
 
 type VoteMultipleResult struct {
-	/** 投票用紙 */
-	Item *Ballot `json:"item"`
+    /** 投票用紙 */
+	Item         *Ballot	`json:"item"`
 }
 
 func (p *VoteMultipleResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type VoteMultipleAsyncResult struct {
@@ -752,8 +756,8 @@ type CommitVoteResult struct {
 }
 
 func (p *CommitVoteResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type CommitVoteAsyncResult struct {

@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package key
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -114,8 +118,8 @@ type DeleteNamespaceResult struct {
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -124,20 +128,20 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeKeysResult struct {
-	/** 暗号鍵のリスト */
-	Items *[]*Key `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** 暗号鍵のリスト */
+	Items         *[]*Key	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeKeysResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeKeysAsyncResult struct {
@@ -146,16 +150,16 @@ type DescribeKeysAsyncResult struct {
 }
 
 type CreateKeyResult struct {
-	/** 作成した暗号鍵 */
-	Item *Key `json:"item"`
+    /** 作成した暗号鍵 */
+	Item         *Key	`json:"item"`
 }
 
 func (p *CreateKeyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateKeyAsyncResult struct {
@@ -164,16 +168,16 @@ type CreateKeyAsyncResult struct {
 }
 
 type UpdateKeyResult struct {
-	/** 更新した暗号鍵 */
-	Item *Key `json:"item"`
+    /** 更新した暗号鍵 */
+	Item         *Key	`json:"item"`
 }
 
 func (p *UpdateKeyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateKeyAsyncResult struct {
@@ -182,16 +186,16 @@ type UpdateKeyAsyncResult struct {
 }
 
 type GetKeyResult struct {
-	/** 暗号鍵 */
-	Item *Key `json:"item"`
+    /** 暗号鍵 */
+	Item         *Key	`json:"item"`
 }
 
 func (p *GetKeyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetKeyAsyncResult struct {
@@ -203,8 +207,8 @@ type DeleteKeyResult struct {
 }
 
 func (p *DeleteKeyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteKeyAsyncResult struct {
@@ -213,16 +217,16 @@ type DeleteKeyAsyncResult struct {
 }
 
 type EncryptResult struct {
-	/** 暗号化済みデータ */
-	Data *string `json:"data"`
+    /** 暗号化済みデータ */
+	Data         *core.String	`json:"data"`
 }
 
 func (p *EncryptResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Data != nil {
-		data["Data"] = p.Data
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Data != nil {
+     data["Data"] = p.Data
+    }
+    return &data
 }
 
 type EncryptAsyncResult struct {
@@ -231,16 +235,16 @@ type EncryptAsyncResult struct {
 }
 
 type DecryptResult struct {
-	/** 復号済みデータ */
-	Data *string `json:"data"`
+    /** 復号済みデータ */
+	Data         *core.String	`json:"data"`
 }
 
 func (p *DecryptResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Data != nil {
-		data["Data"] = p.Data
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Data != nil {
+     data["Data"] = p.Data
+    }
+    return &data
 }
 
 type DecryptAsyncResult struct {
@@ -249,20 +253,20 @@ type DecryptAsyncResult struct {
 }
 
 type DescribeGitHubApiKeysResult struct {
-	/** GitHub のAPIキーのリスト */
-	Items *[]*GitHubApiKey `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** GitHub のAPIキーのリスト */
+	Items         *[]*GitHubApiKey	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeGitHubApiKeysResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeGitHubApiKeysAsyncResult struct {
@@ -271,16 +275,16 @@ type DescribeGitHubApiKeysAsyncResult struct {
 }
 
 type CreateGitHubApiKeyResult struct {
-	/** 作成したGitHub のAPIキー */
-	Item *GitHubApiKey `json:"item"`
+    /** 作成したGitHub のAPIキー */
+	Item         *GitHubApiKey	`json:"item"`
 }
 
 func (p *CreateGitHubApiKeyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateGitHubApiKeyAsyncResult struct {
@@ -289,16 +293,16 @@ type CreateGitHubApiKeyAsyncResult struct {
 }
 
 type UpdateGitHubApiKeyResult struct {
-	/** 更新したGitHub のAPIキー */
-	Item *GitHubApiKey `json:"item"`
+    /** 更新したGitHub のAPIキー */
+	Item         *GitHubApiKey	`json:"item"`
 }
 
 func (p *UpdateGitHubApiKeyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateGitHubApiKeyAsyncResult struct {
@@ -307,16 +311,16 @@ type UpdateGitHubApiKeyAsyncResult struct {
 }
 
 type GetGitHubApiKeyResult struct {
-	/** GitHub のAPIキー */
-	Item *GitHubApiKey `json:"item"`
+    /** GitHub のAPIキー */
+	Item         *GitHubApiKey	`json:"item"`
 }
 
 func (p *GetGitHubApiKeyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetGitHubApiKeyAsyncResult struct {
@@ -328,8 +332,8 @@ type DeleteGitHubApiKeyResult struct {
 }
 
 func (p *DeleteGitHubApiKeyResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+    var data = map[string]interface{}{}
+    return &data
 }
 
 type DeleteGitHubApiKeyAsyncResult struct {

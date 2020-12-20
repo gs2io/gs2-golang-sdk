@@ -21,355 +21,353 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
-	RequestId                                     *core.RequestId      `json:"requestId"`
-	ContextStack                                  *core.ContextStack   `json:"contextStack"`
-	Name                                          *string              `json:"name"`
-	Description                                   *string              `json:"description"`
-	EnableRating                                  *bool                `json:"enableRating"`
-	CreateGatheringTriggerType                    *string              `json:"createGatheringTriggerType"`
-	CreateGatheringTriggerRealtimeNamespaceId     *string              `json:"createGatheringTriggerRealtimeNamespaceId"`
-	CreateGatheringTriggerScriptId                *string              `json:"createGatheringTriggerScriptId"`
-	CompleteMatchmakingTriggerType                *string              `json:"completeMatchmakingTriggerType"`
-	CompleteMatchmakingTriggerRealtimeNamespaceId *string              `json:"completeMatchmakingTriggerRealtimeNamespaceId"`
-	CompleteMatchmakingTriggerScriptId            *string              `json:"completeMatchmakingTriggerScriptId"`
-	JoinNotification                              *NotificationSetting `json:"joinNotification"`
-	LeaveNotification                             *NotificationSetting `json:"leaveNotification"`
-	CompleteNotification                          *NotificationSetting `json:"completeNotification"`
-	LogSetting                                    *LogSetting          `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	EnableRating *bool	`json:"enableRating"`
+	CreateGatheringTriggerType *core.String	`json:"createGatheringTriggerType"`
+	CreateGatheringTriggerRealtimeNamespaceId *core.String	`json:"createGatheringTriggerRealtimeNamespaceId"`
+	CreateGatheringTriggerScriptId *core.String	`json:"createGatheringTriggerScriptId"`
+	CompleteMatchmakingTriggerType *core.String	`json:"completeMatchmakingTriggerType"`
+	CompleteMatchmakingTriggerRealtimeNamespaceId *core.String	`json:"completeMatchmakingTriggerRealtimeNamespaceId"`
+	CompleteMatchmakingTriggerScriptId *core.String	`json:"completeMatchmakingTriggerScriptId"`
+	JoinNotification *NotificationSetting	`json:"joinNotification"`
+	LeaveNotification *NotificationSetting	`json:"leaveNotification"`
+	CompleteNotification *NotificationSetting	`json:"completeNotification"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId                                     *core.RequestId      `json:"requestId"`
-	ContextStack                                  *core.ContextStack   `json:"contextStack"`
-	NamespaceName                                 *string              `json:"namespaceName"`
-	Description                                   *string              `json:"description"`
-	EnableRating                                  *bool                `json:"enableRating"`
-	CreateGatheringTriggerType                    *string              `json:"createGatheringTriggerType"`
-	CreateGatheringTriggerRealtimeNamespaceId     *string              `json:"createGatheringTriggerRealtimeNamespaceId"`
-	CreateGatheringTriggerScriptId                *string              `json:"createGatheringTriggerScriptId"`
-	CompleteMatchmakingTriggerType                *string              `json:"completeMatchmakingTriggerType"`
-	CompleteMatchmakingTriggerRealtimeNamespaceId *string              `json:"completeMatchmakingTriggerRealtimeNamespaceId"`
-	CompleteMatchmakingTriggerScriptId            *string              `json:"completeMatchmakingTriggerScriptId"`
-	JoinNotification                              *NotificationSetting `json:"joinNotification"`
-	LeaveNotification                             *NotificationSetting `json:"leaveNotification"`
-	CompleteNotification                          *NotificationSetting `json:"completeNotification"`
-	LogSetting                                    *LogSetting          `json:"logSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Description *core.String	`json:"description"`
+	EnableRating *bool	`json:"enableRating"`
+	CreateGatheringTriggerType *core.String	`json:"createGatheringTriggerType"`
+	CreateGatheringTriggerRealtimeNamespaceId *core.String	`json:"createGatheringTriggerRealtimeNamespaceId"`
+	CreateGatheringTriggerScriptId *core.String	`json:"createGatheringTriggerScriptId"`
+	CompleteMatchmakingTriggerType *core.String	`json:"completeMatchmakingTriggerType"`
+	CompleteMatchmakingTriggerRealtimeNamespaceId *core.String	`json:"completeMatchmakingTriggerRealtimeNamespaceId"`
+	CompleteMatchmakingTriggerScriptId *core.String	`json:"completeMatchmakingTriggerScriptId"`
+	JoinNotification *NotificationSetting	`json:"joinNotification"`
+	LeaveNotification *NotificationSetting	`json:"leaveNotification"`
+	CompleteNotification *NotificationSetting	`json:"completeNotification"`
+	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type DescribeGatheringsRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	PageToken     *string            `json:"pageToken"`
-	Limit         *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateGatheringRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	Player                 *Player            `json:"player"`
-	AttributeRanges        *[]*AttributeRange `json:"attributeRanges"`
-	CapacityOfRoles        *[]*CapacityOfRole `json:"capacityOfRoles"`
-	AllowUserIds           *[]string          `json:"allowUserIds"`
-	ExpiresAt              *int64             `json:"expiresAt"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Player *Player	`json:"player"`
+	AttributeRanges *[]*AttributeRange	`json:"attributeRanges"`
+	CapacityOfRoles *[]*CapacityOfRole	`json:"capacityOfRoles"`
+	AllowUserIds *[]core.String	`json:"allowUserIds"`
+	ExpiresAt *int64	`json:"expiresAt"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type CreateGatheringByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	Player                 *Player            `json:"player"`
-	AttributeRanges        *[]*AttributeRange `json:"attributeRanges"`
-	CapacityOfRoles        *[]*CapacityOfRole `json:"capacityOfRoles"`
-	AllowUserIds           *[]string          `json:"allowUserIds"`
-	ExpiresAt              *int64             `json:"expiresAt"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	Player *Player	`json:"player"`
+	AttributeRanges *[]*AttributeRange	`json:"attributeRanges"`
+	CapacityOfRoles *[]*CapacityOfRole	`json:"capacityOfRoles"`
+	AllowUserIds *[]core.String	`json:"allowUserIds"`
+	ExpiresAt *int64	`json:"expiresAt"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type UpdateGatheringRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	GatheringName          *string            `json:"gatheringName"`
-	AttributeRanges        *[]*AttributeRange `json:"attributeRanges"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	GatheringName *core.String	`json:"gatheringName"`
+	AttributeRanges *[]*AttributeRange	`json:"attributeRanges"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type UpdateGatheringByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	GatheringName          *string            `json:"gatheringName"`
-	UserId                 *string            `json:"userId"`
-	AttributeRanges        *[]*AttributeRange `json:"attributeRanges"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	GatheringName *core.String	`json:"gatheringName"`
+	UserId *core.String	`json:"userId"`
+	AttributeRanges *[]*AttributeRange	`json:"attributeRanges"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type DoMatchmakingByPlayerRequest struct {
-	RequestId               *core.RequestId    `json:"requestId"`
-	ContextStack            *core.ContextStack `json:"contextStack"`
-	NamespaceName           *string            `json:"namespaceName"`
-	Player                  *Player            `json:"player"`
-	MatchmakingContextToken *string            `json:"matchmakingContextToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Player *Player	`json:"player"`
+	MatchmakingContextToken *core.String	`json:"matchmakingContextToken"`
 }
 
 type DoMatchmakingRequest struct {
-	RequestId               *core.RequestId    `json:"requestId"`
-	ContextStack            *core.ContextStack `json:"contextStack"`
-	NamespaceName           *string            `json:"namespaceName"`
-	Player                  *Player            `json:"player"`
-	MatchmakingContextToken *string            `json:"matchmakingContextToken"`
-	XGs2DuplicationAvoider  *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken             *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Player *Player	`json:"player"`
+	MatchmakingContextToken *core.String	`json:"matchmakingContextToken"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetGatheringRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	GatheringName *string            `json:"gatheringName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	GatheringName *core.String	`json:"gatheringName"`
 }
 
 type CancelMatchmakingRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	GatheringName          *string            `json:"gatheringName"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	GatheringName *core.String	`json:"gatheringName"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type CancelMatchmakingByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	GatheringName          *string            `json:"gatheringName"`
-	UserId                 *string            `json:"userId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	GatheringName *core.String	`json:"gatheringName"`
+	UserId *core.String	`json:"userId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type DeleteGatheringRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	GatheringName *string            `json:"gatheringName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	GatheringName *core.String	`json:"gatheringName"`
 }
 
 type DescribeRatingModelMastersRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	PageToken     *string            `json:"pageToken"`
-	Limit         *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateRatingModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	Name          *string            `json:"name"`
-	Description   *string            `json:"description"`
-	Metadata      *string            `json:"metadata"`
-	Volatility    *int32             `json:"volatility"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	Metadata *core.String	`json:"metadata"`
+	Volatility *int32	`json:"volatility"`
 }
 
 type GetRatingModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	RatingName    *string            `json:"ratingName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	RatingName *core.String	`json:"ratingName"`
 }
 
 type UpdateRatingModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	RatingName    *string            `json:"ratingName"`
-	Description   *string            `json:"description"`
-	Metadata      *string            `json:"metadata"`
-	Volatility    *int32             `json:"volatility"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	RatingName *core.String	`json:"ratingName"`
+	Description *core.String	`json:"description"`
+	Metadata *core.String	`json:"metadata"`
+	Volatility *int32	`json:"volatility"`
 }
 
 type DeleteRatingModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	RatingName    *string            `json:"ratingName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	RatingName *core.String	`json:"ratingName"`
 }
 
 type DescribeRatingModelsRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetRatingModelRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	RatingName    *string            `json:"ratingName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	RatingName *core.String	`json:"ratingName"`
 }
 
 type ExportMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type GetCurrentRatingModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
 }
 
 type UpdateCurrentRatingModelMasterRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	Settings      *string            `json:"settings"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	Settings *core.String	`json:"settings"`
 }
 
 type UpdateCurrentRatingModelMasterFromGitHubRequest struct {
-	RequestId       *core.RequestId        `json:"requestId"`
-	ContextStack    *core.ContextStack     `json:"contextStack"`
-	NamespaceName   *string                `json:"namespaceName"`
-	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	CheckoutSetting *GitHubCheckoutSetting	`json:"checkoutSetting"`
 }
 
 type DescribeRatingsRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeRatingsByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	PageToken              *string            `json:"pageToken"`
-	Limit                  *int64             `json:"limit"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetRatingRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	RatingName             *string            `json:"ratingName"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	RatingName *core.String	`json:"ratingName"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetRatingByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	RatingName             *string            `json:"ratingName"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	RatingName *core.String	`json:"ratingName"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type PutResultRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	RatingName    *string            `json:"ratingName"`
-	GameResults   *[]*GameResult     `json:"gameResults"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	RatingName *core.String	`json:"ratingName"`
+	GameResults *[]*GameResult	`json:"gameResults"`
 }
 
 type DeleteRatingRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	UserId                 *string            `json:"userId"`
-	RatingName             *string            `json:"ratingName"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	UserId *core.String	`json:"userId"`
+	RatingName *core.String	`json:"ratingName"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetBallotRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	RatingName             *string            `json:"ratingName"`
-	GatheringName          *string            `json:"gatheringName"`
-	GatheringId            *string            `json:"gatheringId"`
-	NumberOfPlayer         *int32             `json:"numberOfPlayer"`
-	KeyId                  *string            `json:"keyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
-	AccessToken            *core.AccessToken  `json:"accessToken"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	RatingName *core.String	`json:"ratingName"`
+	GatheringName *core.String	`json:"gatheringName"`
+	NumberOfPlayer *int32	`json:"numberOfPlayer"`
+	KeyId *core.String	`json:"keyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetBallotByUserIdRequest struct {
-	RequestId              *core.RequestId    `json:"requestId"`
-	ContextStack           *core.ContextStack `json:"contextStack"`
-	NamespaceName          *string            `json:"namespaceName"`
-	RatingName             *string            `json:"ratingName"`
-	GatheringName          *string            `json:"gatheringName"`
-	UserId                 *string            `json:"userId"`
-	GatheringId            *string            `json:"gatheringId"`
-	NumberOfPlayer         *int32             `json:"numberOfPlayer"`
-	KeyId                  *string            `json:"keyId"`
-	XGs2DuplicationAvoider *string            `json:"xGs2DuplicationAvoider"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	RatingName *core.String	`json:"ratingName"`
+	GatheringName *core.String	`json:"gatheringName"`
+	UserId *core.String	`json:"userId"`
+	NumberOfPlayer *int32	`json:"numberOfPlayer"`
+	KeyId *core.String	`json:"keyId"`
+	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
 }
 
 type VoteRequest struct {
-	RequestId       *core.RequestId    `json:"requestId"`
-	ContextStack    *core.ContextStack `json:"contextStack"`
-	NamespaceName   *string            `json:"namespaceName"`
-	BallotBody      *string            `json:"ballotBody"`
-	BallotSignature *string            `json:"ballotSignature"`
-	GameResults     *[]*GameResult     `json:"gameResults"`
-	KeyId           *string            `json:"keyId"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	BallotBody *core.String	`json:"ballotBody"`
+	BallotSignature *core.String	`json:"ballotSignature"`
+	GameResults *[]*GameResult	`json:"gameResults"`
+	KeyId *core.String	`json:"keyId"`
 }
 
 type VoteMultipleRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	SignedBallots *[]*SignedBallot   `json:"signedBallots"`
-	GameResults   *[]*GameResult     `json:"gameResults"`
-	KeyId         *string            `json:"keyId"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	SignedBallots *[]*SignedBallot	`json:"signedBallots"`
+	GameResults *[]*GameResult	`json:"gameResults"`
+	KeyId *core.String	`json:"keyId"`
 }
 
 type CommitVoteRequest struct {
-	RequestId     *core.RequestId    `json:"requestId"`
-	ContextStack  *core.ContextStack `json:"contextStack"`
-	NamespaceName *string            `json:"namespaceName"`
-	RatingName    *string            `json:"ratingName"`
-	GatheringName *string            `json:"gatheringName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	NamespaceName *core.String	`json:"namespaceName"`
+	RatingName *core.String	`json:"ratingName"`
+	GatheringName *core.String	`json:"gatheringName"`
 }

@@ -21,166 +21,166 @@ import (
 )
 
 type DescribeUsersRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateUserRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	Name         *string            `json:"name"`
-	Description  *string            `json:"description"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
 }
 
 type UpdateUserRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	UserName     *string            `json:"userName"`
-	Description  *string            `json:"description"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
+	Description *core.String	`json:"description"`
 }
 
 type GetUserRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	UserName     *string            `json:"userName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
 }
 
 type DeleteUserRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	UserName     *string            `json:"userName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
 }
 
 type DescribeSecurityPoliciesRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type DescribeCommonSecurityPoliciesRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	OwnerId      *string            `json:"ownerId"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	OwnerId *core.String	`json:"ownerId"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateSecurityPolicyRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	Name         *string            `json:"name"`
-	Description  *string            `json:"description"`
-	Policy       *string            `json:"policy"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	Name *core.String	`json:"name"`
+	Description *core.String	`json:"description"`
+	Policy *core.String	`json:"policy"`
 }
 
 type UpdateSecurityPolicyRequest struct {
-	RequestId          *core.RequestId    `json:"requestId"`
-	ContextStack       *core.ContextStack `json:"contextStack"`
-	SecurityPolicyName *string            `json:"securityPolicyName"`
-	Description        *string            `json:"description"`
-	Policy             *string            `json:"policy"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	SecurityPolicyName *core.String	`json:"securityPolicyName"`
+	Description *core.String	`json:"description"`
+	Policy *core.String	`json:"policy"`
 }
 
 type GetSecurityPolicyRequest struct {
-	RequestId          *core.RequestId    `json:"requestId"`
-	ContextStack       *core.ContextStack `json:"contextStack"`
-	SecurityPolicyName *string            `json:"securityPolicyName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	SecurityPolicyName *core.String	`json:"securityPolicyName"`
 }
 
 type DeleteSecurityPolicyRequest struct {
-	RequestId          *core.RequestId    `json:"requestId"`
-	ContextStack       *core.ContextStack `json:"contextStack"`
-	SecurityPolicyName *string            `json:"securityPolicyName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	SecurityPolicyName *core.String	`json:"securityPolicyName"`
 }
 
 type DescribeIdentifiersRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	UserName     *string            `json:"userName"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreateIdentifierRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	UserName     *string            `json:"userName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
 }
 
 type GetIdentifierRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	UserName     *string            `json:"userName"`
-	ClientId     *string            `json:"clientId"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
+	ClientId *core.String	`json:"clientId"`
 }
 
 type DeleteIdentifierRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	UserName     *string            `json:"userName"`
-	ClientId     *string            `json:"clientId"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
+	ClientId *core.String	`json:"clientId"`
 }
 
 type DescribePasswordsRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	UserName     *string            `json:"userName"`
-	PageToken    *string            `json:"pageToken"`
-	Limit        *int64             `json:"limit"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
+	PageToken *core.String	`json:"pageToken"`
+	Limit *int64	`json:"limit"`
 }
 
 type CreatePasswordRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	UserName     *string            `json:"userName"`
-	Password     *string            `json:"password"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
+	Password *core.String	`json:"password"`
 }
 
 type GetPasswordRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	UserName     *string            `json:"userName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
 }
 
 type DeletePasswordRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	UserName     *string            `json:"userName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
 }
 
 type GetHasSecurityPolicyRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	UserName     *string            `json:"userName"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
 }
 
 type AttachSecurityPolicyRequest struct {
-	RequestId        *core.RequestId    `json:"requestId"`
-	ContextStack     *core.ContextStack `json:"contextStack"`
-	UserName         *string            `json:"userName"`
-	SecurityPolicyId *string            `json:"securityPolicyId"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
+	SecurityPolicyId *core.String	`json:"securityPolicyId"`
 }
 
 type DetachSecurityPolicyRequest struct {
-	RequestId        *core.RequestId    `json:"requestId"`
-	ContextStack     *core.ContextStack `json:"contextStack"`
-	UserName         *string            `json:"userName"`
-	SecurityPolicyId *string            `json:"securityPolicyId"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
+	SecurityPolicyId *core.String	`json:"securityPolicyId"`
 }
 
 type LoginRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	ClientId     *string            `json:"clientId"`
-	ClientSecret *string            `json:"clientSecret"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	ClientId *core.String	`json:"clientId"`
+	ClientSecret *core.String	`json:"clientSecret"`
 }
 
 type LoginByUserRequest struct {
-	RequestId    *core.RequestId    `json:"requestId"`
-	ContextStack *core.ContextStack `json:"contextStack"`
-	UserName     *string            `json:"userName"`
-	Password     *string            `json:"password"`
+	RequestId    *core.RequestId	`json:"requestId"`
+	ContextStack *core.ContextStack	`json:"contextStack"`
+	UserName *core.String	`json:"userName"`
+	Password *core.String	`json:"password"`
 }

@@ -16,21 +16,25 @@ permissions and limitations under the License.
 
 package jobQueue
 
+import (
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
 type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items *[]*Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ネームスペースのリスト */
+	Items         *[]*Namespace	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -39,16 +43,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 作成したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -57,16 +61,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+    /** None */
+	Status         *core.String	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["Status"] = p.Status
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Status != nil {
+     data["Status"] = p.Status
+    }
+    return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -75,16 +79,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+    /** ネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -93,16 +97,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 更新したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -111,16 +115,16 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 type DeleteNamespaceResult struct {
-	/** 削除したネームスペース */
-	Item *Namespace `json:"item"`
+    /** 削除したネームスペース */
+	Item         *Namespace	`json:"item"`
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -129,20 +133,20 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeJobsByUserIdResult struct {
-	/** ジョブのリスト */
-	Items *[]*Job `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** ジョブのリスト */
+	Items         *[]*Job	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeJobsByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeJobsByUserIdAsyncResult struct {
@@ -151,16 +155,16 @@ type DescribeJobsByUserIdAsyncResult struct {
 }
 
 type GetJobByUserIdResult struct {
-	/** ジョブ */
-	Item *Job `json:"item"`
+    /** ジョブ */
+	Item         *Job	`json:"item"`
 }
 
 func (p *GetJobByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetJobByUserIdAsyncResult struct {
@@ -169,15 +173,15 @@ type GetJobByUserIdAsyncResult struct {
 }
 
 type PushByUserIdResult struct {
-	/** 追加した{model_name}の一覧 */
-	Items *[]*Job `json:"items"`
+    /** 追加した{model_name}の一覧 */
+	Items         *[]*Job	`json:"items"`
 }
 
 func (p *PushByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type PushByUserIdAsyncResult struct {
@@ -186,26 +190,26 @@ type PushByUserIdAsyncResult struct {
 }
 
 type RunResult struct {
-	/** ジョブ */
-	Item *Job `json:"item"`
-	/** ジョブの実行結果 */
-	Result *JobResultBody `json:"result"`
-	/** None */
-	IsLastJob *bool `json:"isLastJob"`
+    /** ジョブ */
+	Item         *Job	`json:"item"`
+    /** ジョブの実行結果 */
+	Result         *JobResultBody	`json:"result"`
+    /** None */
+	IsLastJob         *bool	`json:"isLastJob"`
 }
 
 func (p *RunResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Result != nil {
-		data["Result"] = p.Result.ToDict()
-	}
-	if p.IsLastJob != nil {
-		data["IsLastJob"] = p.IsLastJob
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Result != nil {
+     data["Result"] = p.Result.ToDict()
+    }
+    if p.IsLastJob != nil {
+     data["IsLastJob"] = p.IsLastJob
+    }
+    return &data
 }
 
 type RunAsyncResult struct {
@@ -214,26 +218,26 @@ type RunAsyncResult struct {
 }
 
 type RunByUserIdResult struct {
-	/** ジョブ */
-	Item *Job `json:"item"`
-	/** ジョブの実行結果 */
-	Result *JobResultBody `json:"result"`
-	/** None */
-	IsLastJob *bool `json:"isLastJob"`
+    /** ジョブ */
+	Item         *Job	`json:"item"`
+    /** ジョブの実行結果 */
+	Result         *JobResultBody	`json:"result"`
+    /** None */
+	IsLastJob         *bool	`json:"isLastJob"`
 }
 
 func (p *RunByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	if p.Result != nil {
-		data["Result"] = p.Result.ToDict()
-	}
-	if p.IsLastJob != nil {
-		data["IsLastJob"] = p.IsLastJob
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    if p.Result != nil {
+     data["Result"] = p.Result.ToDict()
+    }
+    if p.IsLastJob != nil {
+     data["IsLastJob"] = p.IsLastJob
+    }
+    return &data
 }
 
 type RunByUserIdAsyncResult struct {
@@ -242,16 +246,16 @@ type RunByUserIdAsyncResult struct {
 }
 
 type DeleteJobByUserIdResult struct {
-	/** ジョブ */
-	Item *Job `json:"item"`
+    /** ジョブ */
+	Item         *Job	`json:"item"`
 }
 
 func (p *DeleteJobByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteJobByUserIdAsyncResult struct {
@@ -260,15 +264,15 @@ type DeleteJobByUserIdAsyncResult struct {
 }
 
 type PushByStampSheetResult struct {
-	/** 追加した{model_name}の一覧 */
-	Items *[]*Job `json:"items"`
+    /** 追加した{model_name}の一覧 */
+	Items         *[]*Job	`json:"items"`
 }
 
 func (p *PushByStampSheetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    return &data
 }
 
 type PushByStampSheetAsyncResult struct {
@@ -277,20 +281,20 @@ type PushByStampSheetAsyncResult struct {
 }
 
 type DescribeDeadLetterJobsByUserIdResult struct {
-	/** デッドレタージョブのリスト */
-	Items *[]*DeadLetterJob `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+    /** デッドレタージョブのリスト */
+	Items         *[]*DeadLetterJob	`json:"items"`
+    /** リストの続きを取得するためのページトークン */
+	NextPageToken         *core.String	`json:"nextPageToken"`
 }
 
 func (p *DescribeDeadLetterJobsByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-	}
-	if p.NextPageToken != nil {
-		data["NextPageToken"] = p.NextPageToken
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Items != nil {
+    }
+    if p.NextPageToken != nil {
+     data["NextPageToken"] = p.NextPageToken
+    }
+    return &data
 }
 
 type DescribeDeadLetterJobsByUserIdAsyncResult struct {
@@ -299,16 +303,16 @@ type DescribeDeadLetterJobsByUserIdAsyncResult struct {
 }
 
 type GetDeadLetterJobByUserIdResult struct {
-	/** デッドレタージョブ */
-	Item *DeadLetterJob `json:"item"`
+    /** デッドレタージョブ */
+	Item         *DeadLetterJob	`json:"item"`
 }
 
 func (p *GetDeadLetterJobByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type GetDeadLetterJobByUserIdAsyncResult struct {
@@ -317,16 +321,16 @@ type GetDeadLetterJobByUserIdAsyncResult struct {
 }
 
 type DeleteDeadLetterJobByUserIdResult struct {
-	/** デッドレタージョブ */
-	Item *DeadLetterJob `json:"item"`
+    /** デッドレタージョブ */
+	Item         *DeadLetterJob	`json:"item"`
 }
 
 func (p *DeleteDeadLetterJobByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["Item"] = p.Item.ToDict()
-	}
-	return &data
+    var data = map[string]interface{}{}
+    if p.Item != nil {
+     data["Item"] = p.Item.ToDict()
+    }
+    return &data
 }
 
 type DeleteDeadLetterJobByUserIdAsyncResult struct {
