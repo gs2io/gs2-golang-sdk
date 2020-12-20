@@ -136,6 +136,9 @@ func (p *String) UnmarshalJSON(data []byte) error {
 }
 
 func (p *String) MarshalJSON() ([]byte, error) {
+	if p == nil {
+		return nil, nil
+	}
 	return []byte(*p), nil
 }
 
