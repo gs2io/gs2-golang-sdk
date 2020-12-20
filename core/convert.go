@@ -6,6 +6,12 @@ import (
 
 func ToString(data interface{}) string {
 	{
+		v, ok := data.(String)
+		if ok {
+			return string(v)
+		}
+	}
+	{
 		v, ok := data.(string)
 		if ok {
 			return v
