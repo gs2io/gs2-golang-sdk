@@ -867,7 +867,7 @@ type DescribeBlackListResult struct {
 func (p *DescribeBlackListResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Items {
 			items = append(items, item)
 		}
@@ -889,7 +889,7 @@ type DescribeBlackListByUserIdResult struct {
 func (p *DescribeBlackListByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Items {
 			items = append(items, item)
 		}

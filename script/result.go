@@ -290,7 +290,7 @@ func (p *InvokeScriptResult) ToDict() *map[string]interface{} {
         data["charged"] = p.Charged
     }
     if p.Output != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Output {
 			items = append(items, item)
 		}
@@ -332,7 +332,7 @@ func (p *DebugInvokeResult) ToDict() *map[string]interface{} {
         data["charged"] = p.Charged
     }
     if p.Output != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Output {
 			items = append(items, item)
 		}

@@ -984,7 +984,7 @@ type DescribeReferenceOfResult struct {
 func (p *DescribeReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Items {
 			items = append(items, item)
 		}
@@ -1021,7 +1021,7 @@ type DescribeReferenceOfByUserIdResult struct {
 func (p *DescribeReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Items {
 			items = append(items, item)
 		}
@@ -1058,7 +1058,7 @@ type GetReferenceOfResult struct {
 func (p *GetReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Item {
 			items = append(items, item)
 		}
@@ -1095,7 +1095,7 @@ type GetReferenceOfByUserIdResult struct {
 func (p *GetReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Item {
 			items = append(items, item)
 		}
@@ -1132,7 +1132,7 @@ type VerifyReferenceOfResult struct {
 func (p *VerifyReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Item {
 			items = append(items, item)
 		}
@@ -1169,7 +1169,7 @@ type VerifyReferenceOfByUserIdResult struct {
 func (p *VerifyReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Item {
 			items = append(items, item)
 		}
@@ -1206,7 +1206,7 @@ type AddReferenceOfResult struct {
 func (p *AddReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Item {
 			items = append(items, item)
 		}
@@ -1243,7 +1243,7 @@ type AddReferenceOfByUserIdResult struct {
 func (p *AddReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Item {
 			items = append(items, item)
 		}
@@ -1280,7 +1280,7 @@ type DeleteReferenceOfResult struct {
 func (p *DeleteReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Item {
 			items = append(items, item)
 		}
@@ -1317,7 +1317,7 @@ type DeleteReferenceOfByUserIdResult struct {
 func (p *DeleteReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Item {
 			items = append(items, item)
 		}
@@ -1423,7 +1423,7 @@ type AddReferenceOfItemSetByStampSheetResult struct {
 func (p *AddReferenceOfItemSetByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Item {
 			items = append(items, item)
 		}
@@ -1460,7 +1460,7 @@ type DeleteReferenceOfItemSetByStampSheetResult struct {
 func (p *DeleteReferenceOfItemSetByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Item {
 			items = append(items, item)
 		}
@@ -1536,7 +1536,7 @@ type VerifyReferenceOfByStampTaskResult struct {
 func (p *VerifyReferenceOfByStampTaskResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.Item {
 			items = append(items, item)
 		}

@@ -450,7 +450,7 @@ type RunStampSheetExpressResult struct {
 func (p *RunStampSheetExpressResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.TaskResults != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.TaskResults {
 			items = append(items, item)
 		}
@@ -518,7 +518,7 @@ type RunStampSheetExpressWithoutNamespaceResult struct {
 func (p *RunStampSheetExpressWithoutNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.TaskResults != nil {
-    	items := make([]*String, 0)
+    	items := make([]core.String, 0)
     	for _, item := range *p.TaskResults {
 			items = append(items, item)
 		}
