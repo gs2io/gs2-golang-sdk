@@ -30,9 +30,14 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Namespace, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -50,7 +55,7 @@ type CreateNamespaceResult struct {
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -68,7 +73,7 @@ type GetNamespaceStatusResult struct {
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Status != nil {
-     data["Status"] = p.Status
+        data["status"] = p.Status
     }
     return &data
 }
@@ -86,7 +91,7 @@ type GetNamespaceResult struct {
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -104,7 +109,7 @@ type UpdateNamespaceResult struct {
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -122,7 +127,7 @@ type DeleteNamespaceResult struct {
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -142,9 +147,14 @@ type DescribeFormModelMastersResult struct {
 func (p *DescribeFormModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*FormModelMaster, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -162,7 +172,7 @@ type CreateFormModelMasterResult struct {
 func (p *CreateFormModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -180,7 +190,7 @@ type GetFormModelMasterResult struct {
 func (p *GetFormModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -198,7 +208,7 @@ type UpdateFormModelMasterResult struct {
 func (p *UpdateFormModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -216,7 +226,7 @@ type DeleteFormModelMasterResult struct {
 func (p *DeleteFormModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -234,6 +244,11 @@ type DescribeMoldModelsResult struct {
 func (p *DescribeMoldModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*MoldModel, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     return &data
 }
@@ -251,7 +266,7 @@ type GetMoldModelResult struct {
 func (p *GetMoldModelResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -271,9 +286,14 @@ type DescribeMoldModelMastersResult struct {
 func (p *DescribeMoldModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*MoldModelMaster, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -291,7 +311,7 @@ type CreateMoldModelMasterResult struct {
 func (p *CreateMoldModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -309,7 +329,7 @@ type GetMoldModelMasterResult struct {
 func (p *GetMoldModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -327,7 +347,7 @@ type UpdateMoldModelMasterResult struct {
 func (p *UpdateMoldModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -345,7 +365,7 @@ type DeleteMoldModelMasterResult struct {
 func (p *DeleteMoldModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -363,7 +383,7 @@ type ExportMasterResult struct {
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -381,7 +401,7 @@ type GetCurrentFormMasterResult struct {
 func (p *GetCurrentFormMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -399,7 +419,7 @@ type UpdateCurrentFormMasterResult struct {
 func (p *UpdateCurrentFormMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -417,7 +437,7 @@ type UpdateCurrentFormMasterFromGitHubResult struct {
 func (p *UpdateCurrentFormMasterFromGitHubResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -437,9 +457,14 @@ type DescribeMoldsResult struct {
 func (p *DescribeMoldsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Mold, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -459,9 +484,14 @@ type DescribeMoldsByUserIdResult struct {
 func (p *DescribeMoldsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Mold, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -481,10 +511,10 @@ type GetMoldResult struct {
 func (p *GetMoldResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     return &data
 }
@@ -504,10 +534,10 @@ type GetMoldByUserIdResult struct {
 func (p *GetMoldByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     return &data
 }
@@ -527,10 +557,10 @@ type SetMoldCapacityByUserIdResult struct {
 func (p *SetMoldCapacityByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     return &data
 }
@@ -550,10 +580,10 @@ type AddMoldCapacityByUserIdResult struct {
 func (p *AddMoldCapacityByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     return &data
 }
@@ -571,7 +601,7 @@ type DeleteMoldResult struct {
 func (p *DeleteMoldResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -589,7 +619,7 @@ type DeleteMoldByUserIdResult struct {
 func (p *DeleteMoldByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -609,10 +639,10 @@ type AddCapacityByStampSheetResult struct {
 func (p *AddCapacityByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     return &data
 }
@@ -632,10 +662,10 @@ type SetCapacityByStampSheetResult struct {
 func (p *SetCapacityByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     return &data
 }
@@ -655,9 +685,14 @@ type DescribeFormsResult struct {
 func (p *DescribeFormsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Form, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -677,9 +712,14 @@ type DescribeFormsByUserIdResult struct {
 func (p *DescribeFormsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Form, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -703,16 +743,16 @@ type GetFormResult struct {
 func (p *GetFormResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.Mold != nil {
-     data["Mold"] = p.Mold.ToDict()
+        data["mold"] = p.Mold.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     if p.FormModel != nil {
-     data["FormModel"] = p.FormModel.ToDict()
+        data["formModel"] = p.FormModel.ToDict()
     }
     return &data
 }
@@ -736,16 +776,16 @@ type GetFormByUserIdResult struct {
 func (p *GetFormByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.Mold != nil {
-     data["Mold"] = p.Mold.ToDict()
+        data["mold"] = p.Mold.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     if p.FormModel != nil {
-     data["FormModel"] = p.FormModel.ToDict()
+        data["formModel"] = p.FormModel.ToDict()
     }
     return &data
 }
@@ -773,22 +813,22 @@ type GetFormWithSignatureResult struct {
 func (p *GetFormWithSignatureResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.Body != nil {
-     data["Body"] = p.Body
+        data["body"] = p.Body
     }
     if p.Signature != nil {
-     data["Signature"] = p.Signature
+        data["signature"] = p.Signature
     }
     if p.Mold != nil {
-     data["Mold"] = p.Mold.ToDict()
+        data["mold"] = p.Mold.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     if p.FormModel != nil {
-     data["FormModel"] = p.FormModel.ToDict()
+        data["formModel"] = p.FormModel.ToDict()
     }
     return &data
 }
@@ -816,22 +856,22 @@ type GetFormWithSignatureByUserIdResult struct {
 func (p *GetFormWithSignatureByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.Body != nil {
-     data["Body"] = p.Body
+        data["body"] = p.Body
     }
     if p.Signature != nil {
-     data["Signature"] = p.Signature
+        data["signature"] = p.Signature
     }
     if p.Mold != nil {
-     data["Mold"] = p.Mold.ToDict()
+        data["mold"] = p.Mold.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     if p.FormModel != nil {
-     data["FormModel"] = p.FormModel.ToDict()
+        data["formModel"] = p.FormModel.ToDict()
     }
     return &data
 }
@@ -855,16 +895,16 @@ type SetFormByUserIdResult struct {
 func (p *SetFormByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.Mold != nil {
-     data["Mold"] = p.Mold.ToDict()
+        data["mold"] = p.Mold.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     if p.FormModel != nil {
-     data["FormModel"] = p.FormModel.ToDict()
+        data["formModel"] = p.FormModel.ToDict()
     }
     return &data
 }
@@ -888,16 +928,16 @@ type SetFormWithSignatureResult struct {
 func (p *SetFormWithSignatureResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.Mold != nil {
-     data["Mold"] = p.Mold.ToDict()
+        data["mold"] = p.Mold.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     if p.FormModel != nil {
-     data["FormModel"] = p.FormModel.ToDict()
+        data["formModel"] = p.FormModel.ToDict()
     }
     return &data
 }
@@ -921,16 +961,16 @@ type AcquireActionsToFormPropertiesResult struct {
 func (p *AcquireActionsToFormPropertiesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.Mold != nil {
-     data["Mold"] = p.Mold.ToDict()
+        data["mold"] = p.Mold.ToDict()
     }
     if p.StampSheet != nil {
-     data["StampSheet"] = p.StampSheet
+        data["stampSheet"] = p.StampSheet
     }
     if p.StampSheetEncryptionKeyId != nil {
-     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }
@@ -954,16 +994,16 @@ type DeleteFormResult struct {
 func (p *DeleteFormResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.Mold != nil {
-     data["Mold"] = p.Mold.ToDict()
+        data["mold"] = p.Mold.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     if p.FormModel != nil {
-     data["FormModel"] = p.FormModel.ToDict()
+        data["formModel"] = p.FormModel.ToDict()
     }
     return &data
 }
@@ -987,16 +1027,16 @@ type DeleteFormByUserIdResult struct {
 func (p *DeleteFormByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.Mold != nil {
-     data["Mold"] = p.Mold.ToDict()
+        data["mold"] = p.Mold.ToDict()
     }
     if p.MoldModel != nil {
-     data["MoldModel"] = p.MoldModel.ToDict()
+        data["moldModel"] = p.MoldModel.ToDict()
     }
     if p.FormModel != nil {
-     data["FormModel"] = p.FormModel.ToDict()
+        data["formModel"] = p.FormModel.ToDict()
     }
     return &data
 }
@@ -1020,16 +1060,16 @@ type AcquireActionToFormPropertiesByStampSheetResult struct {
 func (p *AcquireActionToFormPropertiesByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.Mold != nil {
-     data["Mold"] = p.Mold.ToDict()
+        data["mold"] = p.Mold.ToDict()
     }
     if p.StampSheet != nil {
-     data["StampSheet"] = p.StampSheet
+        data["stampSheet"] = p.StampSheet
     }
     if p.StampSheetEncryptionKeyId != nil {
-     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }

@@ -30,9 +30,14 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Namespace, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -50,7 +55,7 @@ type CreateNamespaceResult struct {
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -68,7 +73,7 @@ type GetNamespaceStatusResult struct {
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Status != nil {
-     data["Status"] = p.Status
+        data["status"] = p.Status
     }
     return &data
 }
@@ -86,7 +91,7 @@ type GetNamespaceResult struct {
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -104,7 +109,7 @@ type UpdateNamespaceResult struct {
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -122,7 +127,7 @@ type DeleteNamespaceResult struct {
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -142,9 +147,14 @@ type DescribeInventoryModelMastersResult struct {
 func (p *DescribeInventoryModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*InventoryModelMaster, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -162,7 +172,7 @@ type CreateInventoryModelMasterResult struct {
 func (p *CreateInventoryModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -180,7 +190,7 @@ type GetInventoryModelMasterResult struct {
 func (p *GetInventoryModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -198,7 +208,7 @@ type UpdateInventoryModelMasterResult struct {
 func (p *UpdateInventoryModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -216,7 +226,7 @@ type DeleteInventoryModelMasterResult struct {
 func (p *DeleteInventoryModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -234,6 +244,11 @@ type DescribeInventoryModelsResult struct {
 func (p *DescribeInventoryModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*InventoryModel, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     return &data
 }
@@ -251,7 +266,7 @@ type GetInventoryModelResult struct {
 func (p *GetInventoryModelResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -271,9 +286,14 @@ type DescribeItemModelMastersResult struct {
 func (p *DescribeItemModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemModelMaster, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -291,7 +311,7 @@ type CreateItemModelMasterResult struct {
 func (p *CreateItemModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -309,7 +329,7 @@ type GetItemModelMasterResult struct {
 func (p *GetItemModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -327,7 +347,7 @@ type UpdateItemModelMasterResult struct {
 func (p *UpdateItemModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -345,7 +365,7 @@ type DeleteItemModelMasterResult struct {
 func (p *DeleteItemModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -363,6 +383,11 @@ type DescribeItemModelsResult struct {
 func (p *DescribeItemModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemModel, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     return &data
 }
@@ -380,7 +405,7 @@ type GetItemModelResult struct {
 func (p *GetItemModelResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -398,7 +423,7 @@ type ExportMasterResult struct {
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -416,7 +441,7 @@ type GetCurrentItemModelMasterResult struct {
 func (p *GetCurrentItemModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -434,7 +459,7 @@ type UpdateCurrentItemModelMasterResult struct {
 func (p *UpdateCurrentItemModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -452,7 +477,7 @@ type UpdateCurrentItemModelMasterFromGitHubResult struct {
 func (p *UpdateCurrentItemModelMasterFromGitHubResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -472,9 +497,14 @@ type DescribeInventoriesResult struct {
 func (p *DescribeInventoriesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Inventory, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -494,9 +524,14 @@ type DescribeInventoriesByUserIdResult struct {
 func (p *DescribeInventoriesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Inventory, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -514,7 +549,7 @@ type GetInventoryResult struct {
 func (p *GetInventoryResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -532,7 +567,7 @@ type GetInventoryByUserIdResult struct {
 func (p *GetInventoryByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -550,7 +585,7 @@ type AddCapacityByUserIdResult struct {
 func (p *AddCapacityByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -568,7 +603,7 @@ type SetCapacityByUserIdResult struct {
 func (p *SetCapacityByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -586,7 +621,7 @@ type DeleteInventoryByUserIdResult struct {
 func (p *DeleteInventoryByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -604,7 +639,7 @@ type AddCapacityByStampSheetResult struct {
 func (p *AddCapacityByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -622,7 +657,7 @@ type SetCapacityByStampSheetResult struct {
 func (p *SetCapacityByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -642,9 +677,14 @@ type DescribeItemSetsResult struct {
 func (p *DescribeItemSetsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemSet, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -664,9 +704,14 @@ type DescribeItemSetsByUserIdResult struct {
 func (p *DescribeItemSetsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemSet, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -688,12 +733,17 @@ type GetItemSetResult struct {
 func (p *GetItemSetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemSet, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -715,12 +765,17 @@ type GetItemSetByUserIdResult struct {
 func (p *GetItemSetByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemSet, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -746,18 +801,23 @@ type GetItemWithSignatureResult struct {
 func (p *GetItemWithSignatureResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemSet, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     if p.Body != nil {
-     data["Body"] = p.Body
+        data["body"] = p.Body
     }
     if p.Signature != nil {
-     data["Signature"] = p.Signature
+        data["signature"] = p.Signature
     }
     return &data
 }
@@ -783,18 +843,23 @@ type GetItemWithSignatureByUserIdResult struct {
 func (p *GetItemWithSignatureByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemSet, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     if p.Body != nil {
-     data["Body"] = p.Body
+        data["body"] = p.Body
     }
     if p.Signature != nil {
-     data["Signature"] = p.Signature
+        data["signature"] = p.Signature
     }
     return &data
 }
@@ -818,15 +883,20 @@ type AcquireItemSetByUserIdResult struct {
 func (p *AcquireItemSetByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemSet, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     if p.OverflowCount != nil {
-     data["OverflowCount"] = p.OverflowCount
+        data["overflowCount"] = p.OverflowCount
     }
     return &data
 }
@@ -848,12 +918,17 @@ type ConsumeItemSetResult struct {
 func (p *ConsumeItemSetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemSet, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -875,12 +950,17 @@ type ConsumeItemSetByUserIdResult struct {
 func (p *ConsumeItemSetByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemSet, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -904,15 +984,20 @@ type DescribeReferenceOfResult struct {
 func (p *DescribeReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ItemSet != nil {
-     data["ItemSet"] = p.ItemSet.ToDict()
+        data["itemSet"] = p.ItemSet.ToDict()
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -936,15 +1021,20 @@ type DescribeReferenceOfByUserIdResult struct {
 func (p *DescribeReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ItemSet != nil {
-     data["ItemSet"] = p.ItemSet.ToDict()
+        data["itemSet"] = p.ItemSet.ToDict()
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -968,15 +1058,20 @@ type GetReferenceOfResult struct {
 func (p *GetReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Item {
+			items = append(items, item)
+		}
+		data["item"] = items
     }
     if p.ItemSet != nil {
-     data["ItemSet"] = p.ItemSet.ToDict()
+        data["itemSet"] = p.ItemSet.ToDict()
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -1000,15 +1095,20 @@ type GetReferenceOfByUserIdResult struct {
 func (p *GetReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Item {
+			items = append(items, item)
+		}
+		data["item"] = items
     }
     if p.ItemSet != nil {
-     data["ItemSet"] = p.ItemSet.ToDict()
+        data["itemSet"] = p.ItemSet.ToDict()
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -1032,15 +1132,20 @@ type VerifyReferenceOfResult struct {
 func (p *VerifyReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Item {
+			items = append(items, item)
+		}
+		data["item"] = items
     }
     if p.ItemSet != nil {
-     data["ItemSet"] = p.ItemSet.ToDict()
+        data["itemSet"] = p.ItemSet.ToDict()
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -1064,15 +1169,20 @@ type VerifyReferenceOfByUserIdResult struct {
 func (p *VerifyReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Item {
+			items = append(items, item)
+		}
+		data["item"] = items
     }
     if p.ItemSet != nil {
-     data["ItemSet"] = p.ItemSet.ToDict()
+        data["itemSet"] = p.ItemSet.ToDict()
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -1096,15 +1206,20 @@ type AddReferenceOfResult struct {
 func (p *AddReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Item {
+			items = append(items, item)
+		}
+		data["item"] = items
     }
     if p.ItemSet != nil {
-     data["ItemSet"] = p.ItemSet.ToDict()
+        data["itemSet"] = p.ItemSet.ToDict()
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -1128,15 +1243,20 @@ type AddReferenceOfByUserIdResult struct {
 func (p *AddReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Item {
+			items = append(items, item)
+		}
+		data["item"] = items
     }
     if p.ItemSet != nil {
-     data["ItemSet"] = p.ItemSet.ToDict()
+        data["itemSet"] = p.ItemSet.ToDict()
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -1160,15 +1280,20 @@ type DeleteReferenceOfResult struct {
 func (p *DeleteReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Item {
+			items = append(items, item)
+		}
+		data["item"] = items
     }
     if p.ItemSet != nil {
-     data["ItemSet"] = p.ItemSet.ToDict()
+        data["itemSet"] = p.ItemSet.ToDict()
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -1192,15 +1317,20 @@ type DeleteReferenceOfByUserIdResult struct {
 func (p *DeleteReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Item {
+			items = append(items, item)
+		}
+		data["item"] = items
     }
     if p.ItemSet != nil {
-     data["ItemSet"] = p.ItemSet.ToDict()
+        data["itemSet"] = p.ItemSet.ToDict()
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -1222,12 +1352,17 @@ type DeleteItemSetByUserIdResult struct {
 func (p *DeleteItemSetByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemSet, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -1251,15 +1386,20 @@ type AcquireItemSetByStampSheetResult struct {
 func (p *AcquireItemSetByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemSet, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     if p.OverflowCount != nil {
-     data["OverflowCount"] = p.OverflowCount
+        data["overflowCount"] = p.OverflowCount
     }
     return &data
 }
@@ -1283,15 +1423,20 @@ type AddReferenceOfItemSetByStampSheetResult struct {
 func (p *AddReferenceOfItemSetByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Item {
+			items = append(items, item)
+		}
+		data["item"] = items
     }
     if p.ItemSet != nil {
-     data["ItemSet"] = p.ItemSet.ToDict()
+        data["itemSet"] = p.ItemSet.ToDict()
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -1315,15 +1460,20 @@ type DeleteReferenceOfItemSetByStampSheetResult struct {
 func (p *DeleteReferenceOfItemSetByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Item {
+			items = append(items, item)
+		}
+		data["item"] = items
     }
     if p.ItemSet != nil {
-     data["ItemSet"] = p.ItemSet.ToDict()
+        data["itemSet"] = p.ItemSet.ToDict()
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     return &data
 }
@@ -1347,15 +1497,20 @@ type ConsumeItemSetByStampTaskResult struct {
 func (p *ConsumeItemSetByStampTaskResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ItemSet, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     if p.NewContextStack != nil {
-     data["NewContextStack"] = p.NewContextStack
+        data["newContextStack"] = p.NewContextStack
     }
     return &data
 }
@@ -1381,18 +1536,23 @@ type VerifyReferenceOfByStampTaskResult struct {
 func (p *VerifyReferenceOfByStampTaskResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Item {
+			items = append(items, item)
+		}
+		data["item"] = items
     }
     if p.ItemSet != nil {
-     data["ItemSet"] = p.ItemSet.ToDict()
+        data["itemSet"] = p.ItemSet.ToDict()
     }
     if p.ItemModel != nil {
-     data["ItemModel"] = p.ItemModel.ToDict()
+        data["itemModel"] = p.ItemModel.ToDict()
     }
     if p.Inventory != nil {
-     data["Inventory"] = p.Inventory.ToDict()
+        data["inventory"] = p.Inventory.ToDict()
     }
     if p.NewContextStack != nil {
-     data["NewContextStack"] = p.NewContextStack
+        data["newContextStack"] = p.NewContextStack
     }
     return &data
 }

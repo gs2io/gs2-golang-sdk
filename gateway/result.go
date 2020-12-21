@@ -30,9 +30,14 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Namespace, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -50,7 +55,7 @@ type CreateNamespaceResult struct {
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -68,7 +73,7 @@ type GetNamespaceStatusResult struct {
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Status != nil {
-     data["Status"] = p.Status
+        data["status"] = p.Status
     }
     return &data
 }
@@ -86,7 +91,7 @@ type GetNamespaceResult struct {
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -104,7 +109,7 @@ type UpdateNamespaceResult struct {
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -137,9 +142,14 @@ type DescribeWebSocketSessionsResult struct {
 func (p *DescribeWebSocketSessionsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*WebSocketSession, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -159,9 +169,14 @@ type DescribeWebSocketSessionsByUserIdResult struct {
 func (p *DescribeWebSocketSessionsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*WebSocketSession, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -179,7 +194,7 @@ type SetUserIdResult struct {
 func (p *SetUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -197,7 +212,7 @@ type SetUserIdByUserIdResult struct {
 func (p *SetUserIdByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -215,7 +230,7 @@ type GetWebSocketSessionResult struct {
 func (p *GetWebSocketSessionResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -233,7 +248,7 @@ type GetWebSocketSessionByConnectionIdResult struct {
 func (p *GetWebSocketSessionByConnectionIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -251,7 +266,7 @@ type SendNotificationResult struct {
 func (p *SendNotificationResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Protocol != nil {
-     data["Protocol"] = p.Protocol
+        data["protocol"] = p.Protocol
     }
     return &data
 }
@@ -269,7 +284,7 @@ type SetFirebaseTokenResult struct {
 func (p *SetFirebaseTokenResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -287,7 +302,7 @@ type SetFirebaseTokenByUserIdResult struct {
 func (p *SetFirebaseTokenByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -305,7 +320,7 @@ type GetFirebaseTokenResult struct {
 func (p *GetFirebaseTokenResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -323,7 +338,7 @@ type GetFirebaseTokenByUserIdResult struct {
 func (p *GetFirebaseTokenByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -341,7 +356,7 @@ type DeleteFirebaseTokenResult struct {
 func (p *DeleteFirebaseTokenResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -359,7 +374,7 @@ type DeleteFirebaseTokenByUserIdResult struct {
 func (p *DeleteFirebaseTokenByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }

@@ -30,9 +30,14 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Namespace, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -50,7 +55,7 @@ type CreateNamespaceResult struct {
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -68,7 +73,7 @@ type GetNamespaceStatusResult struct {
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Status != nil {
-     data["Status"] = p.Status
+        data["status"] = p.Status
     }
     return &data
 }
@@ -86,7 +91,7 @@ type GetNamespaceResult struct {
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -104,7 +109,7 @@ type UpdateNamespaceResult struct {
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -122,7 +127,7 @@ type DeleteNamespaceResult struct {
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -142,9 +147,14 @@ type DescribeSalesItemMastersResult struct {
 func (p *DescribeSalesItemMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*SalesItemMaster, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -162,7 +172,7 @@ type CreateSalesItemMasterResult struct {
 func (p *CreateSalesItemMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -180,7 +190,7 @@ type GetSalesItemMasterResult struct {
 func (p *GetSalesItemMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -198,7 +208,7 @@ type UpdateSalesItemMasterResult struct {
 func (p *UpdateSalesItemMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -216,7 +226,7 @@ type DeleteSalesItemMasterResult struct {
 func (p *DeleteSalesItemMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -236,9 +246,14 @@ type DescribeSalesItemGroupMastersResult struct {
 func (p *DescribeSalesItemGroupMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*SalesItemGroupMaster, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -256,7 +271,7 @@ type CreateSalesItemGroupMasterResult struct {
 func (p *CreateSalesItemGroupMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -274,7 +289,7 @@ type GetSalesItemGroupMasterResult struct {
 func (p *GetSalesItemGroupMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -292,7 +307,7 @@ type UpdateSalesItemGroupMasterResult struct {
 func (p *UpdateSalesItemGroupMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -310,7 +325,7 @@ type DeleteSalesItemGroupMasterResult struct {
 func (p *DeleteSalesItemGroupMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -330,9 +345,14 @@ type DescribeShowcaseMastersResult struct {
 func (p *DescribeShowcaseMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ShowcaseMaster, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -350,7 +370,7 @@ type CreateShowcaseMasterResult struct {
 func (p *CreateShowcaseMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -368,7 +388,7 @@ type GetShowcaseMasterResult struct {
 func (p *GetShowcaseMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -386,7 +406,7 @@ type UpdateShowcaseMasterResult struct {
 func (p *UpdateShowcaseMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -404,7 +424,7 @@ type DeleteShowcaseMasterResult struct {
 func (p *DeleteShowcaseMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -422,7 +442,7 @@ type ExportMasterResult struct {
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -440,7 +460,7 @@ type GetCurrentShowcaseMasterResult struct {
 func (p *GetCurrentShowcaseMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -458,7 +478,7 @@ type UpdateCurrentShowcaseMasterResult struct {
 func (p *UpdateCurrentShowcaseMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -476,7 +496,7 @@ type UpdateCurrentShowcaseMasterFromGitHubResult struct {
 func (p *UpdateCurrentShowcaseMasterFromGitHubResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -494,6 +514,11 @@ type DescribeShowcasesResult struct {
 func (p *DescribeShowcasesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Showcase, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     return &data
 }
@@ -511,6 +536,11 @@ type DescribeShowcasesByUserIdResult struct {
 func (p *DescribeShowcasesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Showcase, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     return &data
 }
@@ -528,7 +558,7 @@ type GetShowcaseResult struct {
 func (p *GetShowcaseResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -546,7 +576,7 @@ type GetShowcaseByUserIdResult struct {
 func (p *GetShowcaseByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -568,13 +598,13 @@ type BuyResult struct {
 func (p *BuyResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StampSheet != nil {
-     data["StampSheet"] = p.StampSheet
+        data["stampSheet"] = p.StampSheet
     }
     if p.StampSheetEncryptionKeyId != nil {
-     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }
@@ -596,13 +626,13 @@ type BuyByUserIdResult struct {
 func (p *BuyByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StampSheet != nil {
-     data["StampSheet"] = p.StampSheet
+        data["stampSheet"] = p.StampSheet
     }
     if p.StampSheetEncryptionKeyId != nil {
-     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }

@@ -30,9 +30,14 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Namespace, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -50,7 +55,7 @@ type CreateNamespaceResult struct {
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -68,7 +73,7 @@ type GetNamespaceStatusResult struct {
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Status != nil {
-     data["Status"] = p.Status
+        data["status"] = p.Status
     }
     return &data
 }
@@ -86,7 +91,7 @@ type GetNamespaceResult struct {
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -104,7 +109,7 @@ type UpdateNamespaceResult struct {
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -137,9 +142,14 @@ type DescribeScriptsResult struct {
 func (p *DescribeScriptsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Script, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -157,7 +167,7 @@ type CreateScriptResult struct {
 func (p *CreateScriptResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -175,7 +185,7 @@ type CreateScriptFromGitHubResult struct {
 func (p *CreateScriptFromGitHubResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -193,7 +203,7 @@ type GetScriptResult struct {
 func (p *GetScriptResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -211,7 +221,7 @@ type UpdateScriptResult struct {
 func (p *UpdateScriptResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -229,7 +239,7 @@ type UpdateScriptFromGitHubResult struct {
 func (p *UpdateScriptFromGitHubResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -268,18 +278,23 @@ type InvokeScriptResult struct {
 func (p *InvokeScriptResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Code != nil {
-     data["Code"] = p.Code
+        data["code"] = p.Code
     }
     if p.Result != nil {
-     data["Result"] = p.Result
+        data["result"] = p.Result
     }
     if p.ExecuteTime != nil {
-     data["ExecuteTime"] = p.ExecuteTime
+        data["executeTime"] = p.ExecuteTime
     }
     if p.Charged != nil {
-     data["Charged"] = p.Charged
+        data["charged"] = p.Charged
     }
     if p.Output != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Output {
+			items = append(items, item)
+		}
+		data["output"] = items
     }
     return &data
 }
@@ -305,18 +320,23 @@ type DebugInvokeResult struct {
 func (p *DebugInvokeResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Code != nil {
-     data["Code"] = p.Code
+        data["code"] = p.Code
     }
     if p.Result != nil {
-     data["Result"] = p.Result
+        data["result"] = p.Result
     }
     if p.ExecuteTime != nil {
-     data["ExecuteTime"] = p.ExecuteTime
+        data["executeTime"] = p.ExecuteTime
     }
     if p.Charged != nil {
-     data["Charged"] = p.Charged
+        data["charged"] = p.Charged
     }
     if p.Output != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.Output {
+			items = append(items, item)
+		}
+		data["output"] = items
     }
     return &data
 }

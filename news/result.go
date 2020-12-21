@@ -30,9 +30,14 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Namespace, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -50,7 +55,7 @@ type CreateNamespaceResult struct {
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -68,7 +73,7 @@ type GetNamespaceStatusResult struct {
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Status != nil {
-     data["Status"] = p.Status
+        data["status"] = p.Status
     }
     return &data
 }
@@ -86,7 +91,7 @@ type GetNamespaceResult struct {
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -104,7 +109,7 @@ type UpdateNamespaceResult struct {
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -137,10 +142,10 @@ type PrepareUpdateCurrentNewsMasterResult struct {
 func (p *PrepareUpdateCurrentNewsMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.UploadToken != nil {
-     data["UploadToken"] = p.UploadToken
+        data["uploadToken"] = p.UploadToken
     }
     if p.TemplateUploadUrl != nil {
-     data["TemplateUploadUrl"] = p.TemplateUploadUrl
+        data["templateUploadUrl"] = p.TemplateUploadUrl
     }
     return &data
 }
@@ -171,7 +176,7 @@ type PrepareUpdateCurrentNewsMasterFromGitHubResult struct {
 func (p *PrepareUpdateCurrentNewsMasterFromGitHubResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.UploadToken != nil {
-     data["UploadToken"] = p.UploadToken
+        data["uploadToken"] = p.UploadToken
     }
     return &data
 }
@@ -193,12 +198,17 @@ type DescribeNewsResult struct {
 func (p *DescribeNewsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*News, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ContentHash != nil {
-     data["ContentHash"] = p.ContentHash
+        data["contentHash"] = p.ContentHash
     }
     if p.TemplateHash != nil {
-     data["TemplateHash"] = p.TemplateHash
+        data["templateHash"] = p.TemplateHash
     }
     return &data
 }
@@ -220,12 +230,17 @@ type DescribeNewsByUserIdResult struct {
 func (p *DescribeNewsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*News, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.ContentHash != nil {
-     data["ContentHash"] = p.ContentHash
+        data["contentHash"] = p.ContentHash
     }
     if p.TemplateHash != nil {
-     data["TemplateHash"] = p.TemplateHash
+        data["templateHash"] = p.TemplateHash
     }
     return &data
 }
@@ -247,12 +262,17 @@ type WantGrantResult struct {
 func (p *WantGrantResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*SetCookieRequestEntry, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.BrowserUrl != nil {
-     data["BrowserUrl"] = p.BrowserUrl
+        data["browserUrl"] = p.BrowserUrl
     }
     if p.ZipUrl != nil {
-     data["ZipUrl"] = p.ZipUrl
+        data["zipUrl"] = p.ZipUrl
     }
     return &data
 }
@@ -274,12 +294,17 @@ type WantGrantByUserIdResult struct {
 func (p *WantGrantByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*SetCookieRequestEntry, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.BrowserUrl != nil {
-     data["BrowserUrl"] = p.BrowserUrl
+        data["browserUrl"] = p.BrowserUrl
     }
     if p.ZipUrl != nil {
-     data["ZipUrl"] = p.ZipUrl
+        data["zipUrl"] = p.ZipUrl
     }
     return &data
 }

@@ -30,9 +30,14 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Namespace, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -50,7 +55,7 @@ type CreateNamespaceResult struct {
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -68,7 +73,7 @@ type GetNamespaceStatusResult struct {
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Status != nil {
-     data["Status"] = p.Status
+        data["status"] = p.Status
     }
     return &data
 }
@@ -86,7 +91,7 @@ type GetNamespaceResult struct {
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -104,7 +109,7 @@ type UpdateNamespaceResult struct {
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -122,7 +127,7 @@ type DeleteNamespaceResult struct {
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -140,6 +145,11 @@ type DescribeRateModelsResult struct {
 func (p *DescribeRateModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*RateModel, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     return &data
 }
@@ -157,7 +167,7 @@ type GetRateModelResult struct {
 func (p *GetRateModelResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -177,9 +187,14 @@ type DescribeRateModelMastersResult struct {
 func (p *DescribeRateModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*RateModelMaster, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -197,7 +212,7 @@ type CreateRateModelMasterResult struct {
 func (p *CreateRateModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -215,7 +230,7 @@ type GetRateModelMasterResult struct {
 func (p *GetRateModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -233,7 +248,7 @@ type UpdateRateModelMasterResult struct {
 func (p *UpdateRateModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -251,7 +266,7 @@ type DeleteRateModelMasterResult struct {
 func (p *DeleteRateModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -273,13 +288,13 @@ type ExchangeResult struct {
 func (p *ExchangeResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StampSheet != nil {
-     data["StampSheet"] = p.StampSheet
+        data["stampSheet"] = p.StampSheet
     }
     if p.StampSheetEncryptionKeyId != nil {
-     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }
@@ -301,13 +316,13 @@ type ExchangeByUserIdResult struct {
 func (p *ExchangeByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StampSheet != nil {
-     data["StampSheet"] = p.StampSheet
+        data["stampSheet"] = p.StampSheet
     }
     if p.StampSheetEncryptionKeyId != nil {
-     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }
@@ -329,13 +344,13 @@ type ExchangeByStampSheetResult struct {
 func (p *ExchangeByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StampSheet != nil {
-     data["StampSheet"] = p.StampSheet
+        data["stampSheet"] = p.StampSheet
     }
     if p.StampSheetEncryptionKeyId != nil {
-     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }
@@ -353,7 +368,7 @@ type ExportMasterResult struct {
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -371,7 +386,7 @@ type GetCurrentRateMasterResult struct {
 func (p *GetCurrentRateMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -389,7 +404,7 @@ type UpdateCurrentRateMasterResult struct {
 func (p *UpdateCurrentRateMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -407,7 +422,7 @@ type UpdateCurrentRateMasterFromGitHubResult struct {
 func (p *UpdateCurrentRateMasterFromGitHubResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -427,10 +442,10 @@ type CreateAwaitByUserIdResult struct {
 func (p *CreateAwaitByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.UnlockAt != nil {
-     data["UnlockAt"] = p.UnlockAt
+        data["unlockAt"] = p.UnlockAt
     }
     return &data
 }
@@ -450,9 +465,14 @@ type DescribeAwaitsResult struct {
 func (p *DescribeAwaitsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Await, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -472,9 +492,14 @@ type DescribeAwaitsByUserIdResult struct {
 func (p *DescribeAwaitsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Await, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -492,7 +517,7 @@ type GetAwaitResult struct {
 func (p *GetAwaitResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -510,7 +535,7 @@ type GetAwaitByUserIdResult struct {
 func (p *GetAwaitByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -532,13 +557,13 @@ type AcquireResult struct {
 func (p *AcquireResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StampSheet != nil {
-     data["StampSheet"] = p.StampSheet
+        data["stampSheet"] = p.StampSheet
     }
     if p.StampSheetEncryptionKeyId != nil {
-     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }
@@ -560,13 +585,13 @@ type AcquireByUserIdResult struct {
 func (p *AcquireByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StampSheet != nil {
-     data["StampSheet"] = p.StampSheet
+        data["stampSheet"] = p.StampSheet
     }
     if p.StampSheetEncryptionKeyId != nil {
-     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }
@@ -588,13 +613,13 @@ type AcquireForceByUserIdResult struct {
 func (p *AcquireForceByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StampSheet != nil {
-     data["StampSheet"] = p.StampSheet
+        data["stampSheet"] = p.StampSheet
     }
     if p.StampSheetEncryptionKeyId != nil {
-     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }
@@ -616,13 +641,13 @@ type SkipResult struct {
 func (p *SkipResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StampSheet != nil {
-     data["StampSheet"] = p.StampSheet
+        data["stampSheet"] = p.StampSheet
     }
     if p.StampSheetEncryptionKeyId != nil {
-     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }
@@ -644,13 +669,13 @@ type SkipByUserIdResult struct {
 func (p *SkipByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StampSheet != nil {
-     data["StampSheet"] = p.StampSheet
+        data["stampSheet"] = p.StampSheet
     }
     if p.StampSheetEncryptionKeyId != nil {
-     data["StampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }
@@ -668,7 +693,7 @@ type DeleteAwaitResult struct {
 func (p *DeleteAwaitResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -686,7 +711,7 @@ type DeleteAwaitByUserIdResult struct {
 func (p *DeleteAwaitByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -704,7 +729,7 @@ type CreateAwaitByStampSheetResult struct {
 func (p *CreateAwaitByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -724,10 +749,10 @@ type DeleteAwaitByStampTaskResult struct {
 func (p *DeleteAwaitByStampTaskResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.NewContextStack != nil {
-     data["NewContextStack"] = p.NewContextStack
+        data["newContextStack"] = p.NewContextStack
     }
     return &data
 }

@@ -30,9 +30,14 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Namespace, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -50,7 +55,7 @@ type CreateNamespaceResult struct {
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -68,7 +73,7 @@ type GetNamespaceStatusResult struct {
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Status != nil {
-     data["Status"] = p.Status
+        data["status"] = p.Status
     }
     return &data
 }
@@ -86,7 +91,7 @@ type GetNamespaceResult struct {
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -104,7 +109,7 @@ type UpdateNamespaceResult struct {
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -122,7 +127,7 @@ type DeleteNamespaceResult struct {
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -142,9 +147,14 @@ type DescribeDataObjectsResult struct {
 func (p *DescribeDataObjectsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*DataObject, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -164,9 +174,14 @@ type DescribeDataObjectsByUserIdResult struct {
 func (p *DescribeDataObjectsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*DataObject, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -186,10 +201,10 @@ type PrepareUploadResult struct {
 func (p *PrepareUploadResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.UploadUrl != nil {
-     data["UploadUrl"] = p.UploadUrl
+        data["uploadUrl"] = p.UploadUrl
     }
     return &data
 }
@@ -209,10 +224,10 @@ type PrepareUploadByUserIdResult struct {
 func (p *PrepareUploadByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.UploadUrl != nil {
-     data["UploadUrl"] = p.UploadUrl
+        data["uploadUrl"] = p.UploadUrl
     }
     return &data
 }
@@ -230,7 +245,7 @@ type UpdateDataObjectResult struct {
 func (p *UpdateDataObjectResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -248,7 +263,7 @@ type UpdateDataObjectByUserIdResult struct {
 func (p *UpdateDataObjectByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -268,10 +283,10 @@ type PrepareReUploadResult struct {
 func (p *PrepareReUploadResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.UploadUrl != nil {
-     data["UploadUrl"] = p.UploadUrl
+        data["uploadUrl"] = p.UploadUrl
     }
     return &data
 }
@@ -291,10 +306,10 @@ type PrepareReUploadByUserIdResult struct {
 func (p *PrepareReUploadByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.UploadUrl != nil {
-     data["UploadUrl"] = p.UploadUrl
+        data["uploadUrl"] = p.UploadUrl
     }
     return &data
 }
@@ -312,7 +327,7 @@ type DoneUploadResult struct {
 func (p *DoneUploadResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -330,7 +345,7 @@ type DoneUploadByUserIdResult struct {
 func (p *DoneUploadByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -348,7 +363,7 @@ type DeleteDataObjectResult struct {
 func (p *DeleteDataObjectResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -366,7 +381,7 @@ type DeleteDataObjectByUserIdResult struct {
 func (p *DeleteDataObjectByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -388,13 +403,13 @@ type PrepareDownloadResult struct {
 func (p *PrepareDownloadResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.FileUrl != nil {
-     data["FileUrl"] = p.FileUrl
+        data["fileUrl"] = p.FileUrl
     }
     if p.ContentLength != nil {
-     data["ContentLength"] = p.ContentLength
+        data["contentLength"] = p.ContentLength
     }
     return &data
 }
@@ -416,13 +431,13 @@ type PrepareDownloadByUserIdResult struct {
 func (p *PrepareDownloadByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.FileUrl != nil {
-     data["FileUrl"] = p.FileUrl
+        data["fileUrl"] = p.FileUrl
     }
     if p.ContentLength != nil {
-     data["ContentLength"] = p.ContentLength
+        data["contentLength"] = p.ContentLength
     }
     return &data
 }
@@ -444,13 +459,13 @@ type PrepareDownloadByGenerationResult struct {
 func (p *PrepareDownloadByGenerationResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.FileUrl != nil {
-     data["FileUrl"] = p.FileUrl
+        data["fileUrl"] = p.FileUrl
     }
     if p.ContentLength != nil {
-     data["ContentLength"] = p.ContentLength
+        data["contentLength"] = p.ContentLength
     }
     return &data
 }
@@ -472,13 +487,13 @@ type PrepareDownloadByGenerationAndUserIdResult struct {
 func (p *PrepareDownloadByGenerationAndUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.FileUrl != nil {
-     data["FileUrl"] = p.FileUrl
+        data["fileUrl"] = p.FileUrl
     }
     if p.ContentLength != nil {
-     data["ContentLength"] = p.ContentLength
+        data["contentLength"] = p.ContentLength
     }
     return &data
 }
@@ -500,13 +515,13 @@ type PrepareDownloadOwnDataResult struct {
 func (p *PrepareDownloadOwnDataResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.FileUrl != nil {
-     data["FileUrl"] = p.FileUrl
+        data["fileUrl"] = p.FileUrl
     }
     if p.ContentLength != nil {
-     data["ContentLength"] = p.ContentLength
+        data["contentLength"] = p.ContentLength
     }
     return &data
 }
@@ -528,13 +543,13 @@ type PrepareDownloadByUserIdAndDataObjectNameResult struct {
 func (p *PrepareDownloadByUserIdAndDataObjectNameResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.FileUrl != nil {
-     data["FileUrl"] = p.FileUrl
+        data["fileUrl"] = p.FileUrl
     }
     if p.ContentLength != nil {
-     data["ContentLength"] = p.ContentLength
+        data["contentLength"] = p.ContentLength
     }
     return &data
 }
@@ -556,13 +571,13 @@ type PrepareDownloadOwnDataByGenerationResult struct {
 func (p *PrepareDownloadOwnDataByGenerationResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.FileUrl != nil {
-     data["FileUrl"] = p.FileUrl
+        data["fileUrl"] = p.FileUrl
     }
     if p.ContentLength != nil {
-     data["ContentLength"] = p.ContentLength
+        data["contentLength"] = p.ContentLength
     }
     return &data
 }
@@ -584,13 +599,13 @@ type PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult struct {
 func (p *PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.FileUrl != nil {
-     data["FileUrl"] = p.FileUrl
+        data["fileUrl"] = p.FileUrl
     }
     if p.ContentLength != nil {
-     data["ContentLength"] = p.ContentLength
+        data["contentLength"] = p.ContentLength
     }
     return &data
 }
@@ -608,7 +623,7 @@ type RestoreDataObjectResult struct {
 func (p *RestoreDataObjectResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -628,9 +643,14 @@ type DescribeDataObjectHistoriesResult struct {
 func (p *DescribeDataObjectHistoriesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*DataObjectHistory, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -650,9 +670,14 @@ type DescribeDataObjectHistoriesByUserIdResult struct {
 func (p *DescribeDataObjectHistoriesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*DataObjectHistory, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -670,7 +695,7 @@ type GetDataObjectHistoryResult struct {
 func (p *GetDataObjectHistoryResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -688,7 +713,7 @@ type GetDataObjectHistoryByUserIdResult struct {
 func (p *GetDataObjectHistoryByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }

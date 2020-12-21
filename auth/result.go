@@ -32,13 +32,13 @@ type LoginResult struct {
 func (p *LoginResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Token != nil {
-     data["Token"] = p.Token
+        data["token"] = p.Token
     }
     if p.UserId != nil {
-     data["UserId"] = p.UserId
+        data["userId"] = p.UserId
     }
     if p.Expire != nil {
-     data["Expire"] = p.Expire
+        data["expire"] = p.Expire
     }
     return &data
 }
@@ -60,13 +60,13 @@ type LoginBySignatureResult struct {
 func (p *LoginBySignatureResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Token != nil {
-     data["Token"] = p.Token
+        data["token"] = p.Token
     }
     if p.UserId != nil {
-     data["UserId"] = p.UserId
+        data["userId"] = p.UserId
     }
     if p.Expire != nil {
-     data["Expire"] = p.Expire
+        data["expire"] = p.Expire
     }
     return &data
 }

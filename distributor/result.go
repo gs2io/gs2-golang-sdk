@@ -30,9 +30,14 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Namespace, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -50,7 +55,7 @@ type CreateNamespaceResult struct {
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -68,7 +73,7 @@ type GetNamespaceStatusResult struct {
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Status != nil {
-     data["Status"] = p.Status
+        data["status"] = p.Status
     }
     return &data
 }
@@ -86,7 +91,7 @@ type GetNamespaceResult struct {
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -104,7 +109,7 @@ type UpdateNamespaceResult struct {
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -122,7 +127,7 @@ type DeleteNamespaceResult struct {
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -142,9 +147,14 @@ type DescribeDistributorModelMastersResult struct {
 func (p *DescribeDistributorModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*DistributorModelMaster, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -162,7 +172,7 @@ type CreateDistributorModelMasterResult struct {
 func (p *CreateDistributorModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -180,7 +190,7 @@ type GetDistributorModelMasterResult struct {
 func (p *GetDistributorModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -198,7 +208,7 @@ type UpdateDistributorModelMasterResult struct {
 func (p *UpdateDistributorModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -216,7 +226,7 @@ type DeleteDistributorModelMasterResult struct {
 func (p *DeleteDistributorModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -234,6 +244,11 @@ type DescribeDistributorModelsResult struct {
 func (p *DescribeDistributorModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*DistributorModel, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     return &data
 }
@@ -251,7 +266,7 @@ type GetDistributorModelResult struct {
 func (p *GetDistributorModelResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -269,7 +284,7 @@ type ExportMasterResult struct {
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -287,7 +302,7 @@ type GetCurrentDistributorMasterResult struct {
 func (p *GetCurrentDistributorMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -305,7 +320,7 @@ type UpdateCurrentDistributorMasterResult struct {
 func (p *UpdateCurrentDistributorMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -323,7 +338,7 @@ type UpdateCurrentDistributorMasterFromGitHubResult struct {
 func (p *UpdateCurrentDistributorMasterFromGitHubResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -345,13 +360,13 @@ type DistributeResult struct {
 func (p *DistributeResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.DistributeResource != nil {
-     data["DistributeResource"] = p.DistributeResource.ToDict()
+        data["distributeResource"] = p.DistributeResource.ToDict()
     }
     if p.InboxNamespaceId != nil {
-     data["InboxNamespaceId"] = p.InboxNamespaceId
+        data["inboxNamespaceId"] = p.InboxNamespaceId
     }
     if p.Result != nil {
-     data["Result"] = p.Result
+        data["result"] = p.Result
     }
     return &data
 }
@@ -371,10 +386,10 @@ type DistributeWithoutOverflowProcessResult struct {
 func (p *DistributeWithoutOverflowProcessResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.DistributeResource != nil {
-     data["DistributeResource"] = p.DistributeResource.ToDict()
+        data["distributeResource"] = p.DistributeResource.ToDict()
     }
     if p.Result != nil {
-     data["Result"] = p.Result
+        data["result"] = p.Result
     }
     return &data
 }
@@ -394,10 +409,10 @@ type RunStampTaskResult struct {
 func (p *RunStampTaskResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.ContextStack != nil {
-     data["ContextStack"] = p.ContextStack
+        data["contextStack"] = p.ContextStack
     }
     if p.Result != nil {
-     data["Result"] = p.Result
+        data["result"] = p.Result
     }
     return &data
 }
@@ -415,7 +430,7 @@ type RunStampSheetResult struct {
 func (p *RunStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Result != nil {
-     data["Result"] = p.Result
+        data["result"] = p.Result
     }
     return &data
 }
@@ -435,9 +450,14 @@ type RunStampSheetExpressResult struct {
 func (p *RunStampSheetExpressResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.TaskResults != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.TaskResults {
+			items = append(items, item)
+		}
+		data["taskResults"] = items
     }
     if p.SheetResult != nil {
-     data["SheetResult"] = p.SheetResult
+        data["sheetResult"] = p.SheetResult
     }
     return &data
 }
@@ -457,10 +477,10 @@ type RunStampTaskWithoutNamespaceResult struct {
 func (p *RunStampTaskWithoutNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.ContextStack != nil {
-     data["ContextStack"] = p.ContextStack
+        data["contextStack"] = p.ContextStack
     }
     if p.Result != nil {
-     data["Result"] = p.Result
+        data["result"] = p.Result
     }
     return &data
 }
@@ -478,7 +498,7 @@ type RunStampSheetWithoutNamespaceResult struct {
 func (p *RunStampSheetWithoutNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Result != nil {
-     data["Result"] = p.Result
+        data["result"] = p.Result
     }
     return &data
 }
@@ -498,9 +518,14 @@ type RunStampSheetExpressWithoutNamespaceResult struct {
 func (p *RunStampSheetExpressWithoutNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.TaskResults != nil {
+    	items := make([]*String, 0)
+    	for _, item := range *p.TaskResults {
+			items = append(items, item)
+		}
+		data["taskResults"] = items
     }
     if p.SheetResult != nil {
-     data["SheetResult"] = p.SheetResult
+        data["sheetResult"] = p.SheetResult
     }
     return &data
 }

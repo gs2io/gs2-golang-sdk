@@ -122,7 +122,6 @@ type Notification struct {
 type String string
 
 func (p *String) UnmarshalJSON(data []byte) error {
-	println(string(data))
 	if data[0] == '"' {
 		var d string
 		err := json.Unmarshal(data, &d)

@@ -30,9 +30,14 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Namespace, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -50,7 +55,7 @@ type CreateNamespaceResult struct {
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -68,7 +73,7 @@ type GetNamespaceStatusResult struct {
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Status != nil {
-     data["Status"] = p.Status
+        data["status"] = p.Status
     }
     return &data
 }
@@ -86,7 +91,7 @@ type GetNamespaceResult struct {
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -104,7 +109,7 @@ type UpdateNamespaceResult struct {
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -122,7 +127,7 @@ type DeleteNamespaceResult struct {
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -146,15 +151,20 @@ type QueryAccessLogResult struct {
 func (p *QueryAccessLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*AccessLog, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     if p.TotalCount != nil {
-     data["TotalCount"] = p.TotalCount
+        data["totalCount"] = p.TotalCount
     }
     if p.ScanSize != nil {
-     data["ScanSize"] = p.ScanSize
+        data["scanSize"] = p.ScanSize
     }
     return &data
 }
@@ -178,15 +188,20 @@ type CountAccessLogResult struct {
 func (p *CountAccessLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*AccessLogCount, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     if p.TotalCount != nil {
-     data["TotalCount"] = p.TotalCount
+        data["totalCount"] = p.TotalCount
     }
     if p.ScanSize != nil {
-     data["ScanSize"] = p.ScanSize
+        data["scanSize"] = p.ScanSize
     }
     return &data
 }
@@ -210,15 +225,20 @@ type QueryIssueStampSheetLogResult struct {
 func (p *QueryIssueStampSheetLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*IssueStampSheetLog, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     if p.TotalCount != nil {
-     data["TotalCount"] = p.TotalCount
+        data["totalCount"] = p.TotalCount
     }
     if p.ScanSize != nil {
-     data["ScanSize"] = p.ScanSize
+        data["scanSize"] = p.ScanSize
     }
     return &data
 }
@@ -242,15 +262,20 @@ type CountIssueStampSheetLogResult struct {
 func (p *CountIssueStampSheetLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*IssueStampSheetLogCount, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     if p.TotalCount != nil {
-     data["TotalCount"] = p.TotalCount
+        data["totalCount"] = p.TotalCount
     }
     if p.ScanSize != nil {
-     data["ScanSize"] = p.ScanSize
+        data["scanSize"] = p.ScanSize
     }
     return &data
 }
@@ -274,15 +299,20 @@ type QueryExecuteStampSheetLogResult struct {
 func (p *QueryExecuteStampSheetLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ExecuteStampSheetLog, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     if p.TotalCount != nil {
-     data["TotalCount"] = p.TotalCount
+        data["totalCount"] = p.TotalCount
     }
     if p.ScanSize != nil {
-     data["ScanSize"] = p.ScanSize
+        data["scanSize"] = p.ScanSize
     }
     return &data
 }
@@ -306,15 +336,20 @@ type CountExecuteStampSheetLogResult struct {
 func (p *CountExecuteStampSheetLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ExecuteStampSheetLogCount, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     if p.TotalCount != nil {
-     data["TotalCount"] = p.TotalCount
+        data["totalCount"] = p.TotalCount
     }
     if p.ScanSize != nil {
-     data["ScanSize"] = p.ScanSize
+        data["scanSize"] = p.ScanSize
     }
     return &data
 }
@@ -338,15 +373,20 @@ type QueryExecuteStampTaskLogResult struct {
 func (p *QueryExecuteStampTaskLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ExecuteStampTaskLog, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     if p.TotalCount != nil {
-     data["TotalCount"] = p.TotalCount
+        data["totalCount"] = p.TotalCount
     }
     if p.ScanSize != nil {
-     data["ScanSize"] = p.ScanSize
+        data["scanSize"] = p.ScanSize
     }
     return &data
 }
@@ -370,15 +410,20 @@ type CountExecuteStampTaskLogResult struct {
 func (p *CountExecuteStampTaskLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*ExecuteStampTaskLogCount, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     if p.TotalCount != nil {
-     data["TotalCount"] = p.TotalCount
+        data["totalCount"] = p.TotalCount
     }
     if p.ScanSize != nil {
-     data["ScanSize"] = p.ScanSize
+        data["scanSize"] = p.ScanSize
     }
     return &data
 }

@@ -30,9 +30,14 @@ type DescribeUsersResult struct {
 func (p *DescribeUsersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*User, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -50,7 +55,7 @@ type CreateUserResult struct {
 func (p *CreateUserResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -68,7 +73,7 @@ type UpdateUserResult struct {
 func (p *UpdateUserResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -86,7 +91,7 @@ type GetUserResult struct {
 func (p *GetUserResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -119,9 +124,14 @@ type DescribeSecurityPoliciesResult struct {
 func (p *DescribeSecurityPoliciesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*SecurityPolicy, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -141,9 +151,14 @@ type DescribeCommonSecurityPoliciesResult struct {
 func (p *DescribeCommonSecurityPoliciesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*SecurityPolicy, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -161,7 +176,7 @@ type CreateSecurityPolicyResult struct {
 func (p *CreateSecurityPolicyResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -179,7 +194,7 @@ type UpdateSecurityPolicyResult struct {
 func (p *UpdateSecurityPolicyResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -197,7 +212,7 @@ type GetSecurityPolicyResult struct {
 func (p *GetSecurityPolicyResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -230,9 +245,14 @@ type DescribeIdentifiersResult struct {
 func (p *DescribeIdentifiersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Identifier, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -252,10 +272,10 @@ type CreateIdentifierResult struct {
 func (p *CreateIdentifierResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.ClientSecret != nil {
-     data["ClientSecret"] = p.ClientSecret
+        data["clientSecret"] = p.ClientSecret
     }
     return &data
 }
@@ -273,7 +293,7 @@ type GetIdentifierResult struct {
 func (p *GetIdentifierResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -306,9 +326,14 @@ type DescribePasswordsResult struct {
 func (p *DescribePasswordsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Password, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -326,7 +351,7 @@ type CreatePasswordResult struct {
 func (p *CreatePasswordResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -344,7 +369,7 @@ type GetPasswordResult struct {
 func (p *GetPasswordResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -375,6 +400,11 @@ type GetHasSecurityPolicyResult struct {
 func (p *GetHasSecurityPolicyResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*SecurityPolicy, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     return &data
 }
@@ -392,6 +422,11 @@ type AttachSecurityPolicyResult struct {
 func (p *AttachSecurityPolicyResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*SecurityPolicy, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     return &data
 }
@@ -409,6 +444,11 @@ type DetachSecurityPolicyResult struct {
 func (p *DetachSecurityPolicyResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*SecurityPolicy, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     return &data
 }
@@ -430,13 +470,13 @@ type LoginResult struct {
 func (p *LoginResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.AccessToken != nil {
-     data["AccessToken"] = p.AccessToken
+        data["accessToken"] = p.AccessToken
     }
     if p.TokenType != nil {
-     data["TokenType"] = p.TokenType
+        data["tokenType"] = p.TokenType
     }
     if p.ExpiresIn != nil {
-     data["ExpiresIn"] = p.ExpiresIn
+        data["expiresIn"] = p.ExpiresIn
     }
     return &data
 }
@@ -454,7 +494,7 @@ type LoginByUserResult struct {
 func (p *LoginByUserResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }

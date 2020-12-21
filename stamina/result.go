@@ -30,9 +30,14 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Namespace, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -50,7 +55,7 @@ type CreateNamespaceResult struct {
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -68,7 +73,7 @@ type GetNamespaceStatusResult struct {
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Status != nil {
-     data["Status"] = p.Status
+        data["status"] = p.Status
     }
     return &data
 }
@@ -86,7 +91,7 @@ type GetNamespaceResult struct {
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -104,7 +109,7 @@ type UpdateNamespaceResult struct {
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -122,7 +127,7 @@ type DeleteNamespaceResult struct {
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -142,9 +147,14 @@ type DescribeStaminaModelMastersResult struct {
 func (p *DescribeStaminaModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*StaminaModelMaster, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -162,7 +172,7 @@ type CreateStaminaModelMasterResult struct {
 func (p *CreateStaminaModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -180,7 +190,7 @@ type GetStaminaModelMasterResult struct {
 func (p *GetStaminaModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -198,7 +208,7 @@ type UpdateStaminaModelMasterResult struct {
 func (p *UpdateStaminaModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -216,7 +226,7 @@ type DeleteStaminaModelMasterResult struct {
 func (p *DeleteStaminaModelMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -236,9 +246,14 @@ type DescribeMaxStaminaTableMastersResult struct {
 func (p *DescribeMaxStaminaTableMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*MaxStaminaTableMaster, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -256,7 +271,7 @@ type CreateMaxStaminaTableMasterResult struct {
 func (p *CreateMaxStaminaTableMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -274,7 +289,7 @@ type GetMaxStaminaTableMasterResult struct {
 func (p *GetMaxStaminaTableMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -292,7 +307,7 @@ type UpdateMaxStaminaTableMasterResult struct {
 func (p *UpdateMaxStaminaTableMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -310,7 +325,7 @@ type DeleteMaxStaminaTableMasterResult struct {
 func (p *DeleteMaxStaminaTableMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -330,9 +345,14 @@ type DescribeRecoverIntervalTableMastersResult struct {
 func (p *DescribeRecoverIntervalTableMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*RecoverIntervalTableMaster, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -350,7 +370,7 @@ type CreateRecoverIntervalTableMasterResult struct {
 func (p *CreateRecoverIntervalTableMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -368,7 +388,7 @@ type GetRecoverIntervalTableMasterResult struct {
 func (p *GetRecoverIntervalTableMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -386,7 +406,7 @@ type UpdateRecoverIntervalTableMasterResult struct {
 func (p *UpdateRecoverIntervalTableMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -404,7 +424,7 @@ type DeleteRecoverIntervalTableMasterResult struct {
 func (p *DeleteRecoverIntervalTableMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -424,9 +444,14 @@ type DescribeRecoverValueTableMastersResult struct {
 func (p *DescribeRecoverValueTableMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*RecoverValueTableMaster, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -444,7 +469,7 @@ type CreateRecoverValueTableMasterResult struct {
 func (p *CreateRecoverValueTableMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -462,7 +487,7 @@ type GetRecoverValueTableMasterResult struct {
 func (p *GetRecoverValueTableMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -480,7 +505,7 @@ type UpdateRecoverValueTableMasterResult struct {
 func (p *UpdateRecoverValueTableMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -498,7 +523,7 @@ type DeleteRecoverValueTableMasterResult struct {
 func (p *DeleteRecoverValueTableMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -516,7 +541,7 @@ type ExportMasterResult struct {
 func (p *ExportMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -534,7 +559,7 @@ type GetCurrentStaminaMasterResult struct {
 func (p *GetCurrentStaminaMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -552,7 +577,7 @@ type UpdateCurrentStaminaMasterResult struct {
 func (p *UpdateCurrentStaminaMasterResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -570,7 +595,7 @@ type UpdateCurrentStaminaMasterFromGitHubResult struct {
 func (p *UpdateCurrentStaminaMasterFromGitHubResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -588,6 +613,11 @@ type DescribeStaminaModelsResult struct {
 func (p *DescribeStaminaModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*StaminaModel, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     return &data
 }
@@ -605,7 +635,7 @@ type GetStaminaModelResult struct {
 func (p *GetStaminaModelResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     return &data
 }
@@ -625,9 +655,14 @@ type DescribeStaminasResult struct {
 func (p *DescribeStaminasResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Stamina, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -647,9 +682,14 @@ type DescribeStaminasByUserIdResult struct {
 func (p *DescribeStaminasByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
+    	items := make([]*Stamina, 0)
+    	for _, item := range *p.Items {
+			items = append(items, item)
+		}
+		data["items"] = items
     }
     if p.NextPageToken != nil {
-     data["NextPageToken"] = p.NextPageToken
+        data["nextPageToken"] = p.NextPageToken
     }
     return &data
 }
@@ -669,10 +709,10 @@ type GetStaminaResult struct {
 func (p *GetStaminaResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -692,10 +732,10 @@ type GetStaminaByUserIdResult struct {
 func (p *GetStaminaByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -715,10 +755,10 @@ type UpdateStaminaByUserIdResult struct {
 func (p *UpdateStaminaByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -738,10 +778,10 @@ type ConsumeStaminaResult struct {
 func (p *ConsumeStaminaResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -761,10 +801,10 @@ type ConsumeStaminaByUserIdResult struct {
 func (p *ConsumeStaminaByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -786,13 +826,13 @@ type RecoverStaminaByUserIdResult struct {
 func (p *RecoverStaminaByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     if p.OverflowValue != nil {
-     data["OverflowValue"] = p.OverflowValue
+        data["overflowValue"] = p.OverflowValue
     }
     return &data
 }
@@ -812,10 +852,10 @@ type RaiseMaxValueByUserIdResult struct {
 func (p *RaiseMaxValueByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -835,10 +875,10 @@ type SetMaxValueByUserIdResult struct {
 func (p *SetMaxValueByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -858,10 +898,10 @@ type SetRecoverIntervalByUserIdResult struct {
 func (p *SetRecoverIntervalByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -881,10 +921,10 @@ type SetRecoverValueByUserIdResult struct {
 func (p *SetRecoverValueByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -904,10 +944,10 @@ type SetMaxValueByStatusResult struct {
 func (p *SetMaxValueByStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -927,10 +967,10 @@ type SetRecoverIntervalByStatusResult struct {
 func (p *SetRecoverIntervalByStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -950,10 +990,10 @@ type SetRecoverValueByStatusResult struct {
 func (p *SetRecoverValueByStatusResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -988,13 +1028,13 @@ type RecoverStaminaByStampSheetResult struct {
 func (p *RecoverStaminaByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     if p.OverflowValue != nil {
-     data["OverflowValue"] = p.OverflowValue
+        data["overflowValue"] = p.OverflowValue
     }
     return &data
 }
@@ -1014,10 +1054,10 @@ type RaiseMaxValueByStampSheetResult struct {
 func (p *RaiseMaxValueByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -1037,10 +1077,10 @@ type SetMaxValueByStampSheetResult struct {
 func (p *SetMaxValueByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -1060,10 +1100,10 @@ type SetRecoverIntervalByStampSheetResult struct {
 func (p *SetRecoverIntervalByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -1083,10 +1123,10 @@ type SetRecoverValueByStampSheetResult struct {
 func (p *SetRecoverValueByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     return &data
 }
@@ -1108,13 +1148,13 @@ type ConsumeStaminaByStampTaskResult struct {
 func (p *ConsumeStaminaByStampTaskResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-     data["Item"] = p.Item.ToDict()
+        data["item"] = p.Item.ToDict()
     }
     if p.StaminaModel != nil {
-     data["StaminaModel"] = p.StaminaModel.ToDict()
+        data["staminaModel"] = p.StaminaModel.ToDict()
     }
     if p.NewContextStack != nil {
-     data["NewContextStack"] = p.NewContextStack
+        data["newContextStack"] = p.NewContextStack
     }
     return &data
 }
