@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeExperienceModelMastersResult struct {
     /** 経験値の種類マスターのリスト */
-	Items         *[]*ExperienceModelMaster	`json:"items"`
+	Items         []ExperienceModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeExperienceModelMastersResult struct {
 func (p *DescribeExperienceModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ExperienceModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ExperienceModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -238,14 +238,14 @@ type DeleteExperienceModelMasterAsyncResult struct {
 
 type DescribeExperienceModelsResult struct {
     /** 経験値・ランクアップ閾値モデルのリスト */
-	Items         *[]*ExperienceModel	`json:"items"`
+	Items         []ExperienceModel	`json:"items"`
 }
 
 func (p *DescribeExperienceModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ExperienceModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ExperienceModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -278,7 +278,7 @@ type GetExperienceModelAsyncResult struct {
 
 type DescribeThresholdMastersResult struct {
     /** ランクアップ閾値マスターのリスト */
-	Items         *[]*ThresholdMaster	`json:"items"`
+	Items         []ThresholdMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -286,8 +286,8 @@ type DescribeThresholdMastersResult struct {
 func (p *DescribeThresholdMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ThresholdMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ThresholdMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -449,7 +449,7 @@ type UpdateCurrentExperienceMasterFromGitHubAsyncResult struct {
 
 type DescribeStatusesResult struct {
     /** ステータスのリスト */
-	Items         *[]*Status	`json:"items"`
+	Items         []Status	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -457,8 +457,8 @@ type DescribeStatusesResult struct {
 func (p *DescribeStatusesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Status, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Status, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -476,7 +476,7 @@ type DescribeStatusesAsyncResult struct {
 
 type DescribeStatusesByUserIdResult struct {
     /** ステータスのリスト */
-	Items         *[]*Status	`json:"items"`
+	Items         []Status	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -484,8 +484,8 @@ type DescribeStatusesByUserIdResult struct {
 func (p *DescribeStatusesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Status, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Status, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

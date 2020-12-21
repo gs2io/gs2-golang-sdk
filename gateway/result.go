@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -134,7 +134,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeWebSocketSessionsResult struct {
     /** Websocketセッションのリスト */
-	Items         *[]*WebSocketSession	`json:"items"`
+	Items         []WebSocketSession	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -142,8 +142,8 @@ type DescribeWebSocketSessionsResult struct {
 func (p *DescribeWebSocketSessionsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*WebSocketSession, 0)
-    	for _, item := range *p.Items {
+    	items := make([]WebSocketSession, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -161,7 +161,7 @@ type DescribeWebSocketSessionsAsyncResult struct {
 
 type DescribeWebSocketSessionsByUserIdResult struct {
     /** Websocketセッションのリスト */
-	Items         *[]*WebSocketSession	`json:"items"`
+	Items         []WebSocketSession	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -169,8 +169,8 @@ type DescribeWebSocketSessionsByUserIdResult struct {
 func (p *DescribeWebSocketSessionsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*WebSocketSession, 0)
-    	for _, item := range *p.Items {
+    	items := make([]WebSocketSession, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

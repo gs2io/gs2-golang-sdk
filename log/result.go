@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type QueryAccessLogResult struct {
     /** アクセスログのリスト */
-	Items         *[]*AccessLog	`json:"items"`
+	Items         []AccessLog	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
@@ -151,8 +151,8 @@ type QueryAccessLogResult struct {
 func (p *QueryAccessLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*AccessLog, 0)
-    	for _, item := range *p.Items {
+    	items := make([]AccessLog, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -176,7 +176,7 @@ type QueryAccessLogAsyncResult struct {
 
 type CountAccessLogResult struct {
     /** アクセスログ集計のリスト */
-	Items         *[]*AccessLogCount	`json:"items"`
+	Items         []AccessLogCount	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
@@ -188,8 +188,8 @@ type CountAccessLogResult struct {
 func (p *CountAccessLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*AccessLogCount, 0)
-    	for _, item := range *p.Items {
+    	items := make([]AccessLogCount, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -213,7 +213,7 @@ type CountAccessLogAsyncResult struct {
 
 type QueryIssueStampSheetLogResult struct {
     /** スタンプシート発行ログのリスト */
-	Items         *[]*IssueStampSheetLog	`json:"items"`
+	Items         []IssueStampSheetLog	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
@@ -225,8 +225,8 @@ type QueryIssueStampSheetLogResult struct {
 func (p *QueryIssueStampSheetLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*IssueStampSheetLog, 0)
-    	for _, item := range *p.Items {
+    	items := make([]IssueStampSheetLog, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -250,7 +250,7 @@ type QueryIssueStampSheetLogAsyncResult struct {
 
 type CountIssueStampSheetLogResult struct {
     /** スタンプシート発行ログ集計のリスト */
-	Items         *[]*IssueStampSheetLogCount	`json:"items"`
+	Items         []IssueStampSheetLogCount	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
@@ -262,8 +262,8 @@ type CountIssueStampSheetLogResult struct {
 func (p *CountIssueStampSheetLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*IssueStampSheetLogCount, 0)
-    	for _, item := range *p.Items {
+    	items := make([]IssueStampSheetLogCount, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -287,7 +287,7 @@ type CountIssueStampSheetLogAsyncResult struct {
 
 type QueryExecuteStampSheetLogResult struct {
     /** スタンプシート実行ログのリスト */
-	Items         *[]*ExecuteStampSheetLog	`json:"items"`
+	Items         []ExecuteStampSheetLog	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
@@ -299,8 +299,8 @@ type QueryExecuteStampSheetLogResult struct {
 func (p *QueryExecuteStampSheetLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ExecuteStampSheetLog, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ExecuteStampSheetLog, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -324,7 +324,7 @@ type QueryExecuteStampSheetLogAsyncResult struct {
 
 type CountExecuteStampSheetLogResult struct {
     /** スタンプシート実行ログ集計のリスト */
-	Items         *[]*ExecuteStampSheetLogCount	`json:"items"`
+	Items         []ExecuteStampSheetLogCount	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
@@ -336,8 +336,8 @@ type CountExecuteStampSheetLogResult struct {
 func (p *CountExecuteStampSheetLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ExecuteStampSheetLogCount, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ExecuteStampSheetLogCount, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -361,7 +361,7 @@ type CountExecuteStampSheetLogAsyncResult struct {
 
 type QueryExecuteStampTaskLogResult struct {
     /** スタンプタスク実行ログのリスト */
-	Items         *[]*ExecuteStampTaskLog	`json:"items"`
+	Items         []ExecuteStampTaskLog	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
@@ -373,8 +373,8 @@ type QueryExecuteStampTaskLogResult struct {
 func (p *QueryExecuteStampTaskLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ExecuteStampTaskLog, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ExecuteStampTaskLog, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -398,7 +398,7 @@ type QueryExecuteStampTaskLogAsyncResult struct {
 
 type CountExecuteStampTaskLogResult struct {
     /** スタンプタスク実行ログ集計のリスト */
-	Items         *[]*ExecuteStampTaskLogCount	`json:"items"`
+	Items         []ExecuteStampTaskLogCount	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
@@ -410,8 +410,8 @@ type CountExecuteStampTaskLogResult struct {
 func (p *CountExecuteStampTaskLogResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ExecuteStampTaskLogCount, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ExecuteStampTaskLogCount, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

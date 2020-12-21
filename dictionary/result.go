@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,14 +139,14 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeEntryModelsResult struct {
     /** エントリーモデルのリスト */
-	Items         *[]*EntryModel	`json:"items"`
+	Items         []EntryModel	`json:"items"`
 }
 
 func (p *DescribeEntryModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*EntryModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]EntryModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -179,7 +179,7 @@ type GetEntryModelAsyncResult struct {
 
 type DescribeEntryModelMastersResult struct {
     /** エントリーモデルマスターのリスト */
-	Items         *[]*EntryModelMaster	`json:"items"`
+	Items         []EntryModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -187,8 +187,8 @@ type DescribeEntryModelMastersResult struct {
 func (p *DescribeEntryModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*EntryModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]EntryModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -278,7 +278,7 @@ type DeleteEntryModelMasterAsyncResult struct {
 
 type DescribeEntriesResult struct {
     /** エントリーのリスト */
-	Items         *[]*Entry	`json:"items"`
+	Items         []Entry	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -286,8 +286,8 @@ type DescribeEntriesResult struct {
 func (p *DescribeEntriesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Entry, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Entry, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -305,7 +305,7 @@ type DescribeEntriesAsyncResult struct {
 
 type DescribeEntriesByUserIdResult struct {
     /** エントリーのリスト */
-	Items         *[]*Entry	`json:"items"`
+	Items         []Entry	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -313,8 +313,8 @@ type DescribeEntriesByUserIdResult struct {
 func (p *DescribeEntriesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Entry, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Entry, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -332,14 +332,14 @@ type DescribeEntriesByUserIdAsyncResult struct {
 
 type AddEntriesByUserIdResult struct {
     /** 登録した{model_name}のリスト */
-	Items         *[]*Entry	`json:"items"`
+	Items         []Entry	`json:"items"`
 }
 
 func (p *AddEntriesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Entry, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Entry, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -459,14 +459,14 @@ type ResetByUserIdAsyncResult struct {
 
 type AddEntriesByStampSheetResult struct {
     /** 追加後のエントリーのリスト */
-	Items         *[]*Entry	`json:"items"`
+	Items         []Entry	`json:"items"`
 }
 
 func (p *AddEntriesByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Entry, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Entry, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

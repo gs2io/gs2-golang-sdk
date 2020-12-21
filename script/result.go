@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -134,7 +134,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeScriptsResult struct {
     /** スクリプトのリスト */
-	Items         *[]*Script	`json:"items"`
+	Items         []Script	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -142,8 +142,8 @@ type DescribeScriptsResult struct {
 func (p *DescribeScriptsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Script, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Script, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -272,7 +272,7 @@ type InvokeScriptResult struct {
     /** 費用の計算対象となった時間(秒) */
 	Charged         *int32	`json:"charged"`
     /** 標準出力の内容のリスト */
-	Output         *[]core.String	`json:"output"`
+	Output         []core.String	`json:"output"`
 }
 
 func (p *InvokeScriptResult) ToDict() *map[string]interface{} {
@@ -291,7 +291,7 @@ func (p *InvokeScriptResult) ToDict() *map[string]interface{} {
     }
     if p.Output != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Output {
+    	for _, item := range p.Output {
 			items = append(items, item)
 		}
 		data["output"] = items
@@ -314,7 +314,7 @@ type DebugInvokeResult struct {
     /** 費用の計算対象となった時間(秒) */
 	Charged         *int32	`json:"charged"`
     /** 標準出力の内容のリスト */
-	Output         *[]core.String	`json:"output"`
+	Output         []core.String	`json:"output"`
 }
 
 func (p *DebugInvokeResult) ToDict() *map[string]interface{} {
@@ -333,7 +333,7 @@ func (p *DebugInvokeResult) ToDict() *map[string]interface{} {
     }
     if p.Output != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Output {
+    	for _, item := range p.Output {
 			items = append(items, item)
 		}
 		data["output"] = items

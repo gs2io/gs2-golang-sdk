@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeFormModelMastersResult struct {
     /** フォームマスターのリスト */
-	Items         *[]*FormModelMaster	`json:"items"`
+	Items         []FormModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeFormModelMastersResult struct {
 func (p *DescribeFormModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*FormModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]FormModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -238,14 +238,14 @@ type DeleteFormModelMasterAsyncResult struct {
 
 type DescribeMoldModelsResult struct {
     /** フォームの保存領域のリスト */
-	Items         *[]*MoldModel	`json:"items"`
+	Items         []MoldModel	`json:"items"`
 }
 
 func (p *DescribeMoldModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*MoldModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]MoldModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -278,7 +278,7 @@ type GetMoldModelAsyncResult struct {
 
 type DescribeMoldModelMastersResult struct {
     /** フォームの保存領域マスターのリスト */
-	Items         *[]*MoldModelMaster	`json:"items"`
+	Items         []MoldModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -286,8 +286,8 @@ type DescribeMoldModelMastersResult struct {
 func (p *DescribeMoldModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*MoldModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]MoldModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -449,7 +449,7 @@ type UpdateCurrentFormMasterFromGitHubAsyncResult struct {
 
 type DescribeMoldsResult struct {
     /** 保存したフォームのリスト */
-	Items         *[]*Mold	`json:"items"`
+	Items         []Mold	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -457,8 +457,8 @@ type DescribeMoldsResult struct {
 func (p *DescribeMoldsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Mold, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Mold, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -476,7 +476,7 @@ type DescribeMoldsAsyncResult struct {
 
 type DescribeMoldsByUserIdResult struct {
     /** 保存したフォームのリスト */
-	Items         *[]*Mold	`json:"items"`
+	Items         []Mold	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -484,8 +484,8 @@ type DescribeMoldsByUserIdResult struct {
 func (p *DescribeMoldsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Mold, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Mold, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -677,7 +677,7 @@ type SetCapacityByStampSheetAsyncResult struct {
 
 type DescribeFormsResult struct {
     /** フォームのリスト */
-	Items         *[]*Form	`json:"items"`
+	Items         []Form	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -685,8 +685,8 @@ type DescribeFormsResult struct {
 func (p *DescribeFormsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Form, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Form, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -704,7 +704,7 @@ type DescribeFormsAsyncResult struct {
 
 type DescribeFormsByUserIdResult struct {
     /** フォームのリスト */
-	Items         *[]*Form	`json:"items"`
+	Items         []Form	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -712,8 +712,8 @@ type DescribeFormsByUserIdResult struct {
 func (p *DescribeFormsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Form, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Form, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

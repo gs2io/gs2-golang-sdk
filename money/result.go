@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -134,7 +134,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeWalletsResult struct {
     /** ウォレットのリスト */
-	Items         *[]*Wallet	`json:"items"`
+	Items         []Wallet	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -142,8 +142,8 @@ type DescribeWalletsResult struct {
 func (p *DescribeWalletsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Wallet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Wallet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -161,7 +161,7 @@ type DescribeWalletsAsyncResult struct {
 
 type DescribeWalletsByUserIdResult struct {
     /** ウォレットのリスト */
-	Items         *[]*Wallet	`json:"items"`
+	Items         []Wallet	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -169,8 +169,8 @@ type DescribeWalletsByUserIdResult struct {
 func (p *DescribeWalletsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Wallet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Wallet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -188,7 +188,7 @@ type DescribeWalletsByUserIdAsyncResult struct {
 
 type QueryWalletsResult struct {
     /** ウォレットのリスト */
-	Items         *[]*Wallet	`json:"items"`
+	Items         []Wallet	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -196,8 +196,8 @@ type QueryWalletsResult struct {
 func (p *QueryWalletsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Wallet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Wallet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -356,7 +356,7 @@ type WithdrawByStampTaskAsyncResult struct {
 
 type DescribeReceiptsResult struct {
     /** レシートのリスト */
-	Items         *[]*Receipt	`json:"items"`
+	Items         []Receipt	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -364,8 +364,8 @@ type DescribeReceiptsResult struct {
 func (p *DescribeReceiptsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Receipt, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Receipt, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

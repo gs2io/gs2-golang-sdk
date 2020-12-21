@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeRoomsResult struct {
     /** ルームのリスト */
-	Items         *[]*Room	`json:"items"`
+	Items         []Room	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeRoomsResult struct {
 func (p *DescribeRoomsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Room, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Room, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -274,14 +274,14 @@ type DeleteRoomFromBackendAsyncResult struct {
 
 type DescribeMessagesResult struct {
     /** メッセージのリスト */
-	Items         *[]*Message	`json:"items"`
+	Items         []Message	`json:"items"`
 }
 
 func (p *DescribeMessagesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Message, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Message, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -368,7 +368,7 @@ type DeleteMessageAsyncResult struct {
 
 type DescribeSubscribesResult struct {
     /** 購読のリスト */
-	Items         *[]*Subscribe	`json:"items"`
+	Items         []Subscribe	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -376,8 +376,8 @@ type DescribeSubscribesResult struct {
 func (p *DescribeSubscribesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Subscribe, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Subscribe, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -395,7 +395,7 @@ type DescribeSubscribesAsyncResult struct {
 
 type DescribeSubscribesByUserIdResult struct {
     /** 購読のリスト */
-	Items         *[]*Subscribe	`json:"items"`
+	Items         []Subscribe	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -403,8 +403,8 @@ type DescribeSubscribesByUserIdResult struct {
 func (p *DescribeSubscribesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Subscribe, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Subscribe, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -422,7 +422,7 @@ type DescribeSubscribesByUserIdAsyncResult struct {
 
 type DescribeSubscribesByRoomNameResult struct {
     /** 購読のリスト */
-	Items         *[]*Subscribe	`json:"items"`
+	Items         []Subscribe	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -430,8 +430,8 @@ type DescribeSubscribesByRoomNameResult struct {
 func (p *DescribeSubscribesByRoomNameResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Subscribe, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Subscribe, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

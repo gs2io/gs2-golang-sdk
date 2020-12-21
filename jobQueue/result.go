@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeJobsByUserIdResult struct {
     /** ジョブのリスト */
-	Items         *[]*Job	`json:"items"`
+	Items         []Job	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeJobsByUserIdResult struct {
 func (p *DescribeJobsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Job, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Job, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -184,14 +184,14 @@ type GetJobByUserIdAsyncResult struct {
 
 type PushByUserIdResult struct {
     /** 追加した{model_name}の一覧 */
-	Items         *[]*Job	`json:"items"`
+	Items         []Job	`json:"items"`
 }
 
 func (p *PushByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Job, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Job, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -280,14 +280,14 @@ type DeleteJobByUserIdAsyncResult struct {
 
 type PushByStampSheetResult struct {
     /** 追加した{model_name}の一覧 */
-	Items         *[]*Job	`json:"items"`
+	Items         []Job	`json:"items"`
 }
 
 func (p *PushByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Job, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Job, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -302,7 +302,7 @@ type PushByStampSheetAsyncResult struct {
 
 type DescribeDeadLetterJobsByUserIdResult struct {
     /** デッドレタージョブのリスト */
-	Items         *[]*DeadLetterJob	`json:"items"`
+	Items         []DeadLetterJob	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -310,8 +310,8 @@ type DescribeDeadLetterJobsByUserIdResult struct {
 func (p *DescribeDeadLetterJobsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*DeadLetterJob, 0)
-    	for _, item := range *p.Items {
+    	items := make([]DeadLetterJob, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

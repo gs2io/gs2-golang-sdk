@@ -22,7 +22,7 @@ import (
 
 type DescribeStacksResult struct {
     /** スタックのリスト */
-	Items         *[]*Stack	`json:"items"`
+	Items         []Stack	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeStacksResult struct {
 func (p *DescribeStacksResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Stack, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Stack, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -242,7 +242,7 @@ type DeleteStackEntityAsyncResult struct {
 
 type DescribeResourcesResult struct {
     /** 作成されたのリソースのリスト */
-	Items         *[]*Resource	`json:"items"`
+	Items         []Resource	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -250,8 +250,8 @@ type DescribeResourcesResult struct {
 func (p *DescribeResourcesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Resource, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Resource, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -287,7 +287,7 @@ type GetResourceAsyncResult struct {
 
 type DescribeEventsResult struct {
     /** 発生したイベントのリスト */
-	Items         *[]*Event	`json:"items"`
+	Items         []Event	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -295,8 +295,8 @@ type DescribeEventsResult struct {
 func (p *DescribeEventsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Event, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Event, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -332,7 +332,7 @@ type GetEventAsyncResult struct {
 
 type DescribeOutputsResult struct {
     /** アウトプットのリスト */
-	Items         *[]*Output	`json:"items"`
+	Items         []Output	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -340,8 +340,8 @@ type DescribeOutputsResult struct {
 func (p *DescribeOutputsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Output, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Output, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

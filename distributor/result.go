@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeDistributorModelMastersResult struct {
     /** 配信設定マスターのリスト */
-	Items         *[]*DistributorModelMaster	`json:"items"`
+	Items         []DistributorModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeDistributorModelMastersResult struct {
 func (p *DescribeDistributorModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*DistributorModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]DistributorModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -238,14 +238,14 @@ type DeleteDistributorModelMasterAsyncResult struct {
 
 type DescribeDistributorModelsResult struct {
     /** 配信設定のリスト */
-	Items         *[]*DistributorModel	`json:"items"`
+	Items         []DistributorModel	`json:"items"`
 }
 
 func (p *DescribeDistributorModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*DistributorModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]DistributorModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -442,7 +442,7 @@ type RunStampSheetAsyncResult struct {
 
 type RunStampSheetExpressResult struct {
     /** スタンプタスクの実行結果 */
-	TaskResults         *[]core.String	`json:"taskResults"`
+	TaskResults         []core.String	`json:"taskResults"`
     /** スタンプシートの実行結果レスポンス内容 */
 	SheetResult         *core.String	`json:"sheetResult"`
 }
@@ -451,7 +451,7 @@ func (p *RunStampSheetExpressResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.TaskResults != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.TaskResults {
+    	for _, item := range p.TaskResults {
 			items = append(items, item)
 		}
 		data["taskResults"] = items
@@ -510,7 +510,7 @@ type RunStampSheetWithoutNamespaceAsyncResult struct {
 
 type RunStampSheetExpressWithoutNamespaceResult struct {
     /** スタンプタスクの実行結果 */
-	TaskResults         *[]core.String	`json:"taskResults"`
+	TaskResults         []core.String	`json:"taskResults"`
     /** スタンプシートの実行結果レスポンス内容 */
 	SheetResult         *core.String	`json:"sheetResult"`
 }
@@ -519,7 +519,7 @@ func (p *RunStampSheetExpressWithoutNamespaceResult) ToDict() *map[string]interf
     var data = map[string]interface{}{}
     if p.TaskResults != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.TaskResults {
+    	for _, item := range p.TaskResults {
 			items = append(items, item)
 		}
 		data["taskResults"] = items

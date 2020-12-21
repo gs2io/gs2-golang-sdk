@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -134,7 +134,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeAccountsResult struct {
     /** ゲームプレイヤーアカウントのリスト */
-	Items         *[]*Account	`json:"items"`
+	Items         []Account	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -142,8 +142,8 @@ type DescribeAccountsResult struct {
 func (p *DescribeAccountsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Account, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Account, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -256,7 +256,7 @@ type AuthenticationAsyncResult struct {
 
 type DescribeTakeOversResult struct {
     /** 引き継ぎ設定のリスト */
-	Items         *[]*TakeOver	`json:"items"`
+	Items         []TakeOver	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -264,8 +264,8 @@ type DescribeTakeOversResult struct {
 func (p *DescribeTakeOversResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*TakeOver, 0)
-    	for _, item := range *p.Items {
+    	items := make([]TakeOver, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -283,7 +283,7 @@ type DescribeTakeOversAsyncResult struct {
 
 type DescribeTakeOversByUserIdResult struct {
     /** 引き継ぎ設定のリスト */
-	Items         *[]*TakeOver	`json:"items"`
+	Items         []TakeOver	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -291,8 +291,8 @@ type DescribeTakeOversByUserIdResult struct {
 func (p *DescribeTakeOversByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*TakeOver, 0)
-    	for _, item := range *p.Items {
+    	items := make([]TakeOver, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

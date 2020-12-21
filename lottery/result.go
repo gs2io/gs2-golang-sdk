@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeLotteryModelMastersResult struct {
     /** 抽選の種類マスターのリスト */
-	Items         *[]*LotteryModelMaster	`json:"items"`
+	Items         []LotteryModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeLotteryModelMastersResult struct {
 func (p *DescribeLotteryModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*LotteryModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]LotteryModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -238,7 +238,7 @@ type DeleteLotteryModelMasterAsyncResult struct {
 
 type DescribePrizeTableMastersResult struct {
     /** 排出確率テーブルマスターのリスト */
-	Items         *[]*PrizeTableMaster	`json:"items"`
+	Items         []PrizeTableMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -246,8 +246,8 @@ type DescribePrizeTableMastersResult struct {
 func (p *DescribePrizeTableMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*PrizeTableMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]PrizeTableMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -337,7 +337,7 @@ type DeletePrizeTableMasterAsyncResult struct {
 
 type DescribeBoxesResult struct {
     /** ボックスのリスト */
-	Items         *[]*Box	`json:"items"`
+	Items         []Box	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -345,8 +345,8 @@ type DescribeBoxesResult struct {
 func (p *DescribeBoxesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Box, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Box, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -364,7 +364,7 @@ type DescribeBoxesAsyncResult struct {
 
 type DescribeBoxesByUserIdResult struct {
     /** ボックスのリスト */
-	Items         *[]*Box	`json:"items"`
+	Items         []Box	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -372,8 +372,8 @@ type DescribeBoxesByUserIdResult struct {
 func (p *DescribeBoxesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Box, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Box, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -471,14 +471,14 @@ type ResetBoxByUserIdAsyncResult struct {
 
 type DescribeLotteryModelsResult struct {
     /** 抽選の種類のリスト */
-	Items         *[]*LotteryModel	`json:"items"`
+	Items         []LotteryModel	`json:"items"`
 }
 
 func (p *DescribeLotteryModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*LotteryModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]LotteryModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -511,14 +511,14 @@ type GetLotteryModelAsyncResult struct {
 
 type DescribePrizeTablesResult struct {
     /** 排出確率テーブルのリスト */
-	Items         *[]*PrizeTable	`json:"items"`
+	Items         []PrizeTable	`json:"items"`
 }
 
 func (p *DescribePrizeTablesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*PrizeTable, 0)
-    	for _, item := range *p.Items {
+    	items := make([]PrizeTable, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -551,7 +551,7 @@ type GetPrizeTableAsyncResult struct {
 
 type DrawByUserIdResult struct {
     /** 抽選結果の景品リスト */
-	Items         *[]*DrawnPrize	`json:"items"`
+	Items         []DrawnPrize	`json:"items"`
     /** 排出された景品を入手するスタンプシート */
 	StampSheet         *core.String	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
@@ -563,8 +563,8 @@ type DrawByUserIdResult struct {
 func (p *DrawByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*DrawnPrize, 0)
-    	for _, item := range *p.Items {
+    	items := make([]DrawnPrize, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -588,14 +588,14 @@ type DrawByUserIdAsyncResult struct {
 
 type DescribeProbabilitiesResult struct {
     /** 景品の当選確率リスト */
-	Items         *[]*Probability	`json:"items"`
+	Items         []Probability	`json:"items"`
 }
 
 func (p *DescribeProbabilitiesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Probability, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Probability, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -610,14 +610,14 @@ type DescribeProbabilitiesAsyncResult struct {
 
 type DescribeProbabilitiesByUserIdResult struct {
     /** 景品の当選確率リスト */
-	Items         *[]*Probability	`json:"items"`
+	Items         []Probability	`json:"items"`
 }
 
 func (p *DescribeProbabilitiesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Probability, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Probability, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -632,7 +632,7 @@ type DescribeProbabilitiesByUserIdAsyncResult struct {
 
 type DrawByStampSheetResult struct {
     /** 抽選結果の景品リスト */
-	Items         *[]*DrawnPrize	`json:"items"`
+	Items         []DrawnPrize	`json:"items"`
     /** 排出された景品を入手するスタンプシート */
 	StampSheet         *core.String	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
@@ -644,8 +644,8 @@ type DrawByStampSheetResult struct {
 func (p *DrawByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*DrawnPrize, 0)
-    	for _, item := range *p.Items {
+    	items := make([]DrawnPrize, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

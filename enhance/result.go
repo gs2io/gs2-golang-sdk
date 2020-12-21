@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,14 +139,14 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeRateModelsResult struct {
     /** 強化レートモデルのリスト */
-	Items         *[]*RateModel	`json:"items"`
+	Items         []RateModel	`json:"items"`
 }
 
 func (p *DescribeRateModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*RateModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]RateModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -179,7 +179,7 @@ type GetRateModelAsyncResult struct {
 
 type DescribeRateModelMastersResult struct {
     /** 強化レートマスターのリスト */
-	Items         *[]*RateModelMaster	`json:"items"`
+	Items         []RateModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -187,8 +187,8 @@ type DescribeRateModelMastersResult struct {
 func (p *DescribeRateModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*RateModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]RateModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -392,7 +392,7 @@ type DirectEnhanceByStampSheetAsyncResult struct {
 
 type DescribeProgressesByUserIdResult struct {
     /** 強化実行のリスト */
-	Items         *[]*Progress	`json:"items"`
+	Items         []Progress	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -400,8 +400,8 @@ type DescribeProgressesByUserIdResult struct {
 func (p *DescribeProgressesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Progress, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Progress, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

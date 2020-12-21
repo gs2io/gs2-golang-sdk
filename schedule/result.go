@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeEventMastersResult struct {
     /** イベントマスターのリスト */
-	Items         *[]*EventMaster	`json:"items"`
+	Items         []EventMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeEventMastersResult struct {
 func (p *DescribeEventMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*EventMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]EventMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -238,7 +238,7 @@ type DeleteEventMasterAsyncResult struct {
 
 type DescribeTriggersResult struct {
     /** トリガーのリスト */
-	Items         *[]*Trigger	`json:"items"`
+	Items         []Trigger	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -246,8 +246,8 @@ type DescribeTriggersResult struct {
 func (p *DescribeTriggersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Trigger, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Trigger, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -265,7 +265,7 @@ type DescribeTriggersAsyncResult struct {
 
 type DescribeTriggersByUserIdResult struct {
     /** トリガーのリスト */
-	Items         *[]*Trigger	`json:"items"`
+	Items         []Trigger	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -273,8 +273,8 @@ type DescribeTriggersByUserIdResult struct {
 func (p *DescribeTriggersByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Trigger, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Trigger, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -382,14 +382,14 @@ type DeleteTriggerByUserIdAsyncResult struct {
 
 type DescribeEventsResult struct {
     /** イベントのリスト */
-	Items         *[]*Event	`json:"items"`
+	Items         []Event	`json:"items"`
 }
 
 func (p *DescribeEventsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Event, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Event, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -404,14 +404,14 @@ type DescribeEventsAsyncResult struct {
 
 type DescribeEventsByUserIdResult struct {
     /** イベントのリスト */
-	Items         *[]*Event	`json:"items"`
+	Items         []Event	`json:"items"`
 }
 
 func (p *DescribeEventsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Event, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Event, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -426,14 +426,14 @@ type DescribeEventsByUserIdAsyncResult struct {
 
 type DescribeRawEventsResult struct {
     /** イベントのリスト */
-	Items         *[]*Event	`json:"items"`
+	Items         []Event	`json:"items"`
 }
 
 func (p *DescribeRawEventsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Event, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Event, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

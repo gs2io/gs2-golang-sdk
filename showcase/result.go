@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeSalesItemMastersResult struct {
     /** 商品マスターのリスト */
-	Items         *[]*SalesItemMaster	`json:"items"`
+	Items         []SalesItemMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeSalesItemMastersResult struct {
 func (p *DescribeSalesItemMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*SalesItemMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]SalesItemMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -238,7 +238,7 @@ type DeleteSalesItemMasterAsyncResult struct {
 
 type DescribeSalesItemGroupMastersResult struct {
     /** 商品グループマスターのリスト */
-	Items         *[]*SalesItemGroupMaster	`json:"items"`
+	Items         []SalesItemGroupMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -246,8 +246,8 @@ type DescribeSalesItemGroupMastersResult struct {
 func (p *DescribeSalesItemGroupMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*SalesItemGroupMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]SalesItemGroupMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -337,7 +337,7 @@ type DeleteSalesItemGroupMasterAsyncResult struct {
 
 type DescribeShowcaseMastersResult struct {
     /** 陳列棚マスターのリスト */
-	Items         *[]*ShowcaseMaster	`json:"items"`
+	Items         []ShowcaseMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -345,8 +345,8 @@ type DescribeShowcaseMastersResult struct {
 func (p *DescribeShowcaseMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ShowcaseMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ShowcaseMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -508,14 +508,14 @@ type UpdateCurrentShowcaseMasterFromGitHubAsyncResult struct {
 
 type DescribeShowcasesResult struct {
     /** 陳列棚のリスト */
-	Items         *[]*Showcase	`json:"items"`
+	Items         []Showcase	`json:"items"`
 }
 
 func (p *DescribeShowcasesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Showcase, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Showcase, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -530,14 +530,14 @@ type DescribeShowcasesAsyncResult struct {
 
 type DescribeShowcasesByUserIdResult struct {
     /** 陳列棚のリスト */
-	Items         *[]*Showcase	`json:"items"`
+	Items         []Showcase	`json:"items"`
 }
 
 func (p *DescribeShowcasesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Showcase, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Showcase, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeStaminaModelMastersResult struct {
     /** スタミナモデルマスターのリスト */
-	Items         *[]*StaminaModelMaster	`json:"items"`
+	Items         []StaminaModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeStaminaModelMastersResult struct {
 func (p *DescribeStaminaModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*StaminaModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]StaminaModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -238,7 +238,7 @@ type DeleteStaminaModelMasterAsyncResult struct {
 
 type DescribeMaxStaminaTableMastersResult struct {
     /** スタミナの最大値テーブルマスターのリスト */
-	Items         *[]*MaxStaminaTableMaster	`json:"items"`
+	Items         []MaxStaminaTableMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -246,8 +246,8 @@ type DescribeMaxStaminaTableMastersResult struct {
 func (p *DescribeMaxStaminaTableMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*MaxStaminaTableMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]MaxStaminaTableMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -337,7 +337,7 @@ type DeleteMaxStaminaTableMasterAsyncResult struct {
 
 type DescribeRecoverIntervalTableMastersResult struct {
     /** スタミナ回復間隔テーブルマスターのリスト */
-	Items         *[]*RecoverIntervalTableMaster	`json:"items"`
+	Items         []RecoverIntervalTableMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -345,8 +345,8 @@ type DescribeRecoverIntervalTableMastersResult struct {
 func (p *DescribeRecoverIntervalTableMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*RecoverIntervalTableMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]RecoverIntervalTableMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -436,7 +436,7 @@ type DeleteRecoverIntervalTableMasterAsyncResult struct {
 
 type DescribeRecoverValueTableMastersResult struct {
     /** スタミナ回復量テーブルマスターのリスト */
-	Items         *[]*RecoverValueTableMaster	`json:"items"`
+	Items         []RecoverValueTableMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -444,8 +444,8 @@ type DescribeRecoverValueTableMastersResult struct {
 func (p *DescribeRecoverValueTableMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*RecoverValueTableMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]RecoverValueTableMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -607,14 +607,14 @@ type UpdateCurrentStaminaMasterFromGitHubAsyncResult struct {
 
 type DescribeStaminaModelsResult struct {
     /** スタミナモデルのリスト */
-	Items         *[]*StaminaModel	`json:"items"`
+	Items         []StaminaModel	`json:"items"`
 }
 
 func (p *DescribeStaminaModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*StaminaModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]StaminaModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -647,7 +647,7 @@ type GetStaminaModelAsyncResult struct {
 
 type DescribeStaminasResult struct {
     /** スタミナのリスト */
-	Items         *[]*Stamina	`json:"items"`
+	Items         []Stamina	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -655,8 +655,8 @@ type DescribeStaminasResult struct {
 func (p *DescribeStaminasResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Stamina, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Stamina, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -674,7 +674,7 @@ type DescribeStaminasAsyncResult struct {
 
 type DescribeStaminasByUserIdResult struct {
     /** スタミナのリスト */
-	Items         *[]*Stamina	`json:"items"`
+	Items         []Stamina	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -682,8 +682,8 @@ type DescribeStaminasByUserIdResult struct {
 func (p *DescribeStaminasByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Stamina, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Stamina, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

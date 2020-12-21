@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeVersionModelMastersResult struct {
     /** バージョンマスターのリスト */
-	Items         *[]*VersionModelMaster	`json:"items"`
+	Items         []VersionModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeVersionModelMastersResult struct {
 func (p *DescribeVersionModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*VersionModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]VersionModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -238,14 +238,14 @@ type DeleteVersionModelMasterAsyncResult struct {
 
 type DescribeVersionModelsResult struct {
     /** バージョン設定のリスト */
-	Items         *[]*VersionModel	`json:"items"`
+	Items         []VersionModel	`json:"items"`
 }
 
 func (p *DescribeVersionModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*VersionModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]VersionModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -278,7 +278,7 @@ type GetVersionModelAsyncResult struct {
 
 type DescribeAcceptVersionsResult struct {
     /** 承認したバージョンのリスト */
-	Items         *[]*AcceptVersion	`json:"items"`
+	Items         []AcceptVersion	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -286,8 +286,8 @@ type DescribeAcceptVersionsResult struct {
 func (p *DescribeAcceptVersionsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*AcceptVersion, 0)
-    	for _, item := range *p.Items {
+    	items := make([]AcceptVersion, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -305,7 +305,7 @@ type DescribeAcceptVersionsAsyncResult struct {
 
 type DescribeAcceptVersionsByUserIdResult struct {
     /** 承認したバージョンのリスト */
-	Items         *[]*AcceptVersion	`json:"items"`
+	Items         []AcceptVersion	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -313,8 +313,8 @@ type DescribeAcceptVersionsByUserIdResult struct {
 func (p *DescribeAcceptVersionsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*AcceptVersion, 0)
-    	for _, item := range *p.Items {
+    	items := make([]AcceptVersion, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -432,9 +432,9 @@ type CheckVersionResult struct {
     /** プロジェクトトークン */
 	ProjectToken         *core.String	`json:"projectToken"`
     /** バージョンの検証結果のリスト */
-	Warnings         *[]*Status	`json:"warnings"`
+	Warnings         []Status	`json:"warnings"`
     /** バージョンの検証結果のリスト */
-	Errors         *[]*Status	`json:"errors"`
+	Errors         []Status	`json:"errors"`
 }
 
 func (p *CheckVersionResult) ToDict() *map[string]interface{} {
@@ -443,15 +443,15 @@ func (p *CheckVersionResult) ToDict() *map[string]interface{} {
         data["projectToken"] = p.ProjectToken
     }
     if p.Warnings != nil {
-    	items := make([]*Status, 0)
-    	for _, item := range *p.Warnings {
+    	items := make([]Status, 0)
+    	for _, item := range p.Warnings {
 			items = append(items, item)
 		}
 		data["warnings"] = items
     }
     if p.Errors != nil {
-    	items := make([]*Status, 0)
-    	for _, item := range *p.Errors {
+    	items := make([]Status, 0)
+    	for _, item := range p.Errors {
 			items = append(items, item)
 		}
 		data["errors"] = items
@@ -468,9 +468,9 @@ type CheckVersionByUserIdResult struct {
     /** プロジェクトトークン */
 	ProjectToken         *core.String	`json:"projectToken"`
     /** バージョンの検証結果のリスト */
-	Warnings         *[]*Status	`json:"warnings"`
+	Warnings         []Status	`json:"warnings"`
     /** バージョンの検証結果のリスト */
-	Errors         *[]*Status	`json:"errors"`
+	Errors         []Status	`json:"errors"`
 }
 
 func (p *CheckVersionByUserIdResult) ToDict() *map[string]interface{} {
@@ -479,15 +479,15 @@ func (p *CheckVersionByUserIdResult) ToDict() *map[string]interface{} {
         data["projectToken"] = p.ProjectToken
     }
     if p.Warnings != nil {
-    	items := make([]*Status, 0)
-    	for _, item := range *p.Warnings {
+    	items := make([]Status, 0)
+    	for _, item := range p.Warnings {
 			items = append(items, item)
 		}
 		data["warnings"] = items
     }
     if p.Errors != nil {
-    	items := make([]*Status, 0)
-    	for _, item := range *p.Errors {
+    	items := make([]Status, 0)
+    	for _, item := range p.Errors {
 			items = append(items, item)
 		}
 		data["errors"] = items

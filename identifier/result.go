@@ -22,7 +22,7 @@ import (
 
 type DescribeUsersResult struct {
     /** ユーザのリスト */
-	Items         *[]*User	`json:"items"`
+	Items         []User	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeUsersResult struct {
 func (p *DescribeUsersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*User, 0)
-    	for _, item := range *p.Items {
+    	items := make([]User, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -116,7 +116,7 @@ type DeleteUserAsyncResult struct {
 
 type DescribeSecurityPoliciesResult struct {
     /** セキュリティポリシーのリスト */
-	Items         *[]*SecurityPolicy	`json:"items"`
+	Items         []SecurityPolicy	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -124,8 +124,8 @@ type DescribeSecurityPoliciesResult struct {
 func (p *DescribeSecurityPoliciesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*SecurityPolicy, 0)
-    	for _, item := range *p.Items {
+    	items := make([]SecurityPolicy, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -143,7 +143,7 @@ type DescribeSecurityPoliciesAsyncResult struct {
 
 type DescribeCommonSecurityPoliciesResult struct {
     /** セキュリティポリシーのリスト */
-	Items         *[]*SecurityPolicy	`json:"items"`
+	Items         []SecurityPolicy	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -151,8 +151,8 @@ type DescribeCommonSecurityPoliciesResult struct {
 func (p *DescribeCommonSecurityPoliciesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*SecurityPolicy, 0)
-    	for _, item := range *p.Items {
+    	items := make([]SecurityPolicy, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -237,7 +237,7 @@ type DeleteSecurityPolicyAsyncResult struct {
 
 type DescribeIdentifiersResult struct {
     /** クレデンシャルのリスト */
-	Items         *[]*Identifier	`json:"items"`
+	Items         []Identifier	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -245,8 +245,8 @@ type DescribeIdentifiersResult struct {
 func (p *DescribeIdentifiersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Identifier, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Identifier, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -318,7 +318,7 @@ type DeleteIdentifierAsyncResult struct {
 
 type DescribePasswordsResult struct {
     /** パスワードのリスト */
-	Items         *[]*Password	`json:"items"`
+	Items         []Password	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -326,8 +326,8 @@ type DescribePasswordsResult struct {
 func (p *DescribePasswordsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Password, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Password, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -394,14 +394,14 @@ type DeletePasswordAsyncResult struct {
 
 type GetHasSecurityPolicyResult struct {
     /** セキュリティポリシーのリスト */
-	Items         *[]*SecurityPolicy	`json:"items"`
+	Items         []SecurityPolicy	`json:"items"`
 }
 
 func (p *GetHasSecurityPolicyResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*SecurityPolicy, 0)
-    	for _, item := range *p.Items {
+    	items := make([]SecurityPolicy, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -416,14 +416,14 @@ type GetHasSecurityPolicyAsyncResult struct {
 
 type AttachSecurityPolicyResult struct {
     /** 新しくユーザーに割り当てたセキュリティポリシーのリスト */
-	Items         *[]*SecurityPolicy	`json:"items"`
+	Items         []SecurityPolicy	`json:"items"`
 }
 
 func (p *AttachSecurityPolicyResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*SecurityPolicy, 0)
-    	for _, item := range *p.Items {
+    	items := make([]SecurityPolicy, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -438,14 +438,14 @@ type AttachSecurityPolicyAsyncResult struct {
 
 type DetachSecurityPolicyResult struct {
     /** 剥奪したあとユーザーに引き続き割り当てられているセキュリティポリシーのリスト */
-	Items         *[]*SecurityPolicy	`json:"items"`
+	Items         []SecurityPolicy	`json:"items"`
 }
 
 func (p *DetachSecurityPolicyResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*SecurityPolicy, 0)
-    	for _, item := range *p.Items {
+    	items := make([]SecurityPolicy, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

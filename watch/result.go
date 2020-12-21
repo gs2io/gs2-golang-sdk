@@ -58,7 +58,7 @@ type GetCumulativeAsyncResult struct {
 
 type DescribeBillingActivitiesResult struct {
     /** 請求にまつわるアクティビティのリスト */
-	Items         *[]*BillingActivity	`json:"items"`
+	Items         []BillingActivity	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -66,8 +66,8 @@ type DescribeBillingActivitiesResult struct {
 func (p *DescribeBillingActivitiesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*BillingActivity, 0)
-    	for _, item := range *p.Items {
+    	items := make([]BillingActivity, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

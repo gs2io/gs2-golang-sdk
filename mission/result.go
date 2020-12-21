@@ -22,7 +22,7 @@ import (
 
 type DescribeMissionTaskModelMastersResult struct {
     /** ミッションタスクマスターのリスト */
-	Items         *[]*MissionTaskModelMaster	`json:"items"`
+	Items         []MissionTaskModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeMissionTaskModelMastersResult struct {
 func (p *DescribeMissionTaskModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*MissionTaskModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]MissionTaskModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -121,14 +121,14 @@ type DeleteMissionTaskModelMasterAsyncResult struct {
 
 type DescribeCounterModelsResult struct {
     /** カウンターの種類のリスト */
-	Items         *[]*CounterModel	`json:"items"`
+	Items         []CounterModel	`json:"items"`
 }
 
 func (p *DescribeCounterModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*CounterModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]CounterModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -161,7 +161,7 @@ type GetCounterModelAsyncResult struct {
 
 type DescribeCountersResult struct {
     /** カウンターのリスト */
-	Items         *[]*Counter	`json:"items"`
+	Items         []Counter	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -169,8 +169,8 @@ type DescribeCountersResult struct {
 func (p *DescribeCountersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Counter, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Counter, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -188,7 +188,7 @@ type DescribeCountersAsyncResult struct {
 
 type DescribeCountersByUserIdResult struct {
     /** カウンターのリスト */
-	Items         *[]*Counter	`json:"items"`
+	Items         []Counter	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -196,8 +196,8 @@ type DescribeCountersByUserIdResult struct {
 func (p *DescribeCountersByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Counter, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Counter, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -305,7 +305,7 @@ type IncreaseByStampSheetAsyncResult struct {
 
 type DescribeCounterModelMastersResult struct {
     /** カウンターの種類マスターのリスト */
-	Items         *[]*CounterModelMaster	`json:"items"`
+	Items         []CounterModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -313,8 +313,8 @@ type DescribeCounterModelMastersResult struct {
 func (p *DescribeCounterModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*CounterModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]CounterModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -404,14 +404,14 @@ type DeleteCounterModelMasterAsyncResult struct {
 
 type DescribeMissionGroupModelsResult struct {
     /** ミッショングループのリスト */
-	Items         *[]*MissionGroupModel	`json:"items"`
+	Items         []MissionGroupModel	`json:"items"`
 }
 
 func (p *DescribeMissionGroupModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*MissionGroupModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]MissionGroupModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -516,7 +516,7 @@ type UpdateCurrentMissionMasterFromGitHubAsyncResult struct {
 
 type DescribeMissionGroupModelMastersResult struct {
     /** ミッショングループマスターのリスト */
-	Items         *[]*MissionGroupModelMaster	`json:"items"`
+	Items         []MissionGroupModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -524,8 +524,8 @@ type DescribeMissionGroupModelMastersResult struct {
 func (p *DescribeMissionGroupModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*MissionGroupModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]MissionGroupModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -615,7 +615,7 @@ type DeleteMissionGroupModelMasterAsyncResult struct {
 
 type DescribeCompletesResult struct {
     /** 達成状況のリスト */
-	Items         *[]*Complete	`json:"items"`
+	Items         []Complete	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -623,8 +623,8 @@ type DescribeCompletesResult struct {
 func (p *DescribeCompletesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Complete, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Complete, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -642,7 +642,7 @@ type DescribeCompletesAsyncResult struct {
 
 type DescribeCompletesByUserIdResult struct {
     /** 達成状況のリスト */
-	Items         *[]*Complete	`json:"items"`
+	Items         []Complete	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -650,8 +650,8 @@ type DescribeCompletesByUserIdResult struct {
 func (p *DescribeCompletesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Complete, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Complete, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -810,7 +810,7 @@ type ReceiveByStampTaskAsyncResult struct {
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -818,8 +818,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -927,14 +927,14 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeMissionTaskModelsResult struct {
     /** ミッションタスクのリスト */
-	Items         *[]*MissionTaskModel	`json:"items"`
+	Items         []MissionTaskModel	`json:"items"`
 }
 
 func (p *DescribeMissionTaskModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*MissionTaskModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]MissionTaskModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

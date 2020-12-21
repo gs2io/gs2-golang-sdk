@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -134,7 +134,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeKeysResult struct {
     /** 暗号鍵のリスト */
-	Items         *[]*Key	`json:"items"`
+	Items         []Key	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -142,8 +142,8 @@ type DescribeKeysResult struct {
 func (p *DescribeKeysResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Key, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Key, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -264,7 +264,7 @@ type DecryptAsyncResult struct {
 
 type DescribeGitHubApiKeysResult struct {
     /** GitHub のAPIキーのリスト */
-	Items         *[]*GitHubApiKey	`json:"items"`
+	Items         []GitHubApiKey	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -272,8 +272,8 @@ type DescribeGitHubApiKeysResult struct {
 func (p *DescribeGitHubApiKeysResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*GitHubApiKey, 0)
-    	for _, item := range *p.Items {
+    	items := make([]GitHubApiKey, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

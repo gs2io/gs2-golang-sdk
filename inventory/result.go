@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeInventoryModelMastersResult struct {
     /** インベントリモデルマスターのリスト */
-	Items         *[]*InventoryModelMaster	`json:"items"`
+	Items         []InventoryModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeInventoryModelMastersResult struct {
 func (p *DescribeInventoryModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*InventoryModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]InventoryModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -238,14 +238,14 @@ type DeleteInventoryModelMasterAsyncResult struct {
 
 type DescribeInventoryModelsResult struct {
     /** インベントリモデルのリスト */
-	Items         *[]*InventoryModel	`json:"items"`
+	Items         []InventoryModel	`json:"items"`
 }
 
 func (p *DescribeInventoryModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*InventoryModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]InventoryModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -278,7 +278,7 @@ type GetInventoryModelAsyncResult struct {
 
 type DescribeItemModelMastersResult struct {
     /** アイテムモデルマスターのリスト */
-	Items         *[]*ItemModelMaster	`json:"items"`
+	Items         []ItemModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -286,8 +286,8 @@ type DescribeItemModelMastersResult struct {
 func (p *DescribeItemModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -377,14 +377,14 @@ type DeleteItemModelMasterAsyncResult struct {
 
 type DescribeItemModelsResult struct {
     /** アイテムモデルのリスト */
-	Items         *[]*ItemModel	`json:"items"`
+	Items         []ItemModel	`json:"items"`
 }
 
 func (p *DescribeItemModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -489,7 +489,7 @@ type UpdateCurrentItemModelMasterFromGitHubAsyncResult struct {
 
 type DescribeInventoriesResult struct {
     /** インベントリのリスト */
-	Items         *[]*Inventory	`json:"items"`
+	Items         []Inventory	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -497,8 +497,8 @@ type DescribeInventoriesResult struct {
 func (p *DescribeInventoriesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Inventory, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Inventory, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -516,7 +516,7 @@ type DescribeInventoriesAsyncResult struct {
 
 type DescribeInventoriesByUserIdResult struct {
     /** インベントリのリスト */
-	Items         *[]*Inventory	`json:"items"`
+	Items         []Inventory	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -524,8 +524,8 @@ type DescribeInventoriesByUserIdResult struct {
 func (p *DescribeInventoriesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Inventory, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Inventory, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -669,7 +669,7 @@ type SetCapacityByStampSheetAsyncResult struct {
 
 type DescribeItemSetsResult struct {
     /** 有効期限ごとのアイテム所持数量のリスト */
-	Items         *[]*ItemSet	`json:"items"`
+	Items         []ItemSet	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -677,8 +677,8 @@ type DescribeItemSetsResult struct {
 func (p *DescribeItemSetsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemSet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemSet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -696,7 +696,7 @@ type DescribeItemSetsAsyncResult struct {
 
 type DescribeItemSetsByUserIdResult struct {
     /** 有効期限ごとのアイテム所持数量のリスト */
-	Items         *[]*ItemSet	`json:"items"`
+	Items         []ItemSet	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -704,8 +704,8 @@ type DescribeItemSetsByUserIdResult struct {
 func (p *DescribeItemSetsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemSet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemSet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -723,7 +723,7 @@ type DescribeItemSetsByUserIdAsyncResult struct {
 
 type GetItemSetResult struct {
     /** 有効期限毎の{model_name} */
-	Items         *[]*ItemSet	`json:"items"`
+	Items         []ItemSet	`json:"items"`
     /** アイテムモデル */
 	ItemModel         *ItemModel	`json:"itemModel"`
     /** インベントリ */
@@ -733,8 +733,8 @@ type GetItemSetResult struct {
 func (p *GetItemSetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemSet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemSet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -755,7 +755,7 @@ type GetItemSetAsyncResult struct {
 
 type GetItemSetByUserIdResult struct {
     /** 有効期限毎の{model_name} */
-	Items         *[]*ItemSet	`json:"items"`
+	Items         []ItemSet	`json:"items"`
     /** アイテムモデル */
 	ItemModel         *ItemModel	`json:"itemModel"`
     /** インベントリ */
@@ -765,8 +765,8 @@ type GetItemSetByUserIdResult struct {
 func (p *GetItemSetByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemSet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemSet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -787,7 +787,7 @@ type GetItemSetByUserIdAsyncResult struct {
 
 type GetItemWithSignatureResult struct {
     /** 有効期限毎の{model_name} */
-	Items         *[]*ItemSet	`json:"items"`
+	Items         []ItemSet	`json:"items"`
     /** アイテムモデル */
 	ItemModel         *ItemModel	`json:"itemModel"`
     /** インベントリ */
@@ -801,8 +801,8 @@ type GetItemWithSignatureResult struct {
 func (p *GetItemWithSignatureResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemSet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemSet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -829,7 +829,7 @@ type GetItemWithSignatureAsyncResult struct {
 
 type GetItemWithSignatureByUserIdResult struct {
     /** 有効期限毎の{model_name} */
-	Items         *[]*ItemSet	`json:"items"`
+	Items         []ItemSet	`json:"items"`
     /** アイテムモデル */
 	ItemModel         *ItemModel	`json:"itemModel"`
     /** インベントリ */
@@ -843,8 +843,8 @@ type GetItemWithSignatureByUserIdResult struct {
 func (p *GetItemWithSignatureByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemSet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemSet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -871,7 +871,7 @@ type GetItemWithSignatureByUserIdAsyncResult struct {
 
 type AcquireItemSetByUserIdResult struct {
     /** 加算後の有効期限ごとのアイテム所持数量のリスト */
-	Items         *[]*ItemSet	`json:"items"`
+	Items         []ItemSet	`json:"items"`
     /** アイテムモデル */
 	ItemModel         *ItemModel	`json:"itemModel"`
     /** インベントリ */
@@ -883,8 +883,8 @@ type AcquireItemSetByUserIdResult struct {
 func (p *AcquireItemSetByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemSet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemSet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -908,7 +908,7 @@ type AcquireItemSetByUserIdAsyncResult struct {
 
 type ConsumeItemSetResult struct {
     /** 消費後の有効期限ごとのアイテム所持数量のリスト */
-	Items         *[]*ItemSet	`json:"items"`
+	Items         []ItemSet	`json:"items"`
     /** アイテムモデル */
 	ItemModel         *ItemModel	`json:"itemModel"`
     /** インベントリ */
@@ -918,8 +918,8 @@ type ConsumeItemSetResult struct {
 func (p *ConsumeItemSetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemSet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemSet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -940,7 +940,7 @@ type ConsumeItemSetAsyncResult struct {
 
 type ConsumeItemSetByUserIdResult struct {
     /** 消費後の有効期限ごとのアイテム所持数量のリスト */
-	Items         *[]*ItemSet	`json:"items"`
+	Items         []ItemSet	`json:"items"`
     /** アイテムモデル */
 	ItemModel         *ItemModel	`json:"itemModel"`
     /** インベントリ */
@@ -950,8 +950,8 @@ type ConsumeItemSetByUserIdResult struct {
 func (p *ConsumeItemSetByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemSet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemSet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -972,7 +972,7 @@ type ConsumeItemSetByUserIdAsyncResult struct {
 
 type DescribeReferenceOfResult struct {
     /** この所持品の参照元リスト */
-	Items         *[]core.String	`json:"items"`
+	Items         []core.String	`json:"items"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -985,7 +985,7 @@ func (p *DescribeReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Items {
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -1009,7 +1009,7 @@ type DescribeReferenceOfAsyncResult struct {
 
 type DescribeReferenceOfByUserIdResult struct {
     /** この所持品の参照元リスト */
-	Items         *[]core.String	`json:"items"`
+	Items         []core.String	`json:"items"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1022,7 +1022,7 @@ func (p *DescribeReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Items {
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -1046,7 +1046,7 @@ type DescribeReferenceOfByUserIdAsyncResult struct {
 
 type GetReferenceOfResult struct {
     /** この所持品の参照元リスト */
-	Item         *[]core.String	`json:"item"`
+	Item         []core.String	`json:"item"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1059,7 +1059,7 @@ func (p *GetReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Item {
+    	for _, item := range p.Item {
 			items = append(items, item)
 		}
 		data["item"] = items
@@ -1083,7 +1083,7 @@ type GetReferenceOfAsyncResult struct {
 
 type GetReferenceOfByUserIdResult struct {
     /** この所持品の参照元リスト */
-	Item         *[]core.String	`json:"item"`
+	Item         []core.String	`json:"item"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1096,7 +1096,7 @@ func (p *GetReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Item {
+    	for _, item := range p.Item {
 			items = append(items, item)
 		}
 		data["item"] = items
@@ -1120,7 +1120,7 @@ type GetReferenceOfByUserIdAsyncResult struct {
 
 type VerifyReferenceOfResult struct {
     /** この所持品の参照元リスト */
-	Item         *[]core.String	`json:"item"`
+	Item         []core.String	`json:"item"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1133,7 +1133,7 @@ func (p *VerifyReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Item {
+    	for _, item := range p.Item {
 			items = append(items, item)
 		}
 		data["item"] = items
@@ -1157,7 +1157,7 @@ type VerifyReferenceOfAsyncResult struct {
 
 type VerifyReferenceOfByUserIdResult struct {
     /** この所持品の参照元リスト */
-	Item         *[]core.String	`json:"item"`
+	Item         []core.String	`json:"item"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1170,7 +1170,7 @@ func (p *VerifyReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Item {
+    	for _, item := range p.Item {
 			items = append(items, item)
 		}
 		data["item"] = items
@@ -1194,7 +1194,7 @@ type VerifyReferenceOfByUserIdAsyncResult struct {
 
 type AddReferenceOfResult struct {
     /** この所持品の参照元リスト */
-	Item         *[]core.String	`json:"item"`
+	Item         []core.String	`json:"item"`
     /** 参照元追加後の有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1207,7 +1207,7 @@ func (p *AddReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Item {
+    	for _, item := range p.Item {
 			items = append(items, item)
 		}
 		data["item"] = items
@@ -1231,7 +1231,7 @@ type AddReferenceOfAsyncResult struct {
 
 type AddReferenceOfByUserIdResult struct {
     /** この所持品の参照元リスト */
-	Item         *[]core.String	`json:"item"`
+	Item         []core.String	`json:"item"`
     /** 参照元追加後の有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1244,7 +1244,7 @@ func (p *AddReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Item {
+    	for _, item := range p.Item {
 			items = append(items, item)
 		}
 		data["item"] = items
@@ -1268,7 +1268,7 @@ type AddReferenceOfByUserIdAsyncResult struct {
 
 type DeleteReferenceOfResult struct {
     /** この所持品の参照元リスト */
-	Item         *[]core.String	`json:"item"`
+	Item         []core.String	`json:"item"`
     /** 参照元削除後の有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1281,7 +1281,7 @@ func (p *DeleteReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Item {
+    	for _, item := range p.Item {
 			items = append(items, item)
 		}
 		data["item"] = items
@@ -1305,7 +1305,7 @@ type DeleteReferenceOfAsyncResult struct {
 
 type DeleteReferenceOfByUserIdResult struct {
     /** この所持品の参照元リスト */
-	Item         *[]core.String	`json:"item"`
+	Item         []core.String	`json:"item"`
     /** 参照元削除後の有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1318,7 +1318,7 @@ func (p *DeleteReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Item {
+    	for _, item := range p.Item {
 			items = append(items, item)
 		}
 		data["item"] = items
@@ -1342,7 +1342,7 @@ type DeleteReferenceOfByUserIdAsyncResult struct {
 
 type DeleteItemSetByUserIdResult struct {
     /** 削除した有効期限ごとのアイテム所持数量のリスト */
-	Items         *[]*ItemSet	`json:"items"`
+	Items         []ItemSet	`json:"items"`
     /** アイテムモデル */
 	ItemModel         *ItemModel	`json:"itemModel"`
     /** インベントリ */
@@ -1352,8 +1352,8 @@ type DeleteItemSetByUserIdResult struct {
 func (p *DeleteItemSetByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemSet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemSet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -1374,7 +1374,7 @@ type DeleteItemSetByUserIdAsyncResult struct {
 
 type AcquireItemSetByStampSheetResult struct {
     /** 加算後の有効期限ごとのアイテム所持数量のリスト */
-	Items         *[]*ItemSet	`json:"items"`
+	Items         []ItemSet	`json:"items"`
     /** アイテムモデル */
 	ItemModel         *ItemModel	`json:"itemModel"`
     /** インベントリ */
@@ -1386,8 +1386,8 @@ type AcquireItemSetByStampSheetResult struct {
 func (p *AcquireItemSetByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemSet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemSet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -1411,7 +1411,7 @@ type AcquireItemSetByStampSheetAsyncResult struct {
 
 type AddReferenceOfItemSetByStampSheetResult struct {
     /** この所持品の参照元リスト */
-	Item         *[]core.String	`json:"item"`
+	Item         []core.String	`json:"item"`
     /** 参照元追加後の有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1424,7 +1424,7 @@ func (p *AddReferenceOfItemSetByStampSheetResult) ToDict() *map[string]interface
     var data = map[string]interface{}{}
     if p.Item != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Item {
+    	for _, item := range p.Item {
 			items = append(items, item)
 		}
 		data["item"] = items
@@ -1448,7 +1448,7 @@ type AddReferenceOfItemSetByStampSheetAsyncResult struct {
 
 type DeleteReferenceOfItemSetByStampSheetResult struct {
     /** この所持品の参照元リスト */
-	Item         *[]core.String	`json:"item"`
+	Item         []core.String	`json:"item"`
     /** 参照元削除後の有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1461,7 +1461,7 @@ func (p *DeleteReferenceOfItemSetByStampSheetResult) ToDict() *map[string]interf
     var data = map[string]interface{}{}
     if p.Item != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Item {
+    	for _, item := range p.Item {
 			items = append(items, item)
 		}
 		data["item"] = items
@@ -1485,7 +1485,7 @@ type DeleteReferenceOfItemSetByStampSheetAsyncResult struct {
 
 type ConsumeItemSetByStampTaskResult struct {
     /** 消費後の有効期限ごとのアイテム所持数量のリスト */
-	Items         *[]*ItemSet	`json:"items"`
+	Items         []ItemSet	`json:"items"`
     /** アイテムモデル */
 	ItemModel         *ItemModel	`json:"itemModel"`
     /** インベントリ */
@@ -1497,8 +1497,8 @@ type ConsumeItemSetByStampTaskResult struct {
 func (p *ConsumeItemSetByStampTaskResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*ItemSet, 0)
-    	for _, item := range *p.Items {
+    	items := make([]ItemSet, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -1522,7 +1522,7 @@ type ConsumeItemSetByStampTaskAsyncResult struct {
 
 type VerifyReferenceOfByStampTaskResult struct {
     /** この所持品の参照元のリスト */
-	Item         *[]core.String	`json:"item"`
+	Item         []core.String	`json:"item"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1537,7 +1537,7 @@ func (p *VerifyReferenceOfByStampTaskResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Item {
+    	for _, item := range p.Item {
 			items = append(items, item)
 		}
 		data["item"] = items

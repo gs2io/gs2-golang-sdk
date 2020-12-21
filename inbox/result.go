@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeMessagesResult struct {
     /** メッセージのリスト */
-	Items         *[]*Message	`json:"items"`
+	Items         []Message	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeMessagesResult struct {
 func (p *DescribeMessagesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Message, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Message, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -166,7 +166,7 @@ type DescribeMessagesAsyncResult struct {
 
 type DescribeMessagesByUserIdResult struct {
     /** メッセージのリスト */
-	Items         *[]*Message	`json:"items"`
+	Items         []Message	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -174,8 +174,8 @@ type DescribeMessagesByUserIdResult struct {
 func (p *DescribeMessagesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Message, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Message, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -247,14 +247,14 @@ type GetMessageByUserIdAsyncResult struct {
 
 type ReceiveGlobalMessageResult struct {
     /** 受信したメッセージ一覧 */
-	Item         *[]*Message	`json:"item"`
+	Item         []Message	`json:"item"`
 }
 
 func (p *ReceiveGlobalMessageResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]*Message, 0)
-    	for _, item := range *p.Item {
+    	items := make([]Message, 0)
+    	for _, item := range p.Item {
 			items = append(items, item)
 		}
 		data["item"] = items
@@ -269,14 +269,14 @@ type ReceiveGlobalMessageAsyncResult struct {
 
 type ReceiveGlobalMessageByUserIdResult struct {
     /** 受信したメッセージ一覧 */
-	Item         *[]*Message	`json:"item"`
+	Item         []Message	`json:"item"`
 }
 
 func (p *ReceiveGlobalMessageByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]*Message, 0)
-    	for _, item := range *p.Item {
+    	items := make([]Message, 0)
+    	for _, item := range p.Item {
 			items = append(items, item)
 		}
 		data["item"] = items
@@ -494,7 +494,7 @@ type UpdateCurrentMessageMasterFromGitHubAsyncResult struct {
 
 type DescribeGlobalMessageMastersResult struct {
     /** 全ユーザに向けたメッセージのリスト */
-	Items         *[]*GlobalMessageMaster	`json:"items"`
+	Items         []GlobalMessageMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -502,8 +502,8 @@ type DescribeGlobalMessageMastersResult struct {
 func (p *DescribeGlobalMessageMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*GlobalMessageMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]GlobalMessageMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -588,14 +588,14 @@ type DeleteGlobalMessageMasterAsyncResult struct {
 
 type DescribeGlobalMessagesResult struct {
     /** 全ユーザに向けたメッセージのリスト */
-	Items         *[]*GlobalMessage	`json:"items"`
+	Items         []GlobalMessage	`json:"items"`
 }
 
 func (p *DescribeGlobalMessagesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*GlobalMessage, 0)
-    	for _, item := range *p.Items {
+    	items := make([]GlobalMessage, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

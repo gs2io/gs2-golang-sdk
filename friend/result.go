@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeProfilesResult struct {
     /** プロフィールのリスト */
-	Items         *[]*Profile	`json:"items"`
+	Items         []Profile	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeProfilesResult struct {
 func (p *DescribeProfilesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Profile, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Profile, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -269,7 +269,7 @@ type GetPublicProfileAsyncResult struct {
 
 type DescribeFollowsResult struct {
     /** フォローしているユーザーのリスト */
-	Items         *[]*FollowUser	`json:"items"`
+	Items         []FollowUser	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -277,8 +277,8 @@ type DescribeFollowsResult struct {
 func (p *DescribeFollowsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*FollowUser, 0)
-    	for _, item := range *p.Items {
+    	items := make([]FollowUser, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -296,7 +296,7 @@ type DescribeFollowsAsyncResult struct {
 
 type DescribeFollowsByUserIdResult struct {
     /** フォローしているユーザーのリスト */
-	Items         *[]*FollowUser	`json:"items"`
+	Items         []FollowUser	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -304,8 +304,8 @@ type DescribeFollowsByUserIdResult struct {
 func (p *DescribeFollowsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*FollowUser, 0)
-    	for _, item := range *p.Items {
+    	items := make([]FollowUser, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -431,7 +431,7 @@ type UnfollowByUserIdAsyncResult struct {
 
 type DescribeFriendsResult struct {
     /** フレンドのユーザーのリスト */
-	Items         *[]*FriendUser	`json:"items"`
+	Items         []FriendUser	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -439,8 +439,8 @@ type DescribeFriendsResult struct {
 func (p *DescribeFriendsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*FriendUser, 0)
-    	for _, item := range *p.Items {
+    	items := make([]FriendUser, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -458,7 +458,7 @@ type DescribeFriendsAsyncResult struct {
 
 type DescribeFriendsByUserIdResult struct {
     /** フレンドのユーザーのリスト */
-	Items         *[]*FriendUser	`json:"items"`
+	Items         []FriendUser	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -466,8 +466,8 @@ type DescribeFriendsByUserIdResult struct {
 func (p *DescribeFriendsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*FriendUser, 0)
-    	for _, item := range *p.Items {
+    	items := make([]FriendUser, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -557,14 +557,14 @@ type DeleteFriendByUserIdAsyncResult struct {
 
 type DescribeSendRequestsResult struct {
     /** フレンドリクエストのリスト */
-	Items         *[]*FriendRequest	`json:"items"`
+	Items         []FriendRequest	`json:"items"`
 }
 
 func (p *DescribeSendRequestsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*FriendRequest, 0)
-    	for _, item := range *p.Items {
+    	items := make([]FriendRequest, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -579,14 +579,14 @@ type DescribeSendRequestsAsyncResult struct {
 
 type DescribeSendRequestsByUserIdResult struct {
     /** フレンドリクエストのリスト */
-	Items         *[]*FriendRequest	`json:"items"`
+	Items         []FriendRequest	`json:"items"`
 }
 
 func (p *DescribeSendRequestsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*FriendRequest, 0)
-    	for _, item := range *p.Items {
+    	items := make([]FriendRequest, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -709,14 +709,14 @@ type DeleteRequestByUserIdAsyncResult struct {
 
 type DescribeReceiveRequestsResult struct {
     /** フレンドリクエストのリスト */
-	Items         *[]*FriendRequest	`json:"items"`
+	Items         []FriendRequest	`json:"items"`
 }
 
 func (p *DescribeReceiveRequestsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*FriendRequest, 0)
-    	for _, item := range *p.Items {
+    	items := make([]FriendRequest, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -731,14 +731,14 @@ type DescribeReceiveRequestsAsyncResult struct {
 
 type DescribeReceiveRequestsByUserIdResult struct {
     /** フレンドリクエストのリスト */
-	Items         *[]*FriendRequest	`json:"items"`
+	Items         []FriendRequest	`json:"items"`
 }
 
 func (p *DescribeReceiveRequestsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*FriendRequest, 0)
-    	for _, item := range *p.Items {
+    	items := make([]FriendRequest, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -861,14 +861,14 @@ type RejectRequestByUserIdAsyncResult struct {
 
 type DescribeBlackListResult struct {
     /** ブラックリストに登録されたユーザIDリスト */
-	Items         *[]core.String	`json:"items"`
+	Items         []core.String	`json:"items"`
 }
 
 func (p *DescribeBlackListResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Items {
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -883,14 +883,14 @@ type DescribeBlackListAsyncResult struct {
 
 type DescribeBlackListByUserIdResult struct {
     /** ブラックリストに登録されたユーザIDリスト */
-	Items         *[]core.String	`json:"items"`
+	Items         []core.String	`json:"items"`
 }
 
 func (p *DescribeBlackListByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
     	items := make([]core.String, 0)
-    	for _, item := range *p.Items {
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

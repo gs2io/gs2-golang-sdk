@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,14 +139,14 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeRateModelsResult struct {
     /** 交換レートモデルのリスト */
-	Items         *[]*RateModel	`json:"items"`
+	Items         []RateModel	`json:"items"`
 }
 
 func (p *DescribeRateModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*RateModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]RateModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -179,7 +179,7 @@ type GetRateModelAsyncResult struct {
 
 type DescribeRateModelMastersResult struct {
     /** 交換レートマスターのリスト */
-	Items         *[]*RateModelMaster	`json:"items"`
+	Items         []RateModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -187,8 +187,8 @@ type DescribeRateModelMastersResult struct {
 func (p *DescribeRateModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*RateModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]RateModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -457,7 +457,7 @@ type CreateAwaitByUserIdAsyncResult struct {
 
 type DescribeAwaitsResult struct {
     /** 交換待機のリスト */
-	Items         *[]*Await	`json:"items"`
+	Items         []Await	`json:"items"`
     /** 次のページを取得するためのトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -465,8 +465,8 @@ type DescribeAwaitsResult struct {
 func (p *DescribeAwaitsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Await, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Await, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -484,7 +484,7 @@ type DescribeAwaitsAsyncResult struct {
 
 type DescribeAwaitsByUserIdResult struct {
     /** 交換待機のリスト */
-	Items         *[]*Await	`json:"items"`
+	Items         []Await	`json:"items"`
     /** 次のページを取得するためのトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -492,8 +492,8 @@ type DescribeAwaitsByUserIdResult struct {
 func (p *DescribeAwaitsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Await, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Await, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

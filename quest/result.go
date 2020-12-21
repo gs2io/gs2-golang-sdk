@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** クエストを分類するカテゴリーのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeQuestGroupModelMastersResult struct {
     /** クエストグループマスターのリスト */
-	Items         *[]*QuestGroupModelMaster	`json:"items"`
+	Items         []QuestGroupModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeQuestGroupModelMastersResult struct {
 func (p *DescribeQuestGroupModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*QuestGroupModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]QuestGroupModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -238,7 +238,7 @@ type DeleteQuestGroupModelMasterAsyncResult struct {
 
 type DescribeQuestModelMastersResult struct {
     /** クエストモデルマスターのリスト */
-	Items         *[]*QuestModelMaster	`json:"items"`
+	Items         []QuestModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -246,8 +246,8 @@ type DescribeQuestModelMastersResult struct {
 func (p *DescribeQuestModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*QuestModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]QuestModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -409,7 +409,7 @@ type UpdateCurrentQuestMasterFromGitHubAsyncResult struct {
 
 type DescribeProgressesByUserIdResult struct {
     /** クエスト挑戦のリスト */
-	Items         *[]*Progress	`json:"items"`
+	Items         []Progress	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -417,8 +417,8 @@ type DescribeProgressesByUserIdResult struct {
 func (p *DescribeProgressesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Progress, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Progress, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -689,7 +689,7 @@ type DeleteProgressByStampTaskAsyncResult struct {
 
 type DescribeCompletedQuestListsResult struct {
     /** クエスト進行のリスト */
-	Items         *[]*CompletedQuestList	`json:"items"`
+	Items         []CompletedQuestList	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -697,8 +697,8 @@ type DescribeCompletedQuestListsResult struct {
 func (p *DescribeCompletedQuestListsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*CompletedQuestList, 0)
-    	for _, item := range *p.Items {
+    	items := make([]CompletedQuestList, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -716,7 +716,7 @@ type DescribeCompletedQuestListsAsyncResult struct {
 
 type DescribeCompletedQuestListsByUserIdResult struct {
     /** クエスト進行のリスト */
-	Items         *[]*CompletedQuestList	`json:"items"`
+	Items         []CompletedQuestList	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -724,8 +724,8 @@ type DescribeCompletedQuestListsByUserIdResult struct {
 func (p *DescribeCompletedQuestListsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*CompletedQuestList, 0)
-    	for _, item := range *p.Items {
+    	items := make([]CompletedQuestList, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -797,14 +797,14 @@ type DeleteCompletedQuestListByUserIdAsyncResult struct {
 
 type DescribeQuestGroupModelsResult struct {
     /** クエストグループのリスト */
-	Items         *[]*QuestGroupModel	`json:"items"`
+	Items         []QuestGroupModel	`json:"items"`
 }
 
 func (p *DescribeQuestGroupModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*QuestGroupModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]QuestGroupModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -837,14 +837,14 @@ type GetQuestGroupModelAsyncResult struct {
 
 type DescribeQuestModelsResult struct {
     /** Noneのリスト */
-	Items         *[]*QuestModel	`json:"items"`
+	Items         []QuestModel	`json:"items"`
 }
 
 func (p *DescribeQuestModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*QuestModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]QuestModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

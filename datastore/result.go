@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeDataObjectsResult struct {
     /** データオブジェクトのリスト */
-	Items         *[]*DataObject	`json:"items"`
+	Items         []DataObject	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeDataObjectsResult struct {
 func (p *DescribeDataObjectsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*DataObject, 0)
-    	for _, item := range *p.Items {
+    	items := make([]DataObject, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -166,7 +166,7 @@ type DescribeDataObjectsAsyncResult struct {
 
 type DescribeDataObjectsByUserIdResult struct {
     /** データオブジェクトのリスト */
-	Items         *[]*DataObject	`json:"items"`
+	Items         []DataObject	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -174,8 +174,8 @@ type DescribeDataObjectsByUserIdResult struct {
 func (p *DescribeDataObjectsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*DataObject, 0)
-    	for _, item := range *p.Items {
+    	items := make([]DataObject, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -635,7 +635,7 @@ type RestoreDataObjectAsyncResult struct {
 
 type DescribeDataObjectHistoriesResult struct {
     /** データオブジェクト履歴のリスト */
-	Items         *[]*DataObjectHistory	`json:"items"`
+	Items         []DataObjectHistory	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -643,8 +643,8 @@ type DescribeDataObjectHistoriesResult struct {
 func (p *DescribeDataObjectHistoriesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*DataObjectHistory, 0)
-    	for _, item := range *p.Items {
+    	items := make([]DataObjectHistory, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -662,7 +662,7 @@ type DescribeDataObjectHistoriesAsyncResult struct {
 
 type DescribeDataObjectHistoriesByUserIdResult struct {
     /** データオブジェクト履歴のリスト */
-	Items         *[]*DataObjectHistory	`json:"items"`
+	Items         []DataObjectHistory	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -670,8 +670,8 @@ type DescribeDataObjectHistoriesByUserIdResult struct {
 func (p *DescribeDataObjectHistoriesByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*DataObjectHistory, 0)
-    	for _, item := range *p.Items {
+    	items := make([]DataObjectHistory, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

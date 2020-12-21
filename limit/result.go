@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeCountersResult struct {
     /** カウンターのリスト */
-	Items         *[]*Counter	`json:"items"`
+	Items         []Counter	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeCountersResult struct {
 func (p *DescribeCountersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Counter, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Counter, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -166,7 +166,7 @@ type DescribeCountersAsyncResult struct {
 
 type DescribeCountersByUserIdResult struct {
     /** カウンターのリスト */
-	Items         *[]*Counter	`json:"items"`
+	Items         []Counter	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -174,8 +174,8 @@ type DescribeCountersByUserIdResult struct {
 func (p *DescribeCountersByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Counter, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Counter, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -324,7 +324,7 @@ type DeleteByStampSheetAsyncResult struct {
 
 type DescribeLimitModelMastersResult struct {
     /** 回数制限の種類マスターのリスト */
-	Items         *[]*LimitModelMaster	`json:"items"`
+	Items         []LimitModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -332,8 +332,8 @@ type DescribeLimitModelMastersResult struct {
 func (p *DescribeLimitModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*LimitModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]LimitModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -495,14 +495,14 @@ type UpdateCurrentLimitMasterFromGitHubAsyncResult struct {
 
 type DescribeLimitModelsResult struct {
     /** 回数制限の種類のリスト */
-	Items         *[]*LimitModel	`json:"items"`
+	Items         []LimitModel	`json:"items"`
 }
 
 func (p *DescribeLimitModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*LimitModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]LimitModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -188,7 +188,7 @@ type PrepareUpdateCurrentNewsMasterFromGitHubAsyncResult struct {
 
 type DescribeNewsResult struct {
     /** お知らせ記事のリスト */
-	Items         *[]*News	`json:"items"`
+	Items         []News	`json:"items"`
     /** お知らせ記事データのハッシュ値 */
 	ContentHash         *core.String	`json:"contentHash"`
     /** テンプレートデータのハッシュ値 */
@@ -198,8 +198,8 @@ type DescribeNewsResult struct {
 func (p *DescribeNewsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*News, 0)
-    	for _, item := range *p.Items {
+    	items := make([]News, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -220,7 +220,7 @@ type DescribeNewsAsyncResult struct {
 
 type DescribeNewsByUserIdResult struct {
     /** お知らせ記事のリスト */
-	Items         *[]*News	`json:"items"`
+	Items         []News	`json:"items"`
     /** お知らせ記事データのハッシュ値 */
 	ContentHash         *core.String	`json:"contentHash"`
     /** テンプレートデータのハッシュ値 */
@@ -230,8 +230,8 @@ type DescribeNewsByUserIdResult struct {
 func (p *DescribeNewsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*News, 0)
-    	for _, item := range *p.Items {
+    	items := make([]News, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -252,7 +252,7 @@ type DescribeNewsByUserIdAsyncResult struct {
 
 type WantGrantResult struct {
     /** お知らせコンテンツにアクセスするために設定の必要なクッキー のリスト */
-	Items         *[]*SetCookieRequestEntry	`json:"items"`
+	Items         []SetCookieRequestEntry	`json:"items"`
     /** お知らせコンテンツにアクセスするためのURL */
 	BrowserUrl         *core.String	`json:"browserUrl"`
     /** ZIP形式のお知らせコンテンツにアクセスするためのURL Cookieの設定は不要 */
@@ -262,8 +262,8 @@ type WantGrantResult struct {
 func (p *WantGrantResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*SetCookieRequestEntry, 0)
-    	for _, item := range *p.Items {
+    	items := make([]SetCookieRequestEntry, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -284,7 +284,7 @@ type WantGrantAsyncResult struct {
 
 type WantGrantByUserIdResult struct {
     /** お知らせコンテンツにアクセスするために設定の必要なクッキー のリスト */
-	Items         *[]*SetCookieRequestEntry	`json:"items"`
+	Items         []SetCookieRequestEntry	`json:"items"`
     /** お知らせコンテンツにアクセスするためのURL */
 	BrowserUrl         *core.String	`json:"browserUrl"`
     /** ZIP形式のお知らせコンテンツにアクセスするためのURL Cookieの設定は不要 */
@@ -294,8 +294,8 @@ type WantGrantByUserIdResult struct {
 func (p *WantGrantByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*SetCookieRequestEntry, 0)
-    	for _, item := range *p.Items {
+    	items := make([]SetCookieRequestEntry, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items

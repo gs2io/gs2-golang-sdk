@@ -22,7 +22,7 @@ import (
 
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
-	Items         *[]*Namespace	`json:"items"`
+	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -30,8 +30,8 @@ type DescribeNamespacesResult struct {
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Namespace, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Namespace, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -139,7 +139,7 @@ type DeleteNamespaceAsyncResult struct {
 
 type DescribeGatheringsResult struct {
     /** ギャザリングのリスト */
-	Items         *[]*Gathering	`json:"items"`
+	Items         []Gathering	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -147,8 +147,8 @@ type DescribeGatheringsResult struct {
 func (p *DescribeGatheringsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Gathering, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Gathering, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -356,7 +356,7 @@ type DeleteGatheringAsyncResult struct {
 
 type DescribeRatingModelMastersResult struct {
     /** レーティングモデルマスターのリスト */
-	Items         *[]*RatingModelMaster	`json:"items"`
+	Items         []RatingModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -364,8 +364,8 @@ type DescribeRatingModelMastersResult struct {
 func (p *DescribeRatingModelMastersResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*RatingModelMaster, 0)
-    	for _, item := range *p.Items {
+    	items := make([]RatingModelMaster, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -455,14 +455,14 @@ type DeleteRatingModelMasterAsyncResult struct {
 
 type DescribeRatingModelsResult struct {
     /** レーティングモデルのリスト */
-	Items         *[]*RatingModel	`json:"items"`
+	Items         []RatingModel	`json:"items"`
 }
 
 func (p *DescribeRatingModelsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*RatingModel, 0)
-    	for _, item := range *p.Items {
+    	items := make([]RatingModel, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -567,7 +567,7 @@ type UpdateCurrentRatingModelMasterFromGitHubAsyncResult struct {
 
 type DescribeRatingsResult struct {
     /** レーティングのリスト */
-	Items         *[]*Rating	`json:"items"`
+	Items         []Rating	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -575,8 +575,8 @@ type DescribeRatingsResult struct {
 func (p *DescribeRatingsResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Rating, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Rating, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -594,7 +594,7 @@ type DescribeRatingsAsyncResult struct {
 
 type DescribeRatingsByUserIdResult struct {
     /** レーティングのリスト */
-	Items         *[]*Rating	`json:"items"`
+	Items         []Rating	`json:"items"`
     /** リストの続きを取得するためのページトークン */
 	NextPageToken         *core.String	`json:"nextPageToken"`
 }
@@ -602,8 +602,8 @@ type DescribeRatingsByUserIdResult struct {
 func (p *DescribeRatingsByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Rating, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Rating, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
@@ -657,14 +657,14 @@ type GetRatingByUserIdAsyncResult struct {
 
 type PutResultResult struct {
     /** 更新後の{model_name}の一覧 */
-	Items         *[]*Rating	`json:"items"`
+	Items         []Rating	`json:"items"`
 }
 
 func (p *PutResultResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]*Rating, 0)
-    	for _, item := range *p.Items {
+    	items := make([]Rating, 0)
+    	for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
