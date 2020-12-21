@@ -134,11 +134,3 @@ func (p *String) UnmarshalJSON(data []byte) error {
 	*p = String(data)
 	return nil
 }
-
-func (p *String) MarshalJSON() ([]byte, error) {
-	if p == nil {
-		return nil, nil
-	}
-	return []byte("\"" + *p + "\""), nil
-}
-
