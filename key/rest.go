@@ -49,6 +49,12 @@ func describeNamespacesAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeNamespacesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -128,6 +134,12 @@ func createNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- CreateNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -213,6 +225,12 @@ func getNamespaceStatusAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
+	if asyncResult.Err != nil {
+		callback <- GetNamespaceStatusAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -291,6 +309,12 @@ func getNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- GetNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -369,6 +393,12 @@ func updateNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- UpdateNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -456,6 +486,12 @@ func deleteNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- DeleteNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -534,6 +570,12 @@ func describeKeysAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeKeysResult
+	if asyncResult.Err != nil {
+		callback <- DescribeKeysAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -618,6 +660,12 @@ func createKeyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateKeyResult
+	if asyncResult.Err != nil {
+		callback <- CreateKeyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -705,6 +753,12 @@ func updateKeyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateKeyResult
+	if asyncResult.Err != nil {
+		callback <- UpdateKeyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -794,6 +848,12 @@ func getKeyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetKeyResult
+	if asyncResult.Err != nil {
+		callback <- GetKeyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -877,6 +937,12 @@ func deleteKeyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteKeyResult
+	if asyncResult.Err != nil {
+		callback <- DeleteKeyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -960,6 +1026,12 @@ func encryptAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result EncryptResult
+	if asyncResult.Err != nil {
+		callback <- EncryptAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1049,6 +1121,12 @@ func decryptAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DecryptResult
+	if asyncResult.Err != nil {
+		callback <- DecryptAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1138,6 +1216,12 @@ func describeGitHubApiKeysAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeGitHubApiKeysResult
+	if asyncResult.Err != nil {
+		callback <- DescribeGitHubApiKeysAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1222,6 +1306,12 @@ func createGitHubApiKeyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateGitHubApiKeyResult
+	if asyncResult.Err != nil {
+		callback <- CreateGitHubApiKeyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1315,6 +1405,12 @@ func updateGitHubApiKeyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateGitHubApiKeyResult
+	if asyncResult.Err != nil {
+		callback <- UpdateGitHubApiKeyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1410,6 +1506,12 @@ func getGitHubApiKeyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetGitHubApiKeyResult
+	if asyncResult.Err != nil {
+		callback <- GetGitHubApiKeyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1493,6 +1595,12 @@ func deleteGitHubApiKeyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteGitHubApiKeyResult
+	if asyncResult.Err != nil {
+		callback <- DeleteGitHubApiKeyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {

@@ -49,6 +49,12 @@ func describeNamespacesAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeNamespacesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -128,6 +134,12 @@ func createNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- CreateNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -219,6 +231,12 @@ func getNamespaceStatusAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
+	if asyncResult.Err != nil {
+		callback <- GetNamespaceStatusAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -297,6 +315,12 @@ func getNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- GetNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -375,6 +399,12 @@ func updateNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- UpdateNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -468,6 +498,12 @@ func deleteNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- DeleteNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -546,6 +582,12 @@ func describeStaminaModelMastersAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeStaminaModelMastersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeStaminaModelMastersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -630,6 +672,12 @@ func createStaminaModelMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateStaminaModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- CreateStaminaModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -744,6 +792,12 @@ func getStaminaModelMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetStaminaModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- GetStaminaModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -827,6 +881,12 @@ func updateStaminaModelMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateStaminaModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- UpdateStaminaModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -943,6 +1003,12 @@ func deleteStaminaModelMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteStaminaModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- DeleteStaminaModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1026,6 +1092,12 @@ func describeMaxStaminaTableMastersAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeMaxStaminaTableMastersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeMaxStaminaTableMastersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1110,6 +1182,12 @@ func createMaxStaminaTableMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateMaxStaminaTableMasterResult
+	if asyncResult.Err != nil {
+		callback <- CreateMaxStaminaTableMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1210,6 +1288,12 @@ func getMaxStaminaTableMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetMaxStaminaTableMasterResult
+	if asyncResult.Err != nil {
+		callback <- GetMaxStaminaTableMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1293,6 +1377,12 @@ func updateMaxStaminaTableMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateMaxStaminaTableMasterResult
+	if asyncResult.Err != nil {
+		callback <- UpdateMaxStaminaTableMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1395,6 +1485,12 @@ func deleteMaxStaminaTableMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteMaxStaminaTableMasterResult
+	if asyncResult.Err != nil {
+		callback <- DeleteMaxStaminaTableMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1478,6 +1574,12 @@ func describeRecoverIntervalTableMastersAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeRecoverIntervalTableMastersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeRecoverIntervalTableMastersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1562,6 +1664,12 @@ func createRecoverIntervalTableMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateRecoverIntervalTableMasterResult
+	if asyncResult.Err != nil {
+		callback <- CreateRecoverIntervalTableMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1662,6 +1770,12 @@ func getRecoverIntervalTableMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetRecoverIntervalTableMasterResult
+	if asyncResult.Err != nil {
+		callback <- GetRecoverIntervalTableMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1745,6 +1859,12 @@ func updateRecoverIntervalTableMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateRecoverIntervalTableMasterResult
+	if asyncResult.Err != nil {
+		callback <- UpdateRecoverIntervalTableMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1847,6 +1967,12 @@ func deleteRecoverIntervalTableMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteRecoverIntervalTableMasterResult
+	if asyncResult.Err != nil {
+		callback <- DeleteRecoverIntervalTableMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1930,6 +2056,12 @@ func describeRecoverValueTableMastersAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeRecoverValueTableMastersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeRecoverValueTableMastersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2014,6 +2146,12 @@ func createRecoverValueTableMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateRecoverValueTableMasterResult
+	if asyncResult.Err != nil {
+		callback <- CreateRecoverValueTableMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2114,6 +2252,12 @@ func getRecoverValueTableMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetRecoverValueTableMasterResult
+	if asyncResult.Err != nil {
+		callback <- GetRecoverValueTableMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2197,6 +2341,12 @@ func updateRecoverValueTableMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateRecoverValueTableMasterResult
+	if asyncResult.Err != nil {
+		callback <- UpdateRecoverValueTableMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2299,6 +2449,12 @@ func deleteRecoverValueTableMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteRecoverValueTableMasterResult
+	if asyncResult.Err != nil {
+		callback <- DeleteRecoverValueTableMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2382,6 +2538,12 @@ func exportMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result ExportMasterResult
+	if asyncResult.Err != nil {
+		callback <- ExportMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2460,6 +2622,12 @@ func getCurrentStaminaMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetCurrentStaminaMasterResult
+	if asyncResult.Err != nil {
+		callback <- GetCurrentStaminaMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2538,6 +2706,12 @@ func updateCurrentStaminaMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateCurrentStaminaMasterResult
+	if asyncResult.Err != nil {
+		callback <- UpdateCurrentStaminaMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2622,6 +2796,12 @@ func updateCurrentStaminaMasterFromGitHubAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateCurrentStaminaMasterFromGitHubResult
+	if asyncResult.Err != nil {
+		callback <- UpdateCurrentStaminaMasterFromGitHubAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2706,6 +2886,12 @@ func describeStaminaModelsAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeStaminaModelsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeStaminaModelsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2784,6 +2970,12 @@ func getStaminaModelAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetStaminaModelResult
+	if asyncResult.Err != nil {
+		callback <- GetStaminaModelAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2867,6 +3059,12 @@ func describeStaminasAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeStaminasResult
+	if asyncResult.Err != nil {
+		callback <- DescribeStaminasAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2954,6 +3152,12 @@ func describeStaminasByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeStaminasByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DescribeStaminasByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -3043,6 +3247,12 @@ func getStaminaAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetStaminaResult
+	if asyncResult.Err != nil {
+		callback <- GetStaminaAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -3129,6 +3339,12 @@ func getStaminaByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetStaminaByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- GetStaminaByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -3217,6 +3433,12 @@ func updateStaminaByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateStaminaByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- UpdateStaminaByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -3320,6 +3542,12 @@ func consumeStaminaAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result ConsumeStaminaResult
+	if asyncResult.Err != nil {
+		callback <- ConsumeStaminaAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -3412,6 +3640,12 @@ func consumeStaminaByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result ConsumeStaminaByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- ConsumeStaminaByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -3506,6 +3740,12 @@ func recoverStaminaByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result RecoverStaminaByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- RecoverStaminaByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -3600,6 +3840,12 @@ func raiseMaxValueByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result RaiseMaxValueByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- RaiseMaxValueByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -3694,6 +3940,12 @@ func setMaxValueByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result SetMaxValueByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- SetMaxValueByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -3788,6 +4040,12 @@ func setRecoverIntervalByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result SetRecoverIntervalByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- SetRecoverIntervalByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -3882,6 +4140,12 @@ func setRecoverValueByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result SetRecoverValueByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- SetRecoverValueByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -3976,6 +4240,12 @@ func setMaxValueByStatusAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result SetMaxValueByStatusResult
+	if asyncResult.Err != nil {
+		callback <- SetMaxValueByStatusAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -4074,6 +4344,12 @@ func setRecoverIntervalByStatusAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result SetRecoverIntervalByStatusResult
+	if asyncResult.Err != nil {
+		callback <- SetRecoverIntervalByStatusAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -4172,6 +4448,12 @@ func setRecoverValueByStatusAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result SetRecoverValueByStatusResult
+	if asyncResult.Err != nil {
+		callback <- SetRecoverValueByStatusAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -4270,6 +4552,12 @@ func deleteStaminaByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteStaminaByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DeleteStaminaByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -4358,6 +4646,12 @@ func recoverStaminaByStampSheetAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result RecoverStaminaByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- RecoverStaminaByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -4440,6 +4734,12 @@ func raiseMaxValueByStampSheetAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result RaiseMaxValueByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- RaiseMaxValueByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -4522,6 +4822,12 @@ func setMaxValueByStampSheetAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result SetMaxValueByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- SetMaxValueByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -4604,6 +4910,12 @@ func setRecoverIntervalByStampSheetAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result SetRecoverIntervalByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- SetRecoverIntervalByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -4686,6 +4998,12 @@ func setRecoverValueByStampSheetAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result SetRecoverValueByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- SetRecoverValueByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -4768,6 +5086,12 @@ func consumeStaminaByStampTaskAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result ConsumeStaminaByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- ConsumeStaminaByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {

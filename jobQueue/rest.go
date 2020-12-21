@@ -49,6 +49,12 @@ func describeNamespacesAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeNamespacesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -128,6 +134,12 @@ func createNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- CreateNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -216,6 +228,12 @@ func getNamespaceStatusAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
+	if asyncResult.Err != nil {
+		callback <- GetNamespaceStatusAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -294,6 +312,12 @@ func getNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- GetNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -372,6 +396,12 @@ func updateNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- UpdateNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -462,6 +492,12 @@ func deleteNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- DeleteNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -540,6 +576,12 @@ func describeJobsByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeJobsByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DescribeJobsByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -629,6 +671,12 @@ func getJobByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetJobByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- GetJobByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -717,6 +765,12 @@ func pushByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result PushByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- PushByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -810,6 +864,12 @@ func runAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result RunResult
+	if asyncResult.Err != nil {
+		callback <- RunAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -894,6 +954,12 @@ func runByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result RunByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- RunByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -980,6 +1046,12 @@ func deleteJobByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteJobByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DeleteJobByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1068,6 +1140,12 @@ func pushByStampSheetAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result PushByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- PushByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1150,6 +1228,12 @@ func describeDeadLetterJobsByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeDeadLetterJobsByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DescribeDeadLetterJobsByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1239,6 +1323,12 @@ func getDeadLetterJobByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetDeadLetterJobByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- GetDeadLetterJobByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1327,6 +1417,12 @@ func deleteDeadLetterJobByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteDeadLetterJobByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DeleteDeadLetterJobByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {

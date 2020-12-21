@@ -49,6 +49,12 @@ func describeNamespacesAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeNamespacesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -128,6 +134,12 @@ func createNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- CreateNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -213,6 +225,12 @@ func getNamespaceStatusAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
+	if asyncResult.Err != nil {
+		callback <- GetNamespaceStatusAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -291,6 +309,12 @@ func getNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- GetNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -369,6 +393,12 @@ func updateNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- UpdateNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -456,6 +486,12 @@ func deleteNamespaceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- DeleteNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -534,6 +570,12 @@ func describeEventMastersAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeEventMastersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeEventMastersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -618,6 +660,12 @@ func createEventMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateEventMasterResult
+	if asyncResult.Err != nil {
+		callback <- CreateEventMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -744,6 +792,12 @@ func getEventMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetEventMasterResult
+	if asyncResult.Err != nil {
+		callback <- GetEventMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -827,6 +881,12 @@ func updateEventMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateEventMasterResult
+	if asyncResult.Err != nil {
+		callback <- UpdateEventMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -955,6 +1015,12 @@ func deleteEventMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteEventMasterResult
+	if asyncResult.Err != nil {
+		callback <- DeleteEventMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1038,6 +1104,12 @@ func describeTriggersAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeTriggersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeTriggersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1125,6 +1197,12 @@ func describeTriggersByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeTriggersByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DescribeTriggersByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1214,6 +1292,12 @@ func getTriggerAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetTriggerResult
+	if asyncResult.Err != nil {
+		callback <- GetTriggerAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1300,6 +1384,12 @@ func getTriggerByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetTriggerByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- GetTriggerByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1388,6 +1478,12 @@ func triggerByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result TriggerByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- TriggerByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1485,6 +1581,12 @@ func deleteTriggerAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteTriggerResult
+	if asyncResult.Err != nil {
+		callback <- DeleteTriggerAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1571,6 +1673,12 @@ func deleteTriggerByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteTriggerByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DeleteTriggerByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1659,6 +1767,12 @@ func describeEventsAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeEventsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeEventsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1740,6 +1854,12 @@ func describeEventsByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeEventsByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DescribeEventsByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1823,6 +1943,12 @@ func describeRawEventsAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeRawEventsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeRawEventsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1901,6 +2027,12 @@ func getEventAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetEventResult
+	if asyncResult.Err != nil {
+		callback <- GetEventAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1987,6 +2119,12 @@ func getEventByUserIdAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetEventByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- GetEventByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2075,6 +2213,12 @@ func getRawEventAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetRawEventResult
+	if asyncResult.Err != nil {
+		callback <- GetRawEventAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2158,6 +2302,12 @@ func exportMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result ExportMasterResult
+	if asyncResult.Err != nil {
+		callback <- ExportMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2236,6 +2386,12 @@ func getCurrentEventMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetCurrentEventMasterResult
+	if asyncResult.Err != nil {
+		callback <- GetCurrentEventMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2314,6 +2470,12 @@ func updateCurrentEventMasterAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateCurrentEventMasterResult
+	if asyncResult.Err != nil {
+		callback <- UpdateCurrentEventMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -2398,6 +2560,12 @@ func updateCurrentEventMasterFromGitHubAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateCurrentEventMasterFromGitHubResult
+	if asyncResult.Err != nil {
+		callback <- UpdateCurrentEventMasterFromGitHubAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {

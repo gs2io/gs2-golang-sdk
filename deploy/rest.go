@@ -49,6 +49,12 @@ func describeStacksAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeStacksResult
+	if asyncResult.Err != nil {
+		callback <- DescribeStacksAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -128,6 +134,12 @@ func createStackAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateStackResult
+	if asyncResult.Err != nil {
+		callback <- CreateStackAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -213,6 +225,12 @@ func createStackFromGitHubAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateStackFromGitHubResult
+	if asyncResult.Err != nil {
+		callback <- CreateStackFromGitHubAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -298,6 +316,12 @@ func validateAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result ValidateResult
+	if asyncResult.Err != nil {
+		callback <- ValidateAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -377,6 +401,12 @@ func getStackStatusAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetStackStatusResult
+	if asyncResult.Err != nil {
+		callback <- GetStackStatusAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -455,6 +485,12 @@ func getStackAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetStackResult
+	if asyncResult.Err != nil {
+		callback <- GetStackAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -533,6 +569,12 @@ func updateStackAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateStackResult
+	if asyncResult.Err != nil {
+		callback <- UpdateStackAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -620,6 +662,12 @@ func updateStackFromGitHubAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateStackFromGitHubResult
+	if asyncResult.Err != nil {
+		callback <- UpdateStackFromGitHubAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -707,6 +755,12 @@ func deleteStackAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteStackResult
+	if asyncResult.Err != nil {
+		callback <- DeleteStackAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -785,6 +839,12 @@ func forceDeleteStackAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result ForceDeleteStackResult
+	if asyncResult.Err != nil {
+		callback <- ForceDeleteStackAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -863,6 +923,12 @@ func deleteStackResourcesAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteStackResourcesResult
+	if asyncResult.Err != nil {
+		callback <- DeleteStackResourcesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -941,6 +1007,12 @@ func deleteStackEntityAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteStackEntityResult
+	if asyncResult.Err != nil {
+		callback <- DeleteStackEntityAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1019,6 +1091,12 @@ func describeResourcesAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeResourcesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeResourcesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1103,6 +1181,12 @@ func getResourceAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetResourceResult
+	if asyncResult.Err != nil {
+		callback <- GetResourceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1186,6 +1270,12 @@ func describeEventsAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeEventsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeEventsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1270,6 +1360,12 @@ func getEventAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetEventResult
+	if asyncResult.Err != nil {
+		callback <- GetEventAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1353,6 +1449,12 @@ func describeOutputsAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeOutputsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeOutputsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1437,6 +1539,12 @@ func getOutputAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetOutputResult
+	if asyncResult.Err != nil {
+		callback <- GetOutputAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {

@@ -49,6 +49,12 @@ func loginAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result LoginResult
+	if asyncResult.Err != nil {
+		callback <- LoginAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -131,6 +137,12 @@ func loginBySignatureAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result LoginBySignatureResult
+	if asyncResult.Err != nil {
+		callback <- LoginBySignatureAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {

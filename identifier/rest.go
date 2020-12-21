@@ -49,6 +49,12 @@ func describeUsersAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeUsersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeUsersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -128,6 +134,12 @@ func createUserAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateUserResult
+	if asyncResult.Err != nil {
+		callback <- CreateUserAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -210,6 +222,12 @@ func updateUserAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateUserResult
+	if asyncResult.Err != nil {
+		callback <- UpdateUserAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -294,6 +312,12 @@ func getUserAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetUserResult
+	if asyncResult.Err != nil {
+		callback <- GetUserAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -372,6 +396,12 @@ func deleteUserAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteUserResult
+	if asyncResult.Err != nil {
+		callback <- DeleteUserAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -450,6 +480,12 @@ func describeSecurityPoliciesAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeSecurityPoliciesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeSecurityPoliciesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -529,6 +565,12 @@ func describeCommonSecurityPoliciesAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeCommonSecurityPoliciesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeCommonSecurityPoliciesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -608,6 +650,12 @@ func createSecurityPolicyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateSecurityPolicyResult
+	if asyncResult.Err != nil {
+		callback <- CreateSecurityPolicyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -693,6 +741,12 @@ func updateSecurityPolicyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result UpdateSecurityPolicyResult
+	if asyncResult.Err != nil {
+		callback <- UpdateSecurityPolicyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -780,6 +834,12 @@ func getSecurityPolicyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetSecurityPolicyResult
+	if asyncResult.Err != nil {
+		callback <- GetSecurityPolicyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -858,6 +918,12 @@ func deleteSecurityPolicyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteSecurityPolicyResult
+	if asyncResult.Err != nil {
+		callback <- DeleteSecurityPolicyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -936,6 +1002,12 @@ func describeIdentifiersAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeIdentifiersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeIdentifiersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1020,6 +1092,12 @@ func createIdentifierAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreateIdentifierResult
+	if asyncResult.Err != nil {
+		callback <- CreateIdentifierAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1101,6 +1179,12 @@ func getIdentifierAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetIdentifierResult
+	if asyncResult.Err != nil {
+		callback <- GetIdentifierAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1184,6 +1268,12 @@ func deleteIdentifierAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeleteIdentifierResult
+	if asyncResult.Err != nil {
+		callback <- DeleteIdentifierAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1267,6 +1357,12 @@ func describePasswordsAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribePasswordsResult
+	if asyncResult.Err != nil {
+		callback <- DescribePasswordsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1351,6 +1447,12 @@ func createPasswordAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result CreatePasswordResult
+	if asyncResult.Err != nil {
+		callback <- CreatePasswordAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1435,6 +1537,12 @@ func getPasswordAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetPasswordResult
+	if asyncResult.Err != nil {
+		callback <- GetPasswordAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1513,6 +1621,12 @@ func deletePasswordAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DeletePasswordResult
+	if asyncResult.Err != nil {
+		callback <- DeletePasswordAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1591,6 +1705,12 @@ func getHasSecurityPolicyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetHasSecurityPolicyResult
+	if asyncResult.Err != nil {
+		callback <- GetHasSecurityPolicyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1669,6 +1789,12 @@ func attachSecurityPolicyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result AttachSecurityPolicyResult
+	if asyncResult.Err != nil {
+		callback <- AttachSecurityPolicyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1753,6 +1879,12 @@ func detachSecurityPolicyAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DetachSecurityPolicyResult
+	if asyncResult.Err != nil {
+		callback <- DetachSecurityPolicyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1836,6 +1968,12 @@ func loginAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result LoginResult
+	if asyncResult.Err != nil {
+		callback <- LoginAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -1918,6 +2056,12 @@ func loginByUserAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result LoginByUserResult
+	if asyncResult.Err != nil {
+		callback <- LoginByUserAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {

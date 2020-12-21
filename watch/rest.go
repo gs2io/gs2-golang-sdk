@@ -49,6 +49,12 @@ func getChartAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetChartResult
+	if asyncResult.Err != nil {
+		callback <- GetChartAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -161,6 +167,12 @@ func getCumulativeAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetCumulativeResult
+	if asyncResult.Err != nil {
+		callback <- GetCumulativeAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -245,6 +257,12 @@ func describeBillingActivitiesAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result DescribeBillingActivitiesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeBillingActivitiesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
@@ -337,6 +355,12 @@ func getBillingActivityAsyncHandler(
 	}
 	asyncResult := <-internalCallback
 	var result GetBillingActivityResult
+	if asyncResult.Err != nil {
+		callback <- GetBillingActivityAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
