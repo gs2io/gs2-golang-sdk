@@ -139,6 +139,9 @@ func (p *String) MarshalJSON() ([]byte, error) {
 	if p == nil {
 		return nil, nil
 	}
+	if len(*p) == 0 {
+		return []byte(""), nil
+	}
 	return []byte(*p), nil
 }
 
