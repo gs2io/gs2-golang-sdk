@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package key
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 説明文 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** 作成日時 */
@@ -53,13 +49,13 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type Key struct {
     /** 暗号鍵 */
-	KeyId *core.String   `json:"keyId"`
+	KeyId *string   `json:"keyId"`
     /** 暗号鍵名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 説明文 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 暗号鍵 */
-	Secret *core.String   `json:"secret"`
+	Secret *string   `json:"secret"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -79,15 +75,15 @@ func (p *Key) ToDict() *map[string]interface{} {
 
 type GitHubApiKey struct {
     /** GitHub のAPIキー */
-	ApiKeyId *core.String   `json:"apiKeyId"`
+	ApiKeyId *string   `json:"apiKeyId"`
     /** GitHub APIキー名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 説明文 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** APIキー */
-	ApiKey *core.String   `json:"apiKey"`
+	ApiKey *string   `json:"apiKey"`
     /** APIキーの暗号化に使用する暗号鍵名 */
-	EncryptionKeyName *core.String   `json:"encryptionKeyName"`
+	EncryptionKeyName *string   `json:"encryptionKeyName"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -108,7 +104,7 @@ func (p *GitHubApiKey) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {
@@ -119,15 +115,15 @@ func (p *LogSetting) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {

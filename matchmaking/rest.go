@@ -282,7 +282,7 @@ func (p Gs2MatchmakingRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -366,7 +366,7 @@ func (p Gs2MatchmakingRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -450,7 +450,7 @@ func (p Gs2MatchmakingRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -573,7 +573,7 @@ func (p Gs2MatchmakingRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -657,7 +657,7 @@ func (p Gs2MatchmakingRestClient) DescribeGatheringsAsync(
 	callback chan<- DescribeGatheringsAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -747,7 +747,7 @@ func (p Gs2MatchmakingRestClient) CreateGatheringAsync(
 	callback chan<- CreateGatheringAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -760,21 +760,21 @@ func (p Gs2MatchmakingRestClient) CreateGatheringAsync(
     }
     if request.AttributeRanges != nil {
         var _attributeRanges []*map[string]interface {}
-        for _, item := range *request.AttributeRanges {
+        for _, item := range request.AttributeRanges {
             _attributeRanges = append(_attributeRanges, item.ToDict())
         }
         bodies["attributeRanges"] = _attributeRanges
     }
     if request.CapacityOfRoles != nil {
         var _capacityOfRoles []*map[string]interface {}
-        for _, item := range *request.CapacityOfRoles {
+        for _, item := range request.CapacityOfRoles {
             _capacityOfRoles = append(_capacityOfRoles, item.ToDict())
         }
         bodies["capacityOfRoles"] = _capacityOfRoles
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []core.String
-        for _, item := range *request.AllowUserIds {
+        var _allowUserIds []string
+        for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
         bodies["allowUserIds"] = _allowUserIds
@@ -864,12 +864,12 @@ func (p Gs2MatchmakingRestClient) CreateGatheringByUserIdAsync(
 	callback chan<- CreateGatheringByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/user/{userId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -882,21 +882,21 @@ func (p Gs2MatchmakingRestClient) CreateGatheringByUserIdAsync(
     }
     if request.AttributeRanges != nil {
         var _attributeRanges []*map[string]interface {}
-        for _, item := range *request.AttributeRanges {
+        for _, item := range request.AttributeRanges {
             _attributeRanges = append(_attributeRanges, item.ToDict())
         }
         bodies["attributeRanges"] = _attributeRanges
     }
     if request.CapacityOfRoles != nil {
         var _capacityOfRoles []*map[string]interface {}
-        for _, item := range *request.CapacityOfRoles {
+        for _, item := range request.CapacityOfRoles {
             _capacityOfRoles = append(_capacityOfRoles, item.ToDict())
         }
         bodies["capacityOfRoles"] = _capacityOfRoles
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []core.String
-        for _, item := range *request.AllowUserIds {
+        var _allowUserIds []string
+        for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
         bodies["allowUserIds"] = _allowUserIds
@@ -983,12 +983,12 @@ func (p Gs2MatchmakingRestClient) UpdateGatheringAsync(
 	callback chan<- UpdateGatheringAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/{gatheringName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.GatheringName != nil {
+    if request.GatheringName != nil && *request.GatheringName != ""  {
         path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
     } else {
         path = strings.ReplaceAll(path, "{gatheringName}", "null")
@@ -998,7 +998,7 @@ func (p Gs2MatchmakingRestClient) UpdateGatheringAsync(
     var bodies = core.Bodies{}
     if request.AttributeRanges != nil {
         var _attributeRanges []*map[string]interface {}
-        for _, item := range *request.AttributeRanges {
+        for _, item := range request.AttributeRanges {
             _attributeRanges = append(_attributeRanges, item.ToDict())
         }
         bodies["attributeRanges"] = _attributeRanges
@@ -1085,17 +1085,17 @@ func (p Gs2MatchmakingRestClient) UpdateGatheringByUserIdAsync(
 	callback chan<- UpdateGatheringByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/{gatheringName}/user/{userId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.GatheringName != nil {
+    if request.GatheringName != nil && *request.GatheringName != ""  {
         path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
     } else {
         path = strings.ReplaceAll(path, "{gatheringName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1105,7 +1105,7 @@ func (p Gs2MatchmakingRestClient) UpdateGatheringByUserIdAsync(
     var bodies = core.Bodies{}
     if request.AttributeRanges != nil {
         var _attributeRanges []*map[string]interface {}
-        for _, item := range *request.AttributeRanges {
+        for _, item := range request.AttributeRanges {
             _attributeRanges = append(_attributeRanges, item.ToDict())
         }
         bodies["attributeRanges"] = _attributeRanges
@@ -1189,7 +1189,7 @@ func (p Gs2MatchmakingRestClient) DoMatchmakingByPlayerAsync(
 	callback chan<- DoMatchmakingByPlayerAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/player/do"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1282,7 +1282,7 @@ func (p Gs2MatchmakingRestClient) DoMatchmakingAsync(
 	callback chan<- DoMatchmakingAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/do"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1378,12 +1378,12 @@ func (p Gs2MatchmakingRestClient) GetGatheringAsync(
 	callback chan<- GetGatheringAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/{gatheringName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.GatheringName != nil {
+    if request.GatheringName != nil && *request.GatheringName != ""  {
         path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
     } else {
         path = strings.ReplaceAll(path, "{gatheringName}", "null")
@@ -1467,12 +1467,12 @@ func (p Gs2MatchmakingRestClient) CancelMatchmakingAsync(
 	callback chan<- CancelMatchmakingAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/{gatheringName}/user/me"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.GatheringName != nil {
+    if request.GatheringName != nil && *request.GatheringName != ""  {
         path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
     } else {
         path = strings.ReplaceAll(path, "{gatheringName}", "null")
@@ -1559,17 +1559,17 @@ func (p Gs2MatchmakingRestClient) CancelMatchmakingByUserIdAsync(
 	callback chan<- CancelMatchmakingByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/{gatheringName}/user/{userId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.GatheringName != nil {
+    if request.GatheringName != nil && *request.GatheringName != ""  {
         path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
     } else {
         path = strings.ReplaceAll(path, "{gatheringName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1653,12 +1653,12 @@ func (p Gs2MatchmakingRestClient) DeleteGatheringAsync(
 	callback chan<- DeleteGatheringAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/{gatheringName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.GatheringName != nil {
+    if request.GatheringName != nil && *request.GatheringName != ""  {
         path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
     } else {
         path = strings.ReplaceAll(path, "{gatheringName}", "null")
@@ -1742,7 +1742,7 @@ func (p Gs2MatchmakingRestClient) DescribeRatingModelMastersAsync(
 	callback chan<- DescribeRatingModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/rating"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1832,7 +1832,7 @@ func (p Gs2MatchmakingRestClient) CreateRatingModelMasterAsync(
 	callback chan<- CreateRatingModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/rating"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1931,12 +1931,12 @@ func (p Gs2MatchmakingRestClient) GetRatingModelMasterAsync(
 	callback chan<- GetRatingModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/rating/{ratingName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RatingName != nil {
+    if request.RatingName != nil && *request.RatingName != ""  {
         path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
     } else {
         path = strings.ReplaceAll(path, "{ratingName}", "null")
@@ -2020,12 +2020,12 @@ func (p Gs2MatchmakingRestClient) UpdateRatingModelMasterAsync(
 	callback chan<- UpdateRatingModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/rating/{ratingName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RatingName != nil {
+    if request.RatingName != nil && *request.RatingName != ""  {
         path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
     } else {
         path = strings.ReplaceAll(path, "{ratingName}", "null")
@@ -2121,12 +2121,12 @@ func (p Gs2MatchmakingRestClient) DeleteRatingModelMasterAsync(
 	callback chan<- DeleteRatingModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/rating/{ratingName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RatingName != nil {
+    if request.RatingName != nil && *request.RatingName != ""  {
         path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
     } else {
         path = strings.ReplaceAll(path, "{ratingName}", "null")
@@ -2210,7 +2210,7 @@ func (p Gs2MatchmakingRestClient) DescribeRatingModelsAsync(
 	callback chan<- DescribeRatingModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/rating"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2294,12 +2294,12 @@ func (p Gs2MatchmakingRestClient) GetRatingModelAsync(
 	callback chan<- GetRatingModelAsyncResult,
 ) {
 	path := "/{namespaceName}/rating/{ratingName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RatingName != nil {
+    if request.RatingName != nil && *request.RatingName != ""  {
         path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
     } else {
         path = strings.ReplaceAll(path, "{ratingName}", "null")
@@ -2383,7 +2383,7 @@ func (p Gs2MatchmakingRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2467,7 +2467,7 @@ func (p Gs2MatchmakingRestClient) GetCurrentRatingModelMasterAsync(
 	callback chan<- GetCurrentRatingModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2551,7 +2551,7 @@ func (p Gs2MatchmakingRestClient) UpdateCurrentRatingModelMasterAsync(
 	callback chan<- UpdateCurrentRatingModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2641,7 +2641,7 @@ func (p Gs2MatchmakingRestClient) UpdateCurrentRatingModelMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentRatingModelMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2731,7 +2731,7 @@ func (p Gs2MatchmakingRestClient) DescribeRatingsAsync(
 	callback chan<- DescribeRatingsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/rating"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2824,12 +2824,12 @@ func (p Gs2MatchmakingRestClient) DescribeRatingsByUserIdAsync(
 	callback chan<- DescribeRatingsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/rating"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2919,12 +2919,12 @@ func (p Gs2MatchmakingRestClient) GetRatingAsync(
 	callback chan<- GetRatingAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/rating/{ratingName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RatingName != nil {
+    if request.RatingName != nil && *request.RatingName != ""  {
         path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
     } else {
         path = strings.ReplaceAll(path, "{ratingName}", "null")
@@ -3011,17 +3011,17 @@ func (p Gs2MatchmakingRestClient) GetRatingByUserIdAsync(
 	callback chan<- GetRatingByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/rating/{ratingName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.RatingName != nil {
+    if request.RatingName != nil && *request.RatingName != ""  {
         path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
     } else {
         path = strings.ReplaceAll(path, "{ratingName}", "null")
@@ -3105,12 +3105,12 @@ func (p Gs2MatchmakingRestClient) PutResultAsync(
 	callback chan<- PutResultAsyncResult,
 ) {
 	path := "/{namespaceName}/rating/{ratingName}/vote"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RatingName != nil {
+    if request.RatingName != nil && *request.RatingName != ""  {
         path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
     } else {
         path = strings.ReplaceAll(path, "{ratingName}", "null")
@@ -3120,7 +3120,7 @@ func (p Gs2MatchmakingRestClient) PutResultAsync(
     var bodies = core.Bodies{}
     if request.GameResults != nil {
         var _gameResults []*map[string]interface {}
-        for _, item := range *request.GameResults {
+        for _, item := range request.GameResults {
             _gameResults = append(_gameResults, item.ToDict())
         }
         bodies["gameResults"] = _gameResults
@@ -3204,17 +3204,17 @@ func (p Gs2MatchmakingRestClient) DeleteRatingAsync(
 	callback chan<- DeleteRatingAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/rating/{ratingName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.RatingName != nil {
+    if request.RatingName != nil && *request.RatingName != ""  {
         path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
     } else {
         path = strings.ReplaceAll(path, "{ratingName}", "null")
@@ -3298,17 +3298,17 @@ func (p Gs2MatchmakingRestClient) GetBallotAsync(
 	callback chan<- GetBallotAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/vote/{ratingName}/{gatheringName}/ballot"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RatingName != nil {
+    if request.RatingName != nil && *request.RatingName != ""  {
         path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
     } else {
         path = strings.ReplaceAll(path, "{ratingName}", "null")
     }
-    if request.GatheringName != nil {
+    if request.GatheringName != nil && *request.GatheringName != ""  {
         path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
     } else {
         path = strings.ReplaceAll(path, "{gatheringName}", "null")
@@ -3404,22 +3404,22 @@ func (p Gs2MatchmakingRestClient) GetBallotByUserIdAsync(
 	callback chan<- GetBallotByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/vote/{ratingName}/{gatheringName}/ballot"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RatingName != nil {
+    if request.RatingName != nil && *request.RatingName != ""  {
         path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
     } else {
         path = strings.ReplaceAll(path, "{ratingName}", "null")
     }
-    if request.GatheringName != nil {
+    if request.GatheringName != nil && *request.GatheringName != ""  {
         path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
     } else {
         path = strings.ReplaceAll(path, "{gatheringName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3512,7 +3512,7 @@ func (p Gs2MatchmakingRestClient) VoteAsync(
 	callback chan<- VoteAsyncResult,
 ) {
 	path := "/{namespaceName}/action/vote"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -3528,7 +3528,7 @@ func (p Gs2MatchmakingRestClient) VoteAsync(
     }
     if request.GameResults != nil {
         var _gameResults []*map[string]interface {}
-        for _, item := range *request.GameResults {
+        for _, item := range request.GameResults {
             _gameResults = append(_gameResults, item.ToDict())
         }
         bodies["gameResults"] = _gameResults
@@ -3615,7 +3615,7 @@ func (p Gs2MatchmakingRestClient) VoteMultipleAsync(
 	callback chan<- VoteMultipleAsyncResult,
 ) {
 	path := "/{namespaceName}/action/vote/multiple"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -3625,14 +3625,14 @@ func (p Gs2MatchmakingRestClient) VoteMultipleAsync(
     var bodies = core.Bodies{}
     if request.SignedBallots != nil {
         var _signedBallots []*map[string]interface {}
-        for _, item := range *request.SignedBallots {
+        for _, item := range request.SignedBallots {
             _signedBallots = append(_signedBallots, item.ToDict())
         }
         bodies["signedBallots"] = _signedBallots
     }
     if request.GameResults != nil {
         var _gameResults []*map[string]interface {}
-        for _, item := range *request.GameResults {
+        for _, item := range request.GameResults {
             _gameResults = append(_gameResults, item.ToDict())
         }
         bodies["gameResults"] = _gameResults
@@ -3719,17 +3719,17 @@ func (p Gs2MatchmakingRestClient) CommitVoteAsync(
 	callback chan<- CommitVoteAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/vote/{ratingName}/{gatheringName}/action/vote/commit"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RatingName != nil {
+    if request.RatingName != nil && *request.RatingName != ""  {
         path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
     } else {
         path = strings.ReplaceAll(path, "{ratingName}", "null")
     }
-    if request.GatheringName != nil {
+    if request.GatheringName != nil && *request.GatheringName != ""  {
         path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
     } else {
         path = strings.ReplaceAll(path, "{gatheringName}", "null")

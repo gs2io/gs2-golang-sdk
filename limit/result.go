@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package limit
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type DescribeCountersResult struct {
     /** カウンターのリスト */
 	Items         []Counter	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeCountersResult) ToDict() *map[string]interface{} {
@@ -168,7 +164,7 @@ type DescribeCountersByUserIdResult struct {
     /** カウンターのリスト */
 	Items         []Counter	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeCountersByUserIdResult) ToDict() *map[string]interface{} {
@@ -285,7 +281,7 @@ type CountUpByStampTaskResult struct {
     /** カウントを増やしたカウンター */
 	Item         *Counter	`json:"item"`
     /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *core.String	`json:"newContextStack"`
+	NewContextStack         *string	`json:"newContextStack"`
 }
 
 func (p *CountUpByStampTaskResult) ToDict() *map[string]interface{} {
@@ -326,7 +322,7 @@ type DescribeLimitModelMastersResult struct {
     /** 回数制限の種類マスターのリスト */
 	Items         []LimitModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeLimitModelMastersResult) ToDict() *map[string]interface{} {

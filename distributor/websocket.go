@@ -677,8 +677,8 @@ func (p Gs2DistributorWebSocketClient) CreateDistributorModelMasterAsync(
         bodies["inboxNamespaceId"] = *request.InboxNamespaceId
     }
     if request.WhiteListTargetIds != nil {
-        var _whiteListTargetIds []core.String
-        for _, item := range *request.WhiteListTargetIds {
+        var _whiteListTargetIds []string
+        for _, item := range request.WhiteListTargetIds {
             _whiteListTargetIds = append(_whiteListTargetIds, item)
         }
         bodies["whiteListTargetIds"] = _whiteListTargetIds
@@ -857,8 +857,8 @@ func (p Gs2DistributorWebSocketClient) UpdateDistributorModelMasterAsync(
         bodies["inboxNamespaceId"] = *request.InboxNamespaceId
     }
     if request.WhiteListTargetIds != nil {
-        var _whiteListTargetIds []core.String
-        for _, item := range *request.WhiteListTargetIds {
+        var _whiteListTargetIds []string
+        for _, item := range request.WhiteListTargetIds {
             _whiteListTargetIds = append(_whiteListTargetIds, item)
         }
         bodies["whiteListTargetIds"] = _whiteListTargetIds
@@ -1517,7 +1517,7 @@ func (p Gs2DistributorWebSocketClient) DistributeAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.distributeAsyncHandler(
@@ -1599,7 +1599,7 @@ func (p Gs2DistributorWebSocketClient) DistributeWithoutOverflowProcessAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.distributeWithoutOverflowProcessAsyncHandler(

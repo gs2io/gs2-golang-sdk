@@ -172,6 +172,12 @@ func (p Gs2VersionWebSocketClient) CreateNamespaceAsync(
     if request.AssumeUserId != nil && *request.AssumeUserId != "" {
         bodies["assumeUserId"] = *request.AssumeUserId
     }
+    if request.AcceptVersionScript != nil {
+        bodies["acceptVersionScript"] = request.AcceptVersionScript.ToDict()
+    }
+    if request.CheckVersionTriggerScriptId != nil && *request.CheckVersionTriggerScriptId != "" {
+        bodies["checkVersionTriggerScriptId"] = *request.CheckVersionTriggerScriptId
+    }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
     }
@@ -417,6 +423,12 @@ func (p Gs2VersionWebSocketClient) UpdateNamespaceAsync(
     }
     if request.AssumeUserId != nil && *request.AssumeUserId != "" {
         bodies["assumeUserId"] = *request.AssumeUserId
+    }
+    if request.AcceptVersionScript != nil {
+        bodies["acceptVersionScript"] = request.AcceptVersionScript.ToDict()
+    }
+    if request.CheckVersionTriggerScriptId != nil && *request.CheckVersionTriggerScriptId != "" {
+        bodies["checkVersionTriggerScriptId"] = *request.CheckVersionTriggerScriptId
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
@@ -1211,7 +1223,7 @@ func (p Gs2VersionWebSocketClient) DescribeAcceptVersionsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeAcceptVersionsAsyncHandler(
@@ -1384,7 +1396,7 @@ func (p Gs2VersionWebSocketClient) AcceptAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.acceptAsyncHandler(
@@ -1554,7 +1566,7 @@ func (p Gs2VersionWebSocketClient) GetAcceptVersionAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getAcceptVersionAsyncHandler(
@@ -1724,7 +1736,7 @@ func (p Gs2VersionWebSocketClient) DeleteAcceptVersionAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteAcceptVersionAsyncHandler(
@@ -1889,7 +1901,7 @@ func (p Gs2VersionWebSocketClient) CheckVersionAsync(
     }
     if request.TargetVersions != nil {
         var _targetVersions []*map[string]interface {}
-        for _, item := range *request.TargetVersions {
+        for _, item := range request.TargetVersions {
             _targetVersions = append(_targetVersions, item.ToDict())
         }
         bodies["targetVersions"] = _targetVersions
@@ -1898,7 +1910,7 @@ func (p Gs2VersionWebSocketClient) CheckVersionAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.checkVersionAsyncHandler(
@@ -1981,7 +1993,7 @@ func (p Gs2VersionWebSocketClient) CheckVersionByUserIdAsync(
     }
     if request.TargetVersions != nil {
         var _targetVersions []*map[string]interface {}
-        for _, item := range *request.TargetVersions {
+        for _, item := range request.TargetVersions {
             _targetVersions = append(_targetVersions, item.ToDict())
         }
         bodies["targetVersions"] = _targetVersions

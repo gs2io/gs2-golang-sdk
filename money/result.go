@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package money
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -136,7 +132,7 @@ type DescribeWalletsResult struct {
     /** ウォレットのリスト */
 	Items         []Wallet	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeWalletsResult) ToDict() *map[string]interface{} {
@@ -163,7 +159,7 @@ type DescribeWalletsByUserIdResult struct {
     /** ウォレットのリスト */
 	Items         []Wallet	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeWalletsByUserIdResult) ToDict() *map[string]interface{} {
@@ -190,7 +186,7 @@ type QueryWalletsResult struct {
     /** ウォレットのリスト */
 	Items         []Wallet	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *QueryWalletsResult) ToDict() *map[string]interface{} {
@@ -335,7 +331,7 @@ type WithdrawByStampTaskResult struct {
     /** 消費後のウォレット */
 	Item         *Wallet	`json:"item"`
     /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *core.String	`json:"newContextStack"`
+	NewContextStack         *string	`json:"newContextStack"`
 }
 
 func (p *WithdrawByStampTaskResult) ToDict() *map[string]interface{} {
@@ -358,7 +354,7 @@ type DescribeReceiptsResult struct {
     /** レシートのリスト */
 	Items         []Receipt	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeReceiptsResult) ToDict() *map[string]interface{} {
@@ -421,7 +417,7 @@ type RecordReceiptByStampTaskResult struct {
     /** レシート */
 	Item         *Receipt	`json:"item"`
     /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *core.String	`json:"newContextStack"`
+	NewContextStack         *string	`json:"newContextStack"`
 }
 
 func (p *RecordReceiptByStampTaskResult) ToDict() *map[string]interface{} {

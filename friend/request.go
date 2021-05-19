@@ -23,15 +23,15 @@ import (
 type DescribeNamespacesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	Name *core.String	`json:"name"`
-	Description *core.String	`json:"description"`
+	Name *string	`json:"name"`
+	Description *string	`json:"description"`
 	FollowScript *ScriptSetting	`json:"followScript"`
 	UnfollowScript *ScriptSetting	`json:"unfollowScript"`
 	SendRequestScript *ScriptSetting	`json:"sendRequestScript"`
@@ -49,20 +49,20 @@ type CreateNamespaceRequest struct {
 type GetNamespaceStatusRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Description *core.String	`json:"description"`
+	NamespaceName *string	`json:"namespaceName"`
+	Description *string	`json:"description"`
 	FollowScript *ScriptSetting	`json:"followScript"`
 	UnfollowScript *ScriptSetting	`json:"unfollowScript"`
 	SendRequestScript *ScriptSetting	`json:"sendRequestScript"`
@@ -80,397 +80,397 @@ type UpdateNamespaceRequest struct {
 type DeleteNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type DescribeProfilesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type GetProfileRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetProfileByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type UpdateProfileRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PublicProfile *core.String	`json:"publicProfile"`
-	FollowerProfile *core.String	`json:"followerProfile"`
-	FriendProfile *core.String	`json:"friendProfile"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	PublicProfile *string	`json:"publicProfile"`
+	FollowerProfile *string	`json:"followerProfile"`
+	FriendProfile *string	`json:"friendProfile"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type UpdateProfileByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	PublicProfile *core.String	`json:"publicProfile"`
-	FollowerProfile *core.String	`json:"followerProfile"`
-	FriendProfile *core.String	`json:"friendProfile"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	PublicProfile *string	`json:"publicProfile"`
+	FollowerProfile *string	`json:"followerProfile"`
+	FriendProfile *string	`json:"friendProfile"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DeleteProfileByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetPublicProfileRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeFollowsRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 	WithProfile *bool	`json:"withProfile"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeFollowsByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
 	WithProfile *bool	`json:"withProfile"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetFollowRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	TargetUserId *core.String	`json:"targetUserId"`
+	NamespaceName *string	`json:"namespaceName"`
+	TargetUserId *string	`json:"targetUserId"`
 	WithProfile *bool	`json:"withProfile"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetFollowByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	TargetUserId *core.String	`json:"targetUserId"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	TargetUserId *string	`json:"targetUserId"`
 	WithProfile *bool	`json:"withProfile"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type FollowRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type FollowByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type UnfollowRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type UnfollowByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeFriendsRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 	WithProfile *bool	`json:"withProfile"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeFriendsByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
 	WithProfile *bool	`json:"withProfile"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetFriendRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	TargetUserId *core.String	`json:"targetUserId"`
+	NamespaceName *string	`json:"namespaceName"`
+	TargetUserId *string	`json:"targetUserId"`
 	WithProfile *bool	`json:"withProfile"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetFriendByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	TargetUserId *core.String	`json:"targetUserId"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	TargetUserId *string	`json:"targetUserId"`
 	WithProfile *bool	`json:"withProfile"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DeleteFriendRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DeleteFriendByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeSendRequestsRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeSendRequestsByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetSendRequestRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetSendRequestByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type SendRequestRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type SendRequestByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DeleteRequestRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DeleteRequestByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeReceiveRequestsRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeReceiveRequestsByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetReceiveRequestRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	FromUserId *core.String	`json:"fromUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	FromUserId *string	`json:"fromUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetReceiveRequestByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	FromUserId *core.String	`json:"fromUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	FromUserId *string	`json:"fromUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type AcceptRequestRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	FromUserId *core.String	`json:"fromUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	FromUserId *string	`json:"fromUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type AcceptRequestByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	FromUserId *core.String	`json:"fromUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	FromUserId *string	`json:"fromUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type RejectRequestRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	FromUserId *core.String	`json:"fromUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	FromUserId *string	`json:"fromUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type RejectRequestByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	FromUserId *core.String	`json:"fromUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	FromUserId *string	`json:"fromUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeBlackListRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeBlackListByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type RegisterBlackListRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type RegisterBlackListByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type UnregisterBlackListRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type UnregisterBlackListByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	TargetUserId *core.String	`json:"targetUserId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	TargetUserId *string	`json:"targetUserId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }

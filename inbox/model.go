@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package inbox
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 説明文 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 開封したメッセージを自動的に削除するか */
 	IsAutomaticDeletingEnabled *bool   `json:"isAutomaticDeletingEnabled"`
     /** メッセージ受信したときに実行するスクリプト */
@@ -38,9 +34,9 @@ type Namespace struct {
     /** メッセージ削除したときに実行するスクリプト */
 	DeleteMessageScript *ScriptSetting   `json:"deleteMessageScript"`
     /** 報酬付与処理をジョブとして追加するキューネームスペース のGRN */
-	QueueNamespaceId *core.String   `json:"queueNamespaceId"`
+	QueueNamespaceId *string   `json:"queueNamespaceId"`
     /** 報酬付与処理のスタンプシートで使用する暗号鍵GRN */
-	KeyId *core.String   `json:"keyId"`
+	KeyId *string   `json:"keyId"`
     /** メッセージを受信したときのプッシュ通知 */
 	ReceiveNotification *NotificationSetting   `json:"receiveNotification"`
     /** ログの出力設定 */
@@ -82,17 +78,17 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type Message struct {
     /** メッセージ */
-	MessageId *core.String   `json:"messageId"`
+	MessageId *string   `json:"messageId"`
     /** メッセージID */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** メッセージの内容に相当するメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 既読状態 */
 	IsRead *bool   `json:"isRead"`
     /** 開封時に実行する入手アクション */
-	ReadAcquireActions *[]*AcquireAction   `json:"readAcquireActions"`
+	ReadAcquireActions []AcquireAction   `json:"readAcquireActions"`
     /** 作成日時 */
 	ReceivedAt *int64   `json:"receivedAt"`
     /** 最終更新日時 */
@@ -110,7 +106,7 @@ func (p *Message) ToDict() *map[string]interface{} {
     data["isRead"] = p.IsRead
     if p.ReadAcquireActions != nil {
         var _readAcquireActions []*map[string]interface {}
-        for _, item := range *p.ReadAcquireActions {
+        for _, item := range p.ReadAcquireActions {
             _readAcquireActions = append(_readAcquireActions, item.ToDict())
         }
         data["readAcquireActions"] = &_readAcquireActions
@@ -123,9 +119,9 @@ func (p *Message) ToDict() *map[string]interface{} {
 
 type CurrentMessageMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentMessageMaster) ToDict() *map[string]interface{} {
@@ -137,13 +133,13 @@ func (p *CurrentMessageMaster) ToDict() *map[string]interface{} {
 
 type GlobalMessageMaster struct {
     /** 全ユーザに向けたメッセージ */
-	GlobalMessageId *core.String   `json:"globalMessageId"`
+	GlobalMessageId *string   `json:"globalMessageId"`
     /** 全ユーザに向けたメッセージ名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 全ユーザに向けたメッセージの内容に相当するメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 開封時に実行する入手アクション */
-	ReadAcquireActions *[]*AcquireAction   `json:"readAcquireActions"`
+	ReadAcquireActions []AcquireAction   `json:"readAcquireActions"`
     /** メッセージを受信したあとメッセージが削除されるまでの期間 */
 	ExpiresTimeSpan *TimeSpan   `json:"expiresTimeSpan"`
     /** 作成日時 */
@@ -159,7 +155,7 @@ func (p *GlobalMessageMaster) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.ReadAcquireActions != nil {
         var _readAcquireActions []*map[string]interface {}
-        for _, item := range *p.ReadAcquireActions {
+        for _, item := range p.ReadAcquireActions {
             _readAcquireActions = append(_readAcquireActions, item.ToDict())
         }
         data["readAcquireActions"] = &_readAcquireActions
@@ -174,13 +170,13 @@ func (p *GlobalMessageMaster) ToDict() *map[string]interface{} {
 
 type GlobalMessage struct {
     /** 全ユーザに向けたメッセージ */
-	GlobalMessageId *core.String   `json:"globalMessageId"`
+	GlobalMessageId *string   `json:"globalMessageId"`
     /** 全ユーザに向けたメッセージ名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 全ユーザに向けたメッセージの内容に相当するメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 開封時に実行する入手アクション */
-	ReadAcquireActions *[]*AcquireAction   `json:"readAcquireActions"`
+	ReadAcquireActions []AcquireAction   `json:"readAcquireActions"`
     /** メッセージを受信したあとメッセージが削除されるまでの期間 */
 	ExpiresTimeSpan *TimeSpan   `json:"expiresTimeSpan"`
     /** 全ユーザに向けたメッセージの有効期限 */
@@ -194,7 +190,7 @@ func (p *GlobalMessage) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.ReadAcquireActions != nil {
         var _readAcquireActions []*map[string]interface {}
-        for _, item := range *p.ReadAcquireActions {
+        for _, item := range p.ReadAcquireActions {
             _readAcquireActions = append(_readAcquireActions, item.ToDict())
         }
         data["readAcquireActions"] = &_readAcquireActions
@@ -208,11 +204,11 @@ func (p *GlobalMessage) ToDict() *map[string]interface{} {
 
 type Received struct {
     /** 受信済みグローバルメッセージ名 */
-	ReceivedId *core.String   `json:"receivedId"`
+	ReceivedId *string   `json:"receivedId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 受信したグローバルメッセージ名 */
-	ReceivedGlobalMessageNames *[]core.String   `json:"receivedGlobalMessageNames"`
+	ReceivedGlobalMessageNames []string   `json:"receivedGlobalMessageNames"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -224,8 +220,8 @@ func (p *Received) ToDict() *map[string]interface{} {
     data["receivedId"] = p.ReceivedId
     data["userId"] = p.UserId
     if p.ReceivedGlobalMessageNames != nil {
-        var _receivedGlobalMessageNames []core.String
-        for _, item := range *p.ReceivedGlobalMessageNames {
+        var _receivedGlobalMessageNames []string
+        for _, item := range p.ReceivedGlobalMessageNames {
             _receivedGlobalMessageNames = append(_receivedGlobalMessageNames, item)
         }
         data["receivedGlobalMessageNames"] = &_receivedGlobalMessageNames
@@ -237,15 +233,15 @@ func (p *Received) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -260,9 +256,9 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type Config struct {
     /** 名前 */
-	Key *core.String   `json:"key"`
+	Key *string   `json:"key"`
     /** 値 */
-	Value *core.String   `json:"value"`
+	Value *string   `json:"value"`
 }
 
 func (p *Config) ToDict() *map[string]interface{} {
@@ -274,13 +270,13 @@ func (p *Config) ToDict() *map[string]interface{} {
 
 type ScriptSetting struct {
     /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *core.String   `json:"triggerScriptId"`
+	TriggerScriptId *string   `json:"triggerScriptId"`
     /** 完了通知の通知先 */
-	DoneTriggerTargetType *core.String   `json:"doneTriggerTargetType"`
+	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
     /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *core.String   `json:"doneTriggerScriptId"`
+	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
     /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *core.String   `json:"doneTriggerQueueNamespaceId"`
+	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
 }
 
 func (p *ScriptSetting) ToDict() *map[string]interface{} {
@@ -294,11 +290,11 @@ func (p *ScriptSetting) ToDict() *map[string]interface{} {
 
 type NotificationSetting struct {
     /** プッシュ通知に使用する GS2-Gateway のネームスペース のGRN */
-	GatewayNamespaceId *core.String   `json:"gatewayNamespaceId"`
+	GatewayNamespaceId *string   `json:"gatewayNamespaceId"`
     /** モバイルプッシュ通知へ転送するか */
 	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
     /** モバイルプッシュ通知で使用するサウンドファイル名 */
-	Sound *core.String   `json:"sound"`
+	Sound *string   `json:"sound"`
 }
 
 func (p *NotificationSetting) ToDict() *map[string]interface{} {
@@ -311,19 +307,19 @@ func (p *NotificationSetting) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -340,7 +336,7 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {
@@ -368,9 +364,9 @@ func (p *TimeSpan) ToDict() *map[string]interface{} {
 
 type AcquireAction struct {
     /** スタンプシートで実行するアクションの種類 */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 入手リクエストのJSON */
-	Request *core.String   `json:"request"`
+	Request *string   `json:"request"`
 }
 
 func (p *AcquireAction) ToDict() *map[string]interface{} {

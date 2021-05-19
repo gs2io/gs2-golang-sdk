@@ -1232,7 +1232,7 @@ func (p Gs2RankingWebSocketClient) DescribeSubscribesByCategoryNameAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeSubscribesByCategoryNameAsyncHandler(
@@ -1405,7 +1405,7 @@ func (p Gs2RankingWebSocketClient) SubscribeAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.subscribeAsyncHandler(
@@ -1581,7 +1581,7 @@ func (p Gs2RankingWebSocketClient) GetSubscribeAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getSubscribeAsyncHandler(
@@ -1757,7 +1757,7 @@ func (p Gs2RankingWebSocketClient) UnsubscribeAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.unsubscribeAsyncHandler(
@@ -1939,7 +1939,7 @@ func (p Gs2RankingWebSocketClient) DescribeScoresAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeScoresAsyncHandler(
@@ -2124,7 +2124,7 @@ func (p Gs2RankingWebSocketClient) GetScoreAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getScoreAsyncHandler(
@@ -2309,7 +2309,7 @@ func (p Gs2RankingWebSocketClient) DescribeRankingsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeRankingsAsyncHandler(
@@ -2579,7 +2579,7 @@ func (p Gs2RankingWebSocketClient) GetRankingAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getRankingAsyncHandler(
@@ -2761,7 +2761,7 @@ func (p Gs2RankingWebSocketClient) PutScoreAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.putScoreAsyncHandler(

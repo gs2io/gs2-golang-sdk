@@ -273,7 +273,7 @@ func (p Gs2InboxRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -357,7 +357,7 @@ func (p Gs2InboxRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -441,7 +441,7 @@ func (p Gs2InboxRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -555,7 +555,7 @@ func (p Gs2InboxRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -639,7 +639,7 @@ func (p Gs2InboxRestClient) DescribeMessagesAsync(
 	callback chan<- DescribeMessagesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/message"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -732,7 +732,7 @@ func (p Gs2InboxRestClient) DescribeMessagesByUserIdAsync(
 	callback chan<- DescribeMessagesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/message"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -825,12 +825,12 @@ func (p Gs2InboxRestClient) SendMessageByUserIdAsync(
 	callback chan<- SendMessageByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/message"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -843,7 +843,7 @@ func (p Gs2InboxRestClient) SendMessageByUserIdAsync(
     }
     if request.ReadAcquireActions != nil {
         var _readAcquireActions []*map[string]interface {}
-        for _, item := range *request.ReadAcquireActions {
+        for _, item := range request.ReadAcquireActions {
             _readAcquireActions = append(_readAcquireActions, item.ToDict())
         }
         bodies["readAcquireActions"] = _readAcquireActions
@@ -933,12 +933,12 @@ func (p Gs2InboxRestClient) GetMessageAsync(
 	callback chan<- GetMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/{messageName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MessageName != nil {
+    if request.MessageName != nil && *request.MessageName != ""  {
         path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
     } else {
         path = strings.ReplaceAll(path, "{messageName}", "null")
@@ -1025,17 +1025,17 @@ func (p Gs2InboxRestClient) GetMessageByUserIdAsync(
 	callback chan<- GetMessageByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/{messageName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.MessageName != nil {
+    if request.MessageName != nil && *request.MessageName != ""  {
         path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
     } else {
         path = strings.ReplaceAll(path, "{messageName}", "null")
@@ -1119,7 +1119,7 @@ func (p Gs2InboxRestClient) ReceiveGlobalMessageAsync(
 	callback chan<- ReceiveGlobalMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/{messageName}/globalMessage/receive"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1209,12 +1209,12 @@ func (p Gs2InboxRestClient) ReceiveGlobalMessageByUserIdAsync(
 	callback chan<- ReceiveGlobalMessageByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/{messageName}/globalMessage/receive"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1301,12 +1301,12 @@ func (p Gs2InboxRestClient) OpenMessageAsync(
 	callback chan<- OpenMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/{messageName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MessageName != nil {
+    if request.MessageName != nil && *request.MessageName != ""  {
         path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
     } else {
         path = strings.ReplaceAll(path, "{messageName}", "null")
@@ -1396,17 +1396,17 @@ func (p Gs2InboxRestClient) OpenMessageByUserIdAsync(
 	callback chan<- OpenMessageByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/{messageName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.MessageName != nil {
+    if request.MessageName != nil && *request.MessageName != ""  {
         path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
     } else {
         path = strings.ReplaceAll(path, "{messageName}", "null")
@@ -1493,12 +1493,12 @@ func (p Gs2InboxRestClient) ReadMessageAsync(
 	callback chan<- ReadMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/{messageName}/read"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MessageName != nil {
+    if request.MessageName != nil && *request.MessageName != ""  {
         path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
     } else {
         path = strings.ReplaceAll(path, "{messageName}", "null")
@@ -1508,7 +1508,7 @@ func (p Gs2InboxRestClient) ReadMessageAsync(
     var bodies = core.Bodies{}
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -1595,17 +1595,17 @@ func (p Gs2InboxRestClient) ReadMessageByUserIdAsync(
 	callback chan<- ReadMessageByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/{messageName}/read"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.MessageName != nil {
+    if request.MessageName != nil && *request.MessageName != ""  {
         path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
     } else {
         path = strings.ReplaceAll(path, "{messageName}", "null")
@@ -1615,7 +1615,7 @@ func (p Gs2InboxRestClient) ReadMessageByUserIdAsync(
     var bodies = core.Bodies{}
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -1699,12 +1699,12 @@ func (p Gs2InboxRestClient) DeleteMessageAsync(
 	callback chan<- DeleteMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/{messageName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MessageName != nil {
+    if request.MessageName != nil && *request.MessageName != ""  {
         path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
     } else {
         path = strings.ReplaceAll(path, "{messageName}", "null")
@@ -1791,17 +1791,17 @@ func (p Gs2InboxRestClient) DeleteMessageByUserIdAsync(
 	callback chan<- DeleteMessageByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/{messageName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.MessageName != nil {
+    if request.MessageName != nil && *request.MessageName != ""  {
         path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
     } else {
         path = strings.ReplaceAll(path, "{messageName}", "null")
@@ -1973,7 +1973,7 @@ func (p Gs2InboxRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2057,7 +2057,7 @@ func (p Gs2InboxRestClient) GetCurrentMessageMasterAsync(
 	callback chan<- GetCurrentMessageMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2141,7 +2141,7 @@ func (p Gs2InboxRestClient) UpdateCurrentMessageMasterAsync(
 	callback chan<- UpdateCurrentMessageMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2231,7 +2231,7 @@ func (p Gs2InboxRestClient) UpdateCurrentMessageMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentMessageMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2321,7 +2321,7 @@ func (p Gs2InboxRestClient) DescribeGlobalMessageMastersAsync(
 	callback chan<- DescribeGlobalMessageMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/globalMessage"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2411,7 +2411,7 @@ func (p Gs2InboxRestClient) CreateGlobalMessageMasterAsync(
 	callback chan<- CreateGlobalMessageMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/globalMessage"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2427,7 +2427,7 @@ func (p Gs2InboxRestClient) CreateGlobalMessageMasterAsync(
     }
     if request.ReadAcquireActions != nil {
         var _readAcquireActions []*map[string]interface {}
-        for _, item := range *request.ReadAcquireActions {
+        for _, item := range request.ReadAcquireActions {
             _readAcquireActions = append(_readAcquireActions, item.ToDict())
         }
         bodies["readAcquireActions"] = _readAcquireActions
@@ -2517,12 +2517,12 @@ func (p Gs2InboxRestClient) GetGlobalMessageMasterAsync(
 	callback chan<- GetGlobalMessageMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/globalMessage/{globalMessageName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.GlobalMessageName != nil {
+    if request.GlobalMessageName != nil && *request.GlobalMessageName != ""  {
         path = strings.ReplaceAll(path, "{globalMessageName}", core.ToString(*request.GlobalMessageName))
     } else {
         path = strings.ReplaceAll(path, "{globalMessageName}", "null")
@@ -2606,12 +2606,12 @@ func (p Gs2InboxRestClient) UpdateGlobalMessageMasterAsync(
 	callback chan<- UpdateGlobalMessageMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/globalMessage/{globalMessageName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.GlobalMessageName != nil {
+    if request.GlobalMessageName != nil && *request.GlobalMessageName != ""  {
         path = strings.ReplaceAll(path, "{globalMessageName}", core.ToString(*request.GlobalMessageName))
     } else {
         path = strings.ReplaceAll(path, "{globalMessageName}", "null")
@@ -2624,7 +2624,7 @@ func (p Gs2InboxRestClient) UpdateGlobalMessageMasterAsync(
     }
     if request.ReadAcquireActions != nil {
         var _readAcquireActions []*map[string]interface {}
-        for _, item := range *request.ReadAcquireActions {
+        for _, item := range request.ReadAcquireActions {
             _readAcquireActions = append(_readAcquireActions, item.ToDict())
         }
         bodies["readAcquireActions"] = _readAcquireActions
@@ -2714,12 +2714,12 @@ func (p Gs2InboxRestClient) DeleteGlobalMessageMasterAsync(
 	callback chan<- DeleteGlobalMessageMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/globalMessage/{globalMessageName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.GlobalMessageName != nil {
+    if request.GlobalMessageName != nil && *request.GlobalMessageName != ""  {
         path = strings.ReplaceAll(path, "{globalMessageName}", core.ToString(*request.GlobalMessageName))
     } else {
         path = strings.ReplaceAll(path, "{globalMessageName}", "null")
@@ -2803,7 +2803,7 @@ func (p Gs2InboxRestClient) DescribeGlobalMessagesAsync(
 	callback chan<- DescribeGlobalMessagesAsyncResult,
 ) {
 	path := "/{namespaceName}/globalMessage"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2887,12 +2887,12 @@ func (p Gs2InboxRestClient) GetGlobalMessageAsync(
 	callback chan<- GetGlobalMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/globalMessage/{globalMessageName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.GlobalMessageName != nil {
+    if request.GlobalMessageName != nil && *request.GlobalMessageName != ""  {
         path = strings.ReplaceAll(path, "{globalMessageName}", core.ToString(*request.GlobalMessageName))
     } else {
         path = strings.ReplaceAll(path, "{globalMessageName}", "null")
@@ -2976,12 +2976,12 @@ func (p Gs2InboxRestClient) GetReceivedByUserIdAsync(
 	callback chan<- GetReceivedByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/received"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3065,12 +3065,12 @@ func (p Gs2InboxRestClient) UpdateReceivedByUserIdAsync(
 	callback chan<- UpdateReceivedByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/received"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3079,8 +3079,8 @@ func (p Gs2InboxRestClient) UpdateReceivedByUserIdAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.ReceivedGlobalMessageNames != nil {
-        var _receivedGlobalMessageNames []core.String
-        for _, item := range *request.ReceivedGlobalMessageNames {
+        var _receivedGlobalMessageNames []string
+        for _, item := range request.ReceivedGlobalMessageNames {
             _receivedGlobalMessageNames = append(_receivedGlobalMessageNames, item)
         }
         bodies["receivedGlobalMessageNames"] = _receivedGlobalMessageNames
@@ -3164,12 +3164,12 @@ func (p Gs2InboxRestClient) DeleteReceivedByUserIdAsync(
 	callback chan<- DeleteReceivedByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/received"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")

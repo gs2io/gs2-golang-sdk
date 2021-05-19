@@ -681,7 +681,7 @@ func (p Gs2FormationWebSocketClient) CreateFormModelMasterAsync(
     }
     if request.Slots != nil {
         var _slots []*map[string]interface {}
-        for _, item := range *request.Slots {
+        for _, item := range request.Slots {
             _slots = append(_slots, item.ToDict())
         }
         bodies["slots"] = _slots
@@ -858,7 +858,7 @@ func (p Gs2FormationWebSocketClient) UpdateFormModelMasterAsync(
     }
     if request.Slots != nil {
         var _slots []*map[string]interface {}
-        for _, item := range *request.Slots {
+        for _, item := range request.Slots {
             _slots = append(_slots, item.ToDict())
         }
         bodies["slots"] = _slots
@@ -1960,7 +1960,7 @@ func (p Gs2FormationWebSocketClient) DescribeMoldsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeMoldsAsyncHandler(
@@ -2133,7 +2133,7 @@ func (p Gs2FormationWebSocketClient) GetMoldAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getMoldAsyncHandler(
@@ -2479,7 +2479,7 @@ func (p Gs2FormationWebSocketClient) DeleteMoldAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteMoldAsyncHandler(
@@ -2819,7 +2819,7 @@ func (p Gs2FormationWebSocketClient) DescribeFormsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeFormsAsyncHandler(
@@ -2998,7 +2998,7 @@ func (p Gs2FormationWebSocketClient) GetFormAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getFormAsyncHandler(
@@ -3177,7 +3177,7 @@ func (p Gs2FormationWebSocketClient) GetFormWithSignatureAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getFormWithSignatureAsyncHandler(
@@ -3357,7 +3357,7 @@ func (p Gs2FormationWebSocketClient) SetFormByUserIdAsync(
     }
     if request.Slots != nil {
         var _slots []*map[string]interface {}
-        for _, item := range *request.Slots {
+        for _, item := range request.Slots {
             _slots = append(_slots, item.ToDict())
         }
         bodies["slots"] = _slots
@@ -3449,7 +3449,7 @@ func (p Gs2FormationWebSocketClient) SetFormWithSignatureAsync(
     }
     if request.Slots != nil {
         var _slots []*map[string]interface {}
-        for _, item := range *request.Slots {
+        for _, item := range request.Slots {
             _slots = append(_slots, item.ToDict())
         }
         bodies["slots"] = _slots
@@ -3461,7 +3461,7 @@ func (p Gs2FormationWebSocketClient) SetFormWithSignatureAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.setFormWithSignatureAsyncHandler(
@@ -3559,7 +3559,7 @@ func (p Gs2FormationWebSocketClient) AcquireActionsToFormPropertiesAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -3653,7 +3653,7 @@ func (p Gs2FormationWebSocketClient) DeleteFormAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteFormAsyncHandler(

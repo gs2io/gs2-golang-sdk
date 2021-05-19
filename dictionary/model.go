@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package dictionary
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** エントリー登録時に実行するスクリプト */
 	EntryScript *ScriptSetting   `json:"entryScript"`
     /** 登録済みのエントリーを再度登録しようとした時に実行するスクリプト */
@@ -63,11 +59,11 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type EntryModel struct {
     /** エントリーモデルマスター */
-	EntryModelId *core.String   `json:"entryModelId"`
+	EntryModelId *string   `json:"entryModelId"`
     /** エントリーの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** エントリーの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
 }
 
 func (p *EntryModel) ToDict() *map[string]interface{} {
@@ -80,13 +76,13 @@ func (p *EntryModel) ToDict() *map[string]interface{} {
 
 type EntryModelMaster struct {
     /** エントリーモデルマスター */
-	EntryModelId *core.String   `json:"entryModelId"`
+	EntryModelId *string   `json:"entryModelId"`
     /** エントリーモデル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** エントリーモデルマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** エントリーモデルのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -106,11 +102,11 @@ func (p *EntryModelMaster) ToDict() *map[string]interface{} {
 
 type Entry struct {
     /** エントリー のGRN */
-	EntryId *core.String   `json:"entryId"`
+	EntryId *string   `json:"entryId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** エントリーの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** None */
 	AcquiredAt *int64   `json:"acquiredAt"`
 }
@@ -126,13 +122,13 @@ func (p *Entry) ToDict() *map[string]interface{} {
 
 type Toc struct {
     /** 見出し */
-	TocId *core.String   `json:"tocId"`
+	TocId *string   `json:"tocId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** インデックス */
 	Index *int32   `json:"index"`
     /** エントリーのリスト */
-	Entries *[]*Entry   `json:"entries"`
+	Entries []Entry   `json:"entries"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -146,7 +142,7 @@ func (p *Toc) ToDict() *map[string]interface{} {
     data["index"] = p.Index
     if p.Entries != nil {
         var _entries []*map[string]interface {}
-        for _, item := range *p.Entries {
+        for _, item := range p.Entries {
             _entries = append(_entries, item.ToDict())
         }
         data["entries"] = &_entries
@@ -158,9 +154,9 @@ func (p *Toc) ToDict() *map[string]interface{} {
 
 type CurrentEntryMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentEntryMaster) ToDict() *map[string]interface{} {
@@ -172,15 +168,15 @@ func (p *CurrentEntryMaster) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -195,9 +191,9 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type Config struct {
     /** 名前 */
-	Key *core.String   `json:"key"`
+	Key *string   `json:"key"`
     /** 値 */
-	Value *core.String   `json:"value"`
+	Value *string   `json:"value"`
 }
 
 func (p *Config) ToDict() *map[string]interface{} {
@@ -209,19 +205,19 @@ func (p *Config) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -238,13 +234,13 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type ScriptSetting struct {
     /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *core.String   `json:"triggerScriptId"`
+	TriggerScriptId *string   `json:"triggerScriptId"`
     /** 完了通知の通知先 */
-	DoneTriggerTargetType *core.String   `json:"doneTriggerTargetType"`
+	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
     /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *core.String   `json:"doneTriggerScriptId"`
+	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
     /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *core.String   `json:"doneTriggerQueueNamespaceId"`
+	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
 }
 
 func (p *ScriptSetting) ToDict() *map[string]interface{} {
@@ -258,7 +254,7 @@ func (p *ScriptSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

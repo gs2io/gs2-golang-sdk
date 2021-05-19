@@ -252,7 +252,7 @@ func (p Gs2LimitRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -336,7 +336,7 @@ func (p Gs2LimitRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -420,7 +420,7 @@ func (p Gs2LimitRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -513,7 +513,7 @@ func (p Gs2LimitRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -597,7 +597,7 @@ func (p Gs2LimitRestClient) DescribeCountersAsync(
 	callback chan<- DescribeCountersAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/counter"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -693,12 +693,12 @@ func (p Gs2LimitRestClient) DescribeCountersByUserIdAsync(
 	callback chan<- DescribeCountersByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/counter"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -791,17 +791,17 @@ func (p Gs2LimitRestClient) GetCounterAsync(
 	callback chan<- GetCounterAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/counter/{limitName}/{counterName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LimitName != nil {
+    if request.LimitName != nil && *request.LimitName != ""  {
         path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
     } else {
         path = strings.ReplaceAll(path, "{limitName}", "null")
     }
-    if request.CounterName != nil {
+    if request.CounterName != nil && *request.CounterName != ""  {
         path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
     } else {
         path = strings.ReplaceAll(path, "{counterName}", "null")
@@ -888,22 +888,22 @@ func (p Gs2LimitRestClient) GetCounterByUserIdAsync(
 	callback chan<- GetCounterByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/counter/{limitName}/{counterName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LimitName != nil {
+    if request.LimitName != nil && *request.LimitName != ""  {
         path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
     } else {
         path = strings.ReplaceAll(path, "{limitName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.CounterName != nil {
+    if request.CounterName != nil && *request.CounterName != ""  {
         path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
     } else {
         path = strings.ReplaceAll(path, "{counterName}", "null")
@@ -987,17 +987,17 @@ func (p Gs2LimitRestClient) CountUpAsync(
 	callback chan<- CountUpAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/counter/{limitName}/{counterName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LimitName != nil {
+    if request.LimitName != nil && *request.LimitName != ""  {
         path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
     } else {
         path = strings.ReplaceAll(path, "{limitName}", "null")
     }
-    if request.CounterName != nil {
+    if request.CounterName != nil && *request.CounterName != ""  {
         path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
     } else {
         path = strings.ReplaceAll(path, "{counterName}", "null")
@@ -1093,22 +1093,22 @@ func (p Gs2LimitRestClient) CountUpByUserIdAsync(
 	callback chan<- CountUpByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/counter/{limitName}/{counterName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LimitName != nil {
+    if request.LimitName != nil && *request.LimitName != ""  {
         path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
     } else {
         path = strings.ReplaceAll(path, "{limitName}", "null")
     }
-    if request.CounterName != nil {
+    if request.CounterName != nil && *request.CounterName != ""  {
         path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
     } else {
         path = strings.ReplaceAll(path, "{counterName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1201,22 +1201,22 @@ func (p Gs2LimitRestClient) DeleteCounterByUserIdAsync(
 	callback chan<- DeleteCounterByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/counter/{limitName}/{counterName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LimitName != nil {
+    if request.LimitName != nil && *request.LimitName != ""  {
         path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
     } else {
         path = strings.ReplaceAll(path, "{limitName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.CounterName != nil {
+    if request.CounterName != nil && *request.CounterName != ""  {
         path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
     } else {
         path = strings.ReplaceAll(path, "{counterName}", "null")
@@ -1476,7 +1476,7 @@ func (p Gs2LimitRestClient) DescribeLimitModelMastersAsync(
 	callback chan<- DescribeLimitModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/limit"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1566,7 +1566,7 @@ func (p Gs2LimitRestClient) CreateLimitModelMasterAsync(
 	callback chan<- CreateLimitModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/limit"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1674,12 +1674,12 @@ func (p Gs2LimitRestClient) GetLimitModelMasterAsync(
 	callback chan<- GetLimitModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/limit/{limitName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LimitName != nil {
+    if request.LimitName != nil && *request.LimitName != ""  {
         path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
     } else {
         path = strings.ReplaceAll(path, "{limitName}", "null")
@@ -1763,12 +1763,12 @@ func (p Gs2LimitRestClient) UpdateLimitModelMasterAsync(
 	callback chan<- UpdateLimitModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/limit/{limitName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LimitName != nil {
+    if request.LimitName != nil && *request.LimitName != ""  {
         path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
     } else {
         path = strings.ReplaceAll(path, "{limitName}", "null")
@@ -1873,12 +1873,12 @@ func (p Gs2LimitRestClient) DeleteLimitModelMasterAsync(
 	callback chan<- DeleteLimitModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/limit/{limitName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LimitName != nil {
+    if request.LimitName != nil && *request.LimitName != ""  {
         path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
     } else {
         path = strings.ReplaceAll(path, "{limitName}", "null")
@@ -1962,7 +1962,7 @@ func (p Gs2LimitRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2046,7 +2046,7 @@ func (p Gs2LimitRestClient) GetCurrentLimitMasterAsync(
 	callback chan<- GetCurrentLimitMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2130,7 +2130,7 @@ func (p Gs2LimitRestClient) UpdateCurrentLimitMasterAsync(
 	callback chan<- UpdateCurrentLimitMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2220,7 +2220,7 @@ func (p Gs2LimitRestClient) UpdateCurrentLimitMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentLimitMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2310,7 +2310,7 @@ func (p Gs2LimitRestClient) DescribeLimitModelsAsync(
 	callback chan<- DescribeLimitModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/limit"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2394,12 +2394,12 @@ func (p Gs2LimitRestClient) GetLimitModelAsync(
 	callback chan<- GetLimitModelAsyncResult,
 ) {
 	path := "/{namespaceName}/limit/{limitName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LimitName != nil {
+    if request.LimitName != nil && *request.LimitName != ""  {
         path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
     } else {
         path = strings.ReplaceAll(path, "{limitName}", "null")

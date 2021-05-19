@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package inventory
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** アイテム入手したときに実行するスクリプト */
 	AcquireScript *ScriptSetting   `json:"acquireScript"`
     /** 入手上限に当たって入手できなかったときに実行するスクリプト */
@@ -68,13 +64,13 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type InventoryModelMaster struct {
     /** インベントリモデルマスター */
-	InventoryModelId *core.String   `json:"inventoryModelId"`
+	InventoryModelId *string   `json:"inventoryModelId"`
     /** インベントリの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** インベントリの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** インベントリモデルマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** インベントリの初期サイズ */
 	InitialCapacity *int32   `json:"initialCapacity"`
     /** インベントリの最大サイズ */
@@ -103,11 +99,11 @@ func (p *InventoryModelMaster) ToDict() *map[string]interface{} {
 
 type InventoryModel struct {
     /** インベントリモデル */
-	InventoryModelId *core.String   `json:"inventoryModelId"`
+	InventoryModelId *string   `json:"inventoryModelId"`
     /** インベントリの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** インベントリの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** インベントリの初期サイズ */
 	InitialCapacity *int32   `json:"initialCapacity"`
     /** インベントリの最大サイズ */
@@ -115,7 +111,7 @@ type InventoryModel struct {
     /** 参照元が登録されているアイテムセットは削除できなくする */
 	ProtectReferencedItem *bool   `json:"protectReferencedItem"`
     /** インベントリに格納可能なアイテムモデル一覧 */
-	ItemModels *[]*ItemModel   `json:"itemModels"`
+	ItemModels []ItemModel   `json:"itemModels"`
 }
 
 func (p *InventoryModel) ToDict() *map[string]interface{} {
@@ -128,7 +124,7 @@ func (p *InventoryModel) ToDict() *map[string]interface{} {
     data["protectReferencedItem"] = p.ProtectReferencedItem
     if p.ItemModels != nil {
         var _itemModels []*map[string]interface {}
-        for _, item := range *p.ItemModels {
+        for _, item := range p.ItemModels {
             _itemModels = append(_itemModels, item.ToDict())
         }
         data["itemModels"] = &_itemModels
@@ -138,15 +134,15 @@ func (p *InventoryModel) ToDict() *map[string]interface{} {
 
 type ItemModelMaster struct {
     /** アイテムモデルマスター */
-	ItemModelId *core.String   `json:"itemModelId"`
+	ItemModelId *string   `json:"itemModelId"`
     /** アイテムの種類名 */
-	InventoryName *core.String   `json:"inventoryName"`
+	InventoryName *string   `json:"inventoryName"`
     /** アイテムモデルの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** アイテムモデルマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** アイテムモデルの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** スタック可能な最大数量 */
 	StackingLimit *int64   `json:"stackingLimit"`
     /** スタック可能な最大数量を超えた時複数枠にアイテムを保管することを許すか */
@@ -176,11 +172,11 @@ func (p *ItemModelMaster) ToDict() *map[string]interface{} {
 
 type ItemModel struct {
     /** アイテムモデルマスター */
-	ItemModelId *core.String   `json:"itemModelId"`
+	ItemModelId *string   `json:"itemModelId"`
     /** アイテムモデルの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** アイテムモデルの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** スタック可能な最大数量 */
 	StackingLimit *int64   `json:"stackingLimit"`
     /** スタック可能な最大数量を超えた時複数枠にアイテムを保管することを許すか */
@@ -202,9 +198,9 @@ func (p *ItemModel) ToDict() *map[string]interface{} {
 
 type CurrentItemModelMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentItemModelMaster) ToDict() *map[string]interface{} {
@@ -216,11 +212,11 @@ func (p *CurrentItemModelMaster) ToDict() *map[string]interface{} {
 
 type Inventory struct {
     /** インベントリ */
-	InventoryId *core.String   `json:"inventoryId"`
+	InventoryId *string   `json:"inventoryId"`
     /** インベントリモデル名 */
-	InventoryName *core.String   `json:"inventoryName"`
+	InventoryName *string   `json:"inventoryName"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 現在のインベントリのキャパシティ使用量 */
 	CurrentInventoryCapacityUsage *int32   `json:"currentInventoryCapacityUsage"`
     /** 現在のインベントリの最大キャパシティ */
@@ -245,19 +241,19 @@ func (p *Inventory) ToDict() *map[string]interface{} {
 
 type ItemSet struct {
     /** 有効期限ごとのアイテム所持数量 */
-	ItemSetId *core.String   `json:"itemSetId"`
+	ItemSetId *string   `json:"itemSetId"`
     /** アイテムセットを識別する名前 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** インベントリの名前 */
-	InventoryName *core.String   `json:"inventoryName"`
+	InventoryName *string   `json:"inventoryName"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** アイテムマスターの名前 */
-	ItemName *core.String   `json:"itemName"`
+	ItemName *string   `json:"itemName"`
     /** 所持数量 */
 	Count *int64   `json:"count"`
     /** この所持品の参照元リスト */
-	ReferenceOf *[]core.String   `json:"referenceOf"`
+	ReferenceOf []string   `json:"referenceOf"`
     /** 表示順番 */
 	SortValue *int32   `json:"sortValue"`
     /** 有効期限 */
@@ -277,8 +273,8 @@ func (p *ItemSet) ToDict() *map[string]interface{} {
     data["itemName"] = p.ItemName
     data["count"] = p.Count
     if p.ReferenceOf != nil {
-        var _referenceOf []core.String
-        for _, item := range *p.ReferenceOf {
+        var _referenceOf []string
+        for _, item := range p.ReferenceOf {
             _referenceOf = append(_referenceOf, item)
         }
         data["referenceOf"] = &_referenceOf
@@ -292,29 +288,29 @@ func (p *ItemSet) ToDict() *map[string]interface{} {
 
 type ItemSetGroup struct {
     /** 有効期限ごとのアイテム所持数量 (このモデルは SDK では使用されません) */
-	ItemSetGroupId *core.String   `json:"itemSetGroupId"`
+	ItemSetGroupId *string   `json:"itemSetGroupId"`
     /** インベントリの名前 */
-	InventoryName *core.String   `json:"inventoryName"`
+	InventoryName *string   `json:"inventoryName"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** アイテムマスターの名前 */
-	ItemName *core.String   `json:"itemName"`
+	ItemName *string   `json:"itemName"`
     /** 表示順番 */
 	SortValue *int32   `json:"sortValue"`
     /** アイテムセットIDのリスト */
-	ItemSetItemSetIdList *[]core.String   `json:"itemSetItemSetIdList"`
+	ItemSetItemSetIdList []string   `json:"itemSetItemSetIdList"`
     /** アイテムセットを識別する名前のリスト */
-	ItemSetNameList *[]core.String   `json:"itemSetNameList"`
+	ItemSetNameList []string   `json:"itemSetNameList"`
     /** 所持数量のリスト */
-	ItemSetCountList *[]int64   `json:"itemSetCountList"`
+	ItemSetCountList []int64   `json:"itemSetCountList"`
     /** 参照元のリストのリスト */
-	ItemSetReferenceOfList *[]*[]core.String   `json:"itemSetReferenceOfList"`
+	ItemSetReferenceOfList [][]string   `json:"itemSetReferenceOfList"`
     /** 有効期限のリスト */
-	ItemSetExpiresAtList *[]int64   `json:"itemSetExpiresAtList"`
+	ItemSetExpiresAtList []int64   `json:"itemSetExpiresAtList"`
     /** 作成日時のリスト */
-	ItemSetCreatedAtList *[]int64   `json:"itemSetCreatedAtList"`
+	ItemSetCreatedAtList []int64   `json:"itemSetCreatedAtList"`
     /** 更新日時のリスト */
-	ItemSetUpdatedAtList *[]int64   `json:"itemSetUpdatedAtList"`
+	ItemSetUpdatedAtList []int64   `json:"itemSetUpdatedAtList"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -329,50 +325,50 @@ func (p *ItemSetGroup) ToDict() *map[string]interface{} {
     data["itemName"] = p.ItemName
     data["sortValue"] = p.SortValue
     if p.ItemSetItemSetIdList != nil {
-        var _itemSetItemSetIdList []core.String
-        for _, item := range *p.ItemSetItemSetIdList {
+        var _itemSetItemSetIdList []string
+        for _, item := range p.ItemSetItemSetIdList {
             _itemSetItemSetIdList = append(_itemSetItemSetIdList, item)
         }
         data["itemSetItemSetIdList"] = &_itemSetItemSetIdList
     }
     if p.ItemSetNameList != nil {
-        var _itemSetNameList []core.String
-        for _, item := range *p.ItemSetNameList {
+        var _itemSetNameList []string
+        for _, item := range p.ItemSetNameList {
             _itemSetNameList = append(_itemSetNameList, item)
         }
         data["itemSetNameList"] = &_itemSetNameList
     }
     if p.ItemSetCountList != nil {
         var _itemSetCountList []int64
-        for _, item := range *p.ItemSetCountList {
+        for _, item := range p.ItemSetCountList {
             _itemSetCountList = append(_itemSetCountList, item)
         }
         data["itemSetCountList"] = &_itemSetCountList
     }
     if p.ItemSetReferenceOfList != nil {
-        var _itemSetReferenceOfList []*[]core.String
-        for _, item := range *p.ItemSetReferenceOfList {
+        var _itemSetReferenceOfList [][]string
+        for _, item := range p.ItemSetReferenceOfList {
             _itemSetReferenceOfList = append(_itemSetReferenceOfList, item)
         }
         data["itemSetReferenceOfList"] = &_itemSetReferenceOfList
     }
     if p.ItemSetExpiresAtList != nil {
         var _itemSetExpiresAtList []int64
-        for _, item := range *p.ItemSetExpiresAtList {
+        for _, item := range p.ItemSetExpiresAtList {
             _itemSetExpiresAtList = append(_itemSetExpiresAtList, item)
         }
         data["itemSetExpiresAtList"] = &_itemSetExpiresAtList
     }
     if p.ItemSetCreatedAtList != nil {
         var _itemSetCreatedAtList []int64
-        for _, item := range *p.ItemSetCreatedAtList {
+        for _, item := range p.ItemSetCreatedAtList {
             _itemSetCreatedAtList = append(_itemSetCreatedAtList, item)
         }
         data["itemSetCreatedAtList"] = &_itemSetCreatedAtList
     }
     if p.ItemSetUpdatedAtList != nil {
         var _itemSetUpdatedAtList []int64
-        for _, item := range *p.ItemSetUpdatedAtList {
+        for _, item := range p.ItemSetUpdatedAtList {
             _itemSetUpdatedAtList = append(_itemSetUpdatedAtList, item)
         }
         data["itemSetUpdatedAtList"] = &_itemSetUpdatedAtList
@@ -384,15 +380,15 @@ func (p *ItemSetGroup) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -407,19 +403,19 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -436,13 +432,13 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type ScriptSetting struct {
     /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *core.String   `json:"triggerScriptId"`
+	TriggerScriptId *string   `json:"triggerScriptId"`
     /** 完了通知の通知先 */
-	DoneTriggerTargetType *core.String   `json:"doneTriggerTargetType"`
+	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
     /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *core.String   `json:"doneTriggerScriptId"`
+	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
     /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *core.String   `json:"doneTriggerQueueNamespaceId"`
+	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
 }
 
 func (p *ScriptSetting) ToDict() *map[string]interface{} {
@@ -456,7 +452,7 @@ func (p *ScriptSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

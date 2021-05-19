@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package deploy
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeStacksResult struct {
     /** スタックのリスト */
 	Items         []Stack	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeStacksResult) ToDict() *map[string]interface{} {
@@ -98,7 +94,7 @@ type ValidateAsyncResult struct {
 
 type GetStackStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetStackStatusResult) ToDict() *map[string]interface{} {
@@ -244,7 +240,7 @@ type DescribeResourcesResult struct {
     /** 作成されたのリソースのリスト */
 	Items         []Resource	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeResourcesResult) ToDict() *map[string]interface{} {
@@ -289,7 +285,7 @@ type DescribeEventsResult struct {
     /** 発生したイベントのリスト */
 	Items         []Event	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeEventsResult) ToDict() *map[string]interface{} {
@@ -334,7 +330,7 @@ type DescribeOutputsResult struct {
     /** アウトプットのリスト */
 	Items         []Output	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeOutputsResult) ToDict() *map[string]interface{} {

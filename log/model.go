@@ -16,37 +16,33 @@ permissions and limitations under the License.
 
 package log
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
-    /** カテゴリー名 */
-	Name *core.String   `json:"name"`
+	OwnerId *string   `json:"ownerId"`
+    /** ネームスペース名 */
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** ログの書き出し方法 */
-	Type *core.String   `json:"type"`
+	Type *string   `json:"type"`
     /** GCPのクレデンシャル */
-	GcpCredentialJson *core.String   `json:"gcpCredentialJson"`
+	GcpCredentialJson *string   `json:"gcpCredentialJson"`
     /** BigQueryのデータセット名 */
-	BigQueryDatasetName *core.String   `json:"bigQueryDatasetName"`
+	BigQueryDatasetName *string   `json:"bigQueryDatasetName"`
     /** ログの保存期間(日) */
 	LogExpireDays *int32   `json:"logExpireDays"`
     /** AWSのリージョン */
-	AwsRegion *core.String   `json:"awsRegion"`
+	AwsRegion *string   `json:"awsRegion"`
     /** AWSのアクセスキーID */
-	AwsAccessKeyId *core.String   `json:"awsAccessKeyId"`
+	AwsAccessKeyId *string   `json:"awsAccessKeyId"`
     /** AWSのシークレットアクセスキー */
-	AwsSecretAccessKey *core.String   `json:"awsSecretAccessKey"`
+	AwsSecretAccessKey *string   `json:"awsSecretAccessKey"`
     /** Kinesis Firehose のストリーム名 */
-	FirehoseStreamName *core.String   `json:"firehoseStreamName"`
+	FirehoseStreamName *string   `json:"firehoseStreamName"`
     /** None */
-	Status *core.String   `json:"status"`
+	Status *string   `json:"status"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -77,17 +73,17 @@ type AccessLog struct {
     /** 日時 */
 	Timestamp *int64   `json:"timestamp"`
     /** リクエストID */
-	RequestId *core.String   `json:"requestId"`
+	RequestId *string   `json:"requestId"`
     /** マイクロサービスの種類 */
-	Service *core.String   `json:"service"`
+	Service *string   `json:"service"`
     /** マイクロサービスのメソッド */
-	Method *core.String   `json:"method"`
+	Method *string   `json:"method"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** リクエストパラメータ */
-	Request *core.String   `json:"request"`
+	Request *string   `json:"request"`
     /** 応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *AccessLog) ToDict() *map[string]interface{} {
@@ -104,11 +100,11 @@ func (p *AccessLog) ToDict() *map[string]interface{} {
 
 type AccessLogCount struct {
     /** マイクロサービスの種類 */
-	Service *core.String   `json:"service"`
+	Service *string   `json:"service"`
     /** マイクロサービスのメソッド */
-	Method *core.String   `json:"method"`
+	Method *string   `json:"method"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 回数 */
 	Count *int64   `json:"count"`
 }
@@ -126,19 +122,19 @@ type IssueStampSheetLog struct {
     /** 日時 */
 	Timestamp *int64   `json:"timestamp"`
     /** トランザクションID */
-	TransactionId *core.String   `json:"transactionId"`
+	TransactionId *string   `json:"transactionId"`
     /** マイクロサービスの種類 */
-	Service *core.String   `json:"service"`
+	Service *string   `json:"service"`
     /** マイクロサービスのメソッド */
-	Method *core.String   `json:"method"`
+	Method *string   `json:"method"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 報酬アクション */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 引数 */
-	Args *core.String   `json:"args"`
+	Args *string   `json:"args"`
     /** スタンプタスク */
-	Tasks *core.String   `json:"tasks"`
+	Tasks *string   `json:"tasks"`
 }
 
 func (p *IssueStampSheetLog) ToDict() *map[string]interface{} {
@@ -156,13 +152,13 @@ func (p *IssueStampSheetLog) ToDict() *map[string]interface{} {
 
 type IssueStampSheetLogCount struct {
     /** マイクロサービスの種類 */
-	Service *core.String   `json:"service"`
+	Service *string   `json:"service"`
     /** マイクロサービスのメソッド */
-	Method *core.String   `json:"method"`
+	Method *string   `json:"method"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 報酬アクション */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 回数 */
 	Count *int64   `json:"count"`
 }
@@ -181,17 +177,17 @@ type ExecuteStampSheetLog struct {
     /** 日時 */
 	Timestamp *int64   `json:"timestamp"`
     /** トランザクションID */
-	TransactionId *core.String   `json:"transactionId"`
+	TransactionId *string   `json:"transactionId"`
     /** マイクロサービスの種類 */
-	Service *core.String   `json:"service"`
+	Service *string   `json:"service"`
     /** マイクロサービスのメソッド */
-	Method *core.String   `json:"method"`
+	Method *string   `json:"method"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 報酬アクション */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 引数 */
-	Args *core.String   `json:"args"`
+	Args *string   `json:"args"`
 }
 
 func (p *ExecuteStampSheetLog) ToDict() *map[string]interface{} {
@@ -208,13 +204,13 @@ func (p *ExecuteStampSheetLog) ToDict() *map[string]interface{} {
 
 type ExecuteStampSheetLogCount struct {
     /** マイクロサービスの種類 */
-	Service *core.String   `json:"service"`
+	Service *string   `json:"service"`
     /** マイクロサービスのメソッド */
-	Method *core.String   `json:"method"`
+	Method *string   `json:"method"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 報酬アクション */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 回数 */
 	Count *int64   `json:"count"`
 }
@@ -233,17 +229,17 @@ type ExecuteStampTaskLog struct {
     /** 日時 */
 	Timestamp *int64   `json:"timestamp"`
     /** タスクID */
-	TaskId *core.String   `json:"taskId"`
+	TaskId *string   `json:"taskId"`
     /** マイクロサービスの種類 */
-	Service *core.String   `json:"service"`
+	Service *string   `json:"service"`
     /** マイクロサービスのメソッド */
-	Method *core.String   `json:"method"`
+	Method *string   `json:"method"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 報酬アクション */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 引数 */
-	Args *core.String   `json:"args"`
+	Args *string   `json:"args"`
 }
 
 func (p *ExecuteStampTaskLog) ToDict() *map[string]interface{} {
@@ -260,13 +256,13 @@ func (p *ExecuteStampTaskLog) ToDict() *map[string]interface{} {
 
 type ExecuteStampTaskLogCount struct {
     /** マイクロサービスの種類 */
-	Service *core.String   `json:"service"`
+	Service *string   `json:"service"`
     /** マイクロサービスのメソッド */
-	Method *core.String   `json:"method"`
+	Method *string   `json:"method"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 報酬アクション */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 回数 */
 	Count *int64   `json:"count"`
 }

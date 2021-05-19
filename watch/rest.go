@@ -76,7 +76,7 @@ func (p Gs2WatchRestClient) GetChartAsync(
 	callback chan<- GetChartAsyncResult,
 ) {
 	path := "/chart/{metrics}"
-    if request.Metrics != nil {
+    if request.Metrics != nil && *request.Metrics != ""  {
         path = strings.ReplaceAll(path, "{metrics}", core.ToString(*request.Metrics))
     } else {
         path = strings.ReplaceAll(path, "{metrics}", "null")
@@ -88,8 +88,8 @@ func (p Gs2WatchRestClient) GetChartAsync(
         bodies["grn"] = *request.Grn
     }
     if request.Queries != nil {
-        var _queries []core.String
-        for _, item := range *request.Queries {
+        var _queries []string
+        for _, item := range request.Queries {
             _queries = append(_queries, item)
         }
         bodies["queries"] = _queries
@@ -194,7 +194,7 @@ func (p Gs2WatchRestClient) GetCumulativeAsync(
 	callback chan<- GetCumulativeAsyncResult,
 ) {
 	path := "/cumulative/{name}"
-    if request.Name != nil {
+    if request.Name != nil && *request.Name != ""  {
         path = strings.ReplaceAll(path, "{name}", core.ToString(*request.Name))
     } else {
         path = strings.ReplaceAll(path, "{name}", "null")
@@ -392,12 +392,12 @@ func (p Gs2WatchRestClient) GetBillingActivityAsync(
     } else {
         path = strings.ReplaceAll(path, "{month}", "null")
     }
-    if request.Service != nil {
+    if request.Service != nil && *request.Service != ""  {
         path = strings.ReplaceAll(path, "{service}", core.ToString(*request.Service))
     } else {
         path = strings.ReplaceAll(path, "{service}", "null")
     }
-    if request.ActivityType != nil {
+    if request.ActivityType != nil && *request.ActivityType != ""  {
         path = strings.ReplaceAll(path, "{activityType}", core.ToString(*request.ActivityType))
     } else {
         path = strings.ReplaceAll(path, "{activityType}", "null")

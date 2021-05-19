@@ -23,15 +23,15 @@ import (
 type DescribeNamespacesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	Name *core.String	`json:"name"`
-	Description *core.String	`json:"description"`
+	Name *string	`json:"name"`
+	Description *string	`json:"description"`
 	AllowCreateRoom *bool	`json:"allowCreateRoom"`
 	PostMessageScript *ScriptSetting	`json:"postMessageScript"`
 	CreateRoomScript *ScriptSetting	`json:"createRoomScript"`
@@ -45,20 +45,20 @@ type CreateNamespaceRequest struct {
 type GetNamespaceStatusRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Description *core.String	`json:"description"`
+	NamespaceName *string	`json:"namespaceName"`
+	Description *string	`json:"description"`
 	AllowCreateRoom *bool	`json:"allowCreateRoom"`
 	PostMessageScript *ScriptSetting	`json:"postMessageScript"`
 	CreateRoomScript *ScriptSetting	`json:"createRoomScript"`
@@ -72,82 +72,82 @@ type UpdateNamespaceRequest struct {
 type DeleteNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type DescribeRoomsRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreateRoomRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Name *core.String	`json:"name"`
-	Metadata *core.String	`json:"metadata"`
-	Password *core.String	`json:"password"`
-	WhiteListUserIds *[]core.String	`json:"whiteListUserIds"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	Name *string	`json:"name"`
+	Metadata *string	`json:"metadata"`
+	Password *string	`json:"password"`
+	WhiteListUserIds []string	`json:"whiteListUserIds"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type CreateRoomFromBackendRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Name *core.String	`json:"name"`
-	UserId *core.String	`json:"userId"`
-	Metadata *core.String	`json:"metadata"`
-	Password *core.String	`json:"password"`
-	WhiteListUserIds *[]core.String	`json:"whiteListUserIds"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	Name *string	`json:"name"`
+	UserId *string	`json:"userId"`
+	Metadata *string	`json:"metadata"`
+	Password *string	`json:"password"`
+	WhiteListUserIds []string	`json:"whiteListUserIds"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetRoomRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
 }
 
 type UpdateRoomRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	Metadata *core.String	`json:"metadata"`
-	Password *core.String	`json:"password"`
-	WhiteListUserIds *[]core.String	`json:"whiteListUserIds"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	Metadata *string	`json:"metadata"`
+	Password *string	`json:"password"`
+	WhiteListUserIds []string	`json:"whiteListUserIds"`
 }
 
 type DeleteRoomRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DeleteRoomFromBackendRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeMessagesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	Password *core.String	`json:"password"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	Password *string	`json:"password"`
 	StartAt *int64	`json:"startAt"`
 	Limit *int64	`json:"limit"`
 }
@@ -155,144 +155,144 @@ type DescribeMessagesRequest struct {
 type PostRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
 	Category *int32	`json:"category"`
-	Metadata *core.String	`json:"metadata"`
-	Password *core.String	`json:"password"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	Metadata *string	`json:"metadata"`
+	Password *string	`json:"password"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type PostByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	UserId *core.String	`json:"userId"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	UserId *string	`json:"userId"`
 	Category *int32	`json:"category"`
-	Metadata *core.String	`json:"metadata"`
-	Password *core.String	`json:"password"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	Metadata *string	`json:"metadata"`
+	Password *string	`json:"password"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetMessageRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	MessageName *core.String	`json:"messageName"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	MessageName *string	`json:"messageName"`
 }
 
 type DeleteMessageRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	MessageName *core.String	`json:"messageName"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	MessageName *string	`json:"messageName"`
 }
 
 type DescribeSubscribesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeSubscribesByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeSubscribesByRoomNameRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type SubscribeRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	NotificationTypes *[]*NotificationType	`json:"notificationTypes"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	NotificationTypes []NotificationType	`json:"notificationTypes"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type SubscribeByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	UserId *core.String	`json:"userId"`
-	NotificationTypes *[]*NotificationType	`json:"notificationTypes"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	UserId *string	`json:"userId"`
+	NotificationTypes []NotificationType	`json:"notificationTypes"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetSubscribeRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetSubscribeByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type UpdateNotificationTypeRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	NotificationTypes *[]*NotificationType	`json:"notificationTypes"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	NotificationTypes []NotificationType	`json:"notificationTypes"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type UpdateNotificationTypeByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	UserId *core.String	`json:"userId"`
-	NotificationTypes *[]*NotificationType	`json:"notificationTypes"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	UserId *string	`json:"userId"`
+	NotificationTypes []NotificationType	`json:"notificationTypes"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type UnsubscribeRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type UnsubscribeByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	RoomName *core.String	`json:"roomName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	RoomName *string	`json:"roomName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }

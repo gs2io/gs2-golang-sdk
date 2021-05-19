@@ -757,7 +757,7 @@ func (p Gs2JobQueueWebSocketClient) PushByUserIdAsync(
     }
     if request.Jobs != nil {
         var _jobs []*map[string]interface {}
-        for _, item := range *request.Jobs {
+        for _, item := range request.Jobs {
             _jobs = append(_jobs, item.ToDict())
         }
         bodies["jobs"] = _jobs
@@ -845,7 +845,7 @@ func (p Gs2JobQueueWebSocketClient) RunAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.runAsyncHandler(

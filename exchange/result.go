@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package exchange
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -181,7 +177,7 @@ type DescribeRateModelMastersResult struct {
     /** 交換レートマスターのリスト */
 	Items         []RateModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeRateModelMastersResult) ToDict() *map[string]interface{} {
@@ -280,9 +276,9 @@ type ExchangeResult struct {
     /** 交換レートモデル */
 	Item         *RateModel	`json:"item"`
     /** 交換処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *ExchangeResult) ToDict() *map[string]interface{} {
@@ -308,9 +304,9 @@ type ExchangeByUserIdResult struct {
     /** 交換レートモデル */
 	Item         *RateModel	`json:"item"`
     /** 交換処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *ExchangeByUserIdResult) ToDict() *map[string]interface{} {
@@ -336,9 +332,9 @@ type ExchangeByStampSheetResult struct {
     /** 交換レートモデル */
 	Item         *RateModel	`json:"item"`
     /** 交換処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *ExchangeByStampSheetResult) ToDict() *map[string]interface{} {
@@ -459,7 +455,7 @@ type DescribeAwaitsResult struct {
     /** 交換待機のリスト */
 	Items         []Await	`json:"items"`
     /** 次のページを取得するためのトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeAwaitsResult) ToDict() *map[string]interface{} {
@@ -486,7 +482,7 @@ type DescribeAwaitsByUserIdResult struct {
     /** 交換待機のリスト */
 	Items         []Await	`json:"items"`
     /** 次のページを取得するためのトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeAwaitsByUserIdResult) ToDict() *map[string]interface{} {
@@ -549,9 +545,9 @@ type AcquireResult struct {
     /** 交換待機 */
 	Item         *Await	`json:"item"`
     /** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *AcquireResult) ToDict() *map[string]interface{} {
@@ -577,9 +573,9 @@ type AcquireByUserIdResult struct {
     /** 交換待機 */
 	Item         *Await	`json:"item"`
     /** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *AcquireByUserIdResult) ToDict() *map[string]interface{} {
@@ -605,9 +601,9 @@ type AcquireForceByUserIdResult struct {
     /** 交換待機 */
 	Item         *Await	`json:"item"`
     /** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *AcquireForceByUserIdResult) ToDict() *map[string]interface{} {
@@ -633,9 +629,9 @@ type SkipResult struct {
     /** 交換待機 */
 	Item         *Await	`json:"item"`
     /** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *SkipResult) ToDict() *map[string]interface{} {
@@ -661,9 +657,9 @@ type SkipByUserIdResult struct {
     /** 交換待機 */
 	Item         *Await	`json:"item"`
     /** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *SkipByUserIdResult) ToDict() *map[string]interface{} {
@@ -743,7 +739,7 @@ type DeleteAwaitByStampTaskResult struct {
     /** 交換待機 */
 	Item         *Await	`json:"item"`
     /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *core.String	`json:"newContextStack"`
+	NewContextStack         *string	`json:"newContextStack"`
 }
 
 func (p *DeleteAwaitByStampTaskResult) ToDict() *map[string]interface{} {

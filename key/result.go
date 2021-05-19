@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package key
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -136,7 +132,7 @@ type DescribeKeysResult struct {
     /** 暗号鍵のリスト */
 	Items         []Key	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeKeysResult) ToDict() *map[string]interface{} {
@@ -228,7 +224,7 @@ type DeleteKeyAsyncResult struct {
 
 type EncryptResult struct {
     /** 暗号化済みデータ */
-	Data         *core.String	`json:"data"`
+	Data         *string	`json:"data"`
 }
 
 func (p *EncryptResult) ToDict() *map[string]interface{} {
@@ -246,7 +242,7 @@ type EncryptAsyncResult struct {
 
 type DecryptResult struct {
     /** 復号済みデータ */
-	Data         *core.String	`json:"data"`
+	Data         *string	`json:"data"`
 }
 
 func (p *DecryptResult) ToDict() *map[string]interface{} {
@@ -266,7 +262,7 @@ type DescribeGitHubApiKeysResult struct {
     /** GitHub のAPIキーのリスト */
 	Items         []GitHubApiKey	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeGitHubApiKeysResult) ToDict() *map[string]interface{} {

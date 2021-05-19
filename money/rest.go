@@ -279,7 +279,7 @@ func (p Gs2MoneyRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -363,7 +363,7 @@ func (p Gs2MoneyRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -447,7 +447,7 @@ func (p Gs2MoneyRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -561,7 +561,7 @@ func (p Gs2MoneyRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -645,7 +645,7 @@ func (p Gs2MoneyRestClient) DescribeWalletsAsync(
 	callback chan<- DescribeWalletsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/wallet"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -738,12 +738,12 @@ func (p Gs2MoneyRestClient) DescribeWalletsByUserIdAsync(
 	callback chan<- DescribeWalletsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/wallet"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -833,7 +833,7 @@ func (p Gs2MoneyRestClient) QueryWalletsAsync(
 	callback chan<- QueryWalletsAsyncResult,
 ) {
 	path := "/{namespaceName}/wallet/query"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -926,7 +926,7 @@ func (p Gs2MoneyRestClient) GetWalletAsync(
 	callback chan<- GetWalletAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/wallet/{slot}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1018,12 +1018,12 @@ func (p Gs2MoneyRestClient) GetWalletByUserIdAsync(
 	callback chan<- GetWalletByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/wallet/{slot}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1112,12 +1112,12 @@ func (p Gs2MoneyRestClient) DepositByUserIdAsync(
 	callback chan<- DepositByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/wallet/{slot}/deposit"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1215,7 +1215,7 @@ func (p Gs2MoneyRestClient) WithdrawAsync(
 	callback chan<- WithdrawAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/wallet/{slot}/withdraw"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1316,12 +1316,12 @@ func (p Gs2MoneyRestClient) WithdrawByUserIdAsync(
 	callback chan<- WithdrawByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/wallet/{slot}/withdraw"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1595,7 +1595,7 @@ func (p Gs2MoneyRestClient) DescribeReceiptsAsync(
 	callback chan<- DescribeReceiptsAsyncResult,
 ) {
 	path := "/{namespaceName}/receipt"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1697,17 +1697,17 @@ func (p Gs2MoneyRestClient) GetByUserIdAndTransactionIdAsync(
 	callback chan<- GetByUserIdAndTransactionIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/receipt/{transactionId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.TransactionId != nil {
+    if request.TransactionId != nil && *request.TransactionId != ""  {
         path = strings.ReplaceAll(path, "{transactionId}", core.ToString(*request.TransactionId))
     } else {
         path = strings.ReplaceAll(path, "{transactionId}", "null")
@@ -1791,12 +1791,12 @@ func (p Gs2MoneyRestClient) RecordReceiptAsync(
 	callback chan<- RecordReceiptAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/receipt"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")

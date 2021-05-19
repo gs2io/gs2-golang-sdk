@@ -428,7 +428,7 @@ func (p Gs2DeployRestClient) GetStackStatusAsync(
 	callback chan<- GetStackStatusAsyncResult,
 ) {
 	path := "/stack/{stackName}/status"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
@@ -512,7 +512,7 @@ func (p Gs2DeployRestClient) GetStackAsync(
 	callback chan<- GetStackAsyncResult,
 ) {
 	path := "/stack/{stackName}"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
@@ -596,7 +596,7 @@ func (p Gs2DeployRestClient) UpdateStackAsync(
 	callback chan<- UpdateStackAsyncResult,
 ) {
 	path := "/stack/{stackName}"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
@@ -689,7 +689,7 @@ func (p Gs2DeployRestClient) UpdateStackFromGitHubAsync(
 	callback chan<- UpdateStackFromGitHubAsyncResult,
 ) {
 	path := "/stack/{stackName}/from_git_hub"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
@@ -782,7 +782,7 @@ func (p Gs2DeployRestClient) DeleteStackAsync(
 	callback chan<- DeleteStackAsyncResult,
 ) {
 	path := "/stack/{stackName}"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
@@ -866,7 +866,7 @@ func (p Gs2DeployRestClient) ForceDeleteStackAsync(
 	callback chan<- ForceDeleteStackAsyncResult,
 ) {
 	path := "/stack/{stackName}/force"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
@@ -950,7 +950,7 @@ func (p Gs2DeployRestClient) DeleteStackResourcesAsync(
 	callback chan<- DeleteStackResourcesAsyncResult,
 ) {
 	path := "/stack/{stackName}/resources"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
@@ -1034,7 +1034,7 @@ func (p Gs2DeployRestClient) DeleteStackEntityAsync(
 	callback chan<- DeleteStackEntityAsyncResult,
 ) {
 	path := "/stack/{stackName}/entity"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
@@ -1118,7 +1118,7 @@ func (p Gs2DeployRestClient) DescribeResourcesAsync(
 	callback chan<- DescribeResourcesAsyncResult,
 ) {
 	path := "/stack/{stackName}/resource"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
@@ -1208,12 +1208,12 @@ func (p Gs2DeployRestClient) GetResourceAsync(
 	callback chan<- GetResourceAsyncResult,
 ) {
 	path := "/stack/{stackName}/resource/{resourceName}"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
     }
-    if request.ResourceName != nil {
+    if request.ResourceName != nil && *request.ResourceName != ""  {
         path = strings.ReplaceAll(path, "{resourceName}", core.ToString(*request.ResourceName))
     } else {
         path = strings.ReplaceAll(path, "{resourceName}", "null")
@@ -1297,7 +1297,7 @@ func (p Gs2DeployRestClient) DescribeEventsAsync(
 	callback chan<- DescribeEventsAsyncResult,
 ) {
 	path := "/stack/{stackName}/event"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
@@ -1387,12 +1387,12 @@ func (p Gs2DeployRestClient) GetEventAsync(
 	callback chan<- GetEventAsyncResult,
 ) {
 	path := "/stack/{stackName}/event/{eventName}"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
     }
-    if request.EventName != nil {
+    if request.EventName != nil && *request.EventName != ""  {
         path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
     } else {
         path = strings.ReplaceAll(path, "{eventName}", "null")
@@ -1476,7 +1476,7 @@ func (p Gs2DeployRestClient) DescribeOutputsAsync(
 	callback chan<- DescribeOutputsAsyncResult,
 ) {
 	path := "/stack/{stackName}/output"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
@@ -1566,12 +1566,12 @@ func (p Gs2DeployRestClient) GetOutputAsync(
 	callback chan<- GetOutputAsyncResult,
 ) {
 	path := "/stack/{stackName}/output/{outputName}"
-    if request.StackName != nil {
+    if request.StackName != nil && *request.StackName != ""  {
         path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
     } else {
         path = strings.ReplaceAll(path, "{stackName}", "null")
     }
-    if request.OutputName != nil {
+    if request.OutputName != nil && *request.OutputName != ""  {
         path = strings.ReplaceAll(path, "{outputName}", core.ToString(*request.OutputName))
     } else {
         path = strings.ReplaceAll(path, "{outputName}", "null")

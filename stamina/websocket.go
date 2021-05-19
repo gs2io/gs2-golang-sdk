@@ -1157,7 +1157,7 @@ func (p Gs2StaminaWebSocketClient) CreateMaxStaminaTableMasterAsync(
     }
     if request.Values != nil {
         var _values []int32
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -1337,7 +1337,7 @@ func (p Gs2StaminaWebSocketClient) UpdateMaxStaminaTableMasterAsync(
     }
     if request.Values != nil {
         var _values []int32
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -1602,7 +1602,7 @@ func (p Gs2StaminaWebSocketClient) CreateRecoverIntervalTableMasterAsync(
     }
     if request.Values != nil {
         var _values []int32
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -1782,7 +1782,7 @@ func (p Gs2StaminaWebSocketClient) UpdateRecoverIntervalTableMasterAsync(
     }
     if request.Values != nil {
         var _values []int32
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -2047,7 +2047,7 @@ func (p Gs2StaminaWebSocketClient) CreateRecoverValueTableMasterAsync(
     }
     if request.Values != nil {
         var _values []int32
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -2227,7 +2227,7 @@ func (p Gs2StaminaWebSocketClient) UpdateRecoverValueTableMasterAsync(
     }
     if request.Values != nil {
         var _values []int32
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -2886,7 +2886,7 @@ func (p Gs2StaminaWebSocketClient) DescribeStaminasAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeStaminasAsyncHandler(
@@ -3059,7 +3059,7 @@ func (p Gs2StaminaWebSocketClient) GetStaminaAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getStaminaAsyncHandler(
@@ -3329,7 +3329,7 @@ func (p Gs2StaminaWebSocketClient) ConsumeStaminaAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.consumeStaminaAsyncHandler(
@@ -3951,7 +3951,7 @@ func (p Gs2StaminaWebSocketClient) SetMaxValueByStatusAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.setMaxValueByStatusAsyncHandler(
@@ -4045,7 +4045,7 @@ func (p Gs2StaminaWebSocketClient) SetRecoverIntervalByStatusAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.setRecoverIntervalByStatusAsyncHandler(
@@ -4139,7 +4139,7 @@ func (p Gs2StaminaWebSocketClient) SetRecoverValueByStatusAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.setRecoverValueByStatusAsyncHandler(

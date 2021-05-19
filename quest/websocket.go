@@ -1136,7 +1136,7 @@ func (p Gs2QuestWebSocketClient) CreateQuestModelMasterAsync(
     }
     if request.Contents != nil {
         var _contents []*map[string]interface {}
-        for _, item := range *request.Contents {
+        for _, item := range request.Contents {
             _contents = append(_contents, item.ToDict())
         }
         bodies["contents"] = _contents
@@ -1146,21 +1146,21 @@ func (p Gs2QuestWebSocketClient) CreateQuestModelMasterAsync(
     }
     if request.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *request.ConsumeActions {
+        for _, item := range request.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         bodies["consumeActions"] = _consumeActions
     }
     if request.FailedAcquireActions != nil {
         var _failedAcquireActions []*map[string]interface {}
-        for _, item := range *request.FailedAcquireActions {
+        for _, item := range request.FailedAcquireActions {
             _failedAcquireActions = append(_failedAcquireActions, item.ToDict())
         }
         bodies["failedAcquireActions"] = _failedAcquireActions
     }
     if request.PremiseQuestNames != nil {
-        var _premiseQuestNames []core.String
-        for _, item := range *request.PremiseQuestNames {
+        var _premiseQuestNames []string
+        for _, item := range request.PremiseQuestNames {
             _premiseQuestNames = append(_premiseQuestNames, item)
         }
         bodies["premiseQuestNames"] = _premiseQuestNames
@@ -1343,7 +1343,7 @@ func (p Gs2QuestWebSocketClient) UpdateQuestModelMasterAsync(
     }
     if request.Contents != nil {
         var _contents []*map[string]interface {}
-        for _, item := range *request.Contents {
+        for _, item := range request.Contents {
             _contents = append(_contents, item.ToDict())
         }
         bodies["contents"] = _contents
@@ -1353,21 +1353,21 @@ func (p Gs2QuestWebSocketClient) UpdateQuestModelMasterAsync(
     }
     if request.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *request.ConsumeActions {
+        for _, item := range request.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         bodies["consumeActions"] = _consumeActions
     }
     if request.FailedAcquireActions != nil {
         var _failedAcquireActions []*map[string]interface {}
-        for _, item := range *request.FailedAcquireActions {
+        for _, item := range request.FailedAcquireActions {
             _failedAcquireActions = append(_failedAcquireActions, item.ToDict())
         }
         bodies["failedAcquireActions"] = _failedAcquireActions
     }
     if request.PremiseQuestNames != nil {
-        var _premiseQuestNames []core.String
-        for _, item := range *request.PremiseQuestNames {
+        var _premiseQuestNames []string
+        for _, item := range request.PremiseQuestNames {
             _premiseQuestNames = append(_premiseQuestNames, item)
         }
         bodies["premiseQuestNames"] = _premiseQuestNames
@@ -1957,7 +1957,7 @@ func (p Gs2QuestWebSocketClient) CreateProgressByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2045,7 +2045,7 @@ func (p Gs2QuestWebSocketClient) GetProgressAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getProgressAsyncHandler(
@@ -2216,7 +2216,7 @@ func (p Gs2QuestWebSocketClient) StartAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2225,7 +2225,7 @@ func (p Gs2QuestWebSocketClient) StartAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.startAsyncHandler(
@@ -2317,7 +2317,7 @@ func (p Gs2QuestWebSocketClient) StartByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2406,7 +2406,7 @@ func (p Gs2QuestWebSocketClient) EndAsync(
     }
     if request.Rewards != nil {
         var _rewards []*map[string]interface {}
-        for _, item := range *request.Rewards {
+        for _, item := range request.Rewards {
             _rewards = append(_rewards, item.ToDict())
         }
         bodies["rewards"] = _rewards
@@ -2416,7 +2416,7 @@ func (p Gs2QuestWebSocketClient) EndAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2425,7 +2425,7 @@ func (p Gs2QuestWebSocketClient) EndAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.endAsyncHandler(
@@ -2511,7 +2511,7 @@ func (p Gs2QuestWebSocketClient) EndByUserIdAsync(
     }
     if request.Rewards != nil {
         var _rewards []*map[string]interface {}
-        for _, item := range *request.Rewards {
+        for _, item := range request.Rewards {
             _rewards = append(_rewards, item.ToDict())
         }
         bodies["rewards"] = _rewards
@@ -2521,7 +2521,7 @@ func (p Gs2QuestWebSocketClient) EndByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2609,7 +2609,7 @@ func (p Gs2QuestWebSocketClient) DeleteProgressAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteProgressAsyncHandler(
@@ -2943,7 +2943,7 @@ func (p Gs2QuestWebSocketClient) DescribeCompletedQuestListsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeCompletedQuestListsAsyncHandler(
@@ -3116,7 +3116,7 @@ func (p Gs2QuestWebSocketClient) GetCompletedQuestListAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getCompletedQuestListAsyncHandler(

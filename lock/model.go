@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package lock
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** カテゴリー名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** 作成日時 */
@@ -53,13 +49,13 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type Mutex struct {
     /** ミューテックス */
-	MutexId *core.String   `json:"mutexId"`
+	MutexId *string   `json:"mutexId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** プロパティID */
-	PropertyId *core.String   `json:"propertyId"`
+	PropertyId *string   `json:"propertyId"`
     /** ロックを取得したトランザクションID */
-	TransactionId *core.String   `json:"transactionId"`
+	TransactionId *string   `json:"transactionId"`
     /** 参照回数 */
 	ReferenceCount *int32   `json:"referenceCount"`
     /** 作成日時 */
@@ -82,15 +78,15 @@ func (p *Mutex) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -105,7 +101,7 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

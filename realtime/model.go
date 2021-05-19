@@ -16,23 +16,19 @@ permissions and limitations under the License.
 
 package realtime
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** サーバの種類 */
-	ServerType *core.String   `json:"serverType"`
+	ServerType *string   `json:"serverType"`
     /** サーバのスペック */
-	ServerSpec *core.String   `json:"serverSpec"`
+	ServerSpec *string   `json:"serverSpec"`
     /** ルームの作成が終わったときのプッシュ通知 */
 	CreateNotification *NotificationSetting   `json:"createNotification"`
     /** ログの出力設定 */
@@ -64,17 +60,17 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type Room struct {
     /** ルーム */
-	RoomId *core.String   `json:"roomId"`
+	RoomId *string   `json:"roomId"`
     /** ルーム名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** IPアドレス */
-	IpAddress *core.String   `json:"ipAddress"`
+	IpAddress *string   `json:"ipAddress"`
     /** 待受ポート */
 	Port *int32   `json:"port"`
     /** 暗号鍵 */
-	EncryptionKey *core.String   `json:"encryptionKey"`
+	EncryptionKey *string   `json:"encryptionKey"`
     /** ルームの作成が終わったときに通知を受けるユーザIDリスト */
-	NotificationUserIds *[]core.String   `json:"notificationUserIds"`
+	NotificationUserIds []string   `json:"notificationUserIds"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -89,8 +85,8 @@ func (p *Room) ToDict() *map[string]interface{} {
     data["port"] = p.Port
     data["encryptionKey"] = p.EncryptionKey
     if p.NotificationUserIds != nil {
-        var _notificationUserIds []core.String
-        for _, item := range *p.NotificationUserIds {
+        var _notificationUserIds []string
+        for _, item := range p.NotificationUserIds {
             _notificationUserIds = append(_notificationUserIds, item)
         }
         data["notificationUserIds"] = &_notificationUserIds
@@ -102,15 +98,15 @@ func (p *Room) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -125,11 +121,11 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type NotificationSetting struct {
     /** プッシュ通知に使用する GS2-Gateway のネームスペース のGRN */
-	GatewayNamespaceId *core.String   `json:"gatewayNamespaceId"`
+	GatewayNamespaceId *string   `json:"gatewayNamespaceId"`
     /** モバイルプッシュ通知へ転送するか */
 	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
     /** モバイルプッシュ通知で使用するサウンドファイル名 */
-	Sound *core.String   `json:"sound"`
+	Sound *string   `json:"sound"`
 }
 
 func (p *NotificationSetting) ToDict() *map[string]interface{} {
@@ -142,7 +138,7 @@ func (p *NotificationSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

@@ -1142,7 +1142,7 @@ func (p Gs2LotteryWebSocketClient) CreatePrizeTableMasterAsync(
     }
     if request.Prizes != nil {
         var _prizes []*map[string]interface {}
-        for _, item := range *request.Prizes {
+        for _, item := range request.Prizes {
             _prizes = append(_prizes, item.ToDict())
         }
         bodies["prizes"] = _prizes
@@ -1319,7 +1319,7 @@ func (p Gs2LotteryWebSocketClient) UpdatePrizeTableMasterAsync(
     }
     if request.Prizes != nil {
         var _prizes []*map[string]interface {}
-        for _, item := range *request.Prizes {
+        for _, item := range request.Prizes {
             _prizes = append(_prizes, item.ToDict())
         }
         bodies["prizes"] = _prizes
@@ -1495,7 +1495,7 @@ func (p Gs2LotteryWebSocketClient) DescribeBoxesAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeBoxesAsyncHandler(
@@ -1668,7 +1668,7 @@ func (p Gs2LotteryWebSocketClient) GetBoxAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getBoxAsyncHandler(
@@ -1923,7 +1923,7 @@ func (p Gs2LotteryWebSocketClient) ResetBoxAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.resetBoxAsyncHandler(
@@ -2419,7 +2419,7 @@ func (p Gs2LotteryWebSocketClient) DrawByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2510,7 +2510,7 @@ func (p Gs2LotteryWebSocketClient) DescribeProbabilitiesAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeProbabilitiesAsyncHandler(

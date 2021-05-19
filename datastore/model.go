@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package datastore
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** アップロード完了報告時に実行するスクリプト */
 	DoneUploadScript *ScriptSetting   `json:"doneUploadScript"`
     /** ログの出力設定 */
@@ -58,13 +54,13 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type ScriptSetting struct {
     /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *core.String   `json:"triggerScriptId"`
+	TriggerScriptId *string   `json:"triggerScriptId"`
     /** 完了通知の通知先 */
-	DoneTriggerTargetType *core.String   `json:"doneTriggerTargetType"`
+	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
     /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *core.String   `json:"doneTriggerScriptId"`
+	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
     /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *core.String   `json:"doneTriggerQueueNamespaceId"`
+	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
 }
 
 func (p *ScriptSetting) ToDict() *map[string]interface{} {
@@ -78,23 +74,23 @@ func (p *ScriptSetting) ToDict() *map[string]interface{} {
 
 type DataObject struct {
     /** データオブジェクト */
-	DataObjectId *core.String   `json:"dataObjectId"`
+	DataObjectId *string   `json:"dataObjectId"`
     /** データの名前 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** ファイルのアクセス権 */
-	Scope *core.String   `json:"scope"`
+	Scope *string   `json:"scope"`
     /** 公開するユーザIDリスト */
-	AllowUserIds *[]core.String   `json:"allowUserIds"`
+	AllowUserIds []string   `json:"allowUserIds"`
     /** プラットフォーム */
-	Platform *core.String   `json:"platform"`
+	Platform *string   `json:"platform"`
     /** 状態 */
-	Status *core.String   `json:"status"`
+	Status *string   `json:"status"`
     /** データの世代 */
-	Generation *core.String   `json:"generation"`
+	Generation *string   `json:"generation"`
     /** 以前有効だったデータの世代 */
-	PreviousGeneration *core.String   `json:"previousGeneration"`
+	PreviousGeneration *string   `json:"previousGeneration"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -108,8 +104,8 @@ func (p *DataObject) ToDict() *map[string]interface{} {
     data["userId"] = p.UserId
     data["scope"] = p.Scope
     if p.AllowUserIds != nil {
-        var _allowUserIds []core.String
-        for _, item := range *p.AllowUserIds {
+        var _allowUserIds []string
+        for _, item := range p.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
         data["allowUserIds"] = &_allowUserIds
@@ -125,11 +121,11 @@ func (p *DataObject) ToDict() *map[string]interface{} {
 
 type DataObjectHistory struct {
     /** データオブジェクト履歴 */
-	DataObjectHistoryId *core.String   `json:"dataObjectHistoryId"`
+	DataObjectHistoryId *string   `json:"dataObjectHistoryId"`
     /** データオブジェクト名 */
-	DataObjectName *core.String   `json:"dataObjectName"`
+	DataObjectName *string   `json:"dataObjectName"`
     /** 世代ID */
-	Generation *core.String   `json:"generation"`
+	Generation *string   `json:"generation"`
     /** データサイズ */
 	ContentLength *int64   `json:"contentLength"`
     /** 作成日時 */
@@ -148,15 +144,15 @@ func (p *DataObjectHistory) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -171,7 +167,7 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

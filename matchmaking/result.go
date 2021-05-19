@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package matchmaking
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type DescribeGatheringsResult struct {
     /** ギャザリングのリスト */
 	Items         []Gathering	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeGatheringsResult) ToDict() *map[string]interface{} {
@@ -240,7 +236,7 @@ type DoMatchmakingByPlayerResult struct {
     /** ギャザリング */
 	Item         *Gathering	`json:"item"`
     /** マッチメイキングの状態を保持するトークン */
-	MatchmakingContextToken         *core.String	`json:"matchmakingContextToken"`
+	MatchmakingContextToken         *string	`json:"matchmakingContextToken"`
 }
 
 func (p *DoMatchmakingByPlayerResult) ToDict() *map[string]interface{} {
@@ -263,7 +259,7 @@ type DoMatchmakingResult struct {
     /** ギャザリング */
 	Item         *Gathering	`json:"item"`
     /** マッチメイキングの状態を保持するトークン */
-	MatchmakingContextToken         *core.String	`json:"matchmakingContextToken"`
+	MatchmakingContextToken         *string	`json:"matchmakingContextToken"`
 }
 
 func (p *DoMatchmakingResult) ToDict() *map[string]interface{} {
@@ -358,7 +354,7 @@ type DescribeRatingModelMastersResult struct {
     /** レーティングモデルマスターのリスト */
 	Items         []RatingModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeRatingModelMastersResult) ToDict() *map[string]interface{} {
@@ -569,7 +565,7 @@ type DescribeRatingsResult struct {
     /** レーティングのリスト */
 	Items         []Rating	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeRatingsResult) ToDict() *map[string]interface{} {
@@ -596,7 +592,7 @@ type DescribeRatingsByUserIdResult struct {
     /** レーティングのリスト */
 	Items         []Rating	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeRatingsByUserIdResult) ToDict() *map[string]interface{} {
@@ -699,9 +695,9 @@ type GetBallotResult struct {
     /** 投票用紙 */
 	Item         *Ballot	`json:"item"`
     /** 署名対象のデータ */
-	Body         *core.String	`json:"body"`
+	Body         *string	`json:"body"`
     /** 署名データ */
-	Signature         *core.String	`json:"signature"`
+	Signature         *string	`json:"signature"`
 }
 
 func (p *GetBallotResult) ToDict() *map[string]interface{} {
@@ -727,9 +723,9 @@ type GetBallotByUserIdResult struct {
     /** 投票用紙 */
 	Item         *Ballot	`json:"item"`
     /** 署名対象のデータ */
-	Body         *core.String	`json:"body"`
+	Body         *string	`json:"body"`
     /** 署名データ */
-	Signature         *core.String	`json:"signature"`
+	Signature         *string	`json:"signature"`
 }
 
 func (p *GetBallotByUserIdResult) ToDict() *map[string]interface{} {

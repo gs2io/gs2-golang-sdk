@@ -16,29 +16,25 @@ permissions and limitations under the License.
 
 package money
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペースの名前 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 消費優先度 */
-	Priority *core.String   `json:"priority"`
+	Priority *string   `json:"priority"`
     /** 無償課金通貨を異なるスロットで共有するか */
 	ShareFree *bool   `json:"shareFree"`
     /** 通貨の種類 */
-	Currency *core.String   `json:"currency"`
+	Currency *string   `json:"currency"`
     /** Apple AppStore のバンドルID */
-	AppleKey *core.String   `json:"appleKey"`
+	AppleKey *string   `json:"appleKey"`
     /** Google PlayStore の秘密鍵 */
-	GoogleKey *core.String   `json:"googleKey"`
+	GoogleKey *string   `json:"googleKey"`
     /** UnityEditorが出力する偽のレシートで決済できるようにするか */
 	EnableFakeReceipt *bool   `json:"enableFakeReceipt"`
     /** ウォレット新規作成したときに実行するスクリプト */
@@ -89,9 +85,9 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type Wallet struct {
     /** ウォレット */
-	WalletId *core.String   `json:"walletId"`
+	WalletId *string   `json:"walletId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** スロット番号 */
 	Slot *int32   `json:"slot"`
     /** 有償課金通貨所持量 */
@@ -99,7 +95,7 @@ type Wallet struct {
     /** 無償課金通貨所持量 */
 	Free *int32   `json:"free"`
     /** 詳細 */
-	Detail *[]*WalletDetail   `json:"detail"`
+	Detail []WalletDetail   `json:"detail"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -115,7 +111,7 @@ func (p *Wallet) ToDict() *map[string]interface{} {
     data["free"] = p.Free
     if p.Detail != nil {
         var _detail []*map[string]interface {}
-        for _, item := range *p.Detail {
+        for _, item := range p.Detail {
             _detail = append(_detail, item.ToDict())
         }
         data["detail"] = &_detail
@@ -127,13 +123,13 @@ func (p *Wallet) ToDict() *map[string]interface{} {
 
 type Receipt struct {
     /** レシート */
-	ReceiptId *core.String   `json:"receiptId"`
+	ReceiptId *string   `json:"receiptId"`
     /** トランザクションID */
-	TransactionId *core.String   `json:"transactionId"`
+	TransactionId *string   `json:"transactionId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 種類 */
-	Type *core.String   `json:"type"`
+	Type *string   `json:"type"`
     /** スロット番号 */
 	Slot *int32   `json:"slot"`
     /** 単価 */
@@ -145,7 +141,7 @@ type Receipt struct {
     /** 総数 */
 	Total *int32   `json:"total"`
     /** ストアプラットフォームで販売されているコンテンツID */
-	ContentsId *core.String   `json:"contentsId"`
+	ContentsId *string   `json:"contentsId"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
 }
@@ -168,15 +164,15 @@ func (p *Receipt) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -205,13 +201,13 @@ func (p *WalletDetail) ToDict() *map[string]interface{} {
 
 type ScriptSetting struct {
     /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *core.String   `json:"triggerScriptId"`
+	TriggerScriptId *string   `json:"triggerScriptId"`
     /** 完了通知の通知先 */
-	DoneTriggerTargetType *core.String   `json:"doneTriggerTargetType"`
+	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
     /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *core.String   `json:"doneTriggerScriptId"`
+	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
     /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *core.String   `json:"doneTriggerQueueNamespaceId"`
+	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
 }
 
 func (p *ScriptSetting) ToDict() *map[string]interface{} {
@@ -225,7 +221,7 @@ func (p *ScriptSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

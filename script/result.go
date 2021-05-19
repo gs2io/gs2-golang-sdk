@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package script
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -136,7 +132,7 @@ type DescribeScriptsResult struct {
     /** スクリプトのリスト */
 	Items         []Script	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeScriptsResult) ToDict() *map[string]interface{} {
@@ -266,13 +262,13 @@ type InvokeScriptResult struct {
     /** ステータスコード */
 	Code         *int32	`json:"code"`
     /** 戻り値 */
-	Result         *core.String	`json:"result"`
+	Result         *string	`json:"result"`
     /** スクリプトの実行時間(ミリ秒) */
 	ExecuteTime         *int32	`json:"executeTime"`
     /** 費用の計算対象となった時間(秒) */
 	Charged         *int32	`json:"charged"`
     /** 標準出力の内容のリスト */
-	Output         []core.String	`json:"output"`
+	Output         []string	`json:"output"`
 }
 
 func (p *InvokeScriptResult) ToDict() *map[string]interface{} {
@@ -290,7 +286,7 @@ func (p *InvokeScriptResult) ToDict() *map[string]interface{} {
         data["charged"] = p.Charged
     }
     if p.Output != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Output {
 			items = append(items, item)
 		}
@@ -308,13 +304,13 @@ type DebugInvokeResult struct {
     /** ステータスコード */
 	Code         *int32	`json:"code"`
     /** 戻り値 */
-	Result         *core.String	`json:"result"`
+	Result         *string	`json:"result"`
     /** スクリプトの実行時間(ミリ秒) */
 	ExecuteTime         *int32	`json:"executeTime"`
     /** 費用の計算対象となった時間(秒) */
 	Charged         *int32	`json:"charged"`
     /** 標準出力の内容のリスト */
-	Output         []core.String	`json:"output"`
+	Output         []string	`json:"output"`
 }
 
 func (p *DebugInvokeResult) ToDict() *map[string]interface{} {
@@ -332,7 +328,7 @@ func (p *DebugInvokeResult) ToDict() *map[string]interface{} {
         data["charged"] = p.Charged
     }
     if p.Output != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Output {
 			items = append(items, item)
 		}

@@ -16,27 +16,23 @@ permissions and limitations under the License.
 
 package lottery
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 景品付与処理をジョブとして追加するキューのネームスペース のGRN */
-	QueueNamespaceId *core.String   `json:"queueNamespaceId"`
+	QueueNamespaceId *string   `json:"queueNamespaceId"`
     /** 景品付与処理のスタンプシートで使用する暗号鍵GRN */
-	KeyId *core.String   `json:"keyId"`
+	KeyId *string   `json:"keyId"`
     /** 抽選処理時 に実行されるスクリプト のGRN */
-	LotteryTriggerScriptId *core.String   `json:"lotteryTriggerScriptId"`
+	LotteryTriggerScriptId *string   `json:"lotteryTriggerScriptId"`
     /** 排出テーブル選択時 に実行されるスクリプト のGRN */
-	ChoicePrizeTableScriptId *core.String   `json:"choicePrizeTableScriptId"`
+	ChoicePrizeTableScriptId *string   `json:"choicePrizeTableScriptId"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** 作成日時 */
@@ -65,21 +61,21 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type LotteryModelMaster struct {
     /** 抽選の種類マスター */
-	LotteryModelId *core.String   `json:"lotteryModelId"`
+	LotteryModelId *string   `json:"lotteryModelId"`
     /** 抽選モデルの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 抽選モデルの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 抽選の種類マスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 抽選モード */
-	Mode *core.String   `json:"mode"`
+	Mode *string   `json:"mode"`
     /** 抽選方法 */
-	Method *core.String   `json:"method"`
+	Method *string   `json:"method"`
     /** 景品テーブルの名前 */
-	PrizeTableName *core.String   `json:"prizeTableName"`
+	PrizeTableName *string   `json:"prizeTableName"`
     /** 抽選テーブルを確定するスクリプト のGRN */
-	ChoicePrizeTableScriptId *core.String   `json:"choicePrizeTableScriptId"`
+	ChoicePrizeTableScriptId *string   `json:"choicePrizeTableScriptId"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -103,15 +99,15 @@ func (p *LotteryModelMaster) ToDict() *map[string]interface{} {
 
 type PrizeTableMaster struct {
     /** 排出確率テーブルマスター */
-	PrizeTableId *core.String   `json:"prizeTableId"`
+	PrizeTableId *string   `json:"prizeTableId"`
     /** 排出確率テーブル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 排出確率テーブルのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 排出確率テーブルマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 景品リスト */
-	Prizes *[]*Prize   `json:"prizes"`
+	Prizes []Prize   `json:"prizes"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -126,7 +122,7 @@ func (p *PrizeTableMaster) ToDict() *map[string]interface{} {
     data["description"] = p.Description
     if p.Prizes != nil {
         var _prizes []*map[string]interface {}
-        for _, item := range *p.Prizes {
+        for _, item := range p.Prizes {
             _prizes = append(_prizes, item.ToDict())
         }
         data["prizes"] = &_prizes
@@ -138,13 +134,13 @@ func (p *PrizeTableMaster) ToDict() *map[string]interface{} {
 
 type Box struct {
     /** ボックス */
-	BoxId *core.String   `json:"boxId"`
+	BoxId *string   `json:"boxId"`
     /** 排出確率テーブル名 */
-	PrizeTableName *core.String   `json:"prizeTableName"`
+	PrizeTableName *string   `json:"prizeTableName"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 排出済み景品のインデックスのリスト */
-	DrawnIndexes *[]int32   `json:"drawnIndexes"`
+	DrawnIndexes []int32   `json:"drawnIndexes"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -158,7 +154,7 @@ func (p *Box) ToDict() *map[string]interface{} {
     data["userId"] = p.UserId
     if p.DrawnIndexes != nil {
         var _drawnIndexes []int32
-        for _, item := range *p.DrawnIndexes {
+        for _, item := range p.DrawnIndexes {
             _drawnIndexes = append(_drawnIndexes, item)
         }
         data["drawnIndexes"] = &_drawnIndexes
@@ -170,19 +166,19 @@ func (p *Box) ToDict() *map[string]interface{} {
 
 type LotteryModel struct {
     /** 抽選の種類マスター */
-	LotteryModelId *core.String   `json:"lotteryModelId"`
+	LotteryModelId *string   `json:"lotteryModelId"`
     /** 抽選モデルの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 抽選モデルの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 抽選モード */
-	Mode *core.String   `json:"mode"`
+	Mode *string   `json:"mode"`
     /** 抽選方法 */
-	Method *core.String   `json:"method"`
+	Method *string   `json:"method"`
     /** 景品テーブルの名前 */
-	PrizeTableName *core.String   `json:"prizeTableName"`
+	PrizeTableName *string   `json:"prizeTableName"`
     /** 抽選テーブルを確定するスクリプト のGRN */
-	ChoicePrizeTableScriptId *core.String   `json:"choicePrizeTableScriptId"`
+	ChoicePrizeTableScriptId *string   `json:"choicePrizeTableScriptId"`
 }
 
 func (p *LotteryModel) ToDict() *map[string]interface{} {
@@ -199,13 +195,13 @@ func (p *LotteryModel) ToDict() *map[string]interface{} {
 
 type PrizeTable struct {
     /** 排出確率テーブルマスター */
-	PrizeTableId *core.String   `json:"prizeTableId"`
+	PrizeTableId *string   `json:"prizeTableId"`
     /** 景品テーブル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 景品テーブルのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 景品リスト */
-	Prizes *[]*Prize   `json:"prizes"`
+	Prizes []Prize   `json:"prizes"`
 }
 
 func (p *PrizeTable) ToDict() *map[string]interface{} {
@@ -215,7 +211,7 @@ func (p *PrizeTable) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.Prizes != nil {
         var _prizes []*map[string]interface {}
-        for _, item := range *p.Prizes {
+        for _, item := range p.Prizes {
             _prizes = append(_prizes, item.ToDict())
         }
         data["prizes"] = &_prizes
@@ -241,9 +237,9 @@ func (p *Probability) ToDict() *map[string]interface{} {
 
 type CurrentLotteryMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentLotteryMaster) ToDict() *map[string]interface{} {
@@ -255,15 +251,15 @@ func (p *CurrentLotteryMaster) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -278,19 +274,19 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -307,7 +303,7 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {
@@ -318,13 +314,13 @@ func (p *LogSetting) ToDict() *map[string]interface{} {
 
 type Prize struct {
     /** 景品ID */
-	PrizeId *core.String   `json:"prizeId"`
+	PrizeId *string   `json:"prizeId"`
     /** 景品の種類 */
-	Type *core.String   `json:"type"`
+	Type *string   `json:"type"`
     /** 景品の入手アクションリスト */
-	AcquireActions *[]*AcquireAction   `json:"acquireActions"`
+	AcquireActions []AcquireAction   `json:"acquireActions"`
     /** 排出確率テーブルの名前 */
-	PrizeTableName *core.String   `json:"prizeTableName"`
+	PrizeTableName *string   `json:"prizeTableName"`
     /** 排出重み */
 	Weight *int32   `json:"weight"`
 }
@@ -335,7 +331,7 @@ func (p *Prize) ToDict() *map[string]interface{} {
     data["type"] = p.Type
     if p.AcquireActions != nil {
         var _acquireActions []*map[string]interface {}
-        for _, item := range *p.AcquireActions {
+        for _, item := range p.AcquireActions {
             _acquireActions = append(_acquireActions, item.ToDict())
         }
         data["acquireActions"] = &_acquireActions
@@ -347,9 +343,9 @@ func (p *Prize) ToDict() *map[string]interface{} {
 
 type AcquireAction struct {
     /** スタンプシートで実行するアクションの種類 */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 入手リクエストのJSON */
-	Request *core.String   `json:"request"`
+	Request *string   `json:"request"`
 }
 
 func (p *AcquireAction) ToDict() *map[string]interface{} {
@@ -361,14 +357,14 @@ func (p *AcquireAction) ToDict() *map[string]interface{} {
 
 type DrawnPrize struct {
     /** 入手アクションのリスト */
-	AcquireActions *[]*AcquireAction   `json:"acquireActions"`
+	AcquireActions []AcquireAction   `json:"acquireActions"`
 }
 
 func (p *DrawnPrize) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.AcquireActions != nil {
         var _acquireActions []*map[string]interface {}
-        for _, item := range *p.AcquireActions {
+        for _, item := range p.AcquireActions {
             _acquireActions = append(_acquireActions, item.ToDict())
         }
         data["acquireActions"] = &_acquireActions
@@ -378,7 +374,7 @@ func (p *DrawnPrize) ToDict() *map[string]interface{} {
 
 type BoxItem struct {
     /** 入手アクションのリスト */
-	AcquireActions *[]*AcquireAction   `json:"acquireActions"`
+	AcquireActions []AcquireAction   `json:"acquireActions"`
     /** 残り数量 */
 	Remaining *int32   `json:"remaining"`
     /** 初期数量 */
@@ -389,7 +385,7 @@ func (p *BoxItem) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.AcquireActions != nil {
         var _acquireActions []*map[string]interface {}
-        for _, item := range *p.AcquireActions {
+        for _, item := range p.AcquireActions {
             _acquireActions = append(_acquireActions, item.ToDict())
         }
         data["acquireActions"] = &_acquireActions
@@ -401,13 +397,13 @@ func (p *BoxItem) ToDict() *map[string]interface{} {
 
 type BoxItems struct {
     /** ボックス */
-	BoxId *core.String   `json:"boxId"`
+	BoxId *string   `json:"boxId"`
     /** 排出確率テーブル名 */
-	PrizeTableName *core.String   `json:"prizeTableName"`
+	PrizeTableName *string   `json:"prizeTableName"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** ボックスから取り出したアイテムのリスト */
-	Items *[]*BoxItem   `json:"items"`
+	Items []BoxItem   `json:"items"`
 }
 
 func (p *BoxItems) ToDict() *map[string]interface{} {
@@ -417,7 +413,7 @@ func (p *BoxItems) ToDict() *map[string]interface{} {
     data["userId"] = p.UserId
     if p.Items != nil {
         var _items []*map[string]interface {}
-        for _, item := range *p.Items {
+        for _, item := range p.Items {
             _items = append(_items, item.ToDict())
         }
         data["items"] = &_items
@@ -427,9 +423,9 @@ func (p *BoxItems) ToDict() *map[string]interface{} {
 
 type Config struct {
     /** 名前 */
-	Key *core.String   `json:"key"`
+	Key *string   `json:"key"`
     /** 値 */
-	Value *core.String   `json:"value"`
+	Value *string   `json:"value"`
 }
 
 func (p *Config) ToDict() *map[string]interface{} {

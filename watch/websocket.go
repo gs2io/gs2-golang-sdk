@@ -88,8 +88,8 @@ func (p Gs2WatchWebSocketClient) GetChartAsync(
         bodies["grn"] = *request.Grn
     }
     if request.Queries != nil {
-        var _queries []core.String
-        for _, item := range *request.Queries {
+        var _queries []string
+        for _, item := range request.Queries {
             _queries = append(_queries, item)
         }
         bodies["queries"] = _queries

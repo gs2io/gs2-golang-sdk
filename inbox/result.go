@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package inbox
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type DescribeMessagesResult struct {
     /** メッセージのリスト */
 	Items         []Message	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeMessagesResult) ToDict() *map[string]interface{} {
@@ -168,7 +164,7 @@ type DescribeMessagesByUserIdResult struct {
     /** メッセージのリスト */
 	Items         []Message	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeMessagesByUserIdResult) ToDict() *map[string]interface{} {
@@ -329,7 +325,9 @@ type ReadMessageResult struct {
     /** メッセージ */
 	Item         *Message	`json:"item"`
     /** スタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *ReadMessageResult) ToDict() *map[string]interface{} {
@@ -339,6 +337,9 @@ func (p *ReadMessageResult) ToDict() *map[string]interface{} {
     }
     if p.StampSheet != nil {
         data["stampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }
@@ -352,7 +353,9 @@ type ReadMessageByUserIdResult struct {
     /** メッセージ */
 	Item         *Message	`json:"item"`
     /** スタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
+    /** スタンプシートの署名計算に使用した暗号鍵GRN */
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *ReadMessageByUserIdResult) ToDict() *map[string]interface{} {
@@ -362,6 +365,9 @@ func (p *ReadMessageByUserIdResult) ToDict() *map[string]interface{} {
     }
     if p.StampSheet != nil {
         data["stampSheet"] = p.StampSheet
+    }
+    if p.StampSheetEncryptionKeyId != nil {
+        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
     }
     return &data
 }
@@ -401,7 +407,7 @@ type OpenByStampTaskResult struct {
     /** メッセージ */
 	Item         *Message	`json:"item"`
     /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *core.String	`json:"newContextStack"`
+	NewContextStack         *string	`json:"newContextStack"`
 }
 
 func (p *OpenByStampTaskResult) ToDict() *map[string]interface{} {
@@ -496,7 +502,7 @@ type DescribeGlobalMessageMastersResult struct {
     /** 全ユーザに向けたメッセージのリスト */
 	Items         []GlobalMessageMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeGlobalMessageMastersResult) ToDict() *map[string]interface{} {

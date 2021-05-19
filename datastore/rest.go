@@ -255,7 +255,7 @@ func (p Gs2DatastoreRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -339,7 +339,7 @@ func (p Gs2DatastoreRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -423,7 +423,7 @@ func (p Gs2DatastoreRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -519,7 +519,7 @@ func (p Gs2DatastoreRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -603,7 +603,7 @@ func (p Gs2DatastoreRestClient) DescribeDataObjectsAsync(
 	callback chan<- DescribeDataObjectsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/data"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -699,12 +699,12 @@ func (p Gs2DatastoreRestClient) DescribeDataObjectsByUserIdAsync(
 	callback chan<- DescribeDataObjectsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/data"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -797,7 +797,7 @@ func (p Gs2DatastoreRestClient) PrepareUploadAsync(
 	callback chan<- PrepareUploadAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/data/file"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -815,8 +815,8 @@ func (p Gs2DatastoreRestClient) PrepareUploadAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []core.String
-        for _, item := range *request.AllowUserIds {
+        var _allowUserIds []string
+        for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
         bodies["allowUserIds"] = _allowUserIds
@@ -906,12 +906,12 @@ func (p Gs2DatastoreRestClient) PrepareUploadByUserIdAsync(
 	callback chan<- PrepareUploadByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/data/file"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -929,8 +929,8 @@ func (p Gs2DatastoreRestClient) PrepareUploadByUserIdAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []core.String
-        for _, item := range *request.AllowUserIds {
+        var _allowUserIds []string
+        for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
         bodies["allowUserIds"] = _allowUserIds
@@ -1017,12 +1017,12 @@ func (p Gs2DatastoreRestClient) UpdateDataObjectAsync(
 	callback chan<- UpdateDataObjectAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/data/{dataObjectName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
@@ -1034,8 +1034,8 @@ func (p Gs2DatastoreRestClient) UpdateDataObjectAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []core.String
-        for _, item := range *request.AllowUserIds {
+        var _allowUserIds []string
+        for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
         bodies["allowUserIds"] = _allowUserIds
@@ -1122,17 +1122,17 @@ func (p Gs2DatastoreRestClient) UpdateDataObjectByUserIdAsync(
 	callback chan<- UpdateDataObjectByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/data/{dataObjectName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1144,8 +1144,8 @@ func (p Gs2DatastoreRestClient) UpdateDataObjectByUserIdAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []core.String
-        for _, item := range *request.AllowUserIds {
+        var _allowUserIds []string
+        for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
         bodies["allowUserIds"] = _allowUserIds
@@ -1229,12 +1229,12 @@ func (p Gs2DatastoreRestClient) PrepareReUploadAsync(
 	callback chan<- PrepareReUploadAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/data/{dataObjectName}/file"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
@@ -1327,17 +1327,17 @@ func (p Gs2DatastoreRestClient) PrepareReUploadByUserIdAsync(
 	callback chan<- PrepareReUploadByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/data/{dataObjectName}/file"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1427,12 +1427,12 @@ func (p Gs2DatastoreRestClient) DoneUploadAsync(
 	callback chan<- DoneUploadAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/data/{dataObjectName}/done"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
@@ -1522,17 +1522,17 @@ func (p Gs2DatastoreRestClient) DoneUploadByUserIdAsync(
 	callback chan<- DoneUploadByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/data/{dataObjectName}/done"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1619,12 +1619,12 @@ func (p Gs2DatastoreRestClient) DeleteDataObjectAsync(
 	callback chan<- DeleteDataObjectAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/data/{dataObjectName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
@@ -1711,17 +1711,17 @@ func (p Gs2DatastoreRestClient) DeleteDataObjectByUserIdAsync(
 	callback chan<- DeleteDataObjectByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/data/{dataObjectName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
@@ -1805,7 +1805,7 @@ func (p Gs2DatastoreRestClient) PrepareDownloadAsync(
 	callback chan<- PrepareDownloadAsyncResult,
 ) {
 	path := "/{namespaceName}/file"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1898,12 +1898,12 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByUserIdAsync(
 	callback chan<- PrepareDownloadByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/file"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1993,12 +1993,12 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByGenerationAsync(
 	callback chan<- PrepareDownloadByGenerationAsyncResult,
 ) {
 	path := "/{namespaceName}/file/generation/{generation}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.Generation != nil {
+    if request.Generation != nil && *request.Generation != ""  {
         path = strings.ReplaceAll(path, "{generation}", core.ToString(*request.Generation))
     } else {
         path = strings.ReplaceAll(path, "{generation}", "null")
@@ -2091,17 +2091,17 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByGenerationAndUserIdAsync(
 	callback chan<- PrepareDownloadByGenerationAndUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/file/generation/{generation}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.Generation != nil {
+    if request.Generation != nil && *request.Generation != ""  {
         path = strings.ReplaceAll(path, "{generation}", core.ToString(*request.Generation))
     } else {
         path = strings.ReplaceAll(path, "{generation}", "null")
@@ -2191,12 +2191,12 @@ func (p Gs2DatastoreRestClient) PrepareDownloadOwnDataAsync(
 	callback chan<- PrepareDownloadOwnDataAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/file"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
@@ -2286,17 +2286,17 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByUserIdAndDataObjectNameAsync(
 	callback chan<- PrepareDownloadByUserIdAndDataObjectNameAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/data/{dataObjectName}/file"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
@@ -2380,17 +2380,17 @@ func (p Gs2DatastoreRestClient) PrepareDownloadOwnDataByGenerationAsync(
 	callback chan<- PrepareDownloadOwnDataByGenerationAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/data/{dataObjectName}/generation/{generation}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
     }
-    if request.Generation != nil {
+    if request.Generation != nil && *request.Generation != ""  {
         path = strings.ReplaceAll(path, "{generation}", core.ToString(*request.Generation))
     } else {
         path = strings.ReplaceAll(path, "{generation}", "null")
@@ -2480,22 +2480,22 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByUserIdAndDataObjectNameAndGener
 	callback chan<- PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/data/{dataObjectName}/generation/{generation}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
     }
-    if request.Generation != nil {
+    if request.Generation != nil && *request.Generation != ""  {
         path = strings.ReplaceAll(path, "{generation}", core.ToString(*request.Generation))
     } else {
         path = strings.ReplaceAll(path, "{generation}", "null")
@@ -2582,7 +2582,7 @@ func (p Gs2DatastoreRestClient) RestoreDataObjectAsync(
 	callback chan<- RestoreDataObjectAsyncResult,
 ) {
 	path := "/{namespaceName}/file/restore"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2672,12 +2672,12 @@ func (p Gs2DatastoreRestClient) DescribeDataObjectHistoriesAsync(
 	callback chan<- DescribeDataObjectHistoriesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/data/{dataObjectName}/history"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
@@ -2770,17 +2770,17 @@ func (p Gs2DatastoreRestClient) DescribeDataObjectHistoriesByUserIdAsync(
 	callback chan<- DescribeDataObjectHistoriesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/data/{dataObjectName}/history"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
@@ -2870,17 +2870,17 @@ func (p Gs2DatastoreRestClient) GetDataObjectHistoryAsync(
 	callback chan<- GetDataObjectHistoryAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/data/{dataObjectName}/history/{generation}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
     }
-    if request.Generation != nil {
+    if request.Generation != nil && *request.Generation != ""  {
         path = strings.ReplaceAll(path, "{generation}", core.ToString(*request.Generation))
     } else {
         path = strings.ReplaceAll(path, "{generation}", "null")
@@ -2970,22 +2970,22 @@ func (p Gs2DatastoreRestClient) GetDataObjectHistoryByUserIdAsync(
 	callback chan<- GetDataObjectHistoryByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/data/{dataObjectName}/history/{generation}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.DataObjectName != nil {
+    if request.DataObjectName != nil && *request.DataObjectName != ""  {
         path = strings.ReplaceAll(path, "{dataObjectName}", core.ToString(*request.DataObjectName))
     } else {
         path = strings.ReplaceAll(path, "{dataObjectName}", "null")
     }
-    if request.Generation != nil {
+    if request.Generation != nil && *request.Generation != ""  {
         path = strings.ReplaceAll(path, "{generation}", core.ToString(*request.Generation))
     } else {
         path = strings.ReplaceAll(path, "{generation}", "null")

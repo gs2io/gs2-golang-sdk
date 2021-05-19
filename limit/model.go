@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package limit
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** 作成日時 */
@@ -53,13 +49,13 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type Counter struct {
     /** カウンター */
-	CounterId *core.String   `json:"counterId"`
+	CounterId *string   `json:"counterId"`
     /** 回数制限の種類の名前 */
-	LimitName *core.String   `json:"limitName"`
+	LimitName *string   `json:"limitName"`
     /** カウンターの名前 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** カウント値 */
 	Count *int32   `json:"count"`
     /** 作成日時 */
@@ -82,19 +78,19 @@ func (p *Counter) ToDict() *map[string]interface{} {
 
 type LimitModelMaster struct {
     /** 回数制限の種類マスター */
-	LimitModelId *core.String   `json:"limitModelId"`
+	LimitModelId *string   `json:"limitModelId"`
     /** 回数制限の種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 回数制限の種類マスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 回数制限の種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** リセットタイミング */
-	ResetType *core.String   `json:"resetType"`
+	ResetType *string   `json:"resetType"`
     /** リセットをする日にち */
 	ResetDayOfMonth *int32   `json:"resetDayOfMonth"`
     /** リセットする曜日 */
-	ResetDayOfWeek *core.String   `json:"resetDayOfWeek"`
+	ResetDayOfWeek *string   `json:"resetDayOfWeek"`
     /** リセット時刻 */
 	ResetHour *int32   `json:"resetHour"`
     /** 作成日時 */
@@ -120,9 +116,9 @@ func (p *LimitModelMaster) ToDict() *map[string]interface{} {
 
 type CurrentLimitMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentLimitMaster) ToDict() *map[string]interface{} {
@@ -134,15 +130,15 @@ func (p *CurrentLimitMaster) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -157,19 +153,19 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -186,7 +182,7 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {
@@ -197,17 +193,17 @@ func (p *LogSetting) ToDict() *map[string]interface{} {
 
 type LimitModel struct {
     /** 回数制限の種類 */
-	LimitModelId *core.String   `json:"limitModelId"`
+	LimitModelId *string   `json:"limitModelId"`
     /** 回数制限の種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 回数制限の種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** リセットタイミング */
-	ResetType *core.String   `json:"resetType"`
+	ResetType *string   `json:"resetType"`
     /** リセットをする日にち */
 	ResetDayOfMonth *int32   `json:"resetDayOfMonth"`
     /** リセットする曜日 */
-	ResetDayOfWeek *core.String   `json:"resetDayOfWeek"`
+	ResetDayOfWeek *string   `json:"resetDayOfWeek"`
     /** リセット時刻 */
 	ResetHour *int32   `json:"resetHour"`
 }

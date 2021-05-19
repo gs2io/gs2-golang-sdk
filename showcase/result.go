@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package showcase
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type DescribeSalesItemMastersResult struct {
     /** 商品マスターのリスト */
 	Items         []SalesItemMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeSalesItemMastersResult) ToDict() *map[string]interface{} {
@@ -240,7 +236,7 @@ type DescribeSalesItemGroupMastersResult struct {
     /** 商品グループマスターのリスト */
 	Items         []SalesItemGroupMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeSalesItemGroupMastersResult) ToDict() *map[string]interface{} {
@@ -339,7 +335,7 @@ type DescribeShowcaseMastersResult struct {
     /** 陳列棚マスターのリスト */
 	Items         []ShowcaseMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeShowcaseMastersResult) ToDict() *map[string]interface{} {
@@ -590,9 +586,9 @@ type BuyResult struct {
     /** 商品 */
 	Item         *SalesItem	`json:"item"`
     /** 購入処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *BuyResult) ToDict() *map[string]interface{} {
@@ -618,9 +614,9 @@ type BuyByUserIdResult struct {
     /** 商品 */
 	Item         *SalesItem	`json:"item"`
     /** 購入処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *BuyByUserIdResult) ToDict() *map[string]interface{} {

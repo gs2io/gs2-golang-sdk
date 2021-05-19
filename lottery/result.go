@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package lottery
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type DescribeLotteryModelMastersResult struct {
     /** 抽選の種類マスターのリスト */
 	Items         []LotteryModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeLotteryModelMastersResult) ToDict() *map[string]interface{} {
@@ -240,7 +236,7 @@ type DescribePrizeTableMastersResult struct {
     /** 排出確率テーブルマスターのリスト */
 	Items         []PrizeTableMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribePrizeTableMastersResult) ToDict() *map[string]interface{} {
@@ -339,7 +335,7 @@ type DescribeBoxesResult struct {
     /** ボックスのリスト */
 	Items         []Box	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeBoxesResult) ToDict() *map[string]interface{} {
@@ -366,7 +362,7 @@ type DescribeBoxesByUserIdResult struct {
     /** ボックスのリスト */
 	Items         []Box	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeBoxesByUserIdResult) ToDict() *map[string]interface{} {
@@ -553,9 +549,9 @@ type DrawByUserIdResult struct {
     /** 抽選結果の景品リスト */
 	Items         []DrawnPrize	`json:"items"`
     /** 排出された景品を入手するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
     /** ボックスから取り出したアイテムのリスト */
 	BoxItems         *BoxItems	`json:"boxItems"`
 }
@@ -634,9 +630,9 @@ type DrawByStampSheetResult struct {
     /** 抽選結果の景品リスト */
 	Items         []DrawnPrize	`json:"items"`
     /** 排出された景品を入手するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
     /** ボックスから取り出したアイテムのリスト */
 	BoxItems         *BoxItems	`json:"boxItems"`
 }

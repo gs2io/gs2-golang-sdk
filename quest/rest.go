@@ -267,7 +267,7 @@ func (p Gs2QuestRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -351,7 +351,7 @@ func (p Gs2QuestRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -435,7 +435,7 @@ func (p Gs2QuestRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -543,7 +543,7 @@ func (p Gs2QuestRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -627,7 +627,7 @@ func (p Gs2QuestRestClient) DescribeQuestGroupModelMastersAsync(
 	callback chan<- DescribeQuestGroupModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -717,7 +717,7 @@ func (p Gs2QuestRestClient) CreateQuestGroupModelMasterAsync(
 	callback chan<- CreateQuestGroupModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -816,12 +816,12 @@ func (p Gs2QuestRestClient) GetQuestGroupModelMasterAsync(
 	callback chan<- GetQuestGroupModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{questGroupName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
@@ -905,12 +905,12 @@ func (p Gs2QuestRestClient) UpdateQuestGroupModelMasterAsync(
 	callback chan<- UpdateQuestGroupModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{questGroupName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
@@ -1006,12 +1006,12 @@ func (p Gs2QuestRestClient) DeleteQuestGroupModelMasterAsync(
 	callback chan<- DeleteQuestGroupModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{questGroupName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
@@ -1095,12 +1095,12 @@ func (p Gs2QuestRestClient) DescribeQuestModelMastersAsync(
 	callback chan<- DescribeQuestModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{questGroupName}/quest"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
@@ -1190,12 +1190,12 @@ func (p Gs2QuestRestClient) CreateQuestModelMasterAsync(
 	callback chan<- CreateQuestModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{questGroupName}/quest"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
@@ -1214,7 +1214,7 @@ func (p Gs2QuestRestClient) CreateQuestModelMasterAsync(
     }
     if request.Contents != nil {
         var _contents []*map[string]interface {}
-        for _, item := range *request.Contents {
+        for _, item := range request.Contents {
             _contents = append(_contents, item.ToDict())
         }
         bodies["contents"] = _contents
@@ -1224,21 +1224,21 @@ func (p Gs2QuestRestClient) CreateQuestModelMasterAsync(
     }
     if request.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *request.ConsumeActions {
+        for _, item := range request.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         bodies["consumeActions"] = _consumeActions
     }
     if request.FailedAcquireActions != nil {
         var _failedAcquireActions []*map[string]interface {}
-        for _, item := range *request.FailedAcquireActions {
+        for _, item := range request.FailedAcquireActions {
             _failedAcquireActions = append(_failedAcquireActions, item.ToDict())
         }
         bodies["failedAcquireActions"] = _failedAcquireActions
     }
     if request.PremiseQuestNames != nil {
-        var _premiseQuestNames []core.String
-        for _, item := range *request.PremiseQuestNames {
+        var _premiseQuestNames []string
+        for _, item := range request.PremiseQuestNames {
             _premiseQuestNames = append(_premiseQuestNames, item)
         }
         bodies["premiseQuestNames"] = _premiseQuestNames
@@ -1322,17 +1322,17 @@ func (p Gs2QuestRestClient) GetQuestModelMasterAsync(
 	callback chan<- GetQuestModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{questGroupName}/quest/{questName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
     }
-    if request.QuestName != nil {
+    if request.QuestName != nil && *request.QuestName != ""  {
         path = strings.ReplaceAll(path, "{questName}", core.ToString(*request.QuestName))
     } else {
         path = strings.ReplaceAll(path, "{questName}", "null")
@@ -1416,17 +1416,17 @@ func (p Gs2QuestRestClient) UpdateQuestModelMasterAsync(
 	callback chan<- UpdateQuestModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{questGroupName}/quest/{questName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
     }
-    if request.QuestName != nil {
+    if request.QuestName != nil && *request.QuestName != ""  {
         path = strings.ReplaceAll(path, "{questName}", core.ToString(*request.QuestName))
     } else {
         path = strings.ReplaceAll(path, "{questName}", "null")
@@ -1442,7 +1442,7 @@ func (p Gs2QuestRestClient) UpdateQuestModelMasterAsync(
     }
     if request.Contents != nil {
         var _contents []*map[string]interface {}
-        for _, item := range *request.Contents {
+        for _, item := range request.Contents {
             _contents = append(_contents, item.ToDict())
         }
         bodies["contents"] = _contents
@@ -1452,21 +1452,21 @@ func (p Gs2QuestRestClient) UpdateQuestModelMasterAsync(
     }
     if request.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *request.ConsumeActions {
+        for _, item := range request.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         bodies["consumeActions"] = _consumeActions
     }
     if request.FailedAcquireActions != nil {
         var _failedAcquireActions []*map[string]interface {}
-        for _, item := range *request.FailedAcquireActions {
+        for _, item := range request.FailedAcquireActions {
             _failedAcquireActions = append(_failedAcquireActions, item.ToDict())
         }
         bodies["failedAcquireActions"] = _failedAcquireActions
     }
     if request.PremiseQuestNames != nil {
-        var _premiseQuestNames []core.String
-        for _, item := range *request.PremiseQuestNames {
+        var _premiseQuestNames []string
+        for _, item := range request.PremiseQuestNames {
             _premiseQuestNames = append(_premiseQuestNames, item)
         }
         bodies["premiseQuestNames"] = _premiseQuestNames
@@ -1550,17 +1550,17 @@ func (p Gs2QuestRestClient) DeleteQuestModelMasterAsync(
 	callback chan<- DeleteQuestModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{questGroupName}/quest/{questName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
     }
-    if request.QuestName != nil {
+    if request.QuestName != nil && *request.QuestName != ""  {
         path = strings.ReplaceAll(path, "{questName}", core.ToString(*request.QuestName))
     } else {
         path = strings.ReplaceAll(path, "{questName}", "null")
@@ -1644,7 +1644,7 @@ func (p Gs2QuestRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1728,7 +1728,7 @@ func (p Gs2QuestRestClient) GetCurrentQuestMasterAsync(
 	callback chan<- GetCurrentQuestMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1812,7 +1812,7 @@ func (p Gs2QuestRestClient) UpdateCurrentQuestMasterAsync(
 	callback chan<- UpdateCurrentQuestMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1902,7 +1902,7 @@ func (p Gs2QuestRestClient) UpdateCurrentQuestMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentQuestMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1992,7 +1992,7 @@ func (p Gs2QuestRestClient) DescribeProgressesByUserIdAsync(
 	callback chan<- DescribeProgressesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/progress"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2085,12 +2085,12 @@ func (p Gs2QuestRestClient) CreateProgressByUserIdAsync(
 	callback chan<- CreateProgressByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/progress"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2106,7 +2106,7 @@ func (p Gs2QuestRestClient) CreateProgressByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2190,7 +2190,7 @@ func (p Gs2QuestRestClient) GetProgressAsync(
 	callback chan<- GetProgressAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/progress"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2277,12 +2277,12 @@ func (p Gs2QuestRestClient) GetProgressByUserIdAsync(
 	callback chan<- GetProgressByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/progress"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2366,17 +2366,17 @@ func (p Gs2QuestRestClient) StartAsync(
 	callback chan<- StartAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/progress/group/{questGroupName}/quest/{questName}/start"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
     }
-    if request.QuestName != nil {
+    if request.QuestName != nil && *request.QuestName != ""  {
         path = strings.ReplaceAll(path, "{questName}", core.ToString(*request.QuestName))
     } else {
         path = strings.ReplaceAll(path, "{questName}", "null")
@@ -2389,7 +2389,7 @@ func (p Gs2QuestRestClient) StartAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2476,22 +2476,22 @@ func (p Gs2QuestRestClient) StartByUserIdAsync(
 	callback chan<- StartByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/progress/group/{questGroupName}/quest/{questName}/start"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
     }
-    if request.QuestName != nil {
+    if request.QuestName != nil && *request.QuestName != ""  {
         path = strings.ReplaceAll(path, "{questName}", core.ToString(*request.QuestName))
     } else {
         path = strings.ReplaceAll(path, "{questName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2504,7 +2504,7 @@ func (p Gs2QuestRestClient) StartByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2588,7 +2588,7 @@ func (p Gs2QuestRestClient) EndAsync(
 	callback chan<- EndAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/progress/end"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2601,7 +2601,7 @@ func (p Gs2QuestRestClient) EndAsync(
     }
     if request.Rewards != nil {
         var _rewards []*map[string]interface {}
-        for _, item := range *request.Rewards {
+        for _, item := range request.Rewards {
             _rewards = append(_rewards, item.ToDict())
         }
         bodies["rewards"] = _rewards
@@ -2611,7 +2611,7 @@ func (p Gs2QuestRestClient) EndAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2698,12 +2698,12 @@ func (p Gs2QuestRestClient) EndByUserIdAsync(
 	callback chan<- EndByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/progress/end"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2716,7 +2716,7 @@ func (p Gs2QuestRestClient) EndByUserIdAsync(
     }
     if request.Rewards != nil {
         var _rewards []*map[string]interface {}
-        for _, item := range *request.Rewards {
+        for _, item := range request.Rewards {
             _rewards = append(_rewards, item.ToDict())
         }
         bodies["rewards"] = _rewards
@@ -2726,7 +2726,7 @@ func (p Gs2QuestRestClient) EndByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2810,7 +2810,7 @@ func (p Gs2QuestRestClient) DeleteProgressAsync(
 	callback chan<- DeleteProgressAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/progress"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2897,12 +2897,12 @@ func (p Gs2QuestRestClient) DeleteProgressByUserIdAsync(
 	callback chan<- DeleteProgressByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/progress"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3162,7 +3162,7 @@ func (p Gs2QuestRestClient) DescribeCompletedQuestListsAsync(
 	callback chan<- DescribeCompletedQuestListsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/completed"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -3255,12 +3255,12 @@ func (p Gs2QuestRestClient) DescribeCompletedQuestListsByUserIdAsync(
 	callback chan<- DescribeCompletedQuestListsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/completed"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3350,12 +3350,12 @@ func (p Gs2QuestRestClient) GetCompletedQuestListAsync(
 	callback chan<- GetCompletedQuestListAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/completed/group/{questGroupName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
@@ -3442,17 +3442,17 @@ func (p Gs2QuestRestClient) GetCompletedQuestListByUserIdAsync(
 	callback chan<- GetCompletedQuestListByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/completed/group/{questGroupName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3536,17 +3536,17 @@ func (p Gs2QuestRestClient) DeleteCompletedQuestListByUserIdAsync(
 	callback chan<- DeleteCompletedQuestListByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/completed/group/{questGroupName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3630,7 +3630,7 @@ func (p Gs2QuestRestClient) DescribeQuestGroupModelsAsync(
 	callback chan<- DescribeQuestGroupModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/group"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -3714,12 +3714,12 @@ func (p Gs2QuestRestClient) GetQuestGroupModelAsync(
 	callback chan<- GetQuestGroupModelAsyncResult,
 ) {
 	path := "/{namespaceName}/group/{questGroupName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
@@ -3803,12 +3803,12 @@ func (p Gs2QuestRestClient) DescribeQuestModelsAsync(
 	callback chan<- DescribeQuestModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/group/{questGroupName}/quest"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
@@ -3892,17 +3892,17 @@ func (p Gs2QuestRestClient) GetQuestModelAsync(
 	callback chan<- GetQuestModelAsyncResult,
 ) {
 	path := "/{namespaceName}/group/{questGroupName}/quest/{questName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.QuestGroupName != nil {
+    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
         path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
     } else {
         path = strings.ReplaceAll(path, "{questGroupName}", "null")
     }
-    if request.QuestName != nil {
+    if request.QuestName != nil && *request.QuestName != ""  {
         path = strings.ReplaceAll(path, "{questName}", core.ToString(*request.QuestName))
     } else {
         path = strings.ReplaceAll(path, "{questName}", "null")

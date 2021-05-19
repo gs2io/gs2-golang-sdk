@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package news
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -134,9 +130,9 @@ type DeleteNamespaceAsyncResult struct {
 
 type PrepareUpdateCurrentNewsMasterResult struct {
     /** アップロード後に結果を反映する際に使用するトークン */
-	UploadToken         *core.String	`json:"uploadToken"`
+	UploadToken         *string	`json:"uploadToken"`
     /** テンプレートアップロード処理の実行に使用するURL */
-	TemplateUploadUrl         *core.String	`json:"templateUploadUrl"`
+	TemplateUploadUrl         *string	`json:"templateUploadUrl"`
 }
 
 func (p *PrepareUpdateCurrentNewsMasterResult) ToDict() *map[string]interface{} {
@@ -170,7 +166,7 @@ type UpdateCurrentNewsMasterAsyncResult struct {
 
 type PrepareUpdateCurrentNewsMasterFromGitHubResult struct {
     /** アップロード後に結果を反映する際に使用するトークン */
-	UploadToken         *core.String	`json:"uploadToken"`
+	UploadToken         *string	`json:"uploadToken"`
 }
 
 func (p *PrepareUpdateCurrentNewsMasterFromGitHubResult) ToDict() *map[string]interface{} {
@@ -190,9 +186,9 @@ type DescribeNewsResult struct {
     /** お知らせ記事のリスト */
 	Items         []News	`json:"items"`
     /** お知らせ記事データのハッシュ値 */
-	ContentHash         *core.String	`json:"contentHash"`
+	ContentHash         *string	`json:"contentHash"`
     /** テンプレートデータのハッシュ値 */
-	TemplateHash         *core.String	`json:"templateHash"`
+	TemplateHash         *string	`json:"templateHash"`
 }
 
 func (p *DescribeNewsResult) ToDict() *map[string]interface{} {
@@ -222,9 +218,9 @@ type DescribeNewsByUserIdResult struct {
     /** お知らせ記事のリスト */
 	Items         []News	`json:"items"`
     /** お知らせ記事データのハッシュ値 */
-	ContentHash         *core.String	`json:"contentHash"`
+	ContentHash         *string	`json:"contentHash"`
     /** テンプレートデータのハッシュ値 */
-	TemplateHash         *core.String	`json:"templateHash"`
+	TemplateHash         *string	`json:"templateHash"`
 }
 
 func (p *DescribeNewsByUserIdResult) ToDict() *map[string]interface{} {
@@ -254,9 +250,9 @@ type WantGrantResult struct {
     /** お知らせコンテンツにアクセスするために設定の必要なクッキー のリスト */
 	Items         []SetCookieRequestEntry	`json:"items"`
     /** お知らせコンテンツにアクセスするためのURL */
-	BrowserUrl         *core.String	`json:"browserUrl"`
+	BrowserUrl         *string	`json:"browserUrl"`
     /** ZIP形式のお知らせコンテンツにアクセスするためのURL Cookieの設定は不要 */
-	ZipUrl         *core.String	`json:"zipUrl"`
+	ZipUrl         *string	`json:"zipUrl"`
 }
 
 func (p *WantGrantResult) ToDict() *map[string]interface{} {
@@ -286,9 +282,9 @@ type WantGrantByUserIdResult struct {
     /** お知らせコンテンツにアクセスするために設定の必要なクッキー のリスト */
 	Items         []SetCookieRequestEntry	`json:"items"`
     /** お知らせコンテンツにアクセスするためのURL */
-	BrowserUrl         *core.String	`json:"browserUrl"`
+	BrowserUrl         *string	`json:"browserUrl"`
     /** ZIP形式のお知らせコンテンツにアクセスするためのURL Cookieの設定は不要 */
-	ZipUrl         *core.String	`json:"zipUrl"`
+	ZipUrl         *string	`json:"zipUrl"`
 }
 
 func (p *WantGrantByUserIdResult) ToDict() *map[string]interface{} {

@@ -23,136 +23,136 @@ import (
 type DescribeNamespacesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	Name *core.String	`json:"name"`
-	Description *core.String	`json:"description"`
-	AssumeUserId *core.String	`json:"assumeUserId"`
+	Name *string	`json:"name"`
+	Description *string	`json:"description"`
+	AssumeUserId *string	`json:"assumeUserId"`
 	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type GetNamespaceStatusRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Description *core.String	`json:"description"`
-	AssumeUserId *core.String	`json:"assumeUserId"`
+	NamespaceName *string	`json:"namespaceName"`
+	Description *string	`json:"description"`
+	AssumeUserId *string	`json:"assumeUserId"`
 	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type DeleteNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type DescribeDistributorModelMastersRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreateDistributorModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Name *core.String	`json:"name"`
-	Description *core.String	`json:"description"`
-	Metadata *core.String	`json:"metadata"`
-	InboxNamespaceId *core.String	`json:"inboxNamespaceId"`
-	WhiteListTargetIds *[]core.String	`json:"whiteListTargetIds"`
+	NamespaceName *string	`json:"namespaceName"`
+	Name *string	`json:"name"`
+	Description *string	`json:"description"`
+	Metadata *string	`json:"metadata"`
+	InboxNamespaceId *string	`json:"inboxNamespaceId"`
+	WhiteListTargetIds []string	`json:"whiteListTargetIds"`
 }
 
 type GetDistributorModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	DistributorName *core.String	`json:"distributorName"`
+	NamespaceName *string	`json:"namespaceName"`
+	DistributorName *string	`json:"distributorName"`
 }
 
 type UpdateDistributorModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	DistributorName *core.String	`json:"distributorName"`
-	Description *core.String	`json:"description"`
-	Metadata *core.String	`json:"metadata"`
-	InboxNamespaceId *core.String	`json:"inboxNamespaceId"`
-	WhiteListTargetIds *[]core.String	`json:"whiteListTargetIds"`
+	NamespaceName *string	`json:"namespaceName"`
+	DistributorName *string	`json:"distributorName"`
+	Description *string	`json:"description"`
+	Metadata *string	`json:"metadata"`
+	InboxNamespaceId *string	`json:"inboxNamespaceId"`
+	WhiteListTargetIds []string	`json:"whiteListTargetIds"`
 }
 
 type DeleteDistributorModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	DistributorName *core.String	`json:"distributorName"`
+	NamespaceName *string	`json:"namespaceName"`
+	DistributorName *string	`json:"distributorName"`
 }
 
 type DescribeDistributorModelsRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetDistributorModelRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	DistributorName *core.String	`json:"distributorName"`
+	NamespaceName *string	`json:"namespaceName"`
+	DistributorName *string	`json:"distributorName"`
 }
 
 type ExportMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetCurrentDistributorMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type UpdateCurrentDistributorMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Settings *core.String	`json:"settings"`
+	NamespaceName *string	`json:"namespaceName"`
+	Settings *string	`json:"settings"`
 }
 
 type UpdateCurrentDistributorMasterFromGitHubRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting	`json:"checkoutSetting"`
 }
 
 type DistributeRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	DistributorName *core.String	`json:"distributorName"`
+	NamespaceName *string	`json:"namespaceName"`
+	DistributorName *string	`json:"distributorName"`
 	DistributeResource *DistributeResource	`json:"distributeResource"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
@@ -160,57 +160,57 @@ type DistributeWithoutOverflowProcessRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
 	DistributeResource *DistributeResource	`json:"distributeResource"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type RunStampTaskRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	StampTask *core.String	`json:"stampTask"`
-	KeyId *core.String	`json:"keyId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	StampTask *string	`json:"stampTask"`
+	KeyId *string	`json:"keyId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type RunStampSheetRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	StampSheet *core.String	`json:"stampSheet"`
-	KeyId *core.String	`json:"keyId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	StampSheet *string	`json:"stampSheet"`
+	KeyId *string	`json:"keyId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type RunStampSheetExpressRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	StampSheet *core.String	`json:"stampSheet"`
-	KeyId *core.String	`json:"keyId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	StampSheet *string	`json:"stampSheet"`
+	KeyId *string	`json:"keyId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type RunStampTaskWithoutNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	StampTask *core.String	`json:"stampTask"`
-	KeyId *core.String	`json:"keyId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	StampTask *string	`json:"stampTask"`
+	KeyId *string	`json:"keyId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type RunStampSheetWithoutNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	StampSheet *core.String	`json:"stampSheet"`
-	KeyId *core.String	`json:"keyId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	StampSheet *string	`json:"stampSheet"`
+	KeyId *string	`json:"keyId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type RunStampSheetExpressWithoutNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	StampSheet *core.String	`json:"stampSheet"`
-	KeyId *core.String	`json:"keyId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	StampSheet *string	`json:"stampSheet"`
+	KeyId *string	`json:"keyId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }

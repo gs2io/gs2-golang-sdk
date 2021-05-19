@@ -6,12 +6,6 @@ import (
 
 func ToString(data interface{}) string {
 	{
-		v, ok := data.(String)
-		if ok {
-			return string(v)
-		}
-	}
-	{
 		v, ok := data.(string)
 		if ok {
 			return v
@@ -52,28 +46,4 @@ func ToString(data interface{}) string {
 		}
 	}
 	return "null"
-}
-
-func ToStringPointer(data string) *string {
-	return &data
-}
-
-func ToInt32Pointer(data int32) *int32 {
-	return &data
-}
-
-func ToInt64Pointer(data int64) *int64 {
-	return &data
-}
-
-func ToFloat32Pointer(data float32) *float32 {
-	return &data
-}
-
-func ToFloat64Pointer(data float64) *float64 {
-	return &data
-}
-
-func ToBoolPointer(data bool) *bool {
-	return &data
 }

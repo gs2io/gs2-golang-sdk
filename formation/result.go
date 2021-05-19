@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package formation
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type DescribeFormModelMastersResult struct {
     /** フォームマスターのリスト */
 	Items         []FormModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeFormModelMastersResult) ToDict() *map[string]interface{} {
@@ -280,7 +276,7 @@ type DescribeMoldModelMastersResult struct {
     /** フォームの保存領域マスターのリスト */
 	Items         []MoldModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeMoldModelMastersResult) ToDict() *map[string]interface{} {
@@ -451,7 +447,7 @@ type DescribeMoldsResult struct {
     /** 保存したフォームのリスト */
 	Items         []Mold	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeMoldsResult) ToDict() *map[string]interface{} {
@@ -478,7 +474,7 @@ type DescribeMoldsByUserIdResult struct {
     /** 保存したフォームのリスト */
 	Items         []Mold	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeMoldsByUserIdResult) ToDict() *map[string]interface{} {
@@ -679,7 +675,7 @@ type DescribeFormsResult struct {
     /** フォームのリスト */
 	Items         []Form	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeFormsResult) ToDict() *map[string]interface{} {
@@ -706,7 +702,7 @@ type DescribeFormsByUserIdResult struct {
     /** フォームのリスト */
 	Items         []Form	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeFormsByUserIdResult) ToDict() *map[string]interface{} {
@@ -799,9 +795,9 @@ type GetFormWithSignatureResult struct {
     /** フォーム */
 	Item         *Form	`json:"item"`
     /** 署名対象の値 */
-	Body         *core.String	`json:"body"`
+	Body         *string	`json:"body"`
     /** 署名 */
-	Signature         *core.String	`json:"signature"`
+	Signature         *string	`json:"signature"`
     /** 保存したフォーム */
 	Mold         *Mold	`json:"mold"`
     /** フォームの保存領域 */
@@ -842,9 +838,9 @@ type GetFormWithSignatureByUserIdResult struct {
     /** フォーム */
 	Item         *Form	`json:"item"`
     /** 署名対象の値 */
-	Body         *core.String	`json:"body"`
+	Body         *string	`json:"body"`
     /** 署名 */
-	Signature         *core.String	`json:"signature"`
+	Signature         *string	`json:"signature"`
     /** 保存したフォーム */
 	Mold         *Mold	`json:"mold"`
     /** フォームの保存領域 */
@@ -953,9 +949,9 @@ type AcquireActionsToFormPropertiesResult struct {
     /** 保存したフォーム */
 	Mold         *Mold	`json:"mold"`
     /** スタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *AcquireActionsToFormPropertiesResult) ToDict() *map[string]interface{} {
@@ -1052,9 +1048,9 @@ type AcquireActionToFormPropertiesByStampSheetResult struct {
     /** 保存したフォーム */
 	Mold         *Mold	`json:"mold"`
     /** スタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *AcquireActionToFormPropertiesByStampSheetResult) ToDict() *map[string]interface{} {

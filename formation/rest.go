@@ -258,7 +258,7 @@ func (p Gs2FormationRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -342,7 +342,7 @@ func (p Gs2FormationRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -426,7 +426,7 @@ func (p Gs2FormationRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -525,7 +525,7 @@ func (p Gs2FormationRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -609,7 +609,7 @@ func (p Gs2FormationRestClient) DescribeFormModelMastersAsync(
 	callback chan<- DescribeFormModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/form"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -699,7 +699,7 @@ func (p Gs2FormationRestClient) CreateFormModelMasterAsync(
 	callback chan<- CreateFormModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/form"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -718,7 +718,7 @@ func (p Gs2FormationRestClient) CreateFormModelMasterAsync(
     }
     if request.Slots != nil {
         var _slots []*map[string]interface {}
-        for _, item := range *request.Slots {
+        for _, item := range request.Slots {
             _slots = append(_slots, item.ToDict())
         }
         bodies["slots"] = _slots
@@ -802,12 +802,12 @@ func (p Gs2FormationRestClient) GetFormModelMasterAsync(
 	callback chan<- GetFormModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/form/{formModelName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.FormModelName != nil {
+    if request.FormModelName != nil && *request.FormModelName != ""  {
         path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
     } else {
         path = strings.ReplaceAll(path, "{formModelName}", "null")
@@ -891,12 +891,12 @@ func (p Gs2FormationRestClient) UpdateFormModelMasterAsync(
 	callback chan<- UpdateFormModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/form/{formModelName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.FormModelName != nil {
+    if request.FormModelName != nil && *request.FormModelName != ""  {
         path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
     } else {
         path = strings.ReplaceAll(path, "{formModelName}", "null")
@@ -912,7 +912,7 @@ func (p Gs2FormationRestClient) UpdateFormModelMasterAsync(
     }
     if request.Slots != nil {
         var _slots []*map[string]interface {}
-        for _, item := range *request.Slots {
+        for _, item := range request.Slots {
             _slots = append(_slots, item.ToDict())
         }
         bodies["slots"] = _slots
@@ -996,12 +996,12 @@ func (p Gs2FormationRestClient) DeleteFormModelMasterAsync(
 	callback chan<- DeleteFormModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/form/{formModelName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.FormModelName != nil {
+    if request.FormModelName != nil && *request.FormModelName != ""  {
         path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
     } else {
         path = strings.ReplaceAll(path, "{formModelName}", "null")
@@ -1085,7 +1085,7 @@ func (p Gs2FormationRestClient) DescribeMoldModelsAsync(
 	callback chan<- DescribeMoldModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/model/mold"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1169,12 +1169,12 @@ func (p Gs2FormationRestClient) GetMoldModelAsync(
 	callback chan<- GetMoldModelAsyncResult,
 ) {
 	path := "/{namespaceName}/model/mold/{moldName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -1258,7 +1258,7 @@ func (p Gs2FormationRestClient) DescribeMoldModelMastersAsync(
 	callback chan<- DescribeMoldModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/mold"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1348,7 +1348,7 @@ func (p Gs2FormationRestClient) CreateMoldModelMasterAsync(
 	callback chan<- CreateMoldModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/mold"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1453,12 +1453,12 @@ func (p Gs2FormationRestClient) GetMoldModelMasterAsync(
 	callback chan<- GetMoldModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/mold/{moldName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -1542,12 +1542,12 @@ func (p Gs2FormationRestClient) UpdateMoldModelMasterAsync(
 	callback chan<- UpdateMoldModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/mold/{moldName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -1649,12 +1649,12 @@ func (p Gs2FormationRestClient) DeleteMoldModelMasterAsync(
 	callback chan<- DeleteMoldModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/mold/{moldName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -1738,7 +1738,7 @@ func (p Gs2FormationRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1822,7 +1822,7 @@ func (p Gs2FormationRestClient) GetCurrentFormMasterAsync(
 	callback chan<- GetCurrentFormMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1906,7 +1906,7 @@ func (p Gs2FormationRestClient) UpdateCurrentFormMasterAsync(
 	callback chan<- UpdateCurrentFormMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1996,7 +1996,7 @@ func (p Gs2FormationRestClient) UpdateCurrentFormMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentFormMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2086,7 +2086,7 @@ func (p Gs2FormationRestClient) DescribeMoldsAsync(
 	callback chan<- DescribeMoldsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/mold"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2179,12 +2179,12 @@ func (p Gs2FormationRestClient) DescribeMoldsByUserIdAsync(
 	callback chan<- DescribeMoldsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mold"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2274,12 +2274,12 @@ func (p Gs2FormationRestClient) GetMoldAsync(
 	callback chan<- GetMoldAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/mold/{moldName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -2366,17 +2366,17 @@ func (p Gs2FormationRestClient) GetMoldByUserIdAsync(
 	callback chan<- GetMoldByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mold/{moldName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -2460,17 +2460,17 @@ func (p Gs2FormationRestClient) SetMoldCapacityByUserIdAsync(
 	callback chan<- SetMoldCapacityByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mold/{moldName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -2560,17 +2560,17 @@ func (p Gs2FormationRestClient) AddMoldCapacityByUserIdAsync(
 	callback chan<- AddMoldCapacityByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mold/{moldName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -2660,12 +2660,12 @@ func (p Gs2FormationRestClient) DeleteMoldAsync(
 	callback chan<- DeleteMoldAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/mold/{moldName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -2752,17 +2752,17 @@ func (p Gs2FormationRestClient) DeleteMoldByUserIdAsync(
 	callback chan<- DeleteMoldByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mold/{moldName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -3022,12 +3022,12 @@ func (p Gs2FormationRestClient) DescribeFormsAsync(
 	callback chan<- DescribeFormsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/mold/{moldName}/form"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -3120,17 +3120,17 @@ func (p Gs2FormationRestClient) DescribeFormsByUserIdAsync(
 	callback chan<- DescribeFormsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mold/{moldName}/form"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3220,12 +3220,12 @@ func (p Gs2FormationRestClient) GetFormAsync(
 	callback chan<- GetFormAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/mold/{moldName}/form/{index}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -3317,17 +3317,17 @@ func (p Gs2FormationRestClient) GetFormByUserIdAsync(
 	callback chan<- GetFormByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mold/{moldName}/form/{index}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -3416,12 +3416,12 @@ func (p Gs2FormationRestClient) GetFormWithSignatureAsync(
 	callback chan<- GetFormWithSignatureAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/mold/{moldName}/form/{index}/signature"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -3516,17 +3516,17 @@ func (p Gs2FormationRestClient) GetFormWithSignatureByUserIdAsync(
 	callback chan<- GetFormWithSignatureByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mold/{moldName}/form/{index}/signature"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -3618,17 +3618,17 @@ func (p Gs2FormationRestClient) SetFormByUserIdAsync(
 	callback chan<- SetFormByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mold/{moldName}/form/{index}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -3643,7 +3643,7 @@ func (p Gs2FormationRestClient) SetFormByUserIdAsync(
     var bodies = core.Bodies{}
     if request.Slots != nil {
         var _slots []*map[string]interface {}
-        for _, item := range *request.Slots {
+        for _, item := range request.Slots {
             _slots = append(_slots, item.ToDict())
         }
         bodies["slots"] = _slots
@@ -3727,12 +3727,12 @@ func (p Gs2FormationRestClient) SetFormWithSignatureAsync(
 	callback chan<- SetFormWithSignatureAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/mold/{moldName}/form/{index}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -3747,7 +3747,7 @@ func (p Gs2FormationRestClient) SetFormWithSignatureAsync(
     var bodies = core.Bodies{}
     if request.Slots != nil {
         var _slots []*map[string]interface {}
-        for _, item := range *request.Slots {
+        for _, item := range request.Slots {
             _slots = append(_slots, item.ToDict())
         }
         bodies["slots"] = _slots
@@ -3837,17 +3837,17 @@ func (p Gs2FormationRestClient) AcquireActionsToFormPropertiesAsync(
 	callback chan<- AcquireActionsToFormPropertiesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mold/{moldName}/form/{index}/stamp/delegate"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -3871,7 +3871,7 @@ func (p Gs2FormationRestClient) AcquireActionsToFormPropertiesAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -3955,12 +3955,12 @@ func (p Gs2FormationRestClient) DeleteFormAsync(
 	callback chan<- DeleteFormAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/mold/{moldName}/form/{index}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")
@@ -4052,17 +4052,17 @@ func (p Gs2FormationRestClient) DeleteFormByUserIdAsync(
 	callback chan<- DeleteFormByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mold/{moldName}/form/{index}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.MoldName != nil {
+    if request.MoldName != nil && *request.MoldName != ""  {
         path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
     } else {
         path = strings.ReplaceAll(path, "{moldName}", "null")

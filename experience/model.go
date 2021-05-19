@@ -16,21 +16,17 @@ permissions and limitations under the License.
 
 package experience
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** ランクキャップ取得時 に実行されるスクリプト のGRN */
-	ExperienceCapScriptId *core.String   `json:"experienceCapScriptId"`
+	ExperienceCapScriptId *string   `json:"experienceCapScriptId"`
     /** 経験値変化したときに実行するスクリプト */
 	ChangeExperienceScript *ScriptSetting   `json:"changeExperienceScript"`
     /** ランク変化したときに実行するスクリプト */
@@ -76,13 +72,13 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type ExperienceModelMaster struct {
     /** 経験値の種類マスター */
-	ExperienceModelId *core.String   `json:"experienceModelId"`
+	ExperienceModelId *string   `json:"experienceModelId"`
     /** 経験値の種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 経験値の種類マスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 経験値の種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 経験値の初期値 */
 	DefaultExperience *int64   `json:"defaultExperience"`
     /** ランクキャップの初期値 */
@@ -90,7 +86,7 @@ type ExperienceModelMaster struct {
     /** ランクキャップの最大値 */
 	MaxRankCap *int64   `json:"maxRankCap"`
     /** ランク計算に用いる */
-	RankThresholdId *core.String   `json:"rankThresholdId"`
+	RankThresholdId *string   `json:"rankThresholdId"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -114,11 +110,11 @@ func (p *ExperienceModelMaster) ToDict() *map[string]interface{} {
 
 type ExperienceModel struct {
     /** 経験値の種類マスター */
-	ExperienceModelId *core.String   `json:"experienceModelId"`
+	ExperienceModelId *string   `json:"experienceModelId"`
     /** 経験値の種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 経験値の種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 経験値の初期値 */
 	DefaultExperience *int64   `json:"defaultExperience"`
     /** ランクキャップの初期値 */
@@ -145,15 +141,15 @@ func (p *ExperienceModel) ToDict() *map[string]interface{} {
 
 type ThresholdMaster struct {
     /** ランクアップ閾値マスター */
-	ThresholdId *core.String   `json:"thresholdId"`
+	ThresholdId *string   `json:"thresholdId"`
     /** ランクアップ閾値名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ランクアップ閾値マスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** ランクアップ閾値のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** ランクアップ経験値閾値リスト */
-	Values *[]int64   `json:"values"`
+	Values []int64   `json:"values"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -168,7 +164,7 @@ func (p *ThresholdMaster) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.Values != nil {
         var _values []int64
-        for _, item := range *p.Values {
+        for _, item := range p.Values {
             _values = append(_values, item)
         }
         data["values"] = &_values
@@ -180,9 +176,9 @@ func (p *ThresholdMaster) ToDict() *map[string]interface{} {
 
 type Threshold struct {
     /** ランクアップ閾値のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** ランクアップ経験値閾値リスト */
-	Values *[]int64   `json:"values"`
+	Values []int64   `json:"values"`
 }
 
 func (p *Threshold) ToDict() *map[string]interface{} {
@@ -190,7 +186,7 @@ func (p *Threshold) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.Values != nil {
         var _values []int64
-        for _, item := range *p.Values {
+        for _, item := range p.Values {
             _values = append(_values, item)
         }
         data["values"] = &_values
@@ -200,9 +196,9 @@ func (p *Threshold) ToDict() *map[string]interface{} {
 
 type CurrentExperienceMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentExperienceMaster) ToDict() *map[string]interface{} {
@@ -214,13 +210,13 @@ func (p *CurrentExperienceMaster) ToDict() *map[string]interface{} {
 
 type Status struct {
     /** ステータス */
-	StatusId *core.String   `json:"statusId"`
+	StatusId *string   `json:"statusId"`
     /** 経験値の種類の名前 */
-	ExperienceName *core.String   `json:"experienceName"`
+	ExperienceName *string   `json:"experienceName"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** プロパティID */
-	PropertyId *core.String   `json:"propertyId"`
+	PropertyId *string   `json:"propertyId"`
     /** 累計獲得経験値 */
 	ExperienceValue *int64   `json:"experienceValue"`
     /** 現在のランク */
@@ -249,15 +245,15 @@ func (p *Status) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -272,19 +268,19 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -301,13 +297,13 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type ScriptSetting struct {
     /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *core.String   `json:"triggerScriptId"`
+	TriggerScriptId *string   `json:"triggerScriptId"`
     /** 完了通知の通知先 */
-	DoneTriggerTargetType *core.String   `json:"doneTriggerTargetType"`
+	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
     /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *core.String   `json:"doneTriggerScriptId"`
+	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
     /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *core.String   `json:"doneTriggerQueueNamespaceId"`
+	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
 }
 
 func (p *ScriptSetting) ToDict() *map[string]interface{} {
@@ -321,7 +317,7 @@ func (p *ScriptSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

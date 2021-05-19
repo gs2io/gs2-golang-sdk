@@ -23,292 +23,292 @@ import (
 type DescribeNamespacesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	Name *core.String	`json:"name"`
-	Description *core.String	`json:"description"`
-	QueueNamespaceId *core.String	`json:"queueNamespaceId"`
-	KeyId *core.String	`json:"keyId"`
-	LotteryTriggerScriptId *core.String	`json:"lotteryTriggerScriptId"`
-	ChoicePrizeTableScriptId *core.String	`json:"choicePrizeTableScriptId"`
+	Name *string	`json:"name"`
+	Description *string	`json:"description"`
+	QueueNamespaceId *string	`json:"queueNamespaceId"`
+	KeyId *string	`json:"keyId"`
+	LotteryTriggerScriptId *string	`json:"lotteryTriggerScriptId"`
+	ChoicePrizeTableScriptId *string	`json:"choicePrizeTableScriptId"`
 	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type GetNamespaceStatusRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Description *core.String	`json:"description"`
-	QueueNamespaceId *core.String	`json:"queueNamespaceId"`
-	KeyId *core.String	`json:"keyId"`
-	LotteryTriggerScriptId *core.String	`json:"lotteryTriggerScriptId"`
-	ChoicePrizeTableScriptId *core.String	`json:"choicePrizeTableScriptId"`
+	NamespaceName *string	`json:"namespaceName"`
+	Description *string	`json:"description"`
+	QueueNamespaceId *string	`json:"queueNamespaceId"`
+	KeyId *string	`json:"keyId"`
+	LotteryTriggerScriptId *string	`json:"lotteryTriggerScriptId"`
+	ChoicePrizeTableScriptId *string	`json:"choicePrizeTableScriptId"`
 	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type DeleteNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type DescribeLotteryModelMastersRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreateLotteryModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Name *core.String	`json:"name"`
-	Description *core.String	`json:"description"`
-	Metadata *core.String	`json:"metadata"`
-	Mode *core.String	`json:"mode"`
-	Method *core.String	`json:"method"`
-	PrizeTableName *core.String	`json:"prizeTableName"`
-	ChoicePrizeTableScriptId *core.String	`json:"choicePrizeTableScriptId"`
+	NamespaceName *string	`json:"namespaceName"`
+	Name *string	`json:"name"`
+	Description *string	`json:"description"`
+	Metadata *string	`json:"metadata"`
+	Mode *string	`json:"mode"`
+	Method *string	`json:"method"`
+	PrizeTableName *string	`json:"prizeTableName"`
+	ChoicePrizeTableScriptId *string	`json:"choicePrizeTableScriptId"`
 }
 
 type GetLotteryModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	LotteryName *core.String	`json:"lotteryName"`
+	NamespaceName *string	`json:"namespaceName"`
+	LotteryName *string	`json:"lotteryName"`
 }
 
 type UpdateLotteryModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	LotteryName *core.String	`json:"lotteryName"`
-	Description *core.String	`json:"description"`
-	Metadata *core.String	`json:"metadata"`
-	Mode *core.String	`json:"mode"`
-	Method *core.String	`json:"method"`
-	PrizeTableName *core.String	`json:"prizeTableName"`
-	ChoicePrizeTableScriptId *core.String	`json:"choicePrizeTableScriptId"`
+	NamespaceName *string	`json:"namespaceName"`
+	LotteryName *string	`json:"lotteryName"`
+	Description *string	`json:"description"`
+	Metadata *string	`json:"metadata"`
+	Mode *string	`json:"mode"`
+	Method *string	`json:"method"`
+	PrizeTableName *string	`json:"prizeTableName"`
+	ChoicePrizeTableScriptId *string	`json:"choicePrizeTableScriptId"`
 }
 
 type DeleteLotteryModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	LotteryName *core.String	`json:"lotteryName"`
+	NamespaceName *string	`json:"namespaceName"`
+	LotteryName *string	`json:"lotteryName"`
 }
 
 type DescribePrizeTableMastersRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreatePrizeTableMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Name *core.String	`json:"name"`
-	Description *core.String	`json:"description"`
-	Metadata *core.String	`json:"metadata"`
-	Prizes *[]*Prize	`json:"prizes"`
+	NamespaceName *string	`json:"namespaceName"`
+	Name *string	`json:"name"`
+	Description *string	`json:"description"`
+	Metadata *string	`json:"metadata"`
+	Prizes []Prize	`json:"prizes"`
 }
 
 type GetPrizeTableMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PrizeTableName *core.String	`json:"prizeTableName"`
+	NamespaceName *string	`json:"namespaceName"`
+	PrizeTableName *string	`json:"prizeTableName"`
 }
 
 type UpdatePrizeTableMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PrizeTableName *core.String	`json:"prizeTableName"`
-	Description *core.String	`json:"description"`
-	Metadata *core.String	`json:"metadata"`
-	Prizes *[]*Prize	`json:"prizes"`
+	NamespaceName *string	`json:"namespaceName"`
+	PrizeTableName *string	`json:"prizeTableName"`
+	Description *string	`json:"description"`
+	Metadata *string	`json:"metadata"`
+	Prizes []Prize	`json:"prizes"`
 }
 
 type DeletePrizeTableMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PrizeTableName *core.String	`json:"prizeTableName"`
+	NamespaceName *string	`json:"namespaceName"`
+	PrizeTableName *string	`json:"prizeTableName"`
 }
 
 type DescribeBoxesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeBoxesByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetBoxRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PrizeTableName *core.String	`json:"prizeTableName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	PrizeTableName *string	`json:"prizeTableName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetBoxByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PrizeTableName *core.String	`json:"prizeTableName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	PrizeTableName *string	`json:"prizeTableName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetRawBoxByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PrizeTableName *core.String	`json:"prizeTableName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	PrizeTableName *string	`json:"prizeTableName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type ResetBoxRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PrizeTableName *core.String	`json:"prizeTableName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	PrizeTableName *string	`json:"prizeTableName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type ResetBoxByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PrizeTableName *core.String	`json:"prizeTableName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	PrizeTableName *string	`json:"prizeTableName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeLotteryModelsRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetLotteryModelRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	LotteryName *core.String	`json:"lotteryName"`
+	NamespaceName *string	`json:"namespaceName"`
+	LotteryName *string	`json:"lotteryName"`
 }
 
 type DescribePrizeTablesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetPrizeTableRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PrizeTableName *core.String	`json:"prizeTableName"`
+	NamespaceName *string	`json:"namespaceName"`
+	PrizeTableName *string	`json:"prizeTableName"`
 }
 
 type DrawByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	LotteryName *core.String	`json:"lotteryName"`
-	UserId *core.String	`json:"userId"`
+	NamespaceName *string	`json:"namespaceName"`
+	LotteryName *string	`json:"lotteryName"`
+	UserId *string	`json:"userId"`
 	Count *int32	`json:"count"`
-	Config *[]*Config	`json:"config"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	Config []Config	`json:"config"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeProbabilitiesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	LotteryName *core.String	`json:"lotteryName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	LotteryName *string	`json:"lotteryName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeProbabilitiesByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	LotteryName *core.String	`json:"lotteryName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	LotteryName *string	`json:"lotteryName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DrawByStampSheetRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	StampSheet *core.String	`json:"stampSheet"`
-	KeyId *core.String	`json:"keyId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	StampSheet *string	`json:"stampSheet"`
+	KeyId *string	`json:"keyId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type ExportMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetCurrentLotteryMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type UpdateCurrentLotteryMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Settings *core.String	`json:"settings"`
+	NamespaceName *string	`json:"namespaceName"`
+	Settings *string	`json:"settings"`
 }
 
 type UpdateCurrentLotteryMasterFromGitHubRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting	`json:"checkoutSetting"`
 }

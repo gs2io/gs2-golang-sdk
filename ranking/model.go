@@ -16,21 +16,17 @@ permissions and limitations under the License.
 
 package ranking
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 最終集計日時リスト */
-	LastCalculatedAts *[]*CalculatedAt   `json:"lastCalculatedAts"`
+	LastCalculatedAts []CalculatedAt   `json:"lastCalculatedAts"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** 作成日時 */
@@ -47,7 +43,7 @@ func (p *Namespace) ToDict() *map[string]interface{} {
     data["description"] = p.Description
     if p.LastCalculatedAts != nil {
         var _lastCalculatedAts []*map[string]interface {}
-        for _, item := range *p.LastCalculatedAts {
+        for _, item := range p.LastCalculatedAts {
             _lastCalculatedAts = append(_lastCalculatedAts, item.ToDict())
         }
         data["lastCalculatedAts"] = &_lastCalculatedAts
@@ -62,19 +58,19 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type CategoryModel struct {
     /** カテゴリ */
-	CategoryModelId *core.String   `json:"categoryModelId"`
+	CategoryModelId *string   `json:"categoryModelId"`
     /** カテゴリ名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** カテゴリのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** スコアの最小値 */
 	MinimumValue *int64   `json:"minimumValue"`
     /** スコアの最大値 */
 	MaximumValue *int64   `json:"maximumValue"`
     /** スコアのソート方向 */
-	OrderDirection *core.String   `json:"orderDirection"`
+	OrderDirection *string   `json:"orderDirection"`
     /** ランキングの種類 */
-	Scope *core.String   `json:"scope"`
+	Scope *string   `json:"scope"`
     /** ユーザID毎にスコアを1つしか登録されないようにする */
 	UniqueByUserId *bool   `json:"uniqueByUserId"`
     /** スコアの固定集計開始時刻(時) */
@@ -84,11 +80,11 @@ type CategoryModel struct {
     /** スコアの集計間隔(分) */
 	CalculateIntervalMinutes *int32   `json:"calculateIntervalMinutes"`
     /** スコアの登録可能期間とするイベントマスター のGRN */
-	EntryPeriodEventId *core.String   `json:"entryPeriodEventId"`
+	EntryPeriodEventId *string   `json:"entryPeriodEventId"`
     /** アクセス可能期間とするイベントマスター のGRN */
-	AccessPeriodEventId *core.String   `json:"accessPeriodEventId"`
+	AccessPeriodEventId *string   `json:"accessPeriodEventId"`
     /** ランキングの世代 */
-	Generation *core.String   `json:"generation"`
+	Generation *string   `json:"generation"`
 }
 
 func (p *CategoryModel) ToDict() *map[string]interface{} {
@@ -112,21 +108,21 @@ func (p *CategoryModel) ToDict() *map[string]interface{} {
 
 type CategoryModelMaster struct {
     /** カテゴリマスター */
-	CategoryModelId *core.String   `json:"categoryModelId"`
+	CategoryModelId *string   `json:"categoryModelId"`
     /** カテゴリモデル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** カテゴリマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** カテゴリマスターのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** スコアの最小値 */
 	MinimumValue *int64   `json:"minimumValue"`
     /** スコアの最大値 */
 	MaximumValue *int64   `json:"maximumValue"`
     /** スコアのソート方向 */
-	OrderDirection *core.String   `json:"orderDirection"`
+	OrderDirection *string   `json:"orderDirection"`
     /** ランキングの種類 */
-	Scope *core.String   `json:"scope"`
+	Scope *string   `json:"scope"`
     /** ユーザID毎にスコアを1つしか登録されないようにする */
 	UniqueByUserId *bool   `json:"uniqueByUserId"`
     /** スコアの固定集計開始時刻(時) */
@@ -136,11 +132,11 @@ type CategoryModelMaster struct {
     /** スコアの集計間隔(分) */
 	CalculateIntervalMinutes *int32   `json:"calculateIntervalMinutes"`
     /** スコアの登録可能期間とするイベントマスター のGRN */
-	EntryPeriodEventId *core.String   `json:"entryPeriodEventId"`
+	EntryPeriodEventId *string   `json:"entryPeriodEventId"`
     /** アクセス可能期間とするイベントマスター のGRN */
-	AccessPeriodEventId *core.String   `json:"accessPeriodEventId"`
+	AccessPeriodEventId *string   `json:"accessPeriodEventId"`
     /** ランキングの世代 */
-	Generation *core.String   `json:"generation"`
+	Generation *string   `json:"generation"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -171,13 +167,13 @@ func (p *CategoryModelMaster) ToDict() *map[string]interface{} {
 
 type Subscribe struct {
     /** 購読 */
-	SubscribeId *core.String   `json:"subscribeId"`
+	SubscribeId *string   `json:"subscribeId"`
     /** カテゴリ名 */
-	CategoryName *core.String   `json:"categoryName"`
+	CategoryName *string   `json:"categoryName"`
     /** 購読するユーザID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 購読されるユーザIDリスト */
-	TargetUserIds *[]core.String   `json:"targetUserIds"`
+	TargetUserIds []string   `json:"targetUserIds"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
 }
@@ -188,8 +184,8 @@ func (p *Subscribe) ToDict() *map[string]interface{} {
     data["categoryName"] = p.CategoryName
     data["userId"] = p.UserId
     if p.TargetUserIds != nil {
-        var _targetUserIds []core.String
-        for _, item := range *p.TargetUserIds {
+        var _targetUserIds []string
+        for _, item := range p.TargetUserIds {
             _targetUserIds = append(_targetUserIds, item)
         }
         data["targetUserIds"] = &_targetUserIds
@@ -200,19 +196,19 @@ func (p *Subscribe) ToDict() *map[string]interface{} {
 
 type Score struct {
     /** スコア */
-	ScoreId *core.String   `json:"scoreId"`
+	ScoreId *string   `json:"scoreId"`
     /** カテゴリ名 */
-	CategoryName *core.String   `json:"categoryName"`
+	CategoryName *string   `json:"categoryName"`
     /** ユーザID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** スコアのユニークID */
-	UniqueId *core.String   `json:"uniqueId"`
+	UniqueId *string   `json:"uniqueId"`
     /** スコアを獲得したユーザID */
-	ScorerUserId *core.String   `json:"scorerUserId"`
+	ScorerUserId *string   `json:"scorerUserId"`
     /** スコア */
 	Score *int64   `json:"score"`
     /** メタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
 }
@@ -236,11 +232,11 @@ type Ranking struct {
     /** 1位からのインデックス */
 	Index *int64   `json:"index"`
     /** ユーザID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** スコア */
 	Score *int64   `json:"score"`
     /** メタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
 }
@@ -258,15 +254,15 @@ func (p *Ranking) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -281,9 +277,9 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type CurrentRankingMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentRankingMaster) ToDict() *map[string]interface{} {
@@ -295,7 +291,7 @@ func (p *CurrentRankingMaster) ToDict() *map[string]interface{} {
 
 type CalculatedAt struct {
     /** カテゴリ名 */
-	CategoryName *core.String   `json:"categoryName"`
+	CategoryName *string   `json:"categoryName"`
     /** 集計日時 */
 	CalculatedAt *int64   `json:"calculatedAt"`
 }
@@ -309,11 +305,11 @@ func (p *CalculatedAt) ToDict() *map[string]interface{} {
 
 type SubscribeUser struct {
     /** カテゴリ名 */
-	CategoryName *core.String   `json:"categoryName"`
+	CategoryName *string   `json:"categoryName"`
     /** 購読するユーザID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 購読されるユーザID */
-	TargetUserId *core.String   `json:"targetUserId"`
+	TargetUserId *string   `json:"targetUserId"`
 }
 
 func (p *SubscribeUser) ToDict() *map[string]interface{} {
@@ -326,19 +322,19 @@ func (p *SubscribeUser) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -355,7 +351,7 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

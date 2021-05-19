@@ -261,7 +261,7 @@ func (p Gs2EnhanceRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -345,7 +345,7 @@ func (p Gs2EnhanceRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -429,7 +429,7 @@ func (p Gs2EnhanceRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -531,7 +531,7 @@ func (p Gs2EnhanceRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -615,7 +615,7 @@ func (p Gs2EnhanceRestClient) DescribeRateModelsAsync(
 	callback chan<- DescribeRateModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/model"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -699,12 +699,12 @@ func (p Gs2EnhanceRestClient) GetRateModelAsync(
 	callback chan<- GetRateModelAsyncResult,
 ) {
 	path := "/{namespaceName}/model/{rateName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RateName != nil {
+    if request.RateName != nil && *request.RateName != ""  {
         path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
     } else {
         path = strings.ReplaceAll(path, "{rateName}", "null")
@@ -788,7 +788,7 @@ func (p Gs2EnhanceRestClient) DescribeRateModelMastersAsync(
 	callback chan<- DescribeRateModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -878,7 +878,7 @@ func (p Gs2EnhanceRestClient) CreateRateModelMasterAsync(
 	callback chan<- CreateRateModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -905,8 +905,8 @@ func (p Gs2EnhanceRestClient) CreateRateModelMasterAsync(
         bodies["materialInventoryModelId"] = *request.MaterialInventoryModelId
     }
     if request.AcquireExperienceHierarchy != nil {
-        var _acquireExperienceHierarchy []core.String
-        for _, item := range *request.AcquireExperienceHierarchy {
+        var _acquireExperienceHierarchy []string
+        for _, item := range request.AcquireExperienceHierarchy {
             _acquireExperienceHierarchy = append(_acquireExperienceHierarchy, item)
         }
         bodies["acquireExperienceHierarchy"] = _acquireExperienceHierarchy
@@ -916,7 +916,7 @@ func (p Gs2EnhanceRestClient) CreateRateModelMasterAsync(
     }
     if request.BonusRates != nil {
         var _bonusRates []*map[string]interface {}
-        for _, item := range *request.BonusRates {
+        for _, item := range request.BonusRates {
             _bonusRates = append(_bonusRates, item.ToDict())
         }
         bodies["bonusRates"] = _bonusRates
@@ -1000,12 +1000,12 @@ func (p Gs2EnhanceRestClient) GetRateModelMasterAsync(
 	callback chan<- GetRateModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{rateName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RateName != nil {
+    if request.RateName != nil && *request.RateName != ""  {
         path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
     } else {
         path = strings.ReplaceAll(path, "{rateName}", "null")
@@ -1089,12 +1089,12 @@ func (p Gs2EnhanceRestClient) UpdateRateModelMasterAsync(
 	callback chan<- UpdateRateModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{rateName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RateName != nil {
+    if request.RateName != nil && *request.RateName != ""  {
         path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
     } else {
         path = strings.ReplaceAll(path, "{rateName}", "null")
@@ -1118,8 +1118,8 @@ func (p Gs2EnhanceRestClient) UpdateRateModelMasterAsync(
         bodies["materialInventoryModelId"] = *request.MaterialInventoryModelId
     }
     if request.AcquireExperienceHierarchy != nil {
-        var _acquireExperienceHierarchy []core.String
-        for _, item := range *request.AcquireExperienceHierarchy {
+        var _acquireExperienceHierarchy []string
+        for _, item := range request.AcquireExperienceHierarchy {
             _acquireExperienceHierarchy = append(_acquireExperienceHierarchy, item)
         }
         bodies["acquireExperienceHierarchy"] = _acquireExperienceHierarchy
@@ -1129,7 +1129,7 @@ func (p Gs2EnhanceRestClient) UpdateRateModelMasterAsync(
     }
     if request.BonusRates != nil {
         var _bonusRates []*map[string]interface {}
-        for _, item := range *request.BonusRates {
+        for _, item := range request.BonusRates {
             _bonusRates = append(_bonusRates, item.ToDict())
         }
         bodies["bonusRates"] = _bonusRates
@@ -1213,12 +1213,12 @@ func (p Gs2EnhanceRestClient) DeleteRateModelMasterAsync(
 	callback chan<- DeleteRateModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{rateName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RateName != nil {
+    if request.RateName != nil && *request.RateName != ""  {
         path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
     } else {
         path = strings.ReplaceAll(path, "{rateName}", "null")
@@ -1302,12 +1302,12 @@ func (p Gs2EnhanceRestClient) DirectEnhanceAsync(
 	callback chan<- DirectEnhanceAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/enhance/{rateName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RateName != nil {
+    if request.RateName != nil && *request.RateName != ""  {
         path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
     } else {
         path = strings.ReplaceAll(path, "{rateName}", "null")
@@ -1320,14 +1320,14 @@ func (p Gs2EnhanceRestClient) DirectEnhanceAsync(
     }
     if request.Materials != nil {
         var _materials []*map[string]interface {}
-        for _, item := range *request.Materials {
+        for _, item := range request.Materials {
             _materials = append(_materials, item.ToDict())
         }
         bodies["materials"] = _materials
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -1414,17 +1414,17 @@ func (p Gs2EnhanceRestClient) DirectEnhanceByUserIdAsync(
 	callback chan<- DirectEnhanceByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/enhance/{rateName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RateName != nil {
+    if request.RateName != nil && *request.RateName != ""  {
         path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
     } else {
         path = strings.ReplaceAll(path, "{rateName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1437,14 +1437,14 @@ func (p Gs2EnhanceRestClient) DirectEnhanceByUserIdAsync(
     }
     if request.Materials != nil {
         var _materials []*map[string]interface {}
-        for _, item := range *request.Materials {
+        for _, item := range request.Materials {
             _materials = append(_materials, item.ToDict())
         }
         bodies["materials"] = _materials
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -1616,7 +1616,7 @@ func (p Gs2EnhanceRestClient) DescribeProgressesByUserIdAsync(
 	callback chan<- DescribeProgressesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/progress"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1709,12 +1709,12 @@ func (p Gs2EnhanceRestClient) CreateProgressByUserIdAsync(
 	callback chan<- CreateProgressByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/progress"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1730,7 +1730,7 @@ func (p Gs2EnhanceRestClient) CreateProgressByUserIdAsync(
     }
     if request.Materials != nil {
         var _materials []*map[string]interface {}
-        for _, item := range *request.Materials {
+        for _, item := range request.Materials {
             _materials = append(_materials, item.ToDict())
         }
         bodies["materials"] = _materials
@@ -1817,7 +1817,7 @@ func (p Gs2EnhanceRestClient) GetProgressAsync(
 	callback chan<- GetProgressAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/progress"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1904,12 +1904,12 @@ func (p Gs2EnhanceRestClient) GetProgressByUserIdAsync(
 	callback chan<- GetProgressByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/progress"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1993,12 +1993,12 @@ func (p Gs2EnhanceRestClient) StartAsync(
 	callback chan<- StartAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/progress/rate/{rateName}/start"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RateName != nil {
+    if request.RateName != nil && *request.RateName != ""  {
         path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
     } else {
         path = strings.ReplaceAll(path, "{rateName}", "null")
@@ -2011,7 +2011,7 @@ func (p Gs2EnhanceRestClient) StartAsync(
     }
     if request.Materials != nil {
         var _materials []*map[string]interface {}
-        for _, item := range *request.Materials {
+        for _, item := range request.Materials {
             _materials = append(_materials, item.ToDict())
         }
         bodies["materials"] = _materials
@@ -2021,7 +2021,7 @@ func (p Gs2EnhanceRestClient) StartAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2108,17 +2108,17 @@ func (p Gs2EnhanceRestClient) StartByUserIdAsync(
 	callback chan<- StartByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/progress/rate/{rateName}/start"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RateName != nil {
+    if request.RateName != nil && *request.RateName != ""  {
         path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
     } else {
         path = strings.ReplaceAll(path, "{rateName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2131,7 +2131,7 @@ func (p Gs2EnhanceRestClient) StartByUserIdAsync(
     }
     if request.Materials != nil {
         var _materials []*map[string]interface {}
-        for _, item := range *request.Materials {
+        for _, item := range request.Materials {
             _materials = append(_materials, item.ToDict())
         }
         bodies["materials"] = _materials
@@ -2141,7 +2141,7 @@ func (p Gs2EnhanceRestClient) StartByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2225,7 +2225,7 @@ func (p Gs2EnhanceRestClient) EndAsync(
 	callback chan<- EndAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/progress/end"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2235,7 +2235,7 @@ func (p Gs2EnhanceRestClient) EndAsync(
     var bodies = core.Bodies{}
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2322,12 +2322,12 @@ func (p Gs2EnhanceRestClient) EndByUserIdAsync(
 	callback chan<- EndByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/progress/end"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2337,7 +2337,7 @@ func (p Gs2EnhanceRestClient) EndByUserIdAsync(
     var bodies = core.Bodies{}
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2421,7 +2421,7 @@ func (p Gs2EnhanceRestClient) DeleteProgressAsync(
 	callback chan<- DeleteProgressAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/progress"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2508,12 +2508,12 @@ func (p Gs2EnhanceRestClient) DeleteProgressByUserIdAsync(
 	callback chan<- DeleteProgressByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/progress"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2773,7 +2773,7 @@ func (p Gs2EnhanceRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2857,7 +2857,7 @@ func (p Gs2EnhanceRestClient) GetCurrentRateMasterAsync(
 	callback chan<- GetCurrentRateMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2941,7 +2941,7 @@ func (p Gs2EnhanceRestClient) UpdateCurrentRateMasterAsync(
 	callback chan<- UpdateCurrentRateMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -3031,7 +3031,7 @@ func (p Gs2EnhanceRestClient) UpdateCurrentRateMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentRateMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")

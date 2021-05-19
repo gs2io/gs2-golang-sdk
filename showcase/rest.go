@@ -258,7 +258,7 @@ func (p Gs2ShowcaseRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -342,7 +342,7 @@ func (p Gs2ShowcaseRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -426,7 +426,7 @@ func (p Gs2ShowcaseRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -525,7 +525,7 @@ func (p Gs2ShowcaseRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -609,7 +609,7 @@ func (p Gs2ShowcaseRestClient) DescribeSalesItemMastersAsync(
 	callback chan<- DescribeSalesItemMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/salesItem"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -699,7 +699,7 @@ func (p Gs2ShowcaseRestClient) CreateSalesItemMasterAsync(
 	callback chan<- CreateSalesItemMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/salesItem"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -718,14 +718,14 @@ func (p Gs2ShowcaseRestClient) CreateSalesItemMasterAsync(
     }
     if request.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *request.ConsumeActions {
+        for _, item := range request.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         bodies["consumeActions"] = _consumeActions
     }
     if request.AcquireActions != nil {
         var _acquireActions []*map[string]interface {}
-        for _, item := range *request.AcquireActions {
+        for _, item := range request.AcquireActions {
             _acquireActions = append(_acquireActions, item.ToDict())
         }
         bodies["acquireActions"] = _acquireActions
@@ -809,12 +809,12 @@ func (p Gs2ShowcaseRestClient) GetSalesItemMasterAsync(
 	callback chan<- GetSalesItemMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/salesItem/{salesItemName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.SalesItemName != nil {
+    if request.SalesItemName != nil && *request.SalesItemName != ""  {
         path = strings.ReplaceAll(path, "{salesItemName}", core.ToString(*request.SalesItemName))
     } else {
         path = strings.ReplaceAll(path, "{salesItemName}", "null")
@@ -898,12 +898,12 @@ func (p Gs2ShowcaseRestClient) UpdateSalesItemMasterAsync(
 	callback chan<- UpdateSalesItemMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/salesItem/{salesItemName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.SalesItemName != nil {
+    if request.SalesItemName != nil && *request.SalesItemName != ""  {
         path = strings.ReplaceAll(path, "{salesItemName}", core.ToString(*request.SalesItemName))
     } else {
         path = strings.ReplaceAll(path, "{salesItemName}", "null")
@@ -919,14 +919,14 @@ func (p Gs2ShowcaseRestClient) UpdateSalesItemMasterAsync(
     }
     if request.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *request.ConsumeActions {
+        for _, item := range request.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         bodies["consumeActions"] = _consumeActions
     }
     if request.AcquireActions != nil {
         var _acquireActions []*map[string]interface {}
-        for _, item := range *request.AcquireActions {
+        for _, item := range request.AcquireActions {
             _acquireActions = append(_acquireActions, item.ToDict())
         }
         bodies["acquireActions"] = _acquireActions
@@ -1010,12 +1010,12 @@ func (p Gs2ShowcaseRestClient) DeleteSalesItemMasterAsync(
 	callback chan<- DeleteSalesItemMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/salesItem/{salesItemName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.SalesItemName != nil {
+    if request.SalesItemName != nil && *request.SalesItemName != ""  {
         path = strings.ReplaceAll(path, "{salesItemName}", core.ToString(*request.SalesItemName))
     } else {
         path = strings.ReplaceAll(path, "{salesItemName}", "null")
@@ -1099,7 +1099,7 @@ func (p Gs2ShowcaseRestClient) DescribeSalesItemGroupMastersAsync(
 	callback chan<- DescribeSalesItemGroupMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1189,7 +1189,7 @@ func (p Gs2ShowcaseRestClient) CreateSalesItemGroupMasterAsync(
 	callback chan<- CreateSalesItemGroupMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1207,8 +1207,8 @@ func (p Gs2ShowcaseRestClient) CreateSalesItemGroupMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.SalesItemNames != nil {
-        var _salesItemNames []core.String
-        for _, item := range *request.SalesItemNames {
+        var _salesItemNames []string
+        for _, item := range request.SalesItemNames {
             _salesItemNames = append(_salesItemNames, item)
         }
         bodies["salesItemNames"] = _salesItemNames
@@ -1292,12 +1292,12 @@ func (p Gs2ShowcaseRestClient) GetSalesItemGroupMasterAsync(
 	callback chan<- GetSalesItemGroupMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{salesItemGroupName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.SalesItemGroupName != nil {
+    if request.SalesItemGroupName != nil && *request.SalesItemGroupName != ""  {
         path = strings.ReplaceAll(path, "{salesItemGroupName}", core.ToString(*request.SalesItemGroupName))
     } else {
         path = strings.ReplaceAll(path, "{salesItemGroupName}", "null")
@@ -1381,12 +1381,12 @@ func (p Gs2ShowcaseRestClient) UpdateSalesItemGroupMasterAsync(
 	callback chan<- UpdateSalesItemGroupMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{salesItemGroupName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.SalesItemGroupName != nil {
+    if request.SalesItemGroupName != nil && *request.SalesItemGroupName != ""  {
         path = strings.ReplaceAll(path, "{salesItemGroupName}", core.ToString(*request.SalesItemGroupName))
     } else {
         path = strings.ReplaceAll(path, "{salesItemGroupName}", "null")
@@ -1401,8 +1401,8 @@ func (p Gs2ShowcaseRestClient) UpdateSalesItemGroupMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.SalesItemNames != nil {
-        var _salesItemNames []core.String
-        for _, item := range *request.SalesItemNames {
+        var _salesItemNames []string
+        for _, item := range request.SalesItemNames {
             _salesItemNames = append(_salesItemNames, item)
         }
         bodies["salesItemNames"] = _salesItemNames
@@ -1486,12 +1486,12 @@ func (p Gs2ShowcaseRestClient) DeleteSalesItemGroupMasterAsync(
 	callback chan<- DeleteSalesItemGroupMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{salesItemGroupName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.SalesItemGroupName != nil {
+    if request.SalesItemGroupName != nil && *request.SalesItemGroupName != ""  {
         path = strings.ReplaceAll(path, "{salesItemGroupName}", core.ToString(*request.SalesItemGroupName))
     } else {
         path = strings.ReplaceAll(path, "{salesItemGroupName}", "null")
@@ -1575,7 +1575,7 @@ func (p Gs2ShowcaseRestClient) DescribeShowcaseMastersAsync(
 	callback chan<- DescribeShowcaseMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/showcase"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1665,7 +1665,7 @@ func (p Gs2ShowcaseRestClient) CreateShowcaseMasterAsync(
 	callback chan<- CreateShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/showcase"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1684,7 +1684,7 @@ func (p Gs2ShowcaseRestClient) CreateShowcaseMasterAsync(
     }
     if request.DisplayItems != nil {
         var _displayItems []*map[string]interface {}
-        for _, item := range *request.DisplayItems {
+        for _, item := range request.DisplayItems {
             _displayItems = append(_displayItems, item.ToDict())
         }
         bodies["displayItems"] = _displayItems
@@ -1771,12 +1771,12 @@ func (p Gs2ShowcaseRestClient) GetShowcaseMasterAsync(
 	callback chan<- GetShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/showcase/{showcaseName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ShowcaseName != nil {
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
         path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
     } else {
         path = strings.ReplaceAll(path, "{showcaseName}", "null")
@@ -1860,12 +1860,12 @@ func (p Gs2ShowcaseRestClient) UpdateShowcaseMasterAsync(
 	callback chan<- UpdateShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/showcase/{showcaseName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ShowcaseName != nil {
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
         path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
     } else {
         path = strings.ReplaceAll(path, "{showcaseName}", "null")
@@ -1881,7 +1881,7 @@ func (p Gs2ShowcaseRestClient) UpdateShowcaseMasterAsync(
     }
     if request.DisplayItems != nil {
         var _displayItems []*map[string]interface {}
-        for _, item := range *request.DisplayItems {
+        for _, item := range request.DisplayItems {
             _displayItems = append(_displayItems, item.ToDict())
         }
         bodies["displayItems"] = _displayItems
@@ -1968,12 +1968,12 @@ func (p Gs2ShowcaseRestClient) DeleteShowcaseMasterAsync(
 	callback chan<- DeleteShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/showcase/{showcaseName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ShowcaseName != nil {
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
         path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
     } else {
         path = strings.ReplaceAll(path, "{showcaseName}", "null")
@@ -2057,7 +2057,7 @@ func (p Gs2ShowcaseRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2141,7 +2141,7 @@ func (p Gs2ShowcaseRestClient) GetCurrentShowcaseMasterAsync(
 	callback chan<- GetCurrentShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2225,7 +2225,7 @@ func (p Gs2ShowcaseRestClient) UpdateCurrentShowcaseMasterAsync(
 	callback chan<- UpdateCurrentShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2315,7 +2315,7 @@ func (p Gs2ShowcaseRestClient) UpdateCurrentShowcaseMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentShowcaseMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2405,7 +2405,7 @@ func (p Gs2ShowcaseRestClient) DescribeShowcasesAsync(
 	callback chan<- DescribeShowcasesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/showcase"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2492,12 +2492,12 @@ func (p Gs2ShowcaseRestClient) DescribeShowcasesByUserIdAsync(
 	callback chan<- DescribeShowcasesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/showcase"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2581,12 +2581,12 @@ func (p Gs2ShowcaseRestClient) GetShowcaseAsync(
 	callback chan<- GetShowcaseAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/showcase/{showcaseName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ShowcaseName != nil {
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
         path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
     } else {
         path = strings.ReplaceAll(path, "{showcaseName}", "null")
@@ -2673,17 +2673,17 @@ func (p Gs2ShowcaseRestClient) GetShowcaseByUserIdAsync(
 	callback chan<- GetShowcaseByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/showcase/{showcaseName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ShowcaseName != nil {
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
         path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
     } else {
         path = strings.ReplaceAll(path, "{showcaseName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2767,17 +2767,17 @@ func (p Gs2ShowcaseRestClient) BuyAsync(
 	callback chan<- BuyAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/showcase/{showcaseName}/{displayItemId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ShowcaseName != nil {
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
         path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
     } else {
         path = strings.ReplaceAll(path, "{showcaseName}", "null")
     }
-    if request.DisplayItemId != nil {
+    if request.DisplayItemId != nil && *request.DisplayItemId != ""  {
         path = strings.ReplaceAll(path, "{displayItemId}", core.ToString(*request.DisplayItemId))
     } else {
         path = strings.ReplaceAll(path, "{displayItemId}", "null")
@@ -2787,7 +2787,7 @@ func (p Gs2ShowcaseRestClient) BuyAsync(
     var bodies = core.Bodies{}
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2874,22 +2874,22 @@ func (p Gs2ShowcaseRestClient) BuyByUserIdAsync(
 	callback chan<- BuyByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/showcase/{showcaseName}/{displayItemId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ShowcaseName != nil {
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
         path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
     } else {
         path = strings.ReplaceAll(path, "{showcaseName}", "null")
     }
-    if request.DisplayItemId != nil {
+    if request.DisplayItemId != nil && *request.DisplayItemId != ""  {
         path = strings.ReplaceAll(path, "{displayItemId}", core.ToString(*request.DisplayItemId))
     } else {
         path = strings.ReplaceAll(path, "{displayItemId}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2899,7 +2899,7 @@ func (p Gs2ShowcaseRestClient) BuyByUserIdAsync(
     var bodies = core.Bodies{}
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config

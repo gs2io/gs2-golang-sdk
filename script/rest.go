@@ -252,7 +252,7 @@ func (p Gs2ScriptRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -336,7 +336,7 @@ func (p Gs2ScriptRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -420,7 +420,7 @@ func (p Gs2ScriptRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -513,7 +513,7 @@ func (p Gs2ScriptRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -597,7 +597,7 @@ func (p Gs2ScriptRestClient) DescribeScriptsAsync(
 	callback chan<- DescribeScriptsAsyncResult,
 ) {
 	path := "/{namespaceName}/script"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -687,7 +687,7 @@ func (p Gs2ScriptRestClient) CreateScriptAsync(
 	callback chan<- CreateScriptAsyncResult,
 ) {
 	path := "/{namespaceName}/script"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -783,7 +783,7 @@ func (p Gs2ScriptRestClient) CreateScriptFromGitHubAsync(
 	callback chan<- CreateScriptFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/script/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -879,12 +879,12 @@ func (p Gs2ScriptRestClient) GetScriptAsync(
 	callback chan<- GetScriptAsyncResult,
 ) {
 	path := "/{namespaceName}/script/{scriptName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ScriptName != nil {
+    if request.ScriptName != nil && *request.ScriptName != ""  {
         path = strings.ReplaceAll(path, "{scriptName}", core.ToString(*request.ScriptName))
     } else {
         path = strings.ReplaceAll(path, "{scriptName}", "null")
@@ -968,12 +968,12 @@ func (p Gs2ScriptRestClient) UpdateScriptAsync(
 	callback chan<- UpdateScriptAsyncResult,
 ) {
 	path := "/{namespaceName}/script/{scriptName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ScriptName != nil {
+    if request.ScriptName != nil && *request.ScriptName != ""  {
         path = strings.ReplaceAll(path, "{scriptName}", core.ToString(*request.ScriptName))
     } else {
         path = strings.ReplaceAll(path, "{scriptName}", "null")
@@ -1066,12 +1066,12 @@ func (p Gs2ScriptRestClient) UpdateScriptFromGitHubAsync(
 	callback chan<- UpdateScriptFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/script/{scriptName}/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ScriptName != nil {
+    if request.ScriptName != nil && *request.ScriptName != ""  {
         path = strings.ReplaceAll(path, "{scriptName}", core.ToString(*request.ScriptName))
     } else {
         path = strings.ReplaceAll(path, "{scriptName}", "null")
@@ -1164,12 +1164,12 @@ func (p Gs2ScriptRestClient) DeleteScriptAsync(
 	callback chan<- DeleteScriptAsyncResult,
 ) {
 	path := "/{namespaceName}/script/{scriptName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ScriptName != nil {
+    if request.ScriptName != nil && *request.ScriptName != ""  {
         path = strings.ReplaceAll(path, "{scriptName}", core.ToString(*request.ScriptName))
     } else {
         path = strings.ReplaceAll(path, "{scriptName}", "null")

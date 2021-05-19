@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package friend
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type DescribeProfilesResult struct {
     /** プロフィールのリスト */
 	Items         []Profile	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeProfilesResult) ToDict() *map[string]interface{} {
@@ -271,7 +267,7 @@ type DescribeFollowsResult struct {
     /** フォローしているユーザーのリスト */
 	Items         []FollowUser	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeFollowsResult) ToDict() *map[string]interface{} {
@@ -298,7 +294,7 @@ type DescribeFollowsByUserIdResult struct {
     /** フォローしているユーザーのリスト */
 	Items         []FollowUser	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeFollowsByUserIdResult) ToDict() *map[string]interface{} {
@@ -433,7 +429,7 @@ type DescribeFriendsResult struct {
     /** フレンドのユーザーのリスト */
 	Items         []FriendUser	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeFriendsResult) ToDict() *map[string]interface{} {
@@ -460,7 +456,7 @@ type DescribeFriendsByUserIdResult struct {
     /** フレンドのユーザーのリスト */
 	Items         []FriendUser	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeFriendsByUserIdResult) ToDict() *map[string]interface{} {
@@ -861,13 +857,13 @@ type RejectRequestByUserIdAsyncResult struct {
 
 type DescribeBlackListResult struct {
     /** ブラックリストに登録されたユーザIDリスト */
-	Items         []core.String	`json:"items"`
+	Items         []string	`json:"items"`
 }
 
 func (p *DescribeBlackListResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Items {
 			items = append(items, item)
 		}
@@ -883,13 +879,13 @@ type DescribeBlackListAsyncResult struct {
 
 type DescribeBlackListByUserIdResult struct {
     /** ブラックリストに登録されたユーザIDリスト */
-	Items         []core.String	`json:"items"`
+	Items         []string	`json:"items"`
 }
 
 func (p *DescribeBlackListByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Items {
 			items = append(items, item)
 		}

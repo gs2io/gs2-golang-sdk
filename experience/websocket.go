@@ -1309,7 +1309,7 @@ func (p Gs2ExperienceWebSocketClient) CreateThresholdMasterAsync(
     }
     if request.Values != nil {
         var _values []int64
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -1486,7 +1486,7 @@ func (p Gs2ExperienceWebSocketClient) UpdateThresholdMasterAsync(
     }
     if request.Values != nil {
         var _values []int64
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -1987,7 +1987,7 @@ func (p Gs2ExperienceWebSocketClient) DescribeStatusesAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeStatusesAsyncHandler(
@@ -2166,7 +2166,7 @@ func (p Gs2ExperienceWebSocketClient) GetStatusAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getStatusAsyncHandler(
@@ -2345,7 +2345,7 @@ func (p Gs2ExperienceWebSocketClient) GetStatusWithSignatureAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getStatusWithSignatureAsyncHandler(

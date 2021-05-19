@@ -592,7 +592,7 @@ func (p Gs2DatastoreWebSocketClient) DescribeDataObjectsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeDataObjectsAsyncHandler(
@@ -771,8 +771,8 @@ func (p Gs2DatastoreWebSocketClient) PrepareUploadAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []core.String
-        for _, item := range *request.AllowUserIds {
+        var _allowUserIds []string
+        for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
         bodies["allowUserIds"] = _allowUserIds
@@ -784,7 +784,7 @@ func (p Gs2DatastoreWebSocketClient) PrepareUploadAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.prepareUploadAsyncHandler(
@@ -875,8 +875,8 @@ func (p Gs2DatastoreWebSocketClient) PrepareUploadByUserIdAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []core.String
-        for _, item := range *request.AllowUserIds {
+        var _allowUserIds []string
+        for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
         bodies["allowUserIds"] = _allowUserIds
@@ -970,8 +970,8 @@ func (p Gs2DatastoreWebSocketClient) UpdateDataObjectAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []core.String
-        for _, item := range *request.AllowUserIds {
+        var _allowUserIds []string
+        for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
         bodies["allowUserIds"] = _allowUserIds
@@ -980,7 +980,7 @@ func (p Gs2DatastoreWebSocketClient) UpdateDataObjectAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.updateDataObjectAsyncHandler(
@@ -1068,8 +1068,8 @@ func (p Gs2DatastoreWebSocketClient) UpdateDataObjectByUserIdAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []core.String
-        for _, item := range *request.AllowUserIds {
+        var _allowUserIds []string
+        for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
         bodies["allowUserIds"] = _allowUserIds
@@ -1163,7 +1163,7 @@ func (p Gs2DatastoreWebSocketClient) PrepareReUploadAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.prepareReUploadAsyncHandler(
@@ -1336,7 +1336,7 @@ func (p Gs2DatastoreWebSocketClient) DoneUploadAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.doneUploadAsyncHandler(
@@ -1506,7 +1506,7 @@ func (p Gs2DatastoreWebSocketClient) DeleteDataObjectAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteDataObjectAsyncHandler(
@@ -1676,7 +1676,7 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.prepareDownloadAsyncHandler(
@@ -1849,7 +1849,7 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByGenerationAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.prepareDownloadByGenerationAsyncHandler(
@@ -2022,7 +2022,7 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadOwnDataAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.prepareDownloadOwnDataAsyncHandler(
@@ -2195,7 +2195,7 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadOwnDataByGenerationAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.prepareDownloadOwnDataByGenerationAsyncHandler(
@@ -2456,7 +2456,7 @@ func (p Gs2DatastoreWebSocketClient) DescribeDataObjectHistoriesAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeDataObjectHistoriesAsyncHandler(
@@ -2635,7 +2635,7 @@ func (p Gs2DatastoreWebSocketClient) GetDataObjectHistoryAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getDataObjectHistoryAsyncHandler(

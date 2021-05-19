@@ -23,244 +23,244 @@ import (
 type DescribeNamespacesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	Name *core.String	`json:"name"`
-	Description *core.String	`json:"description"`
+	Name *string	`json:"name"`
+	Description *string	`json:"description"`
 	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type GetNamespaceStatusRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Description *core.String	`json:"description"`
+	NamespaceName *string	`json:"namespaceName"`
+	Description *string	`json:"description"`
 	LogSetting *LogSetting	`json:"logSetting"`
 }
 
 type DeleteNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type DescribeEventMastersRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreateEventMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Name *core.String	`json:"name"`
-	Description *core.String	`json:"description"`
-	Metadata *core.String	`json:"metadata"`
-	ScheduleType *core.String	`json:"scheduleType"`
+	NamespaceName *string	`json:"namespaceName"`
+	Name *string	`json:"name"`
+	Description *string	`json:"description"`
+	Metadata *string	`json:"metadata"`
+	ScheduleType *string	`json:"scheduleType"`
 	AbsoluteBegin *int64	`json:"absoluteBegin"`
 	AbsoluteEnd *int64	`json:"absoluteEnd"`
-	RepeatType *core.String	`json:"repeatType"`
+	RepeatType *string	`json:"repeatType"`
 	RepeatBeginDayOfMonth *int32	`json:"repeatBeginDayOfMonth"`
 	RepeatEndDayOfMonth *int32	`json:"repeatEndDayOfMonth"`
-	RepeatBeginDayOfWeek *core.String	`json:"repeatBeginDayOfWeek"`
-	RepeatEndDayOfWeek *core.String	`json:"repeatEndDayOfWeek"`
+	RepeatBeginDayOfWeek *string	`json:"repeatBeginDayOfWeek"`
+	RepeatEndDayOfWeek *string	`json:"repeatEndDayOfWeek"`
 	RepeatBeginHour *int32	`json:"repeatBeginHour"`
 	RepeatEndHour *int32	`json:"repeatEndHour"`
-	RelativeTriggerName *core.String	`json:"relativeTriggerName"`
+	RelativeTriggerName *string	`json:"relativeTriggerName"`
 	RelativeDuration *int32	`json:"relativeDuration"`
 }
 
 type GetEventMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	EventName *core.String	`json:"eventName"`
+	NamespaceName *string	`json:"namespaceName"`
+	EventName *string	`json:"eventName"`
 }
 
 type UpdateEventMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	EventName *core.String	`json:"eventName"`
-	Description *core.String	`json:"description"`
-	Metadata *core.String	`json:"metadata"`
-	ScheduleType *core.String	`json:"scheduleType"`
+	NamespaceName *string	`json:"namespaceName"`
+	EventName *string	`json:"eventName"`
+	Description *string	`json:"description"`
+	Metadata *string	`json:"metadata"`
+	ScheduleType *string	`json:"scheduleType"`
 	AbsoluteBegin *int64	`json:"absoluteBegin"`
 	AbsoluteEnd *int64	`json:"absoluteEnd"`
-	RepeatType *core.String	`json:"repeatType"`
+	RepeatType *string	`json:"repeatType"`
 	RepeatBeginDayOfMonth *int32	`json:"repeatBeginDayOfMonth"`
 	RepeatEndDayOfMonth *int32	`json:"repeatEndDayOfMonth"`
-	RepeatBeginDayOfWeek *core.String	`json:"repeatBeginDayOfWeek"`
-	RepeatEndDayOfWeek *core.String	`json:"repeatEndDayOfWeek"`
+	RepeatBeginDayOfWeek *string	`json:"repeatBeginDayOfWeek"`
+	RepeatEndDayOfWeek *string	`json:"repeatEndDayOfWeek"`
 	RepeatBeginHour *int32	`json:"repeatBeginHour"`
 	RepeatEndHour *int32	`json:"repeatEndHour"`
-	RelativeTriggerName *core.String	`json:"relativeTriggerName"`
+	RelativeTriggerName *string	`json:"relativeTriggerName"`
 	RelativeDuration *int32	`json:"relativeDuration"`
 }
 
 type DeleteEventMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	EventName *core.String	`json:"eventName"`
+	NamespaceName *string	`json:"namespaceName"`
+	EventName *string	`json:"eventName"`
 }
 
 type DescribeTriggersRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeTriggersByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetTriggerRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	TriggerName *core.String	`json:"triggerName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	TriggerName *string	`json:"triggerName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetTriggerByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	TriggerName *core.String	`json:"triggerName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	TriggerName *string	`json:"triggerName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type TriggerByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	TriggerName *core.String	`json:"triggerName"`
-	UserId *core.String	`json:"userId"`
-	TriggerStrategy *core.String	`json:"triggerStrategy"`
+	NamespaceName *string	`json:"namespaceName"`
+	TriggerName *string	`json:"triggerName"`
+	UserId *string	`json:"userId"`
+	TriggerStrategy *string	`json:"triggerStrategy"`
 	Ttl *int32	`json:"ttl"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DeleteTriggerRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	TriggerName *core.String	`json:"triggerName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	TriggerName *string	`json:"triggerName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DeleteTriggerByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	TriggerName *core.String	`json:"triggerName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	TriggerName *string	`json:"triggerName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeEventsRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeEventsByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeRawEventsRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetEventRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	EventName *core.String	`json:"eventName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	EventName *string	`json:"eventName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetEventByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	EventName *core.String	`json:"eventName"`
-	UserId *core.String	`json:"userId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	EventName *string	`json:"eventName"`
+	UserId *string	`json:"userId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetRawEventRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	EventName *core.String	`json:"eventName"`
+	NamespaceName *string	`json:"namespaceName"`
+	EventName *string	`json:"eventName"`
 }
 
 type ExportMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetCurrentEventMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type UpdateCurrentEventMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Settings *core.String	`json:"settings"`
+	NamespaceName *string	`json:"namespaceName"`
+	Settings *string	`json:"settings"`
 }
 
 type UpdateCurrentEventMasterFromGitHubRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting	`json:"checkoutSetting"`
 }

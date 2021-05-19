@@ -264,7 +264,7 @@ func (p Gs2LotteryRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -348,7 +348,7 @@ func (p Gs2LotteryRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -432,7 +432,7 @@ func (p Gs2LotteryRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -537,7 +537,7 @@ func (p Gs2LotteryRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -621,7 +621,7 @@ func (p Gs2LotteryRestClient) DescribeLotteryModelMastersAsync(
 	callback chan<- DescribeLotteryModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/lottery"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -711,7 +711,7 @@ func (p Gs2LotteryRestClient) CreateLotteryModelMasterAsync(
 	callback chan<- CreateLotteryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/lottery"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -819,12 +819,12 @@ func (p Gs2LotteryRestClient) GetLotteryModelMasterAsync(
 	callback chan<- GetLotteryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/lottery/{lotteryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LotteryName != nil {
+    if request.LotteryName != nil && *request.LotteryName != ""  {
         path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
     } else {
         path = strings.ReplaceAll(path, "{lotteryName}", "null")
@@ -908,12 +908,12 @@ func (p Gs2LotteryRestClient) UpdateLotteryModelMasterAsync(
 	callback chan<- UpdateLotteryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/lottery/{lotteryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LotteryName != nil {
+    if request.LotteryName != nil && *request.LotteryName != ""  {
         path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
     } else {
         path = strings.ReplaceAll(path, "{lotteryName}", "null")
@@ -1018,12 +1018,12 @@ func (p Gs2LotteryRestClient) DeleteLotteryModelMasterAsync(
 	callback chan<- DeleteLotteryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/lottery/{lotteryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LotteryName != nil {
+    if request.LotteryName != nil && *request.LotteryName != ""  {
         path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
     } else {
         path = strings.ReplaceAll(path, "{lotteryName}", "null")
@@ -1107,7 +1107,7 @@ func (p Gs2LotteryRestClient) DescribePrizeTableMastersAsync(
 	callback chan<- DescribePrizeTableMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/table"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1197,7 +1197,7 @@ func (p Gs2LotteryRestClient) CreatePrizeTableMasterAsync(
 	callback chan<- CreatePrizeTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/table"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1216,7 +1216,7 @@ func (p Gs2LotteryRestClient) CreatePrizeTableMasterAsync(
     }
     if request.Prizes != nil {
         var _prizes []*map[string]interface {}
-        for _, item := range *request.Prizes {
+        for _, item := range request.Prizes {
             _prizes = append(_prizes, item.ToDict())
         }
         bodies["prizes"] = _prizes
@@ -1300,12 +1300,12 @@ func (p Gs2LotteryRestClient) GetPrizeTableMasterAsync(
 	callback chan<- GetPrizeTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/table/{prizeTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PrizeTableName != nil {
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
         path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
     } else {
         path = strings.ReplaceAll(path, "{prizeTableName}", "null")
@@ -1389,12 +1389,12 @@ func (p Gs2LotteryRestClient) UpdatePrizeTableMasterAsync(
 	callback chan<- UpdatePrizeTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/table/{prizeTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PrizeTableName != nil {
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
         path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
     } else {
         path = strings.ReplaceAll(path, "{prizeTableName}", "null")
@@ -1410,7 +1410,7 @@ func (p Gs2LotteryRestClient) UpdatePrizeTableMasterAsync(
     }
     if request.Prizes != nil {
         var _prizes []*map[string]interface {}
-        for _, item := range *request.Prizes {
+        for _, item := range request.Prizes {
             _prizes = append(_prizes, item.ToDict())
         }
         bodies["prizes"] = _prizes
@@ -1494,12 +1494,12 @@ func (p Gs2LotteryRestClient) DeletePrizeTableMasterAsync(
 	callback chan<- DeletePrizeTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/table/{prizeTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PrizeTableName != nil {
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
         path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
     } else {
         path = strings.ReplaceAll(path, "{prizeTableName}", "null")
@@ -1583,7 +1583,7 @@ func (p Gs2LotteryRestClient) DescribeBoxesAsync(
 	callback chan<- DescribeBoxesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/box"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1676,12 +1676,12 @@ func (p Gs2LotteryRestClient) DescribeBoxesByUserIdAsync(
 	callback chan<- DescribeBoxesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/box"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1771,12 +1771,12 @@ func (p Gs2LotteryRestClient) GetBoxAsync(
 	callback chan<- GetBoxAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/box/{prizeTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PrizeTableName != nil {
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
         path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
     } else {
         path = strings.ReplaceAll(path, "{prizeTableName}", "null")
@@ -1863,17 +1863,17 @@ func (p Gs2LotteryRestClient) GetBoxByUserIdAsync(
 	callback chan<- GetBoxByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/box/{prizeTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PrizeTableName != nil {
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
         path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
     } else {
         path = strings.ReplaceAll(path, "{prizeTableName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1957,17 +1957,17 @@ func (p Gs2LotteryRestClient) GetRawBoxByUserIdAsync(
 	callback chan<- GetRawBoxByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/box/{prizeTableName}/raw"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PrizeTableName != nil {
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
         path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
     } else {
         path = strings.ReplaceAll(path, "{prizeTableName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2051,12 +2051,12 @@ func (p Gs2LotteryRestClient) ResetBoxAsync(
 	callback chan<- ResetBoxAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/box/{prizeTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PrizeTableName != nil {
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
         path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
     } else {
         path = strings.ReplaceAll(path, "{prizeTableName}", "null")
@@ -2143,17 +2143,17 @@ func (p Gs2LotteryRestClient) ResetBoxByUserIdAsync(
 	callback chan<- ResetBoxByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/box/{prizeTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PrizeTableName != nil {
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
         path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
     } else {
         path = strings.ReplaceAll(path, "{prizeTableName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2237,7 +2237,7 @@ func (p Gs2LotteryRestClient) DescribeLotteryModelsAsync(
 	callback chan<- DescribeLotteryModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/lottery"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2321,12 +2321,12 @@ func (p Gs2LotteryRestClient) GetLotteryModelAsync(
 	callback chan<- GetLotteryModelAsyncResult,
 ) {
 	path := "/{namespaceName}/lottery/{lotteryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LotteryName != nil {
+    if request.LotteryName != nil && *request.LotteryName != ""  {
         path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
     } else {
         path = strings.ReplaceAll(path, "{lotteryName}", "null")
@@ -2410,7 +2410,7 @@ func (p Gs2LotteryRestClient) DescribePrizeTablesAsync(
 	callback chan<- DescribePrizeTablesAsyncResult,
 ) {
 	path := "/{namespaceName}/table"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2494,12 +2494,12 @@ func (p Gs2LotteryRestClient) GetPrizeTableAsync(
 	callback chan<- GetPrizeTableAsyncResult,
 ) {
 	path := "/{namespaceName}/table/{prizeTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PrizeTableName != nil {
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
         path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
     } else {
         path = strings.ReplaceAll(path, "{prizeTableName}", "null")
@@ -2583,17 +2583,17 @@ func (p Gs2LotteryRestClient) DrawByUserIdAsync(
 	callback chan<- DrawByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/lottery/{lotteryName}/draw"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LotteryName != nil {
+    if request.LotteryName != nil && *request.LotteryName != ""  {
         path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
     } else {
         path = strings.ReplaceAll(path, "{lotteryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2606,7 +2606,7 @@ func (p Gs2LotteryRestClient) DrawByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2690,12 +2690,12 @@ func (p Gs2LotteryRestClient) DescribeProbabilitiesAsync(
 	callback chan<- DescribeProbabilitiesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/lottery/{lotteryName}/probability"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LotteryName != nil {
+    if request.LotteryName != nil && *request.LotteryName != ""  {
         path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
     } else {
         path = strings.ReplaceAll(path, "{lotteryName}", "null")
@@ -2782,17 +2782,17 @@ func (p Gs2LotteryRestClient) DescribeProbabilitiesByUserIdAsync(
 	callback chan<- DescribeProbabilitiesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/lottery/{lotteryName}/probability"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.LotteryName != nil {
+    if request.LotteryName != nil && *request.LotteryName != ""  {
         path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
     } else {
         path = strings.ReplaceAll(path, "{lotteryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2964,7 +2964,7 @@ func (p Gs2LotteryRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -3048,7 +3048,7 @@ func (p Gs2LotteryRestClient) GetCurrentLotteryMasterAsync(
 	callback chan<- GetCurrentLotteryMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -3132,7 +3132,7 @@ func (p Gs2LotteryRestClient) UpdateCurrentLotteryMasterAsync(
 	callback chan<- UpdateCurrentLotteryMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -3222,7 +3222,7 @@ func (p Gs2LotteryRestClient) UpdateCurrentLotteryMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentLotteryMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")

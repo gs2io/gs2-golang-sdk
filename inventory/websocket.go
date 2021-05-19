@@ -2152,7 +2152,7 @@ func (p Gs2InventoryWebSocketClient) DescribeInventoriesAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeInventoriesAsyncHandler(
@@ -2325,7 +2325,7 @@ func (p Gs2InventoryWebSocketClient) GetInventoryAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getInventoryAsyncHandler(
@@ -2926,7 +2926,7 @@ func (p Gs2InventoryWebSocketClient) DescribeItemSetsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeItemSetsAsyncHandler(
@@ -3108,7 +3108,7 @@ func (p Gs2InventoryWebSocketClient) GetItemSetAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getItemSetAsyncHandler(
@@ -3293,7 +3293,7 @@ func (p Gs2InventoryWebSocketClient) GetItemWithSignatureAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getItemWithSignatureAsyncHandler(
@@ -3581,7 +3581,7 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.consumeItemSetAsyncHandler(
@@ -3766,7 +3766,7 @@ func (p Gs2InventoryWebSocketClient) DescribeReferenceOfAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeReferenceOfAsyncHandler(
@@ -3951,7 +3951,7 @@ func (p Gs2InventoryWebSocketClient) GetReferenceOfAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getReferenceOfAsyncHandler(
@@ -4142,7 +4142,7 @@ func (p Gs2InventoryWebSocketClient) VerifyReferenceOfAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.verifyReferenceOfAsyncHandler(
@@ -4333,7 +4333,7 @@ func (p Gs2InventoryWebSocketClient) AddReferenceOfAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.addReferenceOfAsyncHandler(
@@ -4521,7 +4521,7 @@ func (p Gs2InventoryWebSocketClient) DeleteReferenceOfAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteReferenceOfAsyncHandler(

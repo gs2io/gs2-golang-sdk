@@ -16,27 +16,23 @@ permissions and limitations under the License.
 
 package exchange
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 直接交換APIの呼び出しを許可する。許可しない場合はスタンプシート経由でしか交換できない */
 	EnableDirectExchange *bool   `json:"enableDirectExchange"`
     /** 交換結果の受け取りに待ち時間の発生する交換機能を利用するか */
 	EnableAwaitExchange *bool   `json:"enableAwaitExchange"`
     /** 交換処理をジョブとして追加するキューのネームスペース のGRN */
-	QueueNamespaceId *core.String   `json:"queueNamespaceId"`
+	QueueNamespaceId *string   `json:"queueNamespaceId"`
     /** 交換処理のスタンプシートで使用する暗号鍵GRN */
-	KeyId *core.String   `json:"keyId"`
+	KeyId *string   `json:"keyId"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** 作成日時 */
@@ -65,23 +61,23 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type RateModel struct {
     /** 交換レートマスター */
-	RateModelId *core.String   `json:"rateModelId"`
+	RateModelId *string   `json:"rateModelId"`
     /** 交換レートの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 交換レートの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 消費アクションリスト */
-	ConsumeActions *[]*ConsumeAction   `json:"consumeActions"`
+	ConsumeActions []ConsumeAction   `json:"consumeActions"`
     /** 交換の種類 */
-	TimingType *core.String   `json:"timingType"`
+	TimingType *string   `json:"timingType"`
     /** 交換実行から実際に報酬を受け取れるようになるまでの待ち時間（分） */
 	LockTime *int32   `json:"lockTime"`
     /** スキップをすることができるか */
 	EnableSkip *bool   `json:"enableSkip"`
     /** 時短消費アクションリスト */
-	SkipConsumeActions *[]*ConsumeAction   `json:"skipConsumeActions"`
+	SkipConsumeActions []ConsumeAction   `json:"skipConsumeActions"`
     /** 入手アクションリスト */
-	AcquireActions *[]*AcquireAction   `json:"acquireActions"`
+	AcquireActions []AcquireAction   `json:"acquireActions"`
 }
 
 func (p *RateModel) ToDict() *map[string]interface{} {
@@ -91,7 +87,7 @@ func (p *RateModel) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *p.ConsumeActions {
+        for _, item := range p.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         data["consumeActions"] = &_consumeActions
@@ -101,14 +97,14 @@ func (p *RateModel) ToDict() *map[string]interface{} {
     data["enableSkip"] = p.EnableSkip
     if p.SkipConsumeActions != nil {
         var _skipConsumeActions []*map[string]interface {}
-        for _, item := range *p.SkipConsumeActions {
+        for _, item := range p.SkipConsumeActions {
             _skipConsumeActions = append(_skipConsumeActions, item.ToDict())
         }
         data["skipConsumeActions"] = &_skipConsumeActions
     }
     if p.AcquireActions != nil {
         var _acquireActions []*map[string]interface {}
-        for _, item := range *p.AcquireActions {
+        for _, item := range p.AcquireActions {
             _acquireActions = append(_acquireActions, item.ToDict())
         }
         data["acquireActions"] = &_acquireActions
@@ -118,25 +114,25 @@ func (p *RateModel) ToDict() *map[string]interface{} {
 
 type RateModelMaster struct {
     /** 交換レートマスター */
-	RateModelId *core.String   `json:"rateModelId"`
+	RateModelId *string   `json:"rateModelId"`
     /** 交換レート名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 交換レートマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 交換レートのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 消費アクションリスト */
-	ConsumeActions *[]*ConsumeAction   `json:"consumeActions"`
+	ConsumeActions []ConsumeAction   `json:"consumeActions"`
     /** 交換の種類 */
-	TimingType *core.String   `json:"timingType"`
+	TimingType *string   `json:"timingType"`
     /** 交換実行から実際に報酬を受け取れるようになるまでの待ち時間（分） */
 	LockTime *int32   `json:"lockTime"`
     /** スキップをすることができるか */
 	EnableSkip *bool   `json:"enableSkip"`
     /** 時短消費アクションリスト */
-	SkipConsumeActions *[]*ConsumeAction   `json:"skipConsumeActions"`
+	SkipConsumeActions []ConsumeAction   `json:"skipConsumeActions"`
     /** 入手アクションリスト */
-	AcquireActions *[]*AcquireAction   `json:"acquireActions"`
+	AcquireActions []AcquireAction   `json:"acquireActions"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -151,7 +147,7 @@ func (p *RateModelMaster) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *p.ConsumeActions {
+        for _, item := range p.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         data["consumeActions"] = &_consumeActions
@@ -161,14 +157,14 @@ func (p *RateModelMaster) ToDict() *map[string]interface{} {
     data["enableSkip"] = p.EnableSkip
     if p.SkipConsumeActions != nil {
         var _skipConsumeActions []*map[string]interface {}
-        for _, item := range *p.SkipConsumeActions {
+        for _, item := range p.SkipConsumeActions {
             _skipConsumeActions = append(_skipConsumeActions, item.ToDict())
         }
         data["skipConsumeActions"] = &_skipConsumeActions
     }
     if p.AcquireActions != nil {
         var _acquireActions []*map[string]interface {}
-        for _, item := range *p.AcquireActions {
+        for _, item := range p.AcquireActions {
             _acquireActions = append(_acquireActions, item.ToDict())
         }
         data["acquireActions"] = &_acquireActions
@@ -180,9 +176,9 @@ func (p *RateModelMaster) ToDict() *map[string]interface{} {
 
 type CurrentRateMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentRateMaster) ToDict() *map[string]interface{} {
@@ -194,13 +190,13 @@ func (p *CurrentRateMaster) ToDict() *map[string]interface{} {
 
 type Await struct {
     /** 交換待機 */
-	AwaitId *core.String   `json:"awaitId"`
+	AwaitId *string   `json:"awaitId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 交換レート名 */
-	RateName *core.String   `json:"rateName"`
+	RateName *string   `json:"rateName"`
     /** 交換待機の名前 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 交換数 */
 	Count *int32   `json:"count"`
     /** 作成日時 */
@@ -220,15 +216,15 @@ func (p *Await) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -243,9 +239,9 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type Config struct {
     /** 名前 */
-	Key *core.String   `json:"key"`
+	Key *string   `json:"key"`
     /** 値 */
-	Value *core.String   `json:"value"`
+	Value *string   `json:"value"`
 }
 
 func (p *Config) ToDict() *map[string]interface{} {
@@ -257,19 +253,19 @@ func (p *Config) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -286,7 +282,7 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {
@@ -297,9 +293,9 @@ func (p *LogSetting) ToDict() *map[string]interface{} {
 
 type AcquireAction struct {
     /** スタンプシートで実行するアクションの種類 */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 入手リクエストのJSON */
-	Request *core.String   `json:"request"`
+	Request *string   `json:"request"`
 }
 
 func (p *AcquireAction) ToDict() *map[string]interface{} {
@@ -311,9 +307,9 @@ func (p *AcquireAction) ToDict() *map[string]interface{} {
 
 type ConsumeAction struct {
     /** スタンプタスクで実行するアクションの種類 */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 消費リクエストのJSON */
-	Request *core.String   `json:"request"`
+	Request *string   `json:"request"`
 }
 
 func (p *ConsumeAction) ToDict() *map[string]interface{} {

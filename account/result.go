@@ -16,30 +16,26 @@ permissions and limitations under the License.
 
 package account
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
-    /** ネームスペースのリスト */
-	Items         []Namespace	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	/** ネームスペースのリスト */
+	Items []Namespace `json:"items"`
+	/** リストの続きを取得するためのページトークン */
+	NextPageToken *string `json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Namespace, 0)
-    	for _, item := range p.Items {
+	var data = map[string]interface{}{}
+	if p.Items != nil {
+		items := make([]Namespace, 0)
+		for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+	}
+	if p.NextPageToken != nil {
+		data["nextPageToken"] = p.NextPageToken
+	}
+	return &data
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -48,16 +44,16 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 type CreateNamespaceResult struct {
-    /** 作成したネームスペース */
-	Item         *Namespace	`json:"item"`
+	/** 作成したネームスペース */
+	Item *Namespace `json:"item"`
 }
 
 func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	return &data
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -66,16 +62,16 @@ type CreateNamespaceAsyncResult struct {
 }
 
 type GetNamespaceStatusResult struct {
-    /** None */
-	Status         *core.String	`json:"status"`
+	/** None */
+	Status *string `json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Status != nil {
-        data["status"] = p.Status
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Status != nil {
+		data["status"] = p.Status
+	}
+	return &data
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -84,16 +80,16 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 type GetNamespaceResult struct {
-    /** ネームスペース */
-	Item         *Namespace	`json:"item"`
+	/** ネームスペース */
+	Item *Namespace `json:"item"`
 }
 
 func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	return &data
 }
 
 type GetNamespaceAsyncResult struct {
@@ -102,16 +98,16 @@ type GetNamespaceAsyncResult struct {
 }
 
 type UpdateNamespaceResult struct {
-    /** 更新したネームスペース */
-	Item         *Namespace	`json:"item"`
+	/** 更新したネームスペース */
+	Item *Namespace `json:"item"`
 }
 
 func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	return &data
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -123,8 +119,8 @@ type DeleteNamespaceResult struct {
 }
 
 func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+	var data = map[string]interface{}{}
+	return &data
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -133,25 +129,25 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 type DescribeAccountsResult struct {
-    /** ゲームプレイヤーアカウントのリスト */
-	Items         []Account	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	/** ゲームプレイヤーアカウントのリスト */
+	Items []Account `json:"items"`
+	/** リストの続きを取得するためのページトークン */
+	NextPageToken *string `json:"nextPageToken"`
 }
 
 func (p *DescribeAccountsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Account, 0)
-    	for _, item := range p.Items {
+	var data = map[string]interface{}{}
+	if p.Items != nil {
+		items := make([]Account, 0)
+		for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+	}
+	if p.NextPageToken != nil {
+		data["nextPageToken"] = p.NextPageToken
+	}
+	return &data
 }
 
 type DescribeAccountsAsyncResult struct {
@@ -160,16 +156,16 @@ type DescribeAccountsAsyncResult struct {
 }
 
 type CreateAccountResult struct {
-    /** 作成したゲームプレイヤーアカウント */
-	Item         *Account	`json:"item"`
+	/** 作成したゲームプレイヤーアカウント */
+	Item *Account `json:"item"`
 }
 
 func (p *CreateAccountResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	return &data
 }
 
 type CreateAccountAsyncResult struct {
@@ -178,16 +174,16 @@ type CreateAccountAsyncResult struct {
 }
 
 type UpdateTimeOffsetResult struct {
-    /** 更新したゲームプレイヤーアカウント */
-	Item         *Account	`json:"item"`
+	/** 更新したゲームプレイヤーアカウント */
+	Item *Account `json:"item"`
 }
 
 func (p *UpdateTimeOffsetResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	return &data
 }
 
 type UpdateTimeOffsetAsyncResult struct {
@@ -196,16 +192,16 @@ type UpdateTimeOffsetAsyncResult struct {
 }
 
 type GetAccountResult struct {
-    /** ゲームプレイヤーアカウント */
-	Item         *Account	`json:"item"`
+	/** ゲームプレイヤーアカウント */
+	Item *Account `json:"item"`
 }
 
 func (p *GetAccountResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	return &data
 }
 
 type GetAccountAsyncResult struct {
@@ -217,8 +213,8 @@ type DeleteAccountResult struct {
 }
 
 func (p *DeleteAccountResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+	var data = map[string]interface{}{}
+	return &data
 }
 
 type DeleteAccountAsyncResult struct {
@@ -227,26 +223,26 @@ type DeleteAccountAsyncResult struct {
 }
 
 type AuthenticationResult struct {
-    /** ゲームプレイヤーアカウント */
-	Item         *Account	`json:"item"`
-    /** 署名対象のアカウント情報 */
-	Body         *core.String	`json:"body"`
-    /** 署名 */
-	Signature         *core.String	`json:"signature"`
+	/** ゲームプレイヤーアカウント */
+	Item *Account `json:"item"`
+	/** 署名対象のアカウント情報 */
+	Body *string `json:"body"`
+	/** 署名 */
+	Signature *string `json:"signature"`
 }
 
 func (p *AuthenticationResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    if p.Body != nil {
-        data["body"] = p.Body
-    }
-    if p.Signature != nil {
-        data["signature"] = p.Signature
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	if p.Body != nil {
+		data["body"] = p.Body
+	}
+	if p.Signature != nil {
+		data["signature"] = p.Signature
+	}
+	return &data
 }
 
 type AuthenticationAsyncResult struct {
@@ -255,25 +251,25 @@ type AuthenticationAsyncResult struct {
 }
 
 type DescribeTakeOversResult struct {
-    /** 引き継ぎ設定のリスト */
-	Items         []TakeOver	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	/** 引き継ぎ設定のリスト */
+	Items []TakeOver `json:"items"`
+	/** リストの続きを取得するためのページトークン */
+	NextPageToken *string `json:"nextPageToken"`
 }
 
 func (p *DescribeTakeOversResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]TakeOver, 0)
-    	for _, item := range p.Items {
+	var data = map[string]interface{}{}
+	if p.Items != nil {
+		items := make([]TakeOver, 0)
+		for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+	}
+	if p.NextPageToken != nil {
+		data["nextPageToken"] = p.NextPageToken
+	}
+	return &data
 }
 
 type DescribeTakeOversAsyncResult struct {
@@ -282,25 +278,25 @@ type DescribeTakeOversAsyncResult struct {
 }
 
 type DescribeTakeOversByUserIdResult struct {
-    /** 引き継ぎ設定のリスト */
-	Items         []TakeOver	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	/** 引き継ぎ設定のリスト */
+	Items []TakeOver `json:"items"`
+	/** リストの続きを取得するためのページトークン */
+	NextPageToken *string `json:"nextPageToken"`
 }
 
 func (p *DescribeTakeOversByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]TakeOver, 0)
-    	for _, item := range p.Items {
+	var data = map[string]interface{}{}
+	if p.Items != nil {
+		items := make([]TakeOver, 0)
+		for _, item := range p.Items {
 			items = append(items, item)
 		}
 		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+	}
+	if p.NextPageToken != nil {
+		data["nextPageToken"] = p.NextPageToken
+	}
+	return &data
 }
 
 type DescribeTakeOversByUserIdAsyncResult struct {
@@ -309,16 +305,16 @@ type DescribeTakeOversByUserIdAsyncResult struct {
 }
 
 type CreateTakeOverResult struct {
-    /** 作成した引き継ぎ設定 */
-	Item         *TakeOver	`json:"item"`
+	/** 作成した引き継ぎ設定 */
+	Item *TakeOver `json:"item"`
 }
 
 func (p *CreateTakeOverResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	return &data
 }
 
 type CreateTakeOverAsyncResult struct {
@@ -327,16 +323,16 @@ type CreateTakeOverAsyncResult struct {
 }
 
 type CreateTakeOverByUserIdResult struct {
-    /** 作成した引き継ぎ設定 */
-	Item         *TakeOver	`json:"item"`
+	/** 作成した引き継ぎ設定 */
+	Item *TakeOver `json:"item"`
 }
 
 func (p *CreateTakeOverByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	return &data
 }
 
 type CreateTakeOverByUserIdAsyncResult struct {
@@ -345,16 +341,16 @@ type CreateTakeOverByUserIdAsyncResult struct {
 }
 
 type GetTakeOverResult struct {
-    /** 引き継ぎ設定 */
-	Item         *TakeOver	`json:"item"`
+	/** 引き継ぎ設定 */
+	Item *TakeOver `json:"item"`
 }
 
 func (p *GetTakeOverResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	return &data
 }
 
 type GetTakeOverAsyncResult struct {
@@ -363,16 +359,16 @@ type GetTakeOverAsyncResult struct {
 }
 
 type GetTakeOverByUserIdResult struct {
-    /** 引き継ぎ設定 */
-	Item         *TakeOver	`json:"item"`
+	/** 引き継ぎ設定 */
+	Item *TakeOver `json:"item"`
 }
 
 func (p *GetTakeOverByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	return &data
 }
 
 type GetTakeOverByUserIdAsyncResult struct {
@@ -381,16 +377,16 @@ type GetTakeOverByUserIdAsyncResult struct {
 }
 
 type UpdateTakeOverResult struct {
-    /** 引き継ぎ設定 */
-	Item         *TakeOver	`json:"item"`
+	/** 引き継ぎ設定 */
+	Item *TakeOver `json:"item"`
 }
 
 func (p *UpdateTakeOverResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	return &data
 }
 
 type UpdateTakeOverAsyncResult struct {
@@ -399,16 +395,16 @@ type UpdateTakeOverAsyncResult struct {
 }
 
 type UpdateTakeOverByUserIdResult struct {
-    /** 引き継ぎ設定 */
-	Item         *TakeOver	`json:"item"`
+	/** 引き継ぎ設定 */
+	Item *TakeOver `json:"item"`
 }
 
 func (p *UpdateTakeOverByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	return &data
 }
 
 type UpdateTakeOverByUserIdAsyncResult struct {
@@ -420,8 +416,8 @@ type DeleteTakeOverResult struct {
 }
 
 func (p *DeleteTakeOverResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+	var data = map[string]interface{}{}
+	return &data
 }
 
 type DeleteTakeOverAsyncResult struct {
@@ -433,8 +429,8 @@ type DeleteTakeOverByUserIdentifierResult struct {
 }
 
 func (p *DeleteTakeOverByUserIdentifierResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+	var data = map[string]interface{}{}
+	return &data
 }
 
 type DeleteTakeOverByUserIdentifierAsyncResult struct {
@@ -443,16 +439,16 @@ type DeleteTakeOverByUserIdentifierAsyncResult struct {
 }
 
 type DoTakeOverResult struct {
-    /** ゲームプレイヤーアカウント */
-	Item         *Account	`json:"item"`
+	/** ゲームプレイヤーアカウント */
+	Item *Account `json:"item"`
 }
 
 func (p *DoTakeOverResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+	var data = map[string]interface{}{}
+	if p.Item != nil {
+		data["item"] = p.Item.ToDict()
+	}
+	return &data
 }
 
 type DoTakeOverAsyncResult struct {

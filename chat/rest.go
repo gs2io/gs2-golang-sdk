@@ -273,7 +273,7 @@ func (p Gs2ChatRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -357,7 +357,7 @@ func (p Gs2ChatRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -441,7 +441,7 @@ func (p Gs2ChatRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -555,7 +555,7 @@ func (p Gs2ChatRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -639,7 +639,7 @@ func (p Gs2ChatRestClient) DescribeRoomsAsync(
 	callback chan<- DescribeRoomsAsyncResult,
 ) {
 	path := "/{namespaceName}/room"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -729,7 +729,7 @@ func (p Gs2ChatRestClient) CreateRoomAsync(
 	callback chan<- CreateRoomAsyncResult,
 ) {
 	path := "/{namespaceName}/room/user"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -747,8 +747,8 @@ func (p Gs2ChatRestClient) CreateRoomAsync(
         bodies["password"] = *request.Password
     }
     if request.WhiteListUserIds != nil {
-        var _whiteListUserIds []core.String
-        for _, item := range *request.WhiteListUserIds {
+        var _whiteListUserIds []string
+        for _, item := range request.WhiteListUserIds {
             _whiteListUserIds = append(_whiteListUserIds, item)
         }
         bodies["whiteListUserIds"] = _whiteListUserIds
@@ -835,7 +835,7 @@ func (p Gs2ChatRestClient) CreateRoomFromBackendAsync(
 	callback chan<- CreateRoomFromBackendAsyncResult,
 ) {
 	path := "/{namespaceName}/room"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -856,8 +856,8 @@ func (p Gs2ChatRestClient) CreateRoomFromBackendAsync(
         bodies["password"] = *request.Password
     }
     if request.WhiteListUserIds != nil {
-        var _whiteListUserIds []core.String
-        for _, item := range *request.WhiteListUserIds {
+        var _whiteListUserIds []string
+        for _, item := range request.WhiteListUserIds {
             _whiteListUserIds = append(_whiteListUserIds, item)
         }
         bodies["whiteListUserIds"] = _whiteListUserIds
@@ -941,12 +941,12 @@ func (p Gs2ChatRestClient) GetRoomAsync(
 	callback chan<- GetRoomAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
@@ -1030,12 +1030,12 @@ func (p Gs2ChatRestClient) UpdateRoomAsync(
 	callback chan<- UpdateRoomAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
@@ -1050,8 +1050,8 @@ func (p Gs2ChatRestClient) UpdateRoomAsync(
         bodies["password"] = *request.Password
     }
     if request.WhiteListUserIds != nil {
-        var _whiteListUserIds []core.String
-        for _, item := range *request.WhiteListUserIds {
+        var _whiteListUserIds []string
+        for _, item := range request.WhiteListUserIds {
             _whiteListUserIds = append(_whiteListUserIds, item)
         }
         bodies["whiteListUserIds"] = _whiteListUserIds
@@ -1135,12 +1135,12 @@ func (p Gs2ChatRestClient) DeleteRoomAsync(
 	callback chan<- DeleteRoomAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/user"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
@@ -1227,12 +1227,12 @@ func (p Gs2ChatRestClient) DeleteRoomFromBackendAsync(
 	callback chan<- DeleteRoomFromBackendAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
@@ -1319,12 +1319,12 @@ func (p Gs2ChatRestClient) DescribeMessagesAsync(
 	callback chan<- DescribeMessagesAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/message"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
@@ -1417,12 +1417,12 @@ func (p Gs2ChatRestClient) PostAsync(
 	callback chan<- PostAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/message"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
@@ -1521,17 +1521,17 @@ func (p Gs2ChatRestClient) PostByUserIdAsync(
 	callback chan<- PostByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/message/user/{userId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1627,17 +1627,17 @@ func (p Gs2ChatRestClient) GetMessageAsync(
 	callback chan<- GetMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/message/{messageName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
     }
-    if request.MessageName != nil {
+    if request.MessageName != nil && *request.MessageName != ""  {
         path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
     } else {
         path = strings.ReplaceAll(path, "{messageName}", "null")
@@ -1721,17 +1721,17 @@ func (p Gs2ChatRestClient) DeleteMessageAsync(
 	callback chan<- DeleteMessageAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/message/{messageName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
     }
-    if request.MessageName != nil {
+    if request.MessageName != nil && *request.MessageName != ""  {
         path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
     } else {
         path = strings.ReplaceAll(path, "{messageName}", "null")
@@ -1815,7 +1815,7 @@ func (p Gs2ChatRestClient) DescribeSubscribesAsync(
 	callback chan<- DescribeSubscribesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/room/subscribe"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1908,12 +1908,12 @@ func (p Gs2ChatRestClient) DescribeSubscribesByUserIdAsync(
 	callback chan<- DescribeSubscribesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/room/subscribe"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2003,12 +2003,12 @@ func (p Gs2ChatRestClient) DescribeSubscribesByRoomNameAsync(
 	callback chan<- DescribeSubscribesByRoomNameAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}/subscribe"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
@@ -2098,12 +2098,12 @@ func (p Gs2ChatRestClient) SubscribeAsync(
 	callback chan<- SubscribeAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/room/{roomName}/subscribe"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
@@ -2113,7 +2113,7 @@ func (p Gs2ChatRestClient) SubscribeAsync(
     var bodies = core.Bodies{}
     if request.NotificationTypes != nil {
         var _notificationTypes []*map[string]interface {}
-        for _, item := range *request.NotificationTypes {
+        for _, item := range request.NotificationTypes {
             _notificationTypes = append(_notificationTypes, item.ToDict())
         }
         bodies["notificationTypes"] = _notificationTypes
@@ -2200,17 +2200,17 @@ func (p Gs2ChatRestClient) SubscribeByUserIdAsync(
 	callback chan<- SubscribeByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/room/{roomName}/subscribe"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2220,7 +2220,7 @@ func (p Gs2ChatRestClient) SubscribeByUserIdAsync(
     var bodies = core.Bodies{}
     if request.NotificationTypes != nil {
         var _notificationTypes []*map[string]interface {}
-        for _, item := range *request.NotificationTypes {
+        for _, item := range request.NotificationTypes {
             _notificationTypes = append(_notificationTypes, item.ToDict())
         }
         bodies["notificationTypes"] = _notificationTypes
@@ -2304,12 +2304,12 @@ func (p Gs2ChatRestClient) GetSubscribeAsync(
 	callback chan<- GetSubscribeAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/room/{roomName}/subscribe"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
@@ -2396,17 +2396,17 @@ func (p Gs2ChatRestClient) GetSubscribeByUserIdAsync(
 	callback chan<- GetSubscribeByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/room/{roomName}/subscribe"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2490,12 +2490,12 @@ func (p Gs2ChatRestClient) UpdateNotificationTypeAsync(
 	callback chan<- UpdateNotificationTypeAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/room/{roomName}/subscribe/notification"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
@@ -2505,7 +2505,7 @@ func (p Gs2ChatRestClient) UpdateNotificationTypeAsync(
     var bodies = core.Bodies{}
     if request.NotificationTypes != nil {
         var _notificationTypes []*map[string]interface {}
-        for _, item := range *request.NotificationTypes {
+        for _, item := range request.NotificationTypes {
             _notificationTypes = append(_notificationTypes, item.ToDict())
         }
         bodies["notificationTypes"] = _notificationTypes
@@ -2592,17 +2592,17 @@ func (p Gs2ChatRestClient) UpdateNotificationTypeByUserIdAsync(
 	callback chan<- UpdateNotificationTypeByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/room/{roomName}/subscribe/notification"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2612,7 +2612,7 @@ func (p Gs2ChatRestClient) UpdateNotificationTypeByUserIdAsync(
     var bodies = core.Bodies{}
     if request.NotificationTypes != nil {
         var _notificationTypes []*map[string]interface {}
-        for _, item := range *request.NotificationTypes {
+        for _, item := range request.NotificationTypes {
             _notificationTypes = append(_notificationTypes, item.ToDict())
         }
         bodies["notificationTypes"] = _notificationTypes
@@ -2696,12 +2696,12 @@ func (p Gs2ChatRestClient) UnsubscribeAsync(
 	callback chan<- UnsubscribeAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/room/{roomName}/subscribe"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
@@ -2788,17 +2788,17 @@ func (p Gs2ChatRestClient) UnsubscribeByUserIdAsync(
 	callback chan<- UnsubscribeByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/room/{roomName}/subscribe"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")

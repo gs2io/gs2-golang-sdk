@@ -258,7 +258,7 @@ func (p Gs2DictionaryRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -342,7 +342,7 @@ func (p Gs2DictionaryRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -426,7 +426,7 @@ func (p Gs2DictionaryRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -525,7 +525,7 @@ func (p Gs2DictionaryRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -609,7 +609,7 @@ func (p Gs2DictionaryRestClient) DescribeEntryModelsAsync(
 	callback chan<- DescribeEntryModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/model"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -693,12 +693,12 @@ func (p Gs2DictionaryRestClient) GetEntryModelAsync(
 	callback chan<- GetEntryModelAsyncResult,
 ) {
 	path := "/{namespaceName}/model/{entryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.EntryName != nil {
+    if request.EntryName != nil && *request.EntryName != ""  {
         path = strings.ReplaceAll(path, "{entryName}", core.ToString(*request.EntryName))
     } else {
         path = strings.ReplaceAll(path, "{entryName}", "null")
@@ -782,7 +782,7 @@ func (p Gs2DictionaryRestClient) DescribeEntryModelMastersAsync(
 	callback chan<- DescribeEntryModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -872,7 +872,7 @@ func (p Gs2DictionaryRestClient) CreateEntryModelMasterAsync(
 	callback chan<- CreateEntryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -968,12 +968,12 @@ func (p Gs2DictionaryRestClient) GetEntryModelMasterAsync(
 	callback chan<- GetEntryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{entryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.EntryName != nil {
+    if request.EntryName != nil && *request.EntryName != ""  {
         path = strings.ReplaceAll(path, "{entryName}", core.ToString(*request.EntryName))
     } else {
         path = strings.ReplaceAll(path, "{entryName}", "null")
@@ -1057,12 +1057,12 @@ func (p Gs2DictionaryRestClient) UpdateEntryModelMasterAsync(
 	callback chan<- UpdateEntryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{entryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.EntryName != nil {
+    if request.EntryName != nil && *request.EntryName != ""  {
         path = strings.ReplaceAll(path, "{entryName}", core.ToString(*request.EntryName))
     } else {
         path = strings.ReplaceAll(path, "{entryName}", "null")
@@ -1155,12 +1155,12 @@ func (p Gs2DictionaryRestClient) DeleteEntryModelMasterAsync(
 	callback chan<- DeleteEntryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{entryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.EntryName != nil {
+    if request.EntryName != nil && *request.EntryName != ""  {
         path = strings.ReplaceAll(path, "{entryName}", core.ToString(*request.EntryName))
     } else {
         path = strings.ReplaceAll(path, "{entryName}", "null")
@@ -1244,7 +1244,7 @@ func (p Gs2DictionaryRestClient) DescribeEntriesAsync(
 	callback chan<- DescribeEntriesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/entry"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1337,12 +1337,12 @@ func (p Gs2DictionaryRestClient) DescribeEntriesByUserIdAsync(
 	callback chan<- DescribeEntriesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/entry"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1432,12 +1432,12 @@ func (p Gs2DictionaryRestClient) AddEntriesByUserIdAsync(
 	callback chan<- AddEntriesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/entry"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1446,8 +1446,8 @@ func (p Gs2DictionaryRestClient) AddEntriesByUserIdAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.EntryModelNames != nil {
-        var _entryModelNames []core.String
-        for _, item := range *request.EntryModelNames {
+        var _entryModelNames []string
+        for _, item := range request.EntryModelNames {
             _entryModelNames = append(_entryModelNames, item)
         }
         bodies["entryModelNames"] = _entryModelNames
@@ -1531,12 +1531,12 @@ func (p Gs2DictionaryRestClient) GetEntryAsync(
 	callback chan<- GetEntryAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/entry/{entryModelName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.EntryModelName != nil {
+    if request.EntryModelName != nil && *request.EntryModelName != ""  {
         path = strings.ReplaceAll(path, "{entryModelName}", core.ToString(*request.EntryModelName))
     } else {
         path = strings.ReplaceAll(path, "{entryModelName}", "null")
@@ -1623,17 +1623,17 @@ func (p Gs2DictionaryRestClient) GetEntryByUserIdAsync(
 	callback chan<- GetEntryByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/entry/{entryModelName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.EntryModelName != nil {
+    if request.EntryModelName != nil && *request.EntryModelName != ""  {
         path = strings.ReplaceAll(path, "{entryModelName}", core.ToString(*request.EntryModelName))
     } else {
         path = strings.ReplaceAll(path, "{entryModelName}", "null")
@@ -1717,12 +1717,12 @@ func (p Gs2DictionaryRestClient) GetEntryWithSignatureAsync(
 	callback chan<- GetEntryWithSignatureAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/entry/{entryModelName}/signature"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.EntryModelName != nil {
+    if request.EntryModelName != nil && *request.EntryModelName != ""  {
         path = strings.ReplaceAll(path, "{entryModelName}", core.ToString(*request.EntryModelName))
     } else {
         path = strings.ReplaceAll(path, "{entryModelName}", "null")
@@ -1812,17 +1812,17 @@ func (p Gs2DictionaryRestClient) GetEntryWithSignatureByUserIdAsync(
 	callback chan<- GetEntryWithSignatureByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/entry/{entryModelName}/signature"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.EntryModelName != nil {
+    if request.EntryModelName != nil && *request.EntryModelName != ""  {
         path = strings.ReplaceAll(path, "{entryModelName}", core.ToString(*request.EntryModelName))
     } else {
         path = strings.ReplaceAll(path, "{entryModelName}", "null")
@@ -1909,12 +1909,12 @@ func (p Gs2DictionaryRestClient) ResetByUserIdAsync(
 	callback chan<- ResetByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/entry"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2086,7 +2086,7 @@ func (p Gs2DictionaryRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2170,7 +2170,7 @@ func (p Gs2DictionaryRestClient) GetCurrentEntryMasterAsync(
 	callback chan<- GetCurrentEntryMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2254,7 +2254,7 @@ func (p Gs2DictionaryRestClient) UpdateCurrentEntryMasterAsync(
 	callback chan<- UpdateCurrentEntryMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2344,7 +2344,7 @@ func (p Gs2DictionaryRestClient) UpdateCurrentEntryMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentEntryMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")

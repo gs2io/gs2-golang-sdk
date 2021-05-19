@@ -285,7 +285,7 @@ func (p Gs2FriendRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -369,7 +369,7 @@ func (p Gs2FriendRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -453,7 +453,7 @@ func (p Gs2FriendRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -579,7 +579,7 @@ func (p Gs2FriendRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -663,7 +663,7 @@ func (p Gs2FriendRestClient) DescribeProfilesAsync(
 	callback chan<- DescribeProfilesAsyncResult,
 ) {
 	path := "/{namespaceName}/profile"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -753,7 +753,7 @@ func (p Gs2FriendRestClient) GetProfileAsync(
 	callback chan<- GetProfileAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/profile"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -840,12 +840,12 @@ func (p Gs2FriendRestClient) GetProfileByUserIdAsync(
 	callback chan<- GetProfileByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/profile"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -929,7 +929,7 @@ func (p Gs2FriendRestClient) UpdateProfileAsync(
 	callback chan<- UpdateProfileAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/profile"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1028,12 +1028,12 @@ func (p Gs2FriendRestClient) UpdateProfileByUserIdAsync(
 	callback chan<- UpdateProfileByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/profile"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1129,12 +1129,12 @@ func (p Gs2FriendRestClient) DeleteProfileByUserIdAsync(
 	callback chan<- DeleteProfileByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/profile"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1218,12 +1218,12 @@ func (p Gs2FriendRestClient) GetPublicProfileAsync(
 	callback chan<- GetPublicProfileAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/profile/public"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1307,7 +1307,7 @@ func (p Gs2FriendRestClient) DescribeFollowsAsync(
 	callback chan<- DescribeFollowsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/follow"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1403,12 +1403,12 @@ func (p Gs2FriendRestClient) DescribeFollowsByUserIdAsync(
 	callback chan<- DescribeFollowsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/follow"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1501,12 +1501,12 @@ func (p Gs2FriendRestClient) GetFollowAsync(
 	callback chan<- GetFollowAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/follow/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -1596,17 +1596,17 @@ func (p Gs2FriendRestClient) GetFollowByUserIdAsync(
 	callback chan<- GetFollowByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/follow/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -1693,12 +1693,12 @@ func (p Gs2FriendRestClient) FollowAsync(
 	callback chan<- FollowAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/follow/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -1788,17 +1788,17 @@ func (p Gs2FriendRestClient) FollowByUserIdAsync(
 	callback chan<- FollowByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/follow/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -1885,12 +1885,12 @@ func (p Gs2FriendRestClient) UnfollowAsync(
 	callback chan<- UnfollowAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/follow/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -1977,17 +1977,17 @@ func (p Gs2FriendRestClient) UnfollowByUserIdAsync(
 	callback chan<- UnfollowByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/follow/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -2071,7 +2071,7 @@ func (p Gs2FriendRestClient) DescribeFriendsAsync(
 	callback chan<- DescribeFriendsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/friend"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2167,12 +2167,12 @@ func (p Gs2FriendRestClient) DescribeFriendsByUserIdAsync(
 	callback chan<- DescribeFriendsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/friend"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2265,12 +2265,12 @@ func (p Gs2FriendRestClient) GetFriendAsync(
 	callback chan<- GetFriendAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/friend/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -2360,17 +2360,17 @@ func (p Gs2FriendRestClient) GetFriendByUserIdAsync(
 	callback chan<- GetFriendByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/friend/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -2457,12 +2457,12 @@ func (p Gs2FriendRestClient) DeleteFriendAsync(
 	callback chan<- DeleteFriendAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/friend/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -2549,17 +2549,17 @@ func (p Gs2FriendRestClient) DeleteFriendByUserIdAsync(
 	callback chan<- DeleteFriendByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/friend/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -2643,7 +2643,7 @@ func (p Gs2FriendRestClient) DescribeSendRequestsAsync(
 	callback chan<- DescribeSendRequestsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/sendBox"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2730,12 +2730,12 @@ func (p Gs2FriendRestClient) DescribeSendRequestsByUserIdAsync(
 	callback chan<- DescribeSendRequestsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/sendBox"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2819,12 +2819,12 @@ func (p Gs2FriendRestClient) GetSendRequestAsync(
 	callback chan<- GetSendRequestAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/sendBox/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -2911,17 +2911,17 @@ func (p Gs2FriendRestClient) GetSendRequestByUserIdAsync(
 	callback chan<- GetSendRequestByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/sendBox/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -3005,12 +3005,12 @@ func (p Gs2FriendRestClient) SendRequestAsync(
 	callback chan<- SendRequestAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/sendBox/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -3100,17 +3100,17 @@ func (p Gs2FriendRestClient) SendRequestByUserIdAsync(
 	callback chan<- SendRequestByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/sendBox/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -3197,12 +3197,12 @@ func (p Gs2FriendRestClient) DeleteRequestAsync(
 	callback chan<- DeleteRequestAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/sendBox/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -3289,17 +3289,17 @@ func (p Gs2FriendRestClient) DeleteRequestByUserIdAsync(
 	callback chan<- DeleteRequestByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/sendBox/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -3383,7 +3383,7 @@ func (p Gs2FriendRestClient) DescribeReceiveRequestsAsync(
 	callback chan<- DescribeReceiveRequestsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inbox"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -3470,12 +3470,12 @@ func (p Gs2FriendRestClient) DescribeReceiveRequestsByUserIdAsync(
 	callback chan<- DescribeReceiveRequestsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inbox"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3559,12 +3559,12 @@ func (p Gs2FriendRestClient) GetReceiveRequestAsync(
 	callback chan<- GetReceiveRequestAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inbox/{fromUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.FromUserId != nil {
+    if request.FromUserId != nil && *request.FromUserId != ""  {
         path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
     } else {
         path = strings.ReplaceAll(path, "{fromUserId}", "null")
@@ -3651,17 +3651,17 @@ func (p Gs2FriendRestClient) GetReceiveRequestByUserIdAsync(
 	callback chan<- GetReceiveRequestByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inbox/{fromUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.FromUserId != nil {
+    if request.FromUserId != nil && *request.FromUserId != ""  {
         path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
     } else {
         path = strings.ReplaceAll(path, "{fromUserId}", "null")
@@ -3745,12 +3745,12 @@ func (p Gs2FriendRestClient) AcceptRequestAsync(
 	callback chan<- AcceptRequestAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inbox/{fromUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.FromUserId != nil {
+    if request.FromUserId != nil && *request.FromUserId != ""  {
         path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
     } else {
         path = strings.ReplaceAll(path, "{fromUserId}", "null")
@@ -3840,17 +3840,17 @@ func (p Gs2FriendRestClient) AcceptRequestByUserIdAsync(
 	callback chan<- AcceptRequestByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inbox/{fromUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.FromUserId != nil {
+    if request.FromUserId != nil && *request.FromUserId != ""  {
         path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
     } else {
         path = strings.ReplaceAll(path, "{fromUserId}", "null")
@@ -3937,12 +3937,12 @@ func (p Gs2FriendRestClient) RejectRequestAsync(
 	callback chan<- RejectRequestAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inbox/{fromUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.FromUserId != nil {
+    if request.FromUserId != nil && *request.FromUserId != ""  {
         path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
     } else {
         path = strings.ReplaceAll(path, "{fromUserId}", "null")
@@ -4029,17 +4029,17 @@ func (p Gs2FriendRestClient) RejectRequestByUserIdAsync(
 	callback chan<- RejectRequestByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inbox/{fromUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.FromUserId != nil {
+    if request.FromUserId != nil && *request.FromUserId != ""  {
         path = strings.ReplaceAll(path, "{fromUserId}", core.ToString(*request.FromUserId))
     } else {
         path = strings.ReplaceAll(path, "{fromUserId}", "null")
@@ -4123,7 +4123,7 @@ func (p Gs2FriendRestClient) DescribeBlackListAsync(
 	callback chan<- DescribeBlackListAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/blackList"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -4210,12 +4210,12 @@ func (p Gs2FriendRestClient) DescribeBlackListByUserIdAsync(
 	callback chan<- DescribeBlackListByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/blackList"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -4299,12 +4299,12 @@ func (p Gs2FriendRestClient) RegisterBlackListAsync(
 	callback chan<- RegisterBlackListAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/blackList/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -4394,17 +4394,17 @@ func (p Gs2FriendRestClient) RegisterBlackListByUserIdAsync(
 	callback chan<- RegisterBlackListByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/blackList/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -4491,12 +4491,12 @@ func (p Gs2FriendRestClient) UnregisterBlackListAsync(
 	callback chan<- UnregisterBlackListAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/blackList/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")
@@ -4583,17 +4583,17 @@ func (p Gs2FriendRestClient) UnregisterBlackListByUserIdAsync(
 	callback chan<- UnregisterBlackListByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/blackList/{targetUserId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.TargetUserId != nil {
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
         path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
     } else {
         path = strings.ReplaceAll(path, "{targetUserId}", "null")

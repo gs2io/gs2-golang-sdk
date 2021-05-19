@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package log
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type QueryAccessLogResult struct {
     /** アクセスログのリスト */
 	Items         []AccessLog	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
 	TotalCount         *int64	`json:"totalCount"`
     /** 検索時にスキャンした総容量 */
@@ -178,7 +174,7 @@ type CountAccessLogResult struct {
     /** アクセスログ集計のリスト */
 	Items         []AccessLogCount	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
 	TotalCount         *int64	`json:"totalCount"`
     /** 検索時にスキャンした総容量 */
@@ -215,7 +211,7 @@ type QueryIssueStampSheetLogResult struct {
     /** スタンプシート発行ログのリスト */
 	Items         []IssueStampSheetLog	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
 	TotalCount         *int64	`json:"totalCount"`
     /** 検索時にスキャンした総容量 */
@@ -252,7 +248,7 @@ type CountIssueStampSheetLogResult struct {
     /** スタンプシート発行ログ集計のリスト */
 	Items         []IssueStampSheetLogCount	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
 	TotalCount         *int64	`json:"totalCount"`
     /** 検索時にスキャンした総容量 */
@@ -289,7 +285,7 @@ type QueryExecuteStampSheetLogResult struct {
     /** スタンプシート実行ログのリスト */
 	Items         []ExecuteStampSheetLog	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
 	TotalCount         *int64	`json:"totalCount"`
     /** 検索時にスキャンした総容量 */
@@ -326,7 +322,7 @@ type CountExecuteStampSheetLogResult struct {
     /** スタンプシート実行ログ集計のリスト */
 	Items         []ExecuteStampSheetLogCount	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
 	TotalCount         *int64	`json:"totalCount"`
     /** 検索時にスキャンした総容量 */
@@ -363,7 +359,7 @@ type QueryExecuteStampTaskLogResult struct {
     /** スタンプタスク実行ログのリスト */
 	Items         []ExecuteStampTaskLog	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
 	TotalCount         *int64	`json:"totalCount"`
     /** 検索時にスキャンした総容量 */
@@ -400,7 +396,7 @@ type CountExecuteStampTaskLogResult struct {
     /** スタンプタスク実行ログ集計のリスト */
 	Items         []ExecuteStampTaskLogCount	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
     /** クエリ結果の総件数 */
 	TotalCount         *int64	`json:"totalCount"`
     /** 検索時にスキャンした総容量 */

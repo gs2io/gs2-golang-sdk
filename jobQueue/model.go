@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package jobQueue
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** ジョブキューにジョブが登録されたときののプッシュ通知 */
 	PushNotification *NotificationSetting   `json:"pushNotification"`
     /** ログの出力設定 */
@@ -58,15 +54,15 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type Job struct {
     /** ジョブ */
-	JobId *core.String   `json:"jobId"`
+	JobId *string   `json:"jobId"`
     /** ジョブの名前 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** ジョブの実行に使用するスクリプト のGRN */
-	ScriptId *core.String   `json:"scriptId"`
+	ScriptId *string   `json:"scriptId"`
     /** 引数 */
-	Args *core.String   `json:"args"`
+	Args *string   `json:"args"`
     /** 現在のリトライ回数 */
 	CurrentRetryCount *int32   `json:"currentRetryCount"`
     /** 最大試行回数 */
@@ -96,15 +92,15 @@ func (p *Job) ToDict() *map[string]interface{} {
 
 type JobResult struct {
     /** ジョブ実行結果 */
-	JobResultId *core.String   `json:"jobResultId"`
+	JobResultId *string   `json:"jobResultId"`
     /** ジョブ */
-	JobId *core.String   `json:"jobId"`
+	JobId *string   `json:"jobId"`
     /** None */
 	TryNumber *int32   `json:"tryNumber"`
     /** None */
 	StatusCode *int32   `json:"statusCode"`
     /** レスポンスの内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
     /** 作成日時 */
 	TryAt *int64   `json:"tryAt"`
 }
@@ -122,17 +118,17 @@ func (p *JobResult) ToDict() *map[string]interface{} {
 
 type DeadLetterJob struct {
     /** デッドレタージョブ */
-	DeadLetterJobId *core.String   `json:"deadLetterJobId"`
+	DeadLetterJobId *string   `json:"deadLetterJobId"`
     /** ジョブの名前 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** ジョブの実行に使用するスクリプト のGRN */
-	ScriptId *core.String   `json:"scriptId"`
+	ScriptId *string   `json:"scriptId"`
     /** 引数 */
-	Args *core.String   `json:"args"`
+	Args *string   `json:"args"`
     /** ジョブ実行結果 */
-	Result *[]*JobResultBody   `json:"result"`
+	Result []JobResultBody   `json:"result"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -148,7 +144,7 @@ func (p *DeadLetterJob) ToDict() *map[string]interface{} {
     data["args"] = p.Args
     if p.Result != nil {
         var _result []*map[string]interface {}
-        for _, item := range *p.Result {
+        for _, item := range p.Result {
             _result = append(_result, item.ToDict())
         }
         data["result"] = &_result
@@ -160,15 +156,15 @@ func (p *DeadLetterJob) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -183,11 +179,11 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type NotificationSetting struct {
     /** プッシュ通知に使用する GS2-Gateway のネームスペース のGRN */
-	GatewayNamespaceId *core.String   `json:"gatewayNamespaceId"`
+	GatewayNamespaceId *string   `json:"gatewayNamespaceId"`
     /** モバイルプッシュ通知へ転送するか */
 	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
     /** モバイルプッシュ通知で使用するサウンドファイル名 */
-	Sound *core.String   `json:"sound"`
+	Sound *string   `json:"sound"`
 }
 
 func (p *NotificationSetting) ToDict() *map[string]interface{} {
@@ -200,7 +196,7 @@ func (p *NotificationSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {
@@ -211,9 +207,9 @@ func (p *LogSetting) ToDict() *map[string]interface{} {
 
 type JobEntry struct {
     /** スクリプト のGRN */
-	ScriptId *core.String   `json:"scriptId"`
+	ScriptId *string   `json:"scriptId"`
     /** 引数 */
-	Args *core.String   `json:"args"`
+	Args *string   `json:"args"`
     /** 最大試行回数 */
 	MaxTryCount *int32   `json:"maxTryCount"`
 }
@@ -232,7 +228,7 @@ type JobResultBody struct {
     /** ステータスコード */
 	StatusCode *int32   `json:"statusCode"`
     /** レスポンスの内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
     /** 実行日時 */
 	TryAt *int64   `json:"tryAt"`
 }

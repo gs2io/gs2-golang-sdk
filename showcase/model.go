@@ -16,23 +16,19 @@ permissions and limitations under the License.
 
 package showcase
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 購入処理をジョブとして追加するキューのネームスペース のGRN */
-	QueueNamespaceId *core.String   `json:"queueNamespaceId"`
+	QueueNamespaceId *string   `json:"queueNamespaceId"`
     /** 購入処理のスタンプシートで使用する暗号鍵GRN */
-	KeyId *core.String   `json:"keyId"`
+	KeyId *string   `json:"keyId"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** 作成日時 */
@@ -59,17 +55,17 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type SalesItemMaster struct {
     /** 商品マスター */
-	SalesItemId *core.String   `json:"salesItemId"`
+	SalesItemId *string   `json:"salesItemId"`
     /** 商品名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 商品マスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 商品のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 消費アクションリスト */
-	ConsumeActions *[]*ConsumeAction   `json:"consumeActions"`
+	ConsumeActions []ConsumeAction   `json:"consumeActions"`
     /** 入手アクションリスト */
-	AcquireActions *[]*AcquireAction   `json:"acquireActions"`
+	AcquireActions []AcquireAction   `json:"acquireActions"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -84,14 +80,14 @@ func (p *SalesItemMaster) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *p.ConsumeActions {
+        for _, item := range p.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         data["consumeActions"] = &_consumeActions
     }
     if p.AcquireActions != nil {
         var _acquireActions []*map[string]interface {}
-        for _, item := range *p.AcquireActions {
+        for _, item := range p.AcquireActions {
             _acquireActions = append(_acquireActions, item.ToDict())
         }
         data["acquireActions"] = &_acquireActions
@@ -103,15 +99,15 @@ func (p *SalesItemMaster) ToDict() *map[string]interface{} {
 
 type SalesItemGroupMaster struct {
     /** 商品グループマスター */
-	SalesItemGroupId *core.String   `json:"salesItemGroupId"`
+	SalesItemGroupId *string   `json:"salesItemGroupId"`
     /** 商品名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 商品グループマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 商品のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 商品グループに含める商品リスト */
-	SalesItemNames *[]core.String   `json:"salesItemNames"`
+	SalesItemNames []string   `json:"salesItemNames"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -125,8 +121,8 @@ func (p *SalesItemGroupMaster) ToDict() *map[string]interface{} {
     data["description"] = p.Description
     data["metadata"] = p.Metadata
     if p.SalesItemNames != nil {
-        var _salesItemNames []core.String
-        for _, item := range *p.SalesItemNames {
+        var _salesItemNames []string
+        for _, item := range p.SalesItemNames {
             _salesItemNames = append(_salesItemNames, item)
         }
         data["salesItemNames"] = &_salesItemNames
@@ -138,17 +134,17 @@ func (p *SalesItemGroupMaster) ToDict() *map[string]interface{} {
 
 type ShowcaseMaster struct {
     /** 陳列棚マスター */
-	ShowcaseId *core.String   `json:"showcaseId"`
+	ShowcaseId *string   `json:"showcaseId"`
     /** 陳列棚名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 陳列棚マスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 商品のメタデータ */
-	Metadata *core.String   `json:"metadata"`
-    /** 陳列する商品モデル一覧 */
-	DisplayItems *[]*DisplayItemMaster   `json:"displayItems"`
+	Metadata *string   `json:"metadata"`
     /** 販売期間とするイベントマスター のGRN */
-	SalesPeriodEventId *core.String   `json:"salesPeriodEventId"`
+	SalesPeriodEventId *string   `json:"salesPeriodEventId"`
+    /** 陳列する商品モデル一覧 */
+	DisplayItems []DisplayItemMaster   `json:"displayItems"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -161,14 +157,14 @@ func (p *ShowcaseMaster) ToDict() *map[string]interface{} {
     data["name"] = p.Name
     data["description"] = p.Description
     data["metadata"] = p.Metadata
+    data["salesPeriodEventId"] = p.SalesPeriodEventId
     if p.DisplayItems != nil {
         var _displayItems []*map[string]interface {}
-        for _, item := range *p.DisplayItems {
+        for _, item := range p.DisplayItems {
             _displayItems = append(_displayItems, item.ToDict())
         }
         data["displayItems"] = &_displayItems
     }
-    data["salesPeriodEventId"] = p.SalesPeriodEventId
     data["createdAt"] = p.CreatedAt
     data["updatedAt"] = p.UpdatedAt
     return &data
@@ -176,9 +172,9 @@ func (p *ShowcaseMaster) ToDict() *map[string]interface{} {
 
 type CurrentShowcaseMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentShowcaseMaster) ToDict() *map[string]interface{} {
@@ -190,15 +186,15 @@ func (p *CurrentShowcaseMaster) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -213,19 +209,19 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -242,7 +238,7 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {
@@ -253,13 +249,13 @@ func (p *LogSetting) ToDict() *map[string]interface{} {
 
 type SalesItem struct {
     /** 商品名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 商品のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 消費アクションリスト */
-	ConsumeActions *[]*ConsumeAction   `json:"consumeActions"`
+	ConsumeActions []ConsumeAction   `json:"consumeActions"`
     /** 入手アクションリスト */
-	AcquireActions *[]*AcquireAction   `json:"acquireActions"`
+	AcquireActions []AcquireAction   `json:"acquireActions"`
 }
 
 func (p *SalesItem) ToDict() *map[string]interface{} {
@@ -268,14 +264,14 @@ func (p *SalesItem) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *p.ConsumeActions {
+        for _, item := range p.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         data["consumeActions"] = &_consumeActions
     }
     if p.AcquireActions != nil {
         var _acquireActions []*map[string]interface {}
-        for _, item := range *p.AcquireActions {
+        for _, item := range p.AcquireActions {
             _acquireActions = append(_acquireActions, item.ToDict())
         }
         data["acquireActions"] = &_acquireActions
@@ -285,11 +281,11 @@ func (p *SalesItem) ToDict() *map[string]interface{} {
 
 type SalesItemGroup struct {
     /** 商品グループ名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** メタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 商品リスト */
-	SalesItems *[]*SalesItem   `json:"salesItems"`
+	SalesItems []SalesItem   `json:"salesItems"`
 }
 
 func (p *SalesItemGroup) ToDict() *map[string]interface{} {
@@ -298,7 +294,7 @@ func (p *SalesItemGroup) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.SalesItems != nil {
         var _salesItems []*map[string]interface {}
-        for _, item := range *p.SalesItems {
+        for _, item := range p.SalesItems {
             _salesItems = append(_salesItems, item.ToDict())
         }
         data["salesItems"] = &_salesItems
@@ -308,15 +304,15 @@ func (p *SalesItemGroup) ToDict() *map[string]interface{} {
 
 type Showcase struct {
     /** 陳列棚 */
-	ShowcaseId *core.String   `json:"showcaseId"`
+	ShowcaseId *string   `json:"showcaseId"`
     /** 商品名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 商品のメタデータ */
-	Metadata *core.String   `json:"metadata"`
-    /** インベントリに格納可能なアイテムモデル一覧 */
-	DisplayItems *[]*DisplayItem   `json:"displayItems"`
+	Metadata *string   `json:"metadata"`
     /** 販売期間とするイベントマスター のGRN */
-	SalesPeriodEventId *core.String   `json:"salesPeriodEventId"`
+	SalesPeriodEventId *string   `json:"salesPeriodEventId"`
+    /** インベントリに格納可能なアイテムモデル一覧 */
+	DisplayItems []DisplayItem   `json:"displayItems"`
 }
 
 func (p *Showcase) ToDict() *map[string]interface{} {
@@ -324,28 +320,28 @@ func (p *Showcase) ToDict() *map[string]interface{} {
     data["showcaseId"] = p.ShowcaseId
     data["name"] = p.Name
     data["metadata"] = p.Metadata
+    data["salesPeriodEventId"] = p.SalesPeriodEventId
     if p.DisplayItems != nil {
         var _displayItems []*map[string]interface {}
-        for _, item := range *p.DisplayItems {
+        for _, item := range p.DisplayItems {
             _displayItems = append(_displayItems, item.ToDict())
         }
         data["displayItems"] = &_displayItems
     }
-    data["salesPeriodEventId"] = p.SalesPeriodEventId
     return &data
 }
 
 type DisplayItem struct {
     /** 陳列商品ID */
-	DisplayItemId *core.String   `json:"displayItemId"`
+	DisplayItemId *string   `json:"displayItemId"`
     /** 種類 */
-	Type *core.String   `json:"type"`
+	Type *string   `json:"type"`
     /** 陳列する商品 */
 	SalesItem *SalesItem   `json:"salesItem"`
     /** 陳列する商品グループ */
 	SalesItemGroup *SalesItemGroup   `json:"salesItemGroup"`
     /** 販売期間とするイベントマスター のGRN */
-	SalesPeriodEventId *core.String   `json:"salesPeriodEventId"`
+	SalesPeriodEventId *string   `json:"salesPeriodEventId"`
 }
 
 func (p *DisplayItem) ToDict() *map[string]interface{} {
@@ -364,9 +360,9 @@ func (p *DisplayItem) ToDict() *map[string]interface{} {
 
 type Config struct {
     /** 名前 */
-	Key *core.String   `json:"key"`
+	Key *string   `json:"key"`
     /** 値 */
-	Value *core.String   `json:"value"`
+	Value *string   `json:"value"`
 }
 
 func (p *Config) ToDict() *map[string]interface{} {
@@ -378,9 +374,9 @@ func (p *Config) ToDict() *map[string]interface{} {
 
 type ConsumeAction struct {
     /** スタンプタスクで実行するアクションの種類 */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 消費リクエストのJSON */
-	Request *core.String   `json:"request"`
+	Request *string   `json:"request"`
 }
 
 func (p *ConsumeAction) ToDict() *map[string]interface{} {
@@ -392,9 +388,9 @@ func (p *ConsumeAction) ToDict() *map[string]interface{} {
 
 type AcquireAction struct {
     /** スタンプシートで実行するアクションの種類 */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 入手リクエストのJSON */
-	Request *core.String   `json:"request"`
+	Request *string   `json:"request"`
 }
 
 func (p *AcquireAction) ToDict() *map[string]interface{} {
@@ -406,15 +402,15 @@ func (p *AcquireAction) ToDict() *map[string]interface{} {
 
 type DisplayItemMaster struct {
     /** 陳列商品ID */
-	DisplayItemId *core.String   `json:"displayItemId"`
+	DisplayItemId *string   `json:"displayItemId"`
     /** 種類 */
-	Type *core.String   `json:"type"`
+	Type *string   `json:"type"`
     /** 陳列する商品の名前 */
-	SalesItemName *core.String   `json:"salesItemName"`
+	SalesItemName *string   `json:"salesItemName"`
     /** 陳列する商品グループの名前 */
-	SalesItemGroupName *core.String   `json:"salesItemGroupName"`
+	SalesItemGroupName *string   `json:"salesItemGroupName"`
     /** 販売期間とするイベントマスター のGRN */
-	SalesPeriodEventId *core.String   `json:"salesPeriodEventId"`
+	SalesPeriodEventId *string   `json:"salesPeriodEventId"`
 }
 
 func (p *DisplayItemMaster) ToDict() *map[string]interface{} {

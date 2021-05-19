@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package distributor
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type DescribeDistributorModelMastersResult struct {
     /** 配信設定マスターのリスト */
 	Items         []DistributorModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeDistributorModelMastersResult) ToDict() *map[string]interface{} {
@@ -352,9 +348,9 @@ type DistributeResult struct {
     /** 処理した DistributeResource */
 	DistributeResource         *DistributeResource	`json:"distributeResource"`
     /** 所持品がキャパシティをオーバーしたときに転送するプレゼントボックスのネームスペース のGRN */
-	InboxNamespaceId         *core.String	`json:"inboxNamespaceId"`
+	InboxNamespaceId         *string	`json:"inboxNamespaceId"`
     /** レスポンス内容 */
-	Result         *core.String	`json:"result"`
+	Result         *string	`json:"result"`
 }
 
 func (p *DistributeResult) ToDict() *map[string]interface{} {
@@ -380,7 +376,7 @@ type DistributeWithoutOverflowProcessResult struct {
     /** 処理した DistributeResource */
 	DistributeResource         *DistributeResource	`json:"distributeResource"`
     /** レスポンス内容 */
-	Result         *core.String	`json:"result"`
+	Result         *string	`json:"result"`
 }
 
 func (p *DistributeWithoutOverflowProcessResult) ToDict() *map[string]interface{} {
@@ -401,9 +397,9 @@ type DistributeWithoutOverflowProcessAsyncResult struct {
 
 type RunStampTaskResult struct {
     /** タスクの実行結果を反映したコンテキストスタック */
-	ContextStack         *core.String	`json:"contextStack"`
+	ContextStack         *string	`json:"contextStack"`
     /** レスポンス内容 */
-	Result         *core.String	`json:"result"`
+	Result         *string	`json:"result"`
 }
 
 func (p *RunStampTaskResult) ToDict() *map[string]interface{} {
@@ -424,7 +420,7 @@ type RunStampTaskAsyncResult struct {
 
 type RunStampSheetResult struct {
     /** レスポンス内容 */
-	Result         *core.String	`json:"result"`
+	Result         *string	`json:"result"`
 }
 
 func (p *RunStampSheetResult) ToDict() *map[string]interface{} {
@@ -442,15 +438,15 @@ type RunStampSheetAsyncResult struct {
 
 type RunStampSheetExpressResult struct {
     /** スタンプタスクの実行結果 */
-	TaskResults         []core.String	`json:"taskResults"`
+	TaskResults         []string	`json:"taskResults"`
     /** スタンプシートの実行結果レスポンス内容 */
-	SheetResult         *core.String	`json:"sheetResult"`
+	SheetResult         *string	`json:"sheetResult"`
 }
 
 func (p *RunStampSheetExpressResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.TaskResults != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.TaskResults {
 			items = append(items, item)
 		}
@@ -469,9 +465,9 @@ type RunStampSheetExpressAsyncResult struct {
 
 type RunStampTaskWithoutNamespaceResult struct {
     /** タスクの実行結果を反映したコンテキストスタック */
-	ContextStack         *core.String	`json:"contextStack"`
+	ContextStack         *string	`json:"contextStack"`
     /** レスポンス内容 */
-	Result         *core.String	`json:"result"`
+	Result         *string	`json:"result"`
 }
 
 func (p *RunStampTaskWithoutNamespaceResult) ToDict() *map[string]interface{} {
@@ -492,7 +488,7 @@ type RunStampTaskWithoutNamespaceAsyncResult struct {
 
 type RunStampSheetWithoutNamespaceResult struct {
     /** レスポンス内容 */
-	Result         *core.String	`json:"result"`
+	Result         *string	`json:"result"`
 }
 
 func (p *RunStampSheetWithoutNamespaceResult) ToDict() *map[string]interface{} {
@@ -510,15 +506,15 @@ type RunStampSheetWithoutNamespaceAsyncResult struct {
 
 type RunStampSheetExpressWithoutNamespaceResult struct {
     /** スタンプタスクの実行結果 */
-	TaskResults         []core.String	`json:"taskResults"`
+	TaskResults         []string	`json:"taskResults"`
     /** スタンプシートの実行結果レスポンス内容 */
-	SheetResult         *core.String	`json:"sheetResult"`
+	SheetResult         *string	`json:"sheetResult"`
 }
 
 func (p *RunStampSheetExpressWithoutNamespaceResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.TaskResults != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.TaskResults {
 			items = append(items, item)
 		}

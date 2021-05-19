@@ -261,7 +261,7 @@ func (p Gs2RealtimeRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -345,7 +345,7 @@ func (p Gs2RealtimeRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -429,7 +429,7 @@ func (p Gs2RealtimeRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -531,7 +531,7 @@ func (p Gs2RealtimeRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -615,7 +615,7 @@ func (p Gs2RealtimeRestClient) DescribeRoomsAsync(
 	callback chan<- DescribeRoomsAsyncResult,
 ) {
 	path := "/{namespaceName}/room"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -705,7 +705,7 @@ func (p Gs2RealtimeRestClient) WantRoomAsync(
 	callback chan<- WantRoomAsyncResult,
 ) {
 	path := "/{namespaceName}/room"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -717,8 +717,8 @@ func (p Gs2RealtimeRestClient) WantRoomAsync(
         bodies["name"] = *request.Name
     }
     if request.NotificationUserIds != nil {
-        var _notificationUserIds []core.String
-        for _, item := range *request.NotificationUserIds {
+        var _notificationUserIds []string
+        for _, item := range request.NotificationUserIds {
             _notificationUserIds = append(_notificationUserIds, item)
         }
         bodies["notificationUserIds"] = _notificationUserIds
@@ -802,12 +802,12 @@ func (p Gs2RealtimeRestClient) GetRoomAsync(
 	callback chan<- GetRoomAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")
@@ -891,12 +891,12 @@ func (p Gs2RealtimeRestClient) DeleteRoomAsync(
 	callback chan<- DeleteRoomAsyncResult,
 ) {
 	path := "/{namespaceName}/room/{roomName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RoomName != nil {
+    if request.RoomName != nil && *request.RoomName != ""  {
         path = strings.ReplaceAll(path, "{roomName}", core.ToString(*request.RoomName))
     } else {
         path = strings.ReplaceAll(path, "{roomName}", "null")

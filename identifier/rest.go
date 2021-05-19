@@ -249,7 +249,7 @@ func (p Gs2IdentifierRestClient) UpdateUserAsync(
 	callback chan<- UpdateUserAsyncResult,
 ) {
 	path := "/user/{userName}"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
@@ -339,7 +339,7 @@ func (p Gs2IdentifierRestClient) GetUserAsync(
 	callback chan<- GetUserAsyncResult,
 ) {
 	path := "/user/{userName}"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
@@ -423,7 +423,7 @@ func (p Gs2IdentifierRestClient) DeleteUserAsync(
 	callback chan<- DeleteUserAsyncResult,
 ) {
 	path := "/user/{userName}"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
@@ -768,7 +768,7 @@ func (p Gs2IdentifierRestClient) UpdateSecurityPolicyAsync(
 	callback chan<- UpdateSecurityPolicyAsyncResult,
 ) {
 	path := "/securityPolicy/{securityPolicyName}"
-    if request.SecurityPolicyName != nil {
+    if request.SecurityPolicyName != nil && *request.SecurityPolicyName != ""  {
         path = strings.ReplaceAll(path, "{securityPolicyName}", core.ToString(*request.SecurityPolicyName))
     } else {
         path = strings.ReplaceAll(path, "{securityPolicyName}", "null")
@@ -861,7 +861,7 @@ func (p Gs2IdentifierRestClient) GetSecurityPolicyAsync(
 	callback chan<- GetSecurityPolicyAsyncResult,
 ) {
 	path := "/securityPolicy/{securityPolicyName}"
-    if request.SecurityPolicyName != nil {
+    if request.SecurityPolicyName != nil && *request.SecurityPolicyName != ""  {
         path = strings.ReplaceAll(path, "{securityPolicyName}", core.ToString(*request.SecurityPolicyName))
     } else {
         path = strings.ReplaceAll(path, "{securityPolicyName}", "null")
@@ -945,7 +945,7 @@ func (p Gs2IdentifierRestClient) DeleteSecurityPolicyAsync(
 	callback chan<- DeleteSecurityPolicyAsyncResult,
 ) {
 	path := "/securityPolicy/{securityPolicyName}"
-    if request.SecurityPolicyName != nil {
+    if request.SecurityPolicyName != nil && *request.SecurityPolicyName != ""  {
         path = strings.ReplaceAll(path, "{securityPolicyName}", core.ToString(*request.SecurityPolicyName))
     } else {
         path = strings.ReplaceAll(path, "{securityPolicyName}", "null")
@@ -1029,7 +1029,7 @@ func (p Gs2IdentifierRestClient) DescribeIdentifiersAsync(
 	callback chan<- DescribeIdentifiersAsyncResult,
 ) {
 	path := "/user/{userName}/identifier"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
@@ -1119,7 +1119,7 @@ func (p Gs2IdentifierRestClient) CreateIdentifierAsync(
 	callback chan<- CreateIdentifierAsyncResult,
 ) {
 	path := "/user/{userName}/identifier"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
@@ -1206,12 +1206,12 @@ func (p Gs2IdentifierRestClient) GetIdentifierAsync(
 	callback chan<- GetIdentifierAsyncResult,
 ) {
 	path := "/user/{userName}/identifier/{clientId}"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
     }
-    if request.ClientId != nil {
+    if request.ClientId != nil && *request.ClientId != ""  {
         path = strings.ReplaceAll(path, "{clientId}", core.ToString(*request.ClientId))
     } else {
         path = strings.ReplaceAll(path, "{clientId}", "null")
@@ -1295,12 +1295,12 @@ func (p Gs2IdentifierRestClient) DeleteIdentifierAsync(
 	callback chan<- DeleteIdentifierAsyncResult,
 ) {
 	path := "/user/{userName}/identifier/{clientId}"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
     }
-    if request.ClientId != nil {
+    if request.ClientId != nil && *request.ClientId != ""  {
         path = strings.ReplaceAll(path, "{clientId}", core.ToString(*request.ClientId))
     } else {
         path = strings.ReplaceAll(path, "{clientId}", "null")
@@ -1384,7 +1384,7 @@ func (p Gs2IdentifierRestClient) DescribePasswordsAsync(
 	callback chan<- DescribePasswordsAsyncResult,
 ) {
 	path := "/user/{userName}/password"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
@@ -1474,7 +1474,7 @@ func (p Gs2IdentifierRestClient) CreatePasswordAsync(
 	callback chan<- CreatePasswordAsyncResult,
 ) {
 	path := "/user/{userName}/password"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
@@ -1564,7 +1564,7 @@ func (p Gs2IdentifierRestClient) GetPasswordAsync(
 	callback chan<- GetPasswordAsyncResult,
 ) {
 	path := "/user/{userName}/password/entity"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
@@ -1648,7 +1648,7 @@ func (p Gs2IdentifierRestClient) DeletePasswordAsync(
 	callback chan<- DeletePasswordAsyncResult,
 ) {
 	path := "/user/{userName}/password/entity"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
@@ -1732,7 +1732,7 @@ func (p Gs2IdentifierRestClient) GetHasSecurityPolicyAsync(
 	callback chan<- GetHasSecurityPolicyAsyncResult,
 ) {
 	path := "/user/{userName}/securityPolicy"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
@@ -1816,7 +1816,7 @@ func (p Gs2IdentifierRestClient) AttachSecurityPolicyAsync(
 	callback chan<- AttachSecurityPolicyAsyncResult,
 ) {
 	path := "/user/{userName}/securityPolicy"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
@@ -1906,12 +1906,12 @@ func (p Gs2IdentifierRestClient) DetachSecurityPolicyAsync(
 	callback chan<- DetachSecurityPolicyAsyncResult,
 ) {
 	path := "/user/{userName}/securityPolicy/{securityPolicyId}"
-    if request.UserName != nil {
+    if request.UserName != nil && *request.UserName != ""  {
         path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
     } else {
         path = strings.ReplaceAll(path, "{userName}", "null")
     }
-    if request.SecurityPolicyId != nil {
+    if request.SecurityPolicyId != nil && *request.SecurityPolicyId != ""  {
         path = strings.ReplaceAll(path, "{securityPolicyId}", core.ToString(*request.SecurityPolicyId))
     } else {
         path = strings.ReplaceAll(path, "{securityPolicyId}", "null")

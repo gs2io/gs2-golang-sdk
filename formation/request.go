@@ -23,15 +23,15 @@ import (
 type DescribeNamespacesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	Name *core.String	`json:"name"`
-	Description *core.String	`json:"description"`
+	Name *string	`json:"name"`
+	Description *string	`json:"description"`
 	UpdateMoldScript *ScriptSetting	`json:"updateMoldScript"`
 	UpdateFormScript *ScriptSetting	`json:"updateFormScript"`
 	LogSetting *LogSetting	`json:"logSetting"`
@@ -40,20 +40,20 @@ type CreateNamespaceRequest struct {
 type GetNamespaceStatusRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Description *core.String	`json:"description"`
+	NamespaceName *string	`json:"namespaceName"`
+	Description *string	`json:"description"`
 	UpdateMoldScript *ScriptSetting	`json:"updateMoldScript"`
 	UpdateFormScript *ScriptSetting	`json:"updateFormScript"`
 	LogSetting *LogSetting	`json:"logSetting"`
@@ -62,80 +62,80 @@ type UpdateNamespaceRequest struct {
 type DeleteNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type DescribeFormModelMastersRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreateFormModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Name *core.String	`json:"name"`
-	Description *core.String	`json:"description"`
-	Metadata *core.String	`json:"metadata"`
-	Slots *[]*SlotModel	`json:"slots"`
+	NamespaceName *string	`json:"namespaceName"`
+	Name *string	`json:"name"`
+	Description *string	`json:"description"`
+	Metadata *string	`json:"metadata"`
+	Slots []SlotModel	`json:"slots"`
 }
 
 type GetFormModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	FormModelName *core.String	`json:"formModelName"`
+	NamespaceName *string	`json:"namespaceName"`
+	FormModelName *string	`json:"formModelName"`
 }
 
 type UpdateFormModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	FormModelName *core.String	`json:"formModelName"`
-	Description *core.String	`json:"description"`
-	Metadata *core.String	`json:"metadata"`
-	Slots *[]*SlotModel	`json:"slots"`
+	NamespaceName *string	`json:"namespaceName"`
+	FormModelName *string	`json:"formModelName"`
+	Description *string	`json:"description"`
+	Metadata *string	`json:"metadata"`
+	Slots []SlotModel	`json:"slots"`
 }
 
 type DeleteFormModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	FormModelName *core.String	`json:"formModelName"`
+	NamespaceName *string	`json:"namespaceName"`
+	FormModelName *string	`json:"formModelName"`
 }
 
 type DescribeMoldModelsRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetMoldModelRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	MoldName *string	`json:"moldName"`
 }
 
 type DescribeMoldModelMastersRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreateMoldModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Name *core.String	`json:"name"`
-	Description *core.String	`json:"description"`
-	Metadata *core.String	`json:"metadata"`
-	FormModelName *core.String	`json:"formModelName"`
+	NamespaceName *string	`json:"namespaceName"`
+	Name *string	`json:"name"`
+	Description *string	`json:"description"`
+	Metadata *string	`json:"metadata"`
+	FormModelName *string	`json:"formModelName"`
 	InitialMaxCapacity *int32	`json:"initialMaxCapacity"`
 	MaxCapacity *int32	`json:"maxCapacity"`
 }
@@ -143,18 +143,18 @@ type CreateMoldModelMasterRequest struct {
 type GetMoldModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	MoldName *string	`json:"moldName"`
 }
 
 type UpdateMoldModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	MoldName *core.String	`json:"moldName"`
-	Description *core.String	`json:"description"`
-	Metadata *core.String	`json:"metadata"`
-	FormModelName *core.String	`json:"formModelName"`
+	NamespaceName *string	`json:"namespaceName"`
+	MoldName *string	`json:"moldName"`
+	Description *string	`json:"description"`
+	Metadata *string	`json:"metadata"`
+	FormModelName *string	`json:"formModelName"`
 	InitialMaxCapacity *int32	`json:"initialMaxCapacity"`
 	MaxCapacity *int32	`json:"maxCapacity"`
 }
@@ -162,253 +162,253 @@ type UpdateMoldModelMasterRequest struct {
 type DeleteMoldModelMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	MoldName *string	`json:"moldName"`
 }
 
 type ExportMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetCurrentFormMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type UpdateCurrentFormMasterRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Settings *core.String	`json:"settings"`
+	NamespaceName *string	`json:"namespaceName"`
+	Settings *string	`json:"settings"`
 }
 
 type UpdateCurrentFormMasterFromGitHubRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting	`json:"checkoutSetting"`
 }
 
 type DescribeMoldsRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeMoldsByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetMoldRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	MoldName *core.String	`json:"moldName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	MoldName *string	`json:"moldName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetMoldByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	MoldName *core.String	`json:"moldName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	MoldName *string	`json:"moldName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type SetMoldCapacityByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	MoldName *string	`json:"moldName"`
 	Capacity *int32	`json:"capacity"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type AddMoldCapacityByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	MoldName *string	`json:"moldName"`
 	Capacity *int32	`json:"capacity"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DeleteMoldRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	MoldName *core.String	`json:"moldName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	MoldName *string	`json:"moldName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DeleteMoldByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	MoldName *core.String	`json:"moldName"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	MoldName *string	`json:"moldName"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type AddCapacityByStampSheetRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	StampSheet *core.String	`json:"stampSheet"`
-	KeyId *core.String	`json:"keyId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	StampSheet *string	`json:"stampSheet"`
+	KeyId *string	`json:"keyId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type SetCapacityByStampSheetRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	StampSheet *core.String	`json:"stampSheet"`
-	KeyId *core.String	`json:"keyId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	StampSheet *string	`json:"stampSheet"`
+	KeyId *string	`json:"keyId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DescribeFormsRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	MoldName *core.String	`json:"moldName"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	MoldName *string	`json:"moldName"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DescribeFormsByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	MoldName *core.String	`json:"moldName"`
-	UserId *core.String	`json:"userId"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	MoldName *string	`json:"moldName"`
+	UserId *string	`json:"userId"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetFormRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	MoldName *string	`json:"moldName"`
 	Index *int32	`json:"index"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetFormByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	MoldName *string	`json:"moldName"`
 	Index *int32	`json:"index"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type GetFormWithSignatureRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	MoldName *string	`json:"moldName"`
 	Index *int32	`json:"index"`
-	KeyId *core.String	`json:"keyId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	KeyId *string	`json:"keyId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type GetFormWithSignatureByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	MoldName *string	`json:"moldName"`
 	Index *int32	`json:"index"`
-	KeyId *core.String	`json:"keyId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	KeyId *string	`json:"keyId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type SetFormByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	MoldName *string	`json:"moldName"`
 	Index *int32	`json:"index"`
-	Slots *[]*Slot	`json:"slots"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	Slots []Slot	`json:"slots"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type SetFormWithSignatureRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	MoldName *string	`json:"moldName"`
 	Index *int32	`json:"index"`
-	Slots *[]*SlotWithSignature	`json:"slots"`
-	KeyId *core.String	`json:"keyId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	Slots []SlotWithSignature	`json:"slots"`
+	KeyId *string	`json:"keyId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type AcquireActionsToFormPropertiesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	MoldName *string	`json:"moldName"`
 	Index *int32	`json:"index"`
 	AcquireAction *AcquireAction	`json:"acquireAction"`
-	QueueNamespaceId *core.String	`json:"queueNamespaceId"`
-	KeyId *core.String	`json:"keyId"`
-	Config *[]*AcquireActionConfig	`json:"config"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	QueueNamespaceId *string	`json:"queueNamespaceId"`
+	KeyId *string	`json:"keyId"`
+	Config []AcquireActionConfig	`json:"config"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type DeleteFormRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	MoldName *string	`json:"moldName"`
 	Index *int32	`json:"index"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 	AccessToken *core.AccessToken	`json:"accessToken"`
 }
 
 type DeleteFormByUserIdRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	UserId *core.String	`json:"userId"`
-	MoldName *core.String	`json:"moldName"`
+	NamespaceName *string	`json:"namespaceName"`
+	UserId *string	`json:"userId"`
+	MoldName *string	`json:"moldName"`
 	Index *int32	`json:"index"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type AcquireActionToFormPropertiesByStampSheetRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	StampSheet *core.String	`json:"stampSheet"`
-	KeyId *core.String	`json:"keyId"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	StampSheet *string	`json:"stampSheet"`
+	KeyId *string	`json:"keyId"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }

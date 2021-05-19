@@ -1080,7 +1080,7 @@ func (p Gs2ScheduleWebSocketClient) DescribeTriggersAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeTriggersAsyncHandler(
@@ -1253,7 +1253,7 @@ func (p Gs2ScheduleWebSocketClient) GetTriggerAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getTriggerAsyncHandler(
@@ -1514,7 +1514,7 @@ func (p Gs2ScheduleWebSocketClient) DeleteTriggerAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteTriggerAsyncHandler(
@@ -1681,7 +1681,7 @@ func (p Gs2ScheduleWebSocketClient) DescribeEventsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeEventsAsyncHandler(
@@ -1927,7 +1927,7 @@ func (p Gs2ScheduleWebSocketClient) GetEventAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getEventAsyncHandler(

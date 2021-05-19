@@ -16,23 +16,19 @@ permissions and limitations under the License.
 
 package deploy
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Stack struct {
     /** スタック */
-	StackId *core.String   `json:"stackId"`
+	StackId *string   `json:"stackId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** スタック名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** スタックの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** テンプレートデータ */
-	Template *core.String   `json:"template"`
+	Template *string   `json:"template"`
     /** 実行状態 */
-	Status *core.String   `json:"status"`
+	Status *string   `json:"status"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -54,25 +50,25 @@ func (p *Stack) ToDict() *map[string]interface{} {
 
 type Resource struct {
     /** 作成されたのリソース */
-	ResourceId *core.String   `json:"resourceId"`
+	ResourceId *string   `json:"resourceId"`
     /** 操作対象のリソース */
-	Type *core.String   `json:"type"`
+	Type *string   `json:"type"`
     /** 作成中のリソース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** リクエストパラメータ */
-	Request *core.String   `json:"request"`
+	Request *string   `json:"request"`
     /** リソースの作成・更新のレスポンス */
-	Response *core.String   `json:"response"`
+	Response *string   `json:"response"`
     /** ロールバック操作の種類 */
-	RollbackContext *core.String   `json:"rollbackContext"`
+	RollbackContext *string   `json:"rollbackContext"`
     /** ロールバック用のリクエストパラメータ */
-	RollbackRequest *core.String   `json:"rollbackRequest"`
+	RollbackRequest *string   `json:"rollbackRequest"`
     /** ロールバック時に依存しているリソースの名前 */
-	RollbackAfter *[]core.String   `json:"rollbackAfter"`
+	RollbackAfter []string   `json:"rollbackAfter"`
     /** リソースを作成したときに Output に記録するフィールド */
-	OutputFields *[]*OutputField   `json:"outputFields"`
+	OutputFields []OutputField   `json:"outputFields"`
     /** このリソースが作成された時の実行 ID */
-	WorkId *core.String   `json:"workId"`
+	WorkId *string   `json:"workId"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
 }
@@ -87,15 +83,15 @@ func (p *Resource) ToDict() *map[string]interface{} {
     data["rollbackContext"] = p.RollbackContext
     data["rollbackRequest"] = p.RollbackRequest
     if p.RollbackAfter != nil {
-        var _rollbackAfter []core.String
-        for _, item := range *p.RollbackAfter {
+        var _rollbackAfter []string
+        for _, item := range p.RollbackAfter {
             _rollbackAfter = append(_rollbackAfter, item)
         }
         data["rollbackAfter"] = &_rollbackAfter
     }
     if p.OutputFields != nil {
         var _outputFields []*map[string]interface {}
-        for _, item := range *p.OutputFields {
+        for _, item := range p.OutputFields {
             _outputFields = append(_outputFields, item.ToDict())
         }
         data["outputFields"] = &_outputFields
@@ -107,13 +103,13 @@ func (p *Resource) ToDict() *map[string]interface{} {
 
 type WorkingStack struct {
     /** 実行中のスタック */
-	StackId *core.String   `json:"stackId"`
+	StackId *string   `json:"stackId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** 実行中のスタック名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 実行に対して割り振られる一意な ID */
-	WorkId *core.String   `json:"workId"`
+	WorkId *string   `json:"workId"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -133,27 +129,27 @@ func (p *WorkingStack) ToDict() *map[string]interface{} {
 
 type WorkingResource struct {
     /** 作成中のリソース */
-	ResourceId *core.String   `json:"resourceId"`
+	ResourceId *string   `json:"resourceId"`
     /** 操作の種類 */
-	Context *core.String   `json:"context"`
+	Context *string   `json:"context"`
     /** 操作対象のリソース */
-	Type *core.String   `json:"type"`
+	Type *string   `json:"type"`
     /** 作成中のリソース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** リクエストパラメータ */
-	Request *core.String   `json:"request"`
+	Request *string   `json:"request"`
     /** 依存しているリソースの名前 */
-	After *[]core.String   `json:"after"`
+	After []string   `json:"after"`
     /** ロールバック操作の種類 */
-	RollbackContext *core.String   `json:"rollbackContext"`
+	RollbackContext *string   `json:"rollbackContext"`
     /** ロールバック用のリクエストパラメータ */
-	RollbackRequest *core.String   `json:"rollbackRequest"`
+	RollbackRequest *string   `json:"rollbackRequest"`
     /** ロールバック時に依存しているリソースの名前 */
-	RollbackAfter *[]core.String   `json:"rollbackAfter"`
+	RollbackAfter []string   `json:"rollbackAfter"`
     /** リソースを作成したときに Output に記録するフィールド */
-	OutputFields *[]*OutputField   `json:"outputFields"`
+	OutputFields []OutputField   `json:"outputFields"`
     /** 実行に対して割り振られる一意な ID */
-	WorkId *core.String   `json:"workId"`
+	WorkId *string   `json:"workId"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -168,8 +164,8 @@ func (p *WorkingResource) ToDict() *map[string]interface{} {
     data["name"] = p.Name
     data["request"] = p.Request
     if p.After != nil {
-        var _after []core.String
-        for _, item := range *p.After {
+        var _after []string
+        for _, item := range p.After {
             _after = append(_after, item)
         }
         data["after"] = &_after
@@ -177,15 +173,15 @@ func (p *WorkingResource) ToDict() *map[string]interface{} {
     data["rollbackContext"] = p.RollbackContext
     data["rollbackRequest"] = p.RollbackRequest
     if p.RollbackAfter != nil {
-        var _rollbackAfter []core.String
-        for _, item := range *p.RollbackAfter {
+        var _rollbackAfter []string
+        for _, item := range p.RollbackAfter {
             _rollbackAfter = append(_rollbackAfter, item)
         }
         data["rollbackAfter"] = &_rollbackAfter
     }
     if p.OutputFields != nil {
         var _outputFields []*map[string]interface {}
-        for _, item := range *p.OutputFields {
+        for _, item := range p.OutputFields {
             _outputFields = append(_outputFields, item.ToDict())
         }
         data["outputFields"] = &_outputFields
@@ -198,15 +194,15 @@ func (p *WorkingResource) ToDict() *map[string]interface{} {
 
 type Event struct {
     /** 発生したイベント */
-	EventId *core.String   `json:"eventId"`
+	EventId *string   `json:"eventId"`
     /** イベント名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** イベントの種類 */
-	ResourceName *core.String   `json:"resourceName"`
+	ResourceName *string   `json:"resourceName"`
     /** イベントの種類 */
-	Type *core.String   `json:"type"`
+	Type *string   `json:"type"`
     /** メッセージ */
-	Message *core.String   `json:"message"`
+	Message *string   `json:"message"`
     /** 日時 */
 	EventAt *int64   `json:"eventAt"`
 }
@@ -224,11 +220,11 @@ func (p *Event) ToDict() *map[string]interface{} {
 
 type Output struct {
     /** アウトプット */
-	OutputId *core.String   `json:"outputId"`
+	OutputId *string   `json:"outputId"`
     /** アウトプット名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 値 */
-	Value *core.String   `json:"value"`
+	Value *string   `json:"value"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
 }
@@ -244,19 +240,19 @@ func (p *Output) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -273,9 +269,9 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type OutputField struct {
     /** 名前 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** フィールド名 */
-	FieldName *core.String   `json:"fieldName"`
+	FieldName *string   `json:"fieldName"`
 }
 
 func (p *OutputField) ToDict() *map[string]interface{} {

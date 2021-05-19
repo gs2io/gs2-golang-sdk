@@ -255,7 +255,7 @@ func (p Gs2JobQueueRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -339,7 +339,7 @@ func (p Gs2JobQueueRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -423,7 +423,7 @@ func (p Gs2JobQueueRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -519,7 +519,7 @@ func (p Gs2JobQueueRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -603,12 +603,12 @@ func (p Gs2JobQueueRestClient) DescribeJobsByUserIdAsync(
 	callback chan<- DescribeJobsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/job"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -698,17 +698,17 @@ func (p Gs2JobQueueRestClient) GetJobByUserIdAsync(
 	callback chan<- GetJobByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/job/{jobName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.JobName != nil {
+    if request.JobName != nil && *request.JobName != ""  {
         path = strings.ReplaceAll(path, "{jobName}", core.ToString(*request.JobName))
     } else {
         path = strings.ReplaceAll(path, "{jobName}", "null")
@@ -792,12 +792,12 @@ func (p Gs2JobQueueRestClient) PushByUserIdAsync(
 	callback chan<- PushByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/job"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -807,7 +807,7 @@ func (p Gs2JobQueueRestClient) PushByUserIdAsync(
     var bodies = core.Bodies{}
     if request.Jobs != nil {
         var _jobs []*map[string]interface {}
-        for _, item := range *request.Jobs {
+        for _, item := range request.Jobs {
             _jobs = append(_jobs, item.ToDict())
         }
         bodies["jobs"] = _jobs
@@ -891,7 +891,7 @@ func (p Gs2JobQueueRestClient) RunAsync(
 	callback chan<- RunAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/job/run"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -981,12 +981,12 @@ func (p Gs2JobQueueRestClient) RunByUserIdAsync(
 	callback chan<- RunByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/job/run"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1073,17 +1073,17 @@ func (p Gs2JobQueueRestClient) DeleteJobByUserIdAsync(
 	callback chan<- DeleteJobByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/job/{jobName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.JobName != nil {
+    if request.JobName != nil && *request.JobName != ""  {
         path = strings.ReplaceAll(path, "{jobName}", core.ToString(*request.JobName))
     } else {
         path = strings.ReplaceAll(path, "{jobName}", "null")
@@ -1255,12 +1255,12 @@ func (p Gs2JobQueueRestClient) DescribeDeadLetterJobsByUserIdAsync(
 	callback chan<- DescribeDeadLetterJobsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/dead"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1350,17 +1350,17 @@ func (p Gs2JobQueueRestClient) GetDeadLetterJobByUserIdAsync(
 	callback chan<- GetDeadLetterJobByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/dead/{deadLetterJobName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.DeadLetterJobName != nil {
+    if request.DeadLetterJobName != nil && *request.DeadLetterJobName != ""  {
         path = strings.ReplaceAll(path, "{deadLetterJobName}", core.ToString(*request.DeadLetterJobName))
     } else {
         path = strings.ReplaceAll(path, "{deadLetterJobName}", "null")
@@ -1444,17 +1444,17 @@ func (p Gs2JobQueueRestClient) DeleteDeadLetterJobByUserIdAsync(
 	callback chan<- DeleteDeadLetterJobByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/dead/{deadLetterJobName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.DeadLetterJobName != nil {
+    if request.DeadLetterJobName != nil && *request.DeadLetterJobName != ""  {
         path = strings.ReplaceAll(path, "{deadLetterJobName}", core.ToString(*request.DeadLetterJobName))
     } else {
         path = strings.ReplaceAll(path, "{deadLetterJobName}", "null")

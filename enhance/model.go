@@ -16,29 +16,25 @@ permissions and limitations under the License.
 
 package enhance
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** DirectEnhance を利用できるようにするか */
 	EnableDirectEnhance *bool   `json:"enableDirectEnhance"`
     /** 交換処理をジョブとして追加するキューのネームスペース のGRN */
-	QueueNamespaceId *core.String   `json:"queueNamespaceId"`
+	QueueNamespaceId *string   `json:"queueNamespaceId"`
     /** 交換処理のスタンプシートで使用する暗号鍵GRN */
-	KeyId *core.String   `json:"keyId"`
+	KeyId *string   `json:"keyId"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** None */
-	Status *core.String   `json:"status"`
+	Status *string   `json:"status"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -65,25 +61,25 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type RateModel struct {
     /** 強化レートモデル */
-	RateModelId *core.String   `json:"rateModelId"`
+	RateModelId *string   `json:"rateModelId"`
     /** 強化レート名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 強化レートの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 強化レートのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 強化対象に使用できるインベントリモデル のGRN */
-	TargetInventoryModelId *core.String   `json:"targetInventoryModelId"`
+	TargetInventoryModelId *string   `json:"targetInventoryModelId"`
     /** GS2-Experience で入手した経験値を格納する プロパティID に付与するサフィックス */
-	AcquireExperienceSuffix *core.String   `json:"acquireExperienceSuffix"`
+	AcquireExperienceSuffix *string   `json:"acquireExperienceSuffix"`
     /** 強化素材に使用できるインベントリモデル のGRN */
-	MaterialInventoryModelId *core.String   `json:"materialInventoryModelId"`
+	MaterialInventoryModelId *string   `json:"materialInventoryModelId"`
     /** 入手経験値を格納しているメタデータのJSON階層 */
-	AcquireExperienceHierarchy *[]core.String   `json:"acquireExperienceHierarchy"`
+	AcquireExperienceHierarchy []string   `json:"acquireExperienceHierarchy"`
     /** 獲得できる経験値の種類マスター のGRN */
-	ExperienceModelId *core.String   `json:"experienceModelId"`
+	ExperienceModelId *string   `json:"experienceModelId"`
     /** 経験値獲得量ボーナス */
-	BonusRates *[]*BonusRate   `json:"bonusRates"`
+	BonusRates []BonusRate   `json:"bonusRates"`
 }
 
 func (p *RateModel) ToDict() *map[string]interface{} {
@@ -96,8 +92,8 @@ func (p *RateModel) ToDict() *map[string]interface{} {
     data["acquireExperienceSuffix"] = p.AcquireExperienceSuffix
     data["materialInventoryModelId"] = p.MaterialInventoryModelId
     if p.AcquireExperienceHierarchy != nil {
-        var _acquireExperienceHierarchy []core.String
-        for _, item := range *p.AcquireExperienceHierarchy {
+        var _acquireExperienceHierarchy []string
+        for _, item := range p.AcquireExperienceHierarchy {
             _acquireExperienceHierarchy = append(_acquireExperienceHierarchy, item)
         }
         data["acquireExperienceHierarchy"] = &_acquireExperienceHierarchy
@@ -105,7 +101,7 @@ func (p *RateModel) ToDict() *map[string]interface{} {
     data["experienceModelId"] = p.ExperienceModelId
     if p.BonusRates != nil {
         var _bonusRates []*map[string]interface {}
-        for _, item := range *p.BonusRates {
+        for _, item := range p.BonusRates {
             _bonusRates = append(_bonusRates, item.ToDict())
         }
         data["bonusRates"] = &_bonusRates
@@ -115,25 +111,25 @@ func (p *RateModel) ToDict() *map[string]interface{} {
 
 type RateModelMaster struct {
     /** 強化レートマスター */
-	RateModelId *core.String   `json:"rateModelId"`
+	RateModelId *string   `json:"rateModelId"`
     /** 強化レート名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 強化レートマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 強化レートのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 強化対象に使用できるインベントリモデル のGRN */
-	TargetInventoryModelId *core.String   `json:"targetInventoryModelId"`
+	TargetInventoryModelId *string   `json:"targetInventoryModelId"`
     /** GS2-Experience で入手した経験値を格納する プロパティID に付与するサフィックス */
-	AcquireExperienceSuffix *core.String   `json:"acquireExperienceSuffix"`
+	AcquireExperienceSuffix *string   `json:"acquireExperienceSuffix"`
     /** 強化素材に使用できるインベントリモデル のGRN */
-	MaterialInventoryModelId *core.String   `json:"materialInventoryModelId"`
+	MaterialInventoryModelId *string   `json:"materialInventoryModelId"`
     /** 入手経験値を格納しているメタデータのJSON階層 */
-	AcquireExperienceHierarchy *[]core.String   `json:"acquireExperienceHierarchy"`
+	AcquireExperienceHierarchy []string   `json:"acquireExperienceHierarchy"`
     /** 獲得できる経験値の種類マスター のGRN */
-	ExperienceModelId *core.String   `json:"experienceModelId"`
+	ExperienceModelId *string   `json:"experienceModelId"`
     /** 経験値獲得量ボーナス */
-	BonusRates *[]*BonusRate   `json:"bonusRates"`
+	BonusRates []BonusRate   `json:"bonusRates"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -150,8 +146,8 @@ func (p *RateModelMaster) ToDict() *map[string]interface{} {
     data["acquireExperienceSuffix"] = p.AcquireExperienceSuffix
     data["materialInventoryModelId"] = p.MaterialInventoryModelId
     if p.AcquireExperienceHierarchy != nil {
-        var _acquireExperienceHierarchy []core.String
-        for _, item := range *p.AcquireExperienceHierarchy {
+        var _acquireExperienceHierarchy []string
+        for _, item := range p.AcquireExperienceHierarchy {
             _acquireExperienceHierarchy = append(_acquireExperienceHierarchy, item)
         }
         data["acquireExperienceHierarchy"] = &_acquireExperienceHierarchy
@@ -159,7 +155,7 @@ func (p *RateModelMaster) ToDict() *map[string]interface{} {
     data["experienceModelId"] = p.ExperienceModelId
     if p.BonusRates != nil {
         var _bonusRates []*map[string]interface {}
-        for _, item := range *p.BonusRates {
+        for _, item := range p.BonusRates {
             _bonusRates = append(_bonusRates, item.ToDict())
         }
         data["bonusRates"] = &_bonusRates
@@ -171,13 +167,13 @@ func (p *RateModelMaster) ToDict() *map[string]interface{} {
 
 type Progress struct {
     /** 強化実行 */
-	ProgressId *core.String   `json:"progressId"`
+	ProgressId *string   `json:"progressId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** レートモデル名 */
-	RateName *core.String   `json:"rateName"`
+	RateName *string   `json:"rateName"`
     /** 強化対象のプロパティID */
-	PropertyId *core.String   `json:"propertyId"`
+	PropertyId *string   `json:"propertyId"`
     /** 入手できる経験値 */
 	ExperienceValue *int32   `json:"experienceValue"`
     /** 経験値倍率 */
@@ -203,9 +199,9 @@ func (p *Progress) ToDict() *map[string]interface{} {
 
 type CurrentRateMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentRateMaster) ToDict() *map[string]interface{} {
@@ -217,15 +213,15 @@ func (p *CurrentRateMaster) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -240,9 +236,9 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type Config struct {
     /** 名前 */
-	Key *core.String   `json:"key"`
+	Key *string   `json:"key"`
     /** 値 */
-	Value *core.String   `json:"value"`
+	Value *string   `json:"value"`
 }
 
 func (p *Config) ToDict() *map[string]interface{} {
@@ -254,19 +250,19 @@ func (p *Config) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -283,7 +279,7 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {
@@ -308,7 +304,7 @@ func (p *BonusRate) ToDict() *map[string]interface{} {
 
 type Material struct {
     /** 強化対象の GS2-Inventory アイテムセットGRN */
-	MaterialItemSetId *core.String   `json:"materialItemSetId"`
+	MaterialItemSetId *string   `json:"materialItemSetId"`
     /** 消費数量 */
 	Count *int32   `json:"count"`
 }

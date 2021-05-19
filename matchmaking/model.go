@@ -16,33 +16,29 @@ permissions and limitations under the License.
 
 package matchmaking
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** レーティング計算機能を使用するか */
 	EnableRating *bool   `json:"enableRating"`
     /** ギャザリング新規作成時のアクション */
-	CreateGatheringTriggerType *core.String   `json:"createGatheringTriggerType"`
+	CreateGatheringTriggerType *string   `json:"createGatheringTriggerType"`
     /** ギャザリング新規作成時 にルームを作成するネームスペース のGRN */
-	CreateGatheringTriggerRealtimeNamespaceId *core.String   `json:"createGatheringTriggerRealtimeNamespaceId"`
+	CreateGatheringTriggerRealtimeNamespaceId *string   `json:"createGatheringTriggerRealtimeNamespaceId"`
     /** ギャザリング新規作成時 に実行されるスクリプト のGRN */
-	CreateGatheringTriggerScriptId *core.String   `json:"createGatheringTriggerScriptId"`
+	CreateGatheringTriggerScriptId *string   `json:"createGatheringTriggerScriptId"`
     /** マッチメイキング完了時のアクション */
-	CompleteMatchmakingTriggerType *core.String   `json:"completeMatchmakingTriggerType"`
+	CompleteMatchmakingTriggerType *string   `json:"completeMatchmakingTriggerType"`
     /** マッチメイキング完了時 にルームを作成するネームスペース のGRN */
-	CompleteMatchmakingTriggerRealtimeNamespaceId *core.String   `json:"completeMatchmakingTriggerRealtimeNamespaceId"`
+	CompleteMatchmakingTriggerRealtimeNamespaceId *string   `json:"completeMatchmakingTriggerRealtimeNamespaceId"`
     /** マッチメイキング完了時 に実行されるスクリプト のGRN */
-	CompleteMatchmakingTriggerScriptId *core.String   `json:"completeMatchmakingTriggerScriptId"`
+	CompleteMatchmakingTriggerScriptId *string   `json:"completeMatchmakingTriggerScriptId"`
     /** ギャザリングに新規プレイヤーが参加したときのプッシュ通知 */
 	JoinNotification *NotificationSetting   `json:"joinNotification"`
     /** ギャザリングからプレイヤーが離脱したときのプッシュ通知 */
@@ -89,17 +85,17 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type Gathering struct {
     /** ギャザリング */
-	GatheringId *core.String   `json:"gatheringId"`
+	GatheringId *string   `json:"gatheringId"`
     /** ギャザリング名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 募集条件 */
-	AttributeRanges *[]*AttributeRange   `json:"attributeRanges"`
+	AttributeRanges []AttributeRange   `json:"attributeRanges"`
     /** 参加者 */
-	CapacityOfRoles *[]*CapacityOfRole   `json:"capacityOfRoles"`
+	CapacityOfRoles []CapacityOfRole   `json:"capacityOfRoles"`
     /** 参加を許可するユーザIDリスト */
-	AllowUserIds *[]core.String   `json:"allowUserIds"`
+	AllowUserIds []string   `json:"allowUserIds"`
     /** メタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** ギャザリングの有効期限 */
 	ExpiresAt *int64   `json:"expiresAt"`
     /** 作成日時 */
@@ -114,21 +110,21 @@ func (p *Gathering) ToDict() *map[string]interface{} {
     data["name"] = p.Name
     if p.AttributeRanges != nil {
         var _attributeRanges []*map[string]interface {}
-        for _, item := range *p.AttributeRanges {
+        for _, item := range p.AttributeRanges {
             _attributeRanges = append(_attributeRanges, item.ToDict())
         }
         data["attributeRanges"] = &_attributeRanges
     }
     if p.CapacityOfRoles != nil {
         var _capacityOfRoles []*map[string]interface {}
-        for _, item := range *p.CapacityOfRoles {
+        for _, item := range p.CapacityOfRoles {
             _capacityOfRoles = append(_capacityOfRoles, item.ToDict())
         }
         data["capacityOfRoles"] = &_capacityOfRoles
     }
     if p.AllowUserIds != nil {
-        var _allowUserIds []core.String
-        for _, item := range *p.AllowUserIds {
+        var _allowUserIds []string
+        for _, item := range p.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
         data["allowUserIds"] = &_allowUserIds
@@ -142,13 +138,13 @@ func (p *Gathering) ToDict() *map[string]interface{} {
 
 type RatingModelMaster struct {
     /** レーティングモデルマスター */
-	RatingModelId *core.String   `json:"ratingModelId"`
+	RatingModelId *string   `json:"ratingModelId"`
     /** レーティングの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** レーティングの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** レーティングモデルマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** レート値の変動の大きさ */
 	Volatility *int32   `json:"volatility"`
     /** 作成日時 */
@@ -171,11 +167,11 @@ func (p *RatingModelMaster) ToDict() *map[string]interface{} {
 
 type RatingModel struct {
     /** レーティングモデル */
-	RatingModelId *core.String   `json:"ratingModelId"`
+	RatingModelId *string   `json:"ratingModelId"`
     /** レーティングの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** レーティングの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** レート値の変動の大きさ */
 	Volatility *int32   `json:"volatility"`
 }
@@ -191,9 +187,9 @@ func (p *RatingModel) ToDict() *map[string]interface{} {
 
 type CurrentRatingModelMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentRatingModelMaster) ToDict() *map[string]interface{} {
@@ -205,15 +201,15 @@ func (p *CurrentRatingModelMaster) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -228,11 +224,11 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type NotificationSetting struct {
     /** プッシュ通知に使用する GS2-Gateway のネームスペース のGRN */
-	GatewayNamespaceId *core.String   `json:"gatewayNamespaceId"`
+	GatewayNamespaceId *string   `json:"gatewayNamespaceId"`
     /** モバイルプッシュ通知へ転送するか */
 	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
     /** モバイルプッシュ通知で使用するサウンドファイル名 */
-	Sound *core.String   `json:"sound"`
+	Sound *string   `json:"sound"`
 }
 
 func (p *NotificationSetting) ToDict() *map[string]interface{} {
@@ -245,7 +241,7 @@ func (p *NotificationSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {
@@ -256,19 +252,19 @@ func (p *LogSetting) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -285,7 +281,7 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type AttributeRange struct {
     /** 属性名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ギャザリング参加可能な属性値の最小値 */
 	Min *int32   `json:"min"`
     /** ギャザリング参加可能な属性値の最大値 */
@@ -302,21 +298,21 @@ func (p *AttributeRange) ToDict() *map[string]interface{} {
 
 type CapacityOfRole struct {
     /** ロール名 */
-	RoleName *core.String   `json:"roleName"`
+	RoleName *string   `json:"roleName"`
     /** ロール名の別名リスト */
-	RoleAliases *[]core.String   `json:"roleAliases"`
+	RoleAliases []string   `json:"roleAliases"`
     /** 募集人数 */
 	Capacity *int32   `json:"capacity"`
     /** 参加者のプレイヤー情報リスト */
-	Participants *[]*Player   `json:"participants"`
+	Participants []Player   `json:"participants"`
 }
 
 func (p *CapacityOfRole) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     data["roleName"] = p.RoleName
     if p.RoleAliases != nil {
-        var _roleAliases []core.String
-        for _, item := range *p.RoleAliases {
+        var _roleAliases []string
+        for _, item := range p.RoleAliases {
             _roleAliases = append(_roleAliases, item)
         }
         data["roleAliases"] = &_roleAliases
@@ -324,7 +320,7 @@ func (p *CapacityOfRole) ToDict() *map[string]interface{} {
     data["capacity"] = p.Capacity
     if p.Participants != nil {
         var _participants []*map[string]interface {}
-        for _, item := range *p.Participants {
+        for _, item := range p.Participants {
             _participants = append(_participants, item.ToDict())
         }
         data["participants"] = &_participants
@@ -334,7 +330,7 @@ func (p *CapacityOfRole) ToDict() *map[string]interface{} {
 
 type Attribute struct {
     /** 属性名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 属性値 */
 	Value *int32   `json:"value"`
 }
@@ -348,13 +344,13 @@ func (p *Attribute) ToDict() *map[string]interface{} {
 
 type Player struct {
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 属性値のリスト */
-	Attributes *[]*Attribute   `json:"attributes"`
+	Attributes []Attribute   `json:"attributes"`
     /** ロール名 */
-	RoleName *core.String   `json:"roleName"`
+	RoleName *string   `json:"roleName"`
     /** 参加を拒否するユーザIDリスト */
-	DenyUserIds *[]core.String   `json:"denyUserIds"`
+	DenyUserIds []string   `json:"denyUserIds"`
 }
 
 func (p *Player) ToDict() *map[string]interface{} {
@@ -362,15 +358,15 @@ func (p *Player) ToDict() *map[string]interface{} {
     data["userId"] = p.UserId
     if p.Attributes != nil {
         var _attributes []*map[string]interface {}
-        for _, item := range *p.Attributes {
+        for _, item := range p.Attributes {
             _attributes = append(_attributes, item.ToDict())
         }
         data["attributes"] = &_attributes
     }
     data["roleName"] = p.RoleName
     if p.DenyUserIds != nil {
-        var _denyUserIds []core.String
-        for _, item := range *p.DenyUserIds {
+        var _denyUserIds []string
+        for _, item := range p.DenyUserIds {
             _denyUserIds = append(_denyUserIds, item)
         }
         data["denyUserIds"] = &_denyUserIds
@@ -380,11 +376,11 @@ func (p *Player) ToDict() *map[string]interface{} {
 
 type Rating struct {
     /** レーティング */
-	RatingId *core.String   `json:"ratingId"`
+	RatingId *string   `json:"ratingId"`
     /** レーティング名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** None */
 	RateValue *float32   `json:"rateValue"`
     /** 作成日時 */
@@ -408,7 +404,7 @@ type GameResult struct {
     /** 順位 */
 	Rank *int32   `json:"rank"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
 }
 
 func (p *GameResult) ToDict() *map[string]interface{} {
@@ -420,11 +416,11 @@ func (p *GameResult) ToDict() *map[string]interface{} {
 
 type Ballot struct {
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** レーティング計算に使用するレーティング名 */
-	RatingName *core.String   `json:"ratingName"`
+	RatingName *string   `json:"ratingName"`
     /** 投票対象のギャザリング名 */
-	GatheringName *core.String   `json:"gatheringName"`
+	GatheringName *string   `json:"gatheringName"`
     /** 参加人数 */
 	NumberOfPlayer *int32   `json:"numberOfPlayer"`
 }
@@ -440,9 +436,9 @@ func (p *Ballot) ToDict() *map[string]interface{} {
 
 type SignedBallot struct {
     /** 投票用紙の署名対象のデータ */
-	Body *core.String   `json:"body"`
+	Body *string   `json:"body"`
     /** 投票用紙の署名 */
-	Signature *core.String   `json:"signature"`
+	Signature *string   `json:"signature"`
 }
 
 func (p *SignedBallot) ToDict() *map[string]interface{} {
@@ -456,7 +452,7 @@ type WrittenBallot struct {
     /** 投票用紙 */
 	Ballot *Ballot   `json:"ballot"`
     /** 投票内容。対戦結果のリスト */
-	GameResults *[]*GameResult   `json:"gameResults"`
+	GameResults []GameResult   `json:"gameResults"`
 }
 
 func (p *WrittenBallot) ToDict() *map[string]interface{} {
@@ -466,7 +462,7 @@ func (p *WrittenBallot) ToDict() *map[string]interface{} {
     }
     if p.GameResults != nil {
         var _gameResults []*map[string]interface {}
-        for _, item := range *p.GameResults {
+        for _, item := range p.GameResults {
             _gameResults = append(_gameResults, item.ToDict())
         }
         data["gameResults"] = &_gameResults
@@ -476,13 +472,13 @@ func (p *WrittenBallot) ToDict() *map[string]interface{} {
 
 type Vote struct {
     /** 投票状況 */
-	VoteId *core.String   `json:"voteId"`
+	VoteId *string   `json:"voteId"`
     /** レーティング名 */
-	RatingName *core.String   `json:"ratingName"`
+	RatingName *string   `json:"ratingName"`
     /** 投票対象のギャザリング名 */
-	GatheringName *core.String   `json:"gatheringName"`
+	GatheringName *string   `json:"gatheringName"`
     /** 投票用紙のリスト */
-	WrittenBallots *[]*WrittenBallot   `json:"writtenBallots"`
+	WrittenBallots []WrittenBallot   `json:"writtenBallots"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -496,7 +492,7 @@ func (p *Vote) ToDict() *map[string]interface{} {
     data["gatheringName"] = p.GatheringName
     if p.WrittenBallots != nil {
         var _writtenBallots []*map[string]interface {}
-        for _, item := range *p.WrittenBallots {
+        for _, item := range p.WrittenBallots {
             _writtenBallots = append(_writtenBallots, item.ToDict())
         }
         data["writtenBallots"] = &_writtenBallots

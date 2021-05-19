@@ -23,156 +23,156 @@ import (
 type DescribeNamespacesRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 }
 
 type CreateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	Name *core.String	`json:"name"`
-	Description *core.String	`json:"description"`
-	Type *core.String	`json:"type"`
-	GcpCredentialJson *core.String	`json:"gcpCredentialJson"`
-	BigQueryDatasetName *core.String	`json:"bigQueryDatasetName"`
+	Name *string	`json:"name"`
+	Description *string	`json:"description"`
+	Type *string	`json:"type"`
+	GcpCredentialJson *string	`json:"gcpCredentialJson"`
+	BigQueryDatasetName *string	`json:"bigQueryDatasetName"`
 	LogExpireDays *int32	`json:"logExpireDays"`
-	AwsRegion *core.String	`json:"awsRegion"`
-	AwsAccessKeyId *core.String	`json:"awsAccessKeyId"`
-	AwsSecretAccessKey *core.String	`json:"awsSecretAccessKey"`
-	FirehoseStreamName *core.String	`json:"firehoseStreamName"`
+	AwsRegion *string	`json:"awsRegion"`
+	AwsAccessKeyId *string	`json:"awsAccessKeyId"`
+	AwsSecretAccessKey *string	`json:"awsSecretAccessKey"`
+	FirehoseStreamName *string	`json:"firehoseStreamName"`
 }
 
 type GetNamespaceStatusRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type GetNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type UpdateNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Description *core.String	`json:"description"`
-	Type *core.String	`json:"type"`
-	GcpCredentialJson *core.String	`json:"gcpCredentialJson"`
-	BigQueryDatasetName *core.String	`json:"bigQueryDatasetName"`
+	NamespaceName *string	`json:"namespaceName"`
+	Description *string	`json:"description"`
+	Type *string	`json:"type"`
+	GcpCredentialJson *string	`json:"gcpCredentialJson"`
+	BigQueryDatasetName *string	`json:"bigQueryDatasetName"`
 	LogExpireDays *int32	`json:"logExpireDays"`
-	AwsRegion *core.String	`json:"awsRegion"`
-	AwsAccessKeyId *core.String	`json:"awsAccessKeyId"`
-	AwsSecretAccessKey *core.String	`json:"awsSecretAccessKey"`
-	FirehoseStreamName *core.String	`json:"firehoseStreamName"`
+	AwsRegion *string	`json:"awsRegion"`
+	AwsAccessKeyId *string	`json:"awsAccessKeyId"`
+	AwsSecretAccessKey *string	`json:"awsSecretAccessKey"`
+	FirehoseStreamName *string	`json:"firehoseStreamName"`
 }
 
 type DeleteNamespaceRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 }
 
 type QueryAccessLogRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Service *core.String	`json:"service"`
-	Method *core.String	`json:"method"`
-	UserId *core.String	`json:"userId"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	Service *string	`json:"service"`
+	Method *string	`json:"method"`
+	UserId *string	`json:"userId"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type CountAccessLogRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 	Service *bool	`json:"service"`
 	Method *bool	`json:"method"`
 	UserId *bool	`json:"userId"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type QueryIssueStampSheetLogRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Service *core.String	`json:"service"`
-	Method *core.String	`json:"method"`
-	UserId *core.String	`json:"userId"`
-	Action *core.String	`json:"action"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	Service *string	`json:"service"`
+	Method *string	`json:"method"`
+	UserId *string	`json:"userId"`
+	Action *string	`json:"action"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type CountIssueStampSheetLogRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 	Service *bool	`json:"service"`
 	Method *bool	`json:"method"`
 	UserId *bool	`json:"userId"`
 	Action *bool	`json:"action"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type QueryExecuteStampSheetLogRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Service *core.String	`json:"service"`
-	Method *core.String	`json:"method"`
-	UserId *core.String	`json:"userId"`
-	Action *core.String	`json:"action"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	Service *string	`json:"service"`
+	Method *string	`json:"method"`
+	UserId *string	`json:"userId"`
+	Action *string	`json:"action"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type CountExecuteStampSheetLogRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 	Service *bool	`json:"service"`
 	Method *bool	`json:"method"`
 	UserId *bool	`json:"userId"`
 	Action *bool	`json:"action"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type QueryExecuteStampTaskLogRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
-	Service *core.String	`json:"service"`
-	Method *core.String	`json:"method"`
-	UserId *core.String	`json:"userId"`
-	Action *core.String	`json:"action"`
-	PageToken *core.String	`json:"pageToken"`
+	NamespaceName *string	`json:"namespaceName"`
+	Service *string	`json:"service"`
+	Method *string	`json:"method"`
+	UserId *string	`json:"userId"`
+	Action *string	`json:"action"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }
 
 type CountExecuteStampTaskLogRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *core.String	`json:"namespaceName"`
+	NamespaceName *string	`json:"namespaceName"`
 	Service *bool	`json:"service"`
 	Method *bool	`json:"method"`
 	UserId *bool	`json:"userId"`
 	Action *bool	`json:"action"`
-	PageToken *core.String	`json:"pageToken"`
+	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
-	XGs2DuplicationAvoider *core.String	`json:"xGs2DuplicationAvoider"`
+	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
 }

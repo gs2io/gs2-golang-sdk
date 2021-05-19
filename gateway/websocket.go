@@ -589,7 +589,7 @@ func (p Gs2GatewayWebSocketClient) DescribeWebSocketSessionsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeWebSocketSessionsAsyncHandler(
@@ -765,7 +765,7 @@ func (p Gs2GatewayWebSocketClient) SetUserIdAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.setUserIdAsyncHandler(
@@ -1199,7 +1199,7 @@ func (p Gs2GatewayWebSocketClient) SetFirebaseTokenAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.setFirebaseTokenAsyncHandler(
@@ -1366,7 +1366,7 @@ func (p Gs2GatewayWebSocketClient) GetFirebaseTokenAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getFirebaseTokenAsyncHandler(
@@ -1530,7 +1530,7 @@ func (p Gs2GatewayWebSocketClient) DeleteFirebaseTokenAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteFirebaseTokenAsyncHandler(

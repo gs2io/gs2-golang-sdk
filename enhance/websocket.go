@@ -856,8 +856,8 @@ func (p Gs2EnhanceWebSocketClient) CreateRateModelMasterAsync(
         bodies["materialInventoryModelId"] = *request.MaterialInventoryModelId
     }
     if request.AcquireExperienceHierarchy != nil {
-        var _acquireExperienceHierarchy []core.String
-        for _, item := range *request.AcquireExperienceHierarchy {
+        var _acquireExperienceHierarchy []string
+        for _, item := range request.AcquireExperienceHierarchy {
             _acquireExperienceHierarchy = append(_acquireExperienceHierarchy, item)
         }
         bodies["acquireExperienceHierarchy"] = _acquireExperienceHierarchy
@@ -867,7 +867,7 @@ func (p Gs2EnhanceWebSocketClient) CreateRateModelMasterAsync(
     }
     if request.BonusRates != nil {
         var _bonusRates []*map[string]interface {}
-        for _, item := range *request.BonusRates {
+        for _, item := range request.BonusRates {
             _bonusRates = append(_bonusRates, item.ToDict())
         }
         bodies["bonusRates"] = _bonusRates
@@ -1052,8 +1052,8 @@ func (p Gs2EnhanceWebSocketClient) UpdateRateModelMasterAsync(
         bodies["materialInventoryModelId"] = *request.MaterialInventoryModelId
     }
     if request.AcquireExperienceHierarchy != nil {
-        var _acquireExperienceHierarchy []core.String
-        for _, item := range *request.AcquireExperienceHierarchy {
+        var _acquireExperienceHierarchy []string
+        for _, item := range request.AcquireExperienceHierarchy {
             _acquireExperienceHierarchy = append(_acquireExperienceHierarchy, item)
         }
         bodies["acquireExperienceHierarchy"] = _acquireExperienceHierarchy
@@ -1063,7 +1063,7 @@ func (p Gs2EnhanceWebSocketClient) UpdateRateModelMasterAsync(
     }
     if request.BonusRates != nil {
         var _bonusRates []*map[string]interface {}
-        for _, item := range *request.BonusRates {
+        for _, item := range request.BonusRates {
             _bonusRates = append(_bonusRates, item.ToDict())
         }
         bodies["bonusRates"] = _bonusRates
@@ -1237,14 +1237,14 @@ func (p Gs2EnhanceWebSocketClient) DirectEnhanceAsync(
     }
     if request.Materials != nil {
         var _materials []*map[string]interface {}
-        for _, item := range *request.Materials {
+        for _, item := range request.Materials {
             _materials = append(_materials, item.ToDict())
         }
         bodies["materials"] = _materials
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -1253,7 +1253,7 @@ func (p Gs2EnhanceWebSocketClient) DirectEnhanceAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.directEnhanceAsyncHandler(
@@ -1342,14 +1342,14 @@ func (p Gs2EnhanceWebSocketClient) DirectEnhanceByUserIdAsync(
     }
     if request.Materials != nil {
         var _materials []*map[string]interface {}
-        for _, item := range *request.Materials {
+        for _, item := range request.Materials {
             _materials = append(_materials, item.ToDict())
         }
         bodies["materials"] = _materials
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -1614,7 +1614,7 @@ func (p Gs2EnhanceWebSocketClient) CreateProgressByUserIdAsync(
     }
     if request.Materials != nil {
         var _materials []*map[string]interface {}
-        for _, item := range *request.Materials {
+        for _, item := range request.Materials {
             _materials = append(_materials, item.ToDict())
         }
         bodies["materials"] = _materials
@@ -1705,7 +1705,7 @@ func (p Gs2EnhanceWebSocketClient) GetProgressAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getProgressAsyncHandler(
@@ -1873,7 +1873,7 @@ func (p Gs2EnhanceWebSocketClient) StartAsync(
     }
     if request.Materials != nil {
         var _materials []*map[string]interface {}
-        for _, item := range *request.Materials {
+        for _, item := range request.Materials {
             _materials = append(_materials, item.ToDict())
         }
         bodies["materials"] = _materials
@@ -1883,7 +1883,7 @@ func (p Gs2EnhanceWebSocketClient) StartAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -1892,7 +1892,7 @@ func (p Gs2EnhanceWebSocketClient) StartAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.startAsyncHandler(
@@ -1978,7 +1978,7 @@ func (p Gs2EnhanceWebSocketClient) StartByUserIdAsync(
     }
     if request.Materials != nil {
         var _materials []*map[string]interface {}
-        for _, item := range *request.Materials {
+        for _, item := range request.Materials {
             _materials = append(_materials, item.ToDict())
         }
         bodies["materials"] = _materials
@@ -1991,7 +1991,7 @@ func (p Gs2EnhanceWebSocketClient) StartByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2077,7 +2077,7 @@ func (p Gs2EnhanceWebSocketClient) EndAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2086,7 +2086,7 @@ func (p Gs2EnhanceWebSocketClient) EndAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.endAsyncHandler(
@@ -2169,7 +2169,7 @@ func (p Gs2EnhanceWebSocketClient) EndByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2257,7 +2257,7 @@ func (p Gs2EnhanceWebSocketClient) DeleteProgressAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteProgressAsyncHandler(

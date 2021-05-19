@@ -680,8 +680,8 @@ func (p Gs2RealtimeWebSocketClient) WantRoomAsync(
         bodies["name"] = *request.Name
     }
     if request.NotificationUserIds != nil {
-        var _notificationUserIds []core.String
-        for _, item := range *request.NotificationUserIds {
+        var _notificationUserIds []string
+        for _, item := range request.NotificationUserIds {
             _notificationUserIds = append(_notificationUserIds, item)
         }
         bodies["notificationUserIds"] = _notificationUserIds

@@ -173,6 +173,12 @@ func (p Gs2VersionRestClient) CreateNamespaceAsync(
     if request.AssumeUserId != nil && *request.AssumeUserId != "" {
         bodies["assumeUserId"] = *request.AssumeUserId
     }
+    if request.AcceptVersionScript != nil {
+        bodies["acceptVersionScript"] = request.AcceptVersionScript.ToDict()
+    }
+    if request.CheckVersionTriggerScriptId != nil && *request.CheckVersionTriggerScriptId != "" {
+        bodies["checkVersionTriggerScriptId"] = *request.CheckVersionTriggerScriptId
+    }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
     }
@@ -255,7 +261,7 @@ func (p Gs2VersionRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -339,7 +345,7 @@ func (p Gs2VersionRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -423,7 +429,7 @@ func (p Gs2VersionRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -436,6 +442,12 @@ func (p Gs2VersionRestClient) UpdateNamespaceAsync(
     }
     if request.AssumeUserId != nil && *request.AssumeUserId != "" {
         bodies["assumeUserId"] = *request.AssumeUserId
+    }
+    if request.AcceptVersionScript != nil {
+        bodies["acceptVersionScript"] = request.AcceptVersionScript.ToDict()
+    }
+    if request.CheckVersionTriggerScriptId != nil && *request.CheckVersionTriggerScriptId != "" {
+        bodies["checkVersionTriggerScriptId"] = *request.CheckVersionTriggerScriptId
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
@@ -519,7 +531,7 @@ func (p Gs2VersionRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -603,7 +615,7 @@ func (p Gs2VersionRestClient) DescribeVersionModelMastersAsync(
 	callback chan<- DescribeVersionModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/version"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -693,7 +705,7 @@ func (p Gs2VersionRestClient) CreateVersionModelMasterAsync(
 	callback chan<- CreateVersionModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/version"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -807,12 +819,12 @@ func (p Gs2VersionRestClient) GetVersionModelMasterAsync(
 	callback chan<- GetVersionModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/version/{versionName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.VersionName != nil {
+    if request.VersionName != nil && *request.VersionName != ""  {
         path = strings.ReplaceAll(path, "{versionName}", core.ToString(*request.VersionName))
     } else {
         path = strings.ReplaceAll(path, "{versionName}", "null")
@@ -896,12 +908,12 @@ func (p Gs2VersionRestClient) UpdateVersionModelMasterAsync(
 	callback chan<- UpdateVersionModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/version/{versionName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.VersionName != nil {
+    if request.VersionName != nil && *request.VersionName != ""  {
         path = strings.ReplaceAll(path, "{versionName}", core.ToString(*request.VersionName))
     } else {
         path = strings.ReplaceAll(path, "{versionName}", "null")
@@ -1012,12 +1024,12 @@ func (p Gs2VersionRestClient) DeleteVersionModelMasterAsync(
 	callback chan<- DeleteVersionModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/version/{versionName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.VersionName != nil {
+    if request.VersionName != nil && *request.VersionName != ""  {
         path = strings.ReplaceAll(path, "{versionName}", core.ToString(*request.VersionName))
     } else {
         path = strings.ReplaceAll(path, "{versionName}", "null")
@@ -1101,7 +1113,7 @@ func (p Gs2VersionRestClient) DescribeVersionModelsAsync(
 	callback chan<- DescribeVersionModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/version"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1185,12 +1197,12 @@ func (p Gs2VersionRestClient) GetVersionModelAsync(
 	callback chan<- GetVersionModelAsyncResult,
 ) {
 	path := "/{namespaceName}/version/{versionName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.VersionName != nil {
+    if request.VersionName != nil && *request.VersionName != ""  {
         path = strings.ReplaceAll(path, "{versionName}", core.ToString(*request.VersionName))
     } else {
         path = strings.ReplaceAll(path, "{versionName}", "null")
@@ -1274,7 +1286,7 @@ func (p Gs2VersionRestClient) DescribeAcceptVersionsAsync(
 	callback chan<- DescribeAcceptVersionsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/acceptVersion"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1367,7 +1379,7 @@ func (p Gs2VersionRestClient) DescribeAcceptVersionsByUserIdAsync(
 	callback chan<- DescribeAcceptVersionsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/acceptVersion"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1460,7 +1472,7 @@ func (p Gs2VersionRestClient) AcceptAsync(
 	callback chan<- AcceptAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/acceptVersion"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1553,7 +1565,7 @@ func (p Gs2VersionRestClient) AcceptByUserIdAsync(
 	callback chan<- AcceptByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/acceptVersion"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1646,12 +1658,12 @@ func (p Gs2VersionRestClient) GetAcceptVersionAsync(
 	callback chan<- GetAcceptVersionAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/{versionName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.VersionName != nil {
+    if request.VersionName != nil && *request.VersionName != ""  {
         path = strings.ReplaceAll(path, "{versionName}", core.ToString(*request.VersionName))
     } else {
         path = strings.ReplaceAll(path, "{versionName}", "null")
@@ -1738,17 +1750,17 @@ func (p Gs2VersionRestClient) GetAcceptVersionByUserIdAsync(
 	callback chan<- GetAcceptVersionByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/{versionName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.VersionName != nil {
+    if request.VersionName != nil && *request.VersionName != ""  {
         path = strings.ReplaceAll(path, "{versionName}", core.ToString(*request.VersionName))
     } else {
         path = strings.ReplaceAll(path, "{versionName}", "null")
@@ -1832,12 +1844,12 @@ func (p Gs2VersionRestClient) DeleteAcceptVersionAsync(
 	callback chan<- DeleteAcceptVersionAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/{versionName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.VersionName != nil {
+    if request.VersionName != nil && *request.VersionName != ""  {
         path = strings.ReplaceAll(path, "{versionName}", core.ToString(*request.VersionName))
     } else {
         path = strings.ReplaceAll(path, "{versionName}", "null")
@@ -1924,17 +1936,17 @@ func (p Gs2VersionRestClient) DeleteAcceptVersionByUserIdAsync(
 	callback chan<- DeleteAcceptVersionByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/{versionName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.VersionName != nil {
+    if request.VersionName != nil && *request.VersionName != ""  {
         path = strings.ReplaceAll(path, "{versionName}", core.ToString(*request.VersionName))
     } else {
         path = strings.ReplaceAll(path, "{versionName}", "null")
@@ -2018,7 +2030,7 @@ func (p Gs2VersionRestClient) CheckVersionAsync(
 	callback chan<- CheckVersionAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/check"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2028,7 +2040,7 @@ func (p Gs2VersionRestClient) CheckVersionAsync(
     var bodies = core.Bodies{}
     if request.TargetVersions != nil {
         var _targetVersions []*map[string]interface {}
-        for _, item := range *request.TargetVersions {
+        for _, item := range request.TargetVersions {
             _targetVersions = append(_targetVersions, item.ToDict())
         }
         bodies["targetVersions"] = _targetVersions
@@ -2115,12 +2127,12 @@ func (p Gs2VersionRestClient) CheckVersionByUserIdAsync(
 	callback chan<- CheckVersionByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/check"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2130,7 +2142,7 @@ func (p Gs2VersionRestClient) CheckVersionByUserIdAsync(
     var bodies = core.Bodies{}
     if request.TargetVersions != nil {
         var _targetVersions []*map[string]interface {}
-        for _, item := range *request.TargetVersions {
+        for _, item := range request.TargetVersions {
             _targetVersions = append(_targetVersions, item.ToDict())
         }
         bodies["targetVersions"] = _targetVersions
@@ -2214,12 +2226,12 @@ func (p Gs2VersionRestClient) CalculateSignatureAsync(
 	callback chan<- CalculateSignatureAsyncResult,
 ) {
 	path := "/{namespaceName}/version/{versionName}/calculate/signature"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.VersionName != nil {
+    if request.VersionName != nil && *request.VersionName != ""  {
         path = strings.ReplaceAll(path, "{versionName}", core.ToString(*request.VersionName))
     } else {
         path = strings.ReplaceAll(path, "{versionName}", "null")
@@ -2309,7 +2321,7 @@ func (p Gs2VersionRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2393,7 +2405,7 @@ func (p Gs2VersionRestClient) GetCurrentVersionMasterAsync(
 	callback chan<- GetCurrentVersionMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2477,7 +2489,7 @@ func (p Gs2VersionRestClient) UpdateCurrentVersionMasterAsync(
 	callback chan<- UpdateCurrentVersionMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2567,7 +2579,7 @@ func (p Gs2VersionRestClient) UpdateCurrentVersionMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentVersionMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")

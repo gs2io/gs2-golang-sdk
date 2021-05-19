@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package stamina
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type DescribeStaminaModelMastersResult struct {
     /** スタミナモデルマスターのリスト */
 	Items         []StaminaModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeStaminaModelMastersResult) ToDict() *map[string]interface{} {
@@ -240,7 +236,7 @@ type DescribeMaxStaminaTableMastersResult struct {
     /** スタミナの最大値テーブルマスターのリスト */
 	Items         []MaxStaminaTableMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeMaxStaminaTableMastersResult) ToDict() *map[string]interface{} {
@@ -339,7 +335,7 @@ type DescribeRecoverIntervalTableMastersResult struct {
     /** スタミナ回復間隔テーブルマスターのリスト */
 	Items         []RecoverIntervalTableMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeRecoverIntervalTableMastersResult) ToDict() *map[string]interface{} {
@@ -438,7 +434,7 @@ type DescribeRecoverValueTableMastersResult struct {
     /** スタミナ回復量テーブルマスターのリスト */
 	Items         []RecoverValueTableMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeRecoverValueTableMastersResult) ToDict() *map[string]interface{} {
@@ -649,7 +645,7 @@ type DescribeStaminasResult struct {
     /** スタミナのリスト */
 	Items         []Stamina	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeStaminasResult) ToDict() *map[string]interface{} {
@@ -676,7 +672,7 @@ type DescribeStaminasByUserIdResult struct {
     /** スタミナのリスト */
 	Items         []Stamina	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeStaminasByUserIdResult) ToDict() *map[string]interface{} {
@@ -1142,7 +1138,7 @@ type ConsumeStaminaByStampTaskResult struct {
     /** スタミナモデル */
 	StaminaModel         *StaminaModel	`json:"staminaModel"`
     /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *core.String	`json:"newContextStack"`
+	NewContextStack         *string	`json:"newContextStack"`
 }
 
 func (p *ConsumeStaminaByStampTaskResult) ToDict() *map[string]interface{} {

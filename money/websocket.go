@@ -631,7 +631,7 @@ func (p Gs2MoneyWebSocketClient) DescribeWalletsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeWalletsAsyncHandler(
@@ -892,7 +892,7 @@ func (p Gs2MoneyWebSocketClient) GetWalletAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getWalletAsyncHandler(
@@ -1159,7 +1159,7 @@ func (p Gs2MoneyWebSocketClient) WithdrawAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.withdrawAsyncHandler(

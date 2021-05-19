@@ -863,21 +863,21 @@ func (p Gs2ExchangeWebSocketClient) CreateRateModelMasterAsync(
     }
     if request.SkipConsumeActions != nil {
         var _skipConsumeActions []*map[string]interface {}
-        for _, item := range *request.SkipConsumeActions {
+        for _, item := range request.SkipConsumeActions {
             _skipConsumeActions = append(_skipConsumeActions, item.ToDict())
         }
         bodies["skipConsumeActions"] = _skipConsumeActions
     }
     if request.AcquireActions != nil {
         var _acquireActions []*map[string]interface {}
-        for _, item := range *request.AcquireActions {
+        for _, item := range request.AcquireActions {
             _acquireActions = append(_acquireActions, item.ToDict())
         }
         bodies["acquireActions"] = _acquireActions
     }
     if request.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *request.ConsumeActions {
+        for _, item := range request.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         bodies["consumeActions"] = _consumeActions
@@ -1063,21 +1063,21 @@ func (p Gs2ExchangeWebSocketClient) UpdateRateModelMasterAsync(
     }
     if request.SkipConsumeActions != nil {
         var _skipConsumeActions []*map[string]interface {}
-        for _, item := range *request.SkipConsumeActions {
+        for _, item := range request.SkipConsumeActions {
             _skipConsumeActions = append(_skipConsumeActions, item.ToDict())
         }
         bodies["skipConsumeActions"] = _skipConsumeActions
     }
     if request.AcquireActions != nil {
         var _acquireActions []*map[string]interface {}
-        for _, item := range *request.AcquireActions {
+        for _, item := range request.AcquireActions {
             _acquireActions = append(_acquireActions, item.ToDict())
         }
         bodies["acquireActions"] = _acquireActions
     }
     if request.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *request.ConsumeActions {
+        for _, item := range request.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         bodies["consumeActions"] = _consumeActions
@@ -1251,7 +1251,7 @@ func (p Gs2ExchangeWebSocketClient) ExchangeAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -1260,7 +1260,7 @@ func (p Gs2ExchangeWebSocketClient) ExchangeAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.exchangeAsyncHandler(
@@ -1349,7 +1349,7 @@ func (p Gs2ExchangeWebSocketClient) ExchangeByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -1938,7 +1938,7 @@ func (p Gs2ExchangeWebSocketClient) DescribeAwaitsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeAwaitsAsyncHandler(
@@ -2117,7 +2117,7 @@ func (p Gs2ExchangeWebSocketClient) GetAwaitAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getAwaitAsyncHandler(
@@ -2291,7 +2291,7 @@ func (p Gs2ExchangeWebSocketClient) AcquireAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2300,7 +2300,7 @@ func (p Gs2ExchangeWebSocketClient) AcquireAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.acquireAsyncHandler(
@@ -2389,7 +2389,7 @@ func (p Gs2ExchangeWebSocketClient) AcquireByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2484,7 +2484,7 @@ func (p Gs2ExchangeWebSocketClient) AcquireForceByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2576,7 +2576,7 @@ func (p Gs2ExchangeWebSocketClient) SkipAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2585,7 +2585,7 @@ func (p Gs2ExchangeWebSocketClient) SkipAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.skipAsyncHandler(
@@ -2674,7 +2674,7 @@ func (p Gs2ExchangeWebSocketClient) SkipByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -2768,7 +2768,7 @@ func (p Gs2ExchangeWebSocketClient) DeleteAwaitAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteAwaitAsyncHandler(

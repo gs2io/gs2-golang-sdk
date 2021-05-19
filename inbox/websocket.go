@@ -625,7 +625,7 @@ func (p Gs2InboxWebSocketClient) DescribeMessagesAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeMessagesAsyncHandler(
@@ -799,7 +799,7 @@ func (p Gs2InboxWebSocketClient) SendMessageByUserIdAsync(
     }
     if request.ReadAcquireActions != nil {
         var _readAcquireActions []*map[string]interface {}
-        for _, item := range *request.ReadAcquireActions {
+        for _, item := range request.ReadAcquireActions {
             _readAcquireActions = append(_readAcquireActions, item.ToDict())
         }
         bodies["readAcquireActions"] = _readAcquireActions
@@ -896,7 +896,7 @@ func (p Gs2InboxWebSocketClient) GetMessageAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getMessageAsyncHandler(
@@ -1063,7 +1063,7 @@ func (p Gs2InboxWebSocketClient) ReceiveGlobalMessageAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.receiveGlobalMessageAsyncHandler(
@@ -1230,7 +1230,7 @@ func (p Gs2InboxWebSocketClient) OpenMessageAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.openMessageAsyncHandler(
@@ -1398,7 +1398,7 @@ func (p Gs2InboxWebSocketClient) ReadMessageAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -1407,7 +1407,7 @@ func (p Gs2InboxWebSocketClient) ReadMessageAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.readMessageAsyncHandler(
@@ -1493,7 +1493,7 @@ func (p Gs2InboxWebSocketClient) ReadMessageByUserIdAsync(
     }
     if request.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *request.Config {
+        for _, item := range request.Config {
             _config = append(_config, item.ToDict())
         }
         bodies["config"] = _config
@@ -1584,7 +1584,7 @@ func (p Gs2InboxWebSocketClient) DeleteMessageAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteMessageAsyncHandler(
@@ -2244,7 +2244,7 @@ func (p Gs2InboxWebSocketClient) CreateGlobalMessageMasterAsync(
     }
     if request.ReadAcquireActions != nil {
         var _readAcquireActions []*map[string]interface {}
-        for _, item := range *request.ReadAcquireActions {
+        for _, item := range request.ReadAcquireActions {
             _readAcquireActions = append(_readAcquireActions, item.ToDict())
         }
         bodies["readAcquireActions"] = _readAcquireActions
@@ -2424,7 +2424,7 @@ func (p Gs2InboxWebSocketClient) UpdateGlobalMessageMasterAsync(
     }
     if request.ReadAcquireActions != nil {
         var _readAcquireActions []*map[string]interface {}
-        for _, item := range *request.ReadAcquireActions {
+        for _, item := range request.ReadAcquireActions {
             _readAcquireActions = append(_readAcquireActions, item.ToDict())
         }
         bodies["readAcquireActions"] = _readAcquireActions
@@ -2843,8 +2843,8 @@ func (p Gs2InboxWebSocketClient) UpdateReceivedByUserIdAsync(
         bodies["userId"] = *request.UserId
     }
     if request.ReceivedGlobalMessageNames != nil {
-        var _receivedGlobalMessageNames []core.String
-        for _, item := range *request.ReceivedGlobalMessageNames {
+        var _receivedGlobalMessageNames []string
+        for _, item := range request.ReceivedGlobalMessageNames {
             _receivedGlobalMessageNames = append(_receivedGlobalMessageNames, item)
         }
         bodies["receivedGlobalMessageNames"] = _receivedGlobalMessageNames

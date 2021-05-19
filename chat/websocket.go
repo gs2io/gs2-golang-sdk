@@ -710,8 +710,8 @@ func (p Gs2ChatWebSocketClient) CreateRoomAsync(
         bodies["password"] = *request.Password
     }
     if request.WhiteListUserIds != nil {
-        var _whiteListUserIds []core.String
-        for _, item := range *request.WhiteListUserIds {
+        var _whiteListUserIds []string
+        for _, item := range request.WhiteListUserIds {
             _whiteListUserIds = append(_whiteListUserIds, item)
         }
         bodies["whiteListUserIds"] = _whiteListUserIds
@@ -720,7 +720,7 @@ func (p Gs2ChatWebSocketClient) CreateRoomAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.createRoomAsyncHandler(
@@ -811,8 +811,8 @@ func (p Gs2ChatWebSocketClient) CreateRoomFromBackendAsync(
         bodies["password"] = *request.Password
     }
     if request.WhiteListUserIds != nil {
-        var _whiteListUserIds []core.String
-        for _, item := range *request.WhiteListUserIds {
+        var _whiteListUserIds []string
+        for _, item := range request.WhiteListUserIds {
             _whiteListUserIds = append(_whiteListUserIds, item)
         }
         bodies["whiteListUserIds"] = _whiteListUserIds
@@ -988,8 +988,8 @@ func (p Gs2ChatWebSocketClient) UpdateRoomAsync(
         bodies["password"] = *request.Password
     }
     if request.WhiteListUserIds != nil {
-        var _whiteListUserIds []core.String
-        for _, item := range *request.WhiteListUserIds {
+        var _whiteListUserIds []string
+        for _, item := range request.WhiteListUserIds {
             _whiteListUserIds = append(_whiteListUserIds, item)
         }
         bodies["whiteListUserIds"] = _whiteListUserIds
@@ -1080,7 +1080,7 @@ func (p Gs2ChatWebSocketClient) DeleteRoomAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteRoomAsyncHandler(
@@ -1350,7 +1350,7 @@ func (p Gs2ChatWebSocketClient) PostAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.postAsyncHandler(
@@ -1702,7 +1702,7 @@ func (p Gs2ChatWebSocketClient) DescribeSubscribesAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeSubscribesAsyncHandler(
@@ -1961,7 +1961,7 @@ func (p Gs2ChatWebSocketClient) SubscribeAsync(
     }
     if request.NotificationTypes != nil {
         var _notificationTypes []*map[string]interface {}
-        for _, item := range *request.NotificationTypes {
+        for _, item := range request.NotificationTypes {
             _notificationTypes = append(_notificationTypes, item.ToDict())
         }
         bodies["notificationTypes"] = _notificationTypes
@@ -1970,7 +1970,7 @@ func (p Gs2ChatWebSocketClient) SubscribeAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.subscribeAsyncHandler(
@@ -2056,7 +2056,7 @@ func (p Gs2ChatWebSocketClient) SubscribeByUserIdAsync(
     }
     if request.NotificationTypes != nil {
         var _notificationTypes []*map[string]interface {}
-        for _, item := range *request.NotificationTypes {
+        for _, item := range request.NotificationTypes {
             _notificationTypes = append(_notificationTypes, item.ToDict())
         }
         bodies["notificationTypes"] = _notificationTypes
@@ -2147,7 +2147,7 @@ func (p Gs2ChatWebSocketClient) GetSubscribeAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getSubscribeAsyncHandler(
@@ -2315,7 +2315,7 @@ func (p Gs2ChatWebSocketClient) UpdateNotificationTypeAsync(
     }
     if request.NotificationTypes != nil {
         var _notificationTypes []*map[string]interface {}
-        for _, item := range *request.NotificationTypes {
+        for _, item := range request.NotificationTypes {
             _notificationTypes = append(_notificationTypes, item.ToDict())
         }
         bodies["notificationTypes"] = _notificationTypes
@@ -2324,7 +2324,7 @@ func (p Gs2ChatWebSocketClient) UpdateNotificationTypeAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.updateNotificationTypeAsyncHandler(
@@ -2410,7 +2410,7 @@ func (p Gs2ChatWebSocketClient) UpdateNotificationTypeByUserIdAsync(
     }
     if request.NotificationTypes != nil {
         var _notificationTypes []*map[string]interface {}
-        for _, item := range *request.NotificationTypes {
+        for _, item := range request.NotificationTypes {
             _notificationTypes = append(_notificationTypes, item.ToDict())
         }
         bodies["notificationTypes"] = _notificationTypes
@@ -2501,7 +2501,7 @@ func (p Gs2ChatWebSocketClient) UnsubscribeAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.unsubscribeAsyncHandler(

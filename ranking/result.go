@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package ranking
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -181,7 +177,7 @@ type DescribeCategoryModelMastersResult struct {
     /** カテゴリマスターのリスト */
 	Items         []CategoryModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeCategoryModelMastersResult) ToDict() *map[string]interface{} {
@@ -432,7 +428,7 @@ type DescribeScoresResult struct {
     /** スコアのリスト */
 	Items         []Score	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeScoresResult) ToDict() *map[string]interface{} {
@@ -459,7 +455,7 @@ type DescribeScoresByUserIdResult struct {
     /** スコアのリスト */
 	Items         []Score	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeScoresByUserIdResult) ToDict() *map[string]interface{} {
@@ -522,7 +518,7 @@ type DescribeRankingsResult struct {
     /** ランキングのリスト */
 	Items         []Ranking	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeRankingsResult) ToDict() *map[string]interface{} {
@@ -549,7 +545,7 @@ type DescribeRankingssByUserIdResult struct {
     /** ランキングのリスト */
 	Items         []Ranking	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeRankingssByUserIdResult) ToDict() *map[string]interface{} {

@@ -16,10 +16,6 @@ permissions and limitations under the License.
 
 package watch
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type GetChartResult struct {
     /** チャート */
 	Item         *Chart	`json:"item"`
@@ -60,7 +56,7 @@ type DescribeBillingActivitiesResult struct {
     /** 請求にまつわるアクティビティのリスト */
 	Items         []BillingActivity	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeBillingActivitiesResult) ToDict() *map[string]interface{} {

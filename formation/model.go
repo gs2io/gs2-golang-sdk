@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package formation
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** キャパシティを更新するときに実行するスクリプト */
 	UpdateMoldScript *ScriptSetting   `json:"updateMoldScript"`
     /** フォームを更新するときに実行するスクリプト */
@@ -63,13 +59,13 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type FormModel struct {
     /** フォームマスター */
-	FormModelId *core.String   `json:"formModelId"`
+	FormModelId *string   `json:"formModelId"`
     /** フォームの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** フォームの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** スリットリスト */
-	Slots *[]*SlotModel   `json:"slots"`
+	Slots []SlotModel   `json:"slots"`
 }
 
 func (p *FormModel) ToDict() *map[string]interface{} {
@@ -79,7 +75,7 @@ func (p *FormModel) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.Slots != nil {
         var _slots []*map[string]interface {}
-        for _, item := range *p.Slots {
+        for _, item := range p.Slots {
             _slots = append(_slots, item.ToDict())
         }
         data["slots"] = &_slots
@@ -89,15 +85,15 @@ func (p *FormModel) ToDict() *map[string]interface{} {
 
 type FormModelMaster struct {
     /** フォームマスター */
-	FormModelId *core.String   `json:"formModelId"`
+	FormModelId *string   `json:"formModelId"`
     /** フォーム名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** フォームマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** フォームのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** スロットリスト */
-	Slots *[]*SlotModel   `json:"slots"`
+	Slots []SlotModel   `json:"slots"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -112,7 +108,7 @@ func (p *FormModelMaster) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.Slots != nil {
         var _slots []*map[string]interface {}
-        for _, item := range *p.Slots {
+        for _, item := range p.Slots {
             _slots = append(_slots, item.ToDict())
         }
         data["slots"] = &_slots
@@ -124,17 +120,17 @@ func (p *FormModelMaster) ToDict() *map[string]interface{} {
 
 type MoldModel struct {
     /** フォームの保存領域マスター */
-	MoldModelId *core.String   `json:"moldModelId"`
+	MoldModelId *string   `json:"moldModelId"`
     /** フォームの保存領域名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** メタデータ */
-	Metadata *core.String   `json:"metadata"`
-    /** None */
-	FormModel *FormModel   `json:"formModel"`
+	Metadata *string   `json:"metadata"`
     /** フォームを保存できる初期キャパシティ */
 	InitialMaxCapacity *int32   `json:"initialMaxCapacity"`
     /** フォームを保存できるキャパシティ */
 	MaxCapacity *int32   `json:"maxCapacity"`
+    /** None */
+	FormModel *FormModel   `json:"formModel"`
 }
 
 func (p *MoldModel) ToDict() *map[string]interface{} {
@@ -142,29 +138,29 @@ func (p *MoldModel) ToDict() *map[string]interface{} {
     data["moldModelId"] = p.MoldModelId
     data["name"] = p.Name
     data["metadata"] = p.Metadata
+    data["initialMaxCapacity"] = p.InitialMaxCapacity
+    data["maxCapacity"] = p.MaxCapacity
     if p.FormModel != nil {
         data["formModel"] = *p.FormModel.ToDict()
     }
-    data["initialMaxCapacity"] = p.InitialMaxCapacity
-    data["maxCapacity"] = p.MaxCapacity
     return &data
 }
 
 type MoldModelMaster struct {
     /** フォームの保存領域マスター */
-	MoldModelId *core.String   `json:"moldModelId"`
+	MoldModelId *string   `json:"moldModelId"`
     /** フォームの保存領域名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** フォームの保存領域マスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** フォームの保存領域のメタデータ */
-	Metadata *core.String   `json:"metadata"`
-    /** フォーム名 */
-	FormModelName *core.String   `json:"formModelName"`
+	Metadata *string   `json:"metadata"`
     /** フォームを保存できる初期キャパシティ */
 	InitialMaxCapacity *int32   `json:"initialMaxCapacity"`
     /** フォームを保存できるキャパシティ */
 	MaxCapacity *int32   `json:"maxCapacity"`
+    /** フォーム名 */
+	FormModelName *string   `json:"formModelName"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -177,9 +173,9 @@ func (p *MoldModelMaster) ToDict() *map[string]interface{} {
     data["name"] = p.Name
     data["description"] = p.Description
     data["metadata"] = p.Metadata
-    data["formModelName"] = p.FormModelName
     data["initialMaxCapacity"] = p.InitialMaxCapacity
     data["maxCapacity"] = p.MaxCapacity
+    data["formModelName"] = p.FormModelName
     data["createdAt"] = p.CreatedAt
     data["updatedAt"] = p.UpdatedAt
     return &data
@@ -187,9 +183,9 @@ func (p *MoldModelMaster) ToDict() *map[string]interface{} {
 
 type CurrentFormMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentFormMaster) ToDict() *map[string]interface{} {
@@ -201,11 +197,11 @@ func (p *CurrentFormMaster) ToDict() *map[string]interface{} {
 
 type Mold struct {
     /** 保存したフォーム */
-	MoldId *core.String   `json:"moldId"`
+	MoldId *string   `json:"moldId"`
     /** フォームの保存領域の名前 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 現在のキャパシティ */
 	Capacity *int32   `json:"capacity"`
     /** 作成日時 */
@@ -227,13 +223,13 @@ func (p *Mold) ToDict() *map[string]interface{} {
 
 type Form struct {
     /** フォーム */
-	FormId *core.String   `json:"formId"`
+	FormId *string   `json:"formId"`
     /** フォームの保存領域の名前 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 保存領域のインデックス */
 	Index *int32   `json:"index"`
     /** スロットリスト */
-	Slots *[]*Slot   `json:"slots"`
+	Slots []Slot   `json:"slots"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -247,7 +243,7 @@ func (p *Form) ToDict() *map[string]interface{} {
     data["index"] = p.Index
     if p.Slots != nil {
         var _slots []*map[string]interface {}
-        for _, item := range *p.Slots {
+        for _, item := range p.Slots {
             _slots = append(_slots, item.ToDict())
         }
         data["slots"] = &_slots
@@ -259,11 +255,11 @@ func (p *Form) ToDict() *map[string]interface{} {
 
 type Slot struct {
     /** スロットモデル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** プロパティID */
-	PropertyId *core.String   `json:"propertyId"`
+	PropertyId *string   `json:"propertyId"`
     /** メタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
 }
 
 func (p *Slot) ToDict() *map[string]interface{} {
@@ -276,15 +272,15 @@ func (p *Slot) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -299,11 +295,11 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type SlotModel struct {
     /** スロットモデル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** プロパティとして設定可能な値の正規表現 */
-	PropertyRegex *core.String   `json:"propertyRegex"`
+	PropertyRegex *string   `json:"propertyRegex"`
     /** メタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
 }
 
 func (p *SlotModel) ToDict() *map[string]interface{} {
@@ -316,15 +312,15 @@ func (p *SlotModel) ToDict() *map[string]interface{} {
 
 type SlotWithSignature struct {
     /** スロットモデル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** プロパティの種類 */
-	PropertyType *core.String   `json:"propertyType"`
+	PropertyType *string   `json:"propertyType"`
     /** ペイロード */
-	Body *core.String   `json:"body"`
+	Body *string   `json:"body"`
     /** プロパティIDのリソースを所有していることを証明する署名 */
-	Signature *core.String   `json:"signature"`
+	Signature *string   `json:"signature"`
     /** メタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
 }
 
 func (p *SlotWithSignature) ToDict() *map[string]interface{} {
@@ -339,9 +335,9 @@ func (p *SlotWithSignature) ToDict() *map[string]interface{} {
 
 type AcquireActionConfig struct {
     /** スロット名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** スタンプシートに使用するコンフィグ */
-	Config *[]*Config   `json:"config"`
+	Config []Config   `json:"config"`
 }
 
 func (p *AcquireActionConfig) ToDict() *map[string]interface{} {
@@ -349,7 +345,7 @@ func (p *AcquireActionConfig) ToDict() *map[string]interface{} {
     data["name"] = p.Name
     if p.Config != nil {
         var _config []*map[string]interface {}
-        for _, item := range *p.Config {
+        for _, item := range p.Config {
             _config = append(_config, item.ToDict())
         }
         data["config"] = &_config
@@ -359,9 +355,9 @@ func (p *AcquireActionConfig) ToDict() *map[string]interface{} {
 
 type Config struct {
     /** 名前 */
-	Key *core.String   `json:"key"`
+	Key *string   `json:"key"`
     /** 値 */
-	Value *core.String   `json:"value"`
+	Value *string   `json:"value"`
 }
 
 func (p *Config) ToDict() *map[string]interface{} {
@@ -373,19 +369,19 @@ func (p *Config) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -402,13 +398,13 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type ScriptSetting struct {
     /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *core.String   `json:"triggerScriptId"`
+	TriggerScriptId *string   `json:"triggerScriptId"`
     /** 完了通知の通知先 */
-	DoneTriggerTargetType *core.String   `json:"doneTriggerTargetType"`
+	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
     /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *core.String   `json:"doneTriggerScriptId"`
+	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
     /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *core.String   `json:"doneTriggerQueueNamespaceId"`
+	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
 }
 
 func (p *ScriptSetting) ToDict() *map[string]interface{} {
@@ -422,7 +418,7 @@ func (p *ScriptSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {
@@ -433,9 +429,9 @@ func (p *LogSetting) ToDict() *map[string]interface{} {
 
 type AcquireAction struct {
     /** スタンプシートで実行するアクションの種類 */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 入手リクエストのJSON */
-	Request *core.String   `json:"request"`
+	Request *string   `json:"request"`
 }
 
 func (p *AcquireAction) ToDict() *map[string]interface{} {

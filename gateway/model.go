@@ -16,21 +16,17 @@ permissions and limitations under the License.
 
 package gateway
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 説明文 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** Firebase の通知送信に使用するシークレットトークン */
-	FirebaseSecret *core.String   `json:"firebaseSecret"`
+	FirebaseSecret *string   `json:"firebaseSecret"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** 作成日時 */
@@ -56,15 +52,15 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type WebSocketSession struct {
     /** コネクションID */
-	ConnectionId *core.String   `json:"connectionId"`
+	ConnectionId *string   `json:"connectionId"`
     /** API ID */
-	ApiId *core.String   `json:"apiId"`
+	ApiId *string   `json:"apiId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -85,13 +81,13 @@ func (p *WebSocketSession) ToDict() *map[string]interface{} {
 
 type FirebaseToken struct {
     /** Firebaseデバイストークン のGRN */
-	FirebaseTokenId *core.String   `json:"firebaseTokenId"`
+	FirebaseTokenId *string   `json:"firebaseTokenId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** Firebase Cloud Messaging のデバイストークン */
-	Token *core.String   `json:"token"`
+	Token *string   `json:"token"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -111,15 +107,15 @@ func (p *FirebaseToken) ToDict() *map[string]interface{} {
 
 type Session struct {
     /** WebSocketセッション のGRN */
-	SessionId *core.String   `json:"sessionId"`
+	SessionId *string   `json:"sessionId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** WebSocketセッション名 */
-	SessionName *core.String   `json:"sessionName"`
+	SessionName *string   `json:"sessionName"`
     /** API Gateway の APIID */
-	ApiId *core.String   `json:"apiId"`
+	ApiId *string   `json:"apiId"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -140,15 +136,15 @@ func (p *Session) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -163,7 +159,7 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

@@ -23,15 +23,15 @@ type RequestError struct {
 }
 
 type Gs2Exception interface {
-	RequestErrors() *[]RequestError
+	RequestErrors() []RequestError
 }
 
 type BadRequestException struct {
 	Errors []RequestError
 }
 
-func (p BadRequestException) RequestErrors() *[]RequestError {
-	return &p.Errors
+func (p BadRequestException) RequestErrors() []RequestError {
+	return p.Errors
 }
 
 func (p BadRequestException) Error() string {
@@ -43,8 +43,8 @@ type BadGatewayException struct {
 	Errors []RequestError
 }
 
-func (p BadGatewayException) RequestErrors() *[]RequestError {
-	return &p.Errors
+func (p BadGatewayException) RequestErrors() []RequestError {
+	return p.Errors
 }
 
 func (p BadGatewayException) Error() string {
@@ -56,8 +56,8 @@ type ConflictException struct {
 	Errors []RequestError
 }
 
-func (p ConflictException) RequestErrors() *[]RequestError {
-	return &p.Errors
+func (p ConflictException) RequestErrors() []RequestError {
+	return p.Errors
 }
 
 func (p ConflictException) Error() string {
@@ -69,8 +69,8 @@ type InternalServerErrorException struct {
 	Errors []RequestError
 }
 
-func (p InternalServerErrorException) RequestErrors() *[]RequestError {
-	return &p.Errors
+func (p InternalServerErrorException) RequestErrors() []RequestError {
+	return p.Errors
 }
 
 func (p InternalServerErrorException) Error() string {
@@ -82,8 +82,8 @@ type NotFoundException struct {
 	Errors []RequestError
 }
 
-func (p NotFoundException) RequestErrors() *[]RequestError {
-	return &p.Errors
+func (p NotFoundException) RequestErrors() []RequestError {
+	return p.Errors
 }
 
 func (p NotFoundException) Error() string {
@@ -95,8 +95,8 @@ type QuotaExceedException struct {
 	Errors []RequestError
 }
 
-func (p QuotaExceedException) RequestErrors() *[]RequestError {
-	return &p.Errors
+func (p QuotaExceedException) RequestErrors() []RequestError {
+	return p.Errors
 }
 
 func (p QuotaExceedException) Error() string {
@@ -108,8 +108,8 @@ type RequestTimeoutException struct {
 	Errors []RequestError
 }
 
-func (p RequestTimeoutException) RequestErrors() *[]RequestError {
-	return &p.Errors
+func (p RequestTimeoutException) RequestErrors() []RequestError {
+	return p.Errors
 }
 
 func (p RequestTimeoutException) Error() string {
@@ -121,8 +121,8 @@ type ServiceUnavailableException struct {
 	Errors []RequestError
 }
 
-func (p ServiceUnavailableException) RequestErrors() *[]RequestError {
-	return &p.Errors
+func (p ServiceUnavailableException) RequestErrors() []RequestError {
+	return p.Errors
 }
 
 func (p ServiceUnavailableException) Error() string {
@@ -134,8 +134,8 @@ type UnauthorizedException struct {
 	Errors []RequestError
 }
 
-func (p UnauthorizedException) RequestErrors() *[]RequestError {
-	return &p.Errors
+func (p UnauthorizedException) RequestErrors() []RequestError {
+	return p.Errors
 }
 
 func (p UnauthorizedException) Error() string {
@@ -147,8 +147,8 @@ type UnknownException struct {
 	Errors []RequestError
 }
 
-func (p UnknownException) RequestErrors() *[]RequestError {
-	return &p.Errors
+func (p UnknownException) RequestErrors() []RequestError {
+	return p.Errors
 }
 
 func (p UnknownException) Error() string {
@@ -160,8 +160,8 @@ type NoInternetConnectionException struct {
 	Errors []RequestError
 }
 
-func (p NoInternetConnectionException) RequestErrors() *[]RequestError {
-	return &p.Errors
+func (p NoInternetConnectionException) RequestErrors() []RequestError {
+	return p.Errors
 }
 
 func (p NoInternetConnectionException) Error() string {

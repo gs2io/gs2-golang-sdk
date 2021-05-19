@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package experience
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type DescribeExperienceModelMastersResult struct {
     /** 経験値の種類マスターのリスト */
 	Items         []ExperienceModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeExperienceModelMastersResult) ToDict() *map[string]interface{} {
@@ -280,7 +276,7 @@ type DescribeThresholdMastersResult struct {
     /** ランクアップ閾値マスターのリスト */
 	Items         []ThresholdMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeThresholdMastersResult) ToDict() *map[string]interface{} {
@@ -451,7 +447,7 @@ type DescribeStatusesResult struct {
     /** ステータスのリスト */
 	Items         []Status	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeStatusesResult) ToDict() *map[string]interface{} {
@@ -478,7 +474,7 @@ type DescribeStatusesByUserIdResult struct {
     /** ステータスのリスト */
 	Items         []Status	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeStatusesByUserIdResult) ToDict() *map[string]interface{} {
@@ -541,9 +537,9 @@ type GetStatusWithSignatureResult struct {
     /** ステータス */
 	Item         *Status	`json:"item"`
     /** 検証対象のオブジェクト */
-	Body         *core.String	`json:"body"`
+	Body         *string	`json:"body"`
     /** 署名 */
-	Signature         *core.String	`json:"signature"`
+	Signature         *string	`json:"signature"`
 }
 
 func (p *GetStatusWithSignatureResult) ToDict() *map[string]interface{} {

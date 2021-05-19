@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package quest
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** クエストを分類するカテゴリー */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** カテゴリ名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** クエスト開始したときに実行するスクリプト */
 	StartQuestScript *ScriptSetting   `json:"startQuestScript"`
     /** クエストクリアしたときに実行するスクリプト */
@@ -36,13 +32,13 @@ type Namespace struct {
     /** クエスト失敗したときに実行するスクリプト */
 	FailedQuestScript *ScriptSetting   `json:"failedQuestScript"`
     /** 報酬付与処理をジョブとして追加するキューのネームスペース のGRN */
-	QueueNamespaceId *core.String   `json:"queueNamespaceId"`
+	QueueNamespaceId *string   `json:"queueNamespaceId"`
     /** 報酬付与処理のスタンプシートで使用する暗号鍵GRN */
-	KeyId *core.String   `json:"keyId"`
+	KeyId *string   `json:"keyId"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** None */
-	Status *core.String   `json:"status"`
+	Status *string   `json:"status"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -77,15 +73,15 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type QuestGroupModelMaster struct {
     /** クエストグループマスター */
-	QuestGroupModelId *core.String   `json:"questGroupModelId"`
+	QuestGroupModelId *string   `json:"questGroupModelId"`
     /** クエストグループモデル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** クエストグループマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** クエストグループのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 挑戦可能な期間を指定するイベントマスター のGRN */
-	ChallengePeriodEventId *core.String   `json:"challengePeriodEventId"`
+	ChallengePeriodEventId *string   `json:"challengePeriodEventId"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -106,25 +102,25 @@ func (p *QuestGroupModelMaster) ToDict() *map[string]interface{} {
 
 type QuestModelMaster struct {
     /** クエストモデルマスター */
-	QuestModelId *core.String   `json:"questModelId"`
+	QuestModelId *string   `json:"questModelId"`
     /** クエストモデル名 */
-	QuestGroupName *core.String   `json:"questGroupName"`
+	QuestGroupName *string   `json:"questGroupName"`
     /** クエスト名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** クエストモデルの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** クエストのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** クエストの内容 */
-	Contents *[]*Contents   `json:"contents"`
+	Contents []Contents   `json:"contents"`
     /** 挑戦可能な期間を指定するイベントマスター のGRN */
-	ChallengePeriodEventId *core.String   `json:"challengePeriodEventId"`
+	ChallengePeriodEventId *string   `json:"challengePeriodEventId"`
     /** クエストの参加料 */
-	ConsumeActions *[]*ConsumeAction   `json:"consumeActions"`
+	ConsumeActions []ConsumeAction   `json:"consumeActions"`
     /** クエスト失敗時の報酬 */
-	FailedAcquireActions *[]*AcquireAction   `json:"failedAcquireActions"`
+	FailedAcquireActions []AcquireAction   `json:"failedAcquireActions"`
     /** クエストに挑戦するためにクリアしておく必要のあるクエスト名 */
-	PremiseQuestNames *[]core.String   `json:"premiseQuestNames"`
+	PremiseQuestNames []string   `json:"premiseQuestNames"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -140,7 +136,7 @@ func (p *QuestModelMaster) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.Contents != nil {
         var _contents []*map[string]interface {}
-        for _, item := range *p.Contents {
+        for _, item := range p.Contents {
             _contents = append(_contents, item.ToDict())
         }
         data["contents"] = &_contents
@@ -148,21 +144,21 @@ func (p *QuestModelMaster) ToDict() *map[string]interface{} {
     data["challengePeriodEventId"] = p.ChallengePeriodEventId
     if p.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *p.ConsumeActions {
+        for _, item := range p.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         data["consumeActions"] = &_consumeActions
     }
     if p.FailedAcquireActions != nil {
         var _failedAcquireActions []*map[string]interface {}
-        for _, item := range *p.FailedAcquireActions {
+        for _, item := range p.FailedAcquireActions {
             _failedAcquireActions = append(_failedAcquireActions, item.ToDict())
         }
         data["failedAcquireActions"] = &_failedAcquireActions
     }
     if p.PremiseQuestNames != nil {
-        var _premiseQuestNames []core.String
-        for _, item := range *p.PremiseQuestNames {
+        var _premiseQuestNames []string
+        for _, item := range p.PremiseQuestNames {
             _premiseQuestNames = append(_premiseQuestNames, item)
         }
         data["premiseQuestNames"] = &_premiseQuestNames
@@ -174,9 +170,9 @@ func (p *QuestModelMaster) ToDict() *map[string]interface{} {
 
 type CurrentQuestMaster struct {
     /** カテゴリ名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentQuestMaster) ToDict() *map[string]interface{} {
@@ -188,15 +184,15 @@ func (p *CurrentQuestMaster) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -211,9 +207,9 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type Contents struct {
     /** クエストモデルのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** クエストクリア時の報酬 */
-	CompleteAcquireActions *[]*AcquireAction   `json:"completeAcquireActions"`
+	CompleteAcquireActions []AcquireAction   `json:"completeAcquireActions"`
     /** 抽選する重み */
 	Weight *int32   `json:"weight"`
 }
@@ -223,7 +219,7 @@ func (p *Contents) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.CompleteAcquireActions != nil {
         var _completeAcquireActions []*map[string]interface {}
-        for _, item := range *p.CompleteAcquireActions {
+        for _, item := range p.CompleteAcquireActions {
             _completeAcquireActions = append(_completeAcquireActions, item.ToDict())
         }
         data["completeAcquireActions"] = &_completeAcquireActions
@@ -234,9 +230,9 @@ func (p *Contents) ToDict() *map[string]interface{} {
 
 type ConsumeAction struct {
     /** スタンプタスクで実行するアクションの種類 */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 消費リクエストのJSON */
-	Request *core.String   `json:"request"`
+	Request *string   `json:"request"`
 }
 
 func (p *ConsumeAction) ToDict() *map[string]interface{} {
@@ -248,9 +244,9 @@ func (p *ConsumeAction) ToDict() *map[string]interface{} {
 
 type AcquireAction struct {
     /** スタンプシートで実行するアクションの種類 */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** 入手リクエストのJSON */
-	Request *core.String   `json:"request"`
+	Request *string   `json:"request"`
 }
 
 func (p *AcquireAction) ToDict() *map[string]interface{} {
@@ -262,11 +258,11 @@ func (p *AcquireAction) ToDict() *map[string]interface{} {
 
 type Reward struct {
     /** スタンプシートで実行するアクションの種類 */
-	Action *core.String   `json:"action"`
+	Action *string   `json:"action"`
     /** リクエストモデル */
-	Request *core.String   `json:"request"`
+	Request *string   `json:"request"`
     /** 入手するリソースGRN */
-	ItemId *core.String   `json:"itemId"`
+	ItemId *string   `json:"itemId"`
     /** 入手する数量 */
 	Value *int32   `json:"value"`
 }
@@ -282,9 +278,9 @@ func (p *Reward) ToDict() *map[string]interface{} {
 
 type Config struct {
     /** 名前 */
-	Key *core.String   `json:"key"`
+	Key *string   `json:"key"`
     /** 値 */
-	Value *core.String   `json:"value"`
+	Value *string   `json:"value"`
 }
 
 func (p *Config) ToDict() *map[string]interface{} {
@@ -296,19 +292,19 @@ func (p *Config) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -325,13 +321,13 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type ScriptSetting struct {
     /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *core.String   `json:"triggerScriptId"`
+	TriggerScriptId *string   `json:"triggerScriptId"`
     /** 完了通知の通知先 */
-	DoneTriggerTargetType *core.String   `json:"doneTriggerTargetType"`
+	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
     /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *core.String   `json:"doneTriggerScriptId"`
+	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
     /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *core.String   `json:"doneTriggerQueueNamespaceId"`
+	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
 }
 
 func (p *ScriptSetting) ToDict() *map[string]interface{} {
@@ -345,7 +341,7 @@ func (p *ScriptSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {
@@ -356,17 +352,19 @@ func (p *LogSetting) ToDict() *map[string]interface{} {
 
 type Progress struct {
     /** クエスト挑戦 */
-	ProgressId *core.String   `json:"progressId"`
+	ProgressId *string   `json:"progressId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** トランザクションID */
-	TransactionId *core.String   `json:"transactionId"`
+	TransactionId *string   `json:"transactionId"`
     /** クエストモデル */
-	QuestModelId *core.String   `json:"questModelId"`
+	QuestModelId *string   `json:"questModelId"`
     /** 乱数シード */
 	RandomSeed *int64   `json:"randomSeed"`
     /** クエストで得られる報酬の上限 */
-	Rewards *[]*Reward   `json:"rewards"`
+	Rewards []Reward   `json:"rewards"`
+    /** クエストモデルのメタデータ */
+	Metadata *string   `json:"metadata"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -382,11 +380,12 @@ func (p *Progress) ToDict() *map[string]interface{} {
     data["randomSeed"] = p.RandomSeed
     if p.Rewards != nil {
         var _rewards []*map[string]interface {}
-        for _, item := range *p.Rewards {
+        for _, item := range p.Rewards {
             _rewards = append(_rewards, item.ToDict())
         }
         data["rewards"] = &_rewards
     }
+    data["metadata"] = p.Metadata
     data["createdAt"] = p.CreatedAt
     data["updatedAt"] = p.UpdatedAt
     return &data
@@ -394,13 +393,13 @@ func (p *Progress) ToDict() *map[string]interface{} {
 
 type CompletedQuestList struct {
     /** クエスト進行 */
-	CompletedQuestListId *core.String   `json:"completedQuestListId"`
+	CompletedQuestListId *string   `json:"completedQuestListId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** クエストグループ名 */
-	QuestGroupName *core.String   `json:"questGroupName"`
+	QuestGroupName *string   `json:"questGroupName"`
     /** 攻略済みのクエスト名一覧のリスト */
-	CompleteQuestNames *[]core.String   `json:"completeQuestNames"`
+	CompleteQuestNames []string   `json:"completeQuestNames"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -413,8 +412,8 @@ func (p *CompletedQuestList) ToDict() *map[string]interface{} {
     data["userId"] = p.UserId
     data["questGroupName"] = p.QuestGroupName
     if p.CompleteQuestNames != nil {
-        var _completeQuestNames []core.String
-        for _, item := range *p.CompleteQuestNames {
+        var _completeQuestNames []string
+        for _, item := range p.CompleteQuestNames {
             _completeQuestNames = append(_completeQuestNames, item)
         }
         data["completeQuestNames"] = &_completeQuestNames
@@ -426,15 +425,15 @@ func (p *CompletedQuestList) ToDict() *map[string]interface{} {
 
 type QuestGroupModel struct {
     /** クエストグループ */
-	QuestGroupModelId *core.String   `json:"questGroupModelId"`
+	QuestGroupModelId *string   `json:"questGroupModelId"`
     /** クエストグループ名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** クエストグループのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** グループに属するクエスト */
-	Quests *[]*QuestModel   `json:"quests"`
+	Quests []QuestModel   `json:"quests"`
     /** 挑戦可能な期間を指定するイベントマスター のGRN */
-	ChallengePeriodEventId *core.String   `json:"challengePeriodEventId"`
+	ChallengePeriodEventId *string   `json:"challengePeriodEventId"`
 }
 
 func (p *QuestGroupModel) ToDict() *map[string]interface{} {
@@ -444,7 +443,7 @@ func (p *QuestGroupModel) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.Quests != nil {
         var _quests []*map[string]interface {}
-        for _, item := range *p.Quests {
+        for _, item := range p.Quests {
             _quests = append(_quests, item.ToDict())
         }
         data["quests"] = &_quests
@@ -455,21 +454,21 @@ func (p *QuestGroupModel) ToDict() *map[string]interface{} {
 
 type QuestModel struct {
     /** クエストモデル */
-	QuestModelId *core.String   `json:"questModelId"`
+	QuestModelId *string   `json:"questModelId"`
     /** クエストモデル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** クエストモデルのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** クエストの内容 */
-	Contents *[]*Contents   `json:"contents"`
+	Contents []Contents   `json:"contents"`
     /** 挑戦可能な期間を指定するイベントマスター のGRN */
-	ChallengePeriodEventId *core.String   `json:"challengePeriodEventId"`
+	ChallengePeriodEventId *string   `json:"challengePeriodEventId"`
     /** クエストの参加料 */
-	ConsumeActions *[]*ConsumeAction   `json:"consumeActions"`
+	ConsumeActions []ConsumeAction   `json:"consumeActions"`
     /** クエスト失敗時の報酬 */
-	FailedAcquireActions *[]*AcquireAction   `json:"failedAcquireActions"`
+	FailedAcquireActions []AcquireAction   `json:"failedAcquireActions"`
     /** クエストに挑戦するためにクリアしておく必要のあるクエスト名 */
-	PremiseQuestNames *[]core.String   `json:"premiseQuestNames"`
+	PremiseQuestNames []string   `json:"premiseQuestNames"`
 }
 
 func (p *QuestModel) ToDict() *map[string]interface{} {
@@ -479,7 +478,7 @@ func (p *QuestModel) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     if p.Contents != nil {
         var _contents []*map[string]interface {}
-        for _, item := range *p.Contents {
+        for _, item := range p.Contents {
             _contents = append(_contents, item.ToDict())
         }
         data["contents"] = &_contents
@@ -487,21 +486,21 @@ func (p *QuestModel) ToDict() *map[string]interface{} {
     data["challengePeriodEventId"] = p.ChallengePeriodEventId
     if p.ConsumeActions != nil {
         var _consumeActions []*map[string]interface {}
-        for _, item := range *p.ConsumeActions {
+        for _, item := range p.ConsumeActions {
             _consumeActions = append(_consumeActions, item.ToDict())
         }
         data["consumeActions"] = &_consumeActions
     }
     if p.FailedAcquireActions != nil {
         var _failedAcquireActions []*map[string]interface {}
-        for _, item := range *p.FailedAcquireActions {
+        for _, item := range p.FailedAcquireActions {
             _failedAcquireActions = append(_failedAcquireActions, item.ToDict())
         }
         data["failedAcquireActions"] = &_failedAcquireActions
     }
     if p.PremiseQuestNames != nil {
-        var _premiseQuestNames []core.String
-        for _, item := range *p.PremiseQuestNames {
+        var _premiseQuestNames []string
+        for _, item := range p.PremiseQuestNames {
             _premiseQuestNames = append(_premiseQuestNames, item)
         }
         data["premiseQuestNames"] = &_premiseQuestNames

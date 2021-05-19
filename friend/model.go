@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package friend
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** フォローされたときに実行するスクリプト */
 	FollowScript *ScriptSetting   `json:"followScript"`
     /** アンフォローされたときに実行するスクリプト */
@@ -54,7 +50,7 @@ type Namespace struct {
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** None */
-	Status *core.String   `json:"status"`
+	Status *string   `json:"status"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -111,15 +107,15 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type Profile struct {
     /** プロフィール */
-	ProfileId *core.String   `json:"profileId"`
+	ProfileId *string   `json:"profileId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 公開されるプロフィール */
-	PublicProfile *core.String   `json:"publicProfile"`
+	PublicProfile *string   `json:"publicProfile"`
     /** フォロワー向けに公開されるプロフィール */
-	FollowerProfile *core.String   `json:"followerProfile"`
+	FollowerProfile *string   `json:"followerProfile"`
     /** フレンド向けに公開されるプロフィール */
-	FriendProfile *core.String   `json:"friendProfile"`
+	FriendProfile *string   `json:"friendProfile"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -140,11 +136,11 @@ func (p *Profile) ToDict() *map[string]interface{} {
 
 type Follow struct {
     /** フォロー */
-	FollowId *core.String   `json:"followId"`
+	FollowId *string   `json:"followId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** フォローしているユーザーIDリスト */
-	TargetUserIds *[]core.String   `json:"targetUserIds"`
+	TargetUserIds []string   `json:"targetUserIds"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -156,8 +152,8 @@ func (p *Follow) ToDict() *map[string]interface{} {
     data["followId"] = p.FollowId
     data["userId"] = p.UserId
     if p.TargetUserIds != nil {
-        var _targetUserIds []core.String
-        for _, item := range *p.TargetUserIds {
+        var _targetUserIds []string
+        for _, item := range p.TargetUserIds {
             _targetUserIds = append(_targetUserIds, item)
         }
         data["targetUserIds"] = &_targetUserIds
@@ -169,11 +165,11 @@ func (p *Follow) ToDict() *map[string]interface{} {
 
 type Friend struct {
     /** フレンド */
-	FriendId *core.String   `json:"friendId"`
+	FriendId *string   `json:"friendId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** フレンドのユーザーIDリスト */
-	TargetUserIds *[]core.String   `json:"targetUserIds"`
+	TargetUserIds []string   `json:"targetUserIds"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -185,8 +181,8 @@ func (p *Friend) ToDict() *map[string]interface{} {
     data["friendId"] = p.FriendId
     data["userId"] = p.UserId
     if p.TargetUserIds != nil {
-        var _targetUserIds []core.String
-        for _, item := range *p.TargetUserIds {
+        var _targetUserIds []string
+        for _, item := range p.TargetUserIds {
             _targetUserIds = append(_targetUserIds, item)
         }
         data["targetUserIds"] = &_targetUserIds
@@ -198,11 +194,11 @@ func (p *Friend) ToDict() *map[string]interface{} {
 
 type SendBox struct {
     /** フレンドリクエストの受信ボックス */
-	SendBoxId *core.String   `json:"sendBoxId"`
+	SendBoxId *string   `json:"sendBoxId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** フレンドリクエストの宛先ユーザーIDリスト */
-	TargetUserIds *[]core.String   `json:"targetUserIds"`
+	TargetUserIds []string   `json:"targetUserIds"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -214,8 +210,8 @@ func (p *SendBox) ToDict() *map[string]interface{} {
     data["sendBoxId"] = p.SendBoxId
     data["userId"] = p.UserId
     if p.TargetUserIds != nil {
-        var _targetUserIds []core.String
-        for _, item := range *p.TargetUserIds {
+        var _targetUserIds []string
+        for _, item := range p.TargetUserIds {
             _targetUserIds = append(_targetUserIds, item)
         }
         data["targetUserIds"] = &_targetUserIds
@@ -227,11 +223,11 @@ func (p *SendBox) ToDict() *map[string]interface{} {
 
 type Inbox struct {
     /** フレンドリクエストの受信ボックス */
-	InboxId *core.String   `json:"inboxId"`
+	InboxId *string   `json:"inboxId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** フレンドリクエストを送ってきたユーザーIDリスト */
-	FromUserIds *[]core.String   `json:"fromUserIds"`
+	FromUserIds []string   `json:"fromUserIds"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -243,8 +239,8 @@ func (p *Inbox) ToDict() *map[string]interface{} {
     data["inboxId"] = p.InboxId
     data["userId"] = p.UserId
     if p.FromUserIds != nil {
-        var _fromUserIds []core.String
-        for _, item := range *p.FromUserIds {
+        var _fromUserIds []string
+        for _, item := range p.FromUserIds {
             _fromUserIds = append(_fromUserIds, item)
         }
         data["fromUserIds"] = &_fromUserIds
@@ -256,11 +252,11 @@ func (p *Inbox) ToDict() *map[string]interface{} {
 
 type BlackList struct {
     /** ブラックリスト */
-	BlackListId *core.String   `json:"blackListId"`
+	BlackListId *string   `json:"blackListId"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** ブラックリストのユーザーIDリスト */
-	TargetUserIds *[]core.String   `json:"targetUserIds"`
+	TargetUserIds []string   `json:"targetUserIds"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -272,8 +268,8 @@ func (p *BlackList) ToDict() *map[string]interface{} {
     data["blackListId"] = p.BlackListId
     data["userId"] = p.UserId
     if p.TargetUserIds != nil {
-        var _targetUserIds []core.String
-        for _, item := range *p.TargetUserIds {
+        var _targetUserIds []string
+        for _, item := range p.TargetUserIds {
             _targetUserIds = append(_targetUserIds, item)
         }
         data["targetUserIds"] = &_targetUserIds
@@ -285,15 +281,15 @@ func (p *BlackList) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -308,11 +304,11 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type FollowUser struct {
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 公開されるプロフィール */
-	PublicProfile *core.String   `json:"publicProfile"`
+	PublicProfile *string   `json:"publicProfile"`
     /** フォロワー向けに公開されるプロフィール */
-	FollowerProfile *core.String   `json:"followerProfile"`
+	FollowerProfile *string   `json:"followerProfile"`
 }
 
 func (p *FollowUser) ToDict() *map[string]interface{} {
@@ -325,11 +321,11 @@ func (p *FollowUser) ToDict() *map[string]interface{} {
 
 type FriendUser struct {
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 公開されるプロフィール */
-	PublicProfile *core.String   `json:"publicProfile"`
+	PublicProfile *string   `json:"publicProfile"`
     /** フレンド向けに公開されるプロフィール */
-	FriendProfile *core.String   `json:"friendProfile"`
+	FriendProfile *string   `json:"friendProfile"`
 }
 
 func (p *FriendUser) ToDict() *map[string]interface{} {
@@ -342,9 +338,9 @@ func (p *FriendUser) ToDict() *map[string]interface{} {
 
 type FriendRequest struct {
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** ユーザーID */
-	TargetUserId *core.String   `json:"targetUserId"`
+	TargetUserId *string   `json:"targetUserId"`
 }
 
 func (p *FriendRequest) ToDict() *map[string]interface{} {
@@ -356,9 +352,9 @@ func (p *FriendRequest) ToDict() *map[string]interface{} {
 
 type PublicProfile struct {
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 公開されるプロフィール */
-	PublicProfile *core.String   `json:"publicProfile"`
+	PublicProfile *string   `json:"publicProfile"`
 }
 
 func (p *PublicProfile) ToDict() *map[string]interface{} {
@@ -370,13 +366,13 @@ func (p *PublicProfile) ToDict() *map[string]interface{} {
 
 type ScriptSetting struct {
     /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *core.String   `json:"triggerScriptId"`
+	TriggerScriptId *string   `json:"triggerScriptId"`
     /** 完了通知の通知先 */
-	DoneTriggerTargetType *core.String   `json:"doneTriggerTargetType"`
+	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
     /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *core.String   `json:"doneTriggerScriptId"`
+	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
     /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *core.String   `json:"doneTriggerQueueNamespaceId"`
+	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
 }
 
 func (p *ScriptSetting) ToDict() *map[string]interface{} {
@@ -390,11 +386,11 @@ func (p *ScriptSetting) ToDict() *map[string]interface{} {
 
 type NotificationSetting struct {
     /** プッシュ通知に使用する GS2-Gateway のネームスペース のGRN */
-	GatewayNamespaceId *core.String   `json:"gatewayNamespaceId"`
+	GatewayNamespaceId *string   `json:"gatewayNamespaceId"`
     /** モバイルプッシュ通知へ転送するか */
 	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
     /** モバイルプッシュ通知で使用するサウンドファイル名 */
-	Sound *core.String   `json:"sound"`
+	Sound *string   `json:"sound"`
 }
 
 func (p *NotificationSetting) ToDict() *map[string]interface{} {
@@ -407,7 +403,7 @@ func (p *NotificationSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

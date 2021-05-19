@@ -255,7 +255,7 @@ func (p Gs2DistributorRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -339,7 +339,7 @@ func (p Gs2DistributorRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -423,7 +423,7 @@ func (p Gs2DistributorRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -519,7 +519,7 @@ func (p Gs2DistributorRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -603,7 +603,7 @@ func (p Gs2DistributorRestClient) DescribeDistributorModelMastersAsync(
 	callback chan<- DescribeDistributorModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/distributor"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -693,7 +693,7 @@ func (p Gs2DistributorRestClient) CreateDistributorModelMasterAsync(
 	callback chan<- CreateDistributorModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/distributor"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -714,8 +714,8 @@ func (p Gs2DistributorRestClient) CreateDistributorModelMasterAsync(
         bodies["inboxNamespaceId"] = *request.InboxNamespaceId
     }
     if request.WhiteListTargetIds != nil {
-        var _whiteListTargetIds []core.String
-        for _, item := range *request.WhiteListTargetIds {
+        var _whiteListTargetIds []string
+        for _, item := range request.WhiteListTargetIds {
             _whiteListTargetIds = append(_whiteListTargetIds, item)
         }
         bodies["whiteListTargetIds"] = _whiteListTargetIds
@@ -799,12 +799,12 @@ func (p Gs2DistributorRestClient) GetDistributorModelMasterAsync(
 	callback chan<- GetDistributorModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/distributor/{distributorName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DistributorName != nil {
+    if request.DistributorName != nil && *request.DistributorName != ""  {
         path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
     } else {
         path = strings.ReplaceAll(path, "{distributorName}", "null")
@@ -888,12 +888,12 @@ func (p Gs2DistributorRestClient) UpdateDistributorModelMasterAsync(
 	callback chan<- UpdateDistributorModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/distributor/{distributorName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DistributorName != nil {
+    if request.DistributorName != nil && *request.DistributorName != ""  {
         path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
     } else {
         path = strings.ReplaceAll(path, "{distributorName}", "null")
@@ -911,8 +911,8 @@ func (p Gs2DistributorRestClient) UpdateDistributorModelMasterAsync(
         bodies["inboxNamespaceId"] = *request.InboxNamespaceId
     }
     if request.WhiteListTargetIds != nil {
-        var _whiteListTargetIds []core.String
-        for _, item := range *request.WhiteListTargetIds {
+        var _whiteListTargetIds []string
+        for _, item := range request.WhiteListTargetIds {
             _whiteListTargetIds = append(_whiteListTargetIds, item)
         }
         bodies["whiteListTargetIds"] = _whiteListTargetIds
@@ -996,12 +996,12 @@ func (p Gs2DistributorRestClient) DeleteDistributorModelMasterAsync(
 	callback chan<- DeleteDistributorModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/distributor/{distributorName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DistributorName != nil {
+    if request.DistributorName != nil && *request.DistributorName != ""  {
         path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
     } else {
         path = strings.ReplaceAll(path, "{distributorName}", "null")
@@ -1085,7 +1085,7 @@ func (p Gs2DistributorRestClient) DescribeDistributorModelsAsync(
 	callback chan<- DescribeDistributorModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/distributor"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1169,12 +1169,12 @@ func (p Gs2DistributorRestClient) GetDistributorModelAsync(
 	callback chan<- GetDistributorModelAsyncResult,
 ) {
 	path := "/{namespaceName}/distributor/{distributorName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DistributorName != nil {
+    if request.DistributorName != nil && *request.DistributorName != ""  {
         path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
     } else {
         path = strings.ReplaceAll(path, "{distributorName}", "null")
@@ -1258,7 +1258,7 @@ func (p Gs2DistributorRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1342,7 +1342,7 @@ func (p Gs2DistributorRestClient) GetCurrentDistributorMasterAsync(
 	callback chan<- GetCurrentDistributorMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1426,7 +1426,7 @@ func (p Gs2DistributorRestClient) UpdateCurrentDistributorMasterAsync(
 	callback chan<- UpdateCurrentDistributorMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1516,7 +1516,7 @@ func (p Gs2DistributorRestClient) UpdateCurrentDistributorMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentDistributorMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1606,12 +1606,12 @@ func (p Gs2DistributorRestClient) DistributeAsync(
 	callback chan<- DistributeAsyncResult,
 ) {
 	path := "/{namespaceName}/distribute"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.DistributorName != nil {
+    if request.DistributorName != nil && *request.DistributorName != ""  {
         path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
     } else {
         path = strings.ReplaceAll(path, "{distributorName}", "null")
@@ -1792,7 +1792,7 @@ func (p Gs2DistributorRestClient) RunStampTaskAsync(
 	callback chan<- RunStampTaskAsyncResult,
 ) {
 	path := "/{namespaceName}/distribute/stamp/task/run"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1885,7 +1885,7 @@ func (p Gs2DistributorRestClient) RunStampSheetAsync(
 	callback chan<- RunStampSheetAsyncResult,
 ) {
 	path := "/{namespaceName}/distribute/stamp/sheet/run"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1978,7 +1978,7 @@ func (p Gs2DistributorRestClient) RunStampSheetExpressAsync(
 	callback chan<- RunStampSheetExpressAsyncResult,
 ) {
 	path := "/{namespaceName}/distribute/stamp/run"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")

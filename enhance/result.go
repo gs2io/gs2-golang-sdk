@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package enhance
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -181,7 +177,7 @@ type DescribeRateModelMastersResult struct {
     /** 強化レートマスターのリスト */
 	Items         []RateModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeRateModelMastersResult) ToDict() *map[string]interface{} {
@@ -280,9 +276,9 @@ type DirectEnhanceResult struct {
     /** 強化レートモデル */
 	Item         *RateModel	`json:"item"`
     /** 強化処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
     /** 獲得経験値量 */
 	AcquireExperience         *int64	`json:"acquireExperience"`
     /** 経験値ボーナスの倍率(1.0=ボーナスなし) */
@@ -318,9 +314,9 @@ type DirectEnhanceByUserIdResult struct {
     /** 強化レートモデル */
 	Item         *RateModel	`json:"item"`
     /** 強化処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
     /** 獲得経験値量 */
 	AcquireExperience         *int64	`json:"acquireExperience"`
     /** 経験値ボーナスの倍率(1.0=ボーナスなし) */
@@ -356,9 +352,9 @@ type DirectEnhanceByStampSheetResult struct {
     /** 強化レートモデル */
 	Item         *RateModel	`json:"item"`
     /** 強化処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
     /** 獲得経験値量 */
 	AcquireExperience         *int64	`json:"acquireExperience"`
     /** 経験値ボーナスの倍率(1.0=ボーナスなし) */
@@ -394,7 +390,7 @@ type DescribeProgressesByUserIdResult struct {
     /** 強化実行のリスト */
 	Items         []Progress	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeProgressesByUserIdResult) ToDict() *map[string]interface{} {
@@ -483,9 +479,9 @@ type GetProgressByUserIdAsyncResult struct {
 
 type StartResult struct {
     /** 強化の開始処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *StartResult) ToDict() *map[string]interface{} {
@@ -506,9 +502,9 @@ type StartAsyncResult struct {
 
 type StartByUserIdResult struct {
     /** 強化の開始処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *StartByUserIdResult) ToDict() *map[string]interface{} {
@@ -531,9 +527,9 @@ type EndResult struct {
     /** 強化実行 */
 	Item         *Progress	`json:"item"`
     /** 報酬付与処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
     /** 獲得経験値量 */
 	AcquireExperience         *int64	`json:"acquireExperience"`
     /** 経験値ボーナスの倍率(1.0=ボーナスなし) */
@@ -569,9 +565,9 @@ type EndByUserIdResult struct {
     /** 強化実行 */
 	Item         *Progress	`json:"item"`
     /** 報酬付与処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
     /** 獲得経験値量 */
 	AcquireExperience         *int64	`json:"acquireExperience"`
     /** 経験値ボーナスの倍率(1.0=ボーナスなし) */
@@ -661,7 +657,7 @@ type DeleteProgressByStampTaskResult struct {
     /** 強化実行 */
 	Item         *Progress	`json:"item"`
     /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *core.String	`json:"newContextStack"`
+	NewContextStack         *string	`json:"newContextStack"`
 }
 
 func (p *DeleteProgressByStampTaskResult) ToDict() *map[string]interface{} {

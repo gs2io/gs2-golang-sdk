@@ -267,7 +267,7 @@ func (p Gs2ExperienceRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -351,7 +351,7 @@ func (p Gs2ExperienceRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -435,7 +435,7 @@ func (p Gs2ExperienceRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -543,7 +543,7 @@ func (p Gs2ExperienceRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -627,7 +627,7 @@ func (p Gs2ExperienceRestClient) DescribeExperienceModelMastersAsync(
 	callback chan<- DescribeExperienceModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -717,7 +717,7 @@ func (p Gs2ExperienceRestClient) CreateExperienceModelMasterAsync(
 	callback chan<- CreateExperienceModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -825,12 +825,12 @@ func (p Gs2ExperienceRestClient) GetExperienceModelMasterAsync(
 	callback chan<- GetExperienceModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{experienceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ExperienceName != nil {
+    if request.ExperienceName != nil && *request.ExperienceName != ""  {
         path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
     } else {
         path = strings.ReplaceAll(path, "{experienceName}", "null")
@@ -914,12 +914,12 @@ func (p Gs2ExperienceRestClient) UpdateExperienceModelMasterAsync(
 	callback chan<- UpdateExperienceModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{experienceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ExperienceName != nil {
+    if request.ExperienceName != nil && *request.ExperienceName != ""  {
         path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
     } else {
         path = strings.ReplaceAll(path, "{experienceName}", "null")
@@ -1024,12 +1024,12 @@ func (p Gs2ExperienceRestClient) DeleteExperienceModelMasterAsync(
 	callback chan<- DeleteExperienceModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{experienceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ExperienceName != nil {
+    if request.ExperienceName != nil && *request.ExperienceName != ""  {
         path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
     } else {
         path = strings.ReplaceAll(path, "{experienceName}", "null")
@@ -1113,7 +1113,7 @@ func (p Gs2ExperienceRestClient) DescribeExperienceModelsAsync(
 	callback chan<- DescribeExperienceModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/model"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1197,12 +1197,12 @@ func (p Gs2ExperienceRestClient) GetExperienceModelAsync(
 	callback chan<- GetExperienceModelAsyncResult,
 ) {
 	path := "/{namespaceName}/model/{experienceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ExperienceName != nil {
+    if request.ExperienceName != nil && *request.ExperienceName != ""  {
         path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
     } else {
         path = strings.ReplaceAll(path, "{experienceName}", "null")
@@ -1286,7 +1286,7 @@ func (p Gs2ExperienceRestClient) DescribeThresholdMastersAsync(
 	callback chan<- DescribeThresholdMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/threshold"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1376,7 +1376,7 @@ func (p Gs2ExperienceRestClient) CreateThresholdMasterAsync(
 	callback chan<- CreateThresholdMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/threshold"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1395,7 +1395,7 @@ func (p Gs2ExperienceRestClient) CreateThresholdMasterAsync(
     }
     if request.Values != nil {
         var _values []int64
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -1479,12 +1479,12 @@ func (p Gs2ExperienceRestClient) GetThresholdMasterAsync(
 	callback chan<- GetThresholdMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/threshold/{thresholdName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ThresholdName != nil {
+    if request.ThresholdName != nil && *request.ThresholdName != ""  {
         path = strings.ReplaceAll(path, "{thresholdName}", core.ToString(*request.ThresholdName))
     } else {
         path = strings.ReplaceAll(path, "{thresholdName}", "null")
@@ -1568,12 +1568,12 @@ func (p Gs2ExperienceRestClient) UpdateThresholdMasterAsync(
 	callback chan<- UpdateThresholdMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/threshold/{thresholdName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ThresholdName != nil {
+    if request.ThresholdName != nil && *request.ThresholdName != ""  {
         path = strings.ReplaceAll(path, "{thresholdName}", core.ToString(*request.ThresholdName))
     } else {
         path = strings.ReplaceAll(path, "{thresholdName}", "null")
@@ -1589,7 +1589,7 @@ func (p Gs2ExperienceRestClient) UpdateThresholdMasterAsync(
     }
     if request.Values != nil {
         var _values []int64
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -1673,12 +1673,12 @@ func (p Gs2ExperienceRestClient) DeleteThresholdMasterAsync(
 	callback chan<- DeleteThresholdMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/threshold/{thresholdName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ThresholdName != nil {
+    if request.ThresholdName != nil && *request.ThresholdName != ""  {
         path = strings.ReplaceAll(path, "{thresholdName}", core.ToString(*request.ThresholdName))
     } else {
         path = strings.ReplaceAll(path, "{thresholdName}", "null")
@@ -1762,7 +1762,7 @@ func (p Gs2ExperienceRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1846,7 +1846,7 @@ func (p Gs2ExperienceRestClient) GetCurrentExperienceMasterAsync(
 	callback chan<- GetCurrentExperienceMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1930,7 +1930,7 @@ func (p Gs2ExperienceRestClient) UpdateCurrentExperienceMasterAsync(
 	callback chan<- UpdateCurrentExperienceMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2020,7 +2020,7 @@ func (p Gs2ExperienceRestClient) UpdateCurrentExperienceMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentExperienceMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2110,7 +2110,7 @@ func (p Gs2ExperienceRestClient) DescribeStatusesAsync(
 	callback chan<- DescribeStatusesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2206,12 +2206,12 @@ func (p Gs2ExperienceRestClient) DescribeStatusesByUserIdAsync(
 	callback chan<- DescribeStatusesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2304,17 +2304,17 @@ func (p Gs2ExperienceRestClient) GetStatusAsync(
 	callback chan<- GetStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/status/model/{experienceName}/property/{propertyId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ExperienceName != nil {
+    if request.ExperienceName != nil && *request.ExperienceName != ""  {
         path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
     } else {
         path = strings.ReplaceAll(path, "{experienceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")
@@ -2401,22 +2401,22 @@ func (p Gs2ExperienceRestClient) GetStatusByUserIdAsync(
 	callback chan<- GetStatusByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/model/{experienceName}/property/{propertyId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ExperienceName != nil {
+    if request.ExperienceName != nil && *request.ExperienceName != ""  {
         path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
     } else {
         path = strings.ReplaceAll(path, "{experienceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")
@@ -2500,17 +2500,17 @@ func (p Gs2ExperienceRestClient) GetStatusWithSignatureAsync(
 	callback chan<- GetStatusWithSignatureAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/status/model/{experienceName}/property/{propertyId}/signature"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ExperienceName != nil {
+    if request.ExperienceName != nil && *request.ExperienceName != ""  {
         path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
     } else {
         path = strings.ReplaceAll(path, "{experienceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")
@@ -2600,22 +2600,22 @@ func (p Gs2ExperienceRestClient) AddExperienceByUserIdAsync(
 	callback chan<- AddExperienceByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/model/{experienceName}/property/{propertyId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ExperienceName != nil {
+    if request.ExperienceName != nil && *request.ExperienceName != ""  {
         path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
     } else {
         path = strings.ReplaceAll(path, "{experienceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")
@@ -2705,22 +2705,22 @@ func (p Gs2ExperienceRestClient) SetExperienceByUserIdAsync(
 	callback chan<- SetExperienceByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/model/{experienceName}/property/{propertyId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ExperienceName != nil {
+    if request.ExperienceName != nil && *request.ExperienceName != ""  {
         path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
     } else {
         path = strings.ReplaceAll(path, "{experienceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")
@@ -2810,22 +2810,22 @@ func (p Gs2ExperienceRestClient) AddRankCapByUserIdAsync(
 	callback chan<- AddRankCapByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/model/{experienceName}/property/{propertyId}/cap"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ExperienceName != nil {
+    if request.ExperienceName != nil && *request.ExperienceName != ""  {
         path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
     } else {
         path = strings.ReplaceAll(path, "{experienceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")
@@ -2915,22 +2915,22 @@ func (p Gs2ExperienceRestClient) SetRankCapByUserIdAsync(
 	callback chan<- SetRankCapByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/model/{experienceName}/property/{propertyId}/cap"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ExperienceName != nil {
+    if request.ExperienceName != nil && *request.ExperienceName != ""  {
         path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
     } else {
         path = strings.ReplaceAll(path, "{experienceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")
@@ -3020,22 +3020,22 @@ func (p Gs2ExperienceRestClient) DeleteStatusByUserIdAsync(
 	callback chan<- DeleteStatusByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/model/{experienceName}/property/{propertyId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ExperienceName != nil {
+    if request.ExperienceName != nil && *request.ExperienceName != ""  {
         path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
     } else {
         path = strings.ReplaceAll(path, "{experienceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")

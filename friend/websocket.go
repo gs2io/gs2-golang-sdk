@@ -728,7 +728,7 @@ func (p Gs2FriendWebSocketClient) GetProfileAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getProfileAsyncHandler(
@@ -901,7 +901,7 @@ func (p Gs2FriendWebSocketClient) UpdateProfileAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.updateProfileAsyncHandler(
@@ -1247,7 +1247,7 @@ func (p Gs2FriendWebSocketClient) DescribeFollowsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeFollowsAsyncHandler(
@@ -1426,7 +1426,7 @@ func (p Gs2FriendWebSocketClient) GetFollowAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getFollowAsyncHandler(
@@ -1599,7 +1599,7 @@ func (p Gs2FriendWebSocketClient) FollowAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.followAsyncHandler(
@@ -1769,7 +1769,7 @@ func (p Gs2FriendWebSocketClient) UnfollowAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.unfollowAsyncHandler(
@@ -1945,7 +1945,7 @@ func (p Gs2FriendWebSocketClient) DescribeFriendsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeFriendsAsyncHandler(
@@ -2124,7 +2124,7 @@ func (p Gs2FriendWebSocketClient) GetFriendAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getFriendAsyncHandler(
@@ -2297,7 +2297,7 @@ func (p Gs2FriendWebSocketClient) DeleteFriendAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteFriendAsyncHandler(
@@ -2464,7 +2464,7 @@ func (p Gs2FriendWebSocketClient) DescribeSendRequestsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeSendRequestsAsyncHandler(
@@ -2631,7 +2631,7 @@ func (p Gs2FriendWebSocketClient) GetSendRequestAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getSendRequestAsyncHandler(
@@ -2801,7 +2801,7 @@ func (p Gs2FriendWebSocketClient) SendRequestAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.sendRequestAsyncHandler(
@@ -2971,7 +2971,7 @@ func (p Gs2FriendWebSocketClient) DeleteRequestAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.deleteRequestAsyncHandler(
@@ -3138,7 +3138,7 @@ func (p Gs2FriendWebSocketClient) DescribeReceiveRequestsAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeReceiveRequestsAsyncHandler(
@@ -3305,7 +3305,7 @@ func (p Gs2FriendWebSocketClient) GetReceiveRequestAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getReceiveRequestAsyncHandler(
@@ -3475,7 +3475,7 @@ func (p Gs2FriendWebSocketClient) AcceptRequestAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.acceptRequestAsyncHandler(
@@ -3645,7 +3645,7 @@ func (p Gs2FriendWebSocketClient) RejectRequestAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.rejectRequestAsyncHandler(
@@ -3812,7 +3812,7 @@ func (p Gs2FriendWebSocketClient) DescribeBlackListAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeBlackListAsyncHandler(
@@ -3979,7 +3979,7 @@ func (p Gs2FriendWebSocketClient) RegisterBlackListAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.registerBlackListAsyncHandler(
@@ -4149,7 +4149,7 @@ func (p Gs2FriendWebSocketClient) UnregisterBlackListAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.unregisterBlackListAsyncHandler(

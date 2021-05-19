@@ -261,7 +261,7 @@ func (p Gs2InventoryRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -345,7 +345,7 @@ func (p Gs2InventoryRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -429,7 +429,7 @@ func (p Gs2InventoryRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -531,7 +531,7 @@ func (p Gs2InventoryRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -615,7 +615,7 @@ func (p Gs2InventoryRestClient) DescribeInventoryModelMastersAsync(
 	callback chan<- DescribeInventoryModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -705,7 +705,7 @@ func (p Gs2InventoryRestClient) CreateInventoryModelMasterAsync(
 	callback chan<- CreateInventoryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -810,12 +810,12 @@ func (p Gs2InventoryRestClient) GetInventoryModelMasterAsync(
 	callback chan<- GetInventoryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
@@ -899,12 +899,12 @@ func (p Gs2InventoryRestClient) UpdateInventoryModelMasterAsync(
 	callback chan<- UpdateInventoryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
@@ -1006,12 +1006,12 @@ func (p Gs2InventoryRestClient) DeleteInventoryModelMasterAsync(
 	callback chan<- DeleteInventoryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
@@ -1095,7 +1095,7 @@ func (p Gs2InventoryRestClient) DescribeInventoryModelsAsync(
 	callback chan<- DescribeInventoryModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/inventory"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1179,12 +1179,12 @@ func (p Gs2InventoryRestClient) GetInventoryModelAsync(
 	callback chan<- GetInventoryModelAsyncResult,
 ) {
 	path := "/{namespaceName}/inventory/{inventoryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
@@ -1268,12 +1268,12 @@ func (p Gs2InventoryRestClient) DescribeItemModelMastersAsync(
 	callback chan<- DescribeItemModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}/item"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
@@ -1363,12 +1363,12 @@ func (p Gs2InventoryRestClient) CreateItemModelMasterAsync(
 	callback chan<- CreateItemModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}/item"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
@@ -1473,17 +1473,17 @@ func (p Gs2InventoryRestClient) GetItemModelMasterAsync(
 	callback chan<- GetItemModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}/item/{itemName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
@@ -1567,17 +1567,17 @@ func (p Gs2InventoryRestClient) UpdateItemModelMasterAsync(
 	callback chan<- UpdateItemModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}/item/{itemName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
@@ -1679,17 +1679,17 @@ func (p Gs2InventoryRestClient) DeleteItemModelMasterAsync(
 	callback chan<- DeleteItemModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}/item/{itemName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
@@ -1773,12 +1773,12 @@ func (p Gs2InventoryRestClient) DescribeItemModelsAsync(
 	callback chan<- DescribeItemModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/inventory/{inventoryName}/item"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
@@ -1862,17 +1862,17 @@ func (p Gs2InventoryRestClient) GetItemModelAsync(
 	callback chan<- GetItemModelAsyncResult,
 ) {
 	path := "/{namespaceName}/inventory/{inventoryName}/item/{itemName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
@@ -1956,7 +1956,7 @@ func (p Gs2InventoryRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2040,7 +2040,7 @@ func (p Gs2InventoryRestClient) GetCurrentItemModelMasterAsync(
 	callback chan<- GetCurrentItemModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2124,7 +2124,7 @@ func (p Gs2InventoryRestClient) UpdateCurrentItemModelMasterAsync(
 	callback chan<- UpdateCurrentItemModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2214,7 +2214,7 @@ func (p Gs2InventoryRestClient) UpdateCurrentItemModelMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentItemModelMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2304,7 +2304,7 @@ func (p Gs2InventoryRestClient) DescribeInventoriesAsync(
 	callback chan<- DescribeInventoriesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2397,12 +2397,12 @@ func (p Gs2InventoryRestClient) DescribeInventoriesByUserIdAsync(
 	callback chan<- DescribeInventoriesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2492,12 +2492,12 @@ func (p Gs2InventoryRestClient) GetInventoryAsync(
 	callback chan<- GetInventoryAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
@@ -2584,17 +2584,17 @@ func (p Gs2InventoryRestClient) GetInventoryByUserIdAsync(
 	callback chan<- GetInventoryByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2678,17 +2678,17 @@ func (p Gs2InventoryRestClient) AddCapacityByUserIdAsync(
 	callback chan<- AddCapacityByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/capacity"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2778,17 +2778,17 @@ func (p Gs2InventoryRestClient) SetCapacityByUserIdAsync(
 	callback chan<- SetCapacityByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/capacity"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2878,17 +2878,17 @@ func (p Gs2InventoryRestClient) DeleteInventoryByUserIdAsync(
 	callback chan<- DeleteInventoryByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3148,12 +3148,12 @@ func (p Gs2InventoryRestClient) DescribeItemSetsAsync(
 	callback chan<- DescribeItemSetsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
@@ -3246,17 +3246,17 @@ func (p Gs2InventoryRestClient) DescribeItemSetsByUserIdAsync(
 	callback chan<- DescribeItemSetsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3346,17 +3346,17 @@ func (p Gs2InventoryRestClient) GetItemSetAsync(
 	callback chan<- GetItemSetAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
@@ -3446,22 +3446,22 @@ func (p Gs2InventoryRestClient) GetItemSetByUserIdAsync(
 	callback chan<- GetItemSetByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
@@ -3548,17 +3548,17 @@ func (p Gs2InventoryRestClient) GetItemWithSignatureAsync(
 	callback chan<- GetItemWithSignatureAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/signature"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
@@ -3651,22 +3651,22 @@ func (p Gs2InventoryRestClient) GetItemWithSignatureByUserIdAsync(
 	callback chan<- GetItemWithSignatureByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/signature"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
@@ -3756,22 +3756,22 @@ func (p Gs2InventoryRestClient) AcquireItemSetByUserIdAsync(
 	callback chan<- AcquireItemSetByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/acquire"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3870,17 +3870,17 @@ func (p Gs2InventoryRestClient) ConsumeItemSetAsync(
 	callback chan<- ConsumeItemSetAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/consume"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
@@ -3976,22 +3976,22 @@ func (p Gs2InventoryRestClient) ConsumeItemSetByUserIdAsync(
 	callback chan<- ConsumeItemSetByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/consume"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
@@ -4084,22 +4084,22 @@ func (p Gs2InventoryRestClient) DescribeReferenceOfAsync(
 	callback chan<- DescribeReferenceOfAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
     }
-    if request.ItemSetName != nil {
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
         path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
     } else {
         path = strings.ReplaceAll(path, "{itemSetName}", "null")
@@ -4186,27 +4186,27 @@ func (p Gs2InventoryRestClient) DescribeReferenceOfByUserIdAsync(
 	callback chan<- DescribeReferenceOfByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
     }
-    if request.ItemSetName != nil {
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
         path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
     } else {
         path = strings.ReplaceAll(path, "{itemSetName}", "null")
@@ -4290,27 +4290,27 @@ func (p Gs2InventoryRestClient) GetReferenceOfAsync(
 	callback chan<- GetReferenceOfAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/{referenceOf}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
     }
-    if request.ItemSetName != nil {
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
         path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
     } else {
         path = strings.ReplaceAll(path, "{itemSetName}", "null")
     }
-    if request.ReferenceOf != nil {
+    if request.ReferenceOf != nil && *request.ReferenceOf != ""  {
         path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
     } else {
         path = strings.ReplaceAll(path, "{referenceOf}", "null")
@@ -4397,32 +4397,32 @@ func (p Gs2InventoryRestClient) GetReferenceOfByUserIdAsync(
 	callback chan<- GetReferenceOfByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/{referenceOf}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
     }
-    if request.ItemSetName != nil {
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
         path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
     } else {
         path = strings.ReplaceAll(path, "{itemSetName}", "null")
     }
-    if request.ReferenceOf != nil {
+    if request.ReferenceOf != nil && *request.ReferenceOf != ""  {
         path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
     } else {
         path = strings.ReplaceAll(path, "{referenceOf}", "null")
@@ -4506,32 +4506,32 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfAsync(
 	callback chan<- VerifyReferenceOfAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/verify"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
     }
-    if request.ItemSetName != nil {
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
         path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
     } else {
         path = strings.ReplaceAll(path, "{itemSetName}", "null")
     }
-    if request.ReferenceOf != nil {
+    if request.ReferenceOf != nil && *request.ReferenceOf != ""  {
         path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
     } else {
         path = strings.ReplaceAll(path, "{referenceOf}", "null")
     }
-    if request.VerifyType != nil {
+    if request.VerifyType != nil && *request.VerifyType != ""  {
         path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
     } else {
         path = strings.ReplaceAll(path, "{verifyType}", "null")
@@ -4621,37 +4621,37 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfByUserIdAsync(
 	callback chan<- VerifyReferenceOfByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/verify"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
     }
-    if request.ItemSetName != nil {
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
         path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
     } else {
         path = strings.ReplaceAll(path, "{itemSetName}", "null")
     }
-    if request.ReferenceOf != nil {
+    if request.ReferenceOf != nil && *request.ReferenceOf != ""  {
         path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
     } else {
         path = strings.ReplaceAll(path, "{referenceOf}", "null")
     }
-    if request.VerifyType != nil {
+    if request.VerifyType != nil && *request.VerifyType != ""  {
         path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
     } else {
         path = strings.ReplaceAll(path, "{verifyType}", "null")
@@ -4738,22 +4738,22 @@ func (p Gs2InventoryRestClient) AddReferenceOfAsync(
 	callback chan<- AddReferenceOfAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
     }
-    if request.ItemSetName != nil {
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
         path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
     } else {
         path = strings.ReplaceAll(path, "{itemSetName}", "null")
@@ -4846,27 +4846,27 @@ func (p Gs2InventoryRestClient) AddReferenceOfByUserIdAsync(
 	callback chan<- AddReferenceOfByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
     }
-    if request.ItemSetName != nil {
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
         path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
     } else {
         path = strings.ReplaceAll(path, "{itemSetName}", "null")
@@ -4956,22 +4956,22 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfAsync(
 	callback chan<- DeleteReferenceOfAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
     }
-    if request.ItemSetName != nil {
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
         path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
     } else {
         path = strings.ReplaceAll(path, "{itemSetName}", "null")
@@ -5058,27 +5058,27 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfByUserIdAsync(
 	callback chan<- DeleteReferenceOfByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")
     }
-    if request.ItemSetName != nil {
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
         path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
     } else {
         path = strings.ReplaceAll(path, "{itemSetName}", "null")
@@ -5162,22 +5162,22 @@ func (p Gs2InventoryRestClient) DeleteItemSetByUserIdAsync(
 	callback chan<- DeleteItemSetByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.InventoryName != nil {
+    if request.InventoryName != nil && *request.InventoryName != ""  {
         path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
     } else {
         path = strings.ReplaceAll(path, "{inventoryName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.ItemName != nil {
+    if request.ItemName != nil && *request.ItemName != ""  {
         path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
     } else {
         path = strings.ReplaceAll(path, "{itemName}", "null")

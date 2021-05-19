@@ -16,23 +16,19 @@ permissions and limitations under the License.
 
 package stamina
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 説明文 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** スタミナオーバーフロー上限に当たって回復できなかったスタミナを通知する スクリプト のGRN */
-	OverflowTriggerScriptId *core.String   `json:"overflowTriggerScriptId"`
+	OverflowTriggerScriptId *string   `json:"overflowTriggerScriptId"`
     /** スタミナオーバーフロー上限に当たって回復できなかったスタミナを追加する ネームスペース のGRN */
-	OverflowTriggerNamespaceId *core.String   `json:"overflowTriggerNamespaceId"`
+	OverflowTriggerNamespaceId *string   `json:"overflowTriggerNamespaceId"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** 作成日時 */
@@ -59,13 +55,13 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type StaminaModelMaster struct {
     /** スタミナモデルマスター */
-	StaminaModelId *core.String   `json:"staminaModelId"`
+	StaminaModelId *string   `json:"staminaModelId"`
     /** スタミナの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** スタミナの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** スタミナモデルマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** スタミナを回復する速度(分) */
 	RecoverIntervalMinutes *int32   `json:"recoverIntervalMinutes"`
     /** 時間経過後に回復する量 */
@@ -77,11 +73,11 @@ type StaminaModelMaster struct {
     /** 溢れた状況での最大値 */
 	MaxCapacity *int32   `json:"maxCapacity"`
     /** GS2-Experience のランクによって最大スタミナ値を決定するスタミナ最大値テーブル名 */
-	MaxStaminaTableName *core.String   `json:"maxStaminaTableName"`
+	MaxStaminaTableName *string   `json:"maxStaminaTableName"`
     /** GS2-Experience のランクによってスタミナの回復間隔を決定する回復間隔テーブル名 */
-	RecoverIntervalTableName *core.String   `json:"recoverIntervalTableName"`
+	RecoverIntervalTableName *string   `json:"recoverIntervalTableName"`
     /** GS2-Experience のランクによってスタミナの回復量を決定する回復量テーブル名 */
-	RecoverValueTableName *core.String   `json:"recoverValueTableName"`
+	RecoverValueTableName *string   `json:"recoverValueTableName"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -109,17 +105,17 @@ func (p *StaminaModelMaster) ToDict() *map[string]interface{} {
 
 type MaxStaminaTableMaster struct {
     /** スタミナの最大値テーブルマスター */
-	MaxStaminaTableId *core.String   `json:"maxStaminaTableId"`
+	MaxStaminaTableId *string   `json:"maxStaminaTableId"`
     /** 最大スタミナ値テーブル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 最大スタミナ値テーブルのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** スタミナの最大値テーブルマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 経験値の種類マスター のGRN */
-	ExperienceModelId *core.String   `json:"experienceModelId"`
+	ExperienceModelId *string   `json:"experienceModelId"`
     /** ランク毎のスタミナの最大値テーブル */
-	Values *[]int32   `json:"values"`
+	Values []int32   `json:"values"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -135,7 +131,7 @@ func (p *MaxStaminaTableMaster) ToDict() *map[string]interface{} {
     data["experienceModelId"] = p.ExperienceModelId
     if p.Values != nil {
         var _values []int32
-        for _, item := range *p.Values {
+        for _, item := range p.Values {
             _values = append(_values, item)
         }
         data["values"] = &_values
@@ -147,17 +143,17 @@ func (p *MaxStaminaTableMaster) ToDict() *map[string]interface{} {
 
 type RecoverIntervalTableMaster struct {
     /** スタミナ回復間隔テーブルマスター */
-	RecoverIntervalTableId *core.String   `json:"recoverIntervalTableId"`
+	RecoverIntervalTableId *string   `json:"recoverIntervalTableId"`
     /** スタミナ回復間隔テーブル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** スタミナ回復間隔テーブルのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** スタミナ回復間隔テーブルマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 経験値の種類マスター のGRN */
-	ExperienceModelId *core.String   `json:"experienceModelId"`
+	ExperienceModelId *string   `json:"experienceModelId"`
     /** ランク毎のスタミナ回復間隔テーブル */
-	Values *[]int32   `json:"values"`
+	Values []int32   `json:"values"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -173,7 +169,7 @@ func (p *RecoverIntervalTableMaster) ToDict() *map[string]interface{} {
     data["experienceModelId"] = p.ExperienceModelId
     if p.Values != nil {
         var _values []int32
-        for _, item := range *p.Values {
+        for _, item := range p.Values {
             _values = append(_values, item)
         }
         data["values"] = &_values
@@ -185,17 +181,17 @@ func (p *RecoverIntervalTableMaster) ToDict() *map[string]interface{} {
 
 type RecoverValueTableMaster struct {
     /** スタミナ回復量テーブルマスター */
-	RecoverValueTableId *core.String   `json:"recoverValueTableId"`
+	RecoverValueTableId *string   `json:"recoverValueTableId"`
     /** スタミナ回復量テーブル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** スタミナ回復量テーブルのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** スタミナ回復量テーブルマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 経験値の種類マスター のGRN */
-	ExperienceModelId *core.String   `json:"experienceModelId"`
+	ExperienceModelId *string   `json:"experienceModelId"`
     /** ランク毎のスタミナ回復量テーブル */
-	Values *[]int32   `json:"values"`
+	Values []int32   `json:"values"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -211,7 +207,7 @@ func (p *RecoverValueTableMaster) ToDict() *map[string]interface{} {
     data["experienceModelId"] = p.ExperienceModelId
     if p.Values != nil {
         var _values []int32
-        for _, item := range *p.Values {
+        for _, item := range p.Values {
             _values = append(_values, item)
         }
         data["values"] = &_values
@@ -223,9 +219,9 @@ func (p *RecoverValueTableMaster) ToDict() *map[string]interface{} {
 
 type CurrentStaminaMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentStaminaMaster) ToDict() *map[string]interface{} {
@@ -237,11 +233,11 @@ func (p *CurrentStaminaMaster) ToDict() *map[string]interface{} {
 
 type StaminaModel struct {
     /** スタミナモデルマスター */
-	StaminaModelId *core.String   `json:"staminaModelId"`
+	StaminaModelId *string   `json:"staminaModelId"`
     /** スタミナの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** スタミナの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** スタミナを回復する速度(分) */
 	RecoverIntervalMinutes *int32   `json:"recoverIntervalMinutes"`
     /** 時間経過後に回復する量 */
@@ -284,15 +280,15 @@ func (p *StaminaModel) ToDict() *map[string]interface{} {
 
 type MaxStaminaTable struct {
     /** スタミナの最大値テーブルマスター */
-	MaxStaminaTableId *core.String   `json:"maxStaminaTableId"`
+	MaxStaminaTableId *string   `json:"maxStaminaTableId"`
     /** 最大スタミナ値テーブル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 最大スタミナ値テーブルのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 経験値の種類マスター のGRN */
-	ExperienceModelId *core.String   `json:"experienceModelId"`
+	ExperienceModelId *string   `json:"experienceModelId"`
     /** ランク毎のスタミナの最大値テーブル */
-	Values *[]int32   `json:"values"`
+	Values []int32   `json:"values"`
 }
 
 func (p *MaxStaminaTable) ToDict() *map[string]interface{} {
@@ -303,7 +299,7 @@ func (p *MaxStaminaTable) ToDict() *map[string]interface{} {
     data["experienceModelId"] = p.ExperienceModelId
     if p.Values != nil {
         var _values []int32
-        for _, item := range *p.Values {
+        for _, item := range p.Values {
             _values = append(_values, item)
         }
         data["values"] = &_values
@@ -313,15 +309,15 @@ func (p *MaxStaminaTable) ToDict() *map[string]interface{} {
 
 type RecoverIntervalTable struct {
     /** スタミナ回復間隔テーブルマスター */
-	RecoverIntervalTableId *core.String   `json:"recoverIntervalTableId"`
+	RecoverIntervalTableId *string   `json:"recoverIntervalTableId"`
     /** スタミナ回復間隔テーブル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** スタミナ回復間隔テーブルのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 経験値の種類マスター のGRN */
-	ExperienceModelId *core.String   `json:"experienceModelId"`
+	ExperienceModelId *string   `json:"experienceModelId"`
     /** ランク毎のスタミナ回復間隔テーブル */
-	Values *[]int32   `json:"values"`
+	Values []int32   `json:"values"`
 }
 
 func (p *RecoverIntervalTable) ToDict() *map[string]interface{} {
@@ -332,7 +328,7 @@ func (p *RecoverIntervalTable) ToDict() *map[string]interface{} {
     data["experienceModelId"] = p.ExperienceModelId
     if p.Values != nil {
         var _values []int32
-        for _, item := range *p.Values {
+        for _, item := range p.Values {
             _values = append(_values, item)
         }
         data["values"] = &_values
@@ -342,15 +338,15 @@ func (p *RecoverIntervalTable) ToDict() *map[string]interface{} {
 
 type RecoverValueTable struct {
     /** スタミナ回復量テーブルマスター */
-	RecoverValueTableId *core.String   `json:"recoverValueTableId"`
+	RecoverValueTableId *string   `json:"recoverValueTableId"`
     /** スタミナ回復量テーブル名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** スタミナ回復量テーブルのメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 経験値の種類マスター のGRN */
-	ExperienceModelId *core.String   `json:"experienceModelId"`
+	ExperienceModelId *string   `json:"experienceModelId"`
     /** ランク毎のスタミナ回復量テーブル */
-	Values *[]int32   `json:"values"`
+	Values []int32   `json:"values"`
 }
 
 func (p *RecoverValueTable) ToDict() *map[string]interface{} {
@@ -361,7 +357,7 @@ func (p *RecoverValueTable) ToDict() *map[string]interface{} {
     data["experienceModelId"] = p.ExperienceModelId
     if p.Values != nil {
         var _values []int32
-        for _, item := range *p.Values {
+        for _, item := range p.Values {
             _values = append(_values, item)
         }
         data["values"] = &_values
@@ -371,11 +367,11 @@ func (p *RecoverValueTable) ToDict() *map[string]interface{} {
 
 type Stamina struct {
     /** スタミナ */
-	StaminaId *core.String   `json:"staminaId"`
+	StaminaId *string   `json:"staminaId"`
     /** スタミナモデルの名前 */
-	StaminaName *core.String   `json:"staminaName"`
+	StaminaName *string   `json:"staminaName"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 最終更新時におけるスタミナ値 */
 	Value *int32   `json:"value"`
     /** スタミナの最大値 */
@@ -415,15 +411,15 @@ func (p *Stamina) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -438,19 +434,19 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -467,7 +463,7 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

@@ -252,7 +252,7 @@ func (p Gs2ScheduleRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -336,7 +336,7 @@ func (p Gs2ScheduleRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -420,7 +420,7 @@ func (p Gs2ScheduleRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -513,7 +513,7 @@ func (p Gs2ScheduleRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -597,7 +597,7 @@ func (p Gs2ScheduleRestClient) DescribeEventMastersAsync(
 	callback chan<- DescribeEventMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/event"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -687,7 +687,7 @@ func (p Gs2ScheduleRestClient) CreateEventMasterAsync(
 	callback chan<- CreateEventMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/event"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -819,12 +819,12 @@ func (p Gs2ScheduleRestClient) GetEventMasterAsync(
 	callback chan<- GetEventMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/event/{eventName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.EventName != nil {
+    if request.EventName != nil && *request.EventName != ""  {
         path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
     } else {
         path = strings.ReplaceAll(path, "{eventName}", "null")
@@ -908,12 +908,12 @@ func (p Gs2ScheduleRestClient) UpdateEventMasterAsync(
 	callback chan<- UpdateEventMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/event/{eventName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.EventName != nil {
+    if request.EventName != nil && *request.EventName != ""  {
         path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
     } else {
         path = strings.ReplaceAll(path, "{eventName}", "null")
@@ -1042,12 +1042,12 @@ func (p Gs2ScheduleRestClient) DeleteEventMasterAsync(
 	callback chan<- DeleteEventMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/event/{eventName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.EventName != nil {
+    if request.EventName != nil && *request.EventName != ""  {
         path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
     } else {
         path = strings.ReplaceAll(path, "{eventName}", "null")
@@ -1131,7 +1131,7 @@ func (p Gs2ScheduleRestClient) DescribeTriggersAsync(
 	callback chan<- DescribeTriggersAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/trigger"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1224,12 +1224,12 @@ func (p Gs2ScheduleRestClient) DescribeTriggersByUserIdAsync(
 	callback chan<- DescribeTriggersByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/trigger"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1319,12 +1319,12 @@ func (p Gs2ScheduleRestClient) GetTriggerAsync(
 	callback chan<- GetTriggerAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/trigger/{triggerName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.TriggerName != nil {
+    if request.TriggerName != nil && *request.TriggerName != ""  {
         path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
     } else {
         path = strings.ReplaceAll(path, "{triggerName}", "null")
@@ -1411,17 +1411,17 @@ func (p Gs2ScheduleRestClient) GetTriggerByUserIdAsync(
 	callback chan<- GetTriggerByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/trigger/{triggerName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.TriggerName != nil {
+    if request.TriggerName != nil && *request.TriggerName != ""  {
         path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
     } else {
         path = strings.ReplaceAll(path, "{triggerName}", "null")
@@ -1505,17 +1505,17 @@ func (p Gs2ScheduleRestClient) TriggerByUserIdAsync(
 	callback chan<- TriggerByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/trigger/{triggerName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.TriggerName != nil {
+    if request.TriggerName != nil && *request.TriggerName != ""  {
         path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
     } else {
         path = strings.ReplaceAll(path, "{triggerName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1608,12 +1608,12 @@ func (p Gs2ScheduleRestClient) DeleteTriggerAsync(
 	callback chan<- DeleteTriggerAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/trigger/{triggerName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.TriggerName != nil {
+    if request.TriggerName != nil && *request.TriggerName != ""  {
         path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
     } else {
         path = strings.ReplaceAll(path, "{triggerName}", "null")
@@ -1700,17 +1700,17 @@ func (p Gs2ScheduleRestClient) DeleteTriggerByUserIdAsync(
 	callback chan<- DeleteTriggerByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/trigger/{triggerName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.TriggerName != nil {
+    if request.TriggerName != nil && *request.TriggerName != ""  {
         path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
     } else {
         path = strings.ReplaceAll(path, "{triggerName}", "null")
@@ -1794,7 +1794,7 @@ func (p Gs2ScheduleRestClient) DescribeEventsAsync(
 	callback chan<- DescribeEventsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/event"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1881,12 +1881,12 @@ func (p Gs2ScheduleRestClient) DescribeEventsByUserIdAsync(
 	callback chan<- DescribeEventsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/event"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1970,7 +1970,7 @@ func (p Gs2ScheduleRestClient) DescribeRawEventsAsync(
 	callback chan<- DescribeRawEventsAsyncResult,
 ) {
 	path := "/{namespaceName}/event"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2054,12 +2054,12 @@ func (p Gs2ScheduleRestClient) GetEventAsync(
 	callback chan<- GetEventAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/event/{eventName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.EventName != nil {
+    if request.EventName != nil && *request.EventName != ""  {
         path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
     } else {
         path = strings.ReplaceAll(path, "{eventName}", "null")
@@ -2146,17 +2146,17 @@ func (p Gs2ScheduleRestClient) GetEventByUserIdAsync(
 	callback chan<- GetEventByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/event/{eventName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.EventName != nil {
+    if request.EventName != nil && *request.EventName != ""  {
         path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
     } else {
         path = strings.ReplaceAll(path, "{eventName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -2240,12 +2240,12 @@ func (p Gs2ScheduleRestClient) GetRawEventAsync(
 	callback chan<- GetRawEventAsyncResult,
 ) {
 	path := "/{namespaceName}/event/{eventName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.EventName != nil {
+    if request.EventName != nil && *request.EventName != ""  {
         path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
     } else {
         path = strings.ReplaceAll(path, "{eventName}", "null")
@@ -2329,7 +2329,7 @@ func (p Gs2ScheduleRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2413,7 +2413,7 @@ func (p Gs2ScheduleRestClient) GetCurrentEventMasterAsync(
 	callback chan<- GetCurrentEventMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2497,7 +2497,7 @@ func (p Gs2ScheduleRestClient) UpdateCurrentEventMasterAsync(
 	callback chan<- UpdateCurrentEventMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2587,7 +2587,7 @@ func (p Gs2ScheduleRestClient) UpdateCurrentEventMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentEventMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")

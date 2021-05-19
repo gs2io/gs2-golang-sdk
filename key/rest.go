@@ -252,7 +252,7 @@ func (p Gs2KeyRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -336,7 +336,7 @@ func (p Gs2KeyRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -420,7 +420,7 @@ func (p Gs2KeyRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -513,7 +513,7 @@ func (p Gs2KeyRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -597,7 +597,7 @@ func (p Gs2KeyRestClient) DescribeKeysAsync(
 	callback chan<- DescribeKeysAsyncResult,
 ) {
 	path := "/{namespaceName}/key"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -687,7 +687,7 @@ func (p Gs2KeyRestClient) CreateKeyAsync(
 	callback chan<- CreateKeyAsyncResult,
 ) {
 	path := "/{namespaceName}/key"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -780,12 +780,12 @@ func (p Gs2KeyRestClient) UpdateKeyAsync(
 	callback chan<- UpdateKeyAsyncResult,
 ) {
 	path := "/{namespaceName}/key/{keyName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.KeyName != nil {
+    if request.KeyName != nil && *request.KeyName != ""  {
         path = strings.ReplaceAll(path, "{keyName}", core.ToString(*request.KeyName))
     } else {
         path = strings.ReplaceAll(path, "{keyName}", "null")
@@ -875,12 +875,12 @@ func (p Gs2KeyRestClient) GetKeyAsync(
 	callback chan<- GetKeyAsyncResult,
 ) {
 	path := "/{namespaceName}/key/{keyName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.KeyName != nil {
+    if request.KeyName != nil && *request.KeyName != ""  {
         path = strings.ReplaceAll(path, "{keyName}", core.ToString(*request.KeyName))
     } else {
         path = strings.ReplaceAll(path, "{keyName}", "null")
@@ -964,12 +964,12 @@ func (p Gs2KeyRestClient) DeleteKeyAsync(
 	callback chan<- DeleteKeyAsyncResult,
 ) {
 	path := "/{namespaceName}/key/{keyName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.KeyName != nil {
+    if request.KeyName != nil && *request.KeyName != ""  {
         path = strings.ReplaceAll(path, "{keyName}", core.ToString(*request.KeyName))
     } else {
         path = strings.ReplaceAll(path, "{keyName}", "null")
@@ -1053,12 +1053,12 @@ func (p Gs2KeyRestClient) EncryptAsync(
 	callback chan<- EncryptAsyncResult,
 ) {
 	path := "/{namespaceName}/key/{keyName}/encrypt"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.KeyName != nil {
+    if request.KeyName != nil && *request.KeyName != ""  {
         path = strings.ReplaceAll(path, "{keyName}", core.ToString(*request.KeyName))
     } else {
         path = strings.ReplaceAll(path, "{keyName}", "null")
@@ -1148,12 +1148,12 @@ func (p Gs2KeyRestClient) DecryptAsync(
 	callback chan<- DecryptAsyncResult,
 ) {
 	path := "/{namespaceName}/key/{keyName}/decrypt"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.KeyName != nil {
+    if request.KeyName != nil && *request.KeyName != ""  {
         path = strings.ReplaceAll(path, "{keyName}", core.ToString(*request.KeyName))
     } else {
         path = strings.ReplaceAll(path, "{keyName}", "null")
@@ -1243,7 +1243,7 @@ func (p Gs2KeyRestClient) DescribeGitHubApiKeysAsync(
 	callback chan<- DescribeGitHubApiKeysAsyncResult,
 ) {
 	path := "/{namespaceName}/github"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1333,7 +1333,7 @@ func (p Gs2KeyRestClient) CreateGitHubApiKeyAsync(
 	callback chan<- CreateGitHubApiKeyAsyncResult,
 ) {
 	path := "/{namespaceName}/github"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1432,12 +1432,12 @@ func (p Gs2KeyRestClient) UpdateGitHubApiKeyAsync(
 	callback chan<- UpdateGitHubApiKeyAsyncResult,
 ) {
 	path := "/{namespaceName}/github/{apiKeyName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ApiKeyName != nil {
+    if request.ApiKeyName != nil && *request.ApiKeyName != ""  {
         path = strings.ReplaceAll(path, "{apiKeyName}", core.ToString(*request.ApiKeyName))
     } else {
         path = strings.ReplaceAll(path, "{apiKeyName}", "null")
@@ -1533,12 +1533,12 @@ func (p Gs2KeyRestClient) GetGitHubApiKeyAsync(
 	callback chan<- GetGitHubApiKeyAsyncResult,
 ) {
 	path := "/{namespaceName}/github/{apiKeyName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ApiKeyName != nil {
+    if request.ApiKeyName != nil && *request.ApiKeyName != ""  {
         path = strings.ReplaceAll(path, "{apiKeyName}", core.ToString(*request.ApiKeyName))
     } else {
         path = strings.ReplaceAll(path, "{apiKeyName}", "null")
@@ -1622,12 +1622,12 @@ func (p Gs2KeyRestClient) DeleteGitHubApiKeyAsync(
 	callback chan<- DeleteGitHubApiKeyAsyncResult,
 ) {
 	path := "/{namespaceName}/github/{apiKeyName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ApiKeyName != nil {
+    if request.ApiKeyName != nil && *request.ApiKeyName != ""  {
         path = strings.ReplaceAll(path, "{apiKeyName}", core.ToString(*request.ApiKeyName))
     } else {
         path = strings.ReplaceAll(path, "{apiKeyName}", "null")

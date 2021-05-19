@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package datastore
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type DescribeDataObjectsResult struct {
     /** データオブジェクトのリスト */
 	Items         []DataObject	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeDataObjectsResult) ToDict() *map[string]interface{} {
@@ -168,7 +164,7 @@ type DescribeDataObjectsByUserIdResult struct {
     /** データオブジェクトのリスト */
 	Items         []DataObject	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeDataObjectsByUserIdResult) ToDict() *map[string]interface{} {
@@ -195,7 +191,7 @@ type PrepareUploadResult struct {
     /** データオブジェクト */
 	Item         *DataObject	`json:"item"`
     /** アップロード処理の実行に使用するURL */
-	UploadUrl         *core.String	`json:"uploadUrl"`
+	UploadUrl         *string	`json:"uploadUrl"`
 }
 
 func (p *PrepareUploadResult) ToDict() *map[string]interface{} {
@@ -218,7 +214,7 @@ type PrepareUploadByUserIdResult struct {
     /** データオブジェクト */
 	Item         *DataObject	`json:"item"`
     /** アップロード処理の実行に使用するURL */
-	UploadUrl         *core.String	`json:"uploadUrl"`
+	UploadUrl         *string	`json:"uploadUrl"`
 }
 
 func (p *PrepareUploadByUserIdResult) ToDict() *map[string]interface{} {
@@ -277,7 +273,7 @@ type PrepareReUploadResult struct {
     /** データオブジェクト */
 	Item         *DataObject	`json:"item"`
     /** アップロード処理の実行に使用するURL */
-	UploadUrl         *core.String	`json:"uploadUrl"`
+	UploadUrl         *string	`json:"uploadUrl"`
 }
 
 func (p *PrepareReUploadResult) ToDict() *map[string]interface{} {
@@ -300,7 +296,7 @@ type PrepareReUploadByUserIdResult struct {
     /** データオブジェクト */
 	Item         *DataObject	`json:"item"`
     /** アップロード処理の実行に使用するURL */
-	UploadUrl         *core.String	`json:"uploadUrl"`
+	UploadUrl         *string	`json:"uploadUrl"`
 }
 
 func (p *PrepareReUploadByUserIdResult) ToDict() *map[string]interface{} {
@@ -395,7 +391,7 @@ type PrepareDownloadResult struct {
     /** データオブジェクト */
 	Item         *DataObject	`json:"item"`
     /** ファイルをダウンロードするためのURL */
-	FileUrl         *core.String	`json:"fileUrl"`
+	FileUrl         *string	`json:"fileUrl"`
     /** ファイルの容量 */
 	ContentLength         *int64	`json:"contentLength"`
 }
@@ -423,7 +419,7 @@ type PrepareDownloadByUserIdResult struct {
     /** データオブジェクト */
 	Item         *DataObject	`json:"item"`
     /** ファイルをダウンロードするためのURL */
-	FileUrl         *core.String	`json:"fileUrl"`
+	FileUrl         *string	`json:"fileUrl"`
     /** ファイルの容量 */
 	ContentLength         *int64	`json:"contentLength"`
 }
@@ -451,7 +447,7 @@ type PrepareDownloadByGenerationResult struct {
     /** データオブジェクト */
 	Item         *DataObject	`json:"item"`
     /** ファイルをダウンロードするためのURL */
-	FileUrl         *core.String	`json:"fileUrl"`
+	FileUrl         *string	`json:"fileUrl"`
     /** ファイルの容量 */
 	ContentLength         *int64	`json:"contentLength"`
 }
@@ -479,7 +475,7 @@ type PrepareDownloadByGenerationAndUserIdResult struct {
     /** データオブジェクト */
 	Item         *DataObject	`json:"item"`
     /** ファイルをダウンロードするためのURL */
-	FileUrl         *core.String	`json:"fileUrl"`
+	FileUrl         *string	`json:"fileUrl"`
     /** ファイルの容量 */
 	ContentLength         *int64	`json:"contentLength"`
 }
@@ -507,7 +503,7 @@ type PrepareDownloadOwnDataResult struct {
     /** データオブジェクト */
 	Item         *DataObject	`json:"item"`
     /** ファイルをダウンロードするためのURL */
-	FileUrl         *core.String	`json:"fileUrl"`
+	FileUrl         *string	`json:"fileUrl"`
     /** ファイルの容量 */
 	ContentLength         *int64	`json:"contentLength"`
 }
@@ -535,7 +531,7 @@ type PrepareDownloadByUserIdAndDataObjectNameResult struct {
     /** データオブジェクト */
 	Item         *DataObject	`json:"item"`
     /** ファイルをダウンロードするためのURL */
-	FileUrl         *core.String	`json:"fileUrl"`
+	FileUrl         *string	`json:"fileUrl"`
     /** ファイルの容量 */
 	ContentLength         *int64	`json:"contentLength"`
 }
@@ -563,7 +559,7 @@ type PrepareDownloadOwnDataByGenerationResult struct {
     /** データオブジェクト */
 	Item         *DataObject	`json:"item"`
     /** ファイルをダウンロードするためのURL */
-	FileUrl         *core.String	`json:"fileUrl"`
+	FileUrl         *string	`json:"fileUrl"`
     /** ファイルの容量 */
 	ContentLength         *int64	`json:"contentLength"`
 }
@@ -591,7 +587,7 @@ type PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult struct {
     /** データオブジェクト */
 	Item         *DataObject	`json:"item"`
     /** ファイルをダウンロードするためのURL */
-	FileUrl         *core.String	`json:"fileUrl"`
+	FileUrl         *string	`json:"fileUrl"`
     /** ファイルの容量 */
 	ContentLength         *int64	`json:"contentLength"`
 }
@@ -637,7 +633,7 @@ type DescribeDataObjectHistoriesResult struct {
     /** データオブジェクト履歴のリスト */
 	Items         []DataObjectHistory	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeDataObjectHistoriesResult) ToDict() *map[string]interface{} {
@@ -664,7 +660,7 @@ type DescribeDataObjectHistoriesByUserIdResult struct {
     /** データオブジェクト履歴のリスト */
 	Items         []DataObjectHistory	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeDataObjectHistoriesByUserIdResult) ToDict() *map[string]interface{} {

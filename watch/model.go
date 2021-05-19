@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package watch
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Chart struct {
     /** Datadog のJSON 形式のグラフ定義 */
-	ChartId *core.String   `json:"chartId"`
+	ChartId *string   `json:"chartId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** Datadog から払い出された組み込みID */
-	EmbedId *core.String   `json:"embedId"`
+	EmbedId *string   `json:"embedId"`
     /** Datadog から払い出された組み込み用HTML */
-	Html *core.String   `json:"html"`
+	Html *string   `json:"html"`
 }
 
 func (p *Chart) ToDict() *map[string]interface{} {
@@ -42,13 +38,13 @@ func (p *Chart) ToDict() *map[string]interface{} {
 
 type Cumulative struct {
     /** 累積値 */
-	CumulativeId *core.String   `json:"cumulativeId"`
+	CumulativeId *string   `json:"cumulativeId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** リソースのGRN */
-	ResourceGrn *core.String   `json:"resourceGrn"`
+	ResourceGrn *string   `json:"resourceGrn"`
     /** 名前 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 累積値 */
 	Value *int64   `json:"value"`
     /** 最終更新日時 */
@@ -68,17 +64,17 @@ func (p *Cumulative) ToDict() *map[string]interface{} {
 
 type BillingActivity struct {
     /** 請求にまつわるアクティビティ */
-	BillingActivityId *core.String   `json:"billingActivityId"`
+	BillingActivityId *string   `json:"billingActivityId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** イベントの発生年 */
 	Year *int32   `json:"year"`
     /** イベントの発生月 */
 	Month *int32   `json:"month"`
     /** サービスの種類 */
-	Service *core.String   `json:"service"`
+	Service *string   `json:"service"`
     /** イベントの種類 */
-	ActivityType *core.String   `json:"activityType"`
+	ActivityType *string   `json:"activityType"`
     /** イベントの値 */
 	Value *int64   `json:"value"`
 }

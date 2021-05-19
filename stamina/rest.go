@@ -258,7 +258,7 @@ func (p Gs2StaminaRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -342,7 +342,7 @@ func (p Gs2StaminaRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -426,7 +426,7 @@ func (p Gs2StaminaRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -525,7 +525,7 @@ func (p Gs2StaminaRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -609,7 +609,7 @@ func (p Gs2StaminaRestClient) DescribeStaminaModelMastersAsync(
 	callback chan<- DescribeStaminaModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -699,7 +699,7 @@ func (p Gs2StaminaRestClient) CreateStaminaModelMasterAsync(
 	callback chan<- CreateStaminaModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -819,12 +819,12 @@ func (p Gs2StaminaRestClient) GetStaminaModelMasterAsync(
 	callback chan<- GetStaminaModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{staminaName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
@@ -908,12 +908,12 @@ func (p Gs2StaminaRestClient) UpdateStaminaModelMasterAsync(
 	callback chan<- UpdateStaminaModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{staminaName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
@@ -1030,12 +1030,12 @@ func (p Gs2StaminaRestClient) DeleteStaminaModelMasterAsync(
 	callback chan<- DeleteStaminaModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{staminaName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
@@ -1119,7 +1119,7 @@ func (p Gs2StaminaRestClient) DescribeMaxStaminaTableMastersAsync(
 	callback chan<- DescribeMaxStaminaTableMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/maxStaminaTable"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1209,7 +1209,7 @@ func (p Gs2StaminaRestClient) CreateMaxStaminaTableMasterAsync(
 	callback chan<- CreateMaxStaminaTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/maxStaminaTable"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1231,7 +1231,7 @@ func (p Gs2StaminaRestClient) CreateMaxStaminaTableMasterAsync(
     }
     if request.Values != nil {
         var _values []int32
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -1315,12 +1315,12 @@ func (p Gs2StaminaRestClient) GetMaxStaminaTableMasterAsync(
 	callback chan<- GetMaxStaminaTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/maxStaminaTable/{maxStaminaTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MaxStaminaTableName != nil {
+    if request.MaxStaminaTableName != nil && *request.MaxStaminaTableName != ""  {
         path = strings.ReplaceAll(path, "{maxStaminaTableName}", core.ToString(*request.MaxStaminaTableName))
     } else {
         path = strings.ReplaceAll(path, "{maxStaminaTableName}", "null")
@@ -1404,12 +1404,12 @@ func (p Gs2StaminaRestClient) UpdateMaxStaminaTableMasterAsync(
 	callback chan<- UpdateMaxStaminaTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/maxStaminaTable/{maxStaminaTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MaxStaminaTableName != nil {
+    if request.MaxStaminaTableName != nil && *request.MaxStaminaTableName != ""  {
         path = strings.ReplaceAll(path, "{maxStaminaTableName}", core.ToString(*request.MaxStaminaTableName))
     } else {
         path = strings.ReplaceAll(path, "{maxStaminaTableName}", "null")
@@ -1428,7 +1428,7 @@ func (p Gs2StaminaRestClient) UpdateMaxStaminaTableMasterAsync(
     }
     if request.Values != nil {
         var _values []int32
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -1512,12 +1512,12 @@ func (p Gs2StaminaRestClient) DeleteMaxStaminaTableMasterAsync(
 	callback chan<- DeleteMaxStaminaTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/maxStaminaTable/{maxStaminaTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.MaxStaminaTableName != nil {
+    if request.MaxStaminaTableName != nil && *request.MaxStaminaTableName != ""  {
         path = strings.ReplaceAll(path, "{maxStaminaTableName}", core.ToString(*request.MaxStaminaTableName))
     } else {
         path = strings.ReplaceAll(path, "{maxStaminaTableName}", "null")
@@ -1601,7 +1601,7 @@ func (p Gs2StaminaRestClient) DescribeRecoverIntervalTableMastersAsync(
 	callback chan<- DescribeRecoverIntervalTableMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverIntervalTable"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1691,7 +1691,7 @@ func (p Gs2StaminaRestClient) CreateRecoverIntervalTableMasterAsync(
 	callback chan<- CreateRecoverIntervalTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverIntervalTable"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1713,7 +1713,7 @@ func (p Gs2StaminaRestClient) CreateRecoverIntervalTableMasterAsync(
     }
     if request.Values != nil {
         var _values []int32
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -1797,12 +1797,12 @@ func (p Gs2StaminaRestClient) GetRecoverIntervalTableMasterAsync(
 	callback chan<- GetRecoverIntervalTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverIntervalTable/{recoverIntervalTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RecoverIntervalTableName != nil {
+    if request.RecoverIntervalTableName != nil && *request.RecoverIntervalTableName != ""  {
         path = strings.ReplaceAll(path, "{recoverIntervalTableName}", core.ToString(*request.RecoverIntervalTableName))
     } else {
         path = strings.ReplaceAll(path, "{recoverIntervalTableName}", "null")
@@ -1886,12 +1886,12 @@ func (p Gs2StaminaRestClient) UpdateRecoverIntervalTableMasterAsync(
 	callback chan<- UpdateRecoverIntervalTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverIntervalTable/{recoverIntervalTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RecoverIntervalTableName != nil {
+    if request.RecoverIntervalTableName != nil && *request.RecoverIntervalTableName != ""  {
         path = strings.ReplaceAll(path, "{recoverIntervalTableName}", core.ToString(*request.RecoverIntervalTableName))
     } else {
         path = strings.ReplaceAll(path, "{recoverIntervalTableName}", "null")
@@ -1910,7 +1910,7 @@ func (p Gs2StaminaRestClient) UpdateRecoverIntervalTableMasterAsync(
     }
     if request.Values != nil {
         var _values []int32
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -1994,12 +1994,12 @@ func (p Gs2StaminaRestClient) DeleteRecoverIntervalTableMasterAsync(
 	callback chan<- DeleteRecoverIntervalTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverIntervalTable/{recoverIntervalTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RecoverIntervalTableName != nil {
+    if request.RecoverIntervalTableName != nil && *request.RecoverIntervalTableName != ""  {
         path = strings.ReplaceAll(path, "{recoverIntervalTableName}", core.ToString(*request.RecoverIntervalTableName))
     } else {
         path = strings.ReplaceAll(path, "{recoverIntervalTableName}", "null")
@@ -2083,7 +2083,7 @@ func (p Gs2StaminaRestClient) DescribeRecoverValueTableMastersAsync(
 	callback chan<- DescribeRecoverValueTableMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverValueTable"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2173,7 +2173,7 @@ func (p Gs2StaminaRestClient) CreateRecoverValueTableMasterAsync(
 	callback chan<- CreateRecoverValueTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverValueTable"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2195,7 +2195,7 @@ func (p Gs2StaminaRestClient) CreateRecoverValueTableMasterAsync(
     }
     if request.Values != nil {
         var _values []int32
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -2279,12 +2279,12 @@ func (p Gs2StaminaRestClient) GetRecoverValueTableMasterAsync(
 	callback chan<- GetRecoverValueTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverValueTable/{recoverValueTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RecoverValueTableName != nil {
+    if request.RecoverValueTableName != nil && *request.RecoverValueTableName != ""  {
         path = strings.ReplaceAll(path, "{recoverValueTableName}", core.ToString(*request.RecoverValueTableName))
     } else {
         path = strings.ReplaceAll(path, "{recoverValueTableName}", "null")
@@ -2368,12 +2368,12 @@ func (p Gs2StaminaRestClient) UpdateRecoverValueTableMasterAsync(
 	callback chan<- UpdateRecoverValueTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverValueTable/{recoverValueTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RecoverValueTableName != nil {
+    if request.RecoverValueTableName != nil && *request.RecoverValueTableName != ""  {
         path = strings.ReplaceAll(path, "{recoverValueTableName}", core.ToString(*request.RecoverValueTableName))
     } else {
         path = strings.ReplaceAll(path, "{recoverValueTableName}", "null")
@@ -2392,7 +2392,7 @@ func (p Gs2StaminaRestClient) UpdateRecoverValueTableMasterAsync(
     }
     if request.Values != nil {
         var _values []int32
-        for _, item := range *request.Values {
+        for _, item := range request.Values {
             _values = append(_values, item)
         }
         bodies["values"] = _values
@@ -2476,12 +2476,12 @@ func (p Gs2StaminaRestClient) DeleteRecoverValueTableMasterAsync(
 	callback chan<- DeleteRecoverValueTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverValueTable/{recoverValueTableName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.RecoverValueTableName != nil {
+    if request.RecoverValueTableName != nil && *request.RecoverValueTableName != ""  {
         path = strings.ReplaceAll(path, "{recoverValueTableName}", core.ToString(*request.RecoverValueTableName))
     } else {
         path = strings.ReplaceAll(path, "{recoverValueTableName}", "null")
@@ -2565,7 +2565,7 @@ func (p Gs2StaminaRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2649,7 +2649,7 @@ func (p Gs2StaminaRestClient) GetCurrentStaminaMasterAsync(
 	callback chan<- GetCurrentStaminaMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2733,7 +2733,7 @@ func (p Gs2StaminaRestClient) UpdateCurrentStaminaMasterAsync(
 	callback chan<- UpdateCurrentStaminaMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2823,7 +2823,7 @@ func (p Gs2StaminaRestClient) UpdateCurrentStaminaMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentStaminaMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2913,7 +2913,7 @@ func (p Gs2StaminaRestClient) DescribeStaminaModelsAsync(
 	callback chan<- DescribeStaminaModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/model"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -2997,12 +2997,12 @@ func (p Gs2StaminaRestClient) GetStaminaModelAsync(
 	callback chan<- GetStaminaModelAsyncResult,
 ) {
 	path := "/{namespaceName}/model/{staminaName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
@@ -3086,7 +3086,7 @@ func (p Gs2StaminaRestClient) DescribeStaminasAsync(
 	callback chan<- DescribeStaminasAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/stamina"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -3179,12 +3179,12 @@ func (p Gs2StaminaRestClient) DescribeStaminasByUserIdAsync(
 	callback chan<- DescribeStaminasByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3274,12 +3274,12 @@ func (p Gs2StaminaRestClient) GetStaminaAsync(
 	callback chan<- GetStaminaAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/stamina/{staminaName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
@@ -3366,17 +3366,17 @@ func (p Gs2StaminaRestClient) GetStaminaByUserIdAsync(
 	callback chan<- GetStaminaByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3460,17 +3460,17 @@ func (p Gs2StaminaRestClient) UpdateStaminaByUserIdAsync(
 	callback chan<- UpdateStaminaByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3569,12 +3569,12 @@ func (p Gs2StaminaRestClient) ConsumeStaminaAsync(
 	callback chan<- ConsumeStaminaAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/stamina/{staminaName}/consume"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
@@ -3667,17 +3667,17 @@ func (p Gs2StaminaRestClient) ConsumeStaminaByUserIdAsync(
 	callback chan<- ConsumeStaminaByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/consume"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3767,17 +3767,17 @@ func (p Gs2StaminaRestClient) RecoverStaminaByUserIdAsync(
 	callback chan<- RecoverStaminaByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/recover"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3867,17 +3867,17 @@ func (p Gs2StaminaRestClient) RaiseMaxValueByUserIdAsync(
 	callback chan<- RaiseMaxValueByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/raise"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -3967,17 +3967,17 @@ func (p Gs2StaminaRestClient) SetMaxValueByUserIdAsync(
 	callback chan<- SetMaxValueByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/set"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -4067,17 +4067,17 @@ func (p Gs2StaminaRestClient) SetRecoverIntervalByUserIdAsync(
 	callback chan<- SetRecoverIntervalByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/recoverInterval/set"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -4167,17 +4167,17 @@ func (p Gs2StaminaRestClient) SetRecoverValueByUserIdAsync(
 	callback chan<- SetRecoverValueByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/recoverValue/set"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -4267,12 +4267,12 @@ func (p Gs2StaminaRestClient) SetMaxValueByStatusAsync(
 	callback chan<- SetMaxValueByStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/stamina/{staminaName}/set"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
@@ -4371,12 +4371,12 @@ func (p Gs2StaminaRestClient) SetRecoverIntervalByStatusAsync(
 	callback chan<- SetRecoverIntervalByStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/stamina/{staminaName}/recoverInterval/set"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
@@ -4475,12 +4475,12 @@ func (p Gs2StaminaRestClient) SetRecoverValueByStatusAsync(
 	callback chan<- SetRecoverValueByStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/stamina/{staminaName}/reoverValue/set"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
@@ -4579,17 +4579,17 @@ func (p Gs2StaminaRestClient) DeleteStaminaByUserIdAsync(
 	callback chan<- DeleteStaminaByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.StaminaName != nil {
+    if request.StaminaName != nil && *request.StaminaName != ""  {
         path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
     } else {
         path = strings.ReplaceAll(path, "{staminaName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")

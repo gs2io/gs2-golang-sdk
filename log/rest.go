@@ -273,7 +273,7 @@ func (p Gs2LogRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -357,7 +357,7 @@ func (p Gs2LogRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -441,7 +441,7 @@ func (p Gs2LogRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -555,7 +555,7 @@ func (p Gs2LogRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -639,7 +639,7 @@ func (p Gs2LogRestClient) QueryAccessLogAsync(
 	callback chan<- QueryAccessLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/access"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -738,7 +738,7 @@ func (p Gs2LogRestClient) CountAccessLogAsync(
 	callback chan<- CountAccessLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/access/count"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -837,7 +837,7 @@ func (p Gs2LogRestClient) QueryIssueStampSheetLogAsync(
 	callback chan<- QueryIssueStampSheetLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/issue/stamp/sheet"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -939,7 +939,7 @@ func (p Gs2LogRestClient) CountIssueStampSheetLogAsync(
 	callback chan<- CountIssueStampSheetLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/issue/stamp/sheet/count"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1041,7 +1041,7 @@ func (p Gs2LogRestClient) QueryExecuteStampSheetLogAsync(
 	callback chan<- QueryExecuteStampSheetLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/execute/stamp/sheet"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1143,7 +1143,7 @@ func (p Gs2LogRestClient) CountExecuteStampSheetLogAsync(
 	callback chan<- CountExecuteStampSheetLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/execute/stamp/sheet/count"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1245,7 +1245,7 @@ func (p Gs2LogRestClient) QueryExecuteStampTaskLogAsync(
 	callback chan<- QueryExecuteStampTaskLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/execute/stamp/task"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1347,7 +1347,7 @@ func (p Gs2LogRestClient) CountExecuteStampTaskLogAsync(
 	callback chan<- CountExecuteStampTaskLogAsyncResult,
 ) {
 	path := "/{namespaceName}/log/execute/stamp/task/count"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")

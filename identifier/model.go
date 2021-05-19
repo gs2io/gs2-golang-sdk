@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package identifier
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type User struct {
     /** ユーザ */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ユーザー名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ユーザの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -48,15 +44,15 @@ func (p *User) ToDict() *map[string]interface{} {
 
 type SecurityPolicy struct {
     /** セキュリティポリシー */
-	SecurityPolicyId *core.String   `json:"securityPolicyId"`
+	SecurityPolicyId *string   `json:"securityPolicyId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** セキュリティポリシー名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** セキュリティポリシーの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** ポリシードキュメント */
-	Policy *core.String   `json:"policy"`
+	Policy *string   `json:"policy"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -77,13 +73,13 @@ func (p *SecurityPolicy) ToDict() *map[string]interface{} {
 
 type Identifier struct {
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** クライアントID */
-	ClientId *core.String   `json:"clientId"`
+	ClientId *string   `json:"clientId"`
     /** ユーザー名 */
-	UserName *core.String   `json:"userName"`
+	UserName *string   `json:"userName"`
     /** クライアントシークレット */
-	ClientSecret *core.String   `json:"clientSecret"`
+	ClientSecret *string   `json:"clientSecret"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
 }
@@ -100,13 +96,13 @@ func (p *Identifier) ToDict() *map[string]interface{} {
 
 type Password struct {
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ユーザ */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** ユーザー名 */
-	UserName *core.String   `json:"userName"`
+	UserName *string   `json:"userName"`
     /** パスワード */
-	Password *core.String   `json:"password"`
+	Password *string   `json:"password"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
 }
@@ -123,9 +119,9 @@ func (p *Password) ToDict() *map[string]interface{} {
 
 type AttachSecurityPolicy struct {
     /** ユーザ のGRN */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** セキュリティポリシー のGRNのリスト */
-	SecurityPolicyIds *[]core.String   `json:"securityPolicyIds"`
+	SecurityPolicyIds []string   `json:"securityPolicyIds"`
     /** 作成日時 */
 	AttachedAt *int64   `json:"attachedAt"`
 }
@@ -134,8 +130,8 @@ func (p *AttachSecurityPolicy) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     data["userId"] = p.UserId
     if p.SecurityPolicyIds != nil {
-        var _securityPolicyIds []core.String
-        for _, item := range *p.SecurityPolicyIds {
+        var _securityPolicyIds []string
+        for _, item := range p.SecurityPolicyIds {
             _securityPolicyIds = append(_securityPolicyIds, item)
         }
         data["securityPolicyIds"] = &_securityPolicyIds
@@ -146,7 +142,7 @@ func (p *AttachSecurityPolicy) ToDict() *map[string]interface{} {
 
 type ProjectToken struct {
     /** プロジェクトトークン */
-	Token *core.String   `json:"token"`
+	Token *string   `json:"token"`
 }
 
 func (p *ProjectToken) ToDict() *map[string]interface{} {

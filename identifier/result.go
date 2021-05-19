@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package identifier
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeUsersResult struct {
     /** ユーザのリスト */
 	Items         []User	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeUsersResult) ToDict() *map[string]interface{} {
@@ -118,7 +114,7 @@ type DescribeSecurityPoliciesResult struct {
     /** セキュリティポリシーのリスト */
 	Items         []SecurityPolicy	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeSecurityPoliciesResult) ToDict() *map[string]interface{} {
@@ -145,7 +141,7 @@ type DescribeCommonSecurityPoliciesResult struct {
     /** セキュリティポリシーのリスト */
 	Items         []SecurityPolicy	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeCommonSecurityPoliciesResult) ToDict() *map[string]interface{} {
@@ -239,7 +235,7 @@ type DescribeIdentifiersResult struct {
     /** クレデンシャルのリスト */
 	Items         []Identifier	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeIdentifiersResult) ToDict() *map[string]interface{} {
@@ -266,7 +262,7 @@ type CreateIdentifierResult struct {
     /** 作成したクレデンシャル */
 	Item         *Identifier	`json:"item"`
     /** クライアントシークレット */
-	ClientSecret         *core.String	`json:"clientSecret"`
+	ClientSecret         *string	`json:"clientSecret"`
 }
 
 func (p *CreateIdentifierResult) ToDict() *map[string]interface{} {
@@ -320,7 +316,7 @@ type DescribePasswordsResult struct {
     /** パスワードのリスト */
 	Items         []Password	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribePasswordsResult) ToDict() *map[string]interface{} {
@@ -460,9 +456,9 @@ type DetachSecurityPolicyAsyncResult struct {
 
 type LoginResult struct {
     /** プロジェクトトークン */
-	AccessToken         *core.String	`json:"accessToken"`
+	AccessToken         *string	`json:"accessToken"`
     /** Bearer */
-	TokenType         *core.String	`json:"tokenType"`
+	TokenType         *string	`json:"tokenType"`
     /** 有効期間(秒) */
 	ExpiresIn         *int32	`json:"expiresIn"`
 }

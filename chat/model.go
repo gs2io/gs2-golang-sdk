@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package chat
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** ゲームプレイヤーによるルームの作成を許可するか */
 	AllowCreateRoom *bool   `json:"allowCreateRoom"`
     /** メッセージを投稿したときに実行するスクリプト */
@@ -46,7 +42,7 @@ type Namespace struct {
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** None */
-	Status *core.String   `json:"status"`
+	Status *string   `json:"status"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -89,17 +85,17 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type Room struct {
     /** ルーム */
-	RoomId *core.String   `json:"roomId"`
+	RoomId *string   `json:"roomId"`
     /** ルーム名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ルームを作成したユーザID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** メタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** メッセージを投稿するために必要となるパスワード */
-	Password *core.String   `json:"password"`
+	Password *string   `json:"password"`
     /** ルームに参加可能なユーザIDリスト */
-	WhiteListUserIds *[]core.String   `json:"whiteListUserIds"`
+	WhiteListUserIds []string   `json:"whiteListUserIds"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** 最終更新日時 */
@@ -114,8 +110,8 @@ func (p *Room) ToDict() *map[string]interface{} {
     data["metadata"] = p.Metadata
     data["password"] = p.Password
     if p.WhiteListUserIds != nil {
-        var _whiteListUserIds []core.String
-        for _, item := range *p.WhiteListUserIds {
+        var _whiteListUserIds []string
+        for _, item := range p.WhiteListUserIds {
             _whiteListUserIds = append(_whiteListUserIds, item)
         }
         data["whiteListUserIds"] = &_whiteListUserIds
@@ -127,17 +123,17 @@ func (p *Room) ToDict() *map[string]interface{} {
 
 type Message struct {
     /** メッセージ */
-	MessageId *core.String   `json:"messageId"`
+	MessageId *string   `json:"messageId"`
     /** ルーム名 */
-	RoomName *core.String   `json:"roomName"`
+	RoomName *string   `json:"roomName"`
     /** メッセージ名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** 発言したユーザID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** メッセージの種類を分類したい時の種類番号 */
 	Category *int32   `json:"category"`
     /** メタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
 }
@@ -156,13 +152,13 @@ func (p *Message) ToDict() *map[string]interface{} {
 
 type Subscribe struct {
     /** 購読 */
-	SubscribeId *core.String   `json:"subscribeId"`
+	SubscribeId *string   `json:"subscribeId"`
     /** 購読するユーザID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 購読するルーム名 */
-	RoomName *core.String   `json:"roomName"`
+	RoomName *string   `json:"roomName"`
     /** 新着メッセージ通知を受け取るカテゴリリスト */
-	NotificationTypes *[]*NotificationType   `json:"notificationTypes"`
+	NotificationTypes []NotificationType   `json:"notificationTypes"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
 }
@@ -174,7 +170,7 @@ func (p *Subscribe) ToDict() *map[string]interface{} {
     data["roomName"] = p.RoomName
     if p.NotificationTypes != nil {
         var _notificationTypes []*map[string]interface {}
-        for _, item := range *p.NotificationTypes {
+        for _, item := range p.NotificationTypes {
             _notificationTypes = append(_notificationTypes, item.ToDict())
         }
         data["notificationTypes"] = &_notificationTypes
@@ -185,15 +181,15 @@ func (p *Subscribe) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -222,13 +218,13 @@ func (p *NotificationType) ToDict() *map[string]interface{} {
 
 type ScriptSetting struct {
     /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *core.String   `json:"triggerScriptId"`
+	TriggerScriptId *string   `json:"triggerScriptId"`
     /** 完了通知の通知先 */
-	DoneTriggerTargetType *core.String   `json:"doneTriggerTargetType"`
+	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
     /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *core.String   `json:"doneTriggerScriptId"`
+	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
     /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *core.String   `json:"doneTriggerQueueNamespaceId"`
+	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
 }
 
 func (p *ScriptSetting) ToDict() *map[string]interface{} {
@@ -242,11 +238,11 @@ func (p *ScriptSetting) ToDict() *map[string]interface{} {
 
 type NotificationSetting struct {
     /** プッシュ通知に使用する GS2-Gateway のネームスペース のGRN */
-	GatewayNamespaceId *core.String   `json:"gatewayNamespaceId"`
+	GatewayNamespaceId *string   `json:"gatewayNamespaceId"`
     /** モバイルプッシュ通知へ転送するか */
 	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
     /** モバイルプッシュ通知で使用するサウンドファイル名 */
-	Sound *core.String   `json:"sound"`
+	Sound *string   `json:"sound"`
 }
 
 func (p *NotificationSetting) ToDict() *map[string]interface{} {
@@ -259,7 +255,7 @@ func (p *NotificationSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

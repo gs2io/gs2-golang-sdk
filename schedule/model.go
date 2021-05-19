@@ -16,19 +16,15 @@ permissions and limitations under the License.
 
 package schedule
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type Namespace struct {
     /** ネームスペース */
-	NamespaceId *core.String   `json:"namespaceId"`
+	NamespaceId *string   `json:"namespaceId"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** ネームスペース名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ネームスペースの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** 作成日時 */
@@ -53,17 +49,17 @@ func (p *Namespace) ToDict() *map[string]interface{} {
 
 type EventMaster struct {
     /** イベントマスター */
-	EventId *core.String   `json:"eventId"`
+	EventId *string   `json:"eventId"`
     /** イベントの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** イベントマスターの説明 */
-	Description *core.String   `json:"description"`
+	Description *string   `json:"description"`
     /** イベントの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** イベント期間の種類 */
-	ScheduleType *core.String   `json:"scheduleType"`
+	ScheduleType *string   `json:"scheduleType"`
     /** 繰り返しの種類 */
-	RepeatType *core.String   `json:"repeatType"`
+	RepeatType *string   `json:"repeatType"`
     /** イベントの開始日時 */
 	AbsoluteBegin *int64   `json:"absoluteBegin"`
     /** イベントの終了日時 */
@@ -73,15 +69,15 @@ type EventMaster struct {
     /** イベントの繰り返し終了日 */
 	RepeatEndDayOfMonth *int32   `json:"repeatEndDayOfMonth"`
     /** イベントの繰り返し開始曜日 */
-	RepeatBeginDayOfWeek *core.String   `json:"repeatBeginDayOfWeek"`
+	RepeatBeginDayOfWeek *string   `json:"repeatBeginDayOfWeek"`
     /** イベントの繰り返し終了曜日 */
-	RepeatEndDayOfWeek *core.String   `json:"repeatEndDayOfWeek"`
+	RepeatEndDayOfWeek *string   `json:"repeatEndDayOfWeek"`
     /** イベントの繰り返し開始時間 */
 	RepeatBeginHour *int32   `json:"repeatBeginHour"`
     /** イベントの繰り返し終了時間 */
 	RepeatEndHour *int32   `json:"repeatEndHour"`
     /** イベントの開始トリガー名 */
-	RelativeTriggerName *core.String   `json:"relativeTriggerName"`
+	RelativeTriggerName *string   `json:"relativeTriggerName"`
     /** イベントの開催期間(秒) */
 	RelativeDuration *int32   `json:"relativeDuration"`
     /** 作成日時 */
@@ -115,11 +111,11 @@ func (p *EventMaster) ToDict() *map[string]interface{} {
 
 type Trigger struct {
     /** トリガー */
-	TriggerId *core.String   `json:"triggerId"`
+	TriggerId *string   `json:"triggerId"`
     /** トリガーの名前 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** ユーザーID */
-	UserId *core.String   `json:"userId"`
+	UserId *string   `json:"userId"`
     /** 作成日時 */
 	CreatedAt *int64   `json:"createdAt"`
     /** トリガーの有効期限 */
@@ -138,15 +134,15 @@ func (p *Trigger) ToDict() *map[string]interface{} {
 
 type Event struct {
     /** イベントマスター */
-	EventId *core.String   `json:"eventId"`
+	EventId *string   `json:"eventId"`
     /** イベントの種類名 */
-	Name *core.String   `json:"name"`
+	Name *string   `json:"name"`
     /** イベントの種類のメタデータ */
-	Metadata *core.String   `json:"metadata"`
+	Metadata *string   `json:"metadata"`
     /** イベント期間の種類 */
-	ScheduleType *core.String   `json:"scheduleType"`
+	ScheduleType *string   `json:"scheduleType"`
     /** 繰り返しの種類 */
-	RepeatType *core.String   `json:"repeatType"`
+	RepeatType *string   `json:"repeatType"`
     /** イベントの開始日時 */
 	AbsoluteBegin *int64   `json:"absoluteBegin"`
     /** イベントの終了日時 */
@@ -156,15 +152,15 @@ type Event struct {
     /** イベントの繰り返し終了日 */
 	RepeatEndDayOfMonth *int32   `json:"repeatEndDayOfMonth"`
     /** イベントの繰り返し開始曜日 */
-	RepeatBeginDayOfWeek *core.String   `json:"repeatBeginDayOfWeek"`
+	RepeatBeginDayOfWeek *string   `json:"repeatBeginDayOfWeek"`
     /** イベントの繰り返し終了曜日 */
-	RepeatEndDayOfWeek *core.String   `json:"repeatEndDayOfWeek"`
+	RepeatEndDayOfWeek *string   `json:"repeatEndDayOfWeek"`
     /** イベントの繰り返し開始時間 */
 	RepeatBeginHour *int32   `json:"repeatBeginHour"`
     /** イベントの繰り返し終了時間 */
 	RepeatEndHour *int32   `json:"repeatEndHour"`
     /** イベントの開始トリガー */
-	RelativeTriggerName *core.String   `json:"relativeTriggerName"`
+	RelativeTriggerName *string   `json:"relativeTriggerName"`
     /** イベントの開催期間(秒) */
 	RelativeDuration *int32   `json:"relativeDuration"`
 }
@@ -191,9 +187,9 @@ func (p *Event) ToDict() *map[string]interface{} {
 
 type CurrentEventMaster struct {
     /** ネームスペース名 */
-	NamespaceName *core.String   `json:"namespaceName"`
+	NamespaceName *string   `json:"namespaceName"`
     /** マスターデータ */
-	Settings *core.String   `json:"settings"`
+	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentEventMaster) ToDict() *map[string]interface{} {
@@ -205,15 +201,15 @@ func (p *CurrentEventMaster) ToDict() *map[string]interface{} {
 
 type ResponseCache struct {
     /** None */
-	Region *core.String   `json:"region"`
+	Region *string   `json:"region"`
     /** オーナーID */
-	OwnerId *core.String   `json:"ownerId"`
+	OwnerId *string   `json:"ownerId"`
     /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *core.String   `json:"responseCacheId"`
+	ResponseCacheId *string   `json:"responseCacheId"`
     /** None */
-	RequestHash *core.String   `json:"requestHash"`
+	RequestHash *string   `json:"requestHash"`
     /** APIの応答内容 */
-	Result *core.String   `json:"result"`
+	Result *string   `json:"result"`
 }
 
 func (p *ResponseCache) ToDict() *map[string]interface{} {
@@ -228,19 +224,19 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *core.String   `json:"gitHubApiKeyId"`
+	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
     /** リポジトリ名 */
-	RepositoryName *core.String   `json:"repositoryName"`
+	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
-	SourcePath *core.String   `json:"sourcePath"`
+	SourcePath *string   `json:"sourcePath"`
     /** コードの取得元 */
-	ReferenceType *core.String   `json:"referenceType"`
+	ReferenceType *string   `json:"referenceType"`
     /** コミットハッシュ */
-	CommitHash *core.String   `json:"commitHash"`
+	CommitHash *string   `json:"commitHash"`
     /** ブランチ名 */
-	BranchName *core.String   `json:"branchName"`
+	BranchName *string   `json:"branchName"`
     /** タグ名 */
-	TagName *core.String   `json:"tagName"`
+	TagName *string   `json:"tagName"`
 }
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
@@ -257,7 +253,7 @@ func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
 
 type LogSetting struct {
     /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *core.String   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
 }
 
 func (p *LogSetting) ToDict() *map[string]interface{} {

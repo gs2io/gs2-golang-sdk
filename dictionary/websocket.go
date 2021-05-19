@@ -1181,7 +1181,7 @@ func (p Gs2DictionaryWebSocketClient) DescribeEntriesAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.describeEntriesAsyncHandler(
@@ -1351,8 +1351,8 @@ func (p Gs2DictionaryWebSocketClient) AddEntriesByUserIdAsync(
         bodies["userId"] = *request.UserId
     }
     if request.EntryModelNames != nil {
-        var _entryModelNames []core.String
-        for _, item := range *request.EntryModelNames {
+        var _entryModelNames []string
+        for _, item := range request.EntryModelNames {
             _entryModelNames = append(_entryModelNames, item)
         }
         bodies["entryModelNames"] = _entryModelNames
@@ -1443,7 +1443,7 @@ func (p Gs2DictionaryWebSocketClient) GetEntryAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getEntryAsyncHandler(
@@ -1616,7 +1616,7 @@ func (p Gs2DictionaryWebSocketClient) GetEntryWithSignatureAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
-        bodies["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
 
 	go p.getEntryWithSignatureAsyncHandler(

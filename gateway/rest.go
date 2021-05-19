@@ -255,7 +255,7 @@ func (p Gs2GatewayRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -339,7 +339,7 @@ func (p Gs2GatewayRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -423,7 +423,7 @@ func (p Gs2GatewayRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -519,7 +519,7 @@ func (p Gs2GatewayRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -603,16 +603,19 @@ func (p Gs2GatewayRestClient) DescribeWebSocketSessionsAsync(
 	callback chan<- DescribeWebSocketSessionsAsyncResult,
 ) {
 	path := "/{namespaceName}/session/user/me"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
     headers := p.CreateAuthorizedHeaders()
@@ -627,9 +630,9 @@ func (p Gs2GatewayRestClient) DescribeWebSocketSessionsAsync(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
-			Method:       core.Post,
+			Method:       core.Get,
 			Headers:      headers,
-			Bodies: bodies,
+			QueryStrings: queryStrings,
 		},
 		callback,
 	)
@@ -693,21 +696,24 @@ func (p Gs2GatewayRestClient) DescribeWebSocketSessionsByUserIdAsync(
 	callback chan<- DescribeWebSocketSessionsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/session/user/{userId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
     headers := p.CreateAuthorizedHeaders()
@@ -719,9 +725,9 @@ func (p Gs2GatewayRestClient) DescribeWebSocketSessionsByUserIdAsync(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
-			Method:       core.Post,
+			Method:       core.Get,
 			Headers:      headers,
-			Bodies: bodies,
+			QueryStrings: queryStrings,
 		},
 		callback,
 	)
@@ -785,7 +791,7 @@ func (p Gs2GatewayRestClient) SetUserIdAsync(
 	callback chan<- SetUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/session/user/me/user"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -878,12 +884,12 @@ func (p Gs2GatewayRestClient) SetUserIdByUserIdAsync(
 	callback chan<- SetUserIdByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/session/user/{userId}/user"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -973,7 +979,7 @@ func (p Gs2GatewayRestClient) GetWebSocketSessionAsync(
 	callback chan<- GetWebSocketSessionAsyncResult,
 ) {
 	path := "/{namespaceName}/session"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1057,12 +1063,12 @@ func (p Gs2GatewayRestClient) GetWebSocketSessionByConnectionIdAsync(
 	callback chan<- GetWebSocketSessionByConnectionIdAsyncResult,
 ) {
 	path := "/{namespaceName}/session/{connectionId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.ConnectionId != nil {
+    if request.ConnectionId != nil && *request.ConnectionId != ""  {
         path = strings.ReplaceAll(path, "{connectionId}", core.ToString(*request.ConnectionId))
     } else {
         path = strings.ReplaceAll(path, "{connectionId}", "null")
@@ -1146,12 +1152,12 @@ func (p Gs2GatewayRestClient) SendNotificationAsync(
 	callback chan<- SendNotificationAsyncResult,
 ) {
 	path := "/{namespaceName}/session/user/{userId}/notification"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1250,7 +1256,7 @@ func (p Gs2GatewayRestClient) SetFirebaseTokenAsync(
 	callback chan<- SetFirebaseTokenAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/firebase/token"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1343,12 +1349,12 @@ func (p Gs2GatewayRestClient) SetFirebaseTokenByUserIdAsync(
 	callback chan<- SetFirebaseTokenByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/firebase/token"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1438,7 +1444,7 @@ func (p Gs2GatewayRestClient) GetFirebaseTokenAsync(
 	callback chan<- GetFirebaseTokenAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/firebase/token"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1525,12 +1531,12 @@ func (p Gs2GatewayRestClient) GetFirebaseTokenByUserIdAsync(
 	callback chan<- GetFirebaseTokenByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/firebase/token"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1614,7 +1620,7 @@ func (p Gs2GatewayRestClient) DeleteFirebaseTokenAsync(
 	callback chan<- DeleteFirebaseTokenAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/firebase/token"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -1701,12 +1707,12 @@ func (p Gs2GatewayRestClient) DeleteFirebaseTokenByUserIdAsync(
 	callback chan<- DeleteFirebaseTokenByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/firebase/token"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1790,12 +1796,12 @@ func (p Gs2GatewayRestClient) SendMobileNotificationByUserIdAsync(
 	callback chan<- SendMobileNotificationByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/firebase/token/notification"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")

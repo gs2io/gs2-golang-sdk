@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package inventory
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type DescribeInventoryModelMastersResult struct {
     /** インベントリモデルマスターのリスト */
 	Items         []InventoryModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeInventoryModelMastersResult) ToDict() *map[string]interface{} {
@@ -280,7 +276,7 @@ type DescribeItemModelMastersResult struct {
     /** アイテムモデルマスターのリスト */
 	Items         []ItemModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeItemModelMastersResult) ToDict() *map[string]interface{} {
@@ -491,7 +487,7 @@ type DescribeInventoriesResult struct {
     /** インベントリのリスト */
 	Items         []Inventory	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeInventoriesResult) ToDict() *map[string]interface{} {
@@ -518,7 +514,7 @@ type DescribeInventoriesByUserIdResult struct {
     /** インベントリのリスト */
 	Items         []Inventory	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeInventoriesByUserIdResult) ToDict() *map[string]interface{} {
@@ -671,7 +667,7 @@ type DescribeItemSetsResult struct {
     /** 有効期限ごとのアイテム所持数量のリスト */
 	Items         []ItemSet	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeItemSetsResult) ToDict() *map[string]interface{} {
@@ -698,7 +694,7 @@ type DescribeItemSetsByUserIdResult struct {
     /** 有効期限ごとのアイテム所持数量のリスト */
 	Items         []ItemSet	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeItemSetsByUserIdResult) ToDict() *map[string]interface{} {
@@ -793,9 +789,9 @@ type GetItemWithSignatureResult struct {
     /** インベントリ */
 	Inventory         *Inventory	`json:"inventory"`
     /** 署名対象のアイテムセット情報 */
-	Body         *core.String	`json:"body"`
+	Body         *string	`json:"body"`
     /** 署名 */
-	Signature         *core.String	`json:"signature"`
+	Signature         *string	`json:"signature"`
 }
 
 func (p *GetItemWithSignatureResult) ToDict() *map[string]interface{} {
@@ -835,9 +831,9 @@ type GetItemWithSignatureByUserIdResult struct {
     /** インベントリ */
 	Inventory         *Inventory	`json:"inventory"`
     /** 署名対象のアイテムセット情報 */
-	Body         *core.String	`json:"body"`
+	Body         *string	`json:"body"`
     /** 署名 */
-	Signature         *core.String	`json:"signature"`
+	Signature         *string	`json:"signature"`
 }
 
 func (p *GetItemWithSignatureByUserIdResult) ToDict() *map[string]interface{} {
@@ -972,7 +968,7 @@ type ConsumeItemSetByUserIdAsyncResult struct {
 
 type DescribeReferenceOfResult struct {
     /** この所持品の参照元リスト */
-	Items         []core.String	`json:"items"`
+	Items         []string	`json:"items"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -984,7 +980,7 @@ type DescribeReferenceOfResult struct {
 func (p *DescribeReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Items {
 			items = append(items, item)
 		}
@@ -1009,7 +1005,7 @@ type DescribeReferenceOfAsyncResult struct {
 
 type DescribeReferenceOfByUserIdResult struct {
     /** この所持品の参照元リスト */
-	Items         []core.String	`json:"items"`
+	Items         []string	`json:"items"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1021,7 +1017,7 @@ type DescribeReferenceOfByUserIdResult struct {
 func (p *DescribeReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Items != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Items {
 			items = append(items, item)
 		}
@@ -1046,7 +1042,7 @@ type DescribeReferenceOfByUserIdAsyncResult struct {
 
 type GetReferenceOfResult struct {
     /** この所持品の参照元リスト */
-	Item         []core.String	`json:"item"`
+	Item         []string	`json:"item"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1058,7 +1054,7 @@ type GetReferenceOfResult struct {
 func (p *GetReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Item {
 			items = append(items, item)
 		}
@@ -1083,7 +1079,7 @@ type GetReferenceOfAsyncResult struct {
 
 type GetReferenceOfByUserIdResult struct {
     /** この所持品の参照元リスト */
-	Item         []core.String	`json:"item"`
+	Item         []string	`json:"item"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1095,7 +1091,7 @@ type GetReferenceOfByUserIdResult struct {
 func (p *GetReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Item {
 			items = append(items, item)
 		}
@@ -1120,7 +1116,7 @@ type GetReferenceOfByUserIdAsyncResult struct {
 
 type VerifyReferenceOfResult struct {
     /** この所持品の参照元リスト */
-	Item         []core.String	`json:"item"`
+	Item         []string	`json:"item"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1132,7 +1128,7 @@ type VerifyReferenceOfResult struct {
 func (p *VerifyReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Item {
 			items = append(items, item)
 		}
@@ -1157,7 +1153,7 @@ type VerifyReferenceOfAsyncResult struct {
 
 type VerifyReferenceOfByUserIdResult struct {
     /** この所持品の参照元リスト */
-	Item         []core.String	`json:"item"`
+	Item         []string	`json:"item"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1169,7 +1165,7 @@ type VerifyReferenceOfByUserIdResult struct {
 func (p *VerifyReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Item {
 			items = append(items, item)
 		}
@@ -1194,7 +1190,7 @@ type VerifyReferenceOfByUserIdAsyncResult struct {
 
 type AddReferenceOfResult struct {
     /** この所持品の参照元リスト */
-	Item         []core.String	`json:"item"`
+	Item         []string	`json:"item"`
     /** 参照元追加後の有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1206,7 +1202,7 @@ type AddReferenceOfResult struct {
 func (p *AddReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Item {
 			items = append(items, item)
 		}
@@ -1231,7 +1227,7 @@ type AddReferenceOfAsyncResult struct {
 
 type AddReferenceOfByUserIdResult struct {
     /** この所持品の参照元リスト */
-	Item         []core.String	`json:"item"`
+	Item         []string	`json:"item"`
     /** 参照元追加後の有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1243,7 +1239,7 @@ type AddReferenceOfByUserIdResult struct {
 func (p *AddReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Item {
 			items = append(items, item)
 		}
@@ -1268,7 +1264,7 @@ type AddReferenceOfByUserIdAsyncResult struct {
 
 type DeleteReferenceOfResult struct {
     /** この所持品の参照元リスト */
-	Item         []core.String	`json:"item"`
+	Item         []string	`json:"item"`
     /** 参照元削除後の有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1280,7 +1276,7 @@ type DeleteReferenceOfResult struct {
 func (p *DeleteReferenceOfResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Item {
 			items = append(items, item)
 		}
@@ -1305,7 +1301,7 @@ type DeleteReferenceOfAsyncResult struct {
 
 type DeleteReferenceOfByUserIdResult struct {
     /** この所持品の参照元リスト */
-	Item         []core.String	`json:"item"`
+	Item         []string	`json:"item"`
     /** 参照元削除後の有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1317,7 +1313,7 @@ type DeleteReferenceOfByUserIdResult struct {
 func (p *DeleteReferenceOfByUserIdResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Item {
 			items = append(items, item)
 		}
@@ -1411,7 +1407,7 @@ type AcquireItemSetByStampSheetAsyncResult struct {
 
 type AddReferenceOfItemSetByStampSheetResult struct {
     /** この所持品の参照元リスト */
-	Item         []core.String	`json:"item"`
+	Item         []string	`json:"item"`
     /** 参照元追加後の有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1423,7 +1419,7 @@ type AddReferenceOfItemSetByStampSheetResult struct {
 func (p *AddReferenceOfItemSetByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Item {
 			items = append(items, item)
 		}
@@ -1448,7 +1444,7 @@ type AddReferenceOfItemSetByStampSheetAsyncResult struct {
 
 type DeleteReferenceOfItemSetByStampSheetResult struct {
     /** この所持品の参照元リスト */
-	Item         []core.String	`json:"item"`
+	Item         []string	`json:"item"`
     /** 参照元削除後の有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1460,7 +1456,7 @@ type DeleteReferenceOfItemSetByStampSheetResult struct {
 func (p *DeleteReferenceOfItemSetByStampSheetResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Item {
 			items = append(items, item)
 		}
@@ -1491,7 +1487,7 @@ type ConsumeItemSetByStampTaskResult struct {
     /** インベントリ */
 	Inventory         *Inventory	`json:"inventory"`
     /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *core.String	`json:"newContextStack"`
+	NewContextStack         *string	`json:"newContextStack"`
 }
 
 func (p *ConsumeItemSetByStampTaskResult) ToDict() *map[string]interface{} {
@@ -1522,7 +1518,7 @@ type ConsumeItemSetByStampTaskAsyncResult struct {
 
 type VerifyReferenceOfByStampTaskResult struct {
     /** この所持品の参照元のリスト */
-	Item         []core.String	`json:"item"`
+	Item         []string	`json:"item"`
     /** 有効期限ごとのアイテム所持数量 */
 	ItemSet         *ItemSet	`json:"itemSet"`
     /** アイテムモデル */
@@ -1530,13 +1526,13 @@ type VerifyReferenceOfByStampTaskResult struct {
     /** インベントリ */
 	Inventory         *Inventory	`json:"inventory"`
     /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *core.String	`json:"newContextStack"`
+	NewContextStack         *string	`json:"newContextStack"`
 }
 
 func (p *VerifyReferenceOfByStampTaskResult) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
     if p.Item != nil {
-    	items := make([]core.String, 0)
+    	items := make([]string, 0)
     	for _, item := range p.Item {
 			items = append(items, item)
 		}

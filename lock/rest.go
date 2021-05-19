@@ -252,7 +252,7 @@ func (p Gs2LockRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -336,7 +336,7 @@ func (p Gs2LockRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -420,7 +420,7 @@ func (p Gs2LockRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -513,7 +513,7 @@ func (p Gs2LockRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -597,7 +597,7 @@ func (p Gs2LockRestClient) DescribeMutexesAsync(
 	callback chan<- DescribeMutexesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/mutex"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
@@ -690,12 +690,12 @@ func (p Gs2LockRestClient) DescribeMutexesByUserIdAsync(
 	callback chan<- DescribeMutexesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mutex"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -785,12 +785,12 @@ func (p Gs2LockRestClient) LockAsync(
 	callback chan<- LockAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/mutex/{propertyId}/lock"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")
@@ -886,17 +886,17 @@ func (p Gs2LockRestClient) LockByUserIdAsync(
 	callback chan<- LockByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mutex/{propertyId}/lock"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -989,12 +989,12 @@ func (p Gs2LockRestClient) UnlockAsync(
 	callback chan<- UnlockAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/mutex/{propertyId}/unlock"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")
@@ -1087,17 +1087,17 @@ func (p Gs2LockRestClient) UnlockByUserIdAsync(
 	callback chan<- UnlockByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mutex/{propertyId}/unlock"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1187,12 +1187,12 @@ func (p Gs2LockRestClient) GetMutexAsync(
 	callback chan<- GetMutexAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/mutex/{propertyId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")
@@ -1279,17 +1279,17 @@ func (p Gs2LockRestClient) GetMutexByUserIdAsync(
 	callback chan<- GetMutexByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mutex/{propertyId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
@@ -1373,17 +1373,17 @@ func (p Gs2LockRestClient) DeleteMutexByUserIdAsync(
 	callback chan<- DeleteMutexByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mutex/{propertyId}"
-    if request.NamespaceName != nil {
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
     }
-    if request.PropertyId != nil {
+    if request.PropertyId != nil && *request.PropertyId != ""  {
         path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
     } else {
         path = strings.ReplaceAll(path, "{propertyId}", "null")

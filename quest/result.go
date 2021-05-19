@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package quest
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** クエストを分類するカテゴリーのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -141,7 +137,7 @@ type DescribeQuestGroupModelMastersResult struct {
     /** クエストグループマスターのリスト */
 	Items         []QuestGroupModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeQuestGroupModelMastersResult) ToDict() *map[string]interface{} {
@@ -240,7 +236,7 @@ type DescribeQuestModelMastersResult struct {
     /** クエストモデルマスターのリスト */
 	Items         []QuestModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeQuestModelMastersResult) ToDict() *map[string]interface{} {
@@ -411,7 +407,7 @@ type DescribeProgressesByUserIdResult struct {
     /** クエスト挑戦のリスト */
 	Items         []Progress	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeProgressesByUserIdResult) ToDict() *map[string]interface{} {
@@ -510,9 +506,9 @@ type GetProgressByUserIdAsyncResult struct {
 
 type StartResult struct {
     /** クエストの開始処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *StartResult) ToDict() *map[string]interface{} {
@@ -533,9 +529,9 @@ type StartAsyncResult struct {
 
 type StartByUserIdResult struct {
     /** クエストの開始処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *StartByUserIdResult) ToDict() *map[string]interface{} {
@@ -558,9 +554,9 @@ type EndResult struct {
     /** クエスト挑戦 */
 	Item         *Progress	`json:"item"`
     /** 報酬付与処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *EndResult) ToDict() *map[string]interface{} {
@@ -586,9 +582,9 @@ type EndByUserIdResult struct {
     /** クエスト挑戦 */
 	Item         *Progress	`json:"item"`
     /** 報酬付与処理の実行に使用するスタンプシート */
-	StampSheet         *core.String	`json:"stampSheet"`
+	StampSheet         *string	`json:"stampSheet"`
     /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *core.String	`json:"stampSheetEncryptionKeyId"`
+	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
 }
 
 func (p *EndByUserIdResult) ToDict() *map[string]interface{} {
@@ -668,7 +664,7 @@ type DeleteProgressByStampTaskResult struct {
     /** クエスト挑戦 */
 	Item         *Progress	`json:"item"`
     /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *core.String	`json:"newContextStack"`
+	NewContextStack         *string	`json:"newContextStack"`
 }
 
 func (p *DeleteProgressByStampTaskResult) ToDict() *map[string]interface{} {
@@ -691,7 +687,7 @@ type DescribeCompletedQuestListsResult struct {
     /** クエスト進行のリスト */
 	Items         []CompletedQuestList	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeCompletedQuestListsResult) ToDict() *map[string]interface{} {
@@ -718,7 +714,7 @@ type DescribeCompletedQuestListsByUserIdResult struct {
     /** クエスト進行のリスト */
 	Items         []CompletedQuestList	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeCompletedQuestListsByUserIdResult) ToDict() *map[string]interface{} {

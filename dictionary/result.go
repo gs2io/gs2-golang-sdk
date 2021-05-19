@@ -16,15 +16,11 @@ permissions and limitations under the License.
 
 package dictionary
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
-
 type DescribeNamespacesResult struct {
     /** ネームスペースのリスト */
 	Items         []Namespace	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
@@ -67,7 +63,7 @@ type CreateNamespaceAsyncResult struct {
 
 type GetNamespaceStatusResult struct {
     /** None */
-	Status         *core.String	`json:"status"`
+	Status         *string	`json:"status"`
 }
 
 func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
@@ -181,7 +177,7 @@ type DescribeEntryModelMastersResult struct {
     /** エントリーモデルマスターのリスト */
 	Items         []EntryModelMaster	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeEntryModelMastersResult) ToDict() *map[string]interface{} {
@@ -280,7 +276,7 @@ type DescribeEntriesResult struct {
     /** エントリーのリスト */
 	Items         []Entry	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeEntriesResult) ToDict() *map[string]interface{} {
@@ -307,7 +303,7 @@ type DescribeEntriesByUserIdResult struct {
     /** エントリーのリスト */
 	Items         []Entry	`json:"items"`
     /** リストの続きを取得するためのページトークン */
-	NextPageToken         *core.String	`json:"nextPageToken"`
+	NextPageToken         *string	`json:"nextPageToken"`
 }
 
 func (p *DescribeEntriesByUserIdResult) ToDict() *map[string]interface{} {
@@ -392,9 +388,9 @@ type GetEntryWithSignatureResult struct {
     /** エントリー */
 	Item         *Entry	`json:"item"`
     /** 署名対象のエントリー情報 */
-	Body         *core.String	`json:"body"`
+	Body         *string	`json:"body"`
     /** 署名 */
-	Signature         *core.String	`json:"signature"`
+	Signature         *string	`json:"signature"`
 }
 
 func (p *GetEntryWithSignatureResult) ToDict() *map[string]interface{} {
@@ -420,9 +416,9 @@ type GetEntryWithSignatureByUserIdResult struct {
     /** エントリー */
 	Item         *Entry	`json:"item"`
     /** 署名対象のエントリー情報 */
-	Body         *core.String	`json:"body"`
+	Body         *string	`json:"body"`
     /** 署名 */
-	Signature         *core.String	`json:"signature"`
+	Signature         *string	`json:"signature"`
 }
 
 func (p *GetEntryWithSignatureByUserIdResult) ToDict() *map[string]interface{} {
