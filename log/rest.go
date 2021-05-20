@@ -656,6 +656,15 @@ func (p Gs2LogRestClient) QueryAccessLogAsync(
 	if request.UserId != nil {
 		queryStrings["userId"] = core.ToString(*request.UserId)
 	}
+	if request.Begin != nil {
+		queryStrings["begin"] = core.ToString(*request.Begin)
+	}
+	if request.End != nil {
+		queryStrings["end"] = core.ToString(*request.End)
+	}
+	if request.LongTerm != nil {
+		queryStrings["longTerm"] = core.ToString(*request.LongTerm)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -754,6 +763,15 @@ func (p Gs2LogRestClient) CountAccessLogAsync(
 	}
 	if request.UserId != nil {
 		queryStrings["userId"] = core.ToString(*request.UserId)
+	}
+	if request.Begin != nil {
+		queryStrings["begin"] = core.ToString(*request.Begin)
+	}
+	if request.End != nil {
+		queryStrings["end"] = core.ToString(*request.End)
+	}
+	if request.LongTerm != nil {
+		queryStrings["longTerm"] = core.ToString(*request.LongTerm)
 	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
@@ -857,6 +875,15 @@ func (p Gs2LogRestClient) QueryIssueStampSheetLogAsync(
 	if request.Action != nil {
 		queryStrings["action"] = core.ToString(*request.Action)
 	}
+	if request.Begin != nil {
+		queryStrings["begin"] = core.ToString(*request.Begin)
+	}
+	if request.End != nil {
+		queryStrings["end"] = core.ToString(*request.End)
+	}
+	if request.LongTerm != nil {
+		queryStrings["longTerm"] = core.ToString(*request.LongTerm)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -958,6 +985,15 @@ func (p Gs2LogRestClient) CountIssueStampSheetLogAsync(
 	}
 	if request.Action != nil {
 		queryStrings["action"] = core.ToString(*request.Action)
+	}
+	if request.Begin != nil {
+		queryStrings["begin"] = core.ToString(*request.Begin)
+	}
+	if request.End != nil {
+		queryStrings["end"] = core.ToString(*request.End)
+	}
+	if request.LongTerm != nil {
+		queryStrings["longTerm"] = core.ToString(*request.LongTerm)
 	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
@@ -1061,6 +1097,15 @@ func (p Gs2LogRestClient) QueryExecuteStampSheetLogAsync(
 	if request.Action != nil {
 		queryStrings["action"] = core.ToString(*request.Action)
 	}
+	if request.Begin != nil {
+		queryStrings["begin"] = core.ToString(*request.Begin)
+	}
+	if request.End != nil {
+		queryStrings["end"] = core.ToString(*request.End)
+	}
+	if request.LongTerm != nil {
+		queryStrings["longTerm"] = core.ToString(*request.LongTerm)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -1162,6 +1207,15 @@ func (p Gs2LogRestClient) CountExecuteStampSheetLogAsync(
 	}
 	if request.Action != nil {
 		queryStrings["action"] = core.ToString(*request.Action)
+	}
+	if request.Begin != nil {
+		queryStrings["begin"] = core.ToString(*request.Begin)
+	}
+	if request.End != nil {
+		queryStrings["end"] = core.ToString(*request.End)
+	}
+	if request.LongTerm != nil {
+		queryStrings["longTerm"] = core.ToString(*request.LongTerm)
 	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
@@ -1265,6 +1319,15 @@ func (p Gs2LogRestClient) QueryExecuteStampTaskLogAsync(
 	if request.Action != nil {
 		queryStrings["action"] = core.ToString(*request.Action)
 	}
+	if request.Begin != nil {
+		queryStrings["begin"] = core.ToString(*request.Begin)
+	}
+	if request.End != nil {
+		queryStrings["end"] = core.ToString(*request.End)
+	}
+	if request.LongTerm != nil {
+		queryStrings["longTerm"] = core.ToString(*request.LongTerm)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -1366,6 +1429,15 @@ func (p Gs2LogRestClient) CountExecuteStampTaskLogAsync(
 	}
 	if request.Action != nil {
 		queryStrings["action"] = core.ToString(*request.Action)
+	}
+	if request.Begin != nil {
+		queryStrings["begin"] = core.ToString(*request.Begin)
+	}
+	if request.End != nil {
+		queryStrings["end"] = core.ToString(*request.End)
+	}
+	if request.LongTerm != nil {
+		queryStrings["longTerm"] = core.ToString(*request.LongTerm)
 	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)

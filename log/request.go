@@ -82,6 +82,9 @@ type QueryAccessLogRequest struct {
 	Service *string	`json:"service"`
 	Method *string	`json:"method"`
 	UserId *string	`json:"userId"`
+	Begin *int64	`json:"begin"`
+	End *int64	`json:"end"`
+	LongTerm *bool	`json:"longTerm"`
 	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
@@ -91,9 +94,12 @@ type CountAccessLogRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
 	NamespaceName *string	`json:"namespaceName"`
-	Service *bool	`json:"service"`
-	Method *bool	`json:"method"`
-	UserId *bool	`json:"userId"`
+	Service *string	`json:"service"`
+	Method *string	`json:"method"`
+	UserId *string	`json:"userId"`
+	Begin *int64	`json:"begin"`
+	End *int64	`json:"end"`
+	LongTerm *bool	`json:"longTerm"`
 	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
@@ -107,6 +113,9 @@ type QueryIssueStampSheetLogRequest struct {
 	Method *string	`json:"method"`
 	UserId *string	`json:"userId"`
 	Action *string	`json:"action"`
+	Begin *int64	`json:"begin"`
+	End *int64	`json:"end"`
+	LongTerm *bool	`json:"longTerm"`
 	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
@@ -116,10 +125,13 @@ type CountIssueStampSheetLogRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
 	NamespaceName *string	`json:"namespaceName"`
-	Service *bool	`json:"service"`
-	Method *bool	`json:"method"`
-	UserId *bool	`json:"userId"`
-	Action *bool	`json:"action"`
+	Service *string	`json:"service"`
+	Method *string	`json:"method"`
+	UserId *string	`json:"userId"`
+	Action *string	`json:"action"`
+	Begin *int64	`json:"begin"`
+	End *int64	`json:"end"`
+	LongTerm *bool	`json:"longTerm"`
 	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
@@ -133,6 +145,9 @@ type QueryExecuteStampSheetLogRequest struct {
 	Method *string	`json:"method"`
 	UserId *string	`json:"userId"`
 	Action *string	`json:"action"`
+	Begin *int64	`json:"begin"`
+	End *int64	`json:"end"`
+	LongTerm *bool	`json:"longTerm"`
 	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
@@ -142,10 +157,13 @@ type CountExecuteStampSheetLogRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
 	NamespaceName *string	`json:"namespaceName"`
-	Service *bool	`json:"service"`
-	Method *bool	`json:"method"`
-	UserId *bool	`json:"userId"`
-	Action *bool	`json:"action"`
+	Service *string	`json:"service"`
+	Method *string	`json:"method"`
+	UserId *string	`json:"userId"`
+	Action *string	`json:"action"`
+	Begin *int64	`json:"begin"`
+	End *int64	`json:"end"`
+	LongTerm *bool	`json:"longTerm"`
 	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
@@ -159,6 +177,9 @@ type QueryExecuteStampTaskLogRequest struct {
 	Method *string	`json:"method"`
 	UserId *string	`json:"userId"`
 	Action *string	`json:"action"`
+	Begin *int64	`json:"begin"`
+	End *int64	`json:"end"`
+	LongTerm *bool	`json:"longTerm"`
 	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`
@@ -168,10 +189,13 @@ type CountExecuteStampTaskLogRequest struct {
 	RequestId    *core.RequestId	`json:"requestId"`
 	ContextStack *core.ContextStack	`json:"contextStack"`
 	NamespaceName *string	`json:"namespaceName"`
-	Service *bool	`json:"service"`
-	Method *bool	`json:"method"`
-	UserId *bool	`json:"userId"`
-	Action *bool	`json:"action"`
+	Service *string	`json:"service"`
+	Method *string	`json:"method"`
+	UserId *string	`json:"userId"`
+	Action *string	`json:"action"`
+	Begin *int64	`json:"begin"`
+	End *int64	`json:"end"`
+	LongTerm *bool	`json:"longTerm"`
 	PageToken *string	`json:"pageToken"`
 	Limit *int64	`json:"limit"`
 	XGs2DuplicationAvoider *string	`json:"xGs2DuplicationAvoider"`

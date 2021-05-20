@@ -624,6 +624,15 @@ func (p Gs2LogWebSocketClient) QueryAccessLogAsync(
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
     }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -709,14 +718,23 @@ func (p Gs2LogWebSocketClient) CountAccessLogAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.Service != nil {
+    if request.Service != nil && *request.Service != "" {
         bodies["service"] = *request.Service
     }
-    if request.Method != nil {
+    if request.Method != nil && *request.Method != "" {
         bodies["method"] = *request.Method
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
+    }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
     }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
@@ -815,6 +833,15 @@ func (p Gs2LogWebSocketClient) QueryIssueStampSheetLogAsync(
     if request.Action != nil && *request.Action != "" {
         bodies["action"] = *request.Action
     }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -900,17 +927,26 @@ func (p Gs2LogWebSocketClient) CountIssueStampSheetLogAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.Service != nil {
+    if request.Service != nil && *request.Service != "" {
         bodies["service"] = *request.Service
     }
-    if request.Method != nil {
+    if request.Method != nil && *request.Method != "" {
         bodies["method"] = *request.Method
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
     }
-    if request.Action != nil {
+    if request.Action != nil && *request.Action != "" {
         bodies["action"] = *request.Action
+    }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
     }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
@@ -1009,6 +1045,15 @@ func (p Gs2LogWebSocketClient) QueryExecuteStampSheetLogAsync(
     if request.Action != nil && *request.Action != "" {
         bodies["action"] = *request.Action
     }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -1094,17 +1139,26 @@ func (p Gs2LogWebSocketClient) CountExecuteStampSheetLogAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.Service != nil {
+    if request.Service != nil && *request.Service != "" {
         bodies["service"] = *request.Service
     }
-    if request.Method != nil {
+    if request.Method != nil && *request.Method != "" {
         bodies["method"] = *request.Method
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
     }
-    if request.Action != nil {
+    if request.Action != nil && *request.Action != "" {
         bodies["action"] = *request.Action
+    }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
     }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
@@ -1203,6 +1257,15 @@ func (p Gs2LogWebSocketClient) QueryExecuteStampTaskLogAsync(
     if request.Action != nil && *request.Action != "" {
         bodies["action"] = *request.Action
     }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -1288,17 +1351,26 @@ func (p Gs2LogWebSocketClient) CountExecuteStampTaskLogAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.Service != nil {
+    if request.Service != nil && *request.Service != "" {
         bodies["service"] = *request.Service
     }
-    if request.Method != nil {
+    if request.Method != nil && *request.Method != "" {
         bodies["method"] = *request.Method
     }
-    if request.UserId != nil {
+    if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
     }
-    if request.Action != nil {
+    if request.Action != nil && *request.Action != "" {
         bodies["action"] = *request.Action
+    }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
     }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
