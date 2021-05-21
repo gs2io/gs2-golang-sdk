@@ -28,7 +28,7 @@ type Namespace struct {
     /** スタミナオーバーフロー上限に当たって回復できなかったスタミナを通知する スクリプト のGRN */
 	OverflowTriggerScriptId *string   `json:"overflowTriggerScriptId"`
     /** スタミナオーバーフロー上限に当たって回復できなかったスタミナを追加する ネームスペース のGRN */
-	OverflowTriggerNamespaceId *string   `json:"overflowTriggerNamespaceId"`
+	OverflowTriggerQueueId *string   `json:"overflowTriggerQueueId"`
     /** ログの出力設定 */
 	LogSetting *LogSetting   `json:"logSetting"`
     /** 作成日時 */
@@ -44,7 +44,7 @@ func (p *Namespace) ToDict() *map[string]interface{} {
     data["name"] = p.Name
     data["description"] = p.Description
     data["overflowTriggerScriptId"] = p.OverflowTriggerScriptId
-    data["overflowTriggerNamespaceId"] = p.OverflowTriggerNamespaceId
+    data["overflowTriggerQueueId"] = p.OverflowTriggerQueueId
     if p.LogSetting != nil {
         data["logSetting"] = *p.LogSetting.ToDict()
     }
@@ -218,15 +218,15 @@ func (p *RecoverValueTableMaster) ToDict() *map[string]interface{} {
 }
 
 type CurrentStaminaMaster struct {
-    /** ネームスペース名 */
-	NamespaceName *string   `json:"namespaceName"`
+    /** ネームスペース */
+	NamespaceId *string   `json:"namespaceId"`
     /** マスターデータ */
 	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentStaminaMaster) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
-    data["namespaceName"] = p.NamespaceName
+    data["namespaceId"] = p.NamespaceId
     data["settings"] = p.Settings
     return &data
 }
@@ -434,7 +434,7 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
+	ApiKeyId *string   `json:"apiKeyId"`
     /** リポジトリ名 */
 	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
@@ -451,7 +451,7 @@ type GitHubCheckoutSetting struct {
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
-    data["gitHubApiKeyId"] = p.GitHubApiKeyId
+    data["apiKeyId"] = p.ApiKeyId
     data["repositoryName"] = p.RepositoryName
     data["sourcePath"] = p.SourcePath
     data["referenceType"] = p.ReferenceType

@@ -169,15 +169,15 @@ func (p *QuestModelMaster) ToDict() *map[string]interface{} {
 }
 
 type CurrentQuestMaster struct {
-    /** カテゴリ名 */
-	NamespaceName *string   `json:"namespaceName"`
+    /** クエストを分類するカテゴリー */
+	NamespaceId *string   `json:"namespaceId"`
     /** マスターデータ */
 	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentQuestMaster) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
-    data["namespaceName"] = p.NamespaceName
+    data["namespaceId"] = p.NamespaceId
     data["settings"] = p.Settings
     return &data
 }
@@ -292,7 +292,7 @@ func (p *Config) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
+	ApiKeyId *string   `json:"apiKeyId"`
     /** リポジトリ名 */
 	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
@@ -309,7 +309,7 @@ type GitHubCheckoutSetting struct {
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
-    data["gitHubApiKeyId"] = p.GitHubApiKeyId
+    data["apiKeyId"] = p.ApiKeyId
     data["repositoryName"] = p.RepositoryName
     data["sourcePath"] = p.SourcePath
     data["referenceType"] = p.ReferenceType

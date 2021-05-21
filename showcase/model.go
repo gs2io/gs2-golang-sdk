@@ -171,15 +171,15 @@ func (p *ShowcaseMaster) ToDict() *map[string]interface{} {
 }
 
 type CurrentShowcaseMaster struct {
-    /** ネームスペース名 */
-	NamespaceName *string   `json:"namespaceName"`
+    /** 現在有効な陳列棚マスター */
+	NamespaceId *string   `json:"namespaceId"`
     /** マスターデータ */
 	Settings *string   `json:"settings"`
 }
 
 func (p *CurrentShowcaseMaster) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
-    data["namespaceName"] = p.NamespaceName
+    data["namespaceId"] = p.NamespaceId
     data["settings"] = p.Settings
     return &data
 }
@@ -209,7 +209,7 @@ func (p *ResponseCache) ToDict() *map[string]interface{} {
 
 type GitHubCheckoutSetting struct {
     /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	GitHubApiKeyId *string   `json:"gitHubApiKeyId"`
+	ApiKeyId *string   `json:"apiKeyId"`
     /** リポジトリ名 */
 	RepositoryName *string   `json:"repositoryName"`
     /** ソースコードのファイルパス */
@@ -226,7 +226,7 @@ type GitHubCheckoutSetting struct {
 
 func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
     var data = map[string]interface{}{}
-    data["gitHubApiKeyId"] = p.GitHubApiKeyId
+    data["apiKeyId"] = p.ApiKeyId
     data["repositoryName"] = p.RepositoryName
     data["sourcePath"] = p.SourcePath
     data["referenceType"] = p.ReferenceType
