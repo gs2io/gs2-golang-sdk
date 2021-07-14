@@ -16,26 +16,11 @@ permissions and limitations under the License.
 
 package lottery
 
-type DescribeNamespacesResult struct {
-    /** ネームスペースのリスト */
-	Items         []Namespace	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
-}
+import "core"
 
-func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Namespace, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+type DescribeNamespacesResult struct {
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -43,17 +28,28 @@ type DescribeNamespacesAsyncResult struct {
 	err    error
 }
 
-type CreateNamespaceResult struct {
-    /** 作成したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
+    return &p
+}
+
+type CreateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -61,17 +57,24 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceStatusResult struct {
-    /** None */
-	Status         *string	`json:"status"`
+func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Status != nil {
-        data["status"] = p.Status
+func (p CreateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
+    return &p
+}
+
+type GetNamespaceStatusResult struct {
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -79,17 +82,24 @@ type GetNamespaceStatusAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceResult struct {
-    /** ネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
-func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "status": p.Status,
     }
-    return &data
+}
+
+func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
+    return &p
+}
+
+type GetNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -97,17 +107,24 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
-type UpdateNamespaceResult struct {
-    /** 更新したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
+    return &p
+}
+
+type UpdateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -115,17 +132,24 @@ type UpdateNamespaceAsyncResult struct {
 	err    error
 }
 
-type DeleteNamespaceResult struct {
-    /** 削除したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
+    return &p
+}
+
+type DeleteNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -133,26 +157,25 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
-type DescribeLotteryModelMastersResult struct {
-    /** 抽選の種類マスターのリスト */
-	Items         []LotteryModelMaster	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
+    return DeleteNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeLotteryModelMastersResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]LotteryModelMaster, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
+    return &p
+}
+
+type DescribeLotteryModelMastersResult struct {
+    Items []LotteryModelMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeLotteryModelMastersAsyncResult struct {
@@ -160,17 +183,28 @@ type DescribeLotteryModelMastersAsyncResult struct {
 	err    error
 }
 
-type CreateLotteryModelMasterResult struct {
-    /** 作成した抽選の種類マスター */
-	Item         *LotteryModelMaster	`json:"item"`
+func NewDescribeLotteryModelMastersResultFromDict(data map[string]interface{}) DescribeLotteryModelMastersResult {
+    return DescribeLotteryModelMastersResult {
+        Items: CastLotteryModelMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateLotteryModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeLotteryModelMastersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastLotteryModelMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeLotteryModelMastersResult) Pointer() *DescribeLotteryModelMastersResult {
+    return &p
+}
+
+type CreateLotteryModelMasterResult struct {
+    Item *LotteryModelMaster `json:"item"`
 }
 
 type CreateLotteryModelMasterAsyncResult struct {
@@ -178,17 +212,24 @@ type CreateLotteryModelMasterAsyncResult struct {
 	err    error
 }
 
-type GetLotteryModelMasterResult struct {
-    /** 抽選の種類マスター */
-	Item         *LotteryModelMaster	`json:"item"`
+func NewCreateLotteryModelMasterResultFromDict(data map[string]interface{}) CreateLotteryModelMasterResult {
+    return CreateLotteryModelMasterResult {
+        Item: NewLotteryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetLotteryModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CreateLotteryModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateLotteryModelMasterResult) Pointer() *CreateLotteryModelMasterResult {
+    return &p
+}
+
+type GetLotteryModelMasterResult struct {
+    Item *LotteryModelMaster `json:"item"`
 }
 
 type GetLotteryModelMasterAsyncResult struct {
@@ -196,17 +237,24 @@ type GetLotteryModelMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateLotteryModelMasterResult struct {
-    /** 更新した抽選の種類マスター */
-	Item         *LotteryModelMaster	`json:"item"`
+func NewGetLotteryModelMasterResultFromDict(data map[string]interface{}) GetLotteryModelMasterResult {
+    return GetLotteryModelMasterResult {
+        Item: NewLotteryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateLotteryModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetLotteryModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetLotteryModelMasterResult) Pointer() *GetLotteryModelMasterResult {
+    return &p
+}
+
+type UpdateLotteryModelMasterResult struct {
+    Item *LotteryModelMaster `json:"item"`
 }
 
 type UpdateLotteryModelMasterAsyncResult struct {
@@ -214,17 +262,24 @@ type UpdateLotteryModelMasterAsyncResult struct {
 	err    error
 }
 
-type DeleteLotteryModelMasterResult struct {
-    /** 削除した抽選の種類マスター */
-	Item         *LotteryModelMaster	`json:"item"`
+func NewUpdateLotteryModelMasterResultFromDict(data map[string]interface{}) UpdateLotteryModelMasterResult {
+    return UpdateLotteryModelMasterResult {
+        Item: NewLotteryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteLotteryModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateLotteryModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateLotteryModelMasterResult) Pointer() *UpdateLotteryModelMasterResult {
+    return &p
+}
+
+type DeleteLotteryModelMasterResult struct {
+    Item *LotteryModelMaster `json:"item"`
 }
 
 type DeleteLotteryModelMasterAsyncResult struct {
@@ -232,26 +287,25 @@ type DeleteLotteryModelMasterAsyncResult struct {
 	err    error
 }
 
-type DescribePrizeTableMastersResult struct {
-    /** 排出確率テーブルマスターのリスト */
-	Items         []PrizeTableMaster	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeleteLotteryModelMasterResultFromDict(data map[string]interface{}) DeleteLotteryModelMasterResult {
+    return DeleteLotteryModelMasterResult {
+        Item: NewLotteryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribePrizeTableMastersResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]PrizeTableMaster, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteLotteryModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeleteLotteryModelMasterResult) Pointer() *DeleteLotteryModelMasterResult {
+    return &p
+}
+
+type DescribePrizeTableMastersResult struct {
+    Items []PrizeTableMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribePrizeTableMastersAsyncResult struct {
@@ -259,17 +313,28 @@ type DescribePrizeTableMastersAsyncResult struct {
 	err    error
 }
 
-type CreatePrizeTableMasterResult struct {
-    /** 作成した排出確率テーブルマスター */
-	Item         *PrizeTableMaster	`json:"item"`
+func NewDescribePrizeTableMastersResultFromDict(data map[string]interface{}) DescribePrizeTableMastersResult {
+    return DescribePrizeTableMastersResult {
+        Items: CastPrizeTableMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreatePrizeTableMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribePrizeTableMastersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastPrizeTableMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribePrizeTableMastersResult) Pointer() *DescribePrizeTableMastersResult {
+    return &p
+}
+
+type CreatePrizeTableMasterResult struct {
+    Item *PrizeTableMaster `json:"item"`
 }
 
 type CreatePrizeTableMasterAsyncResult struct {
@@ -277,17 +342,24 @@ type CreatePrizeTableMasterAsyncResult struct {
 	err    error
 }
 
-type GetPrizeTableMasterResult struct {
-    /** 排出確率テーブルマスター */
-	Item         *PrizeTableMaster	`json:"item"`
+func NewCreatePrizeTableMasterResultFromDict(data map[string]interface{}) CreatePrizeTableMasterResult {
+    return CreatePrizeTableMasterResult {
+        Item: NewPrizeTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetPrizeTableMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CreatePrizeTableMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreatePrizeTableMasterResult) Pointer() *CreatePrizeTableMasterResult {
+    return &p
+}
+
+type GetPrizeTableMasterResult struct {
+    Item *PrizeTableMaster `json:"item"`
 }
 
 type GetPrizeTableMasterAsyncResult struct {
@@ -295,17 +367,24 @@ type GetPrizeTableMasterAsyncResult struct {
 	err    error
 }
 
-type UpdatePrizeTableMasterResult struct {
-    /** 更新した排出確率テーブルマスター */
-	Item         *PrizeTableMaster	`json:"item"`
+func NewGetPrizeTableMasterResultFromDict(data map[string]interface{}) GetPrizeTableMasterResult {
+    return GetPrizeTableMasterResult {
+        Item: NewPrizeTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdatePrizeTableMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetPrizeTableMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetPrizeTableMasterResult) Pointer() *GetPrizeTableMasterResult {
+    return &p
+}
+
+type UpdatePrizeTableMasterResult struct {
+    Item *PrizeTableMaster `json:"item"`
 }
 
 type UpdatePrizeTableMasterAsyncResult struct {
@@ -313,17 +392,24 @@ type UpdatePrizeTableMasterAsyncResult struct {
 	err    error
 }
 
-type DeletePrizeTableMasterResult struct {
-    /** 削除した排出確率テーブルマスター */
-	Item         *PrizeTableMaster	`json:"item"`
+func NewUpdatePrizeTableMasterResultFromDict(data map[string]interface{}) UpdatePrizeTableMasterResult {
+    return UpdatePrizeTableMasterResult {
+        Item: NewPrizeTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeletePrizeTableMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdatePrizeTableMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdatePrizeTableMasterResult) Pointer() *UpdatePrizeTableMasterResult {
+    return &p
+}
+
+type DeletePrizeTableMasterResult struct {
+    Item *PrizeTableMaster `json:"item"`
 }
 
 type DeletePrizeTableMasterAsyncResult struct {
@@ -331,26 +417,25 @@ type DeletePrizeTableMasterAsyncResult struct {
 	err    error
 }
 
-type DescribeBoxesResult struct {
-    /** ボックスのリスト */
-	Items         []Box	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeletePrizeTableMasterResultFromDict(data map[string]interface{}) DeletePrizeTableMasterResult {
+    return DeletePrizeTableMasterResult {
+        Item: NewPrizeTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeBoxesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Box, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeletePrizeTableMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeletePrizeTableMasterResult) Pointer() *DeletePrizeTableMasterResult {
+    return &p
+}
+
+type DescribeBoxesResult struct {
+    Items []Box `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeBoxesAsyncResult struct {
@@ -358,26 +443,29 @@ type DescribeBoxesAsyncResult struct {
 	err    error
 }
 
-type DescribeBoxesByUserIdResult struct {
-    /** ボックスのリスト */
-	Items         []Box	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDescribeBoxesResultFromDict(data map[string]interface{}) DescribeBoxesResult {
+    return DescribeBoxesResult {
+        Items: CastBoxes(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *DescribeBoxesByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Box, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeBoxesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastBoxesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DescribeBoxesResult) Pointer() *DescribeBoxesResult {
+    return &p
+}
+
+type DescribeBoxesByUserIdResult struct {
+    Items []Box `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeBoxesByUserIdAsyncResult struct {
@@ -385,17 +473,28 @@ type DescribeBoxesByUserIdAsyncResult struct {
 	err    error
 }
 
-type GetBoxResult struct {
-    /** ボックスから取り出したアイテムのリスト */
-	Item         *BoxItems	`json:"item"`
+func NewDescribeBoxesByUserIdResultFromDict(data map[string]interface{}) DescribeBoxesByUserIdResult {
+    return DescribeBoxesByUserIdResult {
+        Items: CastBoxes(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *GetBoxResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeBoxesByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastBoxesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeBoxesByUserIdResult) Pointer() *DescribeBoxesByUserIdResult {
+    return &p
+}
+
+type GetBoxResult struct {
+    Item *BoxItems `json:"item"`
 }
 
 type GetBoxAsyncResult struct {
@@ -403,17 +502,24 @@ type GetBoxAsyncResult struct {
 	err    error
 }
 
-type GetBoxByUserIdResult struct {
-    /** ボックスから取り出したアイテムのリスト */
-	Item         *BoxItems	`json:"item"`
+func NewGetBoxResultFromDict(data map[string]interface{}) GetBoxResult {
+    return GetBoxResult {
+        Item: NewBoxItemsFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetBoxByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetBoxResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetBoxResult) Pointer() *GetBoxResult {
+    return &p
+}
+
+type GetBoxByUserIdResult struct {
+    Item *BoxItems `json:"item"`
 }
 
 type GetBoxByUserIdAsyncResult struct {
@@ -421,17 +527,24 @@ type GetBoxByUserIdAsyncResult struct {
 	err    error
 }
 
-type GetRawBoxByUserIdResult struct {
-    /** ボックス */
-	Item         *Box	`json:"item"`
+func NewGetBoxByUserIdResultFromDict(data map[string]interface{}) GetBoxByUserIdResult {
+    return GetBoxByUserIdResult {
+        Item: NewBoxItemsFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetRawBoxByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetBoxByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetBoxByUserIdResult) Pointer() *GetBoxByUserIdResult {
+    return &p
+}
+
+type GetRawBoxByUserIdResult struct {
+    Item *Box `json:"item"`
 }
 
 type GetRawBoxByUserIdAsyncResult struct {
@@ -439,12 +552,23 @@ type GetRawBoxByUserIdAsyncResult struct {
 	err    error
 }
 
-type ResetBoxResult struct {
+func NewGetRawBoxByUserIdResultFromDict(data map[string]interface{}) GetRawBoxByUserIdResult {
+    return GetRawBoxByUserIdResult {
+        Item: NewBoxFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *ResetBoxResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+func (p GetRawBoxByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetRawBoxByUserIdResult) Pointer() *GetRawBoxByUserIdResult {
+    return &p
+}
+
+type ResetBoxResult struct {
 }
 
 type ResetBoxAsyncResult struct {
@@ -452,12 +576,21 @@ type ResetBoxAsyncResult struct {
 	err    error
 }
 
-type ResetBoxByUserIdResult struct {
+func NewResetBoxResultFromDict(data map[string]interface{}) ResetBoxResult {
+    return ResetBoxResult {
+    }
 }
 
-func (p *ResetBoxByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+func (p ResetBoxResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+    }
+}
+
+func (p ResetBoxResult) Pointer() *ResetBoxResult {
+    return &p
+}
+
+type ResetBoxByUserIdResult struct {
 }
 
 type ResetBoxByUserIdAsyncResult struct {
@@ -465,21 +598,22 @@ type ResetBoxByUserIdAsyncResult struct {
 	err    error
 }
 
-type DescribeLotteryModelsResult struct {
-    /** 抽選の種類のリスト */
-	Items         []LotteryModel	`json:"items"`
+func NewResetBoxByUserIdResultFromDict(data map[string]interface{}) ResetBoxByUserIdResult {
+    return ResetBoxByUserIdResult {
+    }
 }
 
-func (p *DescribeLotteryModelsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]LotteryModel, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p ResetBoxByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
     }
-    return &data
+}
+
+func (p ResetBoxByUserIdResult) Pointer() *ResetBoxByUserIdResult {
+    return &p
+}
+
+type DescribeLotteryModelsResult struct {
+    Items []LotteryModel `json:"items"`
 }
 
 type DescribeLotteryModelsAsyncResult struct {
@@ -487,17 +621,26 @@ type DescribeLotteryModelsAsyncResult struct {
 	err    error
 }
 
-type GetLotteryModelResult struct {
-    /** 抽選の種類 */
-	Item         *LotteryModel	`json:"item"`
+func NewDescribeLotteryModelsResultFromDict(data map[string]interface{}) DescribeLotteryModelsResult {
+    return DescribeLotteryModelsResult {
+        Items: CastLotteryModels(core.CastArray(data["items"])),
+    }
 }
 
-func (p *GetLotteryModelResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeLotteryModelsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastLotteryModelsFromDict(
+            p.Items,
+        ),
     }
-    return &data
+}
+
+func (p DescribeLotteryModelsResult) Pointer() *DescribeLotteryModelsResult {
+    return &p
+}
+
+type GetLotteryModelResult struct {
+    Item *LotteryModel `json:"item"`
 }
 
 type GetLotteryModelAsyncResult struct {
@@ -505,21 +648,24 @@ type GetLotteryModelAsyncResult struct {
 	err    error
 }
 
-type DescribePrizeTablesResult struct {
-    /** 排出確率テーブルのリスト */
-	Items         []PrizeTable	`json:"items"`
+func NewGetLotteryModelResultFromDict(data map[string]interface{}) GetLotteryModelResult {
+    return GetLotteryModelResult {
+        Item: NewLotteryModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribePrizeTablesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]PrizeTable, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p GetLotteryModelResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetLotteryModelResult) Pointer() *GetLotteryModelResult {
+    return &p
+}
+
+type DescribePrizeTablesResult struct {
+    Items []PrizeTable `json:"items"`
 }
 
 type DescribePrizeTablesAsyncResult struct {
@@ -527,17 +673,26 @@ type DescribePrizeTablesAsyncResult struct {
 	err    error
 }
 
-type GetPrizeTableResult struct {
-    /** 排出確率テーブル */
-	Item         *PrizeTable	`json:"item"`
+func NewDescribePrizeTablesResultFromDict(data map[string]interface{}) DescribePrizeTablesResult {
+    return DescribePrizeTablesResult {
+        Items: CastPrizeTables(core.CastArray(data["items"])),
+    }
 }
 
-func (p *GetPrizeTableResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribePrizeTablesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastPrizeTablesFromDict(
+            p.Items,
+        ),
     }
-    return &data
+}
+
+func (p DescribePrizeTablesResult) Pointer() *DescribePrizeTablesResult {
+    return &p
+}
+
+type GetPrizeTableResult struct {
+    Item *PrizeTable `json:"item"`
 }
 
 type GetPrizeTableAsyncResult struct {
@@ -545,36 +700,27 @@ type GetPrizeTableAsyncResult struct {
 	err    error
 }
 
-type DrawByUserIdResult struct {
-    /** 抽選結果の景品リスト */
-	Items         []DrawnPrize	`json:"items"`
-    /** 排出された景品を入手するスタンプシート */
-	StampSheet         *string	`json:"stampSheet"`
-    /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
-    /** ボックスから取り出したアイテムのリスト */
-	BoxItems         *BoxItems	`json:"boxItems"`
+func NewGetPrizeTableResultFromDict(data map[string]interface{}) GetPrizeTableResult {
+    return GetPrizeTableResult {
+        Item: NewPrizeTableFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DrawByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]DrawnPrize, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p GetPrizeTableResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.StampSheet != nil {
-        data["stampSheet"] = p.StampSheet
-    }
-    if p.StampSheetEncryptionKeyId != nil {
-        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-    }
-    if p.BoxItems != nil {
-        data["boxItems"] = p.BoxItems.ToDict()
-    }
-    return &data
+}
+
+func (p GetPrizeTableResult) Pointer() *GetPrizeTableResult {
+    return &p
+}
+
+type DrawByUserIdResult struct {
+    Items []DrawnPrize `json:"items"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    BoxItems *BoxItems `json:"boxItems"`
 }
 
 type DrawByUserIdAsyncResult struct {
@@ -582,21 +728,32 @@ type DrawByUserIdAsyncResult struct {
 	err    error
 }
 
-type DescribeProbabilitiesResult struct {
-    /** 景品の当選確率リスト */
-	Items         []Probability	`json:"items"`
+func NewDrawByUserIdResultFromDict(data map[string]interface{}) DrawByUserIdResult {
+    return DrawByUserIdResult {
+        Items: CastDrawnPrizes(core.CastArray(data["items"])),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        BoxItems: NewBoxItemsFromDict(core.CastMap(data["boxItems"])).Pointer(),
+    }
 }
 
-func (p *DescribeProbabilitiesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Probability, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DrawByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastDrawnPrizesFromDict(
+            p.Items,
+        ),
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "boxItems": p.BoxItems.ToDict(),
     }
-    return &data
+}
+
+func (p DrawByUserIdResult) Pointer() *DrawByUserIdResult {
+    return &p
+}
+
+type DescribeProbabilitiesResult struct {
+    Items []Probability `json:"items"`
 }
 
 type DescribeProbabilitiesAsyncResult struct {
@@ -604,21 +761,26 @@ type DescribeProbabilitiesAsyncResult struct {
 	err    error
 }
 
-type DescribeProbabilitiesByUserIdResult struct {
-    /** 景品の当選確率リスト */
-	Items         []Probability	`json:"items"`
+func NewDescribeProbabilitiesResultFromDict(data map[string]interface{}) DescribeProbabilitiesResult {
+    return DescribeProbabilitiesResult {
+        Items: CastProbabilities(core.CastArray(data["items"])),
+    }
 }
 
-func (p *DescribeProbabilitiesByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Probability, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeProbabilitiesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastProbabilitiesFromDict(
+            p.Items,
+        ),
     }
-    return &data
+}
+
+func (p DescribeProbabilitiesResult) Pointer() *DescribeProbabilitiesResult {
+    return &p
+}
+
+type DescribeProbabilitiesByUserIdResult struct {
+    Items []Probability `json:"items"`
 }
 
 type DescribeProbabilitiesByUserIdAsyncResult struct {
@@ -626,36 +788,29 @@ type DescribeProbabilitiesByUserIdAsyncResult struct {
 	err    error
 }
 
-type DrawByStampSheetResult struct {
-    /** 抽選結果の景品リスト */
-	Items         []DrawnPrize	`json:"items"`
-    /** 排出された景品を入手するスタンプシート */
-	StampSheet         *string	`json:"stampSheet"`
-    /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
-    /** ボックスから取り出したアイテムのリスト */
-	BoxItems         *BoxItems	`json:"boxItems"`
+func NewDescribeProbabilitiesByUserIdResultFromDict(data map[string]interface{}) DescribeProbabilitiesByUserIdResult {
+    return DescribeProbabilitiesByUserIdResult {
+        Items: CastProbabilities(core.CastArray(data["items"])),
+    }
 }
 
-func (p *DrawByStampSheetResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]DrawnPrize, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeProbabilitiesByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastProbabilitiesFromDict(
+            p.Items,
+        ),
     }
-    if p.StampSheet != nil {
-        data["stampSheet"] = p.StampSheet
-    }
-    if p.StampSheetEncryptionKeyId != nil {
-        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-    }
-    if p.BoxItems != nil {
-        data["boxItems"] = p.BoxItems.ToDict()
-    }
-    return &data
+}
+
+func (p DescribeProbabilitiesByUserIdResult) Pointer() *DescribeProbabilitiesByUserIdResult {
+    return &p
+}
+
+type DrawByStampSheetResult struct {
+    Items []DrawnPrize `json:"items"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    BoxItems *BoxItems `json:"boxItems"`
 }
 
 type DrawByStampSheetAsyncResult struct {
@@ -663,17 +818,32 @@ type DrawByStampSheetAsyncResult struct {
 	err    error
 }
 
-type ExportMasterResult struct {
-    /** 現在有効な抽選設定 */
-	Item         *CurrentLotteryMaster	`json:"item"`
+func NewDrawByStampSheetResultFromDict(data map[string]interface{}) DrawByStampSheetResult {
+    return DrawByStampSheetResult {
+        Items: CastDrawnPrizes(core.CastArray(data["items"])),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        BoxItems: NewBoxItemsFromDict(core.CastMap(data["boxItems"])).Pointer(),
+    }
 }
 
-func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DrawByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastDrawnPrizesFromDict(
+            p.Items,
+        ),
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "boxItems": p.BoxItems.ToDict(),
     }
-    return &data
+}
+
+func (p DrawByStampSheetResult) Pointer() *DrawByStampSheetResult {
+    return &p
+}
+
+type ExportMasterResult struct {
+    Item *CurrentLotteryMaster `json:"item"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -681,17 +851,24 @@ type ExportMasterAsyncResult struct {
 	err    error
 }
 
-type GetCurrentLotteryMasterResult struct {
-    /** 現在有効な抽選設定 */
-	Item         *CurrentLotteryMaster	`json:"item"`
+func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
+    return ExportMasterResult {
+        Item: NewCurrentLotteryMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetCurrentLotteryMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p ExportMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p ExportMasterResult) Pointer() *ExportMasterResult {
+    return &p
+}
+
+type GetCurrentLotteryMasterResult struct {
+    Item *CurrentLotteryMaster `json:"item"`
 }
 
 type GetCurrentLotteryMasterAsyncResult struct {
@@ -699,17 +876,24 @@ type GetCurrentLotteryMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateCurrentLotteryMasterResult struct {
-    /** 更新した現在有効な抽選設定 */
-	Item         *CurrentLotteryMaster	`json:"item"`
+func NewGetCurrentLotteryMasterResultFromDict(data map[string]interface{}) GetCurrentLotteryMasterResult {
+    return GetCurrentLotteryMasterResult {
+        Item: NewCurrentLotteryMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateCurrentLotteryMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetCurrentLotteryMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetCurrentLotteryMasterResult) Pointer() *GetCurrentLotteryMasterResult {
+    return &p
+}
+
+type UpdateCurrentLotteryMasterResult struct {
+    Item *CurrentLotteryMaster `json:"item"`
 }
 
 type UpdateCurrentLotteryMasterAsyncResult struct {
@@ -717,20 +901,43 @@ type UpdateCurrentLotteryMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateCurrentLotteryMasterFromGitHubResult struct {
-    /** 更新した現在有効な抽選設定 */
-	Item         *CurrentLotteryMaster	`json:"item"`
+func NewUpdateCurrentLotteryMasterResultFromDict(data map[string]interface{}) UpdateCurrentLotteryMasterResult {
+    return UpdateCurrentLotteryMasterResult {
+        Item: NewCurrentLotteryMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateCurrentLotteryMasterFromGitHubResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateCurrentLotteryMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateCurrentLotteryMasterResult) Pointer() *UpdateCurrentLotteryMasterResult {
+    return &p
+}
+
+type UpdateCurrentLotteryMasterFromGitHubResult struct {
+    Item *CurrentLotteryMaster `json:"item"`
 }
 
 type UpdateCurrentLotteryMasterFromGitHubAsyncResult struct {
 	result *UpdateCurrentLotteryMasterFromGitHubResult
 	err    error
+}
+
+func NewUpdateCurrentLotteryMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentLotteryMasterFromGitHubResult {
+    return UpdateCurrentLotteryMasterFromGitHubResult {
+        Item: NewCurrentLotteryMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UpdateCurrentLotteryMasterFromGitHubResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateCurrentLotteryMasterFromGitHubResult) Pointer() *UpdateCurrentLotteryMasterFromGitHubResult {
+    return &p
 }

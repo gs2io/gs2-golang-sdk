@@ -18,7 +18,7 @@ package stamina
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -170,11 +170,8 @@ func (p Gs2StaminaRestClient) CreateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
-    if request.OverflowTriggerScriptId != nil && *request.OverflowTriggerScriptId != "" {
-        bodies["overflowTriggerScriptId"] = *request.OverflowTriggerScriptId
-    }
-    if request.OverflowTriggerNamespaceId != nil && *request.OverflowTriggerNamespaceId != "" {
-        bodies["overflowTriggerNamespaceId"] = *request.OverflowTriggerNamespaceId
+    if request.OverflowTriggerScript != nil {
+        bodies["overflowTriggerScript"] = request.OverflowTriggerScript.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
@@ -437,11 +434,8 @@ func (p Gs2StaminaRestClient) UpdateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
-    if request.OverflowTriggerScriptId != nil && *request.OverflowTriggerScriptId != "" {
-        bodies["overflowTriggerScriptId"] = *request.OverflowTriggerScriptId
-    }
-    if request.OverflowTriggerNamespaceId != nil && *request.OverflowTriggerNamespaceId != "" {
-        bodies["overflowTriggerNamespaceId"] = *request.OverflowTriggerNamespaceId
+    if request.OverflowTriggerScript != nil {
+        bodies["overflowTriggerScript"] = request.OverflowTriggerScript.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
@@ -1230,7 +1224,7 @@ func (p Gs2StaminaRestClient) CreateMaxStaminaTableMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.Values != nil {
-        var _values []int32
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -1427,7 +1421,7 @@ func (p Gs2StaminaRestClient) UpdateMaxStaminaTableMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.Values != nil {
-        var _values []int32
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -1712,7 +1706,7 @@ func (p Gs2StaminaRestClient) CreateRecoverIntervalTableMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.Values != nil {
-        var _values []int32
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -1909,7 +1903,7 @@ func (p Gs2StaminaRestClient) UpdateRecoverIntervalTableMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.Values != nil {
-        var _values []int32
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -2194,7 +2188,7 @@ func (p Gs2StaminaRestClient) CreateRecoverValueTableMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.Values != nil {
-        var _values []int32
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -2391,7 +2385,7 @@ func (p Gs2StaminaRestClient) UpdateRecoverValueTableMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.Values != nil {
-        var _values []int32
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -4474,7 +4468,7 @@ func (p Gs2StaminaRestClient) SetRecoverValueByStatusAsync(
 	request *SetRecoverValueByStatusRequest,
 	callback chan<- SetRecoverValueByStatusAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/stamina/{staminaName}/reoverValue/set"
+	path := "/{namespaceName}/user/me/stamina/{staminaName}/recoverValue/set"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {

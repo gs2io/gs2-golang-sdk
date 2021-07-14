@@ -18,7 +18,7 @@ package formation
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -717,9 +717,9 @@ func (p Gs2FormationRestClient) CreateFormModelMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.Slots != nil {
-        var _slots []*map[string]interface {}
+        var _slots []interface {}
         for _, item := range request.Slots {
-            _slots = append(_slots, item.ToDict())
+            _slots = append(_slots, item)
         }
         bodies["slots"] = _slots
     }
@@ -911,9 +911,9 @@ func (p Gs2FormationRestClient) UpdateFormModelMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.Slots != nil {
-        var _slots []*map[string]interface {}
+        var _slots []interface {}
         for _, item := range request.Slots {
-            _slots = append(_slots, item.ToDict())
+            _slots = append(_slots, item)
         }
         bodies["slots"] = _slots
     }
@@ -3642,9 +3642,9 @@ func (p Gs2FormationRestClient) SetFormByUserIdAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.Slots != nil {
-        var _slots []*map[string]interface {}
+        var _slots []interface {}
         for _, item := range request.Slots {
-            _slots = append(_slots, item.ToDict())
+            _slots = append(_slots, item)
         }
         bodies["slots"] = _slots
     }
@@ -3746,9 +3746,9 @@ func (p Gs2FormationRestClient) SetFormWithSignatureAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.Slots != nil {
-        var _slots []*map[string]interface {}
+        var _slots []interface {}
         for _, item := range request.Slots {
-            _slots = append(_slots, item.ToDict())
+            _slots = append(_slots, item)
         }
         bodies["slots"] = _slots
     }
@@ -3870,9 +3870,9 @@ func (p Gs2FormationRestClient) AcquireActionsToFormPropertiesAsync(
         bodies["keyId"] = *request.KeyId
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }

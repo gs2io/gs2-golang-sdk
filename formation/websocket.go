@@ -19,7 +19,7 @@ package formation
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2FormationWebSocketClient struct {
@@ -680,9 +680,9 @@ func (p Gs2FormationWebSocketClient) CreateFormModelMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.Slots != nil {
-        var _slots []*map[string]interface {}
+        var _slots []interface {}
         for _, item := range request.Slots {
-            _slots = append(_slots, item.ToDict())
+            _slots = append(_slots, item)
         }
         bodies["slots"] = _slots
     }
@@ -857,9 +857,9 @@ func (p Gs2FormationWebSocketClient) UpdateFormModelMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.Slots != nil {
-        var _slots []*map[string]interface {}
+        var _slots []interface {}
         for _, item := range request.Slots {
-            _slots = append(_slots, item.ToDict())
+            _slots = append(_slots, item)
         }
         bodies["slots"] = _slots
     }
@@ -1950,6 +1950,9 @@ func (p Gs2FormationWebSocketClient) DescribeMoldsAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -2125,6 +2128,9 @@ func (p Gs2FormationWebSocketClient) GetMoldAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.MoldName != nil && *request.MoldName != "" {
         bodies["moldName"] = *request.MoldName
@@ -2472,6 +2478,9 @@ func (p Gs2FormationWebSocketClient) DeleteMoldAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.MoldName != nil && *request.MoldName != "" {
         bodies["moldName"] = *request.MoldName
     }
@@ -2809,6 +2818,9 @@ func (p Gs2FormationWebSocketClient) DescribeFormsAsync(
     if request.MoldName != nil && *request.MoldName != "" {
         bodies["moldName"] = *request.MoldName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -2988,6 +3000,9 @@ func (p Gs2FormationWebSocketClient) GetFormAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.MoldName != nil && *request.MoldName != "" {
         bodies["moldName"] = *request.MoldName
     }
@@ -3163,6 +3178,9 @@ func (p Gs2FormationWebSocketClient) GetFormWithSignatureAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.MoldName != nil && *request.MoldName != "" {
         bodies["moldName"] = *request.MoldName
@@ -3356,9 +3374,9 @@ func (p Gs2FormationWebSocketClient) SetFormByUserIdAsync(
         bodies["index"] = *request.Index
     }
     if request.Slots != nil {
-        var _slots []*map[string]interface {}
+        var _slots []interface {}
         for _, item := range request.Slots {
-            _slots = append(_slots, item.ToDict())
+            _slots = append(_slots, item)
         }
         bodies["slots"] = _slots
     }
@@ -3441,6 +3459,9 @@ func (p Gs2FormationWebSocketClient) SetFormWithSignatureAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.MoldName != nil && *request.MoldName != "" {
         bodies["moldName"] = *request.MoldName
     }
@@ -3448,9 +3469,9 @@ func (p Gs2FormationWebSocketClient) SetFormWithSignatureAsync(
         bodies["index"] = *request.Index
     }
     if request.Slots != nil {
-        var _slots []*map[string]interface {}
+        var _slots []interface {}
         for _, item := range request.Slots {
-            _slots = append(_slots, item.ToDict())
+            _slots = append(_slots, item)
         }
         bodies["slots"] = _slots
     }
@@ -3558,9 +3579,9 @@ func (p Gs2FormationWebSocketClient) AcquireActionsToFormPropertiesAsync(
         bodies["keyId"] = *request.KeyId
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -3642,6 +3663,9 @@ func (p Gs2FormationWebSocketClient) DeleteFormAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.MoldName != nil && *request.MoldName != "" {
         bodies["moldName"] = *request.MoldName

@@ -19,7 +19,7 @@ package exchange
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2ExchangeWebSocketClient struct {
@@ -862,23 +862,23 @@ func (p Gs2ExchangeWebSocketClient) CreateRateModelMasterAsync(
         bodies["enableSkip"] = *request.EnableSkip
     }
     if request.SkipConsumeActions != nil {
-        var _skipConsumeActions []*map[string]interface {}
+        var _skipConsumeActions []interface {}
         for _, item := range request.SkipConsumeActions {
-            _skipConsumeActions = append(_skipConsumeActions, item.ToDict())
+            _skipConsumeActions = append(_skipConsumeActions, item)
         }
         bodies["skipConsumeActions"] = _skipConsumeActions
     }
     if request.AcquireActions != nil {
-        var _acquireActions []*map[string]interface {}
+        var _acquireActions []interface {}
         for _, item := range request.AcquireActions {
-            _acquireActions = append(_acquireActions, item.ToDict())
+            _acquireActions = append(_acquireActions, item)
         }
         bodies["acquireActions"] = _acquireActions
     }
     if request.ConsumeActions != nil {
-        var _consumeActions []*map[string]interface {}
+        var _consumeActions []interface {}
         for _, item := range request.ConsumeActions {
-            _consumeActions = append(_consumeActions, item.ToDict())
+            _consumeActions = append(_consumeActions, item)
         }
         bodies["consumeActions"] = _consumeActions
     }
@@ -1062,23 +1062,23 @@ func (p Gs2ExchangeWebSocketClient) UpdateRateModelMasterAsync(
         bodies["enableSkip"] = *request.EnableSkip
     }
     if request.SkipConsumeActions != nil {
-        var _skipConsumeActions []*map[string]interface {}
+        var _skipConsumeActions []interface {}
         for _, item := range request.SkipConsumeActions {
-            _skipConsumeActions = append(_skipConsumeActions, item.ToDict())
+            _skipConsumeActions = append(_skipConsumeActions, item)
         }
         bodies["skipConsumeActions"] = _skipConsumeActions
     }
     if request.AcquireActions != nil {
-        var _acquireActions []*map[string]interface {}
+        var _acquireActions []interface {}
         for _, item := range request.AcquireActions {
-            _acquireActions = append(_acquireActions, item.ToDict())
+            _acquireActions = append(_acquireActions, item)
         }
         bodies["acquireActions"] = _acquireActions
     }
     if request.ConsumeActions != nil {
-        var _consumeActions []*map[string]interface {}
+        var _consumeActions []interface {}
         for _, item := range request.ConsumeActions {
-            _consumeActions = append(_consumeActions, item.ToDict())
+            _consumeActions = append(_consumeActions, item)
         }
         bodies["consumeActions"] = _consumeActions
     }
@@ -1246,13 +1246,16 @@ func (p Gs2ExchangeWebSocketClient) ExchangeAsync(
     if request.RateName != nil && *request.RateName != "" {
         bodies["rateName"] = *request.RateName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.Count != nil {
         bodies["count"] = *request.Count
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -1348,9 +1351,9 @@ func (p Gs2ExchangeWebSocketClient) ExchangeByUserIdAsync(
         bodies["count"] = *request.Count
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -1925,6 +1928,9 @@ func (p Gs2ExchangeWebSocketClient) DescribeAwaitsAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.RateName != nil && *request.RateName != "" {
         bodies["rateName"] = *request.RateName
     }
@@ -2107,6 +2113,9 @@ func (p Gs2ExchangeWebSocketClient) GetAwaitAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.RateName != nil && *request.RateName != "" {
         bodies["rateName"] = *request.RateName
     }
@@ -2283,6 +2292,9 @@ func (p Gs2ExchangeWebSocketClient) AcquireAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.RateName != nil && *request.RateName != "" {
         bodies["rateName"] = *request.RateName
     }
@@ -2290,9 +2302,9 @@ func (p Gs2ExchangeWebSocketClient) AcquireAsync(
         bodies["awaitName"] = *request.AwaitName
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2388,9 +2400,9 @@ func (p Gs2ExchangeWebSocketClient) AcquireByUserIdAsync(
         bodies["awaitName"] = *request.AwaitName
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2483,9 +2495,9 @@ func (p Gs2ExchangeWebSocketClient) AcquireForceByUserIdAsync(
         bodies["awaitName"] = *request.AwaitName
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2568,6 +2580,9 @@ func (p Gs2ExchangeWebSocketClient) SkipAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.RateName != nil && *request.RateName != "" {
         bodies["rateName"] = *request.RateName
     }
@@ -2575,9 +2590,9 @@ func (p Gs2ExchangeWebSocketClient) SkipAsync(
         bodies["awaitName"] = *request.AwaitName
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2673,9 +2688,9 @@ func (p Gs2ExchangeWebSocketClient) SkipByUserIdAsync(
         bodies["awaitName"] = *request.AwaitName
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2757,6 +2772,9 @@ func (p Gs2ExchangeWebSocketClient) DeleteAwaitAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.RateName != nil && *request.RateName != "" {
         bodies["rateName"] = *request.RateName

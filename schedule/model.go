@@ -16,248 +16,397 @@ permissions and limitations under the License.
 
 package schedule
 
+import "core"
+
 type Namespace struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** ネームスペース名 */
-	Name *string   `json:"name"`
-    /** ネームスペースの説明 */
-	Description *string   `json:"description"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId *string     `json:"namespaceId"`
+	Name        *string     `json:"name"`
+	Description *string     `json:"description"`
+	LogSetting  *LogSetting `json:"logSetting"`
+	CreatedAt   *int64      `json:"createdAt"`
+	UpdatedAt   *int64      `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Name:        core.CastString(data["name"]),
+		Description: core.CastString(data["description"]),
+		LogSetting:  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:   core.CastInt64(data["createdAt"]),
+		UpdatedAt:   core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId": p.NamespaceId,
+		"name":        p.Name,
+		"description": p.Description,
+		"logSetting":  p.LogSetting.ToDict(),
+		"createdAt":   p.CreatedAt,
+		"updatedAt":   p.UpdatedAt,
+	}
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type EventMaster struct {
-    /** イベントマスター */
-	EventId *string   `json:"eventId"`
-    /** イベントの種類名 */
-	Name *string   `json:"name"`
-    /** イベントマスターの説明 */
-	Description *string   `json:"description"`
-    /** イベントの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** イベント期間の種類 */
-	ScheduleType *string   `json:"scheduleType"`
-    /** 繰り返しの種類 */
-	RepeatType *string   `json:"repeatType"`
-    /** イベントの開始日時 */
-	AbsoluteBegin *int64   `json:"absoluteBegin"`
-    /** イベントの終了日時 */
-	AbsoluteEnd *int64   `json:"absoluteEnd"`
-    /** イベントの繰り返し開始日 */
-	RepeatBeginDayOfMonth *int32   `json:"repeatBeginDayOfMonth"`
-    /** イベントの繰り返し終了日 */
-	RepeatEndDayOfMonth *int32   `json:"repeatEndDayOfMonth"`
-    /** イベントの繰り返し開始曜日 */
-	RepeatBeginDayOfWeek *string   `json:"repeatBeginDayOfWeek"`
-    /** イベントの繰り返し終了曜日 */
-	RepeatEndDayOfWeek *string   `json:"repeatEndDayOfWeek"`
-    /** イベントの繰り返し開始時間 */
-	RepeatBeginHour *int32   `json:"repeatBeginHour"`
-    /** イベントの繰り返し終了時間 */
-	RepeatEndHour *int32   `json:"repeatEndHour"`
-    /** イベントの開始トリガー名 */
-	RelativeTriggerName *string   `json:"relativeTriggerName"`
-    /** イベントの開催期間(秒) */
-	RelativeDuration *int32   `json:"relativeDuration"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	EventId               *string `json:"eventId"`
+	Name                  *string `json:"name"`
+	Description           *string `json:"description"`
+	Metadata              *string `json:"metadata"`
+	ScheduleType          *string `json:"scheduleType"`
+	RepeatType            *string `json:"repeatType"`
+	AbsoluteBegin         *int64  `json:"absoluteBegin"`
+	AbsoluteEnd           *int64  `json:"absoluteEnd"`
+	RepeatBeginDayOfMonth *int32  `json:"repeatBeginDayOfMonth"`
+	RepeatEndDayOfMonth   *int32  `json:"repeatEndDayOfMonth"`
+	RepeatBeginDayOfWeek  *string `json:"repeatBeginDayOfWeek"`
+	RepeatEndDayOfWeek    *string `json:"repeatEndDayOfWeek"`
+	RepeatBeginHour       *int32  `json:"repeatBeginHour"`
+	RepeatEndHour         *int32  `json:"repeatEndHour"`
+	RelativeTriggerName   *string `json:"relativeTriggerName"`
+	RelativeDuration      *int32  `json:"relativeDuration"`
+	CreatedAt             *int64  `json:"createdAt"`
+	UpdatedAt             *int64  `json:"updatedAt"`
 }
 
-func (p *EventMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["eventId"] = p.EventId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["metadata"] = p.Metadata
-    data["scheduleType"] = p.ScheduleType
-    data["repeatType"] = p.RepeatType
-    data["absoluteBegin"] = p.AbsoluteBegin
-    data["absoluteEnd"] = p.AbsoluteEnd
-    data["repeatBeginDayOfMonth"] = p.RepeatBeginDayOfMonth
-    data["repeatEndDayOfMonth"] = p.RepeatEndDayOfMonth
-    data["repeatBeginDayOfWeek"] = p.RepeatBeginDayOfWeek
-    data["repeatEndDayOfWeek"] = p.RepeatEndDayOfWeek
-    data["repeatBeginHour"] = p.RepeatBeginHour
-    data["repeatEndHour"] = p.RepeatEndHour
-    data["relativeTriggerName"] = p.RelativeTriggerName
-    data["relativeDuration"] = p.RelativeDuration
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewEventMasterFromDict(data map[string]interface{}) EventMaster {
+	return EventMaster{
+		EventId:               core.CastString(data["eventId"]),
+		Name:                  core.CastString(data["name"]),
+		Description:           core.CastString(data["description"]),
+		Metadata:              core.CastString(data["metadata"]),
+		ScheduleType:          core.CastString(data["scheduleType"]),
+		RepeatType:            core.CastString(data["repeatType"]),
+		AbsoluteBegin:         core.CastInt64(data["absoluteBegin"]),
+		AbsoluteEnd:           core.CastInt64(data["absoluteEnd"]),
+		RepeatBeginDayOfMonth: core.CastInt32(data["repeatBeginDayOfMonth"]),
+		RepeatEndDayOfMonth:   core.CastInt32(data["repeatEndDayOfMonth"]),
+		RepeatBeginDayOfWeek:  core.CastString(data["repeatBeginDayOfWeek"]),
+		RepeatEndDayOfWeek:    core.CastString(data["repeatEndDayOfWeek"]),
+		RepeatBeginHour:       core.CastInt32(data["repeatBeginHour"]),
+		RepeatEndHour:         core.CastInt32(data["repeatEndHour"]),
+		RelativeTriggerName:   core.CastString(data["relativeTriggerName"]),
+		RelativeDuration:      core.CastInt32(data["relativeDuration"]),
+		CreatedAt:             core.CastInt64(data["createdAt"]),
+		UpdatedAt:             core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p EventMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"eventId":               p.EventId,
+		"name":                  p.Name,
+		"description":           p.Description,
+		"metadata":              p.Metadata,
+		"scheduleType":          p.ScheduleType,
+		"repeatType":            p.RepeatType,
+		"absoluteBegin":         p.AbsoluteBegin,
+		"absoluteEnd":           p.AbsoluteEnd,
+		"repeatBeginDayOfMonth": p.RepeatBeginDayOfMonth,
+		"repeatEndDayOfMonth":   p.RepeatEndDayOfMonth,
+		"repeatBeginDayOfWeek":  p.RepeatBeginDayOfWeek,
+		"repeatEndDayOfWeek":    p.RepeatEndDayOfWeek,
+		"repeatBeginHour":       p.RepeatBeginHour,
+		"repeatEndHour":         p.RepeatEndHour,
+		"relativeTriggerName":   p.RelativeTriggerName,
+		"relativeDuration":      p.RelativeDuration,
+		"createdAt":             p.CreatedAt,
+		"updatedAt":             p.UpdatedAt,
+	}
+}
+
+func (p EventMaster) Pointer() *EventMaster {
+	return &p
+}
+
+func CastEventMasters(data []interface{}) []EventMaster {
+	v := make([]EventMaster, 0)
+	for _, d := range data {
+		v = append(v, NewEventMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastEventMastersFromDict(data []EventMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Trigger struct {
-    /** トリガー */
-	TriggerId *string   `json:"triggerId"`
-    /** トリガーの名前 */
-	Name *string   `json:"name"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** トリガーの有効期限 */
-	ExpiresAt *int64   `json:"expiresAt"`
+	TriggerId *string `json:"triggerId"`
+	Name      *string `json:"name"`
+	UserId    *string `json:"userId"`
+	CreatedAt *int64  `json:"createdAt"`
+	ExpiresAt *int64  `json:"expiresAt"`
 }
 
-func (p *Trigger) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["triggerId"] = p.TriggerId
-    data["name"] = p.Name
-    data["userId"] = p.UserId
-    data["createdAt"] = p.CreatedAt
-    data["expiresAt"] = p.ExpiresAt
-    return &data
+func NewTriggerFromDict(data map[string]interface{}) Trigger {
+	return Trigger{
+		TriggerId: core.CastString(data["triggerId"]),
+		Name:      core.CastString(data["name"]),
+		UserId:    core.CastString(data["userId"]),
+		CreatedAt: core.CastInt64(data["createdAt"]),
+		ExpiresAt: core.CastInt64(data["expiresAt"]),
+	}
+}
+
+func (p Trigger) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"triggerId": p.TriggerId,
+		"name":      p.Name,
+		"userId":    p.UserId,
+		"createdAt": p.CreatedAt,
+		"expiresAt": p.ExpiresAt,
+	}
+}
+
+func (p Trigger) Pointer() *Trigger {
+	return &p
+}
+
+func CastTriggers(data []interface{}) []Trigger {
+	v := make([]Trigger, 0)
+	for _, d := range data {
+		v = append(v, NewTriggerFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTriggersFromDict(data []Trigger) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Event struct {
-    /** イベントマスター */
-	EventId *string   `json:"eventId"`
-    /** イベントの種類名 */
-	Name *string   `json:"name"`
-    /** イベントの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** イベント期間の種類 */
-	ScheduleType *string   `json:"scheduleType"`
-    /** 繰り返しの種類 */
-	RepeatType *string   `json:"repeatType"`
-    /** イベントの開始日時 */
-	AbsoluteBegin *int64   `json:"absoluteBegin"`
-    /** イベントの終了日時 */
-	AbsoluteEnd *int64   `json:"absoluteEnd"`
-    /** イベントの繰り返し開始日 */
-	RepeatBeginDayOfMonth *int32   `json:"repeatBeginDayOfMonth"`
-    /** イベントの繰り返し終了日 */
-	RepeatEndDayOfMonth *int32   `json:"repeatEndDayOfMonth"`
-    /** イベントの繰り返し開始曜日 */
-	RepeatBeginDayOfWeek *string   `json:"repeatBeginDayOfWeek"`
-    /** イベントの繰り返し終了曜日 */
-	RepeatEndDayOfWeek *string   `json:"repeatEndDayOfWeek"`
-    /** イベントの繰り返し開始時間 */
-	RepeatBeginHour *int32   `json:"repeatBeginHour"`
-    /** イベントの繰り返し終了時間 */
-	RepeatEndHour *int32   `json:"repeatEndHour"`
-    /** イベントの開始トリガー */
-	RelativeTriggerName *string   `json:"relativeTriggerName"`
-    /** イベントの開催期間(秒) */
-	RelativeDuration *int32   `json:"relativeDuration"`
+	EventId               *string `json:"eventId"`
+	Name                  *string `json:"name"`
+	Metadata              *string `json:"metadata"`
+	ScheduleType          *string `json:"scheduleType"`
+	RepeatType            *string `json:"repeatType"`
+	AbsoluteBegin         *int64  `json:"absoluteBegin"`
+	AbsoluteEnd           *int64  `json:"absoluteEnd"`
+	RepeatBeginDayOfMonth *int32  `json:"repeatBeginDayOfMonth"`
+	RepeatEndDayOfMonth   *int32  `json:"repeatEndDayOfMonth"`
+	RepeatBeginDayOfWeek  *string `json:"repeatBeginDayOfWeek"`
+	RepeatEndDayOfWeek    *string `json:"repeatEndDayOfWeek"`
+	RepeatBeginHour       *int32  `json:"repeatBeginHour"`
+	RepeatEndHour         *int32  `json:"repeatEndHour"`
+	RelativeTriggerName   *string `json:"relativeTriggerName"`
+	RelativeDuration      *int32  `json:"relativeDuration"`
 }
 
-func (p *Event) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["eventId"] = p.EventId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["scheduleType"] = p.ScheduleType
-    data["repeatType"] = p.RepeatType
-    data["absoluteBegin"] = p.AbsoluteBegin
-    data["absoluteEnd"] = p.AbsoluteEnd
-    data["repeatBeginDayOfMonth"] = p.RepeatBeginDayOfMonth
-    data["repeatEndDayOfMonth"] = p.RepeatEndDayOfMonth
-    data["repeatBeginDayOfWeek"] = p.RepeatBeginDayOfWeek
-    data["repeatEndDayOfWeek"] = p.RepeatEndDayOfWeek
-    data["repeatBeginHour"] = p.RepeatBeginHour
-    data["repeatEndHour"] = p.RepeatEndHour
-    data["relativeTriggerName"] = p.RelativeTriggerName
-    data["relativeDuration"] = p.RelativeDuration
-    return &data
+func NewEventFromDict(data map[string]interface{}) Event {
+	return Event{
+		EventId:               core.CastString(data["eventId"]),
+		Name:                  core.CastString(data["name"]),
+		Metadata:              core.CastString(data["metadata"]),
+		ScheduleType:          core.CastString(data["scheduleType"]),
+		RepeatType:            core.CastString(data["repeatType"]),
+		AbsoluteBegin:         core.CastInt64(data["absoluteBegin"]),
+		AbsoluteEnd:           core.CastInt64(data["absoluteEnd"]),
+		RepeatBeginDayOfMonth: core.CastInt32(data["repeatBeginDayOfMonth"]),
+		RepeatEndDayOfMonth:   core.CastInt32(data["repeatEndDayOfMonth"]),
+		RepeatBeginDayOfWeek:  core.CastString(data["repeatBeginDayOfWeek"]),
+		RepeatEndDayOfWeek:    core.CastString(data["repeatEndDayOfWeek"]),
+		RepeatBeginHour:       core.CastInt32(data["repeatBeginHour"]),
+		RepeatEndHour:         core.CastInt32(data["repeatEndHour"]),
+		RelativeTriggerName:   core.CastString(data["relativeTriggerName"]),
+		RelativeDuration:      core.CastInt32(data["relativeDuration"]),
+	}
+}
+
+func (p Event) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"eventId":               p.EventId,
+		"name":                  p.Name,
+		"metadata":              p.Metadata,
+		"scheduleType":          p.ScheduleType,
+		"repeatType":            p.RepeatType,
+		"absoluteBegin":         p.AbsoluteBegin,
+		"absoluteEnd":           p.AbsoluteEnd,
+		"repeatBeginDayOfMonth": p.RepeatBeginDayOfMonth,
+		"repeatEndDayOfMonth":   p.RepeatEndDayOfMonth,
+		"repeatBeginDayOfWeek":  p.RepeatBeginDayOfWeek,
+		"repeatEndDayOfWeek":    p.RepeatEndDayOfWeek,
+		"repeatBeginHour":       p.RepeatBeginHour,
+		"repeatEndHour":         p.RepeatEndHour,
+		"relativeTriggerName":   p.RelativeTriggerName,
+		"relativeDuration":      p.RelativeDuration,
+	}
+}
+
+func (p Event) Pointer() *Event {
+	return &p
+}
+
+func CastEvents(data []interface{}) []Event {
+	v := make([]Event, 0)
+	for _, d := range data {
+		v = append(v, NewEventFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastEventsFromDict(data []Event) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CurrentEventMaster struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** マスターデータ */
-	Settings *string   `json:"settings"`
+	NamespaceId *string `json:"namespaceId"`
+	Settings    *string `json:"settings"`
 }
 
-func (p *CurrentEventMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["settings"] = p.Settings
-    return &data
+func NewCurrentEventMasterFromDict(data map[string]interface{}) CurrentEventMaster {
+	return CurrentEventMaster{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Settings:    core.CastString(data["settings"]),
+	}
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func (p CurrentEventMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId": p.NamespaceId,
+		"settings":    p.Settings,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func (p CurrentEventMaster) Pointer() *CurrentEventMaster {
+	return &p
+}
+
+func CastCurrentEventMasters(data []interface{}) []CurrentEventMaster {
+	v := make([]CurrentEventMaster, 0)
+	for _, d := range data {
+		v = append(v, NewCurrentEventMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCurrentEventMastersFromDict(data []CurrentEventMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GitHubCheckoutSetting struct {
-    /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	ApiKeyId *string   `json:"apiKeyId"`
-    /** リポジトリ名 */
-	RepositoryName *string   `json:"repositoryName"`
-    /** ソースコードのファイルパス */
-	SourcePath *string   `json:"sourcePath"`
-    /** コードの取得元 */
-	ReferenceType *string   `json:"referenceType"`
-    /** コミットハッシュ */
-	CommitHash *string   `json:"commitHash"`
-    /** ブランチ名 */
-	BranchName *string   `json:"branchName"`
-    /** タグ名 */
-	TagName *string   `json:"tagName"`
+	ApiKeyId       *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath     *string `json:"sourcePath"`
+	ReferenceType  *string `json:"referenceType"`
+	CommitHash     *string `json:"commitHash"`
+	BranchName     *string `json:"branchName"`
+	TagName        *string `json:"tagName"`
 }
 
-func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["apiKeyId"] = p.ApiKeyId
-    data["repositoryName"] = p.RepositoryName
-    data["sourcePath"] = p.SourcePath
-    data["referenceType"] = p.ReferenceType
-    data["commitHash"] = p.CommitHash
-    data["branchName"] = p.BranchName
-    data["tagName"] = p.TagName
-    return &data
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+	return GitHubCheckoutSetting{
+		ApiKeyId:       core.CastString(data["apiKeyId"]),
+		RepositoryName: core.CastString(data["repositoryName"]),
+		SourcePath:     core.CastString(data["sourcePath"]),
+		ReferenceType:  core.CastString(data["referenceType"]),
+		CommitHash:     core.CastString(data["commitHash"]),
+		BranchName:     core.CastString(data["branchName"]),
+		TagName:        core.CastString(data["tagName"]),
+	}
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"apiKeyId":       p.ApiKeyId,
+		"repositoryName": p.RepositoryName,
+		"sourcePath":     p.SourcePath,
+		"referenceType":  p.ReferenceType,
+		"commitHash":     p.CommitHash,
+		"branchName":     p.BranchName,
+		"tagName":        p.TagName,
+	}
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+	return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

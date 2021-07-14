@@ -16,398 +16,677 @@ permissions and limitations under the License.
 
 package friend
 
+import "core"
+
 type Namespace struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** ネームスペース名 */
-	Name *string   `json:"name"`
-    /** ネームスペースの説明 */
-	Description *string   `json:"description"`
-    /** フォローされたときに実行するスクリプト */
-	FollowScript *ScriptSetting   `json:"followScript"`
-    /** アンフォローされたときに実行するスクリプト */
-	UnfollowScript *ScriptSetting   `json:"unfollowScript"`
-    /** フレンドリクエストを発行したときに実行するスクリプト */
-	SendRequestScript *ScriptSetting   `json:"sendRequestScript"`
-    /** フレンドリクエストをキャンセルしたときに実行するスクリプト */
-	CancelRequestScript *ScriptSetting   `json:"cancelRequestScript"`
-    /** フレンドリクエストを承諾したときに実行するスクリプト */
-	AcceptRequestScript *ScriptSetting   `json:"acceptRequestScript"`
-    /** フレンドリクエストを拒否したときに実行するスクリプト */
-	RejectRequestScript *ScriptSetting   `json:"rejectRequestScript"`
-    /** フレンドを削除したときに実行するスクリプト */
-	DeleteFriendScript *ScriptSetting   `json:"deleteFriendScript"`
-    /** プロフィールを更新したときに実行するスクリプト */
-	UpdateProfileScript *ScriptSetting   `json:"updateProfileScript"`
-    /** フォローされたときのプッシュ通知 */
-	FollowNotification *NotificationSetting   `json:"followNotification"`
-    /** フレンドリクエストが届いたときのプッシュ通知 */
-	ReceiveRequestNotification *NotificationSetting   `json:"receiveRequestNotification"`
-    /** フレンドリクエストが承認されたときのプッシュ通知 */
-	AcceptRequestNotification *NotificationSetting   `json:"acceptRequestNotification"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** None */
-	Status *string   `json:"status"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId                *string              `json:"namespaceId"`
+	Name                       *string              `json:"name"`
+	Description                *string              `json:"description"`
+	FollowScript               *ScriptSetting       `json:"followScript"`
+	UnfollowScript             *ScriptSetting       `json:"unfollowScript"`
+	SendRequestScript          *ScriptSetting       `json:"sendRequestScript"`
+	CancelRequestScript        *ScriptSetting       `json:"cancelRequestScript"`
+	AcceptRequestScript        *ScriptSetting       `json:"acceptRequestScript"`
+	RejectRequestScript        *ScriptSetting       `json:"rejectRequestScript"`
+	DeleteFriendScript         *ScriptSetting       `json:"deleteFriendScript"`
+	UpdateProfileScript        *ScriptSetting       `json:"updateProfileScript"`
+	FollowNotification         *NotificationSetting `json:"followNotification"`
+	ReceiveRequestNotification *NotificationSetting `json:"receiveRequestNotification"`
+	AcceptRequestNotification  *NotificationSetting `json:"acceptRequestNotification"`
+	LogSetting                 *LogSetting          `json:"logSetting"`
+	CreatedAt                  *int64               `json:"createdAt"`
+	UpdatedAt                  *int64               `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    if p.FollowScript != nil {
-        data["followScript"] = *p.FollowScript.ToDict()
-    }
-    if p.UnfollowScript != nil {
-        data["unfollowScript"] = *p.UnfollowScript.ToDict()
-    }
-    if p.SendRequestScript != nil {
-        data["sendRequestScript"] = *p.SendRequestScript.ToDict()
-    }
-    if p.CancelRequestScript != nil {
-        data["cancelRequestScript"] = *p.CancelRequestScript.ToDict()
-    }
-    if p.AcceptRequestScript != nil {
-        data["acceptRequestScript"] = *p.AcceptRequestScript.ToDict()
-    }
-    if p.RejectRequestScript != nil {
-        data["rejectRequestScript"] = *p.RejectRequestScript.ToDict()
-    }
-    if p.DeleteFriendScript != nil {
-        data["deleteFriendScript"] = *p.DeleteFriendScript.ToDict()
-    }
-    if p.UpdateProfileScript != nil {
-        data["updateProfileScript"] = *p.UpdateProfileScript.ToDict()
-    }
-    if p.FollowNotification != nil {
-        data["followNotification"] = *p.FollowNotification.ToDict()
-    }
-    if p.ReceiveRequestNotification != nil {
-        data["receiveRequestNotification"] = *p.ReceiveRequestNotification.ToDict()
-    }
-    if p.AcceptRequestNotification != nil {
-        data["acceptRequestNotification"] = *p.AcceptRequestNotification.ToDict()
-    }
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
-    }
-    data["status"] = p.Status
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId:                core.CastString(data["namespaceId"]),
+		Name:                       core.CastString(data["name"]),
+		Description:                core.CastString(data["description"]),
+		FollowScript:               NewScriptSettingFromDict(core.CastMap(data["followScript"])).Pointer(),
+		UnfollowScript:             NewScriptSettingFromDict(core.CastMap(data["unfollowScript"])).Pointer(),
+		SendRequestScript:          NewScriptSettingFromDict(core.CastMap(data["sendRequestScript"])).Pointer(),
+		CancelRequestScript:        NewScriptSettingFromDict(core.CastMap(data["cancelRequestScript"])).Pointer(),
+		AcceptRequestScript:        NewScriptSettingFromDict(core.CastMap(data["acceptRequestScript"])).Pointer(),
+		RejectRequestScript:        NewScriptSettingFromDict(core.CastMap(data["rejectRequestScript"])).Pointer(),
+		DeleteFriendScript:         NewScriptSettingFromDict(core.CastMap(data["deleteFriendScript"])).Pointer(),
+		UpdateProfileScript:        NewScriptSettingFromDict(core.CastMap(data["updateProfileScript"])).Pointer(),
+		FollowNotification:         NewNotificationSettingFromDict(core.CastMap(data["followNotification"])).Pointer(),
+		ReceiveRequestNotification: NewNotificationSettingFromDict(core.CastMap(data["receiveRequestNotification"])).Pointer(),
+		AcceptRequestNotification:  NewNotificationSettingFromDict(core.CastMap(data["acceptRequestNotification"])).Pointer(),
+		LogSetting:                 NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:                  core.CastInt64(data["createdAt"]),
+		UpdatedAt:                  core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId":                p.NamespaceId,
+		"name":                       p.Name,
+		"description":                p.Description,
+		"followScript":               p.FollowScript.ToDict(),
+		"unfollowScript":             p.UnfollowScript.ToDict(),
+		"sendRequestScript":          p.SendRequestScript.ToDict(),
+		"cancelRequestScript":        p.CancelRequestScript.ToDict(),
+		"acceptRequestScript":        p.AcceptRequestScript.ToDict(),
+		"rejectRequestScript":        p.RejectRequestScript.ToDict(),
+		"deleteFriendScript":         p.DeleteFriendScript.ToDict(),
+		"updateProfileScript":        p.UpdateProfileScript.ToDict(),
+		"followNotification":         p.FollowNotification.ToDict(),
+		"receiveRequestNotification": p.ReceiveRequestNotification.ToDict(),
+		"acceptRequestNotification":  p.AcceptRequestNotification.ToDict(),
+		"logSetting":                 p.LogSetting.ToDict(),
+		"createdAt":                  p.CreatedAt,
+		"updatedAt":                  p.UpdatedAt,
+	}
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Profile struct {
-    /** プロフィール */
-	ProfileId *string   `json:"profileId"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** 公開されるプロフィール */
-	PublicProfile *string   `json:"publicProfile"`
-    /** フォロワー向けに公開されるプロフィール */
-	FollowerProfile *string   `json:"followerProfile"`
-    /** フレンド向けに公開されるプロフィール */
-	FriendProfile *string   `json:"friendProfile"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	ProfileId       *string `json:"profileId"`
+	UserId          *string `json:"userId"`
+	PublicProfile   *string `json:"publicProfile"`
+	FollowerProfile *string `json:"followerProfile"`
+	FriendProfile   *string `json:"friendProfile"`
+	CreatedAt       *int64  `json:"createdAt"`
+	UpdatedAt       *int64  `json:"updatedAt"`
 }
 
-func (p *Profile) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["profileId"] = p.ProfileId
-    data["userId"] = p.UserId
-    data["publicProfile"] = p.PublicProfile
-    data["followerProfile"] = p.FollowerProfile
-    data["friendProfile"] = p.FriendProfile
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewProfileFromDict(data map[string]interface{}) Profile {
+	return Profile{
+		ProfileId:       core.CastString(data["profileId"]),
+		UserId:          core.CastString(data["userId"]),
+		PublicProfile:   core.CastString(data["publicProfile"]),
+		FollowerProfile: core.CastString(data["followerProfile"]),
+		FriendProfile:   core.CastString(data["friendProfile"]),
+		CreatedAt:       core.CastInt64(data["createdAt"]),
+		UpdatedAt:       core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Profile) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"profileId":       p.ProfileId,
+		"userId":          p.UserId,
+		"publicProfile":   p.PublicProfile,
+		"followerProfile": p.FollowerProfile,
+		"friendProfile":   p.FriendProfile,
+		"createdAt":       p.CreatedAt,
+		"updatedAt":       p.UpdatedAt,
+	}
+}
+
+func (p Profile) Pointer() *Profile {
+	return &p
+}
+
+func CastProfiles(data []interface{}) []Profile {
+	v := make([]Profile, 0)
+	for _, d := range data {
+		v = append(v, NewProfileFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastProfilesFromDict(data []Profile) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Follow struct {
-    /** フォロー */
-	FollowId *string   `json:"followId"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** フォローしているユーザーIDリスト */
-	TargetUserIds []string   `json:"targetUserIds"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	FollowId      *string  `json:"followId"`
+	UserId        *string  `json:"userId"`
+	TargetUserIds []string `json:"targetUserIds"`
+	CreatedAt     *int64   `json:"createdAt"`
+	UpdatedAt     *int64   `json:"updatedAt"`
 }
 
-func (p *Follow) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["followId"] = p.FollowId
-    data["userId"] = p.UserId
-    if p.TargetUserIds != nil {
-        var _targetUserIds []string
-        for _, item := range p.TargetUserIds {
-            _targetUserIds = append(_targetUserIds, item)
-        }
-        data["targetUserIds"] = &_targetUserIds
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewFollowFromDict(data map[string]interface{}) Follow {
+	return Follow{
+		FollowId:      core.CastString(data["followId"]),
+		UserId:        core.CastString(data["userId"]),
+		TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
+		CreatedAt:     core.CastInt64(data["createdAt"]),
+		UpdatedAt:     core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Follow) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"followId": p.FollowId,
+		"userId":   p.UserId,
+		"targetUserIds": core.CastStringsFromDict(
+			p.TargetUserIds,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p Follow) Pointer() *Follow {
+	return &p
+}
+
+func CastFollows(data []interface{}) []Follow {
+	v := make([]Follow, 0)
+	for _, d := range data {
+		v = append(v, NewFollowFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastFollowsFromDict(data []Follow) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Friend struct {
-    /** フレンド */
-	FriendId *string   `json:"friendId"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** フレンドのユーザーIDリスト */
-	TargetUserIds []string   `json:"targetUserIds"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	FriendId      *string  `json:"friendId"`
+	UserId        *string  `json:"userId"`
+	TargetUserIds []string `json:"targetUserIds"`
+	CreatedAt     *int64   `json:"createdAt"`
+	UpdatedAt     *int64   `json:"updatedAt"`
 }
 
-func (p *Friend) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["friendId"] = p.FriendId
-    data["userId"] = p.UserId
-    if p.TargetUserIds != nil {
-        var _targetUserIds []string
-        for _, item := range p.TargetUserIds {
-            _targetUserIds = append(_targetUserIds, item)
-        }
-        data["targetUserIds"] = &_targetUserIds
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewFriendFromDict(data map[string]interface{}) Friend {
+	return Friend{
+		FriendId:      core.CastString(data["friendId"]),
+		UserId:        core.CastString(data["userId"]),
+		TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
+		CreatedAt:     core.CastInt64(data["createdAt"]),
+		UpdatedAt:     core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Friend) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"friendId": p.FriendId,
+		"userId":   p.UserId,
+		"targetUserIds": core.CastStringsFromDict(
+			p.TargetUserIds,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p Friend) Pointer() *Friend {
+	return &p
+}
+
+func CastFriends(data []interface{}) []Friend {
+	v := make([]Friend, 0)
+	for _, d := range data {
+		v = append(v, NewFriendFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastFriendsFromDict(data []Friend) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type SendBox struct {
-    /** フレンドリクエストの受信ボックス */
-	SendBoxId *string   `json:"sendBoxId"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** フレンドリクエストの宛先ユーザーIDリスト */
-	TargetUserIds []string   `json:"targetUserIds"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	SendBoxId     *string  `json:"sendBoxId"`
+	UserId        *string  `json:"userId"`
+	TargetUserIds []string `json:"targetUserIds"`
+	CreatedAt     *int64   `json:"createdAt"`
+	UpdatedAt     *int64   `json:"updatedAt"`
 }
 
-func (p *SendBox) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["sendBoxId"] = p.SendBoxId
-    data["userId"] = p.UserId
-    if p.TargetUserIds != nil {
-        var _targetUserIds []string
-        for _, item := range p.TargetUserIds {
-            _targetUserIds = append(_targetUserIds, item)
-        }
-        data["targetUserIds"] = &_targetUserIds
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewSendBoxFromDict(data map[string]interface{}) SendBox {
+	return SendBox{
+		SendBoxId:     core.CastString(data["sendBoxId"]),
+		UserId:        core.CastString(data["userId"]),
+		TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
+		CreatedAt:     core.CastInt64(data["createdAt"]),
+		UpdatedAt:     core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p SendBox) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"sendBoxId": p.SendBoxId,
+		"userId":    p.UserId,
+		"targetUserIds": core.CastStringsFromDict(
+			p.TargetUserIds,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p SendBox) Pointer() *SendBox {
+	return &p
+}
+
+func CastSendBoxes(data []interface{}) []SendBox {
+	v := make([]SendBox, 0)
+	for _, d := range data {
+		v = append(v, NewSendBoxFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSendBoxesFromDict(data []SendBox) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Inbox struct {
-    /** フレンドリクエストの受信ボックス */
-	InboxId *string   `json:"inboxId"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** フレンドリクエストを送ってきたユーザーIDリスト */
-	FromUserIds []string   `json:"fromUserIds"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	InboxId     *string  `json:"inboxId"`
+	UserId      *string  `json:"userId"`
+	FromUserIds []string `json:"fromUserIds"`
+	CreatedAt   *int64   `json:"createdAt"`
+	UpdatedAt   *int64   `json:"updatedAt"`
 }
 
-func (p *Inbox) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["inboxId"] = p.InboxId
-    data["userId"] = p.UserId
-    if p.FromUserIds != nil {
-        var _fromUserIds []string
-        for _, item := range p.FromUserIds {
-            _fromUserIds = append(_fromUserIds, item)
-        }
-        data["fromUserIds"] = &_fromUserIds
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewInboxFromDict(data map[string]interface{}) Inbox {
+	return Inbox{
+		InboxId:     core.CastString(data["inboxId"]),
+		UserId:      core.CastString(data["userId"]),
+		FromUserIds: core.CastStrings(core.CastArray(data["fromUserIds"])),
+		CreatedAt:   core.CastInt64(data["createdAt"]),
+		UpdatedAt:   core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Inbox) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"inboxId": p.InboxId,
+		"userId":  p.UserId,
+		"fromUserIds": core.CastStringsFromDict(
+			p.FromUserIds,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p Inbox) Pointer() *Inbox {
+	return &p
+}
+
+func CastInboxes(data []interface{}) []Inbox {
+	v := make([]Inbox, 0)
+	for _, d := range data {
+		v = append(v, NewInboxFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastInboxesFromDict(data []Inbox) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type BlackList struct {
-    /** ブラックリスト */
-	BlackListId *string   `json:"blackListId"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** ブラックリストのユーザーIDリスト */
-	TargetUserIds []string   `json:"targetUserIds"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	BlackListId   *string  `json:"blackListId"`
+	UserId        *string  `json:"userId"`
+	TargetUserIds []string `json:"targetUserIds"`
+	CreatedAt     *int64   `json:"createdAt"`
+	UpdatedAt     *int64   `json:"updatedAt"`
 }
 
-func (p *BlackList) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["blackListId"] = p.BlackListId
-    data["userId"] = p.UserId
-    if p.TargetUserIds != nil {
-        var _targetUserIds []string
-        for _, item := range p.TargetUserIds {
-            _targetUserIds = append(_targetUserIds, item)
-        }
-        data["targetUserIds"] = &_targetUserIds
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewBlackListFromDict(data map[string]interface{}) BlackList {
+	return BlackList{
+		BlackListId:   core.CastString(data["blackListId"]),
+		UserId:        core.CastString(data["userId"]),
+		TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
+		CreatedAt:     core.CastInt64(data["createdAt"]),
+		UpdatedAt:     core.CastInt64(data["updatedAt"]),
+	}
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func (p BlackList) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"blackListId": p.BlackListId,
+		"userId":      p.UserId,
+		"targetUserIds": core.CastStringsFromDict(
+			p.TargetUserIds,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func (p BlackList) Pointer() *BlackList {
+	return &p
+}
+
+func CastBlackLists(data []interface{}) []BlackList {
+	v := make([]BlackList, 0)
+	for _, d := range data {
+		v = append(v, NewBlackListFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBlackListsFromDict(data []BlackList) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type FollowUser struct {
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** 公開されるプロフィール */
-	PublicProfile *string   `json:"publicProfile"`
-    /** フォロワー向けに公開されるプロフィール */
-	FollowerProfile *string   `json:"followerProfile"`
+	UserId          *string `json:"userId"`
+	PublicProfile   *string `json:"publicProfile"`
+	FollowerProfile *string `json:"followerProfile"`
 }
 
-func (p *FollowUser) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["userId"] = p.UserId
-    data["publicProfile"] = p.PublicProfile
-    data["followerProfile"] = p.FollowerProfile
-    return &data
+func NewFollowUserFromDict(data map[string]interface{}) FollowUser {
+	return FollowUser{
+		UserId:          core.CastString(data["userId"]),
+		PublicProfile:   core.CastString(data["publicProfile"]),
+		FollowerProfile: core.CastString(data["followerProfile"]),
+	}
+}
+
+func (p FollowUser) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId":          p.UserId,
+		"publicProfile":   p.PublicProfile,
+		"followerProfile": p.FollowerProfile,
+	}
+}
+
+func (p FollowUser) Pointer() *FollowUser {
+	return &p
+}
+
+func CastFollowUsers(data []interface{}) []FollowUser {
+	v := make([]FollowUser, 0)
+	for _, d := range data {
+		v = append(v, NewFollowUserFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastFollowUsersFromDict(data []FollowUser) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type FriendUser struct {
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** 公開されるプロフィール */
-	PublicProfile *string   `json:"publicProfile"`
-    /** フレンド向けに公開されるプロフィール */
-	FriendProfile *string   `json:"friendProfile"`
+	UserId        *string `json:"userId"`
+	PublicProfile *string `json:"publicProfile"`
+	FriendProfile *string `json:"friendProfile"`
 }
 
-func (p *FriendUser) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["userId"] = p.UserId
-    data["publicProfile"] = p.PublicProfile
-    data["friendProfile"] = p.FriendProfile
-    return &data
+func NewFriendUserFromDict(data map[string]interface{}) FriendUser {
+	return FriendUser{
+		UserId:        core.CastString(data["userId"]),
+		PublicProfile: core.CastString(data["publicProfile"]),
+		FriendProfile: core.CastString(data["friendProfile"]),
+	}
+}
+
+func (p FriendUser) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId":        p.UserId,
+		"publicProfile": p.PublicProfile,
+		"friendProfile": p.FriendProfile,
+	}
+}
+
+func (p FriendUser) Pointer() *FriendUser {
+	return &p
+}
+
+func CastFriendUsers(data []interface{}) []FriendUser {
+	v := make([]FriendUser, 0)
+	for _, d := range data {
+		v = append(v, NewFriendUserFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastFriendUsersFromDict(data []FriendUser) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type FriendRequest struct {
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** ユーザーID */
-	TargetUserId *string   `json:"targetUserId"`
+	UserId       *string `json:"userId"`
+	TargetUserId *string `json:"targetUserId"`
 }
 
-func (p *FriendRequest) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["userId"] = p.UserId
-    data["targetUserId"] = p.TargetUserId
-    return &data
+func NewFriendRequestFromDict(data map[string]interface{}) FriendRequest {
+	return FriendRequest{
+		UserId:       core.CastString(data["userId"]),
+		TargetUserId: core.CastString(data["targetUserId"]),
+	}
+}
+
+func (p FriendRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId":       p.UserId,
+		"targetUserId": p.TargetUserId,
+	}
+}
+
+func (p FriendRequest) Pointer() *FriendRequest {
+	return &p
+}
+
+func CastFriendRequests(data []interface{}) []FriendRequest {
+	v := make([]FriendRequest, 0)
+	for _, d := range data {
+		v = append(v, NewFriendRequestFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastFriendRequestsFromDict(data []FriendRequest) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type PublicProfile struct {
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** 公開されるプロフィール */
-	PublicProfile *string   `json:"publicProfile"`
+	UserId        *string `json:"userId"`
+	PublicProfile *string `json:"publicProfile"`
 }
 
-func (p *PublicProfile) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["userId"] = p.UserId
-    data["publicProfile"] = p.PublicProfile
-    return &data
+func NewPublicProfileFromDict(data map[string]interface{}) PublicProfile {
+	return PublicProfile{
+		UserId:        core.CastString(data["userId"]),
+		PublicProfile: core.CastString(data["publicProfile"]),
+	}
+}
+
+func (p PublicProfile) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId":        p.UserId,
+		"publicProfile": p.PublicProfile,
+	}
+}
+
+func (p PublicProfile) Pointer() *PublicProfile {
+	return &p
+}
+
+func CastPublicProfiles(data []interface{}) []PublicProfile {
+	v := make([]PublicProfile, 0)
+	for _, d := range data {
+		v = append(v, NewPublicProfileFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastPublicProfilesFromDict(data []PublicProfile) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ScriptSetting struct {
-    /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *string   `json:"triggerScriptId"`
-    /** 完了通知の通知先 */
-	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
-    /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
-    /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
+	TriggerScriptId             *string `json:"triggerScriptId"`
+	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
+	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
-func (p *ScriptSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["triggerScriptId"] = p.TriggerScriptId
-    data["doneTriggerTargetType"] = p.DoneTriggerTargetType
-    data["doneTriggerScriptId"] = p.DoneTriggerScriptId
-    data["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
-    return &data
+func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
+	return ScriptSetting{
+		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
+		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
+		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
+		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+	}
+}
+
+func (p ScriptSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"triggerScriptId":             p.TriggerScriptId,
+		"doneTriggerTargetType":       p.DoneTriggerTargetType,
+		"doneTriggerScriptId":         p.DoneTriggerScriptId,
+		"doneTriggerQueueNamespaceId": p.DoneTriggerQueueNamespaceId,
+	}
+}
+
+func (p ScriptSetting) Pointer() *ScriptSetting {
+	return &p
+}
+
+func CastScriptSettings(data []interface{}) []ScriptSetting {
+	v := make([]ScriptSetting, 0)
+	for _, d := range data {
+		v = append(v, NewScriptSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type NotificationSetting struct {
-    /** プッシュ通知に使用する GS2-Gateway のネームスペース のGRN */
-	GatewayNamespaceId *string   `json:"gatewayNamespaceId"`
-    /** モバイルプッシュ通知へ転送するか */
+	GatewayNamespaceId               *string `json:"gatewayNamespaceId"`
 	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
-    /** モバイルプッシュ通知で使用するサウンドファイル名 */
-	Sound *string   `json:"sound"`
+	Sound                            *string `json:"sound"`
 }
 
-func (p *NotificationSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["gatewayNamespaceId"] = p.GatewayNamespaceId
-    data["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
-    data["sound"] = p.Sound
-    return &data
+func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
+	return NotificationSetting{
+		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
+		EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
+		Sound:                            core.CastString(data["sound"]),
+	}
+}
+
+func (p NotificationSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"gatewayNamespaceId":               p.GatewayNamespaceId,
+		"enableTransferMobileNotification": p.EnableTransferMobileNotification,
+		"sound":                            p.Sound,
+	}
+}
+
+func (p NotificationSetting) Pointer() *NotificationSetting {
+	return &p
+}
+
+func CastNotificationSettings(data []interface{}) []NotificationSetting {
+	v := make([]NotificationSetting, 0)
+	for _, d := range data {
+		v = append(v, NewNotificationSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNotificationSettingsFromDict(data []NotificationSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

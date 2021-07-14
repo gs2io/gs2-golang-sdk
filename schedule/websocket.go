@@ -19,7 +19,7 @@ package schedule
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2ScheduleWebSocketClient struct {
@@ -1070,6 +1070,9 @@ func (p Gs2ScheduleWebSocketClient) DescribeTriggersAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -1245,6 +1248,9 @@ func (p Gs2ScheduleWebSocketClient) GetTriggerAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.TriggerName != nil && *request.TriggerName != "" {
         bodies["triggerName"] = *request.TriggerName
@@ -1507,6 +1513,9 @@ func (p Gs2ScheduleWebSocketClient) DeleteTriggerAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.TriggerName != nil && *request.TriggerName != "" {
         bodies["triggerName"] = *request.TriggerName
     }
@@ -1676,6 +1685,9 @@ func (p Gs2ScheduleWebSocketClient) DescribeEventsAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -1922,6 +1934,9 @@ func (p Gs2ScheduleWebSocketClient) GetEventAsync(
     }
     if request.EventName != nil && *request.EventName != "" {
         bodies["eventName"] = *request.EventName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

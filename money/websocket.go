@@ -19,7 +19,7 @@ package money
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2MoneyWebSocketClient struct {
@@ -621,6 +621,9 @@ func (p Gs2MoneyWebSocketClient) DescribeWalletsAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -743,94 +746,6 @@ func (p Gs2MoneyWebSocketClient) DescribeWalletsByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2MoneyWebSocketClient) queryWalletsAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- QueryWalletsAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- QueryWalletsAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result QueryWalletsResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- QueryWalletsAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- QueryWalletsAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2MoneyWebSocketClient) QueryWalletsAsync(
-	request *QueryWalletsRequest,
-	callback chan<- QueryWalletsAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "money",
-    		"component": "wallet",
-    		"function": "queryWallets",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.queryWalletsAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2MoneyWebSocketClient) QueryWallets(
-	request *QueryWalletsRequest,
-) (*QueryWalletsResult, error) {
-	callback := make(chan QueryWalletsAsyncResult, 1)
-	go p.QueryWalletsAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
 func (p Gs2MoneyWebSocketClient) getWalletAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- GetWalletAsyncResult,
@@ -884,6 +799,9 @@ func (p Gs2MoneyWebSocketClient) GetWalletAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.Slot != nil {
         bodies["slot"] = *request.Slot
@@ -1145,6 +1063,9 @@ func (p Gs2MoneyWebSocketClient) WithdrawAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.Slot != nil {
         bodies["slot"] = *request.Slot

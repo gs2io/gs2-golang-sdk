@@ -18,7 +18,7 @@ package version
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -1471,7 +1471,7 @@ func (p Gs2VersionRestClient) AcceptAsync(
 	request *AcceptRequest,
 	callback chan<- AcceptAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/acceptVersion"
+	path := "/{namespaceName}/user/me/acceptVersion"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2039,9 +2039,9 @@ func (p Gs2VersionRestClient) CheckVersionAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.TargetVersions != nil {
-        var _targetVersions []*map[string]interface {}
+        var _targetVersions []interface {}
         for _, item := range request.TargetVersions {
-            _targetVersions = append(_targetVersions, item.ToDict())
+            _targetVersions = append(_targetVersions, item)
         }
         bodies["targetVersions"] = _targetVersions
     }
@@ -2141,9 +2141,9 @@ func (p Gs2VersionRestClient) CheckVersionByUserIdAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.TargetVersions != nil {
-        var _targetVersions []*map[string]interface {}
+        var _targetVersions []interface {}
         for _, item := range request.TargetVersions {
-            _targetVersions = append(_targetVersions, item.ToDict())
+            _targetVersions = append(_targetVersions, item)
         }
         bodies["targetVersions"] = _targetVersions
     }

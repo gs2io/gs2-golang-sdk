@@ -18,7 +18,7 @@ package lock
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -1284,15 +1284,15 @@ func (p Gs2LockRestClient) GetMutexByUserIdAsync(
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
     }
-    if request.PropertyId != nil && *request.PropertyId != ""  {
-        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-    } else {
-        path = strings.ReplaceAll(path, "{propertyId}", "null")
-    }
     if request.UserId != nil && *request.UserId != ""  {
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
     }
 
 	replacer := strings.NewReplacer()

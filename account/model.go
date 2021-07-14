@@ -16,159 +16,250 @@ permissions and limitations under the License.
 
 package account
 
+import "core"
+
 type Namespace struct {
-	/** ネームスペース */
-	NamespaceId *string `json:"namespaceId"`
-	/** オーナーID */
-	OwnerId *string `json:"ownerId"`
-	/** ネームスペース名 */
-	Name *string `json:"name"`
-	/** 説明文 */
-	Description *string `json:"description"`
-	/** アカウント引き継ぎ時にパスワードを変更するか */
-	ChangePasswordIfTakeOver *bool `json:"changePasswordIfTakeOver"`
-	/** アカウント新規作成したときに実行するスクリプト */
-	CreateAccountScript *ScriptSetting `json:"createAccountScript"`
-	/** 認証したときに実行するスクリプト */
-	AuthenticationScript *ScriptSetting `json:"authenticationScript"`
-	/** 引き継ぎ情報登録したときに実行するスクリプト */
-	CreateTakeOverScript *ScriptSetting `json:"createTakeOverScript"`
-	/** 引き継ぎ実行したときに実行するスクリプト */
-	DoTakeOverScript *ScriptSetting `json:"doTakeOverScript"`
-	/** ログの出力設定 */
-	LogSetting *LogSetting `json:"logSetting"`
-	/** 作成日時 */
-	CreatedAt *int64 `json:"createdAt"`
-	/** 最終更新日時 */
-	UpdatedAt *int64 `json:"updatedAt"`
+	NamespaceId              *string        `json:"namespaceId"`
+	Name                     *string        `json:"name"`
+	Description              *string        `json:"description"`
+	ChangePasswordIfTakeOver *bool          `json:"changePasswordIfTakeOver"`
+	CreateAccountScript      *ScriptSetting `json:"createAccountScript"`
+	AuthenticationScript     *ScriptSetting `json:"authenticationScript"`
+	CreateTakeOverScript     *ScriptSetting `json:"createTakeOverScript"`
+	DoTakeOverScript         *ScriptSetting `json:"doTakeOverScript"`
+	LogSetting               *LogSetting    `json:"logSetting"`
+	CreatedAt                *int64         `json:"createdAt"`
+	UpdatedAt                *int64         `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	data["namespaceId"] = p.NamespaceId
-	data["ownerId"] = p.OwnerId
-	data["name"] = p.Name
-	data["description"] = p.Description
-	data["changePasswordIfTakeOver"] = p.ChangePasswordIfTakeOver
-	if p.CreateAccountScript != nil {
-		data["createAccountScript"] = *p.CreateAccountScript.ToDict()
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId:              core.CastString(data["namespaceId"]),
+		Name:                     core.CastString(data["name"]),
+		Description:              core.CastString(data["description"]),
+		ChangePasswordIfTakeOver: core.CastBool(data["changePasswordIfTakeOver"]),
+		CreateAccountScript:      NewScriptSettingFromDict(core.CastMap(data["createAccountScript"])).Pointer(),
+		AuthenticationScript:     NewScriptSettingFromDict(core.CastMap(data["authenticationScript"])).Pointer(),
+		CreateTakeOverScript:     NewScriptSettingFromDict(core.CastMap(data["createTakeOverScript"])).Pointer(),
+		DoTakeOverScript:         NewScriptSettingFromDict(core.CastMap(data["doTakeOverScript"])).Pointer(),
+		LogSetting:               NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:                core.CastInt64(data["createdAt"]),
+		UpdatedAt:                core.CastInt64(data["updatedAt"]),
 	}
-	if p.AuthenticationScript != nil {
-		data["authenticationScript"] = *p.AuthenticationScript.ToDict()
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId":              p.NamespaceId,
+		"name":                     p.Name,
+		"description":              p.Description,
+		"changePasswordIfTakeOver": p.ChangePasswordIfTakeOver,
+		"createAccountScript":      p.CreateAccountScript.ToDict(),
+		"authenticationScript":     p.AuthenticationScript.ToDict(),
+		"createTakeOverScript":     p.CreateTakeOverScript.ToDict(),
+		"doTakeOverScript":         p.DoTakeOverScript.ToDict(),
+		"logSetting":               p.LogSetting.ToDict(),
+		"createdAt":                p.CreatedAt,
+		"updatedAt":                p.UpdatedAt,
 	}
-	if p.CreateTakeOverScript != nil {
-		data["createTakeOverScript"] = *p.CreateTakeOverScript.ToDict()
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
 	}
-	if p.DoTakeOverScript != nil {
-		data["doTakeOverScript"] = *p.DoTakeOverScript.ToDict()
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
 	}
-	if p.LogSetting != nil {
-		data["logSetting"] = *p.LogSetting.ToDict()
-	}
-	data["createdAt"] = p.CreatedAt
-	data["updatedAt"] = p.UpdatedAt
-	return &data
+	return v
 }
 
 type Account struct {
-	/** ゲームプレイヤーアカウント */
-	AccountId *string `json:"accountId"`
-	/** アカウントID */
-	UserId *string `json:"userId"`
-	/** パスワード */
-	Password *string `json:"password"`
-	/** 現在時刻に対する補正値（現在時刻を起点とした秒数） */
-	TimeOffset *int32 `json:"timeOffset"`
-	/** 作成日時 */
-	CreatedAt *int64 `json:"createdAt"`
+	AccountId  *string `json:"accountId"`
+	UserId     *string `json:"userId"`
+	Password   *string `json:"password"`
+	TimeOffset *int32  `json:"timeOffset"`
+	CreatedAt  *int64  `json:"createdAt"`
 }
 
-func (p *Account) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	data["accountId"] = p.AccountId
-	data["userId"] = p.UserId
-	data["password"] = p.Password
-	data["timeOffset"] = p.TimeOffset
-	data["createdAt"] = p.CreatedAt
-	return &data
+func NewAccountFromDict(data map[string]interface{}) Account {
+	return Account{
+		AccountId:  core.CastString(data["accountId"]),
+		UserId:     core.CastString(data["userId"]),
+		Password:   core.CastString(data["password"]),
+		TimeOffset: core.CastInt32(data["timeOffset"]),
+		CreatedAt:  core.CastInt64(data["createdAt"]),
+	}
+}
+
+func (p Account) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"accountId":  p.AccountId,
+		"userId":     p.UserId,
+		"password":   p.Password,
+		"timeOffset": p.TimeOffset,
+		"createdAt":  p.CreatedAt,
+	}
+}
+
+func (p Account) Pointer() *Account {
+	return &p
+}
+
+func CastAccounts(data []interface{}) []Account {
+	v := make([]Account, 0)
+	for _, d := range data {
+		v = append(v, NewAccountFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAccountsFromDict(data []Account) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type TakeOver struct {
-	/** 引き継ぎ設定 */
-	TakeOverId *string `json:"takeOverId"`
-	/** ユーザーID */
-	UserId *string `json:"userId"`
-	/** スロット番号 */
-	Type *int32 `json:"type"`
-	/** 引き継ぎ用ユーザーID */
+	TakeOverId     *string `json:"takeOverId"`
+	UserId         *string `json:"userId"`
+	Type           *int32  `json:"type"`
 	UserIdentifier *string `json:"userIdentifier"`
-	/** パスワード */
-	Password *string `json:"password"`
-	/** 作成日時 */
-	CreatedAt *int64 `json:"createdAt"`
+	Password       *string `json:"password"`
+	CreatedAt      *int64  `json:"createdAt"`
 }
 
-func (p *TakeOver) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	data["takeOverId"] = p.TakeOverId
-	data["userId"] = p.UserId
-	data["type"] = p.Type
-	data["userIdentifier"] = p.UserIdentifier
-	data["password"] = p.Password
-	data["createdAt"] = p.CreatedAt
-	return &data
+func NewTakeOverFromDict(data map[string]interface{}) TakeOver {
+	return TakeOver{
+		TakeOverId:     core.CastString(data["takeOverId"]),
+		UserId:         core.CastString(data["userId"]),
+		Type:           core.CastInt32(data["type"]),
+		UserIdentifier: core.CastString(data["userIdentifier"]),
+		Password:       core.CastString(data["password"]),
+		CreatedAt:      core.CastInt64(data["createdAt"]),
+	}
 }
 
-type ResponseCache struct {
-	/** None */
-	Region *string `json:"region"`
-	/** オーナーID */
-	OwnerId *string `json:"ownerId"`
-	/** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string `json:"responseCacheId"`
-	/** None */
-	RequestHash *string `json:"requestHash"`
-	/** APIの応答内容 */
-	Result *string `json:"result"`
+func (p TakeOver) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"takeOverId":     p.TakeOverId,
+		"userId":         p.UserId,
+		"type":           p.Type,
+		"userIdentifier": p.UserIdentifier,
+		"password":       p.Password,
+		"createdAt":      p.CreatedAt,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	data["region"] = p.Region
-	data["ownerId"] = p.OwnerId
-	data["responseCacheId"] = p.ResponseCacheId
-	data["requestHash"] = p.RequestHash
-	data["result"] = p.Result
-	return &data
+func (p TakeOver) Pointer() *TakeOver {
+	return &p
+}
+
+func CastTakeOvers(data []interface{}) []TakeOver {
+	v := make([]TakeOver, 0)
+	for _, d := range data {
+		v = append(v, NewTakeOverFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTakeOversFromDict(data []TakeOver) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ScriptSetting struct {
-	/** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *string `json:"triggerScriptId"`
-	/** 完了通知の通知先 */
-	DoneTriggerTargetType *string `json:"doneTriggerTargetType"`
-	/** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *string `json:"doneTriggerScriptId"`
-	/** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
+	TriggerScriptId             *string `json:"triggerScriptId"`
+	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
-func (p *ScriptSetting) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	data["triggerScriptId"] = p.TriggerScriptId
-	data["doneTriggerTargetType"] = p.DoneTriggerTargetType
-	data["doneTriggerScriptId"] = p.DoneTriggerScriptId
-	data["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
-	return &data
+func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
+	return ScriptSetting{
+		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
+		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
+		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
+		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+	}
+}
+
+func (p ScriptSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"triggerScriptId":             p.TriggerScriptId,
+		"doneTriggerTargetType":       p.DoneTriggerTargetType,
+		"doneTriggerScriptId":         p.DoneTriggerScriptId,
+		"doneTriggerQueueNamespaceId": p.DoneTriggerQueueNamespaceId,
+	}
+}
+
+func (p ScriptSetting) Pointer() *ScriptSetting {
+	return &p
+}
+
+func CastScriptSettings(data []interface{}) []ScriptSetting {
+	v := make([]ScriptSetting, 0)
+	for _, d := range data {
+		v = append(v, NewScriptSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-	/** ログの記録に使用する GS2-Log のネームスペース のGRN */
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	data["loggingNamespaceId"] = p.LoggingNamespaceId
-	return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

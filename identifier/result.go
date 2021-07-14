@@ -16,26 +16,11 @@ permissions and limitations under the License.
 
 package identifier
 
-type DescribeUsersResult struct {
-    /** ユーザのリスト */
-	Items         []User	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
-}
+import "core"
 
-func (p *DescribeUsersResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]User, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+type DescribeUsersResult struct {
+    Items []User `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeUsersAsyncResult struct {
@@ -43,17 +28,28 @@ type DescribeUsersAsyncResult struct {
 	err    error
 }
 
-type CreateUserResult struct {
-    /** 作成したユーザ */
-	Item         *User	`json:"item"`
+func NewDescribeUsersResultFromDict(data map[string]interface{}) DescribeUsersResult {
+    return DescribeUsersResult {
+        Items: CastUsers(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateUserResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeUsersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastUsersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeUsersResult) Pointer() *DescribeUsersResult {
+    return &p
+}
+
+type CreateUserResult struct {
+    Item *User `json:"item"`
 }
 
 type CreateUserAsyncResult struct {
@@ -61,17 +57,24 @@ type CreateUserAsyncResult struct {
 	err    error
 }
 
-type UpdateUserResult struct {
-    /** 更新後のユーザ */
-	Item         *User	`json:"item"`
+func NewCreateUserResultFromDict(data map[string]interface{}) CreateUserResult {
+    return CreateUserResult {
+        Item: NewUserFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateUserResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CreateUserResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateUserResult) Pointer() *CreateUserResult {
+    return &p
+}
+
+type UpdateUserResult struct {
+    Item *User `json:"item"`
 }
 
 type UpdateUserAsyncResult struct {
@@ -79,17 +82,24 @@ type UpdateUserAsyncResult struct {
 	err    error
 }
 
-type GetUserResult struct {
-    /** ユーザ */
-	Item         *User	`json:"item"`
+func NewUpdateUserResultFromDict(data map[string]interface{}) UpdateUserResult {
+    return UpdateUserResult {
+        Item: NewUserFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetUserResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateUserResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateUserResult) Pointer() *UpdateUserResult {
+    return &p
+}
+
+type GetUserResult struct {
+    Item *User `json:"item"`
 }
 
 type GetUserAsyncResult struct {
@@ -97,12 +107,23 @@ type GetUserAsyncResult struct {
 	err    error
 }
 
-type DeleteUserResult struct {
+func NewGetUserResultFromDict(data map[string]interface{}) GetUserResult {
+    return GetUserResult {
+        Item: NewUserFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteUserResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+func (p GetUserResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetUserResult) Pointer() *GetUserResult {
+    return &p
+}
+
+type DeleteUserResult struct {
 }
 
 type DeleteUserAsyncResult struct {
@@ -110,26 +131,23 @@ type DeleteUserAsyncResult struct {
 	err    error
 }
 
-type DescribeSecurityPoliciesResult struct {
-    /** セキュリティポリシーのリスト */
-	Items         []SecurityPolicy	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeleteUserResultFromDict(data map[string]interface{}) DeleteUserResult {
+    return DeleteUserResult {
+    }
 }
 
-func (p *DescribeSecurityPoliciesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]SecurityPolicy, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteUserResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeleteUserResult) Pointer() *DeleteUserResult {
+    return &p
+}
+
+type DescribeSecurityPoliciesResult struct {
+    Items []SecurityPolicy `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeSecurityPoliciesAsyncResult struct {
@@ -137,26 +155,29 @@ type DescribeSecurityPoliciesAsyncResult struct {
 	err    error
 }
 
-type DescribeCommonSecurityPoliciesResult struct {
-    /** セキュリティポリシーのリスト */
-	Items         []SecurityPolicy	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDescribeSecurityPoliciesResultFromDict(data map[string]interface{}) DescribeSecurityPoliciesResult {
+    return DescribeSecurityPoliciesResult {
+        Items: CastSecurityPolicies(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *DescribeCommonSecurityPoliciesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]SecurityPolicy, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeSecurityPoliciesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSecurityPoliciesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DescribeSecurityPoliciesResult) Pointer() *DescribeSecurityPoliciesResult {
+    return &p
+}
+
+type DescribeCommonSecurityPoliciesResult struct {
+    Items []SecurityPolicy `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeCommonSecurityPoliciesAsyncResult struct {
@@ -164,17 +185,28 @@ type DescribeCommonSecurityPoliciesAsyncResult struct {
 	err    error
 }
 
-type CreateSecurityPolicyResult struct {
-    /** 作成したセキュリティポリシー */
-	Item         *SecurityPolicy	`json:"item"`
+func NewDescribeCommonSecurityPoliciesResultFromDict(data map[string]interface{}) DescribeCommonSecurityPoliciesResult {
+    return DescribeCommonSecurityPoliciesResult {
+        Items: CastSecurityPolicies(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateSecurityPolicyResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeCommonSecurityPoliciesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSecurityPoliciesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeCommonSecurityPoliciesResult) Pointer() *DescribeCommonSecurityPoliciesResult {
+    return &p
+}
+
+type CreateSecurityPolicyResult struct {
+    Item *SecurityPolicy `json:"item"`
 }
 
 type CreateSecurityPolicyAsyncResult struct {
@@ -182,17 +214,24 @@ type CreateSecurityPolicyAsyncResult struct {
 	err    error
 }
 
-type UpdateSecurityPolicyResult struct {
-    /** 更新後のセキュリティポリシー */
-	Item         *SecurityPolicy	`json:"item"`
+func NewCreateSecurityPolicyResultFromDict(data map[string]interface{}) CreateSecurityPolicyResult {
+    return CreateSecurityPolicyResult {
+        Item: NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateSecurityPolicyResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CreateSecurityPolicyResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateSecurityPolicyResult) Pointer() *CreateSecurityPolicyResult {
+    return &p
+}
+
+type UpdateSecurityPolicyResult struct {
+    Item *SecurityPolicy `json:"item"`
 }
 
 type UpdateSecurityPolicyAsyncResult struct {
@@ -200,17 +239,24 @@ type UpdateSecurityPolicyAsyncResult struct {
 	err    error
 }
 
-type GetSecurityPolicyResult struct {
-    /** セキュリティポリシー */
-	Item         *SecurityPolicy	`json:"item"`
+func NewUpdateSecurityPolicyResultFromDict(data map[string]interface{}) UpdateSecurityPolicyResult {
+    return UpdateSecurityPolicyResult {
+        Item: NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetSecurityPolicyResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateSecurityPolicyResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateSecurityPolicyResult) Pointer() *UpdateSecurityPolicyResult {
+    return &p
+}
+
+type GetSecurityPolicyResult struct {
+    Item *SecurityPolicy `json:"item"`
 }
 
 type GetSecurityPolicyAsyncResult struct {
@@ -218,12 +264,23 @@ type GetSecurityPolicyAsyncResult struct {
 	err    error
 }
 
-type DeleteSecurityPolicyResult struct {
+func NewGetSecurityPolicyResultFromDict(data map[string]interface{}) GetSecurityPolicyResult {
+    return GetSecurityPolicyResult {
+        Item: NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteSecurityPolicyResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+func (p GetSecurityPolicyResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetSecurityPolicyResult) Pointer() *GetSecurityPolicyResult {
+    return &p
+}
+
+type DeleteSecurityPolicyResult struct {
 }
 
 type DeleteSecurityPolicyAsyncResult struct {
@@ -231,26 +288,23 @@ type DeleteSecurityPolicyAsyncResult struct {
 	err    error
 }
 
-type DescribeIdentifiersResult struct {
-    /** クレデンシャルのリスト */
-	Items         []Identifier	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeleteSecurityPolicyResultFromDict(data map[string]interface{}) DeleteSecurityPolicyResult {
+    return DeleteSecurityPolicyResult {
+    }
 }
 
-func (p *DescribeIdentifiersResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Identifier, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteSecurityPolicyResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeleteSecurityPolicyResult) Pointer() *DeleteSecurityPolicyResult {
+    return &p
+}
+
+type DescribeIdentifiersResult struct {
+    Items []Identifier `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeIdentifiersAsyncResult struct {
@@ -258,22 +312,29 @@ type DescribeIdentifiersAsyncResult struct {
 	err    error
 }
 
-type CreateIdentifierResult struct {
-    /** 作成したクレデンシャル */
-	Item         *Identifier	`json:"item"`
-    /** クライアントシークレット */
-	ClientSecret         *string	`json:"clientSecret"`
+func NewDescribeIdentifiersResultFromDict(data map[string]interface{}) DescribeIdentifiersResult {
+    return DescribeIdentifiersResult {
+        Items: CastIdentifiers(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateIdentifierResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeIdentifiersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastIdentifiersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    if p.ClientSecret != nil {
-        data["clientSecret"] = p.ClientSecret
-    }
-    return &data
+}
+
+func (p DescribeIdentifiersResult) Pointer() *DescribeIdentifiersResult {
+    return &p
+}
+
+type CreateIdentifierResult struct {
+    Item *Identifier `json:"item"`
+    ClientSecret *string `json:"clientSecret"`
 }
 
 type CreateIdentifierAsyncResult struct {
@@ -281,17 +342,26 @@ type CreateIdentifierAsyncResult struct {
 	err    error
 }
 
-type GetIdentifierResult struct {
-    /** クレデンシャル */
-	Item         *Identifier	`json:"item"`
+func NewCreateIdentifierResultFromDict(data map[string]interface{}) CreateIdentifierResult {
+    return CreateIdentifierResult {
+        Item: NewIdentifierFromDict(core.CastMap(data["item"])).Pointer(),
+        ClientSecret: core.CastString(data["clientSecret"]),
+    }
 }
 
-func (p *GetIdentifierResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CreateIdentifierResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "clientSecret": p.ClientSecret,
     }
-    return &data
+}
+
+func (p CreateIdentifierResult) Pointer() *CreateIdentifierResult {
+    return &p
+}
+
+type GetIdentifierResult struct {
+    Item *Identifier `json:"item"`
 }
 
 type GetIdentifierAsyncResult struct {
@@ -299,12 +369,23 @@ type GetIdentifierAsyncResult struct {
 	err    error
 }
 
-type DeleteIdentifierResult struct {
+func NewGetIdentifierResultFromDict(data map[string]interface{}) GetIdentifierResult {
+    return GetIdentifierResult {
+        Item: NewIdentifierFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteIdentifierResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+func (p GetIdentifierResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetIdentifierResult) Pointer() *GetIdentifierResult {
+    return &p
+}
+
+type DeleteIdentifierResult struct {
 }
 
 type DeleteIdentifierAsyncResult struct {
@@ -312,26 +393,23 @@ type DeleteIdentifierAsyncResult struct {
 	err    error
 }
 
-type DescribePasswordsResult struct {
-    /** パスワードのリスト */
-	Items         []Password	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeleteIdentifierResultFromDict(data map[string]interface{}) DeleteIdentifierResult {
+    return DeleteIdentifierResult {
+    }
 }
 
-func (p *DescribePasswordsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Password, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteIdentifierResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeleteIdentifierResult) Pointer() *DeleteIdentifierResult {
+    return &p
+}
+
+type DescribePasswordsResult struct {
+    Items []Password `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribePasswordsAsyncResult struct {
@@ -339,17 +417,28 @@ type DescribePasswordsAsyncResult struct {
 	err    error
 }
 
-type CreatePasswordResult struct {
-    /** 作成したパスワード */
-	Item         *Password	`json:"item"`
+func NewDescribePasswordsResultFromDict(data map[string]interface{}) DescribePasswordsResult {
+    return DescribePasswordsResult {
+        Items: CastPasswords(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreatePasswordResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribePasswordsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastPasswordsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribePasswordsResult) Pointer() *DescribePasswordsResult {
+    return &p
+}
+
+type CreatePasswordResult struct {
+    Item *Password `json:"item"`
 }
 
 type CreatePasswordAsyncResult struct {
@@ -357,17 +446,24 @@ type CreatePasswordAsyncResult struct {
 	err    error
 }
 
-type GetPasswordResult struct {
-    /** パスワード */
-	Item         *Password	`json:"item"`
+func NewCreatePasswordResultFromDict(data map[string]interface{}) CreatePasswordResult {
+    return CreatePasswordResult {
+        Item: NewPasswordFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetPasswordResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CreatePasswordResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreatePasswordResult) Pointer() *CreatePasswordResult {
+    return &p
+}
+
+type GetPasswordResult struct {
+    Item *Password `json:"item"`
 }
 
 type GetPasswordAsyncResult struct {
@@ -375,12 +471,23 @@ type GetPasswordAsyncResult struct {
 	err    error
 }
 
-type DeletePasswordResult struct {
+func NewGetPasswordResultFromDict(data map[string]interface{}) GetPasswordResult {
+    return GetPasswordResult {
+        Item: NewPasswordFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeletePasswordResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+func (p GetPasswordResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetPasswordResult) Pointer() *GetPasswordResult {
+    return &p
+}
+
+type DeletePasswordResult struct {
 }
 
 type DeletePasswordAsyncResult struct {
@@ -388,21 +495,22 @@ type DeletePasswordAsyncResult struct {
 	err    error
 }
 
-type GetHasSecurityPolicyResult struct {
-    /** セキュリティポリシーのリスト */
-	Items         []SecurityPolicy	`json:"items"`
+func NewDeletePasswordResultFromDict(data map[string]interface{}) DeletePasswordResult {
+    return DeletePasswordResult {
+    }
 }
 
-func (p *GetHasSecurityPolicyResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]SecurityPolicy, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeletePasswordResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
     }
-    return &data
+}
+
+func (p DeletePasswordResult) Pointer() *DeletePasswordResult {
+    return &p
+}
+
+type GetHasSecurityPolicyResult struct {
+    Items []SecurityPolicy `json:"items"`
 }
 
 type GetHasSecurityPolicyAsyncResult struct {
@@ -410,21 +518,26 @@ type GetHasSecurityPolicyAsyncResult struct {
 	err    error
 }
 
-type AttachSecurityPolicyResult struct {
-    /** 新しくユーザーに割り当てたセキュリティポリシーのリスト */
-	Items         []SecurityPolicy	`json:"items"`
+func NewGetHasSecurityPolicyResultFromDict(data map[string]interface{}) GetHasSecurityPolicyResult {
+    return GetHasSecurityPolicyResult {
+        Items: CastSecurityPolicies(core.CastArray(data["items"])),
+    }
 }
 
-func (p *AttachSecurityPolicyResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]SecurityPolicy, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p GetHasSecurityPolicyResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSecurityPoliciesFromDict(
+            p.Items,
+        ),
     }
-    return &data
+}
+
+func (p GetHasSecurityPolicyResult) Pointer() *GetHasSecurityPolicyResult {
+    return &p
+}
+
+type AttachSecurityPolicyResult struct {
+    Items []SecurityPolicy `json:"items"`
 }
 
 type AttachSecurityPolicyAsyncResult struct {
@@ -432,21 +545,26 @@ type AttachSecurityPolicyAsyncResult struct {
 	err    error
 }
 
-type DetachSecurityPolicyResult struct {
-    /** 剥奪したあとユーザーに引き続き割り当てられているセキュリティポリシーのリスト */
-	Items         []SecurityPolicy	`json:"items"`
+func NewAttachSecurityPolicyResultFromDict(data map[string]interface{}) AttachSecurityPolicyResult {
+    return AttachSecurityPolicyResult {
+        Items: CastSecurityPolicies(core.CastArray(data["items"])),
+    }
 }
 
-func (p *DetachSecurityPolicyResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]SecurityPolicy, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p AttachSecurityPolicyResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSecurityPoliciesFromDict(
+            p.Items,
+        ),
     }
-    return &data
+}
+
+func (p AttachSecurityPolicyResult) Pointer() *AttachSecurityPolicyResult {
+    return &p
+}
+
+type DetachSecurityPolicyResult struct {
+    Items []SecurityPolicy `json:"items"`
 }
 
 type DetachSecurityPolicyAsyncResult struct {
@@ -454,27 +572,28 @@ type DetachSecurityPolicyAsyncResult struct {
 	err    error
 }
 
-type LoginResult struct {
-    /** プロジェクトトークン */
-	AccessToken         *string	`json:"accessToken"`
-    /** Bearer */
-	TokenType         *string	`json:"tokenType"`
-    /** 有効期間(秒) */
-	ExpiresIn         *int32	`json:"expiresIn"`
+func NewDetachSecurityPolicyResultFromDict(data map[string]interface{}) DetachSecurityPolicyResult {
+    return DetachSecurityPolicyResult {
+        Items: CastSecurityPolicies(core.CastArray(data["items"])),
+    }
 }
 
-func (p *LoginResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.AccessToken != nil {
-        data["accessToken"] = p.AccessToken
+func (p DetachSecurityPolicyResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSecurityPoliciesFromDict(
+            p.Items,
+        ),
     }
-    if p.TokenType != nil {
-        data["tokenType"] = p.TokenType
-    }
-    if p.ExpiresIn != nil {
-        data["expiresIn"] = p.ExpiresIn
-    }
-    return &data
+}
+
+func (p DetachSecurityPolicyResult) Pointer() *DetachSecurityPolicyResult {
+    return &p
+}
+
+type LoginResult struct {
+    AccessToken *string `json:"accessToken"`
+    TokenType *string `json:"tokenType"`
+    ExpiresIn *int32 `json:"expiresIn"`
 }
 
 type LoginAsyncResult struct {
@@ -482,20 +601,47 @@ type LoginAsyncResult struct {
 	err    error
 }
 
-type LoginByUserResult struct {
-    /** プロジェクトトークン */
-	Item         *ProjectToken	`json:"item"`
+func NewLoginResultFromDict(data map[string]interface{}) LoginResult {
+    return LoginResult {
+        AccessToken: core.CastString(data["accessToken"]),
+        TokenType: core.CastString(data["tokenType"]),
+        ExpiresIn: core.CastInt32(data["expiresIn"]),
+    }
 }
 
-func (p *LoginByUserResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p LoginResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "accessToken": p.AccessToken,
+        "tokenType": p.TokenType,
+        "expiresIn": p.ExpiresIn,
     }
-    return &data
+}
+
+func (p LoginResult) Pointer() *LoginResult {
+    return &p
+}
+
+type LoginByUserResult struct {
+    Item *ProjectToken `json:"item"`
 }
 
 type LoginByUserAsyncResult struct {
 	result *LoginByUserResult
 	err    error
+}
+
+func NewLoginByUserResultFromDict(data map[string]interface{}) LoginByUserResult {
+    return LoginByUserResult {
+        Item: NewProjectTokenFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p LoginByUserResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p LoginByUserResult) Pointer() *LoginByUserResult {
+    return &p
 }

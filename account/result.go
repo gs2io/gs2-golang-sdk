@@ -16,26 +16,11 @@ permissions and limitations under the License.
 
 package account
 
-type DescribeNamespacesResult struct {
-	/** ネームスペースのリスト */
-	Items []Namespace `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
-}
+import "core"
 
-func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-		items := make([]Namespace, 0)
-		for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-	}
-	if p.NextPageToken != nil {
-		data["nextPageToken"] = p.NextPageToken
-	}
-	return &data
+type DescribeNamespacesResult struct {
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -43,17 +28,28 @@ type DescribeNamespacesAsyncResult struct {
 	err    error
 }
 
-type CreateNamespaceResult struct {
-	/** 作成したネームスペース */
-	Item *Namespace `json:"item"`
+func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	return &data
+func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
+    return &p
+}
+
+type CreateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -61,17 +57,24 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceStatusResult struct {
-	/** None */
-	Status *string `json:"status"`
+func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Status != nil {
-		data["status"] = p.Status
-	}
-	return &data
+func (p CreateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
+    return &p
+}
+
+type GetNamespaceStatusResult struct {
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -79,17 +82,24 @@ type GetNamespaceStatusAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceResult struct {
-	/** ネームスペース */
-	Item *Namespace `json:"item"`
+func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
-func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	return &data
+func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "status": p.Status,
+    }
+}
+
+func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
+    return &p
+}
+
+type GetNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -97,17 +107,24 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
-type UpdateNamespaceResult struct {
-	/** 更新したネームスペース */
-	Item *Namespace `json:"item"`
+func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	return &data
+func (p GetNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
+    return &p
+}
+
+type UpdateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -115,12 +132,23 @@ type UpdateNamespaceAsyncResult struct {
 	err    error
 }
 
-type DeleteNamespaceResult struct {
+func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
+    return &p
+}
+
+type DeleteNamespaceResult struct {
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -128,26 +156,23 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
-type DescribeAccountsResult struct {
-	/** ゲームプレイヤーアカウントのリスト */
-	Items []Account `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
+    return DeleteNamespaceResult {
+    }
 }
 
-func (p *DescribeAccountsResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-		items := make([]Account, 0)
-		for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-	}
-	if p.NextPageToken != nil {
-		data["nextPageToken"] = p.NextPageToken
-	}
-	return &data
+func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+    }
+}
+
+func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
+    return &p
+}
+
+type DescribeAccountsResult struct {
+    Items []Account `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeAccountsAsyncResult struct {
@@ -155,17 +180,28 @@ type DescribeAccountsAsyncResult struct {
 	err    error
 }
 
-type CreateAccountResult struct {
-	/** 作成したゲームプレイヤーアカウント */
-	Item *Account `json:"item"`
+func NewDescribeAccountsResultFromDict(data map[string]interface{}) DescribeAccountsResult {
+    return DescribeAccountsResult {
+        Items: CastAccounts(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateAccountResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	return &data
+func (p DescribeAccountsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastAccountsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeAccountsResult) Pointer() *DescribeAccountsResult {
+    return &p
+}
+
+type CreateAccountResult struct {
+    Item *Account `json:"item"`
 }
 
 type CreateAccountAsyncResult struct {
@@ -173,17 +209,24 @@ type CreateAccountAsyncResult struct {
 	err    error
 }
 
-type UpdateTimeOffsetResult struct {
-	/** 更新したゲームプレイヤーアカウント */
-	Item *Account `json:"item"`
+func NewCreateAccountResultFromDict(data map[string]interface{}) CreateAccountResult {
+    return CreateAccountResult {
+        Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateTimeOffsetResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	return &data
+func (p CreateAccountResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p CreateAccountResult) Pointer() *CreateAccountResult {
+    return &p
+}
+
+type UpdateTimeOffsetResult struct {
+    Item *Account `json:"item"`
 }
 
 type UpdateTimeOffsetAsyncResult struct {
@@ -191,17 +234,24 @@ type UpdateTimeOffsetAsyncResult struct {
 	err    error
 }
 
-type GetAccountResult struct {
-	/** ゲームプレイヤーアカウント */
-	Item *Account `json:"item"`
+func NewUpdateTimeOffsetResultFromDict(data map[string]interface{}) UpdateTimeOffsetResult {
+    return UpdateTimeOffsetResult {
+        Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetAccountResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	return &data
+func (p UpdateTimeOffsetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateTimeOffsetResult) Pointer() *UpdateTimeOffsetResult {
+    return &p
+}
+
+type GetAccountResult struct {
+    Item *Account `json:"item"`
 }
 
 type GetAccountAsyncResult struct {
@@ -209,12 +259,23 @@ type GetAccountAsyncResult struct {
 	err    error
 }
 
-type DeleteAccountResult struct {
+func NewGetAccountResultFromDict(data map[string]interface{}) GetAccountResult {
+    return GetAccountResult {
+        Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteAccountResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+func (p GetAccountResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetAccountResult) Pointer() *GetAccountResult {
+    return &p
+}
+
+type DeleteAccountResult struct {
 }
 
 type DeleteAccountAsyncResult struct {
@@ -222,27 +283,24 @@ type DeleteAccountAsyncResult struct {
 	err    error
 }
 
-type AuthenticationResult struct {
-	/** ゲームプレイヤーアカウント */
-	Item *Account `json:"item"`
-	/** 署名対象のアカウント情報 */
-	Body *string `json:"body"`
-	/** 署名 */
-	Signature *string `json:"signature"`
+func NewDeleteAccountResultFromDict(data map[string]interface{}) DeleteAccountResult {
+    return DeleteAccountResult {
+    }
 }
 
-func (p *AuthenticationResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	if p.Body != nil {
-		data["body"] = p.Body
-	}
-	if p.Signature != nil {
-		data["signature"] = p.Signature
-	}
-	return &data
+func (p DeleteAccountResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+    }
+}
+
+func (p DeleteAccountResult) Pointer() *DeleteAccountResult {
+    return &p
+}
+
+type AuthenticationResult struct {
+    Item *Account `json:"item"`
+    Body *string `json:"body"`
+    Signature *string `json:"signature"`
 }
 
 type AuthenticationAsyncResult struct {
@@ -250,26 +308,29 @@ type AuthenticationAsyncResult struct {
 	err    error
 }
 
-type DescribeTakeOversResult struct {
-	/** 引き継ぎ設定のリスト */
-	Items []TakeOver `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+func NewAuthenticationResultFromDict(data map[string]interface{}) AuthenticationResult {
+    return AuthenticationResult {
+        Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+        Body: core.CastString(data["body"]),
+        Signature: core.CastString(data["signature"]),
+    }
 }
 
-func (p *DescribeTakeOversResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-		items := make([]TakeOver, 0)
-		for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-	}
-	if p.NextPageToken != nil {
-		data["nextPageToken"] = p.NextPageToken
-	}
-	return &data
+func (p AuthenticationResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "body": p.Body,
+        "signature": p.Signature,
+    }
+}
+
+func (p AuthenticationResult) Pointer() *AuthenticationResult {
+    return &p
+}
+
+type DescribeTakeOversResult struct {
+    Items []TakeOver `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeTakeOversAsyncResult struct {
@@ -277,26 +338,29 @@ type DescribeTakeOversAsyncResult struct {
 	err    error
 }
 
-type DescribeTakeOversByUserIdResult struct {
-	/** 引き継ぎ設定のリスト */
-	Items []TakeOver `json:"items"`
-	/** リストの続きを取得するためのページトークン */
-	NextPageToken *string `json:"nextPageToken"`
+func NewDescribeTakeOversResultFromDict(data map[string]interface{}) DescribeTakeOversResult {
+    return DescribeTakeOversResult {
+        Items: CastTakeOvers(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *DescribeTakeOversByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Items != nil {
-		items := make([]TakeOver, 0)
-		for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-	}
-	if p.NextPageToken != nil {
-		data["nextPageToken"] = p.NextPageToken
-	}
-	return &data
+func (p DescribeTakeOversResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastTakeOversFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeTakeOversResult) Pointer() *DescribeTakeOversResult {
+    return &p
+}
+
+type DescribeTakeOversByUserIdResult struct {
+    Items []TakeOver `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeTakeOversByUserIdAsyncResult struct {
@@ -304,17 +368,28 @@ type DescribeTakeOversByUserIdAsyncResult struct {
 	err    error
 }
 
-type CreateTakeOverResult struct {
-	/** 作成した引き継ぎ設定 */
-	Item *TakeOver `json:"item"`
+func NewDescribeTakeOversByUserIdResultFromDict(data map[string]interface{}) DescribeTakeOversByUserIdResult {
+    return DescribeTakeOversByUserIdResult {
+        Items: CastTakeOvers(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateTakeOverResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	return &data
+func (p DescribeTakeOversByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastTakeOversFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeTakeOversByUserIdResult) Pointer() *DescribeTakeOversByUserIdResult {
+    return &p
+}
+
+type CreateTakeOverResult struct {
+    Item *TakeOver `json:"item"`
 }
 
 type CreateTakeOverAsyncResult struct {
@@ -322,17 +397,24 @@ type CreateTakeOverAsyncResult struct {
 	err    error
 }
 
-type CreateTakeOverByUserIdResult struct {
-	/** 作成した引き継ぎ設定 */
-	Item *TakeOver `json:"item"`
+func NewCreateTakeOverResultFromDict(data map[string]interface{}) CreateTakeOverResult {
+    return CreateTakeOverResult {
+        Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *CreateTakeOverByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	return &data
+func (p CreateTakeOverResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p CreateTakeOverResult) Pointer() *CreateTakeOverResult {
+    return &p
+}
+
+type CreateTakeOverByUserIdResult struct {
+    Item *TakeOver `json:"item"`
 }
 
 type CreateTakeOverByUserIdAsyncResult struct {
@@ -340,17 +422,24 @@ type CreateTakeOverByUserIdAsyncResult struct {
 	err    error
 }
 
-type GetTakeOverResult struct {
-	/** 引き継ぎ設定 */
-	Item *TakeOver `json:"item"`
+func NewCreateTakeOverByUserIdResultFromDict(data map[string]interface{}) CreateTakeOverByUserIdResult {
+    return CreateTakeOverByUserIdResult {
+        Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetTakeOverResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	return &data
+func (p CreateTakeOverByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p CreateTakeOverByUserIdResult) Pointer() *CreateTakeOverByUserIdResult {
+    return &p
+}
+
+type GetTakeOverResult struct {
+    Item *TakeOver `json:"item"`
 }
 
 type GetTakeOverAsyncResult struct {
@@ -358,17 +447,24 @@ type GetTakeOverAsyncResult struct {
 	err    error
 }
 
-type GetTakeOverByUserIdResult struct {
-	/** 引き継ぎ設定 */
-	Item *TakeOver `json:"item"`
+func NewGetTakeOverResultFromDict(data map[string]interface{}) GetTakeOverResult {
+    return GetTakeOverResult {
+        Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetTakeOverByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	return &data
+func (p GetTakeOverResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetTakeOverResult) Pointer() *GetTakeOverResult {
+    return &p
+}
+
+type GetTakeOverByUserIdResult struct {
+    Item *TakeOver `json:"item"`
 }
 
 type GetTakeOverByUserIdAsyncResult struct {
@@ -376,17 +472,24 @@ type GetTakeOverByUserIdAsyncResult struct {
 	err    error
 }
 
-type UpdateTakeOverResult struct {
-	/** 引き継ぎ設定 */
-	Item *TakeOver `json:"item"`
+func NewGetTakeOverByUserIdResultFromDict(data map[string]interface{}) GetTakeOverByUserIdResult {
+    return GetTakeOverByUserIdResult {
+        Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateTakeOverResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	return &data
+func (p GetTakeOverByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetTakeOverByUserIdResult) Pointer() *GetTakeOverByUserIdResult {
+    return &p
+}
+
+type UpdateTakeOverResult struct {
+    Item *TakeOver `json:"item"`
 }
 
 type UpdateTakeOverAsyncResult struct {
@@ -394,17 +497,24 @@ type UpdateTakeOverAsyncResult struct {
 	err    error
 }
 
-type UpdateTakeOverByUserIdResult struct {
-	/** 引き継ぎ設定 */
-	Item *TakeOver `json:"item"`
+func NewUpdateTakeOverResultFromDict(data map[string]interface{}) UpdateTakeOverResult {
+    return UpdateTakeOverResult {
+        Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateTakeOverByUserIdResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	return &data
+func (p UpdateTakeOverResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateTakeOverResult) Pointer() *UpdateTakeOverResult {
+    return &p
+}
+
+type UpdateTakeOverByUserIdResult struct {
+    Item *TakeOver `json:"item"`
 }
 
 type UpdateTakeOverByUserIdAsyncResult struct {
@@ -412,12 +522,23 @@ type UpdateTakeOverByUserIdAsyncResult struct {
 	err    error
 }
 
-type DeleteTakeOverResult struct {
+func NewUpdateTakeOverByUserIdResultFromDict(data map[string]interface{}) UpdateTakeOverByUserIdResult {
+    return UpdateTakeOverByUserIdResult {
+        Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteTakeOverResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+func (p UpdateTakeOverByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateTakeOverByUserIdResult) Pointer() *UpdateTakeOverByUserIdResult {
+    return &p
+}
+
+type DeleteTakeOverResult struct {
 }
 
 type DeleteTakeOverAsyncResult struct {
@@ -425,12 +546,21 @@ type DeleteTakeOverAsyncResult struct {
 	err    error
 }
 
-type DeleteTakeOverByUserIdentifierResult struct {
+func NewDeleteTakeOverResultFromDict(data map[string]interface{}) DeleteTakeOverResult {
+    return DeleteTakeOverResult {
+    }
 }
 
-func (p *DeleteTakeOverByUserIdentifierResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	return &data
+func (p DeleteTakeOverResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+    }
+}
+
+func (p DeleteTakeOverResult) Pointer() *DeleteTakeOverResult {
+    return &p
+}
+
+type DeleteTakeOverByUserIdentifierResult struct {
 }
 
 type DeleteTakeOverByUserIdentifierAsyncResult struct {
@@ -438,20 +568,41 @@ type DeleteTakeOverByUserIdentifierAsyncResult struct {
 	err    error
 }
 
-type DoTakeOverResult struct {
-	/** ゲームプレイヤーアカウント */
-	Item *Account `json:"item"`
+func NewDeleteTakeOverByUserIdentifierResultFromDict(data map[string]interface{}) DeleteTakeOverByUserIdentifierResult {
+    return DeleteTakeOverByUserIdentifierResult {
+    }
 }
 
-func (p *DoTakeOverResult) ToDict() *map[string]interface{} {
-	var data = map[string]interface{}{}
-	if p.Item != nil {
-		data["item"] = p.Item.ToDict()
-	}
-	return &data
+func (p DeleteTakeOverByUserIdentifierResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+    }
+}
+
+func (p DeleteTakeOverByUserIdentifierResult) Pointer() *DeleteTakeOverByUserIdentifierResult {
+    return &p
+}
+
+type DoTakeOverResult struct {
+    Item *Account `json:"item"`
 }
 
 type DoTakeOverAsyncResult struct {
 	result *DoTakeOverResult
 	err    error
+}
+
+func NewDoTakeOverResultFromDict(data map[string]interface{}) DoTakeOverResult {
+    return DoTakeOverResult {
+        Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p DoTakeOverResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p DoTakeOverResult) Pointer() *DoTakeOverResult {
+    return &p
 }

@@ -19,7 +19,7 @@ package news
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2NewsWebSocketClient struct {
@@ -816,6 +816,9 @@ func (p Gs2NewsWebSocketClient) DescribeNewsAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -979,6 +982,9 @@ func (p Gs2NewsWebSocketClient) WantGrantAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

@@ -16,26 +16,11 @@ permissions and limitations under the License.
 
 package money
 
-type DescribeNamespacesResult struct {
-    /** ネームスペースのリスト */
-	Items         []Namespace	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
-}
+import "core"
 
-func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Namespace, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+type DescribeNamespacesResult struct {
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -43,17 +28,28 @@ type DescribeNamespacesAsyncResult struct {
 	err    error
 }
 
-type CreateNamespaceResult struct {
-    /** 作成したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
+    return &p
+}
+
+type CreateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -61,17 +57,24 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceStatusResult struct {
-    /** None */
-	Status         *string	`json:"status"`
+func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Status != nil {
-        data["status"] = p.Status
+func (p CreateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
+    return &p
+}
+
+type GetNamespaceStatusResult struct {
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -79,17 +82,24 @@ type GetNamespaceStatusAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceResult struct {
-    /** ネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
-func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "status": p.Status,
     }
-    return &data
+}
+
+func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
+    return &p
+}
+
+type GetNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -97,17 +107,24 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
-type UpdateNamespaceResult struct {
-    /** 更新したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
+    return &p
+}
+
+type UpdateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -115,12 +132,23 @@ type UpdateNamespaceAsyncResult struct {
 	err    error
 }
 
-type DeleteNamespaceResult struct {
+func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
+    return &p
+}
+
+type DeleteNamespaceResult struct {
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -128,26 +156,23 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
-type DescribeWalletsResult struct {
-    /** ウォレットのリスト */
-	Items         []Wallet	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
+    return DeleteNamespaceResult {
+    }
 }
 
-func (p *DescribeWalletsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Wallet, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
+    return &p
+}
+
+type DescribeWalletsResult struct {
+    Items []Wallet `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeWalletsAsyncResult struct {
@@ -155,26 +180,29 @@ type DescribeWalletsAsyncResult struct {
 	err    error
 }
 
-type DescribeWalletsByUserIdResult struct {
-    /** ウォレットのリスト */
-	Items         []Wallet	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDescribeWalletsResultFromDict(data map[string]interface{}) DescribeWalletsResult {
+    return DescribeWalletsResult {
+        Items: CastWallets(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *DescribeWalletsByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Wallet, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeWalletsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastWalletsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DescribeWalletsResult) Pointer() *DescribeWalletsResult {
+    return &p
+}
+
+type DescribeWalletsByUserIdResult struct {
+    Items []Wallet `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeWalletsByUserIdAsyncResult struct {
@@ -182,44 +210,28 @@ type DescribeWalletsByUserIdAsyncResult struct {
 	err    error
 }
 
-type QueryWalletsResult struct {
-    /** ウォレットのリスト */
-	Items         []Wallet	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDescribeWalletsByUserIdResultFromDict(data map[string]interface{}) DescribeWalletsByUserIdResult {
+    return DescribeWalletsByUserIdResult {
+        Items: CastWallets(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *QueryWalletsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Wallet, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeWalletsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastWalletsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
 }
 
-type QueryWalletsAsyncResult struct {
-	result *QueryWalletsResult
-	err    error
+func (p DescribeWalletsByUserIdResult) Pointer() *DescribeWalletsByUserIdResult {
+    return &p
 }
 
 type GetWalletResult struct {
-    /** ウォレット */
-	Item         *Wallet	`json:"item"`
-}
-
-func (p *GetWalletResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+    Item *Wallet `json:"item"`
 }
 
 type GetWalletAsyncResult struct {
@@ -227,17 +239,24 @@ type GetWalletAsyncResult struct {
 	err    error
 }
 
-type GetWalletByUserIdResult struct {
-    /** ウォレット */
-	Item         *Wallet	`json:"item"`
+func NewGetWalletResultFromDict(data map[string]interface{}) GetWalletResult {
+    return GetWalletResult {
+        Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetWalletByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetWalletResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetWalletResult) Pointer() *GetWalletResult {
+    return &p
+}
+
+type GetWalletByUserIdResult struct {
+    Item *Wallet `json:"item"`
 }
 
 type GetWalletByUserIdAsyncResult struct {
@@ -245,17 +264,24 @@ type GetWalletByUserIdAsyncResult struct {
 	err    error
 }
 
-type DepositByUserIdResult struct {
-    /** 加算後のウォレット */
-	Item         *Wallet	`json:"item"`
+func NewGetWalletByUserIdResultFromDict(data map[string]interface{}) GetWalletByUserIdResult {
+    return GetWalletByUserIdResult {
+        Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DepositByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetWalletByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetWalletByUserIdResult) Pointer() *GetWalletByUserIdResult {
+    return &p
+}
+
+type DepositByUserIdResult struct {
+    Item *Wallet `json:"item"`
 }
 
 type DepositByUserIdAsyncResult struct {
@@ -263,22 +289,25 @@ type DepositByUserIdAsyncResult struct {
 	err    error
 }
 
-type WithdrawResult struct {
-    /** 消費後のウォレット */
-	Item         *Wallet	`json:"item"`
-    /** 消費した通貨の価格 */
-	Price         *float32	`json:"price"`
+func NewDepositByUserIdResultFromDict(data map[string]interface{}) DepositByUserIdResult {
+    return DepositByUserIdResult {
+        Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *WithdrawResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DepositByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.Price != nil {
-        data["price"] = p.Price
-    }
-    return &data
+}
+
+func (p DepositByUserIdResult) Pointer() *DepositByUserIdResult {
+    return &p
+}
+
+type WithdrawResult struct {
+    Item *Wallet `json:"item"`
+    Price *float32 `json:"price"`
 }
 
 type WithdrawAsyncResult struct {
@@ -286,22 +315,27 @@ type WithdrawAsyncResult struct {
 	err    error
 }
 
-type WithdrawByUserIdResult struct {
-    /** 消費後のウォレット */
-	Item         *Wallet	`json:"item"`
-    /** 消費した通貨の価格 */
-	Price         *float32	`json:"price"`
+func NewWithdrawResultFromDict(data map[string]interface{}) WithdrawResult {
+    return WithdrawResult {
+        Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
+        Price: core.CastFloat32(data["price"]),
+    }
 }
 
-func (p *WithdrawByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p WithdrawResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "price": p.Price,
     }
-    if p.Price != nil {
-        data["price"] = p.Price
-    }
-    return &data
+}
+
+func (p WithdrawResult) Pointer() *WithdrawResult {
+    return &p
+}
+
+type WithdrawByUserIdResult struct {
+    Item *Wallet `json:"item"`
+    Price *float32 `json:"price"`
 }
 
 type WithdrawByUserIdAsyncResult struct {
@@ -309,17 +343,26 @@ type WithdrawByUserIdAsyncResult struct {
 	err    error
 }
 
-type DepositByStampSheetResult struct {
-    /** 加算後のウォレット */
-	Item         *Wallet	`json:"item"`
+func NewWithdrawByUserIdResultFromDict(data map[string]interface{}) WithdrawByUserIdResult {
+    return WithdrawByUserIdResult {
+        Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
+        Price: core.CastFloat32(data["price"]),
+    }
 }
 
-func (p *DepositByStampSheetResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p WithdrawByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "price": p.Price,
     }
-    return &data
+}
+
+func (p WithdrawByUserIdResult) Pointer() *WithdrawByUserIdResult {
+    return &p
+}
+
+type DepositByStampSheetResult struct {
+    Item *Wallet `json:"item"`
 }
 
 type DepositByStampSheetAsyncResult struct {
@@ -327,22 +370,26 @@ type DepositByStampSheetAsyncResult struct {
 	err    error
 }
 
-type WithdrawByStampTaskResult struct {
-    /** 消費後のウォレット */
-	Item         *Wallet	`json:"item"`
-    /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *string	`json:"newContextStack"`
+func NewDepositByStampSheetResultFromDict(data map[string]interface{}) DepositByStampSheetResult {
+    return DepositByStampSheetResult {
+        Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *WithdrawByStampTaskResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DepositByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NewContextStack != nil {
-        data["newContextStack"] = p.NewContextStack
-    }
-    return &data
+}
+
+func (p DepositByStampSheetResult) Pointer() *DepositByStampSheetResult {
+    return &p
+}
+
+type WithdrawByStampTaskResult struct {
+    Item *Wallet `json:"item"`
+    Price *float32 `json:"price"`
+    NewContextStack *string `json:"newContextStack"`
 }
 
 type WithdrawByStampTaskAsyncResult struct {
@@ -350,26 +397,29 @@ type WithdrawByStampTaskAsyncResult struct {
 	err    error
 }
 
-type DescribeReceiptsResult struct {
-    /** レシートのリスト */
-	Items         []Receipt	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewWithdrawByStampTaskResultFromDict(data map[string]interface{}) WithdrawByStampTaskResult {
+    return WithdrawByStampTaskResult {
+        Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
+        Price: core.CastFloat32(data["price"]),
+        NewContextStack: core.CastString(data["newContextStack"]),
+    }
 }
 
-func (p *DescribeReceiptsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Receipt, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p WithdrawByStampTaskResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "price": p.Price,
+        "newContextStack": p.NewContextStack,
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p WithdrawByStampTaskResult) Pointer() *WithdrawByStampTaskResult {
+    return &p
+}
+
+type DescribeReceiptsResult struct {
+    Items []Receipt `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeReceiptsAsyncResult struct {
@@ -377,17 +427,28 @@ type DescribeReceiptsAsyncResult struct {
 	err    error
 }
 
-type GetByUserIdAndTransactionIdResult struct {
-    /** レシート */
-	Item         *Receipt	`json:"item"`
+func NewDescribeReceiptsResultFromDict(data map[string]interface{}) DescribeReceiptsResult {
+    return DescribeReceiptsResult {
+        Items: CastReceipts(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *GetByUserIdAndTransactionIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeReceiptsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastReceiptsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeReceiptsResult) Pointer() *DescribeReceiptsResult {
+    return &p
+}
+
+type GetByUserIdAndTransactionIdResult struct {
+    Item *Receipt `json:"item"`
 }
 
 type GetByUserIdAndTransactionIdAsyncResult struct {
@@ -395,17 +456,24 @@ type GetByUserIdAndTransactionIdAsyncResult struct {
 	err    error
 }
 
-type RecordReceiptResult struct {
-    /** レシート */
-	Item         *Receipt	`json:"item"`
+func NewGetByUserIdAndTransactionIdResultFromDict(data map[string]interface{}) GetByUserIdAndTransactionIdResult {
+    return GetByUserIdAndTransactionIdResult {
+        Item: NewReceiptFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *RecordReceiptResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetByUserIdAndTransactionIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetByUserIdAndTransactionIdResult) Pointer() *GetByUserIdAndTransactionIdResult {
+    return &p
+}
+
+type RecordReceiptResult struct {
+    Item *Receipt `json:"item"`
 }
 
 type RecordReceiptAsyncResult struct {
@@ -413,25 +481,46 @@ type RecordReceiptAsyncResult struct {
 	err    error
 }
 
-type RecordReceiptByStampTaskResult struct {
-    /** レシート */
-	Item         *Receipt	`json:"item"`
-    /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *string	`json:"newContextStack"`
+func NewRecordReceiptResultFromDict(data map[string]interface{}) RecordReceiptResult {
+    return RecordReceiptResult {
+        Item: NewReceiptFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *RecordReceiptByStampTaskResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p RecordReceiptResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NewContextStack != nil {
-        data["newContextStack"] = p.NewContextStack
-    }
-    return &data
+}
+
+func (p RecordReceiptResult) Pointer() *RecordReceiptResult {
+    return &p
+}
+
+type RecordReceiptByStampTaskResult struct {
+    Item *Receipt `json:"item"`
+    NewContextStack *string `json:"newContextStack"`
 }
 
 type RecordReceiptByStampTaskAsyncResult struct {
 	result *RecordReceiptByStampTaskResult
 	err    error
+}
+
+func NewRecordReceiptByStampTaskResultFromDict(data map[string]interface{}) RecordReceiptByStampTaskResult {
+    return RecordReceiptByStampTaskResult {
+        Item: NewReceiptFromDict(core.CastMap(data["item"])).Pointer(),
+        NewContextStack: core.CastString(data["newContextStack"]),
+    }
+}
+
+func (p RecordReceiptByStampTaskResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "newContextStack": p.NewContextStack,
+    }
+}
+
+func (p RecordReceiptByStampTaskResult) Pointer() *RecordReceiptByStampTaskResult {
+    return &p
 }

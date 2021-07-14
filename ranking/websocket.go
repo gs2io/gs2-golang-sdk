@@ -19,7 +19,7 @@ package ranking
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2RankingWebSocketClient struct {
@@ -1228,6 +1228,9 @@ func (p Gs2RankingWebSocketClient) DescribeSubscribesByCategoryNameAsync(
     if request.CategoryName != nil && *request.CategoryName != "" {
         bodies["categoryName"] = *request.CategoryName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -1397,6 +1400,9 @@ func (p Gs2RankingWebSocketClient) SubscribeAsync(
     }
     if request.CategoryName != nil && *request.CategoryName != "" {
         bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.TargetUserId != nil && *request.TargetUserId != "" {
         bodies["targetUserId"] = *request.TargetUserId
@@ -1574,6 +1580,9 @@ func (p Gs2RankingWebSocketClient) GetSubscribeAsync(
     if request.CategoryName != nil && *request.CategoryName != "" {
         bodies["categoryName"] = *request.CategoryName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.TargetUserId != nil && *request.TargetUserId != "" {
         bodies["targetUserId"] = *request.TargetUserId
     }
@@ -1750,6 +1759,9 @@ func (p Gs2RankingWebSocketClient) UnsubscribeAsync(
     if request.CategoryName != nil && *request.CategoryName != "" {
         bodies["categoryName"] = *request.CategoryName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.TargetUserId != nil && *request.TargetUserId != "" {
         bodies["targetUserId"] = *request.TargetUserId
     }
@@ -1925,6 +1937,9 @@ func (p Gs2RankingWebSocketClient) DescribeScoresAsync(
     }
     if request.CategoryName != nil && *request.CategoryName != "" {
         bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.ScorerUserId != nil && *request.ScorerUserId != "" {
         bodies["scorerUserId"] = *request.ScorerUserId
@@ -2114,6 +2129,9 @@ func (p Gs2RankingWebSocketClient) GetScoreAsync(
     if request.CategoryName != nil && *request.CategoryName != "" {
         bodies["categoryName"] = *request.CategoryName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.ScorerUserId != nil && *request.ScorerUserId != "" {
         bodies["scorerUserId"] = *request.ScorerUserId
     }
@@ -2295,6 +2313,9 @@ func (p Gs2RankingWebSocketClient) DescribeRankingsAsync(
     }
     if request.CategoryName != nil && *request.CategoryName != "" {
         bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.StartIndex != nil {
         bodies["startIndex"] = *request.StartIndex
@@ -2569,6 +2590,9 @@ func (p Gs2RankingWebSocketClient) GetRankingAsync(
     if request.CategoryName != nil && *request.CategoryName != "" {
         bodies["categoryName"] = *request.CategoryName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.ScorerUserId != nil && *request.ScorerUserId != "" {
         bodies["scorerUserId"] = *request.ScorerUserId
     }
@@ -2750,6 +2774,9 @@ func (p Gs2RankingWebSocketClient) PutScoreAsync(
     }
     if request.CategoryName != nil && *request.CategoryName != "" {
         bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.Score != nil {
         bodies["score"] = *request.Score

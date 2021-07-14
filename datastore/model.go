@@ -16,162 +16,255 @@ permissions and limitations under the License.
 
 package datastore
 
+import "core"
+
 type Namespace struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** ネームスペース名 */
-	Name *string   `json:"name"`
-    /** ネームスペースの説明 */
-	Description *string   `json:"description"`
-    /** アップロード完了報告時に実行するスクリプト */
-	DoneUploadScript *ScriptSetting   `json:"doneUploadScript"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId      *string        `json:"namespaceId"`
+	Name             *string        `json:"name"`
+	Description      *string        `json:"description"`
+	DoneUploadScript *ScriptSetting `json:"doneUploadScript"`
+	LogSetting       *LogSetting    `json:"logSetting"`
+	CreatedAt        *int64         `json:"createdAt"`
+	UpdatedAt        *int64         `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    if p.DoneUploadScript != nil {
-        data["doneUploadScript"] = *p.DoneUploadScript.ToDict()
-    }
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId:      core.CastString(data["namespaceId"]),
+		Name:             core.CastString(data["name"]),
+		Description:      core.CastString(data["description"]),
+		DoneUploadScript: NewScriptSettingFromDict(core.CastMap(data["doneUploadScript"])).Pointer(),
+		LogSetting:       NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:        core.CastInt64(data["createdAt"]),
+		UpdatedAt:        core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId":      p.NamespaceId,
+		"name":             p.Name,
+		"description":      p.Description,
+		"doneUploadScript": p.DoneUploadScript.ToDict(),
+		"logSetting":       p.LogSetting.ToDict(),
+		"createdAt":        p.CreatedAt,
+		"updatedAt":        p.UpdatedAt,
+	}
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ScriptSetting struct {
-    /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *string   `json:"triggerScriptId"`
-    /** 完了通知の通知先 */
-	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
-    /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
-    /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
+	TriggerScriptId             *string `json:"triggerScriptId"`
+	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
+	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
-func (p *ScriptSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["triggerScriptId"] = p.TriggerScriptId
-    data["doneTriggerTargetType"] = p.DoneTriggerTargetType
-    data["doneTriggerScriptId"] = p.DoneTriggerScriptId
-    data["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
-    return &data
+func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
+	return ScriptSetting{
+		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
+		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
+		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
+		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+	}
+}
+
+func (p ScriptSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"triggerScriptId":             p.TriggerScriptId,
+		"doneTriggerTargetType":       p.DoneTriggerTargetType,
+		"doneTriggerScriptId":         p.DoneTriggerScriptId,
+		"doneTriggerQueueNamespaceId": p.DoneTriggerQueueNamespaceId,
+	}
+}
+
+func (p ScriptSetting) Pointer() *ScriptSetting {
+	return &p
+}
+
+func CastScriptSettings(data []interface{}) []ScriptSetting {
+	v := make([]ScriptSetting, 0)
+	for _, d := range data {
+		v = append(v, NewScriptSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type DataObject struct {
-    /** データオブジェクト */
-	DataObjectId *string   `json:"dataObjectId"`
-    /** データの名前 */
-	Name *string   `json:"name"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** ファイルのアクセス権 */
-	Scope *string   `json:"scope"`
-    /** 公開するユーザIDリスト */
-	AllowUserIds []string   `json:"allowUserIds"`
-    /** プラットフォーム */
-	Platform *string   `json:"platform"`
-    /** 状態 */
-	Status *string   `json:"status"`
-    /** データの世代 */
-	Generation *string   `json:"generation"`
-    /** 以前有効だったデータの世代 */
-	PreviousGeneration *string   `json:"previousGeneration"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	DataObjectId       *string  `json:"dataObjectId"`
+	Name               *string  `json:"name"`
+	UserId             *string  `json:"userId"`
+	Scope              *string  `json:"scope"`
+	AllowUserIds       []string `json:"allowUserIds"`
+	Platform           *string  `json:"platform"`
+	Status             *string  `json:"status"`
+	Generation         *string  `json:"generation"`
+	PreviousGeneration *string  `json:"previousGeneration"`
+	CreatedAt          *int64   `json:"createdAt"`
+	UpdatedAt          *int64   `json:"updatedAt"`
 }
 
-func (p *DataObject) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["dataObjectId"] = p.DataObjectId
-    data["name"] = p.Name
-    data["userId"] = p.UserId
-    data["scope"] = p.Scope
-    if p.AllowUserIds != nil {
-        var _allowUserIds []string
-        for _, item := range p.AllowUserIds {
-            _allowUserIds = append(_allowUserIds, item)
-        }
-        data["allowUserIds"] = &_allowUserIds
-    }
-    data["platform"] = p.Platform
-    data["status"] = p.Status
-    data["generation"] = p.Generation
-    data["previousGeneration"] = p.PreviousGeneration
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewDataObjectFromDict(data map[string]interface{}) DataObject {
+	return DataObject{
+		DataObjectId:       core.CastString(data["dataObjectId"]),
+		Name:               core.CastString(data["name"]),
+		UserId:             core.CastString(data["userId"]),
+		Scope:              core.CastString(data["scope"]),
+		AllowUserIds:       core.CastStrings(core.CastArray(data["allowUserIds"])),
+		Platform:           core.CastString(data["platform"]),
+		Status:             core.CastString(data["status"]),
+		Generation:         core.CastString(data["generation"]),
+		PreviousGeneration: core.CastString(data["previousGeneration"]),
+		CreatedAt:          core.CastInt64(data["createdAt"]),
+		UpdatedAt:          core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p DataObject) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"dataObjectId": p.DataObjectId,
+		"name":         p.Name,
+		"userId":       p.UserId,
+		"scope":        p.Scope,
+		"allowUserIds": core.CastStringsFromDict(
+			p.AllowUserIds,
+		),
+		"platform":           p.Platform,
+		"status":             p.Status,
+		"generation":         p.Generation,
+		"previousGeneration": p.PreviousGeneration,
+		"createdAt":          p.CreatedAt,
+		"updatedAt":          p.UpdatedAt,
+	}
+}
+
+func (p DataObject) Pointer() *DataObject {
+	return &p
+}
+
+func CastDataObjects(data []interface{}) []DataObject {
+	v := make([]DataObject, 0)
+	for _, d := range data {
+		v = append(v, NewDataObjectFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastDataObjectsFromDict(data []DataObject) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type DataObjectHistory struct {
-    /** データオブジェクト履歴 */
-	DataObjectHistoryId *string   `json:"dataObjectHistoryId"`
-    /** データオブジェクト名 */
-	DataObjectName *string   `json:"dataObjectName"`
-    /** 世代ID */
-	Generation *string   `json:"generation"`
-    /** データサイズ */
-	ContentLength *int64   `json:"contentLength"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
+	DataObjectHistoryId *string `json:"dataObjectHistoryId"`
+	DataObjectName      *string `json:"dataObjectName"`
+	Generation          *string `json:"generation"`
+	ContentLength       *int64  `json:"contentLength"`
+	CreatedAt           *int64  `json:"createdAt"`
 }
 
-func (p *DataObjectHistory) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["dataObjectHistoryId"] = p.DataObjectHistoryId
-    data["dataObjectName"] = p.DataObjectName
-    data["generation"] = p.Generation
-    data["contentLength"] = p.ContentLength
-    data["createdAt"] = p.CreatedAt
-    return &data
+func NewDataObjectHistoryFromDict(data map[string]interface{}) DataObjectHistory {
+	return DataObjectHistory{
+		DataObjectHistoryId: core.CastString(data["dataObjectHistoryId"]),
+		DataObjectName:      core.CastString(data["dataObjectName"]),
+		Generation:          core.CastString(data["generation"]),
+		ContentLength:       core.CastInt64(data["contentLength"]),
+		CreatedAt:           core.CastInt64(data["createdAt"]),
+	}
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func (p DataObjectHistory) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"dataObjectHistoryId": p.DataObjectHistoryId,
+		"dataObjectName":      p.DataObjectName,
+		"generation":          p.Generation,
+		"contentLength":       p.ContentLength,
+		"createdAt":           p.CreatedAt,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func (p DataObjectHistory) Pointer() *DataObjectHistory {
+	return &p
+}
+
+func CastDataObjectHistories(data []interface{}) []DataObjectHistory {
+	v := make([]DataObjectHistory, 0)
+	for _, d := range data {
+		v = append(v, NewDataObjectHistoryFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastDataObjectHistoriesFromDict(data []DataObjectHistory) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

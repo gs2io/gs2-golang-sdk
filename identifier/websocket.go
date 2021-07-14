@@ -19,7 +19,7 @@ package identifier
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2IdentifierWebSocketClient struct {
@@ -567,9 +567,6 @@ func (p Gs2IdentifierWebSocketClient) DescribeCommonSecurityPoliciesAsync(
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.OwnerId != nil && *request.OwnerId != "" {
-        bodies["ownerId"] = *request.OwnerId
-    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }

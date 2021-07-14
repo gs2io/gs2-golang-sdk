@@ -19,7 +19,7 @@ package showcase
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2ShowcaseWebSocketClient struct {
@@ -680,16 +680,16 @@ func (p Gs2ShowcaseWebSocketClient) CreateSalesItemMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.ConsumeActions != nil {
-        var _consumeActions []*map[string]interface {}
+        var _consumeActions []interface {}
         for _, item := range request.ConsumeActions {
-            _consumeActions = append(_consumeActions, item.ToDict())
+            _consumeActions = append(_consumeActions, item)
         }
         bodies["consumeActions"] = _consumeActions
     }
     if request.AcquireActions != nil {
-        var _acquireActions []*map[string]interface {}
+        var _acquireActions []interface {}
         for _, item := range request.AcquireActions {
-            _acquireActions = append(_acquireActions, item.ToDict())
+            _acquireActions = append(_acquireActions, item)
         }
         bodies["acquireActions"] = _acquireActions
     }
@@ -864,16 +864,16 @@ func (p Gs2ShowcaseWebSocketClient) UpdateSalesItemMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.ConsumeActions != nil {
-        var _consumeActions []*map[string]interface {}
+        var _consumeActions []interface {}
         for _, item := range request.ConsumeActions {
-            _consumeActions = append(_consumeActions, item.ToDict())
+            _consumeActions = append(_consumeActions, item)
         }
         bodies["consumeActions"] = _consumeActions
     }
     if request.AcquireActions != nil {
-        var _acquireActions []*map[string]interface {}
+        var _acquireActions []interface {}
         for _, item := range request.AcquireActions {
-            _acquireActions = append(_acquireActions, item.ToDict())
+            _acquireActions = append(_acquireActions, item)
         }
         bodies["acquireActions"] = _acquireActions
     }
@@ -1133,7 +1133,7 @@ func (p Gs2ShowcaseWebSocketClient) CreateSalesItemGroupMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.SalesItemNames != nil {
-        var _salesItemNames []string
+        var _salesItemNames []interface {}
         for _, item := range request.SalesItemNames {
             _salesItemNames = append(_salesItemNames, item)
         }
@@ -1310,7 +1310,7 @@ func (p Gs2ShowcaseWebSocketClient) UpdateSalesItemGroupMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.SalesItemNames != nil {
-        var _salesItemNames []string
+        var _salesItemNames []interface {}
         for _, item := range request.SalesItemNames {
             _salesItemNames = append(_salesItemNames, item)
         }
@@ -1572,9 +1572,9 @@ func (p Gs2ShowcaseWebSocketClient) CreateShowcaseMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.DisplayItems != nil {
-        var _displayItems []*map[string]interface {}
+        var _displayItems []interface {}
         for _, item := range request.DisplayItems {
-            _displayItems = append(_displayItems, item.ToDict())
+            _displayItems = append(_displayItems, item)
         }
         bodies["displayItems"] = _displayItems
     }
@@ -1752,9 +1752,9 @@ func (p Gs2ShowcaseWebSocketClient) UpdateShowcaseMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.DisplayItems != nil {
-        var _displayItems []*map[string]interface {}
+        var _displayItems []interface {}
         for _, item := range request.DisplayItems {
-            _displayItems = append(_displayItems, item.ToDict())
+            _displayItems = append(_displayItems, item)
         }
         bodies["displayItems"] = _displayItems
     }
@@ -2244,6 +2244,9 @@ func (p Gs2ShowcaseWebSocketClient) DescribeShowcasesAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -2410,6 +2413,9 @@ func (p Gs2ShowcaseWebSocketClient) GetShowcaseAsync(
     }
     if request.ShowcaseName != nil && *request.ShowcaseName != "" {
         bodies["showcaseName"] = *request.ShowcaseName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -2584,10 +2590,13 @@ func (p Gs2ShowcaseWebSocketClient) BuyAsync(
     if request.DisplayItemId != nil && *request.DisplayItemId != "" {
         bodies["displayItemId"] = *request.DisplayItemId
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2683,9 +2692,9 @@ func (p Gs2ShowcaseWebSocketClient) BuyByUserIdAsync(
         bodies["userId"] = *request.UserId
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }

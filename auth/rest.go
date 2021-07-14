@@ -18,7 +18,7 @@ package auth
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 

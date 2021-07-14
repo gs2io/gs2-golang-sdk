@@ -16,26 +16,11 @@ permissions and limitations under the License.
 
 package datastore
 
-type DescribeNamespacesResult struct {
-    /** ネームスペースのリスト */
-	Items         []Namespace	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
-}
+import "core"
 
-func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Namespace, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+type DescribeNamespacesResult struct {
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -43,17 +28,28 @@ type DescribeNamespacesAsyncResult struct {
 	err    error
 }
 
-type CreateNamespaceResult struct {
-    /** 作成したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
+    return &p
+}
+
+type CreateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -61,17 +57,24 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceStatusResult struct {
-    /** None */
-	Status         *string	`json:"status"`
+func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Status != nil {
-        data["status"] = p.Status
+func (p CreateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
+    return &p
+}
+
+type GetNamespaceStatusResult struct {
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -79,17 +82,24 @@ type GetNamespaceStatusAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceResult struct {
-    /** ネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
-func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "status": p.Status,
     }
-    return &data
+}
+
+func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
+    return &p
+}
+
+type GetNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -97,17 +107,24 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
-type UpdateNamespaceResult struct {
-    /** 更新したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
+    return &p
+}
+
+type UpdateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -115,17 +132,24 @@ type UpdateNamespaceAsyncResult struct {
 	err    error
 }
 
-type DeleteNamespaceResult struct {
-    /** 削除したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
+    return &p
+}
+
+type DeleteNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -133,26 +157,25 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
-type DescribeDataObjectsResult struct {
-    /** データオブジェクトのリスト */
-	Items         []DataObject	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
+    return DeleteNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeDataObjectsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]DataObject, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
+    return &p
+}
+
+type DescribeDataObjectsResult struct {
+    Items []DataObject `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeDataObjectsAsyncResult struct {
@@ -160,26 +183,29 @@ type DescribeDataObjectsAsyncResult struct {
 	err    error
 }
 
-type DescribeDataObjectsByUserIdResult struct {
-    /** データオブジェクトのリスト */
-	Items         []DataObject	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDescribeDataObjectsResultFromDict(data map[string]interface{}) DescribeDataObjectsResult {
+    return DescribeDataObjectsResult {
+        Items: CastDataObjects(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *DescribeDataObjectsByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]DataObject, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeDataObjectsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastDataObjectsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DescribeDataObjectsResult) Pointer() *DescribeDataObjectsResult {
+    return &p
+}
+
+type DescribeDataObjectsByUserIdResult struct {
+    Items []DataObject `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeDataObjectsByUserIdAsyncResult struct {
@@ -187,22 +213,29 @@ type DescribeDataObjectsByUserIdAsyncResult struct {
 	err    error
 }
 
-type PrepareUploadResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
-    /** アップロード処理の実行に使用するURL */
-	UploadUrl         *string	`json:"uploadUrl"`
+func NewDescribeDataObjectsByUserIdResultFromDict(data map[string]interface{}) DescribeDataObjectsByUserIdResult {
+    return DescribeDataObjectsByUserIdResult {
+        Items: CastDataObjects(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *PrepareUploadResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeDataObjectsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastDataObjectsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    if p.UploadUrl != nil {
-        data["uploadUrl"] = p.UploadUrl
-    }
-    return &data
+}
+
+func (p DescribeDataObjectsByUserIdResult) Pointer() *DescribeDataObjectsByUserIdResult {
+    return &p
+}
+
+type PrepareUploadResult struct {
+    Item *DataObject `json:"item"`
+    UploadUrl *string `json:"uploadUrl"`
 }
 
 type PrepareUploadAsyncResult struct {
@@ -210,22 +243,27 @@ type PrepareUploadAsyncResult struct {
 	err    error
 }
 
-type PrepareUploadByUserIdResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
-    /** アップロード処理の実行に使用するURL */
-	UploadUrl         *string	`json:"uploadUrl"`
+func NewPrepareUploadResultFromDict(data map[string]interface{}) PrepareUploadResult {
+    return PrepareUploadResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        UploadUrl: core.CastString(data["uploadUrl"]),
+    }
 }
 
-func (p *PrepareUploadByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p PrepareUploadResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "uploadUrl": p.UploadUrl,
     }
-    if p.UploadUrl != nil {
-        data["uploadUrl"] = p.UploadUrl
-    }
-    return &data
+}
+
+func (p PrepareUploadResult) Pointer() *PrepareUploadResult {
+    return &p
+}
+
+type PrepareUploadByUserIdResult struct {
+    Item *DataObject `json:"item"`
+    UploadUrl *string `json:"uploadUrl"`
 }
 
 type PrepareUploadByUserIdAsyncResult struct {
@@ -233,17 +271,26 @@ type PrepareUploadByUserIdAsyncResult struct {
 	err    error
 }
 
-type UpdateDataObjectResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
+func NewPrepareUploadByUserIdResultFromDict(data map[string]interface{}) PrepareUploadByUserIdResult {
+    return PrepareUploadByUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        UploadUrl: core.CastString(data["uploadUrl"]),
+    }
 }
 
-func (p *UpdateDataObjectResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p PrepareUploadByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "uploadUrl": p.UploadUrl,
     }
-    return &data
+}
+
+func (p PrepareUploadByUserIdResult) Pointer() *PrepareUploadByUserIdResult {
+    return &p
+}
+
+type UpdateDataObjectResult struct {
+    Item *DataObject `json:"item"`
 }
 
 type UpdateDataObjectAsyncResult struct {
@@ -251,17 +298,24 @@ type UpdateDataObjectAsyncResult struct {
 	err    error
 }
 
-type UpdateDataObjectByUserIdResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
+func NewUpdateDataObjectResultFromDict(data map[string]interface{}) UpdateDataObjectResult {
+    return UpdateDataObjectResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateDataObjectByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateDataObjectResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateDataObjectResult) Pointer() *UpdateDataObjectResult {
+    return &p
+}
+
+type UpdateDataObjectByUserIdResult struct {
+    Item *DataObject `json:"item"`
 }
 
 type UpdateDataObjectByUserIdAsyncResult struct {
@@ -269,22 +323,25 @@ type UpdateDataObjectByUserIdAsyncResult struct {
 	err    error
 }
 
-type PrepareReUploadResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
-    /** アップロード処理の実行に使用するURL */
-	UploadUrl         *string	`json:"uploadUrl"`
+func NewUpdateDataObjectByUserIdResultFromDict(data map[string]interface{}) UpdateDataObjectByUserIdResult {
+    return UpdateDataObjectByUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *PrepareReUploadResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateDataObjectByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.UploadUrl != nil {
-        data["uploadUrl"] = p.UploadUrl
-    }
-    return &data
+}
+
+func (p UpdateDataObjectByUserIdResult) Pointer() *UpdateDataObjectByUserIdResult {
+    return &p
+}
+
+type PrepareReUploadResult struct {
+    Item *DataObject `json:"item"`
+    UploadUrl *string `json:"uploadUrl"`
 }
 
 type PrepareReUploadAsyncResult struct {
@@ -292,22 +349,27 @@ type PrepareReUploadAsyncResult struct {
 	err    error
 }
 
-type PrepareReUploadByUserIdResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
-    /** アップロード処理の実行に使用するURL */
-	UploadUrl         *string	`json:"uploadUrl"`
+func NewPrepareReUploadResultFromDict(data map[string]interface{}) PrepareReUploadResult {
+    return PrepareReUploadResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        UploadUrl: core.CastString(data["uploadUrl"]),
+    }
 }
 
-func (p *PrepareReUploadByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p PrepareReUploadResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "uploadUrl": p.UploadUrl,
     }
-    if p.UploadUrl != nil {
-        data["uploadUrl"] = p.UploadUrl
-    }
-    return &data
+}
+
+func (p PrepareReUploadResult) Pointer() *PrepareReUploadResult {
+    return &p
+}
+
+type PrepareReUploadByUserIdResult struct {
+    Item *DataObject `json:"item"`
+    UploadUrl *string `json:"uploadUrl"`
 }
 
 type PrepareReUploadByUserIdAsyncResult struct {
@@ -315,17 +377,26 @@ type PrepareReUploadByUserIdAsyncResult struct {
 	err    error
 }
 
-type DoneUploadResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
+func NewPrepareReUploadByUserIdResultFromDict(data map[string]interface{}) PrepareReUploadByUserIdResult {
+    return PrepareReUploadByUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        UploadUrl: core.CastString(data["uploadUrl"]),
+    }
 }
 
-func (p *DoneUploadResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p PrepareReUploadByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "uploadUrl": p.UploadUrl,
     }
-    return &data
+}
+
+func (p PrepareReUploadByUserIdResult) Pointer() *PrepareReUploadByUserIdResult {
+    return &p
+}
+
+type DoneUploadResult struct {
+    Item *DataObject `json:"item"`
 }
 
 type DoneUploadAsyncResult struct {
@@ -333,17 +404,24 @@ type DoneUploadAsyncResult struct {
 	err    error
 }
 
-type DoneUploadByUserIdResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
+func NewDoneUploadResultFromDict(data map[string]interface{}) DoneUploadResult {
+    return DoneUploadResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DoneUploadByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DoneUploadResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p DoneUploadResult) Pointer() *DoneUploadResult {
+    return &p
+}
+
+type DoneUploadByUserIdResult struct {
+    Item *DataObject `json:"item"`
 }
 
 type DoneUploadByUserIdAsyncResult struct {
@@ -351,17 +429,24 @@ type DoneUploadByUserIdAsyncResult struct {
 	err    error
 }
 
-type DeleteDataObjectResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
+func NewDoneUploadByUserIdResultFromDict(data map[string]interface{}) DoneUploadByUserIdResult {
+    return DoneUploadByUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteDataObjectResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DoneUploadByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p DoneUploadByUserIdResult) Pointer() *DoneUploadByUserIdResult {
+    return &p
+}
+
+type DeleteDataObjectResult struct {
+    Item *DataObject `json:"item"`
 }
 
 type DeleteDataObjectAsyncResult struct {
@@ -369,17 +454,24 @@ type DeleteDataObjectAsyncResult struct {
 	err    error
 }
 
-type DeleteDataObjectByUserIdResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
+func NewDeleteDataObjectResultFromDict(data map[string]interface{}) DeleteDataObjectResult {
+    return DeleteDataObjectResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteDataObjectByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DeleteDataObjectResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p DeleteDataObjectResult) Pointer() *DeleteDataObjectResult {
+    return &p
+}
+
+type DeleteDataObjectByUserIdResult struct {
+    Item *DataObject `json:"item"`
 }
 
 type DeleteDataObjectByUserIdAsyncResult struct {
@@ -387,27 +479,26 @@ type DeleteDataObjectByUserIdAsyncResult struct {
 	err    error
 }
 
-type PrepareDownloadResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
-    /** ファイルをダウンロードするためのURL */
-	FileUrl         *string	`json:"fileUrl"`
-    /** ファイルの容量 */
-	ContentLength         *int64	`json:"contentLength"`
+func NewDeleteDataObjectByUserIdResultFromDict(data map[string]interface{}) DeleteDataObjectByUserIdResult {
+    return DeleteDataObjectByUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *PrepareDownloadResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DeleteDataObjectByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.FileUrl != nil {
-        data["fileUrl"] = p.FileUrl
-    }
-    if p.ContentLength != nil {
-        data["contentLength"] = p.ContentLength
-    }
-    return &data
+}
+
+func (p DeleteDataObjectByUserIdResult) Pointer() *DeleteDataObjectByUserIdResult {
+    return &p
+}
+
+type PrepareDownloadResult struct {
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadAsyncResult struct {
@@ -415,27 +506,30 @@ type PrepareDownloadAsyncResult struct {
 	err    error
 }
 
-type PrepareDownloadByUserIdResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
-    /** ファイルをダウンロードするためのURL */
-	FileUrl         *string	`json:"fileUrl"`
-    /** ファイルの容量 */
-	ContentLength         *int64	`json:"contentLength"`
+func NewPrepareDownloadResultFromDict(data map[string]interface{}) PrepareDownloadResult {
+    return PrepareDownloadResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
-func (p *PrepareDownloadByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p PrepareDownloadResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
     }
-    if p.FileUrl != nil {
-        data["fileUrl"] = p.FileUrl
-    }
-    if p.ContentLength != nil {
-        data["contentLength"] = p.ContentLength
-    }
-    return &data
+}
+
+func (p PrepareDownloadResult) Pointer() *PrepareDownloadResult {
+    return &p
+}
+
+type PrepareDownloadByUserIdResult struct {
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadByUserIdAsyncResult struct {
@@ -443,27 +537,30 @@ type PrepareDownloadByUserIdAsyncResult struct {
 	err    error
 }
 
-type PrepareDownloadByGenerationResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
-    /** ファイルをダウンロードするためのURL */
-	FileUrl         *string	`json:"fileUrl"`
-    /** ファイルの容量 */
-	ContentLength         *int64	`json:"contentLength"`
+func NewPrepareDownloadByUserIdResultFromDict(data map[string]interface{}) PrepareDownloadByUserIdResult {
+    return PrepareDownloadByUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
-func (p *PrepareDownloadByGenerationResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p PrepareDownloadByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
     }
-    if p.FileUrl != nil {
-        data["fileUrl"] = p.FileUrl
-    }
-    if p.ContentLength != nil {
-        data["contentLength"] = p.ContentLength
-    }
-    return &data
+}
+
+func (p PrepareDownloadByUserIdResult) Pointer() *PrepareDownloadByUserIdResult {
+    return &p
+}
+
+type PrepareDownloadByGenerationResult struct {
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadByGenerationAsyncResult struct {
@@ -471,27 +568,30 @@ type PrepareDownloadByGenerationAsyncResult struct {
 	err    error
 }
 
-type PrepareDownloadByGenerationAndUserIdResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
-    /** ファイルをダウンロードするためのURL */
-	FileUrl         *string	`json:"fileUrl"`
-    /** ファイルの容量 */
-	ContentLength         *int64	`json:"contentLength"`
+func NewPrepareDownloadByGenerationResultFromDict(data map[string]interface{}) PrepareDownloadByGenerationResult {
+    return PrepareDownloadByGenerationResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
-func (p *PrepareDownloadByGenerationAndUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p PrepareDownloadByGenerationResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
     }
-    if p.FileUrl != nil {
-        data["fileUrl"] = p.FileUrl
-    }
-    if p.ContentLength != nil {
-        data["contentLength"] = p.ContentLength
-    }
-    return &data
+}
+
+func (p PrepareDownloadByGenerationResult) Pointer() *PrepareDownloadByGenerationResult {
+    return &p
+}
+
+type PrepareDownloadByGenerationAndUserIdResult struct {
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadByGenerationAndUserIdAsyncResult struct {
@@ -499,27 +599,30 @@ type PrepareDownloadByGenerationAndUserIdAsyncResult struct {
 	err    error
 }
 
-type PrepareDownloadOwnDataResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
-    /** ファイルをダウンロードするためのURL */
-	FileUrl         *string	`json:"fileUrl"`
-    /** ファイルの容量 */
-	ContentLength         *int64	`json:"contentLength"`
+func NewPrepareDownloadByGenerationAndUserIdResultFromDict(data map[string]interface{}) PrepareDownloadByGenerationAndUserIdResult {
+    return PrepareDownloadByGenerationAndUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
-func (p *PrepareDownloadOwnDataResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p PrepareDownloadByGenerationAndUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
     }
-    if p.FileUrl != nil {
-        data["fileUrl"] = p.FileUrl
-    }
-    if p.ContentLength != nil {
-        data["contentLength"] = p.ContentLength
-    }
-    return &data
+}
+
+func (p PrepareDownloadByGenerationAndUserIdResult) Pointer() *PrepareDownloadByGenerationAndUserIdResult {
+    return &p
+}
+
+type PrepareDownloadOwnDataResult struct {
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadOwnDataAsyncResult struct {
@@ -527,27 +630,30 @@ type PrepareDownloadOwnDataAsyncResult struct {
 	err    error
 }
 
-type PrepareDownloadByUserIdAndDataObjectNameResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
-    /** ファイルをダウンロードするためのURL */
-	FileUrl         *string	`json:"fileUrl"`
-    /** ファイルの容量 */
-	ContentLength         *int64	`json:"contentLength"`
+func NewPrepareDownloadOwnDataResultFromDict(data map[string]interface{}) PrepareDownloadOwnDataResult {
+    return PrepareDownloadOwnDataResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
-func (p *PrepareDownloadByUserIdAndDataObjectNameResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p PrepareDownloadOwnDataResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
     }
-    if p.FileUrl != nil {
-        data["fileUrl"] = p.FileUrl
-    }
-    if p.ContentLength != nil {
-        data["contentLength"] = p.ContentLength
-    }
-    return &data
+}
+
+func (p PrepareDownloadOwnDataResult) Pointer() *PrepareDownloadOwnDataResult {
+    return &p
+}
+
+type PrepareDownloadByUserIdAndDataObjectNameResult struct {
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadByUserIdAndDataObjectNameAsyncResult struct {
@@ -555,27 +661,30 @@ type PrepareDownloadByUserIdAndDataObjectNameAsyncResult struct {
 	err    error
 }
 
-type PrepareDownloadOwnDataByGenerationResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
-    /** ファイルをダウンロードするためのURL */
-	FileUrl         *string	`json:"fileUrl"`
-    /** ファイルの容量 */
-	ContentLength         *int64	`json:"contentLength"`
+func NewPrepareDownloadByUserIdAndDataObjectNameResultFromDict(data map[string]interface{}) PrepareDownloadByUserIdAndDataObjectNameResult {
+    return PrepareDownloadByUserIdAndDataObjectNameResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
-func (p *PrepareDownloadOwnDataByGenerationResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p PrepareDownloadByUserIdAndDataObjectNameResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
     }
-    if p.FileUrl != nil {
-        data["fileUrl"] = p.FileUrl
-    }
-    if p.ContentLength != nil {
-        data["contentLength"] = p.ContentLength
-    }
-    return &data
+}
+
+func (p PrepareDownloadByUserIdAndDataObjectNameResult) Pointer() *PrepareDownloadByUserIdAndDataObjectNameResult {
+    return &p
+}
+
+type PrepareDownloadOwnDataByGenerationResult struct {
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadOwnDataByGenerationAsyncResult struct {
@@ -583,27 +692,30 @@ type PrepareDownloadOwnDataByGenerationAsyncResult struct {
 	err    error
 }
 
-type PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
-    /** ファイルをダウンロードするためのURL */
-	FileUrl         *string	`json:"fileUrl"`
-    /** ファイルの容量 */
-	ContentLength         *int64	`json:"contentLength"`
+func NewPrepareDownloadOwnDataByGenerationResultFromDict(data map[string]interface{}) PrepareDownloadOwnDataByGenerationResult {
+    return PrepareDownloadOwnDataByGenerationResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
-func (p *PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p PrepareDownloadOwnDataByGenerationResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
     }
-    if p.FileUrl != nil {
-        data["fileUrl"] = p.FileUrl
-    }
-    if p.ContentLength != nil {
-        data["contentLength"] = p.ContentLength
-    }
-    return &data
+}
+
+func (p PrepareDownloadOwnDataByGenerationResult) Pointer() *PrepareDownloadOwnDataByGenerationResult {
+    return &p
+}
+
+type PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult struct {
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncResult struct {
@@ -611,17 +723,28 @@ type PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncResult struct {
 	err    error
 }
 
-type RestoreDataObjectResult struct {
-    /** データオブジェクト */
-	Item         *DataObject	`json:"item"`
+func NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationResultFromDict(data map[string]interface{}) PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult {
+    return PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
-func (p *RestoreDataObjectResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
     }
-    return &data
+}
+
+func (p PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult) Pointer() *PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult {
+    return &p
+}
+
+type RestoreDataObjectResult struct {
+    Item *DataObject `json:"item"`
 }
 
 type RestoreDataObjectAsyncResult struct {
@@ -629,26 +752,25 @@ type RestoreDataObjectAsyncResult struct {
 	err    error
 }
 
-type DescribeDataObjectHistoriesResult struct {
-    /** データオブジェクト履歴のリスト */
-	Items         []DataObjectHistory	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewRestoreDataObjectResultFromDict(data map[string]interface{}) RestoreDataObjectResult {
+    return RestoreDataObjectResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeDataObjectHistoriesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]DataObjectHistory, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p RestoreDataObjectResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p RestoreDataObjectResult) Pointer() *RestoreDataObjectResult {
+    return &p
+}
+
+type DescribeDataObjectHistoriesResult struct {
+    Items []DataObjectHistory `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeDataObjectHistoriesAsyncResult struct {
@@ -656,26 +778,29 @@ type DescribeDataObjectHistoriesAsyncResult struct {
 	err    error
 }
 
-type DescribeDataObjectHistoriesByUserIdResult struct {
-    /** データオブジェクト履歴のリスト */
-	Items         []DataObjectHistory	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDescribeDataObjectHistoriesResultFromDict(data map[string]interface{}) DescribeDataObjectHistoriesResult {
+    return DescribeDataObjectHistoriesResult {
+        Items: CastDataObjectHistories(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *DescribeDataObjectHistoriesByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]DataObjectHistory, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeDataObjectHistoriesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastDataObjectHistoriesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DescribeDataObjectHistoriesResult) Pointer() *DescribeDataObjectHistoriesResult {
+    return &p
+}
+
+type DescribeDataObjectHistoriesByUserIdResult struct {
+    Items []DataObjectHistory `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeDataObjectHistoriesByUserIdAsyncResult struct {
@@ -683,17 +808,28 @@ type DescribeDataObjectHistoriesByUserIdAsyncResult struct {
 	err    error
 }
 
-type GetDataObjectHistoryResult struct {
-    /** データオブジェクト履歴 */
-	Item         *DataObjectHistory	`json:"item"`
+func NewDescribeDataObjectHistoriesByUserIdResultFromDict(data map[string]interface{}) DescribeDataObjectHistoriesByUserIdResult {
+    return DescribeDataObjectHistoriesByUserIdResult {
+        Items: CastDataObjectHistories(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *GetDataObjectHistoryResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeDataObjectHistoriesByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastDataObjectHistoriesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeDataObjectHistoriesByUserIdResult) Pointer() *DescribeDataObjectHistoriesByUserIdResult {
+    return &p
+}
+
+type GetDataObjectHistoryResult struct {
+    Item *DataObjectHistory `json:"item"`
 }
 
 type GetDataObjectHistoryAsyncResult struct {
@@ -701,20 +837,43 @@ type GetDataObjectHistoryAsyncResult struct {
 	err    error
 }
 
-type GetDataObjectHistoryByUserIdResult struct {
-    /** データオブジェクト履歴 */
-	Item         *DataObjectHistory	`json:"item"`
+func NewGetDataObjectHistoryResultFromDict(data map[string]interface{}) GetDataObjectHistoryResult {
+    return GetDataObjectHistoryResult {
+        Item: NewDataObjectHistoryFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetDataObjectHistoryByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetDataObjectHistoryResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetDataObjectHistoryResult) Pointer() *GetDataObjectHistoryResult {
+    return &p
+}
+
+type GetDataObjectHistoryByUserIdResult struct {
+    Item *DataObjectHistory `json:"item"`
 }
 
 type GetDataObjectHistoryByUserIdAsyncResult struct {
 	result *GetDataObjectHistoryByUserIdResult
 	err    error
+}
+
+func NewGetDataObjectHistoryByUserIdResultFromDict(data map[string]interface{}) GetDataObjectHistoryByUserIdResult {
+    return GetDataObjectHistoryByUserIdResult {
+        Item: NewDataObjectHistoryFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetDataObjectHistoryByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetDataObjectHistoryByUserIdResult) Pointer() *GetDataObjectHistoryByUserIdResult {
+    return &p
 }

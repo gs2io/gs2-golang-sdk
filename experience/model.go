@@ -16,312 +16,518 @@ permissions and limitations under the License.
 
 package experience
 
+import "core"
+
 type Namespace struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** ネームスペース名 */
-	Name *string   `json:"name"`
-    /** ネームスペースの説明 */
-	Description *string   `json:"description"`
-    /** ランクキャップ取得時 に実行されるスクリプト のGRN */
-	ExperienceCapScriptId *string   `json:"experienceCapScriptId"`
-    /** 経験値変化したときに実行するスクリプト */
-	ChangeExperienceScript *ScriptSetting   `json:"changeExperienceScript"`
-    /** ランク変化したときに実行するスクリプト */
-	ChangeRankScript *ScriptSetting   `json:"changeRankScript"`
-    /** ランクキャップ変化したときに実行するスクリプト */
-	ChangeRankCapScript *ScriptSetting   `json:"changeRankCapScript"`
-    /** 経験値あふれしたときに実行するスクリプト */
-	OverflowExperienceScript *ScriptSetting   `json:"overflowExperienceScript"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId              *string        `json:"namespaceId"`
+	Name                     *string        `json:"name"`
+	Description              *string        `json:"description"`
+	ExperienceCapScriptId    *string        `json:"experienceCapScriptId"`
+	ChangeExperienceScript   *ScriptSetting `json:"changeExperienceScript"`
+	ChangeRankScript         *ScriptSetting `json:"changeRankScript"`
+	ChangeRankCapScript      *ScriptSetting `json:"changeRankCapScript"`
+	OverflowExperienceScript *ScriptSetting `json:"overflowExperienceScript"`
+	LogSetting               *LogSetting    `json:"logSetting"`
+	CreatedAt                *int64         `json:"createdAt"`
+	UpdatedAt                *int64         `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["experienceCapScriptId"] = p.ExperienceCapScriptId
-    if p.ChangeExperienceScript != nil {
-        data["changeExperienceScript"] = *p.ChangeExperienceScript.ToDict()
-    }
-    if p.ChangeRankScript != nil {
-        data["changeRankScript"] = *p.ChangeRankScript.ToDict()
-    }
-    if p.ChangeRankCapScript != nil {
-        data["changeRankCapScript"] = *p.ChangeRankCapScript.ToDict()
-    }
-    if p.OverflowExperienceScript != nil {
-        data["overflowExperienceScript"] = *p.OverflowExperienceScript.ToDict()
-    }
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId:              core.CastString(data["namespaceId"]),
+		Name:                     core.CastString(data["name"]),
+		Description:              core.CastString(data["description"]),
+		ExperienceCapScriptId:    core.CastString(data["experienceCapScriptId"]),
+		ChangeExperienceScript:   NewScriptSettingFromDict(core.CastMap(data["changeExperienceScript"])).Pointer(),
+		ChangeRankScript:         NewScriptSettingFromDict(core.CastMap(data["changeRankScript"])).Pointer(),
+		ChangeRankCapScript:      NewScriptSettingFromDict(core.CastMap(data["changeRankCapScript"])).Pointer(),
+		OverflowExperienceScript: NewScriptSettingFromDict(core.CastMap(data["overflowExperienceScript"])).Pointer(),
+		LogSetting:               NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:                core.CastInt64(data["createdAt"]),
+		UpdatedAt:                core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId":              p.NamespaceId,
+		"name":                     p.Name,
+		"description":              p.Description,
+		"experienceCapScriptId":    p.ExperienceCapScriptId,
+		"changeExperienceScript":   p.ChangeExperienceScript.ToDict(),
+		"changeRankScript":         p.ChangeRankScript.ToDict(),
+		"changeRankCapScript":      p.ChangeRankCapScript.ToDict(),
+		"overflowExperienceScript": p.OverflowExperienceScript.ToDict(),
+		"logSetting":               p.LogSetting.ToDict(),
+		"createdAt":                p.CreatedAt,
+		"updatedAt":                p.UpdatedAt,
+	}
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ExperienceModelMaster struct {
-    /** 経験値の種類マスター */
-	ExperienceModelId *string   `json:"experienceModelId"`
-    /** 経験値の種類名 */
-	Name *string   `json:"name"`
-    /** 経験値の種類マスターの説明 */
-	Description *string   `json:"description"`
-    /** 経験値の種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 経験値の初期値 */
-	DefaultExperience *int64   `json:"defaultExperience"`
-    /** ランクキャップの初期値 */
-	DefaultRankCap *int64   `json:"defaultRankCap"`
-    /** ランクキャップの最大値 */
-	MaxRankCap *int64   `json:"maxRankCap"`
-    /** ランク計算に用いる */
-	RankThresholdId *string   `json:"rankThresholdId"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	ExperienceModelId *string `json:"experienceModelId"`
+	Name              *string `json:"name"`
+	Description       *string `json:"description"`
+	Metadata          *string `json:"metadata"`
+	DefaultExperience *int64  `json:"defaultExperience"`
+	DefaultRankCap    *int64  `json:"defaultRankCap"`
+	MaxRankCap        *int64  `json:"maxRankCap"`
+	RankThresholdName *string `json:"rankThresholdName"`
+	CreatedAt         *int64  `json:"createdAt"`
+	UpdatedAt         *int64  `json:"updatedAt"`
 }
 
-func (p *ExperienceModelMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["experienceModelId"] = p.ExperienceModelId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["metadata"] = p.Metadata
-    data["defaultExperience"] = p.DefaultExperience
-    data["defaultRankCap"] = p.DefaultRankCap
-    data["maxRankCap"] = p.MaxRankCap
-    data["rankThresholdId"] = p.RankThresholdId
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewExperienceModelMasterFromDict(data map[string]interface{}) ExperienceModelMaster {
+	return ExperienceModelMaster{
+		ExperienceModelId: core.CastString(data["experienceModelId"]),
+		Name:              core.CastString(data["name"]),
+		Description:       core.CastString(data["description"]),
+		Metadata:          core.CastString(data["metadata"]),
+		DefaultExperience: core.CastInt64(data["defaultExperience"]),
+		DefaultRankCap:    core.CastInt64(data["defaultRankCap"]),
+		MaxRankCap:        core.CastInt64(data["maxRankCap"]),
+		RankThresholdName: core.CastString(data["rankThresholdName"]),
+		CreatedAt:         core.CastInt64(data["createdAt"]),
+		UpdatedAt:         core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p ExperienceModelMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"experienceModelId": p.ExperienceModelId,
+		"name":              p.Name,
+		"description":       p.Description,
+		"metadata":          p.Metadata,
+		"defaultExperience": p.DefaultExperience,
+		"defaultRankCap":    p.DefaultRankCap,
+		"maxRankCap":        p.MaxRankCap,
+		"rankThresholdName": p.RankThresholdName,
+		"createdAt":         p.CreatedAt,
+		"updatedAt":         p.UpdatedAt,
+	}
+}
+
+func (p ExperienceModelMaster) Pointer() *ExperienceModelMaster {
+	return &p
+}
+
+func CastExperienceModelMasters(data []interface{}) []ExperienceModelMaster {
+	v := make([]ExperienceModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewExperienceModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastExperienceModelMastersFromDict(data []ExperienceModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ExperienceModel struct {
-    /** 経験値の種類マスター */
-	ExperienceModelId *string   `json:"experienceModelId"`
-    /** 経験値の種類名 */
-	Name *string   `json:"name"`
-    /** 経験値の種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 経験値の初期値 */
-	DefaultExperience *int64   `json:"defaultExperience"`
-    /** ランクキャップの初期値 */
-	DefaultRankCap *int64   `json:"defaultRankCap"`
-    /** ランクキャップの最大値 */
-	MaxRankCap *int64   `json:"maxRankCap"`
-    /** ランクアップ閾値 */
-	RankThreshold *Threshold   `json:"rankThreshold"`
+	ExperienceModelId *string    `json:"experienceModelId"`
+	Name              *string    `json:"name"`
+	Metadata          *string    `json:"metadata"`
+	DefaultExperience *int64     `json:"defaultExperience"`
+	DefaultRankCap    *int64     `json:"defaultRankCap"`
+	MaxRankCap        *int64     `json:"maxRankCap"`
+	RankThreshold     *Threshold `json:"rankThreshold"`
 }
 
-func (p *ExperienceModel) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["experienceModelId"] = p.ExperienceModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["defaultExperience"] = p.DefaultExperience
-    data["defaultRankCap"] = p.DefaultRankCap
-    data["maxRankCap"] = p.MaxRankCap
-    if p.RankThreshold != nil {
-        data["rankThreshold"] = *p.RankThreshold.ToDict()
-    }
-    return &data
+func NewExperienceModelFromDict(data map[string]interface{}) ExperienceModel {
+	return ExperienceModel{
+		ExperienceModelId: core.CastString(data["experienceModelId"]),
+		Name:              core.CastString(data["name"]),
+		Metadata:          core.CastString(data["metadata"]),
+		DefaultExperience: core.CastInt64(data["defaultExperience"]),
+		DefaultRankCap:    core.CastInt64(data["defaultRankCap"]),
+		MaxRankCap:        core.CastInt64(data["maxRankCap"]),
+		RankThreshold:     NewThresholdFromDict(core.CastMap(data["rankThreshold"])).Pointer(),
+	}
+}
+
+func (p ExperienceModel) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"experienceModelId": p.ExperienceModelId,
+		"name":              p.Name,
+		"metadata":          p.Metadata,
+		"defaultExperience": p.DefaultExperience,
+		"defaultRankCap":    p.DefaultRankCap,
+		"maxRankCap":        p.MaxRankCap,
+		"rankThreshold":     p.RankThreshold.ToDict(),
+	}
+}
+
+func (p ExperienceModel) Pointer() *ExperienceModel {
+	return &p
+}
+
+func CastExperienceModels(data []interface{}) []ExperienceModel {
+	v := make([]ExperienceModel, 0)
+	for _, d := range data {
+		v = append(v, NewExperienceModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastExperienceModelsFromDict(data []ExperienceModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ThresholdMaster struct {
-    /** ランクアップ閾値マスター */
-	ThresholdId *string   `json:"thresholdId"`
-    /** ランクアップ閾値名 */
-	Name *string   `json:"name"`
-    /** ランクアップ閾値マスターの説明 */
-	Description *string   `json:"description"`
-    /** ランクアップ閾値のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** ランクアップ経験値閾値リスト */
-	Values []int64   `json:"values"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	ThresholdId *string `json:"thresholdId"`
+	Name        *string `json:"name"`
+	Description *string `json:"description"`
+	Metadata    *string `json:"metadata"`
+	Values      []int64 `json:"values"`
+	CreatedAt   *int64  `json:"createdAt"`
+	UpdatedAt   *int64  `json:"updatedAt"`
 }
 
-func (p *ThresholdMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["thresholdId"] = p.ThresholdId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["metadata"] = p.Metadata
-    if p.Values != nil {
-        var _values []int64
-        for _, item := range p.Values {
-            _values = append(_values, item)
-        }
-        data["values"] = &_values
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewThresholdMasterFromDict(data map[string]interface{}) ThresholdMaster {
+	return ThresholdMaster{
+		ThresholdId: core.CastString(data["thresholdId"]),
+		Name:        core.CastString(data["name"]),
+		Description: core.CastString(data["description"]),
+		Metadata:    core.CastString(data["metadata"]),
+		Values:      core.CastInt64s(core.CastArray(data["values"])),
+		CreatedAt:   core.CastInt64(data["createdAt"]),
+		UpdatedAt:   core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p ThresholdMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"thresholdId": p.ThresholdId,
+		"name":        p.Name,
+		"description": p.Description,
+		"metadata":    p.Metadata,
+		"values": core.CastInt64sFromDict(
+			p.Values,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p ThresholdMaster) Pointer() *ThresholdMaster {
+	return &p
+}
+
+func CastThresholdMasters(data []interface{}) []ThresholdMaster {
+	v := make([]ThresholdMaster, 0)
+	for _, d := range data {
+		v = append(v, NewThresholdMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastThresholdMastersFromDict(data []ThresholdMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Threshold struct {
-    /** ランクアップ閾値のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** ランクアップ経験値閾値リスト */
-	Values []int64   `json:"values"`
+	Metadata *string `json:"metadata"`
+	Values   []int64 `json:"values"`
 }
 
-func (p *Threshold) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["metadata"] = p.Metadata
-    if p.Values != nil {
-        var _values []int64
-        for _, item := range p.Values {
-            _values = append(_values, item)
-        }
-        data["values"] = &_values
-    }
-    return &data
+func NewThresholdFromDict(data map[string]interface{}) Threshold {
+	return Threshold{
+		Metadata: core.CastString(data["metadata"]),
+		Values:   core.CastInt64s(core.CastArray(data["values"])),
+	}
+}
+
+func (p Threshold) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": p.Metadata,
+		"values": core.CastInt64sFromDict(
+			p.Values,
+		),
+	}
+}
+
+func (p Threshold) Pointer() *Threshold {
+	return &p
+}
+
+func CastThresholds(data []interface{}) []Threshold {
+	v := make([]Threshold, 0)
+	for _, d := range data {
+		v = append(v, NewThresholdFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastThresholdsFromDict(data []Threshold) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CurrentExperienceMaster struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** マスターデータ */
-	Settings *string   `json:"settings"`
+	NamespaceId *string `json:"namespaceId"`
+	Settings    *string `json:"settings"`
 }
 
-func (p *CurrentExperienceMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["settings"] = p.Settings
-    return &data
+func NewCurrentExperienceMasterFromDict(data map[string]interface{}) CurrentExperienceMaster {
+	return CurrentExperienceMaster{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Settings:    core.CastString(data["settings"]),
+	}
+}
+
+func (p CurrentExperienceMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId": p.NamespaceId,
+		"settings":    p.Settings,
+	}
+}
+
+func (p CurrentExperienceMaster) Pointer() *CurrentExperienceMaster {
+	return &p
+}
+
+func CastCurrentExperienceMasters(data []interface{}) []CurrentExperienceMaster {
+	v := make([]CurrentExperienceMaster, 0)
+	for _, d := range data {
+		v = append(v, NewCurrentExperienceMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCurrentExperienceMastersFromDict(data []CurrentExperienceMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Status struct {
-    /** ステータス */
-	StatusId *string   `json:"statusId"`
-    /** 経験値の種類の名前 */
-	ExperienceName *string   `json:"experienceName"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** プロパティID */
-	PropertyId *string   `json:"propertyId"`
-    /** 累計獲得経験値 */
-	ExperienceValue *int64   `json:"experienceValue"`
-    /** 現在のランク */
-	RankValue *int64   `json:"rankValue"`
-    /** 現在のランクキャップ */
-	RankCapValue *int64   `json:"rankCapValue"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	StatusId        *string `json:"statusId"`
+	ExperienceName  *string `json:"experienceName"`
+	UserId          *string `json:"userId"`
+	PropertyId      *string `json:"propertyId"`
+	ExperienceValue *int64  `json:"experienceValue"`
+	RankValue       *int64  `json:"rankValue"`
+	RankCapValue    *int64  `json:"rankCapValue"`
+	CreatedAt       *int64  `json:"createdAt"`
+	UpdatedAt       *int64  `json:"updatedAt"`
 }
 
-func (p *Status) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["statusId"] = p.StatusId
-    data["experienceName"] = p.ExperienceName
-    data["userId"] = p.UserId
-    data["propertyId"] = p.PropertyId
-    data["experienceValue"] = p.ExperienceValue
-    data["rankValue"] = p.RankValue
-    data["rankCapValue"] = p.RankCapValue
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewStatusFromDict(data map[string]interface{}) Status {
+	return Status{
+		StatusId:        core.CastString(data["statusId"]),
+		ExperienceName:  core.CastString(data["experienceName"]),
+		UserId:          core.CastString(data["userId"]),
+		PropertyId:      core.CastString(data["propertyId"]),
+		ExperienceValue: core.CastInt64(data["experienceValue"]),
+		RankValue:       core.CastInt64(data["rankValue"]),
+		RankCapValue:    core.CastInt64(data["rankCapValue"]),
+		CreatedAt:       core.CastInt64(data["createdAt"]),
+		UpdatedAt:       core.CastInt64(data["updatedAt"]),
+	}
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func (p Status) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"statusId":        p.StatusId,
+		"experienceName":  p.ExperienceName,
+		"userId":          p.UserId,
+		"propertyId":      p.PropertyId,
+		"experienceValue": p.ExperienceValue,
+		"rankValue":       p.RankValue,
+		"rankCapValue":    p.RankCapValue,
+		"createdAt":       p.CreatedAt,
+		"updatedAt":       p.UpdatedAt,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func (p Status) Pointer() *Status {
+	return &p
+}
+
+func CastStatuses(data []interface{}) []Status {
+	v := make([]Status, 0)
+	for _, d := range data {
+		v = append(v, NewStatusFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastStatusesFromDict(data []Status) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GitHubCheckoutSetting struct {
-    /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	ApiKeyId *string   `json:"apiKeyId"`
-    /** リポジトリ名 */
-	RepositoryName *string   `json:"repositoryName"`
-    /** ソースコードのファイルパス */
-	SourcePath *string   `json:"sourcePath"`
-    /** コードの取得元 */
-	ReferenceType *string   `json:"referenceType"`
-    /** コミットハッシュ */
-	CommitHash *string   `json:"commitHash"`
-    /** ブランチ名 */
-	BranchName *string   `json:"branchName"`
-    /** タグ名 */
-	TagName *string   `json:"tagName"`
+	ApiKeyId       *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath     *string `json:"sourcePath"`
+	ReferenceType  *string `json:"referenceType"`
+	CommitHash     *string `json:"commitHash"`
+	BranchName     *string `json:"branchName"`
+	TagName        *string `json:"tagName"`
 }
 
-func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["apiKeyId"] = p.ApiKeyId
-    data["repositoryName"] = p.RepositoryName
-    data["sourcePath"] = p.SourcePath
-    data["referenceType"] = p.ReferenceType
-    data["commitHash"] = p.CommitHash
-    data["branchName"] = p.BranchName
-    data["tagName"] = p.TagName
-    return &data
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+	return GitHubCheckoutSetting{
+		ApiKeyId:       core.CastString(data["apiKeyId"]),
+		RepositoryName: core.CastString(data["repositoryName"]),
+		SourcePath:     core.CastString(data["sourcePath"]),
+		ReferenceType:  core.CastString(data["referenceType"]),
+		CommitHash:     core.CastString(data["commitHash"]),
+		BranchName:     core.CastString(data["branchName"]),
+		TagName:        core.CastString(data["tagName"]),
+	}
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"apiKeyId":       p.ApiKeyId,
+		"repositoryName": p.RepositoryName,
+		"sourcePath":     p.SourcePath,
+		"referenceType":  p.ReferenceType,
+		"commitHash":     p.CommitHash,
+		"branchName":     p.BranchName,
+		"tagName":        p.TagName,
+	}
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+	return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ScriptSetting struct {
-    /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *string   `json:"triggerScriptId"`
-    /** 完了通知の通知先 */
-	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
-    /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
-    /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
+	TriggerScriptId             *string `json:"triggerScriptId"`
+	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
+	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
-func (p *ScriptSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["triggerScriptId"] = p.TriggerScriptId
-    data["doneTriggerTargetType"] = p.DoneTriggerTargetType
-    data["doneTriggerScriptId"] = p.DoneTriggerScriptId
-    data["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
-    return &data
+func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
+	return ScriptSetting{
+		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
+		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
+		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
+		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+	}
+}
+
+func (p ScriptSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"triggerScriptId":             p.TriggerScriptId,
+		"doneTriggerTargetType":       p.DoneTriggerTargetType,
+		"doneTriggerScriptId":         p.DoneTriggerScriptId,
+		"doneTriggerQueueNamespaceId": p.DoneTriggerQueueNamespaceId,
+	}
+}
+
+func (p ScriptSetting) Pointer() *ScriptSetting {
+	return &p
+}
+
+func CastScriptSettings(data []interface{}) []ScriptSetting {
+	v := make([]ScriptSetting, 0)
+	for _, d := range data {
+		v = append(v, NewScriptSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

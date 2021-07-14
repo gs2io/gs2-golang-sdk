@@ -18,7 +18,7 @@ package matchmaking
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -759,21 +759,21 @@ func (p Gs2MatchmakingRestClient) CreateGatheringAsync(
         bodies["player"] = request.Player.ToDict()
     }
     if request.AttributeRanges != nil {
-        var _attributeRanges []*map[string]interface {}
+        var _attributeRanges []interface {}
         for _, item := range request.AttributeRanges {
-            _attributeRanges = append(_attributeRanges, item.ToDict())
+            _attributeRanges = append(_attributeRanges, item)
         }
         bodies["attributeRanges"] = _attributeRanges
     }
     if request.CapacityOfRoles != nil {
-        var _capacityOfRoles []*map[string]interface {}
+        var _capacityOfRoles []interface {}
         for _, item := range request.CapacityOfRoles {
-            _capacityOfRoles = append(_capacityOfRoles, item.ToDict())
+            _capacityOfRoles = append(_capacityOfRoles, item)
         }
         bodies["capacityOfRoles"] = _capacityOfRoles
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []interface {}
         for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -881,21 +881,21 @@ func (p Gs2MatchmakingRestClient) CreateGatheringByUserIdAsync(
         bodies["player"] = request.Player.ToDict()
     }
     if request.AttributeRanges != nil {
-        var _attributeRanges []*map[string]interface {}
+        var _attributeRanges []interface {}
         for _, item := range request.AttributeRanges {
-            _attributeRanges = append(_attributeRanges, item.ToDict())
+            _attributeRanges = append(_attributeRanges, item)
         }
         bodies["attributeRanges"] = _attributeRanges
     }
     if request.CapacityOfRoles != nil {
-        var _capacityOfRoles []*map[string]interface {}
+        var _capacityOfRoles []interface {}
         for _, item := range request.CapacityOfRoles {
-            _capacityOfRoles = append(_capacityOfRoles, item.ToDict())
+            _capacityOfRoles = append(_capacityOfRoles, item)
         }
         bodies["capacityOfRoles"] = _capacityOfRoles
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []interface {}
         for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -997,9 +997,9 @@ func (p Gs2MatchmakingRestClient) UpdateGatheringAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.AttributeRanges != nil {
-        var _attributeRanges []*map[string]interface {}
+        var _attributeRanges []interface {}
         for _, item := range request.AttributeRanges {
-            _attributeRanges = append(_attributeRanges, item.ToDict())
+            _attributeRanges = append(_attributeRanges, item)
         }
         bodies["attributeRanges"] = _attributeRanges
     }
@@ -1104,9 +1104,9 @@ func (p Gs2MatchmakingRestClient) UpdateGatheringByUserIdAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.AttributeRanges != nil {
-        var _attributeRanges []*map[string]interface {}
+        var _attributeRanges []interface {}
         for _, item := range request.AttributeRanges {
-            _attributeRanges = append(_attributeRanges, item.ToDict())
+            _attributeRanges = append(_attributeRanges, item)
         }
         bodies["attributeRanges"] = _attributeRanges
     }
@@ -3119,9 +3119,9 @@ func (p Gs2MatchmakingRestClient) PutResultAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.GameResults != nil {
-        var _gameResults []*map[string]interface {}
+        var _gameResults []interface {}
         for _, item := range request.GameResults {
-            _gameResults = append(_gameResults, item.ToDict())
+            _gameResults = append(_gameResults, item)
         }
         bodies["gameResults"] = _gameResults
     }
@@ -3527,9 +3527,9 @@ func (p Gs2MatchmakingRestClient) VoteAsync(
         bodies["ballotSignature"] = *request.BallotSignature
     }
     if request.GameResults != nil {
-        var _gameResults []*map[string]interface {}
+        var _gameResults []interface {}
         for _, item := range request.GameResults {
-            _gameResults = append(_gameResults, item.ToDict())
+            _gameResults = append(_gameResults, item)
         }
         bodies["gameResults"] = _gameResults
     }
@@ -3624,16 +3624,16 @@ func (p Gs2MatchmakingRestClient) VoteMultipleAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.SignedBallots != nil {
-        var _signedBallots []*map[string]interface {}
+        var _signedBallots []interface {}
         for _, item := range request.SignedBallots {
-            _signedBallots = append(_signedBallots, item.ToDict())
+            _signedBallots = append(_signedBallots, item)
         }
         bodies["signedBallots"] = _signedBallots
     }
     if request.GameResults != nil {
-        var _gameResults []*map[string]interface {}
+        var _gameResults []interface {}
         for _, item := range request.GameResults {
-            _gameResults = append(_gameResults, item.ToDict())
+            _gameResults = append(_gameResults, item)
         }
         bodies["gameResults"] = _gameResults
     }
@@ -3718,7 +3718,7 @@ func (p Gs2MatchmakingRestClient) CommitVoteAsync(
 	request *CommitVoteRequest,
 	callback chan<- CommitVoteAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/vote/{ratingName}/{gatheringName}/action/vote/commit"
+	path := "/{namespaceName}/vote/{ratingName}/{gatheringName}/action/vote/commit"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {

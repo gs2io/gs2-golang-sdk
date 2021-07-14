@@ -16,47 +16,145 @@ permissions and limitations under the License.
 
 package watch
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
+import "core"
 
 type GetChartRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	Metrics *string	`json:"metrics"`
-	Grn *string	`json:"grn"`
-	Queries []string	`json:"queries"`
-	By *string	`json:"by"`
-	Timeframe *string	`json:"timeframe"`
-	Size *string	`json:"size"`
-	Format *string	`json:"format"`
-	Aggregator *string	`json:"aggregator"`
-	Style *string	`json:"style"`
-	Title *string	`json:"title"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    Metrics *string `json:"metrics"`
+    Grn *string `json:"grn"`
+    Queries []string `json:"queries"`
+    By *string `json:"by"`
+    Timeframe *string `json:"timeframe"`
+    Size *string `json:"size"`
+    Format *string `json:"format"`
+    Aggregator *string `json:"aggregator"`
+    Style *string `json:"style"`
+    Title *string `json:"title"`
+}
+
+func NewGetChartRequestFromDict(data map[string]interface{}) GetChartRequest {
+    return GetChartRequest {
+        Metrics: core.CastString(data["metrics"]),
+        Grn: core.CastString(data["grn"]),
+        Queries: core.CastStrings(core.CastArray(data["queries"])),
+        By: core.CastString(data["by"]),
+        Timeframe: core.CastString(data["timeframe"]),
+        Size: core.CastString(data["size"]),
+        Format: core.CastString(data["format"]),
+        Aggregator: core.CastString(data["aggregator"]),
+        Style: core.CastString(data["style"]),
+        Title: core.CastString(data["title"]),
+    }
+}
+
+func (p GetChartRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "metrics": p.Metrics,
+        "grn": p.Grn,
+        "queries": core.CastStringsFromDict(
+            p.Queries,
+        ),
+        "by": p.By,
+        "timeframe": p.Timeframe,
+        "size": p.Size,
+        "format": p.Format,
+        "aggregator": p.Aggregator,
+        "style": p.Style,
+        "title": p.Title,
+    }
+}
+
+func (p GetChartRequest) Pointer() *GetChartRequest {
+    return &p
 }
 
 type GetCumulativeRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	Name *string	`json:"name"`
-	ResourceGrn *string	`json:"resourceGrn"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    Name *string `json:"name"`
+    ResourceGrn *string `json:"resourceGrn"`
+}
+
+func NewGetCumulativeRequestFromDict(data map[string]interface{}) GetCumulativeRequest {
+    return GetCumulativeRequest {
+        Name: core.CastString(data["name"]),
+        ResourceGrn: core.CastString(data["resourceGrn"]),
+    }
+}
+
+func (p GetCumulativeRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "name": p.Name,
+        "resourceGrn": p.ResourceGrn,
+    }
+}
+
+func (p GetCumulativeRequest) Pointer() *GetCumulativeRequest {
+    return &p
 }
 
 type DescribeBillingActivitiesRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	Year *int32	`json:"year"`
-	Month *int32	`json:"month"`
-	Service *string	`json:"service"`
-	PageToken *string	`json:"pageToken"`
-	Limit *int64	`json:"limit"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    Year *int32 `json:"year"`
+    Month *int32 `json:"month"`
+    Service *string `json:"service"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeBillingActivitiesRequestFromDict(data map[string]interface{}) DescribeBillingActivitiesRequest {
+    return DescribeBillingActivitiesRequest {
+        Year: core.CastInt32(data["year"]),
+        Month: core.CastInt32(data["month"]),
+        Service: core.CastString(data["service"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeBillingActivitiesRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "year": p.Year,
+        "month": p.Month,
+        "service": p.Service,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeBillingActivitiesRequest) Pointer() *DescribeBillingActivitiesRequest {
+    return &p
 }
 
 type GetBillingActivityRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	Year *int32	`json:"year"`
-	Month *int32	`json:"month"`
-	Service *string	`json:"service"`
-	ActivityType *string	`json:"activityType"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    Year *int32 `json:"year"`
+    Month *int32 `json:"month"`
+    Service *string `json:"service"`
+    ActivityType *string `json:"activityType"`
+}
+
+func NewGetBillingActivityRequestFromDict(data map[string]interface{}) GetBillingActivityRequest {
+    return GetBillingActivityRequest {
+        Year: core.CastInt32(data["year"]),
+        Month: core.CastInt32(data["month"]),
+        Service: core.CastString(data["service"]),
+        ActivityType: core.CastString(data["activityType"]),
+    }
+}
+
+func (p GetBillingActivityRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "year": p.Year,
+        "month": p.Month,
+        "service": p.Service,
+        "activityType": p.ActivityType,
+    }
+}
+
+func (p GetBillingActivityRequest) Pointer() *GetBillingActivityRequest {
+    return &p
 }

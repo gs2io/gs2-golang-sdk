@@ -18,7 +18,7 @@ package distributor
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -714,7 +714,7 @@ func (p Gs2DistributorRestClient) CreateDistributorModelMasterAsync(
         bodies["inboxNamespaceId"] = *request.InboxNamespaceId
     }
     if request.WhiteListTargetIds != nil {
-        var _whiteListTargetIds []string
+        var _whiteListTargetIds []interface {}
         for _, item := range request.WhiteListTargetIds {
             _whiteListTargetIds = append(_whiteListTargetIds, item)
         }
@@ -911,7 +911,7 @@ func (p Gs2DistributorRestClient) UpdateDistributorModelMasterAsync(
         bodies["inboxNamespaceId"] = *request.InboxNamespaceId
     }
     if request.WhiteListTargetIds != nil {
-        var _whiteListTargetIds []string
+        var _whiteListTargetIds []interface {}
         for _, item := range request.WhiteListTargetIds {
             _whiteListTargetIds = append(_whiteListTargetIds, item)
         }
@@ -1605,7 +1605,7 @@ func (p Gs2DistributorRestClient) DistributeAsync(
 	request *DistributeRequest,
 	callback chan<- DistributeAsyncResult,
 ) {
-	path := "/{namespaceName}/distribute"
+	path := "/{namespaceName}/distribute/{distributorName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -1619,6 +1619,9 @@ func (p Gs2DistributorRestClient) DistributeAsync(
 
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
     if request.DistributeResource != nil {
         bodies["distributeResource"] = request.DistributeResource.ToDict()
     }
@@ -1629,9 +1632,6 @@ func (p Gs2DistributorRestClient) DistributeAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
 
 	go distributeAsyncHandler(
@@ -1707,6 +1707,9 @@ func (p Gs2DistributorRestClient) DistributeWithoutOverflowProcessAsync(
 
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
     if request.DistributeResource != nil {
         bodies["distributeResource"] = request.DistributeResource.ToDict()
     }
@@ -1717,9 +1720,6 @@ func (p Gs2DistributorRestClient) DistributeWithoutOverflowProcessAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
 
 	go distributeWithoutOverflowProcessAsyncHandler(
@@ -2158,7 +2158,7 @@ func (p Gs2DistributorRestClient) RunStampSheetWithoutNamespaceAsync(
 	request *RunStampSheetWithoutNamespaceRequest,
 	callback chan<- RunStampSheetWithoutNamespaceAsyncResult,
 ) {
-	path := "/{namespaceName}/distribute/stamp/sheet/run"
+	path := "/stamp/sheet/run"
 
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
@@ -2246,7 +2246,7 @@ func (p Gs2DistributorRestClient) RunStampSheetExpressWithoutNamespaceAsync(
 	request *RunStampSheetExpressWithoutNamespaceRequest,
 	callback chan<- RunStampSheetExpressWithoutNamespaceAsyncResult,
 ) {
-	path := "/{namespaceName}/distribute/stamp/run"
+	path := "/stamp/run"
 
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}

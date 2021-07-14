@@ -16,26 +16,11 @@ permissions and limitations under the License.
 
 package schedule
 
-type DescribeNamespacesResult struct {
-    /** ネームスペースのリスト */
-	Items         []Namespace	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
-}
+import "core"
 
-func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Namespace, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+type DescribeNamespacesResult struct {
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -43,17 +28,28 @@ type DescribeNamespacesAsyncResult struct {
 	err    error
 }
 
-type CreateNamespaceResult struct {
-    /** 作成したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
+    return &p
+}
+
+type CreateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -61,17 +57,24 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceStatusResult struct {
-    /** None */
-	Status         *string	`json:"status"`
+func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Status != nil {
-        data["status"] = p.Status
+func (p CreateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
+    return &p
+}
+
+type GetNamespaceStatusResult struct {
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -79,17 +82,24 @@ type GetNamespaceStatusAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceResult struct {
-    /** ネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
-func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "status": p.Status,
     }
-    return &data
+}
+
+func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
+    return &p
+}
+
+type GetNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -97,17 +107,24 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
-type UpdateNamespaceResult struct {
-    /** 更新したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
+    return &p
+}
+
+type UpdateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -115,17 +132,24 @@ type UpdateNamespaceAsyncResult struct {
 	err    error
 }
 
-type DeleteNamespaceResult struct {
-    /** 削除したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
+    return &p
+}
+
+type DeleteNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -133,26 +157,25 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
-type DescribeEventMastersResult struct {
-    /** イベントマスターのリスト */
-	Items         []EventMaster	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
+    return DeleteNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeEventMastersResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]EventMaster, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
+    return &p
+}
+
+type DescribeEventMastersResult struct {
+    Items []EventMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeEventMastersAsyncResult struct {
@@ -160,17 +183,28 @@ type DescribeEventMastersAsyncResult struct {
 	err    error
 }
 
-type CreateEventMasterResult struct {
-    /** 作成したイベントマスター */
-	Item         *EventMaster	`json:"item"`
+func NewDescribeEventMastersResultFromDict(data map[string]interface{}) DescribeEventMastersResult {
+    return DescribeEventMastersResult {
+        Items: CastEventMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateEventMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeEventMastersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastEventMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeEventMastersResult) Pointer() *DescribeEventMastersResult {
+    return &p
+}
+
+type CreateEventMasterResult struct {
+    Item *EventMaster `json:"item"`
 }
 
 type CreateEventMasterAsyncResult struct {
@@ -178,17 +212,24 @@ type CreateEventMasterAsyncResult struct {
 	err    error
 }
 
-type GetEventMasterResult struct {
-    /** イベントマスター */
-	Item         *EventMaster	`json:"item"`
+func NewCreateEventMasterResultFromDict(data map[string]interface{}) CreateEventMasterResult {
+    return CreateEventMasterResult {
+        Item: NewEventMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetEventMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CreateEventMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateEventMasterResult) Pointer() *CreateEventMasterResult {
+    return &p
+}
+
+type GetEventMasterResult struct {
+    Item *EventMaster `json:"item"`
 }
 
 type GetEventMasterAsyncResult struct {
@@ -196,17 +237,24 @@ type GetEventMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateEventMasterResult struct {
-    /** 更新したイベントマスター */
-	Item         *EventMaster	`json:"item"`
+func NewGetEventMasterResultFromDict(data map[string]interface{}) GetEventMasterResult {
+    return GetEventMasterResult {
+        Item: NewEventMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateEventMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetEventMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetEventMasterResult) Pointer() *GetEventMasterResult {
+    return &p
+}
+
+type UpdateEventMasterResult struct {
+    Item *EventMaster `json:"item"`
 }
 
 type UpdateEventMasterAsyncResult struct {
@@ -214,17 +262,24 @@ type UpdateEventMasterAsyncResult struct {
 	err    error
 }
 
-type DeleteEventMasterResult struct {
-    /** 削除したイベントマスター */
-	Item         *EventMaster	`json:"item"`
+func NewUpdateEventMasterResultFromDict(data map[string]interface{}) UpdateEventMasterResult {
+    return UpdateEventMasterResult {
+        Item: NewEventMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteEventMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateEventMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateEventMasterResult) Pointer() *UpdateEventMasterResult {
+    return &p
+}
+
+type DeleteEventMasterResult struct {
+    Item *EventMaster `json:"item"`
 }
 
 type DeleteEventMasterAsyncResult struct {
@@ -232,26 +287,25 @@ type DeleteEventMasterAsyncResult struct {
 	err    error
 }
 
-type DescribeTriggersResult struct {
-    /** トリガーのリスト */
-	Items         []Trigger	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeleteEventMasterResultFromDict(data map[string]interface{}) DeleteEventMasterResult {
+    return DeleteEventMasterResult {
+        Item: NewEventMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeTriggersResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Trigger, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteEventMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeleteEventMasterResult) Pointer() *DeleteEventMasterResult {
+    return &p
+}
+
+type DescribeTriggersResult struct {
+    Items []Trigger `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeTriggersAsyncResult struct {
@@ -259,26 +313,29 @@ type DescribeTriggersAsyncResult struct {
 	err    error
 }
 
-type DescribeTriggersByUserIdResult struct {
-    /** トリガーのリスト */
-	Items         []Trigger	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDescribeTriggersResultFromDict(data map[string]interface{}) DescribeTriggersResult {
+    return DescribeTriggersResult {
+        Items: CastTriggers(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *DescribeTriggersByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Trigger, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeTriggersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastTriggersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DescribeTriggersResult) Pointer() *DescribeTriggersResult {
+    return &p
+}
+
+type DescribeTriggersByUserIdResult struct {
+    Items []Trigger `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeTriggersByUserIdAsyncResult struct {
@@ -286,17 +343,28 @@ type DescribeTriggersByUserIdAsyncResult struct {
 	err    error
 }
 
-type GetTriggerResult struct {
-    /** トリガー */
-	Item         *Trigger	`json:"item"`
+func NewDescribeTriggersByUserIdResultFromDict(data map[string]interface{}) DescribeTriggersByUserIdResult {
+    return DescribeTriggersByUserIdResult {
+        Items: CastTriggers(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *GetTriggerResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeTriggersByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastTriggersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeTriggersByUserIdResult) Pointer() *DescribeTriggersByUserIdResult {
+    return &p
+}
+
+type GetTriggerResult struct {
+    Item *Trigger `json:"item"`
 }
 
 type GetTriggerAsyncResult struct {
@@ -304,17 +372,24 @@ type GetTriggerAsyncResult struct {
 	err    error
 }
 
-type GetTriggerByUserIdResult struct {
-    /** トリガー */
-	Item         *Trigger	`json:"item"`
+func NewGetTriggerResultFromDict(data map[string]interface{}) GetTriggerResult {
+    return GetTriggerResult {
+        Item: NewTriggerFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetTriggerByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetTriggerResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetTriggerResult) Pointer() *GetTriggerResult {
+    return &p
+}
+
+type GetTriggerByUserIdResult struct {
+    Item *Trigger `json:"item"`
 }
 
 type GetTriggerByUserIdAsyncResult struct {
@@ -322,17 +397,24 @@ type GetTriggerByUserIdAsyncResult struct {
 	err    error
 }
 
-type TriggerByUserIdResult struct {
-    /** 引いたトリガー */
-	Item         *Trigger	`json:"item"`
+func NewGetTriggerByUserIdResultFromDict(data map[string]interface{}) GetTriggerByUserIdResult {
+    return GetTriggerByUserIdResult {
+        Item: NewTriggerFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *TriggerByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetTriggerByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetTriggerByUserIdResult) Pointer() *GetTriggerByUserIdResult {
+    return &p
+}
+
+type TriggerByUserIdResult struct {
+    Item *Trigger `json:"item"`
 }
 
 type TriggerByUserIdAsyncResult struct {
@@ -340,17 +422,24 @@ type TriggerByUserIdAsyncResult struct {
 	err    error
 }
 
-type DeleteTriggerResult struct {
-    /** トリガー */
-	Item         *Trigger	`json:"item"`
+func NewTriggerByUserIdResultFromDict(data map[string]interface{}) TriggerByUserIdResult {
+    return TriggerByUserIdResult {
+        Item: NewTriggerFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteTriggerResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p TriggerByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p TriggerByUserIdResult) Pointer() *TriggerByUserIdResult {
+    return &p
+}
+
+type DeleteTriggerResult struct {
+    Item *Trigger `json:"item"`
 }
 
 type DeleteTriggerAsyncResult struct {
@@ -358,17 +447,24 @@ type DeleteTriggerAsyncResult struct {
 	err    error
 }
 
-type DeleteTriggerByUserIdResult struct {
-    /** トリガー */
-	Item         *Trigger	`json:"item"`
+func NewDeleteTriggerResultFromDict(data map[string]interface{}) DeleteTriggerResult {
+    return DeleteTriggerResult {
+        Item: NewTriggerFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteTriggerByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DeleteTriggerResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p DeleteTriggerResult) Pointer() *DeleteTriggerResult {
+    return &p
+}
+
+type DeleteTriggerByUserIdResult struct {
+    Item *Trigger `json:"item"`
 }
 
 type DeleteTriggerByUserIdAsyncResult struct {
@@ -376,21 +472,24 @@ type DeleteTriggerByUserIdAsyncResult struct {
 	err    error
 }
 
-type DescribeEventsResult struct {
-    /** イベントのリスト */
-	Items         []Event	`json:"items"`
+func NewDeleteTriggerByUserIdResultFromDict(data map[string]interface{}) DeleteTriggerByUserIdResult {
+    return DeleteTriggerByUserIdResult {
+        Item: NewTriggerFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeEventsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Event, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteTriggerByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p DeleteTriggerByUserIdResult) Pointer() *DeleteTriggerByUserIdResult {
+    return &p
+}
+
+type DescribeEventsResult struct {
+    Items []Event `json:"items"`
 }
 
 type DescribeEventsAsyncResult struct {
@@ -398,21 +497,26 @@ type DescribeEventsAsyncResult struct {
 	err    error
 }
 
-type DescribeEventsByUserIdResult struct {
-    /** イベントのリスト */
-	Items         []Event	`json:"items"`
+func NewDescribeEventsResultFromDict(data map[string]interface{}) DescribeEventsResult {
+    return DescribeEventsResult {
+        Items: CastEvents(core.CastArray(data["items"])),
+    }
 }
 
-func (p *DescribeEventsByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Event, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeEventsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastEventsFromDict(
+            p.Items,
+        ),
     }
-    return &data
+}
+
+func (p DescribeEventsResult) Pointer() *DescribeEventsResult {
+    return &p
+}
+
+type DescribeEventsByUserIdResult struct {
+    Items []Event `json:"items"`
 }
 
 type DescribeEventsByUserIdAsyncResult struct {
@@ -420,21 +524,26 @@ type DescribeEventsByUserIdAsyncResult struct {
 	err    error
 }
 
-type DescribeRawEventsResult struct {
-    /** イベントのリスト */
-	Items         []Event	`json:"items"`
+func NewDescribeEventsByUserIdResultFromDict(data map[string]interface{}) DescribeEventsByUserIdResult {
+    return DescribeEventsByUserIdResult {
+        Items: CastEvents(core.CastArray(data["items"])),
+    }
 }
 
-func (p *DescribeRawEventsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Event, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeEventsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastEventsFromDict(
+            p.Items,
+        ),
     }
-    return &data
+}
+
+func (p DescribeEventsByUserIdResult) Pointer() *DescribeEventsByUserIdResult {
+    return &p
+}
+
+type DescribeRawEventsResult struct {
+    Items []Event `json:"items"`
 }
 
 type DescribeRawEventsAsyncResult struct {
@@ -442,17 +551,26 @@ type DescribeRawEventsAsyncResult struct {
 	err    error
 }
 
-type GetEventResult struct {
-    /** イベント */
-	Item         *Event	`json:"item"`
+func NewDescribeRawEventsResultFromDict(data map[string]interface{}) DescribeRawEventsResult {
+    return DescribeRawEventsResult {
+        Items: CastEvents(core.CastArray(data["items"])),
+    }
 }
 
-func (p *GetEventResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeRawEventsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastEventsFromDict(
+            p.Items,
+        ),
     }
-    return &data
+}
+
+func (p DescribeRawEventsResult) Pointer() *DescribeRawEventsResult {
+    return &p
+}
+
+type GetEventResult struct {
+    Item *Event `json:"item"`
 }
 
 type GetEventAsyncResult struct {
@@ -460,17 +578,24 @@ type GetEventAsyncResult struct {
 	err    error
 }
 
-type GetEventByUserIdResult struct {
-    /** イベント */
-	Item         *Event	`json:"item"`
+func NewGetEventResultFromDict(data map[string]interface{}) GetEventResult {
+    return GetEventResult {
+        Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetEventByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetEventResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetEventResult) Pointer() *GetEventResult {
+    return &p
+}
+
+type GetEventByUserIdResult struct {
+    Item *Event `json:"item"`
 }
 
 type GetEventByUserIdAsyncResult struct {
@@ -478,17 +603,24 @@ type GetEventByUserIdAsyncResult struct {
 	err    error
 }
 
-type GetRawEventResult struct {
-    /** イベント */
-	Item         *Event	`json:"item"`
+func NewGetEventByUserIdResultFromDict(data map[string]interface{}) GetEventByUserIdResult {
+    return GetEventByUserIdResult {
+        Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetRawEventResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetEventByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetEventByUserIdResult) Pointer() *GetEventByUserIdResult {
+    return &p
+}
+
+type GetRawEventResult struct {
+    Item *Event `json:"item"`
 }
 
 type GetRawEventAsyncResult struct {
@@ -496,17 +628,24 @@ type GetRawEventAsyncResult struct {
 	err    error
 }
 
-type ExportMasterResult struct {
-    /** 現在有効なイベントスケジュールマスター */
-	Item         *CurrentEventMaster	`json:"item"`
+func NewGetRawEventResultFromDict(data map[string]interface{}) GetRawEventResult {
+    return GetRawEventResult {
+        Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetRawEventResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetRawEventResult) Pointer() *GetRawEventResult {
+    return &p
+}
+
+type ExportMasterResult struct {
+    Item *CurrentEventMaster `json:"item"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -514,17 +653,24 @@ type ExportMasterAsyncResult struct {
 	err    error
 }
 
-type GetCurrentEventMasterResult struct {
-    /** 現在有効なイベントスケジュールマスター */
-	Item         *CurrentEventMaster	`json:"item"`
+func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
+    return ExportMasterResult {
+        Item: NewCurrentEventMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetCurrentEventMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p ExportMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p ExportMasterResult) Pointer() *ExportMasterResult {
+    return &p
+}
+
+type GetCurrentEventMasterResult struct {
+    Item *CurrentEventMaster `json:"item"`
 }
 
 type GetCurrentEventMasterAsyncResult struct {
@@ -532,17 +678,24 @@ type GetCurrentEventMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateCurrentEventMasterResult struct {
-    /** 更新した現在有効なイベントスケジュールマスター */
-	Item         *CurrentEventMaster	`json:"item"`
+func NewGetCurrentEventMasterResultFromDict(data map[string]interface{}) GetCurrentEventMasterResult {
+    return GetCurrentEventMasterResult {
+        Item: NewCurrentEventMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateCurrentEventMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetCurrentEventMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetCurrentEventMasterResult) Pointer() *GetCurrentEventMasterResult {
+    return &p
+}
+
+type UpdateCurrentEventMasterResult struct {
+    Item *CurrentEventMaster `json:"item"`
 }
 
 type UpdateCurrentEventMasterAsyncResult struct {
@@ -550,20 +703,43 @@ type UpdateCurrentEventMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateCurrentEventMasterFromGitHubResult struct {
-    /** 更新した現在有効なイベントスケジュールマスター */
-	Item         *CurrentEventMaster	`json:"item"`
+func NewUpdateCurrentEventMasterResultFromDict(data map[string]interface{}) UpdateCurrentEventMasterResult {
+    return UpdateCurrentEventMasterResult {
+        Item: NewCurrentEventMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateCurrentEventMasterFromGitHubResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateCurrentEventMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateCurrentEventMasterResult) Pointer() *UpdateCurrentEventMasterResult {
+    return &p
+}
+
+type UpdateCurrentEventMasterFromGitHubResult struct {
+    Item *CurrentEventMaster `json:"item"`
 }
 
 type UpdateCurrentEventMasterFromGitHubAsyncResult struct {
 	result *UpdateCurrentEventMasterFromGitHubResult
 	err    error
+}
+
+func NewUpdateCurrentEventMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentEventMasterFromGitHubResult {
+    return UpdateCurrentEventMasterFromGitHubResult {
+        Item: NewCurrentEventMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UpdateCurrentEventMasterFromGitHubResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateCurrentEventMasterFromGitHubResult) Pointer() *UpdateCurrentEventMasterFromGitHubResult {
+    return &p
 }

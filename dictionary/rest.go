@@ -18,7 +18,7 @@ package dictionary
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -1446,7 +1446,7 @@ func (p Gs2DictionaryRestClient) AddEntriesByUserIdAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.EntryModelNames != nil {
-        var _entryModelNames []string
+        var _entryModelNames []interface {}
         for _, item := range request.EntryModelNames {
             _entryModelNames = append(_entryModelNames, item)
         }

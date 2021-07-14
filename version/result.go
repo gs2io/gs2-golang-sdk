@@ -16,26 +16,11 @@ permissions and limitations under the License.
 
 package version
 
-type DescribeNamespacesResult struct {
-    /** ネームスペースのリスト */
-	Items         []Namespace	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
-}
+import "core"
 
-func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Namespace, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+type DescribeNamespacesResult struct {
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -43,17 +28,28 @@ type DescribeNamespacesAsyncResult struct {
 	err    error
 }
 
-type CreateNamespaceResult struct {
-    /** 作成したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
+    return &p
+}
+
+type CreateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -61,17 +57,24 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceStatusResult struct {
-    /** None */
-	Status         *string	`json:"status"`
+func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Status != nil {
-        data["status"] = p.Status
+func (p CreateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
+    return &p
+}
+
+type GetNamespaceStatusResult struct {
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -79,17 +82,24 @@ type GetNamespaceStatusAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceResult struct {
-    /** ネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
-func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "status": p.Status,
     }
-    return &data
+}
+
+func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
+    return &p
+}
+
+type GetNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -97,17 +107,24 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
-type UpdateNamespaceResult struct {
-    /** 更新したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
+    return &p
+}
+
+type UpdateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -115,17 +132,24 @@ type UpdateNamespaceAsyncResult struct {
 	err    error
 }
 
-type DeleteNamespaceResult struct {
-    /** 削除したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
+    return &p
+}
+
+type DeleteNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -133,26 +157,25 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
-type DescribeVersionModelMastersResult struct {
-    /** バージョンマスターのリスト */
-	Items         []VersionModelMaster	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
+    return DeleteNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeVersionModelMastersResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]VersionModelMaster, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
+    return &p
+}
+
+type DescribeVersionModelMastersResult struct {
+    Items []VersionModelMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeVersionModelMastersAsyncResult struct {
@@ -160,17 +183,28 @@ type DescribeVersionModelMastersAsyncResult struct {
 	err    error
 }
 
-type CreateVersionModelMasterResult struct {
-    /** 作成したバージョンマスター */
-	Item         *VersionModelMaster	`json:"item"`
+func NewDescribeVersionModelMastersResultFromDict(data map[string]interface{}) DescribeVersionModelMastersResult {
+    return DescribeVersionModelMastersResult {
+        Items: CastVersionModelMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateVersionModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeVersionModelMastersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastVersionModelMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeVersionModelMastersResult) Pointer() *DescribeVersionModelMastersResult {
+    return &p
+}
+
+type CreateVersionModelMasterResult struct {
+    Item *VersionModelMaster `json:"item"`
 }
 
 type CreateVersionModelMasterAsyncResult struct {
@@ -178,17 +212,24 @@ type CreateVersionModelMasterAsyncResult struct {
 	err    error
 }
 
-type GetVersionModelMasterResult struct {
-    /** バージョンマスター */
-	Item         *VersionModelMaster	`json:"item"`
+func NewCreateVersionModelMasterResultFromDict(data map[string]interface{}) CreateVersionModelMasterResult {
+    return CreateVersionModelMasterResult {
+        Item: NewVersionModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetVersionModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CreateVersionModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateVersionModelMasterResult) Pointer() *CreateVersionModelMasterResult {
+    return &p
+}
+
+type GetVersionModelMasterResult struct {
+    Item *VersionModelMaster `json:"item"`
 }
 
 type GetVersionModelMasterAsyncResult struct {
@@ -196,17 +237,24 @@ type GetVersionModelMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateVersionModelMasterResult struct {
-    /** 更新したバージョンマスター */
-	Item         *VersionModelMaster	`json:"item"`
+func NewGetVersionModelMasterResultFromDict(data map[string]interface{}) GetVersionModelMasterResult {
+    return GetVersionModelMasterResult {
+        Item: NewVersionModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateVersionModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetVersionModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetVersionModelMasterResult) Pointer() *GetVersionModelMasterResult {
+    return &p
+}
+
+type UpdateVersionModelMasterResult struct {
+    Item *VersionModelMaster `json:"item"`
 }
 
 type UpdateVersionModelMasterAsyncResult struct {
@@ -214,17 +262,24 @@ type UpdateVersionModelMasterAsyncResult struct {
 	err    error
 }
 
-type DeleteVersionModelMasterResult struct {
-    /** 削除したバージョンマスター */
-	Item         *VersionModelMaster	`json:"item"`
+func NewUpdateVersionModelMasterResultFromDict(data map[string]interface{}) UpdateVersionModelMasterResult {
+    return UpdateVersionModelMasterResult {
+        Item: NewVersionModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteVersionModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateVersionModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateVersionModelMasterResult) Pointer() *UpdateVersionModelMasterResult {
+    return &p
+}
+
+type DeleteVersionModelMasterResult struct {
+    Item *VersionModelMaster `json:"item"`
 }
 
 type DeleteVersionModelMasterAsyncResult struct {
@@ -232,21 +287,24 @@ type DeleteVersionModelMasterAsyncResult struct {
 	err    error
 }
 
-type DescribeVersionModelsResult struct {
-    /** バージョン設定のリスト */
-	Items         []VersionModel	`json:"items"`
+func NewDeleteVersionModelMasterResultFromDict(data map[string]interface{}) DeleteVersionModelMasterResult {
+    return DeleteVersionModelMasterResult {
+        Item: NewVersionModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeVersionModelsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]VersionModel, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteVersionModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p DeleteVersionModelMasterResult) Pointer() *DeleteVersionModelMasterResult {
+    return &p
+}
+
+type DescribeVersionModelsResult struct {
+    Items []VersionModel `json:"items"`
 }
 
 type DescribeVersionModelsAsyncResult struct {
@@ -254,17 +312,26 @@ type DescribeVersionModelsAsyncResult struct {
 	err    error
 }
 
-type GetVersionModelResult struct {
-    /** バージョン設定 */
-	Item         *VersionModel	`json:"item"`
+func NewDescribeVersionModelsResultFromDict(data map[string]interface{}) DescribeVersionModelsResult {
+    return DescribeVersionModelsResult {
+        Items: CastVersionModels(core.CastArray(data["items"])),
+    }
 }
 
-func (p *GetVersionModelResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeVersionModelsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastVersionModelsFromDict(
+            p.Items,
+        ),
     }
-    return &data
+}
+
+func (p DescribeVersionModelsResult) Pointer() *DescribeVersionModelsResult {
+    return &p
+}
+
+type GetVersionModelResult struct {
+    Item *VersionModel `json:"item"`
 }
 
 type GetVersionModelAsyncResult struct {
@@ -272,26 +339,25 @@ type GetVersionModelAsyncResult struct {
 	err    error
 }
 
-type DescribeAcceptVersionsResult struct {
-    /** 承認したバージョンのリスト */
-	Items         []AcceptVersion	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewGetVersionModelResultFromDict(data map[string]interface{}) GetVersionModelResult {
+    return GetVersionModelResult {
+        Item: NewVersionModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeAcceptVersionsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]AcceptVersion, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p GetVersionModelResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p GetVersionModelResult) Pointer() *GetVersionModelResult {
+    return &p
+}
+
+type DescribeAcceptVersionsResult struct {
+    Items []AcceptVersion `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeAcceptVersionsAsyncResult struct {
@@ -299,26 +365,29 @@ type DescribeAcceptVersionsAsyncResult struct {
 	err    error
 }
 
-type DescribeAcceptVersionsByUserIdResult struct {
-    /** 承認したバージョンのリスト */
-	Items         []AcceptVersion	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDescribeAcceptVersionsResultFromDict(data map[string]interface{}) DescribeAcceptVersionsResult {
+    return DescribeAcceptVersionsResult {
+        Items: CastAcceptVersions(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *DescribeAcceptVersionsByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]AcceptVersion, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeAcceptVersionsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastAcceptVersionsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DescribeAcceptVersionsResult) Pointer() *DescribeAcceptVersionsResult {
+    return &p
+}
+
+type DescribeAcceptVersionsByUserIdResult struct {
+    Items []AcceptVersion `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeAcceptVersionsByUserIdAsyncResult struct {
@@ -326,17 +395,28 @@ type DescribeAcceptVersionsByUserIdAsyncResult struct {
 	err    error
 }
 
-type AcceptResult struct {
-    /** 承認したバージョン */
-	Item         *AcceptVersion	`json:"item"`
+func NewDescribeAcceptVersionsByUserIdResultFromDict(data map[string]interface{}) DescribeAcceptVersionsByUserIdResult {
+    return DescribeAcceptVersionsByUserIdResult {
+        Items: CastAcceptVersions(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *AcceptResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeAcceptVersionsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastAcceptVersionsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeAcceptVersionsByUserIdResult) Pointer() *DescribeAcceptVersionsByUserIdResult {
+    return &p
+}
+
+type AcceptResult struct {
+    Item *AcceptVersion `json:"item"`
 }
 
 type AcceptAsyncResult struct {
@@ -344,17 +424,24 @@ type AcceptAsyncResult struct {
 	err    error
 }
 
-type AcceptByUserIdResult struct {
-    /** 承認したバージョン */
-	Item         *AcceptVersion	`json:"item"`
+func NewAcceptResultFromDict(data map[string]interface{}) AcceptResult {
+    return AcceptResult {
+        Item: NewAcceptVersionFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *AcceptByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p AcceptResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p AcceptResult) Pointer() *AcceptResult {
+    return &p
+}
+
+type AcceptByUserIdResult struct {
+    Item *AcceptVersion `json:"item"`
 }
 
 type AcceptByUserIdAsyncResult struct {
@@ -362,17 +449,24 @@ type AcceptByUserIdAsyncResult struct {
 	err    error
 }
 
-type GetAcceptVersionResult struct {
-    /** 承認したバージョン */
-	Item         *AcceptVersion	`json:"item"`
+func NewAcceptByUserIdResultFromDict(data map[string]interface{}) AcceptByUserIdResult {
+    return AcceptByUserIdResult {
+        Item: NewAcceptVersionFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetAcceptVersionResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p AcceptByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p AcceptByUserIdResult) Pointer() *AcceptByUserIdResult {
+    return &p
+}
+
+type GetAcceptVersionResult struct {
+    Item *AcceptVersion `json:"item"`
 }
 
 type GetAcceptVersionAsyncResult struct {
@@ -380,17 +474,24 @@ type GetAcceptVersionAsyncResult struct {
 	err    error
 }
 
-type GetAcceptVersionByUserIdResult struct {
-    /** 承認したバージョン */
-	Item         *AcceptVersion	`json:"item"`
+func NewGetAcceptVersionResultFromDict(data map[string]interface{}) GetAcceptVersionResult {
+    return GetAcceptVersionResult {
+        Item: NewAcceptVersionFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetAcceptVersionByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetAcceptVersionResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetAcceptVersionResult) Pointer() *GetAcceptVersionResult {
+    return &p
+}
+
+type GetAcceptVersionByUserIdResult struct {
+    Item *AcceptVersion `json:"item"`
 }
 
 type GetAcceptVersionByUserIdAsyncResult struct {
@@ -398,12 +499,23 @@ type GetAcceptVersionByUserIdAsyncResult struct {
 	err    error
 }
 
-type DeleteAcceptVersionResult struct {
+func NewGetAcceptVersionByUserIdResultFromDict(data map[string]interface{}) GetAcceptVersionByUserIdResult {
+    return GetAcceptVersionByUserIdResult {
+        Item: NewAcceptVersionFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteAcceptVersionResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+func (p GetAcceptVersionByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetAcceptVersionByUserIdResult) Pointer() *GetAcceptVersionByUserIdResult {
+    return &p
+}
+
+type DeleteAcceptVersionResult struct {
 }
 
 type DeleteAcceptVersionAsyncResult struct {
@@ -411,12 +523,21 @@ type DeleteAcceptVersionAsyncResult struct {
 	err    error
 }
 
-type DeleteAcceptVersionByUserIdResult struct {
+func NewDeleteAcceptVersionResultFromDict(data map[string]interface{}) DeleteAcceptVersionResult {
+    return DeleteAcceptVersionResult {
+    }
 }
 
-func (p *DeleteAcceptVersionByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+func (p DeleteAcceptVersionResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+    }
+}
+
+func (p DeleteAcceptVersionResult) Pointer() *DeleteAcceptVersionResult {
+    return &p
+}
+
+type DeleteAcceptVersionByUserIdResult struct {
 }
 
 type DeleteAcceptVersionByUserIdAsyncResult struct {
@@ -424,35 +545,24 @@ type DeleteAcceptVersionByUserIdAsyncResult struct {
 	err    error
 }
 
-type CheckVersionResult struct {
-    /** プロジェクトトークン */
-	ProjectToken         *string	`json:"projectToken"`
-    /** バージョンの検証結果のリスト */
-	Warnings         []Status	`json:"warnings"`
-    /** バージョンの検証結果のリスト */
-	Errors         []Status	`json:"errors"`
+func NewDeleteAcceptVersionByUserIdResultFromDict(data map[string]interface{}) DeleteAcceptVersionByUserIdResult {
+    return DeleteAcceptVersionByUserIdResult {
+    }
 }
 
-func (p *CheckVersionResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.ProjectToken != nil {
-        data["projectToken"] = p.ProjectToken
+func (p DeleteAcceptVersionByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
     }
-    if p.Warnings != nil {
-    	items := make([]Status, 0)
-    	for _, item := range p.Warnings {
-			items = append(items, item)
-		}
-		data["warnings"] = items
-    }
-    if p.Errors != nil {
-    	items := make([]Status, 0)
-    	for _, item := range p.Errors {
-			items = append(items, item)
-		}
-		data["errors"] = items
-    }
-    return &data
+}
+
+func (p DeleteAcceptVersionByUserIdResult) Pointer() *DeleteAcceptVersionByUserIdResult {
+    return &p
+}
+
+type CheckVersionResult struct {
+    ProjectToken *string `json:"projectToken"`
+    Warnings []Status `json:"warnings"`
+    Errors []Status `json:"errors"`
 }
 
 type CheckVersionAsyncResult struct {
@@ -460,35 +570,34 @@ type CheckVersionAsyncResult struct {
 	err    error
 }
 
-type CheckVersionByUserIdResult struct {
-    /** プロジェクトトークン */
-	ProjectToken         *string	`json:"projectToken"`
-    /** バージョンの検証結果のリスト */
-	Warnings         []Status	`json:"warnings"`
-    /** バージョンの検証結果のリスト */
-	Errors         []Status	`json:"errors"`
+func NewCheckVersionResultFromDict(data map[string]interface{}) CheckVersionResult {
+    return CheckVersionResult {
+        ProjectToken: core.CastString(data["projectToken"]),
+        Warnings: CastStatuses(core.CastArray(data["warnings"])),
+        Errors: CastStatuses(core.CastArray(data["errors"])),
+    }
 }
 
-func (p *CheckVersionByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.ProjectToken != nil {
-        data["projectToken"] = p.ProjectToken
+func (p CheckVersionResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "projectToken": p.ProjectToken,
+        "warnings": CastStatusesFromDict(
+            p.Warnings,
+        ),
+        "errors": CastStatusesFromDict(
+            p.Errors,
+        ),
     }
-    if p.Warnings != nil {
-    	items := make([]Status, 0)
-    	for _, item := range p.Warnings {
-			items = append(items, item)
-		}
-		data["warnings"] = items
-    }
-    if p.Errors != nil {
-    	items := make([]Status, 0)
-    	for _, item := range p.Errors {
-			items = append(items, item)
-		}
-		data["errors"] = items
-    }
-    return &data
+}
+
+func (p CheckVersionResult) Pointer() *CheckVersionResult {
+    return &p
+}
+
+type CheckVersionByUserIdResult struct {
+    ProjectToken *string `json:"projectToken"`
+    Warnings []Status `json:"warnings"`
+    Errors []Status `json:"errors"`
 }
 
 type CheckVersionByUserIdAsyncResult struct {
@@ -496,22 +605,33 @@ type CheckVersionByUserIdAsyncResult struct {
 	err    error
 }
 
-type CalculateSignatureResult struct {
-    /** ボディ */
-	Body         *string	`json:"body"`
-    /** 署名 */
-	Signature         *string	`json:"signature"`
+func NewCheckVersionByUserIdResultFromDict(data map[string]interface{}) CheckVersionByUserIdResult {
+    return CheckVersionByUserIdResult {
+        ProjectToken: core.CastString(data["projectToken"]),
+        Warnings: CastStatuses(core.CastArray(data["warnings"])),
+        Errors: CastStatuses(core.CastArray(data["errors"])),
+    }
 }
 
-func (p *CalculateSignatureResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Body != nil {
-        data["body"] = p.Body
+func (p CheckVersionByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "projectToken": p.ProjectToken,
+        "warnings": CastStatusesFromDict(
+            p.Warnings,
+        ),
+        "errors": CastStatusesFromDict(
+            p.Errors,
+        ),
     }
-    if p.Signature != nil {
-        data["signature"] = p.Signature
-    }
-    return &data
+}
+
+func (p CheckVersionByUserIdResult) Pointer() *CheckVersionByUserIdResult {
+    return &p
+}
+
+type CalculateSignatureResult struct {
+    Body *string `json:"body"`
+    Signature *string `json:"signature"`
 }
 
 type CalculateSignatureAsyncResult struct {
@@ -519,17 +639,26 @@ type CalculateSignatureAsyncResult struct {
 	err    error
 }
 
-type ExportMasterResult struct {
-    /** 現在有効なバージョン */
-	Item         *CurrentVersionMaster	`json:"item"`
+func NewCalculateSignatureResultFromDict(data map[string]interface{}) CalculateSignatureResult {
+    return CalculateSignatureResult {
+        Body: core.CastString(data["body"]),
+        Signature: core.CastString(data["signature"]),
+    }
 }
 
-func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CalculateSignatureResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "body": p.Body,
+        "signature": p.Signature,
     }
-    return &data
+}
+
+func (p CalculateSignatureResult) Pointer() *CalculateSignatureResult {
+    return &p
+}
+
+type ExportMasterResult struct {
+    Item *CurrentVersionMaster `json:"item"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -537,17 +666,24 @@ type ExportMasterAsyncResult struct {
 	err    error
 }
 
-type GetCurrentVersionMasterResult struct {
-    /** 現在有効なバージョン */
-	Item         *CurrentVersionMaster	`json:"item"`
+func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
+    return ExportMasterResult {
+        Item: NewCurrentVersionMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetCurrentVersionMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p ExportMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p ExportMasterResult) Pointer() *ExportMasterResult {
+    return &p
+}
+
+type GetCurrentVersionMasterResult struct {
+    Item *CurrentVersionMaster `json:"item"`
 }
 
 type GetCurrentVersionMasterAsyncResult struct {
@@ -555,17 +691,24 @@ type GetCurrentVersionMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateCurrentVersionMasterResult struct {
-    /** 更新した現在有効なバージョン */
-	Item         *CurrentVersionMaster	`json:"item"`
+func NewGetCurrentVersionMasterResultFromDict(data map[string]interface{}) GetCurrentVersionMasterResult {
+    return GetCurrentVersionMasterResult {
+        Item: NewCurrentVersionMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateCurrentVersionMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetCurrentVersionMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetCurrentVersionMasterResult) Pointer() *GetCurrentVersionMasterResult {
+    return &p
+}
+
+type UpdateCurrentVersionMasterResult struct {
+    Item *CurrentVersionMaster `json:"item"`
 }
 
 type UpdateCurrentVersionMasterAsyncResult struct {
@@ -573,20 +716,43 @@ type UpdateCurrentVersionMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateCurrentVersionMasterFromGitHubResult struct {
-    /** 更新した現在有効なバージョン */
-	Item         *CurrentVersionMaster	`json:"item"`
+func NewUpdateCurrentVersionMasterResultFromDict(data map[string]interface{}) UpdateCurrentVersionMasterResult {
+    return UpdateCurrentVersionMasterResult {
+        Item: NewCurrentVersionMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateCurrentVersionMasterFromGitHubResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateCurrentVersionMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateCurrentVersionMasterResult) Pointer() *UpdateCurrentVersionMasterResult {
+    return &p
+}
+
+type UpdateCurrentVersionMasterFromGitHubResult struct {
+    Item *CurrentVersionMaster `json:"item"`
 }
 
 type UpdateCurrentVersionMasterFromGitHubAsyncResult struct {
 	result *UpdateCurrentVersionMasterFromGitHubResult
 	err    error
+}
+
+func NewUpdateCurrentVersionMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentVersionMasterFromGitHubResult {
+    return UpdateCurrentVersionMasterFromGitHubResult {
+        Item: NewCurrentVersionMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UpdateCurrentVersionMasterFromGitHubResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateCurrentVersionMasterFromGitHubResult) Pointer() *UpdateCurrentVersionMasterFromGitHubResult {
+    return &p
 }

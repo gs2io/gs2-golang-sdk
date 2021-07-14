@@ -19,7 +19,7 @@ package experience
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2ExperienceWebSocketClient struct {
@@ -706,8 +706,8 @@ func (p Gs2ExperienceWebSocketClient) CreateExperienceModelMasterAsync(
     if request.MaxRankCap != nil {
         bodies["maxRankCap"] = *request.MaxRankCap
     }
-    if request.RankThresholdId != nil && *request.RankThresholdId != "" {
-        bodies["rankThresholdId"] = *request.RankThresholdId
+    if request.RankThresholdName != nil && *request.RankThresholdName != "" {
+        bodies["rankThresholdName"] = *request.RankThresholdName
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -888,8 +888,8 @@ func (p Gs2ExperienceWebSocketClient) UpdateExperienceModelMasterAsync(
     if request.MaxRankCap != nil {
         bodies["maxRankCap"] = *request.MaxRankCap
     }
-    if request.RankThresholdId != nil && *request.RankThresholdId != "" {
-        bodies["rankThresholdId"] = *request.RankThresholdId
+    if request.RankThresholdName != nil && *request.RankThresholdName != "" {
+        bodies["rankThresholdName"] = *request.RankThresholdName
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -1308,7 +1308,7 @@ func (p Gs2ExperienceWebSocketClient) CreateThresholdMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.Values != nil {
-        var _values []int64
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -1485,7 +1485,7 @@ func (p Gs2ExperienceWebSocketClient) UpdateThresholdMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.Values != nil {
-        var _values []int64
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -1977,6 +1977,9 @@ func (p Gs2ExperienceWebSocketClient) DescribeStatusesAsync(
     if request.ExperienceName != nil && *request.ExperienceName != "" {
         bodies["experienceName"] = *request.ExperienceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -2156,6 +2159,9 @@ func (p Gs2ExperienceWebSocketClient) GetStatusAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.ExperienceName != nil && *request.ExperienceName != "" {
         bodies["experienceName"] = *request.ExperienceName
     }
@@ -2331,6 +2337,9 @@ func (p Gs2ExperienceWebSocketClient) GetStatusWithSignatureAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.ExperienceName != nil && *request.ExperienceName != "" {
         bodies["experienceName"] = *request.ExperienceName

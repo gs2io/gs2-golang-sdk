@@ -18,7 +18,7 @@ package exchange
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -911,23 +911,23 @@ func (p Gs2ExchangeRestClient) CreateRateModelMasterAsync(
         bodies["enableSkip"] = *request.EnableSkip
     }
     if request.SkipConsumeActions != nil {
-        var _skipConsumeActions []*map[string]interface {}
+        var _skipConsumeActions []interface {}
         for _, item := range request.SkipConsumeActions {
-            _skipConsumeActions = append(_skipConsumeActions, item.ToDict())
+            _skipConsumeActions = append(_skipConsumeActions, item)
         }
         bodies["skipConsumeActions"] = _skipConsumeActions
     }
     if request.AcquireActions != nil {
-        var _acquireActions []*map[string]interface {}
+        var _acquireActions []interface {}
         for _, item := range request.AcquireActions {
-            _acquireActions = append(_acquireActions, item.ToDict())
+            _acquireActions = append(_acquireActions, item)
         }
         bodies["acquireActions"] = _acquireActions
     }
     if request.ConsumeActions != nil {
-        var _consumeActions []*map[string]interface {}
+        var _consumeActions []interface {}
         for _, item := range request.ConsumeActions {
-            _consumeActions = append(_consumeActions, item.ToDict())
+            _consumeActions = append(_consumeActions, item)
         }
         bodies["consumeActions"] = _consumeActions
     }
@@ -1128,23 +1128,23 @@ func (p Gs2ExchangeRestClient) UpdateRateModelMasterAsync(
         bodies["enableSkip"] = *request.EnableSkip
     }
     if request.SkipConsumeActions != nil {
-        var _skipConsumeActions []*map[string]interface {}
+        var _skipConsumeActions []interface {}
         for _, item := range request.SkipConsumeActions {
-            _skipConsumeActions = append(_skipConsumeActions, item.ToDict())
+            _skipConsumeActions = append(_skipConsumeActions, item)
         }
         bodies["skipConsumeActions"] = _skipConsumeActions
     }
     if request.AcquireActions != nil {
-        var _acquireActions []*map[string]interface {}
+        var _acquireActions []interface {}
         for _, item := range request.AcquireActions {
-            _acquireActions = append(_acquireActions, item.ToDict())
+            _acquireActions = append(_acquireActions, item)
         }
         bodies["acquireActions"] = _acquireActions
     }
     if request.ConsumeActions != nil {
-        var _consumeActions []*map[string]interface {}
+        var _consumeActions []interface {}
         for _, item := range request.ConsumeActions {
-            _consumeActions = append(_consumeActions, item.ToDict())
+            _consumeActions = append(_consumeActions, item)
         }
         bodies["consumeActions"] = _consumeActions
     }
@@ -1333,9 +1333,9 @@ func (p Gs2ExchangeRestClient) ExchangeAsync(
         bodies["count"] = *request.Count
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -1443,9 +1443,9 @@ func (p Gs2ExchangeRestClient) ExchangeByUserIdAsync(
         bodies["count"] = *request.Count
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2473,9 +2473,9 @@ func (p Gs2ExchangeRestClient) AcquireAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2585,9 +2585,9 @@ func (p Gs2ExchangeRestClient) AcquireByUserIdAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2694,9 +2694,9 @@ func (p Gs2ExchangeRestClient) AcquireForceByUserIdAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2798,9 +2798,9 @@ func (p Gs2ExchangeRestClient) SkipAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2910,9 +2910,9 @@ func (p Gs2ExchangeRestClient) SkipByUserIdAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }

@@ -16,26 +16,11 @@ permissions and limitations under the License.
 
 package news
 
-type DescribeNamespacesResult struct {
-    /** ネームスペースのリスト */
-	Items         []Namespace	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
-}
+import "core"
 
-func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Namespace, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+type DescribeNamespacesResult struct {
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -43,17 +28,28 @@ type DescribeNamespacesAsyncResult struct {
 	err    error
 }
 
-type CreateNamespaceResult struct {
-    /** 作成したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
+    return &p
+}
+
+type CreateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -61,17 +57,24 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceStatusResult struct {
-    /** None */
-	Status         *string	`json:"status"`
+func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Status != nil {
-        data["status"] = p.Status
+func (p CreateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
+    return &p
+}
+
+type GetNamespaceStatusResult struct {
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -79,17 +82,24 @@ type GetNamespaceStatusAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceResult struct {
-    /** ネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
-func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "status": p.Status,
     }
-    return &data
+}
+
+func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
+    return &p
+}
+
+type GetNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -97,17 +107,24 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
-type UpdateNamespaceResult struct {
-    /** 更新したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
+    return &p
+}
+
+type UpdateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -115,12 +132,23 @@ type UpdateNamespaceAsyncResult struct {
 	err    error
 }
 
-type DeleteNamespaceResult struct {
+func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
+    return &p
+}
+
+type DeleteNamespaceResult struct {
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -128,22 +156,23 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
-type PrepareUpdateCurrentNewsMasterResult struct {
-    /** アップロード後に結果を反映する際に使用するトークン */
-	UploadToken         *string	`json:"uploadToken"`
-    /** テンプレートアップロード処理の実行に使用するURL */
-	TemplateUploadUrl         *string	`json:"templateUploadUrl"`
+func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
+    return DeleteNamespaceResult {
+    }
 }
 
-func (p *PrepareUpdateCurrentNewsMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.UploadToken != nil {
-        data["uploadToken"] = p.UploadToken
+func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
     }
-    if p.TemplateUploadUrl != nil {
-        data["templateUploadUrl"] = p.TemplateUploadUrl
-    }
-    return &data
+}
+
+func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
+    return &p
+}
+
+type PrepareUpdateCurrentNewsMasterResult struct {
+    UploadToken *string `json:"uploadToken"`
+    TemplateUploadUrl *string `json:"templateUploadUrl"`
 }
 
 type PrepareUpdateCurrentNewsMasterAsyncResult struct {
@@ -151,12 +180,25 @@ type PrepareUpdateCurrentNewsMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateCurrentNewsMasterResult struct {
+func NewPrepareUpdateCurrentNewsMasterResultFromDict(data map[string]interface{}) PrepareUpdateCurrentNewsMasterResult {
+    return PrepareUpdateCurrentNewsMasterResult {
+        UploadToken: core.CastString(data["uploadToken"]),
+        TemplateUploadUrl: core.CastString(data["templateUploadUrl"]),
+    }
 }
 
-func (p *UpdateCurrentNewsMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    return &data
+func (p PrepareUpdateCurrentNewsMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "uploadToken": p.UploadToken,
+        "templateUploadUrl": p.TemplateUploadUrl,
+    }
+}
+
+func (p PrepareUpdateCurrentNewsMasterResult) Pointer() *PrepareUpdateCurrentNewsMasterResult {
+    return &p
+}
+
+type UpdateCurrentNewsMasterResult struct {
 }
 
 type UpdateCurrentNewsMasterAsyncResult struct {
@@ -164,17 +206,22 @@ type UpdateCurrentNewsMasterAsyncResult struct {
 	err    error
 }
 
-type PrepareUpdateCurrentNewsMasterFromGitHubResult struct {
-    /** アップロード後に結果を反映する際に使用するトークン */
-	UploadToken         *string	`json:"uploadToken"`
+func NewUpdateCurrentNewsMasterResultFromDict(data map[string]interface{}) UpdateCurrentNewsMasterResult {
+    return UpdateCurrentNewsMasterResult {
+    }
 }
 
-func (p *PrepareUpdateCurrentNewsMasterFromGitHubResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.UploadToken != nil {
-        data["uploadToken"] = p.UploadToken
+func (p UpdateCurrentNewsMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
     }
-    return &data
+}
+
+func (p UpdateCurrentNewsMasterResult) Pointer() *UpdateCurrentNewsMasterResult {
+    return &p
+}
+
+type PrepareUpdateCurrentNewsMasterFromGitHubResult struct {
+    UploadToken *string `json:"uploadToken"`
 }
 
 type PrepareUpdateCurrentNewsMasterFromGitHubAsyncResult struct {
@@ -182,31 +229,26 @@ type PrepareUpdateCurrentNewsMasterFromGitHubAsyncResult struct {
 	err    error
 }
 
-type DescribeNewsResult struct {
-    /** お知らせ記事のリスト */
-	Items         []News	`json:"items"`
-    /** お知らせ記事データのハッシュ値 */
-	ContentHash         *string	`json:"contentHash"`
-    /** テンプレートデータのハッシュ値 */
-	TemplateHash         *string	`json:"templateHash"`
+func NewPrepareUpdateCurrentNewsMasterFromGitHubResultFromDict(data map[string]interface{}) PrepareUpdateCurrentNewsMasterFromGitHubResult {
+    return PrepareUpdateCurrentNewsMasterFromGitHubResult {
+        UploadToken: core.CastString(data["uploadToken"]),
+    }
 }
 
-func (p *DescribeNewsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]News, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p PrepareUpdateCurrentNewsMasterFromGitHubResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "uploadToken": p.UploadToken,
     }
-    if p.ContentHash != nil {
-        data["contentHash"] = p.ContentHash
-    }
-    if p.TemplateHash != nil {
-        data["templateHash"] = p.TemplateHash
-    }
-    return &data
+}
+
+func (p PrepareUpdateCurrentNewsMasterFromGitHubResult) Pointer() *PrepareUpdateCurrentNewsMasterFromGitHubResult {
+    return &p
+}
+
+type DescribeNewsResult struct {
+    Items []News `json:"items"`
+    ContentHash *string `json:"contentHash"`
+    TemplateHash *string `json:"templateHash"`
 }
 
 type DescribeNewsAsyncResult struct {
@@ -214,31 +256,32 @@ type DescribeNewsAsyncResult struct {
 	err    error
 }
 
-type DescribeNewsByUserIdResult struct {
-    /** お知らせ記事のリスト */
-	Items         []News	`json:"items"`
-    /** お知らせ記事データのハッシュ値 */
-	ContentHash         *string	`json:"contentHash"`
-    /** テンプレートデータのハッシュ値 */
-	TemplateHash         *string	`json:"templateHash"`
+func NewDescribeNewsResultFromDict(data map[string]interface{}) DescribeNewsResult {
+    return DescribeNewsResult {
+        Items: CastNewses(core.CastArray(data["items"])),
+        ContentHash: core.CastString(data["contentHash"]),
+        TemplateHash: core.CastString(data["templateHash"]),
+    }
 }
 
-func (p *DescribeNewsByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]News, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeNewsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastNewsesFromDict(
+            p.Items,
+        ),
+        "contentHash": p.ContentHash,
+        "templateHash": p.TemplateHash,
     }
-    if p.ContentHash != nil {
-        data["contentHash"] = p.ContentHash
-    }
-    if p.TemplateHash != nil {
-        data["templateHash"] = p.TemplateHash
-    }
-    return &data
+}
+
+func (p DescribeNewsResult) Pointer() *DescribeNewsResult {
+    return &p
+}
+
+type DescribeNewsByUserIdResult struct {
+    Items []News `json:"items"`
+    ContentHash *string `json:"contentHash"`
+    TemplateHash *string `json:"templateHash"`
 }
 
 type DescribeNewsByUserIdAsyncResult struct {
@@ -246,31 +289,32 @@ type DescribeNewsByUserIdAsyncResult struct {
 	err    error
 }
 
-type WantGrantResult struct {
-    /** お知らせコンテンツにアクセスするために設定の必要なクッキー のリスト */
-	Items         []SetCookieRequestEntry	`json:"items"`
-    /** お知らせコンテンツにアクセスするためのURL */
-	BrowserUrl         *string	`json:"browserUrl"`
-    /** ZIP形式のお知らせコンテンツにアクセスするためのURL Cookieの設定は不要 */
-	ZipUrl         *string	`json:"zipUrl"`
+func NewDescribeNewsByUserIdResultFromDict(data map[string]interface{}) DescribeNewsByUserIdResult {
+    return DescribeNewsByUserIdResult {
+        Items: CastNewses(core.CastArray(data["items"])),
+        ContentHash: core.CastString(data["contentHash"]),
+        TemplateHash: core.CastString(data["templateHash"]),
+    }
 }
 
-func (p *WantGrantResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]SetCookieRequestEntry, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeNewsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastNewsesFromDict(
+            p.Items,
+        ),
+        "contentHash": p.ContentHash,
+        "templateHash": p.TemplateHash,
     }
-    if p.BrowserUrl != nil {
-        data["browserUrl"] = p.BrowserUrl
-    }
-    if p.ZipUrl != nil {
-        data["zipUrl"] = p.ZipUrl
-    }
-    return &data
+}
+
+func (p DescribeNewsByUserIdResult) Pointer() *DescribeNewsByUserIdResult {
+    return &p
+}
+
+type WantGrantResult struct {
+    Items []SetCookieRequestEntry `json:"items"`
+    BrowserUrl *string `json:"browserUrl"`
+    ZipUrl *string `json:"zipUrl"`
 }
 
 type WantGrantAsyncResult struct {
@@ -278,34 +322,57 @@ type WantGrantAsyncResult struct {
 	err    error
 }
 
-type WantGrantByUserIdResult struct {
-    /** お知らせコンテンツにアクセスするために設定の必要なクッキー のリスト */
-	Items         []SetCookieRequestEntry	`json:"items"`
-    /** お知らせコンテンツにアクセスするためのURL */
-	BrowserUrl         *string	`json:"browserUrl"`
-    /** ZIP形式のお知らせコンテンツにアクセスするためのURL Cookieの設定は不要 */
-	ZipUrl         *string	`json:"zipUrl"`
+func NewWantGrantResultFromDict(data map[string]interface{}) WantGrantResult {
+    return WantGrantResult {
+        Items: CastSetCookieRequestEntries(core.CastArray(data["items"])),
+        BrowserUrl: core.CastString(data["browserUrl"]),
+        ZipUrl: core.CastString(data["zipUrl"]),
+    }
 }
 
-func (p *WantGrantByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]SetCookieRequestEntry, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p WantGrantResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSetCookieRequestEntriesFromDict(
+            p.Items,
+        ),
+        "browserUrl": p.BrowserUrl,
+        "zipUrl": p.ZipUrl,
     }
-    if p.BrowserUrl != nil {
-        data["browserUrl"] = p.BrowserUrl
-    }
-    if p.ZipUrl != nil {
-        data["zipUrl"] = p.ZipUrl
-    }
-    return &data
+}
+
+func (p WantGrantResult) Pointer() *WantGrantResult {
+    return &p
+}
+
+type WantGrantByUserIdResult struct {
+    Items []SetCookieRequestEntry `json:"items"`
+    BrowserUrl *string `json:"browserUrl"`
+    ZipUrl *string `json:"zipUrl"`
 }
 
 type WantGrantByUserIdAsyncResult struct {
 	result *WantGrantByUserIdResult
 	err    error
+}
+
+func NewWantGrantByUserIdResultFromDict(data map[string]interface{}) WantGrantByUserIdResult {
+    return WantGrantByUserIdResult {
+        Items: CastSetCookieRequestEntries(core.CastArray(data["items"])),
+        BrowserUrl: core.CastString(data["browserUrl"]),
+        ZipUrl: core.CastString(data["zipUrl"]),
+    }
+}
+
+func (p WantGrantByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSetCookieRequestEntriesFromDict(
+            p.Items,
+        ),
+        "browserUrl": p.BrowserUrl,
+        "zipUrl": p.ZipUrl,
+    }
+}
+
+func (p WantGrantByUserIdResult) Pointer() *WantGrantByUserIdResult {
+    return &p
 }

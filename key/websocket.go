@@ -19,7 +19,7 @@ package key
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2KeyWebSocketClient struct {

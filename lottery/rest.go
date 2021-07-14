@@ -18,7 +18,7 @@ package lottery
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -1215,9 +1215,9 @@ func (p Gs2LotteryRestClient) CreatePrizeTableMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.Prizes != nil {
-        var _prizes []*map[string]interface {}
+        var _prizes []interface {}
         for _, item := range request.Prizes {
-            _prizes = append(_prizes, item.ToDict())
+            _prizes = append(_prizes, item)
         }
         bodies["prizes"] = _prizes
     }
@@ -1409,9 +1409,9 @@ func (p Gs2LotteryRestClient) UpdatePrizeTableMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.Prizes != nil {
-        var _prizes []*map[string]interface {}
+        var _prizes []interface {}
         for _, item := range request.Prizes {
-            _prizes = append(_prizes, item.ToDict())
+            _prizes = append(_prizes, item)
         }
         bodies["prizes"] = _prizes
     }
@@ -2605,9 +2605,9 @@ func (p Gs2LotteryRestClient) DrawByUserIdAsync(
         bodies["count"] = *request.Count
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }

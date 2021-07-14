@@ -16,494 +16,811 @@ permissions and limitations under the License.
 
 package quest
 
+import "core"
+
 type Namespace struct {
-    /** クエストを分類するカテゴリー */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** カテゴリ名 */
-	Name *string   `json:"name"`
-    /** ネームスペースの説明 */
-	Description *string   `json:"description"`
-    /** クエスト開始したときに実行するスクリプト */
-	StartQuestScript *ScriptSetting   `json:"startQuestScript"`
-    /** クエストクリアしたときに実行するスクリプト */
-	CompleteQuestScript *ScriptSetting   `json:"completeQuestScript"`
-    /** クエスト失敗したときに実行するスクリプト */
-	FailedQuestScript *ScriptSetting   `json:"failedQuestScript"`
-    /** 報酬付与処理をジョブとして追加するキューのネームスペース のGRN */
-	QueueNamespaceId *string   `json:"queueNamespaceId"`
-    /** 報酬付与処理のスタンプシートで使用する暗号鍵GRN */
-	KeyId *string   `json:"keyId"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** None */
-	Status *string   `json:"status"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId         *string        `json:"namespaceId"`
+	Name                *string        `json:"name"`
+	Description         *string        `json:"description"`
+	StartQuestScript    *ScriptSetting `json:"startQuestScript"`
+	CompleteQuestScript *ScriptSetting `json:"completeQuestScript"`
+	FailedQuestScript   *ScriptSetting `json:"failedQuestScript"`
+	QueueNamespaceId    *string        `json:"queueNamespaceId"`
+	KeyId               *string        `json:"keyId"`
+	LogSetting          *LogSetting    `json:"logSetting"`
+	CreatedAt           *int64         `json:"createdAt"`
+	UpdatedAt           *int64         `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    if p.StartQuestScript != nil {
-        data["startQuestScript"] = *p.StartQuestScript.ToDict()
-    }
-    if p.CompleteQuestScript != nil {
-        data["completeQuestScript"] = *p.CompleteQuestScript.ToDict()
-    }
-    if p.FailedQuestScript != nil {
-        data["failedQuestScript"] = *p.FailedQuestScript.ToDict()
-    }
-    data["queueNamespaceId"] = p.QueueNamespaceId
-    data["keyId"] = p.KeyId
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
-    }
-    data["status"] = p.Status
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId:         core.CastString(data["namespaceId"]),
+		Name:                core.CastString(data["name"]),
+		Description:         core.CastString(data["description"]),
+		StartQuestScript:    NewScriptSettingFromDict(core.CastMap(data["startQuestScript"])).Pointer(),
+		CompleteQuestScript: NewScriptSettingFromDict(core.CastMap(data["completeQuestScript"])).Pointer(),
+		FailedQuestScript:   NewScriptSettingFromDict(core.CastMap(data["failedQuestScript"])).Pointer(),
+		QueueNamespaceId:    core.CastString(data["queueNamespaceId"]),
+		KeyId:               core.CastString(data["keyId"]),
+		LogSetting:          NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:           core.CastInt64(data["createdAt"]),
+		UpdatedAt:           core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId":         p.NamespaceId,
+		"name":                p.Name,
+		"description":         p.Description,
+		"startQuestScript":    p.StartQuestScript.ToDict(),
+		"completeQuestScript": p.CompleteQuestScript.ToDict(),
+		"failedQuestScript":   p.FailedQuestScript.ToDict(),
+		"queueNamespaceId":    p.QueueNamespaceId,
+		"keyId":               p.KeyId,
+		"logSetting":          p.LogSetting.ToDict(),
+		"createdAt":           p.CreatedAt,
+		"updatedAt":           p.UpdatedAt,
+	}
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type QuestGroupModelMaster struct {
-    /** クエストグループマスター */
-	QuestGroupModelId *string   `json:"questGroupModelId"`
-    /** クエストグループモデル名 */
-	Name *string   `json:"name"`
-    /** クエストグループマスターの説明 */
-	Description *string   `json:"description"`
-    /** クエストグループのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 挑戦可能な期間を指定するイベントマスター のGRN */
-	ChallengePeriodEventId *string   `json:"challengePeriodEventId"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	QuestGroupModelId      *string `json:"questGroupModelId"`
+	Name                   *string `json:"name"`
+	Description            *string `json:"description"`
+	Metadata               *string `json:"metadata"`
+	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
+	CreatedAt              *int64  `json:"createdAt"`
+	UpdatedAt              *int64  `json:"updatedAt"`
 }
 
-func (p *QuestGroupModelMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["questGroupModelId"] = p.QuestGroupModelId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["metadata"] = p.Metadata
-    data["challengePeriodEventId"] = p.ChallengePeriodEventId
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewQuestGroupModelMasterFromDict(data map[string]interface{}) QuestGroupModelMaster {
+	return QuestGroupModelMaster{
+		QuestGroupModelId:      core.CastString(data["questGroupModelId"]),
+		Name:                   core.CastString(data["name"]),
+		Description:            core.CastString(data["description"]),
+		Metadata:               core.CastString(data["metadata"]),
+		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+		CreatedAt:              core.CastInt64(data["createdAt"]),
+		UpdatedAt:              core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p QuestGroupModelMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"questGroupModelId":      p.QuestGroupModelId,
+		"name":                   p.Name,
+		"description":            p.Description,
+		"metadata":               p.Metadata,
+		"challengePeriodEventId": p.ChallengePeriodEventId,
+		"createdAt":              p.CreatedAt,
+		"updatedAt":              p.UpdatedAt,
+	}
+}
+
+func (p QuestGroupModelMaster) Pointer() *QuestGroupModelMaster {
+	return &p
+}
+
+func CastQuestGroupModelMasters(data []interface{}) []QuestGroupModelMaster {
+	v := make([]QuestGroupModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewQuestGroupModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastQuestGroupModelMastersFromDict(data []QuestGroupModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type QuestModelMaster struct {
-    /** クエストモデルマスター */
-	QuestModelId *string   `json:"questModelId"`
-    /** クエストモデル名 */
-	QuestGroupName *string   `json:"questGroupName"`
-    /** クエスト名 */
-	Name *string   `json:"name"`
-    /** クエストモデルの説明 */
-	Description *string   `json:"description"`
-    /** クエストのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** クエストの内容 */
-	Contents []Contents   `json:"contents"`
-    /** 挑戦可能な期間を指定するイベントマスター のGRN */
-	ChallengePeriodEventId *string   `json:"challengePeriodEventId"`
-    /** クエストの参加料 */
-	ConsumeActions []ConsumeAction   `json:"consumeActions"`
-    /** クエスト失敗時の報酬 */
-	FailedAcquireActions []AcquireAction   `json:"failedAcquireActions"`
-    /** クエストに挑戦するためにクリアしておく必要のあるクエスト名 */
-	PremiseQuestNames []string   `json:"premiseQuestNames"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	QuestModelId           *string         `json:"questModelId"`
+	QuestGroupName         *string         `json:"questGroupName"`
+	Name                   *string         `json:"name"`
+	Description            *string         `json:"description"`
+	Metadata               *string         `json:"metadata"`
+	Contents               []Contents      `json:"contents"`
+	ChallengePeriodEventId *string         `json:"challengePeriodEventId"`
+	ConsumeActions         []ConsumeAction `json:"consumeActions"`
+	FailedAcquireActions   []AcquireAction `json:"failedAcquireActions"`
+	PremiseQuestNames      []string        `json:"premiseQuestNames"`
+	CreatedAt              *int64          `json:"createdAt"`
+	UpdatedAt              *int64          `json:"updatedAt"`
 }
 
-func (p *QuestModelMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["questModelId"] = p.QuestModelId
-    data["questGroupName"] = p.QuestGroupName
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["metadata"] = p.Metadata
-    if p.Contents != nil {
-        var _contents []*map[string]interface {}
-        for _, item := range p.Contents {
-            _contents = append(_contents, item.ToDict())
-        }
-        data["contents"] = &_contents
-    }
-    data["challengePeriodEventId"] = p.ChallengePeriodEventId
-    if p.ConsumeActions != nil {
-        var _consumeActions []*map[string]interface {}
-        for _, item := range p.ConsumeActions {
-            _consumeActions = append(_consumeActions, item.ToDict())
-        }
-        data["consumeActions"] = &_consumeActions
-    }
-    if p.FailedAcquireActions != nil {
-        var _failedAcquireActions []*map[string]interface {}
-        for _, item := range p.FailedAcquireActions {
-            _failedAcquireActions = append(_failedAcquireActions, item.ToDict())
-        }
-        data["failedAcquireActions"] = &_failedAcquireActions
-    }
-    if p.PremiseQuestNames != nil {
-        var _premiseQuestNames []string
-        for _, item := range p.PremiseQuestNames {
-            _premiseQuestNames = append(_premiseQuestNames, item)
-        }
-        data["premiseQuestNames"] = &_premiseQuestNames
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewQuestModelMasterFromDict(data map[string]interface{}) QuestModelMaster {
+	return QuestModelMaster{
+		QuestModelId:           core.CastString(data["questModelId"]),
+		QuestGroupName:         core.CastString(data["questGroupName"]),
+		Name:                   core.CastString(data["name"]),
+		Description:            core.CastString(data["description"]),
+		Metadata:               core.CastString(data["metadata"]),
+		Contents:               CastContentses(core.CastArray(data["contents"])),
+		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+		ConsumeActions:         CastConsumeActions(core.CastArray(data["consumeActions"])),
+		FailedAcquireActions:   CastAcquireActions(core.CastArray(data["failedAcquireActions"])),
+		PremiseQuestNames:      core.CastStrings(core.CastArray(data["premiseQuestNames"])),
+		CreatedAt:              core.CastInt64(data["createdAt"]),
+		UpdatedAt:              core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p QuestModelMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"questModelId":   p.QuestModelId,
+		"questGroupName": p.QuestGroupName,
+		"name":           p.Name,
+		"description":    p.Description,
+		"metadata":       p.Metadata,
+		"contents": CastContentsesFromDict(
+			p.Contents,
+		),
+		"challengePeriodEventId": p.ChallengePeriodEventId,
+		"consumeActions": CastConsumeActionsFromDict(
+			p.ConsumeActions,
+		),
+		"failedAcquireActions": CastAcquireActionsFromDict(
+			p.FailedAcquireActions,
+		),
+		"premiseQuestNames": core.CastStringsFromDict(
+			p.PremiseQuestNames,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p QuestModelMaster) Pointer() *QuestModelMaster {
+	return &p
+}
+
+func CastQuestModelMasters(data []interface{}) []QuestModelMaster {
+	v := make([]QuestModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewQuestModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastQuestModelMastersFromDict(data []QuestModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CurrentQuestMaster struct {
-    /** クエストを分類するカテゴリー */
-	NamespaceId *string   `json:"namespaceId"`
-    /** マスターデータ */
-	Settings *string   `json:"settings"`
+	NamespaceId *string `json:"namespaceId"`
+	Settings    *string `json:"settings"`
 }
 
-func (p *CurrentQuestMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["settings"] = p.Settings
-    return &data
+func NewCurrentQuestMasterFromDict(data map[string]interface{}) CurrentQuestMaster {
+	return CurrentQuestMaster{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Settings:    core.CastString(data["settings"]),
+	}
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func (p CurrentQuestMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId": p.NamespaceId,
+		"settings":    p.Settings,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func (p CurrentQuestMaster) Pointer() *CurrentQuestMaster {
+	return &p
+}
+
+func CastCurrentQuestMasters(data []interface{}) []CurrentQuestMaster {
+	v := make([]CurrentQuestMaster, 0)
+	for _, d := range data {
+		v = append(v, NewCurrentQuestMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCurrentQuestMastersFromDict(data []CurrentQuestMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Contents struct {
-    /** クエストモデルのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** クエストクリア時の報酬 */
-	CompleteAcquireActions []AcquireAction   `json:"completeAcquireActions"`
-    /** 抽選する重み */
-	Weight *int32   `json:"weight"`
+	Metadata               *string         `json:"metadata"`
+	CompleteAcquireActions []AcquireAction `json:"completeAcquireActions"`
+	Weight                 *int32          `json:"weight"`
 }
 
-func (p *Contents) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["metadata"] = p.Metadata
-    if p.CompleteAcquireActions != nil {
-        var _completeAcquireActions []*map[string]interface {}
-        for _, item := range p.CompleteAcquireActions {
-            _completeAcquireActions = append(_completeAcquireActions, item.ToDict())
-        }
-        data["completeAcquireActions"] = &_completeAcquireActions
-    }
-    data["weight"] = p.Weight
-    return &data
+func NewContentsFromDict(data map[string]interface{}) Contents {
+	return Contents{
+		Metadata:               core.CastString(data["metadata"]),
+		CompleteAcquireActions: CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
+		Weight:                 core.CastInt32(data["weight"]),
+	}
+}
+
+func (p Contents) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": p.Metadata,
+		"completeAcquireActions": CastAcquireActionsFromDict(
+			p.CompleteAcquireActions,
+		),
+		"weight": p.Weight,
+	}
+}
+
+func (p Contents) Pointer() *Contents {
+	return &p
+}
+
+func CastContentses(data []interface{}) []Contents {
+	v := make([]Contents, 0)
+	for _, d := range data {
+		v = append(v, NewContentsFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastContentsesFromDict(data []Contents) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ConsumeAction struct {
-    /** スタンプタスクで実行するアクションの種類 */
-	Action *string   `json:"action"`
-    /** 消費リクエストのJSON */
-	Request *string   `json:"request"`
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
 }
 
-func (p *ConsumeAction) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["action"] = p.Action
-    data["request"] = p.Request
-    return &data
+func NewConsumeActionFromDict(data map[string]interface{}) ConsumeAction {
+	return ConsumeAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p ConsumeAction) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"action":  p.Action,
+		"request": p.Request,
+	}
+}
+
+func (p ConsumeAction) Pointer() *ConsumeAction {
+	return &p
+}
+
+func CastConsumeActions(data []interface{}) []ConsumeAction {
+	v := make([]ConsumeAction, 0)
+	for _, d := range data {
+		v = append(v, NewConsumeActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastConsumeActionsFromDict(data []ConsumeAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type AcquireAction struct {
-    /** スタンプシートで実行するアクションの種類 */
-	Action *string   `json:"action"`
-    /** 入手リクエストのJSON */
-	Request *string   `json:"request"`
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
 }
 
-func (p *AcquireAction) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["action"] = p.Action
-    data["request"] = p.Request
-    return &data
+func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
+	return AcquireAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p AcquireAction) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"action":  p.Action,
+		"request": p.Request,
+	}
+}
+
+func (p AcquireAction) Pointer() *AcquireAction {
+	return &p
+}
+
+func CastAcquireActions(data []interface{}) []AcquireAction {
+	v := make([]AcquireAction, 0)
+	for _, d := range data {
+		v = append(v, NewAcquireActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Reward struct {
-    /** スタンプシートで実行するアクションの種類 */
-	Action *string   `json:"action"`
-    /** リクエストモデル */
-	Request *string   `json:"request"`
-    /** 入手するリソースGRN */
-	ItemId *string   `json:"itemId"`
-    /** 入手する数量 */
-	Value *int32   `json:"value"`
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
+	ItemId  *string `json:"itemId"`
+	Value   *int32  `json:"value"`
 }
 
-func (p *Reward) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["action"] = p.Action
-    data["request"] = p.Request
-    data["itemId"] = p.ItemId
-    data["value"] = p.Value
-    return &data
+func NewRewardFromDict(data map[string]interface{}) Reward {
+	return Reward{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+		ItemId:  core.CastString(data["itemId"]),
+		Value:   core.CastInt32(data["value"]),
+	}
+}
+
+func (p Reward) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"action":  p.Action,
+		"request": p.Request,
+		"itemId":  p.ItemId,
+		"value":   p.Value,
+	}
+}
+
+func (p Reward) Pointer() *Reward {
+	return &p
+}
+
+func CastRewards(data []interface{}) []Reward {
+	v := make([]Reward, 0)
+	for _, d := range data {
+		v = append(v, NewRewardFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRewardsFromDict(data []Reward) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Config struct {
-    /** 名前 */
-	Key *string   `json:"key"`
-    /** 値 */
-	Value *string   `json:"value"`
+	Key   *string `json:"key"`
+	Value *string `json:"value"`
 }
 
-func (p *Config) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["key"] = p.Key
-    data["value"] = p.Value
-    return &data
+func NewConfigFromDict(data map[string]interface{}) Config {
+	return Config{
+		Key:   core.CastString(data["key"]),
+		Value: core.CastString(data["value"]),
+	}
+}
+
+func (p Config) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"key":   p.Key,
+		"value": p.Value,
+	}
+}
+
+func (p Config) Pointer() *Config {
+	return &p
+}
+
+func CastConfigs(data []interface{}) []Config {
+	v := make([]Config, 0)
+	for _, d := range data {
+		v = append(v, NewConfigFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastConfigsFromDict(data []Config) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GitHubCheckoutSetting struct {
-    /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	ApiKeyId *string   `json:"apiKeyId"`
-    /** リポジトリ名 */
-	RepositoryName *string   `json:"repositoryName"`
-    /** ソースコードのファイルパス */
-	SourcePath *string   `json:"sourcePath"`
-    /** コードの取得元 */
-	ReferenceType *string   `json:"referenceType"`
-    /** コミットハッシュ */
-	CommitHash *string   `json:"commitHash"`
-    /** ブランチ名 */
-	BranchName *string   `json:"branchName"`
-    /** タグ名 */
-	TagName *string   `json:"tagName"`
+	ApiKeyId       *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath     *string `json:"sourcePath"`
+	ReferenceType  *string `json:"referenceType"`
+	CommitHash     *string `json:"commitHash"`
+	BranchName     *string `json:"branchName"`
+	TagName        *string `json:"tagName"`
 }
 
-func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["apiKeyId"] = p.ApiKeyId
-    data["repositoryName"] = p.RepositoryName
-    data["sourcePath"] = p.SourcePath
-    data["referenceType"] = p.ReferenceType
-    data["commitHash"] = p.CommitHash
-    data["branchName"] = p.BranchName
-    data["tagName"] = p.TagName
-    return &data
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+	return GitHubCheckoutSetting{
+		ApiKeyId:       core.CastString(data["apiKeyId"]),
+		RepositoryName: core.CastString(data["repositoryName"]),
+		SourcePath:     core.CastString(data["sourcePath"]),
+		ReferenceType:  core.CastString(data["referenceType"]),
+		CommitHash:     core.CastString(data["commitHash"]),
+		BranchName:     core.CastString(data["branchName"]),
+		TagName:        core.CastString(data["tagName"]),
+	}
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"apiKeyId":       p.ApiKeyId,
+		"repositoryName": p.RepositoryName,
+		"sourcePath":     p.SourcePath,
+		"referenceType":  p.ReferenceType,
+		"commitHash":     p.CommitHash,
+		"branchName":     p.BranchName,
+		"tagName":        p.TagName,
+	}
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+	return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ScriptSetting struct {
-    /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *string   `json:"triggerScriptId"`
-    /** 完了通知の通知先 */
-	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
-    /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
-    /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
+	TriggerScriptId             *string `json:"triggerScriptId"`
+	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
+	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
-func (p *ScriptSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["triggerScriptId"] = p.TriggerScriptId
-    data["doneTriggerTargetType"] = p.DoneTriggerTargetType
-    data["doneTriggerScriptId"] = p.DoneTriggerScriptId
-    data["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
-    return &data
+func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
+	return ScriptSetting{
+		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
+		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
+		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
+		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+	}
+}
+
+func (p ScriptSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"triggerScriptId":             p.TriggerScriptId,
+		"doneTriggerTargetType":       p.DoneTriggerTargetType,
+		"doneTriggerScriptId":         p.DoneTriggerScriptId,
+		"doneTriggerQueueNamespaceId": p.DoneTriggerQueueNamespaceId,
+	}
+}
+
+func (p ScriptSetting) Pointer() *ScriptSetting {
+	return &p
+}
+
+func CastScriptSettings(data []interface{}) []ScriptSetting {
+	v := make([]ScriptSetting, 0)
+	for _, d := range data {
+		v = append(v, NewScriptSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Progress struct {
-    /** クエスト挑戦 */
-	ProgressId *string   `json:"progressId"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** トランザクションID */
-	TransactionId *string   `json:"transactionId"`
-    /** クエストモデル */
-	QuestModelId *string   `json:"questModelId"`
-    /** 乱数シード */
-	RandomSeed *int64   `json:"randomSeed"`
-    /** クエストで得られる報酬の上限 */
-	Rewards []Reward   `json:"rewards"`
-    /** クエストモデルのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	ProgressId    *string  `json:"progressId"`
+	UserId        *string  `json:"userId"`
+	TransactionId *string  `json:"transactionId"`
+	QuestModelId  *string  `json:"questModelId"`
+	RandomSeed    *int64   `json:"randomSeed"`
+	Rewards       []Reward `json:"rewards"`
+	Metadata      *string  `json:"metadata"`
+	CreatedAt     *int64   `json:"createdAt"`
+	UpdatedAt     *int64   `json:"updatedAt"`
 }
 
-func (p *Progress) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["progressId"] = p.ProgressId
-    data["userId"] = p.UserId
-    data["transactionId"] = p.TransactionId
-    data["questModelId"] = p.QuestModelId
-    data["randomSeed"] = p.RandomSeed
-    if p.Rewards != nil {
-        var _rewards []*map[string]interface {}
-        for _, item := range p.Rewards {
-            _rewards = append(_rewards, item.ToDict())
-        }
-        data["rewards"] = &_rewards
-    }
-    data["metadata"] = p.Metadata
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewProgressFromDict(data map[string]interface{}) Progress {
+	return Progress{
+		ProgressId:    core.CastString(data["progressId"]),
+		UserId:        core.CastString(data["userId"]),
+		TransactionId: core.CastString(data["transactionId"]),
+		QuestModelId:  core.CastString(data["questModelId"]),
+		RandomSeed:    core.CastInt64(data["randomSeed"]),
+		Rewards:       CastRewards(core.CastArray(data["rewards"])),
+		Metadata:      core.CastString(data["metadata"]),
+		CreatedAt:     core.CastInt64(data["createdAt"]),
+		UpdatedAt:     core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Progress) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"progressId":    p.ProgressId,
+		"userId":        p.UserId,
+		"transactionId": p.TransactionId,
+		"questModelId":  p.QuestModelId,
+		"randomSeed":    p.RandomSeed,
+		"rewards": CastRewardsFromDict(
+			p.Rewards,
+		),
+		"metadata":  p.Metadata,
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p Progress) Pointer() *Progress {
+	return &p
+}
+
+func CastProgresses(data []interface{}) []Progress {
+	v := make([]Progress, 0)
+	for _, d := range data {
+		v = append(v, NewProgressFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastProgressesFromDict(data []Progress) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CompletedQuestList struct {
-    /** クエスト進行 */
-	CompletedQuestListId *string   `json:"completedQuestListId"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** クエストグループ名 */
-	QuestGroupName *string   `json:"questGroupName"`
-    /** 攻略済みのクエスト名一覧のリスト */
-	CompleteQuestNames []string   `json:"completeQuestNames"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	CompletedQuestListId *string  `json:"completedQuestListId"`
+	UserId               *string  `json:"userId"`
+	QuestGroupName       *string  `json:"questGroupName"`
+	CompleteQuestNames   []string `json:"completeQuestNames"`
+	CreatedAt            *int64   `json:"createdAt"`
+	UpdatedAt            *int64   `json:"updatedAt"`
 }
 
-func (p *CompletedQuestList) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["completedQuestListId"] = p.CompletedQuestListId
-    data["userId"] = p.UserId
-    data["questGroupName"] = p.QuestGroupName
-    if p.CompleteQuestNames != nil {
-        var _completeQuestNames []string
-        for _, item := range p.CompleteQuestNames {
-            _completeQuestNames = append(_completeQuestNames, item)
-        }
-        data["completeQuestNames"] = &_completeQuestNames
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewCompletedQuestListFromDict(data map[string]interface{}) CompletedQuestList {
+	return CompletedQuestList{
+		CompletedQuestListId: core.CastString(data["completedQuestListId"]),
+		UserId:               core.CastString(data["userId"]),
+		QuestGroupName:       core.CastString(data["questGroupName"]),
+		CompleteQuestNames:   core.CastStrings(core.CastArray(data["completeQuestNames"])),
+		CreatedAt:            core.CastInt64(data["createdAt"]),
+		UpdatedAt:            core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p CompletedQuestList) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"completedQuestListId": p.CompletedQuestListId,
+		"userId":               p.UserId,
+		"questGroupName":       p.QuestGroupName,
+		"completeQuestNames": core.CastStringsFromDict(
+			p.CompleteQuestNames,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p CompletedQuestList) Pointer() *CompletedQuestList {
+	return &p
+}
+
+func CastCompletedQuestLists(data []interface{}) []CompletedQuestList {
+	v := make([]CompletedQuestList, 0)
+	for _, d := range data {
+		v = append(v, NewCompletedQuestListFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCompletedQuestListsFromDict(data []CompletedQuestList) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type QuestGroupModel struct {
-    /** クエストグループ */
-	QuestGroupModelId *string   `json:"questGroupModelId"`
-    /** クエストグループ名 */
-	Name *string   `json:"name"`
-    /** クエストグループのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** グループに属するクエスト */
-	Quests []QuestModel   `json:"quests"`
-    /** 挑戦可能な期間を指定するイベントマスター のGRN */
-	ChallengePeriodEventId *string   `json:"challengePeriodEventId"`
+	QuestGroupModelId      *string      `json:"questGroupModelId"`
+	Name                   *string      `json:"name"`
+	Metadata               *string      `json:"metadata"`
+	Quests                 []QuestModel `json:"quests"`
+	ChallengePeriodEventId *string      `json:"challengePeriodEventId"`
 }
 
-func (p *QuestGroupModel) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["questGroupModelId"] = p.QuestGroupModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    if p.Quests != nil {
-        var _quests []*map[string]interface {}
-        for _, item := range p.Quests {
-            _quests = append(_quests, item.ToDict())
-        }
-        data["quests"] = &_quests
-    }
-    data["challengePeriodEventId"] = p.ChallengePeriodEventId
-    return &data
+func NewQuestGroupModelFromDict(data map[string]interface{}) QuestGroupModel {
+	return QuestGroupModel{
+		QuestGroupModelId:      core.CastString(data["questGroupModelId"]),
+		Name:                   core.CastString(data["name"]),
+		Metadata:               core.CastString(data["metadata"]),
+		Quests:                 CastQuestModels(core.CastArray(data["quests"])),
+		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+	}
+}
+
+func (p QuestGroupModel) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"questGroupModelId": p.QuestGroupModelId,
+		"name":              p.Name,
+		"metadata":          p.Metadata,
+		"quests": CastQuestModelsFromDict(
+			p.Quests,
+		),
+		"challengePeriodEventId": p.ChallengePeriodEventId,
+	}
+}
+
+func (p QuestGroupModel) Pointer() *QuestGroupModel {
+	return &p
+}
+
+func CastQuestGroupModels(data []interface{}) []QuestGroupModel {
+	v := make([]QuestGroupModel, 0)
+	for _, d := range data {
+		v = append(v, NewQuestGroupModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastQuestGroupModelsFromDict(data []QuestGroupModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type QuestModel struct {
-    /** クエストモデル */
-	QuestModelId *string   `json:"questModelId"`
-    /** クエストモデル名 */
-	Name *string   `json:"name"`
-    /** クエストモデルのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** クエストの内容 */
-	Contents []Contents   `json:"contents"`
-    /** 挑戦可能な期間を指定するイベントマスター のGRN */
-	ChallengePeriodEventId *string   `json:"challengePeriodEventId"`
-    /** クエストの参加料 */
-	ConsumeActions []ConsumeAction   `json:"consumeActions"`
-    /** クエスト失敗時の報酬 */
-	FailedAcquireActions []AcquireAction   `json:"failedAcquireActions"`
-    /** クエストに挑戦するためにクリアしておく必要のあるクエスト名 */
-	PremiseQuestNames []string   `json:"premiseQuestNames"`
+	QuestModelId           *string         `json:"questModelId"`
+	Name                   *string         `json:"name"`
+	Metadata               *string         `json:"metadata"`
+	Contents               []Contents      `json:"contents"`
+	ChallengePeriodEventId *string         `json:"challengePeriodEventId"`
+	ConsumeActions         []ConsumeAction `json:"consumeActions"`
+	FailedAcquireActions   []AcquireAction `json:"failedAcquireActions"`
+	PremiseQuestNames      []string        `json:"premiseQuestNames"`
 }
 
-func (p *QuestModel) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["questModelId"] = p.QuestModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    if p.Contents != nil {
-        var _contents []*map[string]interface {}
-        for _, item := range p.Contents {
-            _contents = append(_contents, item.ToDict())
-        }
-        data["contents"] = &_contents
-    }
-    data["challengePeriodEventId"] = p.ChallengePeriodEventId
-    if p.ConsumeActions != nil {
-        var _consumeActions []*map[string]interface {}
-        for _, item := range p.ConsumeActions {
-            _consumeActions = append(_consumeActions, item.ToDict())
-        }
-        data["consumeActions"] = &_consumeActions
-    }
-    if p.FailedAcquireActions != nil {
-        var _failedAcquireActions []*map[string]interface {}
-        for _, item := range p.FailedAcquireActions {
-            _failedAcquireActions = append(_failedAcquireActions, item.ToDict())
-        }
-        data["failedAcquireActions"] = &_failedAcquireActions
-    }
-    if p.PremiseQuestNames != nil {
-        var _premiseQuestNames []string
-        for _, item := range p.PremiseQuestNames {
-            _premiseQuestNames = append(_premiseQuestNames, item)
-        }
-        data["premiseQuestNames"] = &_premiseQuestNames
-    }
-    return &data
+func NewQuestModelFromDict(data map[string]interface{}) QuestModel {
+	return QuestModel{
+		QuestModelId:           core.CastString(data["questModelId"]),
+		Name:                   core.CastString(data["name"]),
+		Metadata:               core.CastString(data["metadata"]),
+		Contents:               CastContentses(core.CastArray(data["contents"])),
+		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+		ConsumeActions:         CastConsumeActions(core.CastArray(data["consumeActions"])),
+		FailedAcquireActions:   CastAcquireActions(core.CastArray(data["failedAcquireActions"])),
+		PremiseQuestNames:      core.CastStrings(core.CastArray(data["premiseQuestNames"])),
+	}
+}
+
+func (p QuestModel) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"questModelId": p.QuestModelId,
+		"name":         p.Name,
+		"metadata":     p.Metadata,
+		"contents": CastContentsesFromDict(
+			p.Contents,
+		),
+		"challengePeriodEventId": p.ChallengePeriodEventId,
+		"consumeActions": CastConsumeActionsFromDict(
+			p.ConsumeActions,
+		),
+		"failedAcquireActions": CastAcquireActionsFromDict(
+			p.FailedAcquireActions,
+		),
+		"premiseQuestNames": core.CastStringsFromDict(
+			p.PremiseQuestNames,
+		),
+	}
+}
+
+func (p QuestModel) Pointer() *QuestModel {
+	return &p
+}
+
+func CastQuestModels(data []interface{}) []QuestModel {
+	v := make([]QuestModel, 0)
+	for _, d := range data {
+		v = append(v, NewQuestModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastQuestModelsFromDict(data []QuestModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

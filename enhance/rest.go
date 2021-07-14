@@ -18,7 +18,7 @@ package enhance
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -905,7 +905,7 @@ func (p Gs2EnhanceRestClient) CreateRateModelMasterAsync(
         bodies["materialInventoryModelId"] = *request.MaterialInventoryModelId
     }
     if request.AcquireExperienceHierarchy != nil {
-        var _acquireExperienceHierarchy []string
+        var _acquireExperienceHierarchy []interface {}
         for _, item := range request.AcquireExperienceHierarchy {
             _acquireExperienceHierarchy = append(_acquireExperienceHierarchy, item)
         }
@@ -915,9 +915,9 @@ func (p Gs2EnhanceRestClient) CreateRateModelMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.BonusRates != nil {
-        var _bonusRates []*map[string]interface {}
+        var _bonusRates []interface {}
         for _, item := range request.BonusRates {
-            _bonusRates = append(_bonusRates, item.ToDict())
+            _bonusRates = append(_bonusRates, item)
         }
         bodies["bonusRates"] = _bonusRates
     }
@@ -1118,7 +1118,7 @@ func (p Gs2EnhanceRestClient) UpdateRateModelMasterAsync(
         bodies["materialInventoryModelId"] = *request.MaterialInventoryModelId
     }
     if request.AcquireExperienceHierarchy != nil {
-        var _acquireExperienceHierarchy []string
+        var _acquireExperienceHierarchy []interface {}
         for _, item := range request.AcquireExperienceHierarchy {
             _acquireExperienceHierarchy = append(_acquireExperienceHierarchy, item)
         }
@@ -1128,9 +1128,9 @@ func (p Gs2EnhanceRestClient) UpdateRateModelMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.BonusRates != nil {
-        var _bonusRates []*map[string]interface {}
+        var _bonusRates []interface {}
         for _, item := range request.BonusRates {
-            _bonusRates = append(_bonusRates, item.ToDict())
+            _bonusRates = append(_bonusRates, item)
         }
         bodies["bonusRates"] = _bonusRates
     }
@@ -1319,16 +1319,16 @@ func (p Gs2EnhanceRestClient) DirectEnhanceAsync(
         bodies["targetItemSetId"] = *request.TargetItemSetId
     }
     if request.Materials != nil {
-        var _materials []*map[string]interface {}
+        var _materials []interface {}
         for _, item := range request.Materials {
-            _materials = append(_materials, item.ToDict())
+            _materials = append(_materials, item)
         }
         bodies["materials"] = _materials
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -1436,16 +1436,16 @@ func (p Gs2EnhanceRestClient) DirectEnhanceByUserIdAsync(
         bodies["targetItemSetId"] = *request.TargetItemSetId
     }
     if request.Materials != nil {
-        var _materials []*map[string]interface {}
+        var _materials []interface {}
         for _, item := range request.Materials {
-            _materials = append(_materials, item.ToDict())
+            _materials = append(_materials, item)
         }
         bodies["materials"] = _materials
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -1729,9 +1729,9 @@ func (p Gs2EnhanceRestClient) CreateProgressByUserIdAsync(
         bodies["targetItemSetId"] = *request.TargetItemSetId
     }
     if request.Materials != nil {
-        var _materials []*map[string]interface {}
+        var _materials []interface {}
         for _, item := range request.Materials {
-            _materials = append(_materials, item.ToDict())
+            _materials = append(_materials, item)
         }
         bodies["materials"] = _materials
     }
@@ -2010,9 +2010,9 @@ func (p Gs2EnhanceRestClient) StartAsync(
         bodies["targetItemSetId"] = *request.TargetItemSetId
     }
     if request.Materials != nil {
-        var _materials []*map[string]interface {}
+        var _materials []interface {}
         for _, item := range request.Materials {
-            _materials = append(_materials, item.ToDict())
+            _materials = append(_materials, item)
         }
         bodies["materials"] = _materials
     }
@@ -2020,9 +2020,9 @@ func (p Gs2EnhanceRestClient) StartAsync(
         bodies["force"] = *request.Force
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2130,9 +2130,9 @@ func (p Gs2EnhanceRestClient) StartByUserIdAsync(
         bodies["targetItemSetId"] = *request.TargetItemSetId
     }
     if request.Materials != nil {
-        var _materials []*map[string]interface {}
+        var _materials []interface {}
         for _, item := range request.Materials {
-            _materials = append(_materials, item.ToDict())
+            _materials = append(_materials, item)
         }
         bodies["materials"] = _materials
     }
@@ -2140,9 +2140,9 @@ func (p Gs2EnhanceRestClient) StartByUserIdAsync(
         bodies["force"] = *request.Force
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2234,9 +2234,9 @@ func (p Gs2EnhanceRestClient) EndAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2336,9 +2336,9 @@ func (p Gs2EnhanceRestClient) EndByUserIdAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }

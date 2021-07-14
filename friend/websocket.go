@@ -19,7 +19,7 @@ package friend
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2FriendWebSocketClient struct {
@@ -724,6 +724,9 @@ func (p Gs2FriendWebSocketClient) GetProfileAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -887,6 +890,9 @@ func (p Gs2FriendWebSocketClient) UpdateProfileAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.PublicProfile != nil && *request.PublicProfile != "" {
         bodies["publicProfile"] = *request.PublicProfile
@@ -1234,6 +1240,9 @@ func (p Gs2FriendWebSocketClient) DescribeFollowsAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.WithProfile != nil {
         bodies["withProfile"] = *request.WithProfile
     }
@@ -1416,6 +1425,9 @@ func (p Gs2FriendWebSocketClient) GetFollowAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.TargetUserId != nil && *request.TargetUserId != "" {
         bodies["targetUserId"] = *request.TargetUserId
     }
@@ -1592,6 +1604,9 @@ func (p Gs2FriendWebSocketClient) FollowAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.TargetUserId != nil && *request.TargetUserId != "" {
         bodies["targetUserId"] = *request.TargetUserId
     }
@@ -1762,6 +1777,9 @@ func (p Gs2FriendWebSocketClient) UnfollowAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.TargetUserId != nil && *request.TargetUserId != "" {
         bodies["targetUserId"] = *request.TargetUserId
     }
@@ -1931,6 +1949,9 @@ func (p Gs2FriendWebSocketClient) DescribeFriendsAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.WithProfile != nil {
         bodies["withProfile"] = *request.WithProfile
@@ -2114,6 +2135,9 @@ func (p Gs2FriendWebSocketClient) GetFriendAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.TargetUserId != nil && *request.TargetUserId != "" {
         bodies["targetUserId"] = *request.TargetUserId
     }
@@ -2290,6 +2314,9 @@ func (p Gs2FriendWebSocketClient) DeleteFriendAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.TargetUserId != nil && *request.TargetUserId != "" {
         bodies["targetUserId"] = *request.TargetUserId
     }
@@ -2460,6 +2487,9 @@ func (p Gs2FriendWebSocketClient) DescribeSendRequestsAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -2623,6 +2653,9 @@ func (p Gs2FriendWebSocketClient) GetSendRequestAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.TargetUserId != nil && *request.TargetUserId != "" {
         bodies["targetUserId"] = *request.TargetUserId
@@ -2794,6 +2827,9 @@ func (p Gs2FriendWebSocketClient) SendRequestAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.TargetUserId != nil && *request.TargetUserId != "" {
         bodies["targetUserId"] = *request.TargetUserId
     }
@@ -2963,6 +2999,9 @@ func (p Gs2FriendWebSocketClient) DeleteRequestAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.TargetUserId != nil && *request.TargetUserId != "" {
         bodies["targetUserId"] = *request.TargetUserId
@@ -3134,6 +3173,9 @@ func (p Gs2FriendWebSocketClient) DescribeReceiveRequestsAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -3297,6 +3339,9 @@ func (p Gs2FriendWebSocketClient) GetReceiveRequestAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.FromUserId != nil && *request.FromUserId != "" {
         bodies["fromUserId"] = *request.FromUserId
@@ -3468,6 +3513,9 @@ func (p Gs2FriendWebSocketClient) AcceptRequestAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.FromUserId != nil && *request.FromUserId != "" {
         bodies["fromUserId"] = *request.FromUserId
     }
@@ -3637,6 +3685,9 @@ func (p Gs2FriendWebSocketClient) RejectRequestAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.FromUserId != nil && *request.FromUserId != "" {
         bodies["fromUserId"] = *request.FromUserId
@@ -3808,6 +3859,9 @@ func (p Gs2FriendWebSocketClient) DescribeBlackListAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -3971,6 +4025,9 @@ func (p Gs2FriendWebSocketClient) RegisterBlackListAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.TargetUserId != nil && *request.TargetUserId != "" {
         bodies["targetUserId"] = *request.TargetUserId
@@ -4141,6 +4198,9 @@ func (p Gs2FriendWebSocketClient) UnregisterBlackListAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.TargetUserId != nil && *request.TargetUserId != "" {
         bodies["targetUserId"] = *request.TargetUserId

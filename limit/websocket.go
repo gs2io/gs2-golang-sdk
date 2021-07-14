@@ -19,7 +19,7 @@ package limit
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2LimitWebSocketClient struct {
@@ -573,6 +573,9 @@ func (p Gs2LimitWebSocketClient) DescribeCountersAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.LimitName != nil && *request.LimitName != "" {
         bodies["limitName"] = *request.LimitName
     }
@@ -664,11 +667,11 @@ func (p Gs2LimitWebSocketClient) DescribeCountersByUserIdAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.LimitName != nil && *request.LimitName != "" {
-        bodies["limitName"] = *request.LimitName
-    }
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
+    }
+    if request.LimitName != nil && *request.LimitName != "" {
+        bodies["limitName"] = *request.LimitName
     }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
@@ -757,6 +760,9 @@ func (p Gs2LimitWebSocketClient) GetCounterAsync(
     }
     if request.LimitName != nil && *request.LimitName != "" {
         bodies["limitName"] = *request.LimitName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.CounterName != nil && *request.CounterName != "" {
         bodies["counterName"] = *request.CounterName
@@ -936,6 +942,9 @@ func (p Gs2LimitWebSocketClient) CountUpAsync(
     }
     if request.CounterName != nil && *request.CounterName != "" {
         bodies["counterName"] = *request.CounterName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.CountUpValue != nil {
         bodies["countUpValue"] = *request.CountUpValue

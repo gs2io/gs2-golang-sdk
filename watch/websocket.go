@@ -19,7 +19,7 @@ package watch
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2WatchWebSocketClient struct {
@@ -88,7 +88,7 @@ func (p Gs2WatchWebSocketClient) GetChartAsync(
         bodies["grn"] = *request.Grn
     }
     if request.Queries != nil {
-        var _queries []string
+        var _queries []interface {}
         for _, item := range request.Queries {
             _queries = append(_queries, item)
         }

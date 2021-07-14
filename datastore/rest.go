@@ -18,7 +18,7 @@ package datastore
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -815,7 +815,7 @@ func (p Gs2DatastoreRestClient) PrepareUploadAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []interface {}
         for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -929,7 +929,7 @@ func (p Gs2DatastoreRestClient) PrepareUploadByUserIdAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []interface {}
         for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -1034,7 +1034,7 @@ func (p Gs2DatastoreRestClient) UpdateDataObjectAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []interface {}
         for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -1144,7 +1144,7 @@ func (p Gs2DatastoreRestClient) UpdateDataObjectByUserIdAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []interface {}
         for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -1228,7 +1228,7 @@ func (p Gs2DatastoreRestClient) PrepareReUploadAsync(
 	request *PrepareReUploadRequest,
 	callback chan<- PrepareReUploadAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/data/{dataObjectName}/file"
+	path := "/{namespaceName}/user/me/data/{dataObjectName}/file/reUpload"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -1326,7 +1326,7 @@ func (p Gs2DatastoreRestClient) PrepareReUploadByUserIdAsync(
 	request *PrepareReUploadByUserIdRequest,
 	callback chan<- PrepareReUploadByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/data/{dataObjectName}/file"
+	path := "/{namespaceName}/user/{userId}/data/{dataObjectName}/file/reUpload"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2190,7 +2190,7 @@ func (p Gs2DatastoreRestClient) PrepareDownloadOwnDataAsync(
 	request *PrepareDownloadOwnDataRequest,
 	callback chan<- PrepareDownloadOwnDataAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/file"
+	path := "/{namespaceName}/user/me/data/{dataObjectName}/file"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {

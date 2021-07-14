@@ -16,26 +16,11 @@ permissions and limitations under the License.
 
 package exchange
 
-type DescribeNamespacesResult struct {
-    /** ネームスペースのリスト */
-	Items         []Namespace	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
-}
+import "core"
 
-func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Namespace, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+type DescribeNamespacesResult struct {
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -43,17 +28,28 @@ type DescribeNamespacesAsyncResult struct {
 	err    error
 }
 
-type CreateNamespaceResult struct {
-    /** 作成したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
+    return &p
+}
+
+type CreateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -61,17 +57,24 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceStatusResult struct {
-    /** None */
-	Status         *string	`json:"status"`
+func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Status != nil {
-        data["status"] = p.Status
+func (p CreateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
+    return &p
+}
+
+type GetNamespaceStatusResult struct {
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -79,17 +82,24 @@ type GetNamespaceStatusAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceResult struct {
-    /** ネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
-func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "status": p.Status,
     }
-    return &data
+}
+
+func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
+    return &p
+}
+
+type GetNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -97,17 +107,24 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
-type UpdateNamespaceResult struct {
-    /** 更新したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
+    return &p
+}
+
+type UpdateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -115,17 +132,24 @@ type UpdateNamespaceAsyncResult struct {
 	err    error
 }
 
-type DeleteNamespaceResult struct {
-    /** 削除したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
+    return &p
+}
+
+type DeleteNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -133,21 +157,24 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
-type DescribeRateModelsResult struct {
-    /** 交換レートモデルのリスト */
-	Items         []RateModel	`json:"items"`
+func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
+    return DeleteNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeRateModelsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]RateModel, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
+    return &p
+}
+
+type DescribeRateModelsResult struct {
+    Items []RateModel `json:"items"`
 }
 
 type DescribeRateModelsAsyncResult struct {
@@ -155,17 +182,26 @@ type DescribeRateModelsAsyncResult struct {
 	err    error
 }
 
-type GetRateModelResult struct {
-    /** 交換レートモデル */
-	Item         *RateModel	`json:"item"`
+func NewDescribeRateModelsResultFromDict(data map[string]interface{}) DescribeRateModelsResult {
+    return DescribeRateModelsResult {
+        Items: CastRateModels(core.CastArray(data["items"])),
+    }
 }
 
-func (p *GetRateModelResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeRateModelsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastRateModelsFromDict(
+            p.Items,
+        ),
     }
-    return &data
+}
+
+func (p DescribeRateModelsResult) Pointer() *DescribeRateModelsResult {
+    return &p
+}
+
+type GetRateModelResult struct {
+    Item *RateModel `json:"item"`
 }
 
 type GetRateModelAsyncResult struct {
@@ -173,26 +209,25 @@ type GetRateModelAsyncResult struct {
 	err    error
 }
 
-type DescribeRateModelMastersResult struct {
-    /** 交換レートマスターのリスト */
-	Items         []RateModelMaster	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewGetRateModelResultFromDict(data map[string]interface{}) GetRateModelResult {
+    return GetRateModelResult {
+        Item: NewRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeRateModelMastersResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]RateModelMaster, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p GetRateModelResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p GetRateModelResult) Pointer() *GetRateModelResult {
+    return &p
+}
+
+type DescribeRateModelMastersResult struct {
+    Items []RateModelMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeRateModelMastersAsyncResult struct {
@@ -200,17 +235,28 @@ type DescribeRateModelMastersAsyncResult struct {
 	err    error
 }
 
-type CreateRateModelMasterResult struct {
-    /** 作成した交換レートマスター */
-	Item         *RateModelMaster	`json:"item"`
+func NewDescribeRateModelMastersResultFromDict(data map[string]interface{}) DescribeRateModelMastersResult {
+    return DescribeRateModelMastersResult {
+        Items: CastRateModelMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateRateModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeRateModelMastersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastRateModelMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeRateModelMastersResult) Pointer() *DescribeRateModelMastersResult {
+    return &p
+}
+
+type CreateRateModelMasterResult struct {
+    Item *RateModelMaster `json:"item"`
 }
 
 type CreateRateModelMasterAsyncResult struct {
@@ -218,17 +264,24 @@ type CreateRateModelMasterAsyncResult struct {
 	err    error
 }
 
-type GetRateModelMasterResult struct {
-    /** 交換レートマスター */
-	Item         *RateModelMaster	`json:"item"`
+func NewCreateRateModelMasterResultFromDict(data map[string]interface{}) CreateRateModelMasterResult {
+    return CreateRateModelMasterResult {
+        Item: NewRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetRateModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CreateRateModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateRateModelMasterResult) Pointer() *CreateRateModelMasterResult {
+    return &p
+}
+
+type GetRateModelMasterResult struct {
+    Item *RateModelMaster `json:"item"`
 }
 
 type GetRateModelMasterAsyncResult struct {
@@ -236,17 +289,24 @@ type GetRateModelMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateRateModelMasterResult struct {
-    /** 更新した交換レートマスター */
-	Item         *RateModelMaster	`json:"item"`
+func NewGetRateModelMasterResultFromDict(data map[string]interface{}) GetRateModelMasterResult {
+    return GetRateModelMasterResult {
+        Item: NewRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateRateModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetRateModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetRateModelMasterResult) Pointer() *GetRateModelMasterResult {
+    return &p
+}
+
+type UpdateRateModelMasterResult struct {
+    Item *RateModelMaster `json:"item"`
 }
 
 type UpdateRateModelMasterAsyncResult struct {
@@ -254,17 +314,24 @@ type UpdateRateModelMasterAsyncResult struct {
 	err    error
 }
 
-type DeleteRateModelMasterResult struct {
-    /** 削除した交換レートマスター */
-	Item         *RateModelMaster	`json:"item"`
+func NewUpdateRateModelMasterResultFromDict(data map[string]interface{}) UpdateRateModelMasterResult {
+    return UpdateRateModelMasterResult {
+        Item: NewRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteRateModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateRateModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateRateModelMasterResult) Pointer() *UpdateRateModelMasterResult {
+    return &p
+}
+
+type DeleteRateModelMasterResult struct {
+    Item *RateModelMaster `json:"item"`
 }
 
 type DeleteRateModelMasterAsyncResult struct {
@@ -272,27 +339,26 @@ type DeleteRateModelMasterAsyncResult struct {
 	err    error
 }
 
-type ExchangeResult struct {
-    /** 交換レートモデル */
-	Item         *RateModel	`json:"item"`
-    /** 交換処理の実行に使用するスタンプシート */
-	StampSheet         *string	`json:"stampSheet"`
-    /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
+func NewDeleteRateModelMasterResultFromDict(data map[string]interface{}) DeleteRateModelMasterResult {
+    return DeleteRateModelMasterResult {
+        Item: NewRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *ExchangeResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DeleteRateModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.StampSheet != nil {
-        data["stampSheet"] = p.StampSheet
-    }
-    if p.StampSheetEncryptionKeyId != nil {
-        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-    }
-    return &data
+}
+
+func (p DeleteRateModelMasterResult) Pointer() *DeleteRateModelMasterResult {
+    return &p
+}
+
+type ExchangeResult struct {
+    Item *RateModel `json:"item"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
 }
 
 type ExchangeAsyncResult struct {
@@ -300,27 +366,30 @@ type ExchangeAsyncResult struct {
 	err    error
 }
 
-type ExchangeByUserIdResult struct {
-    /** 交換レートモデル */
-	Item         *RateModel	`json:"item"`
-    /** 交換処理の実行に使用するスタンプシート */
-	StampSheet         *string	`json:"stampSheet"`
-    /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
+func NewExchangeResultFromDict(data map[string]interface{}) ExchangeResult {
+    return ExchangeResult {
+        Item: NewRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+    }
 }
 
-func (p *ExchangeByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p ExchangeResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
     }
-    if p.StampSheet != nil {
-        data["stampSheet"] = p.StampSheet
-    }
-    if p.StampSheetEncryptionKeyId != nil {
-        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-    }
-    return &data
+}
+
+func (p ExchangeResult) Pointer() *ExchangeResult {
+    return &p
+}
+
+type ExchangeByUserIdResult struct {
+    Item *RateModel `json:"item"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
 }
 
 type ExchangeByUserIdAsyncResult struct {
@@ -328,27 +397,30 @@ type ExchangeByUserIdAsyncResult struct {
 	err    error
 }
 
-type ExchangeByStampSheetResult struct {
-    /** 交換レートモデル */
-	Item         *RateModel	`json:"item"`
-    /** 交換処理の実行に使用するスタンプシート */
-	StampSheet         *string	`json:"stampSheet"`
-    /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
+func NewExchangeByUserIdResultFromDict(data map[string]interface{}) ExchangeByUserIdResult {
+    return ExchangeByUserIdResult {
+        Item: NewRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+    }
 }
 
-func (p *ExchangeByStampSheetResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p ExchangeByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
     }
-    if p.StampSheet != nil {
-        data["stampSheet"] = p.StampSheet
-    }
-    if p.StampSheetEncryptionKeyId != nil {
-        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-    }
-    return &data
+}
+
+func (p ExchangeByUserIdResult) Pointer() *ExchangeByUserIdResult {
+    return &p
+}
+
+type ExchangeByStampSheetResult struct {
+    Item *RateModel `json:"item"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
 }
 
 type ExchangeByStampSheetAsyncResult struct {
@@ -356,17 +428,28 @@ type ExchangeByStampSheetAsyncResult struct {
 	err    error
 }
 
-type ExportMasterResult struct {
-    /** 現在有効な交換レート設定 */
-	Item         *CurrentRateMaster	`json:"item"`
+func NewExchangeByStampSheetResultFromDict(data map[string]interface{}) ExchangeByStampSheetResult {
+    return ExchangeByStampSheetResult {
+        Item: NewRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+    }
 }
 
-func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p ExchangeByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
     }
-    return &data
+}
+
+func (p ExchangeByStampSheetResult) Pointer() *ExchangeByStampSheetResult {
+    return &p
+}
+
+type ExportMasterResult struct {
+    Item *CurrentRateMaster `json:"item"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -374,17 +457,24 @@ type ExportMasterAsyncResult struct {
 	err    error
 }
 
-type GetCurrentRateMasterResult struct {
-    /** 現在有効な交換レート設定 */
-	Item         *CurrentRateMaster	`json:"item"`
+func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
+    return ExportMasterResult {
+        Item: NewCurrentRateMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetCurrentRateMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p ExportMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p ExportMasterResult) Pointer() *ExportMasterResult {
+    return &p
+}
+
+type GetCurrentRateMasterResult struct {
+    Item *CurrentRateMaster `json:"item"`
 }
 
 type GetCurrentRateMasterAsyncResult struct {
@@ -392,17 +482,24 @@ type GetCurrentRateMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateCurrentRateMasterResult struct {
-    /** 更新した現在有効な交換レート設定 */
-	Item         *CurrentRateMaster	`json:"item"`
+func NewGetCurrentRateMasterResultFromDict(data map[string]interface{}) GetCurrentRateMasterResult {
+    return GetCurrentRateMasterResult {
+        Item: NewCurrentRateMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateCurrentRateMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetCurrentRateMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetCurrentRateMasterResult) Pointer() *GetCurrentRateMasterResult {
+    return &p
+}
+
+type UpdateCurrentRateMasterResult struct {
+    Item *CurrentRateMaster `json:"item"`
 }
 
 type UpdateCurrentRateMasterAsyncResult struct {
@@ -410,17 +507,24 @@ type UpdateCurrentRateMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateCurrentRateMasterFromGitHubResult struct {
-    /** 更新した現在有効な交換レート設定 */
-	Item         *CurrentRateMaster	`json:"item"`
+func NewUpdateCurrentRateMasterResultFromDict(data map[string]interface{}) UpdateCurrentRateMasterResult {
+    return UpdateCurrentRateMasterResult {
+        Item: NewCurrentRateMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateCurrentRateMasterFromGitHubResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateCurrentRateMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateCurrentRateMasterResult) Pointer() *UpdateCurrentRateMasterResult {
+    return &p
+}
+
+type UpdateCurrentRateMasterFromGitHubResult struct {
+    Item *CurrentRateMaster `json:"item"`
 }
 
 type UpdateCurrentRateMasterFromGitHubAsyncResult struct {
@@ -428,22 +532,25 @@ type UpdateCurrentRateMasterFromGitHubAsyncResult struct {
 	err    error
 }
 
-type CreateAwaitByUserIdResult struct {
-    /** 交換待機 */
-	Item         *Await	`json:"item"`
-    /** 取得できるようになる日時 */
-	UnlockAt         *int64	`json:"unlockAt"`
+func NewUpdateCurrentRateMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentRateMasterFromGitHubResult {
+    return UpdateCurrentRateMasterFromGitHubResult {
+        Item: NewCurrentRateMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *CreateAwaitByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateCurrentRateMasterFromGitHubResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.UnlockAt != nil {
-        data["unlockAt"] = p.UnlockAt
-    }
-    return &data
+}
+
+func (p UpdateCurrentRateMasterFromGitHubResult) Pointer() *UpdateCurrentRateMasterFromGitHubResult {
+    return &p
+}
+
+type CreateAwaitByUserIdResult struct {
+    Item *Await `json:"item"`
+    UnlockAt *int64 `json:"unlockAt"`
 }
 
 type CreateAwaitByUserIdAsyncResult struct {
@@ -451,26 +558,27 @@ type CreateAwaitByUserIdAsyncResult struct {
 	err    error
 }
 
-type DescribeAwaitsResult struct {
-    /** 交換待機のリスト */
-	Items         []Await	`json:"items"`
-    /** 次のページを取得するためのトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewCreateAwaitByUserIdResultFromDict(data map[string]interface{}) CreateAwaitByUserIdResult {
+    return CreateAwaitByUserIdResult {
+        Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
+        UnlockAt: core.CastInt64(data["unlockAt"]),
+    }
 }
 
-func (p *DescribeAwaitsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Await, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p CreateAwaitByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "unlockAt": p.UnlockAt,
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p CreateAwaitByUserIdResult) Pointer() *CreateAwaitByUserIdResult {
+    return &p
+}
+
+type DescribeAwaitsResult struct {
+    Items []Await `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeAwaitsAsyncResult struct {
@@ -478,26 +586,29 @@ type DescribeAwaitsAsyncResult struct {
 	err    error
 }
 
-type DescribeAwaitsByUserIdResult struct {
-    /** 交換待機のリスト */
-	Items         []Await	`json:"items"`
-    /** 次のページを取得するためのトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDescribeAwaitsResultFromDict(data map[string]interface{}) DescribeAwaitsResult {
+    return DescribeAwaitsResult {
+        Items: CastAwaits(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *DescribeAwaitsByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Await, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeAwaitsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastAwaitsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DescribeAwaitsResult) Pointer() *DescribeAwaitsResult {
+    return &p
+}
+
+type DescribeAwaitsByUserIdResult struct {
+    Items []Await `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeAwaitsByUserIdAsyncResult struct {
@@ -505,17 +616,28 @@ type DescribeAwaitsByUserIdAsyncResult struct {
 	err    error
 }
 
-type GetAwaitResult struct {
-    /** 交換待機 */
-	Item         *Await	`json:"item"`
+func NewDescribeAwaitsByUserIdResultFromDict(data map[string]interface{}) DescribeAwaitsByUserIdResult {
+    return DescribeAwaitsByUserIdResult {
+        Items: CastAwaits(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *GetAwaitResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeAwaitsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastAwaitsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeAwaitsByUserIdResult) Pointer() *DescribeAwaitsByUserIdResult {
+    return &p
+}
+
+type GetAwaitResult struct {
+    Item *Await `json:"item"`
 }
 
 type GetAwaitAsyncResult struct {
@@ -523,17 +645,24 @@ type GetAwaitAsyncResult struct {
 	err    error
 }
 
-type GetAwaitByUserIdResult struct {
-    /** 交換待機 */
-	Item         *Await	`json:"item"`
+func NewGetAwaitResultFromDict(data map[string]interface{}) GetAwaitResult {
+    return GetAwaitResult {
+        Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetAwaitByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetAwaitResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetAwaitResult) Pointer() *GetAwaitResult {
+    return &p
+}
+
+type GetAwaitByUserIdResult struct {
+    Item *Await `json:"item"`
 }
 
 type GetAwaitByUserIdAsyncResult struct {
@@ -541,27 +670,26 @@ type GetAwaitByUserIdAsyncResult struct {
 	err    error
 }
 
-type AcquireResult struct {
-    /** 交換待機 */
-	Item         *Await	`json:"item"`
-    /** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet         *string	`json:"stampSheet"`
-    /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
+func NewGetAwaitByUserIdResultFromDict(data map[string]interface{}) GetAwaitByUserIdResult {
+    return GetAwaitByUserIdResult {
+        Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *AcquireResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetAwaitByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.StampSheet != nil {
-        data["stampSheet"] = p.StampSheet
-    }
-    if p.StampSheetEncryptionKeyId != nil {
-        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-    }
-    return &data
+}
+
+func (p GetAwaitByUserIdResult) Pointer() *GetAwaitByUserIdResult {
+    return &p
+}
+
+type AcquireResult struct {
+    Item *Await `json:"item"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
 }
 
 type AcquireAsyncResult struct {
@@ -569,27 +697,30 @@ type AcquireAsyncResult struct {
 	err    error
 }
 
-type AcquireByUserIdResult struct {
-    /** 交換待機 */
-	Item         *Await	`json:"item"`
-    /** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet         *string	`json:"stampSheet"`
-    /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
+func NewAcquireResultFromDict(data map[string]interface{}) AcquireResult {
+    return AcquireResult {
+        Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+    }
 }
 
-func (p *AcquireByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p AcquireResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
     }
-    if p.StampSheet != nil {
-        data["stampSheet"] = p.StampSheet
-    }
-    if p.StampSheetEncryptionKeyId != nil {
-        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-    }
-    return &data
+}
+
+func (p AcquireResult) Pointer() *AcquireResult {
+    return &p
+}
+
+type AcquireByUserIdResult struct {
+    Item *Await `json:"item"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
 }
 
 type AcquireByUserIdAsyncResult struct {
@@ -597,27 +728,30 @@ type AcquireByUserIdAsyncResult struct {
 	err    error
 }
 
-type AcquireForceByUserIdResult struct {
-    /** 交換待機 */
-	Item         *Await	`json:"item"`
-    /** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet         *string	`json:"stampSheet"`
-    /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
+func NewAcquireByUserIdResultFromDict(data map[string]interface{}) AcquireByUserIdResult {
+    return AcquireByUserIdResult {
+        Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+    }
 }
 
-func (p *AcquireForceByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p AcquireByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
     }
-    if p.StampSheet != nil {
-        data["stampSheet"] = p.StampSheet
-    }
-    if p.StampSheetEncryptionKeyId != nil {
-        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-    }
-    return &data
+}
+
+func (p AcquireByUserIdResult) Pointer() *AcquireByUserIdResult {
+    return &p
+}
+
+type AcquireForceByUserIdResult struct {
+    Item *Await `json:"item"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
 }
 
 type AcquireForceByUserIdAsyncResult struct {
@@ -625,27 +759,30 @@ type AcquireForceByUserIdAsyncResult struct {
 	err    error
 }
 
-type SkipResult struct {
-    /** 交換待機 */
-	Item         *Await	`json:"item"`
-    /** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet         *string	`json:"stampSheet"`
-    /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
+func NewAcquireForceByUserIdResultFromDict(data map[string]interface{}) AcquireForceByUserIdResult {
+    return AcquireForceByUserIdResult {
+        Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+    }
 }
 
-func (p *SkipResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p AcquireForceByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
     }
-    if p.StampSheet != nil {
-        data["stampSheet"] = p.StampSheet
-    }
-    if p.StampSheetEncryptionKeyId != nil {
-        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-    }
-    return &data
+}
+
+func (p AcquireForceByUserIdResult) Pointer() *AcquireForceByUserIdResult {
+    return &p
+}
+
+type SkipResult struct {
+    Item *Await `json:"item"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
 }
 
 type SkipAsyncResult struct {
@@ -653,27 +790,30 @@ type SkipAsyncResult struct {
 	err    error
 }
 
-type SkipByUserIdResult struct {
-    /** 交換待機 */
-	Item         *Await	`json:"item"`
-    /** 報酬取得処理の実行に使用するスタンプシート */
-	StampSheet         *string	`json:"stampSheet"`
-    /** スタンプシートの署名計算に使用した暗号鍵GRN */
-	StampSheetEncryptionKeyId         *string	`json:"stampSheetEncryptionKeyId"`
+func NewSkipResultFromDict(data map[string]interface{}) SkipResult {
+    return SkipResult {
+        Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+    }
 }
 
-func (p *SkipByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p SkipResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
     }
-    if p.StampSheet != nil {
-        data["stampSheet"] = p.StampSheet
-    }
-    if p.StampSheetEncryptionKeyId != nil {
-        data["stampSheetEncryptionKeyId"] = p.StampSheetEncryptionKeyId
-    }
-    return &data
+}
+
+func (p SkipResult) Pointer() *SkipResult {
+    return &p
+}
+
+type SkipByUserIdResult struct {
+    Item *Await `json:"item"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
 }
 
 type SkipByUserIdAsyncResult struct {
@@ -681,17 +821,28 @@ type SkipByUserIdAsyncResult struct {
 	err    error
 }
 
-type DeleteAwaitResult struct {
-    /** 交換待機 */
-	Item         *Await	`json:"item"`
+func NewSkipByUserIdResultFromDict(data map[string]interface{}) SkipByUserIdResult {
+    return SkipByUserIdResult {
+        Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+    }
 }
 
-func (p *DeleteAwaitResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p SkipByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
     }
-    return &data
+}
+
+func (p SkipByUserIdResult) Pointer() *SkipByUserIdResult {
+    return &p
+}
+
+type DeleteAwaitResult struct {
+    Item *Await `json:"item"`
 }
 
 type DeleteAwaitAsyncResult struct {
@@ -699,17 +850,24 @@ type DeleteAwaitAsyncResult struct {
 	err    error
 }
 
-type DeleteAwaitByUserIdResult struct {
-    /** 交換待機 */
-	Item         *Await	`json:"item"`
+func NewDeleteAwaitResultFromDict(data map[string]interface{}) DeleteAwaitResult {
+    return DeleteAwaitResult {
+        Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteAwaitByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DeleteAwaitResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p DeleteAwaitResult) Pointer() *DeleteAwaitResult {
+    return &p
+}
+
+type DeleteAwaitByUserIdResult struct {
+    Item *Await `json:"item"`
 }
 
 type DeleteAwaitByUserIdAsyncResult struct {
@@ -717,17 +875,25 @@ type DeleteAwaitByUserIdAsyncResult struct {
 	err    error
 }
 
-type CreateAwaitByStampSheetResult struct {
-    /** 交換待機 */
-	Item         *Await	`json:"item"`
+func NewDeleteAwaitByUserIdResultFromDict(data map[string]interface{}) DeleteAwaitByUserIdResult {
+    return DeleteAwaitByUserIdResult {
+        Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *CreateAwaitByStampSheetResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DeleteAwaitByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p DeleteAwaitByUserIdResult) Pointer() *DeleteAwaitByUserIdResult {
+    return &p
+}
+
+type CreateAwaitByStampSheetResult struct {
+    Item *Await `json:"item"`
+    UnlockAt *int64 `json:"unlockAt"`
 }
 
 type CreateAwaitByStampSheetAsyncResult struct {
@@ -735,25 +901,48 @@ type CreateAwaitByStampSheetAsyncResult struct {
 	err    error
 }
 
-type DeleteAwaitByStampTaskResult struct {
-    /** 交換待機 */
-	Item         *Await	`json:"item"`
-    /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *string	`json:"newContextStack"`
+func NewCreateAwaitByStampSheetResultFromDict(data map[string]interface{}) CreateAwaitByStampSheetResult {
+    return CreateAwaitByStampSheetResult {
+        Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
+        UnlockAt: core.CastInt64(data["unlockAt"]),
+    }
 }
 
-func (p *DeleteAwaitByStampTaskResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CreateAwaitByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "unlockAt": p.UnlockAt,
     }
-    if p.NewContextStack != nil {
-        data["newContextStack"] = p.NewContextStack
-    }
-    return &data
+}
+
+func (p CreateAwaitByStampSheetResult) Pointer() *CreateAwaitByStampSheetResult {
+    return &p
+}
+
+type DeleteAwaitByStampTaskResult struct {
+    Item *Await `json:"item"`
+    NewContextStack *string `json:"newContextStack"`
 }
 
 type DeleteAwaitByStampTaskAsyncResult struct {
 	result *DeleteAwaitByStampTaskResult
 	err    error
+}
+
+func NewDeleteAwaitByStampTaskResultFromDict(data map[string]interface{}) DeleteAwaitByStampTaskResult {
+    return DeleteAwaitByStampTaskResult {
+        Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
+        NewContextStack: core.CastString(data["newContextStack"]),
+    }
+}
+
+func (p DeleteAwaitByStampTaskResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "newContextStack": p.NewContextStack,
+    }
+}
+
+func (p DeleteAwaitByStampTaskResult) Pointer() *DeleteAwaitByStampTaskResult {
+    return &p
 }

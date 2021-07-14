@@ -19,7 +19,7 @@ package datastore
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2DatastoreWebSocketClient struct {
@@ -579,6 +579,9 @@ func (p Gs2DatastoreWebSocketClient) DescribeDataObjectsAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.Status != nil && *request.Status != "" {
         bodies["status"] = *request.Status
     }
@@ -761,6 +764,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareUploadAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.Name != nil && *request.Name != "" {
         bodies["name"] = *request.Name
     }
@@ -771,7 +777,7 @@ func (p Gs2DatastoreWebSocketClient) PrepareUploadAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []interface {}
         for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -875,7 +881,7 @@ func (p Gs2DatastoreWebSocketClient) PrepareUploadByUserIdAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []interface {}
         for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -966,11 +972,14 @@ func (p Gs2DatastoreWebSocketClient) UpdateDataObjectAsync(
     if request.DataObjectName != nil && *request.DataObjectName != "" {
         bodies["dataObjectName"] = *request.DataObjectName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.Scope != nil && *request.Scope != "" {
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []interface {}
         for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -1068,7 +1077,7 @@ func (p Gs2DatastoreWebSocketClient) UpdateDataObjectByUserIdAsync(
         bodies["scope"] = *request.Scope
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []interface {}
         for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -1155,6 +1164,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareReUploadAsync(
     }
     if request.DataObjectName != nil && *request.DataObjectName != "" {
         bodies["dataObjectName"] = *request.DataObjectName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.ContentType != nil && *request.ContentType != "" {
         bodies["contentType"] = *request.ContentType
@@ -1332,6 +1344,9 @@ func (p Gs2DatastoreWebSocketClient) DoneUploadAsync(
     if request.DataObjectName != nil && *request.DataObjectName != "" {
         bodies["dataObjectName"] = *request.DataObjectName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -1498,6 +1513,9 @@ func (p Gs2DatastoreWebSocketClient) DeleteDataObjectAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.DataObjectName != nil && *request.DataObjectName != "" {
         bodies["dataObjectName"] = *request.DataObjectName
@@ -1669,6 +1687,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.DataObjectId != nil && *request.DataObjectId != "" {
         bodies["dataObjectId"] = *request.DataObjectId
     }
@@ -1838,6 +1859,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByGenerationAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.DataObjectId != nil && *request.DataObjectId != "" {
         bodies["dataObjectId"] = *request.DataObjectId
@@ -2015,6 +2039,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadOwnDataAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.DataObjectName != nil && *request.DataObjectName != "" {
         bodies["dataObjectName"] = *request.DataObjectName
     }
@@ -2184,6 +2211,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadOwnDataByGenerationAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.DataObjectName != nil && *request.DataObjectName != "" {
         bodies["dataObjectName"] = *request.DataObjectName
@@ -2443,6 +2473,9 @@ func (p Gs2DatastoreWebSocketClient) DescribeDataObjectHistoriesAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.DataObjectName != nil && *request.DataObjectName != "" {
         bodies["dataObjectName"] = *request.DataObjectName
     }
@@ -2624,6 +2657,9 @@ func (p Gs2DatastoreWebSocketClient) GetDataObjectHistoryAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.DataObjectName != nil && *request.DataObjectName != "" {
         bodies["dataObjectName"] = *request.DataObjectName

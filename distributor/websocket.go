@@ -19,7 +19,7 @@ package distributor
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2DistributorWebSocketClient struct {
@@ -677,7 +677,7 @@ func (p Gs2DistributorWebSocketClient) CreateDistributorModelMasterAsync(
         bodies["inboxNamespaceId"] = *request.InboxNamespaceId
     }
     if request.WhiteListTargetIds != nil {
-        var _whiteListTargetIds []string
+        var _whiteListTargetIds []interface {}
         for _, item := range request.WhiteListTargetIds {
             _whiteListTargetIds = append(_whiteListTargetIds, item)
         }
@@ -857,7 +857,7 @@ func (p Gs2DistributorWebSocketClient) UpdateDistributorModelMasterAsync(
         bodies["inboxNamespaceId"] = *request.InboxNamespaceId
     }
     if request.WhiteListTargetIds != nil {
-        var _whiteListTargetIds []string
+        var _whiteListTargetIds []interface {}
         for _, item := range request.WhiteListTargetIds {
             _whiteListTargetIds = append(_whiteListTargetIds, item)
         }
@@ -1510,15 +1510,15 @@ func (p Gs2DistributorWebSocketClient) DistributeAsync(
     if request.DistributorName != nil && *request.DistributorName != "" {
         bodies["distributorName"] = *request.DistributorName
     }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
     if request.DistributeResource != nil {
         bodies["distributeResource"] = request.DistributeResource.ToDict()
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
 
 	go p.distributeAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1592,15 +1592,15 @@ func (p Gs2DistributorWebSocketClient) DistributeWithoutOverflowProcessAsync(
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
     if request.DistributeResource != nil {
         bodies["distributeResource"] = request.DistributeResource.ToDict()
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
 
 	go p.distributeWithoutOverflowProcessAsyncHandler(
 		&core.WebSocketNetworkJob{

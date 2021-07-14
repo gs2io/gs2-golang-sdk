@@ -19,7 +19,7 @@ package inventory
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2InventoryWebSocketClient struct {
@@ -2142,6 +2142,9 @@ func (p Gs2InventoryWebSocketClient) DescribeInventoriesAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -2320,6 +2323,9 @@ func (p Gs2InventoryWebSocketClient) GetInventoryAsync(
     }
     if request.InventoryName != nil && *request.InventoryName != "" {
         bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -2916,6 +2922,9 @@ func (p Gs2InventoryWebSocketClient) DescribeItemSetsAsync(
     if request.InventoryName != nil && *request.InventoryName != "" {
         bodies["inventoryName"] = *request.InventoryName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -3098,6 +3107,9 @@ func (p Gs2InventoryWebSocketClient) GetItemSetAsync(
     if request.InventoryName != nil && *request.InventoryName != "" {
         bodies["inventoryName"] = *request.InventoryName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.ItemName != nil && *request.ItemName != "" {
         bodies["itemName"] = *request.ItemName
     }
@@ -3279,6 +3291,9 @@ func (p Gs2InventoryWebSocketClient) GetItemWithSignatureAsync(
     }
     if request.InventoryName != nil && *request.InventoryName != "" {
         bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.ItemName != nil && *request.ItemName != "" {
         bodies["itemName"] = *request.ItemName
@@ -3568,6 +3583,9 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetAsync(
     if request.InventoryName != nil && *request.InventoryName != "" {
         bodies["inventoryName"] = *request.InventoryName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.ItemName != nil && *request.ItemName != "" {
         bodies["itemName"] = *request.ItemName
     }
@@ -3756,6 +3774,9 @@ func (p Gs2InventoryWebSocketClient) DescribeReferenceOfAsync(
     if request.InventoryName != nil && *request.InventoryName != "" {
         bodies["inventoryName"] = *request.InventoryName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.ItemName != nil && *request.ItemName != "" {
         bodies["itemName"] = *request.ItemName
     }
@@ -3937,6 +3958,9 @@ func (p Gs2InventoryWebSocketClient) GetReferenceOfAsync(
     }
     if request.InventoryName != nil && *request.InventoryName != "" {
         bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.ItemName != nil && *request.ItemName != "" {
         bodies["itemName"] = *request.ItemName
@@ -4125,6 +4149,9 @@ func (p Gs2InventoryWebSocketClient) VerifyReferenceOfAsync(
     }
     if request.InventoryName != nil && *request.InventoryName != "" {
         bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.ItemName != nil && *request.ItemName != "" {
         bodies["itemName"] = *request.ItemName
@@ -4320,6 +4347,9 @@ func (p Gs2InventoryWebSocketClient) AddReferenceOfAsync(
     if request.InventoryName != nil && *request.InventoryName != "" {
         bodies["inventoryName"] = *request.InventoryName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.ItemName != nil && *request.ItemName != "" {
         bodies["itemName"] = *request.ItemName
     }
@@ -4507,6 +4537,9 @@ func (p Gs2InventoryWebSocketClient) DeleteReferenceOfAsync(
     }
     if request.InventoryName != nil && *request.InventoryName != "" {
         bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.ItemName != nil && *request.ItemName != "" {
         bodies["itemName"] = *request.ItemName

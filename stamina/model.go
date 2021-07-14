@@ -16,458 +16,769 @@ permissions and limitations under the License.
 
 package stamina
 
+import "core"
+
 type Namespace struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** ネームスペース名 */
-	Name *string   `json:"name"`
-    /** 説明文 */
-	Description *string   `json:"description"`
-    /** スタミナオーバーフロー上限に当たって回復できなかったスタミナを通知する スクリプト のGRN */
-	OverflowTriggerScriptId *string   `json:"overflowTriggerScriptId"`
-    /** スタミナオーバーフロー上限に当たって回復できなかったスタミナを追加する ネームスペース のGRN */
-	OverflowTriggerQueueId *string   `json:"overflowTriggerQueueId"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId           *string        `json:"namespaceId"`
+	Name                  *string        `json:"name"`
+	Description           *string        `json:"description"`
+	OverflowTriggerScript *ScriptSetting `json:"overflowTriggerScript"`
+	LogSetting            *LogSetting    `json:"logSetting"`
+	CreatedAt             *int64         `json:"createdAt"`
+	UpdatedAt             *int64         `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["overflowTriggerScriptId"] = p.OverflowTriggerScriptId
-    data["overflowTriggerQueueId"] = p.OverflowTriggerQueueId
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId:           core.CastString(data["namespaceId"]),
+		Name:                  core.CastString(data["name"]),
+		Description:           core.CastString(data["description"]),
+		OverflowTriggerScript: NewScriptSettingFromDict(core.CastMap(data["overflowTriggerScript"])).Pointer(),
+		LogSetting:            NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:             core.CastInt64(data["createdAt"]),
+		UpdatedAt:             core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId":           p.NamespaceId,
+		"name":                  p.Name,
+		"description":           p.Description,
+		"overflowTriggerScript": p.OverflowTriggerScript.ToDict(),
+		"logSetting":            p.LogSetting.ToDict(),
+		"createdAt":             p.CreatedAt,
+		"updatedAt":             p.UpdatedAt,
+	}
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type StaminaModelMaster struct {
-    /** スタミナモデルマスター */
-	StaminaModelId *string   `json:"staminaModelId"`
-    /** スタミナの種類名 */
-	Name *string   `json:"name"`
-    /** スタミナの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** スタミナモデルマスターの説明 */
-	Description *string   `json:"description"`
-    /** スタミナを回復する速度(分) */
-	RecoverIntervalMinutes *int32   `json:"recoverIntervalMinutes"`
-    /** 時間経過後に回復する量 */
-	RecoverValue *int32   `json:"recoverValue"`
-    /** スタミナの最大値の初期値 */
-	InitialCapacity *int32   `json:"initialCapacity"`
-    /** 最大値を超えて回復するか */
-	IsOverflow *bool   `json:"isOverflow"`
-    /** 溢れた状況での最大値 */
-	MaxCapacity *int32   `json:"maxCapacity"`
-    /** GS2-Experience のランクによって最大スタミナ値を決定するスタミナ最大値テーブル名 */
-	MaxStaminaTableName *string   `json:"maxStaminaTableName"`
-    /** GS2-Experience のランクによってスタミナの回復間隔を決定する回復間隔テーブル名 */
-	RecoverIntervalTableName *string   `json:"recoverIntervalTableName"`
-    /** GS2-Experience のランクによってスタミナの回復量を決定する回復量テーブル名 */
-	RecoverValueTableName *string   `json:"recoverValueTableName"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	StaminaModelId           *string `json:"staminaModelId"`
+	Name                     *string `json:"name"`
+	Metadata                 *string `json:"metadata"`
+	Description              *string `json:"description"`
+	RecoverIntervalMinutes   *int32  `json:"recoverIntervalMinutes"`
+	RecoverValue             *int32  `json:"recoverValue"`
+	InitialCapacity          *int32  `json:"initialCapacity"`
+	IsOverflow               *bool   `json:"isOverflow"`
+	MaxCapacity              *int32  `json:"maxCapacity"`
+	MaxStaminaTableName      *string `json:"maxStaminaTableName"`
+	RecoverIntervalTableName *string `json:"recoverIntervalTableName"`
+	RecoverValueTableName    *string `json:"recoverValueTableName"`
+	CreatedAt                *int64  `json:"createdAt"`
+	UpdatedAt                *int64  `json:"updatedAt"`
 }
 
-func (p *StaminaModelMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["staminaModelId"] = p.StaminaModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["description"] = p.Description
-    data["recoverIntervalMinutes"] = p.RecoverIntervalMinutes
-    data["recoverValue"] = p.RecoverValue
-    data["initialCapacity"] = p.InitialCapacity
-    data["isOverflow"] = p.IsOverflow
-    data["maxCapacity"] = p.MaxCapacity
-    data["maxStaminaTableName"] = p.MaxStaminaTableName
-    data["recoverIntervalTableName"] = p.RecoverIntervalTableName
-    data["recoverValueTableName"] = p.RecoverValueTableName
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewStaminaModelMasterFromDict(data map[string]interface{}) StaminaModelMaster {
+	return StaminaModelMaster{
+		StaminaModelId:           core.CastString(data["staminaModelId"]),
+		Name:                     core.CastString(data["name"]),
+		Metadata:                 core.CastString(data["metadata"]),
+		Description:              core.CastString(data["description"]),
+		RecoverIntervalMinutes:   core.CastInt32(data["recoverIntervalMinutes"]),
+		RecoverValue:             core.CastInt32(data["recoverValue"]),
+		InitialCapacity:          core.CastInt32(data["initialCapacity"]),
+		IsOverflow:               core.CastBool(data["isOverflow"]),
+		MaxCapacity:              core.CastInt32(data["maxCapacity"]),
+		MaxStaminaTableName:      core.CastString(data["maxStaminaTableName"]),
+		RecoverIntervalTableName: core.CastString(data["recoverIntervalTableName"]),
+		RecoverValueTableName:    core.CastString(data["recoverValueTableName"]),
+		CreatedAt:                core.CastInt64(data["createdAt"]),
+		UpdatedAt:                core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p StaminaModelMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"staminaModelId":           p.StaminaModelId,
+		"name":                     p.Name,
+		"metadata":                 p.Metadata,
+		"description":              p.Description,
+		"recoverIntervalMinutes":   p.RecoverIntervalMinutes,
+		"recoverValue":             p.RecoverValue,
+		"initialCapacity":          p.InitialCapacity,
+		"isOverflow":               p.IsOverflow,
+		"maxCapacity":              p.MaxCapacity,
+		"maxStaminaTableName":      p.MaxStaminaTableName,
+		"recoverIntervalTableName": p.RecoverIntervalTableName,
+		"recoverValueTableName":    p.RecoverValueTableName,
+		"createdAt":                p.CreatedAt,
+		"updatedAt":                p.UpdatedAt,
+	}
+}
+
+func (p StaminaModelMaster) Pointer() *StaminaModelMaster {
+	return &p
+}
+
+func CastStaminaModelMasters(data []interface{}) []StaminaModelMaster {
+	v := make([]StaminaModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewStaminaModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastStaminaModelMastersFromDict(data []StaminaModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type MaxStaminaTableMaster struct {
-    /** スタミナの最大値テーブルマスター */
-	MaxStaminaTableId *string   `json:"maxStaminaTableId"`
-    /** 最大スタミナ値テーブル名 */
-	Name *string   `json:"name"`
-    /** 最大スタミナ値テーブルのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** スタミナの最大値テーブルマスターの説明 */
-	Description *string   `json:"description"`
-    /** 経験値の種類マスター のGRN */
-	ExperienceModelId *string   `json:"experienceModelId"`
-    /** ランク毎のスタミナの最大値テーブル */
-	Values []int32   `json:"values"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	MaxStaminaTableId *string `json:"maxStaminaTableId"`
+	Name              *string `json:"name"`
+	Metadata          *string `json:"metadata"`
+	Description       *string `json:"description"`
+	ExperienceModelId *string `json:"experienceModelId"`
+	Values            []int32 `json:"values"`
+	CreatedAt         *int64  `json:"createdAt"`
+	UpdatedAt         *int64  `json:"updatedAt"`
 }
 
-func (p *MaxStaminaTableMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["maxStaminaTableId"] = p.MaxStaminaTableId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["description"] = p.Description
-    data["experienceModelId"] = p.ExperienceModelId
-    if p.Values != nil {
-        var _values []int32
-        for _, item := range p.Values {
-            _values = append(_values, item)
-        }
-        data["values"] = &_values
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewMaxStaminaTableMasterFromDict(data map[string]interface{}) MaxStaminaTableMaster {
+	return MaxStaminaTableMaster{
+		MaxStaminaTableId: core.CastString(data["maxStaminaTableId"]),
+		Name:              core.CastString(data["name"]),
+		Metadata:          core.CastString(data["metadata"]),
+		Description:       core.CastString(data["description"]),
+		ExperienceModelId: core.CastString(data["experienceModelId"]),
+		Values:            core.CastInt32s(core.CastArray(data["values"])),
+		CreatedAt:         core.CastInt64(data["createdAt"]),
+		UpdatedAt:         core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p MaxStaminaTableMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"maxStaminaTableId": p.MaxStaminaTableId,
+		"name":              p.Name,
+		"metadata":          p.Metadata,
+		"description":       p.Description,
+		"experienceModelId": p.ExperienceModelId,
+		"values": core.CastInt32sFromDict(
+			p.Values,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p MaxStaminaTableMaster) Pointer() *MaxStaminaTableMaster {
+	return &p
+}
+
+func CastMaxStaminaTableMasters(data []interface{}) []MaxStaminaTableMaster {
+	v := make([]MaxStaminaTableMaster, 0)
+	for _, d := range data {
+		v = append(v, NewMaxStaminaTableMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastMaxStaminaTableMastersFromDict(data []MaxStaminaTableMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type RecoverIntervalTableMaster struct {
-    /** スタミナ回復間隔テーブルマスター */
-	RecoverIntervalTableId *string   `json:"recoverIntervalTableId"`
-    /** スタミナ回復間隔テーブル名 */
-	Name *string   `json:"name"`
-    /** スタミナ回復間隔テーブルのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** スタミナ回復間隔テーブルマスターの説明 */
-	Description *string   `json:"description"`
-    /** 経験値の種類マスター のGRN */
-	ExperienceModelId *string   `json:"experienceModelId"`
-    /** ランク毎のスタミナ回復間隔テーブル */
-	Values []int32   `json:"values"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	RecoverIntervalTableId *string `json:"recoverIntervalTableId"`
+	Name                   *string `json:"name"`
+	Metadata               *string `json:"metadata"`
+	Description            *string `json:"description"`
+	ExperienceModelId      *string `json:"experienceModelId"`
+	Values                 []int32 `json:"values"`
+	CreatedAt              *int64  `json:"createdAt"`
+	UpdatedAt              *int64  `json:"updatedAt"`
 }
 
-func (p *RecoverIntervalTableMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["recoverIntervalTableId"] = p.RecoverIntervalTableId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["description"] = p.Description
-    data["experienceModelId"] = p.ExperienceModelId
-    if p.Values != nil {
-        var _values []int32
-        for _, item := range p.Values {
-            _values = append(_values, item)
-        }
-        data["values"] = &_values
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewRecoverIntervalTableMasterFromDict(data map[string]interface{}) RecoverIntervalTableMaster {
+	return RecoverIntervalTableMaster{
+		RecoverIntervalTableId: core.CastString(data["recoverIntervalTableId"]),
+		Name:                   core.CastString(data["name"]),
+		Metadata:               core.CastString(data["metadata"]),
+		Description:            core.CastString(data["description"]),
+		ExperienceModelId:      core.CastString(data["experienceModelId"]),
+		Values:                 core.CastInt32s(core.CastArray(data["values"])),
+		CreatedAt:              core.CastInt64(data["createdAt"]),
+		UpdatedAt:              core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p RecoverIntervalTableMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"recoverIntervalTableId": p.RecoverIntervalTableId,
+		"name":                   p.Name,
+		"metadata":               p.Metadata,
+		"description":            p.Description,
+		"experienceModelId":      p.ExperienceModelId,
+		"values": core.CastInt32sFromDict(
+			p.Values,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p RecoverIntervalTableMaster) Pointer() *RecoverIntervalTableMaster {
+	return &p
+}
+
+func CastRecoverIntervalTableMasters(data []interface{}) []RecoverIntervalTableMaster {
+	v := make([]RecoverIntervalTableMaster, 0)
+	for _, d := range data {
+		v = append(v, NewRecoverIntervalTableMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRecoverIntervalTableMastersFromDict(data []RecoverIntervalTableMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type RecoverValueTableMaster struct {
-    /** スタミナ回復量テーブルマスター */
-	RecoverValueTableId *string   `json:"recoverValueTableId"`
-    /** スタミナ回復量テーブル名 */
-	Name *string   `json:"name"`
-    /** スタミナ回復量テーブルのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** スタミナ回復量テーブルマスターの説明 */
-	Description *string   `json:"description"`
-    /** 経験値の種類マスター のGRN */
-	ExperienceModelId *string   `json:"experienceModelId"`
-    /** ランク毎のスタミナ回復量テーブル */
-	Values []int32   `json:"values"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	RecoverValueTableId *string `json:"recoverValueTableId"`
+	Name                *string `json:"name"`
+	Metadata            *string `json:"metadata"`
+	Description         *string `json:"description"`
+	ExperienceModelId   *string `json:"experienceModelId"`
+	Values              []int32 `json:"values"`
+	CreatedAt           *int64  `json:"createdAt"`
+	UpdatedAt           *int64  `json:"updatedAt"`
 }
 
-func (p *RecoverValueTableMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["recoverValueTableId"] = p.RecoverValueTableId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["description"] = p.Description
-    data["experienceModelId"] = p.ExperienceModelId
-    if p.Values != nil {
-        var _values []int32
-        for _, item := range p.Values {
-            _values = append(_values, item)
-        }
-        data["values"] = &_values
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewRecoverValueTableMasterFromDict(data map[string]interface{}) RecoverValueTableMaster {
+	return RecoverValueTableMaster{
+		RecoverValueTableId: core.CastString(data["recoverValueTableId"]),
+		Name:                core.CastString(data["name"]),
+		Metadata:            core.CastString(data["metadata"]),
+		Description:         core.CastString(data["description"]),
+		ExperienceModelId:   core.CastString(data["experienceModelId"]),
+		Values:              core.CastInt32s(core.CastArray(data["values"])),
+		CreatedAt:           core.CastInt64(data["createdAt"]),
+		UpdatedAt:           core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p RecoverValueTableMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"recoverValueTableId": p.RecoverValueTableId,
+		"name":                p.Name,
+		"metadata":            p.Metadata,
+		"description":         p.Description,
+		"experienceModelId":   p.ExperienceModelId,
+		"values": core.CastInt32sFromDict(
+			p.Values,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p RecoverValueTableMaster) Pointer() *RecoverValueTableMaster {
+	return &p
+}
+
+func CastRecoverValueTableMasters(data []interface{}) []RecoverValueTableMaster {
+	v := make([]RecoverValueTableMaster, 0)
+	for _, d := range data {
+		v = append(v, NewRecoverValueTableMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRecoverValueTableMastersFromDict(data []RecoverValueTableMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CurrentStaminaMaster struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** マスターデータ */
-	Settings *string   `json:"settings"`
+	NamespaceId *string `json:"namespaceId"`
+	Settings    *string `json:"settings"`
 }
 
-func (p *CurrentStaminaMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["settings"] = p.Settings
-    return &data
+func NewCurrentStaminaMasterFromDict(data map[string]interface{}) CurrentStaminaMaster {
+	return CurrentStaminaMaster{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Settings:    core.CastString(data["settings"]),
+	}
+}
+
+func (p CurrentStaminaMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId": p.NamespaceId,
+		"settings":    p.Settings,
+	}
+}
+
+func (p CurrentStaminaMaster) Pointer() *CurrentStaminaMaster {
+	return &p
+}
+
+func CastCurrentStaminaMasters(data []interface{}) []CurrentStaminaMaster {
+	v := make([]CurrentStaminaMaster, 0)
+	for _, d := range data {
+		v = append(v, NewCurrentStaminaMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCurrentStaminaMastersFromDict(data []CurrentStaminaMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type StaminaModel struct {
-    /** スタミナモデルマスター */
-	StaminaModelId *string   `json:"staminaModelId"`
-    /** スタミナの種類名 */
-	Name *string   `json:"name"`
-    /** スタミナの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** スタミナを回復する速度(分) */
-	RecoverIntervalMinutes *int32   `json:"recoverIntervalMinutes"`
-    /** 時間経過後に回復する量 */
-	RecoverValue *int32   `json:"recoverValue"`
-    /** スタミナの最大値の初期値 */
-	InitialCapacity *int32   `json:"initialCapacity"`
-    /** 最大値を超えて回復するか */
-	IsOverflow *bool   `json:"isOverflow"`
-    /** 溢れた状況での最大値 */
-	MaxCapacity *int32   `json:"maxCapacity"`
-    /** GS2-Experience と連携する際に使用するスタミナ最大値テーブル */
-	MaxStaminaTable *MaxStaminaTable   `json:"maxStaminaTable"`
-    /** GS2-Experience と連携する際に使用する回復間隔テーブル */
-	RecoverIntervalTable *RecoverIntervalTable   `json:"recoverIntervalTable"`
-    /** GS2-Experience と連携する際に使用する回復量テーブル */
-	RecoverValueTable *RecoverValueTable   `json:"recoverValueTable"`
+	StaminaModelId         *string               `json:"staminaModelId"`
+	Name                   *string               `json:"name"`
+	Metadata               *string               `json:"metadata"`
+	RecoverIntervalMinutes *int32                `json:"recoverIntervalMinutes"`
+	RecoverValue           *int32                `json:"recoverValue"`
+	InitialCapacity        *int32                `json:"initialCapacity"`
+	IsOverflow             *bool                 `json:"isOverflow"`
+	MaxCapacity            *int32                `json:"maxCapacity"`
+	MaxStaminaTable        *MaxStaminaTable      `json:"maxStaminaTable"`
+	RecoverIntervalTable   *RecoverIntervalTable `json:"recoverIntervalTable"`
+	RecoverValueTable      *RecoverValueTable    `json:"recoverValueTable"`
 }
 
-func (p *StaminaModel) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["staminaModelId"] = p.StaminaModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["recoverIntervalMinutes"] = p.RecoverIntervalMinutes
-    data["recoverValue"] = p.RecoverValue
-    data["initialCapacity"] = p.InitialCapacity
-    data["isOverflow"] = p.IsOverflow
-    data["maxCapacity"] = p.MaxCapacity
-    if p.MaxStaminaTable != nil {
-        data["maxStaminaTable"] = *p.MaxStaminaTable.ToDict()
-    }
-    if p.RecoverIntervalTable != nil {
-        data["recoverIntervalTable"] = *p.RecoverIntervalTable.ToDict()
-    }
-    if p.RecoverValueTable != nil {
-        data["recoverValueTable"] = *p.RecoverValueTable.ToDict()
-    }
-    return &data
+func NewStaminaModelFromDict(data map[string]interface{}) StaminaModel {
+	return StaminaModel{
+		StaminaModelId:         core.CastString(data["staminaModelId"]),
+		Name:                   core.CastString(data["name"]),
+		Metadata:               core.CastString(data["metadata"]),
+		RecoverIntervalMinutes: core.CastInt32(data["recoverIntervalMinutes"]),
+		RecoverValue:           core.CastInt32(data["recoverValue"]),
+		InitialCapacity:        core.CastInt32(data["initialCapacity"]),
+		IsOverflow:             core.CastBool(data["isOverflow"]),
+		MaxCapacity:            core.CastInt32(data["maxCapacity"]),
+		MaxStaminaTable:        NewMaxStaminaTableFromDict(core.CastMap(data["maxStaminaTable"])).Pointer(),
+		RecoverIntervalTable:   NewRecoverIntervalTableFromDict(core.CastMap(data["recoverIntervalTable"])).Pointer(),
+		RecoverValueTable:      NewRecoverValueTableFromDict(core.CastMap(data["recoverValueTable"])).Pointer(),
+	}
+}
+
+func (p StaminaModel) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"staminaModelId":         p.StaminaModelId,
+		"name":                   p.Name,
+		"metadata":               p.Metadata,
+		"recoverIntervalMinutes": p.RecoverIntervalMinutes,
+		"recoverValue":           p.RecoverValue,
+		"initialCapacity":        p.InitialCapacity,
+		"isOverflow":             p.IsOverflow,
+		"maxCapacity":            p.MaxCapacity,
+		"maxStaminaTable":        p.MaxStaminaTable.ToDict(),
+		"recoverIntervalTable":   p.RecoverIntervalTable.ToDict(),
+		"recoverValueTable":      p.RecoverValueTable.ToDict(),
+	}
+}
+
+func (p StaminaModel) Pointer() *StaminaModel {
+	return &p
+}
+
+func CastStaminaModels(data []interface{}) []StaminaModel {
+	v := make([]StaminaModel, 0)
+	for _, d := range data {
+		v = append(v, NewStaminaModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastStaminaModelsFromDict(data []StaminaModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type MaxStaminaTable struct {
-    /** スタミナの最大値テーブルマスター */
-	MaxStaminaTableId *string   `json:"maxStaminaTableId"`
-    /** 最大スタミナ値テーブル名 */
-	Name *string   `json:"name"`
-    /** 最大スタミナ値テーブルのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 経験値の種類マスター のGRN */
-	ExperienceModelId *string   `json:"experienceModelId"`
-    /** ランク毎のスタミナの最大値テーブル */
-	Values []int32   `json:"values"`
+	MaxStaminaTableId *string `json:"maxStaminaTableId"`
+	Name              *string `json:"name"`
+	Metadata          *string `json:"metadata"`
+	ExperienceModelId *string `json:"experienceModelId"`
+	Values            []int32 `json:"values"`
 }
 
-func (p *MaxStaminaTable) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["maxStaminaTableId"] = p.MaxStaminaTableId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["experienceModelId"] = p.ExperienceModelId
-    if p.Values != nil {
-        var _values []int32
-        for _, item := range p.Values {
-            _values = append(_values, item)
-        }
-        data["values"] = &_values
-    }
-    return &data
+func NewMaxStaminaTableFromDict(data map[string]interface{}) MaxStaminaTable {
+	return MaxStaminaTable{
+		MaxStaminaTableId: core.CastString(data["maxStaminaTableId"]),
+		Name:              core.CastString(data["name"]),
+		Metadata:          core.CastString(data["metadata"]),
+		ExperienceModelId: core.CastString(data["experienceModelId"]),
+		Values:            core.CastInt32s(core.CastArray(data["values"])),
+	}
+}
+
+func (p MaxStaminaTable) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"maxStaminaTableId": p.MaxStaminaTableId,
+		"name":              p.Name,
+		"metadata":          p.Metadata,
+		"experienceModelId": p.ExperienceModelId,
+		"values": core.CastInt32sFromDict(
+			p.Values,
+		),
+	}
+}
+
+func (p MaxStaminaTable) Pointer() *MaxStaminaTable {
+	return &p
+}
+
+func CastMaxStaminaTables(data []interface{}) []MaxStaminaTable {
+	v := make([]MaxStaminaTable, 0)
+	for _, d := range data {
+		v = append(v, NewMaxStaminaTableFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastMaxStaminaTablesFromDict(data []MaxStaminaTable) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type RecoverIntervalTable struct {
-    /** スタミナ回復間隔テーブルマスター */
-	RecoverIntervalTableId *string   `json:"recoverIntervalTableId"`
-    /** スタミナ回復間隔テーブル名 */
-	Name *string   `json:"name"`
-    /** スタミナ回復間隔テーブルのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 経験値の種類マスター のGRN */
-	ExperienceModelId *string   `json:"experienceModelId"`
-    /** ランク毎のスタミナ回復間隔テーブル */
-	Values []int32   `json:"values"`
+	RecoverIntervalTableId *string `json:"recoverIntervalTableId"`
+	Name                   *string `json:"name"`
+	Metadata               *string `json:"metadata"`
+	ExperienceModelId      *string `json:"experienceModelId"`
+	Values                 []int32 `json:"values"`
 }
 
-func (p *RecoverIntervalTable) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["recoverIntervalTableId"] = p.RecoverIntervalTableId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["experienceModelId"] = p.ExperienceModelId
-    if p.Values != nil {
-        var _values []int32
-        for _, item := range p.Values {
-            _values = append(_values, item)
-        }
-        data["values"] = &_values
-    }
-    return &data
+func NewRecoverIntervalTableFromDict(data map[string]interface{}) RecoverIntervalTable {
+	return RecoverIntervalTable{
+		RecoverIntervalTableId: core.CastString(data["recoverIntervalTableId"]),
+		Name:                   core.CastString(data["name"]),
+		Metadata:               core.CastString(data["metadata"]),
+		ExperienceModelId:      core.CastString(data["experienceModelId"]),
+		Values:                 core.CastInt32s(core.CastArray(data["values"])),
+	}
+}
+
+func (p RecoverIntervalTable) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"recoverIntervalTableId": p.RecoverIntervalTableId,
+		"name":                   p.Name,
+		"metadata":               p.Metadata,
+		"experienceModelId":      p.ExperienceModelId,
+		"values": core.CastInt32sFromDict(
+			p.Values,
+		),
+	}
+}
+
+func (p RecoverIntervalTable) Pointer() *RecoverIntervalTable {
+	return &p
+}
+
+func CastRecoverIntervalTables(data []interface{}) []RecoverIntervalTable {
+	v := make([]RecoverIntervalTable, 0)
+	for _, d := range data {
+		v = append(v, NewRecoverIntervalTableFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRecoverIntervalTablesFromDict(data []RecoverIntervalTable) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type RecoverValueTable struct {
-    /** スタミナ回復量テーブルマスター */
-	RecoverValueTableId *string   `json:"recoverValueTableId"`
-    /** スタミナ回復量テーブル名 */
-	Name *string   `json:"name"`
-    /** スタミナ回復量テーブルのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 経験値の種類マスター のGRN */
-	ExperienceModelId *string   `json:"experienceModelId"`
-    /** ランク毎のスタミナ回復量テーブル */
-	Values []int32   `json:"values"`
+	RecoverValueTableId *string `json:"recoverValueTableId"`
+	Name                *string `json:"name"`
+	Metadata            *string `json:"metadata"`
+	ExperienceModelId   *string `json:"experienceModelId"`
+	Values              []int32 `json:"values"`
 }
 
-func (p *RecoverValueTable) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["recoverValueTableId"] = p.RecoverValueTableId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["experienceModelId"] = p.ExperienceModelId
-    if p.Values != nil {
-        var _values []int32
-        for _, item := range p.Values {
-            _values = append(_values, item)
-        }
-        data["values"] = &_values
-    }
-    return &data
+func NewRecoverValueTableFromDict(data map[string]interface{}) RecoverValueTable {
+	return RecoverValueTable{
+		RecoverValueTableId: core.CastString(data["recoverValueTableId"]),
+		Name:                core.CastString(data["name"]),
+		Metadata:            core.CastString(data["metadata"]),
+		ExperienceModelId:   core.CastString(data["experienceModelId"]),
+		Values:              core.CastInt32s(core.CastArray(data["values"])),
+	}
+}
+
+func (p RecoverValueTable) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"recoverValueTableId": p.RecoverValueTableId,
+		"name":                p.Name,
+		"metadata":            p.Metadata,
+		"experienceModelId":   p.ExperienceModelId,
+		"values": core.CastInt32sFromDict(
+			p.Values,
+		),
+	}
+}
+
+func (p RecoverValueTable) Pointer() *RecoverValueTable {
+	return &p
+}
+
+func CastRecoverValueTables(data []interface{}) []RecoverValueTable {
+	v := make([]RecoverValueTable, 0)
+	for _, d := range data {
+		v = append(v, NewRecoverValueTableFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRecoverValueTablesFromDict(data []RecoverValueTable) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Stamina struct {
-    /** スタミナ */
-	StaminaId *string   `json:"staminaId"`
-    /** スタミナモデルの名前 */
-	StaminaName *string   `json:"staminaName"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** 最終更新時におけるスタミナ値 */
-	Value *int32   `json:"value"`
-    /** スタミナの最大値 */
-	MaxValue *int32   `json:"maxValue"`
-    /** スタミナの回復間隔(分) */
-	RecoverIntervalMinutes *int32   `json:"recoverIntervalMinutes"`
-    /** スタミナの回復量 */
-	RecoverValue *int32   `json:"recoverValue"`
-    /** スタミナの最大値を超えて格納されているスタミナ値 */
-	OverflowValue *int32   `json:"overflowValue"`
-    /** 次回スタミナが回復する時間 */
-	NextRecoverAt *int64   `json:"nextRecoverAt"`
-    /** 作成日時 */
-	LastRecoveredAt *int64   `json:"lastRecoveredAt"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	StaminaId              *string `json:"staminaId"`
+	StaminaName            *string `json:"staminaName"`
+	UserId                 *string `json:"userId"`
+	Value                  *int32  `json:"value"`
+	MaxValue               *int32  `json:"maxValue"`
+	RecoverIntervalMinutes *int32  `json:"recoverIntervalMinutes"`
+	RecoverValue           *int32  `json:"recoverValue"`
+	OverflowValue          *int32  `json:"overflowValue"`
+	NextRecoverAt          *int64  `json:"nextRecoverAt"`
+	LastRecoveredAt        *int64  `json:"lastRecoveredAt"`
+	CreatedAt              *int64  `json:"createdAt"`
+	UpdatedAt              *int64  `json:"updatedAt"`
 }
 
-func (p *Stamina) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["staminaId"] = p.StaminaId
-    data["staminaName"] = p.StaminaName
-    data["userId"] = p.UserId
-    data["value"] = p.Value
-    data["maxValue"] = p.MaxValue
-    data["recoverIntervalMinutes"] = p.RecoverIntervalMinutes
-    data["recoverValue"] = p.RecoverValue
-    data["overflowValue"] = p.OverflowValue
-    data["nextRecoverAt"] = p.NextRecoverAt
-    data["lastRecoveredAt"] = p.LastRecoveredAt
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewStaminaFromDict(data map[string]interface{}) Stamina {
+	return Stamina{
+		StaminaId:              core.CastString(data["staminaId"]),
+		StaminaName:            core.CastString(data["staminaName"]),
+		UserId:                 core.CastString(data["userId"]),
+		Value:                  core.CastInt32(data["value"]),
+		MaxValue:               core.CastInt32(data["maxValue"]),
+		RecoverIntervalMinutes: core.CastInt32(data["recoverIntervalMinutes"]),
+		RecoverValue:           core.CastInt32(data["recoverValue"]),
+		OverflowValue:          core.CastInt32(data["overflowValue"]),
+		NextRecoverAt:          core.CastInt64(data["nextRecoverAt"]),
+		LastRecoveredAt:        core.CastInt64(data["lastRecoveredAt"]),
+		CreatedAt:              core.CastInt64(data["createdAt"]),
+		UpdatedAt:              core.CastInt64(data["updatedAt"]),
+	}
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func (p Stamina) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"staminaId":              p.StaminaId,
+		"staminaName":            p.StaminaName,
+		"userId":                 p.UserId,
+		"value":                  p.Value,
+		"maxValue":               p.MaxValue,
+		"recoverIntervalMinutes": p.RecoverIntervalMinutes,
+		"recoverValue":           p.RecoverValue,
+		"overflowValue":          p.OverflowValue,
+		"nextRecoverAt":          p.NextRecoverAt,
+		"lastRecoveredAt":        p.LastRecoveredAt,
+		"createdAt":              p.CreatedAt,
+		"updatedAt":              p.UpdatedAt,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func (p Stamina) Pointer() *Stamina {
+	return &p
+}
+
+func CastStaminas(data []interface{}) []Stamina {
+	v := make([]Stamina, 0)
+	for _, d := range data {
+		v = append(v, NewStaminaFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastStaminasFromDict(data []Stamina) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GitHubCheckoutSetting struct {
-    /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	ApiKeyId *string   `json:"apiKeyId"`
-    /** リポジトリ名 */
-	RepositoryName *string   `json:"repositoryName"`
-    /** ソースコードのファイルパス */
-	SourcePath *string   `json:"sourcePath"`
-    /** コードの取得元 */
-	ReferenceType *string   `json:"referenceType"`
-    /** コミットハッシュ */
-	CommitHash *string   `json:"commitHash"`
-    /** ブランチ名 */
-	BranchName *string   `json:"branchName"`
-    /** タグ名 */
-	TagName *string   `json:"tagName"`
+	ApiKeyId       *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath     *string `json:"sourcePath"`
+	ReferenceType  *string `json:"referenceType"`
+	CommitHash     *string `json:"commitHash"`
+	BranchName     *string `json:"branchName"`
+	TagName        *string `json:"tagName"`
 }
 
-func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["apiKeyId"] = p.ApiKeyId
-    data["repositoryName"] = p.RepositoryName
-    data["sourcePath"] = p.SourcePath
-    data["referenceType"] = p.ReferenceType
-    data["commitHash"] = p.CommitHash
-    data["branchName"] = p.BranchName
-    data["tagName"] = p.TagName
-    return &data
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+	return GitHubCheckoutSetting{
+		ApiKeyId:       core.CastString(data["apiKeyId"]),
+		RepositoryName: core.CastString(data["repositoryName"]),
+		SourcePath:     core.CastString(data["sourcePath"]),
+		ReferenceType:  core.CastString(data["referenceType"]),
+		CommitHash:     core.CastString(data["commitHash"]),
+		BranchName:     core.CastString(data["branchName"]),
+		TagName:        core.CastString(data["tagName"]),
+	}
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"apiKeyId":       p.ApiKeyId,
+		"repositoryName": p.RepositoryName,
+		"sourcePath":     p.SourcePath,
+		"referenceType":  p.ReferenceType,
+		"commitHash":     p.CommitHash,
+		"branchName":     p.BranchName,
+		"tagName":        p.TagName,
+	}
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+	return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type ScriptSetting struct {
+	TriggerScriptId             *string `json:"triggerScriptId"`
+	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
+	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
+}
+
+func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
+	return ScriptSetting{
+		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
+		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
+		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
+		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+	}
+}
+
+func (p ScriptSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"triggerScriptId":             p.TriggerScriptId,
+		"doneTriggerTargetType":       p.DoneTriggerTargetType,
+		"doneTriggerScriptId":         p.DoneTriggerScriptId,
+		"doneTriggerQueueNamespaceId": p.DoneTriggerQueueNamespaceId,
+	}
+}
+
+func (p ScriptSetting) Pointer() *ScriptSetting {
+	return &p
+}
+
+func CastScriptSettings(data []interface{}) []ScriptSetting {
+	v := make([]ScriptSetting, 0)
+	for _, d := range data {
+		v = append(v, NewScriptSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

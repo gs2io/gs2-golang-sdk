@@ -16,45 +16,46 @@ permissions and limitations under the License.
 
 package auth
 
+import "core"
+
 type AccessToken struct {
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** アクセストークン */
-	Token *string   `json:"token"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** 有効期限 */
-	Expire *int64   `json:"expire"`
+	Token  *string `json:"token"`
+	UserId *string `json:"userId"`
+	Expire *int64  `json:"expire"`
 }
 
-func (p *AccessToken) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["ownerId"] = p.OwnerId
-    data["token"] = p.Token
-    data["userId"] = p.UserId
-    data["expire"] = p.Expire
-    return &data
+func NewAccessTokenFromDict(data map[string]interface{}) AccessToken {
+	return AccessToken{
+		Token:  core.CastString(data["token"]),
+		UserId: core.CastString(data["userId"]),
+		Expire: core.CastInt64(data["expire"]),
+	}
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func (p AccessToken) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"token":  p.Token,
+		"userId": p.UserId,
+		"expire": p.Expire,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func (p AccessToken) Pointer() *AccessToken {
+	return &p
+}
+
+func CastAccessTokens(data []interface{}) []AccessToken {
+	v := make([]AccessToken, 0)
+	for _, d := range data {
+		v = append(v, NewAccessTokenFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAccessTokensFromDict(data []AccessToken) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

@@ -19,7 +19,7 @@ package matchmaking
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2MatchmakingWebSocketClient struct {
@@ -718,25 +718,28 @@ func (p Gs2MatchmakingWebSocketClient) CreateGatheringAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.Player != nil {
         bodies["player"] = request.Player.ToDict()
     }
     if request.AttributeRanges != nil {
-        var _attributeRanges []*map[string]interface {}
+        var _attributeRanges []interface {}
         for _, item := range request.AttributeRanges {
-            _attributeRanges = append(_attributeRanges, item.ToDict())
+            _attributeRanges = append(_attributeRanges, item)
         }
         bodies["attributeRanges"] = _attributeRanges
     }
     if request.CapacityOfRoles != nil {
-        var _capacityOfRoles []*map[string]interface {}
+        var _capacityOfRoles []interface {}
         for _, item := range request.CapacityOfRoles {
-            _capacityOfRoles = append(_capacityOfRoles, item.ToDict())
+            _capacityOfRoles = append(_capacityOfRoles, item)
         }
         bodies["capacityOfRoles"] = _capacityOfRoles
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []interface {}
         for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -834,21 +837,21 @@ func (p Gs2MatchmakingWebSocketClient) CreateGatheringByUserIdAsync(
         bodies["player"] = request.Player.ToDict()
     }
     if request.AttributeRanges != nil {
-        var _attributeRanges []*map[string]interface {}
+        var _attributeRanges []interface {}
         for _, item := range request.AttributeRanges {
-            _attributeRanges = append(_attributeRanges, item.ToDict())
+            _attributeRanges = append(_attributeRanges, item)
         }
         bodies["attributeRanges"] = _attributeRanges
     }
     if request.CapacityOfRoles != nil {
-        var _capacityOfRoles []*map[string]interface {}
+        var _capacityOfRoles []interface {}
         for _, item := range request.CapacityOfRoles {
-            _capacityOfRoles = append(_capacityOfRoles, item.ToDict())
+            _capacityOfRoles = append(_capacityOfRoles, item)
         }
         bodies["capacityOfRoles"] = _capacityOfRoles
     }
     if request.AllowUserIds != nil {
-        var _allowUserIds []string
+        var _allowUserIds []interface {}
         for _, item := range request.AllowUserIds {
             _allowUserIds = append(_allowUserIds, item)
         }
@@ -939,10 +942,13 @@ func (p Gs2MatchmakingWebSocketClient) UpdateGatheringAsync(
     if request.GatheringName != nil && *request.GatheringName != "" {
         bodies["gatheringName"] = *request.GatheringName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.AttributeRanges != nil {
-        var _attributeRanges []*map[string]interface {}
+        var _attributeRanges []interface {}
         for _, item := range request.AttributeRanges {
-            _attributeRanges = append(_attributeRanges, item.ToDict())
+            _attributeRanges = append(_attributeRanges, item)
         }
         bodies["attributeRanges"] = _attributeRanges
     }
@@ -1035,9 +1041,9 @@ func (p Gs2MatchmakingWebSocketClient) UpdateGatheringByUserIdAsync(
         bodies["userId"] = *request.UserId
     }
     if request.AttributeRanges != nil {
-        var _attributeRanges []*map[string]interface {}
+        var _attributeRanges []interface {}
         for _, item := range request.AttributeRanges {
-            _attributeRanges = append(_attributeRanges, item.ToDict())
+            _attributeRanges = append(_attributeRanges, item)
         }
         bodies["attributeRanges"] = _attributeRanges
     }
@@ -1204,6 +1210,9 @@ func (p Gs2MatchmakingWebSocketClient) DoMatchmakingAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.Player != nil {
         bodies["player"] = request.Player.ToDict()
@@ -1377,6 +1386,9 @@ func (p Gs2MatchmakingWebSocketClient) CancelMatchmakingAsync(
     }
     if request.GatheringName != nil && *request.GatheringName != "" {
         bodies["gatheringName"] = *request.GatheringName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -2541,6 +2553,9 @@ func (p Gs2MatchmakingWebSocketClient) DescribeRatingsAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -2717,6 +2732,9 @@ func (p Gs2MatchmakingWebSocketClient) GetRatingAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.RatingName != nil && *request.RatingName != "" {
         bodies["ratingName"] = *request.RatingName
     }
@@ -2891,9 +2909,9 @@ func (p Gs2MatchmakingWebSocketClient) PutResultAsync(
         bodies["ratingName"] = *request.RatingName
     }
     if request.GameResults != nil {
-        var _gameResults []*map[string]interface {}
+        var _gameResults []interface {}
         for _, item := range request.GameResults {
-            _gameResults = append(_gameResults, item.ToDict())
+            _gameResults = append(_gameResults, item)
         }
         bodies["gameResults"] = _gameResults
     }
@@ -3066,6 +3084,9 @@ func (p Gs2MatchmakingWebSocketClient) GetBallotAsync(
     }
     if request.GatheringName != nil && *request.GatheringName != "" {
         bodies["gatheringName"] = *request.GatheringName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.NumberOfPlayer != nil {
         bodies["numberOfPlayer"] = *request.NumberOfPlayer
@@ -3256,9 +3277,9 @@ func (p Gs2MatchmakingWebSocketClient) VoteAsync(
         bodies["ballotSignature"] = *request.BallotSignature
     }
     if request.GameResults != nil {
-        var _gameResults []*map[string]interface {}
+        var _gameResults []interface {}
         for _, item := range request.GameResults {
-            _gameResults = append(_gameResults, item.ToDict())
+            _gameResults = append(_gameResults, item)
         }
         bodies["gameResults"] = _gameResults
     }
@@ -3345,16 +3366,16 @@ func (p Gs2MatchmakingWebSocketClient) VoteMultipleAsync(
         bodies["namespaceName"] = *request.NamespaceName
     }
     if request.SignedBallots != nil {
-        var _signedBallots []*map[string]interface {}
+        var _signedBallots []interface {}
         for _, item := range request.SignedBallots {
-            _signedBallots = append(_signedBallots, item.ToDict())
+            _signedBallots = append(_signedBallots, item)
         }
         bodies["signedBallots"] = _signedBallots
     }
     if request.GameResults != nil {
-        var _gameResults []*map[string]interface {}
+        var _gameResults []interface {}
         for _, item := range request.GameResults {
-            _gameResults = append(_gameResults, item.ToDict())
+            _gameResults = append(_gameResults, item)
         }
         bodies["gameResults"] = _gameResults
     }

@@ -19,7 +19,7 @@ package inbox
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2InboxWebSocketClient struct {
@@ -615,6 +615,9 @@ func (p Gs2InboxWebSocketClient) DescribeMessagesAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -798,9 +801,9 @@ func (p Gs2InboxWebSocketClient) SendMessageByUserIdAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.ReadAcquireActions != nil {
-        var _readAcquireActions []*map[string]interface {}
+        var _readAcquireActions []interface {}
         for _, item := range request.ReadAcquireActions {
-            _readAcquireActions = append(_readAcquireActions, item.ToDict())
+            _readAcquireActions = append(_readAcquireActions, item)
         }
         bodies["readAcquireActions"] = _readAcquireActions
     }
@@ -888,6 +891,9 @@ func (p Gs2InboxWebSocketClient) GetMessageAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.MessageName != nil && *request.MessageName != "" {
         bodies["messageName"] = *request.MessageName
@@ -1059,6 +1065,9 @@ func (p Gs2InboxWebSocketClient) ReceiveGlobalMessageAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -1222,6 +1231,9 @@ func (p Gs2InboxWebSocketClient) OpenMessageAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.MessageName != nil && *request.MessageName != "" {
         bodies["messageName"] = *request.MessageName
@@ -1393,13 +1405,16 @@ func (p Gs2InboxWebSocketClient) ReadMessageAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.MessageName != nil && *request.MessageName != "" {
         bodies["messageName"] = *request.MessageName
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -1492,9 +1507,9 @@ func (p Gs2InboxWebSocketClient) ReadMessageByUserIdAsync(
         bodies["messageName"] = *request.MessageName
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -1576,6 +1591,9 @@ func (p Gs2InboxWebSocketClient) DeleteMessageAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.MessageName != nil && *request.MessageName != "" {
         bodies["messageName"] = *request.MessageName
@@ -2243,9 +2261,9 @@ func (p Gs2InboxWebSocketClient) CreateGlobalMessageMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.ReadAcquireActions != nil {
-        var _readAcquireActions []*map[string]interface {}
+        var _readAcquireActions []interface {}
         for _, item := range request.ReadAcquireActions {
-            _readAcquireActions = append(_readAcquireActions, item.ToDict())
+            _readAcquireActions = append(_readAcquireActions, item)
         }
         bodies["readAcquireActions"] = _readAcquireActions
     }
@@ -2423,9 +2441,9 @@ func (p Gs2InboxWebSocketClient) UpdateGlobalMessageMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.ReadAcquireActions != nil {
-        var _readAcquireActions []*map[string]interface {}
+        var _readAcquireActions []interface {}
         for _, item := range request.ReadAcquireActions {
-            _readAcquireActions = append(_readAcquireActions, item.ToDict())
+            _readAcquireActions = append(_readAcquireActions, item)
         }
         bodies["readAcquireActions"] = _readAcquireActions
     }
@@ -2843,7 +2861,7 @@ func (p Gs2InboxWebSocketClient) UpdateReceivedByUserIdAsync(
         bodies["userId"] = *request.UserId
     }
     if request.ReceivedGlobalMessageNames != nil {
-        var _receivedGlobalMessageNames []string
+        var _receivedGlobalMessageNames []interface {}
         for _, item := range request.ReceivedGlobalMessageNames {
             _receivedGlobalMessageNames = append(_receivedGlobalMessageNames, item)
         }

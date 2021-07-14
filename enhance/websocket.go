@@ -19,7 +19,7 @@ package enhance
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2EnhanceWebSocketClient struct {
@@ -856,7 +856,7 @@ func (p Gs2EnhanceWebSocketClient) CreateRateModelMasterAsync(
         bodies["materialInventoryModelId"] = *request.MaterialInventoryModelId
     }
     if request.AcquireExperienceHierarchy != nil {
-        var _acquireExperienceHierarchy []string
+        var _acquireExperienceHierarchy []interface {}
         for _, item := range request.AcquireExperienceHierarchy {
             _acquireExperienceHierarchy = append(_acquireExperienceHierarchy, item)
         }
@@ -866,9 +866,9 @@ func (p Gs2EnhanceWebSocketClient) CreateRateModelMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.BonusRates != nil {
-        var _bonusRates []*map[string]interface {}
+        var _bonusRates []interface {}
         for _, item := range request.BonusRates {
-            _bonusRates = append(_bonusRates, item.ToDict())
+            _bonusRates = append(_bonusRates, item)
         }
         bodies["bonusRates"] = _bonusRates
     }
@@ -1052,7 +1052,7 @@ func (p Gs2EnhanceWebSocketClient) UpdateRateModelMasterAsync(
         bodies["materialInventoryModelId"] = *request.MaterialInventoryModelId
     }
     if request.AcquireExperienceHierarchy != nil {
-        var _acquireExperienceHierarchy []string
+        var _acquireExperienceHierarchy []interface {}
         for _, item := range request.AcquireExperienceHierarchy {
             _acquireExperienceHierarchy = append(_acquireExperienceHierarchy, item)
         }
@@ -1062,9 +1062,9 @@ func (p Gs2EnhanceWebSocketClient) UpdateRateModelMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.BonusRates != nil {
-        var _bonusRates []*map[string]interface {}
+        var _bonusRates []interface {}
         for _, item := range request.BonusRates {
-            _bonusRates = append(_bonusRates, item.ToDict())
+            _bonusRates = append(_bonusRates, item)
         }
         bodies["bonusRates"] = _bonusRates
     }
@@ -1232,20 +1232,23 @@ func (p Gs2EnhanceWebSocketClient) DirectEnhanceAsync(
     if request.RateName != nil && *request.RateName != "" {
         bodies["rateName"] = *request.RateName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.TargetItemSetId != nil && *request.TargetItemSetId != "" {
         bodies["targetItemSetId"] = *request.TargetItemSetId
     }
     if request.Materials != nil {
-        var _materials []*map[string]interface {}
+        var _materials []interface {}
         for _, item := range request.Materials {
-            _materials = append(_materials, item.ToDict())
+            _materials = append(_materials, item)
         }
         bodies["materials"] = _materials
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -1341,16 +1344,16 @@ func (p Gs2EnhanceWebSocketClient) DirectEnhanceByUserIdAsync(
         bodies["targetItemSetId"] = *request.TargetItemSetId
     }
     if request.Materials != nil {
-        var _materials []*map[string]interface {}
+        var _materials []interface {}
         for _, item := range request.Materials {
-            _materials = append(_materials, item.ToDict())
+            _materials = append(_materials, item)
         }
         bodies["materials"] = _materials
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -1613,9 +1616,9 @@ func (p Gs2EnhanceWebSocketClient) CreateProgressByUserIdAsync(
         bodies["targetItemSetId"] = *request.TargetItemSetId
     }
     if request.Materials != nil {
-        var _materials []*map[string]interface {}
+        var _materials []interface {}
         for _, item := range request.Materials {
-            _materials = append(_materials, item.ToDict())
+            _materials = append(_materials, item)
         }
         bodies["materials"] = _materials
     }
@@ -1700,6 +1703,9 @@ func (p Gs2EnhanceWebSocketClient) GetProgressAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -1872,19 +1878,22 @@ func (p Gs2EnhanceWebSocketClient) StartAsync(
         bodies["targetItemSetId"] = *request.TargetItemSetId
     }
     if request.Materials != nil {
-        var _materials []*map[string]interface {}
+        var _materials []interface {}
         for _, item := range request.Materials {
-            _materials = append(_materials, item.ToDict())
+            _materials = append(_materials, item)
         }
         bodies["materials"] = _materials
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.Force != nil {
         bodies["force"] = *request.Force
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -1977,9 +1986,9 @@ func (p Gs2EnhanceWebSocketClient) StartByUserIdAsync(
         bodies["targetItemSetId"] = *request.TargetItemSetId
     }
     if request.Materials != nil {
-        var _materials []*map[string]interface {}
+        var _materials []interface {}
         for _, item := range request.Materials {
-            _materials = append(_materials, item.ToDict())
+            _materials = append(_materials, item)
         }
         bodies["materials"] = _materials
     }
@@ -1990,9 +1999,9 @@ func (p Gs2EnhanceWebSocketClient) StartByUserIdAsync(
         bodies["force"] = *request.Force
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2075,10 +2084,13 @@ func (p Gs2EnhanceWebSocketClient) EndAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2168,9 +2180,9 @@ func (p Gs2EnhanceWebSocketClient) EndByUserIdAsync(
         bodies["userId"] = *request.UserId
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2252,6 +2264,9 @@ func (p Gs2EnhanceWebSocketClient) DeleteProgressAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

@@ -19,7 +19,7 @@ package lottery
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2LotteryWebSocketClient struct {
@@ -1141,9 +1141,9 @@ func (p Gs2LotteryWebSocketClient) CreatePrizeTableMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.Prizes != nil {
-        var _prizes []*map[string]interface {}
+        var _prizes []interface {}
         for _, item := range request.Prizes {
-            _prizes = append(_prizes, item.ToDict())
+            _prizes = append(_prizes, item)
         }
         bodies["prizes"] = _prizes
     }
@@ -1318,9 +1318,9 @@ func (p Gs2LotteryWebSocketClient) UpdatePrizeTableMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.Prizes != nil {
-        var _prizes []*map[string]interface {}
+        var _prizes []interface {}
         for _, item := range request.Prizes {
-            _prizes = append(_prizes, item.ToDict())
+            _prizes = append(_prizes, item)
         }
         bodies["prizes"] = _prizes
     }
@@ -1484,6 +1484,9 @@ func (p Gs2LotteryWebSocketClient) DescribeBoxesAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
@@ -1663,6 +1666,9 @@ func (p Gs2LotteryWebSocketClient) GetBoxAsync(
     }
     if request.PrizeTableName != nil && *request.PrizeTableName != "" {
         bodies["prizeTableName"] = *request.PrizeTableName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -1918,6 +1924,9 @@ func (p Gs2LotteryWebSocketClient) ResetBoxAsync(
     }
     if request.PrizeTableName != nil && *request.PrizeTableName != "" {
         bodies["prizeTableName"] = *request.PrizeTableName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -2418,9 +2427,9 @@ func (p Gs2LotteryWebSocketClient) DrawByUserIdAsync(
         bodies["count"] = *request.Count
     }
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2505,6 +2514,9 @@ func (p Gs2LotteryWebSocketClient) DescribeProbabilitiesAsync(
     }
     if request.LotteryName != nil && *request.LotteryName != "" {
         bodies["lotteryName"] = *request.LotteryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

@@ -16,122 +16,190 @@ permissions and limitations under the License.
 
 package key
 
+import "core"
+
 type Namespace struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** ネームスペース名 */
-	Name *string   `json:"name"`
-    /** 説明文 */
-	Description *string   `json:"description"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId *string     `json:"namespaceId"`
+	Name        *string     `json:"name"`
+	Description *string     `json:"description"`
+	LogSetting  *LogSetting `json:"logSetting"`
+	CreatedAt   *int64      `json:"createdAt"`
+	UpdatedAt   *int64      `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Name:        core.CastString(data["name"]),
+		Description: core.CastString(data["description"]),
+		LogSetting:  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:   core.CastInt64(data["createdAt"]),
+		UpdatedAt:   core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId": p.NamespaceId,
+		"name":        p.Name,
+		"description": p.Description,
+		"logSetting":  p.LogSetting.ToDict(),
+		"createdAt":   p.CreatedAt,
+		"updatedAt":   p.UpdatedAt,
+	}
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Key struct {
-    /** 暗号鍵 */
-	KeyId *string   `json:"keyId"`
-    /** 暗号鍵名 */
-	Name *string   `json:"name"`
-    /** 説明文 */
-	Description *string   `json:"description"`
-    /** 暗号鍵 */
-	Secret *string   `json:"secret"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	KeyId       *string `json:"keyId"`
+	Name        *string `json:"name"`
+	Description *string `json:"description"`
+	CreatedAt   *int64  `json:"createdAt"`
+	UpdatedAt   *int64  `json:"updatedAt"`
 }
 
-func (p *Key) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["keyId"] = p.KeyId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["secret"] = p.Secret
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewKeyFromDict(data map[string]interface{}) Key {
+	return Key{
+		KeyId:       core.CastString(data["keyId"]),
+		Name:        core.CastString(data["name"]),
+		Description: core.CastString(data["description"]),
+		CreatedAt:   core.CastInt64(data["createdAt"]),
+		UpdatedAt:   core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Key) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"keyId":       p.KeyId,
+		"name":        p.Name,
+		"description": p.Description,
+		"createdAt":   p.CreatedAt,
+		"updatedAt":   p.UpdatedAt,
+	}
+}
+
+func (p Key) Pointer() *Key {
+	return &p
+}
+
+func CastKeys(data []interface{}) []Key {
+	v := make([]Key, 0)
+	for _, d := range data {
+		v = append(v, NewKeyFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastKeysFromDict(data []Key) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GitHubApiKey struct {
-    /** GitHub のAPIキー */
-	ApiKeyId *string   `json:"apiKeyId"`
-    /** GitHub APIキー名 */
-	Name *string   `json:"name"`
-    /** 説明文 */
-	Description *string   `json:"description"`
-    /** APIキー */
-	ApiKey *string   `json:"apiKey"`
-    /** APIキーの暗号化に使用する暗号鍵名 */
-	EncryptionKeyName *string   `json:"encryptionKeyName"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	ApiKeyId          *string `json:"apiKeyId"`
+	Name              *string `json:"name"`
+	Description       *string `json:"description"`
+	EncryptionKeyName *string `json:"encryptionKeyName"`
+	CreatedAt         *int64  `json:"createdAt"`
+	UpdatedAt         *int64  `json:"updatedAt"`
 }
 
-func (p *GitHubApiKey) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["apiKeyId"] = p.ApiKeyId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["apiKey"] = p.ApiKey
-    data["encryptionKeyName"] = p.EncryptionKeyName
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewGitHubApiKeyFromDict(data map[string]interface{}) GitHubApiKey {
+	return GitHubApiKey{
+		ApiKeyId:          core.CastString(data["apiKeyId"]),
+		Name:              core.CastString(data["name"]),
+		Description:       core.CastString(data["description"]),
+		EncryptionKeyName: core.CastString(data["encryptionKeyName"]),
+		CreatedAt:         core.CastInt64(data["createdAt"]),
+		UpdatedAt:         core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p GitHubApiKey) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"apiKeyId":          p.ApiKeyId,
+		"name":              p.Name,
+		"description":       p.Description,
+		"encryptionKeyName": p.EncryptionKeyName,
+		"createdAt":         p.CreatedAt,
+		"updatedAt":         p.UpdatedAt,
+	}
+}
+
+func (p GitHubApiKey) Pointer() *GitHubApiKey {
+	return &p
+}
+
+func CastGitHubApiKeys(data []interface{}) []GitHubApiKey {
+	v := make([]GitHubApiKey, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubApiKeyFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubApiKeysFromDict(data []GitHubApiKey) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

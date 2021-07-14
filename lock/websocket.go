@@ -19,7 +19,7 @@ package lock
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2LockWebSocketClient struct {
@@ -573,6 +573,9 @@ func (p Gs2LockWebSocketClient) DescribeMutexesAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -751,6 +754,9 @@ func (p Gs2LockWebSocketClient) LockAsync(
     }
     if request.PropertyId != nil && *request.PropertyId != "" {
         bodies["propertyId"] = *request.PropertyId
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.TransactionId != nil && *request.TransactionId != "" {
         bodies["transactionId"] = *request.TransactionId
@@ -934,6 +940,9 @@ func (p Gs2LockWebSocketClient) UnlockAsync(
     if request.PropertyId != nil && *request.PropertyId != "" {
         bodies["propertyId"] = *request.PropertyId
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.TransactionId != nil && *request.TransactionId != "" {
         bodies["transactionId"] = *request.TransactionId
     }
@@ -1107,6 +1116,9 @@ func (p Gs2LockWebSocketClient) GetMutexAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PropertyId != nil && *request.PropertyId != "" {
         bodies["propertyId"] = *request.PropertyId
     }
@@ -1192,11 +1204,11 @@ func (p Gs2LockWebSocketClient) GetMutexByUserIdAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

@@ -16,206 +16,355 @@ permissions and limitations under the License.
 
 package limit
 
+import "core"
+
 type Namespace struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** ネームスペース名 */
-	Name *string   `json:"name"`
-    /** ネームスペースの説明 */
-	Description *string   `json:"description"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId *string     `json:"namespaceId"`
+	Name        *string     `json:"name"`
+	Description *string     `json:"description"`
+	LogSetting  *LogSetting `json:"logSetting"`
+	CreatedAt   *int64      `json:"createdAt"`
+	UpdatedAt   *int64      `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Name:        core.CastString(data["name"]),
+		Description: core.CastString(data["description"]),
+		LogSetting:  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:   core.CastInt64(data["createdAt"]),
+		UpdatedAt:   core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId": p.NamespaceId,
+		"name":        p.Name,
+		"description": p.Description,
+		"logSetting":  p.LogSetting.ToDict(),
+		"createdAt":   p.CreatedAt,
+		"updatedAt":   p.UpdatedAt,
+	}
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Counter struct {
-    /** カウンター */
-	CounterId *string   `json:"counterId"`
-    /** 回数制限の種類の名前 */
-	LimitName *string   `json:"limitName"`
-    /** カウンターの名前 */
-	Name *string   `json:"name"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** カウント値 */
-	Count *int32   `json:"count"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	CounterId *string `json:"counterId"`
+	LimitName *string `json:"limitName"`
+	Name      *string `json:"name"`
+	UserId    *string `json:"userId"`
+	Count     *int32  `json:"count"`
+	CreatedAt *int64  `json:"createdAt"`
+	UpdatedAt *int64  `json:"updatedAt"`
 }
 
-func (p *Counter) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["counterId"] = p.CounterId
-    data["limitName"] = p.LimitName
-    data["name"] = p.Name
-    data["userId"] = p.UserId
-    data["count"] = p.Count
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewCounterFromDict(data map[string]interface{}) Counter {
+	return Counter{
+		CounterId: core.CastString(data["counterId"]),
+		LimitName: core.CastString(data["limitName"]),
+		Name:      core.CastString(data["name"]),
+		UserId:    core.CastString(data["userId"]),
+		Count:     core.CastInt32(data["count"]),
+		CreatedAt: core.CastInt64(data["createdAt"]),
+		UpdatedAt: core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Counter) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"counterId": p.CounterId,
+		"limitName": p.LimitName,
+		"name":      p.Name,
+		"userId":    p.UserId,
+		"count":     p.Count,
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p Counter) Pointer() *Counter {
+	return &p
+}
+
+func CastCounters(data []interface{}) []Counter {
+	v := make([]Counter, 0)
+	for _, d := range data {
+		v = append(v, NewCounterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCountersFromDict(data []Counter) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LimitModelMaster struct {
-    /** 回数制限の種類マスター */
-	LimitModelId *string   `json:"limitModelId"`
-    /** 回数制限の種類名 */
-	Name *string   `json:"name"`
-    /** 回数制限の種類マスターの説明 */
-	Description *string   `json:"description"`
-    /** 回数制限の種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** リセットタイミング */
-	ResetType *string   `json:"resetType"`
-    /** リセットをする日にち */
-	ResetDayOfMonth *int32   `json:"resetDayOfMonth"`
-    /** リセットする曜日 */
-	ResetDayOfWeek *string   `json:"resetDayOfWeek"`
-    /** リセット時刻 */
-	ResetHour *int32   `json:"resetHour"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	LimitModelId    *string `json:"limitModelId"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
+	ResetType       *string `json:"resetType"`
+	ResetDayOfMonth *int32  `json:"resetDayOfMonth"`
+	ResetDayOfWeek  *string `json:"resetDayOfWeek"`
+	ResetHour       *int32  `json:"resetHour"`
+	CreatedAt       *int64  `json:"createdAt"`
+	UpdatedAt       *int64  `json:"updatedAt"`
 }
 
-func (p *LimitModelMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["limitModelId"] = p.LimitModelId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["metadata"] = p.Metadata
-    data["resetType"] = p.ResetType
-    data["resetDayOfMonth"] = p.ResetDayOfMonth
-    data["resetDayOfWeek"] = p.ResetDayOfWeek
-    data["resetHour"] = p.ResetHour
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewLimitModelMasterFromDict(data map[string]interface{}) LimitModelMaster {
+	return LimitModelMaster{
+		LimitModelId:    core.CastString(data["limitModelId"]),
+		Name:            core.CastString(data["name"]),
+		Description:     core.CastString(data["description"]),
+		Metadata:        core.CastString(data["metadata"]),
+		ResetType:       core.CastString(data["resetType"]),
+		ResetDayOfMonth: core.CastInt32(data["resetDayOfMonth"]),
+		ResetDayOfWeek:  core.CastString(data["resetDayOfWeek"]),
+		ResetHour:       core.CastInt32(data["resetHour"]),
+		CreatedAt:       core.CastInt64(data["createdAt"]),
+		UpdatedAt:       core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p LimitModelMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"limitModelId":    p.LimitModelId,
+		"name":            p.Name,
+		"description":     p.Description,
+		"metadata":        p.Metadata,
+		"resetType":       p.ResetType,
+		"resetDayOfMonth": p.ResetDayOfMonth,
+		"resetDayOfWeek":  p.ResetDayOfWeek,
+		"resetHour":       p.ResetHour,
+		"createdAt":       p.CreatedAt,
+		"updatedAt":       p.UpdatedAt,
+	}
+}
+
+func (p LimitModelMaster) Pointer() *LimitModelMaster {
+	return &p
+}
+
+func CastLimitModelMasters(data []interface{}) []LimitModelMaster {
+	v := make([]LimitModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewLimitModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLimitModelMastersFromDict(data []LimitModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CurrentLimitMaster struct {
-    /** 現在有効な回数制限設定 */
-	NamespaceId *string   `json:"namespaceId"`
-    /** マスターデータ */
-	Settings *string   `json:"settings"`
+	NamespaceId *string `json:"namespaceId"`
+	Settings    *string `json:"settings"`
 }
 
-func (p *CurrentLimitMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["settings"] = p.Settings
-    return &data
+func NewCurrentLimitMasterFromDict(data map[string]interface{}) CurrentLimitMaster {
+	return CurrentLimitMaster{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Settings:    core.CastString(data["settings"]),
+	}
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func (p CurrentLimitMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId": p.NamespaceId,
+		"settings":    p.Settings,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func (p CurrentLimitMaster) Pointer() *CurrentLimitMaster {
+	return &p
+}
+
+func CastCurrentLimitMasters(data []interface{}) []CurrentLimitMaster {
+	v := make([]CurrentLimitMaster, 0)
+	for _, d := range data {
+		v = append(v, NewCurrentLimitMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCurrentLimitMastersFromDict(data []CurrentLimitMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GitHubCheckoutSetting struct {
-    /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	ApiKeyId *string   `json:"apiKeyId"`
-    /** リポジトリ名 */
-	RepositoryName *string   `json:"repositoryName"`
-    /** ソースコードのファイルパス */
-	SourcePath *string   `json:"sourcePath"`
-    /** コードの取得元 */
-	ReferenceType *string   `json:"referenceType"`
-    /** コミットハッシュ */
-	CommitHash *string   `json:"commitHash"`
-    /** ブランチ名 */
-	BranchName *string   `json:"branchName"`
-    /** タグ名 */
-	TagName *string   `json:"tagName"`
+	ApiKeyId       *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath     *string `json:"sourcePath"`
+	ReferenceType  *string `json:"referenceType"`
+	CommitHash     *string `json:"commitHash"`
+	BranchName     *string `json:"branchName"`
+	TagName        *string `json:"tagName"`
 }
 
-func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["apiKeyId"] = p.ApiKeyId
-    data["repositoryName"] = p.RepositoryName
-    data["sourcePath"] = p.SourcePath
-    data["referenceType"] = p.ReferenceType
-    data["commitHash"] = p.CommitHash
-    data["branchName"] = p.BranchName
-    data["tagName"] = p.TagName
-    return &data
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+	return GitHubCheckoutSetting{
+		ApiKeyId:       core.CastString(data["apiKeyId"]),
+		RepositoryName: core.CastString(data["repositoryName"]),
+		SourcePath:     core.CastString(data["sourcePath"]),
+		ReferenceType:  core.CastString(data["referenceType"]),
+		CommitHash:     core.CastString(data["commitHash"]),
+		BranchName:     core.CastString(data["branchName"]),
+		TagName:        core.CastString(data["tagName"]),
+	}
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"apiKeyId":       p.ApiKeyId,
+		"repositoryName": p.RepositoryName,
+		"sourcePath":     p.SourcePath,
+		"referenceType":  p.ReferenceType,
+		"commitHash":     p.CommitHash,
+		"branchName":     p.BranchName,
+		"tagName":        p.TagName,
+	}
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+	return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LimitModel struct {
-    /** 回数制限の種類 */
-	LimitModelId *string   `json:"limitModelId"`
-    /** 回数制限の種類名 */
-	Name *string   `json:"name"`
-    /** 回数制限の種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** リセットタイミング */
-	ResetType *string   `json:"resetType"`
-    /** リセットをする日にち */
-	ResetDayOfMonth *int32   `json:"resetDayOfMonth"`
-    /** リセットする曜日 */
-	ResetDayOfWeek *string   `json:"resetDayOfWeek"`
-    /** リセット時刻 */
-	ResetHour *int32   `json:"resetHour"`
+	LimitModelId    *string `json:"limitModelId"`
+	Name            *string `json:"name"`
+	Metadata        *string `json:"metadata"`
+	ResetType       *string `json:"resetType"`
+	ResetDayOfMonth *int32  `json:"resetDayOfMonth"`
+	ResetDayOfWeek  *string `json:"resetDayOfWeek"`
+	ResetHour       *int32  `json:"resetHour"`
 }
 
-func (p *LimitModel) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["limitModelId"] = p.LimitModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["resetType"] = p.ResetType
-    data["resetDayOfMonth"] = p.ResetDayOfMonth
-    data["resetDayOfWeek"] = p.ResetDayOfWeek
-    data["resetHour"] = p.ResetHour
-    return &data
+func NewLimitModelFromDict(data map[string]interface{}) LimitModel {
+	return LimitModel{
+		LimitModelId:    core.CastString(data["limitModelId"]),
+		Name:            core.CastString(data["name"]),
+		Metadata:        core.CastString(data["metadata"]),
+		ResetType:       core.CastString(data["resetType"]),
+		ResetDayOfMonth: core.CastInt32(data["resetDayOfMonth"]),
+		ResetDayOfWeek:  core.CastString(data["resetDayOfWeek"]),
+		ResetHour:       core.CastInt32(data["resetHour"]),
+	}
+}
+
+func (p LimitModel) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"limitModelId":    p.LimitModelId,
+		"name":            p.Name,
+		"metadata":        p.Metadata,
+		"resetType":       p.ResetType,
+		"resetDayOfMonth": p.ResetDayOfMonth,
+		"resetDayOfWeek":  p.ResetDayOfWeek,
+		"resetHour":       p.ResetHour,
+	}
+}
+
+func (p LimitModel) Pointer() *LimitModel {
+	return &p
+}
+
+func CastLimitModels(data []interface{}) []LimitModel {
+	v := make([]LimitModel, 0)
+	for _, d := range data {
+		v = append(v, NewLimitModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLimitModelsFromDict(data []LimitModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

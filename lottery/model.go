@@ -16,421 +16,765 @@ permissions and limitations under the License.
 
 package lottery
 
+import "core"
+
 type Namespace struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** ネームスペース名 */
-	Name *string   `json:"name"`
-    /** ネームスペースの説明 */
-	Description *string   `json:"description"`
-    /** 景品付与処理をジョブとして追加するキューのネームスペース のGRN */
-	QueueNamespaceId *string   `json:"queueNamespaceId"`
-    /** 景品付与処理のスタンプシートで使用する暗号鍵GRN */
-	KeyId *string   `json:"keyId"`
-    /** 抽選処理時 に実行されるスクリプト のGRN */
-	LotteryTriggerScriptId *string   `json:"lotteryTriggerScriptId"`
-    /** 排出テーブル選択時 に実行されるスクリプト のGRN */
-	ChoicePrizeTableScriptId *string   `json:"choicePrizeTableScriptId"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId              *string     `json:"namespaceId"`
+	Name                     *string     `json:"name"`
+	Description              *string     `json:"description"`
+	QueueNamespaceId         *string     `json:"queueNamespaceId"`
+	KeyId                    *string     `json:"keyId"`
+	LotteryTriggerScriptId   *string     `json:"lotteryTriggerScriptId"`
+	ChoicePrizeTableScriptId *string     `json:"choicePrizeTableScriptId"`
+	LogSetting               *LogSetting `json:"logSetting"`
+	CreatedAt                *int64      `json:"createdAt"`
+	UpdatedAt                *int64      `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["queueNamespaceId"] = p.QueueNamespaceId
-    data["keyId"] = p.KeyId
-    data["lotteryTriggerScriptId"] = p.LotteryTriggerScriptId
-    data["choicePrizeTableScriptId"] = p.ChoicePrizeTableScriptId
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId:              core.CastString(data["namespaceId"]),
+		Name:                     core.CastString(data["name"]),
+		Description:              core.CastString(data["description"]),
+		QueueNamespaceId:         core.CastString(data["queueNamespaceId"]),
+		KeyId:                    core.CastString(data["keyId"]),
+		LotteryTriggerScriptId:   core.CastString(data["lotteryTriggerScriptId"]),
+		ChoicePrizeTableScriptId: core.CastString(data["choicePrizeTableScriptId"]),
+		LogSetting:               NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:                core.CastInt64(data["createdAt"]),
+		UpdatedAt:                core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId":              p.NamespaceId,
+		"name":                     p.Name,
+		"description":              p.Description,
+		"queueNamespaceId":         p.QueueNamespaceId,
+		"keyId":                    p.KeyId,
+		"lotteryTriggerScriptId":   p.LotteryTriggerScriptId,
+		"choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
+		"logSetting":               p.LogSetting.ToDict(),
+		"createdAt":                p.CreatedAt,
+		"updatedAt":                p.UpdatedAt,
+	}
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LotteryModelMaster struct {
-    /** 抽選の種類マスター */
-	LotteryModelId *string   `json:"lotteryModelId"`
-    /** 抽選モデルの種類名 */
-	Name *string   `json:"name"`
-    /** 抽選モデルの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 抽選の種類マスターの説明 */
-	Description *string   `json:"description"`
-    /** 抽選モード */
-	Mode *string   `json:"mode"`
-    /** 抽選方法 */
-	Method *string   `json:"method"`
-    /** 景品テーブルの名前 */
-	PrizeTableName *string   `json:"prizeTableName"`
-    /** 抽選テーブルを確定するスクリプト のGRN */
-	ChoicePrizeTableScriptId *string   `json:"choicePrizeTableScriptId"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	LotteryModelId           *string `json:"lotteryModelId"`
+	Name                     *string `json:"name"`
+	Metadata                 *string `json:"metadata"`
+	Description              *string `json:"description"`
+	Mode                     *string `json:"mode"`
+	Method                   *string `json:"method"`
+	PrizeTableName           *string `json:"prizeTableName"`
+	ChoicePrizeTableScriptId *string `json:"choicePrizeTableScriptId"`
+	CreatedAt                *int64  `json:"createdAt"`
+	UpdatedAt                *int64  `json:"updatedAt"`
 }
 
-func (p *LotteryModelMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["lotteryModelId"] = p.LotteryModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["description"] = p.Description
-    data["mode"] = p.Mode
-    data["method"] = p.Method
-    data["prizeTableName"] = p.PrizeTableName
-    data["choicePrizeTableScriptId"] = p.ChoicePrizeTableScriptId
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewLotteryModelMasterFromDict(data map[string]interface{}) LotteryModelMaster {
+	return LotteryModelMaster{
+		LotteryModelId:           core.CastString(data["lotteryModelId"]),
+		Name:                     core.CastString(data["name"]),
+		Metadata:                 core.CastString(data["metadata"]),
+		Description:              core.CastString(data["description"]),
+		Mode:                     core.CastString(data["mode"]),
+		Method:                   core.CastString(data["method"]),
+		PrizeTableName:           core.CastString(data["prizeTableName"]),
+		ChoicePrizeTableScriptId: core.CastString(data["choicePrizeTableScriptId"]),
+		CreatedAt:                core.CastInt64(data["createdAt"]),
+		UpdatedAt:                core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p LotteryModelMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"lotteryModelId":           p.LotteryModelId,
+		"name":                     p.Name,
+		"metadata":                 p.Metadata,
+		"description":              p.Description,
+		"mode":                     p.Mode,
+		"method":                   p.Method,
+		"prizeTableName":           p.PrizeTableName,
+		"choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
+		"createdAt":                p.CreatedAt,
+		"updatedAt":                p.UpdatedAt,
+	}
+}
+
+func (p LotteryModelMaster) Pointer() *LotteryModelMaster {
+	return &p
+}
+
+func CastLotteryModelMasters(data []interface{}) []LotteryModelMaster {
+	v := make([]LotteryModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewLotteryModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLotteryModelMastersFromDict(data []LotteryModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type PrizeTableMaster struct {
-    /** 排出確率テーブルマスター */
-	PrizeTableId *string   `json:"prizeTableId"`
-    /** 排出確率テーブル名 */
-	Name *string   `json:"name"`
-    /** 排出確率テーブルのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 排出確率テーブルマスターの説明 */
-	Description *string   `json:"description"`
-    /** 景品リスト */
-	Prizes []Prize   `json:"prizes"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	PrizeTableId *string `json:"prizeTableId"`
+	Name         *string `json:"name"`
+	Metadata     *string `json:"metadata"`
+	Description  *string `json:"description"`
+	Prizes       []Prize `json:"prizes"`
+	CreatedAt    *int64  `json:"createdAt"`
+	UpdatedAt    *int64  `json:"updatedAt"`
 }
 
-func (p *PrizeTableMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["prizeTableId"] = p.PrizeTableId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["description"] = p.Description
-    if p.Prizes != nil {
-        var _prizes []*map[string]interface {}
-        for _, item := range p.Prizes {
-            _prizes = append(_prizes, item.ToDict())
-        }
-        data["prizes"] = &_prizes
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewPrizeTableMasterFromDict(data map[string]interface{}) PrizeTableMaster {
+	return PrizeTableMaster{
+		PrizeTableId: core.CastString(data["prizeTableId"]),
+		Name:         core.CastString(data["name"]),
+		Metadata:     core.CastString(data["metadata"]),
+		Description:  core.CastString(data["description"]),
+		Prizes:       CastPrizes(core.CastArray(data["prizes"])),
+		CreatedAt:    core.CastInt64(data["createdAt"]),
+		UpdatedAt:    core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p PrizeTableMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"prizeTableId": p.PrizeTableId,
+		"name":         p.Name,
+		"metadata":     p.Metadata,
+		"description":  p.Description,
+		"prizes": CastPrizesFromDict(
+			p.Prizes,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p PrizeTableMaster) Pointer() *PrizeTableMaster {
+	return &p
+}
+
+func CastPrizeTableMasters(data []interface{}) []PrizeTableMaster {
+	v := make([]PrizeTableMaster, 0)
+	for _, d := range data {
+		v = append(v, NewPrizeTableMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastPrizeTableMastersFromDict(data []PrizeTableMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Box struct {
-    /** ボックス */
-	BoxId *string   `json:"boxId"`
-    /** 排出確率テーブル名 */
-	PrizeTableName *string   `json:"prizeTableName"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** 排出済み景品のインデックスのリスト */
-	DrawnIndexes []int32   `json:"drawnIndexes"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	BoxId          *string `json:"boxId"`
+	PrizeTableName *string `json:"prizeTableName"`
+	UserId         *string `json:"userId"`
+	DrawnIndexes   []int32 `json:"drawnIndexes"`
+	CreatedAt      *int64  `json:"createdAt"`
+	UpdatedAt      *int64  `json:"updatedAt"`
 }
 
-func (p *Box) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["boxId"] = p.BoxId
-    data["prizeTableName"] = p.PrizeTableName
-    data["userId"] = p.UserId
-    if p.DrawnIndexes != nil {
-        var _drawnIndexes []int32
-        for _, item := range p.DrawnIndexes {
-            _drawnIndexes = append(_drawnIndexes, item)
-        }
-        data["drawnIndexes"] = &_drawnIndexes
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewBoxFromDict(data map[string]interface{}) Box {
+	return Box{
+		BoxId:          core.CastString(data["boxId"]),
+		PrizeTableName: core.CastString(data["prizeTableName"]),
+		UserId:         core.CastString(data["userId"]),
+		DrawnIndexes:   core.CastInt32s(core.CastArray(data["drawnIndexes"])),
+		CreatedAt:      core.CastInt64(data["createdAt"]),
+		UpdatedAt:      core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Box) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"boxId":          p.BoxId,
+		"prizeTableName": p.PrizeTableName,
+		"userId":         p.UserId,
+		"drawnIndexes": core.CastInt32sFromDict(
+			p.DrawnIndexes,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p Box) Pointer() *Box {
+	return &p
+}
+
+func CastBoxes(data []interface{}) []Box {
+	v := make([]Box, 0)
+	for _, d := range data {
+		v = append(v, NewBoxFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBoxesFromDict(data []Box) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LotteryModel struct {
-    /** 抽選の種類マスター */
-	LotteryModelId *string   `json:"lotteryModelId"`
-    /** 抽選モデルの種類名 */
-	Name *string   `json:"name"`
-    /** 抽選モデルの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 抽選モード */
-	Mode *string   `json:"mode"`
-    /** 抽選方法 */
-	Method *string   `json:"method"`
-    /** 景品テーブルの名前 */
-	PrizeTableName *string   `json:"prizeTableName"`
-    /** 抽選テーブルを確定するスクリプト のGRN */
-	ChoicePrizeTableScriptId *string   `json:"choicePrizeTableScriptId"`
+	LotteryModelId           *string `json:"lotteryModelId"`
+	Name                     *string `json:"name"`
+	Metadata                 *string `json:"metadata"`
+	Mode                     *string `json:"mode"`
+	Method                   *string `json:"method"`
+	PrizeTableName           *string `json:"prizeTableName"`
+	ChoicePrizeTableScriptId *string `json:"choicePrizeTableScriptId"`
 }
 
-func (p *LotteryModel) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["lotteryModelId"] = p.LotteryModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["mode"] = p.Mode
-    data["method"] = p.Method
-    data["prizeTableName"] = p.PrizeTableName
-    data["choicePrizeTableScriptId"] = p.ChoicePrizeTableScriptId
-    return &data
+func NewLotteryModelFromDict(data map[string]interface{}) LotteryModel {
+	return LotteryModel{
+		LotteryModelId:           core.CastString(data["lotteryModelId"]),
+		Name:                     core.CastString(data["name"]),
+		Metadata:                 core.CastString(data["metadata"]),
+		Mode:                     core.CastString(data["mode"]),
+		Method:                   core.CastString(data["method"]),
+		PrizeTableName:           core.CastString(data["prizeTableName"]),
+		ChoicePrizeTableScriptId: core.CastString(data["choicePrizeTableScriptId"]),
+	}
+}
+
+func (p LotteryModel) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"lotteryModelId":           p.LotteryModelId,
+		"name":                     p.Name,
+		"metadata":                 p.Metadata,
+		"mode":                     p.Mode,
+		"method":                   p.Method,
+		"prizeTableName":           p.PrizeTableName,
+		"choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
+	}
+}
+
+func (p LotteryModel) Pointer() *LotteryModel {
+	return &p
+}
+
+func CastLotteryModels(data []interface{}) []LotteryModel {
+	v := make([]LotteryModel, 0)
+	for _, d := range data {
+		v = append(v, NewLotteryModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLotteryModelsFromDict(data []LotteryModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type PrizeTable struct {
-    /** 排出確率テーブルマスター */
-	PrizeTableId *string   `json:"prizeTableId"`
-    /** 景品テーブル名 */
-	Name *string   `json:"name"`
-    /** 景品テーブルのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 景品リスト */
-	Prizes []Prize   `json:"prizes"`
+	PrizeTableId *string `json:"prizeTableId"`
+	Name         *string `json:"name"`
+	Metadata     *string `json:"metadata"`
+	Prizes       []Prize `json:"prizes"`
 }
 
-func (p *PrizeTable) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["prizeTableId"] = p.PrizeTableId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    if p.Prizes != nil {
-        var _prizes []*map[string]interface {}
-        for _, item := range p.Prizes {
-            _prizes = append(_prizes, item.ToDict())
-        }
-        data["prizes"] = &_prizes
-    }
-    return &data
+func NewPrizeTableFromDict(data map[string]interface{}) PrizeTable {
+	return PrizeTable{
+		PrizeTableId: core.CastString(data["prizeTableId"]),
+		Name:         core.CastString(data["name"]),
+		Metadata:     core.CastString(data["metadata"]),
+		Prizes:       CastPrizes(core.CastArray(data["prizes"])),
+	}
+}
+
+func (p PrizeTable) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"prizeTableId": p.PrizeTableId,
+		"name":         p.Name,
+		"metadata":     p.Metadata,
+		"prizes": CastPrizesFromDict(
+			p.Prizes,
+		),
+	}
+}
+
+func (p PrizeTable) Pointer() *PrizeTable {
+	return &p
+}
+
+func CastPrizeTables(data []interface{}) []PrizeTable {
+	v := make([]PrizeTable, 0)
+	for _, d := range data {
+		v = append(v, NewPrizeTableFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastPrizeTablesFromDict(data []PrizeTable) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Probability struct {
-    /** 景品の種類 */
-	Prize *DrawnPrize   `json:"prize"`
-    /** 排出確率(0.0〜1.0) */
-	Rate *float32   `json:"rate"`
+	Prize *DrawnPrize `json:"prize"`
+	Rate  *float32    `json:"rate"`
 }
 
-func (p *Probability) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Prize != nil {
-        data["prize"] = *p.Prize.ToDict()
-    }
-    data["rate"] = p.Rate
-    return &data
+func NewProbabilityFromDict(data map[string]interface{}) Probability {
+	return Probability{
+		Prize: NewDrawnPrizeFromDict(core.CastMap(data["prize"])).Pointer(),
+		Rate:  core.CastFloat32(data["rate"]),
+	}
+}
+
+func (p Probability) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"prize": p.Prize.ToDict(),
+		"rate":  p.Rate,
+	}
+}
+
+func (p Probability) Pointer() *Probability {
+	return &p
+}
+
+func CastProbabilities(data []interface{}) []Probability {
+	v := make([]Probability, 0)
+	for _, d := range data {
+		v = append(v, NewProbabilityFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastProbabilitiesFromDict(data []Probability) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CurrentLotteryMaster struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** マスターデータ */
-	Settings *string   `json:"settings"`
+	NamespaceId *string `json:"namespaceId"`
+	Settings    *string `json:"settings"`
 }
 
-func (p *CurrentLotteryMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["settings"] = p.Settings
-    return &data
+func NewCurrentLotteryMasterFromDict(data map[string]interface{}) CurrentLotteryMaster {
+	return CurrentLotteryMaster{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Settings:    core.CastString(data["settings"]),
+	}
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func (p CurrentLotteryMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId": p.NamespaceId,
+		"settings":    p.Settings,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func (p CurrentLotteryMaster) Pointer() *CurrentLotteryMaster {
+	return &p
+}
+
+func CastCurrentLotteryMasters(data []interface{}) []CurrentLotteryMaster {
+	v := make([]CurrentLotteryMaster, 0)
+	for _, d := range data {
+		v = append(v, NewCurrentLotteryMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCurrentLotteryMastersFromDict(data []CurrentLotteryMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GitHubCheckoutSetting struct {
-    /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	ApiKeyId *string   `json:"apiKeyId"`
-    /** リポジトリ名 */
-	RepositoryName *string   `json:"repositoryName"`
-    /** ソースコードのファイルパス */
-	SourcePath *string   `json:"sourcePath"`
-    /** コードの取得元 */
-	ReferenceType *string   `json:"referenceType"`
-    /** コミットハッシュ */
-	CommitHash *string   `json:"commitHash"`
-    /** ブランチ名 */
-	BranchName *string   `json:"branchName"`
-    /** タグ名 */
-	TagName *string   `json:"tagName"`
+	ApiKeyId       *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath     *string `json:"sourcePath"`
+	ReferenceType  *string `json:"referenceType"`
+	CommitHash     *string `json:"commitHash"`
+	BranchName     *string `json:"branchName"`
+	TagName        *string `json:"tagName"`
 }
 
-func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["apiKeyId"] = p.ApiKeyId
-    data["repositoryName"] = p.RepositoryName
-    data["sourcePath"] = p.SourcePath
-    data["referenceType"] = p.ReferenceType
-    data["commitHash"] = p.CommitHash
-    data["branchName"] = p.BranchName
-    data["tagName"] = p.TagName
-    return &data
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+	return GitHubCheckoutSetting{
+		ApiKeyId:       core.CastString(data["apiKeyId"]),
+		RepositoryName: core.CastString(data["repositoryName"]),
+		SourcePath:     core.CastString(data["sourcePath"]),
+		ReferenceType:  core.CastString(data["referenceType"]),
+		CommitHash:     core.CastString(data["commitHash"]),
+		BranchName:     core.CastString(data["branchName"]),
+		TagName:        core.CastString(data["tagName"]),
+	}
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"apiKeyId":       p.ApiKeyId,
+		"repositoryName": p.RepositoryName,
+		"sourcePath":     p.SourcePath,
+		"referenceType":  p.ReferenceType,
+		"commitHash":     p.CommitHash,
+		"branchName":     p.BranchName,
+		"tagName":        p.TagName,
+	}
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+	return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Prize struct {
-    /** 景品ID */
-	PrizeId *string   `json:"prizeId"`
-    /** 景品の種類 */
-	Type *string   `json:"type"`
-    /** 景品の入手アクションリスト */
-	AcquireActions []AcquireAction   `json:"acquireActions"`
-    /** 排出確率テーブルの名前 */
-	PrizeTableName *string   `json:"prizeTableName"`
-    /** 排出重み */
-	Weight *int32   `json:"weight"`
+	PrizeId        *string         `json:"prizeId"`
+	Type           *string         `json:"type"`
+	AcquireActions []AcquireAction `json:"acquireActions"`
+	PrizeTableName *string         `json:"prizeTableName"`
+	Weight         *int32          `json:"weight"`
 }
 
-func (p *Prize) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["prizeId"] = p.PrizeId
-    data["type"] = p.Type
-    if p.AcquireActions != nil {
-        var _acquireActions []*map[string]interface {}
-        for _, item := range p.AcquireActions {
-            _acquireActions = append(_acquireActions, item.ToDict())
-        }
-        data["acquireActions"] = &_acquireActions
-    }
-    data["prizeTableName"] = p.PrizeTableName
-    data["weight"] = p.Weight
-    return &data
+func NewPrizeFromDict(data map[string]interface{}) Prize {
+	return Prize{
+		PrizeId:        core.CastString(data["prizeId"]),
+		Type:           core.CastString(data["type"]),
+		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+		PrizeTableName: core.CastString(data["prizeTableName"]),
+		Weight:         core.CastInt32(data["weight"]),
+	}
+}
+
+func (p Prize) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"prizeId": p.PrizeId,
+		"type":    p.Type,
+		"acquireActions": CastAcquireActionsFromDict(
+			p.AcquireActions,
+		),
+		"prizeTableName": p.PrizeTableName,
+		"weight":         p.Weight,
+	}
+}
+
+func (p Prize) Pointer() *Prize {
+	return &p
+}
+
+func CastPrizes(data []interface{}) []Prize {
+	v := make([]Prize, 0)
+	for _, d := range data {
+		v = append(v, NewPrizeFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastPrizesFromDict(data []Prize) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type AcquireAction struct {
-    /** スタンプシートで実行するアクションの種類 */
-	Action *string   `json:"action"`
-    /** 入手リクエストのJSON */
-	Request *string   `json:"request"`
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
 }
 
-func (p *AcquireAction) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["action"] = p.Action
-    data["request"] = p.Request
-    return &data
+func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
+	return AcquireAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p AcquireAction) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"action":  p.Action,
+		"request": p.Request,
+	}
+}
+
+func (p AcquireAction) Pointer() *AcquireAction {
+	return &p
+}
+
+func CastAcquireActions(data []interface{}) []AcquireAction {
+	v := make([]AcquireAction, 0)
+	for _, d := range data {
+		v = append(v, NewAcquireActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type DrawnPrize struct {
-    /** 入手アクションのリスト */
-	AcquireActions []AcquireAction   `json:"acquireActions"`
+	AcquireActions []AcquireAction `json:"acquireActions"`
 }
 
-func (p *DrawnPrize) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.AcquireActions != nil {
-        var _acquireActions []*map[string]interface {}
-        for _, item := range p.AcquireActions {
-            _acquireActions = append(_acquireActions, item.ToDict())
-        }
-        data["acquireActions"] = &_acquireActions
-    }
-    return &data
+func NewDrawnPrizeFromDict(data map[string]interface{}) DrawnPrize {
+	return DrawnPrize{
+		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+	}
+}
+
+func (p DrawnPrize) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"acquireActions": CastAcquireActionsFromDict(
+			p.AcquireActions,
+		),
+	}
+}
+
+func (p DrawnPrize) Pointer() *DrawnPrize {
+	return &p
+}
+
+func CastDrawnPrizes(data []interface{}) []DrawnPrize {
+	v := make([]DrawnPrize, 0)
+	for _, d := range data {
+		v = append(v, NewDrawnPrizeFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastDrawnPrizesFromDict(data []DrawnPrize) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type BoxItem struct {
-    /** 入手アクションのリスト */
-	AcquireActions []AcquireAction   `json:"acquireActions"`
-    /** 残り数量 */
-	Remaining *int32   `json:"remaining"`
-    /** 初期数量 */
-	Initial *int32   `json:"initial"`
+	AcquireActions []AcquireAction `json:"acquireActions"`
+	Remaining      *int32          `json:"remaining"`
+	Initial        *int32          `json:"initial"`
 }
 
-func (p *BoxItem) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.AcquireActions != nil {
-        var _acquireActions []*map[string]interface {}
-        for _, item := range p.AcquireActions {
-            _acquireActions = append(_acquireActions, item.ToDict())
-        }
-        data["acquireActions"] = &_acquireActions
-    }
-    data["remaining"] = p.Remaining
-    data["initial"] = p.Initial
-    return &data
+func NewBoxItemFromDict(data map[string]interface{}) BoxItem {
+	return BoxItem{
+		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+		Remaining:      core.CastInt32(data["remaining"]),
+		Initial:        core.CastInt32(data["initial"]),
+	}
+}
+
+func (p BoxItem) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"acquireActions": CastAcquireActionsFromDict(
+			p.AcquireActions,
+		),
+		"remaining": p.Remaining,
+		"initial":   p.Initial,
+	}
+}
+
+func (p BoxItem) Pointer() *BoxItem {
+	return &p
+}
+
+func CastBoxItems(data []interface{}) []BoxItem {
+	v := make([]BoxItem, 0)
+	for _, d := range data {
+		v = append(v, NewBoxItemFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBoxItemsFromDict(data []BoxItem) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type BoxItems struct {
-    /** ボックス */
-	BoxId *string   `json:"boxId"`
-    /** 排出確率テーブル名 */
+	BoxId          *string   `json:"boxId"`
 	PrizeTableName *string   `json:"prizeTableName"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** ボックスから取り出したアイテムのリスト */
-	Items []BoxItem   `json:"items"`
+	UserId         *string   `json:"userId"`
+	Items          []BoxItem `json:"items"`
 }
 
-func (p *BoxItems) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["boxId"] = p.BoxId
-    data["prizeTableName"] = p.PrizeTableName
-    data["userId"] = p.UserId
-    if p.Items != nil {
-        var _items []*map[string]interface {}
-        for _, item := range p.Items {
-            _items = append(_items, item.ToDict())
-        }
-        data["items"] = &_items
-    }
-    return &data
+func NewBoxItemsFromDict(data map[string]interface{}) BoxItems {
+	return BoxItems{
+		BoxId:          core.CastString(data["boxId"]),
+		PrizeTableName: core.CastString(data["prizeTableName"]),
+		UserId:         core.CastString(data["userId"]),
+		Items:          CastBoxItems(core.CastArray(data["items"])),
+	}
+}
+
+func (p BoxItems) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"boxId":          p.BoxId,
+		"prizeTableName": p.PrizeTableName,
+		"userId":         p.UserId,
+		"items": CastBoxItemsFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p BoxItems) Pointer() *BoxItems {
+	return &p
+}
+
+func CastBoxItemses(data []interface{}) []BoxItems {
+	v := make([]BoxItems, 0)
+	for _, d := range data {
+		v = append(v, NewBoxItemsFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBoxItemsesFromDict(data []BoxItems) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Config struct {
-    /** 名前 */
-	Key *string   `json:"key"`
-    /** 値 */
-	Value *string   `json:"value"`
+	Key   *string `json:"key"`
+	Value *string `json:"value"`
 }
 
-func (p *Config) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["key"] = p.Key
-    data["value"] = p.Value
-    return &data
+func NewConfigFromDict(data map[string]interface{}) Config {
+	return Config{
+		Key:   core.CastString(data["key"]),
+		Value: core.CastString(data["value"]),
+	}
+}
+
+func (p Config) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"key":   p.Key,
+		"value": p.Value,
+	}
+}
+
+func (p Config) Pointer() *Config {
+	return &p
+}
+
+func CastConfigs(data []interface{}) []Config {
+	v := make([]Config, 0)
+	for _, d := range data {
+		v = append(v, NewConfigFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastConfigsFromDict(data []Config) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

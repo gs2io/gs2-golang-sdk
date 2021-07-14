@@ -16,83 +16,277 @@ permissions and limitations under the License.
 
 package realtime
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
+import "core"
 
 type DescribeNamespacesRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	PageToken *string	`json:"pageToken"`
-	Limit *int64	`json:"limit"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
+    return DescribeNamespacesRequest {
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeNamespacesRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
+    return &p
 }
 
 type CreateNamespaceRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	Name *string	`json:"name"`
-	Description *string	`json:"description"`
-	ServerType *string	`json:"serverType"`
-	ServerSpec *string	`json:"serverSpec"`
-	CreateNotification *NotificationSetting	`json:"createNotification"`
-	LogSetting *LogSetting	`json:"logSetting"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    Name *string `json:"name"`
+    Description *string `json:"description"`
+    ServerType *string `json:"serverType"`
+    ServerSpec *string `json:"serverSpec"`
+    CreateNotification *NotificationSetting `json:"createNotification"`
+    LogSetting *LogSetting `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
+    return CreateNamespaceRequest {
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        ServerType: core.CastString(data["serverType"]),
+        ServerSpec: core.CastString(data["serverSpec"]),
+        CreateNotification: NewNotificationSettingFromDict(core.CastMap(data["createNotification"])).Pointer(),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+    }
+}
+
+func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "name": p.Name,
+        "description": p.Description,
+        "serverType": p.ServerType,
+        "serverSpec": p.ServerSpec,
+        "createNotification": p.CreateNotification.ToDict(),
+        "logSetting": p.LogSetting.ToDict(),
+    }
+}
+
+func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
+    return &p
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
+    return GetNamespaceStatusRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
+}
+
+func (p GetNamespaceStatusRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
+}
+
+func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
+    return &p
 }
 
 type GetNamespaceRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
+    return GetNamespaceRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
+}
+
+func (p GetNamespaceRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
+}
+
+func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
+    return &p
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	Description *string	`json:"description"`
-	ServerType *string	`json:"serverType"`
-	ServerSpec *string	`json:"serverSpec"`
-	CreateNotification *NotificationSetting	`json:"createNotification"`
-	LogSetting *LogSetting	`json:"logSetting"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Description *string `json:"description"`
+    ServerType *string `json:"serverType"`
+    ServerSpec *string `json:"serverSpec"`
+    CreateNotification *NotificationSetting `json:"createNotification"`
+    LogSetting *LogSetting `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
+    return UpdateNamespaceRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Description: core.CastString(data["description"]),
+        ServerType: core.CastString(data["serverType"]),
+        ServerSpec: core.CastString(data["serverSpec"]),
+        CreateNotification: NewNotificationSettingFromDict(core.CastMap(data["createNotification"])).Pointer(),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+    }
+}
+
+func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "description": p.Description,
+        "serverType": p.ServerType,
+        "serverSpec": p.ServerSpec,
+        "createNotification": p.CreateNotification.ToDict(),
+        "logSetting": p.LogSetting.ToDict(),
+    }
+}
+
+func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
+    return &p
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+}
+
+func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
+    return DeleteNamespaceRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
+}
+
+func (p DeleteNamespaceRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
+}
+
+func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
+    return &p
 }
 
 type DescribeRoomsRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	PageToken *string	`json:"pageToken"`
-	Limit *int64	`json:"limit"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeRoomsRequestFromDict(data map[string]interface{}) DescribeRoomsRequest {
+    return DescribeRoomsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeRoomsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeRoomsRequest) Pointer() *DescribeRoomsRequest {
+    return &p
 }
 
 type WantRoomRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	Name *string	`json:"name"`
-	NotificationUserIds []string	`json:"notificationUserIds"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Name *string `json:"name"`
+    NotificationUserIds []string `json:"notificationUserIds"`
+}
+
+func NewWantRoomRequestFromDict(data map[string]interface{}) WantRoomRequest {
+    return WantRoomRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Name: core.CastString(data["name"]),
+        NotificationUserIds: core.CastStrings(core.CastArray(data["notificationUserIds"])),
+    }
+}
+
+func (p WantRoomRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "name": p.Name,
+        "notificationUserIds": core.CastStringsFromDict(
+            p.NotificationUserIds,
+        ),
+    }
+}
+
+func (p WantRoomRequest) Pointer() *WantRoomRequest {
+    return &p
 }
 
 type GetRoomRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	RoomName *string	`json:"roomName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RoomName *string `json:"roomName"`
+}
+
+func NewGetRoomRequestFromDict(data map[string]interface{}) GetRoomRequest {
+    return GetRoomRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RoomName: core.CastString(data["roomName"]),
+    }
+}
+
+func (p GetRoomRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "roomName": p.RoomName,
+    }
+}
+
+func (p GetRoomRequest) Pointer() *GetRoomRequest {
+    return &p
 }
 
 type DeleteRoomRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	RoomName *string	`json:"roomName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RoomName *string `json:"roomName"`
+}
+
+func NewDeleteRoomRequestFromDict(data map[string]interface{}) DeleteRoomRequest {
+    return DeleteRoomRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RoomName: core.CastString(data["roomName"]),
+    }
+}
+
+func (p DeleteRoomRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "roomName": p.RoomName,
+    }
+}
+
+func (p DeleteRoomRequest) Pointer() *DeleteRoomRequest {
+    return &p
 }

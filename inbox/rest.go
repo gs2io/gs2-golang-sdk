@@ -18,7 +18,7 @@ package inbox
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -842,9 +842,9 @@ func (p Gs2InboxRestClient) SendMessageByUserIdAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.ReadAcquireActions != nil {
-        var _readAcquireActions []*map[string]interface {}
+        var _readAcquireActions []interface {}
         for _, item := range request.ReadAcquireActions {
-            _readAcquireActions = append(_readAcquireActions, item.ToDict())
+            _readAcquireActions = append(_readAcquireActions, item)
         }
         bodies["readAcquireActions"] = _readAcquireActions
     }
@@ -1118,7 +1118,7 @@ func (p Gs2InboxRestClient) ReceiveGlobalMessageAsync(
 	request *ReceiveGlobalMessageRequest,
 	callback chan<- ReceiveGlobalMessageAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/{messageName}/globalMessage/receive"
+	path := "/{namespaceName}/user/me/message/globalMessage/receive"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -1208,7 +1208,7 @@ func (p Gs2InboxRestClient) ReceiveGlobalMessageByUserIdAsync(
 	request *ReceiveGlobalMessageByUserIdRequest,
 	callback chan<- ReceiveGlobalMessageByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/{messageName}/globalMessage/receive"
+	path := "/{namespaceName}/user/{userId}/message/globalMessage/receive"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -1507,9 +1507,9 @@ func (p Gs2InboxRestClient) ReadMessageAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -1614,9 +1614,9 @@ func (p Gs2InboxRestClient) ReadMessageByUserIdAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.Config != nil {
-        var _config []*map[string]interface {}
+        var _config []interface {}
         for _, item := range request.Config {
-            _config = append(_config, item.ToDict())
+            _config = append(_config, item)
         }
         bodies["config"] = _config
     }
@@ -2426,9 +2426,9 @@ func (p Gs2InboxRestClient) CreateGlobalMessageMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.ReadAcquireActions != nil {
-        var _readAcquireActions []*map[string]interface {}
+        var _readAcquireActions []interface {}
         for _, item := range request.ReadAcquireActions {
-            _readAcquireActions = append(_readAcquireActions, item.ToDict())
+            _readAcquireActions = append(_readAcquireActions, item)
         }
         bodies["readAcquireActions"] = _readAcquireActions
     }
@@ -2623,9 +2623,9 @@ func (p Gs2InboxRestClient) UpdateGlobalMessageMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.ReadAcquireActions != nil {
-        var _readAcquireActions []*map[string]interface {}
+        var _readAcquireActions []interface {}
         for _, item := range request.ReadAcquireActions {
-            _readAcquireActions = append(_readAcquireActions, item.ToDict())
+            _readAcquireActions = append(_readAcquireActions, item)
         }
         bodies["readAcquireActions"] = _readAcquireActions
     }
@@ -3079,7 +3079,7 @@ func (p Gs2InboxRestClient) UpdateReceivedByUserIdAsync(
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
     if request.ReceivedGlobalMessageNames != nil {
-        var _receivedGlobalMessageNames []string
+        var _receivedGlobalMessageNames []interface {}
         for _, item := range request.ReceivedGlobalMessageNames {
             _receivedGlobalMessageNames = append(_receivedGlobalMessageNames, item)
         }

@@ -19,7 +19,7 @@ package version
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2VersionWebSocketClient struct {
@@ -1213,6 +1213,9 @@ func (p Gs2VersionWebSocketClient) DescribeAcceptVersionsAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -1392,6 +1395,9 @@ func (p Gs2VersionWebSocketClient) AcceptAsync(
     if request.VersionName != nil && *request.VersionName != "" {
         bodies["versionName"] = *request.VersionName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -1558,6 +1564,9 @@ func (p Gs2VersionWebSocketClient) GetAcceptVersionAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.VersionName != nil && *request.VersionName != "" {
         bodies["versionName"] = *request.VersionName
@@ -1729,6 +1738,9 @@ func (p Gs2VersionWebSocketClient) DeleteAcceptVersionAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.VersionName != nil && *request.VersionName != "" {
         bodies["versionName"] = *request.VersionName
     }
@@ -1899,10 +1911,13 @@ func (p Gs2VersionWebSocketClient) CheckVersionAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.TargetVersions != nil {
-        var _targetVersions []*map[string]interface {}
+        var _targetVersions []interface {}
         for _, item := range request.TargetVersions {
-            _targetVersions = append(_targetVersions, item.ToDict())
+            _targetVersions = append(_targetVersions, item)
         }
         bodies["targetVersions"] = _targetVersions
     }
@@ -1992,9 +2007,9 @@ func (p Gs2VersionWebSocketClient) CheckVersionByUserIdAsync(
         bodies["userId"] = *request.UserId
     }
     if request.TargetVersions != nil {
-        var _targetVersions []*map[string]interface {}
+        var _targetVersions []interface {}
         for _, item := range request.TargetVersions {
-            _targetVersions = append(_targetVersions, item.ToDict())
+            _targetVersions = append(_targetVersions, item)
         }
         bodies["targetVersions"] = _targetVersions
     }

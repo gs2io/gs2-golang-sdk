@@ -16,194 +16,413 @@ permissions and limitations under the License.
 
 package distributor
 
+import "core"
+
 type Namespace struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** ネームスペース名 */
-	Name *string   `json:"name"`
-    /** ネームスペースの説明 */
-	Description *string   `json:"description"`
-    /** リソース溢れ処理に使用する ユーザ のGRN */
-	AssumeUserId *string   `json:"assumeUserId"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId *string `json:"namespaceId"`
+	Name *string `json:"name"`
+	Description *string `json:"description"`
+	AssumeUserId *string `json:"assumeUserId"`
+	LogSetting *LogSetting `json:"logSetting"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["assumeUserId"] = p.AssumeUserId
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+    return Namespace {
+        NamespaceId: core.CastString(data["namespaceId"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        AssumeUserId: core.CastString(data["assumeUserId"]),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
     }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceId": p.NamespaceId,
+        "name": p.Name,
+        "description": p.Description,
+        "assumeUserId": p.AssumeUserId,
+        "logSetting": p.LogSetting.ToDict(),
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
+}
+
+func (p Namespace) Pointer() *Namespace {
+    return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type DistributorModelMaster struct {
-    /** 配信設定マスター */
-	DistributorModelId *string   `json:"distributorModelId"`
-    /** 配信設定名 */
-	Name *string   `json:"name"`
-    /** 配信設定マスターの説明 */
-	Description *string   `json:"description"`
-    /** 配信設定のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 所持品がキャパシティをオーバーしたときに転送するプレゼントボックスのネームスペース のGRN */
-	InboxNamespaceId *string   `json:"inboxNamespaceId"`
-    /** ディストリビューターを通して処理出来る対象のリソースGRNのホワイトリスト */
-	WhiteListTargetIds []string   `json:"whiteListTargetIds"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	DistributorModelId *string `json:"distributorModelId"`
+	Name *string `json:"name"`
+	Description *string `json:"description"`
+	Metadata *string `json:"metadata"`
+	InboxNamespaceId *string `json:"inboxNamespaceId"`
+	WhiteListTargetIds []string `json:"whiteListTargetIds"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
-func (p *DistributorModelMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["distributorModelId"] = p.DistributorModelId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["metadata"] = p.Metadata
-    data["inboxNamespaceId"] = p.InboxNamespaceId
-    if p.WhiteListTargetIds != nil {
-        var _whiteListTargetIds []string
-        for _, item := range p.WhiteListTargetIds {
-            _whiteListTargetIds = append(_whiteListTargetIds, item)
-        }
-        data["whiteListTargetIds"] = &_whiteListTargetIds
+func NewDistributorModelMasterFromDict(data map[string]interface{}) DistributorModelMaster {
+    return DistributorModelMaster {
+        DistributorModelId: core.CastString(data["distributorModelId"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        InboxNamespaceId: core.CastString(data["inboxNamespaceId"]),
+        WhiteListTargetIds: core.CastStrings(core.CastArray(data["whiteListTargetIds"])),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
     }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+}
+
+func (p DistributorModelMaster) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "distributorModelId": p.DistributorModelId,
+        "name": p.Name,
+        "description": p.Description,
+        "metadata": p.Metadata,
+        "inboxNamespaceId": p.InboxNamespaceId,
+        "whiteListTargetIds": core.CastStringsFromDict(
+        p.WhiteListTargetIds,
+    ),
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
+}
+
+func (p DistributorModelMaster) Pointer() *DistributorModelMaster {
+    return &p
+}
+
+func CastDistributorModelMasters(data []interface{}) []DistributorModelMaster {
+	v := make([]DistributorModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewDistributorModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastDistributorModelMastersFromDict(data []DistributorModelMaster) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type DistributorModel struct {
-    /** 配信設定 */
-	DistributorModelId *string   `json:"distributorModelId"`
-    /** ディストリビューターの種類名 */
-	Name *string   `json:"name"`
-    /** ディストリビューターの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 所持品がキャパシティをオーバーしたときに転送するプレゼントボックスのネームスペース のGRN */
-	InboxNamespaceId *string   `json:"inboxNamespaceId"`
-    /** ディストリビューターを通して処理出来る対象のリソースGRNのホワイトリスト */
-	WhiteListTargetIds []string   `json:"whiteListTargetIds"`
+	DistributorModelId *string `json:"distributorModelId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	InboxNamespaceId *string `json:"inboxNamespaceId"`
+	WhiteListTargetIds []string `json:"whiteListTargetIds"`
 }
 
-func (p *DistributorModel) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["distributorModelId"] = p.DistributorModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["inboxNamespaceId"] = p.InboxNamespaceId
-    if p.WhiteListTargetIds != nil {
-        var _whiteListTargetIds []string
-        for _, item := range p.WhiteListTargetIds {
-            _whiteListTargetIds = append(_whiteListTargetIds, item)
-        }
-        data["whiteListTargetIds"] = &_whiteListTargetIds
+func NewDistributorModelFromDict(data map[string]interface{}) DistributorModel {
+    return DistributorModel {
+        DistributorModelId: core.CastString(data["distributorModelId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        InboxNamespaceId: core.CastString(data["inboxNamespaceId"]),
+        WhiteListTargetIds: core.CastStrings(core.CastArray(data["whiteListTargetIds"])),
     }
-    return &data
+}
+
+func (p DistributorModel) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "distributorModelId": p.DistributorModelId,
+        "name": p.Name,
+        "metadata": p.Metadata,
+        "inboxNamespaceId": p.InboxNamespaceId,
+        "whiteListTargetIds": core.CastStringsFromDict(
+        p.WhiteListTargetIds,
+    ),
+    }
+}
+
+func (p DistributorModel) Pointer() *DistributorModel {
+    return &p
+}
+
+func CastDistributorModels(data []interface{}) []DistributorModel {
+	v := make([]DistributorModel, 0)
+	for _, d := range data {
+		v = append(v, NewDistributorModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastDistributorModelsFromDict(data []DistributorModel) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type CurrentDistributorMaster struct {
-    /** 現在有効な配信設定 */
-	NamespaceId *string   `json:"namespaceId"`
-    /** マスターデータ */
-	Settings *string   `json:"settings"`
+	NamespaceId *string `json:"namespaceId"`
+	Settings *string `json:"settings"`
 }
 
-func (p *CurrentDistributorMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["settings"] = p.Settings
-    return &data
+func NewCurrentDistributorMasterFromDict(data map[string]interface{}) CurrentDistributorMaster {
+    return CurrentDistributorMaster {
+        NamespaceId: core.CastString(data["namespaceId"]),
+        Settings: core.CastString(data["settings"]),
+    }
+}
+
+func (p CurrentDistributorMaster) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceId": p.NamespaceId,
+        "settings": p.Settings,
+    }
+}
+
+func (p CurrentDistributorMaster) Pointer() *CurrentDistributorMaster {
+    return &p
+}
+
+func CastCurrentDistributorMasters(data []interface{}) []CurrentDistributorMaster {
+	v := make([]CurrentDistributorMaster, 0)
+	for _, d := range data {
+		v = append(v, NewCurrentDistributorMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCurrentDistributorMastersFromDict(data []CurrentDistributorMaster) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type Distribute struct {
+}
+
+func NewDistributeFromDict(data map[string]interface{}) Distribute {
+    return Distribute {
+    }
+}
+
+func (p Distribute) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+    }
+}
+
+func (p Distribute) Pointer() *Distribute {
+    return &p
+}
+
+func CastDistributes(data []interface{}) []Distribute {
+	v := make([]Distribute, 0)
+	for _, d := range data {
+		v = append(v, NewDistributeFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastDistributesFromDict(data []Distribute) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+	Region *string `json:"region"`
+	ResponseCacheId *string `json:"responseCacheId"`
+	RequestHash *string `json:"requestHash"`
+	Result *string `json:"result"`
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func NewResponseCacheFromDict(data map[string]interface{}) ResponseCache {
+    return ResponseCache {
+        Region: core.CastString(data["region"]),
+        ResponseCacheId: core.CastString(data["responseCacheId"]),
+        RequestHash: core.CastString(data["requestHash"]),
+        Result: core.CastString(data["result"]),
+    }
+}
+
+func (p ResponseCache) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "region": p.Region,
+        "responseCacheId": p.ResponseCacheId,
+        "requestHash": p.RequestHash,
+        "result": p.Result,
+    }
+}
+
+func (p ResponseCache) Pointer() *ResponseCache {
+    return &p
+}
+
+func CastResponseCaches(data []interface{}) []ResponseCache {
+	v := make([]ResponseCache, 0)
+	for _, d := range data {
+		v = append(v, NewResponseCacheFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastResponseCachesFromDict(data []ResponseCache) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type GitHubCheckoutSetting struct {
-    /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	ApiKeyId *string   `json:"apiKeyId"`
-    /** リポジトリ名 */
-	RepositoryName *string   `json:"repositoryName"`
-    /** ソースコードのファイルパス */
-	SourcePath *string   `json:"sourcePath"`
-    /** コードの取得元 */
-	ReferenceType *string   `json:"referenceType"`
-    /** コミットハッシュ */
-	CommitHash *string   `json:"commitHash"`
-    /** ブランチ名 */
-	BranchName *string   `json:"branchName"`
-    /** タグ名 */
-	TagName *string   `json:"tagName"`
+	ApiKeyId *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath *string `json:"sourcePath"`
+	ReferenceType *string `json:"referenceType"`
+	CommitHash *string `json:"commitHash"`
+	BranchName *string `json:"branchName"`
+	TagName *string `json:"tagName"`
 }
 
-func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["apiKeyId"] = p.ApiKeyId
-    data["repositoryName"] = p.RepositoryName
-    data["sourcePath"] = p.SourcePath
-    data["referenceType"] = p.ReferenceType
-    data["commitHash"] = p.CommitHash
-    data["branchName"] = p.BranchName
-    data["tagName"] = p.TagName
-    return &data
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+    return GitHubCheckoutSetting {
+        ApiKeyId: core.CastString(data["apiKeyId"]),
+        RepositoryName: core.CastString(data["repositoryName"]),
+        SourcePath: core.CastString(data["sourcePath"]),
+        ReferenceType: core.CastString(data["referenceType"]),
+        CommitHash: core.CastString(data["commitHash"]),
+        BranchName: core.CastString(data["branchName"]),
+        TagName: core.CastString(data["tagName"]),
+    }
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "apiKeyId": p.ApiKeyId,
+        "repositoryName": p.RepositoryName,
+        "sourcePath": p.SourcePath,
+        "referenceType": p.ReferenceType,
+        "commitHash": p.CommitHash,
+        "branchName": p.BranchName,
+        "tagName": p.TagName,
+    }
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+    return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type DistributeResource struct {
-    /** スタンプシートで実行するアクションの種類 */
-	Action *string   `json:"action"`
-    /** 加算リクエストのJSON */
-	Request *string   `json:"request"`
+	Action *string `json:"action"`
+	Request *string `json:"request"`
 }
 
-func (p *DistributeResource) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["action"] = p.Action
-    data["request"] = p.Request
-    return &data
+func NewDistributeResourceFromDict(data map[string]interface{}) DistributeResource {
+    return DistributeResource {
+        Action: core.CastString(data["action"]),
+        Request: core.CastString(data["request"]),
+    }
+}
+
+func (p DistributeResource) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "action": p.Action,
+        "request": p.Request,
+    }
+}
+
+func (p DistributeResource) Pointer() *DistributeResource {
+    return &p
+}
+
+func CastDistributeResources(data []interface{}) []DistributeResource {
+	v := make([]DistributeResource, 0)
+	for _, d := range data {
+		v = append(v, NewDistributeResourceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastDistributeResourcesFromDict(data []DistributeResource) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+    return LogSetting {
+        LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+    }
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "loggingNamespaceId": p.LoggingNamespaceId,
+    }
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+    return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }

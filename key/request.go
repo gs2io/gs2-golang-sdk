@@ -16,143 +16,487 @@ permissions and limitations under the License.
 
 package key
 
-import (
-	"github.com/gs2io/gs2-golang-sdk/core"
-)
+import "core"
 
 type DescribeNamespacesRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	PageToken *string	`json:"pageToken"`
-	Limit *int64	`json:"limit"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
+    return DescribeNamespacesRequest {
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeNamespacesRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
+    return &p
 }
 
 type CreateNamespaceRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	Name *string	`json:"name"`
-	Description *string	`json:"description"`
-	LogSetting *LogSetting	`json:"logSetting"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    Name *string `json:"name"`
+    Description *string `json:"description"`
+    LogSetting *LogSetting `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
+    return CreateNamespaceRequest {
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+    }
+}
+
+func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "name": p.Name,
+        "description": p.Description,
+        "logSetting": p.LogSetting.ToDict(),
+    }
+}
+
+func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
+    return &p
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
+    return GetNamespaceStatusRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
+}
+
+func (p GetNamespaceStatusRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
+}
+
+func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
+    return &p
 }
 
 type GetNamespaceRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
+    return GetNamespaceRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
+}
+
+func (p GetNamespaceRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
+}
+
+func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
+    return &p
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	Description *string	`json:"description"`
-	LogSetting *LogSetting	`json:"logSetting"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Description *string `json:"description"`
+    LogSetting *LogSetting `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
+    return UpdateNamespaceRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Description: core.CastString(data["description"]),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+    }
+}
+
+func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "description": p.Description,
+        "logSetting": p.LogSetting.ToDict(),
+    }
+}
+
+func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
+    return &p
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+}
+
+func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
+    return DeleteNamespaceRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
+}
+
+func (p DeleteNamespaceRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
+}
+
+func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
+    return &p
 }
 
 type DescribeKeysRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	PageToken *string	`json:"pageToken"`
-	Limit *int64	`json:"limit"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeKeysRequestFromDict(data map[string]interface{}) DescribeKeysRequest {
+    return DescribeKeysRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeKeysRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeKeysRequest) Pointer() *DescribeKeysRequest {
+    return &p
 }
 
 type CreateKeyRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	Name *string	`json:"name"`
-	Description *string	`json:"description"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Name *string `json:"name"`
+    Description *string `json:"description"`
+}
+
+func NewCreateKeyRequestFromDict(data map[string]interface{}) CreateKeyRequest {
+    return CreateKeyRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+    }
+}
+
+func (p CreateKeyRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "name": p.Name,
+        "description": p.Description,
+    }
+}
+
+func (p CreateKeyRequest) Pointer() *CreateKeyRequest {
+    return &p
 }
 
 type UpdateKeyRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	KeyName *string	`json:"keyName"`
-	Description *string	`json:"description"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    KeyName *string `json:"keyName"`
+    Description *string `json:"description"`
+}
+
+func NewUpdateKeyRequestFromDict(data map[string]interface{}) UpdateKeyRequest {
+    return UpdateKeyRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        KeyName: core.CastString(data["keyName"]),
+        Description: core.CastString(data["description"]),
+    }
+}
+
+func (p UpdateKeyRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "keyName": p.KeyName,
+        "description": p.Description,
+    }
+}
+
+func (p UpdateKeyRequest) Pointer() *UpdateKeyRequest {
+    return &p
 }
 
 type GetKeyRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	KeyName *string	`json:"keyName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    KeyName *string `json:"keyName"`
+}
+
+func NewGetKeyRequestFromDict(data map[string]interface{}) GetKeyRequest {
+    return GetKeyRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        KeyName: core.CastString(data["keyName"]),
+    }
+}
+
+func (p GetKeyRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "keyName": p.KeyName,
+    }
+}
+
+func (p GetKeyRequest) Pointer() *GetKeyRequest {
+    return &p
 }
 
 type DeleteKeyRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	KeyName *string	`json:"keyName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    KeyName *string `json:"keyName"`
+}
+
+func NewDeleteKeyRequestFromDict(data map[string]interface{}) DeleteKeyRequest {
+    return DeleteKeyRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        KeyName: core.CastString(data["keyName"]),
+    }
+}
+
+func (p DeleteKeyRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "keyName": p.KeyName,
+    }
+}
+
+func (p DeleteKeyRequest) Pointer() *DeleteKeyRequest {
+    return &p
 }
 
 type EncryptRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	KeyName *string	`json:"keyName"`
-	Data *string	`json:"data"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    KeyName *string `json:"keyName"`
+    Data *string `json:"data"`
+}
+
+func NewEncryptRequestFromDict(data map[string]interface{}) EncryptRequest {
+    return EncryptRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        KeyName: core.CastString(data["keyName"]),
+        Data: core.CastString(data["data"]),
+    }
+}
+
+func (p EncryptRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "keyName": p.KeyName,
+        "data": p.Data,
+    }
+}
+
+func (p EncryptRequest) Pointer() *EncryptRequest {
+    return &p
 }
 
 type DecryptRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	KeyName *string	`json:"keyName"`
-	Data *string	`json:"data"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    KeyName *string `json:"keyName"`
+    Data *string `json:"data"`
+}
+
+func NewDecryptRequestFromDict(data map[string]interface{}) DecryptRequest {
+    return DecryptRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        KeyName: core.CastString(data["keyName"]),
+        Data: core.CastString(data["data"]),
+    }
+}
+
+func (p DecryptRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "keyName": p.KeyName,
+        "data": p.Data,
+    }
+}
+
+func (p DecryptRequest) Pointer() *DecryptRequest {
+    return &p
 }
 
 type DescribeGitHubApiKeysRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	PageToken *string	`json:"pageToken"`
-	Limit *int64	`json:"limit"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeGitHubApiKeysRequestFromDict(data map[string]interface{}) DescribeGitHubApiKeysRequest {
+    return DescribeGitHubApiKeysRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeGitHubApiKeysRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeGitHubApiKeysRequest) Pointer() *DescribeGitHubApiKeysRequest {
+    return &p
 }
 
 type CreateGitHubApiKeyRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	Name *string	`json:"name"`
-	Description *string	`json:"description"`
-	ApiKey *string	`json:"apiKey"`
-	EncryptionKeyName *string	`json:"encryptionKeyName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Name *string `json:"name"`
+    Description *string `json:"description"`
+    ApiKey *string `json:"apiKey"`
+    EncryptionKeyName *string `json:"encryptionKeyName"`
+}
+
+func NewCreateGitHubApiKeyRequestFromDict(data map[string]interface{}) CreateGitHubApiKeyRequest {
+    return CreateGitHubApiKeyRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        ApiKey: core.CastString(data["apiKey"]),
+        EncryptionKeyName: core.CastString(data["encryptionKeyName"]),
+    }
+}
+
+func (p CreateGitHubApiKeyRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "name": p.Name,
+        "description": p.Description,
+        "apiKey": p.ApiKey,
+        "encryptionKeyName": p.EncryptionKeyName,
+    }
+}
+
+func (p CreateGitHubApiKeyRequest) Pointer() *CreateGitHubApiKeyRequest {
+    return &p
 }
 
 type UpdateGitHubApiKeyRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	ApiKeyName *string	`json:"apiKeyName"`
-	Description *string	`json:"description"`
-	ApiKey *string	`json:"apiKey"`
-	EncryptionKeyName *string	`json:"encryptionKeyName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    ApiKeyName *string `json:"apiKeyName"`
+    Description *string `json:"description"`
+    ApiKey *string `json:"apiKey"`
+    EncryptionKeyName *string `json:"encryptionKeyName"`
+}
+
+func NewUpdateGitHubApiKeyRequestFromDict(data map[string]interface{}) UpdateGitHubApiKeyRequest {
+    return UpdateGitHubApiKeyRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        ApiKeyName: core.CastString(data["apiKeyName"]),
+        Description: core.CastString(data["description"]),
+        ApiKey: core.CastString(data["apiKey"]),
+        EncryptionKeyName: core.CastString(data["encryptionKeyName"]),
+    }
+}
+
+func (p UpdateGitHubApiKeyRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "apiKeyName": p.ApiKeyName,
+        "description": p.Description,
+        "apiKey": p.ApiKey,
+        "encryptionKeyName": p.EncryptionKeyName,
+    }
+}
+
+func (p UpdateGitHubApiKeyRequest) Pointer() *UpdateGitHubApiKeyRequest {
+    return &p
 }
 
 type GetGitHubApiKeyRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	ApiKeyName *string	`json:"apiKeyName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    ApiKeyName *string `json:"apiKeyName"`
+}
+
+func NewGetGitHubApiKeyRequestFromDict(data map[string]interface{}) GetGitHubApiKeyRequest {
+    return GetGitHubApiKeyRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        ApiKeyName: core.CastString(data["apiKeyName"]),
+    }
+}
+
+func (p GetGitHubApiKeyRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "apiKeyName": p.ApiKeyName,
+    }
+}
+
+func (p GetGitHubApiKeyRequest) Pointer() *GetGitHubApiKeyRequest {
+    return &p
 }
 
 type DeleteGitHubApiKeyRequest struct {
-	RequestId    *core.RequestId	`json:"requestId"`
-	ContextStack *core.ContextStack	`json:"contextStack"`
-	NamespaceName *string	`json:"namespaceName"`
-	ApiKeyName *string	`json:"apiKeyName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    ApiKeyName *string `json:"apiKeyName"`
+}
+
+func NewDeleteGitHubApiKeyRequestFromDict(data map[string]interface{}) DeleteGitHubApiKeyRequest {
+    return DeleteGitHubApiKeyRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        ApiKeyName: core.CastString(data["apiKeyName"]),
+    }
+}
+
+func (p DeleteGitHubApiKeyRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "apiKeyName": p.ApiKeyName,
+    }
+}
+
+func (p DeleteGitHubApiKeyRequest) Pointer() *DeleteGitHubApiKeyRequest {
+    return &p
 }

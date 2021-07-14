@@ -16,305 +16,505 @@ permissions and limitations under the License.
 
 package exchange
 
+import "core"
+
 type Namespace struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** ネームスペース名 */
-	Name *string   `json:"name"`
-    /** ネームスペースの説明 */
-	Description *string   `json:"description"`
-    /** 直接交換APIの呼び出しを許可する。許可しない場合はスタンプシート経由でしか交換できない */
-	EnableDirectExchange *bool   `json:"enableDirectExchange"`
-    /** 交換結果の受け取りに待ち時間の発生する交換機能を利用するか */
-	EnableAwaitExchange *bool   `json:"enableAwaitExchange"`
-    /** 交換処理をジョブとして追加するキューのネームスペース のGRN */
-	QueueNamespaceId *string   `json:"queueNamespaceId"`
-    /** 交換処理のスタンプシートで使用する暗号鍵GRN */
-	KeyId *string   `json:"keyId"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId          *string     `json:"namespaceId"`
+	Name                 *string     `json:"name"`
+	Description          *string     `json:"description"`
+	EnableDirectExchange *bool       `json:"enableDirectExchange"`
+	EnableAwaitExchange  *bool       `json:"enableAwaitExchange"`
+	QueueNamespaceId     *string     `json:"queueNamespaceId"`
+	KeyId                *string     `json:"keyId"`
+	LogSetting           *LogSetting `json:"logSetting"`
+	CreatedAt            *int64      `json:"createdAt"`
+	UpdatedAt            *int64      `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["enableDirectExchange"] = p.EnableDirectExchange
-    data["enableAwaitExchange"] = p.EnableAwaitExchange
-    data["queueNamespaceId"] = p.QueueNamespaceId
-    data["keyId"] = p.KeyId
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId:          core.CastString(data["namespaceId"]),
+		Name:                 core.CastString(data["name"]),
+		Description:          core.CastString(data["description"]),
+		EnableDirectExchange: core.CastBool(data["enableDirectExchange"]),
+		EnableAwaitExchange:  core.CastBool(data["enableAwaitExchange"]),
+		QueueNamespaceId:     core.CastString(data["queueNamespaceId"]),
+		KeyId:                core.CastString(data["keyId"]),
+		LogSetting:           NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:            core.CastInt64(data["createdAt"]),
+		UpdatedAt:            core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId":          p.NamespaceId,
+		"name":                 p.Name,
+		"description":          p.Description,
+		"enableDirectExchange": p.EnableDirectExchange,
+		"enableAwaitExchange":  p.EnableAwaitExchange,
+		"queueNamespaceId":     p.QueueNamespaceId,
+		"keyId":                p.KeyId,
+		"logSetting":           p.LogSetting.ToDict(),
+		"createdAt":            p.CreatedAt,
+		"updatedAt":            p.UpdatedAt,
+	}
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type RateModel struct {
-    /** 交換レートマスター */
-	RateModelId *string   `json:"rateModelId"`
-    /** 交換レートの種類名 */
-	Name *string   `json:"name"`
-    /** 交換レートの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 消費アクションリスト */
-	ConsumeActions []ConsumeAction   `json:"consumeActions"`
-    /** 交換の種類 */
-	TimingType *string   `json:"timingType"`
-    /** 交換実行から実際に報酬を受け取れるようになるまでの待ち時間（分） */
-	LockTime *int32   `json:"lockTime"`
-    /** スキップをすることができるか */
-	EnableSkip *bool   `json:"enableSkip"`
-    /** 時短消費アクションリスト */
-	SkipConsumeActions []ConsumeAction   `json:"skipConsumeActions"`
-    /** 入手アクションリスト */
-	AcquireActions []AcquireAction   `json:"acquireActions"`
+	RateModelId        *string         `json:"rateModelId"`
+	Name               *string         `json:"name"`
+	Metadata           *string         `json:"metadata"`
+	ConsumeActions     []ConsumeAction `json:"consumeActions"`
+	TimingType         *string         `json:"timingType"`
+	LockTime           *int32          `json:"lockTime"`
+	EnableSkip         *bool           `json:"enableSkip"`
+	SkipConsumeActions []ConsumeAction `json:"skipConsumeActions"`
+	AcquireActions     []AcquireAction `json:"acquireActions"`
 }
 
-func (p *RateModel) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["rateModelId"] = p.RateModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    if p.ConsumeActions != nil {
-        var _consumeActions []*map[string]interface {}
-        for _, item := range p.ConsumeActions {
-            _consumeActions = append(_consumeActions, item.ToDict())
-        }
-        data["consumeActions"] = &_consumeActions
-    }
-    data["timingType"] = p.TimingType
-    data["lockTime"] = p.LockTime
-    data["enableSkip"] = p.EnableSkip
-    if p.SkipConsumeActions != nil {
-        var _skipConsumeActions []*map[string]interface {}
-        for _, item := range p.SkipConsumeActions {
-            _skipConsumeActions = append(_skipConsumeActions, item.ToDict())
-        }
-        data["skipConsumeActions"] = &_skipConsumeActions
-    }
-    if p.AcquireActions != nil {
-        var _acquireActions []*map[string]interface {}
-        for _, item := range p.AcquireActions {
-            _acquireActions = append(_acquireActions, item.ToDict())
-        }
-        data["acquireActions"] = &_acquireActions
-    }
-    return &data
+func NewRateModelFromDict(data map[string]interface{}) RateModel {
+	return RateModel{
+		RateModelId:        core.CastString(data["rateModelId"]),
+		Name:               core.CastString(data["name"]),
+		Metadata:           core.CastString(data["metadata"]),
+		ConsumeActions:     CastConsumeActions(core.CastArray(data["consumeActions"])),
+		TimingType:         core.CastString(data["timingType"]),
+		LockTime:           core.CastInt32(data["lockTime"]),
+		EnableSkip:         core.CastBool(data["enableSkip"]),
+		SkipConsumeActions: CastConsumeActions(core.CastArray(data["skipConsumeActions"])),
+		AcquireActions:     CastAcquireActions(core.CastArray(data["acquireActions"])),
+	}
+}
+
+func (p RateModel) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"rateModelId": p.RateModelId,
+		"name":        p.Name,
+		"metadata":    p.Metadata,
+		"consumeActions": CastConsumeActionsFromDict(
+			p.ConsumeActions,
+		),
+		"timingType": p.TimingType,
+		"lockTime":   p.LockTime,
+		"enableSkip": p.EnableSkip,
+		"skipConsumeActions": CastConsumeActionsFromDict(
+			p.SkipConsumeActions,
+		),
+		"acquireActions": CastAcquireActionsFromDict(
+			p.AcquireActions,
+		),
+	}
+}
+
+func (p RateModel) Pointer() *RateModel {
+	return &p
+}
+
+func CastRateModels(data []interface{}) []RateModel {
+	v := make([]RateModel, 0)
+	for _, d := range data {
+		v = append(v, NewRateModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRateModelsFromDict(data []RateModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type RateModelMaster struct {
-    /** 交換レートマスター */
-	RateModelId *string   `json:"rateModelId"`
-    /** 交換レート名 */
-	Name *string   `json:"name"`
-    /** 交換レートマスターの説明 */
-	Description *string   `json:"description"`
-    /** 交換レートのメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** 消費アクションリスト */
-	ConsumeActions []ConsumeAction   `json:"consumeActions"`
-    /** 交換の種類 */
-	TimingType *string   `json:"timingType"`
-    /** 交換実行から実際に報酬を受け取れるようになるまでの待ち時間（分） */
-	LockTime *int32   `json:"lockTime"`
-    /** スキップをすることができるか */
-	EnableSkip *bool   `json:"enableSkip"`
-    /** 時短消費アクションリスト */
-	SkipConsumeActions []ConsumeAction   `json:"skipConsumeActions"`
-    /** 入手アクションリスト */
-	AcquireActions []AcquireAction   `json:"acquireActions"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	RateModelId        *string         `json:"rateModelId"`
+	Name               *string         `json:"name"`
+	Description        *string         `json:"description"`
+	Metadata           *string         `json:"metadata"`
+	ConsumeActions     []ConsumeAction `json:"consumeActions"`
+	TimingType         *string         `json:"timingType"`
+	LockTime           *int32          `json:"lockTime"`
+	EnableSkip         *bool           `json:"enableSkip"`
+	SkipConsumeActions []ConsumeAction `json:"skipConsumeActions"`
+	AcquireActions     []AcquireAction `json:"acquireActions"`
+	CreatedAt          *int64          `json:"createdAt"`
+	UpdatedAt          *int64          `json:"updatedAt"`
 }
 
-func (p *RateModelMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["rateModelId"] = p.RateModelId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["metadata"] = p.Metadata
-    if p.ConsumeActions != nil {
-        var _consumeActions []*map[string]interface {}
-        for _, item := range p.ConsumeActions {
-            _consumeActions = append(_consumeActions, item.ToDict())
-        }
-        data["consumeActions"] = &_consumeActions
-    }
-    data["timingType"] = p.TimingType
-    data["lockTime"] = p.LockTime
-    data["enableSkip"] = p.EnableSkip
-    if p.SkipConsumeActions != nil {
-        var _skipConsumeActions []*map[string]interface {}
-        for _, item := range p.SkipConsumeActions {
-            _skipConsumeActions = append(_skipConsumeActions, item.ToDict())
-        }
-        data["skipConsumeActions"] = &_skipConsumeActions
-    }
-    if p.AcquireActions != nil {
-        var _acquireActions []*map[string]interface {}
-        for _, item := range p.AcquireActions {
-            _acquireActions = append(_acquireActions, item.ToDict())
-        }
-        data["acquireActions"] = &_acquireActions
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewRateModelMasterFromDict(data map[string]interface{}) RateModelMaster {
+	return RateModelMaster{
+		RateModelId:        core.CastString(data["rateModelId"]),
+		Name:               core.CastString(data["name"]),
+		Description:        core.CastString(data["description"]),
+		Metadata:           core.CastString(data["metadata"]),
+		ConsumeActions:     CastConsumeActions(core.CastArray(data["consumeActions"])),
+		TimingType:         core.CastString(data["timingType"]),
+		LockTime:           core.CastInt32(data["lockTime"]),
+		EnableSkip:         core.CastBool(data["enableSkip"]),
+		SkipConsumeActions: CastConsumeActions(core.CastArray(data["skipConsumeActions"])),
+		AcquireActions:     CastAcquireActions(core.CastArray(data["acquireActions"])),
+		CreatedAt:          core.CastInt64(data["createdAt"]),
+		UpdatedAt:          core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p RateModelMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"rateModelId": p.RateModelId,
+		"name":        p.Name,
+		"description": p.Description,
+		"metadata":    p.Metadata,
+		"consumeActions": CastConsumeActionsFromDict(
+			p.ConsumeActions,
+		),
+		"timingType": p.TimingType,
+		"lockTime":   p.LockTime,
+		"enableSkip": p.EnableSkip,
+		"skipConsumeActions": CastConsumeActionsFromDict(
+			p.SkipConsumeActions,
+		),
+		"acquireActions": CastAcquireActionsFromDict(
+			p.AcquireActions,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p RateModelMaster) Pointer() *RateModelMaster {
+	return &p
+}
+
+func CastRateModelMasters(data []interface{}) []RateModelMaster {
+	v := make([]RateModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewRateModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRateModelMastersFromDict(data []RateModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CurrentRateMaster struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** マスターデータ */
-	Settings *string   `json:"settings"`
+	NamespaceId *string `json:"namespaceId"`
+	Settings    *string `json:"settings"`
 }
 
-func (p *CurrentRateMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["settings"] = p.Settings
-    return &data
+func NewCurrentRateMasterFromDict(data map[string]interface{}) CurrentRateMaster {
+	return CurrentRateMaster{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Settings:    core.CastString(data["settings"]),
+	}
+}
+
+func (p CurrentRateMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId": p.NamespaceId,
+		"settings":    p.Settings,
+	}
+}
+
+func (p CurrentRateMaster) Pointer() *CurrentRateMaster {
+	return &p
+}
+
+func CastCurrentRateMasters(data []interface{}) []CurrentRateMaster {
+	v := make([]CurrentRateMaster, 0)
+	for _, d := range data {
+		v = append(v, NewCurrentRateMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCurrentRateMastersFromDict(data []CurrentRateMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Await struct {
-    /** 交換待機 */
-	AwaitId *string   `json:"awaitId"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** 交換レート名 */
-	RateName *string   `json:"rateName"`
-    /** 交換待機の名前 */
-	Name *string   `json:"name"`
-    /** 交換数 */
-	Count *int32   `json:"count"`
-    /** 作成日時 */
-	ExchangedAt *int64   `json:"exchangedAt"`
+	AwaitId     *string `json:"awaitId"`
+	UserId      *string `json:"userId"`
+	RateName    *string `json:"rateName"`
+	Name        *string `json:"name"`
+	Count       *int32  `json:"count"`
+	ExchangedAt *int64  `json:"exchangedAt"`
 }
 
-func (p *Await) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["awaitId"] = p.AwaitId
-    data["userId"] = p.UserId
-    data["rateName"] = p.RateName
-    data["name"] = p.Name
-    data["count"] = p.Count
-    data["exchangedAt"] = p.ExchangedAt
-    return &data
+func NewAwaitFromDict(data map[string]interface{}) Await {
+	return Await{
+		AwaitId:     core.CastString(data["awaitId"]),
+		UserId:      core.CastString(data["userId"]),
+		RateName:    core.CastString(data["rateName"]),
+		Name:        core.CastString(data["name"]),
+		Count:       core.CastInt32(data["count"]),
+		ExchangedAt: core.CastInt64(data["exchangedAt"]),
+	}
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func (p Await) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"awaitId":     p.AwaitId,
+		"userId":      p.UserId,
+		"rateName":    p.RateName,
+		"name":        p.Name,
+		"count":       p.Count,
+		"exchangedAt": p.ExchangedAt,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func (p Await) Pointer() *Await {
+	return &p
+}
+
+func CastAwaits(data []interface{}) []Await {
+	v := make([]Await, 0)
+	for _, d := range data {
+		v = append(v, NewAwaitFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAwaitsFromDict(data []Await) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Config struct {
-    /** 名前 */
-	Key *string   `json:"key"`
-    /** 値 */
-	Value *string   `json:"value"`
+	Key   *string `json:"key"`
+	Value *string `json:"value"`
 }
 
-func (p *Config) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["key"] = p.Key
-    data["value"] = p.Value
-    return &data
+func NewConfigFromDict(data map[string]interface{}) Config {
+	return Config{
+		Key:   core.CastString(data["key"]),
+		Value: core.CastString(data["value"]),
+	}
+}
+
+func (p Config) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"key":   p.Key,
+		"value": p.Value,
+	}
+}
+
+func (p Config) Pointer() *Config {
+	return &p
+}
+
+func CastConfigs(data []interface{}) []Config {
+	v := make([]Config, 0)
+	for _, d := range data {
+		v = append(v, NewConfigFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastConfigsFromDict(data []Config) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GitHubCheckoutSetting struct {
-    /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	ApiKeyId *string   `json:"apiKeyId"`
-    /** リポジトリ名 */
-	RepositoryName *string   `json:"repositoryName"`
-    /** ソースコードのファイルパス */
-	SourcePath *string   `json:"sourcePath"`
-    /** コードの取得元 */
-	ReferenceType *string   `json:"referenceType"`
-    /** コミットハッシュ */
-	CommitHash *string   `json:"commitHash"`
-    /** ブランチ名 */
-	BranchName *string   `json:"branchName"`
-    /** タグ名 */
-	TagName *string   `json:"tagName"`
+	ApiKeyId       *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath     *string `json:"sourcePath"`
+	ReferenceType  *string `json:"referenceType"`
+	CommitHash     *string `json:"commitHash"`
+	BranchName     *string `json:"branchName"`
+	TagName        *string `json:"tagName"`
 }
 
-func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["apiKeyId"] = p.ApiKeyId
-    data["repositoryName"] = p.RepositoryName
-    data["sourcePath"] = p.SourcePath
-    data["referenceType"] = p.ReferenceType
-    data["commitHash"] = p.CommitHash
-    data["branchName"] = p.BranchName
-    data["tagName"] = p.TagName
-    return &data
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+	return GitHubCheckoutSetting{
+		ApiKeyId:       core.CastString(data["apiKeyId"]),
+		RepositoryName: core.CastString(data["repositoryName"]),
+		SourcePath:     core.CastString(data["sourcePath"]),
+		ReferenceType:  core.CastString(data["referenceType"]),
+		CommitHash:     core.CastString(data["commitHash"]),
+		BranchName:     core.CastString(data["branchName"]),
+		TagName:        core.CastString(data["tagName"]),
+	}
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"apiKeyId":       p.ApiKeyId,
+		"repositoryName": p.RepositoryName,
+		"sourcePath":     p.SourcePath,
+		"referenceType":  p.ReferenceType,
+		"commitHash":     p.CommitHash,
+		"branchName":     p.BranchName,
+		"tagName":        p.TagName,
+	}
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+	return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type AcquireAction struct {
-    /** スタンプシートで実行するアクションの種類 */
-	Action *string   `json:"action"`
-    /** 入手リクエストのJSON */
-	Request *string   `json:"request"`
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
 }
 
-func (p *AcquireAction) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["action"] = p.Action
-    data["request"] = p.Request
-    return &data
+func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
+	return AcquireAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p AcquireAction) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"action":  p.Action,
+		"request": p.Request,
+	}
+}
+
+func (p AcquireAction) Pointer() *AcquireAction {
+	return &p
+}
+
+func CastAcquireActions(data []interface{}) []AcquireAction {
+	v := make([]AcquireAction, 0)
+	for _, d := range data {
+		v = append(v, NewAcquireActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ConsumeAction struct {
-    /** スタンプタスクで実行するアクションの種類 */
-	Action *string   `json:"action"`
-    /** 消費リクエストのJSON */
-	Request *string   `json:"request"`
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
 }
 
-func (p *ConsumeAction) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["action"] = p.Action
-    data["request"] = p.Request
-    return &data
+func NewConsumeActionFromDict(data map[string]interface{}) ConsumeAction {
+	return ConsumeAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p ConsumeAction) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"action":  p.Action,
+		"request": p.Request,
+	}
+}
+
+func (p ConsumeAction) Pointer() *ConsumeAction {
+	return &p
+}
+
+func CastConsumeActions(data []interface{}) []ConsumeAction {
+	v := make([]ConsumeAction, 0)
+	for _, d := range data {
+		v = append(v, NewConsumeActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastConsumeActionsFromDict(data []ConsumeAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

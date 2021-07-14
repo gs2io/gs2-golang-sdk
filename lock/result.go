@@ -16,26 +16,11 @@ permissions and limitations under the License.
 
 package lock
 
-type DescribeNamespacesResult struct {
-    /** ネームスペースのリスト */
-	Items         []Namespace	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
-}
+import "core"
 
-func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Namespace, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+type DescribeNamespacesResult struct {
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -43,17 +28,28 @@ type DescribeNamespacesAsyncResult struct {
 	err    error
 }
 
-type CreateNamespaceResult struct {
-    /** 作成したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
+    return &p
+}
+
+type CreateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -61,17 +57,24 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceStatusResult struct {
-    /** None */
-	Status         *string	`json:"status"`
+func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Status != nil {
-        data["status"] = p.Status
+func (p CreateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
+    return &p
+}
+
+type GetNamespaceStatusResult struct {
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -79,17 +82,24 @@ type GetNamespaceStatusAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceResult struct {
-    /** ネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
-func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "status": p.Status,
     }
-    return &data
+}
+
+func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
+    return &p
+}
+
+type GetNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -97,17 +107,24 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
-type UpdateNamespaceResult struct {
-    /** 更新したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
+    return &p
+}
+
+type UpdateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -115,17 +132,24 @@ type UpdateNamespaceAsyncResult struct {
 	err    error
 }
 
-type DeleteNamespaceResult struct {
-    /** 削除したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
+    return &p
+}
+
+type DeleteNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -133,26 +157,25 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
-type DescribeMutexesResult struct {
-    /** ミューテックスのリスト */
-	Items         []Mutex	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
+    return DeleteNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeMutexesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Mutex, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
+    return &p
+}
+
+type DescribeMutexesResult struct {
+    Items []Mutex `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeMutexesAsyncResult struct {
@@ -160,26 +183,29 @@ type DescribeMutexesAsyncResult struct {
 	err    error
 }
 
-type DescribeMutexesByUserIdResult struct {
-    /** ミューテックスのリスト */
-	Items         []Mutex	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDescribeMutexesResultFromDict(data map[string]interface{}) DescribeMutexesResult {
+    return DescribeMutexesResult {
+        Items: CastMutexes(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *DescribeMutexesByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Mutex, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeMutexesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastMutexesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DescribeMutexesResult) Pointer() *DescribeMutexesResult {
+    return &p
+}
+
+type DescribeMutexesByUserIdResult struct {
+    Items []Mutex `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeMutexesByUserIdAsyncResult struct {
@@ -187,17 +213,28 @@ type DescribeMutexesByUserIdAsyncResult struct {
 	err    error
 }
 
-type LockResult struct {
-    /** ミューテックス */
-	Item         *Mutex	`json:"item"`
+func NewDescribeMutexesByUserIdResultFromDict(data map[string]interface{}) DescribeMutexesByUserIdResult {
+    return DescribeMutexesByUserIdResult {
+        Items: CastMutexes(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *LockResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeMutexesByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastMutexesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeMutexesByUserIdResult) Pointer() *DescribeMutexesByUserIdResult {
+    return &p
+}
+
+type LockResult struct {
+    Item *Mutex `json:"item"`
 }
 
 type LockAsyncResult struct {
@@ -205,17 +242,24 @@ type LockAsyncResult struct {
 	err    error
 }
 
-type LockByUserIdResult struct {
-    /** ミューテックス */
-	Item         *Mutex	`json:"item"`
+func NewLockResultFromDict(data map[string]interface{}) LockResult {
+    return LockResult {
+        Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *LockByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p LockResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p LockResult) Pointer() *LockResult {
+    return &p
+}
+
+type LockByUserIdResult struct {
+    Item *Mutex `json:"item"`
 }
 
 type LockByUserIdAsyncResult struct {
@@ -223,17 +267,24 @@ type LockByUserIdAsyncResult struct {
 	err    error
 }
 
-type UnlockResult struct {
-    /** ミューテックス */
-	Item         *Mutex	`json:"item"`
+func NewLockByUserIdResultFromDict(data map[string]interface{}) LockByUserIdResult {
+    return LockByUserIdResult {
+        Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UnlockResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p LockByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p LockByUserIdResult) Pointer() *LockByUserIdResult {
+    return &p
+}
+
+type UnlockResult struct {
+    Item *Mutex `json:"item"`
 }
 
 type UnlockAsyncResult struct {
@@ -241,17 +292,24 @@ type UnlockAsyncResult struct {
 	err    error
 }
 
-type UnlockByUserIdResult struct {
-    /** ミューテックス */
-	Item         *Mutex	`json:"item"`
+func NewUnlockResultFromDict(data map[string]interface{}) UnlockResult {
+    return UnlockResult {
+        Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UnlockByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UnlockResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UnlockResult) Pointer() *UnlockResult {
+    return &p
+}
+
+type UnlockByUserIdResult struct {
+    Item *Mutex `json:"item"`
 }
 
 type UnlockByUserIdAsyncResult struct {
@@ -259,17 +317,24 @@ type UnlockByUserIdAsyncResult struct {
 	err    error
 }
 
-type GetMutexResult struct {
-    /** ミューテックス */
-	Item         *Mutex	`json:"item"`
+func NewUnlockByUserIdResultFromDict(data map[string]interface{}) UnlockByUserIdResult {
+    return UnlockByUserIdResult {
+        Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetMutexResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UnlockByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UnlockByUserIdResult) Pointer() *UnlockByUserIdResult {
+    return &p
+}
+
+type GetMutexResult struct {
+    Item *Mutex `json:"item"`
 }
 
 type GetMutexAsyncResult struct {
@@ -277,17 +342,24 @@ type GetMutexAsyncResult struct {
 	err    error
 }
 
-type GetMutexByUserIdResult struct {
-    /** ミューテックス */
-	Item         *Mutex	`json:"item"`
+func NewGetMutexResultFromDict(data map[string]interface{}) GetMutexResult {
+    return GetMutexResult {
+        Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetMutexByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetMutexResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetMutexResult) Pointer() *GetMutexResult {
+    return &p
+}
+
+type GetMutexByUserIdResult struct {
+    Item *Mutex `json:"item"`
 }
 
 type GetMutexByUserIdAsyncResult struct {
@@ -295,20 +367,43 @@ type GetMutexByUserIdAsyncResult struct {
 	err    error
 }
 
-type DeleteMutexByUserIdResult struct {
-    /** ミューテックス */
-	Item         *Mutex	`json:"item"`
+func NewGetMutexByUserIdResultFromDict(data map[string]interface{}) GetMutexByUserIdResult {
+    return GetMutexByUserIdResult {
+        Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteMutexByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetMutexByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetMutexByUserIdResult) Pointer() *GetMutexByUserIdResult {
+    return &p
+}
+
+type DeleteMutexByUserIdResult struct {
+    Item *Mutex `json:"item"`
 }
 
 type DeleteMutexByUserIdAsyncResult struct {
 	result *DeleteMutexByUserIdResult
 	err    error
+}
+
+func NewDeleteMutexByUserIdResultFromDict(data map[string]interface{}) DeleteMutexByUserIdResult {
+    return DeleteMutexByUserIdResult {
+        Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p DeleteMutexByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p DeleteMutexByUserIdResult) Pointer() *DeleteMutexByUserIdResult {
+    return &p
 }

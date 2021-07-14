@@ -16,26 +16,11 @@ permissions and limitations under the License.
 
 package limit
 
-type DescribeNamespacesResult struct {
-    /** ネームスペースのリスト */
-	Items         []Namespace	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
-}
+import "core"
 
-func (p *DescribeNamespacesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Namespace, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
-    }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+type DescribeNamespacesResult struct {
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -43,17 +28,28 @@ type DescribeNamespacesAsyncResult struct {
 	err    error
 }
 
-type CreateNamespaceResult struct {
-    /** 作成したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
+    return &p
+}
+
+type CreateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -61,17 +57,24 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceStatusResult struct {
-    /** None */
-	Status         *string	`json:"status"`
+func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetNamespaceStatusResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Status != nil {
-        data["status"] = p.Status
+func (p CreateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
+    return &p
+}
+
+type GetNamespaceStatusResult struct {
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -79,17 +82,24 @@ type GetNamespaceStatusAsyncResult struct {
 	err    error
 }
 
-type GetNamespaceResult struct {
-    /** ネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
-func (p *GetNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "status": p.Status,
     }
-    return &data
+}
+
+func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
+    return &p
+}
+
+type GetNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -97,17 +107,24 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
-type UpdateNamespaceResult struct {
-    /** 更新したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
+    return &p
+}
+
+type UpdateNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -115,17 +132,24 @@ type UpdateNamespaceAsyncResult struct {
 	err    error
 }
 
-type DeleteNamespaceResult struct {
-    /** 削除したネームスペース */
-	Item         *Namespace	`json:"item"`
+func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteNamespaceResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
+    return &p
+}
+
+type DeleteNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -133,26 +157,25 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
-type DescribeCountersResult struct {
-    /** カウンターのリスト */
-	Items         []Counter	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
+    return DeleteNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeCountersResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Counter, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
+    return &p
+}
+
+type DescribeCountersResult struct {
+    Items []Counter `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeCountersAsyncResult struct {
@@ -160,26 +183,29 @@ type DescribeCountersAsyncResult struct {
 	err    error
 }
 
-type DescribeCountersByUserIdResult struct {
-    /** カウンターのリスト */
-	Items         []Counter	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDescribeCountersResultFromDict(data map[string]interface{}) DescribeCountersResult {
+    return DescribeCountersResult {
+        Items: CastCounters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *DescribeCountersByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]Counter, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DescribeCountersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastCountersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DescribeCountersResult) Pointer() *DescribeCountersResult {
+    return &p
+}
+
+type DescribeCountersByUserIdResult struct {
+    Items []Counter `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeCountersByUserIdAsyncResult struct {
@@ -187,17 +213,28 @@ type DescribeCountersByUserIdAsyncResult struct {
 	err    error
 }
 
-type GetCounterResult struct {
-    /** カウンター */
-	Item         *Counter	`json:"item"`
+func NewDescribeCountersByUserIdResultFromDict(data map[string]interface{}) DescribeCountersByUserIdResult {
+    return DescribeCountersByUserIdResult {
+        Items: CastCounters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *GetCounterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeCountersByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastCountersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeCountersByUserIdResult) Pointer() *DescribeCountersByUserIdResult {
+    return &p
+}
+
+type GetCounterResult struct {
+    Item *Counter `json:"item"`
 }
 
 type GetCounterAsyncResult struct {
@@ -205,17 +242,24 @@ type GetCounterAsyncResult struct {
 	err    error
 }
 
-type GetCounterByUserIdResult struct {
-    /** カウンター */
-	Item         *Counter	`json:"item"`
+func NewGetCounterResultFromDict(data map[string]interface{}) GetCounterResult {
+    return GetCounterResult {
+        Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetCounterByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetCounterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetCounterResult) Pointer() *GetCounterResult {
+    return &p
+}
+
+type GetCounterByUserIdResult struct {
+    Item *Counter `json:"item"`
 }
 
 type GetCounterByUserIdAsyncResult struct {
@@ -223,17 +267,24 @@ type GetCounterByUserIdAsyncResult struct {
 	err    error
 }
 
-type CountUpResult struct {
-    /** カウントを増やしたカウンター */
-	Item         *Counter	`json:"item"`
+func NewGetCounterByUserIdResultFromDict(data map[string]interface{}) GetCounterByUserIdResult {
+    return GetCounterByUserIdResult {
+        Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *CountUpResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetCounterByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetCounterByUserIdResult) Pointer() *GetCounterByUserIdResult {
+    return &p
+}
+
+type CountUpResult struct {
+    Item *Counter `json:"item"`
 }
 
 type CountUpAsyncResult struct {
@@ -241,17 +292,24 @@ type CountUpAsyncResult struct {
 	err    error
 }
 
-type CountUpByUserIdResult struct {
-    /** カウントを増やしたカウンター */
-	Item         *Counter	`json:"item"`
+func NewCountUpResultFromDict(data map[string]interface{}) CountUpResult {
+    return CountUpResult {
+        Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *CountUpByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CountUpResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CountUpResult) Pointer() *CountUpResult {
+    return &p
+}
+
+type CountUpByUserIdResult struct {
+    Item *Counter `json:"item"`
 }
 
 type CountUpByUserIdAsyncResult struct {
@@ -259,17 +317,24 @@ type CountUpByUserIdAsyncResult struct {
 	err    error
 }
 
-type DeleteCounterByUserIdResult struct {
-    /** カウンター */
-	Item         *Counter	`json:"item"`
+func NewCountUpByUserIdResultFromDict(data map[string]interface{}) CountUpByUserIdResult {
+    return CountUpByUserIdResult {
+        Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteCounterByUserIdResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CountUpByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CountUpByUserIdResult) Pointer() *CountUpByUserIdResult {
+    return &p
+}
+
+type DeleteCounterByUserIdResult struct {
+    Item *Counter `json:"item"`
 }
 
 type DeleteCounterByUserIdAsyncResult struct {
@@ -277,22 +342,25 @@ type DeleteCounterByUserIdAsyncResult struct {
 	err    error
 }
 
-type CountUpByStampTaskResult struct {
-    /** カウントを増やしたカウンター */
-	Item         *Counter	`json:"item"`
-    /** スタンプタスクの実行結果を記録したコンテキスト */
-	NewContextStack         *string	`json:"newContextStack"`
+func NewDeleteCounterByUserIdResultFromDict(data map[string]interface{}) DeleteCounterByUserIdResult {
+    return DeleteCounterByUserIdResult {
+        Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *CountUpByStampTaskResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DeleteCounterByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NewContextStack != nil {
-        data["newContextStack"] = p.NewContextStack
-    }
-    return &data
+}
+
+func (p DeleteCounterByUserIdResult) Pointer() *DeleteCounterByUserIdResult {
+    return &p
+}
+
+type CountUpByStampTaskResult struct {
+    Item *Counter `json:"item"`
+    NewContextStack *string `json:"newContextStack"`
 }
 
 type CountUpByStampTaskAsyncResult struct {
@@ -300,17 +368,26 @@ type CountUpByStampTaskAsyncResult struct {
 	err    error
 }
 
-type DeleteByStampSheetResult struct {
-    /** カウンター */
-	Item         *Counter	`json:"item"`
+func NewCountUpByStampTaskResultFromDict(data map[string]interface{}) CountUpByStampTaskResult {
+    return CountUpByStampTaskResult {
+        Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+        NewContextStack: core.CastString(data["newContextStack"]),
+    }
 }
 
-func (p *DeleteByStampSheetResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CountUpByStampTaskResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "newContextStack": p.NewContextStack,
     }
-    return &data
+}
+
+func (p CountUpByStampTaskResult) Pointer() *CountUpByStampTaskResult {
+    return &p
+}
+
+type DeleteByStampSheetResult struct {
+    Item *Counter `json:"item"`
 }
 
 type DeleteByStampSheetAsyncResult struct {
@@ -318,26 +395,25 @@ type DeleteByStampSheetAsyncResult struct {
 	err    error
 }
 
-type DescribeLimitModelMastersResult struct {
-    /** 回数制限の種類マスターのリスト */
-	Items         []LimitModelMaster	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewDeleteByStampSheetResultFromDict(data map[string]interface{}) DeleteByStampSheetResult {
+    return DeleteByStampSheetResult {
+        Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeLimitModelMastersResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]LimitModelMaster, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p DeleteByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p DeleteByStampSheetResult) Pointer() *DeleteByStampSheetResult {
+    return &p
+}
+
+type DescribeLimitModelMastersResult struct {
+    Items []LimitModelMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeLimitModelMastersAsyncResult struct {
@@ -345,17 +421,28 @@ type DescribeLimitModelMastersAsyncResult struct {
 	err    error
 }
 
-type CreateLimitModelMasterResult struct {
-    /** 作成した回数制限の種類マスター */
-	Item         *LimitModelMaster	`json:"item"`
+func NewDescribeLimitModelMastersResultFromDict(data map[string]interface{}) DescribeLimitModelMastersResult {
+    return DescribeLimitModelMastersResult {
+        Items: CastLimitModelMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *CreateLimitModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeLimitModelMastersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastLimitModelMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeLimitModelMastersResult) Pointer() *DescribeLimitModelMastersResult {
+    return &p
+}
+
+type CreateLimitModelMasterResult struct {
+    Item *LimitModelMaster `json:"item"`
 }
 
 type CreateLimitModelMasterAsyncResult struct {
@@ -363,17 +450,24 @@ type CreateLimitModelMasterAsyncResult struct {
 	err    error
 }
 
-type GetLimitModelMasterResult struct {
-    /** 回数制限の種類マスター */
-	Item         *LimitModelMaster	`json:"item"`
+func NewCreateLimitModelMasterResultFromDict(data map[string]interface{}) CreateLimitModelMasterResult {
+    return CreateLimitModelMasterResult {
+        Item: NewLimitModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetLimitModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p CreateLimitModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p CreateLimitModelMasterResult) Pointer() *CreateLimitModelMasterResult {
+    return &p
+}
+
+type GetLimitModelMasterResult struct {
+    Item *LimitModelMaster `json:"item"`
 }
 
 type GetLimitModelMasterAsyncResult struct {
@@ -381,17 +475,24 @@ type GetLimitModelMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateLimitModelMasterResult struct {
-    /** 更新した回数制限の種類マスター */
-	Item         *LimitModelMaster	`json:"item"`
+func NewGetLimitModelMasterResultFromDict(data map[string]interface{}) GetLimitModelMasterResult {
+    return GetLimitModelMasterResult {
+        Item: NewLimitModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateLimitModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetLimitModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetLimitModelMasterResult) Pointer() *GetLimitModelMasterResult {
+    return &p
+}
+
+type UpdateLimitModelMasterResult struct {
+    Item *LimitModelMaster `json:"item"`
 }
 
 type UpdateLimitModelMasterAsyncResult struct {
@@ -399,17 +500,24 @@ type UpdateLimitModelMasterAsyncResult struct {
 	err    error
 }
 
-type DeleteLimitModelMasterResult struct {
-    /** 削除した回数制限の種類マスター */
-	Item         *LimitModelMaster	`json:"item"`
+func NewUpdateLimitModelMasterResultFromDict(data map[string]interface{}) UpdateLimitModelMasterResult {
+    return UpdateLimitModelMasterResult {
+        Item: NewLimitModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DeleteLimitModelMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateLimitModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateLimitModelMasterResult) Pointer() *UpdateLimitModelMasterResult {
+    return &p
+}
+
+type DeleteLimitModelMasterResult struct {
+    Item *LimitModelMaster `json:"item"`
 }
 
 type DeleteLimitModelMasterAsyncResult struct {
@@ -417,17 +525,24 @@ type DeleteLimitModelMasterAsyncResult struct {
 	err    error
 }
 
-type ExportMasterResult struct {
-    /** 現在有効な回数制限設定 */
-	Item         *CurrentLimitMaster	`json:"item"`
+func NewDeleteLimitModelMasterResultFromDict(data map[string]interface{}) DeleteLimitModelMasterResult {
+    return DeleteLimitModelMasterResult {
+        Item: NewLimitModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *ExportMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DeleteLimitModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p DeleteLimitModelMasterResult) Pointer() *DeleteLimitModelMasterResult {
+    return &p
+}
+
+type ExportMasterResult struct {
+    Item *CurrentLimitMaster `json:"item"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -435,17 +550,24 @@ type ExportMasterAsyncResult struct {
 	err    error
 }
 
-type GetCurrentLimitMasterResult struct {
-    /** 現在有効な回数制限設定 */
-	Item         *CurrentLimitMaster	`json:"item"`
+func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
+    return ExportMasterResult {
+        Item: NewCurrentLimitMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetCurrentLimitMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p ExportMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p ExportMasterResult) Pointer() *ExportMasterResult {
+    return &p
+}
+
+type GetCurrentLimitMasterResult struct {
+    Item *CurrentLimitMaster `json:"item"`
 }
 
 type GetCurrentLimitMasterAsyncResult struct {
@@ -453,17 +575,24 @@ type GetCurrentLimitMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateCurrentLimitMasterResult struct {
-    /** 更新した現在有効な回数制限設定 */
-	Item         *CurrentLimitMaster	`json:"item"`
+func NewGetCurrentLimitMasterResultFromDict(data map[string]interface{}) GetCurrentLimitMasterResult {
+    return GetCurrentLimitMasterResult {
+        Item: NewCurrentLimitMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateCurrentLimitMasterResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetCurrentLimitMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetCurrentLimitMasterResult) Pointer() *GetCurrentLimitMasterResult {
+    return &p
+}
+
+type UpdateCurrentLimitMasterResult struct {
+    Item *CurrentLimitMaster `json:"item"`
 }
 
 type UpdateCurrentLimitMasterAsyncResult struct {
@@ -471,17 +600,24 @@ type UpdateCurrentLimitMasterAsyncResult struct {
 	err    error
 }
 
-type UpdateCurrentLimitMasterFromGitHubResult struct {
-    /** 更新した現在有効な回数制限設定 */
-	Item         *CurrentLimitMaster	`json:"item"`
+func NewUpdateCurrentLimitMasterResultFromDict(data map[string]interface{}) UpdateCurrentLimitMasterResult {
+    return UpdateCurrentLimitMasterResult {
+        Item: NewCurrentLimitMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *UpdateCurrentLimitMasterFromGitHubResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p UpdateCurrentLimitMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateCurrentLimitMasterResult) Pointer() *UpdateCurrentLimitMasterResult {
+    return &p
+}
+
+type UpdateCurrentLimitMasterFromGitHubResult struct {
+    Item *CurrentLimitMaster `json:"item"`
 }
 
 type UpdateCurrentLimitMasterFromGitHubAsyncResult struct {
@@ -489,21 +625,24 @@ type UpdateCurrentLimitMasterFromGitHubAsyncResult struct {
 	err    error
 }
 
-type DescribeLimitModelsResult struct {
-    /** 回数制限の種類のリスト */
-	Items         []LimitModel	`json:"items"`
+func NewUpdateCurrentLimitMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentLimitMasterFromGitHubResult {
+    return UpdateCurrentLimitMasterFromGitHubResult {
+        Item: NewCurrentLimitMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeLimitModelsResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]LimitModel, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p UpdateCurrentLimitMasterFromGitHubResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p UpdateCurrentLimitMasterFromGitHubResult) Pointer() *UpdateCurrentLimitMasterFromGitHubResult {
+    return &p
+}
+
+type DescribeLimitModelsResult struct {
+    Items []LimitModel `json:"items"`
 }
 
 type DescribeLimitModelsAsyncResult struct {
@@ -511,20 +650,45 @@ type DescribeLimitModelsAsyncResult struct {
 	err    error
 }
 
-type GetLimitModelResult struct {
-    /** 回数制限の種類 */
-	Item         *LimitModel	`json:"item"`
+func NewDescribeLimitModelsResultFromDict(data map[string]interface{}) DescribeLimitModelsResult {
+    return DescribeLimitModelsResult {
+        Items: CastLimitModels(core.CastArray(data["items"])),
+    }
 }
 
-func (p *GetLimitModelResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeLimitModelsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastLimitModelsFromDict(
+            p.Items,
+        ),
     }
-    return &data
+}
+
+func (p DescribeLimitModelsResult) Pointer() *DescribeLimitModelsResult {
+    return &p
+}
+
+type GetLimitModelResult struct {
+    Item *LimitModel `json:"item"`
 }
 
 type GetLimitModelAsyncResult struct {
 	result *GetLimitModelResult
 	err    error
+}
+
+func NewGetLimitModelResultFromDict(data map[string]interface{}) GetLimitModelResult {
+    return GetLimitModelResult {
+        Item: NewLimitModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetLimitModelResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetLimitModelResult) Pointer() *GetLimitModelResult {
+    return &p
 }

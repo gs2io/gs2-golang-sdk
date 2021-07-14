@@ -16,96 +16,139 @@ permissions and limitations under the License.
 
 package lock
 
+import "core"
+
 type Namespace struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** カテゴリー名 */
-	Name *string   `json:"name"`
-    /** ネームスペースの説明 */
-	Description *string   `json:"description"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId *string     `json:"namespaceId"`
+	Name        *string     `json:"name"`
+	Description *string     `json:"description"`
+	LogSetting  *LogSetting `json:"logSetting"`
+	CreatedAt   *int64      `json:"createdAt"`
+	UpdatedAt   *int64      `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Name:        core.CastString(data["name"]),
+		Description: core.CastString(data["description"]),
+		LogSetting:  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:   core.CastInt64(data["createdAt"]),
+		UpdatedAt:   core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId": p.NamespaceId,
+		"name":        p.Name,
+		"description": p.Description,
+		"logSetting":  p.LogSetting.ToDict(),
+		"createdAt":   p.CreatedAt,
+		"updatedAt":   p.UpdatedAt,
+	}
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Mutex struct {
-    /** ミューテックス */
-	MutexId *string   `json:"mutexId"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** プロパティID */
-	PropertyId *string   `json:"propertyId"`
-    /** ロックを取得したトランザクションID */
-	TransactionId *string   `json:"transactionId"`
-    /** 参照回数 */
-	ReferenceCount *int32   `json:"referenceCount"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** ロックの有効期限 */
-	TtlAt *int64   `json:"ttlAt"`
+	MutexId       *string `json:"mutexId"`
+	UserId        *string `json:"userId"`
+	PropertyId    *string `json:"propertyId"`
+	TransactionId *string `json:"transactionId"`
+	CreatedAt     *int64  `json:"createdAt"`
 }
 
-func (p *Mutex) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["mutexId"] = p.MutexId
-    data["userId"] = p.UserId
-    data["propertyId"] = p.PropertyId
-    data["transactionId"] = p.TransactionId
-    data["referenceCount"] = p.ReferenceCount
-    data["createdAt"] = p.CreatedAt
-    data["ttlAt"] = p.TtlAt
-    return &data
+func NewMutexFromDict(data map[string]interface{}) Mutex {
+	return Mutex{
+		MutexId:       core.CastString(data["mutexId"]),
+		UserId:        core.CastString(data["userId"]),
+		PropertyId:    core.CastString(data["propertyId"]),
+		TransactionId: core.CastString(data["transactionId"]),
+		CreatedAt:     core.CastInt64(data["createdAt"]),
+	}
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func (p Mutex) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"mutexId":       p.MutexId,
+		"userId":        p.UserId,
+		"propertyId":    p.PropertyId,
+		"transactionId": p.TransactionId,
+		"createdAt":     p.CreatedAt,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func (p Mutex) Pointer() *Mutex {
+	return &p
+}
+
+func CastMutexes(data []interface{}) []Mutex {
+	v := make([]Mutex, 0)
+	for _, d := range data {
+		v = append(v, NewMutexFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastMutexesFromDict(data []Mutex) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

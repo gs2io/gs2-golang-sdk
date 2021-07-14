@@ -16,77 +16,145 @@ permissions and limitations under the License.
 
 package watch
 
+import "core"
+
 type Chart struct {
-    /** Datadog のJSON 形式のグラフ定義 */
-	ChartId *string   `json:"chartId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** Datadog から払い出された組み込みID */
-	EmbedId *string   `json:"embedId"`
-    /** Datadog から払い出された組み込み用HTML */
-	Html *string   `json:"html"`
+	ChartId *string `json:"chartId"`
+	EmbedId *string `json:"embedId"`
+	Html *string `json:"html"`
 }
 
-func (p *Chart) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["chartId"] = p.ChartId
-    data["ownerId"] = p.OwnerId
-    data["embedId"] = p.EmbedId
-    data["html"] = p.Html
-    return &data
+func NewChartFromDict(data map[string]interface{}) Chart {
+    return Chart {
+        ChartId: core.CastString(data["chartId"]),
+        EmbedId: core.CastString(data["embedId"]),
+        Html: core.CastString(data["html"]),
+    }
+}
+
+func (p Chart) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "chartId": p.ChartId,
+        "embedId": p.EmbedId,
+        "html": p.Html,
+    }
+}
+
+func (p Chart) Pointer() *Chart {
+    return &p
+}
+
+func CastCharts(data []interface{}) []Chart {
+	v := make([]Chart, 0)
+	for _, d := range data {
+		v = append(v, NewChartFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastChartsFromDict(data []Chart) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Cumulative struct {
-    /** 累積値 */
-	CumulativeId *string   `json:"cumulativeId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** リソースのGRN */
-	ResourceGrn *string   `json:"resourceGrn"`
-    /** 名前 */
-	Name *string   `json:"name"`
-    /** 累積値 */
-	Value *int64   `json:"value"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	CumulativeId *string `json:"cumulativeId"`
+	ResourceGrn *string `json:"resourceGrn"`
+	Name *string `json:"name"`
+	Value *int64 `json:"value"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
-func (p *Cumulative) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["cumulativeId"] = p.CumulativeId
-    data["ownerId"] = p.OwnerId
-    data["resourceGrn"] = p.ResourceGrn
-    data["name"] = p.Name
-    data["value"] = p.Value
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewCumulativeFromDict(data map[string]interface{}) Cumulative {
+    return Cumulative {
+        CumulativeId: core.CastString(data["cumulativeId"]),
+        ResourceGrn: core.CastString(data["resourceGrn"]),
+        Name: core.CastString(data["name"]),
+        Value: core.CastInt64(data["value"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
+}
+
+func (p Cumulative) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "cumulativeId": p.CumulativeId,
+        "resourceGrn": p.ResourceGrn,
+        "name": p.Name,
+        "value": p.Value,
+        "updatedAt": p.UpdatedAt,
+    }
+}
+
+func (p Cumulative) Pointer() *Cumulative {
+    return &p
+}
+
+func CastCumulatives(data []interface{}) []Cumulative {
+	v := make([]Cumulative, 0)
+	for _, d := range data {
+		v = append(v, NewCumulativeFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCumulativesFromDict(data []Cumulative) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type BillingActivity struct {
-    /** 請求にまつわるアクティビティ */
-	BillingActivityId *string   `json:"billingActivityId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** イベントの発生年 */
-	Year *int32   `json:"year"`
-    /** イベントの発生月 */
-	Month *int32   `json:"month"`
-    /** サービスの種類 */
-	Service *string   `json:"service"`
-    /** イベントの種類 */
-	ActivityType *string   `json:"activityType"`
-    /** イベントの値 */
-	Value *int64   `json:"value"`
+	BillingActivityId *string `json:"billingActivityId"`
+	Year *int32 `json:"year"`
+	Month *int32 `json:"month"`
+	Service *string `json:"service"`
+	ActivityType *string `json:"activityType"`
+	Value *int64 `json:"value"`
 }
 
-func (p *BillingActivity) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["billingActivityId"] = p.BillingActivityId
-    data["ownerId"] = p.OwnerId
-    data["year"] = p.Year
-    data["month"] = p.Month
-    data["service"] = p.Service
-    data["activityType"] = p.ActivityType
-    data["value"] = p.Value
-    return &data
+func NewBillingActivityFromDict(data map[string]interface{}) BillingActivity {
+    return BillingActivity {
+        BillingActivityId: core.CastString(data["billingActivityId"]),
+        Year: core.CastInt32(data["year"]),
+        Month: core.CastInt32(data["month"]),
+        Service: core.CastString(data["service"]),
+        ActivityType: core.CastString(data["activityType"]),
+        Value: core.CastInt64(data["value"]),
+    }
+}
+
+func (p BillingActivity) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "billingActivityId": p.BillingActivityId,
+        "year": p.Year,
+        "month": p.Month,
+        "service": p.Service,
+        "activityType": p.ActivityType,
+        "value": p.Value,
+    }
+}
+
+func (p BillingActivity) Pointer() *BillingActivity {
+    return &p
+}
+
+func CastBillingActivities(data []interface{}) []BillingActivity {
+	v := make([]BillingActivity, 0)
+	for _, d := range data {
+		v = append(v, NewBillingActivityFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBillingActivitiesFromDict(data []BillingActivity) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }

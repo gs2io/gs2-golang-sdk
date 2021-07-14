@@ -18,7 +18,7 @@ package money
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -780,99 +780,6 @@ func (p Gs2MoneyRestClient) DescribeWalletsByUserId(
 ) (*DescribeWalletsByUserIdResult, error) {
 	callback := make(chan DescribeWalletsByUserIdAsyncResult, 1)
 	go p.DescribeWalletsByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func queryWalletsAsyncHandler(
-	client Gs2MoneyRestClient,
-	job *core.NetworkJob,
-	callback chan<- QueryWalletsAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- QueryWalletsAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result QueryWalletsResult
-	if asyncResult.Err != nil {
-		callback <- QueryWalletsAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- QueryWalletsAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- QueryWalletsAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2MoneyRestClient) QueryWalletsAsync(
-	request *QueryWalletsRequest,
-	callback chan<- QueryWalletsAsyncResult,
-) {
-	path := "/{namespaceName}/wallet/query"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-	if request.UserId != nil {
-		queryStrings["userId"] = core.ToString(*request.UserId)
-	}
-	if request.PageToken != nil {
-		queryStrings["pageToken"] = core.ToString(*request.PageToken)
-	}
-	if request.Limit != nil {
-		queryStrings["limit"] = core.ToString(*request.Limit)
-	}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go queryWalletsAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
-			Method:       core.Get,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2MoneyRestClient) QueryWallets(
-	request *QueryWalletsRequest,
-) (*QueryWalletsResult, error) {
-	callback := make(chan QueryWalletsAsyncResult, 1)
-	go p.QueryWalletsAsync(
 		request,
 		callback,
 	)

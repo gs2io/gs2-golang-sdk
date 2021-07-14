@@ -16,447 +16,590 @@ permissions and limitations under the License.
 
 package inventory
 
+import "core"
+
 type Namespace struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** ネームスペース名 */
-	Name *string   `json:"name"`
-    /** ネームスペースの説明 */
-	Description *string   `json:"description"`
-    /** アイテム入手したときに実行するスクリプト */
-	AcquireScript *ScriptSetting   `json:"acquireScript"`
-    /** 入手上限に当たって入手できなかったときに実行するスクリプト */
-	OverflowScript *ScriptSetting   `json:"overflowScript"`
-    /** アイテム消費するときに実行するスクリプト */
-	ConsumeScript *ScriptSetting   `json:"consumeScript"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId    *string        `json:"namespaceId"`
+	Name           *string        `json:"name"`
+	Description    *string        `json:"description"`
+	AcquireScript  *ScriptSetting `json:"acquireScript"`
+	OverflowScript *ScriptSetting `json:"overflowScript"`
+	ConsumeScript  *ScriptSetting `json:"consumeScript"`
+	LogSetting     *LogSetting    `json:"logSetting"`
+	CreatedAt      *int64         `json:"createdAt"`
+	UpdatedAt      *int64         `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    if p.AcquireScript != nil {
-        data["acquireScript"] = *p.AcquireScript.ToDict()
-    }
-    if p.OverflowScript != nil {
-        data["overflowScript"] = *p.OverflowScript.ToDict()
-    }
-    if p.ConsumeScript != nil {
-        data["consumeScript"] = *p.ConsumeScript.ToDict()
-    }
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId:    core.CastString(data["namespaceId"]),
+		Name:           core.CastString(data["name"]),
+		Description:    core.CastString(data["description"]),
+		AcquireScript:  NewScriptSettingFromDict(core.CastMap(data["acquireScript"])).Pointer(),
+		OverflowScript: NewScriptSettingFromDict(core.CastMap(data["overflowScript"])).Pointer(),
+		ConsumeScript:  NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer(),
+		LogSetting:     NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:      core.CastInt64(data["createdAt"]),
+		UpdatedAt:      core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId":    p.NamespaceId,
+		"name":           p.Name,
+		"description":    p.Description,
+		"acquireScript":  p.AcquireScript.ToDict(),
+		"overflowScript": p.OverflowScript.ToDict(),
+		"consumeScript":  p.ConsumeScript.ToDict(),
+		"logSetting":     p.LogSetting.ToDict(),
+		"createdAt":      p.CreatedAt,
+		"updatedAt":      p.UpdatedAt,
+	}
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type InventoryModelMaster struct {
-    /** インベントリモデルマスター */
-	InventoryModelId *string   `json:"inventoryModelId"`
-    /** インベントリの種類名 */
-	Name *string   `json:"name"`
-    /** インベントリの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** インベントリモデルマスターの説明 */
-	Description *string   `json:"description"`
-    /** インベントリの初期サイズ */
-	InitialCapacity *int32   `json:"initialCapacity"`
-    /** インベントリの最大サイズ */
-	MaxCapacity *int32   `json:"maxCapacity"`
-    /** 参照元が登録されているアイテムセットは削除できなくする */
+	InventoryModelId      *string `json:"inventoryModelId"`
+	Name                  *string `json:"name"`
+	Metadata              *string `json:"metadata"`
+	Description           *string `json:"description"`
+	InitialCapacity       *int32  `json:"initialCapacity"`
+	MaxCapacity           *int32  `json:"maxCapacity"`
 	ProtectReferencedItem *bool   `json:"protectReferencedItem"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	CreatedAt             *int64  `json:"createdAt"`
+	UpdatedAt             *int64  `json:"updatedAt"`
 }
 
-func (p *InventoryModelMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["inventoryModelId"] = p.InventoryModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["description"] = p.Description
-    data["initialCapacity"] = p.InitialCapacity
-    data["maxCapacity"] = p.MaxCapacity
-    data["protectReferencedItem"] = p.ProtectReferencedItem
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewInventoryModelMasterFromDict(data map[string]interface{}) InventoryModelMaster {
+	return InventoryModelMaster{
+		InventoryModelId:      core.CastString(data["inventoryModelId"]),
+		Name:                  core.CastString(data["name"]),
+		Metadata:              core.CastString(data["metadata"]),
+		Description:           core.CastString(data["description"]),
+		InitialCapacity:       core.CastInt32(data["initialCapacity"]),
+		MaxCapacity:           core.CastInt32(data["maxCapacity"]),
+		ProtectReferencedItem: core.CastBool(data["protectReferencedItem"]),
+		CreatedAt:             core.CastInt64(data["createdAt"]),
+		UpdatedAt:             core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p InventoryModelMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"inventoryModelId":      p.InventoryModelId,
+		"name":                  p.Name,
+		"metadata":              p.Metadata,
+		"description":           p.Description,
+		"initialCapacity":       p.InitialCapacity,
+		"maxCapacity":           p.MaxCapacity,
+		"protectReferencedItem": p.ProtectReferencedItem,
+		"createdAt":             p.CreatedAt,
+		"updatedAt":             p.UpdatedAt,
+	}
+}
+
+func (p InventoryModelMaster) Pointer() *InventoryModelMaster {
+	return &p
+}
+
+func CastInventoryModelMasters(data []interface{}) []InventoryModelMaster {
+	v := make([]InventoryModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewInventoryModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastInventoryModelMastersFromDict(data []InventoryModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type InventoryModel struct {
-    /** インベントリモデル */
-	InventoryModelId *string   `json:"inventoryModelId"`
-    /** インベントリの種類名 */
-	Name *string   `json:"name"`
-    /** インベントリの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** インベントリの初期サイズ */
-	InitialCapacity *int32   `json:"initialCapacity"`
-    /** インベントリの最大サイズ */
-	MaxCapacity *int32   `json:"maxCapacity"`
-    /** 参照元が登録されているアイテムセットは削除できなくする */
-	ProtectReferencedItem *bool   `json:"protectReferencedItem"`
-    /** インベントリに格納可能なアイテムモデル一覧 */
-	ItemModels []ItemModel   `json:"itemModels"`
+	InventoryModelId      *string     `json:"inventoryModelId"`
+	Name                  *string     `json:"name"`
+	Metadata              *string     `json:"metadata"`
+	InitialCapacity       *int32      `json:"initialCapacity"`
+	MaxCapacity           *int32      `json:"maxCapacity"`
+	ProtectReferencedItem *bool       `json:"protectReferencedItem"`
+	ItemModels            []ItemModel `json:"itemModels"`
 }
 
-func (p *InventoryModel) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["inventoryModelId"] = p.InventoryModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["initialCapacity"] = p.InitialCapacity
-    data["maxCapacity"] = p.MaxCapacity
-    data["protectReferencedItem"] = p.ProtectReferencedItem
-    if p.ItemModels != nil {
-        var _itemModels []*map[string]interface {}
-        for _, item := range p.ItemModels {
-            _itemModels = append(_itemModels, item.ToDict())
-        }
-        data["itemModels"] = &_itemModels
-    }
-    return &data
+func NewInventoryModelFromDict(data map[string]interface{}) InventoryModel {
+	return InventoryModel{
+		InventoryModelId:      core.CastString(data["inventoryModelId"]),
+		Name:                  core.CastString(data["name"]),
+		Metadata:              core.CastString(data["metadata"]),
+		InitialCapacity:       core.CastInt32(data["initialCapacity"]),
+		MaxCapacity:           core.CastInt32(data["maxCapacity"]),
+		ProtectReferencedItem: core.CastBool(data["protectReferencedItem"]),
+		ItemModels:            CastItemModels(core.CastArray(data["itemModels"])),
+	}
+}
+
+func (p InventoryModel) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"inventoryModelId":      p.InventoryModelId,
+		"name":                  p.Name,
+		"metadata":              p.Metadata,
+		"initialCapacity":       p.InitialCapacity,
+		"maxCapacity":           p.MaxCapacity,
+		"protectReferencedItem": p.ProtectReferencedItem,
+		"itemModels": CastItemModelsFromDict(
+			p.ItemModels,
+		),
+	}
+}
+
+func (p InventoryModel) Pointer() *InventoryModel {
+	return &p
+}
+
+func CastInventoryModels(data []interface{}) []InventoryModel {
+	v := make([]InventoryModel, 0)
+	for _, d := range data {
+		v = append(v, NewInventoryModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastInventoryModelsFromDict(data []InventoryModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ItemModelMaster struct {
-    /** アイテムモデルマスター */
-	ItemModelId *string   `json:"itemModelId"`
-    /** アイテムの種類名 */
-	InventoryName *string   `json:"inventoryName"`
-    /** アイテムモデルの種類名 */
-	Name *string   `json:"name"`
-    /** アイテムモデルマスターの説明 */
-	Description *string   `json:"description"`
-    /** アイテムモデルの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** スタック可能な最大数量 */
-	StackingLimit *int64   `json:"stackingLimit"`
-    /** スタック可能な最大数量を超えた時複数枠にアイテムを保管することを許すか */
+	ItemModelId         *string `json:"itemModelId"`
+	InventoryName       *string `json:"inventoryName"`
+	Name                *string `json:"name"`
+	Description         *string `json:"description"`
+	Metadata            *string `json:"metadata"`
+	StackingLimit       *int64  `json:"stackingLimit"`
 	AllowMultipleStacks *bool   `json:"allowMultipleStacks"`
-    /** 表示順番 */
-	SortValue *int32   `json:"sortValue"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	SortValue           *int32  `json:"sortValue"`
+	CreatedAt           *int64  `json:"createdAt"`
+	UpdatedAt           *int64  `json:"updatedAt"`
 }
 
-func (p *ItemModelMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["itemModelId"] = p.ItemModelId
-    data["inventoryName"] = p.InventoryName
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["metadata"] = p.Metadata
-    data["stackingLimit"] = p.StackingLimit
-    data["allowMultipleStacks"] = p.AllowMultipleStacks
-    data["sortValue"] = p.SortValue
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewItemModelMasterFromDict(data map[string]interface{}) ItemModelMaster {
+	return ItemModelMaster{
+		ItemModelId:         core.CastString(data["itemModelId"]),
+		InventoryName:       core.CastString(data["inventoryName"]),
+		Name:                core.CastString(data["name"]),
+		Description:         core.CastString(data["description"]),
+		Metadata:            core.CastString(data["metadata"]),
+		StackingLimit:       core.CastInt64(data["stackingLimit"]),
+		AllowMultipleStacks: core.CastBool(data["allowMultipleStacks"]),
+		SortValue:           core.CastInt32(data["sortValue"]),
+		CreatedAt:           core.CastInt64(data["createdAt"]),
+		UpdatedAt:           core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p ItemModelMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"itemModelId":         p.ItemModelId,
+		"inventoryName":       p.InventoryName,
+		"name":                p.Name,
+		"description":         p.Description,
+		"metadata":            p.Metadata,
+		"stackingLimit":       p.StackingLimit,
+		"allowMultipleStacks": p.AllowMultipleStacks,
+		"sortValue":           p.SortValue,
+		"createdAt":           p.CreatedAt,
+		"updatedAt":           p.UpdatedAt,
+	}
+}
+
+func (p ItemModelMaster) Pointer() *ItemModelMaster {
+	return &p
+}
+
+func CastItemModelMasters(data []interface{}) []ItemModelMaster {
+	v := make([]ItemModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewItemModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastItemModelMastersFromDict(data []ItemModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ItemModel struct {
-    /** アイテムモデルマスター */
-	ItemModelId *string   `json:"itemModelId"`
-    /** アイテムモデルの種類名 */
-	Name *string   `json:"name"`
-    /** アイテムモデルの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** スタック可能な最大数量 */
-	StackingLimit *int64   `json:"stackingLimit"`
-    /** スタック可能な最大数量を超えた時複数枠にアイテムを保管することを許すか */
+	ItemModelId         *string `json:"itemModelId"`
+	Name                *string `json:"name"`
+	Metadata            *string `json:"metadata"`
+	StackingLimit       *int64  `json:"stackingLimit"`
 	AllowMultipleStacks *bool   `json:"allowMultipleStacks"`
-    /** 表示順番 */
-	SortValue *int32   `json:"sortValue"`
+	SortValue           *int32  `json:"sortValue"`
 }
 
-func (p *ItemModel) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["itemModelId"] = p.ItemModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["stackingLimit"] = p.StackingLimit
-    data["allowMultipleStacks"] = p.AllowMultipleStacks
-    data["sortValue"] = p.SortValue
-    return &data
+func NewItemModelFromDict(data map[string]interface{}) ItemModel {
+	return ItemModel{
+		ItemModelId:         core.CastString(data["itemModelId"]),
+		Name:                core.CastString(data["name"]),
+		Metadata:            core.CastString(data["metadata"]),
+		StackingLimit:       core.CastInt64(data["stackingLimit"]),
+		AllowMultipleStacks: core.CastBool(data["allowMultipleStacks"]),
+		SortValue:           core.CastInt32(data["sortValue"]),
+	}
+}
+
+func (p ItemModel) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"itemModelId":         p.ItemModelId,
+		"name":                p.Name,
+		"metadata":            p.Metadata,
+		"stackingLimit":       p.StackingLimit,
+		"allowMultipleStacks": p.AllowMultipleStacks,
+		"sortValue":           p.SortValue,
+	}
+}
+
+func (p ItemModel) Pointer() *ItemModel {
+	return &p
+}
+
+func CastItemModels(data []interface{}) []ItemModel {
+	v := make([]ItemModel, 0)
+	for _, d := range data {
+		v = append(v, NewItemModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastItemModelsFromDict(data []ItemModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CurrentItemModelMaster struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** マスターデータ */
-	Settings *string   `json:"settings"`
+	NamespaceId *string `json:"namespaceId"`
+	Settings    *string `json:"settings"`
 }
 
-func (p *CurrentItemModelMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["settings"] = p.Settings
-    return &data
+func NewCurrentItemModelMasterFromDict(data map[string]interface{}) CurrentItemModelMaster {
+	return CurrentItemModelMaster{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Settings:    core.CastString(data["settings"]),
+	}
+}
+
+func (p CurrentItemModelMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId": p.NamespaceId,
+		"settings":    p.Settings,
+	}
+}
+
+func (p CurrentItemModelMaster) Pointer() *CurrentItemModelMaster {
+	return &p
+}
+
+func CastCurrentItemModelMasters(data []interface{}) []CurrentItemModelMaster {
+	v := make([]CurrentItemModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewCurrentItemModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCurrentItemModelMastersFromDict(data []CurrentItemModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Inventory struct {
-    /** インベントリ */
-	InventoryId *string   `json:"inventoryId"`
-    /** インベントリモデル名 */
-	InventoryName *string   `json:"inventoryName"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** 現在のインベントリのキャパシティ使用量 */
-	CurrentInventoryCapacityUsage *int32   `json:"currentInventoryCapacityUsage"`
-    /** 現在のインベントリの最大キャパシティ */
-	CurrentInventoryMaxCapacity *int32   `json:"currentInventoryMaxCapacity"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	InventoryId                   *string `json:"inventoryId"`
+	InventoryName                 *string `json:"inventoryName"`
+	UserId                        *string `json:"userId"`
+	CurrentInventoryCapacityUsage *int32  `json:"currentInventoryCapacityUsage"`
+	CurrentInventoryMaxCapacity   *int32  `json:"currentInventoryMaxCapacity"`
+	CreatedAt                     *int64  `json:"createdAt"`
+	UpdatedAt                     *int64  `json:"updatedAt"`
 }
 
-func (p *Inventory) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["inventoryId"] = p.InventoryId
-    data["inventoryName"] = p.InventoryName
-    data["userId"] = p.UserId
-    data["currentInventoryCapacityUsage"] = p.CurrentInventoryCapacityUsage
-    data["currentInventoryMaxCapacity"] = p.CurrentInventoryMaxCapacity
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewInventoryFromDict(data map[string]interface{}) Inventory {
+	return Inventory{
+		InventoryId:                   core.CastString(data["inventoryId"]),
+		InventoryName:                 core.CastString(data["inventoryName"]),
+		UserId:                        core.CastString(data["userId"]),
+		CurrentInventoryCapacityUsage: core.CastInt32(data["currentInventoryCapacityUsage"]),
+		CurrentInventoryMaxCapacity:   core.CastInt32(data["currentInventoryMaxCapacity"]),
+		CreatedAt:                     core.CastInt64(data["createdAt"]),
+		UpdatedAt:                     core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Inventory) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"inventoryId":                   p.InventoryId,
+		"inventoryName":                 p.InventoryName,
+		"userId":                        p.UserId,
+		"currentInventoryCapacityUsage": p.CurrentInventoryCapacityUsage,
+		"currentInventoryMaxCapacity":   p.CurrentInventoryMaxCapacity,
+		"createdAt":                     p.CreatedAt,
+		"updatedAt":                     p.UpdatedAt,
+	}
+}
+
+func (p Inventory) Pointer() *Inventory {
+	return &p
+}
+
+func CastInventories(data []interface{}) []Inventory {
+	v := make([]Inventory, 0)
+	for _, d := range data {
+		v = append(v, NewInventoryFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastInventoriesFromDict(data []Inventory) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ItemSet struct {
-    /** 有効期限ごとのアイテム所持数量 */
-	ItemSetId *string   `json:"itemSetId"`
-    /** アイテムセットを識別する名前 */
-	Name *string   `json:"name"`
-    /** インベントリの名前 */
-	InventoryName *string   `json:"inventoryName"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** アイテムマスターの名前 */
-	ItemName *string   `json:"itemName"`
-    /** 所持数量 */
-	Count *int64   `json:"count"`
-    /** この所持品の参照元リスト */
-	ReferenceOf []string   `json:"referenceOf"`
-    /** 表示順番 */
-	SortValue *int32   `json:"sortValue"`
-    /** 有効期限 */
-	ExpiresAt *int64   `json:"expiresAt"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	ItemSetId     *string  `json:"itemSetId"`
+	Name          *string  `json:"name"`
+	InventoryName *string  `json:"inventoryName"`
+	UserId        *string  `json:"userId"`
+	ItemName      *string  `json:"itemName"`
+	Count         *int64   `json:"count"`
+	ReferenceOf   []string `json:"referenceOf"`
+	SortValue     *int32   `json:"sortValue"`
+	ExpiresAt     *int64   `json:"expiresAt"`
+	CreatedAt     *int64   `json:"createdAt"`
+	UpdatedAt     *int64   `json:"updatedAt"`
 }
 
-func (p *ItemSet) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["itemSetId"] = p.ItemSetId
-    data["name"] = p.Name
-    data["inventoryName"] = p.InventoryName
-    data["userId"] = p.UserId
-    data["itemName"] = p.ItemName
-    data["count"] = p.Count
-    if p.ReferenceOf != nil {
-        var _referenceOf []string
-        for _, item := range p.ReferenceOf {
-            _referenceOf = append(_referenceOf, item)
-        }
-        data["referenceOf"] = &_referenceOf
-    }
-    data["sortValue"] = p.SortValue
-    data["expiresAt"] = p.ExpiresAt
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewItemSetFromDict(data map[string]interface{}) ItemSet {
+	return ItemSet{
+		ItemSetId:     core.CastString(data["itemSetId"]),
+		Name:          core.CastString(data["name"]),
+		InventoryName: core.CastString(data["inventoryName"]),
+		UserId:        core.CastString(data["userId"]),
+		ItemName:      core.CastString(data["itemName"]),
+		Count:         core.CastInt64(data["count"]),
+		ReferenceOf:   core.CastStrings(core.CastArray(data["referenceOf"])),
+		SortValue:     core.CastInt32(data["sortValue"]),
+		ExpiresAt:     core.CastInt64(data["expiresAt"]),
+		CreatedAt:     core.CastInt64(data["createdAt"]),
+		UpdatedAt:     core.CastInt64(data["updatedAt"]),
+	}
 }
 
-type ItemSetGroup struct {
-    /** 有効期限ごとのアイテム所持数量 (このモデルは SDK では使用されません) */
-	ItemSetGroupId *string   `json:"itemSetGroupId"`
-    /** インベントリの名前 */
-	InventoryName *string   `json:"inventoryName"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** アイテムマスターの名前 */
-	ItemName *string   `json:"itemName"`
-    /** 表示順番 */
-	SortValue *int32   `json:"sortValue"`
-    /** アイテムセットIDのリスト */
-	ItemSetItemSetIdList []string   `json:"itemSetItemSetIdList"`
-    /** アイテムセットを識別する名前のリスト */
-	ItemSetNameList []string   `json:"itemSetNameList"`
-    /** 所持数量のリスト */
-	ItemSetCountList []int64   `json:"itemSetCountList"`
-    /** 参照元のリストのリスト */
-	ItemSetReferenceOfList [][]string   `json:"itemSetReferenceOfList"`
-    /** 有効期限のリスト */
-	ItemSetExpiresAtList []int64   `json:"itemSetExpiresAtList"`
-    /** 作成日時のリスト */
-	ItemSetCreatedAtList []int64   `json:"itemSetCreatedAtList"`
-    /** 更新日時のリスト */
-	ItemSetUpdatedAtList []int64   `json:"itemSetUpdatedAtList"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+func (p ItemSet) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"itemSetId":     p.ItemSetId,
+		"name":          p.Name,
+		"inventoryName": p.InventoryName,
+		"userId":        p.UserId,
+		"itemName":      p.ItemName,
+		"count":         p.Count,
+		"referenceOf": core.CastStringsFromDict(
+			p.ReferenceOf,
+		),
+		"sortValue": p.SortValue,
+		"expiresAt": p.ExpiresAt,
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
 }
 
-func (p *ItemSetGroup) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["itemSetGroupId"] = p.ItemSetGroupId
-    data["inventoryName"] = p.InventoryName
-    data["userId"] = p.UserId
-    data["itemName"] = p.ItemName
-    data["sortValue"] = p.SortValue
-    if p.ItemSetItemSetIdList != nil {
-        var _itemSetItemSetIdList []string
-        for _, item := range p.ItemSetItemSetIdList {
-            _itemSetItemSetIdList = append(_itemSetItemSetIdList, item)
-        }
-        data["itemSetItemSetIdList"] = &_itemSetItemSetIdList
-    }
-    if p.ItemSetNameList != nil {
-        var _itemSetNameList []string
-        for _, item := range p.ItemSetNameList {
-            _itemSetNameList = append(_itemSetNameList, item)
-        }
-        data["itemSetNameList"] = &_itemSetNameList
-    }
-    if p.ItemSetCountList != nil {
-        var _itemSetCountList []int64
-        for _, item := range p.ItemSetCountList {
-            _itemSetCountList = append(_itemSetCountList, item)
-        }
-        data["itemSetCountList"] = &_itemSetCountList
-    }
-    if p.ItemSetReferenceOfList != nil {
-        var _itemSetReferenceOfList [][]string
-        for _, item := range p.ItemSetReferenceOfList {
-            _itemSetReferenceOfList = append(_itemSetReferenceOfList, item)
-        }
-        data["itemSetReferenceOfList"] = &_itemSetReferenceOfList
-    }
-    if p.ItemSetExpiresAtList != nil {
-        var _itemSetExpiresAtList []int64
-        for _, item := range p.ItemSetExpiresAtList {
-            _itemSetExpiresAtList = append(_itemSetExpiresAtList, item)
-        }
-        data["itemSetExpiresAtList"] = &_itemSetExpiresAtList
-    }
-    if p.ItemSetCreatedAtList != nil {
-        var _itemSetCreatedAtList []int64
-        for _, item := range p.ItemSetCreatedAtList {
-            _itemSetCreatedAtList = append(_itemSetCreatedAtList, item)
-        }
-        data["itemSetCreatedAtList"] = &_itemSetCreatedAtList
-    }
-    if p.ItemSetUpdatedAtList != nil {
-        var _itemSetUpdatedAtList []int64
-        for _, item := range p.ItemSetUpdatedAtList {
-            _itemSetUpdatedAtList = append(_itemSetUpdatedAtList, item)
-        }
-        data["itemSetUpdatedAtList"] = &_itemSetUpdatedAtList
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func (p ItemSet) Pointer() *ItemSet {
+	return &p
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func CastItemSets(data []interface{}) []ItemSet {
+	v := make([]ItemSet, 0)
+	for _, d := range data {
+		v = append(v, NewItemSetFromDict(d.(map[string]interface{})))
+	}
+	return v
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func CastItemSetsFromDict(data []ItemSet) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GitHubCheckoutSetting struct {
-    /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	ApiKeyId *string   `json:"apiKeyId"`
-    /** リポジトリ名 */
-	RepositoryName *string   `json:"repositoryName"`
-    /** ソースコードのファイルパス */
-	SourcePath *string   `json:"sourcePath"`
-    /** コードの取得元 */
-	ReferenceType *string   `json:"referenceType"`
-    /** コミットハッシュ */
-	CommitHash *string   `json:"commitHash"`
-    /** ブランチ名 */
-	BranchName *string   `json:"branchName"`
-    /** タグ名 */
-	TagName *string   `json:"tagName"`
+	ApiKeyId       *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath     *string `json:"sourcePath"`
+	ReferenceType  *string `json:"referenceType"`
+	CommitHash     *string `json:"commitHash"`
+	BranchName     *string `json:"branchName"`
+	TagName        *string `json:"tagName"`
 }
 
-func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["apiKeyId"] = p.ApiKeyId
-    data["repositoryName"] = p.RepositoryName
-    data["sourcePath"] = p.SourcePath
-    data["referenceType"] = p.ReferenceType
-    data["commitHash"] = p.CommitHash
-    data["branchName"] = p.BranchName
-    data["tagName"] = p.TagName
-    return &data
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+	return GitHubCheckoutSetting{
+		ApiKeyId:       core.CastString(data["apiKeyId"]),
+		RepositoryName: core.CastString(data["repositoryName"]),
+		SourcePath:     core.CastString(data["sourcePath"]),
+		ReferenceType:  core.CastString(data["referenceType"]),
+		CommitHash:     core.CastString(data["commitHash"]),
+		BranchName:     core.CastString(data["branchName"]),
+		TagName:        core.CastString(data["tagName"]),
+	}
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"apiKeyId":       p.ApiKeyId,
+		"repositoryName": p.RepositoryName,
+		"sourcePath":     p.SourcePath,
+		"referenceType":  p.ReferenceType,
+		"commitHash":     p.CommitHash,
+		"branchName":     p.BranchName,
+		"tagName":        p.TagName,
+	}
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+	return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ScriptSetting struct {
-    /** 実行前に使用する GS2-Script のスクリプト のGRN */
-	TriggerScriptId *string   `json:"triggerScriptId"`
-    /** 完了通知の通知先 */
-	DoneTriggerTargetType *string   `json:"doneTriggerTargetType"`
-    /** 完了時に使用する GS2-Script のスクリプト のGRN */
-	DoneTriggerScriptId *string   `json:"doneTriggerScriptId"`
-    /** 完了時に使用する GS2-JobQueue のネームスペース のGRN */
-	DoneTriggerQueueNamespaceId *string   `json:"doneTriggerQueueNamespaceId"`
+	TriggerScriptId             *string `json:"triggerScriptId"`
+	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
+	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
-func (p *ScriptSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["triggerScriptId"] = p.TriggerScriptId
-    data["doneTriggerTargetType"] = p.DoneTriggerTargetType
-    data["doneTriggerScriptId"] = p.DoneTriggerScriptId
-    data["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
-    return &data
+func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
+	return ScriptSetting{
+		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
+		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
+		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
+		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+	}
+}
+
+func (p ScriptSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"triggerScriptId":             p.TriggerScriptId,
+		"doneTriggerTargetType":       p.DoneTriggerTargetType,
+		"doneTriggerScriptId":         p.DoneTriggerScriptId,
+		"doneTriggerQueueNamespaceId": p.DoneTriggerQueueNamespaceId,
+	}
+}
+
+func (p ScriptSetting) Pointer() *ScriptSetting {
+	return &p
+}
+
+func CastScriptSettings(data []interface{}) []ScriptSetting {
+	v := make([]ScriptSetting, 0)
+	for _, d := range data {
+		v = append(v, NewScriptSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

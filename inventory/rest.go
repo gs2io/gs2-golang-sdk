@@ -18,7 +18,7 @@ package inventory
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -4505,7 +4505,7 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfAsync(
 	request *VerifyReferenceOfRequest,
 	callback chan<- VerifyReferenceOfAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/verify"
+	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/{referenceOf}/verify/{verifyType}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -4620,7 +4620,7 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfByUserIdAsync(
 	request *VerifyReferenceOfByUserIdRequest,
 	callback chan<- VerifyReferenceOfByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/verify"
+	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/{referenceOf}/verify/{verifyType}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -4955,7 +4955,7 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfAsync(
 	request *DeleteReferenceOfRequest,
 	callback chan<- DeleteReferenceOfAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference"
+	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/{referenceOf}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -4975,6 +4975,11 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfAsync(
         path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
     } else {
         path = strings.ReplaceAll(path, "{itemSetName}", "null")
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != ""  {
+        path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
+    } else {
+        path = strings.ReplaceAll(path, "{referenceOf}", "null")
     }
 
 	replacer := strings.NewReplacer()
@@ -5057,7 +5062,7 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfByUserIdAsync(
 	request *DeleteReferenceOfByUserIdRequest,
 	callback chan<- DeleteReferenceOfByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference"
+	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/{referenceOf}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -5082,6 +5087,11 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfByUserIdAsync(
         path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
     } else {
         path = strings.ReplaceAll(path, "{itemSetName}", "null")
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != ""  {
+        path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
+    } else {
+        path = strings.ReplaceAll(path, "{referenceOf}", "null")
     }
 
 	replacer := strings.NewReplacer()

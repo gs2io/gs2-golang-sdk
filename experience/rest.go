@@ -18,7 +18,7 @@ package experience
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -743,8 +743,8 @@ func (p Gs2ExperienceRestClient) CreateExperienceModelMasterAsync(
     if request.MaxRankCap != nil {
         bodies["maxRankCap"] = *request.MaxRankCap
     }
-    if request.RankThresholdId != nil && *request.RankThresholdId != "" {
-        bodies["rankThresholdId"] = *request.RankThresholdId
+    if request.RankThresholdName != nil && *request.RankThresholdName != "" {
+        bodies["rankThresholdName"] = *request.RankThresholdName
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -942,8 +942,8 @@ func (p Gs2ExperienceRestClient) UpdateExperienceModelMasterAsync(
     if request.MaxRankCap != nil {
         bodies["maxRankCap"] = *request.MaxRankCap
     }
-    if request.RankThresholdId != nil && *request.RankThresholdId != "" {
-        bodies["rankThresholdId"] = *request.RankThresholdId
+    if request.RankThresholdName != nil && *request.RankThresholdName != "" {
+        bodies["rankThresholdName"] = *request.RankThresholdName
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -1394,7 +1394,7 @@ func (p Gs2ExperienceRestClient) CreateThresholdMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.Values != nil {
-        var _values []int64
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -1588,7 +1588,7 @@ func (p Gs2ExperienceRestClient) UpdateThresholdMasterAsync(
         bodies["metadata"] = *request.Metadata
     }
     if request.Values != nil {
-        var _values []int64
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }

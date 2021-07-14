@@ -18,7 +18,7 @@ package realtime
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -717,7 +717,7 @@ func (p Gs2RealtimeRestClient) WantRoomAsync(
         bodies["name"] = *request.Name
     }
     if request.NotificationUserIds != nil {
-        var _notificationUserIds []string
+        var _notificationUserIds []interface {}
         for _, item := range request.NotificationUserIds {
             _notificationUserIds = append(_notificationUserIds, item)
         }

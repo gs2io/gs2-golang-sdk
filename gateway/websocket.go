@@ -19,7 +19,7 @@ package gateway
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2GatewayWebSocketClient struct {
@@ -579,6 +579,9 @@ func (p Gs2GatewayWebSocketClient) DescribeWebSocketSessionsAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -755,8 +758,8 @@ func (p Gs2GatewayWebSocketClient) SetUserIdAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.ConnectionId != nil && *request.ConnectionId != "" {
-        bodies["connectionId"] = *request.ConnectionId
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.AllowConcurrentAccess != nil {
         bodies["allowConcurrentAccess"] = *request.AllowConcurrentAccess
@@ -843,9 +846,6 @@ func (p Gs2GatewayWebSocketClient) SetUserIdByUserIdAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.ConnectionId != nil && *request.ConnectionId != "" {
-        bodies["connectionId"] = *request.ConnectionId
-    }
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
     }
@@ -870,170 +870,6 @@ func (p Gs2GatewayWebSocketClient) SetUserIdByUserId(
 ) (*SetUserIdByUserIdResult, error) {
 	callback := make(chan SetUserIdByUserIdAsyncResult, 1)
 	go p.SetUserIdByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2GatewayWebSocketClient) getWebSocketSessionAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetWebSocketSessionAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetWebSocketSessionAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetWebSocketSessionResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetWebSocketSessionAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetWebSocketSessionAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2GatewayWebSocketClient) GetWebSocketSessionAsync(
-	request *GetWebSocketSessionRequest,
-	callback chan<- GetWebSocketSessionAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "webSocketSession",
-    		"function": "getWebSocketSession",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ConnectionId != nil && *request.ConnectionId != "" {
-        bodies["connectionId"] = *request.ConnectionId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.getWebSocketSessionAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2GatewayWebSocketClient) GetWebSocketSession(
-	request *GetWebSocketSessionRequest,
-) (*GetWebSocketSessionResult, error) {
-	callback := make(chan GetWebSocketSessionAsyncResult, 1)
-	go p.GetWebSocketSessionAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2GatewayWebSocketClient) getWebSocketSessionByConnectionIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetWebSocketSessionByConnectionIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetWebSocketSessionByConnectionIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetWebSocketSessionByConnectionIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetWebSocketSessionByConnectionIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetWebSocketSessionByConnectionIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2GatewayWebSocketClient) GetWebSocketSessionByConnectionIdAsync(
-	request *GetWebSocketSessionByConnectionIdRequest,
-	callback chan<- GetWebSocketSessionByConnectionIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "webSocketSession",
-    		"function": "getWebSocketSessionByConnectionId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ConnectionId != nil && *request.ConnectionId != "" {
-        bodies["connectionId"] = *request.ConnectionId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.getWebSocketSessionByConnectionIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2GatewayWebSocketClient) GetWebSocketSessionByConnectionId(
-	request *GetWebSocketSessionByConnectionIdRequest,
-) (*GetWebSocketSessionByConnectionIdResult, error) {
-	callback := make(chan GetWebSocketSessionByConnectionIdAsyncResult, 1)
-	go p.GetWebSocketSessionByConnectionIdAsync(
 		request,
 		callback,
 	)
@@ -1097,9 +933,6 @@ func (p Gs2GatewayWebSocketClient) SendNotificationAsync(
     }
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
-    }
-    if request.Issuer != nil && *request.Issuer != "" {
-        bodies["issuer"] = *request.Issuer
     }
     if request.Subject != nil && *request.Subject != "" {
         bodies["subject"] = *request.Subject
@@ -1191,6 +1024,9 @@ func (p Gs2GatewayWebSocketClient) SetFirebaseTokenAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.Token != nil && *request.Token != "" {
         bodies["token"] = *request.Token
@@ -1362,6 +1198,9 @@ func (p Gs2GatewayWebSocketClient) GetFirebaseTokenAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -1525,6 +1364,9 @@ func (p Gs2GatewayWebSocketClient) DeleteFirebaseTokenAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

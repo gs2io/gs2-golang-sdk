@@ -18,7 +18,7 @@ package news
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 	"strings"
 )
 
@@ -1039,7 +1039,7 @@ func (p Gs2NewsRestClient) WantGrantAsync(
 	request *WantGrantRequest,
 	callback chan<- WantGrantAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/news/grant"
+	path := "/{namespaceName}/user/me/news/grant"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -1126,7 +1126,7 @@ func (p Gs2NewsRestClient) WantGrantByUserIdAsync(
 	request *WantGrantByUserIdRequest,
 	callback chan<- WantGrantByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/news/grant"
+	path := "/{namespaceName}/user/{userId}/news/grant"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {

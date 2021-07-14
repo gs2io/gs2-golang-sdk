@@ -16,17 +16,10 @@ permissions and limitations under the License.
 
 package watch
 
-type GetChartResult struct {
-    /** チャート */
-	Item         *Chart	`json:"item"`
-}
+import "core"
 
-func (p *GetChartResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
-    }
-    return &data
+type GetChartResult struct {
+    Item *Chart `json:"item"`
 }
 
 type GetChartAsyncResult struct {
@@ -34,17 +27,24 @@ type GetChartAsyncResult struct {
 	err    error
 }
 
-type GetCumulativeResult struct {
-    /** 累積値 */
-	Item         *Cumulative	`json:"item"`
+func NewGetChartResultFromDict(data map[string]interface{}) GetChartResult {
+    return GetChartResult {
+        Item: NewChartFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *GetCumulativeResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p GetChartResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    return &data
+}
+
+func (p GetChartResult) Pointer() *GetChartResult {
+    return &p
+}
+
+type GetCumulativeResult struct {
+    Item *Cumulative `json:"item"`
 }
 
 type GetCumulativeAsyncResult struct {
@@ -52,26 +52,25 @@ type GetCumulativeAsyncResult struct {
 	err    error
 }
 
-type DescribeBillingActivitiesResult struct {
-    /** 請求にまつわるアクティビティのリスト */
-	Items         []BillingActivity	`json:"items"`
-    /** リストの続きを取得するためのページトークン */
-	NextPageToken         *string	`json:"nextPageToken"`
+func NewGetCumulativeResultFromDict(data map[string]interface{}) GetCumulativeResult {
+    return GetCumulativeResult {
+        Item: NewCumulativeFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
-func (p *DescribeBillingActivitiesResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Items != nil {
-    	items := make([]BillingActivity, 0)
-    	for _, item := range p.Items {
-			items = append(items, item)
-		}
-		data["items"] = items
+func (p GetCumulativeResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
-    if p.NextPageToken != nil {
-        data["nextPageToken"] = p.NextPageToken
-    }
-    return &data
+}
+
+func (p GetCumulativeResult) Pointer() *GetCumulativeResult {
+    return &p
+}
+
+type DescribeBillingActivitiesResult struct {
+    Items []BillingActivity `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeBillingActivitiesAsyncResult struct {
@@ -79,20 +78,47 @@ type DescribeBillingActivitiesAsyncResult struct {
 	err    error
 }
 
-type GetBillingActivityResult struct {
-    /** 請求にまつわるアクティビティ */
-	Item         *BillingActivity	`json:"item"`
+func NewDescribeBillingActivitiesResultFromDict(data map[string]interface{}) DescribeBillingActivitiesResult {
+    return DescribeBillingActivitiesResult {
+        Items: CastBillingActivities(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
-func (p *GetBillingActivityResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Item != nil {
-        data["item"] = p.Item.ToDict()
+func (p DescribeBillingActivitiesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastBillingActivitiesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
     }
-    return &data
+}
+
+func (p DescribeBillingActivitiesResult) Pointer() *DescribeBillingActivitiesResult {
+    return &p
+}
+
+type GetBillingActivityResult struct {
+    Item *BillingActivity `json:"item"`
 }
 
 type GetBillingActivityAsyncResult struct {
 	result *GetBillingActivityResult
 	err    error
+}
+
+func NewGetBillingActivityResultFromDict(data map[string]interface{}) GetBillingActivityResult {
+    return GetBillingActivityResult {
+        Item: NewBillingActivityFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetBillingActivityResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetBillingActivityResult) Pointer() *GetBillingActivityResult {
+    return &p
 }

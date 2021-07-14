@@ -16,488 +16,868 @@ permissions and limitations under the License.
 
 package matchmaking
 
+import "core"
+
 type Namespace struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** ネームスペース名 */
-	Name *string   `json:"name"`
-    /** ネームスペースの説明 */
-	Description *string   `json:"description"`
-    /** レーティング計算機能を使用するか */
-	EnableRating *bool   `json:"enableRating"`
-    /** ギャザリング新規作成時のアクション */
-	CreateGatheringTriggerType *string   `json:"createGatheringTriggerType"`
-    /** ギャザリング新規作成時 にルームを作成するネームスペース のGRN */
-	CreateGatheringTriggerRealtimeNamespaceId *string   `json:"createGatheringTriggerRealtimeNamespaceId"`
-    /** ギャザリング新規作成時 に実行されるスクリプト のGRN */
-	CreateGatheringTriggerScriptId *string   `json:"createGatheringTriggerScriptId"`
-    /** マッチメイキング完了時のアクション */
-	CompleteMatchmakingTriggerType *string   `json:"completeMatchmakingTriggerType"`
-    /** マッチメイキング完了時 にルームを作成するネームスペース のGRN */
-	CompleteMatchmakingTriggerRealtimeNamespaceId *string   `json:"completeMatchmakingTriggerRealtimeNamespaceId"`
-    /** マッチメイキング完了時 に実行されるスクリプト のGRN */
-	CompleteMatchmakingTriggerScriptId *string   `json:"completeMatchmakingTriggerScriptId"`
-    /** ギャザリングに新規プレイヤーが参加したときのプッシュ通知 */
-	JoinNotification *NotificationSetting   `json:"joinNotification"`
-    /** ギャザリングからプレイヤーが離脱したときのプッシュ通知 */
-	LeaveNotification *NotificationSetting   `json:"leaveNotification"`
-    /** マッチメイキングが完了したときのプッシュ通知 */
-	CompleteNotification *NotificationSetting   `json:"completeNotification"`
-    /** ログの出力設定 */
-	LogSetting *LogSetting   `json:"logSetting"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	NamespaceId                                   *string              `json:"namespaceId"`
+	Name                                          *string              `json:"name"`
+	Description                                   *string              `json:"description"`
+	EnableRating                                  *bool                `json:"enableRating"`
+	CreateGatheringTriggerType                    *string              `json:"createGatheringTriggerType"`
+	CreateGatheringTriggerRealtimeNamespaceId     *string              `json:"createGatheringTriggerRealtimeNamespaceId"`
+	CreateGatheringTriggerScriptId                *string              `json:"createGatheringTriggerScriptId"`
+	CompleteMatchmakingTriggerType                *string              `json:"completeMatchmakingTriggerType"`
+	CompleteMatchmakingTriggerRealtimeNamespaceId *string              `json:"completeMatchmakingTriggerRealtimeNamespaceId"`
+	CompleteMatchmakingTriggerScriptId            *string              `json:"completeMatchmakingTriggerScriptId"`
+	JoinNotification                              *NotificationSetting `json:"joinNotification"`
+	LeaveNotification                             *NotificationSetting `json:"leaveNotification"`
+	CompleteNotification                          *NotificationSetting `json:"completeNotification"`
+	LogSetting                                    *LogSetting          `json:"logSetting"`
+	CreatedAt                                     *int64               `json:"createdAt"`
+	UpdatedAt                                     *int64               `json:"updatedAt"`
 }
 
-func (p *Namespace) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["enableRating"] = p.EnableRating
-    data["createGatheringTriggerType"] = p.CreateGatheringTriggerType
-    data["createGatheringTriggerRealtimeNamespaceId"] = p.CreateGatheringTriggerRealtimeNamespaceId
-    data["createGatheringTriggerScriptId"] = p.CreateGatheringTriggerScriptId
-    data["completeMatchmakingTriggerType"] = p.CompleteMatchmakingTriggerType
-    data["completeMatchmakingTriggerRealtimeNamespaceId"] = p.CompleteMatchmakingTriggerRealtimeNamespaceId
-    data["completeMatchmakingTriggerScriptId"] = p.CompleteMatchmakingTriggerScriptId
-    if p.JoinNotification != nil {
-        data["joinNotification"] = *p.JoinNotification.ToDict()
-    }
-    if p.LeaveNotification != nil {
-        data["leaveNotification"] = *p.LeaveNotification.ToDict()
-    }
-    if p.CompleteNotification != nil {
-        data["completeNotification"] = *p.CompleteNotification.ToDict()
-    }
-    if p.LogSetting != nil {
-        data["logSetting"] = *p.LogSetting.ToDict()
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewNamespaceFromDict(data map[string]interface{}) Namespace {
+	return Namespace{
+		NamespaceId:                core.CastString(data["namespaceId"]),
+		Name:                       core.CastString(data["name"]),
+		Description:                core.CastString(data["description"]),
+		EnableRating:               core.CastBool(data["enableRating"]),
+		CreateGatheringTriggerType: core.CastString(data["createGatheringTriggerType"]),
+		CreateGatheringTriggerRealtimeNamespaceId:     core.CastString(data["createGatheringTriggerRealtimeNamespaceId"]),
+		CreateGatheringTriggerScriptId:                core.CastString(data["createGatheringTriggerScriptId"]),
+		CompleteMatchmakingTriggerType:                core.CastString(data["completeMatchmakingTriggerType"]),
+		CompleteMatchmakingTriggerRealtimeNamespaceId: core.CastString(data["completeMatchmakingTriggerRealtimeNamespaceId"]),
+		CompleteMatchmakingTriggerScriptId:            core.CastString(data["completeMatchmakingTriggerScriptId"]),
+		JoinNotification:                              NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer(),
+		LeaveNotification:                             NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer(),
+		CompleteNotification:                          NewNotificationSettingFromDict(core.CastMap(data["completeNotification"])).Pointer(),
+		LogSetting:                                    NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:                                     core.CastInt64(data["createdAt"]),
+		UpdatedAt:                                     core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Namespace) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId":                p.NamespaceId,
+		"name":                       p.Name,
+		"description":                p.Description,
+		"enableRating":               p.EnableRating,
+		"createGatheringTriggerType": p.CreateGatheringTriggerType,
+		"createGatheringTriggerRealtimeNamespaceId":     p.CreateGatheringTriggerRealtimeNamespaceId,
+		"createGatheringTriggerScriptId":                p.CreateGatheringTriggerScriptId,
+		"completeMatchmakingTriggerType":                p.CompleteMatchmakingTriggerType,
+		"completeMatchmakingTriggerRealtimeNamespaceId": p.CompleteMatchmakingTriggerRealtimeNamespaceId,
+		"completeMatchmakingTriggerScriptId":            p.CompleteMatchmakingTriggerScriptId,
+		"joinNotification":                              p.JoinNotification.ToDict(),
+		"leaveNotification":                             p.LeaveNotification.ToDict(),
+		"completeNotification":                          p.CompleteNotification.ToDict(),
+		"logSetting":                                    p.LogSetting.ToDict(),
+		"createdAt":                                     p.CreatedAt,
+		"updatedAt":                                     p.UpdatedAt,
+	}
+}
+
+func (p Namespace) Pointer() *Namespace {
+	return &p
+}
+
+func CastNamespaces(data []interface{}) []Namespace {
+	v := make([]Namespace, 0)
+	for _, d := range data {
+		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNamespacesFromDict(data []Namespace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Gathering struct {
-    /** ギャザリング */
-	GatheringId *string   `json:"gatheringId"`
-    /** ギャザリング名 */
-	Name *string   `json:"name"`
-    /** 募集条件 */
-	AttributeRanges []AttributeRange   `json:"attributeRanges"`
-    /** 参加者 */
-	CapacityOfRoles []CapacityOfRole   `json:"capacityOfRoles"`
-    /** 参加を許可するユーザIDリスト */
-	AllowUserIds []string   `json:"allowUserIds"`
-    /** メタデータ */
-	Metadata *string   `json:"metadata"`
-    /** ギャザリングの有効期限 */
-	ExpiresAt *int64   `json:"expiresAt"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	GatheringId     *string          `json:"gatheringId"`
+	Name            *string          `json:"name"`
+	AttributeRanges []AttributeRange `json:"attributeRanges"`
+	CapacityOfRoles []CapacityOfRole `json:"capacityOfRoles"`
+	AllowUserIds    []string         `json:"allowUserIds"`
+	Metadata        *string          `json:"metadata"`
+	ExpiresAt       *int64           `json:"expiresAt"`
+	CreatedAt       *int64           `json:"createdAt"`
+	UpdatedAt       *int64           `json:"updatedAt"`
 }
 
-func (p *Gathering) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["gatheringId"] = p.GatheringId
-    data["name"] = p.Name
-    if p.AttributeRanges != nil {
-        var _attributeRanges []*map[string]interface {}
-        for _, item := range p.AttributeRanges {
-            _attributeRanges = append(_attributeRanges, item.ToDict())
-        }
-        data["attributeRanges"] = &_attributeRanges
-    }
-    if p.CapacityOfRoles != nil {
-        var _capacityOfRoles []*map[string]interface {}
-        for _, item := range p.CapacityOfRoles {
-            _capacityOfRoles = append(_capacityOfRoles, item.ToDict())
-        }
-        data["capacityOfRoles"] = &_capacityOfRoles
-    }
-    if p.AllowUserIds != nil {
-        var _allowUserIds []string
-        for _, item := range p.AllowUserIds {
-            _allowUserIds = append(_allowUserIds, item)
-        }
-        data["allowUserIds"] = &_allowUserIds
-    }
-    data["metadata"] = p.Metadata
-    data["expiresAt"] = p.ExpiresAt
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewGatheringFromDict(data map[string]interface{}) Gathering {
+	return Gathering{
+		GatheringId:     core.CastString(data["gatheringId"]),
+		Name:            core.CastString(data["name"]),
+		AttributeRanges: CastAttributeRanges(core.CastArray(data["attributeRanges"])),
+		CapacityOfRoles: CastCapacityOfRoles(core.CastArray(data["capacityOfRoles"])),
+		AllowUserIds:    core.CastStrings(core.CastArray(data["allowUserIds"])),
+		Metadata:        core.CastString(data["metadata"]),
+		ExpiresAt:       core.CastInt64(data["expiresAt"]),
+		CreatedAt:       core.CastInt64(data["createdAt"]),
+		UpdatedAt:       core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Gathering) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"gatheringId": p.GatheringId,
+		"name":        p.Name,
+		"attributeRanges": CastAttributeRangesFromDict(
+			p.AttributeRanges,
+		),
+		"capacityOfRoles": CastCapacityOfRolesFromDict(
+			p.CapacityOfRoles,
+		),
+		"allowUserIds": core.CastStringsFromDict(
+			p.AllowUserIds,
+		),
+		"metadata":  p.Metadata,
+		"expiresAt": p.ExpiresAt,
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p Gathering) Pointer() *Gathering {
+	return &p
+}
+
+func CastGatherings(data []interface{}) []Gathering {
+	v := make([]Gathering, 0)
+	for _, d := range data {
+		v = append(v, NewGatheringFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGatheringsFromDict(data []Gathering) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type RatingModelMaster struct {
-    /** レーティングモデルマスター */
-	RatingModelId *string   `json:"ratingModelId"`
-    /** レーティングの種類名 */
-	Name *string   `json:"name"`
-    /** レーティングの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** レーティングモデルマスターの説明 */
-	Description *string   `json:"description"`
-    /** レート値の変動の大きさ */
-	Volatility *int32   `json:"volatility"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	RatingModelId *string `json:"ratingModelId"`
+	Name          *string `json:"name"`
+	Metadata      *string `json:"metadata"`
+	Description   *string `json:"description"`
+	Volatility    *int32  `json:"volatility"`
+	CreatedAt     *int64  `json:"createdAt"`
+	UpdatedAt     *int64  `json:"updatedAt"`
 }
 
-func (p *RatingModelMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["ratingModelId"] = p.RatingModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["description"] = p.Description
-    data["volatility"] = p.Volatility
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewRatingModelMasterFromDict(data map[string]interface{}) RatingModelMaster {
+	return RatingModelMaster{
+		RatingModelId: core.CastString(data["ratingModelId"]),
+		Name:          core.CastString(data["name"]),
+		Metadata:      core.CastString(data["metadata"]),
+		Description:   core.CastString(data["description"]),
+		Volatility:    core.CastInt32(data["volatility"]),
+		CreatedAt:     core.CastInt64(data["createdAt"]),
+		UpdatedAt:     core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p RatingModelMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"ratingModelId": p.RatingModelId,
+		"name":          p.Name,
+		"metadata":      p.Metadata,
+		"description":   p.Description,
+		"volatility":    p.Volatility,
+		"createdAt":     p.CreatedAt,
+		"updatedAt":     p.UpdatedAt,
+	}
+}
+
+func (p RatingModelMaster) Pointer() *RatingModelMaster {
+	return &p
+}
+
+func CastRatingModelMasters(data []interface{}) []RatingModelMaster {
+	v := make([]RatingModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewRatingModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRatingModelMastersFromDict(data []RatingModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type RatingModel struct {
-    /** レーティングモデル */
-	RatingModelId *string   `json:"ratingModelId"`
-    /** レーティングの種類名 */
-	Name *string   `json:"name"`
-    /** レーティングの種類のメタデータ */
-	Metadata *string   `json:"metadata"`
-    /** レート値の変動の大きさ */
-	Volatility *int32   `json:"volatility"`
+	RatingModelId *string `json:"ratingModelId"`
+	Name          *string `json:"name"`
+	Metadata      *string `json:"metadata"`
+	Volatility    *int32  `json:"volatility"`
 }
 
-func (p *RatingModel) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["ratingModelId"] = p.RatingModelId
-    data["name"] = p.Name
-    data["metadata"] = p.Metadata
-    data["volatility"] = p.Volatility
-    return &data
+func NewRatingModelFromDict(data map[string]interface{}) RatingModel {
+	return RatingModel{
+		RatingModelId: core.CastString(data["ratingModelId"]),
+		Name:          core.CastString(data["name"]),
+		Metadata:      core.CastString(data["metadata"]),
+		Volatility:    core.CastInt32(data["volatility"]),
+	}
+}
+
+func (p RatingModel) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"ratingModelId": p.RatingModelId,
+		"name":          p.Name,
+		"metadata":      p.Metadata,
+		"volatility":    p.Volatility,
+	}
+}
+
+func (p RatingModel) Pointer() *RatingModel {
+	return &p
+}
+
+func CastRatingModels(data []interface{}) []RatingModel {
+	v := make([]RatingModel, 0)
+	for _, d := range data {
+		v = append(v, NewRatingModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRatingModelsFromDict(data []RatingModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CurrentRatingModelMaster struct {
-    /** ネームスペース */
-	NamespaceId *string   `json:"namespaceId"`
-    /** マスターデータ */
-	Settings *string   `json:"settings"`
+	NamespaceId *string `json:"namespaceId"`
+	Settings    *string `json:"settings"`
 }
 
-func (p *CurrentRatingModelMaster) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["namespaceId"] = p.NamespaceId
-    data["settings"] = p.Settings
-    return &data
+func NewCurrentRatingModelMasterFromDict(data map[string]interface{}) CurrentRatingModelMaster {
+	return CurrentRatingModelMaster{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Settings:    core.CastString(data["settings"]),
+	}
 }
 
-type ResponseCache struct {
-    /** None */
-	Region *string   `json:"region"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** レスポンスキャッシュ のGRN */
-	ResponseCacheId *string   `json:"responseCacheId"`
-    /** None */
-	RequestHash *string   `json:"requestHash"`
-    /** APIの応答内容 */
-	Result *string   `json:"result"`
+func (p CurrentRatingModelMaster) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceId": p.NamespaceId,
+		"settings":    p.Settings,
+	}
 }
 
-func (p *ResponseCache) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["region"] = p.Region
-    data["ownerId"] = p.OwnerId
-    data["responseCacheId"] = p.ResponseCacheId
-    data["requestHash"] = p.RequestHash
-    data["result"] = p.Result
-    return &data
+func (p CurrentRatingModelMaster) Pointer() *CurrentRatingModelMaster {
+	return &p
+}
+
+func CastCurrentRatingModelMasters(data []interface{}) []CurrentRatingModelMaster {
+	v := make([]CurrentRatingModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewCurrentRatingModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCurrentRatingModelMastersFromDict(data []CurrentRatingModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type NotificationSetting struct {
-    /** プッシュ通知に使用する GS2-Gateway のネームスペース のGRN */
-	GatewayNamespaceId *string   `json:"gatewayNamespaceId"`
-    /** モバイルプッシュ通知へ転送するか */
+	GatewayNamespaceId               *string `json:"gatewayNamespaceId"`
 	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
-    /** モバイルプッシュ通知で使用するサウンドファイル名 */
-	Sound *string   `json:"sound"`
+	Sound                            *string `json:"sound"`
 }
 
-func (p *NotificationSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["gatewayNamespaceId"] = p.GatewayNamespaceId
-    data["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
-    data["sound"] = p.Sound
-    return &data
+func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
+	return NotificationSetting{
+		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
+		EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
+		Sound:                            core.CastString(data["sound"]),
+	}
+}
+
+func (p NotificationSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"gatewayNamespaceId":               p.GatewayNamespaceId,
+		"enableTransferMobileNotification": p.EnableTransferMobileNotification,
+		"sound":                            p.Sound,
+	}
+}
+
+func (p NotificationSetting) Pointer() *NotificationSetting {
+	return &p
+}
+
+func CastNotificationSettings(data []interface{}) []NotificationSetting {
+	v := make([]NotificationSetting, 0)
+	for _, d := range data {
+		v = append(v, NewNotificationSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNotificationSettingsFromDict(data []NotificationSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
-    /** ログの記録に使用する GS2-Log のネームスペース のGRN */
-	LoggingNamespaceId *string   `json:"loggingNamespaceId"`
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
-func (p *LogSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["loggingNamespaceId"] = p.LoggingNamespaceId
-    return &data
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"loggingNamespaceId": p.LoggingNamespaceId,
+	}
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+	return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GitHubCheckoutSetting struct {
-    /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	ApiKeyId *string   `json:"apiKeyId"`
-    /** リポジトリ名 */
-	RepositoryName *string   `json:"repositoryName"`
-    /** ソースコードのファイルパス */
-	SourcePath *string   `json:"sourcePath"`
-    /** コードの取得元 */
-	ReferenceType *string   `json:"referenceType"`
-    /** コミットハッシュ */
-	CommitHash *string   `json:"commitHash"`
-    /** ブランチ名 */
-	BranchName *string   `json:"branchName"`
-    /** タグ名 */
-	TagName *string   `json:"tagName"`
+	ApiKeyId       *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath     *string `json:"sourcePath"`
+	ReferenceType  *string `json:"referenceType"`
+	CommitHash     *string `json:"commitHash"`
+	BranchName     *string `json:"branchName"`
+	TagName        *string `json:"tagName"`
 }
 
-func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["apiKeyId"] = p.ApiKeyId
-    data["repositoryName"] = p.RepositoryName
-    data["sourcePath"] = p.SourcePath
-    data["referenceType"] = p.ReferenceType
-    data["commitHash"] = p.CommitHash
-    data["branchName"] = p.BranchName
-    data["tagName"] = p.TagName
-    return &data
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+	return GitHubCheckoutSetting{
+		ApiKeyId:       core.CastString(data["apiKeyId"]),
+		RepositoryName: core.CastString(data["repositoryName"]),
+		SourcePath:     core.CastString(data["sourcePath"]),
+		ReferenceType:  core.CastString(data["referenceType"]),
+		CommitHash:     core.CastString(data["commitHash"]),
+		BranchName:     core.CastString(data["branchName"]),
+		TagName:        core.CastString(data["tagName"]),
+	}
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"apiKeyId":       p.ApiKeyId,
+		"repositoryName": p.RepositoryName,
+		"sourcePath":     p.SourcePath,
+		"referenceType":  p.ReferenceType,
+		"commitHash":     p.CommitHash,
+		"branchName":     p.BranchName,
+		"tagName":        p.TagName,
+	}
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+	return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type AttributeRange struct {
-    /** 属性名 */
-	Name *string   `json:"name"`
-    /** ギャザリング参加可能な属性値の最小値 */
-	Min *int32   `json:"min"`
-    /** ギャザリング参加可能な属性値の最大値 */
-	Max *int32   `json:"max"`
+	Name *string `json:"name"`
+	Min  *int32  `json:"min"`
+	Max  *int32  `json:"max"`
 }
 
-func (p *AttributeRange) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["name"] = p.Name
-    data["min"] = p.Min
-    data["max"] = p.Max
-    return &data
+func NewAttributeRangeFromDict(data map[string]interface{}) AttributeRange {
+	return AttributeRange{
+		Name: core.CastString(data["name"]),
+		Min:  core.CastInt32(data["min"]),
+		Max:  core.CastInt32(data["max"]),
+	}
+}
+
+func (p AttributeRange) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"name": p.Name,
+		"min":  p.Min,
+		"max":  p.Max,
+	}
+}
+
+func (p AttributeRange) Pointer() *AttributeRange {
+	return &p
+}
+
+func CastAttributeRanges(data []interface{}) []AttributeRange {
+	v := make([]AttributeRange, 0)
+	for _, d := range data {
+		v = append(v, NewAttributeRangeFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAttributeRangesFromDict(data []AttributeRange) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CapacityOfRole struct {
-    /** ロール名 */
-	RoleName *string   `json:"roleName"`
-    /** ロール名の別名リスト */
-	RoleAliases []string   `json:"roleAliases"`
-    /** 募集人数 */
-	Capacity *int32   `json:"capacity"`
-    /** 参加者のプレイヤー情報リスト */
-	Participants []Player   `json:"participants"`
+	RoleName     *string  `json:"roleName"`
+	RoleAliases  []string `json:"roleAliases"`
+	Capacity     *int32   `json:"capacity"`
+	Participants []Player `json:"participants"`
 }
 
-func (p *CapacityOfRole) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["roleName"] = p.RoleName
-    if p.RoleAliases != nil {
-        var _roleAliases []string
-        for _, item := range p.RoleAliases {
-            _roleAliases = append(_roleAliases, item)
-        }
-        data["roleAliases"] = &_roleAliases
-    }
-    data["capacity"] = p.Capacity
-    if p.Participants != nil {
-        var _participants []*map[string]interface {}
-        for _, item := range p.Participants {
-            _participants = append(_participants, item.ToDict())
-        }
-        data["participants"] = &_participants
-    }
-    return &data
+func NewCapacityOfRoleFromDict(data map[string]interface{}) CapacityOfRole {
+	return CapacityOfRole{
+		RoleName:     core.CastString(data["roleName"]),
+		RoleAliases:  core.CastStrings(core.CastArray(data["roleAliases"])),
+		Capacity:     core.CastInt32(data["capacity"]),
+		Participants: CastPlayers(core.CastArray(data["participants"])),
+	}
+}
+
+func (p CapacityOfRole) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"roleName": p.RoleName,
+		"roleAliases": core.CastStringsFromDict(
+			p.RoleAliases,
+		),
+		"capacity": p.Capacity,
+		"participants": CastPlayersFromDict(
+			p.Participants,
+		),
+	}
+}
+
+func (p CapacityOfRole) Pointer() *CapacityOfRole {
+	return &p
+}
+
+func CastCapacityOfRoles(data []interface{}) []CapacityOfRole {
+	v := make([]CapacityOfRole, 0)
+	for _, d := range data {
+		v = append(v, NewCapacityOfRoleFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCapacityOfRolesFromDict(data []CapacityOfRole) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Attribute struct {
-    /** 属性名 */
-	Name *string   `json:"name"`
-    /** 属性値 */
-	Value *int32   `json:"value"`
+	Name  *string `json:"name"`
+	Value *int32  `json:"value"`
 }
 
-func (p *Attribute) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["name"] = p.Name
-    data["value"] = p.Value
-    return &data
+func NewAttributeFromDict(data map[string]interface{}) Attribute {
+	return Attribute{
+		Name:  core.CastString(data["name"]),
+		Value: core.CastInt32(data["value"]),
+	}
+}
+
+func (p Attribute) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"name":  p.Name,
+		"value": p.Value,
+	}
+}
+
+func (p Attribute) Pointer() *Attribute {
+	return &p
+}
+
+func CastAttributes(data []interface{}) []Attribute {
+	v := make([]Attribute, 0)
+	for _, d := range data {
+		v = append(v, NewAttributeFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAttributesFromDict(data []Attribute) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Player struct {
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** 属性値のリスト */
-	Attributes []Attribute   `json:"attributes"`
-    /** ロール名 */
-	RoleName *string   `json:"roleName"`
-    /** 参加を拒否するユーザIDリスト */
-	DenyUserIds []string   `json:"denyUserIds"`
+	UserId      *string     `json:"userId"`
+	Attributes  []Attribute `json:"attributes"`
+	RoleName    *string     `json:"roleName"`
+	DenyUserIds []string    `json:"denyUserIds"`
 }
 
-func (p *Player) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["userId"] = p.UserId
-    if p.Attributes != nil {
-        var _attributes []*map[string]interface {}
-        for _, item := range p.Attributes {
-            _attributes = append(_attributes, item.ToDict())
-        }
-        data["attributes"] = &_attributes
-    }
-    data["roleName"] = p.RoleName
-    if p.DenyUserIds != nil {
-        var _denyUserIds []string
-        for _, item := range p.DenyUserIds {
-            _denyUserIds = append(_denyUserIds, item)
-        }
-        data["denyUserIds"] = &_denyUserIds
-    }
-    return &data
+func NewPlayerFromDict(data map[string]interface{}) Player {
+	return Player{
+		UserId:      core.CastString(data["userId"]),
+		Attributes:  CastAttributes(core.CastArray(data["attributes"])),
+		RoleName:    core.CastString(data["roleName"]),
+		DenyUserIds: core.CastStrings(core.CastArray(data["denyUserIds"])),
+	}
+}
+
+func (p Player) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId": p.UserId,
+		"attributes": CastAttributesFromDict(
+			p.Attributes,
+		),
+		"roleName": p.RoleName,
+		"denyUserIds": core.CastStringsFromDict(
+			p.DenyUserIds,
+		),
+	}
+}
+
+func (p Player) Pointer() *Player {
+	return &p
+}
+
+func CastPlayers(data []interface{}) []Player {
+	v := make([]Player, 0)
+	for _, d := range data {
+		v = append(v, NewPlayerFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastPlayersFromDict(data []Player) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Rating struct {
-    /** レーティング */
-	RatingId *string   `json:"ratingId"`
-    /** レーティング名 */
-	Name *string   `json:"name"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** None */
-	RateValue *float32   `json:"rateValue"`
-    /** 作成日時 */
+	RatingId  *string  `json:"ratingId"`
+	Name      *string  `json:"name"`
+	UserId    *string  `json:"userId"`
+	RateValue *float32 `json:"rateValue"`
 	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
 	UpdatedAt *int64   `json:"updatedAt"`
 }
 
-func (p *Rating) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["ratingId"] = p.RatingId
-    data["name"] = p.Name
-    data["userId"] = p.UserId
-    data["rateValue"] = p.RateValue
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewRatingFromDict(data map[string]interface{}) Rating {
+	return Rating{
+		RatingId:  core.CastString(data["ratingId"]),
+		Name:      core.CastString(data["name"]),
+		UserId:    core.CastString(data["userId"]),
+		RateValue: core.CastFloat32(data["rateValue"]),
+		CreatedAt: core.CastInt64(data["createdAt"]),
+		UpdatedAt: core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Rating) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"ratingId":  p.RatingId,
+		"name":      p.Name,
+		"userId":    p.UserId,
+		"rateValue": p.RateValue,
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p Rating) Pointer() *Rating {
+	return &p
+}
+
+func CastRatings(data []interface{}) []Rating {
+	v := make([]Rating, 0)
+	for _, d := range data {
+		v = append(v, NewRatingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRatingsFromDict(data []Rating) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GameResult struct {
-    /** 順位 */
-	Rank *int32   `json:"rank"`
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
+	Rank   *int32  `json:"rank"`
+	UserId *string `json:"userId"`
 }
 
-func (p *GameResult) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["rank"] = p.Rank
-    data["userId"] = p.UserId
-    return &data
+func NewGameResultFromDict(data map[string]interface{}) GameResult {
+	return GameResult{
+		Rank:   core.CastInt32(data["rank"]),
+		UserId: core.CastString(data["userId"]),
+	}
+}
+
+func (p GameResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"rank":   p.Rank,
+		"userId": p.UserId,
+	}
+}
+
+func (p GameResult) Pointer() *GameResult {
+	return &p
+}
+
+func CastGameResults(data []interface{}) []GameResult {
+	v := make([]GameResult, 0)
+	for _, d := range data {
+		v = append(v, NewGameResultFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGameResultsFromDict(data []GameResult) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Ballot struct {
-    /** ユーザーID */
-	UserId *string   `json:"userId"`
-    /** レーティング計算に使用するレーティング名 */
-	RatingName *string   `json:"ratingName"`
-    /** 投票対象のギャザリング名 */
-	GatheringName *string   `json:"gatheringName"`
-    /** 参加人数 */
-	NumberOfPlayer *int32   `json:"numberOfPlayer"`
+	UserId         *string `json:"userId"`
+	RatingName     *string `json:"ratingName"`
+	GatheringName  *string `json:"gatheringName"`
+	NumberOfPlayer *int32  `json:"numberOfPlayer"`
 }
 
-func (p *Ballot) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["userId"] = p.UserId
-    data["ratingName"] = p.RatingName
-    data["gatheringName"] = p.GatheringName
-    data["numberOfPlayer"] = p.NumberOfPlayer
-    return &data
+func NewBallotFromDict(data map[string]interface{}) Ballot {
+	return Ballot{
+		UserId:         core.CastString(data["userId"]),
+		RatingName:     core.CastString(data["ratingName"]),
+		GatheringName:  core.CastString(data["gatheringName"]),
+		NumberOfPlayer: core.CastInt32(data["numberOfPlayer"]),
+	}
+}
+
+func (p Ballot) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId":         p.UserId,
+		"ratingName":     p.RatingName,
+		"gatheringName":  p.GatheringName,
+		"numberOfPlayer": p.NumberOfPlayer,
+	}
+}
+
+func (p Ballot) Pointer() *Ballot {
+	return &p
+}
+
+func CastBallots(data []interface{}) []Ballot {
+	v := make([]Ballot, 0)
+	for _, d := range data {
+		v = append(v, NewBallotFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBallotsFromDict(data []Ballot) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type SignedBallot struct {
-    /** 投票用紙の署名対象のデータ */
-	Body *string   `json:"body"`
-    /** 投票用紙の署名 */
-	Signature *string   `json:"signature"`
+	Body      *string `json:"body"`
+	Signature *string `json:"signature"`
 }
 
-func (p *SignedBallot) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["body"] = p.Body
-    data["signature"] = p.Signature
-    return &data
+func NewSignedBallotFromDict(data map[string]interface{}) SignedBallot {
+	return SignedBallot{
+		Body:      core.CastString(data["body"]),
+		Signature: core.CastString(data["signature"]),
+	}
+}
+
+func (p SignedBallot) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"body":      p.Body,
+		"signature": p.Signature,
+	}
+}
+
+func (p SignedBallot) Pointer() *SignedBallot {
+	return &p
+}
+
+func CastSignedBallots(data []interface{}) []SignedBallot {
+	v := make([]SignedBallot, 0)
+	for _, d := range data {
+		v = append(v, NewSignedBallotFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSignedBallotsFromDict(data []SignedBallot) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type WrittenBallot struct {
-    /** 投票用紙 */
-	Ballot *Ballot   `json:"ballot"`
-    /** 投票内容。対戦結果のリスト */
-	GameResults []GameResult   `json:"gameResults"`
+	Ballot      *Ballot      `json:"ballot"`
+	GameResults []GameResult `json:"gameResults"`
 }
 
-func (p *WrittenBallot) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    if p.Ballot != nil {
-        data["ballot"] = *p.Ballot.ToDict()
-    }
-    if p.GameResults != nil {
-        var _gameResults []*map[string]interface {}
-        for _, item := range p.GameResults {
-            _gameResults = append(_gameResults, item.ToDict())
-        }
-        data["gameResults"] = &_gameResults
-    }
-    return &data
+func NewWrittenBallotFromDict(data map[string]interface{}) WrittenBallot {
+	return WrittenBallot{
+		Ballot:      NewBallotFromDict(core.CastMap(data["ballot"])).Pointer(),
+		GameResults: CastGameResults(core.CastArray(data["gameResults"])),
+	}
+}
+
+func (p WrittenBallot) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"ballot": p.Ballot.ToDict(),
+		"gameResults": CastGameResultsFromDict(
+			p.GameResults,
+		),
+	}
+}
+
+func (p WrittenBallot) Pointer() *WrittenBallot {
+	return &p
+}
+
+func CastWrittenBallots(data []interface{}) []WrittenBallot {
+	v := make([]WrittenBallot, 0)
+	for _, d := range data {
+		v = append(v, NewWrittenBallotFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastWrittenBallotsFromDict(data []WrittenBallot) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Vote struct {
-    /** 投票状況 */
-	VoteId *string   `json:"voteId"`
-    /** レーティング名 */
-	RatingName *string   `json:"ratingName"`
-    /** 投票対象のギャザリング名 */
-	GatheringName *string   `json:"gatheringName"`
-    /** 投票用紙のリスト */
-	WrittenBallots []WrittenBallot   `json:"writtenBallots"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	VoteId         *string         `json:"voteId"`
+	RatingName     *string         `json:"ratingName"`
+	GatheringName  *string         `json:"gatheringName"`
+	WrittenBallots []WrittenBallot `json:"writtenBallots"`
+	CreatedAt      *int64          `json:"createdAt"`
+	UpdatedAt      *int64          `json:"updatedAt"`
 }
 
-func (p *Vote) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["voteId"] = p.VoteId
-    data["ratingName"] = p.RatingName
-    data["gatheringName"] = p.GatheringName
-    if p.WrittenBallots != nil {
-        var _writtenBallots []*map[string]interface {}
-        for _, item := range p.WrittenBallots {
-            _writtenBallots = append(_writtenBallots, item.ToDict())
-        }
-        data["writtenBallots"] = &_writtenBallots
-    }
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewVoteFromDict(data map[string]interface{}) Vote {
+	return Vote{
+		VoteId:         core.CastString(data["voteId"]),
+		RatingName:     core.CastString(data["ratingName"]),
+		GatheringName:  core.CastString(data["gatheringName"]),
+		WrittenBallots: CastWrittenBallots(core.CastArray(data["writtenBallots"])),
+		CreatedAt:      core.CastInt64(data["createdAt"]),
+		UpdatedAt:      core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Vote) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"voteId":        p.VoteId,
+		"ratingName":    p.RatingName,
+		"gatheringName": p.GatheringName,
+		"writtenBallots": CastWrittenBallotsFromDict(
+			p.WrittenBallots,
+		),
+		"createdAt": p.CreatedAt,
+		"updatedAt": p.UpdatedAt,
+	}
+}
+
+func (p Vote) Pointer() *Vote {
+	return &p
+}
+
+func CastVotes(data []interface{}) []Vote {
+	v := make([]Vote, 0)
+	for _, d := range data {
+		v = append(v, NewVoteFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastVotesFromDict(data []Vote) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

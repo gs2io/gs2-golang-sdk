@@ -19,7 +19,7 @@ package dictionary
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2DictionaryWebSocketClient struct {
@@ -1171,6 +1171,9 @@ func (p Gs2DictionaryWebSocketClient) DescribeEntriesAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -1351,7 +1354,7 @@ func (p Gs2DictionaryWebSocketClient) AddEntriesByUserIdAsync(
         bodies["userId"] = *request.UserId
     }
     if request.EntryModelNames != nil {
-        var _entryModelNames []string
+        var _entryModelNames []interface {}
         for _, item := range request.EntryModelNames {
             _entryModelNames = append(_entryModelNames, item)
         }
@@ -1435,6 +1438,9 @@ func (p Gs2DictionaryWebSocketClient) GetEntryAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.EntryModelName != nil && *request.EntryModelName != "" {
         bodies["entryModelName"] = *request.EntryModelName
@@ -1605,6 +1611,9 @@ func (p Gs2DictionaryWebSocketClient) GetEntryWithSignatureAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.EntryModelName != nil && *request.EntryModelName != "" {
         bodies["entryModelName"] = *request.EntryModelName

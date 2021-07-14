@@ -19,7 +19,7 @@ package stamina
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2StaminaWebSocketClient struct {
@@ -169,11 +169,8 @@ func (p Gs2StaminaWebSocketClient) CreateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
-    if request.OverflowTriggerScriptId != nil && *request.OverflowTriggerScriptId != "" {
-        bodies["overflowTriggerScriptId"] = *request.OverflowTriggerScriptId
-    }
-    if request.OverflowTriggerNamespaceId != nil && *request.OverflowTriggerNamespaceId != "" {
-        bodies["overflowTriggerNamespaceId"] = *request.OverflowTriggerNamespaceId
+    if request.OverflowTriggerScript != nil {
+        bodies["overflowTriggerScript"] = request.OverflowTriggerScript.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
@@ -418,11 +415,8 @@ func (p Gs2StaminaWebSocketClient) UpdateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
-    if request.OverflowTriggerScriptId != nil && *request.OverflowTriggerScriptId != "" {
-        bodies["overflowTriggerScriptId"] = *request.OverflowTriggerScriptId
-    }
-    if request.OverflowTriggerNamespaceId != nil && *request.OverflowTriggerNamespaceId != "" {
-        bodies["overflowTriggerNamespaceId"] = *request.OverflowTriggerNamespaceId
+    if request.OverflowTriggerScript != nil {
+        bodies["overflowTriggerScript"] = request.OverflowTriggerScript.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
@@ -1156,7 +1150,7 @@ func (p Gs2StaminaWebSocketClient) CreateMaxStaminaTableMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.Values != nil {
-        var _values []int32
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -1336,7 +1330,7 @@ func (p Gs2StaminaWebSocketClient) UpdateMaxStaminaTableMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.Values != nil {
-        var _values []int32
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -1601,7 +1595,7 @@ func (p Gs2StaminaWebSocketClient) CreateRecoverIntervalTableMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.Values != nil {
-        var _values []int32
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -1781,7 +1775,7 @@ func (p Gs2StaminaWebSocketClient) UpdateRecoverIntervalTableMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.Values != nil {
-        var _values []int32
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -2046,7 +2040,7 @@ func (p Gs2StaminaWebSocketClient) CreateRecoverValueTableMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.Values != nil {
-        var _values []int32
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -2226,7 +2220,7 @@ func (p Gs2StaminaWebSocketClient) UpdateRecoverValueTableMasterAsync(
         bodies["experienceModelId"] = *request.ExperienceModelId
     }
     if request.Values != nil {
-        var _values []int32
+        var _values []interface {}
         for _, item := range request.Values {
             _values = append(_values, item)
         }
@@ -2876,6 +2870,9 @@ func (p Gs2StaminaWebSocketClient) DescribeStaminasAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.PageToken != nil && *request.PageToken != "" {
         bodies["pageToken"] = *request.PageToken
     }
@@ -3054,6 +3051,9 @@ func (p Gs2StaminaWebSocketClient) GetStaminaAsync(
     }
     if request.StaminaName != nil && *request.StaminaName != "" {
         bodies["staminaName"] = *request.StaminaName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -3321,6 +3321,9 @@ func (p Gs2StaminaWebSocketClient) ConsumeStaminaAsync(
     }
     if request.StaminaName != nil && *request.StaminaName != "" {
         bodies["staminaName"] = *request.StaminaName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.ConsumeValue != nil {
         bodies["consumeValue"] = *request.ConsumeValue
@@ -3938,6 +3941,9 @@ func (p Gs2StaminaWebSocketClient) SetMaxValueByStatusAsync(
     if request.StaminaName != nil && *request.StaminaName != "" {
         bodies["staminaName"] = *request.StaminaName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.KeyId != nil && *request.KeyId != "" {
         bodies["keyId"] = *request.KeyId
     }
@@ -4032,6 +4038,9 @@ func (p Gs2StaminaWebSocketClient) SetRecoverIntervalByStatusAsync(
     if request.StaminaName != nil && *request.StaminaName != "" {
         bodies["staminaName"] = *request.StaminaName
     }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
     if request.KeyId != nil && *request.KeyId != "" {
         bodies["keyId"] = *request.KeyId
     }
@@ -4125,6 +4134,9 @@ func (p Gs2StaminaWebSocketClient) SetRecoverValueByStatusAsync(
     }
     if request.StaminaName != nil && *request.StaminaName != "" {
         bodies["staminaName"] = *request.StaminaName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.KeyId != nil && *request.KeyId != "" {
         bodies["keyId"] = *request.KeyId

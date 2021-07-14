@@ -16,267 +16,317 @@ permissions and limitations under the License.
 
 package deploy
 
+import "core"
+
 type Stack struct {
-    /** スタック */
-	StackId *string   `json:"stackId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** スタック名 */
-	Name *string   `json:"name"`
-    /** スタックの説明 */
-	Description *string   `json:"description"`
-    /** テンプレートデータ */
-	Template *string   `json:"template"`
-    /** 実行状態 */
-	Status *string   `json:"status"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+	StackId     *string `json:"stackId"`
+	Name        *string `json:"name"`
+	Description *string `json:"description"`
+	Template    *string `json:"template"`
+	Status      *string `json:"status"`
+	CreatedAt   *int64  `json:"createdAt"`
+	UpdatedAt   *int64  `json:"updatedAt"`
 }
 
-func (p *Stack) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["stackId"] = p.StackId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["description"] = p.Description
-    data["template"] = p.Template
-    data["status"] = p.Status
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func NewStackFromDict(data map[string]interface{}) Stack {
+	return Stack{
+		StackId:     core.CastString(data["stackId"]),
+		Name:        core.CastString(data["name"]),
+		Description: core.CastString(data["description"]),
+		Template:    core.CastString(data["template"]),
+		Status:      core.CastString(data["status"]),
+		CreatedAt:   core.CastInt64(data["createdAt"]),
+		UpdatedAt:   core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p Stack) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stackId":     p.StackId,
+		"name":        p.Name,
+		"description": p.Description,
+		"template":    p.Template,
+		"status":      p.Status,
+		"createdAt":   p.CreatedAt,
+		"updatedAt":   p.UpdatedAt,
+	}
+}
+
+func (p Stack) Pointer() *Stack {
+	return &p
+}
+
+func CastStacks(data []interface{}) []Stack {
+	v := make([]Stack, 0)
+	for _, d := range data {
+		v = append(v, NewStackFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastStacksFromDict(data []Stack) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Resource struct {
-    /** 作成されたのリソース */
-	ResourceId *string   `json:"resourceId"`
-    /** 操作対象のリソース */
-	Type *string   `json:"type"`
-    /** 作成中のリソース名 */
-	Name *string   `json:"name"`
-    /** リクエストパラメータ */
-	Request *string   `json:"request"`
-    /** リソースの作成・更新のレスポンス */
-	Response *string   `json:"response"`
-    /** ロールバック操作の種類 */
-	RollbackContext *string   `json:"rollbackContext"`
-    /** ロールバック用のリクエストパラメータ */
-	RollbackRequest *string   `json:"rollbackRequest"`
-    /** ロールバック時に依存しているリソースの名前 */
-	RollbackAfter []string   `json:"rollbackAfter"`
-    /** リソースを作成したときに Output に記録するフィールド */
-	OutputFields []OutputField   `json:"outputFields"`
-    /** このリソースが作成された時の実行 ID */
-	WorkId *string   `json:"workId"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
+	ResourceId      *string       `json:"resourceId"`
+	Type            *string       `json:"type"`
+	Name            *string       `json:"name"`
+	Request         *string       `json:"request"`
+	Response        *string       `json:"response"`
+	RollbackContext *string       `json:"rollbackContext"`
+	RollbackRequest *string       `json:"rollbackRequest"`
+	RollbackAfter   []string      `json:"rollbackAfter"`
+	OutputFields    []OutputField `json:"outputFields"`
+	WorkId          *string       `json:"workId"`
+	CreatedAt       *int64        `json:"createdAt"`
 }
 
-func (p *Resource) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["resourceId"] = p.ResourceId
-    data["type"] = p.Type
-    data["name"] = p.Name
-    data["request"] = p.Request
-    data["response"] = p.Response
-    data["rollbackContext"] = p.RollbackContext
-    data["rollbackRequest"] = p.RollbackRequest
-    if p.RollbackAfter != nil {
-        var _rollbackAfter []string
-        for _, item := range p.RollbackAfter {
-            _rollbackAfter = append(_rollbackAfter, item)
-        }
-        data["rollbackAfter"] = &_rollbackAfter
-    }
-    if p.OutputFields != nil {
-        var _outputFields []*map[string]interface {}
-        for _, item := range p.OutputFields {
-            _outputFields = append(_outputFields, item.ToDict())
-        }
-        data["outputFields"] = &_outputFields
-    }
-    data["workId"] = p.WorkId
-    data["createdAt"] = p.CreatedAt
-    return &data
+func NewResourceFromDict(data map[string]interface{}) Resource {
+	return Resource{
+		ResourceId:      core.CastString(data["resourceId"]),
+		Type:            core.CastString(data["type"]),
+		Name:            core.CastString(data["name"]),
+		Request:         core.CastString(data["request"]),
+		Response:        core.CastString(data["response"]),
+		RollbackContext: core.CastString(data["rollbackContext"]),
+		RollbackRequest: core.CastString(data["rollbackRequest"]),
+		RollbackAfter:   core.CastStrings(core.CastArray(data["rollbackAfter"])),
+		OutputFields:    CastOutputFields(core.CastArray(data["outputFields"])),
+		WorkId:          core.CastString(data["workId"]),
+		CreatedAt:       core.CastInt64(data["createdAt"]),
+	}
 }
 
-type WorkingStack struct {
-    /** 実行中のスタック */
-	StackId *string   `json:"stackId"`
-    /** オーナーID */
-	OwnerId *string   `json:"ownerId"`
-    /** 実行中のスタック名 */
-	Name *string   `json:"name"`
-    /** 実行に対して割り振られる一意な ID */
-	WorkId *string   `json:"workId"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+func (p Resource) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"resourceId":      p.ResourceId,
+		"type":            p.Type,
+		"name":            p.Name,
+		"request":         p.Request,
+		"response":        p.Response,
+		"rollbackContext": p.RollbackContext,
+		"rollbackRequest": p.RollbackRequest,
+		"rollbackAfter": core.CastStringsFromDict(
+			p.RollbackAfter,
+		),
+		"outputFields": CastOutputFieldsFromDict(
+			p.OutputFields,
+		),
+		"workId":    p.WorkId,
+		"createdAt": p.CreatedAt,
+	}
 }
 
-func (p *WorkingStack) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["stackId"] = p.StackId
-    data["ownerId"] = p.OwnerId
-    data["name"] = p.Name
-    data["workId"] = p.WorkId
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func (p Resource) Pointer() *Resource {
+	return &p
 }
 
-type WorkingResource struct {
-    /** 作成中のリソース */
-	ResourceId *string   `json:"resourceId"`
-    /** 操作の種類 */
-	Context *string   `json:"context"`
-    /** 操作対象のリソース */
-	Type *string   `json:"type"`
-    /** 作成中のリソース名 */
-	Name *string   `json:"name"`
-    /** リクエストパラメータ */
-	Request *string   `json:"request"`
-    /** 依存しているリソースの名前 */
-	After []string   `json:"after"`
-    /** ロールバック操作の種類 */
-	RollbackContext *string   `json:"rollbackContext"`
-    /** ロールバック用のリクエストパラメータ */
-	RollbackRequest *string   `json:"rollbackRequest"`
-    /** ロールバック時に依存しているリソースの名前 */
-	RollbackAfter []string   `json:"rollbackAfter"`
-    /** リソースを作成したときに Output に記録するフィールド */
-	OutputFields []OutputField   `json:"outputFields"`
-    /** 実行に対して割り振られる一意な ID */
-	WorkId *string   `json:"workId"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
-    /** 最終更新日時 */
-	UpdatedAt *int64   `json:"updatedAt"`
+func CastResources(data []interface{}) []Resource {
+	v := make([]Resource, 0)
+	for _, d := range data {
+		v = append(v, NewResourceFromDict(d.(map[string]interface{})))
+	}
+	return v
 }
 
-func (p *WorkingResource) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["resourceId"] = p.ResourceId
-    data["context"] = p.Context
-    data["type"] = p.Type
-    data["name"] = p.Name
-    data["request"] = p.Request
-    if p.After != nil {
-        var _after []string
-        for _, item := range p.After {
-            _after = append(_after, item)
-        }
-        data["after"] = &_after
-    }
-    data["rollbackContext"] = p.RollbackContext
-    data["rollbackRequest"] = p.RollbackRequest
-    if p.RollbackAfter != nil {
-        var _rollbackAfter []string
-        for _, item := range p.RollbackAfter {
-            _rollbackAfter = append(_rollbackAfter, item)
-        }
-        data["rollbackAfter"] = &_rollbackAfter
-    }
-    if p.OutputFields != nil {
-        var _outputFields []*map[string]interface {}
-        for _, item := range p.OutputFields {
-            _outputFields = append(_outputFields, item.ToDict())
-        }
-        data["outputFields"] = &_outputFields
-    }
-    data["workId"] = p.WorkId
-    data["createdAt"] = p.CreatedAt
-    data["updatedAt"] = p.UpdatedAt
-    return &data
+func CastResourcesFromDict(data []Resource) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Event struct {
-    /** 発生したイベント */
-	EventId *string   `json:"eventId"`
-    /** イベント名 */
-	Name *string   `json:"name"`
-    /** イベントの種類 */
-	ResourceName *string   `json:"resourceName"`
-    /** イベントの種類 */
-	Type *string   `json:"type"`
-    /** メッセージ */
-	Message *string   `json:"message"`
-    /** 日時 */
-	EventAt *int64   `json:"eventAt"`
+	EventId      *string `json:"eventId"`
+	Name         *string `json:"name"`
+	ResourceName *string `json:"resourceName"`
+	Type         *string `json:"type"`
+	Message      *string `json:"message"`
+	EventAt      *int64  `json:"eventAt"`
 }
 
-func (p *Event) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["eventId"] = p.EventId
-    data["name"] = p.Name
-    data["resourceName"] = p.ResourceName
-    data["type"] = p.Type
-    data["message"] = p.Message
-    data["eventAt"] = p.EventAt
-    return &data
+func NewEventFromDict(data map[string]interface{}) Event {
+	return Event{
+		EventId:      core.CastString(data["eventId"]),
+		Name:         core.CastString(data["name"]),
+		ResourceName: core.CastString(data["resourceName"]),
+		Type:         core.CastString(data["type"]),
+		Message:      core.CastString(data["message"]),
+		EventAt:      core.CastInt64(data["eventAt"]),
+	}
+}
+
+func (p Event) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"eventId":      p.EventId,
+		"name":         p.Name,
+		"resourceName": p.ResourceName,
+		"type":         p.Type,
+		"message":      p.Message,
+		"eventAt":      p.EventAt,
+	}
+}
+
+func (p Event) Pointer() *Event {
+	return &p
+}
+
+func CastEvents(data []interface{}) []Event {
+	v := make([]Event, 0)
+	for _, d := range data {
+		v = append(v, NewEventFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastEventsFromDict(data []Event) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Output struct {
-    /** アウトプット */
-	OutputId *string   `json:"outputId"`
-    /** アウトプット名 */
-	Name *string   `json:"name"`
-    /** 値 */
-	Value *string   `json:"value"`
-    /** 作成日時 */
-	CreatedAt *int64   `json:"createdAt"`
+	OutputId  *string `json:"outputId"`
+	Name      *string `json:"name"`
+	Value     *string `json:"value"`
+	CreatedAt *int64  `json:"createdAt"`
 }
 
-func (p *Output) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["outputId"] = p.OutputId
-    data["name"] = p.Name
-    data["value"] = p.Value
-    data["createdAt"] = p.CreatedAt
-    return &data
+func NewOutputFromDict(data map[string]interface{}) Output {
+	return Output{
+		OutputId:  core.CastString(data["outputId"]),
+		Name:      core.CastString(data["name"]),
+		Value:     core.CastString(data["value"]),
+		CreatedAt: core.CastInt64(data["createdAt"]),
+	}
+}
+
+func (p Output) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"outputId":  p.OutputId,
+		"name":      p.Name,
+		"value":     p.Value,
+		"createdAt": p.CreatedAt,
+	}
+}
+
+func (p Output) Pointer() *Output {
+	return &p
+}
+
+func CastOutputs(data []interface{}) []Output {
+	v := make([]Output, 0)
+	for _, d := range data {
+		v = append(v, NewOutputFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastOutputsFromDict(data []Output) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GitHubCheckoutSetting struct {
-    /** リソースの取得に使用するGitHub のAPIキー のGRN */
-	ApiKeyId *string   `json:"apiKeyId"`
-    /** リポジトリ名 */
-	RepositoryName *string   `json:"repositoryName"`
-    /** ソースコードのファイルパス */
-	SourcePath *string   `json:"sourcePath"`
-    /** コードの取得元 */
-	ReferenceType *string   `json:"referenceType"`
-    /** コミットハッシュ */
-	CommitHash *string   `json:"commitHash"`
-    /** ブランチ名 */
-	BranchName *string   `json:"branchName"`
-    /** タグ名 */
-	TagName *string   `json:"tagName"`
+	ApiKeyId       *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath     *string `json:"sourcePath"`
+	ReferenceType  *string `json:"referenceType"`
+	CommitHash     *string `json:"commitHash"`
+	BranchName     *string `json:"branchName"`
+	TagName        *string `json:"tagName"`
 }
 
-func (p *GitHubCheckoutSetting) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["apiKeyId"] = p.ApiKeyId
-    data["repositoryName"] = p.RepositoryName
-    data["sourcePath"] = p.SourcePath
-    data["referenceType"] = p.ReferenceType
-    data["commitHash"] = p.CommitHash
-    data["branchName"] = p.BranchName
-    data["tagName"] = p.TagName
-    return &data
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+	return GitHubCheckoutSetting{
+		ApiKeyId:       core.CastString(data["apiKeyId"]),
+		RepositoryName: core.CastString(data["repositoryName"]),
+		SourcePath:     core.CastString(data["sourcePath"]),
+		ReferenceType:  core.CastString(data["referenceType"]),
+		CommitHash:     core.CastString(data["commitHash"]),
+		BranchName:     core.CastString(data["branchName"]),
+		TagName:        core.CastString(data["tagName"]),
+	}
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"apiKeyId":       p.ApiKeyId,
+		"repositoryName": p.RepositoryName,
+		"sourcePath":     p.SourcePath,
+		"referenceType":  p.ReferenceType,
+		"commitHash":     p.CommitHash,
+		"branchName":     p.BranchName,
+		"tagName":        p.TagName,
+	}
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+	return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type OutputField struct {
-    /** 名前 */
-	Name *string   `json:"name"`
-    /** フィールド名 */
-	FieldName *string   `json:"fieldName"`
+	Name      *string `json:"name"`
+	FieldName *string `json:"fieldName"`
 }
 
-func (p *OutputField) ToDict() *map[string]interface{} {
-    var data = map[string]interface{}{}
-    data["name"] = p.Name
-    data["fieldName"] = p.FieldName
-    return &data
+func NewOutputFieldFromDict(data map[string]interface{}) OutputField {
+	return OutputField{
+		Name:      core.CastString(data["name"]),
+		FieldName: core.CastString(data["fieldName"]),
+	}
+}
+
+func (p OutputField) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"name":      p.Name,
+		"fieldName": p.FieldName,
+	}
+}
+
+func (p OutputField) Pointer() *OutputField {
+	return &p
+}
+
+func CastOutputFields(data []interface{}) []OutputField {
+	v := make([]OutputField, 0)
+	for _, d := range data {
+		v = append(v, NewOutputFieldFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastOutputFieldsFromDict(data []OutputField) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

@@ -19,7 +19,7 @@ package project
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/gs2io/gs2-golang-sdk/core"
+	"core"
 )
 
 type Gs2ProjectWebSocketClient struct {
@@ -658,9 +658,6 @@ func (p Gs2ProjectWebSocketClient) DeleteAccountAsync(
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.AccountName != nil && *request.AccountName != "" {
-        bodies["accountName"] = *request.AccountName
-    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
