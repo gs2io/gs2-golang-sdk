@@ -16,10 +16,10 @@ permissions and limitations under the License.
 
 package project
 
-import "core"
+import "github.com/gs2io/gs2-golang-sdk/core"
 
 type CreateAccountResult struct {
-    Item *Account `json:"item"`
+	Item *Account `json:"item"`
 }
 
 type CreateAccountAsyncResult struct {
@@ -28,23 +28,23 @@ type CreateAccountAsyncResult struct {
 }
 
 func NewCreateAccountResultFromDict(data map[string]interface{}) CreateAccountResult {
-    return CreateAccountResult {
-        Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateAccountResult{
+		Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateAccountResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateAccountResult) Pointer() *CreateAccountResult {
-    return &p
+	return &p
 }
 
 type VerifyResult struct {
-    Item *Account `json:"item"`
+	Item *Account `json:"item"`
 }
 
 type VerifyAsyncResult struct {
@@ -53,24 +53,24 @@ type VerifyAsyncResult struct {
 }
 
 func NewVerifyResultFromDict(data map[string]interface{}) VerifyResult {
-    return VerifyResult {
-        Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return VerifyResult{
+		Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p VerifyResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p VerifyResult) Pointer() *VerifyResult {
-    return &p
+	return &p
 }
 
 type SignInResult struct {
-    Item *Account `json:"item"`
-    AccountToken *string `json:"accountToken"`
+	Item         *Account `json:"item"`
+	AccountToken *string  `json:"accountToken"`
 }
 
 type SignInAsyncResult struct {
@@ -79,25 +79,25 @@ type SignInAsyncResult struct {
 }
 
 func NewSignInResultFromDict(data map[string]interface{}) SignInResult {
-    return SignInResult {
-        Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
-        AccountToken: core.CastString(data["accountToken"]),
-    }
+	return SignInResult{
+		Item:         NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+		AccountToken: core.CastString(data["accountToken"]),
+	}
 }
 
 func (p SignInResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "accountToken": p.AccountToken,
-    }
+	return map[string]interface{}{
+		"item":         p.Item.ToDict(),
+		"accountToken": p.AccountToken,
+	}
 }
 
 func (p SignInResult) Pointer() *SignInResult {
-    return &p
+	return &p
 }
 
 type IssueAccountTokenResult struct {
-    AccountToken *string `json:"accountToken"`
+	AccountToken *string `json:"accountToken"`
 }
 
 type IssueAccountTokenAsyncResult struct {
@@ -106,23 +106,23 @@ type IssueAccountTokenAsyncResult struct {
 }
 
 func NewIssueAccountTokenResultFromDict(data map[string]interface{}) IssueAccountTokenResult {
-    return IssueAccountTokenResult {
-        AccountToken: core.CastString(data["accountToken"]),
-    }
+	return IssueAccountTokenResult{
+		AccountToken: core.CastString(data["accountToken"]),
+	}
 }
 
 func (p IssueAccountTokenResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "accountToken": p.AccountToken,
-    }
+	return map[string]interface{}{
+		"accountToken": p.AccountToken,
+	}
 }
 
 func (p IssueAccountTokenResult) Pointer() *IssueAccountTokenResult {
-    return &p
+	return &p
 }
 
 type ForgetResult struct {
-    IssuePasswordToken *string `json:"issuePasswordToken"`
+	IssuePasswordToken *string `json:"issuePasswordToken"`
 }
 
 type ForgetAsyncResult struct {
@@ -131,23 +131,23 @@ type ForgetAsyncResult struct {
 }
 
 func NewForgetResultFromDict(data map[string]interface{}) ForgetResult {
-    return ForgetResult {
-        IssuePasswordToken: core.CastString(data["issuePasswordToken"]),
-    }
+	return ForgetResult{
+		IssuePasswordToken: core.CastString(data["issuePasswordToken"]),
+	}
 }
 
 func (p ForgetResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "issuePasswordToken": p.IssuePasswordToken,
-    }
+	return map[string]interface{}{
+		"issuePasswordToken": p.IssuePasswordToken,
+	}
 }
 
 func (p ForgetResult) Pointer() *ForgetResult {
-    return &p
+	return &p
 }
 
 type IssuePasswordResult struct {
-    NewPassword *string `json:"newPassword"`
+	NewPassword *string `json:"newPassword"`
 }
 
 type IssuePasswordAsyncResult struct {
@@ -156,23 +156,23 @@ type IssuePasswordAsyncResult struct {
 }
 
 func NewIssuePasswordResultFromDict(data map[string]interface{}) IssuePasswordResult {
-    return IssuePasswordResult {
-        NewPassword: core.CastString(data["newPassword"]),
-    }
+	return IssuePasswordResult{
+		NewPassword: core.CastString(data["newPassword"]),
+	}
 }
 
 func (p IssuePasswordResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "newPassword": p.NewPassword,
-    }
+	return map[string]interface{}{
+		"newPassword": p.NewPassword,
+	}
 }
 
 func (p IssuePasswordResult) Pointer() *IssuePasswordResult {
-    return &p
+	return &p
 }
 
 type UpdateAccountResult struct {
-    Item *Account `json:"item"`
+	Item *Account `json:"item"`
 }
 
 type UpdateAccountAsyncResult struct {
@@ -181,19 +181,19 @@ type UpdateAccountAsyncResult struct {
 }
 
 func NewUpdateAccountResultFromDict(data map[string]interface{}) UpdateAccountResult {
-    return UpdateAccountResult {
-        Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateAccountResult{
+		Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateAccountResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateAccountResult) Pointer() *UpdateAccountResult {
-    return &p
+	return &p
 }
 
 type DeleteAccountResult struct {
@@ -205,22 +205,20 @@ type DeleteAccountAsyncResult struct {
 }
 
 func NewDeleteAccountResultFromDict(data map[string]interface{}) DeleteAccountResult {
-    return DeleteAccountResult {
-    }
+	return DeleteAccountResult{}
 }
 
 func (p DeleteAccountResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-    }
+	return map[string]interface{}{}
 }
 
 func (p DeleteAccountResult) Pointer() *DeleteAccountResult {
-    return &p
+	return &p
 }
 
 type DescribeProjectsResult struct {
-    Items []Project `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Project `json:"items"`
+	NextPageToken *string   `json:"nextPageToken"`
 }
 
 type DescribeProjectsAsyncResult struct {
@@ -229,27 +227,27 @@ type DescribeProjectsAsyncResult struct {
 }
 
 func NewDescribeProjectsResultFromDict(data map[string]interface{}) DescribeProjectsResult {
-    return DescribeProjectsResult {
-        Items: CastProjects(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeProjectsResult{
+		Items:         CastProjects(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeProjectsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastProjectsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastProjectsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeProjectsResult) Pointer() *DescribeProjectsResult {
-    return &p
+	return &p
 }
 
 type CreateProjectResult struct {
-    Item *Project `json:"item"`
+	Item *Project `json:"item"`
 }
 
 type CreateProjectAsyncResult struct {
@@ -258,23 +256,23 @@ type CreateProjectAsyncResult struct {
 }
 
 func NewCreateProjectResultFromDict(data map[string]interface{}) CreateProjectResult {
-    return CreateProjectResult {
-        Item: NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateProjectResult{
+		Item: NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateProjectResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateProjectResult) Pointer() *CreateProjectResult {
-    return &p
+	return &p
 }
 
 type GetProjectResult struct {
-    Item *Project `json:"item"`
+	Item *Project `json:"item"`
 }
 
 type GetProjectAsyncResult struct {
@@ -283,25 +281,25 @@ type GetProjectAsyncResult struct {
 }
 
 func NewGetProjectResultFromDict(data map[string]interface{}) GetProjectResult {
-    return GetProjectResult {
-        Item: NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetProjectResult{
+		Item: NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetProjectResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetProjectResult) Pointer() *GetProjectResult {
-    return &p
+	return &p
 }
 
 type GetProjectTokenResult struct {
-    Item *Project `json:"item"`
-    OwnerId *string `json:"ownerId"`
-    ProjectToken *string `json:"projectToken"`
+	Item         *Project `json:"item"`
+	OwnerId      *string  `json:"ownerId"`
+	ProjectToken *string  `json:"projectToken"`
 }
 
 type GetProjectTokenAsyncResult struct {
@@ -310,29 +308,29 @@ type GetProjectTokenAsyncResult struct {
 }
 
 func NewGetProjectTokenResultFromDict(data map[string]interface{}) GetProjectTokenResult {
-    return GetProjectTokenResult {
-        Item: NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
-        OwnerId: core.CastString(data["ownerId"]),
-        ProjectToken: core.CastString(data["projectToken"]),
-    }
+	return GetProjectTokenResult{
+		Item:         NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
+		OwnerId:      core.CastString(data["ownerId"]),
+		ProjectToken: core.CastString(data["projectToken"]),
+	}
 }
 
 func (p GetProjectTokenResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "ownerId": p.OwnerId,
-        "projectToken": p.ProjectToken,
-    }
+	return map[string]interface{}{
+		"item":         p.Item.ToDict(),
+		"ownerId":      p.OwnerId,
+		"projectToken": p.ProjectToken,
+	}
 }
 
 func (p GetProjectTokenResult) Pointer() *GetProjectTokenResult {
-    return &p
+	return &p
 }
 
 type GetProjectTokenByIdentifierResult struct {
-    Item *Project `json:"item"`
-    OwnerId *string `json:"ownerId"`
-    ProjectToken *string `json:"projectToken"`
+	Item         *Project `json:"item"`
+	OwnerId      *string  `json:"ownerId"`
+	ProjectToken *string  `json:"projectToken"`
 }
 
 type GetProjectTokenByIdentifierAsyncResult struct {
@@ -341,27 +339,27 @@ type GetProjectTokenByIdentifierAsyncResult struct {
 }
 
 func NewGetProjectTokenByIdentifierResultFromDict(data map[string]interface{}) GetProjectTokenByIdentifierResult {
-    return GetProjectTokenByIdentifierResult {
-        Item: NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
-        OwnerId: core.CastString(data["ownerId"]),
-        ProjectToken: core.CastString(data["projectToken"]),
-    }
+	return GetProjectTokenByIdentifierResult{
+		Item:         NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
+		OwnerId:      core.CastString(data["ownerId"]),
+		ProjectToken: core.CastString(data["projectToken"]),
+	}
 }
 
 func (p GetProjectTokenByIdentifierResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "ownerId": p.OwnerId,
-        "projectToken": p.ProjectToken,
-    }
+	return map[string]interface{}{
+		"item":         p.Item.ToDict(),
+		"ownerId":      p.OwnerId,
+		"projectToken": p.ProjectToken,
+	}
 }
 
 func (p GetProjectTokenByIdentifierResult) Pointer() *GetProjectTokenByIdentifierResult {
-    return &p
+	return &p
 }
 
 type UpdateProjectResult struct {
-    Item *Project `json:"item"`
+	Item *Project `json:"item"`
 }
 
 type UpdateProjectAsyncResult struct {
@@ -370,23 +368,23 @@ type UpdateProjectAsyncResult struct {
 }
 
 func NewUpdateProjectResultFromDict(data map[string]interface{}) UpdateProjectResult {
-    return UpdateProjectResult {
-        Item: NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateProjectResult{
+		Item: NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateProjectResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateProjectResult) Pointer() *UpdateProjectResult {
-    return &p
+	return &p
 }
 
 type DeleteProjectResult struct {
-    Item *Project `json:"item"`
+	Item *Project `json:"item"`
 }
 
 type DeleteProjectAsyncResult struct {
@@ -395,24 +393,24 @@ type DeleteProjectAsyncResult struct {
 }
 
 func NewDeleteProjectResultFromDict(data map[string]interface{}) DeleteProjectResult {
-    return DeleteProjectResult {
-        Item: NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteProjectResult{
+		Item: NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteProjectResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteProjectResult) Pointer() *DeleteProjectResult {
-    return &p
+	return &p
 }
 
 type DescribeBillingMethodsResult struct {
-    Items []BillingMethod `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []BillingMethod `json:"items"`
+	NextPageToken *string         `json:"nextPageToken"`
 }
 
 type DescribeBillingMethodsAsyncResult struct {
@@ -421,27 +419,27 @@ type DescribeBillingMethodsAsyncResult struct {
 }
 
 func NewDescribeBillingMethodsResultFromDict(data map[string]interface{}) DescribeBillingMethodsResult {
-    return DescribeBillingMethodsResult {
-        Items: CastBillingMethods(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeBillingMethodsResult{
+		Items:         CastBillingMethods(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeBillingMethodsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastBillingMethodsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastBillingMethodsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeBillingMethodsResult) Pointer() *DescribeBillingMethodsResult {
-    return &p
+	return &p
 }
 
 type CreateBillingMethodResult struct {
-    Item *BillingMethod `json:"item"`
+	Item *BillingMethod `json:"item"`
 }
 
 type CreateBillingMethodAsyncResult struct {
@@ -450,23 +448,23 @@ type CreateBillingMethodAsyncResult struct {
 }
 
 func NewCreateBillingMethodResultFromDict(data map[string]interface{}) CreateBillingMethodResult {
-    return CreateBillingMethodResult {
-        Item: NewBillingMethodFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateBillingMethodResult{
+		Item: NewBillingMethodFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateBillingMethodResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateBillingMethodResult) Pointer() *CreateBillingMethodResult {
-    return &p
+	return &p
 }
 
 type GetBillingMethodResult struct {
-    Item *BillingMethod `json:"item"`
+	Item *BillingMethod `json:"item"`
 }
 
 type GetBillingMethodAsyncResult struct {
@@ -475,23 +473,23 @@ type GetBillingMethodAsyncResult struct {
 }
 
 func NewGetBillingMethodResultFromDict(data map[string]interface{}) GetBillingMethodResult {
-    return GetBillingMethodResult {
-        Item: NewBillingMethodFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetBillingMethodResult{
+		Item: NewBillingMethodFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetBillingMethodResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetBillingMethodResult) Pointer() *GetBillingMethodResult {
-    return &p
+	return &p
 }
 
 type UpdateBillingMethodResult struct {
-    Item *BillingMethod `json:"item"`
+	Item *BillingMethod `json:"item"`
 }
 
 type UpdateBillingMethodAsyncResult struct {
@@ -500,23 +498,23 @@ type UpdateBillingMethodAsyncResult struct {
 }
 
 func NewUpdateBillingMethodResultFromDict(data map[string]interface{}) UpdateBillingMethodResult {
-    return UpdateBillingMethodResult {
-        Item: NewBillingMethodFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateBillingMethodResult{
+		Item: NewBillingMethodFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateBillingMethodResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateBillingMethodResult) Pointer() *UpdateBillingMethodResult {
-    return &p
+	return &p
 }
 
 type DeleteBillingMethodResult struct {
-    Item *BillingMethod `json:"item"`
+	Item *BillingMethod `json:"item"`
 }
 
 type DeleteBillingMethodAsyncResult struct {
@@ -525,24 +523,24 @@ type DeleteBillingMethodAsyncResult struct {
 }
 
 func NewDeleteBillingMethodResultFromDict(data map[string]interface{}) DeleteBillingMethodResult {
-    return DeleteBillingMethodResult {
-        Item: NewBillingMethodFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteBillingMethodResult{
+		Item: NewBillingMethodFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteBillingMethodResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteBillingMethodResult) Pointer() *DeleteBillingMethodResult {
-    return &p
+	return &p
 }
 
 type DescribeReceiptsResult struct {
-    Items []Receipt `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Receipt `json:"items"`
+	NextPageToken *string   `json:"nextPageToken"`
 }
 
 type DescribeReceiptsAsyncResult struct {
@@ -551,27 +549,27 @@ type DescribeReceiptsAsyncResult struct {
 }
 
 func NewDescribeReceiptsResultFromDict(data map[string]interface{}) DescribeReceiptsResult {
-    return DescribeReceiptsResult {
-        Items: CastReceipts(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeReceiptsResult{
+		Items:         CastReceipts(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeReceiptsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastReceiptsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastReceiptsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeReceiptsResult) Pointer() *DescribeReceiptsResult {
-    return &p
+	return &p
 }
 
 type DescribeBillingsResult struct {
-    Items []Billing `json:"items"`
+	Items []Billing `json:"items"`
 }
 
 type DescribeBillingsAsyncResult struct {
@@ -580,19 +578,19 @@ type DescribeBillingsAsyncResult struct {
 }
 
 func NewDescribeBillingsResultFromDict(data map[string]interface{}) DescribeBillingsResult {
-    return DescribeBillingsResult {
-        Items: CastBillings(core.CastArray(data["items"])),
-    }
+	return DescribeBillingsResult{
+		Items: CastBillings(core.CastArray(data["items"])),
+	}
 }
 
 func (p DescribeBillingsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastBillingsFromDict(
-            p.Items,
-        ),
-    }
+	return map[string]interface{}{
+		"items": CastBillingsFromDict(
+			p.Items,
+		),
+	}
 }
 
 func (p DescribeBillingsResult) Pointer() *DescribeBillingsResult {
-    return &p
+	return &p
 }

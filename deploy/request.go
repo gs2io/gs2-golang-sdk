@@ -16,7 +16,7 @@ permissions and limitations under the License.
 
 package deploy
 
-import "core"
+import "github.com/gs2io/gs2-golang-sdk/core"
 
 type DescribeStacksRequest struct {
 	RequestId          *string `json:"requestId"`

@@ -16,7 +16,7 @@ permissions and limitations under the License.
 
 package matchmaking
 
-import "core"
+import "github.com/gs2io/gs2-golang-sdk/core"
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`

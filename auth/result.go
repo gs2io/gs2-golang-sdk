@@ -18,12 +18,12 @@ deny overwrite
 
 package auth
 
-import "core"
+import "github.com/gs2io/gs2-golang-sdk/core"
 
 type LoginResult struct {
-    Token *core.AccessToken `json:"token"`
-    UserId *string `json:"userId"`
-    Expire *int64 `json:"expire"`
+	Token  *core.AccessToken `json:"token"`
+	UserId *string           `json:"userId"`
+	Expire *int64            `json:"expire"`
 }
 
 type LoginAsyncResult struct {
@@ -32,29 +32,29 @@ type LoginAsyncResult struct {
 }
 
 func NewLoginResultFromDict(data map[string]interface{}) LoginResult {
-    return LoginResult {
-        Token: core.CastString(data["token"]),
-        UserId: core.CastString(data["userId"]),
-        Expire: core.CastInt64(data["expire"]),
-    }
+	return LoginResult{
+		Token:  core.CastString(data["token"]),
+		UserId: core.CastString(data["userId"]),
+		Expire: core.CastInt64(data["expire"]),
+	}
 }
 
 func (p LoginResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "token": p.Token,
-        "userId": p.UserId,
-        "expire": p.Expire,
-    }
+	return map[string]interface{}{
+		"token":  p.Token,
+		"userId": p.UserId,
+		"expire": p.Expire,
+	}
 }
 
 func (p LoginResult) Pointer() *LoginResult {
-    return &p
+	return &p
 }
 
 type LoginBySignatureResult struct {
-    Token *core.AccessToken `json:"token"`
-    UserId *string `json:"userId"`
-    Expire *int64 `json:"expire"`
+	Token  *core.AccessToken `json:"token"`
+	UserId *string           `json:"userId"`
+	Expire *int64            `json:"expire"`
 }
 
 type LoginBySignatureAsyncResult struct {
@@ -63,21 +63,21 @@ type LoginBySignatureAsyncResult struct {
 }
 
 func NewLoginBySignatureResultFromDict(data map[string]interface{}) LoginBySignatureResult {
-    return LoginBySignatureResult {
-        Token: core.CastString(data["token"]),
-        UserId: core.CastString(data["userId"]),
-        Expire: core.CastInt64(data["expire"]),
-    }
+	return LoginBySignatureResult{
+		Token:  core.CastString(data["token"]),
+		UserId: core.CastString(data["userId"]),
+		Expire: core.CastInt64(data["expire"]),
+	}
 }
 
 func (p LoginBySignatureResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "token": p.Token,
-        "userId": p.UserId,
-        "expire": p.Expire,
-    }
+	return map[string]interface{}{
+		"token":  p.Token,
+		"userId": p.UserId,
+		"expire": p.Expire,
+	}
 }
 
 func (p LoginBySignatureResult) Pointer() *LoginBySignatureResult {
-    return &p
+	return &p
 }

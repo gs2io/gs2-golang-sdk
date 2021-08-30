@@ -16,7 +16,7 @@ permissions and limitations under the License.
 
 package quest
 
-import "core"
+import "github.com/gs2io/gs2-golang-sdk/core"
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`

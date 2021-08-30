@@ -16,7 +16,7 @@ permissions and limitations under the License.
 
 package showcase
 
-import "core"
+import "github.com/gs2io/gs2-golang-sdk/core"
 
 type Namespace struct {
 	NamespaceId      *string     `json:"namespaceId"`

@@ -16,10 +16,10 @@ permissions and limitations under the License.
 
 package watch
 
-import "core"
+import "github.com/gs2io/gs2-golang-sdk/core"
 
 type GetChartResult struct {
-    Item *Chart `json:"item"`
+	Item *Chart `json:"item"`
 }
 
 type GetChartAsyncResult struct {
@@ -28,23 +28,23 @@ type GetChartAsyncResult struct {
 }
 
 func NewGetChartResultFromDict(data map[string]interface{}) GetChartResult {
-    return GetChartResult {
-        Item: NewChartFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetChartResult{
+		Item: NewChartFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetChartResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetChartResult) Pointer() *GetChartResult {
-    return &p
+	return &p
 }
 
 type GetCumulativeResult struct {
-    Item *Cumulative `json:"item"`
+	Item *Cumulative `json:"item"`
 }
 
 type GetCumulativeAsyncResult struct {
@@ -53,24 +53,24 @@ type GetCumulativeAsyncResult struct {
 }
 
 func NewGetCumulativeResultFromDict(data map[string]interface{}) GetCumulativeResult {
-    return GetCumulativeResult {
-        Item: NewCumulativeFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetCumulativeResult{
+		Item: NewCumulativeFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetCumulativeResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetCumulativeResult) Pointer() *GetCumulativeResult {
-    return &p
+	return &p
 }
 
 type DescribeBillingActivitiesResult struct {
-    Items []BillingActivity `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []BillingActivity `json:"items"`
+	NextPageToken *string           `json:"nextPageToken"`
 }
 
 type DescribeBillingActivitiesAsyncResult struct {
@@ -79,27 +79,27 @@ type DescribeBillingActivitiesAsyncResult struct {
 }
 
 func NewDescribeBillingActivitiesResultFromDict(data map[string]interface{}) DescribeBillingActivitiesResult {
-    return DescribeBillingActivitiesResult {
-        Items: CastBillingActivities(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeBillingActivitiesResult{
+		Items:         CastBillingActivities(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeBillingActivitiesResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastBillingActivitiesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastBillingActivitiesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeBillingActivitiesResult) Pointer() *DescribeBillingActivitiesResult {
-    return &p
+	return &p
 }
 
 type GetBillingActivityResult struct {
-    Item *BillingActivity `json:"item"`
+	Item *BillingActivity `json:"item"`
 }
 
 type GetBillingActivityAsyncResult struct {
@@ -108,17 +108,17 @@ type GetBillingActivityAsyncResult struct {
 }
 
 func NewGetBillingActivityResultFromDict(data map[string]interface{}) GetBillingActivityResult {
-    return GetBillingActivityResult {
-        Item: NewBillingActivityFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetBillingActivityResult{
+		Item: NewBillingActivityFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetBillingActivityResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetBillingActivityResult) Pointer() *GetBillingActivityResult {
-    return &p
+	return &p
 }

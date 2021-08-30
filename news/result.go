@@ -16,11 +16,11 @@ permissions and limitations under the License.
 
 package news
 
-import "core"
+import "github.com/gs2io/gs2-golang-sdk/core"
 
 type DescribeNamespacesResult struct {
-    Items []Namespace `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Namespace `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -29,27 +29,27 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
-    return DescribeNamespacesResult {
-        Items: CastNamespaces(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeNamespacesResult{
+		Items:         CastNamespaces(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastNamespacesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastNamespacesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
-    return &p
+	return &p
 }
 
 type CreateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -58,23 +58,23 @@ type CreateNamespaceAsyncResult struct {
 }
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
-    return CreateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceStatusResult struct {
-    Status *string `json:"status"`
+	Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -83,23 +83,23 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
-    return GetNamespaceStatusResult {
-        Status: core.CastString(data["status"]),
-    }
+	return GetNamespaceStatusResult{
+		Status: core.CastString(data["status"]),
+	}
 }
 
 func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "status": p.Status,
-    }
+	return map[string]interface{}{
+		"status": p.Status,
+	}
 }
 
 func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -108,23 +108,23 @@ type GetNamespaceAsyncResult struct {
 }
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
-    return GetNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
-    return &p
+	return &p
 }
 
 type UpdateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -133,19 +133,19 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
-    return UpdateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
-    return &p
+	return &p
 }
 
 type DeleteNamespaceResult struct {
@@ -157,22 +157,20 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
-    return DeleteNamespaceResult {
-    }
+	return DeleteNamespaceResult{}
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-    }
+	return map[string]interface{}{}
 }
 
 func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
-    return &p
+	return &p
 }
 
 type PrepareUpdateCurrentNewsMasterResult struct {
-    UploadToken *string `json:"uploadToken"`
-    TemplateUploadUrl *string `json:"templateUploadUrl"`
+	UploadToken       *string `json:"uploadToken"`
+	TemplateUploadUrl *string `json:"templateUploadUrl"`
 }
 
 type PrepareUpdateCurrentNewsMasterAsyncResult struct {
@@ -181,21 +179,21 @@ type PrepareUpdateCurrentNewsMasterAsyncResult struct {
 }
 
 func NewPrepareUpdateCurrentNewsMasterResultFromDict(data map[string]interface{}) PrepareUpdateCurrentNewsMasterResult {
-    return PrepareUpdateCurrentNewsMasterResult {
-        UploadToken: core.CastString(data["uploadToken"]),
-        TemplateUploadUrl: core.CastString(data["templateUploadUrl"]),
-    }
+	return PrepareUpdateCurrentNewsMasterResult{
+		UploadToken:       core.CastString(data["uploadToken"]),
+		TemplateUploadUrl: core.CastString(data["templateUploadUrl"]),
+	}
 }
 
 func (p PrepareUpdateCurrentNewsMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "uploadToken": p.UploadToken,
-        "templateUploadUrl": p.TemplateUploadUrl,
-    }
+	return map[string]interface{}{
+		"uploadToken":       p.UploadToken,
+		"templateUploadUrl": p.TemplateUploadUrl,
+	}
 }
 
 func (p PrepareUpdateCurrentNewsMasterResult) Pointer() *PrepareUpdateCurrentNewsMasterResult {
-    return &p
+	return &p
 }
 
 type UpdateCurrentNewsMasterResult struct {
@@ -207,21 +205,19 @@ type UpdateCurrentNewsMasterAsyncResult struct {
 }
 
 func NewUpdateCurrentNewsMasterResultFromDict(data map[string]interface{}) UpdateCurrentNewsMasterResult {
-    return UpdateCurrentNewsMasterResult {
-    }
+	return UpdateCurrentNewsMasterResult{}
 }
 
 func (p UpdateCurrentNewsMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-    }
+	return map[string]interface{}{}
 }
 
 func (p UpdateCurrentNewsMasterResult) Pointer() *UpdateCurrentNewsMasterResult {
-    return &p
+	return &p
 }
 
 type PrepareUpdateCurrentNewsMasterFromGitHubResult struct {
-    UploadToken *string `json:"uploadToken"`
+	UploadToken *string `json:"uploadToken"`
 }
 
 type PrepareUpdateCurrentNewsMasterFromGitHubAsyncResult struct {
@@ -230,25 +226,25 @@ type PrepareUpdateCurrentNewsMasterFromGitHubAsyncResult struct {
 }
 
 func NewPrepareUpdateCurrentNewsMasterFromGitHubResultFromDict(data map[string]interface{}) PrepareUpdateCurrentNewsMasterFromGitHubResult {
-    return PrepareUpdateCurrentNewsMasterFromGitHubResult {
-        UploadToken: core.CastString(data["uploadToken"]),
-    }
+	return PrepareUpdateCurrentNewsMasterFromGitHubResult{
+		UploadToken: core.CastString(data["uploadToken"]),
+	}
 }
 
 func (p PrepareUpdateCurrentNewsMasterFromGitHubResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "uploadToken": p.UploadToken,
-    }
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+	}
 }
 
 func (p PrepareUpdateCurrentNewsMasterFromGitHubResult) Pointer() *PrepareUpdateCurrentNewsMasterFromGitHubResult {
-    return &p
+	return &p
 }
 
 type DescribeNewsResult struct {
-    Items []News `json:"items"`
-    ContentHash *string `json:"contentHash"`
-    TemplateHash *string `json:"templateHash"`
+	Items        []News  `json:"items"`
+	ContentHash  *string `json:"contentHash"`
+	TemplateHash *string `json:"templateHash"`
 }
 
 type DescribeNewsAsyncResult struct {
@@ -257,31 +253,31 @@ type DescribeNewsAsyncResult struct {
 }
 
 func NewDescribeNewsResultFromDict(data map[string]interface{}) DescribeNewsResult {
-    return DescribeNewsResult {
-        Items: CastNewses(core.CastArray(data["items"])),
-        ContentHash: core.CastString(data["contentHash"]),
-        TemplateHash: core.CastString(data["templateHash"]),
-    }
+	return DescribeNewsResult{
+		Items:        CastNewses(core.CastArray(data["items"])),
+		ContentHash:  core.CastString(data["contentHash"]),
+		TemplateHash: core.CastString(data["templateHash"]),
+	}
 }
 
 func (p DescribeNewsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastNewsesFromDict(
-            p.Items,
-        ),
-        "contentHash": p.ContentHash,
-        "templateHash": p.TemplateHash,
-    }
+	return map[string]interface{}{
+		"items": CastNewsesFromDict(
+			p.Items,
+		),
+		"contentHash":  p.ContentHash,
+		"templateHash": p.TemplateHash,
+	}
 }
 
 func (p DescribeNewsResult) Pointer() *DescribeNewsResult {
-    return &p
+	return &p
 }
 
 type DescribeNewsByUserIdResult struct {
-    Items []News `json:"items"`
-    ContentHash *string `json:"contentHash"`
-    TemplateHash *string `json:"templateHash"`
+	Items        []News  `json:"items"`
+	ContentHash  *string `json:"contentHash"`
+	TemplateHash *string `json:"templateHash"`
 }
 
 type DescribeNewsByUserIdAsyncResult struct {
@@ -290,31 +286,31 @@ type DescribeNewsByUserIdAsyncResult struct {
 }
 
 func NewDescribeNewsByUserIdResultFromDict(data map[string]interface{}) DescribeNewsByUserIdResult {
-    return DescribeNewsByUserIdResult {
-        Items: CastNewses(core.CastArray(data["items"])),
-        ContentHash: core.CastString(data["contentHash"]),
-        TemplateHash: core.CastString(data["templateHash"]),
-    }
+	return DescribeNewsByUserIdResult{
+		Items:        CastNewses(core.CastArray(data["items"])),
+		ContentHash:  core.CastString(data["contentHash"]),
+		TemplateHash: core.CastString(data["templateHash"]),
+	}
 }
 
 func (p DescribeNewsByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastNewsesFromDict(
-            p.Items,
-        ),
-        "contentHash": p.ContentHash,
-        "templateHash": p.TemplateHash,
-    }
+	return map[string]interface{}{
+		"items": CastNewsesFromDict(
+			p.Items,
+		),
+		"contentHash":  p.ContentHash,
+		"templateHash": p.TemplateHash,
+	}
 }
 
 func (p DescribeNewsByUserIdResult) Pointer() *DescribeNewsByUserIdResult {
-    return &p
+	return &p
 }
 
 type WantGrantResult struct {
-    Items []SetCookieRequestEntry `json:"items"`
-    BrowserUrl *string `json:"browserUrl"`
-    ZipUrl *string `json:"zipUrl"`
+	Items      []SetCookieRequestEntry `json:"items"`
+	BrowserUrl *string                 `json:"browserUrl"`
+	ZipUrl     *string                 `json:"zipUrl"`
 }
 
 type WantGrantAsyncResult struct {
@@ -323,31 +319,31 @@ type WantGrantAsyncResult struct {
 }
 
 func NewWantGrantResultFromDict(data map[string]interface{}) WantGrantResult {
-    return WantGrantResult {
-        Items: CastSetCookieRequestEntries(core.CastArray(data["items"])),
-        BrowserUrl: core.CastString(data["browserUrl"]),
-        ZipUrl: core.CastString(data["zipUrl"]),
-    }
+	return WantGrantResult{
+		Items:      CastSetCookieRequestEntries(core.CastArray(data["items"])),
+		BrowserUrl: core.CastString(data["browserUrl"]),
+		ZipUrl:     core.CastString(data["zipUrl"]),
+	}
 }
 
 func (p WantGrantResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastSetCookieRequestEntriesFromDict(
-            p.Items,
-        ),
-        "browserUrl": p.BrowserUrl,
-        "zipUrl": p.ZipUrl,
-    }
+	return map[string]interface{}{
+		"items": CastSetCookieRequestEntriesFromDict(
+			p.Items,
+		),
+		"browserUrl": p.BrowserUrl,
+		"zipUrl":     p.ZipUrl,
+	}
 }
 
 func (p WantGrantResult) Pointer() *WantGrantResult {
-    return &p
+	return &p
 }
 
 type WantGrantByUserIdResult struct {
-    Items []SetCookieRequestEntry `json:"items"`
-    BrowserUrl *string `json:"browserUrl"`
-    ZipUrl *string `json:"zipUrl"`
+	Items      []SetCookieRequestEntry `json:"items"`
+	BrowserUrl *string                 `json:"browserUrl"`
+	ZipUrl     *string                 `json:"zipUrl"`
 }
 
 type WantGrantByUserIdAsyncResult struct {
@@ -356,23 +352,23 @@ type WantGrantByUserIdAsyncResult struct {
 }
 
 func NewWantGrantByUserIdResultFromDict(data map[string]interface{}) WantGrantByUserIdResult {
-    return WantGrantByUserIdResult {
-        Items: CastSetCookieRequestEntries(core.CastArray(data["items"])),
-        BrowserUrl: core.CastString(data["browserUrl"]),
-        ZipUrl: core.CastString(data["zipUrl"]),
-    }
+	return WantGrantByUserIdResult{
+		Items:      CastSetCookieRequestEntries(core.CastArray(data["items"])),
+		BrowserUrl: core.CastString(data["browserUrl"]),
+		ZipUrl:     core.CastString(data["zipUrl"]),
+	}
 }
 
 func (p WantGrantByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastSetCookieRequestEntriesFromDict(
-            p.Items,
-        ),
-        "browserUrl": p.BrowserUrl,
-        "zipUrl": p.ZipUrl,
-    }
+	return map[string]interface{}{
+		"items": CastSetCookieRequestEntriesFromDict(
+			p.Items,
+		),
+		"browserUrl": p.BrowserUrl,
+		"zipUrl":     p.ZipUrl,
+	}
 }
 
 func (p WantGrantByUserIdResult) Pointer() *WantGrantByUserIdResult {
-    return &p
+	return &p
 }

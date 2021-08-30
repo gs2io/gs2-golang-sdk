@@ -16,7 +16,7 @@ permissions and limitations under the License.
 
 package project
 
-import "core"
+import "github.com/gs2io/gs2-golang-sdk/core"
 
 type CreateAccountRequest struct {
 	RequestId          *string `json:"requestId"`

@@ -16,7 +16,7 @@ permissions and limitations under the License.
 
 package auth
 
-import "core"
+import "github.com/gs2io/gs2-golang-sdk/core"
 
 type AccessToken struct {
 	Token  *string `json:"token"`

@@ -17,9 +17,9 @@ permissions and limitations under the License.
 package jobQueue
 
 import (
-	"core"
 	"encoding/json"
 	"github.com/google/uuid"
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Gs2JobQueueWebSocketClient struct {

@@ -16,7 +16,7 @@ permissions and limitations under the License.
 
 package mission
 
-import "core"
+import "github.com/gs2io/gs2-golang-sdk/core"
 
 type Complete struct {
 	CompleteId                *string  `json:"completeId"`

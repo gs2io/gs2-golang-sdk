@@ -17,8 +17,8 @@ permissions and limitations under the License.
 package friend
 
 import (
-	"core"
 	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
 	"strings"
 )
 

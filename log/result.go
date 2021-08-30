@@ -16,11 +16,11 @@ permissions and limitations under the License.
 
 package log
 
-import "core"
+import "github.com/gs2io/gs2-golang-sdk/core"
 
 type DescribeNamespacesResult struct {
-    Items []Namespace `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Namespace `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -29,27 +29,27 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
-    return DescribeNamespacesResult {
-        Items: CastNamespaces(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeNamespacesResult{
+		Items:         CastNamespaces(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastNamespacesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastNamespacesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
-    return &p
+	return &p
 }
 
 type CreateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -58,23 +58,23 @@ type CreateNamespaceAsyncResult struct {
 }
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
-    return CreateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceStatusResult struct {
-    Status *string `json:"status"`
+	Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -83,23 +83,23 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
-    return GetNamespaceStatusResult {
-        Status: core.CastString(data["status"]),
-    }
+	return GetNamespaceStatusResult{
+		Status: core.CastString(data["status"]),
+	}
 }
 
 func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "status": p.Status,
-    }
+	return map[string]interface{}{
+		"status": p.Status,
+	}
 }
 
 func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -108,23 +108,23 @@ type GetNamespaceAsyncResult struct {
 }
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
-    return GetNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
-    return &p
+	return &p
 }
 
 type UpdateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -133,23 +133,23 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
-    return UpdateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
-    return &p
+	return &p
 }
 
 type DeleteNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -158,26 +158,26 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
-    return DeleteNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
-    return &p
+	return &p
 }
 
 type QueryAccessLogResult struct {
-    Items []AccessLog `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-    TotalCount *int64 `json:"totalCount"`
-    ScanSize *int64 `json:"scanSize"`
+	Items         []AccessLog `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
+	TotalCount    *int64      `json:"totalCount"`
+	ScanSize      *int64      `json:"scanSize"`
 }
 
 type QueryAccessLogAsyncResult struct {
@@ -186,34 +186,34 @@ type QueryAccessLogAsyncResult struct {
 }
 
 func NewQueryAccessLogResultFromDict(data map[string]interface{}) QueryAccessLogResult {
-    return QueryAccessLogResult {
-        Items: CastAccessLogs(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-        TotalCount: core.CastInt64(data["totalCount"]),
-        ScanSize: core.CastInt64(data["scanSize"]),
-    }
+	return QueryAccessLogResult{
+		Items:         CastAccessLogs(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+		TotalCount:    core.CastInt64(data["totalCount"]),
+		ScanSize:      core.CastInt64(data["scanSize"]),
+	}
 }
 
 func (p QueryAccessLogResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastAccessLogsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-        "totalCount": p.TotalCount,
-        "scanSize": p.ScanSize,
-    }
+	return map[string]interface{}{
+		"items": CastAccessLogsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"totalCount":    p.TotalCount,
+		"scanSize":      p.ScanSize,
+	}
 }
 
 func (p QueryAccessLogResult) Pointer() *QueryAccessLogResult {
-    return &p
+	return &p
 }
 
 type CountAccessLogResult struct {
-    Items []AccessLogCount `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-    TotalCount *int64 `json:"totalCount"`
-    ScanSize *int64 `json:"scanSize"`
+	Items         []AccessLogCount `json:"items"`
+	NextPageToken *string          `json:"nextPageToken"`
+	TotalCount    *int64           `json:"totalCount"`
+	ScanSize      *int64           `json:"scanSize"`
 }
 
 type CountAccessLogAsyncResult struct {
@@ -222,34 +222,34 @@ type CountAccessLogAsyncResult struct {
 }
 
 func NewCountAccessLogResultFromDict(data map[string]interface{}) CountAccessLogResult {
-    return CountAccessLogResult {
-        Items: CastAccessLogCounts(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-        TotalCount: core.CastInt64(data["totalCount"]),
-        ScanSize: core.CastInt64(data["scanSize"]),
-    }
+	return CountAccessLogResult{
+		Items:         CastAccessLogCounts(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+		TotalCount:    core.CastInt64(data["totalCount"]),
+		ScanSize:      core.CastInt64(data["scanSize"]),
+	}
 }
 
 func (p CountAccessLogResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastAccessLogCountsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-        "totalCount": p.TotalCount,
-        "scanSize": p.ScanSize,
-    }
+	return map[string]interface{}{
+		"items": CastAccessLogCountsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"totalCount":    p.TotalCount,
+		"scanSize":      p.ScanSize,
+	}
 }
 
 func (p CountAccessLogResult) Pointer() *CountAccessLogResult {
-    return &p
+	return &p
 }
 
 type QueryIssueStampSheetLogResult struct {
-    Items []IssueStampSheetLog `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-    TotalCount *int64 `json:"totalCount"`
-    ScanSize *int64 `json:"scanSize"`
+	Items         []IssueStampSheetLog `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	TotalCount    *int64               `json:"totalCount"`
+	ScanSize      *int64               `json:"scanSize"`
 }
 
 type QueryIssueStampSheetLogAsyncResult struct {
@@ -258,34 +258,34 @@ type QueryIssueStampSheetLogAsyncResult struct {
 }
 
 func NewQueryIssueStampSheetLogResultFromDict(data map[string]interface{}) QueryIssueStampSheetLogResult {
-    return QueryIssueStampSheetLogResult {
-        Items: CastIssueStampSheetLogs(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-        TotalCount: core.CastInt64(data["totalCount"]),
-        ScanSize: core.CastInt64(data["scanSize"]),
-    }
+	return QueryIssueStampSheetLogResult{
+		Items:         CastIssueStampSheetLogs(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+		TotalCount:    core.CastInt64(data["totalCount"]),
+		ScanSize:      core.CastInt64(data["scanSize"]),
+	}
 }
 
 func (p QueryIssueStampSheetLogResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastIssueStampSheetLogsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-        "totalCount": p.TotalCount,
-        "scanSize": p.ScanSize,
-    }
+	return map[string]interface{}{
+		"items": CastIssueStampSheetLogsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"totalCount":    p.TotalCount,
+		"scanSize":      p.ScanSize,
+	}
 }
 
 func (p QueryIssueStampSheetLogResult) Pointer() *QueryIssueStampSheetLogResult {
-    return &p
+	return &p
 }
 
 type CountIssueStampSheetLogResult struct {
-    Items []IssueStampSheetLogCount `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-    TotalCount *int64 `json:"totalCount"`
-    ScanSize *int64 `json:"scanSize"`
+	Items         []IssueStampSheetLogCount `json:"items"`
+	NextPageToken *string                   `json:"nextPageToken"`
+	TotalCount    *int64                    `json:"totalCount"`
+	ScanSize      *int64                    `json:"scanSize"`
 }
 
 type CountIssueStampSheetLogAsyncResult struct {
@@ -294,34 +294,34 @@ type CountIssueStampSheetLogAsyncResult struct {
 }
 
 func NewCountIssueStampSheetLogResultFromDict(data map[string]interface{}) CountIssueStampSheetLogResult {
-    return CountIssueStampSheetLogResult {
-        Items: CastIssueStampSheetLogCounts(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-        TotalCount: core.CastInt64(data["totalCount"]),
-        ScanSize: core.CastInt64(data["scanSize"]),
-    }
+	return CountIssueStampSheetLogResult{
+		Items:         CastIssueStampSheetLogCounts(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+		TotalCount:    core.CastInt64(data["totalCount"]),
+		ScanSize:      core.CastInt64(data["scanSize"]),
+	}
 }
 
 func (p CountIssueStampSheetLogResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastIssueStampSheetLogCountsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-        "totalCount": p.TotalCount,
-        "scanSize": p.ScanSize,
-    }
+	return map[string]interface{}{
+		"items": CastIssueStampSheetLogCountsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"totalCount":    p.TotalCount,
+		"scanSize":      p.ScanSize,
+	}
 }
 
 func (p CountIssueStampSheetLogResult) Pointer() *CountIssueStampSheetLogResult {
-    return &p
+	return &p
 }
 
 type QueryExecuteStampSheetLogResult struct {
-    Items []ExecuteStampSheetLog `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-    TotalCount *int64 `json:"totalCount"`
-    ScanSize *int64 `json:"scanSize"`
+	Items         []ExecuteStampSheetLog `json:"items"`
+	NextPageToken *string                `json:"nextPageToken"`
+	TotalCount    *int64                 `json:"totalCount"`
+	ScanSize      *int64                 `json:"scanSize"`
 }
 
 type QueryExecuteStampSheetLogAsyncResult struct {
@@ -330,34 +330,34 @@ type QueryExecuteStampSheetLogAsyncResult struct {
 }
 
 func NewQueryExecuteStampSheetLogResultFromDict(data map[string]interface{}) QueryExecuteStampSheetLogResult {
-    return QueryExecuteStampSheetLogResult {
-        Items: CastExecuteStampSheetLogs(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-        TotalCount: core.CastInt64(data["totalCount"]),
-        ScanSize: core.CastInt64(data["scanSize"]),
-    }
+	return QueryExecuteStampSheetLogResult{
+		Items:         CastExecuteStampSheetLogs(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+		TotalCount:    core.CastInt64(data["totalCount"]),
+		ScanSize:      core.CastInt64(data["scanSize"]),
+	}
 }
 
 func (p QueryExecuteStampSheetLogResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastExecuteStampSheetLogsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-        "totalCount": p.TotalCount,
-        "scanSize": p.ScanSize,
-    }
+	return map[string]interface{}{
+		"items": CastExecuteStampSheetLogsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"totalCount":    p.TotalCount,
+		"scanSize":      p.ScanSize,
+	}
 }
 
 func (p QueryExecuteStampSheetLogResult) Pointer() *QueryExecuteStampSheetLogResult {
-    return &p
+	return &p
 }
 
 type CountExecuteStampSheetLogResult struct {
-    Items []ExecuteStampSheetLogCount `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-    TotalCount *int64 `json:"totalCount"`
-    ScanSize *int64 `json:"scanSize"`
+	Items         []ExecuteStampSheetLogCount `json:"items"`
+	NextPageToken *string                     `json:"nextPageToken"`
+	TotalCount    *int64                      `json:"totalCount"`
+	ScanSize      *int64                      `json:"scanSize"`
 }
 
 type CountExecuteStampSheetLogAsyncResult struct {
@@ -366,34 +366,34 @@ type CountExecuteStampSheetLogAsyncResult struct {
 }
 
 func NewCountExecuteStampSheetLogResultFromDict(data map[string]interface{}) CountExecuteStampSheetLogResult {
-    return CountExecuteStampSheetLogResult {
-        Items: CastExecuteStampSheetLogCounts(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-        TotalCount: core.CastInt64(data["totalCount"]),
-        ScanSize: core.CastInt64(data["scanSize"]),
-    }
+	return CountExecuteStampSheetLogResult{
+		Items:         CastExecuteStampSheetLogCounts(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+		TotalCount:    core.CastInt64(data["totalCount"]),
+		ScanSize:      core.CastInt64(data["scanSize"]),
+	}
 }
 
 func (p CountExecuteStampSheetLogResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastExecuteStampSheetLogCountsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-        "totalCount": p.TotalCount,
-        "scanSize": p.ScanSize,
-    }
+	return map[string]interface{}{
+		"items": CastExecuteStampSheetLogCountsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"totalCount":    p.TotalCount,
+		"scanSize":      p.ScanSize,
+	}
 }
 
 func (p CountExecuteStampSheetLogResult) Pointer() *CountExecuteStampSheetLogResult {
-    return &p
+	return &p
 }
 
 type QueryExecuteStampTaskLogResult struct {
-    Items []ExecuteStampTaskLog `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-    TotalCount *int64 `json:"totalCount"`
-    ScanSize *int64 `json:"scanSize"`
+	Items         []ExecuteStampTaskLog `json:"items"`
+	NextPageToken *string               `json:"nextPageToken"`
+	TotalCount    *int64                `json:"totalCount"`
+	ScanSize      *int64                `json:"scanSize"`
 }
 
 type QueryExecuteStampTaskLogAsyncResult struct {
@@ -402,34 +402,34 @@ type QueryExecuteStampTaskLogAsyncResult struct {
 }
 
 func NewQueryExecuteStampTaskLogResultFromDict(data map[string]interface{}) QueryExecuteStampTaskLogResult {
-    return QueryExecuteStampTaskLogResult {
-        Items: CastExecuteStampTaskLogs(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-        TotalCount: core.CastInt64(data["totalCount"]),
-        ScanSize: core.CastInt64(data["scanSize"]),
-    }
+	return QueryExecuteStampTaskLogResult{
+		Items:         CastExecuteStampTaskLogs(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+		TotalCount:    core.CastInt64(data["totalCount"]),
+		ScanSize:      core.CastInt64(data["scanSize"]),
+	}
 }
 
 func (p QueryExecuteStampTaskLogResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastExecuteStampTaskLogsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-        "totalCount": p.TotalCount,
-        "scanSize": p.ScanSize,
-    }
+	return map[string]interface{}{
+		"items": CastExecuteStampTaskLogsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"totalCount":    p.TotalCount,
+		"scanSize":      p.ScanSize,
+	}
 }
 
 func (p QueryExecuteStampTaskLogResult) Pointer() *QueryExecuteStampTaskLogResult {
-    return &p
+	return &p
 }
 
 type CountExecuteStampTaskLogResult struct {
-    Items []ExecuteStampTaskLogCount `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-    TotalCount *int64 `json:"totalCount"`
-    ScanSize *int64 `json:"scanSize"`
+	Items         []ExecuteStampTaskLogCount `json:"items"`
+	NextPageToken *string                    `json:"nextPageToken"`
+	TotalCount    *int64                     `json:"totalCount"`
+	ScanSize      *int64                     `json:"scanSize"`
 }
 
 type CountExecuteStampTaskLogAsyncResult struct {
@@ -438,25 +438,25 @@ type CountExecuteStampTaskLogAsyncResult struct {
 }
 
 func NewCountExecuteStampTaskLogResultFromDict(data map[string]interface{}) CountExecuteStampTaskLogResult {
-    return CountExecuteStampTaskLogResult {
-        Items: CastExecuteStampTaskLogCounts(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-        TotalCount: core.CastInt64(data["totalCount"]),
-        ScanSize: core.CastInt64(data["scanSize"]),
-    }
+	return CountExecuteStampTaskLogResult{
+		Items:         CastExecuteStampTaskLogCounts(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+		TotalCount:    core.CastInt64(data["totalCount"]),
+		ScanSize:      core.CastInt64(data["scanSize"]),
+	}
 }
 
 func (p CountExecuteStampTaskLogResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastExecuteStampTaskLogCountsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-        "totalCount": p.TotalCount,
-        "scanSize": p.ScanSize,
-    }
+	return map[string]interface{}{
+		"items": CastExecuteStampTaskLogCountsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"totalCount":    p.TotalCount,
+		"scanSize":      p.ScanSize,
+	}
 }
 
 func (p CountExecuteStampTaskLogResult) Pointer() *CountExecuteStampTaskLogResult {
-    return &p
+	return &p
 }

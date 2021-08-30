@@ -19,7 +19,7 @@ package deploy
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"core"
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Gs2DeployWebSocketClient struct {
@@ -49,13 +49,13 @@ func (p Gs2DeployWebSocketClient) describeStacksAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeStacksResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeStacksAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStacksAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeStacksAsyncResult{
 		result: &result,
@@ -68,33 +68,33 @@ func (p Gs2DeployWebSocketClient) DescribeStacksAsync(
 	request *DescribeStacksRequest,
 	callback chan<- DescribeStacksAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "stack",
-    		"function": "describeStacks",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "describeStacks",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeStacksAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -131,13 +131,13 @@ func (p Gs2DeployWebSocketClient) createStackAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateStackResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateStackAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateStackAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateStackAsyncResult{
 		result: &result,
@@ -150,36 +150,36 @@ func (p Gs2DeployWebSocketClient) CreateStackAsync(
 	request *CreateStackRequest,
 	callback chan<- CreateStackAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "stack",
-    		"function": "createStack",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "createStack",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Template != nil && *request.Template != "" {
-        bodies["template"] = *request.Template
-    }
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Template != nil && *request.Template != "" {
+		bodies["template"] = *request.Template
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.createStackAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -216,13 +216,13 @@ func (p Gs2DeployWebSocketClient) createStackFromGitHubAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateStackFromGitHubResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateStackFromGitHubAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateStackFromGitHubAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateStackFromGitHubAsyncResult{
 		result: &result,
@@ -235,36 +235,36 @@ func (p Gs2DeployWebSocketClient) CreateStackFromGitHubAsync(
 	request *CreateStackFromGitHubRequest,
 	callback chan<- CreateStackFromGitHubAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "stack",
-    		"function": "createStackFromGitHub",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "createStackFromGitHub",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.CheckoutSetting != nil {
-        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-    }
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.CheckoutSetting != nil {
+		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.createStackFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -301,13 +301,13 @@ func (p Gs2DeployWebSocketClient) validateAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ValidateResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ValidateAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ValidateAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ValidateAsyncResult{
 		result: &result,
@@ -320,30 +320,30 @@ func (p Gs2DeployWebSocketClient) ValidateAsync(
 	request *ValidateRequest,
 	callback chan<- ValidateAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "stack",
-    		"function": "validate",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "validate",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.Template != nil && *request.Template != "" {
-        bodies["template"] = *request.Template
-    }
+	if request.Template != nil && *request.Template != "" {
+		bodies["template"] = *request.Template
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.validateAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -380,13 +380,13 @@ func (p Gs2DeployWebSocketClient) getStackStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetStackStatusResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStackStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStackStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetStackStatusAsyncResult{
 		result: &result,
@@ -399,30 +399,30 @@ func (p Gs2DeployWebSocketClient) GetStackStatusAsync(
 	request *GetStackStatusRequest,
 	callback chan<- GetStackStatusAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "stack",
-    		"function": "getStackStatus",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "getStackStatus",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getStackStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -459,13 +459,13 @@ func (p Gs2DeployWebSocketClient) getStackAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetStackResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStackAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStackAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetStackAsyncResult{
 		result: &result,
@@ -478,30 +478,30 @@ func (p Gs2DeployWebSocketClient) GetStackAsync(
 	request *GetStackRequest,
 	callback chan<- GetStackAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "stack",
-    		"function": "getStack",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "getStack",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getStackAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -538,13 +538,13 @@ func (p Gs2DeployWebSocketClient) updateStackAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateStackResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateStackAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateStackAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateStackAsyncResult{
 		result: &result,
@@ -557,36 +557,36 @@ func (p Gs2DeployWebSocketClient) UpdateStackAsync(
 	request *UpdateStackRequest,
 	callback chan<- UpdateStackAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "stack",
-    		"function": "updateStack",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "updateStack",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Template != nil && *request.Template != "" {
-        bodies["template"] = *request.Template
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Template != nil && *request.Template != "" {
+		bodies["template"] = *request.Template
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateStackAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -623,13 +623,13 @@ func (p Gs2DeployWebSocketClient) updateStackFromGitHubAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateStackFromGitHubResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateStackFromGitHubAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateStackFromGitHubAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateStackFromGitHubAsyncResult{
 		result: &result,
@@ -642,36 +642,36 @@ func (p Gs2DeployWebSocketClient) UpdateStackFromGitHubAsync(
 	request *UpdateStackFromGitHubRequest,
 	callback chan<- UpdateStackFromGitHubAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "stack",
-    		"function": "updateStackFromGitHub",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "updateStackFromGitHub",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.CheckoutSetting != nil {
-        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.CheckoutSetting != nil {
+		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateStackFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -708,13 +708,13 @@ func (p Gs2DeployWebSocketClient) deleteStackAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteStackResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteStackAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteStackAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteStackAsyncResult{
 		result: &result,
@@ -727,30 +727,30 @@ func (p Gs2DeployWebSocketClient) DeleteStackAsync(
 	request *DeleteStackRequest,
 	callback chan<- DeleteStackAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "stack",
-    		"function": "deleteStack",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "deleteStack",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteStackAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -787,13 +787,13 @@ func (p Gs2DeployWebSocketClient) forceDeleteStackAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ForceDeleteStackResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ForceDeleteStackAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ForceDeleteStackAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ForceDeleteStackAsyncResult{
 		result: &result,
@@ -806,30 +806,30 @@ func (p Gs2DeployWebSocketClient) ForceDeleteStackAsync(
 	request *ForceDeleteStackRequest,
 	callback chan<- ForceDeleteStackAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "stack",
-    		"function": "forceDeleteStack",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "forceDeleteStack",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.forceDeleteStackAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -866,13 +866,13 @@ func (p Gs2DeployWebSocketClient) deleteStackResourcesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteStackResourcesResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteStackResourcesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteStackResourcesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteStackResourcesAsyncResult{
 		result: &result,
@@ -885,30 +885,30 @@ func (p Gs2DeployWebSocketClient) DeleteStackResourcesAsync(
 	request *DeleteStackResourcesRequest,
 	callback chan<- DeleteStackResourcesAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "stack",
-    		"function": "deleteStackResources",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "deleteStackResources",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteStackResourcesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -945,13 +945,13 @@ func (p Gs2DeployWebSocketClient) deleteStackEntityAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteStackEntityResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteStackEntityAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteStackEntityAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteStackEntityAsyncResult{
 		result: &result,
@@ -964,30 +964,30 @@ func (p Gs2DeployWebSocketClient) DeleteStackEntityAsync(
 	request *DeleteStackEntityRequest,
 	callback chan<- DeleteStackEntityAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "stack",
-    		"function": "deleteStackEntity",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "deleteStackEntity",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteStackEntityAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1024,13 +1024,13 @@ func (p Gs2DeployWebSocketClient) describeResourcesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeResourcesResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeResourcesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeResourcesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeResourcesAsyncResult{
 		result: &result,
@@ -1043,36 +1043,36 @@ func (p Gs2DeployWebSocketClient) DescribeResourcesAsync(
 	request *DescribeResourcesRequest,
 	callback chan<- DescribeResourcesAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "resource",
-    		"function": "describeResources",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "resource",
+			"function":    "describeResources",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeResourcesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1109,13 +1109,13 @@ func (p Gs2DeployWebSocketClient) getResourceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetResourceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetResourceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetResourceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetResourceAsyncResult{
 		result: &result,
@@ -1128,33 +1128,33 @@ func (p Gs2DeployWebSocketClient) GetResourceAsync(
 	request *GetResourceRequest,
 	callback chan<- GetResourceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "resource",
-    		"function": "getResource",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "resource",
+			"function":    "getResource",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
-    if request.ResourceName != nil && *request.ResourceName != "" {
-        bodies["resourceName"] = *request.ResourceName
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
+	if request.ResourceName != nil && *request.ResourceName != "" {
+		bodies["resourceName"] = *request.ResourceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getResourceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1191,13 +1191,13 @@ func (p Gs2DeployWebSocketClient) describeEventsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeEventsResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeEventsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeEventsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeEventsAsyncResult{
 		result: &result,
@@ -1210,36 +1210,36 @@ func (p Gs2DeployWebSocketClient) DescribeEventsAsync(
 	request *DescribeEventsRequest,
 	callback chan<- DescribeEventsAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "event",
-    		"function": "describeEvents",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "event",
+			"function":    "describeEvents",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeEventsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1276,13 +1276,13 @@ func (p Gs2DeployWebSocketClient) getEventAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetEventResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetEventAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetEventAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetEventAsyncResult{
 		result: &result,
@@ -1295,33 +1295,33 @@ func (p Gs2DeployWebSocketClient) GetEventAsync(
 	request *GetEventRequest,
 	callback chan<- GetEventAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "event",
-    		"function": "getEvent",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "event",
+			"function":    "getEvent",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
-    if request.EventName != nil && *request.EventName != "" {
-        bodies["eventName"] = *request.EventName
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
+	if request.EventName != nil && *request.EventName != "" {
+		bodies["eventName"] = *request.EventName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getEventAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1358,13 +1358,13 @@ func (p Gs2DeployWebSocketClient) describeOutputsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeOutputsResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeOutputsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeOutputsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeOutputsAsyncResult{
 		result: &result,
@@ -1377,36 +1377,36 @@ func (p Gs2DeployWebSocketClient) DescribeOutputsAsync(
 	request *DescribeOutputsRequest,
 	callback chan<- DescribeOutputsAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "output",
-    		"function": "describeOutputs",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "output",
+			"function":    "describeOutputs",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeOutputsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1443,13 +1443,13 @@ func (p Gs2DeployWebSocketClient) getOutputAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetOutputResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetOutputAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetOutputAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetOutputAsyncResult{
 		result: &result,
@@ -1462,33 +1462,33 @@ func (p Gs2DeployWebSocketClient) GetOutputAsync(
 	request *GetOutputRequest,
 	callback chan<- GetOutputAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "deploy",
-    		"component": "output",
-    		"function": "getOutput",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "output",
+			"function":    "getOutput",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StackName != nil && *request.StackName != "" {
-        bodies["stackName"] = *request.StackName
-    }
-    if request.OutputName != nil && *request.OutputName != "" {
-        bodies["outputName"] = *request.OutputName
-    }
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
+	if request.OutputName != nil && *request.OutputName != "" {
+		bodies["outputName"] = *request.OutputName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getOutputAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
