@@ -73,16 +73,15 @@ func CastNamespacesFromDict(data []Namespace) []interface{} {
 }
 
 type Job struct {
-	JobId             *string  `json:"jobId"`
-	Name              *string  `json:"name"`
-	UserId            *string  `json:"userId"`
-	ScriptId          *string  `json:"scriptId"`
-	Args              *string  `json:"args"`
-	CurrentRetryCount *int32   `json:"currentRetryCount"`
-	MaxTryCount       *int32   `json:"maxTryCount"`
-	Index             *float64 `json:"index"`
-	CreatedAt         *int64   `json:"createdAt"`
-	UpdatedAt         *int64   `json:"updatedAt"`
+	JobId             *string `json:"jobId"`
+	Name              *string `json:"name"`
+	UserId            *string `json:"userId"`
+	ScriptId          *string `json:"scriptId"`
+	Args              *string `json:"args"`
+	CurrentRetryCount *int32  `json:"currentRetryCount"`
+	MaxTryCount       *int32  `json:"maxTryCount"`
+	CreatedAt         *int64  `json:"createdAt"`
+	UpdatedAt         *int64  `json:"updatedAt"`
 }
 
 func NewJobFromDict(data map[string]interface{}) Job {
@@ -94,7 +93,6 @@ func NewJobFromDict(data map[string]interface{}) Job {
 		Args:              core.CastString(data["args"]),
 		CurrentRetryCount: core.CastInt32(data["currentRetryCount"]),
 		MaxTryCount:       core.CastInt32(data["maxTryCount"]),
-		Index:             core.CastFloat64(data["index"]),
 		CreatedAt:         core.CastInt64(data["createdAt"]),
 		UpdatedAt:         core.CastInt64(data["updatedAt"]),
 	}
@@ -109,7 +107,6 @@ func (p Job) ToDict() map[string]interface{} {
 		"args":              p.Args,
 		"currentRetryCount": p.CurrentRetryCount,
 		"maxTryCount":       p.MaxTryCount,
-		"index":             p.Index,
 		"createdAt":         p.CreatedAt,
 		"updatedAt":         p.UpdatedAt,
 	}

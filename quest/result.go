@@ -19,8 +19,8 @@ package quest
 import "core"
 
 type DescribeNamespacesResult struct {
-    Items []Namespace `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Namespace `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -29,27 +29,27 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
-    return DescribeNamespacesResult {
-        Items: CastNamespaces(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeNamespacesResult{
+		Items:         CastNamespaces(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastNamespacesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastNamespacesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
-    return &p
+	return &p
 }
 
 type CreateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -58,23 +58,23 @@ type CreateNamespaceAsyncResult struct {
 }
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
-    return CreateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceStatusResult struct {
-    Status *string `json:"status"`
+	Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -83,23 +83,23 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
-    return GetNamespaceStatusResult {
-        Status: core.CastString(data["status"]),
-    }
+	return GetNamespaceStatusResult{
+		Status: core.CastString(data["status"]),
+	}
 }
 
 func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "status": p.Status,
-    }
+	return map[string]interface{}{
+		"status": p.Status,
+	}
 }
 
 func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -108,23 +108,23 @@ type GetNamespaceAsyncResult struct {
 }
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
-    return GetNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
-    return &p
+	return &p
 }
 
 type UpdateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -133,23 +133,23 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
-    return UpdateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
-    return &p
+	return &p
 }
 
 type DeleteNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -158,24 +158,24 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
-    return DeleteNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
-    return &p
+	return &p
 }
 
 type DescribeQuestGroupModelMastersResult struct {
-    Items []QuestGroupModelMaster `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []QuestGroupModelMaster `json:"items"`
+	NextPageToken *string                 `json:"nextPageToken"`
 }
 
 type DescribeQuestGroupModelMastersAsyncResult struct {
@@ -184,27 +184,27 @@ type DescribeQuestGroupModelMastersAsyncResult struct {
 }
 
 func NewDescribeQuestGroupModelMastersResultFromDict(data map[string]interface{}) DescribeQuestGroupModelMastersResult {
-    return DescribeQuestGroupModelMastersResult {
-        Items: CastQuestGroupModelMasters(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeQuestGroupModelMastersResult{
+		Items:         CastQuestGroupModelMasters(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeQuestGroupModelMastersResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastQuestGroupModelMastersFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastQuestGroupModelMastersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeQuestGroupModelMastersResult) Pointer() *DescribeQuestGroupModelMastersResult {
-    return &p
+	return &p
 }
 
 type CreateQuestGroupModelMasterResult struct {
-    Item *QuestGroupModelMaster `json:"item"`
+	Item *QuestGroupModelMaster `json:"item"`
 }
 
 type CreateQuestGroupModelMasterAsyncResult struct {
@@ -213,23 +213,23 @@ type CreateQuestGroupModelMasterAsyncResult struct {
 }
 
 func NewCreateQuestGroupModelMasterResultFromDict(data map[string]interface{}) CreateQuestGroupModelMasterResult {
-    return CreateQuestGroupModelMasterResult {
-        Item: NewQuestGroupModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateQuestGroupModelMasterResult{
+		Item: NewQuestGroupModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateQuestGroupModelMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateQuestGroupModelMasterResult) Pointer() *CreateQuestGroupModelMasterResult {
-    return &p
+	return &p
 }
 
 type GetQuestGroupModelMasterResult struct {
-    Item *QuestGroupModelMaster `json:"item"`
+	Item *QuestGroupModelMaster `json:"item"`
 }
 
 type GetQuestGroupModelMasterAsyncResult struct {
@@ -238,23 +238,23 @@ type GetQuestGroupModelMasterAsyncResult struct {
 }
 
 func NewGetQuestGroupModelMasterResultFromDict(data map[string]interface{}) GetQuestGroupModelMasterResult {
-    return GetQuestGroupModelMasterResult {
-        Item: NewQuestGroupModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetQuestGroupModelMasterResult{
+		Item: NewQuestGroupModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetQuestGroupModelMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetQuestGroupModelMasterResult) Pointer() *GetQuestGroupModelMasterResult {
-    return &p
+	return &p
 }
 
 type UpdateQuestGroupModelMasterResult struct {
-    Item *QuestGroupModelMaster `json:"item"`
+	Item *QuestGroupModelMaster `json:"item"`
 }
 
 type UpdateQuestGroupModelMasterAsyncResult struct {
@@ -263,23 +263,23 @@ type UpdateQuestGroupModelMasterAsyncResult struct {
 }
 
 func NewUpdateQuestGroupModelMasterResultFromDict(data map[string]interface{}) UpdateQuestGroupModelMasterResult {
-    return UpdateQuestGroupModelMasterResult {
-        Item: NewQuestGroupModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateQuestGroupModelMasterResult{
+		Item: NewQuestGroupModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateQuestGroupModelMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateQuestGroupModelMasterResult) Pointer() *UpdateQuestGroupModelMasterResult {
-    return &p
+	return &p
 }
 
 type DeleteQuestGroupModelMasterResult struct {
-    Item *QuestGroupModelMaster `json:"item"`
+	Item *QuestGroupModelMaster `json:"item"`
 }
 
 type DeleteQuestGroupModelMasterAsyncResult struct {
@@ -288,24 +288,24 @@ type DeleteQuestGroupModelMasterAsyncResult struct {
 }
 
 func NewDeleteQuestGroupModelMasterResultFromDict(data map[string]interface{}) DeleteQuestGroupModelMasterResult {
-    return DeleteQuestGroupModelMasterResult {
-        Item: NewQuestGroupModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteQuestGroupModelMasterResult{
+		Item: NewQuestGroupModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteQuestGroupModelMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteQuestGroupModelMasterResult) Pointer() *DeleteQuestGroupModelMasterResult {
-    return &p
+	return &p
 }
 
 type DescribeQuestModelMastersResult struct {
-    Items []QuestModelMaster `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []QuestModelMaster `json:"items"`
+	NextPageToken *string            `json:"nextPageToken"`
 }
 
 type DescribeQuestModelMastersAsyncResult struct {
@@ -314,27 +314,27 @@ type DescribeQuestModelMastersAsyncResult struct {
 }
 
 func NewDescribeQuestModelMastersResultFromDict(data map[string]interface{}) DescribeQuestModelMastersResult {
-    return DescribeQuestModelMastersResult {
-        Items: CastQuestModelMasters(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeQuestModelMastersResult{
+		Items:         CastQuestModelMasters(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeQuestModelMastersResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastQuestModelMastersFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastQuestModelMastersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeQuestModelMastersResult) Pointer() *DescribeQuestModelMastersResult {
-    return &p
+	return &p
 }
 
 type CreateQuestModelMasterResult struct {
-    Item *QuestModelMaster `json:"item"`
+	Item *QuestModelMaster `json:"item"`
 }
 
 type CreateQuestModelMasterAsyncResult struct {
@@ -343,23 +343,23 @@ type CreateQuestModelMasterAsyncResult struct {
 }
 
 func NewCreateQuestModelMasterResultFromDict(data map[string]interface{}) CreateQuestModelMasterResult {
-    return CreateQuestModelMasterResult {
-        Item: NewQuestModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateQuestModelMasterResult{
+		Item: NewQuestModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateQuestModelMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateQuestModelMasterResult) Pointer() *CreateQuestModelMasterResult {
-    return &p
+	return &p
 }
 
 type GetQuestModelMasterResult struct {
-    Item *QuestModelMaster `json:"item"`
+	Item *QuestModelMaster `json:"item"`
 }
 
 type GetQuestModelMasterAsyncResult struct {
@@ -368,23 +368,23 @@ type GetQuestModelMasterAsyncResult struct {
 }
 
 func NewGetQuestModelMasterResultFromDict(data map[string]interface{}) GetQuestModelMasterResult {
-    return GetQuestModelMasterResult {
-        Item: NewQuestModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetQuestModelMasterResult{
+		Item: NewQuestModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetQuestModelMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetQuestModelMasterResult) Pointer() *GetQuestModelMasterResult {
-    return &p
+	return &p
 }
 
 type UpdateQuestModelMasterResult struct {
-    Item *QuestModelMaster `json:"item"`
+	Item *QuestModelMaster `json:"item"`
 }
 
 type UpdateQuestModelMasterAsyncResult struct {
@@ -393,23 +393,23 @@ type UpdateQuestModelMasterAsyncResult struct {
 }
 
 func NewUpdateQuestModelMasterResultFromDict(data map[string]interface{}) UpdateQuestModelMasterResult {
-    return UpdateQuestModelMasterResult {
-        Item: NewQuestModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateQuestModelMasterResult{
+		Item: NewQuestModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateQuestModelMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateQuestModelMasterResult) Pointer() *UpdateQuestModelMasterResult {
-    return &p
+	return &p
 }
 
 type DeleteQuestModelMasterResult struct {
-    Item *QuestModelMaster `json:"item"`
+	Item *QuestModelMaster `json:"item"`
 }
 
 type DeleteQuestModelMasterAsyncResult struct {
@@ -418,23 +418,23 @@ type DeleteQuestModelMasterAsyncResult struct {
 }
 
 func NewDeleteQuestModelMasterResultFromDict(data map[string]interface{}) DeleteQuestModelMasterResult {
-    return DeleteQuestModelMasterResult {
-        Item: NewQuestModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteQuestModelMasterResult{
+		Item: NewQuestModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteQuestModelMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteQuestModelMasterResult) Pointer() *DeleteQuestModelMasterResult {
-    return &p
+	return &p
 }
 
 type ExportMasterResult struct {
-    Item *CurrentQuestMaster `json:"item"`
+	Item *CurrentQuestMaster `json:"item"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -443,23 +443,23 @@ type ExportMasterAsyncResult struct {
 }
 
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
-    return ExportMasterResult {
-        Item: NewCurrentQuestMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return ExportMasterResult{
+		Item: NewCurrentQuestMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p ExportMasterResult) Pointer() *ExportMasterResult {
-    return &p
+	return &p
 }
 
 type GetCurrentQuestMasterResult struct {
-    Item *CurrentQuestMaster `json:"item"`
+	Item *CurrentQuestMaster `json:"item"`
 }
 
 type GetCurrentQuestMasterAsyncResult struct {
@@ -468,23 +468,23 @@ type GetCurrentQuestMasterAsyncResult struct {
 }
 
 func NewGetCurrentQuestMasterResultFromDict(data map[string]interface{}) GetCurrentQuestMasterResult {
-    return GetCurrentQuestMasterResult {
-        Item: NewCurrentQuestMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetCurrentQuestMasterResult{
+		Item: NewCurrentQuestMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetCurrentQuestMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetCurrentQuestMasterResult) Pointer() *GetCurrentQuestMasterResult {
-    return &p
+	return &p
 }
 
 type UpdateCurrentQuestMasterResult struct {
-    Item *CurrentQuestMaster `json:"item"`
+	Item *CurrentQuestMaster `json:"item"`
 }
 
 type UpdateCurrentQuestMasterAsyncResult struct {
@@ -493,23 +493,23 @@ type UpdateCurrentQuestMasterAsyncResult struct {
 }
 
 func NewUpdateCurrentQuestMasterResultFromDict(data map[string]interface{}) UpdateCurrentQuestMasterResult {
-    return UpdateCurrentQuestMasterResult {
-        Item: NewCurrentQuestMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateCurrentQuestMasterResult{
+		Item: NewCurrentQuestMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateCurrentQuestMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateCurrentQuestMasterResult) Pointer() *UpdateCurrentQuestMasterResult {
-    return &p
+	return &p
 }
 
 type UpdateCurrentQuestMasterFromGitHubResult struct {
-    Item *CurrentQuestMaster `json:"item"`
+	Item *CurrentQuestMaster `json:"item"`
 }
 
 type UpdateCurrentQuestMasterFromGitHubAsyncResult struct {
@@ -518,24 +518,24 @@ type UpdateCurrentQuestMasterFromGitHubAsyncResult struct {
 }
 
 func NewUpdateCurrentQuestMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentQuestMasterFromGitHubResult {
-    return UpdateCurrentQuestMasterFromGitHubResult {
-        Item: NewCurrentQuestMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateCurrentQuestMasterFromGitHubResult{
+		Item: NewCurrentQuestMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateCurrentQuestMasterFromGitHubResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateCurrentQuestMasterFromGitHubResult) Pointer() *UpdateCurrentQuestMasterFromGitHubResult {
-    return &p
+	return &p
 }
 
 type DescribeProgressesByUserIdResult struct {
-    Items []Progress `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Progress `json:"items"`
+	NextPageToken *string    `json:"nextPageToken"`
 }
 
 type DescribeProgressesByUserIdAsyncResult struct {
@@ -544,27 +544,27 @@ type DescribeProgressesByUserIdAsyncResult struct {
 }
 
 func NewDescribeProgressesByUserIdResultFromDict(data map[string]interface{}) DescribeProgressesByUserIdResult {
-    return DescribeProgressesByUserIdResult {
-        Items: CastProgresses(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeProgressesByUserIdResult{
+		Items:         CastProgresses(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeProgressesByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastProgressesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastProgressesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeProgressesByUserIdResult) Pointer() *DescribeProgressesByUserIdResult {
-    return &p
+	return &p
 }
 
 type CreateProgressByUserIdResult struct {
-    Item *Progress `json:"item"`
+	Item *Progress `json:"item"`
 }
 
 type CreateProgressByUserIdAsyncResult struct {
@@ -573,25 +573,25 @@ type CreateProgressByUserIdAsyncResult struct {
 }
 
 func NewCreateProgressByUserIdResultFromDict(data map[string]interface{}) CreateProgressByUserIdResult {
-    return CreateProgressByUserIdResult {
-        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateProgressByUserIdResult{
+		Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateProgressByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateProgressByUserIdResult) Pointer() *CreateProgressByUserIdResult {
-    return &p
+	return &p
 }
 
 type GetProgressResult struct {
-    Item *Progress `json:"item"`
-    QuestGroup *QuestGroupModel `json:"questGroup"`
-    Quest *QuestModel `json:"quest"`
+	Item       *Progress        `json:"item"`
+	QuestGroup *QuestGroupModel `json:"questGroup"`
+	Quest      *QuestModel      `json:"quest"`
 }
 
 type GetProgressAsyncResult struct {
@@ -600,29 +600,29 @@ type GetProgressAsyncResult struct {
 }
 
 func NewGetProgressResultFromDict(data map[string]interface{}) GetProgressResult {
-    return GetProgressResult {
-        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-        QuestGroup: NewQuestGroupModelFromDict(core.CastMap(data["questGroup"])).Pointer(),
-        Quest: NewQuestModelFromDict(core.CastMap(data["quest"])).Pointer(),
-    }
+	return GetProgressResult{
+		Item:       NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+		QuestGroup: NewQuestGroupModelFromDict(core.CastMap(data["questGroup"])).Pointer(),
+		Quest:      NewQuestModelFromDict(core.CastMap(data["quest"])).Pointer(),
+	}
 }
 
 func (p GetProgressResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "questGroup": p.QuestGroup.ToDict(),
-        "quest": p.Quest.ToDict(),
-    }
+	return map[string]interface{}{
+		"item":       p.Item.ToDict(),
+		"questGroup": p.QuestGroup.ToDict(),
+		"quest":      p.Quest.ToDict(),
+	}
 }
 
 func (p GetProgressResult) Pointer() *GetProgressResult {
-    return &p
+	return &p
 }
 
 type GetProgressByUserIdResult struct {
-    Item *Progress `json:"item"`
-    QuestGroup *QuestGroupModel `json:"questGroup"`
-    Quest *QuestModel `json:"quest"`
+	Item       *Progress        `json:"item"`
+	QuestGroup *QuestGroupModel `json:"questGroup"`
+	Quest      *QuestModel      `json:"quest"`
 }
 
 type GetProgressByUserIdAsyncResult struct {
@@ -631,29 +631,28 @@ type GetProgressByUserIdAsyncResult struct {
 }
 
 func NewGetProgressByUserIdResultFromDict(data map[string]interface{}) GetProgressByUserIdResult {
-    return GetProgressByUserIdResult {
-        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-        QuestGroup: NewQuestGroupModelFromDict(core.CastMap(data["questGroup"])).Pointer(),
-        Quest: NewQuestModelFromDict(core.CastMap(data["quest"])).Pointer(),
-    }
+	return GetProgressByUserIdResult{
+		Item:       NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+		QuestGroup: NewQuestGroupModelFromDict(core.CastMap(data["questGroup"])).Pointer(),
+		Quest:      NewQuestModelFromDict(core.CastMap(data["quest"])).Pointer(),
+	}
 }
 
 func (p GetProgressByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "questGroup": p.QuestGroup.ToDict(),
-        "quest": p.Quest.ToDict(),
-    }
+	return map[string]interface{}{
+		"item":       p.Item.ToDict(),
+		"questGroup": p.QuestGroup.ToDict(),
+		"quest":      p.Quest.ToDict(),
+	}
 }
 
 func (p GetProgressByUserIdResult) Pointer() *GetProgressByUserIdResult {
-    return &p
+	return &p
 }
 
 type StartResult struct {
-    Item *Progress `json:"item"`
-    StampSheet *string `json:"stampSheet"`
-    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+	StampSheet                *string `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
 }
 
 type StartAsyncResult struct {
@@ -662,29 +661,26 @@ type StartAsyncResult struct {
 }
 
 func NewStartResultFromDict(data map[string]interface{}) StartResult {
-    return StartResult {
-        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-        StampSheet: core.CastString(data["stampSheet"]),
-        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-    }
+	return StartResult{
+		StampSheet:                core.CastString(data["stampSheet"]),
+		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+	}
 }
 
 func (p StartResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "stampSheet": p.StampSheet,
-        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-    }
+	return map[string]interface{}{
+		"stampSheet":                p.StampSheet,
+		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+	}
 }
 
 func (p StartResult) Pointer() *StartResult {
-    return &p
+	return &p
 }
 
 type StartByUserIdResult struct {
-    Item *Progress `json:"item"`
-    StampSheet *string `json:"stampSheet"`
-    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+	StampSheet                *string `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
 }
 
 type StartByUserIdAsyncResult struct {
@@ -693,29 +689,27 @@ type StartByUserIdAsyncResult struct {
 }
 
 func NewStartByUserIdResultFromDict(data map[string]interface{}) StartByUserIdResult {
-    return StartByUserIdResult {
-        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-        StampSheet: core.CastString(data["stampSheet"]),
-        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-    }
+	return StartByUserIdResult{
+		StampSheet:                core.CastString(data["stampSheet"]),
+		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+	}
 }
 
 func (p StartByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "stampSheet": p.StampSheet,
-        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-    }
+	return map[string]interface{}{
+		"stampSheet":                p.StampSheet,
+		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+	}
 }
 
 func (p StartByUserIdResult) Pointer() *StartByUserIdResult {
-    return &p
+	return &p
 }
 
 type EndResult struct {
-    Item *Progress `json:"item"`
-    StampSheet *string `json:"stampSheet"`
-    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+	Item                      *Progress `json:"item"`
+	StampSheet                *string   `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string   `json:"stampSheetEncryptionKeyId"`
 }
 
 type EndAsyncResult struct {
@@ -724,29 +718,29 @@ type EndAsyncResult struct {
 }
 
 func NewEndResultFromDict(data map[string]interface{}) EndResult {
-    return EndResult {
-        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-        StampSheet: core.CastString(data["stampSheet"]),
-        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-    }
+	return EndResult{
+		Item:                      NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+		StampSheet:                core.CastString(data["stampSheet"]),
+		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+	}
 }
 
 func (p EndResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "stampSheet": p.StampSheet,
-        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-    }
+	return map[string]interface{}{
+		"item":                      p.Item.ToDict(),
+		"stampSheet":                p.StampSheet,
+		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+	}
 }
 
 func (p EndResult) Pointer() *EndResult {
-    return &p
+	return &p
 }
 
 type EndByUserIdResult struct {
-    Item *Progress `json:"item"`
-    StampSheet *string `json:"stampSheet"`
-    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+	Item                      *Progress `json:"item"`
+	StampSheet                *string   `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string   `json:"stampSheetEncryptionKeyId"`
 }
 
 type EndByUserIdAsyncResult struct {
@@ -755,27 +749,27 @@ type EndByUserIdAsyncResult struct {
 }
 
 func NewEndByUserIdResultFromDict(data map[string]interface{}) EndByUserIdResult {
-    return EndByUserIdResult {
-        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-        StampSheet: core.CastString(data["stampSheet"]),
-        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-    }
+	return EndByUserIdResult{
+		Item:                      NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+		StampSheet:                core.CastString(data["stampSheet"]),
+		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+	}
 }
 
 func (p EndByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "stampSheet": p.StampSheet,
-        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-    }
+	return map[string]interface{}{
+		"item":                      p.Item.ToDict(),
+		"stampSheet":                p.StampSheet,
+		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+	}
 }
 
 func (p EndByUserIdResult) Pointer() *EndByUserIdResult {
-    return &p
+	return &p
 }
 
 type DeleteProgressResult struct {
-    Item *Progress `json:"item"`
+	Item *Progress `json:"item"`
 }
 
 type DeleteProgressAsyncResult struct {
@@ -784,23 +778,23 @@ type DeleteProgressAsyncResult struct {
 }
 
 func NewDeleteProgressResultFromDict(data map[string]interface{}) DeleteProgressResult {
-    return DeleteProgressResult {
-        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteProgressResult{
+		Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteProgressResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteProgressResult) Pointer() *DeleteProgressResult {
-    return &p
+	return &p
 }
 
 type DeleteProgressByUserIdResult struct {
-    Item *Progress `json:"item"`
+	Item *Progress `json:"item"`
 }
 
 type DeleteProgressByUserIdAsyncResult struct {
@@ -809,23 +803,23 @@ type DeleteProgressByUserIdAsyncResult struct {
 }
 
 func NewDeleteProgressByUserIdResultFromDict(data map[string]interface{}) DeleteProgressByUserIdResult {
-    return DeleteProgressByUserIdResult {
-        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteProgressByUserIdResult{
+		Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteProgressByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteProgressByUserIdResult) Pointer() *DeleteProgressByUserIdResult {
-    return &p
+	return &p
 }
 
 type CreateProgressByStampSheetResult struct {
-    Item *Progress `json:"item"`
+	Item *Progress `json:"item"`
 }
 
 type CreateProgressByStampSheetAsyncResult struct {
@@ -834,24 +828,24 @@ type CreateProgressByStampSheetAsyncResult struct {
 }
 
 func NewCreateProgressByStampSheetResultFromDict(data map[string]interface{}) CreateProgressByStampSheetResult {
-    return CreateProgressByStampSheetResult {
-        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateProgressByStampSheetResult{
+		Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateProgressByStampSheetResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateProgressByStampSheetResult) Pointer() *CreateProgressByStampSheetResult {
-    return &p
+	return &p
 }
 
 type DeleteProgressByStampTaskResult struct {
-    Item *Progress `json:"item"`
-    NewContextStack *string `json:"newContextStack"`
+	Item            *Progress `json:"item"`
+	NewContextStack *string   `json:"newContextStack"`
 }
 
 type DeleteProgressByStampTaskAsyncResult struct {
@@ -860,26 +854,26 @@ type DeleteProgressByStampTaskAsyncResult struct {
 }
 
 func NewDeleteProgressByStampTaskResultFromDict(data map[string]interface{}) DeleteProgressByStampTaskResult {
-    return DeleteProgressByStampTaskResult {
-        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-        NewContextStack: core.CastString(data["newContextStack"]),
-    }
+	return DeleteProgressByStampTaskResult{
+		Item:            NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
 }
 
 func (p DeleteProgressByStampTaskResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "newContextStack": p.NewContextStack,
-    }
+	return map[string]interface{}{
+		"item":            p.Item.ToDict(),
+		"newContextStack": p.NewContextStack,
+	}
 }
 
 func (p DeleteProgressByStampTaskResult) Pointer() *DeleteProgressByStampTaskResult {
-    return &p
+	return &p
 }
 
 type DescribeCompletedQuestListsResult struct {
-    Items []CompletedQuestList `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []CompletedQuestList `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
 }
 
 type DescribeCompletedQuestListsAsyncResult struct {
@@ -888,28 +882,28 @@ type DescribeCompletedQuestListsAsyncResult struct {
 }
 
 func NewDescribeCompletedQuestListsResultFromDict(data map[string]interface{}) DescribeCompletedQuestListsResult {
-    return DescribeCompletedQuestListsResult {
-        Items: CastCompletedQuestLists(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeCompletedQuestListsResult{
+		Items:         CastCompletedQuestLists(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeCompletedQuestListsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastCompletedQuestListsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastCompletedQuestListsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeCompletedQuestListsResult) Pointer() *DescribeCompletedQuestListsResult {
-    return &p
+	return &p
 }
 
 type DescribeCompletedQuestListsByUserIdResult struct {
-    Items []CompletedQuestList `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []CompletedQuestList `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
 }
 
 type DescribeCompletedQuestListsByUserIdAsyncResult struct {
@@ -918,27 +912,27 @@ type DescribeCompletedQuestListsByUserIdAsyncResult struct {
 }
 
 func NewDescribeCompletedQuestListsByUserIdResultFromDict(data map[string]interface{}) DescribeCompletedQuestListsByUserIdResult {
-    return DescribeCompletedQuestListsByUserIdResult {
-        Items: CastCompletedQuestLists(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeCompletedQuestListsByUserIdResult{
+		Items:         CastCompletedQuestLists(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeCompletedQuestListsByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastCompletedQuestListsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastCompletedQuestListsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeCompletedQuestListsByUserIdResult) Pointer() *DescribeCompletedQuestListsByUserIdResult {
-    return &p
+	return &p
 }
 
 type GetCompletedQuestListResult struct {
-    Item *CompletedQuestList `json:"item"`
+	Item *CompletedQuestList `json:"item"`
 }
 
 type GetCompletedQuestListAsyncResult struct {
@@ -947,23 +941,23 @@ type GetCompletedQuestListAsyncResult struct {
 }
 
 func NewGetCompletedQuestListResultFromDict(data map[string]interface{}) GetCompletedQuestListResult {
-    return GetCompletedQuestListResult {
-        Item: NewCompletedQuestListFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetCompletedQuestListResult{
+		Item: NewCompletedQuestListFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetCompletedQuestListResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetCompletedQuestListResult) Pointer() *GetCompletedQuestListResult {
-    return &p
+	return &p
 }
 
 type GetCompletedQuestListByUserIdResult struct {
-    Item *CompletedQuestList `json:"item"`
+	Item *CompletedQuestList `json:"item"`
 }
 
 type GetCompletedQuestListByUserIdAsyncResult struct {
@@ -972,23 +966,23 @@ type GetCompletedQuestListByUserIdAsyncResult struct {
 }
 
 func NewGetCompletedQuestListByUserIdResultFromDict(data map[string]interface{}) GetCompletedQuestListByUserIdResult {
-    return GetCompletedQuestListByUserIdResult {
-        Item: NewCompletedQuestListFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetCompletedQuestListByUserIdResult{
+		Item: NewCompletedQuestListFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetCompletedQuestListByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetCompletedQuestListByUserIdResult) Pointer() *GetCompletedQuestListByUserIdResult {
-    return &p
+	return &p
 }
 
 type DeleteCompletedQuestListByUserIdResult struct {
-    Item *CompletedQuestList `json:"item"`
+	Item *CompletedQuestList `json:"item"`
 }
 
 type DeleteCompletedQuestListByUserIdAsyncResult struct {
@@ -997,23 +991,23 @@ type DeleteCompletedQuestListByUserIdAsyncResult struct {
 }
 
 func NewDeleteCompletedQuestListByUserIdResultFromDict(data map[string]interface{}) DeleteCompletedQuestListByUserIdResult {
-    return DeleteCompletedQuestListByUserIdResult {
-        Item: NewCompletedQuestListFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteCompletedQuestListByUserIdResult{
+		Item: NewCompletedQuestListFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteCompletedQuestListByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteCompletedQuestListByUserIdResult) Pointer() *DeleteCompletedQuestListByUserIdResult {
-    return &p
+	return &p
 }
 
 type DescribeQuestGroupModelsResult struct {
-    Items []QuestGroupModel `json:"items"`
+	Items []QuestGroupModel `json:"items"`
 }
 
 type DescribeQuestGroupModelsAsyncResult struct {
@@ -1022,25 +1016,25 @@ type DescribeQuestGroupModelsAsyncResult struct {
 }
 
 func NewDescribeQuestGroupModelsResultFromDict(data map[string]interface{}) DescribeQuestGroupModelsResult {
-    return DescribeQuestGroupModelsResult {
-        Items: CastQuestGroupModels(core.CastArray(data["items"])),
-    }
+	return DescribeQuestGroupModelsResult{
+		Items: CastQuestGroupModels(core.CastArray(data["items"])),
+	}
 }
 
 func (p DescribeQuestGroupModelsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastQuestGroupModelsFromDict(
-            p.Items,
-        ),
-    }
+	return map[string]interface{}{
+		"items": CastQuestGroupModelsFromDict(
+			p.Items,
+		),
+	}
 }
 
 func (p DescribeQuestGroupModelsResult) Pointer() *DescribeQuestGroupModelsResult {
-    return &p
+	return &p
 }
 
 type GetQuestGroupModelResult struct {
-    Item *QuestGroupModel `json:"item"`
+	Item *QuestGroupModel `json:"item"`
 }
 
 type GetQuestGroupModelAsyncResult struct {
@@ -1049,23 +1043,23 @@ type GetQuestGroupModelAsyncResult struct {
 }
 
 func NewGetQuestGroupModelResultFromDict(data map[string]interface{}) GetQuestGroupModelResult {
-    return GetQuestGroupModelResult {
-        Item: NewQuestGroupModelFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetQuestGroupModelResult{
+		Item: NewQuestGroupModelFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetQuestGroupModelResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetQuestGroupModelResult) Pointer() *GetQuestGroupModelResult {
-    return &p
+	return &p
 }
 
 type DescribeQuestModelsResult struct {
-    Items []QuestModel `json:"items"`
+	Items []QuestModel `json:"items"`
 }
 
 type DescribeQuestModelsAsyncResult struct {
@@ -1074,25 +1068,25 @@ type DescribeQuestModelsAsyncResult struct {
 }
 
 func NewDescribeQuestModelsResultFromDict(data map[string]interface{}) DescribeQuestModelsResult {
-    return DescribeQuestModelsResult {
-        Items: CastQuestModels(core.CastArray(data["items"])),
-    }
+	return DescribeQuestModelsResult{
+		Items: CastQuestModels(core.CastArray(data["items"])),
+	}
 }
 
 func (p DescribeQuestModelsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastQuestModelsFromDict(
-            p.Items,
-        ),
-    }
+	return map[string]interface{}{
+		"items": CastQuestModelsFromDict(
+			p.Items,
+		),
+	}
 }
 
 func (p DescribeQuestModelsResult) Pointer() *DescribeQuestModelsResult {
-    return &p
+	return &p
 }
 
 type GetQuestModelResult struct {
-    Item *QuestModel `json:"item"`
+	Item *QuestModel `json:"item"`
 }
 
 type GetQuestModelAsyncResult struct {
@@ -1101,17 +1095,17 @@ type GetQuestModelAsyncResult struct {
 }
 
 func NewGetQuestModelResultFromDict(data map[string]interface{}) GetQuestModelResult {
-    return GetQuestModelResult {
-        Item: NewQuestModelFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetQuestModelResult{
+		Item: NewQuestModelFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetQuestModelResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetQuestModelResult) Pointer() *GetQuestModelResult {
-    return &p
+	return &p
 }

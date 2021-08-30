@@ -123,7 +123,6 @@ type DataObject struct {
 	UserId             *string  `json:"userId"`
 	Scope              *string  `json:"scope"`
 	AllowUserIds       []string `json:"allowUserIds"`
-	Platform           *string  `json:"platform"`
 	Status             *string  `json:"status"`
 	Generation         *string  `json:"generation"`
 	PreviousGeneration *string  `json:"previousGeneration"`
@@ -138,7 +137,6 @@ func NewDataObjectFromDict(data map[string]interface{}) DataObject {
 		UserId:             core.CastString(data["userId"]),
 		Scope:              core.CastString(data["scope"]),
 		AllowUserIds:       core.CastStrings(core.CastArray(data["allowUserIds"])),
-		Platform:           core.CastString(data["platform"]),
 		Status:             core.CastString(data["status"]),
 		Generation:         core.CastString(data["generation"]),
 		PreviousGeneration: core.CastString(data["previousGeneration"]),
@@ -156,7 +154,6 @@ func (p DataObject) ToDict() map[string]interface{} {
 		"allowUserIds": core.CastStringsFromDict(
 			p.AllowUserIds,
 		),
-		"platform":           p.Platform,
 		"status":             p.Status,
 		"generation":         p.Generation,
 		"previousGeneration": p.PreviousGeneration,

@@ -17,8 +17,8 @@ permissions and limitations under the License.
 package matchmaking
 
 import (
-	"encoding/json"
 	"core"
+	"encoding/json"
 	"strings"
 )
 
@@ -56,13 +56,13 @@ func describeNamespacesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeNamespacesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeNamespacesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -86,10 +86,10 @@ func (p Gs2MatchmakingRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -141,13 +141,13 @@ func createNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -163,62 +163,62 @@ func (p Gs2MatchmakingRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.EnableRating != nil {
-        bodies["enableRating"] = *request.EnableRating
-    }
-    if request.CreateGatheringTriggerType != nil && *request.CreateGatheringTriggerType != "" {
-        bodies["createGatheringTriggerType"] = *request.CreateGatheringTriggerType
-    }
-    if request.CreateGatheringTriggerRealtimeNamespaceId != nil && *request.CreateGatheringTriggerRealtimeNamespaceId != "" {
-        bodies["createGatheringTriggerRealtimeNamespaceId"] = *request.CreateGatheringTriggerRealtimeNamespaceId
-    }
-    if request.CreateGatheringTriggerScriptId != nil && *request.CreateGatheringTriggerScriptId != "" {
-        bodies["createGatheringTriggerScriptId"] = *request.CreateGatheringTriggerScriptId
-    }
-    if request.CompleteMatchmakingTriggerType != nil && *request.CompleteMatchmakingTriggerType != "" {
-        bodies["completeMatchmakingTriggerType"] = *request.CompleteMatchmakingTriggerType
-    }
-    if request.CompleteMatchmakingTriggerRealtimeNamespaceId != nil && *request.CompleteMatchmakingTriggerRealtimeNamespaceId != "" {
-        bodies["completeMatchmakingTriggerRealtimeNamespaceId"] = *request.CompleteMatchmakingTriggerRealtimeNamespaceId
-    }
-    if request.CompleteMatchmakingTriggerScriptId != nil && *request.CompleteMatchmakingTriggerScriptId != "" {
-        bodies["completeMatchmakingTriggerScriptId"] = *request.CompleteMatchmakingTriggerScriptId
-    }
-    if request.JoinNotification != nil {
-        bodies["joinNotification"] = request.JoinNotification.ToDict()
-    }
-    if request.LeaveNotification != nil {
-        bodies["leaveNotification"] = request.LeaveNotification.ToDict()
-    }
-    if request.CompleteNotification != nil {
-        bodies["completeNotification"] = request.CompleteNotification.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.EnableRating != nil {
+		bodies["enableRating"] = *request.EnableRating
+	}
+	if request.CreateGatheringTriggerType != nil && *request.CreateGatheringTriggerType != "" {
+		bodies["createGatheringTriggerType"] = *request.CreateGatheringTriggerType
+	}
+	if request.CreateGatheringTriggerRealtimeNamespaceId != nil && *request.CreateGatheringTriggerRealtimeNamespaceId != "" {
+		bodies["createGatheringTriggerRealtimeNamespaceId"] = *request.CreateGatheringTriggerRealtimeNamespaceId
+	}
+	if request.CreateGatheringTriggerScriptId != nil && *request.CreateGatheringTriggerScriptId != "" {
+		bodies["createGatheringTriggerScriptId"] = *request.CreateGatheringTriggerScriptId
+	}
+	if request.CompleteMatchmakingTriggerType != nil && *request.CompleteMatchmakingTriggerType != "" {
+		bodies["completeMatchmakingTriggerType"] = *request.CompleteMatchmakingTriggerType
+	}
+	if request.CompleteMatchmakingTriggerRealtimeNamespaceId != nil && *request.CompleteMatchmakingTriggerRealtimeNamespaceId != "" {
+		bodies["completeMatchmakingTriggerRealtimeNamespaceId"] = *request.CompleteMatchmakingTriggerRealtimeNamespaceId
+	}
+	if request.CompleteMatchmakingTriggerScriptId != nil && *request.CompleteMatchmakingTriggerScriptId != "" {
+		bodies["completeMatchmakingTriggerScriptId"] = *request.CompleteMatchmakingTriggerScriptId
+	}
+	if request.JoinNotification != nil {
+		bodies["joinNotification"] = request.JoinNotification.ToDict()
+	}
+	if request.LeaveNotification != nil {
+		bodies["leaveNotification"] = request.LeaveNotification.ToDict()
+	}
+	if request.CompleteNotification != nil {
+		bodies["completeNotification"] = request.CompleteNotification.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -262,13 +262,13 @@ func getNamespaceStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -282,19 +282,19 @@ func (p Gs2MatchmakingRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -346,13 +346,13 @@ func getNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -366,19 +366,19 @@ func (p Gs2MatchmakingRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -430,13 +430,13 @@ func updateNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -450,66 +450,66 @@ func (p Gs2MatchmakingRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.EnableRating != nil {
-        bodies["enableRating"] = *request.EnableRating
-    }
-    if request.CreateGatheringTriggerType != nil && *request.CreateGatheringTriggerType != "" {
-        bodies["createGatheringTriggerType"] = *request.CreateGatheringTriggerType
-    }
-    if request.CreateGatheringTriggerRealtimeNamespaceId != nil && *request.CreateGatheringTriggerRealtimeNamespaceId != "" {
-        bodies["createGatheringTriggerRealtimeNamespaceId"] = *request.CreateGatheringTriggerRealtimeNamespaceId
-    }
-    if request.CreateGatheringTriggerScriptId != nil && *request.CreateGatheringTriggerScriptId != "" {
-        bodies["createGatheringTriggerScriptId"] = *request.CreateGatheringTriggerScriptId
-    }
-    if request.CompleteMatchmakingTriggerType != nil && *request.CompleteMatchmakingTriggerType != "" {
-        bodies["completeMatchmakingTriggerType"] = *request.CompleteMatchmakingTriggerType
-    }
-    if request.CompleteMatchmakingTriggerRealtimeNamespaceId != nil && *request.CompleteMatchmakingTriggerRealtimeNamespaceId != "" {
-        bodies["completeMatchmakingTriggerRealtimeNamespaceId"] = *request.CompleteMatchmakingTriggerRealtimeNamespaceId
-    }
-    if request.CompleteMatchmakingTriggerScriptId != nil && *request.CompleteMatchmakingTriggerScriptId != "" {
-        bodies["completeMatchmakingTriggerScriptId"] = *request.CompleteMatchmakingTriggerScriptId
-    }
-    if request.JoinNotification != nil {
-        bodies["joinNotification"] = request.JoinNotification.ToDict()
-    }
-    if request.LeaveNotification != nil {
-        bodies["leaveNotification"] = request.LeaveNotification.ToDict()
-    }
-    if request.CompleteNotification != nil {
-        bodies["completeNotification"] = request.CompleteNotification.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.EnableRating != nil {
+		bodies["enableRating"] = *request.EnableRating
+	}
+	if request.CreateGatheringTriggerType != nil && *request.CreateGatheringTriggerType != "" {
+		bodies["createGatheringTriggerType"] = *request.CreateGatheringTriggerType
+	}
+	if request.CreateGatheringTriggerRealtimeNamespaceId != nil && *request.CreateGatheringTriggerRealtimeNamespaceId != "" {
+		bodies["createGatheringTriggerRealtimeNamespaceId"] = *request.CreateGatheringTriggerRealtimeNamespaceId
+	}
+	if request.CreateGatheringTriggerScriptId != nil && *request.CreateGatheringTriggerScriptId != "" {
+		bodies["createGatheringTriggerScriptId"] = *request.CreateGatheringTriggerScriptId
+	}
+	if request.CompleteMatchmakingTriggerType != nil && *request.CompleteMatchmakingTriggerType != "" {
+		bodies["completeMatchmakingTriggerType"] = *request.CompleteMatchmakingTriggerType
+	}
+	if request.CompleteMatchmakingTriggerRealtimeNamespaceId != nil && *request.CompleteMatchmakingTriggerRealtimeNamespaceId != "" {
+		bodies["completeMatchmakingTriggerRealtimeNamespaceId"] = *request.CompleteMatchmakingTriggerRealtimeNamespaceId
+	}
+	if request.CompleteMatchmakingTriggerScriptId != nil && *request.CompleteMatchmakingTriggerScriptId != "" {
+		bodies["completeMatchmakingTriggerScriptId"] = *request.CompleteMatchmakingTriggerScriptId
+	}
+	if request.JoinNotification != nil {
+		bodies["joinNotification"] = request.JoinNotification.ToDict()
+	}
+	if request.LeaveNotification != nil {
+		bodies["leaveNotification"] = request.LeaveNotification.ToDict()
+	}
+	if request.CompleteNotification != nil {
+		bodies["completeNotification"] = request.CompleteNotification.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -553,13 +553,13 @@ func deleteNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -573,19 +573,19 @@ func (p Gs2MatchmakingRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -637,13 +637,13 @@ func describeGatheringsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeGatheringsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeGatheringsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeGatheringsAsyncResult{
 		result: &result,
@@ -657,11 +657,11 @@ func (p Gs2MatchmakingRestClient) DescribeGatheringsAsync(
 	callback chan<- DescribeGatheringsAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -672,10 +672,10 @@ func (p Gs2MatchmakingRestClient) DescribeGatheringsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeGatheringsAsyncHandler(
 		p,
@@ -727,13 +727,13 @@ func createGatheringAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateGatheringAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateGatheringAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateGatheringAsyncResult{
 		result: &result,
@@ -747,60 +747,60 @@ func (p Gs2MatchmakingRestClient) CreateGatheringAsync(
 	callback chan<- CreateGatheringAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Player != nil {
-        bodies["player"] = request.Player.ToDict()
-    }
-    if request.AttributeRanges != nil {
-        var _attributeRanges []interface {}
-        for _, item := range request.AttributeRanges {
-            _attributeRanges = append(_attributeRanges, item)
-        }
-        bodies["attributeRanges"] = _attributeRanges
-    }
-    if request.CapacityOfRoles != nil {
-        var _capacityOfRoles []interface {}
-        for _, item := range request.CapacityOfRoles {
-            _capacityOfRoles = append(_capacityOfRoles, item)
-        }
-        bodies["capacityOfRoles"] = _capacityOfRoles
-    }
-    if request.AllowUserIds != nil {
-        var _allowUserIds []interface {}
-        for _, item := range request.AllowUserIds {
-            _allowUserIds = append(_allowUserIds, item)
-        }
-        bodies["allowUserIds"] = _allowUserIds
-    }
-    if request.ExpiresAt != nil {
-        bodies["expiresAt"] = *request.ExpiresAt
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Player != nil {
+		bodies["player"] = request.Player.ToDict()
+	}
+	if request.AttributeRanges != nil {
+		var _attributeRanges []interface{}
+		for _, item := range request.AttributeRanges {
+			_attributeRanges = append(_attributeRanges, item)
+		}
+		bodies["attributeRanges"] = _attributeRanges
+	}
+	if request.CapacityOfRoles != nil {
+		var _capacityOfRoles []interface{}
+		for _, item := range request.CapacityOfRoles {
+			_capacityOfRoles = append(_capacityOfRoles, item)
+		}
+		bodies["capacityOfRoles"] = _capacityOfRoles
+	}
+	if request.AllowUserIds != nil {
+		var _allowUserIds []interface{}
+		for _, item := range request.AllowUserIds {
+			_allowUserIds = append(_allowUserIds, item)
+		}
+		bodies["allowUserIds"] = _allowUserIds
+	}
+	if request.ExpiresAt != nil {
+		bodies["expiresAt"] = *request.ExpiresAt
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go createGatheringAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -844,13 +844,13 @@ func createGatheringByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateGatheringByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateGatheringByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateGatheringByUserIdAsyncResult{
 		result: &result,
@@ -864,62 +864,62 @@ func (p Gs2MatchmakingRestClient) CreateGatheringByUserIdAsync(
 	callback chan<- CreateGatheringByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/user/{userId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Player != nil {
-        bodies["player"] = request.Player.ToDict()
-    }
-    if request.AttributeRanges != nil {
-        var _attributeRanges []interface {}
-        for _, item := range request.AttributeRanges {
-            _attributeRanges = append(_attributeRanges, item)
-        }
-        bodies["attributeRanges"] = _attributeRanges
-    }
-    if request.CapacityOfRoles != nil {
-        var _capacityOfRoles []interface {}
-        for _, item := range request.CapacityOfRoles {
-            _capacityOfRoles = append(_capacityOfRoles, item)
-        }
-        bodies["capacityOfRoles"] = _capacityOfRoles
-    }
-    if request.AllowUserIds != nil {
-        var _allowUserIds []interface {}
-        for _, item := range request.AllowUserIds {
-            _allowUserIds = append(_allowUserIds, item)
-        }
-        bodies["allowUserIds"] = _allowUserIds
-    }
-    if request.ExpiresAt != nil {
-        bodies["expiresAt"] = *request.ExpiresAt
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Player != nil {
+		bodies["player"] = request.Player.ToDict()
+	}
+	if request.AttributeRanges != nil {
+		var _attributeRanges []interface{}
+		for _, item := range request.AttributeRanges {
+			_attributeRanges = append(_attributeRanges, item)
+		}
+		bodies["attributeRanges"] = _attributeRanges
+	}
+	if request.CapacityOfRoles != nil {
+		var _capacityOfRoles []interface{}
+		for _, item := range request.CapacityOfRoles {
+			_capacityOfRoles = append(_capacityOfRoles, item)
+		}
+		bodies["capacityOfRoles"] = _capacityOfRoles
+	}
+	if request.AllowUserIds != nil {
+		var _allowUserIds []interface{}
+		for _, item := range request.AllowUserIds {
+			_allowUserIds = append(_allowUserIds, item)
+		}
+		bodies["allowUserIds"] = _allowUserIds
+	}
+	if request.ExpiresAt != nil {
+		bodies["expiresAt"] = *request.ExpiresAt
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createGatheringByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -963,13 +963,13 @@ func updateGatheringAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateGatheringAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateGatheringAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateGatheringAsyncResult{
 		result: &result,
@@ -983,45 +983,45 @@ func (p Gs2MatchmakingRestClient) UpdateGatheringAsync(
 	callback chan<- UpdateGatheringAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/{gatheringName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.GatheringName != nil && *request.GatheringName != ""  {
-        path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
-    } else {
-        path = strings.ReplaceAll(path, "{gatheringName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.AttributeRanges != nil {
-        var _attributeRanges []interface {}
-        for _, item := range request.AttributeRanges {
-            _attributeRanges = append(_attributeRanges, item)
-        }
-        bodies["attributeRanges"] = _attributeRanges
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
+	} else {
+		path = strings.ReplaceAll(path, "{gatheringName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.AttributeRanges != nil {
+		var _attributeRanges []interface{}
+		for _, item := range request.AttributeRanges {
+			_attributeRanges = append(_attributeRanges, item)
+		}
+		bodies["attributeRanges"] = _attributeRanges
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go updateGatheringAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1065,13 +1065,13 @@ func updateGatheringByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateGatheringByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateGatheringByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateGatheringByUserIdAsyncResult{
 		result: &result,
@@ -1085,47 +1085,47 @@ func (p Gs2MatchmakingRestClient) UpdateGatheringByUserIdAsync(
 	callback chan<- UpdateGatheringByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/{gatheringName}/user/{userId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.GatheringName != nil && *request.GatheringName != ""  {
-        path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
-    } else {
-        path = strings.ReplaceAll(path, "{gatheringName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.AttributeRanges != nil {
-        var _attributeRanges []interface {}
-        for _, item := range request.AttributeRanges {
-            _attributeRanges = append(_attributeRanges, item)
-        }
-        bodies["attributeRanges"] = _attributeRanges
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
+	} else {
+		path = strings.ReplaceAll(path, "{gatheringName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.AttributeRanges != nil {
+		var _attributeRanges []interface{}
+		for _, item := range request.AttributeRanges {
+			_attributeRanges = append(_attributeRanges, item)
+		}
+		bodies["attributeRanges"] = _attributeRanges
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateGatheringByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1169,13 +1169,13 @@ func doMatchmakingByPlayerAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DoMatchmakingByPlayerAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DoMatchmakingByPlayerAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DoMatchmakingByPlayerAsyncResult{
 		result: &result,
@@ -1189,36 +1189,36 @@ func (p Gs2MatchmakingRestClient) DoMatchmakingByPlayerAsync(
 	callback chan<- DoMatchmakingByPlayerAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/player/do"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Player != nil {
-        bodies["player"] = request.Player.ToDict()
-    }
-    if request.MatchmakingContextToken != nil && *request.MatchmakingContextToken != "" {
-        bodies["matchmakingContextToken"] = *request.MatchmakingContextToken
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Player != nil {
+		bodies["player"] = request.Player.ToDict()
+	}
+	if request.MatchmakingContextToken != nil && *request.MatchmakingContextToken != "" {
+		bodies["matchmakingContextToken"] = *request.MatchmakingContextToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go doMatchmakingByPlayerAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1262,13 +1262,13 @@ func doMatchmakingAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DoMatchmakingAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DoMatchmakingAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DoMatchmakingAsyncResult{
 		result: &result,
@@ -1282,39 +1282,39 @@ func (p Gs2MatchmakingRestClient) DoMatchmakingAsync(
 	callback chan<- DoMatchmakingAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/do"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Player != nil {
-        bodies["player"] = request.Player.ToDict()
-    }
-    if request.MatchmakingContextToken != nil && *request.MatchmakingContextToken != "" {
-        bodies["matchmakingContextToken"] = *request.MatchmakingContextToken
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Player != nil {
+		bodies["player"] = request.Player.ToDict()
+	}
+	if request.MatchmakingContextToken != nil && *request.MatchmakingContextToken != "" {
+		bodies["matchmakingContextToken"] = *request.MatchmakingContextToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go doMatchmakingAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1325,6 +1325,104 @@ func (p Gs2MatchmakingRestClient) DoMatchmaking(
 ) (*DoMatchmakingResult, error) {
 	callback := make(chan DoMatchmakingAsyncResult, 1)
 	go p.DoMatchmakingAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func doMatchmakingByUserIdAsyncHandler(
+	client Gs2MatchmakingRestClient,
+	job *core.NetworkJob,
+	callback chan<- DoMatchmakingByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DoMatchmakingByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DoMatchmakingByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DoMatchmakingByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DoMatchmakingByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DoMatchmakingByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingRestClient) DoMatchmakingByUserIdAsync(
+	request *DoMatchmakingByUserIdRequest,
+	callback chan<- DoMatchmakingByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/gathering/do"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Player != nil {
+		bodies["player"] = request.Player.ToDict()
+	}
+	if request.MatchmakingContextToken != nil && *request.MatchmakingContextToken != "" {
+		bodies["matchmakingContextToken"] = *request.MatchmakingContextToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go doMatchmakingByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingRestClient) DoMatchmakingByUserId(
+	request *DoMatchmakingByUserIdRequest,
+) (*DoMatchmakingByUserIdResult, error) {
+	callback := make(chan DoMatchmakingByUserIdAsyncResult, 1)
+	go p.DoMatchmakingByUserIdAsync(
 		request,
 		callback,
 	)
@@ -1358,13 +1456,13 @@ func getGatheringAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetGatheringAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetGatheringAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetGatheringAsyncResult{
 		result: &result,
@@ -1378,24 +1476,24 @@ func (p Gs2MatchmakingRestClient) GetGatheringAsync(
 	callback chan<- GetGatheringAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/{gatheringName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.GatheringName != nil && *request.GatheringName != ""  {
-        path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
-    } else {
-        path = strings.ReplaceAll(path, "{gatheringName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
+	} else {
+		path = strings.ReplaceAll(path, "{gatheringName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getGatheringAsyncHandler(
 		p,
@@ -1447,13 +1545,13 @@ func cancelMatchmakingAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CancelMatchmakingAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CancelMatchmakingAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CancelMatchmakingAsyncResult{
 		result: &result,
@@ -1467,27 +1565,27 @@ func (p Gs2MatchmakingRestClient) CancelMatchmakingAsync(
 	callback chan<- CancelMatchmakingAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/{gatheringName}/user/me"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.GatheringName != nil && *request.GatheringName != ""  {
-        path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
-    } else {
-        path = strings.ReplaceAll(path, "{gatheringName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
+	} else {
+		path = strings.ReplaceAll(path, "{gatheringName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go cancelMatchmakingAsyncHandler(
 		p,
@@ -1539,13 +1637,13 @@ func cancelMatchmakingByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CancelMatchmakingByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CancelMatchmakingByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CancelMatchmakingByUserIdAsyncResult{
 		result: &result,
@@ -1559,29 +1657,29 @@ func (p Gs2MatchmakingRestClient) CancelMatchmakingByUserIdAsync(
 	callback chan<- CancelMatchmakingByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/{gatheringName}/user/{userId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.GatheringName != nil && *request.GatheringName != ""  {
-        path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
-    } else {
-        path = strings.ReplaceAll(path, "{gatheringName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
+	} else {
+		path = strings.ReplaceAll(path, "{gatheringName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go cancelMatchmakingByUserIdAsyncHandler(
 		p,
@@ -1633,13 +1731,13 @@ func deleteGatheringAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteGatheringAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteGatheringAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteGatheringAsyncResult{
 		result: &result,
@@ -1653,24 +1751,24 @@ func (p Gs2MatchmakingRestClient) DeleteGatheringAsync(
 	callback chan<- DeleteGatheringAsyncResult,
 ) {
 	path := "/{namespaceName}/gathering/{gatheringName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.GatheringName != nil && *request.GatheringName != ""  {
-        path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
-    } else {
-        path = strings.ReplaceAll(path, "{gatheringName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
+	} else {
+		path = strings.ReplaceAll(path, "{gatheringName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteGatheringAsyncHandler(
 		p,
@@ -1722,13 +1820,13 @@ func describeRatingModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeRatingModelMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRatingModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeRatingModelMastersAsyncResult{
 		result: &result,
@@ -1742,11 +1840,11 @@ func (p Gs2MatchmakingRestClient) DescribeRatingModelMastersAsync(
 	callback chan<- DescribeRatingModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/rating"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1757,10 +1855,10 @@ func (p Gs2MatchmakingRestClient) DescribeRatingModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeRatingModelMastersAsyncHandler(
 		p,
@@ -1812,13 +1910,13 @@ func createRatingModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateRatingModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateRatingModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateRatingModelMasterAsyncResult{
 		result: &result,
@@ -1832,42 +1930,42 @@ func (p Gs2MatchmakingRestClient) CreateRatingModelMasterAsync(
 	callback chan<- CreateRatingModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/rating"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.Volatility != nil {
-        bodies["volatility"] = *request.Volatility
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.Volatility != nil {
+		bodies["volatility"] = *request.Volatility
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createRatingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1911,13 +2009,13 @@ func getRatingModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRatingModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRatingModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetRatingModelMasterAsyncResult{
 		result: &result,
@@ -1931,24 +2029,24 @@ func (p Gs2MatchmakingRestClient) GetRatingModelMasterAsync(
 	callback chan<- GetRatingModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/rating/{ratingName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RatingName != nil && *request.RatingName != ""  {
-        path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
-    } else {
-        path = strings.ReplaceAll(path, "{ratingName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
+	} else {
+		path = strings.ReplaceAll(path, "{ratingName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getRatingModelMasterAsyncHandler(
 		p,
@@ -2000,13 +2098,13 @@ func updateRatingModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateRatingModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateRatingModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateRatingModelMasterAsyncResult{
 		result: &result,
@@ -2020,44 +2118,44 @@ func (p Gs2MatchmakingRestClient) UpdateRatingModelMasterAsync(
 	callback chan<- UpdateRatingModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/rating/{ratingName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RatingName != nil && *request.RatingName != ""  {
-        path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
-    } else {
-        path = strings.ReplaceAll(path, "{ratingName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.Volatility != nil {
-        bodies["volatility"] = *request.Volatility
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
+	} else {
+		path = strings.ReplaceAll(path, "{ratingName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.Volatility != nil {
+		bodies["volatility"] = *request.Volatility
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateRatingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2101,13 +2199,13 @@ func deleteRatingModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteRatingModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteRatingModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteRatingModelMasterAsyncResult{
 		result: &result,
@@ -2121,24 +2219,24 @@ func (p Gs2MatchmakingRestClient) DeleteRatingModelMasterAsync(
 	callback chan<- DeleteRatingModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/rating/{ratingName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RatingName != nil && *request.RatingName != ""  {
-        path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
-    } else {
-        path = strings.ReplaceAll(path, "{ratingName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
+	} else {
+		path = strings.ReplaceAll(path, "{ratingName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteRatingModelMasterAsyncHandler(
 		p,
@@ -2190,13 +2288,13 @@ func describeRatingModelsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeRatingModelsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRatingModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeRatingModelsAsyncResult{
 		result: &result,
@@ -2210,19 +2308,19 @@ func (p Gs2MatchmakingRestClient) DescribeRatingModelsAsync(
 	callback chan<- DescribeRatingModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/rating"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeRatingModelsAsyncHandler(
 		p,
@@ -2274,13 +2372,13 @@ func getRatingModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRatingModelAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRatingModelAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetRatingModelAsyncResult{
 		result: &result,
@@ -2294,24 +2392,24 @@ func (p Gs2MatchmakingRestClient) GetRatingModelAsync(
 	callback chan<- GetRatingModelAsyncResult,
 ) {
 	path := "/{namespaceName}/rating/{ratingName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RatingName != nil && *request.RatingName != ""  {
-        path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
-    } else {
-        path = strings.ReplaceAll(path, "{ratingName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
+	} else {
+		path = strings.ReplaceAll(path, "{ratingName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getRatingModelAsyncHandler(
 		p,
@@ -2363,13 +2461,13 @@ func exportMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ExportMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExportMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -2383,19 +2481,19 @@ func (p Gs2MatchmakingRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go exportMasterAsyncHandler(
 		p,
@@ -2447,13 +2545,13 @@ func getCurrentRatingModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCurrentRatingModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCurrentRatingModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetCurrentRatingModelMasterAsyncResult{
 		result: &result,
@@ -2467,19 +2565,19 @@ func (p Gs2MatchmakingRestClient) GetCurrentRatingModelMasterAsync(
 	callback chan<- GetCurrentRatingModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getCurrentRatingModelMasterAsyncHandler(
 		p,
@@ -2531,13 +2629,13 @@ func updateCurrentRatingModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentRatingModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentRatingModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateCurrentRatingModelMasterAsyncResult{
 		result: &result,
@@ -2551,33 +2649,33 @@ func (p Gs2MatchmakingRestClient) UpdateCurrentRatingModelMasterAsync(
 	callback chan<- UpdateCurrentRatingModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Settings != nil && *request.Settings != "" {
-        bodies["settings"] = *request.Settings
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Settings != nil && *request.Settings != "" {
+		bodies["settings"] = *request.Settings
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateCurrentRatingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2621,13 +2719,13 @@ func updateCurrentRatingModelMasterFromGitHubAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentRatingModelMasterFromGitHubAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentRatingModelMasterFromGitHubAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateCurrentRatingModelMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2641,33 +2739,33 @@ func (p Gs2MatchmakingRestClient) UpdateCurrentRatingModelMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentRatingModelMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.CheckoutSetting != nil {
-        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.CheckoutSetting != nil {
+		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateCurrentRatingModelMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2711,13 +2809,13 @@ func describeRatingsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeRatingsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRatingsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeRatingsAsyncResult{
 		result: &result,
@@ -2731,11 +2829,11 @@ func (p Gs2MatchmakingRestClient) DescribeRatingsAsync(
 	callback chan<- DescribeRatingsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/rating"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2746,13 +2844,13 @@ func (p Gs2MatchmakingRestClient) DescribeRatingsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go describeRatingsAsyncHandler(
 		p,
@@ -2804,13 +2902,13 @@ func describeRatingsByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeRatingsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRatingsByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeRatingsByUserIdAsyncResult{
 		result: &result,
@@ -2824,16 +2922,16 @@ func (p Gs2MatchmakingRestClient) DescribeRatingsByUserIdAsync(
 	callback chan<- DescribeRatingsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/rating"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2844,10 +2942,10 @@ func (p Gs2MatchmakingRestClient) DescribeRatingsByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeRatingsByUserIdAsyncHandler(
 		p,
@@ -2899,13 +2997,13 @@ func getRatingAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRatingAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRatingAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetRatingAsyncResult{
 		result: &result,
@@ -2919,27 +3017,27 @@ func (p Gs2MatchmakingRestClient) GetRatingAsync(
 	callback chan<- GetRatingAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/rating/{ratingName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RatingName != nil && *request.RatingName != ""  {
-        path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
-    } else {
-        path = strings.ReplaceAll(path, "{ratingName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
+	} else {
+		path = strings.ReplaceAll(path, "{ratingName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go getRatingAsyncHandler(
 		p,
@@ -2991,13 +3089,13 @@ func getRatingByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRatingByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRatingByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetRatingByUserIdAsyncResult{
 		result: &result,
@@ -3011,29 +3109,29 @@ func (p Gs2MatchmakingRestClient) GetRatingByUserIdAsync(
 	callback chan<- GetRatingByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/rating/{ratingName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.RatingName != nil && *request.RatingName != ""  {
-        path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
-    } else {
-        path = strings.ReplaceAll(path, "{ratingName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
+	} else {
+		path = strings.ReplaceAll(path, "{ratingName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getRatingByUserIdAsyncHandler(
 		p,
@@ -3085,13 +3183,13 @@ func putResultAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- PutResultAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PutResultAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- PutResultAsyncResult{
 		result: &result,
@@ -3105,42 +3203,42 @@ func (p Gs2MatchmakingRestClient) PutResultAsync(
 	callback chan<- PutResultAsyncResult,
 ) {
 	path := "/{namespaceName}/rating/{ratingName}/vote"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RatingName != nil && *request.RatingName != ""  {
-        path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
-    } else {
-        path = strings.ReplaceAll(path, "{ratingName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.GameResults != nil {
-        var _gameResults []interface {}
-        for _, item := range request.GameResults {
-            _gameResults = append(_gameResults, item)
-        }
-        bodies["gameResults"] = _gameResults
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
+	} else {
+		path = strings.ReplaceAll(path, "{ratingName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.GameResults != nil {
+		var _gameResults []interface{}
+		for _, item := range request.GameResults {
+			_gameResults = append(_gameResults, item)
+		}
+		bodies["gameResults"] = _gameResults
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go putResultAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3184,13 +3282,13 @@ func deleteRatingAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteRatingAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteRatingAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteRatingAsyncResult{
 		result: &result,
@@ -3204,29 +3302,29 @@ func (p Gs2MatchmakingRestClient) DeleteRatingAsync(
 	callback chan<- DeleteRatingAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/rating/{ratingName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.RatingName != nil && *request.RatingName != ""  {
-        path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
-    } else {
-        path = strings.ReplaceAll(path, "{ratingName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
+	} else {
+		path = strings.ReplaceAll(path, "{ratingName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteRatingAsyncHandler(
 		p,
@@ -3278,13 +3376,13 @@ func getBallotAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetBallotAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetBallotAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetBallotAsyncResult{
 		result: &result,
@@ -3298,49 +3396,49 @@ func (p Gs2MatchmakingRestClient) GetBallotAsync(
 	callback chan<- GetBallotAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/vote/{ratingName}/{gatheringName}/ballot"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RatingName != nil && *request.RatingName != ""  {
-        path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
-    } else {
-        path = strings.ReplaceAll(path, "{ratingName}", "null")
-    }
-    if request.GatheringName != nil && *request.GatheringName != ""  {
-        path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
-    } else {
-        path = strings.ReplaceAll(path, "{gatheringName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.NumberOfPlayer != nil {
-        bodies["numberOfPlayer"] = *request.NumberOfPlayer
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
+	} else {
+		path = strings.ReplaceAll(path, "{ratingName}", "null")
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
+	} else {
+		path = strings.ReplaceAll(path, "{gatheringName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.NumberOfPlayer != nil {
+		bodies["numberOfPlayer"] = *request.NumberOfPlayer
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go getBallotAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3384,13 +3482,13 @@ func getBallotByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetBallotByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetBallotByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetBallotByUserIdAsyncResult{
 		result: &result,
@@ -3404,51 +3502,51 @@ func (p Gs2MatchmakingRestClient) GetBallotByUserIdAsync(
 	callback chan<- GetBallotByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/vote/{ratingName}/{gatheringName}/ballot"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RatingName != nil && *request.RatingName != ""  {
-        path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
-    } else {
-        path = strings.ReplaceAll(path, "{ratingName}", "null")
-    }
-    if request.GatheringName != nil && *request.GatheringName != ""  {
-        path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
-    } else {
-        path = strings.ReplaceAll(path, "{gatheringName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.NumberOfPlayer != nil {
-        bodies["numberOfPlayer"] = *request.NumberOfPlayer
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
+	} else {
+		path = strings.ReplaceAll(path, "{ratingName}", "null")
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
+	} else {
+		path = strings.ReplaceAll(path, "{gatheringName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.NumberOfPlayer != nil {
+		bodies["numberOfPlayer"] = *request.NumberOfPlayer
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getBallotByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3492,13 +3590,13 @@ func voteAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- VoteAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VoteAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- VoteAsyncResult{
 		result: &result,
@@ -3512,46 +3610,46 @@ func (p Gs2MatchmakingRestClient) VoteAsync(
 	callback chan<- VoteAsyncResult,
 ) {
 	path := "/{namespaceName}/action/vote"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.BallotBody != nil && *request.BallotBody != "" {
-        bodies["ballotBody"] = *request.BallotBody
-    }
-    if request.BallotSignature != nil && *request.BallotSignature != "" {
-        bodies["ballotSignature"] = *request.BallotSignature
-    }
-    if request.GameResults != nil {
-        var _gameResults []interface {}
-        for _, item := range request.GameResults {
-            _gameResults = append(_gameResults, item)
-        }
-        bodies["gameResults"] = _gameResults
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.BallotBody != nil && *request.BallotBody != "" {
+		bodies["ballotBody"] = *request.BallotBody
+	}
+	if request.BallotSignature != nil && *request.BallotSignature != "" {
+		bodies["ballotSignature"] = *request.BallotSignature
+	}
+	if request.GameResults != nil {
+		var _gameResults []interface{}
+		for _, item := range request.GameResults {
+			_gameResults = append(_gameResults, item)
+		}
+		bodies["gameResults"] = _gameResults
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go voteAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3595,13 +3693,13 @@ func voteMultipleAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- VoteMultipleAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VoteMultipleAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- VoteMultipleAsyncResult{
 		result: &result,
@@ -3615,47 +3713,47 @@ func (p Gs2MatchmakingRestClient) VoteMultipleAsync(
 	callback chan<- VoteMultipleAsyncResult,
 ) {
 	path := "/{namespaceName}/action/vote/multiple"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.SignedBallots != nil {
-        var _signedBallots []interface {}
-        for _, item := range request.SignedBallots {
-            _signedBallots = append(_signedBallots, item)
-        }
-        bodies["signedBallots"] = _signedBallots
-    }
-    if request.GameResults != nil {
-        var _gameResults []interface {}
-        for _, item := range request.GameResults {
-            _gameResults = append(_gameResults, item)
-        }
-        bodies["gameResults"] = _gameResults
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.SignedBallots != nil {
+		var _signedBallots []interface{}
+		for _, item := range request.SignedBallots {
+			_signedBallots = append(_signedBallots, item)
+		}
+		bodies["signedBallots"] = _signedBallots
+	}
+	if request.GameResults != nil {
+		var _gameResults []interface{}
+		for _, item := range request.GameResults {
+			_gameResults = append(_gameResults, item)
+		}
+		bodies["gameResults"] = _gameResults
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go voteMultipleAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3699,13 +3797,13 @@ func commitVoteAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CommitVoteAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CommitVoteAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CommitVoteAsyncResult{
 		result: &result,
@@ -3719,40 +3817,40 @@ func (p Gs2MatchmakingRestClient) CommitVoteAsync(
 	callback chan<- CommitVoteAsyncResult,
 ) {
 	path := "/{namespaceName}/vote/{ratingName}/{gatheringName}/action/vote/commit"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RatingName != nil && *request.RatingName != ""  {
-        path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
-    } else {
-        path = strings.ReplaceAll(path, "{ratingName}", "null")
-    }
-    if request.GatheringName != nil && *request.GatheringName != ""  {
-        path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
-    } else {
-        path = strings.ReplaceAll(path, "{gatheringName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
+	} else {
+		path = strings.ReplaceAll(path, "{ratingName}", "null")
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
+	} else {
+		path = strings.ReplaceAll(path, "{gatheringName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go commitVoteAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)

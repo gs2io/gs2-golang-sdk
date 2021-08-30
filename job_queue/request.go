@@ -19,10 +19,11 @@ package job_queue
 import "core"
 
 type DescribeNamespacesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	PageToken          *string `json:"pageToken"`
+	Limit              *int32  `json:"limit"`
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -44,12 +45,13 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	RequestId        *string              `json:"requestId"`
-	ContextStack     *string              `json:"contextStack"`
-	Name             *string              `json:"name"`
-	Description      *string              `json:"description"`
-	PushNotification *NotificationSetting `json:"pushNotification"`
-	LogSetting       *LogSetting          `json:"logSetting"`
+	RequestId          *string              `json:"requestId"`
+	ContextStack       *string              `json:"contextStack"`
+	DuplicationAvoider *string              `json:"duplicationAvoider"`
+	Name               *string              `json:"name"`
+	Description        *string              `json:"description"`
+	PushNotification   *NotificationSetting `json:"pushNotification"`
+	LogSetting         *LogSetting          `json:"logSetting"`
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -75,9 +77,10 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
@@ -97,9 +100,10 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -119,12 +123,13 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId        *string              `json:"requestId"`
-	ContextStack     *string              `json:"contextStack"`
-	NamespaceName    *string              `json:"namespaceName"`
-	Description      *string              `json:"description"`
-	PushNotification *NotificationSetting `json:"pushNotification"`
-	LogSetting       *LogSetting          `json:"logSetting"`
+	RequestId          *string              `json:"requestId"`
+	ContextStack       *string              `json:"contextStack"`
+	DuplicationAvoider *string              `json:"duplicationAvoider"`
+	NamespaceName      *string              `json:"namespaceName"`
+	Description        *string              `json:"description"`
+	PushNotification   *NotificationSetting `json:"pushNotification"`
+	LogSetting         *LogSetting          `json:"logSetting"`
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -150,9 +155,10 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
 }
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
@@ -172,12 +178,13 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DescribeJobsByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	PageToken          *string `json:"pageToken"`
+	Limit              *int32  `json:"limit"`
 }
 
 func NewDescribeJobsByUserIdRequestFromDict(data map[string]interface{}) DescribeJobsByUserIdRequest {
@@ -203,11 +210,12 @@ func (p DescribeJobsByUserIdRequest) Pointer() *DescribeJobsByUserIdRequest {
 }
 
 type GetJobByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
-	JobName       *string `json:"jobName"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	JobName            *string `json:"jobName"`
 }
 
 func NewGetJobByUserIdRequestFromDict(data map[string]interface{}) GetJobByUserIdRequest {
@@ -231,11 +239,12 @@ func (p GetJobByUserIdRequest) Pointer() *GetJobByUserIdRequest {
 }
 
 type PushByUserIdRequest struct {
-	RequestId     *string    `json:"requestId"`
-	ContextStack  *string    `json:"contextStack"`
-	NamespaceName *string    `json:"namespaceName"`
-	UserId        *string    `json:"userId"`
-	Jobs          []JobEntry `json:"jobs"`
+	RequestId          *string    `json:"requestId"`
+	ContextStack       *string    `json:"contextStack"`
+	DuplicationAvoider *string    `json:"duplicationAvoider"`
+	NamespaceName      *string    `json:"namespaceName"`
+	UserId             *string    `json:"userId"`
+	Jobs               []JobEntry `json:"jobs"`
 }
 
 func NewPushByUserIdRequestFromDict(data map[string]interface{}) PushByUserIdRequest {
@@ -261,10 +270,11 @@ func (p PushByUserIdRequest) Pointer() *PushByUserIdRequest {
 }
 
 type RunRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AccessToken   *string `json:"accessToken"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
 }
 
 func NewRunRequestFromDict(data map[string]interface{}) RunRequest {
@@ -286,10 +296,11 @@ func (p RunRequest) Pointer() *RunRequest {
 }
 
 type RunByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
 }
 
 func NewRunByUserIdRequestFromDict(data map[string]interface{}) RunByUserIdRequest {
@@ -311,11 +322,12 @@ func (p RunByUserIdRequest) Pointer() *RunByUserIdRequest {
 }
 
 type DeleteJobByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
-	JobName       *string `json:"jobName"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	JobName            *string `json:"jobName"`
 }
 
 func NewDeleteJobByUserIdRequestFromDict(data map[string]interface{}) DeleteJobByUserIdRequest {
@@ -339,10 +351,11 @@ func (p DeleteJobByUserIdRequest) Pointer() *DeleteJobByUserIdRequest {
 }
 
 type PushByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	StampSheet         *string `json:"stampSheet"`
+	KeyId              *string `json:"keyId"`
 }
 
 func NewPushByStampSheetRequestFromDict(data map[string]interface{}) PushByStampSheetRequest {
@@ -364,12 +377,13 @@ func (p PushByStampSheetRequest) Pointer() *PushByStampSheetRequest {
 }
 
 type DescribeDeadLetterJobsByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	PageToken          *string `json:"pageToken"`
+	Limit              *int32  `json:"limit"`
 }
 
 func NewDescribeDeadLetterJobsByUserIdRequestFromDict(data map[string]interface{}) DescribeDeadLetterJobsByUserIdRequest {
@@ -395,11 +409,12 @@ func (p DescribeDeadLetterJobsByUserIdRequest) Pointer() *DescribeDeadLetterJobs
 }
 
 type GetDeadLetterJobByUserIdRequest struct {
-	RequestId         *string `json:"requestId"`
-	ContextStack      *string `json:"contextStack"`
-	NamespaceName     *string `json:"namespaceName"`
-	UserId            *string `json:"userId"`
-	DeadLetterJobName *string `json:"deadLetterJobName"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	DeadLetterJobName  *string `json:"deadLetterJobName"`
 }
 
 func NewGetDeadLetterJobByUserIdRequestFromDict(data map[string]interface{}) GetDeadLetterJobByUserIdRequest {
@@ -423,11 +438,12 @@ func (p GetDeadLetterJobByUserIdRequest) Pointer() *GetDeadLetterJobByUserIdRequ
 }
 
 type DeleteDeadLetterJobByUserIdRequest struct {
-	RequestId         *string `json:"requestId"`
-	ContextStack      *string `json:"contextStack"`
-	NamespaceName     *string `json:"namespaceName"`
-	UserId            *string `json:"userId"`
-	DeadLetterJobName *string `json:"deadLetterJobName"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	DeadLetterJobName  *string `json:"deadLetterJobName"`
 }
 
 func NewDeleteDeadLetterJobByUserIdRequestFromDict(data map[string]interface{}) DeleteDeadLetterJobByUserIdRequest {

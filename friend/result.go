@@ -19,8 +19,8 @@ package friend
 import "core"
 
 type DescribeNamespacesResult struct {
-    Items []Namespace `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Namespace `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -29,27 +29,27 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
-    return DescribeNamespacesResult {
-        Items: CastNamespaces(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeNamespacesResult{
+		Items:         CastNamespaces(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastNamespacesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastNamespacesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
-    return &p
+	return &p
 }
 
 type CreateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -58,23 +58,23 @@ type CreateNamespaceAsyncResult struct {
 }
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
-    return CreateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceStatusResult struct {
-    Status *string `json:"status"`
+	Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -83,23 +83,23 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
-    return GetNamespaceStatusResult {
-        Status: core.CastString(data["status"]),
-    }
+	return GetNamespaceStatusResult{
+		Status: core.CastString(data["status"]),
+	}
 }
 
 func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "status": p.Status,
-    }
+	return map[string]interface{}{
+		"status": p.Status,
+	}
 }
 
 func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -108,23 +108,23 @@ type GetNamespaceAsyncResult struct {
 }
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
-    return GetNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
-    return &p
+	return &p
 }
 
 type UpdateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -133,23 +133,23 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
-    return UpdateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
-    return &p
+	return &p
 }
 
 type DeleteNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -158,53 +158,23 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
-    return DeleteNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
-    return &p
-}
-
-type DescribeProfilesResult struct {
-    Items []Profile `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-}
-
-type DescribeProfilesAsyncResult struct {
-	result *DescribeProfilesResult
-	err    error
-}
-
-func NewDescribeProfilesResultFromDict(data map[string]interface{}) DescribeProfilesResult {
-    return DescribeProfilesResult {
-        Items: CastProfiles(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
-}
-
-func (p DescribeProfilesResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastProfilesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
-}
-
-func (p DescribeProfilesResult) Pointer() *DescribeProfilesResult {
-    return &p
+	return &p
 }
 
 type GetProfileResult struct {
-    Item *Profile `json:"item"`
+	Item *Profile `json:"item"`
 }
 
 type GetProfileAsyncResult struct {
@@ -213,23 +183,23 @@ type GetProfileAsyncResult struct {
 }
 
 func NewGetProfileResultFromDict(data map[string]interface{}) GetProfileResult {
-    return GetProfileResult {
-        Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetProfileResult{
+		Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetProfileResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetProfileResult) Pointer() *GetProfileResult {
-    return &p
+	return &p
 }
 
 type GetProfileByUserIdResult struct {
-    Item *Profile `json:"item"`
+	Item *Profile `json:"item"`
 }
 
 type GetProfileByUserIdAsyncResult struct {
@@ -238,23 +208,23 @@ type GetProfileByUserIdAsyncResult struct {
 }
 
 func NewGetProfileByUserIdResultFromDict(data map[string]interface{}) GetProfileByUserIdResult {
-    return GetProfileByUserIdResult {
-        Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetProfileByUserIdResult{
+		Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetProfileByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetProfileByUserIdResult) Pointer() *GetProfileByUserIdResult {
-    return &p
+	return &p
 }
 
 type UpdateProfileResult struct {
-    Item *Profile `json:"item"`
+	Item *Profile `json:"item"`
 }
 
 type UpdateProfileAsyncResult struct {
@@ -263,23 +233,23 @@ type UpdateProfileAsyncResult struct {
 }
 
 func NewUpdateProfileResultFromDict(data map[string]interface{}) UpdateProfileResult {
-    return UpdateProfileResult {
-        Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateProfileResult{
+		Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateProfileResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateProfileResult) Pointer() *UpdateProfileResult {
-    return &p
+	return &p
 }
 
 type UpdateProfileByUserIdResult struct {
-    Item *Profile `json:"item"`
+	Item *Profile `json:"item"`
 }
 
 type UpdateProfileByUserIdAsyncResult struct {
@@ -288,19 +258,19 @@ type UpdateProfileByUserIdAsyncResult struct {
 }
 
 func NewUpdateProfileByUserIdResultFromDict(data map[string]interface{}) UpdateProfileByUserIdResult {
-    return UpdateProfileByUserIdResult {
-        Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateProfileByUserIdResult{
+		Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateProfileByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateProfileByUserIdResult) Pointer() *UpdateProfileByUserIdResult {
-    return &p
+	return &p
 }
 
 type DeleteProfileByUserIdResult struct {
@@ -312,21 +282,19 @@ type DeleteProfileByUserIdAsyncResult struct {
 }
 
 func NewDeleteProfileByUserIdResultFromDict(data map[string]interface{}) DeleteProfileByUserIdResult {
-    return DeleteProfileByUserIdResult {
-    }
+	return DeleteProfileByUserIdResult{}
 }
 
 func (p DeleteProfileByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-    }
+	return map[string]interface{}{}
 }
 
 func (p DeleteProfileByUserIdResult) Pointer() *DeleteProfileByUserIdResult {
-    return &p
+	return &p
 }
 
 type GetPublicProfileResult struct {
-    Item *PublicProfile `json:"item"`
+	Item *PublicProfile `json:"item"`
 }
 
 type GetPublicProfileAsyncResult struct {
@@ -335,24 +303,24 @@ type GetPublicProfileAsyncResult struct {
 }
 
 func NewGetPublicProfileResultFromDict(data map[string]interface{}) GetPublicProfileResult {
-    return GetPublicProfileResult {
-        Item: NewPublicProfileFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetPublicProfileResult{
+		Item: NewPublicProfileFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetPublicProfileResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetPublicProfileResult) Pointer() *GetPublicProfileResult {
-    return &p
+	return &p
 }
 
 type DescribeFollowsResult struct {
-    Items []FollowUser `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []FollowUser `json:"items"`
+	NextPageToken *string      `json:"nextPageToken"`
 }
 
 type DescribeFollowsAsyncResult struct {
@@ -361,28 +329,28 @@ type DescribeFollowsAsyncResult struct {
 }
 
 func NewDescribeFollowsResultFromDict(data map[string]interface{}) DescribeFollowsResult {
-    return DescribeFollowsResult {
-        Items: CastFollowUsers(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeFollowsResult{
+		Items:         CastFollowUsers(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeFollowsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastFollowUsersFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastFollowUsersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeFollowsResult) Pointer() *DescribeFollowsResult {
-    return &p
+	return &p
 }
 
 type DescribeFollowsByUserIdResult struct {
-    Items []FollowUser `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []FollowUser `json:"items"`
+	NextPageToken *string      `json:"nextPageToken"`
 }
 
 type DescribeFollowsByUserIdAsyncResult struct {
@@ -391,27 +359,27 @@ type DescribeFollowsByUserIdAsyncResult struct {
 }
 
 func NewDescribeFollowsByUserIdResultFromDict(data map[string]interface{}) DescribeFollowsByUserIdResult {
-    return DescribeFollowsByUserIdResult {
-        Items: CastFollowUsers(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeFollowsByUserIdResult{
+		Items:         CastFollowUsers(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeFollowsByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastFollowUsersFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastFollowUsersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeFollowsByUserIdResult) Pointer() *DescribeFollowsByUserIdResult {
-    return &p
+	return &p
 }
 
 type GetFollowResult struct {
-    Item *FollowUser `json:"item"`
+	Item *FollowUser `json:"item"`
 }
 
 type GetFollowAsyncResult struct {
@@ -420,23 +388,23 @@ type GetFollowAsyncResult struct {
 }
 
 func NewGetFollowResultFromDict(data map[string]interface{}) GetFollowResult {
-    return GetFollowResult {
-        Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetFollowResult{
+		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetFollowResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetFollowResult) Pointer() *GetFollowResult {
-    return &p
+	return &p
 }
 
 type GetFollowByUserIdResult struct {
-    Item *FollowUser `json:"item"`
+	Item *FollowUser `json:"item"`
 }
 
 type GetFollowByUserIdAsyncResult struct {
@@ -445,23 +413,23 @@ type GetFollowByUserIdAsyncResult struct {
 }
 
 func NewGetFollowByUserIdResultFromDict(data map[string]interface{}) GetFollowByUserIdResult {
-    return GetFollowByUserIdResult {
-        Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetFollowByUserIdResult{
+		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetFollowByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetFollowByUserIdResult) Pointer() *GetFollowByUserIdResult {
-    return &p
+	return &p
 }
 
 type FollowResult struct {
-    Item *FollowUser `json:"item"`
+	Item *FollowUser `json:"item"`
 }
 
 type FollowAsyncResult struct {
@@ -470,23 +438,23 @@ type FollowAsyncResult struct {
 }
 
 func NewFollowResultFromDict(data map[string]interface{}) FollowResult {
-    return FollowResult {
-        Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return FollowResult{
+		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p FollowResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p FollowResult) Pointer() *FollowResult {
-    return &p
+	return &p
 }
 
 type FollowByUserIdResult struct {
-    Item *FollowUser `json:"item"`
+	Item *FollowUser `json:"item"`
 }
 
 type FollowByUserIdAsyncResult struct {
@@ -495,23 +463,23 @@ type FollowByUserIdAsyncResult struct {
 }
 
 func NewFollowByUserIdResultFromDict(data map[string]interface{}) FollowByUserIdResult {
-    return FollowByUserIdResult {
-        Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return FollowByUserIdResult{
+		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p FollowByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p FollowByUserIdResult) Pointer() *FollowByUserIdResult {
-    return &p
+	return &p
 }
 
 type UnfollowResult struct {
-    Item *FollowUser `json:"item"`
+	Item *FollowUser `json:"item"`
 }
 
 type UnfollowAsyncResult struct {
@@ -520,23 +488,23 @@ type UnfollowAsyncResult struct {
 }
 
 func NewUnfollowResultFromDict(data map[string]interface{}) UnfollowResult {
-    return UnfollowResult {
-        Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UnfollowResult{
+		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UnfollowResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UnfollowResult) Pointer() *UnfollowResult {
-    return &p
+	return &p
 }
 
 type UnfollowByUserIdResult struct {
-    Item *FollowUser `json:"item"`
+	Item *FollowUser `json:"item"`
 }
 
 type UnfollowByUserIdAsyncResult struct {
@@ -545,24 +513,24 @@ type UnfollowByUserIdAsyncResult struct {
 }
 
 func NewUnfollowByUserIdResultFromDict(data map[string]interface{}) UnfollowByUserIdResult {
-    return UnfollowByUserIdResult {
-        Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UnfollowByUserIdResult{
+		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UnfollowByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UnfollowByUserIdResult) Pointer() *UnfollowByUserIdResult {
-    return &p
+	return &p
 }
 
 type DescribeFriendsResult struct {
-    Items []FriendUser `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []FriendUser `json:"items"`
+	NextPageToken *string      `json:"nextPageToken"`
 }
 
 type DescribeFriendsAsyncResult struct {
@@ -571,28 +539,28 @@ type DescribeFriendsAsyncResult struct {
 }
 
 func NewDescribeFriendsResultFromDict(data map[string]interface{}) DescribeFriendsResult {
-    return DescribeFriendsResult {
-        Items: CastFriendUsers(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeFriendsResult{
+		Items:         CastFriendUsers(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeFriendsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastFriendUsersFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastFriendUsersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeFriendsResult) Pointer() *DescribeFriendsResult {
-    return &p
+	return &p
 }
 
 type DescribeFriendsByUserIdResult struct {
-    Items []FriendUser `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []FriendUser `json:"items"`
+	NextPageToken *string      `json:"nextPageToken"`
 }
 
 type DescribeFriendsByUserIdAsyncResult struct {
@@ -601,27 +569,27 @@ type DescribeFriendsByUserIdAsyncResult struct {
 }
 
 func NewDescribeFriendsByUserIdResultFromDict(data map[string]interface{}) DescribeFriendsByUserIdResult {
-    return DescribeFriendsByUserIdResult {
-        Items: CastFriendUsers(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeFriendsByUserIdResult{
+		Items:         CastFriendUsers(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeFriendsByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastFriendUsersFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastFriendUsersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeFriendsByUserIdResult) Pointer() *DescribeFriendsByUserIdResult {
-    return &p
+	return &p
 }
 
 type GetFriendResult struct {
-    Item *FriendUser `json:"item"`
+	Item *FriendUser `json:"item"`
 }
 
 type GetFriendAsyncResult struct {
@@ -630,23 +598,23 @@ type GetFriendAsyncResult struct {
 }
 
 func NewGetFriendResultFromDict(data map[string]interface{}) GetFriendResult {
-    return GetFriendResult {
-        Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetFriendResult{
+		Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetFriendResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetFriendResult) Pointer() *GetFriendResult {
-    return &p
+	return &p
 }
 
 type GetFriendByUserIdResult struct {
-    Item *FriendUser `json:"item"`
+	Item *FriendUser `json:"item"`
 }
 
 type GetFriendByUserIdAsyncResult struct {
@@ -655,23 +623,23 @@ type GetFriendByUserIdAsyncResult struct {
 }
 
 func NewGetFriendByUserIdResultFromDict(data map[string]interface{}) GetFriendByUserIdResult {
-    return GetFriendByUserIdResult {
-        Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetFriendByUserIdResult{
+		Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetFriendByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetFriendByUserIdResult) Pointer() *GetFriendByUserIdResult {
-    return &p
+	return &p
 }
 
 type DeleteFriendResult struct {
-    Item *FriendUser `json:"item"`
+	Item *FriendUser `json:"item"`
 }
 
 type DeleteFriendAsyncResult struct {
@@ -680,23 +648,23 @@ type DeleteFriendAsyncResult struct {
 }
 
 func NewDeleteFriendResultFromDict(data map[string]interface{}) DeleteFriendResult {
-    return DeleteFriendResult {
-        Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteFriendResult{
+		Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteFriendResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteFriendResult) Pointer() *DeleteFriendResult {
-    return &p
+	return &p
 }
 
 type DeleteFriendByUserIdResult struct {
-    Item *FriendUser `json:"item"`
+	Item *FriendUser `json:"item"`
 }
 
 type DeleteFriendByUserIdAsyncResult struct {
@@ -705,23 +673,23 @@ type DeleteFriendByUserIdAsyncResult struct {
 }
 
 func NewDeleteFriendByUserIdResultFromDict(data map[string]interface{}) DeleteFriendByUserIdResult {
-    return DeleteFriendByUserIdResult {
-        Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteFriendByUserIdResult{
+		Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteFriendByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteFriendByUserIdResult) Pointer() *DeleteFriendByUserIdResult {
-    return &p
+	return &p
 }
 
 type DescribeSendRequestsResult struct {
-    Items []FriendRequest `json:"items"`
+	Items []FriendRequest `json:"items"`
 }
 
 type DescribeSendRequestsAsyncResult struct {
@@ -730,25 +698,25 @@ type DescribeSendRequestsAsyncResult struct {
 }
 
 func NewDescribeSendRequestsResultFromDict(data map[string]interface{}) DescribeSendRequestsResult {
-    return DescribeSendRequestsResult {
-        Items: CastFriendRequests(core.CastArray(data["items"])),
-    }
+	return DescribeSendRequestsResult{
+		Items: CastFriendRequests(core.CastArray(data["items"])),
+	}
 }
 
 func (p DescribeSendRequestsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastFriendRequestsFromDict(
-            p.Items,
-        ),
-    }
+	return map[string]interface{}{
+		"items": CastFriendRequestsFromDict(
+			p.Items,
+		),
+	}
 }
 
 func (p DescribeSendRequestsResult) Pointer() *DescribeSendRequestsResult {
-    return &p
+	return &p
 }
 
 type DescribeSendRequestsByUserIdResult struct {
-    Items []FriendRequest `json:"items"`
+	Items []FriendRequest `json:"items"`
 }
 
 type DescribeSendRequestsByUserIdAsyncResult struct {
@@ -757,25 +725,25 @@ type DescribeSendRequestsByUserIdAsyncResult struct {
 }
 
 func NewDescribeSendRequestsByUserIdResultFromDict(data map[string]interface{}) DescribeSendRequestsByUserIdResult {
-    return DescribeSendRequestsByUserIdResult {
-        Items: CastFriendRequests(core.CastArray(data["items"])),
-    }
+	return DescribeSendRequestsByUserIdResult{
+		Items: CastFriendRequests(core.CastArray(data["items"])),
+	}
 }
 
 func (p DescribeSendRequestsByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastFriendRequestsFromDict(
-            p.Items,
-        ),
-    }
+	return map[string]interface{}{
+		"items": CastFriendRequestsFromDict(
+			p.Items,
+		),
+	}
 }
 
 func (p DescribeSendRequestsByUserIdResult) Pointer() *DescribeSendRequestsByUserIdResult {
-    return &p
+	return &p
 }
 
 type GetSendRequestResult struct {
-    Item *FriendRequest `json:"item"`
+	Item *FriendRequest `json:"item"`
 }
 
 type GetSendRequestAsyncResult struct {
@@ -784,23 +752,23 @@ type GetSendRequestAsyncResult struct {
 }
 
 func NewGetSendRequestResultFromDict(data map[string]interface{}) GetSendRequestResult {
-    return GetSendRequestResult {
-        Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetSendRequestResult{
+		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetSendRequestResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetSendRequestResult) Pointer() *GetSendRequestResult {
-    return &p
+	return &p
 }
 
 type GetSendRequestByUserIdResult struct {
-    Item *FriendRequest `json:"item"`
+	Item *FriendRequest `json:"item"`
 }
 
 type GetSendRequestByUserIdAsyncResult struct {
@@ -809,23 +777,23 @@ type GetSendRequestByUserIdAsyncResult struct {
 }
 
 func NewGetSendRequestByUserIdResultFromDict(data map[string]interface{}) GetSendRequestByUserIdResult {
-    return GetSendRequestByUserIdResult {
-        Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetSendRequestByUserIdResult{
+		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetSendRequestByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetSendRequestByUserIdResult) Pointer() *GetSendRequestByUserIdResult {
-    return &p
+	return &p
 }
 
 type SendRequestResult struct {
-    Item *FriendRequest `json:"item"`
+	Item *FriendRequest `json:"item"`
 }
 
 type SendRequestAsyncResult struct {
@@ -834,23 +802,23 @@ type SendRequestAsyncResult struct {
 }
 
 func NewSendRequestResultFromDict(data map[string]interface{}) SendRequestResult {
-    return SendRequestResult {
-        Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return SendRequestResult{
+		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p SendRequestResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p SendRequestResult) Pointer() *SendRequestResult {
-    return &p
+	return &p
 }
 
 type SendRequestByUserIdResult struct {
-    Item *FriendRequest `json:"item"`
+	Item *FriendRequest `json:"item"`
 }
 
 type SendRequestByUserIdAsyncResult struct {
@@ -859,23 +827,23 @@ type SendRequestByUserIdAsyncResult struct {
 }
 
 func NewSendRequestByUserIdResultFromDict(data map[string]interface{}) SendRequestByUserIdResult {
-    return SendRequestByUserIdResult {
-        Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return SendRequestByUserIdResult{
+		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p SendRequestByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p SendRequestByUserIdResult) Pointer() *SendRequestByUserIdResult {
-    return &p
+	return &p
 }
 
 type DeleteRequestResult struct {
-    Item *FriendRequest `json:"item"`
+	Item *FriendRequest `json:"item"`
 }
 
 type DeleteRequestAsyncResult struct {
@@ -884,23 +852,23 @@ type DeleteRequestAsyncResult struct {
 }
 
 func NewDeleteRequestResultFromDict(data map[string]interface{}) DeleteRequestResult {
-    return DeleteRequestResult {
-        Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteRequestResult{
+		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteRequestResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteRequestResult) Pointer() *DeleteRequestResult {
-    return &p
+	return &p
 }
 
 type DeleteRequestByUserIdResult struct {
-    Item *FriendRequest `json:"item"`
+	Item *FriendRequest `json:"item"`
 }
 
 type DeleteRequestByUserIdAsyncResult struct {
@@ -909,23 +877,23 @@ type DeleteRequestByUserIdAsyncResult struct {
 }
 
 func NewDeleteRequestByUserIdResultFromDict(data map[string]interface{}) DeleteRequestByUserIdResult {
-    return DeleteRequestByUserIdResult {
-        Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteRequestByUserIdResult{
+		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteRequestByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteRequestByUserIdResult) Pointer() *DeleteRequestByUserIdResult {
-    return &p
+	return &p
 }
 
 type DescribeReceiveRequestsResult struct {
-    Items []FriendRequest `json:"items"`
+	Items []FriendRequest `json:"items"`
 }
 
 type DescribeReceiveRequestsAsyncResult struct {
@@ -934,25 +902,25 @@ type DescribeReceiveRequestsAsyncResult struct {
 }
 
 func NewDescribeReceiveRequestsResultFromDict(data map[string]interface{}) DescribeReceiveRequestsResult {
-    return DescribeReceiveRequestsResult {
-        Items: CastFriendRequests(core.CastArray(data["items"])),
-    }
+	return DescribeReceiveRequestsResult{
+		Items: CastFriendRequests(core.CastArray(data["items"])),
+	}
 }
 
 func (p DescribeReceiveRequestsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastFriendRequestsFromDict(
-            p.Items,
-        ),
-    }
+	return map[string]interface{}{
+		"items": CastFriendRequestsFromDict(
+			p.Items,
+		),
+	}
 }
 
 func (p DescribeReceiveRequestsResult) Pointer() *DescribeReceiveRequestsResult {
-    return &p
+	return &p
 }
 
 type DescribeReceiveRequestsByUserIdResult struct {
-    Items []FriendRequest `json:"items"`
+	Items []FriendRequest `json:"items"`
 }
 
 type DescribeReceiveRequestsByUserIdAsyncResult struct {
@@ -961,25 +929,25 @@ type DescribeReceiveRequestsByUserIdAsyncResult struct {
 }
 
 func NewDescribeReceiveRequestsByUserIdResultFromDict(data map[string]interface{}) DescribeReceiveRequestsByUserIdResult {
-    return DescribeReceiveRequestsByUserIdResult {
-        Items: CastFriendRequests(core.CastArray(data["items"])),
-    }
+	return DescribeReceiveRequestsByUserIdResult{
+		Items: CastFriendRequests(core.CastArray(data["items"])),
+	}
 }
 
 func (p DescribeReceiveRequestsByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastFriendRequestsFromDict(
-            p.Items,
-        ),
-    }
+	return map[string]interface{}{
+		"items": CastFriendRequestsFromDict(
+			p.Items,
+		),
+	}
 }
 
 func (p DescribeReceiveRequestsByUserIdResult) Pointer() *DescribeReceiveRequestsByUserIdResult {
-    return &p
+	return &p
 }
 
 type GetReceiveRequestResult struct {
-    Item *FriendRequest `json:"item"`
+	Item *FriendRequest `json:"item"`
 }
 
 type GetReceiveRequestAsyncResult struct {
@@ -988,23 +956,23 @@ type GetReceiveRequestAsyncResult struct {
 }
 
 func NewGetReceiveRequestResultFromDict(data map[string]interface{}) GetReceiveRequestResult {
-    return GetReceiveRequestResult {
-        Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetReceiveRequestResult{
+		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetReceiveRequestResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetReceiveRequestResult) Pointer() *GetReceiveRequestResult {
-    return &p
+	return &p
 }
 
 type GetReceiveRequestByUserIdResult struct {
-    Item *FriendRequest `json:"item"`
+	Item *FriendRequest `json:"item"`
 }
 
 type GetReceiveRequestByUserIdAsyncResult struct {
@@ -1013,23 +981,23 @@ type GetReceiveRequestByUserIdAsyncResult struct {
 }
 
 func NewGetReceiveRequestByUserIdResultFromDict(data map[string]interface{}) GetReceiveRequestByUserIdResult {
-    return GetReceiveRequestByUserIdResult {
-        Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetReceiveRequestByUserIdResult{
+		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetReceiveRequestByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetReceiveRequestByUserIdResult) Pointer() *GetReceiveRequestByUserIdResult {
-    return &p
+	return &p
 }
 
 type AcceptRequestResult struct {
-    Item *FriendRequest `json:"item"`
+	Item *FriendRequest `json:"item"`
 }
 
 type AcceptRequestAsyncResult struct {
@@ -1038,23 +1006,23 @@ type AcceptRequestAsyncResult struct {
 }
 
 func NewAcceptRequestResultFromDict(data map[string]interface{}) AcceptRequestResult {
-    return AcceptRequestResult {
-        Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return AcceptRequestResult{
+		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p AcceptRequestResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p AcceptRequestResult) Pointer() *AcceptRequestResult {
-    return &p
+	return &p
 }
 
 type AcceptRequestByUserIdResult struct {
-    Item *FriendRequest `json:"item"`
+	Item *FriendRequest `json:"item"`
 }
 
 type AcceptRequestByUserIdAsyncResult struct {
@@ -1063,23 +1031,23 @@ type AcceptRequestByUserIdAsyncResult struct {
 }
 
 func NewAcceptRequestByUserIdResultFromDict(data map[string]interface{}) AcceptRequestByUserIdResult {
-    return AcceptRequestByUserIdResult {
-        Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return AcceptRequestByUserIdResult{
+		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p AcceptRequestByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p AcceptRequestByUserIdResult) Pointer() *AcceptRequestByUserIdResult {
-    return &p
+	return &p
 }
 
 type RejectRequestResult struct {
-    Item *FriendRequest `json:"item"`
+	Item *FriendRequest `json:"item"`
 }
 
 type RejectRequestAsyncResult struct {
@@ -1088,23 +1056,23 @@ type RejectRequestAsyncResult struct {
 }
 
 func NewRejectRequestResultFromDict(data map[string]interface{}) RejectRequestResult {
-    return RejectRequestResult {
-        Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return RejectRequestResult{
+		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p RejectRequestResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p RejectRequestResult) Pointer() *RejectRequestResult {
-    return &p
+	return &p
 }
 
 type RejectRequestByUserIdResult struct {
-    Item *FriendRequest `json:"item"`
+	Item *FriendRequest `json:"item"`
 }
 
 type RejectRequestByUserIdAsyncResult struct {
@@ -1113,23 +1081,23 @@ type RejectRequestByUserIdAsyncResult struct {
 }
 
 func NewRejectRequestByUserIdResultFromDict(data map[string]interface{}) RejectRequestByUserIdResult {
-    return RejectRequestByUserIdResult {
-        Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return RejectRequestByUserIdResult{
+		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p RejectRequestByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p RejectRequestByUserIdResult) Pointer() *RejectRequestByUserIdResult {
-    return &p
+	return &p
 }
 
 type DescribeBlackListResult struct {
-    Items []string `json:"items"`
+	Items []string `json:"items"`
 }
 
 type DescribeBlackListAsyncResult struct {
@@ -1138,25 +1106,25 @@ type DescribeBlackListAsyncResult struct {
 }
 
 func NewDescribeBlackListResultFromDict(data map[string]interface{}) DescribeBlackListResult {
-    return DescribeBlackListResult {
-        Items: core.CastStrings(core.CastArray(data["items"])),
-    }
+	return DescribeBlackListResult{
+		Items: core.CastStrings(core.CastArray(data["items"])),
+	}
 }
 
 func (p DescribeBlackListResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": core.CastStringsFromDict(
-            p.Items,
-        ),
-    }
+	return map[string]interface{}{
+		"items": core.CastStringsFromDict(
+			p.Items,
+		),
+	}
 }
 
 func (p DescribeBlackListResult) Pointer() *DescribeBlackListResult {
-    return &p
+	return &p
 }
 
 type DescribeBlackListByUserIdResult struct {
-    Items []string `json:"items"`
+	Items []string `json:"items"`
 }
 
 type DescribeBlackListByUserIdAsyncResult struct {
@@ -1165,25 +1133,25 @@ type DescribeBlackListByUserIdAsyncResult struct {
 }
 
 func NewDescribeBlackListByUserIdResultFromDict(data map[string]interface{}) DescribeBlackListByUserIdResult {
-    return DescribeBlackListByUserIdResult {
-        Items: core.CastStrings(core.CastArray(data["items"])),
-    }
+	return DescribeBlackListByUserIdResult{
+		Items: core.CastStrings(core.CastArray(data["items"])),
+	}
 }
 
 func (p DescribeBlackListByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": core.CastStringsFromDict(
-            p.Items,
-        ),
-    }
+	return map[string]interface{}{
+		"items": core.CastStringsFromDict(
+			p.Items,
+		),
+	}
 }
 
 func (p DescribeBlackListByUserIdResult) Pointer() *DescribeBlackListByUserIdResult {
-    return &p
+	return &p
 }
 
 type RegisterBlackListResult struct {
-    Item *BlackList `json:"item"`
+	Item *BlackList `json:"item"`
 }
 
 type RegisterBlackListAsyncResult struct {
@@ -1192,23 +1160,23 @@ type RegisterBlackListAsyncResult struct {
 }
 
 func NewRegisterBlackListResultFromDict(data map[string]interface{}) RegisterBlackListResult {
-    return RegisterBlackListResult {
-        Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return RegisterBlackListResult{
+		Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p RegisterBlackListResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p RegisterBlackListResult) Pointer() *RegisterBlackListResult {
-    return &p
+	return &p
 }
 
 type RegisterBlackListByUserIdResult struct {
-    Item *BlackList `json:"item"`
+	Item *BlackList `json:"item"`
 }
 
 type RegisterBlackListByUserIdAsyncResult struct {
@@ -1217,23 +1185,23 @@ type RegisterBlackListByUserIdAsyncResult struct {
 }
 
 func NewRegisterBlackListByUserIdResultFromDict(data map[string]interface{}) RegisterBlackListByUserIdResult {
-    return RegisterBlackListByUserIdResult {
-        Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return RegisterBlackListByUserIdResult{
+		Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p RegisterBlackListByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p RegisterBlackListByUserIdResult) Pointer() *RegisterBlackListByUserIdResult {
-    return &p
+	return &p
 }
 
 type UnregisterBlackListResult struct {
-    Item *BlackList `json:"item"`
+	Item *BlackList `json:"item"`
 }
 
 type UnregisterBlackListAsyncResult struct {
@@ -1242,23 +1210,23 @@ type UnregisterBlackListAsyncResult struct {
 }
 
 func NewUnregisterBlackListResultFromDict(data map[string]interface{}) UnregisterBlackListResult {
-    return UnregisterBlackListResult {
-        Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UnregisterBlackListResult{
+		Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UnregisterBlackListResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UnregisterBlackListResult) Pointer() *UnregisterBlackListResult {
-    return &p
+	return &p
 }
 
 type UnregisterBlackListByUserIdResult struct {
-    Item *BlackList `json:"item"`
+	Item *BlackList `json:"item"`
 }
 
 type UnregisterBlackListByUserIdAsyncResult struct {
@@ -1267,17 +1235,17 @@ type UnregisterBlackListByUserIdAsyncResult struct {
 }
 
 func NewUnregisterBlackListByUserIdResultFromDict(data map[string]interface{}) UnregisterBlackListByUserIdResult {
-    return UnregisterBlackListByUserIdResult {
-        Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UnregisterBlackListByUserIdResult{
+		Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UnregisterBlackListByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UnregisterBlackListByUserIdResult) Pointer() *UnregisterBlackListByUserIdResult {
-    return &p
+	return &p
 }
