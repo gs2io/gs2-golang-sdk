@@ -17,82 +17,82 @@ permissions and limitations under the License.
 package friend
 
 import (
-	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+    "encoding/json"
+    "github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Namespace struct {
-	NamespaceId                *string              `json:"namespaceId"`
-	Name                       *string              `json:"name"`
-	Description                *string              `json:"description"`
-	FollowScript               *ScriptSetting       `json:"followScript"`
-	UnfollowScript             *ScriptSetting       `json:"unfollowScript"`
-	SendRequestScript          *ScriptSetting       `json:"sendRequestScript"`
-	CancelRequestScript        *ScriptSetting       `json:"cancelRequestScript"`
-	AcceptRequestScript        *ScriptSetting       `json:"acceptRequestScript"`
-	RejectRequestScript        *ScriptSetting       `json:"rejectRequestScript"`
-	DeleteFriendScript         *ScriptSetting       `json:"deleteFriendScript"`
-	UpdateProfileScript        *ScriptSetting       `json:"updateProfileScript"`
-	FollowNotification         *NotificationSetting `json:"followNotification"`
+	NamespaceId *string `json:"namespaceId"`
+	Name *string `json:"name"`
+	Description *string `json:"description"`
+	FollowScript *ScriptSetting `json:"followScript"`
+	UnfollowScript *ScriptSetting `json:"unfollowScript"`
+	SendRequestScript *ScriptSetting `json:"sendRequestScript"`
+	CancelRequestScript *ScriptSetting `json:"cancelRequestScript"`
+	AcceptRequestScript *ScriptSetting `json:"acceptRequestScript"`
+	RejectRequestScript *ScriptSetting `json:"rejectRequestScript"`
+	DeleteFriendScript *ScriptSetting `json:"deleteFriendScript"`
+	UpdateProfileScript *ScriptSetting `json:"updateProfileScript"`
+	FollowNotification *NotificationSetting `json:"followNotification"`
 	ReceiveRequestNotification *NotificationSetting `json:"receiveRequestNotification"`
-	AcceptRequestNotification  *NotificationSetting `json:"acceptRequestNotification"`
-	LogSetting                 *LogSetting          `json:"logSetting"`
-	CreatedAt                  *int64               `json:"createdAt"`
-	UpdatedAt                  *int64               `json:"updatedAt"`
+	AcceptRequestNotification *NotificationSetting `json:"acceptRequestNotification"`
+	LogSetting *LogSetting `json:"logSetting"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewNamespaceFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
-	return Namespace{
-		NamespaceId:                core.CastString(data["namespaceId"]),
-		Name:                       core.CastString(data["name"]),
-		Description:                core.CastString(data["description"]),
-		FollowScript:               NewScriptSettingFromDict(core.CastMap(data["followScript"])).Pointer(),
-		UnfollowScript:             NewScriptSettingFromDict(core.CastMap(data["unfollowScript"])).Pointer(),
-		SendRequestScript:          NewScriptSettingFromDict(core.CastMap(data["sendRequestScript"])).Pointer(),
-		CancelRequestScript:        NewScriptSettingFromDict(core.CastMap(data["cancelRequestScript"])).Pointer(),
-		AcceptRequestScript:        NewScriptSettingFromDict(core.CastMap(data["acceptRequestScript"])).Pointer(),
-		RejectRequestScript:        NewScriptSettingFromDict(core.CastMap(data["rejectRequestScript"])).Pointer(),
-		DeleteFriendScript:         NewScriptSettingFromDict(core.CastMap(data["deleteFriendScript"])).Pointer(),
-		UpdateProfileScript:        NewScriptSettingFromDict(core.CastMap(data["updateProfileScript"])).Pointer(),
-		FollowNotification:         NewNotificationSettingFromDict(core.CastMap(data["followNotification"])).Pointer(),
-		ReceiveRequestNotification: NewNotificationSettingFromDict(core.CastMap(data["receiveRequestNotification"])).Pointer(),
-		AcceptRequestNotification:  NewNotificationSettingFromDict(core.CastMap(data["acceptRequestNotification"])).Pointer(),
-		LogSetting:                 NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:                  core.CastInt64(data["createdAt"]),
-		UpdatedAt:                  core.CastInt64(data["updatedAt"]),
-	}
+    return Namespace {
+        NamespaceId: core.CastString(data["namespaceId"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        FollowScript: NewScriptSettingFromDict(core.CastMap(data["followScript"])).Pointer(),
+        UnfollowScript: NewScriptSettingFromDict(core.CastMap(data["unfollowScript"])).Pointer(),
+        SendRequestScript: NewScriptSettingFromDict(core.CastMap(data["sendRequestScript"])).Pointer(),
+        CancelRequestScript: NewScriptSettingFromDict(core.CastMap(data["cancelRequestScript"])).Pointer(),
+        AcceptRequestScript: NewScriptSettingFromDict(core.CastMap(data["acceptRequestScript"])).Pointer(),
+        RejectRequestScript: NewScriptSettingFromDict(core.CastMap(data["rejectRequestScript"])).Pointer(),
+        DeleteFriendScript: NewScriptSettingFromDict(core.CastMap(data["deleteFriendScript"])).Pointer(),
+        UpdateProfileScript: NewScriptSettingFromDict(core.CastMap(data["updateProfileScript"])).Pointer(),
+        FollowNotification: NewNotificationSettingFromDict(core.CastMap(data["followNotification"])).Pointer(),
+        ReceiveRequestNotification: NewNotificationSettingFromDict(core.CastMap(data["receiveRequestNotification"])).Pointer(),
+        AcceptRequestNotification: NewNotificationSettingFromDict(core.CastMap(data["acceptRequestNotification"])).Pointer(),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceId":                p.NamespaceId,
-		"name":                       p.Name,
-		"description":                p.Description,
-		"followScript":               p.FollowScript.ToDict(),
-		"unfollowScript":             p.UnfollowScript.ToDict(),
-		"sendRequestScript":          p.SendRequestScript.ToDict(),
-		"cancelRequestScript":        p.CancelRequestScript.ToDict(),
-		"acceptRequestScript":        p.AcceptRequestScript.ToDict(),
-		"rejectRequestScript":        p.RejectRequestScript.ToDict(),
-		"deleteFriendScript":         p.DeleteFriendScript.ToDict(),
-		"updateProfileScript":        p.UpdateProfileScript.ToDict(),
-		"followNotification":         p.FollowNotification.ToDict(),
-		"receiveRequestNotification": p.ReceiveRequestNotification.ToDict(),
-		"acceptRequestNotification":  p.AcceptRequestNotification.ToDict(),
-		"logSetting":                 p.LogSetting.ToDict(),
-		"createdAt":                  p.CreatedAt,
-		"updatedAt":                  p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "namespaceId": p.NamespaceId,
+        "name": p.Name,
+        "description": p.Description,
+        "followScript": p.FollowScript.ToDict(),
+        "unfollowScript": p.UnfollowScript.ToDict(),
+        "sendRequestScript": p.SendRequestScript.ToDict(),
+        "cancelRequestScript": p.CancelRequestScript.ToDict(),
+        "acceptRequestScript": p.AcceptRequestScript.ToDict(),
+        "rejectRequestScript": p.RejectRequestScript.ToDict(),
+        "deleteFriendScript": p.DeleteFriendScript.ToDict(),
+        "updateProfileScript": p.UpdateProfileScript.ToDict(),
+        "followNotification": p.FollowNotification.ToDict(),
+        "receiveRequestNotification": p.ReceiveRequestNotification.ToDict(),
+        "acceptRequestNotification": p.AcceptRequestNotification.ToDict(),
+        "logSetting": p.LogSetting.ToDict(),
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p Namespace) Pointer() *Namespace {
-	return &p
+    return &p
 }
 
 func CastNamespaces(data []interface{}) []Namespace {
@@ -104,55 +104,55 @@ func CastNamespaces(data []interface{}) []Namespace {
 }
 
 func CastNamespacesFromDict(data []Namespace) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Profile struct {
-	ProfileId       *string `json:"profileId"`
-	UserId          *string `json:"userId"`
-	PublicProfile   *string `json:"publicProfile"`
+	ProfileId *string `json:"profileId"`
+	UserId *string `json:"userId"`
+	PublicProfile *string `json:"publicProfile"`
 	FollowerProfile *string `json:"followerProfile"`
-	FriendProfile   *string `json:"friendProfile"`
-	CreatedAt       *int64  `json:"createdAt"`
-	UpdatedAt       *int64  `json:"updatedAt"`
+	FriendProfile *string `json:"friendProfile"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewProfileFromJson(data string) Profile {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewProfileFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewProfileFromDict(dict)
 }
 
 func NewProfileFromDict(data map[string]interface{}) Profile {
-	return Profile{
-		ProfileId:       core.CastString(data["profileId"]),
-		UserId:          core.CastString(data["userId"]),
-		PublicProfile:   core.CastString(data["publicProfile"]),
-		FollowerProfile: core.CastString(data["followerProfile"]),
-		FriendProfile:   core.CastString(data["friendProfile"]),
-		CreatedAt:       core.CastInt64(data["createdAt"]),
-		UpdatedAt:       core.CastInt64(data["updatedAt"]),
-	}
+    return Profile {
+        ProfileId: core.CastString(data["profileId"]),
+        UserId: core.CastString(data["userId"]),
+        PublicProfile: core.CastString(data["publicProfile"]),
+        FollowerProfile: core.CastString(data["followerProfile"]),
+        FriendProfile: core.CastString(data["friendProfile"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p Profile) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"profileId":       p.ProfileId,
-		"userId":          p.UserId,
-		"publicProfile":   p.PublicProfile,
-		"followerProfile": p.FollowerProfile,
-		"friendProfile":   p.FriendProfile,
-		"createdAt":       p.CreatedAt,
-		"updatedAt":       p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "profileId": p.ProfileId,
+        "userId": p.UserId,
+        "publicProfile": p.PublicProfile,
+        "followerProfile": p.FollowerProfile,
+        "friendProfile": p.FriendProfile,
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p Profile) Pointer() *Profile {
-	return &p
+    return &p
 }
 
 func CastProfiles(data []interface{}) []Profile {
@@ -164,51 +164,51 @@ func CastProfiles(data []interface{}) []Profile {
 }
 
 func CastProfilesFromDict(data []Profile) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Follow struct {
-	FollowId      *string  `json:"followId"`
-	UserId        *string  `json:"userId"`
+	FollowId *string `json:"followId"`
+	UserId *string `json:"userId"`
 	TargetUserIds []string `json:"targetUserIds"`
-	CreatedAt     *int64   `json:"createdAt"`
-	UpdatedAt     *int64   `json:"updatedAt"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewFollowFromJson(data string) Follow {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFollowFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewFollowFromDict(dict)
 }
 
 func NewFollowFromDict(data map[string]interface{}) Follow {
-	return Follow{
-		FollowId:      core.CastString(data["followId"]),
-		UserId:        core.CastString(data["userId"]),
-		TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
-		CreatedAt:     core.CastInt64(data["createdAt"]),
-		UpdatedAt:     core.CastInt64(data["updatedAt"]),
-	}
+    return Follow {
+        FollowId: core.CastString(data["followId"]),
+        UserId: core.CastString(data["userId"]),
+        TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p Follow) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"followId": p.FollowId,
-		"userId":   p.UserId,
-		"targetUserIds": core.CastStringsFromDict(
-			p.TargetUserIds,
-		),
-		"createdAt": p.CreatedAt,
-		"updatedAt": p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "followId": p.FollowId,
+        "userId": p.UserId,
+        "targetUserIds": core.CastStringsFromDict(
+        p.TargetUserIds,
+    ),
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p Follow) Pointer() *Follow {
-	return &p
+    return &p
 }
 
 func CastFollows(data []interface{}) []Follow {
@@ -220,51 +220,51 @@ func CastFollows(data []interface{}) []Follow {
 }
 
 func CastFollowsFromDict(data []Follow) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Friend struct {
-	FriendId      *string  `json:"friendId"`
-	UserId        *string  `json:"userId"`
+	FriendId *string `json:"friendId"`
+	UserId *string `json:"userId"`
 	TargetUserIds []string `json:"targetUserIds"`
-	CreatedAt     *int64   `json:"createdAt"`
-	UpdatedAt     *int64   `json:"updatedAt"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewFriendFromJson(data string) Friend {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewFriendFromDict(dict)
 }
 
 func NewFriendFromDict(data map[string]interface{}) Friend {
-	return Friend{
-		FriendId:      core.CastString(data["friendId"]),
-		UserId:        core.CastString(data["userId"]),
-		TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
-		CreatedAt:     core.CastInt64(data["createdAt"]),
-		UpdatedAt:     core.CastInt64(data["updatedAt"]),
-	}
+    return Friend {
+        FriendId: core.CastString(data["friendId"]),
+        UserId: core.CastString(data["userId"]),
+        TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p Friend) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"friendId": p.FriendId,
-		"userId":   p.UserId,
-		"targetUserIds": core.CastStringsFromDict(
-			p.TargetUserIds,
-		),
-		"createdAt": p.CreatedAt,
-		"updatedAt": p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "friendId": p.FriendId,
+        "userId": p.UserId,
+        "targetUserIds": core.CastStringsFromDict(
+        p.TargetUserIds,
+    ),
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p Friend) Pointer() *Friend {
-	return &p
+    return &p
 }
 
 func CastFriends(data []interface{}) []Friend {
@@ -276,51 +276,51 @@ func CastFriends(data []interface{}) []Friend {
 }
 
 func CastFriendsFromDict(data []Friend) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type SendBox struct {
-	SendBoxId     *string  `json:"sendBoxId"`
-	UserId        *string  `json:"userId"`
+	SendBoxId *string `json:"sendBoxId"`
+	UserId *string `json:"userId"`
 	TargetUserIds []string `json:"targetUserIds"`
-	CreatedAt     *int64   `json:"createdAt"`
-	UpdatedAt     *int64   `json:"updatedAt"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewSendBoxFromJson(data string) SendBox {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSendBoxFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSendBoxFromDict(dict)
 }
 
 func NewSendBoxFromDict(data map[string]interface{}) SendBox {
-	return SendBox{
-		SendBoxId:     core.CastString(data["sendBoxId"]),
-		UserId:        core.CastString(data["userId"]),
-		TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
-		CreatedAt:     core.CastInt64(data["createdAt"]),
-		UpdatedAt:     core.CastInt64(data["updatedAt"]),
-	}
+    return SendBox {
+        SendBoxId: core.CastString(data["sendBoxId"]),
+        UserId: core.CastString(data["userId"]),
+        TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p SendBox) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"sendBoxId": p.SendBoxId,
-		"userId":    p.UserId,
-		"targetUserIds": core.CastStringsFromDict(
-			p.TargetUserIds,
-		),
-		"createdAt": p.CreatedAt,
-		"updatedAt": p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "sendBoxId": p.SendBoxId,
+        "userId": p.UserId,
+        "targetUserIds": core.CastStringsFromDict(
+        p.TargetUserIds,
+    ),
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p SendBox) Pointer() *SendBox {
-	return &p
+    return &p
 }
 
 func CastSendBoxes(data []interface{}) []SendBox {
@@ -332,51 +332,51 @@ func CastSendBoxes(data []interface{}) []SendBox {
 }
 
 func CastSendBoxesFromDict(data []SendBox) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Inbox struct {
-	InboxId     *string  `json:"inboxId"`
-	UserId      *string  `json:"userId"`
+	InboxId *string `json:"inboxId"`
+	UserId *string `json:"userId"`
 	FromUserIds []string `json:"fromUserIds"`
-	CreatedAt   *int64   `json:"createdAt"`
-	UpdatedAt   *int64   `json:"updatedAt"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewInboxFromJson(data string) Inbox {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInboxFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewInboxFromDict(dict)
 }
 
 func NewInboxFromDict(data map[string]interface{}) Inbox {
-	return Inbox{
-		InboxId:     core.CastString(data["inboxId"]),
-		UserId:      core.CastString(data["userId"]),
-		FromUserIds: core.CastStrings(core.CastArray(data["fromUserIds"])),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-	}
+    return Inbox {
+        InboxId: core.CastString(data["inboxId"]),
+        UserId: core.CastString(data["userId"]),
+        FromUserIds: core.CastStrings(core.CastArray(data["fromUserIds"])),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p Inbox) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"inboxId": p.InboxId,
-		"userId":  p.UserId,
-		"fromUserIds": core.CastStringsFromDict(
-			p.FromUserIds,
-		),
-		"createdAt": p.CreatedAt,
-		"updatedAt": p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "inboxId": p.InboxId,
+        "userId": p.UserId,
+        "fromUserIds": core.CastStringsFromDict(
+        p.FromUserIds,
+    ),
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p Inbox) Pointer() *Inbox {
-	return &p
+    return &p
 }
 
 func CastInboxes(data []interface{}) []Inbox {
@@ -388,51 +388,51 @@ func CastInboxes(data []interface{}) []Inbox {
 }
 
 func CastInboxesFromDict(data []Inbox) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type BlackList struct {
-	BlackListId   *string  `json:"blackListId"`
-	UserId        *string  `json:"userId"`
+	BlackListId *string `json:"blackListId"`
+	UserId *string `json:"userId"`
 	TargetUserIds []string `json:"targetUserIds"`
-	CreatedAt     *int64   `json:"createdAt"`
-	UpdatedAt     *int64   `json:"updatedAt"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewBlackListFromJson(data string) BlackList {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewBlackListFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewBlackListFromDict(dict)
 }
 
 func NewBlackListFromDict(data map[string]interface{}) BlackList {
-	return BlackList{
-		BlackListId:   core.CastString(data["blackListId"]),
-		UserId:        core.CastString(data["userId"]),
-		TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
-		CreatedAt:     core.CastInt64(data["createdAt"]),
-		UpdatedAt:     core.CastInt64(data["updatedAt"]),
-	}
+    return BlackList {
+        BlackListId: core.CastString(data["blackListId"]),
+        UserId: core.CastString(data["userId"]),
+        TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p BlackList) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"blackListId": p.BlackListId,
-		"userId":      p.UserId,
-		"targetUserIds": core.CastStringsFromDict(
-			p.TargetUserIds,
-		),
-		"createdAt": p.CreatedAt,
-		"updatedAt": p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "blackListId": p.BlackListId,
+        "userId": p.UserId,
+        "targetUserIds": core.CastStringsFromDict(
+        p.TargetUserIds,
+    ),
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p BlackList) Pointer() *BlackList {
-	return &p
+    return &p
 }
 
 func CastBlackLists(data []interface{}) []BlackList {
@@ -444,43 +444,43 @@ func CastBlackLists(data []interface{}) []BlackList {
 }
 
 func CastBlackListsFromDict(data []BlackList) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type FollowUser struct {
-	UserId          *string `json:"userId"`
-	PublicProfile   *string `json:"publicProfile"`
+	UserId *string `json:"userId"`
+	PublicProfile *string `json:"publicProfile"`
 	FollowerProfile *string `json:"followerProfile"`
 }
 
 func NewFollowUserFromJson(data string) FollowUser {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFollowUserFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewFollowUserFromDict(dict)
 }
 
 func NewFollowUserFromDict(data map[string]interface{}) FollowUser {
-	return FollowUser{
-		UserId:          core.CastString(data["userId"]),
-		PublicProfile:   core.CastString(data["publicProfile"]),
-		FollowerProfile: core.CastString(data["followerProfile"]),
-	}
+    return FollowUser {
+        UserId: core.CastString(data["userId"]),
+        PublicProfile: core.CastString(data["publicProfile"]),
+        FollowerProfile: core.CastString(data["followerProfile"]),
+    }
 }
 
 func (p FollowUser) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"userId":          p.UserId,
-		"publicProfile":   p.PublicProfile,
-		"followerProfile": p.FollowerProfile,
-	}
+    return map[string]interface{} {
+        "userId": p.UserId,
+        "publicProfile": p.PublicProfile,
+        "followerProfile": p.FollowerProfile,
+    }
 }
 
 func (p FollowUser) Pointer() *FollowUser {
-	return &p
+    return &p
 }
 
 func CastFollowUsers(data []interface{}) []FollowUser {
@@ -492,43 +492,43 @@ func CastFollowUsers(data []interface{}) []FollowUser {
 }
 
 func CastFollowUsersFromDict(data []FollowUser) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type FriendUser struct {
-	UserId        *string `json:"userId"`
+	UserId *string `json:"userId"`
 	PublicProfile *string `json:"publicProfile"`
 	FriendProfile *string `json:"friendProfile"`
 }
 
 func NewFriendUserFromJson(data string) FriendUser {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendUserFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewFriendUserFromDict(dict)
 }
 
 func NewFriendUserFromDict(data map[string]interface{}) FriendUser {
-	return FriendUser{
-		UserId:        core.CastString(data["userId"]),
-		PublicProfile: core.CastString(data["publicProfile"]),
-		FriendProfile: core.CastString(data["friendProfile"]),
-	}
+    return FriendUser {
+        UserId: core.CastString(data["userId"]),
+        PublicProfile: core.CastString(data["publicProfile"]),
+        FriendProfile: core.CastString(data["friendProfile"]),
+    }
 }
 
 func (p FriendUser) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"userId":        p.UserId,
-		"publicProfile": p.PublicProfile,
-		"friendProfile": p.FriendProfile,
-	}
+    return map[string]interface{} {
+        "userId": p.UserId,
+        "publicProfile": p.PublicProfile,
+        "friendProfile": p.FriendProfile,
+    }
 }
 
 func (p FriendUser) Pointer() *FriendUser {
-	return &p
+    return &p
 }
 
 func CastFriendUsers(data []interface{}) []FriendUser {
@@ -540,40 +540,40 @@ func CastFriendUsers(data []interface{}) []FriendUser {
 }
 
 func CastFriendUsersFromDict(data []FriendUser) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type FriendRequest struct {
-	UserId       *string `json:"userId"`
+	UserId *string `json:"userId"`
 	TargetUserId *string `json:"targetUserId"`
 }
 
 func NewFriendRequestFromJson(data string) FriendRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewFriendRequestFromDict(dict)
 }
 
 func NewFriendRequestFromDict(data map[string]interface{}) FriendRequest {
-	return FriendRequest{
-		UserId:       core.CastString(data["userId"]),
-		TargetUserId: core.CastString(data["targetUserId"]),
-	}
+    return FriendRequest {
+        UserId: core.CastString(data["userId"]),
+        TargetUserId: core.CastString(data["targetUserId"]),
+    }
 }
 
 func (p FriendRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"userId":       p.UserId,
-		"targetUserId": p.TargetUserId,
-	}
+    return map[string]interface{} {
+        "userId": p.UserId,
+        "targetUserId": p.TargetUserId,
+    }
 }
 
 func (p FriendRequest) Pointer() *FriendRequest {
-	return &p
+    return &p
 }
 
 func CastFriendRequests(data []interface{}) []FriendRequest {
@@ -585,40 +585,40 @@ func CastFriendRequests(data []interface{}) []FriendRequest {
 }
 
 func CastFriendRequestsFromDict(data []FriendRequest) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type PublicProfile struct {
-	UserId        *string `json:"userId"`
+	UserId *string `json:"userId"`
 	PublicProfile *string `json:"publicProfile"`
 }
 
 func NewPublicProfileFromJson(data string) PublicProfile {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPublicProfileFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPublicProfileFromDict(dict)
 }
 
 func NewPublicProfileFromDict(data map[string]interface{}) PublicProfile {
-	return PublicProfile{
-		UserId:        core.CastString(data["userId"]),
-		PublicProfile: core.CastString(data["publicProfile"]),
-	}
+    return PublicProfile {
+        UserId: core.CastString(data["userId"]),
+        PublicProfile: core.CastString(data["publicProfile"]),
+    }
 }
 
 func (p PublicProfile) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"userId":        p.UserId,
-		"publicProfile": p.PublicProfile,
-	}
+    return map[string]interface{} {
+        "userId": p.UserId,
+        "publicProfile": p.PublicProfile,
+    }
 }
 
 func (p PublicProfile) Pointer() *PublicProfile {
-	return &p
+    return &p
 }
 
 func CastPublicProfiles(data []interface{}) []PublicProfile {
@@ -630,46 +630,46 @@ func CastPublicProfiles(data []interface{}) []PublicProfile {
 }
 
 func CastPublicProfilesFromDict(data []PublicProfile) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type ScriptSetting struct {
-	TriggerScriptId             *string `json:"triggerScriptId"`
-	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
-	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
+	TriggerScriptId *string `json:"triggerScriptId"`
+	DoneTriggerTargetType *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId *string `json:"doneTriggerScriptId"`
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
 func NewScriptSettingFromJson(data string) ScriptSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewScriptSettingFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewScriptSettingFromDict(dict)
 }
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
-	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
-	}
+    return ScriptSetting {
+        TriggerScriptId: core.CastString(data["triggerScriptId"]),
+        DoneTriggerTargetType: core.CastString(data["doneTriggerTargetType"]),
+        DoneTriggerScriptId: core.CastString(data["doneTriggerScriptId"]),
+        DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+    }
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"triggerScriptId":             p.TriggerScriptId,
-		"doneTriggerTargetType":       p.DoneTriggerTargetType,
-		"doneTriggerScriptId":         p.DoneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": p.DoneTriggerQueueNamespaceId,
-	}
+    return map[string]interface{} {
+        "triggerScriptId": p.TriggerScriptId,
+        "doneTriggerTargetType": p.DoneTriggerTargetType,
+        "doneTriggerScriptId": p.DoneTriggerScriptId,
+        "doneTriggerQueueNamespaceId": p.DoneTriggerQueueNamespaceId,
+    }
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
-	return &p
+    return &p
 }
 
 func CastScriptSettings(data []interface{}) []ScriptSetting {
@@ -681,43 +681,43 @@ func CastScriptSettings(data []interface{}) []ScriptSetting {
 }
 
 func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type NotificationSetting struct {
-	GatewayNamespaceId               *string `json:"gatewayNamespaceId"`
-	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
-	Sound                            *string `json:"sound"`
+	GatewayNamespaceId *string `json:"gatewayNamespaceId"`
+	EnableTransferMobileNotification *bool `json:"enableTransferMobileNotification"`
+	Sound *string `json:"sound"`
 }
 
 func NewNotificationSettingFromJson(data string) NotificationSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewNotificationSettingFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewNotificationSettingFromDict(dict)
 }
 
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
-	return NotificationSetting{
-		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
-		EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
-		Sound:                            core.CastString(data["sound"]),
-	}
+    return NotificationSetting {
+        GatewayNamespaceId: core.CastString(data["gatewayNamespaceId"]),
+        EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
+        Sound: core.CastString(data["sound"]),
+    }
 }
 
 func (p NotificationSetting) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"gatewayNamespaceId":               p.GatewayNamespaceId,
-		"enableTransferMobileNotification": p.EnableTransferMobileNotification,
-		"sound":                            p.Sound,
-	}
+    return map[string]interface{} {
+        "gatewayNamespaceId": p.GatewayNamespaceId,
+        "enableTransferMobileNotification": p.EnableTransferMobileNotification,
+        "sound": p.Sound,
+    }
 }
 
 func (p NotificationSetting) Pointer() *NotificationSetting {
-	return &p
+    return &p
 }
 
 func CastNotificationSettings(data []interface{}) []NotificationSetting {
@@ -729,11 +729,11 @@ func CastNotificationSettings(data []interface{}) []NotificationSetting {
 }
 
 func CastNotificationSettingsFromDict(data []NotificationSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type LogSetting struct {
@@ -741,25 +741,25 @@ type LogSetting struct {
 }
 
 func NewLogSettingFromJson(data string) LogSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLogSettingFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
-	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
-	}
+    return LogSetting {
+        LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+    }
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"loggingNamespaceId": p.LoggingNamespaceId,
-	}
+    return map[string]interface{} {
+        "loggingNamespaceId": p.LoggingNamespaceId,
+    }
 }
 
 func (p LogSetting) Pointer() *LogSetting {
-	return &p
+    return &p
 }
 
 func CastLogSettings(data []interface{}) []LogSetting {
@@ -771,9 +771,9 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }

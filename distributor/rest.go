@@ -56,13 +56,13 @@ func describeNamespacesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -86,10 +86,10 @@ func (p Gs2DistributorRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -141,13 +141,13 @@ func createNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -163,35 +163,35 @@ func (p Gs2DistributorRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.AssumeUserId != nil && *request.AssumeUserId != "" {
-		bodies["assumeUserId"] = *request.AssumeUserId
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.AssumeUserId != nil && *request.AssumeUserId != "" {
+        bodies["assumeUserId"] = *request.AssumeUserId
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -235,13 +235,13 @@ func getNamespaceStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -255,19 +255,19 @@ func (p Gs2DistributorRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -319,13 +319,13 @@ func getNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -339,19 +339,19 @@ func (p Gs2DistributorRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -403,13 +403,13 @@ func updateNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -423,39 +423,39 @@ func (p Gs2DistributorRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.AssumeUserId != nil && *request.AssumeUserId != "" {
-		bodies["assumeUserId"] = *request.AssumeUserId
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.AssumeUserId != nil && *request.AssumeUserId != "" {
+        bodies["assumeUserId"] = *request.AssumeUserId
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -499,13 +499,13 @@ func deleteNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -519,19 +519,19 @@ func (p Gs2DistributorRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -583,13 +583,13 @@ func describeDistributorModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeDistributorModelMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeDistributorModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeDistributorModelMastersAsyncResult{
 		result: &result,
@@ -603,11 +603,11 @@ func (p Gs2DistributorRestClient) DescribeDistributorModelMastersAsync(
 	callback chan<- DescribeDistributorModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/distributor"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -618,10 +618,10 @@ func (p Gs2DistributorRestClient) DescribeDistributorModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeDistributorModelMastersAsyncHandler(
 		p,
@@ -673,13 +673,13 @@ func createDistributorModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateDistributorModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateDistributorModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateDistributorModelMasterAsyncResult{
 		result: &result,
@@ -693,49 +693,49 @@ func (p Gs2DistributorRestClient) CreateDistributorModelMasterAsync(
 	callback chan<- CreateDistributorModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/distributor"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.InboxNamespaceId != nil && *request.InboxNamespaceId != "" {
-		bodies["inboxNamespaceId"] = *request.InboxNamespaceId
-	}
-	if request.WhiteListTargetIds != nil {
-		var _whiteListTargetIds []interface{}
-		for _, item := range request.WhiteListTargetIds {
-			_whiteListTargetIds = append(_whiteListTargetIds, item)
-		}
-		bodies["whiteListTargetIds"] = _whiteListTargetIds
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.InboxNamespaceId != nil && *request.InboxNamespaceId != "" {
+        bodies["inboxNamespaceId"] = *request.InboxNamespaceId
+    }
+    if request.WhiteListTargetIds != nil {
+        var _whiteListTargetIds []interface {}
+        for _, item := range request.WhiteListTargetIds {
+            _whiteListTargetIds = append(_whiteListTargetIds, item)
+        }
+        bodies["whiteListTargetIds"] = _whiteListTargetIds
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createDistributorModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -779,13 +779,13 @@ func getDistributorModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetDistributorModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetDistributorModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetDistributorModelMasterAsyncResult{
 		result: &result,
@@ -799,24 +799,24 @@ func (p Gs2DistributorRestClient) GetDistributorModelMasterAsync(
 	callback chan<- GetDistributorModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/distributor/{distributorName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.DistributorName != nil && *request.DistributorName != "" {
-		path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
-	} else {
-		path = strings.ReplaceAll(path, "{distributorName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.DistributorName != nil && *request.DistributorName != ""  {
+        path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
+    } else {
+        path = strings.ReplaceAll(path, "{distributorName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getDistributorModelMasterAsyncHandler(
 		p,
@@ -868,13 +868,13 @@ func updateDistributorModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateDistributorModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateDistributorModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateDistributorModelMasterAsyncResult{
 		result: &result,
@@ -888,51 +888,51 @@ func (p Gs2DistributorRestClient) UpdateDistributorModelMasterAsync(
 	callback chan<- UpdateDistributorModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/distributor/{distributorName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.DistributorName != nil && *request.DistributorName != "" {
-		path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
-	} else {
-		path = strings.ReplaceAll(path, "{distributorName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.DistributorName != nil && *request.DistributorName != ""  {
+        path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
+    } else {
+        path = strings.ReplaceAll(path, "{distributorName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.InboxNamespaceId != nil && *request.InboxNamespaceId != "" {
-		bodies["inboxNamespaceId"] = *request.InboxNamespaceId
-	}
-	if request.WhiteListTargetIds != nil {
-		var _whiteListTargetIds []interface{}
-		for _, item := range request.WhiteListTargetIds {
-			_whiteListTargetIds = append(_whiteListTargetIds, item)
-		}
-		bodies["whiteListTargetIds"] = _whiteListTargetIds
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.InboxNamespaceId != nil && *request.InboxNamespaceId != "" {
+        bodies["inboxNamespaceId"] = *request.InboxNamespaceId
+    }
+    if request.WhiteListTargetIds != nil {
+        var _whiteListTargetIds []interface {}
+        for _, item := range request.WhiteListTargetIds {
+            _whiteListTargetIds = append(_whiteListTargetIds, item)
+        }
+        bodies["whiteListTargetIds"] = _whiteListTargetIds
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateDistributorModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -976,13 +976,13 @@ func deleteDistributorModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteDistributorModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteDistributorModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteDistributorModelMasterAsyncResult{
 		result: &result,
@@ -996,24 +996,24 @@ func (p Gs2DistributorRestClient) DeleteDistributorModelMasterAsync(
 	callback chan<- DeleteDistributorModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/distributor/{distributorName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.DistributorName != nil && *request.DistributorName != "" {
-		path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
-	} else {
-		path = strings.ReplaceAll(path, "{distributorName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.DistributorName != nil && *request.DistributorName != ""  {
+        path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
+    } else {
+        path = strings.ReplaceAll(path, "{distributorName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteDistributorModelMasterAsyncHandler(
 		p,
@@ -1065,13 +1065,13 @@ func describeDistributorModelsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeDistributorModelsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeDistributorModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeDistributorModelsAsyncResult{
 		result: &result,
@@ -1085,19 +1085,19 @@ func (p Gs2DistributorRestClient) DescribeDistributorModelsAsync(
 	callback chan<- DescribeDistributorModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/distributor"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeDistributorModelsAsyncHandler(
 		p,
@@ -1149,13 +1149,13 @@ func getDistributorModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetDistributorModelAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetDistributorModelAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetDistributorModelAsyncResult{
 		result: &result,
@@ -1169,24 +1169,24 @@ func (p Gs2DistributorRestClient) GetDistributorModelAsync(
 	callback chan<- GetDistributorModelAsyncResult,
 ) {
 	path := "/{namespaceName}/distributor/{distributorName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.DistributorName != nil && *request.DistributorName != "" {
-		path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
-	} else {
-		path = strings.ReplaceAll(path, "{distributorName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.DistributorName != nil && *request.DistributorName != ""  {
+        path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
+    } else {
+        path = strings.ReplaceAll(path, "{distributorName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getDistributorModelAsyncHandler(
 		p,
@@ -1238,13 +1238,13 @@ func exportMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ExportMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ExportMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -1258,19 +1258,19 @@ func (p Gs2DistributorRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go exportMasterAsyncHandler(
 		p,
@@ -1322,13 +1322,13 @@ func getCurrentDistributorMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCurrentDistributorMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCurrentDistributorMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCurrentDistributorMasterAsyncResult{
 		result: &result,
@@ -1342,19 +1342,19 @@ func (p Gs2DistributorRestClient) GetCurrentDistributorMasterAsync(
 	callback chan<- GetCurrentDistributorMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getCurrentDistributorMasterAsyncHandler(
 		p,
@@ -1406,13 +1406,13 @@ func updateCurrentDistributorMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentDistributorMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentDistributorMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentDistributorMasterAsyncResult{
 		result: &result,
@@ -1426,33 +1426,33 @@ func (p Gs2DistributorRestClient) UpdateCurrentDistributorMasterAsync(
 	callback chan<- UpdateCurrentDistributorMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Settings != nil && *request.Settings != "" {
-		bodies["settings"] = *request.Settings
-	}
+    var bodies = core.Bodies{}
+    if request.Settings != nil && *request.Settings != "" {
+        bodies["settings"] = *request.Settings
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentDistributorMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1496,13 +1496,13 @@ func updateCurrentDistributorMasterFromGitHubAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentDistributorMasterFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentDistributorMasterFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentDistributorMasterFromGitHubAsyncResult{
 		result: &result,
@@ -1516,33 +1516,33 @@ func (p Gs2DistributorRestClient) UpdateCurrentDistributorMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentDistributorMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentDistributorMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1586,13 +1586,13 @@ func distributeAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DistributeAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DistributeAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DistributeAsyncResult{
 		result: &result,
@@ -1606,41 +1606,41 @@ func (p Gs2DistributorRestClient) DistributeAsync(
 	callback chan<- DistributeAsyncResult,
 ) {
 	path := "/{namespaceName}/distribute/{distributorName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.DistributorName != nil && *request.DistributorName != "" {
-		path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
-	} else {
-		path = strings.ReplaceAll(path, "{distributorName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.DistributorName != nil && *request.DistributorName != ""  {
+        path = strings.ReplaceAll(path, "{distributorName}", core.ToString(*request.DistributorName))
+    } else {
+        path = strings.ReplaceAll(path, "{distributorName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.DistributeResource != nil {
-		bodies["distributeResource"] = request.DistributeResource.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.DistributeResource != nil {
+        bodies["distributeResource"] = request.DistributeResource.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go distributeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1684,13 +1684,13 @@ func distributeWithoutOverflowProcessAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DistributeWithoutOverflowProcessAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DistributeWithoutOverflowProcessAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DistributeWithoutOverflowProcessAsyncResult{
 		result: &result,
@@ -1706,29 +1706,29 @@ func (p Gs2DistributorRestClient) DistributeWithoutOverflowProcessAsync(
 	path := "/distribute"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.DistributeResource != nil {
-		bodies["distributeResource"] = request.DistributeResource.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.DistributeResource != nil {
+        bodies["distributeResource"] = request.DistributeResource.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go distributeWithoutOverflowProcessAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1772,13 +1772,13 @@ func runStampTaskAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RunStampTaskAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RunStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RunStampTaskAsyncResult{
 		result: &result,
@@ -1792,36 +1792,36 @@ func (p Gs2DistributorRestClient) RunStampTaskAsync(
 	callback chan<- RunStampTaskAsyncResult,
 ) {
 	path := "/{namespaceName}/distribute/stamp/task/run"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go runStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1865,13 +1865,13 @@ func runStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RunStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RunStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RunStampSheetAsyncResult{
 		result: &result,
@@ -1885,36 +1885,36 @@ func (p Gs2DistributorRestClient) RunStampSheetAsync(
 	callback chan<- RunStampSheetAsyncResult,
 ) {
 	path := "/{namespaceName}/distribute/stamp/sheet/run"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go runStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1958,13 +1958,13 @@ func runStampSheetExpressAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RunStampSheetExpressAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RunStampSheetExpressAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RunStampSheetExpressAsyncResult{
 		result: &result,
@@ -1978,36 +1978,36 @@ func (p Gs2DistributorRestClient) RunStampSheetExpressAsync(
 	callback chan<- RunStampSheetExpressAsyncResult,
 ) {
 	path := "/{namespaceName}/distribute/stamp/run"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go runStampSheetExpressAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2051,13 +2051,13 @@ func runStampTaskWithoutNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RunStampTaskWithoutNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RunStampTaskWithoutNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RunStampTaskWithoutNamespaceAsyncResult{
 		result: &result,
@@ -2073,29 +2073,29 @@ func (p Gs2DistributorRestClient) RunStampTaskWithoutNamespaceAsync(
 	path := "/stamp/task/run"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go runStampTaskWithoutNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2139,13 +2139,13 @@ func runStampSheetWithoutNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RunStampSheetWithoutNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RunStampSheetWithoutNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RunStampSheetWithoutNamespaceAsyncResult{
 		result: &result,
@@ -2161,29 +2161,29 @@ func (p Gs2DistributorRestClient) RunStampSheetWithoutNamespaceAsync(
 	path := "/stamp/sheet/run"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go runStampSheetWithoutNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2227,13 +2227,13 @@ func runStampSheetExpressWithoutNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RunStampSheetExpressWithoutNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RunStampSheetExpressWithoutNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RunStampSheetExpressWithoutNamespaceAsyncResult{
 		result: &result,
@@ -2249,29 +2249,29 @@ func (p Gs2DistributorRestClient) RunStampSheetExpressWithoutNamespaceAsync(
 	path := "/stamp/run"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go runStampSheetExpressWithoutNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)

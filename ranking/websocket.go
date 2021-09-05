@@ -49,13 +49,13 @@ func (p Gs2RankingWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -68,33 +68,33 @@ func (p Gs2RankingWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "namespace",
-			"function":    "describeNamespaces",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "namespace",
+    		"function": "describeNamespaces",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -131,13 +131,13 @@ func (p Gs2RankingWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -150,36 +150,36 @@ func (p Gs2RankingWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "namespace",
-			"function":    "createNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "namespace",
+    		"function": "createNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -216,13 +216,13 @@ func (p Gs2RankingWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -235,30 +235,30 @@ func (p Gs2RankingWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "namespace",
-			"function":    "getNamespaceStatus",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "namespace",
+    		"function": "getNamespaceStatus",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -295,13 +295,13 @@ func (p Gs2RankingWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -314,30 +314,30 @@ func (p Gs2RankingWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "namespace",
-			"function":    "getNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "namespace",
+    		"function": "getNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -374,13 +374,13 @@ func (p Gs2RankingWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -393,36 +393,36 @@ func (p Gs2RankingWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "namespace",
-			"function":    "updateNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "namespace",
+    		"function": "updateNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -459,13 +459,13 @@ func (p Gs2RankingWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -478,30 +478,30 @@ func (p Gs2RankingWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "namespace",
-			"function":    "deleteNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "namespace",
+    		"function": "deleteNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -538,13 +538,13 @@ func (p Gs2RankingWebSocketClient) describeCategoryModelsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeCategoryModelsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeCategoryModelsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeCategoryModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeCategoryModelsAsyncResult{
 		result: &result,
@@ -557,30 +557,30 @@ func (p Gs2RankingWebSocketClient) DescribeCategoryModelsAsync(
 	request *DescribeCategoryModelsRequest,
 	callback chan<- DescribeCategoryModelsAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "categoryModel",
-			"function":    "describeCategoryModels",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "categoryModel",
+    		"function": "describeCategoryModels",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeCategoryModelsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -617,13 +617,13 @@ func (p Gs2RankingWebSocketClient) getCategoryModelAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCategoryModelResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCategoryModelAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCategoryModelAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCategoryModelAsyncResult{
 		result: &result,
@@ -636,33 +636,33 @@ func (p Gs2RankingWebSocketClient) GetCategoryModelAsync(
 	request *GetCategoryModelRequest,
 	callback chan<- GetCategoryModelAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "categoryModel",
-			"function":    "getCategoryModel",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "categoryModel",
+    		"function": "getCategoryModel",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getCategoryModelAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -699,13 +699,13 @@ func (p Gs2RankingWebSocketClient) describeCategoryModelMastersAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeCategoryModelMastersResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeCategoryModelMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeCategoryModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeCategoryModelMastersAsyncResult{
 		result: &result,
@@ -718,36 +718,36 @@ func (p Gs2RankingWebSocketClient) DescribeCategoryModelMastersAsync(
 	request *DescribeCategoryModelMastersRequest,
 	callback chan<- DescribeCategoryModelMastersAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "categoryModelMaster",
-			"function":    "describeCategoryModelMasters",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "categoryModelMaster",
+    		"function": "describeCategoryModelMasters",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeCategoryModelMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -784,13 +784,13 @@ func (p Gs2RankingWebSocketClient) createCategoryModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateCategoryModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateCategoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateCategoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateCategoryModelMasterAsyncResult{
 		result: &result,
@@ -803,72 +803,72 @@ func (p Gs2RankingWebSocketClient) CreateCategoryModelMasterAsync(
 	request *CreateCategoryModelMasterRequest,
 	callback chan<- CreateCategoryModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "categoryModelMaster",
-			"function":    "createCategoryModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "categoryModelMaster",
+    		"function": "createCategoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.MinimumValue != nil {
-		bodies["minimumValue"] = *request.MinimumValue
-	}
-	if request.MaximumValue != nil {
-		bodies["maximumValue"] = *request.MaximumValue
-	}
-	if request.OrderDirection != nil && *request.OrderDirection != "" {
-		bodies["orderDirection"] = *request.OrderDirection
-	}
-	if request.Scope != nil && *request.Scope != "" {
-		bodies["scope"] = *request.Scope
-	}
-	if request.UniqueByUserId != nil {
-		bodies["uniqueByUserId"] = *request.UniqueByUserId
-	}
-	if request.CalculateFixedTimingHour != nil {
-		bodies["calculateFixedTimingHour"] = *request.CalculateFixedTimingHour
-	}
-	if request.CalculateFixedTimingMinute != nil {
-		bodies["calculateFixedTimingMinute"] = *request.CalculateFixedTimingMinute
-	}
-	if request.CalculateIntervalMinutes != nil {
-		bodies["calculateIntervalMinutes"] = *request.CalculateIntervalMinutes
-	}
-	if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
-		bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
-	}
-	if request.AccessPeriodEventId != nil && *request.AccessPeriodEventId != "" {
-		bodies["accessPeriodEventId"] = *request.AccessPeriodEventId
-	}
-	if request.Generation != nil && *request.Generation != "" {
-		bodies["generation"] = *request.Generation
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.MinimumValue != nil {
+        bodies["minimumValue"] = *request.MinimumValue
+    }
+    if request.MaximumValue != nil {
+        bodies["maximumValue"] = *request.MaximumValue
+    }
+    if request.OrderDirection != nil && *request.OrderDirection != "" {
+        bodies["orderDirection"] = *request.OrderDirection
+    }
+    if request.Scope != nil && *request.Scope != "" {
+        bodies["scope"] = *request.Scope
+    }
+    if request.UniqueByUserId != nil {
+        bodies["uniqueByUserId"] = *request.UniqueByUserId
+    }
+    if request.CalculateFixedTimingHour != nil {
+        bodies["calculateFixedTimingHour"] = *request.CalculateFixedTimingHour
+    }
+    if request.CalculateFixedTimingMinute != nil {
+        bodies["calculateFixedTimingMinute"] = *request.CalculateFixedTimingMinute
+    }
+    if request.CalculateIntervalMinutes != nil {
+        bodies["calculateIntervalMinutes"] = *request.CalculateIntervalMinutes
+    }
+    if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
+        bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
+    }
+    if request.AccessPeriodEventId != nil && *request.AccessPeriodEventId != "" {
+        bodies["accessPeriodEventId"] = *request.AccessPeriodEventId
+    }
+    if request.Generation != nil && *request.Generation != "" {
+        bodies["generation"] = *request.Generation
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createCategoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -905,13 +905,13 @@ func (p Gs2RankingWebSocketClient) getCategoryModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCategoryModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCategoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCategoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCategoryModelMasterAsyncResult{
 		result: &result,
@@ -924,33 +924,33 @@ func (p Gs2RankingWebSocketClient) GetCategoryModelMasterAsync(
 	request *GetCategoryModelMasterRequest,
 	callback chan<- GetCategoryModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "categoryModelMaster",
-			"function":    "getCategoryModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "categoryModelMaster",
+    		"function": "getCategoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getCategoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -987,13 +987,13 @@ func (p Gs2RankingWebSocketClient) updateCategoryModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCategoryModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCategoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCategoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCategoryModelMasterAsyncResult{
 		result: &result,
@@ -1006,72 +1006,72 @@ func (p Gs2RankingWebSocketClient) UpdateCategoryModelMasterAsync(
 	request *UpdateCategoryModelMasterRequest,
 	callback chan<- UpdateCategoryModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "categoryModelMaster",
-			"function":    "updateCategoryModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "categoryModelMaster",
+    		"function": "updateCategoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.MinimumValue != nil {
-		bodies["minimumValue"] = *request.MinimumValue
-	}
-	if request.MaximumValue != nil {
-		bodies["maximumValue"] = *request.MaximumValue
-	}
-	if request.OrderDirection != nil && *request.OrderDirection != "" {
-		bodies["orderDirection"] = *request.OrderDirection
-	}
-	if request.Scope != nil && *request.Scope != "" {
-		bodies["scope"] = *request.Scope
-	}
-	if request.UniqueByUserId != nil {
-		bodies["uniqueByUserId"] = *request.UniqueByUserId
-	}
-	if request.CalculateFixedTimingHour != nil {
-		bodies["calculateFixedTimingHour"] = *request.CalculateFixedTimingHour
-	}
-	if request.CalculateFixedTimingMinute != nil {
-		bodies["calculateFixedTimingMinute"] = *request.CalculateFixedTimingMinute
-	}
-	if request.CalculateIntervalMinutes != nil {
-		bodies["calculateIntervalMinutes"] = *request.CalculateIntervalMinutes
-	}
-	if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
-		bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
-	}
-	if request.AccessPeriodEventId != nil && *request.AccessPeriodEventId != "" {
-		bodies["accessPeriodEventId"] = *request.AccessPeriodEventId
-	}
-	if request.Generation != nil && *request.Generation != "" {
-		bodies["generation"] = *request.Generation
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.MinimumValue != nil {
+        bodies["minimumValue"] = *request.MinimumValue
+    }
+    if request.MaximumValue != nil {
+        bodies["maximumValue"] = *request.MaximumValue
+    }
+    if request.OrderDirection != nil && *request.OrderDirection != "" {
+        bodies["orderDirection"] = *request.OrderDirection
+    }
+    if request.Scope != nil && *request.Scope != "" {
+        bodies["scope"] = *request.Scope
+    }
+    if request.UniqueByUserId != nil {
+        bodies["uniqueByUserId"] = *request.UniqueByUserId
+    }
+    if request.CalculateFixedTimingHour != nil {
+        bodies["calculateFixedTimingHour"] = *request.CalculateFixedTimingHour
+    }
+    if request.CalculateFixedTimingMinute != nil {
+        bodies["calculateFixedTimingMinute"] = *request.CalculateFixedTimingMinute
+    }
+    if request.CalculateIntervalMinutes != nil {
+        bodies["calculateIntervalMinutes"] = *request.CalculateIntervalMinutes
+    }
+    if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
+        bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
+    }
+    if request.AccessPeriodEventId != nil && *request.AccessPeriodEventId != "" {
+        bodies["accessPeriodEventId"] = *request.AccessPeriodEventId
+    }
+    if request.Generation != nil && *request.Generation != "" {
+        bodies["generation"] = *request.Generation
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateCategoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1108,13 +1108,13 @@ func (p Gs2RankingWebSocketClient) deleteCategoryModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteCategoryModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteCategoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteCategoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteCategoryModelMasterAsyncResult{
 		result: &result,
@@ -1127,33 +1127,33 @@ func (p Gs2RankingWebSocketClient) DeleteCategoryModelMasterAsync(
 	request *DeleteCategoryModelMasterRequest,
 	callback chan<- DeleteCategoryModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "categoryModelMaster",
-			"function":    "deleteCategoryModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "categoryModelMaster",
+    		"function": "deleteCategoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteCategoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1190,13 +1190,13 @@ func (p Gs2RankingWebSocketClient) describeSubscribesByCategoryNameAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeSubscribesByCategoryNameResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeSubscribesByCategoryNameAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeSubscribesByCategoryNameAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeSubscribesByCategoryNameAsyncResult{
 		result: &result,
@@ -1209,39 +1209,39 @@ func (p Gs2RankingWebSocketClient) DescribeSubscribesByCategoryNameAsync(
 	request *DescribeSubscribesByCategoryNameRequest,
 	callback chan<- DescribeSubscribesByCategoryNameAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "subscribe",
-			"function":    "describeSubscribesByCategoryName",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "subscribe",
+    		"function": "describeSubscribesByCategoryName",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.describeSubscribesByCategoryNameAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1278,13 +1278,13 @@ func (p Gs2RankingWebSocketClient) describeSubscribesByCategoryNameAndUserIdAsyn
 	asyncResult := <-internalCallback
 	var result DescribeSubscribesByCategoryNameAndUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeSubscribesByCategoryNameAndUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeSubscribesByCategoryNameAndUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeSubscribesByCategoryNameAndUserIdAsyncResult{
 		result: &result,
@@ -1297,36 +1297,36 @@ func (p Gs2RankingWebSocketClient) DescribeSubscribesByCategoryNameAndUserIdAsyn
 	request *DescribeSubscribesByCategoryNameAndUserIdRequest,
 	callback chan<- DescribeSubscribesByCategoryNameAndUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "subscribe",
-			"function":    "describeSubscribesByCategoryNameAndUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "subscribe",
+    		"function": "describeSubscribesByCategoryNameAndUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeSubscribesByCategoryNameAndUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1363,13 +1363,13 @@ func (p Gs2RankingWebSocketClient) subscribeAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SubscribeResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SubscribeAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SubscribeAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SubscribeAsyncResult{
 		result: &result,
@@ -1382,42 +1382,42 @@ func (p Gs2RankingWebSocketClient) SubscribeAsync(
 	request *SubscribeRequest,
 	callback chan<- SubscribeAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "subscribe",
-			"function":    "subscribe",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "subscribe",
+    		"function": "subscribe",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		bodies["targetUserId"] = *request.TargetUserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.subscribeAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1454,13 +1454,13 @@ func (p Gs2RankingWebSocketClient) subscribeByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SubscribeByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SubscribeByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SubscribeByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SubscribeByUserIdAsyncResult{
 		result: &result,
@@ -1473,39 +1473,39 @@ func (p Gs2RankingWebSocketClient) SubscribeByUserIdAsync(
 	request *SubscribeByUserIdRequest,
 	callback chan<- SubscribeByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "subscribe",
-			"function":    "subscribeByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "subscribe",
+    		"function": "subscribeByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		bodies["targetUserId"] = *request.TargetUserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.subscribeByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1542,13 +1542,13 @@ func (p Gs2RankingWebSocketClient) getSubscribeAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetSubscribeResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSubscribeAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSubscribeAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetSubscribeAsyncResult{
 		result: &result,
@@ -1561,42 +1561,42 @@ func (p Gs2RankingWebSocketClient) GetSubscribeAsync(
 	request *GetSubscribeRequest,
 	callback chan<- GetSubscribeAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "subscribe",
-			"function":    "getSubscribe",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "subscribe",
+    		"function": "getSubscribe",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		bodies["targetUserId"] = *request.TargetUserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.getSubscribeAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1633,13 +1633,13 @@ func (p Gs2RankingWebSocketClient) getSubscribeByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetSubscribeByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSubscribeByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSubscribeByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetSubscribeByUserIdAsyncResult{
 		result: &result,
@@ -1652,39 +1652,39 @@ func (p Gs2RankingWebSocketClient) GetSubscribeByUserIdAsync(
 	request *GetSubscribeByUserIdRequest,
 	callback chan<- GetSubscribeByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "subscribe",
-			"function":    "getSubscribeByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "subscribe",
+    		"function": "getSubscribeByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		bodies["targetUserId"] = *request.TargetUserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getSubscribeByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1721,13 +1721,13 @@ func (p Gs2RankingWebSocketClient) unsubscribeAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UnsubscribeResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UnsubscribeAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnsubscribeAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UnsubscribeAsyncResult{
 		result: &result,
@@ -1740,42 +1740,42 @@ func (p Gs2RankingWebSocketClient) UnsubscribeAsync(
 	request *UnsubscribeRequest,
 	callback chan<- UnsubscribeAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "subscribe",
-			"function":    "unsubscribe",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "subscribe",
+    		"function": "unsubscribe",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		bodies["targetUserId"] = *request.TargetUserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.unsubscribeAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1812,13 +1812,13 @@ func (p Gs2RankingWebSocketClient) unsubscribeByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UnsubscribeByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UnsubscribeByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnsubscribeByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UnsubscribeByUserIdAsyncResult{
 		result: &result,
@@ -1831,39 +1831,39 @@ func (p Gs2RankingWebSocketClient) UnsubscribeByUserIdAsync(
 	request *UnsubscribeByUserIdRequest,
 	callback chan<- UnsubscribeByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "subscribe",
-			"function":    "unsubscribeByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "subscribe",
+    		"function": "unsubscribeByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		bodies["targetUserId"] = *request.TargetUserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.unsubscribeByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1900,13 +1900,13 @@ func (p Gs2RankingWebSocketClient) describeScoresAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeScoresResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeScoresAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeScoresAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeScoresAsyncResult{
 		result: &result,
@@ -1919,48 +1919,48 @@ func (p Gs2RankingWebSocketClient) DescribeScoresAsync(
 	request *DescribeScoresRequest,
 	callback chan<- DescribeScoresAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "score",
-			"function":    "describeScores",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "score",
+    		"function": "describeScores",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.ScorerUserId != nil && *request.ScorerUserId != "" {
-		bodies["scorerUserId"] = *request.ScorerUserId
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.ScorerUserId != nil && *request.ScorerUserId != "" {
+        bodies["scorerUserId"] = *request.ScorerUserId
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.describeScoresAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1997,13 +1997,13 @@ func (p Gs2RankingWebSocketClient) describeScoresByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeScoresByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeScoresByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeScoresByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeScoresByUserIdAsyncResult{
 		result: &result,
@@ -2016,45 +2016,45 @@ func (p Gs2RankingWebSocketClient) DescribeScoresByUserIdAsync(
 	request *DescribeScoresByUserIdRequest,
 	callback chan<- DescribeScoresByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "score",
-			"function":    "describeScoresByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "score",
+    		"function": "describeScoresByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ScorerUserId != nil && *request.ScorerUserId != "" {
-		bodies["scorerUserId"] = *request.ScorerUserId
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ScorerUserId != nil && *request.ScorerUserId != "" {
+        bodies["scorerUserId"] = *request.ScorerUserId
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeScoresByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2091,13 +2091,13 @@ func (p Gs2RankingWebSocketClient) getScoreAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetScoreResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetScoreAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetScoreAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetScoreAsyncResult{
 		result: &result,
@@ -2110,45 +2110,45 @@ func (p Gs2RankingWebSocketClient) GetScoreAsync(
 	request *GetScoreRequest,
 	callback chan<- GetScoreAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "score",
-			"function":    "getScore",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "score",
+    		"function": "getScore",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.ScorerUserId != nil && *request.ScorerUserId != "" {
-		bodies["scorerUserId"] = *request.ScorerUserId
-	}
-	if request.UniqueId != nil && *request.UniqueId != "" {
-		bodies["uniqueId"] = *request.UniqueId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.ScorerUserId != nil && *request.ScorerUserId != "" {
+        bodies["scorerUserId"] = *request.ScorerUserId
+    }
+    if request.UniqueId != nil && *request.UniqueId != "" {
+        bodies["uniqueId"] = *request.UniqueId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.getScoreAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2185,13 +2185,13 @@ func (p Gs2RankingWebSocketClient) getScoreByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetScoreByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetScoreByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetScoreByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetScoreByUserIdAsyncResult{
 		result: &result,
@@ -2204,42 +2204,42 @@ func (p Gs2RankingWebSocketClient) GetScoreByUserIdAsync(
 	request *GetScoreByUserIdRequest,
 	callback chan<- GetScoreByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "score",
-			"function":    "getScoreByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "score",
+    		"function": "getScoreByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ScorerUserId != nil && *request.ScorerUserId != "" {
-		bodies["scorerUserId"] = *request.ScorerUserId
-	}
-	if request.UniqueId != nil && *request.UniqueId != "" {
-		bodies["uniqueId"] = *request.UniqueId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ScorerUserId != nil && *request.ScorerUserId != "" {
+        bodies["scorerUserId"] = *request.ScorerUserId
+    }
+    if request.UniqueId != nil && *request.UniqueId != "" {
+        bodies["uniqueId"] = *request.UniqueId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getScoreByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2276,13 +2276,13 @@ func (p Gs2RankingWebSocketClient) describeRankingsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeRankingsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeRankingsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeRankingsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeRankingsAsyncResult{
 		result: &result,
@@ -2295,48 +2295,48 @@ func (p Gs2RankingWebSocketClient) DescribeRankingsAsync(
 	request *DescribeRankingsRequest,
 	callback chan<- DescribeRankingsAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "ranking",
-			"function":    "describeRankings",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "ranking",
+    		"function": "describeRankings",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.StartIndex != nil {
-		bodies["startIndex"] = *request.StartIndex
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.StartIndex != nil {
+        bodies["startIndex"] = *request.StartIndex
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.describeRankingsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2373,13 +2373,13 @@ func (p Gs2RankingWebSocketClient) describeRankingssByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeRankingssByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeRankingssByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeRankingssByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeRankingssByUserIdAsyncResult{
 		result: &result,
@@ -2392,45 +2392,45 @@ func (p Gs2RankingWebSocketClient) DescribeRankingssByUserIdAsync(
 	request *DescribeRankingssByUserIdRequest,
 	callback chan<- DescribeRankingssByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "ranking",
-			"function":    "describeRankingssByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "ranking",
+    		"function": "describeRankingssByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.StartIndex != nil {
-		bodies["startIndex"] = *request.StartIndex
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.StartIndex != nil {
+        bodies["startIndex"] = *request.StartIndex
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeRankingssByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2467,13 +2467,13 @@ func (p Gs2RankingWebSocketClient) describeNearRankingsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNearRankingsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNearRankingsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNearRankingsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNearRankingsAsyncResult{
 		result: &result,
@@ -2486,36 +2486,36 @@ func (p Gs2RankingWebSocketClient) DescribeNearRankingsAsync(
 	request *DescribeNearRankingsRequest,
 	callback chan<- DescribeNearRankingsAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "ranking",
-			"function":    "describeNearRankings",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "ranking",
+    		"function": "describeNearRankings",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.Score != nil {
-		bodies["score"] = *request.Score
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.Score != nil {
+        bodies["score"] = *request.Score
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeNearRankingsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2552,13 +2552,13 @@ func (p Gs2RankingWebSocketClient) getRankingAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetRankingResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetRankingAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetRankingAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetRankingAsyncResult{
 		result: &result,
@@ -2571,45 +2571,45 @@ func (p Gs2RankingWebSocketClient) GetRankingAsync(
 	request *GetRankingRequest,
 	callback chan<- GetRankingAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "ranking",
-			"function":    "getRanking",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "ranking",
+    		"function": "getRanking",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.ScorerUserId != nil && *request.ScorerUserId != "" {
-		bodies["scorerUserId"] = *request.ScorerUserId
-	}
-	if request.UniqueId != nil && *request.UniqueId != "" {
-		bodies["uniqueId"] = *request.UniqueId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.ScorerUserId != nil && *request.ScorerUserId != "" {
+        bodies["scorerUserId"] = *request.ScorerUserId
+    }
+    if request.UniqueId != nil && *request.UniqueId != "" {
+        bodies["uniqueId"] = *request.UniqueId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.getRankingAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2646,13 +2646,13 @@ func (p Gs2RankingWebSocketClient) getRankingByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetRankingByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetRankingByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetRankingByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetRankingByUserIdAsyncResult{
 		result: &result,
@@ -2665,42 +2665,42 @@ func (p Gs2RankingWebSocketClient) GetRankingByUserIdAsync(
 	request *GetRankingByUserIdRequest,
 	callback chan<- GetRankingByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "ranking",
-			"function":    "getRankingByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "ranking",
+    		"function": "getRankingByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ScorerUserId != nil && *request.ScorerUserId != "" {
-		bodies["scorerUserId"] = *request.ScorerUserId
-	}
-	if request.UniqueId != nil && *request.UniqueId != "" {
-		bodies["uniqueId"] = *request.UniqueId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ScorerUserId != nil && *request.ScorerUserId != "" {
+        bodies["scorerUserId"] = *request.ScorerUserId
+    }
+    if request.UniqueId != nil && *request.UniqueId != "" {
+        bodies["uniqueId"] = *request.UniqueId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getRankingByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2737,13 +2737,13 @@ func (p Gs2RankingWebSocketClient) putScoreAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PutScoreResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PutScoreAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PutScoreAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PutScoreAsyncResult{
 		result: &result,
@@ -2756,45 +2756,45 @@ func (p Gs2RankingWebSocketClient) PutScoreAsync(
 	request *PutScoreRequest,
 	callback chan<- PutScoreAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "ranking",
-			"function":    "putScore",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "ranking",
+    		"function": "putScore",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.Score != nil {
-		bodies["score"] = *request.Score
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.Score != nil {
+        bodies["score"] = *request.Score
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.putScoreAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2831,13 +2831,13 @@ func (p Gs2RankingWebSocketClient) putScoreByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PutScoreByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PutScoreByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PutScoreByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PutScoreByUserIdAsyncResult{
 		result: &result,
@@ -2850,42 +2850,42 @@ func (p Gs2RankingWebSocketClient) PutScoreByUserIdAsync(
 	request *PutScoreByUserIdRequest,
 	callback chan<- PutScoreByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "ranking",
-			"function":    "putScoreByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "ranking",
+    		"function": "putScoreByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Score != nil {
-		bodies["score"] = *request.Score
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Score != nil {
+        bodies["score"] = *request.Score
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.putScoreByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2922,13 +2922,13 @@ func (p Gs2RankingWebSocketClient) exportMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ExportMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ExportMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ExportMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -2941,30 +2941,30 @@ func (p Gs2RankingWebSocketClient) ExportMasterAsync(
 	request *ExportMasterRequest,
 	callback chan<- ExportMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "currentRankingMaster",
-			"function":    "exportMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "currentRankingMaster",
+    		"function": "exportMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3001,13 +3001,13 @@ func (p Gs2RankingWebSocketClient) getCurrentRankingMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCurrentRankingMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCurrentRankingMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCurrentRankingMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCurrentRankingMasterAsyncResult{
 		result: &result,
@@ -3020,30 +3020,30 @@ func (p Gs2RankingWebSocketClient) GetCurrentRankingMasterAsync(
 	request *GetCurrentRankingMasterRequest,
 	callback chan<- GetCurrentRankingMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "currentRankingMaster",
-			"function":    "getCurrentRankingMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "currentRankingMaster",
+    		"function": "getCurrentRankingMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getCurrentRankingMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3080,13 +3080,13 @@ func (p Gs2RankingWebSocketClient) updateCurrentRankingMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCurrentRankingMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentRankingMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentRankingMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentRankingMasterAsyncResult{
 		result: &result,
@@ -3099,33 +3099,33 @@ func (p Gs2RankingWebSocketClient) UpdateCurrentRankingMasterAsync(
 	request *UpdateCurrentRankingMasterRequest,
 	callback chan<- UpdateCurrentRankingMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "currentRankingMaster",
-			"function":    "updateCurrentRankingMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "currentRankingMaster",
+    		"function": "updateCurrentRankingMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Settings != nil && *request.Settings != "" {
-		bodies["settings"] = *request.Settings
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Settings != nil && *request.Settings != "" {
+        bodies["settings"] = *request.Settings
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateCurrentRankingMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3162,13 +3162,13 @@ func (p Gs2RankingWebSocketClient) updateCurrentRankingMasterFromGitHubAsyncHand
 	asyncResult := <-internalCallback
 	var result UpdateCurrentRankingMasterFromGitHubResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentRankingMasterFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentRankingMasterFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentRankingMasterFromGitHubAsyncResult{
 		result: &result,
@@ -3181,33 +3181,33 @@ func (p Gs2RankingWebSocketClient) UpdateCurrentRankingMasterFromGitHubAsync(
 	request *UpdateCurrentRankingMasterFromGitHubRequest,
 	callback chan<- UpdateCurrentRankingMasterFromGitHubAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking",
-			"component":   "currentRankingMaster",
-			"function":    "updateCurrentRankingMasterFromGitHub",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "currentRankingMaster",
+    		"function": "updateCurrentRankingMasterFromGitHub",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateCurrentRankingMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)

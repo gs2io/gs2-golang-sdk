@@ -49,13 +49,13 @@ func (p Gs2ShowcaseWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -68,33 +68,33 @@ func (p Gs2ShowcaseWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "namespace",
-			"function":    "describeNamespaces",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "namespace",
+    		"function": "describeNamespaces",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -131,13 +131,13 @@ func (p Gs2ShowcaseWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -150,42 +150,42 @@ func (p Gs2ShowcaseWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "namespace",
-			"function":    "createNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "namespace",
+    		"function": "createNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
-		bodies["queueNamespaceId"] = *request.QueueNamespaceId
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
+        bodies["queueNamespaceId"] = *request.QueueNamespaceId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -222,13 +222,13 @@ func (p Gs2ShowcaseWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -241,30 +241,30 @@ func (p Gs2ShowcaseWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "namespace",
-			"function":    "getNamespaceStatus",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "namespace",
+    		"function": "getNamespaceStatus",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -301,13 +301,13 @@ func (p Gs2ShowcaseWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -320,30 +320,30 @@ func (p Gs2ShowcaseWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "namespace",
-			"function":    "getNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "namespace",
+    		"function": "getNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -380,13 +380,13 @@ func (p Gs2ShowcaseWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -399,42 +399,42 @@ func (p Gs2ShowcaseWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "namespace",
-			"function":    "updateNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "namespace",
+    		"function": "updateNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
-		bodies["queueNamespaceId"] = *request.QueueNamespaceId
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
+        bodies["queueNamespaceId"] = *request.QueueNamespaceId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -471,13 +471,13 @@ func (p Gs2ShowcaseWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -490,30 +490,30 @@ func (p Gs2ShowcaseWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "namespace",
-			"function":    "deleteNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "namespace",
+    		"function": "deleteNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -550,13 +550,13 @@ func (p Gs2ShowcaseWebSocketClient) describeSalesItemMastersAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeSalesItemMastersResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeSalesItemMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeSalesItemMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeSalesItemMastersAsyncResult{
 		result: &result,
@@ -569,36 +569,36 @@ func (p Gs2ShowcaseWebSocketClient) DescribeSalesItemMastersAsync(
 	request *DescribeSalesItemMastersRequest,
 	callback chan<- DescribeSalesItemMastersAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "salesItemMaster",
-			"function":    "describeSalesItemMasters",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "salesItemMaster",
+    		"function": "describeSalesItemMasters",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeSalesItemMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -635,13 +635,13 @@ func (p Gs2ShowcaseWebSocketClient) createSalesItemMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateSalesItemMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateSalesItemMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateSalesItemMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateSalesItemMasterAsyncResult{
 		result: &result,
@@ -654,53 +654,53 @@ func (p Gs2ShowcaseWebSocketClient) CreateSalesItemMasterAsync(
 	request *CreateSalesItemMasterRequest,
 	callback chan<- CreateSalesItemMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "salesItemMaster",
-			"function":    "createSalesItemMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "salesItemMaster",
+    		"function": "createSalesItemMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.ConsumeActions != nil {
-		var _consumeActions []interface{}
-		for _, item := range request.ConsumeActions {
-			_consumeActions = append(_consumeActions, item)
-		}
-		bodies["consumeActions"] = _consumeActions
-	}
-	if request.AcquireActions != nil {
-		var _acquireActions []interface{}
-		for _, item := range request.AcquireActions {
-			_acquireActions = append(_acquireActions, item)
-		}
-		bodies["acquireActions"] = _acquireActions
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ConsumeActions != nil {
+        var _consumeActions []interface {}
+        for _, item := range request.ConsumeActions {
+            _consumeActions = append(_consumeActions, item)
+        }
+        bodies["consumeActions"] = _consumeActions
+    }
+    if request.AcquireActions != nil {
+        var _acquireActions []interface {}
+        for _, item := range request.AcquireActions {
+            _acquireActions = append(_acquireActions, item)
+        }
+        bodies["acquireActions"] = _acquireActions
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createSalesItemMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -737,13 +737,13 @@ func (p Gs2ShowcaseWebSocketClient) getSalesItemMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetSalesItemMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSalesItemMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSalesItemMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetSalesItemMasterAsyncResult{
 		result: &result,
@@ -756,33 +756,33 @@ func (p Gs2ShowcaseWebSocketClient) GetSalesItemMasterAsync(
 	request *GetSalesItemMasterRequest,
 	callback chan<- GetSalesItemMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "salesItemMaster",
-			"function":    "getSalesItemMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "salesItemMaster",
+    		"function": "getSalesItemMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.SalesItemName != nil && *request.SalesItemName != "" {
-		bodies["salesItemName"] = *request.SalesItemName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.SalesItemName != nil && *request.SalesItemName != "" {
+        bodies["salesItemName"] = *request.SalesItemName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getSalesItemMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -819,13 +819,13 @@ func (p Gs2ShowcaseWebSocketClient) updateSalesItemMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateSalesItemMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateSalesItemMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateSalesItemMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateSalesItemMasterAsyncResult{
 		result: &result,
@@ -838,53 +838,53 @@ func (p Gs2ShowcaseWebSocketClient) UpdateSalesItemMasterAsync(
 	request *UpdateSalesItemMasterRequest,
 	callback chan<- UpdateSalesItemMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "salesItemMaster",
-			"function":    "updateSalesItemMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "salesItemMaster",
+    		"function": "updateSalesItemMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.SalesItemName != nil && *request.SalesItemName != "" {
-		bodies["salesItemName"] = *request.SalesItemName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.ConsumeActions != nil {
-		var _consumeActions []interface{}
-		for _, item := range request.ConsumeActions {
-			_consumeActions = append(_consumeActions, item)
-		}
-		bodies["consumeActions"] = _consumeActions
-	}
-	if request.AcquireActions != nil {
-		var _acquireActions []interface{}
-		for _, item := range request.AcquireActions {
-			_acquireActions = append(_acquireActions, item)
-		}
-		bodies["acquireActions"] = _acquireActions
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.SalesItemName != nil && *request.SalesItemName != "" {
+        bodies["salesItemName"] = *request.SalesItemName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ConsumeActions != nil {
+        var _consumeActions []interface {}
+        for _, item := range request.ConsumeActions {
+            _consumeActions = append(_consumeActions, item)
+        }
+        bodies["consumeActions"] = _consumeActions
+    }
+    if request.AcquireActions != nil {
+        var _acquireActions []interface {}
+        for _, item := range request.AcquireActions {
+            _acquireActions = append(_acquireActions, item)
+        }
+        bodies["acquireActions"] = _acquireActions
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateSalesItemMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -921,13 +921,13 @@ func (p Gs2ShowcaseWebSocketClient) deleteSalesItemMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteSalesItemMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteSalesItemMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteSalesItemMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteSalesItemMasterAsyncResult{
 		result: &result,
@@ -940,33 +940,33 @@ func (p Gs2ShowcaseWebSocketClient) DeleteSalesItemMasterAsync(
 	request *DeleteSalesItemMasterRequest,
 	callback chan<- DeleteSalesItemMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "salesItemMaster",
-			"function":    "deleteSalesItemMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "salesItemMaster",
+    		"function": "deleteSalesItemMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.SalesItemName != nil && *request.SalesItemName != "" {
-		bodies["salesItemName"] = *request.SalesItemName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.SalesItemName != nil && *request.SalesItemName != "" {
+        bodies["salesItemName"] = *request.SalesItemName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteSalesItemMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1003,13 +1003,13 @@ func (p Gs2ShowcaseWebSocketClient) describeSalesItemGroupMastersAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeSalesItemGroupMastersResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeSalesItemGroupMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeSalesItemGroupMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeSalesItemGroupMastersAsyncResult{
 		result: &result,
@@ -1022,36 +1022,36 @@ func (p Gs2ShowcaseWebSocketClient) DescribeSalesItemGroupMastersAsync(
 	request *DescribeSalesItemGroupMastersRequest,
 	callback chan<- DescribeSalesItemGroupMastersAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "salesItemGroupMaster",
-			"function":    "describeSalesItemGroupMasters",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "salesItemGroupMaster",
+    		"function": "describeSalesItemGroupMasters",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeSalesItemGroupMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1088,13 +1088,13 @@ func (p Gs2ShowcaseWebSocketClient) createSalesItemGroupMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateSalesItemGroupMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateSalesItemGroupMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateSalesItemGroupMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateSalesItemGroupMasterAsyncResult{
 		result: &result,
@@ -1107,46 +1107,46 @@ func (p Gs2ShowcaseWebSocketClient) CreateSalesItemGroupMasterAsync(
 	request *CreateSalesItemGroupMasterRequest,
 	callback chan<- CreateSalesItemGroupMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "salesItemGroupMaster",
-			"function":    "createSalesItemGroupMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "salesItemGroupMaster",
+    		"function": "createSalesItemGroupMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.SalesItemNames != nil {
-		var _salesItemNames []interface{}
-		for _, item := range request.SalesItemNames {
-			_salesItemNames = append(_salesItemNames, item)
-		}
-		bodies["salesItemNames"] = _salesItemNames
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.SalesItemNames != nil {
+        var _salesItemNames []interface {}
+        for _, item := range request.SalesItemNames {
+            _salesItemNames = append(_salesItemNames, item)
+        }
+        bodies["salesItemNames"] = _salesItemNames
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createSalesItemGroupMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1183,13 +1183,13 @@ func (p Gs2ShowcaseWebSocketClient) getSalesItemGroupMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetSalesItemGroupMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSalesItemGroupMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSalesItemGroupMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetSalesItemGroupMasterAsyncResult{
 		result: &result,
@@ -1202,33 +1202,33 @@ func (p Gs2ShowcaseWebSocketClient) GetSalesItemGroupMasterAsync(
 	request *GetSalesItemGroupMasterRequest,
 	callback chan<- GetSalesItemGroupMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "salesItemGroupMaster",
-			"function":    "getSalesItemGroupMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "salesItemGroupMaster",
+    		"function": "getSalesItemGroupMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.SalesItemGroupName != nil && *request.SalesItemGroupName != "" {
-		bodies["salesItemGroupName"] = *request.SalesItemGroupName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.SalesItemGroupName != nil && *request.SalesItemGroupName != "" {
+        bodies["salesItemGroupName"] = *request.SalesItemGroupName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getSalesItemGroupMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1265,13 +1265,13 @@ func (p Gs2ShowcaseWebSocketClient) updateSalesItemGroupMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateSalesItemGroupMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateSalesItemGroupMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateSalesItemGroupMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateSalesItemGroupMasterAsyncResult{
 		result: &result,
@@ -1284,46 +1284,46 @@ func (p Gs2ShowcaseWebSocketClient) UpdateSalesItemGroupMasterAsync(
 	request *UpdateSalesItemGroupMasterRequest,
 	callback chan<- UpdateSalesItemGroupMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "salesItemGroupMaster",
-			"function":    "updateSalesItemGroupMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "salesItemGroupMaster",
+    		"function": "updateSalesItemGroupMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.SalesItemGroupName != nil && *request.SalesItemGroupName != "" {
-		bodies["salesItemGroupName"] = *request.SalesItemGroupName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.SalesItemNames != nil {
-		var _salesItemNames []interface{}
-		for _, item := range request.SalesItemNames {
-			_salesItemNames = append(_salesItemNames, item)
-		}
-		bodies["salesItemNames"] = _salesItemNames
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.SalesItemGroupName != nil && *request.SalesItemGroupName != "" {
+        bodies["salesItemGroupName"] = *request.SalesItemGroupName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.SalesItemNames != nil {
+        var _salesItemNames []interface {}
+        for _, item := range request.SalesItemNames {
+            _salesItemNames = append(_salesItemNames, item)
+        }
+        bodies["salesItemNames"] = _salesItemNames
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateSalesItemGroupMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1360,13 +1360,13 @@ func (p Gs2ShowcaseWebSocketClient) deleteSalesItemGroupMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteSalesItemGroupMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteSalesItemGroupMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteSalesItemGroupMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteSalesItemGroupMasterAsyncResult{
 		result: &result,
@@ -1379,33 +1379,33 @@ func (p Gs2ShowcaseWebSocketClient) DeleteSalesItemGroupMasterAsync(
 	request *DeleteSalesItemGroupMasterRequest,
 	callback chan<- DeleteSalesItemGroupMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "salesItemGroupMaster",
-			"function":    "deleteSalesItemGroupMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "salesItemGroupMaster",
+    		"function": "deleteSalesItemGroupMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.SalesItemGroupName != nil && *request.SalesItemGroupName != "" {
-		bodies["salesItemGroupName"] = *request.SalesItemGroupName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.SalesItemGroupName != nil && *request.SalesItemGroupName != "" {
+        bodies["salesItemGroupName"] = *request.SalesItemGroupName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteSalesItemGroupMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1442,13 +1442,13 @@ func (p Gs2ShowcaseWebSocketClient) describeShowcaseMastersAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeShowcaseMastersResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeShowcaseMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeShowcaseMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeShowcaseMastersAsyncResult{
 		result: &result,
@@ -1461,36 +1461,36 @@ func (p Gs2ShowcaseWebSocketClient) DescribeShowcaseMastersAsync(
 	request *DescribeShowcaseMastersRequest,
 	callback chan<- DescribeShowcaseMastersAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "showcaseMaster",
-			"function":    "describeShowcaseMasters",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "showcaseMaster",
+    		"function": "describeShowcaseMasters",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeShowcaseMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1527,13 +1527,13 @@ func (p Gs2ShowcaseWebSocketClient) createShowcaseMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateShowcaseMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateShowcaseMasterAsyncResult{
 		result: &result,
@@ -1546,49 +1546,49 @@ func (p Gs2ShowcaseWebSocketClient) CreateShowcaseMasterAsync(
 	request *CreateShowcaseMasterRequest,
 	callback chan<- CreateShowcaseMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "showcaseMaster",
-			"function":    "createShowcaseMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "showcaseMaster",
+    		"function": "createShowcaseMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.DisplayItems != nil {
-		var _displayItems []interface{}
-		for _, item := range request.DisplayItems {
-			_displayItems = append(_displayItems, item)
-		}
-		bodies["displayItems"] = _displayItems
-	}
-	if request.SalesPeriodEventId != nil && *request.SalesPeriodEventId != "" {
-		bodies["salesPeriodEventId"] = *request.SalesPeriodEventId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.DisplayItems != nil {
+        var _displayItems []interface {}
+        for _, item := range request.DisplayItems {
+            _displayItems = append(_displayItems, item)
+        }
+        bodies["displayItems"] = _displayItems
+    }
+    if request.SalesPeriodEventId != nil && *request.SalesPeriodEventId != "" {
+        bodies["salesPeriodEventId"] = *request.SalesPeriodEventId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createShowcaseMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1625,13 +1625,13 @@ func (p Gs2ShowcaseWebSocketClient) getShowcaseMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetShowcaseMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetShowcaseMasterAsyncResult{
 		result: &result,
@@ -1644,33 +1644,33 @@ func (p Gs2ShowcaseWebSocketClient) GetShowcaseMasterAsync(
 	request *GetShowcaseMasterRequest,
 	callback chan<- GetShowcaseMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "showcaseMaster",
-			"function":    "getShowcaseMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "showcaseMaster",
+    		"function": "getShowcaseMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		bodies["showcaseName"] = *request.ShowcaseName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+        bodies["showcaseName"] = *request.ShowcaseName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getShowcaseMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1707,13 +1707,13 @@ func (p Gs2ShowcaseWebSocketClient) updateShowcaseMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateShowcaseMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateShowcaseMasterAsyncResult{
 		result: &result,
@@ -1726,49 +1726,49 @@ func (p Gs2ShowcaseWebSocketClient) UpdateShowcaseMasterAsync(
 	request *UpdateShowcaseMasterRequest,
 	callback chan<- UpdateShowcaseMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "showcaseMaster",
-			"function":    "updateShowcaseMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "showcaseMaster",
+    		"function": "updateShowcaseMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		bodies["showcaseName"] = *request.ShowcaseName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.DisplayItems != nil {
-		var _displayItems []interface{}
-		for _, item := range request.DisplayItems {
-			_displayItems = append(_displayItems, item)
-		}
-		bodies["displayItems"] = _displayItems
-	}
-	if request.SalesPeriodEventId != nil && *request.SalesPeriodEventId != "" {
-		bodies["salesPeriodEventId"] = *request.SalesPeriodEventId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+        bodies["showcaseName"] = *request.ShowcaseName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.DisplayItems != nil {
+        var _displayItems []interface {}
+        for _, item := range request.DisplayItems {
+            _displayItems = append(_displayItems, item)
+        }
+        bodies["displayItems"] = _displayItems
+    }
+    if request.SalesPeriodEventId != nil && *request.SalesPeriodEventId != "" {
+        bodies["salesPeriodEventId"] = *request.SalesPeriodEventId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateShowcaseMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1805,13 +1805,13 @@ func (p Gs2ShowcaseWebSocketClient) deleteShowcaseMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteShowcaseMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteShowcaseMasterAsyncResult{
 		result: &result,
@@ -1824,33 +1824,33 @@ func (p Gs2ShowcaseWebSocketClient) DeleteShowcaseMasterAsync(
 	request *DeleteShowcaseMasterRequest,
 	callback chan<- DeleteShowcaseMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "showcaseMaster",
-			"function":    "deleteShowcaseMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "showcaseMaster",
+    		"function": "deleteShowcaseMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		bodies["showcaseName"] = *request.ShowcaseName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+        bodies["showcaseName"] = *request.ShowcaseName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteShowcaseMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1887,13 +1887,13 @@ func (p Gs2ShowcaseWebSocketClient) exportMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ExportMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ExportMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ExportMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -1906,30 +1906,30 @@ func (p Gs2ShowcaseWebSocketClient) ExportMasterAsync(
 	request *ExportMasterRequest,
 	callback chan<- ExportMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "currentShowcaseMaster",
-			"function":    "exportMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "currentShowcaseMaster",
+    		"function": "exportMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1966,13 +1966,13 @@ func (p Gs2ShowcaseWebSocketClient) getCurrentShowcaseMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCurrentShowcaseMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCurrentShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCurrentShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCurrentShowcaseMasterAsyncResult{
 		result: &result,
@@ -1985,30 +1985,30 @@ func (p Gs2ShowcaseWebSocketClient) GetCurrentShowcaseMasterAsync(
 	request *GetCurrentShowcaseMasterRequest,
 	callback chan<- GetCurrentShowcaseMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "currentShowcaseMaster",
-			"function":    "getCurrentShowcaseMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "currentShowcaseMaster",
+    		"function": "getCurrentShowcaseMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getCurrentShowcaseMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2045,13 +2045,13 @@ func (p Gs2ShowcaseWebSocketClient) updateCurrentShowcaseMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCurrentShowcaseMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentShowcaseMasterAsyncResult{
 		result: &result,
@@ -2064,33 +2064,33 @@ func (p Gs2ShowcaseWebSocketClient) UpdateCurrentShowcaseMasterAsync(
 	request *UpdateCurrentShowcaseMasterRequest,
 	callback chan<- UpdateCurrentShowcaseMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "currentShowcaseMaster",
-			"function":    "updateCurrentShowcaseMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "currentShowcaseMaster",
+    		"function": "updateCurrentShowcaseMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Settings != nil && *request.Settings != "" {
-		bodies["settings"] = *request.Settings
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Settings != nil && *request.Settings != "" {
+        bodies["settings"] = *request.Settings
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateCurrentShowcaseMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2127,13 +2127,13 @@ func (p Gs2ShowcaseWebSocketClient) updateCurrentShowcaseMasterFromGitHubAsyncHa
 	asyncResult := <-internalCallback
 	var result UpdateCurrentShowcaseMasterFromGitHubResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentShowcaseMasterFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentShowcaseMasterFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentShowcaseMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2146,33 +2146,33 @@ func (p Gs2ShowcaseWebSocketClient) UpdateCurrentShowcaseMasterFromGitHubAsync(
 	request *UpdateCurrentShowcaseMasterFromGitHubRequest,
 	callback chan<- UpdateCurrentShowcaseMasterFromGitHubAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "currentShowcaseMaster",
-			"function":    "updateCurrentShowcaseMasterFromGitHub",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "currentShowcaseMaster",
+    		"function": "updateCurrentShowcaseMasterFromGitHub",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateCurrentShowcaseMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2209,13 +2209,13 @@ func (p Gs2ShowcaseWebSocketClient) describeShowcasesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeShowcasesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeShowcasesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeShowcasesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeShowcasesAsyncResult{
 		result: &result,
@@ -2228,36 +2228,36 @@ func (p Gs2ShowcaseWebSocketClient) DescribeShowcasesAsync(
 	request *DescribeShowcasesRequest,
 	callback chan<- DescribeShowcasesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "showcase",
-			"function":    "describeShowcases",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "showcase",
+    		"function": "describeShowcases",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.describeShowcasesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2294,13 +2294,13 @@ func (p Gs2ShowcaseWebSocketClient) describeShowcasesByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeShowcasesByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeShowcasesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeShowcasesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeShowcasesByUserIdAsyncResult{
 		result: &result,
@@ -2313,33 +2313,33 @@ func (p Gs2ShowcaseWebSocketClient) DescribeShowcasesByUserIdAsync(
 	request *DescribeShowcasesByUserIdRequest,
 	callback chan<- DescribeShowcasesByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "showcase",
-			"function":    "describeShowcasesByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "showcase",
+    		"function": "describeShowcasesByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeShowcasesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2376,13 +2376,13 @@ func (p Gs2ShowcaseWebSocketClient) getShowcaseAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetShowcaseResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetShowcaseAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetShowcaseAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetShowcaseAsyncResult{
 		result: &result,
@@ -2395,39 +2395,39 @@ func (p Gs2ShowcaseWebSocketClient) GetShowcaseAsync(
 	request *GetShowcaseRequest,
 	callback chan<- GetShowcaseAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "showcase",
-			"function":    "getShowcase",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "showcase",
+    		"function": "getShowcase",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		bodies["showcaseName"] = *request.ShowcaseName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+        bodies["showcaseName"] = *request.ShowcaseName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.getShowcaseAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2464,13 +2464,13 @@ func (p Gs2ShowcaseWebSocketClient) getShowcaseByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetShowcaseByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetShowcaseByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetShowcaseByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetShowcaseByUserIdAsyncResult{
 		result: &result,
@@ -2483,36 +2483,36 @@ func (p Gs2ShowcaseWebSocketClient) GetShowcaseByUserIdAsync(
 	request *GetShowcaseByUserIdRequest,
 	callback chan<- GetShowcaseByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "showcase",
-			"function":    "getShowcaseByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "showcase",
+    		"function": "getShowcaseByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		bodies["showcaseName"] = *request.ShowcaseName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+        bodies["showcaseName"] = *request.ShowcaseName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getShowcaseByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2549,13 +2549,13 @@ func (p Gs2ShowcaseWebSocketClient) buyAsyncHandler(
 	asyncResult := <-internalCallback
 	var result BuyResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- BuyAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- BuyAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- BuyAsyncResult{
 		result: &result,
@@ -2568,49 +2568,49 @@ func (p Gs2ShowcaseWebSocketClient) BuyAsync(
 	request *BuyRequest,
 	callback chan<- BuyAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "showcase",
-			"function":    "buy",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "showcase",
+    		"function": "buy",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		bodies["showcaseName"] = *request.ShowcaseName
-	}
-	if request.DisplayItemId != nil && *request.DisplayItemId != "" {
-		bodies["displayItemId"] = *request.DisplayItemId
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+        bodies["showcaseName"] = *request.ShowcaseName
+    }
+    if request.DisplayItemId != nil && *request.DisplayItemId != "" {
+        bodies["displayItemId"] = *request.DisplayItemId
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.buyAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2647,13 +2647,13 @@ func (p Gs2ShowcaseWebSocketClient) buyByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result BuyByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- BuyByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- BuyByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- BuyByUserIdAsyncResult{
 		result: &result,
@@ -2666,46 +2666,46 @@ func (p Gs2ShowcaseWebSocketClient) BuyByUserIdAsync(
 	request *BuyByUserIdRequest,
 	callback chan<- BuyByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "showcase",
-			"component":   "showcase",
-			"function":    "buyByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "showcase",
+    		"function": "buyByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		bodies["showcaseName"] = *request.ShowcaseName
-	}
-	if request.DisplayItemId != nil && *request.DisplayItemId != "" {
-		bodies["displayItemId"] = *request.DisplayItemId
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+        bodies["showcaseName"] = *request.ShowcaseName
+    }
+    if request.DisplayItemId != nil && *request.DisplayItemId != "" {
+        bodies["displayItemId"] = *request.DisplayItemId
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.buyByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)

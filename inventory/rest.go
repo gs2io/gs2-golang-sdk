@@ -56,13 +56,13 @@ func describeNamespacesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -86,10 +86,10 @@ func (p Gs2InventoryRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -141,13 +141,13 @@ func createNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -163,41 +163,41 @@ func (p Gs2InventoryRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.AcquireScript != nil {
-		bodies["acquireScript"] = request.AcquireScript.ToDict()
-	}
-	if request.OverflowScript != nil {
-		bodies["overflowScript"] = request.OverflowScript.ToDict()
-	}
-	if request.ConsumeScript != nil {
-		bodies["consumeScript"] = request.ConsumeScript.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.AcquireScript != nil {
+        bodies["acquireScript"] = request.AcquireScript.ToDict()
+    }
+    if request.OverflowScript != nil {
+        bodies["overflowScript"] = request.OverflowScript.ToDict()
+    }
+    if request.ConsumeScript != nil {
+        bodies["consumeScript"] = request.ConsumeScript.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -241,13 +241,13 @@ func getNamespaceStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -261,19 +261,19 @@ func (p Gs2InventoryRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -325,13 +325,13 @@ func getNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -345,19 +345,19 @@ func (p Gs2InventoryRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -409,13 +409,13 @@ func updateNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -429,45 +429,45 @@ func (p Gs2InventoryRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.AcquireScript != nil {
-		bodies["acquireScript"] = request.AcquireScript.ToDict()
-	}
-	if request.OverflowScript != nil {
-		bodies["overflowScript"] = request.OverflowScript.ToDict()
-	}
-	if request.ConsumeScript != nil {
-		bodies["consumeScript"] = request.ConsumeScript.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.AcquireScript != nil {
+        bodies["acquireScript"] = request.AcquireScript.ToDict()
+    }
+    if request.OverflowScript != nil {
+        bodies["overflowScript"] = request.OverflowScript.ToDict()
+    }
+    if request.ConsumeScript != nil {
+        bodies["consumeScript"] = request.ConsumeScript.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -511,13 +511,13 @@ func deleteNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -531,19 +531,19 @@ func (p Gs2InventoryRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -595,13 +595,13 @@ func describeInventoryModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeInventoryModelMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeInventoryModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeInventoryModelMastersAsyncResult{
 		result: &result,
@@ -615,11 +615,11 @@ func (p Gs2InventoryRestClient) DescribeInventoryModelMastersAsync(
 	callback chan<- DescribeInventoryModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -630,10 +630,10 @@ func (p Gs2InventoryRestClient) DescribeInventoryModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeInventoryModelMastersAsyncHandler(
 		p,
@@ -685,13 +685,13 @@ func createInventoryModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateInventoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateInventoryModelMasterAsyncResult{
 		result: &result,
@@ -705,48 +705,48 @@ func (p Gs2InventoryRestClient) CreateInventoryModelMasterAsync(
 	callback chan<- CreateInventoryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.InitialCapacity != nil {
-		bodies["initialCapacity"] = *request.InitialCapacity
-	}
-	if request.MaxCapacity != nil {
-		bodies["maxCapacity"] = *request.MaxCapacity
-	}
-	if request.ProtectReferencedItem != nil {
-		bodies["protectReferencedItem"] = *request.ProtectReferencedItem
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.InitialCapacity != nil {
+        bodies["initialCapacity"] = *request.InitialCapacity
+    }
+    if request.MaxCapacity != nil {
+        bodies["maxCapacity"] = *request.MaxCapacity
+    }
+    if request.ProtectReferencedItem != nil {
+        bodies["protectReferencedItem"] = *request.ProtectReferencedItem
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -790,13 +790,13 @@ func getInventoryModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetInventoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetInventoryModelMasterAsyncResult{
 		result: &result,
@@ -810,24 +810,24 @@ func (p Gs2InventoryRestClient) GetInventoryModelMasterAsync(
 	callback chan<- GetInventoryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getInventoryModelMasterAsyncHandler(
 		p,
@@ -879,13 +879,13 @@ func updateInventoryModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateInventoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateInventoryModelMasterAsyncResult{
 		result: &result,
@@ -899,50 +899,50 @@ func (p Gs2InventoryRestClient) UpdateInventoryModelMasterAsync(
 	callback chan<- UpdateInventoryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.InitialCapacity != nil {
-		bodies["initialCapacity"] = *request.InitialCapacity
-	}
-	if request.MaxCapacity != nil {
-		bodies["maxCapacity"] = *request.MaxCapacity
-	}
-	if request.ProtectReferencedItem != nil {
-		bodies["protectReferencedItem"] = *request.ProtectReferencedItem
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.InitialCapacity != nil {
+        bodies["initialCapacity"] = *request.InitialCapacity
+    }
+    if request.MaxCapacity != nil {
+        bodies["maxCapacity"] = *request.MaxCapacity
+    }
+    if request.ProtectReferencedItem != nil {
+        bodies["protectReferencedItem"] = *request.ProtectReferencedItem
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -986,13 +986,13 @@ func deleteInventoryModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteInventoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteInventoryModelMasterAsyncResult{
 		result: &result,
@@ -1006,24 +1006,24 @@ func (p Gs2InventoryRestClient) DeleteInventoryModelMasterAsync(
 	callback chan<- DeleteInventoryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteInventoryModelMasterAsyncHandler(
 		p,
@@ -1075,13 +1075,13 @@ func describeInventoryModelsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeInventoryModelsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeInventoryModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeInventoryModelsAsyncResult{
 		result: &result,
@@ -1095,19 +1095,19 @@ func (p Gs2InventoryRestClient) DescribeInventoryModelsAsync(
 	callback chan<- DescribeInventoryModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/inventory"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeInventoryModelsAsyncHandler(
 		p,
@@ -1159,13 +1159,13 @@ func getInventoryModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetInventoryModelAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetInventoryModelAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetInventoryModelAsyncResult{
 		result: &result,
@@ -1179,24 +1179,24 @@ func (p Gs2InventoryRestClient) GetInventoryModelAsync(
 	callback chan<- GetInventoryModelAsyncResult,
 ) {
 	path := "/{namespaceName}/inventory/{inventoryName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getInventoryModelAsyncHandler(
 		p,
@@ -1248,13 +1248,13 @@ func describeItemModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeItemModelMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeItemModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeItemModelMastersAsyncResult{
 		result: &result,
@@ -1268,16 +1268,16 @@ func (p Gs2InventoryRestClient) DescribeItemModelMastersAsync(
 	callback chan<- DescribeItemModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}/item"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1288,10 +1288,10 @@ func (p Gs2InventoryRestClient) DescribeItemModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeItemModelMastersAsyncHandler(
 		p,
@@ -1343,13 +1343,13 @@ func createItemModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateItemModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateItemModelMasterAsyncResult{
 		result: &result,
@@ -1363,53 +1363,53 @@ func (p Gs2InventoryRestClient) CreateItemModelMasterAsync(
 	callback chan<- CreateItemModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}/item"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.StackingLimit != nil {
-		bodies["stackingLimit"] = *request.StackingLimit
-	}
-	if request.AllowMultipleStacks != nil {
-		bodies["allowMultipleStacks"] = *request.AllowMultipleStacks
-	}
-	if request.SortValue != nil {
-		bodies["sortValue"] = *request.SortValue
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.StackingLimit != nil {
+        bodies["stackingLimit"] = *request.StackingLimit
+    }
+    if request.AllowMultipleStacks != nil {
+        bodies["allowMultipleStacks"] = *request.AllowMultipleStacks
+    }
+    if request.SortValue != nil {
+        bodies["sortValue"] = *request.SortValue
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1453,13 +1453,13 @@ func getItemModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetItemModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetItemModelMasterAsyncResult{
 		result: &result,
@@ -1473,29 +1473,29 @@ func (p Gs2InventoryRestClient) GetItemModelMasterAsync(
 	callback chan<- GetItemModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}/item/{itemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getItemModelMasterAsyncHandler(
 		p,
@@ -1547,13 +1547,13 @@ func updateItemModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateItemModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateItemModelMasterAsyncResult{
 		result: &result,
@@ -1567,55 +1567,55 @@ func (p Gs2InventoryRestClient) UpdateItemModelMasterAsync(
 	callback chan<- UpdateItemModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}/item/{itemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.StackingLimit != nil {
-		bodies["stackingLimit"] = *request.StackingLimit
-	}
-	if request.AllowMultipleStacks != nil {
-		bodies["allowMultipleStacks"] = *request.AllowMultipleStacks
-	}
-	if request.SortValue != nil {
-		bodies["sortValue"] = *request.SortValue
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.StackingLimit != nil {
+        bodies["stackingLimit"] = *request.StackingLimit
+    }
+    if request.AllowMultipleStacks != nil {
+        bodies["allowMultipleStacks"] = *request.AllowMultipleStacks
+    }
+    if request.SortValue != nil {
+        bodies["sortValue"] = *request.SortValue
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1659,13 +1659,13 @@ func deleteItemModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteItemModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteItemModelMasterAsyncResult{
 		result: &result,
@@ -1679,29 +1679,29 @@ func (p Gs2InventoryRestClient) DeleteItemModelMasterAsync(
 	callback chan<- DeleteItemModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/inventory/{inventoryName}/item/{itemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteItemModelMasterAsyncHandler(
 		p,
@@ -1753,13 +1753,13 @@ func describeItemModelsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeItemModelsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeItemModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeItemModelsAsyncResult{
 		result: &result,
@@ -1773,24 +1773,24 @@ func (p Gs2InventoryRestClient) DescribeItemModelsAsync(
 	callback chan<- DescribeItemModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/inventory/{inventoryName}/item"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeItemModelsAsyncHandler(
 		p,
@@ -1842,13 +1842,13 @@ func getItemModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetItemModelAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetItemModelAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetItemModelAsyncResult{
 		result: &result,
@@ -1862,29 +1862,29 @@ func (p Gs2InventoryRestClient) GetItemModelAsync(
 	callback chan<- GetItemModelAsyncResult,
 ) {
 	path := "/{namespaceName}/inventory/{inventoryName}/item/{itemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getItemModelAsyncHandler(
 		p,
@@ -1936,13 +1936,13 @@ func exportMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ExportMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ExportMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -1956,19 +1956,19 @@ func (p Gs2InventoryRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go exportMasterAsyncHandler(
 		p,
@@ -2020,13 +2020,13 @@ func getCurrentItemModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCurrentItemModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCurrentItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCurrentItemModelMasterAsyncResult{
 		result: &result,
@@ -2040,19 +2040,19 @@ func (p Gs2InventoryRestClient) GetCurrentItemModelMasterAsync(
 	callback chan<- GetCurrentItemModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getCurrentItemModelMasterAsyncHandler(
 		p,
@@ -2104,13 +2104,13 @@ func updateCurrentItemModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentItemModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentItemModelMasterAsyncResult{
 		result: &result,
@@ -2124,33 +2124,33 @@ func (p Gs2InventoryRestClient) UpdateCurrentItemModelMasterAsync(
 	callback chan<- UpdateCurrentItemModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Settings != nil && *request.Settings != "" {
-		bodies["settings"] = *request.Settings
-	}
+    var bodies = core.Bodies{}
+    if request.Settings != nil && *request.Settings != "" {
+        bodies["settings"] = *request.Settings
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2194,13 +2194,13 @@ func updateCurrentItemModelMasterFromGitHubAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentItemModelMasterFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentItemModelMasterFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentItemModelMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2214,33 +2214,33 @@ func (p Gs2InventoryRestClient) UpdateCurrentItemModelMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentItemModelMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentItemModelMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2284,13 +2284,13 @@ func describeInventoriesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeInventoriesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeInventoriesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeInventoriesAsyncResult{
 		result: &result,
@@ -2304,11 +2304,11 @@ func (p Gs2InventoryRestClient) DescribeInventoriesAsync(
 	callback chan<- DescribeInventoriesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2319,13 +2319,13 @@ func (p Gs2InventoryRestClient) DescribeInventoriesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeInventoriesAsyncHandler(
 		p,
@@ -2377,13 +2377,13 @@ func describeInventoriesByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeInventoriesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeInventoriesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeInventoriesByUserIdAsyncResult{
 		result: &result,
@@ -2397,16 +2397,16 @@ func (p Gs2InventoryRestClient) DescribeInventoriesByUserIdAsync(
 	callback chan<- DescribeInventoriesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2417,10 +2417,10 @@ func (p Gs2InventoryRestClient) DescribeInventoriesByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeInventoriesByUserIdAsyncHandler(
 		p,
@@ -2472,13 +2472,13 @@ func getInventoryAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetInventoryAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetInventoryAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetInventoryAsyncResult{
 		result: &result,
@@ -2492,27 +2492,27 @@ func (p Gs2InventoryRestClient) GetInventoryAsync(
 	callback chan<- GetInventoryAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getInventoryAsyncHandler(
 		p,
@@ -2564,13 +2564,13 @@ func getInventoryByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetInventoryByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetInventoryByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetInventoryByUserIdAsyncResult{
 		result: &result,
@@ -2584,29 +2584,29 @@ func (p Gs2InventoryRestClient) GetInventoryByUserIdAsync(
 	callback chan<- GetInventoryByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getInventoryByUserIdAsyncHandler(
 		p,
@@ -2658,13 +2658,13 @@ func addCapacityByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AddCapacityByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddCapacityByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AddCapacityByUserIdAsyncResult{
 		result: &result,
@@ -2678,43 +2678,43 @@ func (p Gs2InventoryRestClient) AddCapacityByUserIdAsync(
 	callback chan<- AddCapacityByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/capacity"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.AddCapacityValue != nil {
-		bodies["addCapacityValue"] = *request.AddCapacityValue
-	}
+    var bodies = core.Bodies{}
+    if request.AddCapacityValue != nil {
+        bodies["addCapacityValue"] = *request.AddCapacityValue
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go addCapacityByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2758,13 +2758,13 @@ func setCapacityByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SetCapacityByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetCapacityByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SetCapacityByUserIdAsyncResult{
 		result: &result,
@@ -2778,43 +2778,43 @@ func (p Gs2InventoryRestClient) SetCapacityByUserIdAsync(
 	callback chan<- SetCapacityByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/capacity"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.NewCapacityValue != nil {
-		bodies["newCapacityValue"] = *request.NewCapacityValue
-	}
+    var bodies = core.Bodies{}
+    if request.NewCapacityValue != nil {
+        bodies["newCapacityValue"] = *request.NewCapacityValue
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go setCapacityByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2858,13 +2858,13 @@ func deleteInventoryByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteInventoryByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteInventoryByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteInventoryByUserIdAsyncResult{
 		result: &result,
@@ -2878,29 +2878,29 @@ func (p Gs2InventoryRestClient) DeleteInventoryByUserIdAsync(
 	callback chan<- DeleteInventoryByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteInventoryByUserIdAsyncHandler(
 		p,
@@ -2952,13 +2952,13 @@ func addCapacityByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AddCapacityByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddCapacityByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AddCapacityByStampSheetAsyncResult{
 		result: &result,
@@ -2974,29 +2974,29 @@ func (p Gs2InventoryRestClient) AddCapacityByStampSheetAsync(
 	path := "/stamp/inventory/capacity/add"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go addCapacityByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3040,13 +3040,13 @@ func setCapacityByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SetCapacityByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetCapacityByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SetCapacityByStampSheetAsyncResult{
 		result: &result,
@@ -3062,29 +3062,29 @@ func (p Gs2InventoryRestClient) SetCapacityByStampSheetAsync(
 	path := "/stamp/inventory/capacity/set"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go setCapacityByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3128,13 +3128,13 @@ func describeItemSetsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeItemSetsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeItemSetsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeItemSetsAsyncResult{
 		result: &result,
@@ -3148,16 +3148,16 @@ func (p Gs2InventoryRestClient) DescribeItemSetsAsync(
 	callback chan<- DescribeItemSetsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3168,13 +3168,13 @@ func (p Gs2InventoryRestClient) DescribeItemSetsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeItemSetsAsyncHandler(
 		p,
@@ -3226,13 +3226,13 @@ func describeItemSetsByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeItemSetsByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeItemSetsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeItemSetsByUserIdAsyncResult{
 		result: &result,
@@ -3246,21 +3246,21 @@ func (p Gs2InventoryRestClient) DescribeItemSetsByUserIdAsync(
 	callback chan<- DescribeItemSetsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3271,10 +3271,10 @@ func (p Gs2InventoryRestClient) DescribeItemSetsByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeItemSetsByUserIdAsyncHandler(
 		p,
@@ -3326,13 +3326,13 @@ func getItemSetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetItemSetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetItemSetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetItemSetAsyncResult{
 		result: &result,
@@ -3346,21 +3346,21 @@ func (p Gs2InventoryRestClient) GetItemSetAsync(
 	callback chan<- GetItemSetAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3368,13 +3368,13 @@ func (p Gs2InventoryRestClient) GetItemSetAsync(
 		queryStrings["itemSetName"] = core.ToString(*request.ItemSetName)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getItemSetAsyncHandler(
 		p,
@@ -3426,13 +3426,13 @@ func getItemSetByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetItemSetByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetItemSetByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetItemSetByUserIdAsyncResult{
 		result: &result,
@@ -3446,26 +3446,26 @@ func (p Gs2InventoryRestClient) GetItemSetByUserIdAsync(
 	callback chan<- GetItemSetByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3473,10 +3473,10 @@ func (p Gs2InventoryRestClient) GetItemSetByUserIdAsync(
 		queryStrings["itemSetName"] = core.ToString(*request.ItemSetName)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getItemSetByUserIdAsyncHandler(
 		p,
@@ -3528,13 +3528,13 @@ func getItemWithSignatureAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetItemWithSignatureAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetItemWithSignatureAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetItemWithSignatureAsyncResult{
 		result: &result,
@@ -3548,21 +3548,21 @@ func (p Gs2InventoryRestClient) GetItemWithSignatureAsync(
 	callback chan<- GetItemWithSignatureAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/signature"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3573,13 +3573,13 @@ func (p Gs2InventoryRestClient) GetItemWithSignatureAsync(
 		queryStrings["keyId"] = core.ToString(*request.KeyId)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getItemWithSignatureAsyncHandler(
 		p,
@@ -3631,13 +3631,13 @@ func getItemWithSignatureByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetItemWithSignatureByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetItemWithSignatureByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetItemWithSignatureByUserIdAsyncResult{
 		result: &result,
@@ -3651,26 +3651,26 @@ func (p Gs2InventoryRestClient) GetItemWithSignatureByUserIdAsync(
 	callback chan<- GetItemWithSignatureByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/signature"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3681,10 +3681,10 @@ func (p Gs2InventoryRestClient) GetItemWithSignatureByUserIdAsync(
 		queryStrings["keyId"] = core.ToString(*request.KeyId)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getItemWithSignatureByUserIdAsyncHandler(
 		p,
@@ -3736,13 +3736,13 @@ func acquireItemSetByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AcquireItemSetByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcquireItemSetByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AcquireItemSetByUserIdAsyncResult{
 		result: &result,
@@ -3756,57 +3756,57 @@ func (p Gs2InventoryRestClient) AcquireItemSetByUserIdAsync(
 	callback chan<- AcquireItemSetByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/acquire"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.AcquireCount != nil {
-		bodies["acquireCount"] = *request.AcquireCount
-	}
-	if request.ExpiresAt != nil {
-		bodies["expiresAt"] = *request.ExpiresAt
-	}
-	if request.CreateNewItemSet != nil {
-		bodies["createNewItemSet"] = *request.CreateNewItemSet
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
+    var bodies = core.Bodies{}
+    if request.AcquireCount != nil {
+        bodies["acquireCount"] = *request.AcquireCount
+    }
+    if request.ExpiresAt != nil {
+        bodies["expiresAt"] = *request.ExpiresAt
+    }
+    if request.CreateNewItemSet != nil {
+        bodies["createNewItemSet"] = *request.CreateNewItemSet
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go acquireItemSetByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3850,13 +3850,13 @@ func consumeItemSetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ConsumeItemSetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ConsumeItemSetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ConsumeItemSetAsyncResult{
 		result: &result,
@@ -3870,49 +3870,49 @@ func (p Gs2InventoryRestClient) ConsumeItemSetAsync(
 	callback chan<- ConsumeItemSetAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/consume"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.ConsumeCount != nil {
-		bodies["consumeCount"] = *request.ConsumeCount
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
+    var bodies = core.Bodies{}
+    if request.ConsumeCount != nil {
+        bodies["consumeCount"] = *request.ConsumeCount
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go consumeItemSetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3956,13 +3956,13 @@ func consumeItemSetByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ConsumeItemSetByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ConsumeItemSetByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ConsumeItemSetByUserIdAsyncResult{
 		result: &result,
@@ -3976,51 +3976,51 @@ func (p Gs2InventoryRestClient) ConsumeItemSetByUserIdAsync(
 	callback chan<- ConsumeItemSetByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/consume"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.ConsumeCount != nil {
-		bodies["consumeCount"] = *request.ConsumeCount
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		bodies["itemSetName"] = *request.ItemSetName
-	}
+    var bodies = core.Bodies{}
+    if request.ConsumeCount != nil {
+        bodies["consumeCount"] = *request.ConsumeCount
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go consumeItemSetByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4064,13 +4064,13 @@ func describeReferenceOfAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeReferenceOfAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeReferenceOfAsyncResult{
 		result: &result,
@@ -4084,37 +4084,37 @@ func (p Gs2InventoryRestClient) DescribeReferenceOfAsync(
 	callback chan<- DescribeReferenceOfAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemSetName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
+        path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemSetName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeReferenceOfAsyncHandler(
 		p,
@@ -4166,13 +4166,13 @@ func describeReferenceOfByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeReferenceOfByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeReferenceOfByUserIdAsyncResult{
 		result: &result,
@@ -4186,39 +4186,39 @@ func (p Gs2InventoryRestClient) DescribeReferenceOfByUserIdAsync(
 	callback chan<- DescribeReferenceOfByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemSetName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
+        path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemSetName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeReferenceOfByUserIdAsyncHandler(
 		p,
@@ -4270,13 +4270,13 @@ func getReferenceOfAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetReferenceOfAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetReferenceOfAsyncResult{
 		result: &result,
@@ -4290,42 +4290,42 @@ func (p Gs2InventoryRestClient) GetReferenceOfAsync(
 	callback chan<- GetReferenceOfAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/{referenceOf}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemSetName}", "null")
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
-	} else {
-		path = strings.ReplaceAll(path, "{referenceOf}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
+        path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemSetName}", "null")
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != ""  {
+        path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
+    } else {
+        path = strings.ReplaceAll(path, "{referenceOf}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getReferenceOfAsyncHandler(
 		p,
@@ -4377,13 +4377,13 @@ func getReferenceOfByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetReferenceOfByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetReferenceOfByUserIdAsyncResult{
 		result: &result,
@@ -4397,44 +4397,44 @@ func (p Gs2InventoryRestClient) GetReferenceOfByUserIdAsync(
 	callback chan<- GetReferenceOfByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/{referenceOf}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemSetName}", "null")
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
-	} else {
-		path = strings.ReplaceAll(path, "{referenceOf}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
+        path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemSetName}", "null")
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != ""  {
+        path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
+    } else {
+        path = strings.ReplaceAll(path, "{referenceOf}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getReferenceOfByUserIdAsyncHandler(
 		p,
@@ -4486,13 +4486,13 @@ func verifyReferenceOfAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- VerifyReferenceOfAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- VerifyReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- VerifyReferenceOfAsyncResult{
 		result: &result,
@@ -4506,58 +4506,58 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfAsync(
 	callback chan<- VerifyReferenceOfAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/{referenceOf}/verify/{verifyType}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemSetName}", "null")
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
-	} else {
-		path = strings.ReplaceAll(path, "{referenceOf}", "null")
-	}
-	if request.VerifyType != nil && *request.VerifyType != "" {
-		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
-	} else {
-		path = strings.ReplaceAll(path, "{verifyType}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
+        path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemSetName}", "null")
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != ""  {
+        path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
+    } else {
+        path = strings.ReplaceAll(path, "{referenceOf}", "null")
+    }
+    if request.VerifyType != nil && *request.VerifyType != ""  {
+        path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+    } else {
+        path = strings.ReplaceAll(path, "{verifyType}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go verifyReferenceOfAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4601,13 +4601,13 @@ func verifyReferenceOfByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- VerifyReferenceOfByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- VerifyReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- VerifyReferenceOfByUserIdAsyncResult{
 		result: &result,
@@ -4621,60 +4621,60 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfByUserIdAsync(
 	callback chan<- VerifyReferenceOfByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/{referenceOf}/verify/{verifyType}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemSetName}", "null")
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
-	} else {
-		path = strings.ReplaceAll(path, "{referenceOf}", "null")
-	}
-	if request.VerifyType != nil && *request.VerifyType != "" {
-		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
-	} else {
-		path = strings.ReplaceAll(path, "{verifyType}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
+        path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemSetName}", "null")
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != ""  {
+        path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
+    } else {
+        path = strings.ReplaceAll(path, "{referenceOf}", "null")
+    }
+    if request.VerifyType != nil && *request.VerifyType != ""  {
+        path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+    } else {
+        path = strings.ReplaceAll(path, "{verifyType}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
+    var bodies = core.Bodies{}
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go verifyReferenceOfByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4718,13 +4718,13 @@ func addReferenceOfAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AddReferenceOfAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AddReferenceOfAsyncResult{
 		result: &result,
@@ -4738,51 +4738,51 @@ func (p Gs2InventoryRestClient) AddReferenceOfAsync(
 	callback chan<- AddReferenceOfAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemSetName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
+        path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemSetName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		bodies["referenceOf"] = *request.ReferenceOf
-	}
+    var bodies = core.Bodies{}
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go addReferenceOfAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4826,13 +4826,13 @@ func addReferenceOfByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AddReferenceOfByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AddReferenceOfByUserIdAsyncResult{
 		result: &result,
@@ -4846,53 +4846,53 @@ func (p Gs2InventoryRestClient) AddReferenceOfByUserIdAsync(
 	callback chan<- AddReferenceOfByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemSetName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
+        path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemSetName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		bodies["referenceOf"] = *request.ReferenceOf
-	}
+    var bodies = core.Bodies{}
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go addReferenceOfByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4936,13 +4936,13 @@ func deleteReferenceOfAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteReferenceOfAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteReferenceOfAsyncResult{
 		result: &result,
@@ -4956,42 +4956,42 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfAsync(
 	callback chan<- DeleteReferenceOfAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/{referenceOf}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemSetName}", "null")
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
-	} else {
-		path = strings.ReplaceAll(path, "{referenceOf}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
+        path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemSetName}", "null")
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != ""  {
+        path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
+    } else {
+        path = strings.ReplaceAll(path, "{referenceOf}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go deleteReferenceOfAsyncHandler(
 		p,
@@ -5043,13 +5043,13 @@ func deleteReferenceOfByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteReferenceOfByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteReferenceOfByUserIdAsyncResult{
 		result: &result,
@@ -5063,44 +5063,44 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfByUserIdAsync(
 	callback chan<- DeleteReferenceOfByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/{itemSetName}/reference/{referenceOf}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
-	if request.ItemSetName != nil && *request.ItemSetName != "" {
-		path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemSetName}", "null")
-	}
-	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-		path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
-	} else {
-		path = strings.ReplaceAll(path, "{referenceOf}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != ""  {
+        path = strings.ReplaceAll(path, "{itemSetName}", core.ToString(*request.ItemSetName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemSetName}", "null")
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != ""  {
+        path = strings.ReplaceAll(path, "{referenceOf}", core.ToString(*request.ReferenceOf))
+    } else {
+        path = strings.ReplaceAll(path, "{referenceOf}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteReferenceOfByUserIdAsyncHandler(
 		p,
@@ -5152,13 +5152,13 @@ func deleteItemSetByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteItemSetByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteItemSetByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteItemSetByUserIdAsyncResult{
 		result: &result,
@@ -5172,26 +5172,26 @@ func (p Gs2InventoryRestClient) DeleteItemSetByUserIdAsync(
 	callback chan<- DeleteItemSetByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.InventoryName != nil && *request.InventoryName != "" {
-		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-	} else {
-		path = strings.ReplaceAll(path, "{inventoryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ItemName != nil && *request.ItemName != "" {
-		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{itemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -5199,10 +5199,10 @@ func (p Gs2InventoryRestClient) DeleteItemSetByUserIdAsync(
 		queryStrings["itemSetName"] = core.ToString(*request.ItemSetName)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteItemSetByUserIdAsyncHandler(
 		p,
@@ -5254,13 +5254,13 @@ func acquireItemSetByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AcquireItemSetByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcquireItemSetByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AcquireItemSetByStampSheetAsyncResult{
 		result: &result,
@@ -5276,29 +5276,29 @@ func (p Gs2InventoryRestClient) AcquireItemSetByStampSheetAsync(
 	path := "/stamp/item/acquire"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go acquireItemSetByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -5342,13 +5342,13 @@ func addReferenceOfItemSetByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AddReferenceOfItemSetByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddReferenceOfItemSetByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AddReferenceOfItemSetByStampSheetAsyncResult{
 		result: &result,
@@ -5364,29 +5364,29 @@ func (p Gs2InventoryRestClient) AddReferenceOfItemSetByStampSheetAsync(
 	path := "/stamp/item/reference/add"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go addReferenceOfItemSetByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -5430,13 +5430,13 @@ func deleteReferenceOfItemSetByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteReferenceOfItemSetByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteReferenceOfItemSetByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteReferenceOfItemSetByStampSheetAsyncResult{
 		result: &result,
@@ -5452,29 +5452,29 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfItemSetByStampSheetAsync(
 	path := "/stamp/item/reference/delete"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteReferenceOfItemSetByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -5518,13 +5518,13 @@ func consumeItemSetByStampTaskAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ConsumeItemSetByStampTaskAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ConsumeItemSetByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ConsumeItemSetByStampTaskAsyncResult{
 		result: &result,
@@ -5540,29 +5540,29 @@ func (p Gs2InventoryRestClient) ConsumeItemSetByStampTaskAsync(
 	path := "/stamp/item/consume"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go consumeItemSetByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -5606,13 +5606,13 @@ func verifyReferenceOfByStampTaskAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- VerifyReferenceOfByStampTaskAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- VerifyReferenceOfByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- VerifyReferenceOfByStampTaskAsyncResult{
 		result: &result,
@@ -5628,29 +5628,29 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfByStampTaskAsync(
 	path := "/stamp/item/verify"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go verifyReferenceOfByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)

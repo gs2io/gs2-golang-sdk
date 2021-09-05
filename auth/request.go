@@ -17,76 +17,76 @@ permissions and limitations under the License.
 package auth
 
 import (
-	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+    "encoding/json"
+    "github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type LoginRequest struct {
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	UserId             *string `json:"userId"`
-	TimeOffset         *int32  `json:"timeOffset"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    UserId *string `json:"userId"`
+    TimeOffset *int32 `json:"timeOffset"`
 }
 
 func NewLoginRequestFromJson(data string) LoginRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLoginRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewLoginRequestFromDict(dict)
 }
 
 func NewLoginRequestFromDict(data map[string]interface{}) LoginRequest {
-	return LoginRequest{
-		UserId:     core.CastString(data["userId"]),
-		TimeOffset: core.CastInt32(data["timeOffset"]),
-	}
+    return LoginRequest {
+        UserId: core.CastString(data["userId"]),
+        TimeOffset: core.CastInt32(data["timeOffset"]),
+    }
 }
 
 func (p LoginRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"userId":     p.UserId,
-		"timeOffset": p.TimeOffset,
-	}
+    return map[string]interface{} {
+        "userId": p.UserId,
+        "timeOffset": p.TimeOffset,
+    }
 }
 
 func (p LoginRequest) Pointer() *LoginRequest {
-	return &p
+    return &p
 }
 
 type LoginBySignatureRequest struct {
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	UserId             *string `json:"userId"`
-	KeyId              *string `json:"keyId"`
-	Body               *string `json:"body"`
-	Signature          *string `json:"signature"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    UserId *string `json:"userId"`
+    KeyId *string `json:"keyId"`
+    Body *string `json:"body"`
+    Signature *string `json:"signature"`
 }
 
 func NewLoginBySignatureRequestFromJson(data string) LoginBySignatureRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLoginBySignatureRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewLoginBySignatureRequestFromDict(dict)
 }
 
 func NewLoginBySignatureRequestFromDict(data map[string]interface{}) LoginBySignatureRequest {
-	return LoginBySignatureRequest{
-		UserId:    core.CastString(data["userId"]),
-		KeyId:     core.CastString(data["keyId"]),
-		Body:      core.CastString(data["body"]),
-		Signature: core.CastString(data["signature"]),
-	}
+    return LoginBySignatureRequest {
+        UserId: core.CastString(data["userId"]),
+        KeyId: core.CastString(data["keyId"]),
+        Body: core.CastString(data["body"]),
+        Signature: core.CastString(data["signature"]),
+    }
 }
 
 func (p LoginBySignatureRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"userId":    p.UserId,
-		"keyId":     p.KeyId,
-		"body":      p.Body,
-		"signature": p.Signature,
-	}
+    return map[string]interface{} {
+        "userId": p.UserId,
+        "keyId": p.KeyId,
+        "body": p.Body,
+        "signature": p.Signature,
+    }
 }
 
 func (p LoginBySignatureRequest) Pointer() *LoginBySignatureRequest {
-	return &p
+    return &p
 }

@@ -17,46 +17,46 @@ permissions and limitations under the License.
 package identifier
 
 import (
-	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+    "encoding/json"
+    "github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type User struct {
-	UserId      *string `json:"userId"`
-	Name        *string `json:"name"`
+	UserId *string `json:"userId"`
+	Name *string `json:"name"`
 	Description *string `json:"description"`
-	CreatedAt   *int64  `json:"createdAt"`
-	UpdatedAt   *int64  `json:"updatedAt"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewUserFromJson(data string) User {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUserFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUserFromDict(dict)
 }
 
 func NewUserFromDict(data map[string]interface{}) User {
-	return User{
-		UserId:      core.CastString(data["userId"]),
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-	}
+    return User {
+        UserId: core.CastString(data["userId"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p User) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"userId":      p.UserId,
-		"name":        p.Name,
-		"description": p.Description,
-		"createdAt":   p.CreatedAt,
-		"updatedAt":   p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "userId": p.UserId,
+        "name": p.Name,
+        "description": p.Description,
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p User) Pointer() *User {
-	return &p
+    return &p
 }
 
 func CastUsers(data []interface{}) []User {
@@ -68,52 +68,52 @@ func CastUsers(data []interface{}) []User {
 }
 
 func CastUsersFromDict(data []User) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type SecurityPolicy struct {
 	SecurityPolicyId *string `json:"securityPolicyId"`
-	Name             *string `json:"name"`
-	Description      *string `json:"description"`
-	Policy           *string `json:"policy"`
-	CreatedAt        *int64  `json:"createdAt"`
-	UpdatedAt        *int64  `json:"updatedAt"`
+	Name *string `json:"name"`
+	Description *string `json:"description"`
+	Policy *string `json:"policy"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewSecurityPolicyFromJson(data string) SecurityPolicy {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSecurityPolicyFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSecurityPolicyFromDict(dict)
 }
 
 func NewSecurityPolicyFromDict(data map[string]interface{}) SecurityPolicy {
-	return SecurityPolicy{
-		SecurityPolicyId: core.CastString(data["securityPolicyId"]),
-		Name:             core.CastString(data["name"]),
-		Description:      core.CastString(data["description"]),
-		Policy:           core.CastString(data["policy"]),
-		CreatedAt:        core.CastInt64(data["createdAt"]),
-		UpdatedAt:        core.CastInt64(data["updatedAt"]),
-	}
+    return SecurityPolicy {
+        SecurityPolicyId: core.CastString(data["securityPolicyId"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Policy: core.CastString(data["policy"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p SecurityPolicy) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"securityPolicyId": p.SecurityPolicyId,
-		"name":             p.Name,
-		"description":      p.Description,
-		"policy":           p.Policy,
-		"createdAt":        p.CreatedAt,
-		"updatedAt":        p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "securityPolicyId": p.SecurityPolicyId,
+        "name": p.Name,
+        "description": p.Description,
+        "policy": p.Policy,
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p SecurityPolicy) Pointer() *SecurityPolicy {
-	return &p
+    return &p
 }
 
 func CastSecurityPolicies(data []interface{}) []SecurityPolicy {
@@ -125,46 +125,46 @@ func CastSecurityPolicies(data []interface{}) []SecurityPolicy {
 }
 
 func CastSecurityPoliciesFromDict(data []SecurityPolicy) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Identifier struct {
-	ClientId     *string `json:"clientId"`
-	UserName     *string `json:"userName"`
+	ClientId *string `json:"clientId"`
+	UserName *string `json:"userName"`
 	ClientSecret *string `json:"clientSecret"`
-	CreatedAt    *int64  `json:"createdAt"`
+	CreatedAt *int64 `json:"createdAt"`
 }
 
 func NewIdentifierFromJson(data string) Identifier {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewIdentifierFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIdentifierFromDict(dict)
 }
 
 func NewIdentifierFromDict(data map[string]interface{}) Identifier {
-	return Identifier{
-		ClientId:     core.CastString(data["clientId"]),
-		UserName:     core.CastString(data["userName"]),
-		ClientSecret: core.CastString(data["clientSecret"]),
-		CreatedAt:    core.CastInt64(data["createdAt"]),
-	}
+    return Identifier {
+        ClientId: core.CastString(data["clientId"]),
+        UserName: core.CastString(data["userName"]),
+        ClientSecret: core.CastString(data["clientSecret"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+    }
 }
 
 func (p Identifier) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"clientId":     p.ClientId,
-		"userName":     p.UserName,
-		"clientSecret": p.ClientSecret,
-		"createdAt":    p.CreatedAt,
-	}
+    return map[string]interface{} {
+        "clientId": p.ClientId,
+        "userName": p.UserName,
+        "clientSecret": p.ClientSecret,
+        "createdAt": p.CreatedAt,
+    }
 }
 
 func (p Identifier) Pointer() *Identifier {
-	return &p
+    return &p
 }
 
 func CastIdentifiers(data []interface{}) []Identifier {
@@ -176,43 +176,43 @@ func CastIdentifiers(data []interface{}) []Identifier {
 }
 
 func CastIdentifiersFromDict(data []Identifier) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Password struct {
-	UserId    *string `json:"userId"`
-	UserName  *string `json:"userName"`
-	CreatedAt *int64  `json:"createdAt"`
+	UserId *string `json:"userId"`
+	UserName *string `json:"userName"`
+	CreatedAt *int64 `json:"createdAt"`
 }
 
 func NewPasswordFromJson(data string) Password {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPasswordFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPasswordFromDict(dict)
 }
 
 func NewPasswordFromDict(data map[string]interface{}) Password {
-	return Password{
-		UserId:    core.CastString(data["userId"]),
-		UserName:  core.CastString(data["userName"]),
-		CreatedAt: core.CastInt64(data["createdAt"]),
-	}
+    return Password {
+        UserId: core.CastString(data["userId"]),
+        UserName: core.CastString(data["userName"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+    }
 }
 
 func (p Password) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"userId":    p.UserId,
-		"userName":  p.UserName,
-		"createdAt": p.CreatedAt,
-	}
+    return map[string]interface{} {
+        "userId": p.UserId,
+        "userName": p.UserName,
+        "createdAt": p.CreatedAt,
+    }
 }
 
 func (p Password) Pointer() *Password {
-	return &p
+    return &p
 }
 
 func CastPasswords(data []interface{}) []Password {
@@ -224,45 +224,45 @@ func CastPasswords(data []interface{}) []Password {
 }
 
 func CastPasswordsFromDict(data []Password) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type AttachSecurityPolicy struct {
-	UserId            *string  `json:"userId"`
+	UserId *string `json:"userId"`
 	SecurityPolicyIds []string `json:"securityPolicyIds"`
-	AttachedAt        *int64   `json:"attachedAt"`
+	AttachedAt *int64 `json:"attachedAt"`
 }
 
 func NewAttachSecurityPolicyFromJson(data string) AttachSecurityPolicy {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAttachSecurityPolicyFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAttachSecurityPolicyFromDict(dict)
 }
 
 func NewAttachSecurityPolicyFromDict(data map[string]interface{}) AttachSecurityPolicy {
-	return AttachSecurityPolicy{
-		UserId:            core.CastString(data["userId"]),
-		SecurityPolicyIds: core.CastStrings(core.CastArray(data["securityPolicyIds"])),
-		AttachedAt:        core.CastInt64(data["attachedAt"]),
-	}
+    return AttachSecurityPolicy {
+        UserId: core.CastString(data["userId"]),
+        SecurityPolicyIds: core.CastStrings(core.CastArray(data["securityPolicyIds"])),
+        AttachedAt: core.CastInt64(data["attachedAt"]),
+    }
 }
 
 func (p AttachSecurityPolicy) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"userId": p.UserId,
-		"securityPolicyIds": core.CastStringsFromDict(
-			p.SecurityPolicyIds,
-		),
-		"attachedAt": p.AttachedAt,
-	}
+    return map[string]interface{} {
+        "userId": p.UserId,
+        "securityPolicyIds": core.CastStringsFromDict(
+        p.SecurityPolicyIds,
+    ),
+        "attachedAt": p.AttachedAt,
+    }
 }
 
 func (p AttachSecurityPolicy) Pointer() *AttachSecurityPolicy {
-	return &p
+    return &p
 }
 
 func CastAttachSecurityPolicies(data []interface{}) []AttachSecurityPolicy {
@@ -274,11 +274,11 @@ func CastAttachSecurityPolicies(data []interface{}) []AttachSecurityPolicy {
 }
 
 func CastAttachSecurityPoliciesFromDict(data []AttachSecurityPolicy) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type ProjectToken struct {
@@ -286,25 +286,25 @@ type ProjectToken struct {
 }
 
 func NewProjectTokenFromJson(data string) ProjectToken {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewProjectTokenFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewProjectTokenFromDict(dict)
 }
 
 func NewProjectTokenFromDict(data map[string]interface{}) ProjectToken {
-	return ProjectToken{
-		Token: core.CastString(data["token"]),
-	}
+    return ProjectToken {
+        Token: core.CastString(data["token"]),
+    }
 }
 
 func (p ProjectToken) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"token": p.Token,
-	}
+    return map[string]interface{} {
+        "token": p.Token,
+    }
 }
 
 func (p ProjectToken) Pointer() *ProjectToken {
-	return &p
+    return &p
 }
 
 func CastProjectTokens(data []interface{}) []ProjectToken {
@@ -316,9 +316,9 @@ func CastProjectTokens(data []interface{}) []ProjectToken {
 }
 
 func CastProjectTokensFromDict(data []ProjectToken) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }

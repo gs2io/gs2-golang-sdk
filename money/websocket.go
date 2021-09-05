@@ -49,13 +49,13 @@ func (p Gs2MoneyWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -68,33 +68,33 @@ func (p Gs2MoneyWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "namespace",
-			"function":    "describeNamespaces",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "namespace",
+    		"function": "describeNamespaces",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -131,13 +131,13 @@ func (p Gs2MoneyWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -150,63 +150,63 @@ func (p Gs2MoneyWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "namespace",
-			"function":    "createNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "namespace",
+    		"function": "createNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Priority != nil && *request.Priority != "" {
-		bodies["priority"] = *request.Priority
-	}
-	if request.ShareFree != nil {
-		bodies["shareFree"] = *request.ShareFree
-	}
-	if request.Currency != nil && *request.Currency != "" {
-		bodies["currency"] = *request.Currency
-	}
-	if request.AppleKey != nil && *request.AppleKey != "" {
-		bodies["appleKey"] = *request.AppleKey
-	}
-	if request.GoogleKey != nil && *request.GoogleKey != "" {
-		bodies["googleKey"] = *request.GoogleKey
-	}
-	if request.EnableFakeReceipt != nil {
-		bodies["enableFakeReceipt"] = *request.EnableFakeReceipt
-	}
-	if request.CreateWalletScript != nil {
-		bodies["createWalletScript"] = request.CreateWalletScript.ToDict()
-	}
-	if request.DepositScript != nil {
-		bodies["depositScript"] = request.DepositScript.ToDict()
-	}
-	if request.WithdrawScript != nil {
-		bodies["withdrawScript"] = request.WithdrawScript.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Priority != nil && *request.Priority != "" {
+        bodies["priority"] = *request.Priority
+    }
+    if request.ShareFree != nil {
+        bodies["shareFree"] = *request.ShareFree
+    }
+    if request.Currency != nil && *request.Currency != "" {
+        bodies["currency"] = *request.Currency
+    }
+    if request.AppleKey != nil && *request.AppleKey != "" {
+        bodies["appleKey"] = *request.AppleKey
+    }
+    if request.GoogleKey != nil && *request.GoogleKey != "" {
+        bodies["googleKey"] = *request.GoogleKey
+    }
+    if request.EnableFakeReceipt != nil {
+        bodies["enableFakeReceipt"] = *request.EnableFakeReceipt
+    }
+    if request.CreateWalletScript != nil {
+        bodies["createWalletScript"] = request.CreateWalletScript.ToDict()
+    }
+    if request.DepositScript != nil {
+        bodies["depositScript"] = request.DepositScript.ToDict()
+    }
+    if request.WithdrawScript != nil {
+        bodies["withdrawScript"] = request.WithdrawScript.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -243,13 +243,13 @@ func (p Gs2MoneyWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -262,30 +262,30 @@ func (p Gs2MoneyWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "namespace",
-			"function":    "getNamespaceStatus",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "namespace",
+    		"function": "getNamespaceStatus",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -322,13 +322,13 @@ func (p Gs2MoneyWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -341,30 +341,30 @@ func (p Gs2MoneyWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "namespace",
-			"function":    "getNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "namespace",
+    		"function": "getNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -401,13 +401,13 @@ func (p Gs2MoneyWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -420,57 +420,57 @@ func (p Gs2MoneyWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "namespace",
-			"function":    "updateNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "namespace",
+    		"function": "updateNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Priority != nil && *request.Priority != "" {
-		bodies["priority"] = *request.Priority
-	}
-	if request.AppleKey != nil && *request.AppleKey != "" {
-		bodies["appleKey"] = *request.AppleKey
-	}
-	if request.GoogleKey != nil && *request.GoogleKey != "" {
-		bodies["googleKey"] = *request.GoogleKey
-	}
-	if request.EnableFakeReceipt != nil {
-		bodies["enableFakeReceipt"] = *request.EnableFakeReceipt
-	}
-	if request.CreateWalletScript != nil {
-		bodies["createWalletScript"] = request.CreateWalletScript.ToDict()
-	}
-	if request.DepositScript != nil {
-		bodies["depositScript"] = request.DepositScript.ToDict()
-	}
-	if request.WithdrawScript != nil {
-		bodies["withdrawScript"] = request.WithdrawScript.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Priority != nil && *request.Priority != "" {
+        bodies["priority"] = *request.Priority
+    }
+    if request.AppleKey != nil && *request.AppleKey != "" {
+        bodies["appleKey"] = *request.AppleKey
+    }
+    if request.GoogleKey != nil && *request.GoogleKey != "" {
+        bodies["googleKey"] = *request.GoogleKey
+    }
+    if request.EnableFakeReceipt != nil {
+        bodies["enableFakeReceipt"] = *request.EnableFakeReceipt
+    }
+    if request.CreateWalletScript != nil {
+        bodies["createWalletScript"] = request.CreateWalletScript.ToDict()
+    }
+    if request.DepositScript != nil {
+        bodies["depositScript"] = request.DepositScript.ToDict()
+    }
+    if request.WithdrawScript != nil {
+        bodies["withdrawScript"] = request.WithdrawScript.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -507,13 +507,13 @@ func (p Gs2MoneyWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -526,30 +526,30 @@ func (p Gs2MoneyWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "namespace",
-			"function":    "deleteNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "namespace",
+    		"function": "deleteNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -586,13 +586,13 @@ func (p Gs2MoneyWebSocketClient) describeWalletsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeWalletsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeWalletsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeWalletsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeWalletsAsyncResult{
 		result: &result,
@@ -605,42 +605,42 @@ func (p Gs2MoneyWebSocketClient) DescribeWalletsAsync(
 	request *DescribeWalletsRequest,
 	callback chan<- DescribeWalletsAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "wallet",
-			"function":    "describeWallets",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "wallet",
+    		"function": "describeWallets",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.describeWalletsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -677,13 +677,13 @@ func (p Gs2MoneyWebSocketClient) describeWalletsByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeWalletsByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeWalletsByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeWalletsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeWalletsByUserIdAsyncResult{
 		result: &result,
@@ -696,39 +696,39 @@ func (p Gs2MoneyWebSocketClient) DescribeWalletsByUserIdAsync(
 	request *DescribeWalletsByUserIdRequest,
 	callback chan<- DescribeWalletsByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "wallet",
-			"function":    "describeWalletsByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "wallet",
+    		"function": "describeWalletsByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeWalletsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -765,13 +765,13 @@ func (p Gs2MoneyWebSocketClient) getWalletAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetWalletResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetWalletAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetWalletAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetWalletAsyncResult{
 		result: &result,
@@ -784,39 +784,39 @@ func (p Gs2MoneyWebSocketClient) GetWalletAsync(
 	request *GetWalletRequest,
 	callback chan<- GetWalletAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "wallet",
-			"function":    "getWallet",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "wallet",
+    		"function": "getWallet",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.Slot != nil {
-		bodies["slot"] = *request.Slot
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.Slot != nil {
+        bodies["slot"] = *request.Slot
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.getWalletAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -853,13 +853,13 @@ func (p Gs2MoneyWebSocketClient) getWalletByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetWalletByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetWalletByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetWalletByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetWalletByUserIdAsyncResult{
 		result: &result,
@@ -872,36 +872,36 @@ func (p Gs2MoneyWebSocketClient) GetWalletByUserIdAsync(
 	request *GetWalletByUserIdRequest,
 	callback chan<- GetWalletByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "wallet",
-			"function":    "getWalletByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "wallet",
+    		"function": "getWalletByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Slot != nil {
-		bodies["slot"] = *request.Slot
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Slot != nil {
+        bodies["slot"] = *request.Slot
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getWalletByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -938,13 +938,13 @@ func (p Gs2MoneyWebSocketClient) depositByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DepositByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DepositByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DepositByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DepositByUserIdAsyncResult{
 		result: &result,
@@ -957,42 +957,42 @@ func (p Gs2MoneyWebSocketClient) DepositByUserIdAsync(
 	request *DepositByUserIdRequest,
 	callback chan<- DepositByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "wallet",
-			"function":    "depositByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "wallet",
+    		"function": "depositByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Slot != nil {
-		bodies["slot"] = *request.Slot
-	}
-	if request.Price != nil {
-		bodies["price"] = *request.Price
-	}
-	if request.Count != nil {
-		bodies["count"] = *request.Count
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Slot != nil {
+        bodies["slot"] = *request.Slot
+    }
+    if request.Price != nil {
+        bodies["price"] = *request.Price
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.depositByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1029,13 +1029,13 @@ func (p Gs2MoneyWebSocketClient) withdrawAsyncHandler(
 	asyncResult := <-internalCallback
 	var result WithdrawResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- WithdrawAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- WithdrawAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- WithdrawAsyncResult{
 		result: &result,
@@ -1048,45 +1048,45 @@ func (p Gs2MoneyWebSocketClient) WithdrawAsync(
 	request *WithdrawRequest,
 	callback chan<- WithdrawAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "wallet",
-			"function":    "withdraw",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "wallet",
+    		"function": "withdraw",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.Slot != nil {
-		bodies["slot"] = *request.Slot
-	}
-	if request.Count != nil {
-		bodies["count"] = *request.Count
-	}
-	if request.PaidOnly != nil {
-		bodies["paidOnly"] = *request.PaidOnly
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.Slot != nil {
+        bodies["slot"] = *request.Slot
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+    if request.PaidOnly != nil {
+        bodies["paidOnly"] = *request.PaidOnly
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.withdrawAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1123,13 +1123,13 @@ func (p Gs2MoneyWebSocketClient) withdrawByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result WithdrawByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- WithdrawByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- WithdrawByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- WithdrawByUserIdAsyncResult{
 		result: &result,
@@ -1142,42 +1142,42 @@ func (p Gs2MoneyWebSocketClient) WithdrawByUserIdAsync(
 	request *WithdrawByUserIdRequest,
 	callback chan<- WithdrawByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "wallet",
-			"function":    "withdrawByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "wallet",
+    		"function": "withdrawByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Slot != nil {
-		bodies["slot"] = *request.Slot
-	}
-	if request.Count != nil {
-		bodies["count"] = *request.Count
-	}
-	if request.PaidOnly != nil {
-		bodies["paidOnly"] = *request.PaidOnly
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Slot != nil {
+        bodies["slot"] = *request.Slot
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+    if request.PaidOnly != nil {
+        bodies["paidOnly"] = *request.PaidOnly
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.withdrawByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1214,13 +1214,13 @@ func (p Gs2MoneyWebSocketClient) depositByStampSheetAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DepositByStampSheetResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DepositByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DepositByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DepositByStampSheetAsyncResult{
 		result: &result,
@@ -1233,33 +1233,33 @@ func (p Gs2MoneyWebSocketClient) DepositByStampSheetAsync(
 	request *DepositByStampSheetRequest,
 	callback chan<- DepositByStampSheetAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "wallet",
-			"function":    "depositByStampSheet",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "wallet",
+    		"function": "depositByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.depositByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1296,13 +1296,13 @@ func (p Gs2MoneyWebSocketClient) withdrawByStampTaskAsyncHandler(
 	asyncResult := <-internalCallback
 	var result WithdrawByStampTaskResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- WithdrawByStampTaskAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- WithdrawByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- WithdrawByStampTaskAsyncResult{
 		result: &result,
@@ -1315,33 +1315,33 @@ func (p Gs2MoneyWebSocketClient) WithdrawByStampTaskAsync(
 	request *WithdrawByStampTaskRequest,
 	callback chan<- WithdrawByStampTaskAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "wallet",
-			"function":    "withdrawByStampTask",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "wallet",
+    		"function": "withdrawByStampTask",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.withdrawByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1378,13 +1378,13 @@ func (p Gs2MoneyWebSocketClient) describeReceiptsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeReceiptsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeReceiptsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReceiptsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeReceiptsAsyncResult{
 		result: &result,
@@ -1397,48 +1397,48 @@ func (p Gs2MoneyWebSocketClient) DescribeReceiptsAsync(
 	request *DescribeReceiptsRequest,
 	callback chan<- DescribeReceiptsAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "receipt",
-			"function":    "describeReceipts",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "receipt",
+    		"function": "describeReceipts",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Slot != nil {
-		bodies["slot"] = *request.Slot
-	}
-	if request.Begin != nil {
-		bodies["begin"] = *request.Begin
-	}
-	if request.End != nil {
-		bodies["end"] = *request.End
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Slot != nil {
+        bodies["slot"] = *request.Slot
+    }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeReceiptsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1475,13 +1475,13 @@ func (p Gs2MoneyWebSocketClient) getByUserIdAndTransactionIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetByUserIdAndTransactionIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetByUserIdAndTransactionIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetByUserIdAndTransactionIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetByUserIdAndTransactionIdAsyncResult{
 		result: &result,
@@ -1494,36 +1494,36 @@ func (p Gs2MoneyWebSocketClient) GetByUserIdAndTransactionIdAsync(
 	request *GetByUserIdAndTransactionIdRequest,
 	callback chan<- GetByUserIdAndTransactionIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "receipt",
-			"function":    "getByUserIdAndTransactionId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "receipt",
+    		"function": "getByUserIdAndTransactionId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.TransactionId != nil && *request.TransactionId != "" {
-		bodies["transactionId"] = *request.TransactionId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TransactionId != nil && *request.TransactionId != "" {
+        bodies["transactionId"] = *request.TransactionId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getByUserIdAndTransactionIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1560,13 +1560,13 @@ func (p Gs2MoneyWebSocketClient) recordReceiptAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RecordReceiptResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RecordReceiptAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RecordReceiptAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RecordReceiptAsyncResult{
 		result: &result,
@@ -1579,39 +1579,39 @@ func (p Gs2MoneyWebSocketClient) RecordReceiptAsync(
 	request *RecordReceiptRequest,
 	callback chan<- RecordReceiptAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "receipt",
-			"function":    "recordReceipt",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "receipt",
+    		"function": "recordReceipt",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ContentsId != nil && *request.ContentsId != "" {
-		bodies["contentsId"] = *request.ContentsId
-	}
-	if request.Receipt != nil && *request.Receipt != "" {
-		bodies["receipt"] = *request.Receipt
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ContentsId != nil && *request.ContentsId != "" {
+        bodies["contentsId"] = *request.ContentsId
+    }
+    if request.Receipt != nil && *request.Receipt != "" {
+        bodies["receipt"] = *request.Receipt
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.recordReceiptAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1648,13 +1648,13 @@ func (p Gs2MoneyWebSocketClient) recordReceiptByStampTaskAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RecordReceiptByStampTaskResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RecordReceiptByStampTaskAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RecordReceiptByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RecordReceiptByStampTaskAsyncResult{
 		result: &result,
@@ -1667,33 +1667,33 @@ func (p Gs2MoneyWebSocketClient) RecordReceiptByStampTaskAsync(
 	request *RecordReceiptByStampTaskRequest,
 	callback chan<- RecordReceiptByStampTaskAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "money",
-			"component":   "receipt",
-			"function":    "recordReceiptByStampTask",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "money",
+    		"component": "receipt",
+    		"function": "recordReceiptByStampTask",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.recordReceiptByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)

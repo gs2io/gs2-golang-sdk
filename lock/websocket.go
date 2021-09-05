@@ -49,13 +49,13 @@ func (p Gs2LockWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -68,33 +68,33 @@ func (p Gs2LockWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "namespace",
-			"function":    "describeNamespaces",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "namespace",
+    		"function": "describeNamespaces",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -131,13 +131,13 @@ func (p Gs2LockWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -150,36 +150,36 @@ func (p Gs2LockWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "namespace",
-			"function":    "createNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "namespace",
+    		"function": "createNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -216,13 +216,13 @@ func (p Gs2LockWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -235,30 +235,30 @@ func (p Gs2LockWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "namespace",
-			"function":    "getNamespaceStatus",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "namespace",
+    		"function": "getNamespaceStatus",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -295,13 +295,13 @@ func (p Gs2LockWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -314,30 +314,30 @@ func (p Gs2LockWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "namespace",
-			"function":    "getNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "namespace",
+    		"function": "getNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -374,13 +374,13 @@ func (p Gs2LockWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -393,36 +393,36 @@ func (p Gs2LockWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "namespace",
-			"function":    "updateNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "namespace",
+    		"function": "updateNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -459,13 +459,13 @@ func (p Gs2LockWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -478,30 +478,30 @@ func (p Gs2LockWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "namespace",
-			"function":    "deleteNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "namespace",
+    		"function": "deleteNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -538,13 +538,13 @@ func (p Gs2LockWebSocketClient) describeMutexesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeMutexesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeMutexesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeMutexesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeMutexesAsyncResult{
 		result: &result,
@@ -557,42 +557,42 @@ func (p Gs2LockWebSocketClient) DescribeMutexesAsync(
 	request *DescribeMutexesRequest,
 	callback chan<- DescribeMutexesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "mutex",
-			"function":    "describeMutexes",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "mutex",
+    		"function": "describeMutexes",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.describeMutexesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -629,13 +629,13 @@ func (p Gs2LockWebSocketClient) describeMutexesByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeMutexesByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeMutexesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeMutexesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeMutexesByUserIdAsyncResult{
 		result: &result,
@@ -648,39 +648,39 @@ func (p Gs2LockWebSocketClient) DescribeMutexesByUserIdAsync(
 	request *DescribeMutexesByUserIdRequest,
 	callback chan<- DescribeMutexesByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "mutex",
-			"function":    "describeMutexesByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "mutex",
+    		"function": "describeMutexesByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeMutexesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -717,13 +717,13 @@ func (p Gs2LockWebSocketClient) lockAsyncHandler(
 	asyncResult := <-internalCallback
 	var result LockResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- LockAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- LockAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- LockAsyncResult{
 		result: &result,
@@ -736,45 +736,45 @@ func (p Gs2LockWebSocketClient) LockAsync(
 	request *LockRequest,
 	callback chan<- LockAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "mutex",
-			"function":    "lock",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "mutex",
+    		"function": "lock",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		bodies["propertyId"] = *request.PropertyId
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.TransactionId != nil && *request.TransactionId != "" {
-		bodies["transactionId"] = *request.TransactionId
-	}
-	if request.Ttl != nil {
-		bodies["ttl"] = *request.Ttl
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TransactionId != nil && *request.TransactionId != "" {
+        bodies["transactionId"] = *request.TransactionId
+    }
+    if request.Ttl != nil {
+        bodies["ttl"] = *request.Ttl
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.lockAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -811,13 +811,13 @@ func (p Gs2LockWebSocketClient) lockByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result LockByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- LockByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- LockByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- LockByUserIdAsyncResult{
 		result: &result,
@@ -830,42 +830,42 @@ func (p Gs2LockWebSocketClient) LockByUserIdAsync(
 	request *LockByUserIdRequest,
 	callback chan<- LockByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "mutex",
-			"function":    "lockByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "mutex",
+    		"function": "lockByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		bodies["propertyId"] = *request.PropertyId
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.TransactionId != nil && *request.TransactionId != "" {
-		bodies["transactionId"] = *request.TransactionId
-	}
-	if request.Ttl != nil {
-		bodies["ttl"] = *request.Ttl
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TransactionId != nil && *request.TransactionId != "" {
+        bodies["transactionId"] = *request.TransactionId
+    }
+    if request.Ttl != nil {
+        bodies["ttl"] = *request.Ttl
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.lockByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -902,13 +902,13 @@ func (p Gs2LockWebSocketClient) unlockAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UnlockResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UnlockAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnlockAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UnlockAsyncResult{
 		result: &result,
@@ -921,42 +921,42 @@ func (p Gs2LockWebSocketClient) UnlockAsync(
 	request *UnlockRequest,
 	callback chan<- UnlockAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "mutex",
-			"function":    "unlock",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "mutex",
+    		"function": "unlock",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		bodies["propertyId"] = *request.PropertyId
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.TransactionId != nil && *request.TransactionId != "" {
-		bodies["transactionId"] = *request.TransactionId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TransactionId != nil && *request.TransactionId != "" {
+        bodies["transactionId"] = *request.TransactionId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.unlockAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -993,13 +993,13 @@ func (p Gs2LockWebSocketClient) unlockByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UnlockByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UnlockByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnlockByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UnlockByUserIdAsyncResult{
 		result: &result,
@@ -1012,39 +1012,39 @@ func (p Gs2LockWebSocketClient) UnlockByUserIdAsync(
 	request *UnlockByUserIdRequest,
 	callback chan<- UnlockByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "mutex",
-			"function":    "unlockByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "mutex",
+    		"function": "unlockByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		bodies["propertyId"] = *request.PropertyId
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.TransactionId != nil && *request.TransactionId != "" {
-		bodies["transactionId"] = *request.TransactionId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TransactionId != nil && *request.TransactionId != "" {
+        bodies["transactionId"] = *request.TransactionId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.unlockByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1081,13 +1081,13 @@ func (p Gs2LockWebSocketClient) getMutexAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetMutexResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetMutexAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetMutexAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetMutexAsyncResult{
 		result: &result,
@@ -1100,39 +1100,39 @@ func (p Gs2LockWebSocketClient) GetMutexAsync(
 	request *GetMutexRequest,
 	callback chan<- GetMutexAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "mutex",
-			"function":    "getMutex",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "mutex",
+    		"function": "getMutex",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		bodies["propertyId"] = *request.PropertyId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.getMutexAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1169,13 +1169,13 @@ func (p Gs2LockWebSocketClient) getMutexByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetMutexByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetMutexByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetMutexByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetMutexByUserIdAsyncResult{
 		result: &result,
@@ -1188,36 +1188,36 @@ func (p Gs2LockWebSocketClient) GetMutexByUserIdAsync(
 	request *GetMutexByUserIdRequest,
 	callback chan<- GetMutexByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "mutex",
-			"function":    "getMutexByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "mutex",
+    		"function": "getMutexByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		bodies["propertyId"] = *request.PropertyId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getMutexByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1254,13 +1254,13 @@ func (p Gs2LockWebSocketClient) deleteMutexByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteMutexByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteMutexByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteMutexByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteMutexByUserIdAsyncResult{
 		result: &result,
@@ -1273,36 +1273,36 @@ func (p Gs2LockWebSocketClient) DeleteMutexByUserIdAsync(
 	request *DeleteMutexByUserIdRequest,
 	callback chan<- DeleteMutexByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "lock",
-			"component":   "mutex",
-			"function":    "deleteMutexByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lock",
+    		"component": "mutex",
+    		"function": "deleteMutexByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		bodies["propertyId"] = *request.PropertyId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteMutexByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)

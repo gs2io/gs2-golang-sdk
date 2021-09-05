@@ -49,13 +49,13 @@ func (p Gs2DatastoreWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -68,33 +68,33 @@ func (p Gs2DatastoreWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "namespace",
-			"function":    "describeNamespaces",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "namespace",
+    		"function": "describeNamespaces",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -131,13 +131,13 @@ func (p Gs2DatastoreWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -150,39 +150,39 @@ func (p Gs2DatastoreWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "namespace",
-			"function":    "createNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "namespace",
+    		"function": "createNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
-	if request.DoneUploadScript != nil {
-		bodies["doneUploadScript"] = request.DoneUploadScript.ToDict()
-	}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
+    if request.DoneUploadScript != nil {
+        bodies["doneUploadScript"] = request.DoneUploadScript.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -219,13 +219,13 @@ func (p Gs2DatastoreWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -238,30 +238,30 @@ func (p Gs2DatastoreWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "namespace",
-			"function":    "getNamespaceStatus",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "namespace",
+    		"function": "getNamespaceStatus",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -298,13 +298,13 @@ func (p Gs2DatastoreWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -317,30 +317,30 @@ func (p Gs2DatastoreWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "namespace",
-			"function":    "getNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "namespace",
+    		"function": "getNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -377,13 +377,13 @@ func (p Gs2DatastoreWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -396,39 +396,39 @@ func (p Gs2DatastoreWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "namespace",
-			"function":    "updateNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "namespace",
+    		"function": "updateNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
-	if request.DoneUploadScript != nil {
-		bodies["doneUploadScript"] = request.DoneUploadScript.ToDict()
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
+    if request.DoneUploadScript != nil {
+        bodies["doneUploadScript"] = request.DoneUploadScript.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -465,13 +465,13 @@ func (p Gs2DatastoreWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -484,30 +484,30 @@ func (p Gs2DatastoreWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "namespace",
-			"function":    "deleteNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "namespace",
+    		"function": "deleteNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -544,13 +544,13 @@ func (p Gs2DatastoreWebSocketClient) describeDataObjectsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeDataObjectsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeDataObjectsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeDataObjectsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeDataObjectsAsyncResult{
 		result: &result,
@@ -563,45 +563,45 @@ func (p Gs2DatastoreWebSocketClient) DescribeDataObjectsAsync(
 	request *DescribeDataObjectsRequest,
 	callback chan<- DescribeDataObjectsAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "describeDataObjects",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "describeDataObjects",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.Status != nil && *request.Status != "" {
-		bodies["status"] = *request.Status
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.Status != nil && *request.Status != "" {
+        bodies["status"] = *request.Status
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.describeDataObjectsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -638,13 +638,13 @@ func (p Gs2DatastoreWebSocketClient) describeDataObjectsByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeDataObjectsByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeDataObjectsByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeDataObjectsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeDataObjectsByUserIdAsyncResult{
 		result: &result,
@@ -657,42 +657,42 @@ func (p Gs2DatastoreWebSocketClient) DescribeDataObjectsByUserIdAsync(
 	request *DescribeDataObjectsByUserIdRequest,
 	callback chan<- DescribeDataObjectsByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "describeDataObjectsByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "describeDataObjectsByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Status != nil && *request.Status != "" {
-		bodies["status"] = *request.Status
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Status != nil && *request.Status != "" {
+        bodies["status"] = *request.Status
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeDataObjectsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -729,13 +729,13 @@ func (p Gs2DatastoreWebSocketClient) prepareUploadAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PrepareUploadResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PrepareUploadAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PrepareUploadAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PrepareUploadAsyncResult{
 		result: &result,
@@ -748,55 +748,55 @@ func (p Gs2DatastoreWebSocketClient) PrepareUploadAsync(
 	request *PrepareUploadRequest,
 	callback chan<- PrepareUploadAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "prepareUpload",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "prepareUpload",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.ContentType != nil && *request.ContentType != "" {
-		bodies["contentType"] = *request.ContentType
-	}
-	if request.Scope != nil && *request.Scope != "" {
-		bodies["scope"] = *request.Scope
-	}
-	if request.AllowUserIds != nil {
-		var _allowUserIds []interface{}
-		for _, item := range request.AllowUserIds {
-			_allowUserIds = append(_allowUserIds, item)
-		}
-		bodies["allowUserIds"] = _allowUserIds
-	}
-	if request.UpdateIfExists != nil {
-		bodies["updateIfExists"] = *request.UpdateIfExists
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.ContentType != nil && *request.ContentType != "" {
+        bodies["contentType"] = *request.ContentType
+    }
+    if request.Scope != nil && *request.Scope != "" {
+        bodies["scope"] = *request.Scope
+    }
+    if request.AllowUserIds != nil {
+        var _allowUserIds []interface {}
+        for _, item := range request.AllowUserIds {
+            _allowUserIds = append(_allowUserIds, item)
+        }
+        bodies["allowUserIds"] = _allowUserIds
+    }
+    if request.UpdateIfExists != nil {
+        bodies["updateIfExists"] = *request.UpdateIfExists
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.prepareUploadAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -833,13 +833,13 @@ func (p Gs2DatastoreWebSocketClient) prepareUploadByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PrepareUploadByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PrepareUploadByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PrepareUploadByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PrepareUploadByUserIdAsyncResult{
 		result: &result,
@@ -852,52 +852,52 @@ func (p Gs2DatastoreWebSocketClient) PrepareUploadByUserIdAsync(
 	request *PrepareUploadByUserIdRequest,
 	callback chan<- PrepareUploadByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "prepareUploadByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "prepareUploadByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.ContentType != nil && *request.ContentType != "" {
-		bodies["contentType"] = *request.ContentType
-	}
-	if request.Scope != nil && *request.Scope != "" {
-		bodies["scope"] = *request.Scope
-	}
-	if request.AllowUserIds != nil {
-		var _allowUserIds []interface{}
-		for _, item := range request.AllowUserIds {
-			_allowUserIds = append(_allowUserIds, item)
-		}
-		bodies["allowUserIds"] = _allowUserIds
-	}
-	if request.UpdateIfExists != nil {
-		bodies["updateIfExists"] = *request.UpdateIfExists
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.ContentType != nil && *request.ContentType != "" {
+        bodies["contentType"] = *request.ContentType
+    }
+    if request.Scope != nil && *request.Scope != "" {
+        bodies["scope"] = *request.Scope
+    }
+    if request.AllowUserIds != nil {
+        var _allowUserIds []interface {}
+        for _, item := range request.AllowUserIds {
+            _allowUserIds = append(_allowUserIds, item)
+        }
+        bodies["allowUserIds"] = _allowUserIds
+    }
+    if request.UpdateIfExists != nil {
+        bodies["updateIfExists"] = *request.UpdateIfExists
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.prepareUploadByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -934,13 +934,13 @@ func (p Gs2DatastoreWebSocketClient) updateDataObjectAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateDataObjectResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateDataObjectAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateDataObjectAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateDataObjectAsyncResult{
 		result: &result,
@@ -953,49 +953,49 @@ func (p Gs2DatastoreWebSocketClient) UpdateDataObjectAsync(
 	request *UpdateDataObjectRequest,
 	callback chan<- UpdateDataObjectAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "updateDataObject",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "updateDataObject",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.Scope != nil && *request.Scope != "" {
-		bodies["scope"] = *request.Scope
-	}
-	if request.AllowUserIds != nil {
-		var _allowUserIds []interface{}
-		for _, item := range request.AllowUserIds {
-			_allowUserIds = append(_allowUserIds, item)
-		}
-		bodies["allowUserIds"] = _allowUserIds
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.Scope != nil && *request.Scope != "" {
+        bodies["scope"] = *request.Scope
+    }
+    if request.AllowUserIds != nil {
+        var _allowUserIds []interface {}
+        for _, item := range request.AllowUserIds {
+            _allowUserIds = append(_allowUserIds, item)
+        }
+        bodies["allowUserIds"] = _allowUserIds
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.updateDataObjectAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1032,13 +1032,13 @@ func (p Gs2DatastoreWebSocketClient) updateDataObjectByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateDataObjectByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateDataObjectByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateDataObjectByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateDataObjectByUserIdAsyncResult{
 		result: &result,
@@ -1051,46 +1051,46 @@ func (p Gs2DatastoreWebSocketClient) UpdateDataObjectByUserIdAsync(
 	request *UpdateDataObjectByUserIdRequest,
 	callback chan<- UpdateDataObjectByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "updateDataObjectByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "updateDataObjectByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Scope != nil && *request.Scope != "" {
-		bodies["scope"] = *request.Scope
-	}
-	if request.AllowUserIds != nil {
-		var _allowUserIds []interface{}
-		for _, item := range request.AllowUserIds {
-			_allowUserIds = append(_allowUserIds, item)
-		}
-		bodies["allowUserIds"] = _allowUserIds
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Scope != nil && *request.Scope != "" {
+        bodies["scope"] = *request.Scope
+    }
+    if request.AllowUserIds != nil {
+        var _allowUserIds []interface {}
+        for _, item := range request.AllowUserIds {
+            _allowUserIds = append(_allowUserIds, item)
+        }
+        bodies["allowUserIds"] = _allowUserIds
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateDataObjectByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1127,13 +1127,13 @@ func (p Gs2DatastoreWebSocketClient) prepareReUploadAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PrepareReUploadResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PrepareReUploadAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PrepareReUploadAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PrepareReUploadAsyncResult{
 		result: &result,
@@ -1146,42 +1146,42 @@ func (p Gs2DatastoreWebSocketClient) PrepareReUploadAsync(
 	request *PrepareReUploadRequest,
 	callback chan<- PrepareReUploadAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "prepareReUpload",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "prepareReUpload",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.ContentType != nil && *request.ContentType != "" {
-		bodies["contentType"] = *request.ContentType
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.ContentType != nil && *request.ContentType != "" {
+        bodies["contentType"] = *request.ContentType
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.prepareReUploadAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1218,13 +1218,13 @@ func (p Gs2DatastoreWebSocketClient) prepareReUploadByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PrepareReUploadByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PrepareReUploadByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PrepareReUploadByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PrepareReUploadByUserIdAsyncResult{
 		result: &result,
@@ -1237,39 +1237,39 @@ func (p Gs2DatastoreWebSocketClient) PrepareReUploadByUserIdAsync(
 	request *PrepareReUploadByUserIdRequest,
 	callback chan<- PrepareReUploadByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "prepareReUploadByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "prepareReUploadByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.ContentType != nil && *request.ContentType != "" {
-		bodies["contentType"] = *request.ContentType
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ContentType != nil && *request.ContentType != "" {
+        bodies["contentType"] = *request.ContentType
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.prepareReUploadByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1306,13 +1306,13 @@ func (p Gs2DatastoreWebSocketClient) doneUploadAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DoneUploadResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DoneUploadAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DoneUploadAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DoneUploadAsyncResult{
 		result: &result,
@@ -1325,39 +1325,39 @@ func (p Gs2DatastoreWebSocketClient) DoneUploadAsync(
 	request *DoneUploadRequest,
 	callback chan<- DoneUploadAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "doneUpload",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "doneUpload",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.doneUploadAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1394,13 +1394,13 @@ func (p Gs2DatastoreWebSocketClient) doneUploadByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DoneUploadByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DoneUploadByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DoneUploadByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DoneUploadByUserIdAsyncResult{
 		result: &result,
@@ -1413,36 +1413,36 @@ func (p Gs2DatastoreWebSocketClient) DoneUploadByUserIdAsync(
 	request *DoneUploadByUserIdRequest,
 	callback chan<- DoneUploadByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "doneUploadByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "doneUploadByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.doneUploadByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1479,13 +1479,13 @@ func (p Gs2DatastoreWebSocketClient) deleteDataObjectAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteDataObjectResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteDataObjectAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteDataObjectAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteDataObjectAsyncResult{
 		result: &result,
@@ -1498,39 +1498,39 @@ func (p Gs2DatastoreWebSocketClient) DeleteDataObjectAsync(
 	request *DeleteDataObjectRequest,
 	callback chan<- DeleteDataObjectAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "deleteDataObject",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "deleteDataObject",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.deleteDataObjectAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1567,13 +1567,13 @@ func (p Gs2DatastoreWebSocketClient) deleteDataObjectByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteDataObjectByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteDataObjectByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteDataObjectByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteDataObjectByUserIdAsyncResult{
 		result: &result,
@@ -1586,36 +1586,36 @@ func (p Gs2DatastoreWebSocketClient) DeleteDataObjectByUserIdAsync(
 	request *DeleteDataObjectByUserIdRequest,
 	callback chan<- DeleteDataObjectByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "deleteDataObjectByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "deleteDataObjectByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteDataObjectByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1652,13 +1652,13 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PrepareDownloadResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PrepareDownloadAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PrepareDownloadAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PrepareDownloadAsyncResult{
 		result: &result,
@@ -1671,39 +1671,39 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadAsync(
 	request *PrepareDownloadRequest,
 	callback chan<- PrepareDownloadAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "prepareDownload",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "prepareDownload",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.DataObjectId != nil && *request.DataObjectId != "" {
-		bodies["dataObjectId"] = *request.DataObjectId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.DataObjectId != nil && *request.DataObjectId != "" {
+        bodies["dataObjectId"] = *request.DataObjectId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.prepareDownloadAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1740,13 +1740,13 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PrepareDownloadByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PrepareDownloadByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PrepareDownloadByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PrepareDownloadByUserIdAsyncResult{
 		result: &result,
@@ -1759,36 +1759,36 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByUserIdAsync(
 	request *PrepareDownloadByUserIdRequest,
 	callback chan<- PrepareDownloadByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "prepareDownloadByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "prepareDownloadByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.DataObjectId != nil && *request.DataObjectId != "" {
-		bodies["dataObjectId"] = *request.DataObjectId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.DataObjectId != nil && *request.DataObjectId != "" {
+        bodies["dataObjectId"] = *request.DataObjectId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.prepareDownloadByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1825,13 +1825,13 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadByGenerationAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PrepareDownloadByGenerationResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PrepareDownloadByGenerationAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PrepareDownloadByGenerationAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PrepareDownloadByGenerationAsyncResult{
 		result: &result,
@@ -1844,42 +1844,42 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByGenerationAsync(
 	request *PrepareDownloadByGenerationRequest,
 	callback chan<- PrepareDownloadByGenerationAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "prepareDownloadByGeneration",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "prepareDownloadByGeneration",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.DataObjectId != nil && *request.DataObjectId != "" {
-		bodies["dataObjectId"] = *request.DataObjectId
-	}
-	if request.Generation != nil && *request.Generation != "" {
-		bodies["generation"] = *request.Generation
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.DataObjectId != nil && *request.DataObjectId != "" {
+        bodies["dataObjectId"] = *request.DataObjectId
+    }
+    if request.Generation != nil && *request.Generation != "" {
+        bodies["generation"] = *request.Generation
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.prepareDownloadByGenerationAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1916,13 +1916,13 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadByGenerationAndUserIdAsyncHa
 	asyncResult := <-internalCallback
 	var result PrepareDownloadByGenerationAndUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PrepareDownloadByGenerationAndUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PrepareDownloadByGenerationAndUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PrepareDownloadByGenerationAndUserIdAsyncResult{
 		result: &result,
@@ -1935,39 +1935,39 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByGenerationAndUserIdAsync(
 	request *PrepareDownloadByGenerationAndUserIdRequest,
 	callback chan<- PrepareDownloadByGenerationAndUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "prepareDownloadByGenerationAndUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "prepareDownloadByGenerationAndUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.DataObjectId != nil && *request.DataObjectId != "" {
-		bodies["dataObjectId"] = *request.DataObjectId
-	}
-	if request.Generation != nil && *request.Generation != "" {
-		bodies["generation"] = *request.Generation
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.DataObjectId != nil && *request.DataObjectId != "" {
+        bodies["dataObjectId"] = *request.DataObjectId
+    }
+    if request.Generation != nil && *request.Generation != "" {
+        bodies["generation"] = *request.Generation
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.prepareDownloadByGenerationAndUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2004,13 +2004,13 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadOwnDataAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PrepareDownloadOwnDataResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PrepareDownloadOwnDataAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PrepareDownloadOwnDataAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PrepareDownloadOwnDataAsyncResult{
 		result: &result,
@@ -2023,39 +2023,39 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadOwnDataAsync(
 	request *PrepareDownloadOwnDataRequest,
 	callback chan<- PrepareDownloadOwnDataAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "prepareDownloadOwnData",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "prepareDownloadOwnData",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.prepareDownloadOwnDataAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2092,13 +2092,13 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadByUserIdAndDataObjectNameAsy
 	asyncResult := <-internalCallback
 	var result PrepareDownloadByUserIdAndDataObjectNameResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PrepareDownloadByUserIdAndDataObjectNameAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PrepareDownloadByUserIdAndDataObjectNameAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PrepareDownloadByUserIdAndDataObjectNameAsyncResult{
 		result: &result,
@@ -2111,36 +2111,36 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByUserIdAndDataObjectNameAsy
 	request *PrepareDownloadByUserIdAndDataObjectNameRequest,
 	callback chan<- PrepareDownloadByUserIdAndDataObjectNameAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "prepareDownloadByUserIdAndDataObjectName",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "prepareDownloadByUserIdAndDataObjectName",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.prepareDownloadByUserIdAndDataObjectNameAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2177,13 +2177,13 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadOwnDataByGenerationAsyncHand
 	asyncResult := <-internalCallback
 	var result PrepareDownloadOwnDataByGenerationResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PrepareDownloadOwnDataByGenerationAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PrepareDownloadOwnDataByGenerationAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PrepareDownloadOwnDataByGenerationAsyncResult{
 		result: &result,
@@ -2196,42 +2196,42 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadOwnDataByGenerationAsync(
 	request *PrepareDownloadOwnDataByGenerationRequest,
 	callback chan<- PrepareDownloadOwnDataByGenerationAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "prepareDownloadOwnDataByGeneration",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "prepareDownloadOwnDataByGeneration",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
-	if request.Generation != nil && *request.Generation != "" {
-		bodies["generation"] = *request.Generation
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
+    if request.Generation != nil && *request.Generation != "" {
+        bodies["generation"] = *request.Generation
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.prepareDownloadOwnDataByGenerationAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2268,13 +2268,13 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadByUserIdAndDataObjectNameAnd
 	asyncResult := <-internalCallback
 	var result PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncResult{
 		result: &result,
@@ -2287,39 +2287,39 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByUserIdAndDataObjectNameAnd
 	request *PrepareDownloadByUserIdAndDataObjectNameAndGenerationRequest,
 	callback chan<- PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "prepareDownloadByUserIdAndDataObjectNameAndGeneration",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "prepareDownloadByUserIdAndDataObjectNameAndGeneration",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
-	if request.Generation != nil && *request.Generation != "" {
-		bodies["generation"] = *request.Generation
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
+    if request.Generation != nil && *request.Generation != "" {
+        bodies["generation"] = *request.Generation
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.prepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2356,13 +2356,13 @@ func (p Gs2DatastoreWebSocketClient) restoreDataObjectAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RestoreDataObjectResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RestoreDataObjectAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RestoreDataObjectAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RestoreDataObjectAsyncResult{
 		result: &result,
@@ -2375,33 +2375,33 @@ func (p Gs2DatastoreWebSocketClient) RestoreDataObjectAsync(
 	request *RestoreDataObjectRequest,
 	callback chan<- RestoreDataObjectAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObject",
-			"function":    "restoreDataObject",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObject",
+    		"function": "restoreDataObject",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.DataObjectId != nil && *request.DataObjectId != "" {
-		bodies["dataObjectId"] = *request.DataObjectId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.DataObjectId != nil && *request.DataObjectId != "" {
+        bodies["dataObjectId"] = *request.DataObjectId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.restoreDataObjectAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2438,13 +2438,13 @@ func (p Gs2DatastoreWebSocketClient) describeDataObjectHistoriesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeDataObjectHistoriesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeDataObjectHistoriesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeDataObjectHistoriesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeDataObjectHistoriesAsyncResult{
 		result: &result,
@@ -2457,45 +2457,45 @@ func (p Gs2DatastoreWebSocketClient) DescribeDataObjectHistoriesAsync(
 	request *DescribeDataObjectHistoriesRequest,
 	callback chan<- DescribeDataObjectHistoriesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObjectHistory",
-			"function":    "describeDataObjectHistories",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObjectHistory",
+    		"function": "describeDataObjectHistories",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.describeDataObjectHistoriesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2532,13 +2532,13 @@ func (p Gs2DatastoreWebSocketClient) describeDataObjectHistoriesByUserIdAsyncHan
 	asyncResult := <-internalCallback
 	var result DescribeDataObjectHistoriesByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeDataObjectHistoriesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeDataObjectHistoriesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeDataObjectHistoriesByUserIdAsyncResult{
 		result: &result,
@@ -2551,42 +2551,42 @@ func (p Gs2DatastoreWebSocketClient) DescribeDataObjectHistoriesByUserIdAsync(
 	request *DescribeDataObjectHistoriesByUserIdRequest,
 	callback chan<- DescribeDataObjectHistoriesByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObjectHistory",
-			"function":    "describeDataObjectHistoriesByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObjectHistory",
+    		"function": "describeDataObjectHistoriesByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeDataObjectHistoriesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2623,13 +2623,13 @@ func (p Gs2DatastoreWebSocketClient) getDataObjectHistoryAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetDataObjectHistoryResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetDataObjectHistoryAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetDataObjectHistoryAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetDataObjectHistoryAsyncResult{
 		result: &result,
@@ -2642,42 +2642,42 @@ func (p Gs2DatastoreWebSocketClient) GetDataObjectHistoryAsync(
 	request *GetDataObjectHistoryRequest,
 	callback chan<- GetDataObjectHistoryAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObjectHistory",
-			"function":    "getDataObjectHistory",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObjectHistory",
+    		"function": "getDataObjectHistory",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
-	if request.Generation != nil && *request.Generation != "" {
-		bodies["generation"] = *request.Generation
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
+    if request.Generation != nil && *request.Generation != "" {
+        bodies["generation"] = *request.Generation
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.getDataObjectHistoryAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2714,13 +2714,13 @@ func (p Gs2DatastoreWebSocketClient) getDataObjectHistoryByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetDataObjectHistoryByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetDataObjectHistoryByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetDataObjectHistoryByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetDataObjectHistoryByUserIdAsyncResult{
 		result: &result,
@@ -2733,39 +2733,39 @@ func (p Gs2DatastoreWebSocketClient) GetDataObjectHistoryByUserIdAsync(
 	request *GetDataObjectHistoryByUserIdRequest,
 	callback chan<- GetDataObjectHistoryByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "datastore",
-			"component":   "dataObjectHistory",
-			"function":    "getDataObjectHistoryByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "datastore",
+    		"component": "dataObjectHistory",
+    		"function": "getDataObjectHistoryByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.DataObjectName != nil && *request.DataObjectName != "" {
-		bodies["dataObjectName"] = *request.DataObjectName
-	}
-	if request.Generation != nil && *request.Generation != "" {
-		bodies["generation"] = *request.Generation
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.DataObjectName != nil && *request.DataObjectName != "" {
+        bodies["dataObjectName"] = *request.DataObjectName
+    }
+    if request.Generation != nil && *request.Generation != "" {
+        bodies["generation"] = *request.Generation
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getDataObjectHistoryByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)

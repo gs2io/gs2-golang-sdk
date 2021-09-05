@@ -17,13 +17,13 @@ permissions and limitations under the License.
 package stamina
 
 import (
-	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+    "encoding/json"
+    "github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -32,33 +32,33 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeNamespacesResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
-	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastNamespacesFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
-	return &p
+    return &p
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -67,29 +67,29 @@ type CreateNamespaceAsyncResult struct {
 }
 
 func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateNamespaceResultFromDict(dict)
 }
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
-	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
-	return &p
+    return &p
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -98,29 +98,29 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceStatusResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
-	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
-	}
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
 func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"status": p.Status,
-	}
+    return map[string]interface{} {
+        "status": p.Status,
+    }
 }
 
 func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
-	return &p
+    return &p
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -129,29 +129,29 @@ type GetNamespaceAsyncResult struct {
 }
 
 func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetNamespaceResultFromDict(dict)
 }
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
-	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
-	return &p
+    return &p
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -160,29 +160,29 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
-	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
-	return &p
+    return &p
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -191,30 +191,30 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteNamespaceResultFromDict(dict)
 }
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
-	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
-	return &p
+    return &p
 }
 
 type DescribeStaminaModelMastersResult struct {
-	Items         []StaminaModelMaster `json:"items"`
-	NextPageToken *string              `json:"nextPageToken"`
+    Items []StaminaModelMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeStaminaModelMastersAsyncResult struct {
@@ -223,33 +223,33 @@ type DescribeStaminaModelMastersAsyncResult struct {
 }
 
 func NewDescribeStaminaModelMastersResultFromJson(data string) DescribeStaminaModelMastersResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeStaminaModelMastersResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeStaminaModelMastersResultFromDict(dict)
 }
 
 func NewDescribeStaminaModelMastersResultFromDict(data map[string]interface{}) DescribeStaminaModelMastersResult {
-	return DescribeStaminaModelMastersResult{
-		Items:         CastStaminaModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeStaminaModelMastersResult {
+        Items: CastStaminaModelMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeStaminaModelMastersResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastStaminaModelMastersFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastStaminaModelMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeStaminaModelMastersResult) Pointer() *DescribeStaminaModelMastersResult {
-	return &p
+    return &p
 }
 
 type CreateStaminaModelMasterResult struct {
-	Item *StaminaModelMaster `json:"item"`
+    Item *StaminaModelMaster `json:"item"`
 }
 
 type CreateStaminaModelMasterAsyncResult struct {
@@ -258,29 +258,29 @@ type CreateStaminaModelMasterAsyncResult struct {
 }
 
 func NewCreateStaminaModelMasterResultFromJson(data string) CreateStaminaModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateStaminaModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateStaminaModelMasterResultFromDict(dict)
 }
 
 func NewCreateStaminaModelMasterResultFromDict(data map[string]interface{}) CreateStaminaModelMasterResult {
-	return CreateStaminaModelMasterResult{
-		Item: NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return CreateStaminaModelMasterResult {
+        Item: NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p CreateStaminaModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p CreateStaminaModelMasterResult) Pointer() *CreateStaminaModelMasterResult {
-	return &p
+    return &p
 }
 
 type GetStaminaModelMasterResult struct {
-	Item *StaminaModelMaster `json:"item"`
+    Item *StaminaModelMaster `json:"item"`
 }
 
 type GetStaminaModelMasterAsyncResult struct {
@@ -289,29 +289,29 @@ type GetStaminaModelMasterAsyncResult struct {
 }
 
 func NewGetStaminaModelMasterResultFromJson(data string) GetStaminaModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStaminaModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetStaminaModelMasterResultFromDict(dict)
 }
 
 func NewGetStaminaModelMasterResultFromDict(data map[string]interface{}) GetStaminaModelMasterResult {
-	return GetStaminaModelMasterResult{
-		Item: NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetStaminaModelMasterResult {
+        Item: NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetStaminaModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetStaminaModelMasterResult) Pointer() *GetStaminaModelMasterResult {
-	return &p
+    return &p
 }
 
 type UpdateStaminaModelMasterResult struct {
-	Item *StaminaModelMaster `json:"item"`
+    Item *StaminaModelMaster `json:"item"`
 }
 
 type UpdateStaminaModelMasterAsyncResult struct {
@@ -320,29 +320,29 @@ type UpdateStaminaModelMasterAsyncResult struct {
 }
 
 func NewUpdateStaminaModelMasterResultFromJson(data string) UpdateStaminaModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateStaminaModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateStaminaModelMasterResultFromDict(dict)
 }
 
 func NewUpdateStaminaModelMasterResultFromDict(data map[string]interface{}) UpdateStaminaModelMasterResult {
-	return UpdateStaminaModelMasterResult{
-		Item: NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateStaminaModelMasterResult {
+        Item: NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateStaminaModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateStaminaModelMasterResult) Pointer() *UpdateStaminaModelMasterResult {
-	return &p
+    return &p
 }
 
 type DeleteStaminaModelMasterResult struct {
-	Item *StaminaModelMaster `json:"item"`
+    Item *StaminaModelMaster `json:"item"`
 }
 
 type DeleteStaminaModelMasterAsyncResult struct {
@@ -351,30 +351,30 @@ type DeleteStaminaModelMasterAsyncResult struct {
 }
 
 func NewDeleteStaminaModelMasterResultFromJson(data string) DeleteStaminaModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteStaminaModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteStaminaModelMasterResultFromDict(dict)
 }
 
 func NewDeleteStaminaModelMasterResultFromDict(data map[string]interface{}) DeleteStaminaModelMasterResult {
-	return DeleteStaminaModelMasterResult{
-		Item: NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteStaminaModelMasterResult {
+        Item: NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteStaminaModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteStaminaModelMasterResult) Pointer() *DeleteStaminaModelMasterResult {
-	return &p
+    return &p
 }
 
 type DescribeMaxStaminaTableMastersResult struct {
-	Items         []MaxStaminaTableMaster `json:"items"`
-	NextPageToken *string                 `json:"nextPageToken"`
+    Items []MaxStaminaTableMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeMaxStaminaTableMastersAsyncResult struct {
@@ -383,33 +383,33 @@ type DescribeMaxStaminaTableMastersAsyncResult struct {
 }
 
 func NewDescribeMaxStaminaTableMastersResultFromJson(data string) DescribeMaxStaminaTableMastersResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeMaxStaminaTableMastersResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeMaxStaminaTableMastersResultFromDict(dict)
 }
 
 func NewDescribeMaxStaminaTableMastersResultFromDict(data map[string]interface{}) DescribeMaxStaminaTableMastersResult {
-	return DescribeMaxStaminaTableMastersResult{
-		Items:         CastMaxStaminaTableMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeMaxStaminaTableMastersResult {
+        Items: CastMaxStaminaTableMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeMaxStaminaTableMastersResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastMaxStaminaTableMastersFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastMaxStaminaTableMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeMaxStaminaTableMastersResult) Pointer() *DescribeMaxStaminaTableMastersResult {
-	return &p
+    return &p
 }
 
 type CreateMaxStaminaTableMasterResult struct {
-	Item *MaxStaminaTableMaster `json:"item"`
+    Item *MaxStaminaTableMaster `json:"item"`
 }
 
 type CreateMaxStaminaTableMasterAsyncResult struct {
@@ -418,29 +418,29 @@ type CreateMaxStaminaTableMasterAsyncResult struct {
 }
 
 func NewCreateMaxStaminaTableMasterResultFromJson(data string) CreateMaxStaminaTableMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateMaxStaminaTableMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateMaxStaminaTableMasterResultFromDict(dict)
 }
 
 func NewCreateMaxStaminaTableMasterResultFromDict(data map[string]interface{}) CreateMaxStaminaTableMasterResult {
-	return CreateMaxStaminaTableMasterResult{
-		Item: NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return CreateMaxStaminaTableMasterResult {
+        Item: NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p CreateMaxStaminaTableMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p CreateMaxStaminaTableMasterResult) Pointer() *CreateMaxStaminaTableMasterResult {
-	return &p
+    return &p
 }
 
 type GetMaxStaminaTableMasterResult struct {
-	Item *MaxStaminaTableMaster `json:"item"`
+    Item *MaxStaminaTableMaster `json:"item"`
 }
 
 type GetMaxStaminaTableMasterAsyncResult struct {
@@ -449,29 +449,29 @@ type GetMaxStaminaTableMasterAsyncResult struct {
 }
 
 func NewGetMaxStaminaTableMasterResultFromJson(data string) GetMaxStaminaTableMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetMaxStaminaTableMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetMaxStaminaTableMasterResultFromDict(dict)
 }
 
 func NewGetMaxStaminaTableMasterResultFromDict(data map[string]interface{}) GetMaxStaminaTableMasterResult {
-	return GetMaxStaminaTableMasterResult{
-		Item: NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetMaxStaminaTableMasterResult {
+        Item: NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetMaxStaminaTableMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetMaxStaminaTableMasterResult) Pointer() *GetMaxStaminaTableMasterResult {
-	return &p
+    return &p
 }
 
 type UpdateMaxStaminaTableMasterResult struct {
-	Item *MaxStaminaTableMaster `json:"item"`
+    Item *MaxStaminaTableMaster `json:"item"`
 }
 
 type UpdateMaxStaminaTableMasterAsyncResult struct {
@@ -480,29 +480,29 @@ type UpdateMaxStaminaTableMasterAsyncResult struct {
 }
 
 func NewUpdateMaxStaminaTableMasterResultFromJson(data string) UpdateMaxStaminaTableMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateMaxStaminaTableMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateMaxStaminaTableMasterResultFromDict(dict)
 }
 
 func NewUpdateMaxStaminaTableMasterResultFromDict(data map[string]interface{}) UpdateMaxStaminaTableMasterResult {
-	return UpdateMaxStaminaTableMasterResult{
-		Item: NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateMaxStaminaTableMasterResult {
+        Item: NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateMaxStaminaTableMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateMaxStaminaTableMasterResult) Pointer() *UpdateMaxStaminaTableMasterResult {
-	return &p
+    return &p
 }
 
 type DeleteMaxStaminaTableMasterResult struct {
-	Item *MaxStaminaTableMaster `json:"item"`
+    Item *MaxStaminaTableMaster `json:"item"`
 }
 
 type DeleteMaxStaminaTableMasterAsyncResult struct {
@@ -511,30 +511,30 @@ type DeleteMaxStaminaTableMasterAsyncResult struct {
 }
 
 func NewDeleteMaxStaminaTableMasterResultFromJson(data string) DeleteMaxStaminaTableMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteMaxStaminaTableMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteMaxStaminaTableMasterResultFromDict(dict)
 }
 
 func NewDeleteMaxStaminaTableMasterResultFromDict(data map[string]interface{}) DeleteMaxStaminaTableMasterResult {
-	return DeleteMaxStaminaTableMasterResult{
-		Item: NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteMaxStaminaTableMasterResult {
+        Item: NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteMaxStaminaTableMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteMaxStaminaTableMasterResult) Pointer() *DeleteMaxStaminaTableMasterResult {
-	return &p
+    return &p
 }
 
 type DescribeRecoverIntervalTableMastersResult struct {
-	Items         []RecoverIntervalTableMaster `json:"items"`
-	NextPageToken *string                      `json:"nextPageToken"`
+    Items []RecoverIntervalTableMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeRecoverIntervalTableMastersAsyncResult struct {
@@ -543,33 +543,33 @@ type DescribeRecoverIntervalTableMastersAsyncResult struct {
 }
 
 func NewDescribeRecoverIntervalTableMastersResultFromJson(data string) DescribeRecoverIntervalTableMastersResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRecoverIntervalTableMastersResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeRecoverIntervalTableMastersResultFromDict(dict)
 }
 
 func NewDescribeRecoverIntervalTableMastersResultFromDict(data map[string]interface{}) DescribeRecoverIntervalTableMastersResult {
-	return DescribeRecoverIntervalTableMastersResult{
-		Items:         CastRecoverIntervalTableMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeRecoverIntervalTableMastersResult {
+        Items: CastRecoverIntervalTableMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeRecoverIntervalTableMastersResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastRecoverIntervalTableMastersFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastRecoverIntervalTableMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeRecoverIntervalTableMastersResult) Pointer() *DescribeRecoverIntervalTableMastersResult {
-	return &p
+    return &p
 }
 
 type CreateRecoverIntervalTableMasterResult struct {
-	Item *RecoverIntervalTableMaster `json:"item"`
+    Item *RecoverIntervalTableMaster `json:"item"`
 }
 
 type CreateRecoverIntervalTableMasterAsyncResult struct {
@@ -578,29 +578,29 @@ type CreateRecoverIntervalTableMasterAsyncResult struct {
 }
 
 func NewCreateRecoverIntervalTableMasterResultFromJson(data string) CreateRecoverIntervalTableMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateRecoverIntervalTableMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateRecoverIntervalTableMasterResultFromDict(dict)
 }
 
 func NewCreateRecoverIntervalTableMasterResultFromDict(data map[string]interface{}) CreateRecoverIntervalTableMasterResult {
-	return CreateRecoverIntervalTableMasterResult{
-		Item: NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return CreateRecoverIntervalTableMasterResult {
+        Item: NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p CreateRecoverIntervalTableMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p CreateRecoverIntervalTableMasterResult) Pointer() *CreateRecoverIntervalTableMasterResult {
-	return &p
+    return &p
 }
 
 type GetRecoverIntervalTableMasterResult struct {
-	Item *RecoverIntervalTableMaster `json:"item"`
+    Item *RecoverIntervalTableMaster `json:"item"`
 }
 
 type GetRecoverIntervalTableMasterAsyncResult struct {
@@ -609,29 +609,29 @@ type GetRecoverIntervalTableMasterAsyncResult struct {
 }
 
 func NewGetRecoverIntervalTableMasterResultFromJson(data string) GetRecoverIntervalTableMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRecoverIntervalTableMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetRecoverIntervalTableMasterResultFromDict(dict)
 }
 
 func NewGetRecoverIntervalTableMasterResultFromDict(data map[string]interface{}) GetRecoverIntervalTableMasterResult {
-	return GetRecoverIntervalTableMasterResult{
-		Item: NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetRecoverIntervalTableMasterResult {
+        Item: NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetRecoverIntervalTableMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetRecoverIntervalTableMasterResult) Pointer() *GetRecoverIntervalTableMasterResult {
-	return &p
+    return &p
 }
 
 type UpdateRecoverIntervalTableMasterResult struct {
-	Item *RecoverIntervalTableMaster `json:"item"`
+    Item *RecoverIntervalTableMaster `json:"item"`
 }
 
 type UpdateRecoverIntervalTableMasterAsyncResult struct {
@@ -640,29 +640,29 @@ type UpdateRecoverIntervalTableMasterAsyncResult struct {
 }
 
 func NewUpdateRecoverIntervalTableMasterResultFromJson(data string) UpdateRecoverIntervalTableMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateRecoverIntervalTableMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateRecoverIntervalTableMasterResultFromDict(dict)
 }
 
 func NewUpdateRecoverIntervalTableMasterResultFromDict(data map[string]interface{}) UpdateRecoverIntervalTableMasterResult {
-	return UpdateRecoverIntervalTableMasterResult{
-		Item: NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateRecoverIntervalTableMasterResult {
+        Item: NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateRecoverIntervalTableMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateRecoverIntervalTableMasterResult) Pointer() *UpdateRecoverIntervalTableMasterResult {
-	return &p
+    return &p
 }
 
 type DeleteRecoverIntervalTableMasterResult struct {
-	Item *RecoverIntervalTableMaster `json:"item"`
+    Item *RecoverIntervalTableMaster `json:"item"`
 }
 
 type DeleteRecoverIntervalTableMasterAsyncResult struct {
@@ -671,30 +671,30 @@ type DeleteRecoverIntervalTableMasterAsyncResult struct {
 }
 
 func NewDeleteRecoverIntervalTableMasterResultFromJson(data string) DeleteRecoverIntervalTableMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteRecoverIntervalTableMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteRecoverIntervalTableMasterResultFromDict(dict)
 }
 
 func NewDeleteRecoverIntervalTableMasterResultFromDict(data map[string]interface{}) DeleteRecoverIntervalTableMasterResult {
-	return DeleteRecoverIntervalTableMasterResult{
-		Item: NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteRecoverIntervalTableMasterResult {
+        Item: NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteRecoverIntervalTableMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteRecoverIntervalTableMasterResult) Pointer() *DeleteRecoverIntervalTableMasterResult {
-	return &p
+    return &p
 }
 
 type DescribeRecoverValueTableMastersResult struct {
-	Items         []RecoverValueTableMaster `json:"items"`
-	NextPageToken *string                   `json:"nextPageToken"`
+    Items []RecoverValueTableMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeRecoverValueTableMastersAsyncResult struct {
@@ -703,33 +703,33 @@ type DescribeRecoverValueTableMastersAsyncResult struct {
 }
 
 func NewDescribeRecoverValueTableMastersResultFromJson(data string) DescribeRecoverValueTableMastersResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRecoverValueTableMastersResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeRecoverValueTableMastersResultFromDict(dict)
 }
 
 func NewDescribeRecoverValueTableMastersResultFromDict(data map[string]interface{}) DescribeRecoverValueTableMastersResult {
-	return DescribeRecoverValueTableMastersResult{
-		Items:         CastRecoverValueTableMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeRecoverValueTableMastersResult {
+        Items: CastRecoverValueTableMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeRecoverValueTableMastersResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastRecoverValueTableMastersFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastRecoverValueTableMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeRecoverValueTableMastersResult) Pointer() *DescribeRecoverValueTableMastersResult {
-	return &p
+    return &p
 }
 
 type CreateRecoverValueTableMasterResult struct {
-	Item *RecoverValueTableMaster `json:"item"`
+    Item *RecoverValueTableMaster `json:"item"`
 }
 
 type CreateRecoverValueTableMasterAsyncResult struct {
@@ -738,29 +738,29 @@ type CreateRecoverValueTableMasterAsyncResult struct {
 }
 
 func NewCreateRecoverValueTableMasterResultFromJson(data string) CreateRecoverValueTableMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateRecoverValueTableMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateRecoverValueTableMasterResultFromDict(dict)
 }
 
 func NewCreateRecoverValueTableMasterResultFromDict(data map[string]interface{}) CreateRecoverValueTableMasterResult {
-	return CreateRecoverValueTableMasterResult{
-		Item: NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return CreateRecoverValueTableMasterResult {
+        Item: NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p CreateRecoverValueTableMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p CreateRecoverValueTableMasterResult) Pointer() *CreateRecoverValueTableMasterResult {
-	return &p
+    return &p
 }
 
 type GetRecoverValueTableMasterResult struct {
-	Item *RecoverValueTableMaster `json:"item"`
+    Item *RecoverValueTableMaster `json:"item"`
 }
 
 type GetRecoverValueTableMasterAsyncResult struct {
@@ -769,29 +769,29 @@ type GetRecoverValueTableMasterAsyncResult struct {
 }
 
 func NewGetRecoverValueTableMasterResultFromJson(data string) GetRecoverValueTableMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRecoverValueTableMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetRecoverValueTableMasterResultFromDict(dict)
 }
 
 func NewGetRecoverValueTableMasterResultFromDict(data map[string]interface{}) GetRecoverValueTableMasterResult {
-	return GetRecoverValueTableMasterResult{
-		Item: NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetRecoverValueTableMasterResult {
+        Item: NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetRecoverValueTableMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetRecoverValueTableMasterResult) Pointer() *GetRecoverValueTableMasterResult {
-	return &p
+    return &p
 }
 
 type UpdateRecoverValueTableMasterResult struct {
-	Item *RecoverValueTableMaster `json:"item"`
+    Item *RecoverValueTableMaster `json:"item"`
 }
 
 type UpdateRecoverValueTableMasterAsyncResult struct {
@@ -800,29 +800,29 @@ type UpdateRecoverValueTableMasterAsyncResult struct {
 }
 
 func NewUpdateRecoverValueTableMasterResultFromJson(data string) UpdateRecoverValueTableMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateRecoverValueTableMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateRecoverValueTableMasterResultFromDict(dict)
 }
 
 func NewUpdateRecoverValueTableMasterResultFromDict(data map[string]interface{}) UpdateRecoverValueTableMasterResult {
-	return UpdateRecoverValueTableMasterResult{
-		Item: NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateRecoverValueTableMasterResult {
+        Item: NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateRecoverValueTableMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateRecoverValueTableMasterResult) Pointer() *UpdateRecoverValueTableMasterResult {
-	return &p
+    return &p
 }
 
 type DeleteRecoverValueTableMasterResult struct {
-	Item *RecoverValueTableMaster `json:"item"`
+    Item *RecoverValueTableMaster `json:"item"`
 }
 
 type DeleteRecoverValueTableMasterAsyncResult struct {
@@ -831,29 +831,29 @@ type DeleteRecoverValueTableMasterAsyncResult struct {
 }
 
 func NewDeleteRecoverValueTableMasterResultFromJson(data string) DeleteRecoverValueTableMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteRecoverValueTableMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteRecoverValueTableMasterResultFromDict(dict)
 }
 
 func NewDeleteRecoverValueTableMasterResultFromDict(data map[string]interface{}) DeleteRecoverValueTableMasterResult {
-	return DeleteRecoverValueTableMasterResult{
-		Item: NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteRecoverValueTableMasterResult {
+        Item: NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteRecoverValueTableMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteRecoverValueTableMasterResult) Pointer() *DeleteRecoverValueTableMasterResult {
-	return &p
+    return &p
 }
 
 type ExportMasterResult struct {
-	Item *CurrentStaminaMaster `json:"item"`
+    Item *CurrentStaminaMaster `json:"item"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -862,29 +862,29 @@ type ExportMasterAsyncResult struct {
 }
 
 func NewExportMasterResultFromJson(data string) ExportMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExportMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewExportMasterResultFromDict(dict)
 }
 
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
-	return ExportMasterResult{
-		Item: NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return ExportMasterResult {
+        Item: NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p ExportMasterResult) Pointer() *ExportMasterResult {
-	return &p
+    return &p
 }
 
 type GetCurrentStaminaMasterResult struct {
-	Item *CurrentStaminaMaster `json:"item"`
+    Item *CurrentStaminaMaster `json:"item"`
 }
 
 type GetCurrentStaminaMasterAsyncResult struct {
@@ -893,29 +893,29 @@ type GetCurrentStaminaMasterAsyncResult struct {
 }
 
 func NewGetCurrentStaminaMasterResultFromJson(data string) GetCurrentStaminaMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetCurrentStaminaMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetCurrentStaminaMasterResultFromDict(dict)
 }
 
 func NewGetCurrentStaminaMasterResultFromDict(data map[string]interface{}) GetCurrentStaminaMasterResult {
-	return GetCurrentStaminaMasterResult{
-		Item: NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetCurrentStaminaMasterResult {
+        Item: NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetCurrentStaminaMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetCurrentStaminaMasterResult) Pointer() *GetCurrentStaminaMasterResult {
-	return &p
+    return &p
 }
 
 type UpdateCurrentStaminaMasterResult struct {
-	Item *CurrentStaminaMaster `json:"item"`
+    Item *CurrentStaminaMaster `json:"item"`
 }
 
 type UpdateCurrentStaminaMasterAsyncResult struct {
@@ -924,29 +924,29 @@ type UpdateCurrentStaminaMasterAsyncResult struct {
 }
 
 func NewUpdateCurrentStaminaMasterResultFromJson(data string) UpdateCurrentStaminaMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentStaminaMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateCurrentStaminaMasterResultFromDict(dict)
 }
 
 func NewUpdateCurrentStaminaMasterResultFromDict(data map[string]interface{}) UpdateCurrentStaminaMasterResult {
-	return UpdateCurrentStaminaMasterResult{
-		Item: NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateCurrentStaminaMasterResult {
+        Item: NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateCurrentStaminaMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateCurrentStaminaMasterResult) Pointer() *UpdateCurrentStaminaMasterResult {
-	return &p
+    return &p
 }
 
 type UpdateCurrentStaminaMasterFromGitHubResult struct {
-	Item *CurrentStaminaMaster `json:"item"`
+    Item *CurrentStaminaMaster `json:"item"`
 }
 
 type UpdateCurrentStaminaMasterFromGitHubAsyncResult struct {
@@ -955,29 +955,29 @@ type UpdateCurrentStaminaMasterFromGitHubAsyncResult struct {
 }
 
 func NewUpdateCurrentStaminaMasterFromGitHubResultFromJson(data string) UpdateCurrentStaminaMasterFromGitHubResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentStaminaMasterFromGitHubResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateCurrentStaminaMasterFromGitHubResultFromDict(dict)
 }
 
 func NewUpdateCurrentStaminaMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentStaminaMasterFromGitHubResult {
-	return UpdateCurrentStaminaMasterFromGitHubResult{
-		Item: NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateCurrentStaminaMasterFromGitHubResult {
+        Item: NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateCurrentStaminaMasterFromGitHubResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateCurrentStaminaMasterFromGitHubResult) Pointer() *UpdateCurrentStaminaMasterFromGitHubResult {
-	return &p
+    return &p
 }
 
 type DescribeStaminaModelsResult struct {
-	Items []StaminaModel `json:"items"`
+    Items []StaminaModel `json:"items"`
 }
 
 type DescribeStaminaModelsAsyncResult struct {
@@ -986,31 +986,31 @@ type DescribeStaminaModelsAsyncResult struct {
 }
 
 func NewDescribeStaminaModelsResultFromJson(data string) DescribeStaminaModelsResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeStaminaModelsResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeStaminaModelsResultFromDict(dict)
 }
 
 func NewDescribeStaminaModelsResultFromDict(data map[string]interface{}) DescribeStaminaModelsResult {
-	return DescribeStaminaModelsResult{
-		Items: CastStaminaModels(core.CastArray(data["items"])),
-	}
+    return DescribeStaminaModelsResult {
+        Items: CastStaminaModels(core.CastArray(data["items"])),
+    }
 }
 
 func (p DescribeStaminaModelsResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastStaminaModelsFromDict(
-			p.Items,
-		),
-	}
+    return map[string]interface{} {
+        "items": CastStaminaModelsFromDict(
+            p.Items,
+        ),
+    }
 }
 
 func (p DescribeStaminaModelsResult) Pointer() *DescribeStaminaModelsResult {
-	return &p
+    return &p
 }
 
 type GetStaminaModelResult struct {
-	Item *StaminaModel `json:"item"`
+    Item *StaminaModel `json:"item"`
 }
 
 type GetStaminaModelAsyncResult struct {
@@ -1019,30 +1019,30 @@ type GetStaminaModelAsyncResult struct {
 }
 
 func NewGetStaminaModelResultFromJson(data string) GetStaminaModelResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStaminaModelResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetStaminaModelResultFromDict(dict)
 }
 
 func NewGetStaminaModelResultFromDict(data map[string]interface{}) GetStaminaModelResult {
-	return GetStaminaModelResult{
-		Item: NewStaminaModelFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetStaminaModelResult {
+        Item: NewStaminaModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetStaminaModelResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetStaminaModelResult) Pointer() *GetStaminaModelResult {
-	return &p
+    return &p
 }
 
 type DescribeStaminasResult struct {
-	Items         []Stamina `json:"items"`
-	NextPageToken *string   `json:"nextPageToken"`
+    Items []Stamina `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeStaminasAsyncResult struct {
@@ -1051,34 +1051,34 @@ type DescribeStaminasAsyncResult struct {
 }
 
 func NewDescribeStaminasResultFromJson(data string) DescribeStaminasResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeStaminasResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeStaminasResultFromDict(dict)
 }
 
 func NewDescribeStaminasResultFromDict(data map[string]interface{}) DescribeStaminasResult {
-	return DescribeStaminasResult{
-		Items:         CastStaminas(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeStaminasResult {
+        Items: CastStaminas(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeStaminasResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastStaminasFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastStaminasFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeStaminasResult) Pointer() *DescribeStaminasResult {
-	return &p
+    return &p
 }
 
 type DescribeStaminasByUserIdResult struct {
-	Items         []Stamina `json:"items"`
-	NextPageToken *string   `json:"nextPageToken"`
+    Items []Stamina `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeStaminasByUserIdAsyncResult struct {
@@ -1087,34 +1087,34 @@ type DescribeStaminasByUserIdAsyncResult struct {
 }
 
 func NewDescribeStaminasByUserIdResultFromJson(data string) DescribeStaminasByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeStaminasByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeStaminasByUserIdResultFromDict(dict)
 }
 
 func NewDescribeStaminasByUserIdResultFromDict(data map[string]interface{}) DescribeStaminasByUserIdResult {
-	return DescribeStaminasByUserIdResult{
-		Items:         CastStaminas(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeStaminasByUserIdResult {
+        Items: CastStaminas(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeStaminasByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastStaminasFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastStaminasFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeStaminasByUserIdResult) Pointer() *DescribeStaminasByUserIdResult {
-	return &p
+    return &p
 }
 
 type GetStaminaResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type GetStaminaAsyncResult struct {
@@ -1123,32 +1123,32 @@ type GetStaminaAsyncResult struct {
 }
 
 func NewGetStaminaResultFromJson(data string) GetStaminaResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStaminaResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetStaminaResultFromDict(dict)
 }
 
 func NewGetStaminaResultFromDict(data map[string]interface{}) GetStaminaResult {
-	return GetStaminaResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return GetStaminaResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p GetStaminaResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p GetStaminaResult) Pointer() *GetStaminaResult {
-	return &p
+    return &p
 }
 
 type GetStaminaByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type GetStaminaByUserIdAsyncResult struct {
@@ -1157,32 +1157,32 @@ type GetStaminaByUserIdAsyncResult struct {
 }
 
 func NewGetStaminaByUserIdResultFromJson(data string) GetStaminaByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStaminaByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetStaminaByUserIdResultFromDict(dict)
 }
 
 func NewGetStaminaByUserIdResultFromDict(data map[string]interface{}) GetStaminaByUserIdResult {
-	return GetStaminaByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return GetStaminaByUserIdResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p GetStaminaByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p GetStaminaByUserIdResult) Pointer() *GetStaminaByUserIdResult {
-	return &p
+    return &p
 }
 
 type UpdateStaminaByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type UpdateStaminaByUserIdAsyncResult struct {
@@ -1191,32 +1191,32 @@ type UpdateStaminaByUserIdAsyncResult struct {
 }
 
 func NewUpdateStaminaByUserIdResultFromJson(data string) UpdateStaminaByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateStaminaByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateStaminaByUserIdResultFromDict(dict)
 }
 
 func NewUpdateStaminaByUserIdResultFromDict(data map[string]interface{}) UpdateStaminaByUserIdResult {
-	return UpdateStaminaByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return UpdateStaminaByUserIdResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p UpdateStaminaByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p UpdateStaminaByUserIdResult) Pointer() *UpdateStaminaByUserIdResult {
-	return &p
+    return &p
 }
 
 type ConsumeStaminaResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type ConsumeStaminaAsyncResult struct {
@@ -1225,32 +1225,32 @@ type ConsumeStaminaAsyncResult struct {
 }
 
 func NewConsumeStaminaResultFromJson(data string) ConsumeStaminaResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewConsumeStaminaResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeStaminaResultFromDict(dict)
 }
 
 func NewConsumeStaminaResultFromDict(data map[string]interface{}) ConsumeStaminaResult {
-	return ConsumeStaminaResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return ConsumeStaminaResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p ConsumeStaminaResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p ConsumeStaminaResult) Pointer() *ConsumeStaminaResult {
-	return &p
+    return &p
 }
 
 type ConsumeStaminaByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type ConsumeStaminaByUserIdAsyncResult struct {
@@ -1259,33 +1259,33 @@ type ConsumeStaminaByUserIdAsyncResult struct {
 }
 
 func NewConsumeStaminaByUserIdResultFromJson(data string) ConsumeStaminaByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewConsumeStaminaByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeStaminaByUserIdResultFromDict(dict)
 }
 
 func NewConsumeStaminaByUserIdResultFromDict(data map[string]interface{}) ConsumeStaminaByUserIdResult {
-	return ConsumeStaminaByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return ConsumeStaminaByUserIdResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p ConsumeStaminaByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p ConsumeStaminaByUserIdResult) Pointer() *ConsumeStaminaByUserIdResult {
-	return &p
+    return &p
 }
 
 type RecoverStaminaByUserIdResult struct {
-	Item          *Stamina      `json:"item"`
-	StaminaModel  *StaminaModel `json:"staminaModel"`
-	OverflowValue *int64        `json:"overflowValue"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
+    OverflowValue *int64 `json:"overflowValue"`
 }
 
 type RecoverStaminaByUserIdAsyncResult struct {
@@ -1294,34 +1294,34 @@ type RecoverStaminaByUserIdAsyncResult struct {
 }
 
 func NewRecoverStaminaByUserIdResultFromJson(data string) RecoverStaminaByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRecoverStaminaByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRecoverStaminaByUserIdResultFromDict(dict)
 }
 
 func NewRecoverStaminaByUserIdResultFromDict(data map[string]interface{}) RecoverStaminaByUserIdResult {
-	return RecoverStaminaByUserIdResult{
-		Item:          NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel:  NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-		OverflowValue: core.CastInt64(data["overflowValue"]),
-	}
+    return RecoverStaminaByUserIdResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+        OverflowValue: core.CastInt64(data["overflowValue"]),
+    }
 }
 
 func (p RecoverStaminaByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"staminaModel":  p.StaminaModel.ToDict(),
-		"overflowValue": p.OverflowValue,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+        "overflowValue": p.OverflowValue,
+    }
 }
 
 func (p RecoverStaminaByUserIdResult) Pointer() *RecoverStaminaByUserIdResult {
-	return &p
+    return &p
 }
 
 type RaiseMaxValueByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type RaiseMaxValueByUserIdAsyncResult struct {
@@ -1330,32 +1330,32 @@ type RaiseMaxValueByUserIdAsyncResult struct {
 }
 
 func NewRaiseMaxValueByUserIdResultFromJson(data string) RaiseMaxValueByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRaiseMaxValueByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRaiseMaxValueByUserIdResultFromDict(dict)
 }
 
 func NewRaiseMaxValueByUserIdResultFromDict(data map[string]interface{}) RaiseMaxValueByUserIdResult {
-	return RaiseMaxValueByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return RaiseMaxValueByUserIdResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p RaiseMaxValueByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p RaiseMaxValueByUserIdResult) Pointer() *RaiseMaxValueByUserIdResult {
-	return &p
+    return &p
 }
 
 type SetMaxValueByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type SetMaxValueByUserIdAsyncResult struct {
@@ -1364,32 +1364,32 @@ type SetMaxValueByUserIdAsyncResult struct {
 }
 
 func NewSetMaxValueByUserIdResultFromJson(data string) SetMaxValueByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetMaxValueByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetMaxValueByUserIdResultFromDict(dict)
 }
 
 func NewSetMaxValueByUserIdResultFromDict(data map[string]interface{}) SetMaxValueByUserIdResult {
-	return SetMaxValueByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return SetMaxValueByUserIdResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p SetMaxValueByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p SetMaxValueByUserIdResult) Pointer() *SetMaxValueByUserIdResult {
-	return &p
+    return &p
 }
 
 type SetRecoverIntervalByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type SetRecoverIntervalByUserIdAsyncResult struct {
@@ -1398,32 +1398,32 @@ type SetRecoverIntervalByUserIdAsyncResult struct {
 }
 
 func NewSetRecoverIntervalByUserIdResultFromJson(data string) SetRecoverIntervalByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetRecoverIntervalByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetRecoverIntervalByUserIdResultFromDict(dict)
 }
 
 func NewSetRecoverIntervalByUserIdResultFromDict(data map[string]interface{}) SetRecoverIntervalByUserIdResult {
-	return SetRecoverIntervalByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return SetRecoverIntervalByUserIdResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p SetRecoverIntervalByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p SetRecoverIntervalByUserIdResult) Pointer() *SetRecoverIntervalByUserIdResult {
-	return &p
+    return &p
 }
 
 type SetRecoverValueByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type SetRecoverValueByUserIdAsyncResult struct {
@@ -1432,32 +1432,32 @@ type SetRecoverValueByUserIdAsyncResult struct {
 }
 
 func NewSetRecoverValueByUserIdResultFromJson(data string) SetRecoverValueByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetRecoverValueByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetRecoverValueByUserIdResultFromDict(dict)
 }
 
 func NewSetRecoverValueByUserIdResultFromDict(data map[string]interface{}) SetRecoverValueByUserIdResult {
-	return SetRecoverValueByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return SetRecoverValueByUserIdResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p SetRecoverValueByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p SetRecoverValueByUserIdResult) Pointer() *SetRecoverValueByUserIdResult {
-	return &p
+    return &p
 }
 
 type SetMaxValueByStatusResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type SetMaxValueByStatusAsyncResult struct {
@@ -1466,32 +1466,32 @@ type SetMaxValueByStatusAsyncResult struct {
 }
 
 func NewSetMaxValueByStatusResultFromJson(data string) SetMaxValueByStatusResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetMaxValueByStatusResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetMaxValueByStatusResultFromDict(dict)
 }
 
 func NewSetMaxValueByStatusResultFromDict(data map[string]interface{}) SetMaxValueByStatusResult {
-	return SetMaxValueByStatusResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return SetMaxValueByStatusResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p SetMaxValueByStatusResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p SetMaxValueByStatusResult) Pointer() *SetMaxValueByStatusResult {
-	return &p
+    return &p
 }
 
 type SetRecoverIntervalByStatusResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type SetRecoverIntervalByStatusAsyncResult struct {
@@ -1500,32 +1500,32 @@ type SetRecoverIntervalByStatusAsyncResult struct {
 }
 
 func NewSetRecoverIntervalByStatusResultFromJson(data string) SetRecoverIntervalByStatusResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetRecoverIntervalByStatusResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetRecoverIntervalByStatusResultFromDict(dict)
 }
 
 func NewSetRecoverIntervalByStatusResultFromDict(data map[string]interface{}) SetRecoverIntervalByStatusResult {
-	return SetRecoverIntervalByStatusResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return SetRecoverIntervalByStatusResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p SetRecoverIntervalByStatusResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p SetRecoverIntervalByStatusResult) Pointer() *SetRecoverIntervalByStatusResult {
-	return &p
+    return &p
 }
 
 type SetRecoverValueByStatusResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type SetRecoverValueByStatusAsyncResult struct {
@@ -1534,27 +1534,27 @@ type SetRecoverValueByStatusAsyncResult struct {
 }
 
 func NewSetRecoverValueByStatusResultFromJson(data string) SetRecoverValueByStatusResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetRecoverValueByStatusResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetRecoverValueByStatusResultFromDict(dict)
 }
 
 func NewSetRecoverValueByStatusResultFromDict(data map[string]interface{}) SetRecoverValueByStatusResult {
-	return SetRecoverValueByStatusResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return SetRecoverValueByStatusResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p SetRecoverValueByStatusResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p SetRecoverValueByStatusResult) Pointer() *SetRecoverValueByStatusResult {
-	return &p
+    return &p
 }
 
 type DeleteStaminaByUserIdResult struct {
@@ -1566,27 +1566,29 @@ type DeleteStaminaByUserIdAsyncResult struct {
 }
 
 func NewDeleteStaminaByUserIdResultFromJson(data string) DeleteStaminaByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteStaminaByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteStaminaByUserIdResultFromDict(dict)
 }
 
 func NewDeleteStaminaByUserIdResultFromDict(data map[string]interface{}) DeleteStaminaByUserIdResult {
-	return DeleteStaminaByUserIdResult{}
+    return DeleteStaminaByUserIdResult {
+    }
 }
 
 func (p DeleteStaminaByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+    return map[string]interface{} {
+    }
 }
 
 func (p DeleteStaminaByUserIdResult) Pointer() *DeleteStaminaByUserIdResult {
-	return &p
+    return &p
 }
 
 type RecoverStaminaByStampSheetResult struct {
-	Item          *Stamina      `json:"item"`
-	StaminaModel  *StaminaModel `json:"staminaModel"`
-	OverflowValue *int64        `json:"overflowValue"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
+    OverflowValue *int64 `json:"overflowValue"`
 }
 
 type RecoverStaminaByStampSheetAsyncResult struct {
@@ -1595,34 +1597,34 @@ type RecoverStaminaByStampSheetAsyncResult struct {
 }
 
 func NewRecoverStaminaByStampSheetResultFromJson(data string) RecoverStaminaByStampSheetResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRecoverStaminaByStampSheetResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRecoverStaminaByStampSheetResultFromDict(dict)
 }
 
 func NewRecoverStaminaByStampSheetResultFromDict(data map[string]interface{}) RecoverStaminaByStampSheetResult {
-	return RecoverStaminaByStampSheetResult{
-		Item:          NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel:  NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-		OverflowValue: core.CastInt64(data["overflowValue"]),
-	}
+    return RecoverStaminaByStampSheetResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+        OverflowValue: core.CastInt64(data["overflowValue"]),
+    }
 }
 
 func (p RecoverStaminaByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"staminaModel":  p.StaminaModel.ToDict(),
-		"overflowValue": p.OverflowValue,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+        "overflowValue": p.OverflowValue,
+    }
 }
 
 func (p RecoverStaminaByStampSheetResult) Pointer() *RecoverStaminaByStampSheetResult {
-	return &p
+    return &p
 }
 
 type RaiseMaxValueByStampSheetResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type RaiseMaxValueByStampSheetAsyncResult struct {
@@ -1631,32 +1633,32 @@ type RaiseMaxValueByStampSheetAsyncResult struct {
 }
 
 func NewRaiseMaxValueByStampSheetResultFromJson(data string) RaiseMaxValueByStampSheetResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRaiseMaxValueByStampSheetResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRaiseMaxValueByStampSheetResultFromDict(dict)
 }
 
 func NewRaiseMaxValueByStampSheetResultFromDict(data map[string]interface{}) RaiseMaxValueByStampSheetResult {
-	return RaiseMaxValueByStampSheetResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return RaiseMaxValueByStampSheetResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p RaiseMaxValueByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p RaiseMaxValueByStampSheetResult) Pointer() *RaiseMaxValueByStampSheetResult {
-	return &p
+    return &p
 }
 
 type SetMaxValueByStampSheetResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type SetMaxValueByStampSheetAsyncResult struct {
@@ -1665,32 +1667,32 @@ type SetMaxValueByStampSheetAsyncResult struct {
 }
 
 func NewSetMaxValueByStampSheetResultFromJson(data string) SetMaxValueByStampSheetResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetMaxValueByStampSheetResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetMaxValueByStampSheetResultFromDict(dict)
 }
 
 func NewSetMaxValueByStampSheetResultFromDict(data map[string]interface{}) SetMaxValueByStampSheetResult {
-	return SetMaxValueByStampSheetResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return SetMaxValueByStampSheetResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p SetMaxValueByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p SetMaxValueByStampSheetResult) Pointer() *SetMaxValueByStampSheetResult {
-	return &p
+    return &p
 }
 
 type SetRecoverIntervalByStampSheetResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type SetRecoverIntervalByStampSheetAsyncResult struct {
@@ -1699,32 +1701,32 @@ type SetRecoverIntervalByStampSheetAsyncResult struct {
 }
 
 func NewSetRecoverIntervalByStampSheetResultFromJson(data string) SetRecoverIntervalByStampSheetResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetRecoverIntervalByStampSheetResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetRecoverIntervalByStampSheetResultFromDict(dict)
 }
 
 func NewSetRecoverIntervalByStampSheetResultFromDict(data map[string]interface{}) SetRecoverIntervalByStampSheetResult {
-	return SetRecoverIntervalByStampSheetResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return SetRecoverIntervalByStampSheetResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p SetRecoverIntervalByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p SetRecoverIntervalByStampSheetResult) Pointer() *SetRecoverIntervalByStampSheetResult {
-	return &p
+    return &p
 }
 
 type SetRecoverValueByStampSheetResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
 }
 
 type SetRecoverValueByStampSheetAsyncResult struct {
@@ -1733,33 +1735,33 @@ type SetRecoverValueByStampSheetAsyncResult struct {
 }
 
 func NewSetRecoverValueByStampSheetResultFromJson(data string) SetRecoverValueByStampSheetResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetRecoverValueByStampSheetResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetRecoverValueByStampSheetResultFromDict(dict)
 }
 
 func NewSetRecoverValueByStampSheetResultFromDict(data map[string]interface{}) SetRecoverValueByStampSheetResult {
-	return SetRecoverValueByStampSheetResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-	}
+    return SetRecoverValueByStampSheetResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+    }
 }
 
 func (p SetRecoverValueByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+    }
 }
 
 func (p SetRecoverValueByStampSheetResult) Pointer() *SetRecoverValueByStampSheetResult {
-	return &p
+    return &p
 }
 
 type ConsumeStaminaByStampTaskResult struct {
-	Item            *Stamina      `json:"item"`
-	StaminaModel    *StaminaModel `json:"staminaModel"`
-	NewContextStack *string       `json:"newContextStack"`
+    Item *Stamina `json:"item"`
+    StaminaModel *StaminaModel `json:"staminaModel"`
+    NewContextStack *string `json:"newContextStack"`
 }
 
 type ConsumeStaminaByStampTaskAsyncResult struct {
@@ -1768,27 +1770,27 @@ type ConsumeStaminaByStampTaskAsyncResult struct {
 }
 
 func NewConsumeStaminaByStampTaskResultFromJson(data string) ConsumeStaminaByStampTaskResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewConsumeStaminaByStampTaskResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeStaminaByStampTaskResultFromDict(dict)
 }
 
 func NewConsumeStaminaByStampTaskResultFromDict(data map[string]interface{}) ConsumeStaminaByStampTaskResult {
-	return ConsumeStaminaByStampTaskResult{
-		Item:            NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel:    NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
-	}
+    return ConsumeStaminaByStampTaskResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+        StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+        NewContextStack: core.CastString(data["newContextStack"]),
+    }
 }
 
 func (p ConsumeStaminaByStampTaskResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
-		"staminaModel":    p.StaminaModel.ToDict(),
-		"newContextStack": p.NewContextStack,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "staminaModel": p.StaminaModel.ToDict(),
+        "newContextStack": p.NewContextStack,
+    }
 }
 
 func (p ConsumeStaminaByStampTaskResult) Pointer() *ConsumeStaminaByStampTaskResult {
-	return &p
+    return &p
 }

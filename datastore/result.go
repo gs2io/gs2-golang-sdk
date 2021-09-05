@@ -17,13 +17,13 @@ permissions and limitations under the License.
 package datastore
 
 import (
-	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+    "encoding/json"
+    "github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -32,33 +32,33 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeNamespacesResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
-	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastNamespacesFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
-	return &p
+    return &p
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -67,29 +67,29 @@ type CreateNamespaceAsyncResult struct {
 }
 
 func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateNamespaceResultFromDict(dict)
 }
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
-	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
-	return &p
+    return &p
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -98,29 +98,29 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceStatusResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
-	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
-	}
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
 func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"status": p.Status,
-	}
+    return map[string]interface{} {
+        "status": p.Status,
+    }
 }
 
 func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
-	return &p
+    return &p
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -129,29 +129,29 @@ type GetNamespaceAsyncResult struct {
 }
 
 func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetNamespaceResultFromDict(dict)
 }
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
-	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
-	return &p
+    return &p
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -160,29 +160,29 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
-	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
-	return &p
+    return &p
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -191,30 +191,30 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteNamespaceResultFromDict(dict)
 }
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
-	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
-	return &p
+    return &p
 }
 
 type DescribeDataObjectsResult struct {
-	Items         []DataObject `json:"items"`
-	NextPageToken *string      `json:"nextPageToken"`
+    Items []DataObject `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeDataObjectsAsyncResult struct {
@@ -223,34 +223,34 @@ type DescribeDataObjectsAsyncResult struct {
 }
 
 func NewDescribeDataObjectsResultFromJson(data string) DescribeDataObjectsResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeDataObjectsResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeDataObjectsResultFromDict(dict)
 }
 
 func NewDescribeDataObjectsResultFromDict(data map[string]interface{}) DescribeDataObjectsResult {
-	return DescribeDataObjectsResult{
-		Items:         CastDataObjects(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeDataObjectsResult {
+        Items: CastDataObjects(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeDataObjectsResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastDataObjectsFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastDataObjectsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeDataObjectsResult) Pointer() *DescribeDataObjectsResult {
-	return &p
+    return &p
 }
 
 type DescribeDataObjectsByUserIdResult struct {
-	Items         []DataObject `json:"items"`
-	NextPageToken *string      `json:"nextPageToken"`
+    Items []DataObject `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeDataObjectsByUserIdAsyncResult struct {
@@ -259,34 +259,34 @@ type DescribeDataObjectsByUserIdAsyncResult struct {
 }
 
 func NewDescribeDataObjectsByUserIdResultFromJson(data string) DescribeDataObjectsByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeDataObjectsByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeDataObjectsByUserIdResultFromDict(dict)
 }
 
 func NewDescribeDataObjectsByUserIdResultFromDict(data map[string]interface{}) DescribeDataObjectsByUserIdResult {
-	return DescribeDataObjectsByUserIdResult{
-		Items:         CastDataObjects(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeDataObjectsByUserIdResult {
+        Items: CastDataObjects(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeDataObjectsByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastDataObjectsFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastDataObjectsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeDataObjectsByUserIdResult) Pointer() *DescribeDataObjectsByUserIdResult {
-	return &p
+    return &p
 }
 
 type PrepareUploadResult struct {
-	Item      *DataObject `json:"item"`
-	UploadUrl *string     `json:"uploadUrl"`
+    Item *DataObject `json:"item"`
+    UploadUrl *string `json:"uploadUrl"`
 }
 
 type PrepareUploadAsyncResult struct {
@@ -295,32 +295,32 @@ type PrepareUploadAsyncResult struct {
 }
 
 func NewPrepareUploadResultFromJson(data string) PrepareUploadResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareUploadResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrepareUploadResultFromDict(dict)
 }
 
 func NewPrepareUploadResultFromDict(data map[string]interface{}) PrepareUploadResult {
-	return PrepareUploadResult{
-		Item:      NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		UploadUrl: core.CastString(data["uploadUrl"]),
-	}
+    return PrepareUploadResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        UploadUrl: core.CastString(data["uploadUrl"]),
+    }
 }
 
 func (p PrepareUploadResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"uploadUrl": p.UploadUrl,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "uploadUrl": p.UploadUrl,
+    }
 }
 
 func (p PrepareUploadResult) Pointer() *PrepareUploadResult {
-	return &p
+    return &p
 }
 
 type PrepareUploadByUserIdResult struct {
-	Item      *DataObject `json:"item"`
-	UploadUrl *string     `json:"uploadUrl"`
+    Item *DataObject `json:"item"`
+    UploadUrl *string `json:"uploadUrl"`
 }
 
 type PrepareUploadByUserIdAsyncResult struct {
@@ -329,31 +329,31 @@ type PrepareUploadByUserIdAsyncResult struct {
 }
 
 func NewPrepareUploadByUserIdResultFromJson(data string) PrepareUploadByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareUploadByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrepareUploadByUserIdResultFromDict(dict)
 }
 
 func NewPrepareUploadByUserIdResultFromDict(data map[string]interface{}) PrepareUploadByUserIdResult {
-	return PrepareUploadByUserIdResult{
-		Item:      NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		UploadUrl: core.CastString(data["uploadUrl"]),
-	}
+    return PrepareUploadByUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        UploadUrl: core.CastString(data["uploadUrl"]),
+    }
 }
 
 func (p PrepareUploadByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"uploadUrl": p.UploadUrl,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "uploadUrl": p.UploadUrl,
+    }
 }
 
 func (p PrepareUploadByUserIdResult) Pointer() *PrepareUploadByUserIdResult {
-	return &p
+    return &p
 }
 
 type UpdateDataObjectResult struct {
-	Item *DataObject `json:"item"`
+    Item *DataObject `json:"item"`
 }
 
 type UpdateDataObjectAsyncResult struct {
@@ -362,29 +362,29 @@ type UpdateDataObjectAsyncResult struct {
 }
 
 func NewUpdateDataObjectResultFromJson(data string) UpdateDataObjectResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateDataObjectResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateDataObjectResultFromDict(dict)
 }
 
 func NewUpdateDataObjectResultFromDict(data map[string]interface{}) UpdateDataObjectResult {
-	return UpdateDataObjectResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateDataObjectResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateDataObjectResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateDataObjectResult) Pointer() *UpdateDataObjectResult {
-	return &p
+    return &p
 }
 
 type UpdateDataObjectByUserIdResult struct {
-	Item *DataObject `json:"item"`
+    Item *DataObject `json:"item"`
 }
 
 type UpdateDataObjectByUserIdAsyncResult struct {
@@ -393,30 +393,30 @@ type UpdateDataObjectByUserIdAsyncResult struct {
 }
 
 func NewUpdateDataObjectByUserIdResultFromJson(data string) UpdateDataObjectByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateDataObjectByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateDataObjectByUserIdResultFromDict(dict)
 }
 
 func NewUpdateDataObjectByUserIdResultFromDict(data map[string]interface{}) UpdateDataObjectByUserIdResult {
-	return UpdateDataObjectByUserIdResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateDataObjectByUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateDataObjectByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateDataObjectByUserIdResult) Pointer() *UpdateDataObjectByUserIdResult {
-	return &p
+    return &p
 }
 
 type PrepareReUploadResult struct {
-	Item      *DataObject `json:"item"`
-	UploadUrl *string     `json:"uploadUrl"`
+    Item *DataObject `json:"item"`
+    UploadUrl *string `json:"uploadUrl"`
 }
 
 type PrepareReUploadAsyncResult struct {
@@ -425,32 +425,32 @@ type PrepareReUploadAsyncResult struct {
 }
 
 func NewPrepareReUploadResultFromJson(data string) PrepareReUploadResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareReUploadResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrepareReUploadResultFromDict(dict)
 }
 
 func NewPrepareReUploadResultFromDict(data map[string]interface{}) PrepareReUploadResult {
-	return PrepareReUploadResult{
-		Item:      NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		UploadUrl: core.CastString(data["uploadUrl"]),
-	}
+    return PrepareReUploadResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        UploadUrl: core.CastString(data["uploadUrl"]),
+    }
 }
 
 func (p PrepareReUploadResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"uploadUrl": p.UploadUrl,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "uploadUrl": p.UploadUrl,
+    }
 }
 
 func (p PrepareReUploadResult) Pointer() *PrepareReUploadResult {
-	return &p
+    return &p
 }
 
 type PrepareReUploadByUserIdResult struct {
-	Item      *DataObject `json:"item"`
-	UploadUrl *string     `json:"uploadUrl"`
+    Item *DataObject `json:"item"`
+    UploadUrl *string `json:"uploadUrl"`
 }
 
 type PrepareReUploadByUserIdAsyncResult struct {
@@ -459,31 +459,31 @@ type PrepareReUploadByUserIdAsyncResult struct {
 }
 
 func NewPrepareReUploadByUserIdResultFromJson(data string) PrepareReUploadByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareReUploadByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrepareReUploadByUserIdResultFromDict(dict)
 }
 
 func NewPrepareReUploadByUserIdResultFromDict(data map[string]interface{}) PrepareReUploadByUserIdResult {
-	return PrepareReUploadByUserIdResult{
-		Item:      NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		UploadUrl: core.CastString(data["uploadUrl"]),
-	}
+    return PrepareReUploadByUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        UploadUrl: core.CastString(data["uploadUrl"]),
+    }
 }
 
 func (p PrepareReUploadByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"uploadUrl": p.UploadUrl,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "uploadUrl": p.UploadUrl,
+    }
 }
 
 func (p PrepareReUploadByUserIdResult) Pointer() *PrepareReUploadByUserIdResult {
-	return &p
+    return &p
 }
 
 type DoneUploadResult struct {
-	Item *DataObject `json:"item"`
+    Item *DataObject `json:"item"`
 }
 
 type DoneUploadAsyncResult struct {
@@ -492,29 +492,29 @@ type DoneUploadAsyncResult struct {
 }
 
 func NewDoneUploadResultFromJson(data string) DoneUploadResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDoneUploadResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDoneUploadResultFromDict(dict)
 }
 
 func NewDoneUploadResultFromDict(data map[string]interface{}) DoneUploadResult {
-	return DoneUploadResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DoneUploadResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DoneUploadResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DoneUploadResult) Pointer() *DoneUploadResult {
-	return &p
+    return &p
 }
 
 type DoneUploadByUserIdResult struct {
-	Item *DataObject `json:"item"`
+    Item *DataObject `json:"item"`
 }
 
 type DoneUploadByUserIdAsyncResult struct {
@@ -523,29 +523,29 @@ type DoneUploadByUserIdAsyncResult struct {
 }
 
 func NewDoneUploadByUserIdResultFromJson(data string) DoneUploadByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDoneUploadByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDoneUploadByUserIdResultFromDict(dict)
 }
 
 func NewDoneUploadByUserIdResultFromDict(data map[string]interface{}) DoneUploadByUserIdResult {
-	return DoneUploadByUserIdResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DoneUploadByUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DoneUploadByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DoneUploadByUserIdResult) Pointer() *DoneUploadByUserIdResult {
-	return &p
+    return &p
 }
 
 type DeleteDataObjectResult struct {
-	Item *DataObject `json:"item"`
+    Item *DataObject `json:"item"`
 }
 
 type DeleteDataObjectAsyncResult struct {
@@ -554,29 +554,29 @@ type DeleteDataObjectAsyncResult struct {
 }
 
 func NewDeleteDataObjectResultFromJson(data string) DeleteDataObjectResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteDataObjectResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteDataObjectResultFromDict(dict)
 }
 
 func NewDeleteDataObjectResultFromDict(data map[string]interface{}) DeleteDataObjectResult {
-	return DeleteDataObjectResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteDataObjectResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteDataObjectResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteDataObjectResult) Pointer() *DeleteDataObjectResult {
-	return &p
+    return &p
 }
 
 type DeleteDataObjectByUserIdResult struct {
-	Item *DataObject `json:"item"`
+    Item *DataObject `json:"item"`
 }
 
 type DeleteDataObjectByUserIdAsyncResult struct {
@@ -585,31 +585,31 @@ type DeleteDataObjectByUserIdAsyncResult struct {
 }
 
 func NewDeleteDataObjectByUserIdResultFromJson(data string) DeleteDataObjectByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteDataObjectByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteDataObjectByUserIdResultFromDict(dict)
 }
 
 func NewDeleteDataObjectByUserIdResultFromDict(data map[string]interface{}) DeleteDataObjectByUserIdResult {
-	return DeleteDataObjectByUserIdResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteDataObjectByUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteDataObjectByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteDataObjectByUserIdResult) Pointer() *DeleteDataObjectByUserIdResult {
-	return &p
+    return &p
 }
 
 type PrepareDownloadResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadAsyncResult struct {
@@ -618,35 +618,35 @@ type PrepareDownloadAsyncResult struct {
 }
 
 func NewPrepareDownloadResultFromJson(data string) PrepareDownloadResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareDownloadResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrepareDownloadResultFromDict(dict)
 }
 
 func NewPrepareDownloadResultFromDict(data map[string]interface{}) PrepareDownloadResult {
-	return PrepareDownloadResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
-	}
+    return PrepareDownloadResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
 func (p PrepareDownloadResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"fileUrl":       p.FileUrl,
-		"contentLength": p.ContentLength,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
+    }
 }
 
 func (p PrepareDownloadResult) Pointer() *PrepareDownloadResult {
-	return &p
+    return &p
 }
 
 type PrepareDownloadByUserIdResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadByUserIdAsyncResult struct {
@@ -655,35 +655,35 @@ type PrepareDownloadByUserIdAsyncResult struct {
 }
 
 func NewPrepareDownloadByUserIdResultFromJson(data string) PrepareDownloadByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareDownloadByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrepareDownloadByUserIdResultFromDict(dict)
 }
 
 func NewPrepareDownloadByUserIdResultFromDict(data map[string]interface{}) PrepareDownloadByUserIdResult {
-	return PrepareDownloadByUserIdResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
-	}
+    return PrepareDownloadByUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
 func (p PrepareDownloadByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"fileUrl":       p.FileUrl,
-		"contentLength": p.ContentLength,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
+    }
 }
 
 func (p PrepareDownloadByUserIdResult) Pointer() *PrepareDownloadByUserIdResult {
-	return &p
+    return &p
 }
 
 type PrepareDownloadByGenerationResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadByGenerationAsyncResult struct {
@@ -692,35 +692,35 @@ type PrepareDownloadByGenerationAsyncResult struct {
 }
 
 func NewPrepareDownloadByGenerationResultFromJson(data string) PrepareDownloadByGenerationResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareDownloadByGenerationResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrepareDownloadByGenerationResultFromDict(dict)
 }
 
 func NewPrepareDownloadByGenerationResultFromDict(data map[string]interface{}) PrepareDownloadByGenerationResult {
-	return PrepareDownloadByGenerationResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
-	}
+    return PrepareDownloadByGenerationResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
 func (p PrepareDownloadByGenerationResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"fileUrl":       p.FileUrl,
-		"contentLength": p.ContentLength,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
+    }
 }
 
 func (p PrepareDownloadByGenerationResult) Pointer() *PrepareDownloadByGenerationResult {
-	return &p
+    return &p
 }
 
 type PrepareDownloadByGenerationAndUserIdResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadByGenerationAndUserIdAsyncResult struct {
@@ -729,35 +729,35 @@ type PrepareDownloadByGenerationAndUserIdAsyncResult struct {
 }
 
 func NewPrepareDownloadByGenerationAndUserIdResultFromJson(data string) PrepareDownloadByGenerationAndUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareDownloadByGenerationAndUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrepareDownloadByGenerationAndUserIdResultFromDict(dict)
 }
 
 func NewPrepareDownloadByGenerationAndUserIdResultFromDict(data map[string]interface{}) PrepareDownloadByGenerationAndUserIdResult {
-	return PrepareDownloadByGenerationAndUserIdResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
-	}
+    return PrepareDownloadByGenerationAndUserIdResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
 func (p PrepareDownloadByGenerationAndUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"fileUrl":       p.FileUrl,
-		"contentLength": p.ContentLength,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
+    }
 }
 
 func (p PrepareDownloadByGenerationAndUserIdResult) Pointer() *PrepareDownloadByGenerationAndUserIdResult {
-	return &p
+    return &p
 }
 
 type PrepareDownloadOwnDataResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadOwnDataAsyncResult struct {
@@ -766,35 +766,35 @@ type PrepareDownloadOwnDataAsyncResult struct {
 }
 
 func NewPrepareDownloadOwnDataResultFromJson(data string) PrepareDownloadOwnDataResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareDownloadOwnDataResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrepareDownloadOwnDataResultFromDict(dict)
 }
 
 func NewPrepareDownloadOwnDataResultFromDict(data map[string]interface{}) PrepareDownloadOwnDataResult {
-	return PrepareDownloadOwnDataResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
-	}
+    return PrepareDownloadOwnDataResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
 func (p PrepareDownloadOwnDataResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"fileUrl":       p.FileUrl,
-		"contentLength": p.ContentLength,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
+    }
 }
 
 func (p PrepareDownloadOwnDataResult) Pointer() *PrepareDownloadOwnDataResult {
-	return &p
+    return &p
 }
 
 type PrepareDownloadByUserIdAndDataObjectNameResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadByUserIdAndDataObjectNameAsyncResult struct {
@@ -803,35 +803,35 @@ type PrepareDownloadByUserIdAndDataObjectNameAsyncResult struct {
 }
 
 func NewPrepareDownloadByUserIdAndDataObjectNameResultFromJson(data string) PrepareDownloadByUserIdAndDataObjectNameResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareDownloadByUserIdAndDataObjectNameResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrepareDownloadByUserIdAndDataObjectNameResultFromDict(dict)
 }
 
 func NewPrepareDownloadByUserIdAndDataObjectNameResultFromDict(data map[string]interface{}) PrepareDownloadByUserIdAndDataObjectNameResult {
-	return PrepareDownloadByUserIdAndDataObjectNameResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
-	}
+    return PrepareDownloadByUserIdAndDataObjectNameResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
 func (p PrepareDownloadByUserIdAndDataObjectNameResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"fileUrl":       p.FileUrl,
-		"contentLength": p.ContentLength,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
+    }
 }
 
 func (p PrepareDownloadByUserIdAndDataObjectNameResult) Pointer() *PrepareDownloadByUserIdAndDataObjectNameResult {
-	return &p
+    return &p
 }
 
 type PrepareDownloadOwnDataByGenerationResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadOwnDataByGenerationAsyncResult struct {
@@ -840,35 +840,35 @@ type PrepareDownloadOwnDataByGenerationAsyncResult struct {
 }
 
 func NewPrepareDownloadOwnDataByGenerationResultFromJson(data string) PrepareDownloadOwnDataByGenerationResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareDownloadOwnDataByGenerationResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrepareDownloadOwnDataByGenerationResultFromDict(dict)
 }
 
 func NewPrepareDownloadOwnDataByGenerationResultFromDict(data map[string]interface{}) PrepareDownloadOwnDataByGenerationResult {
-	return PrepareDownloadOwnDataByGenerationResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
-	}
+    return PrepareDownloadOwnDataByGenerationResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
 func (p PrepareDownloadOwnDataByGenerationResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"fileUrl":       p.FileUrl,
-		"contentLength": p.ContentLength,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
+    }
 }
 
 func (p PrepareDownloadOwnDataByGenerationResult) Pointer() *PrepareDownloadOwnDataByGenerationResult {
-	return &p
+    return &p
 }
 
 type PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+    Item *DataObject `json:"item"`
+    FileUrl *string `json:"fileUrl"`
+    ContentLength *int64 `json:"contentLength"`
 }
 
 type PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncResult struct {
@@ -877,33 +877,33 @@ type PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncResult struct {
 }
 
 func NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationResultFromJson(data string) PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationResultFromDict(dict)
 }
 
 func NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationResultFromDict(data map[string]interface{}) PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult {
-	return PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
-	}
+    return PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+        FileUrl: core.CastString(data["fileUrl"]),
+        ContentLength: core.CastInt64(data["contentLength"]),
+    }
 }
 
 func (p PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"fileUrl":       p.FileUrl,
-		"contentLength": p.ContentLength,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "fileUrl": p.FileUrl,
+        "contentLength": p.ContentLength,
+    }
 }
 
 func (p PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult) Pointer() *PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult {
-	return &p
+    return &p
 }
 
 type RestoreDataObjectResult struct {
-	Item *DataObject `json:"item"`
+    Item *DataObject `json:"item"`
 }
 
 type RestoreDataObjectAsyncResult struct {
@@ -912,30 +912,30 @@ type RestoreDataObjectAsyncResult struct {
 }
 
 func NewRestoreDataObjectResultFromJson(data string) RestoreDataObjectResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRestoreDataObjectResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRestoreDataObjectResultFromDict(dict)
 }
 
 func NewRestoreDataObjectResultFromDict(data map[string]interface{}) RestoreDataObjectResult {
-	return RestoreDataObjectResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return RestoreDataObjectResult {
+        Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p RestoreDataObjectResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p RestoreDataObjectResult) Pointer() *RestoreDataObjectResult {
-	return &p
+    return &p
 }
 
 type DescribeDataObjectHistoriesResult struct {
-	Items         []DataObjectHistory `json:"items"`
-	NextPageToken *string             `json:"nextPageToken"`
+    Items []DataObjectHistory `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeDataObjectHistoriesAsyncResult struct {
@@ -944,34 +944,34 @@ type DescribeDataObjectHistoriesAsyncResult struct {
 }
 
 func NewDescribeDataObjectHistoriesResultFromJson(data string) DescribeDataObjectHistoriesResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeDataObjectHistoriesResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeDataObjectHistoriesResultFromDict(dict)
 }
 
 func NewDescribeDataObjectHistoriesResultFromDict(data map[string]interface{}) DescribeDataObjectHistoriesResult {
-	return DescribeDataObjectHistoriesResult{
-		Items:         CastDataObjectHistories(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeDataObjectHistoriesResult {
+        Items: CastDataObjectHistories(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeDataObjectHistoriesResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastDataObjectHistoriesFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastDataObjectHistoriesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeDataObjectHistoriesResult) Pointer() *DescribeDataObjectHistoriesResult {
-	return &p
+    return &p
 }
 
 type DescribeDataObjectHistoriesByUserIdResult struct {
-	Items         []DataObjectHistory `json:"items"`
-	NextPageToken *string             `json:"nextPageToken"`
+    Items []DataObjectHistory `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeDataObjectHistoriesByUserIdAsyncResult struct {
@@ -980,33 +980,33 @@ type DescribeDataObjectHistoriesByUserIdAsyncResult struct {
 }
 
 func NewDescribeDataObjectHistoriesByUserIdResultFromJson(data string) DescribeDataObjectHistoriesByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeDataObjectHistoriesByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeDataObjectHistoriesByUserIdResultFromDict(dict)
 }
 
 func NewDescribeDataObjectHistoriesByUserIdResultFromDict(data map[string]interface{}) DescribeDataObjectHistoriesByUserIdResult {
-	return DescribeDataObjectHistoriesByUserIdResult{
-		Items:         CastDataObjectHistories(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeDataObjectHistoriesByUserIdResult {
+        Items: CastDataObjectHistories(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeDataObjectHistoriesByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastDataObjectHistoriesFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastDataObjectHistoriesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeDataObjectHistoriesByUserIdResult) Pointer() *DescribeDataObjectHistoriesByUserIdResult {
-	return &p
+    return &p
 }
 
 type GetDataObjectHistoryResult struct {
-	Item *DataObjectHistory `json:"item"`
+    Item *DataObjectHistory `json:"item"`
 }
 
 type GetDataObjectHistoryAsyncResult struct {
@@ -1015,29 +1015,29 @@ type GetDataObjectHistoryAsyncResult struct {
 }
 
 func NewGetDataObjectHistoryResultFromJson(data string) GetDataObjectHistoryResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetDataObjectHistoryResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetDataObjectHistoryResultFromDict(dict)
 }
 
 func NewGetDataObjectHistoryResultFromDict(data map[string]interface{}) GetDataObjectHistoryResult {
-	return GetDataObjectHistoryResult{
-		Item: NewDataObjectHistoryFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetDataObjectHistoryResult {
+        Item: NewDataObjectHistoryFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetDataObjectHistoryResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetDataObjectHistoryResult) Pointer() *GetDataObjectHistoryResult {
-	return &p
+    return &p
 }
 
 type GetDataObjectHistoryByUserIdResult struct {
-	Item *DataObjectHistory `json:"item"`
+    Item *DataObjectHistory `json:"item"`
 }
 
 type GetDataObjectHistoryByUserIdAsyncResult struct {
@@ -1046,23 +1046,23 @@ type GetDataObjectHistoryByUserIdAsyncResult struct {
 }
 
 func NewGetDataObjectHistoryByUserIdResultFromJson(data string) GetDataObjectHistoryByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetDataObjectHistoryByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetDataObjectHistoryByUserIdResultFromDict(dict)
 }
 
 func NewGetDataObjectHistoryByUserIdResultFromDict(data map[string]interface{}) GetDataObjectHistoryByUserIdResult {
-	return GetDataObjectHistoryByUserIdResult{
-		Item: NewDataObjectHistoryFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetDataObjectHistoryByUserIdResult {
+        Item: NewDataObjectHistoryFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetDataObjectHistoryByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetDataObjectHistoryByUserIdResult) Pointer() *GetDataObjectHistoryByUserIdResult {
-	return &p
+    return &p
 }

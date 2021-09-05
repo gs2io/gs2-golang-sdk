@@ -17,70 +17,70 @@ permissions and limitations under the License.
 package chat
 
 import (
-	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+    "encoding/json"
+    "github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Namespace struct {
-	NamespaceId           *string              `json:"namespaceId"`
-	Name                  *string              `json:"name"`
-	Description           *string              `json:"description"`
-	AllowCreateRoom       *bool                `json:"allowCreateRoom"`
-	PostMessageScript     *ScriptSetting       `json:"postMessageScript"`
-	CreateRoomScript      *ScriptSetting       `json:"createRoomScript"`
-	DeleteRoomScript      *ScriptSetting       `json:"deleteRoomScript"`
-	SubscribeRoomScript   *ScriptSetting       `json:"subscribeRoomScript"`
-	UnsubscribeRoomScript *ScriptSetting       `json:"unsubscribeRoomScript"`
-	PostNotification      *NotificationSetting `json:"postNotification"`
-	LogSetting            *LogSetting          `json:"logSetting"`
-	CreatedAt             *int64               `json:"createdAt"`
-	UpdatedAt             *int64               `json:"updatedAt"`
+	NamespaceId *string `json:"namespaceId"`
+	Name *string `json:"name"`
+	Description *string `json:"description"`
+	AllowCreateRoom *bool `json:"allowCreateRoom"`
+	PostMessageScript *ScriptSetting `json:"postMessageScript"`
+	CreateRoomScript *ScriptSetting `json:"createRoomScript"`
+	DeleteRoomScript *ScriptSetting `json:"deleteRoomScript"`
+	SubscribeRoomScript *ScriptSetting `json:"subscribeRoomScript"`
+	UnsubscribeRoomScript *ScriptSetting `json:"unsubscribeRoomScript"`
+	PostNotification *NotificationSetting `json:"postNotification"`
+	LogSetting *LogSetting `json:"logSetting"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewNamespaceFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
-	return Namespace{
-		NamespaceId:           core.CastString(data["namespaceId"]),
-		Name:                  core.CastString(data["name"]),
-		Description:           core.CastString(data["description"]),
-		AllowCreateRoom:       core.CastBool(data["allowCreateRoom"]),
-		PostMessageScript:     NewScriptSettingFromDict(core.CastMap(data["postMessageScript"])).Pointer(),
-		CreateRoomScript:      NewScriptSettingFromDict(core.CastMap(data["createRoomScript"])).Pointer(),
-		DeleteRoomScript:      NewScriptSettingFromDict(core.CastMap(data["deleteRoomScript"])).Pointer(),
-		SubscribeRoomScript:   NewScriptSettingFromDict(core.CastMap(data["subscribeRoomScript"])).Pointer(),
-		UnsubscribeRoomScript: NewScriptSettingFromDict(core.CastMap(data["unsubscribeRoomScript"])).Pointer(),
-		PostNotification:      NewNotificationSettingFromDict(core.CastMap(data["postNotification"])).Pointer(),
-		LogSetting:            NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:             core.CastInt64(data["createdAt"]),
-		UpdatedAt:             core.CastInt64(data["updatedAt"]),
-	}
+    return Namespace {
+        NamespaceId: core.CastString(data["namespaceId"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        AllowCreateRoom: core.CastBool(data["allowCreateRoom"]),
+        PostMessageScript: NewScriptSettingFromDict(core.CastMap(data["postMessageScript"])).Pointer(),
+        CreateRoomScript: NewScriptSettingFromDict(core.CastMap(data["createRoomScript"])).Pointer(),
+        DeleteRoomScript: NewScriptSettingFromDict(core.CastMap(data["deleteRoomScript"])).Pointer(),
+        SubscribeRoomScript: NewScriptSettingFromDict(core.CastMap(data["subscribeRoomScript"])).Pointer(),
+        UnsubscribeRoomScript: NewScriptSettingFromDict(core.CastMap(data["unsubscribeRoomScript"])).Pointer(),
+        PostNotification: NewNotificationSettingFromDict(core.CastMap(data["postNotification"])).Pointer(),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceId":           p.NamespaceId,
-		"name":                  p.Name,
-		"description":           p.Description,
-		"allowCreateRoom":       p.AllowCreateRoom,
-		"postMessageScript":     p.PostMessageScript.ToDict(),
-		"createRoomScript":      p.CreateRoomScript.ToDict(),
-		"deleteRoomScript":      p.DeleteRoomScript.ToDict(),
-		"subscribeRoomScript":   p.SubscribeRoomScript.ToDict(),
-		"unsubscribeRoomScript": p.UnsubscribeRoomScript.ToDict(),
-		"postNotification":      p.PostNotification.ToDict(),
-		"logSetting":            p.LogSetting.ToDict(),
-		"createdAt":             p.CreatedAt,
-		"updatedAt":             p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "namespaceId": p.NamespaceId,
+        "name": p.Name,
+        "description": p.Description,
+        "allowCreateRoom": p.AllowCreateRoom,
+        "postMessageScript": p.PostMessageScript.ToDict(),
+        "createRoomScript": p.CreateRoomScript.ToDict(),
+        "deleteRoomScript": p.DeleteRoomScript.ToDict(),
+        "subscribeRoomScript": p.SubscribeRoomScript.ToDict(),
+        "unsubscribeRoomScript": p.UnsubscribeRoomScript.ToDict(),
+        "postNotification": p.PostNotification.ToDict(),
+        "logSetting": p.LogSetting.ToDict(),
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p Namespace) Pointer() *Namespace {
-	return &p
+    return &p
 }
 
 func CastNamespaces(data []interface{}) []Namespace {
@@ -92,60 +92,60 @@ func CastNamespaces(data []interface{}) []Namespace {
 }
 
 func CastNamespacesFromDict(data []Namespace) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Room struct {
-	RoomId           *string  `json:"roomId"`
-	Name             *string  `json:"name"`
-	UserId           *string  `json:"userId"`
-	Metadata         *string  `json:"metadata"`
-	Password         *string  `json:"password"`
+	RoomId *string `json:"roomId"`
+	Name *string `json:"name"`
+	UserId *string `json:"userId"`
+	Metadata *string `json:"metadata"`
+	Password *string `json:"password"`
 	WhiteListUserIds []string `json:"whiteListUserIds"`
-	CreatedAt        *int64   `json:"createdAt"`
-	UpdatedAt        *int64   `json:"updatedAt"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewRoomFromJson(data string) Room {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRoomFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRoomFromDict(dict)
 }
 
 func NewRoomFromDict(data map[string]interface{}) Room {
-	return Room{
-		RoomId:           core.CastString(data["roomId"]),
-		Name:             core.CastString(data["name"]),
-		UserId:           core.CastString(data["userId"]),
-		Metadata:         core.CastString(data["metadata"]),
-		Password:         core.CastString(data["password"]),
-		WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
-		CreatedAt:        core.CastInt64(data["createdAt"]),
-		UpdatedAt:        core.CastInt64(data["updatedAt"]),
-	}
+    return Room {
+        RoomId: core.CastString(data["roomId"]),
+        Name: core.CastString(data["name"]),
+        UserId: core.CastString(data["userId"]),
+        Metadata: core.CastString(data["metadata"]),
+        Password: core.CastString(data["password"]),
+        WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p Room) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"roomId":   p.RoomId,
-		"name":     p.Name,
-		"userId":   p.UserId,
-		"metadata": p.Metadata,
-		"password": p.Password,
-		"whiteListUserIds": core.CastStringsFromDict(
-			p.WhiteListUserIds,
-		),
-		"createdAt": p.CreatedAt,
-		"updatedAt": p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "roomId": p.RoomId,
+        "name": p.Name,
+        "userId": p.UserId,
+        "metadata": p.Metadata,
+        "password": p.Password,
+        "whiteListUserIds": core.CastStringsFromDict(
+        p.WhiteListUserIds,
+    ),
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p Room) Pointer() *Room {
-	return &p
+    return &p
 }
 
 func CastRooms(data []interface{}) []Room {
@@ -157,55 +157,55 @@ func CastRooms(data []interface{}) []Room {
 }
 
 func CastRoomsFromDict(data []Room) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Message struct {
 	MessageId *string `json:"messageId"`
-	RoomName  *string `json:"roomName"`
-	Name      *string `json:"name"`
-	UserId    *string `json:"userId"`
-	Category  *int32  `json:"category"`
-	Metadata  *string `json:"metadata"`
-	CreatedAt *int64  `json:"createdAt"`
+	RoomName *string `json:"roomName"`
+	Name *string `json:"name"`
+	UserId *string `json:"userId"`
+	Category *int32 `json:"category"`
+	Metadata *string `json:"metadata"`
+	CreatedAt *int64 `json:"createdAt"`
 }
 
 func NewMessageFromJson(data string) Message {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMessageFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewMessageFromDict(dict)
 }
 
 func NewMessageFromDict(data map[string]interface{}) Message {
-	return Message{
-		MessageId: core.CastString(data["messageId"]),
-		RoomName:  core.CastString(data["roomName"]),
-		Name:      core.CastString(data["name"]),
-		UserId:    core.CastString(data["userId"]),
-		Category:  core.CastInt32(data["category"]),
-		Metadata:  core.CastString(data["metadata"]),
-		CreatedAt: core.CastInt64(data["createdAt"]),
-	}
+    return Message {
+        MessageId: core.CastString(data["messageId"]),
+        RoomName: core.CastString(data["roomName"]),
+        Name: core.CastString(data["name"]),
+        UserId: core.CastString(data["userId"]),
+        Category: core.CastInt32(data["category"]),
+        Metadata: core.CastString(data["metadata"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+    }
 }
 
 func (p Message) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"messageId": p.MessageId,
-		"roomName":  p.RoomName,
-		"name":      p.Name,
-		"userId":    p.UserId,
-		"category":  p.Category,
-		"metadata":  p.Metadata,
-		"createdAt": p.CreatedAt,
-	}
+    return map[string]interface{} {
+        "messageId": p.MessageId,
+        "roomName": p.RoomName,
+        "name": p.Name,
+        "userId": p.UserId,
+        "category": p.Category,
+        "metadata": p.Metadata,
+        "createdAt": p.CreatedAt,
+    }
 }
 
 func (p Message) Pointer() *Message {
-	return &p
+    return &p
 }
 
 func CastMessages(data []interface{}) []Message {
@@ -217,51 +217,51 @@ func CastMessages(data []interface{}) []Message {
 }
 
 func CastMessagesFromDict(data []Message) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Subscribe struct {
-	SubscribeId       *string            `json:"subscribeId"`
-	UserId            *string            `json:"userId"`
-	RoomName          *string            `json:"roomName"`
+	SubscribeId *string `json:"subscribeId"`
+	UserId *string `json:"userId"`
+	RoomName *string `json:"roomName"`
 	NotificationTypes []NotificationType `json:"notificationTypes"`
-	CreatedAt         *int64             `json:"createdAt"`
+	CreatedAt *int64 `json:"createdAt"`
 }
 
 func NewSubscribeFromJson(data string) Subscribe {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSubscribeFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSubscribeFromDict(dict)
 }
 
 func NewSubscribeFromDict(data map[string]interface{}) Subscribe {
-	return Subscribe{
-		SubscribeId:       core.CastString(data["subscribeId"]),
-		UserId:            core.CastString(data["userId"]),
-		RoomName:          core.CastString(data["roomName"]),
-		NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
-		CreatedAt:         core.CastInt64(data["createdAt"]),
-	}
+    return Subscribe {
+        SubscribeId: core.CastString(data["subscribeId"]),
+        UserId: core.CastString(data["userId"]),
+        RoomName: core.CastString(data["roomName"]),
+        NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+    }
 }
 
 func (p Subscribe) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"subscribeId": p.SubscribeId,
-		"userId":      p.UserId,
-		"roomName":    p.RoomName,
-		"notificationTypes": CastNotificationTypesFromDict(
-			p.NotificationTypes,
-		),
-		"createdAt": p.CreatedAt,
-	}
+    return map[string]interface{} {
+        "subscribeId": p.SubscribeId,
+        "userId": p.UserId,
+        "roomName": p.RoomName,
+        "notificationTypes": CastNotificationTypesFromDict(
+        p.NotificationTypes,
+    ),
+        "createdAt": p.CreatedAt,
+    }
 }
 
 func (p Subscribe) Pointer() *Subscribe {
-	return &p
+    return &p
 }
 
 func CastSubscribes(data []interface{}) []Subscribe {
@@ -273,40 +273,40 @@ func CastSubscribes(data []interface{}) []Subscribe {
 }
 
 func CastSubscribesFromDict(data []Subscribe) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type NotificationType struct {
-	Category                             *int32 `json:"category"`
-	EnableTransferMobilePushNotification *bool  `json:"enableTransferMobilePushNotification"`
+	Category *int32 `json:"category"`
+	EnableTransferMobilePushNotification *bool `json:"enableTransferMobilePushNotification"`
 }
 
 func NewNotificationTypeFromJson(data string) NotificationType {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewNotificationTypeFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewNotificationTypeFromDict(dict)
 }
 
 func NewNotificationTypeFromDict(data map[string]interface{}) NotificationType {
-	return NotificationType{
-		Category:                             core.CastInt32(data["category"]),
-		EnableTransferMobilePushNotification: core.CastBool(data["enableTransferMobilePushNotification"]),
-	}
+    return NotificationType {
+        Category: core.CastInt32(data["category"]),
+        EnableTransferMobilePushNotification: core.CastBool(data["enableTransferMobilePushNotification"]),
+    }
 }
 
 func (p NotificationType) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"category":                             p.Category,
-		"enableTransferMobilePushNotification": p.EnableTransferMobilePushNotification,
-	}
+    return map[string]interface{} {
+        "category": p.Category,
+        "enableTransferMobilePushNotification": p.EnableTransferMobilePushNotification,
+    }
 }
 
 func (p NotificationType) Pointer() *NotificationType {
-	return &p
+    return &p
 }
 
 func CastNotificationTypes(data []interface{}) []NotificationType {
@@ -318,46 +318,46 @@ func CastNotificationTypes(data []interface{}) []NotificationType {
 }
 
 func CastNotificationTypesFromDict(data []NotificationType) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type ScriptSetting struct {
-	TriggerScriptId             *string `json:"triggerScriptId"`
-	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
-	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
+	TriggerScriptId *string `json:"triggerScriptId"`
+	DoneTriggerTargetType *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId *string `json:"doneTriggerScriptId"`
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
 func NewScriptSettingFromJson(data string) ScriptSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewScriptSettingFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewScriptSettingFromDict(dict)
 }
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
-	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
-	}
+    return ScriptSetting {
+        TriggerScriptId: core.CastString(data["triggerScriptId"]),
+        DoneTriggerTargetType: core.CastString(data["doneTriggerTargetType"]),
+        DoneTriggerScriptId: core.CastString(data["doneTriggerScriptId"]),
+        DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+    }
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"triggerScriptId":             p.TriggerScriptId,
-		"doneTriggerTargetType":       p.DoneTriggerTargetType,
-		"doneTriggerScriptId":         p.DoneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": p.DoneTriggerQueueNamespaceId,
-	}
+    return map[string]interface{} {
+        "triggerScriptId": p.TriggerScriptId,
+        "doneTriggerTargetType": p.DoneTriggerTargetType,
+        "doneTriggerScriptId": p.DoneTriggerScriptId,
+        "doneTriggerQueueNamespaceId": p.DoneTriggerQueueNamespaceId,
+    }
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
-	return &p
+    return &p
 }
 
 func CastScriptSettings(data []interface{}) []ScriptSetting {
@@ -369,43 +369,43 @@ func CastScriptSettings(data []interface{}) []ScriptSetting {
 }
 
 func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type NotificationSetting struct {
-	GatewayNamespaceId               *string `json:"gatewayNamespaceId"`
-	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
-	Sound                            *string `json:"sound"`
+	GatewayNamespaceId *string `json:"gatewayNamespaceId"`
+	EnableTransferMobileNotification *bool `json:"enableTransferMobileNotification"`
+	Sound *string `json:"sound"`
 }
 
 func NewNotificationSettingFromJson(data string) NotificationSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewNotificationSettingFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewNotificationSettingFromDict(dict)
 }
 
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
-	return NotificationSetting{
-		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
-		EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
-		Sound:                            core.CastString(data["sound"]),
-	}
+    return NotificationSetting {
+        GatewayNamespaceId: core.CastString(data["gatewayNamespaceId"]),
+        EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
+        Sound: core.CastString(data["sound"]),
+    }
 }
 
 func (p NotificationSetting) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"gatewayNamespaceId":               p.GatewayNamespaceId,
-		"enableTransferMobileNotification": p.EnableTransferMobileNotification,
-		"sound":                            p.Sound,
-	}
+    return map[string]interface{} {
+        "gatewayNamespaceId": p.GatewayNamespaceId,
+        "enableTransferMobileNotification": p.EnableTransferMobileNotification,
+        "sound": p.Sound,
+    }
 }
 
 func (p NotificationSetting) Pointer() *NotificationSetting {
-	return &p
+    return &p
 }
 
 func CastNotificationSettings(data []interface{}) []NotificationSetting {
@@ -417,11 +417,11 @@ func CastNotificationSettings(data []interface{}) []NotificationSetting {
 }
 
 func CastNotificationSettingsFromDict(data []NotificationSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type LogSetting struct {
@@ -429,25 +429,25 @@ type LogSetting struct {
 }
 
 func NewLogSettingFromJson(data string) LogSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLogSettingFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
-	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
-	}
+    return LogSetting {
+        LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+    }
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"loggingNamespaceId": p.LoggingNamespaceId,
-	}
+    return map[string]interface{} {
+        "loggingNamespaceId": p.LoggingNamespaceId,
+    }
 }
 
 func (p LogSetting) Pointer() *LogSetting {
-	return &p
+    return &p
 }
 
 func CastLogSettings(data []interface{}) []LogSetting {
@@ -459,9 +459,9 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }

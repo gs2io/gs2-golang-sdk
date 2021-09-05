@@ -49,13 +49,13 @@ func (p Gs2WatchWebSocketClient) getChartAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetChartResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetChartAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetChartAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetChartAsyncResult{
 		result: &result,
@@ -68,61 +68,61 @@ func (p Gs2WatchWebSocketClient) GetChartAsync(
 	request *GetChartRequest,
 	callback chan<- GetChartAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "watch",
-			"component":   "chart",
-			"function":    "getChart",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "watch",
+    		"component": "chart",
+    		"function": "getChart",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.Metrics != nil && *request.Metrics != "" {
-		bodies["metrics"] = *request.Metrics
-	}
-	if request.Grn != nil && *request.Grn != "" {
-		bodies["grn"] = *request.Grn
-	}
-	if request.Queries != nil {
-		var _queries []interface{}
-		for _, item := range request.Queries {
-			_queries = append(_queries, item)
-		}
-		bodies["queries"] = _queries
-	}
-	if request.By != nil && *request.By != "" {
-		bodies["by"] = *request.By
-	}
-	if request.Timeframe != nil && *request.Timeframe != "" {
-		bodies["timeframe"] = *request.Timeframe
-	}
-	if request.Size != nil && *request.Size != "" {
-		bodies["size"] = *request.Size
-	}
-	if request.Format != nil && *request.Format != "" {
-		bodies["format"] = *request.Format
-	}
-	if request.Aggregator != nil && *request.Aggregator != "" {
-		bodies["aggregator"] = *request.Aggregator
-	}
-	if request.Style != nil && *request.Style != "" {
-		bodies["style"] = *request.Style
-	}
-	if request.Title != nil && *request.Title != "" {
-		bodies["title"] = *request.Title
-	}
+    if request.Metrics != nil && *request.Metrics != "" {
+        bodies["metrics"] = *request.Metrics
+    }
+    if request.Grn != nil && *request.Grn != "" {
+        bodies["grn"] = *request.Grn
+    }
+    if request.Queries != nil {
+        var _queries []interface {}
+        for _, item := range request.Queries {
+            _queries = append(_queries, item)
+        }
+        bodies["queries"] = _queries
+    }
+    if request.By != nil && *request.By != "" {
+        bodies["by"] = *request.By
+    }
+    if request.Timeframe != nil && *request.Timeframe != "" {
+        bodies["timeframe"] = *request.Timeframe
+    }
+    if request.Size != nil && *request.Size != "" {
+        bodies["size"] = *request.Size
+    }
+    if request.Format != nil && *request.Format != "" {
+        bodies["format"] = *request.Format
+    }
+    if request.Aggregator != nil && *request.Aggregator != "" {
+        bodies["aggregator"] = *request.Aggregator
+    }
+    if request.Style != nil && *request.Style != "" {
+        bodies["style"] = *request.Style
+    }
+    if request.Title != nil && *request.Title != "" {
+        bodies["title"] = *request.Title
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getChartAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -159,13 +159,13 @@ func (p Gs2WatchWebSocketClient) getCumulativeAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCumulativeResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCumulativeAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCumulativeAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCumulativeAsyncResult{
 		result: &result,
@@ -178,33 +178,33 @@ func (p Gs2WatchWebSocketClient) GetCumulativeAsync(
 	request *GetCumulativeRequest,
 	callback chan<- GetCumulativeAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "watch",
-			"component":   "cumulative",
-			"function":    "getCumulative",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "watch",
+    		"component": "cumulative",
+    		"function": "getCumulative",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.ResourceGrn != nil && *request.ResourceGrn != "" {
-		bodies["resourceGrn"] = *request.ResourceGrn
-	}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.ResourceGrn != nil && *request.ResourceGrn != "" {
+        bodies["resourceGrn"] = *request.ResourceGrn
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getCumulativeAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -241,13 +241,13 @@ func (p Gs2WatchWebSocketClient) describeBillingActivitiesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeBillingActivitiesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBillingActivitiesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBillingActivitiesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeBillingActivitiesAsyncResult{
 		result: &result,
@@ -260,42 +260,42 @@ func (p Gs2WatchWebSocketClient) DescribeBillingActivitiesAsync(
 	request *DescribeBillingActivitiesRequest,
 	callback chan<- DescribeBillingActivitiesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "watch",
-			"component":   "billingActivity",
-			"function":    "describeBillingActivities",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "watch",
+    		"component": "billingActivity",
+    		"function": "describeBillingActivities",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.Year != nil {
-		bodies["year"] = *request.Year
-	}
-	if request.Month != nil {
-		bodies["month"] = *request.Month
-	}
-	if request.Service != nil && *request.Service != "" {
-		bodies["service"] = *request.Service
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.Year != nil {
+        bodies["year"] = *request.Year
+    }
+    if request.Month != nil {
+        bodies["month"] = *request.Month
+    }
+    if request.Service != nil && *request.Service != "" {
+        bodies["service"] = *request.Service
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeBillingActivitiesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -332,13 +332,13 @@ func (p Gs2WatchWebSocketClient) getBillingActivityAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetBillingActivityResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetBillingActivityAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBillingActivityAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetBillingActivityAsyncResult{
 		result: &result,
@@ -351,39 +351,39 @@ func (p Gs2WatchWebSocketClient) GetBillingActivityAsync(
 	request *GetBillingActivityRequest,
 	callback chan<- GetBillingActivityAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "watch",
-			"component":   "billingActivity",
-			"function":    "getBillingActivity",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "watch",
+    		"component": "billingActivity",
+    		"function": "getBillingActivity",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.Year != nil {
-		bodies["year"] = *request.Year
-	}
-	if request.Month != nil {
-		bodies["month"] = *request.Month
-	}
-	if request.Service != nil && *request.Service != "" {
-		bodies["service"] = *request.Service
-	}
-	if request.ActivityType != nil && *request.ActivityType != "" {
-		bodies["activityType"] = *request.ActivityType
-	}
+    if request.Year != nil {
+        bodies["year"] = *request.Year
+    }
+    if request.Month != nil {
+        bodies["month"] = *request.Month
+    }
+    if request.Service != nil && *request.Service != "" {
+        bodies["service"] = *request.Service
+    }
+    if request.ActivityType != nil && *request.ActivityType != "" {
+        bodies["activityType"] = *request.ActivityType
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getBillingActivityAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)

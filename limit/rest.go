@@ -56,13 +56,13 @@ func describeNamespacesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -86,10 +86,10 @@ func (p Gs2LimitRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -141,13 +141,13 @@ func createNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -163,32 +163,32 @@ func (p Gs2LimitRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -232,13 +232,13 @@ func getNamespaceStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -252,19 +252,19 @@ func (p Gs2LimitRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -316,13 +316,13 @@ func getNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -336,19 +336,19 @@ func (p Gs2LimitRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -400,13 +400,13 @@ func updateNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -420,36 +420,36 @@ func (p Gs2LimitRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -493,13 +493,13 @@ func deleteNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -513,19 +513,19 @@ func (p Gs2LimitRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -577,13 +577,13 @@ func describeCountersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeCountersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeCountersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeCountersAsyncResult{
 		result: &result,
@@ -597,11 +597,11 @@ func (p Gs2LimitRestClient) DescribeCountersAsync(
 	callback chan<- DescribeCountersAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/counter"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -615,13 +615,13 @@ func (p Gs2LimitRestClient) DescribeCountersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeCountersAsyncHandler(
 		p,
@@ -673,13 +673,13 @@ func describeCountersByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeCountersByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeCountersByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeCountersByUserIdAsyncResult{
 		result: &result,
@@ -693,16 +693,16 @@ func (p Gs2LimitRestClient) DescribeCountersByUserIdAsync(
 	callback chan<- DescribeCountersByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/counter"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -716,10 +716,10 @@ func (p Gs2LimitRestClient) DescribeCountersByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeCountersByUserIdAsyncHandler(
 		p,
@@ -771,13 +771,13 @@ func getCounterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCounterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCounterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCounterAsyncResult{
 		result: &result,
@@ -791,32 +791,32 @@ func (p Gs2LimitRestClient) GetCounterAsync(
 	callback chan<- GetCounterAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/counter/{limitName}/{counterName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LimitName != nil && *request.LimitName != "" {
-		path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
-	} else {
-		path = strings.ReplaceAll(path, "{limitName}", "null")
-	}
-	if request.CounterName != nil && *request.CounterName != "" {
-		path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
-	} else {
-		path = strings.ReplaceAll(path, "{counterName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LimitName != nil && *request.LimitName != ""  {
+        path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
+    } else {
+        path = strings.ReplaceAll(path, "{limitName}", "null")
+    }
+    if request.CounterName != nil && *request.CounterName != ""  {
+        path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
+    } else {
+        path = strings.ReplaceAll(path, "{counterName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getCounterAsyncHandler(
 		p,
@@ -868,13 +868,13 @@ func getCounterByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCounterByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCounterByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCounterByUserIdAsyncResult{
 		result: &result,
@@ -888,34 +888,34 @@ func (p Gs2LimitRestClient) GetCounterByUserIdAsync(
 	callback chan<- GetCounterByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/counter/{limitName}/{counterName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LimitName != nil && *request.LimitName != "" {
-		path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
-	} else {
-		path = strings.ReplaceAll(path, "{limitName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.CounterName != nil && *request.CounterName != "" {
-		path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
-	} else {
-		path = strings.ReplaceAll(path, "{counterName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LimitName != nil && *request.LimitName != ""  {
+        path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
+    } else {
+        path = strings.ReplaceAll(path, "{limitName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.CounterName != nil && *request.CounterName != ""  {
+        path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
+    } else {
+        path = strings.ReplaceAll(path, "{counterName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getCounterByUserIdAsyncHandler(
 		p,
@@ -967,13 +967,13 @@ func countUpAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CountUpAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CountUpAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CountUpAsyncResult{
 		result: &result,
@@ -987,49 +987,49 @@ func (p Gs2LimitRestClient) CountUpAsync(
 	callback chan<- CountUpAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/counter/{limitName}/{counterName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LimitName != nil && *request.LimitName != "" {
-		path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
-	} else {
-		path = strings.ReplaceAll(path, "{limitName}", "null")
-	}
-	if request.CounterName != nil && *request.CounterName != "" {
-		path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
-	} else {
-		path = strings.ReplaceAll(path, "{counterName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LimitName != nil && *request.LimitName != ""  {
+        path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
+    } else {
+        path = strings.ReplaceAll(path, "{limitName}", "null")
+    }
+    if request.CounterName != nil && *request.CounterName != ""  {
+        path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
+    } else {
+        path = strings.ReplaceAll(path, "{counterName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.CountUpValue != nil {
-		bodies["countUpValue"] = *request.CountUpValue
-	}
-	if request.MaxValue != nil {
-		bodies["maxValue"] = *request.MaxValue
-	}
+    var bodies = core.Bodies{}
+    if request.CountUpValue != nil {
+        bodies["countUpValue"] = *request.CountUpValue
+    }
+    if request.MaxValue != nil {
+        bodies["maxValue"] = *request.MaxValue
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go countUpAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1073,13 +1073,13 @@ func countUpByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CountUpByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CountUpByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CountUpByUserIdAsyncResult{
 		result: &result,
@@ -1093,51 +1093,51 @@ func (p Gs2LimitRestClient) CountUpByUserIdAsync(
 	callback chan<- CountUpByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/counter/{limitName}/{counterName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LimitName != nil && *request.LimitName != "" {
-		path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
-	} else {
-		path = strings.ReplaceAll(path, "{limitName}", "null")
-	}
-	if request.CounterName != nil && *request.CounterName != "" {
-		path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
-	} else {
-		path = strings.ReplaceAll(path, "{counterName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LimitName != nil && *request.LimitName != ""  {
+        path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
+    } else {
+        path = strings.ReplaceAll(path, "{limitName}", "null")
+    }
+    if request.CounterName != nil && *request.CounterName != ""  {
+        path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
+    } else {
+        path = strings.ReplaceAll(path, "{counterName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.CountUpValue != nil {
-		bodies["countUpValue"] = *request.CountUpValue
-	}
-	if request.MaxValue != nil {
-		bodies["maxValue"] = *request.MaxValue
-	}
+    var bodies = core.Bodies{}
+    if request.CountUpValue != nil {
+        bodies["countUpValue"] = *request.CountUpValue
+    }
+    if request.MaxValue != nil {
+        bodies["maxValue"] = *request.MaxValue
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go countUpByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1181,13 +1181,13 @@ func deleteCounterByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteCounterByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteCounterByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteCounterByUserIdAsyncResult{
 		result: &result,
@@ -1201,34 +1201,34 @@ func (p Gs2LimitRestClient) DeleteCounterByUserIdAsync(
 	callback chan<- DeleteCounterByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/counter/{limitName}/{counterName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LimitName != nil && *request.LimitName != "" {
-		path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
-	} else {
-		path = strings.ReplaceAll(path, "{limitName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.CounterName != nil && *request.CounterName != "" {
-		path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
-	} else {
-		path = strings.ReplaceAll(path, "{counterName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LimitName != nil && *request.LimitName != ""  {
+        path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
+    } else {
+        path = strings.ReplaceAll(path, "{limitName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.CounterName != nil && *request.CounterName != ""  {
+        path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
+    } else {
+        path = strings.ReplaceAll(path, "{counterName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteCounterByUserIdAsyncHandler(
 		p,
@@ -1280,13 +1280,13 @@ func countUpByStampTaskAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CountUpByStampTaskAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CountUpByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CountUpByStampTaskAsyncResult{
 		result: &result,
@@ -1302,29 +1302,29 @@ func (p Gs2LimitRestClient) CountUpByStampTaskAsync(
 	path := "/stamp/counter/increase"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go countUpByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1368,13 +1368,13 @@ func deleteByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteByStampSheetAsyncResult{
 		result: &result,
@@ -1390,29 +1390,29 @@ func (p Gs2LimitRestClient) DeleteByStampSheetAsync(
 	path := "/stamp/counter/delete"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1456,13 +1456,13 @@ func describeLimitModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeLimitModelMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeLimitModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeLimitModelMastersAsyncResult{
 		result: &result,
@@ -1476,11 +1476,11 @@ func (p Gs2LimitRestClient) DescribeLimitModelMastersAsync(
 	callback chan<- DescribeLimitModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/limit"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1491,10 +1491,10 @@ func (p Gs2LimitRestClient) DescribeLimitModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeLimitModelMastersAsyncHandler(
 		p,
@@ -1546,13 +1546,13 @@ func createLimitModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateLimitModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateLimitModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateLimitModelMasterAsyncResult{
 		result: &result,
@@ -1566,51 +1566,51 @@ func (p Gs2LimitRestClient) CreateLimitModelMasterAsync(
 	callback chan<- CreateLimitModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/limit"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.ResetType != nil && *request.ResetType != "" {
-		bodies["resetType"] = *request.ResetType
-	}
-	if request.ResetDayOfMonth != nil {
-		bodies["resetDayOfMonth"] = *request.ResetDayOfMonth
-	}
-	if request.ResetDayOfWeek != nil && *request.ResetDayOfWeek != "" {
-		bodies["resetDayOfWeek"] = *request.ResetDayOfWeek
-	}
-	if request.ResetHour != nil {
-		bodies["resetHour"] = *request.ResetHour
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ResetType != nil && *request.ResetType != "" {
+        bodies["resetType"] = *request.ResetType
+    }
+    if request.ResetDayOfMonth != nil {
+        bodies["resetDayOfMonth"] = *request.ResetDayOfMonth
+    }
+    if request.ResetDayOfWeek != nil && *request.ResetDayOfWeek != "" {
+        bodies["resetDayOfWeek"] = *request.ResetDayOfWeek
+    }
+    if request.ResetHour != nil {
+        bodies["resetHour"] = *request.ResetHour
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createLimitModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1654,13 +1654,13 @@ func getLimitModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetLimitModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetLimitModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetLimitModelMasterAsyncResult{
 		result: &result,
@@ -1674,24 +1674,24 @@ func (p Gs2LimitRestClient) GetLimitModelMasterAsync(
 	callback chan<- GetLimitModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/limit/{limitName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LimitName != nil && *request.LimitName != "" {
-		path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
-	} else {
-		path = strings.ReplaceAll(path, "{limitName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LimitName != nil && *request.LimitName != ""  {
+        path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
+    } else {
+        path = strings.ReplaceAll(path, "{limitName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getLimitModelMasterAsyncHandler(
 		p,
@@ -1743,13 +1743,13 @@ func updateLimitModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateLimitModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateLimitModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateLimitModelMasterAsyncResult{
 		result: &result,
@@ -1763,53 +1763,53 @@ func (p Gs2LimitRestClient) UpdateLimitModelMasterAsync(
 	callback chan<- UpdateLimitModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/limit/{limitName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LimitName != nil && *request.LimitName != "" {
-		path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
-	} else {
-		path = strings.ReplaceAll(path, "{limitName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LimitName != nil && *request.LimitName != ""  {
+        path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
+    } else {
+        path = strings.ReplaceAll(path, "{limitName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.ResetType != nil && *request.ResetType != "" {
-		bodies["resetType"] = *request.ResetType
-	}
-	if request.ResetDayOfMonth != nil {
-		bodies["resetDayOfMonth"] = *request.ResetDayOfMonth
-	}
-	if request.ResetDayOfWeek != nil && *request.ResetDayOfWeek != "" {
-		bodies["resetDayOfWeek"] = *request.ResetDayOfWeek
-	}
-	if request.ResetHour != nil {
-		bodies["resetHour"] = *request.ResetHour
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ResetType != nil && *request.ResetType != "" {
+        bodies["resetType"] = *request.ResetType
+    }
+    if request.ResetDayOfMonth != nil {
+        bodies["resetDayOfMonth"] = *request.ResetDayOfMonth
+    }
+    if request.ResetDayOfWeek != nil && *request.ResetDayOfWeek != "" {
+        bodies["resetDayOfWeek"] = *request.ResetDayOfWeek
+    }
+    if request.ResetHour != nil {
+        bodies["resetHour"] = *request.ResetHour
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateLimitModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1853,13 +1853,13 @@ func deleteLimitModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteLimitModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteLimitModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteLimitModelMasterAsyncResult{
 		result: &result,
@@ -1873,24 +1873,24 @@ func (p Gs2LimitRestClient) DeleteLimitModelMasterAsync(
 	callback chan<- DeleteLimitModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/limit/{limitName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LimitName != nil && *request.LimitName != "" {
-		path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
-	} else {
-		path = strings.ReplaceAll(path, "{limitName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LimitName != nil && *request.LimitName != ""  {
+        path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
+    } else {
+        path = strings.ReplaceAll(path, "{limitName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteLimitModelMasterAsyncHandler(
 		p,
@@ -1942,13 +1942,13 @@ func exportMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ExportMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ExportMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -1962,19 +1962,19 @@ func (p Gs2LimitRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go exportMasterAsyncHandler(
 		p,
@@ -2026,13 +2026,13 @@ func getCurrentLimitMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCurrentLimitMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCurrentLimitMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCurrentLimitMasterAsyncResult{
 		result: &result,
@@ -2046,19 +2046,19 @@ func (p Gs2LimitRestClient) GetCurrentLimitMasterAsync(
 	callback chan<- GetCurrentLimitMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getCurrentLimitMasterAsyncHandler(
 		p,
@@ -2110,13 +2110,13 @@ func updateCurrentLimitMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentLimitMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentLimitMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentLimitMasterAsyncResult{
 		result: &result,
@@ -2130,33 +2130,33 @@ func (p Gs2LimitRestClient) UpdateCurrentLimitMasterAsync(
 	callback chan<- UpdateCurrentLimitMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Settings != nil && *request.Settings != "" {
-		bodies["settings"] = *request.Settings
-	}
+    var bodies = core.Bodies{}
+    if request.Settings != nil && *request.Settings != "" {
+        bodies["settings"] = *request.Settings
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentLimitMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2200,13 +2200,13 @@ func updateCurrentLimitMasterFromGitHubAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentLimitMasterFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentLimitMasterFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentLimitMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2220,33 +2220,33 @@ func (p Gs2LimitRestClient) UpdateCurrentLimitMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentLimitMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentLimitMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2290,13 +2290,13 @@ func describeLimitModelsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeLimitModelsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeLimitModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeLimitModelsAsyncResult{
 		result: &result,
@@ -2310,19 +2310,19 @@ func (p Gs2LimitRestClient) DescribeLimitModelsAsync(
 	callback chan<- DescribeLimitModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/limit"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeLimitModelsAsyncHandler(
 		p,
@@ -2374,13 +2374,13 @@ func getLimitModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetLimitModelAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetLimitModelAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetLimitModelAsyncResult{
 		result: &result,
@@ -2394,24 +2394,24 @@ func (p Gs2LimitRestClient) GetLimitModelAsync(
 	callback chan<- GetLimitModelAsyncResult,
 ) {
 	path := "/{namespaceName}/limit/{limitName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LimitName != nil && *request.LimitName != "" {
-		path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
-	} else {
-		path = strings.ReplaceAll(path, "{limitName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LimitName != nil && *request.LimitName != ""  {
+        path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
+    } else {
+        path = strings.ReplaceAll(path, "{limitName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getLimitModelAsyncHandler(
 		p,

@@ -17,61 +17,61 @@ permissions and limitations under the License.
 package lottery
 
 import (
-	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+    "encoding/json"
+    "github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Namespace struct {
-	NamespaceId              *string     `json:"namespaceId"`
-	Name                     *string     `json:"name"`
-	Description              *string     `json:"description"`
-	QueueNamespaceId         *string     `json:"queueNamespaceId"`
-	KeyId                    *string     `json:"keyId"`
-	LotteryTriggerScriptId   *string     `json:"lotteryTriggerScriptId"`
-	ChoicePrizeTableScriptId *string     `json:"choicePrizeTableScriptId"`
-	LogSetting               *LogSetting `json:"logSetting"`
-	CreatedAt                *int64      `json:"createdAt"`
-	UpdatedAt                *int64      `json:"updatedAt"`
+	NamespaceId *string `json:"namespaceId"`
+	Name *string `json:"name"`
+	Description *string `json:"description"`
+	QueueNamespaceId *string `json:"queueNamespaceId"`
+	KeyId *string `json:"keyId"`
+	LotteryTriggerScriptId *string `json:"lotteryTriggerScriptId"`
+	ChoicePrizeTableScriptId *string `json:"choicePrizeTableScriptId"`
+	LogSetting *LogSetting `json:"logSetting"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewNamespaceFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
-	return Namespace{
-		NamespaceId:              core.CastString(data["namespaceId"]),
-		Name:                     core.CastString(data["name"]),
-		Description:              core.CastString(data["description"]),
-		QueueNamespaceId:         core.CastString(data["queueNamespaceId"]),
-		KeyId:                    core.CastString(data["keyId"]),
-		LotteryTriggerScriptId:   core.CastString(data["lotteryTriggerScriptId"]),
-		ChoicePrizeTableScriptId: core.CastString(data["choicePrizeTableScriptId"]),
-		LogSetting:               NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:                core.CastInt64(data["createdAt"]),
-		UpdatedAt:                core.CastInt64(data["updatedAt"]),
-	}
+    return Namespace {
+        NamespaceId: core.CastString(data["namespaceId"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
+        LotteryTriggerScriptId: core.CastString(data["lotteryTriggerScriptId"]),
+        ChoicePrizeTableScriptId: core.CastString(data["choicePrizeTableScriptId"]),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceId":              p.NamespaceId,
-		"name":                     p.Name,
-		"description":              p.Description,
-		"queueNamespaceId":         p.QueueNamespaceId,
-		"keyId":                    p.KeyId,
-		"lotteryTriggerScriptId":   p.LotteryTriggerScriptId,
-		"choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
-		"logSetting":               p.LogSetting.ToDict(),
-		"createdAt":                p.CreatedAt,
-		"updatedAt":                p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "namespaceId": p.NamespaceId,
+        "name": p.Name,
+        "description": p.Description,
+        "queueNamespaceId": p.QueueNamespaceId,
+        "keyId": p.KeyId,
+        "lotteryTriggerScriptId": p.LotteryTriggerScriptId,
+        "choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
+        "logSetting": p.LogSetting.ToDict(),
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p Namespace) Pointer() *Namespace {
-	return &p
+    return &p
 }
 
 func CastNamespaces(data []interface{}) []Namespace {
@@ -83,64 +83,64 @@ func CastNamespaces(data []interface{}) []Namespace {
 }
 
 func CastNamespacesFromDict(data []Namespace) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type LotteryModelMaster struct {
-	LotteryModelId           *string `json:"lotteryModelId"`
-	Name                     *string `json:"name"`
-	Metadata                 *string `json:"metadata"`
-	Description              *string `json:"description"`
-	Mode                     *string `json:"mode"`
-	Method                   *string `json:"method"`
-	PrizeTableName           *string `json:"prizeTableName"`
+	LotteryModelId *string `json:"lotteryModelId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	Description *string `json:"description"`
+	Mode *string `json:"mode"`
+	Method *string `json:"method"`
+	PrizeTableName *string `json:"prizeTableName"`
 	ChoicePrizeTableScriptId *string `json:"choicePrizeTableScriptId"`
-	CreatedAt                *int64  `json:"createdAt"`
-	UpdatedAt                *int64  `json:"updatedAt"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewLotteryModelMasterFromJson(data string) LotteryModelMaster {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryModelMasterFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewLotteryModelMasterFromDict(dict)
 }
 
 func NewLotteryModelMasterFromDict(data map[string]interface{}) LotteryModelMaster {
-	return LotteryModelMaster{
-		LotteryModelId:           core.CastString(data["lotteryModelId"]),
-		Name:                     core.CastString(data["name"]),
-		Metadata:                 core.CastString(data["metadata"]),
-		Description:              core.CastString(data["description"]),
-		Mode:                     core.CastString(data["mode"]),
-		Method:                   core.CastString(data["method"]),
-		PrizeTableName:           core.CastString(data["prizeTableName"]),
-		ChoicePrizeTableScriptId: core.CastString(data["choicePrizeTableScriptId"]),
-		CreatedAt:                core.CastInt64(data["createdAt"]),
-		UpdatedAt:                core.CastInt64(data["updatedAt"]),
-	}
+    return LotteryModelMaster {
+        LotteryModelId: core.CastString(data["lotteryModelId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        Description: core.CastString(data["description"]),
+        Mode: core.CastString(data["mode"]),
+        Method: core.CastString(data["method"]),
+        PrizeTableName: core.CastString(data["prizeTableName"]),
+        ChoicePrizeTableScriptId: core.CastString(data["choicePrizeTableScriptId"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p LotteryModelMaster) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"lotteryModelId":           p.LotteryModelId,
-		"name":                     p.Name,
-		"metadata":                 p.Metadata,
-		"description":              p.Description,
-		"mode":                     p.Mode,
-		"method":                   p.Method,
-		"prizeTableName":           p.PrizeTableName,
-		"choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
-		"createdAt":                p.CreatedAt,
-		"updatedAt":                p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "lotteryModelId": p.LotteryModelId,
+        "name": p.Name,
+        "metadata": p.Metadata,
+        "description": p.Description,
+        "mode": p.Mode,
+        "method": p.Method,
+        "prizeTableName": p.PrizeTableName,
+        "choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p LotteryModelMaster) Pointer() *LotteryModelMaster {
-	return &p
+    return &p
 }
 
 func CastLotteryModelMasters(data []interface{}) []LotteryModelMaster {
@@ -152,57 +152,57 @@ func CastLotteryModelMasters(data []interface{}) []LotteryModelMaster {
 }
 
 func CastLotteryModelMastersFromDict(data []LotteryModelMaster) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type PrizeTableMaster struct {
 	PrizeTableId *string `json:"prizeTableId"`
-	Name         *string `json:"name"`
-	Metadata     *string `json:"metadata"`
-	Description  *string `json:"description"`
-	Prizes       []Prize `json:"prizes"`
-	CreatedAt    *int64  `json:"createdAt"`
-	UpdatedAt    *int64  `json:"updatedAt"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	Description *string `json:"description"`
+	Prizes []Prize `json:"prizes"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewPrizeTableMasterFromJson(data string) PrizeTableMaster {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrizeTableMasterFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrizeTableMasterFromDict(dict)
 }
 
 func NewPrizeTableMasterFromDict(data map[string]interface{}) PrizeTableMaster {
-	return PrizeTableMaster{
-		PrizeTableId: core.CastString(data["prizeTableId"]),
-		Name:         core.CastString(data["name"]),
-		Metadata:     core.CastString(data["metadata"]),
-		Description:  core.CastString(data["description"]),
-		Prizes:       CastPrizes(core.CastArray(data["prizes"])),
-		CreatedAt:    core.CastInt64(data["createdAt"]),
-		UpdatedAt:    core.CastInt64(data["updatedAt"]),
-	}
+    return PrizeTableMaster {
+        PrizeTableId: core.CastString(data["prizeTableId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        Description: core.CastString(data["description"]),
+        Prizes: CastPrizes(core.CastArray(data["prizes"])),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p PrizeTableMaster) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"prizeTableId": p.PrizeTableId,
-		"name":         p.Name,
-		"metadata":     p.Metadata,
-		"description":  p.Description,
-		"prizes": CastPrizesFromDict(
-			p.Prizes,
-		),
-		"createdAt": p.CreatedAt,
-		"updatedAt": p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "prizeTableId": p.PrizeTableId,
+        "name": p.Name,
+        "metadata": p.Metadata,
+        "description": p.Description,
+        "prizes": CastPrizesFromDict(
+        p.Prizes,
+    ),
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p PrizeTableMaster) Pointer() *PrizeTableMaster {
-	return &p
+    return &p
 }
 
 func CastPrizeTableMasters(data []interface{}) []PrizeTableMaster {
@@ -214,54 +214,54 @@ func CastPrizeTableMasters(data []interface{}) []PrizeTableMaster {
 }
 
 func CastPrizeTableMastersFromDict(data []PrizeTableMaster) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Box struct {
-	BoxId          *string `json:"boxId"`
+	BoxId *string `json:"boxId"`
 	PrizeTableName *string `json:"prizeTableName"`
-	UserId         *string `json:"userId"`
-	DrawnIndexes   []int32 `json:"drawnIndexes"`
-	CreatedAt      *int64  `json:"createdAt"`
-	UpdatedAt      *int64  `json:"updatedAt"`
+	UserId *string `json:"userId"`
+	DrawnIndexes []int32 `json:"drawnIndexes"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewBoxFromJson(data string) Box {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewBoxFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewBoxFromDict(dict)
 }
 
 func NewBoxFromDict(data map[string]interface{}) Box {
-	return Box{
-		BoxId:          core.CastString(data["boxId"]),
-		PrizeTableName: core.CastString(data["prizeTableName"]),
-		UserId:         core.CastString(data["userId"]),
-		DrawnIndexes:   core.CastInt32s(core.CastArray(data["drawnIndexes"])),
-		CreatedAt:      core.CastInt64(data["createdAt"]),
-		UpdatedAt:      core.CastInt64(data["updatedAt"]),
-	}
+    return Box {
+        BoxId: core.CastString(data["boxId"]),
+        PrizeTableName: core.CastString(data["prizeTableName"]),
+        UserId: core.CastString(data["userId"]),
+        DrawnIndexes: core.CastInt32s(core.CastArray(data["drawnIndexes"])),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p Box) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"boxId":          p.BoxId,
-		"prizeTableName": p.PrizeTableName,
-		"userId":         p.UserId,
-		"drawnIndexes": core.CastInt32sFromDict(
-			p.DrawnIndexes,
-		),
-		"createdAt": p.CreatedAt,
-		"updatedAt": p.UpdatedAt,
-	}
+    return map[string]interface{} {
+        "boxId": p.BoxId,
+        "prizeTableName": p.PrizeTableName,
+        "userId": p.UserId,
+        "drawnIndexes": core.CastInt32sFromDict(
+        p.DrawnIndexes,
+    ),
+        "createdAt": p.CreatedAt,
+        "updatedAt": p.UpdatedAt,
+    }
 }
 
 func (p Box) Pointer() *Box {
-	return &p
+    return &p
 }
 
 func CastBoxes(data []interface{}) []Box {
@@ -273,55 +273,55 @@ func CastBoxes(data []interface{}) []Box {
 }
 
 func CastBoxesFromDict(data []Box) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type LotteryModel struct {
-	LotteryModelId           *string `json:"lotteryModelId"`
-	Name                     *string `json:"name"`
-	Metadata                 *string `json:"metadata"`
-	Mode                     *string `json:"mode"`
-	Method                   *string `json:"method"`
-	PrizeTableName           *string `json:"prizeTableName"`
+	LotteryModelId *string `json:"lotteryModelId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	Mode *string `json:"mode"`
+	Method *string `json:"method"`
+	PrizeTableName *string `json:"prizeTableName"`
 	ChoicePrizeTableScriptId *string `json:"choicePrizeTableScriptId"`
 }
 
 func NewLotteryModelFromJson(data string) LotteryModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryModelFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewLotteryModelFromDict(dict)
 }
 
 func NewLotteryModelFromDict(data map[string]interface{}) LotteryModel {
-	return LotteryModel{
-		LotteryModelId:           core.CastString(data["lotteryModelId"]),
-		Name:                     core.CastString(data["name"]),
-		Metadata:                 core.CastString(data["metadata"]),
-		Mode:                     core.CastString(data["mode"]),
-		Method:                   core.CastString(data["method"]),
-		PrizeTableName:           core.CastString(data["prizeTableName"]),
-		ChoicePrizeTableScriptId: core.CastString(data["choicePrizeTableScriptId"]),
-	}
+    return LotteryModel {
+        LotteryModelId: core.CastString(data["lotteryModelId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        Mode: core.CastString(data["mode"]),
+        Method: core.CastString(data["method"]),
+        PrizeTableName: core.CastString(data["prizeTableName"]),
+        ChoicePrizeTableScriptId: core.CastString(data["choicePrizeTableScriptId"]),
+    }
 }
 
 func (p LotteryModel) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"lotteryModelId":           p.LotteryModelId,
-		"name":                     p.Name,
-		"metadata":                 p.Metadata,
-		"mode":                     p.Mode,
-		"method":                   p.Method,
-		"prizeTableName":           p.PrizeTableName,
-		"choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
-	}
+    return map[string]interface{} {
+        "lotteryModelId": p.LotteryModelId,
+        "name": p.Name,
+        "metadata": p.Metadata,
+        "mode": p.Mode,
+        "method": p.Method,
+        "prizeTableName": p.PrizeTableName,
+        "choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
+    }
 }
 
 func (p LotteryModel) Pointer() *LotteryModel {
-	return &p
+    return &p
 }
 
 func CastLotteryModels(data []interface{}) []LotteryModel {
@@ -333,48 +333,48 @@ func CastLotteryModels(data []interface{}) []LotteryModel {
 }
 
 func CastLotteryModelsFromDict(data []LotteryModel) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type PrizeTable struct {
 	PrizeTableId *string `json:"prizeTableId"`
-	Name         *string `json:"name"`
-	Metadata     *string `json:"metadata"`
-	Prizes       []Prize `json:"prizes"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	Prizes []Prize `json:"prizes"`
 }
 
 func NewPrizeTableFromJson(data string) PrizeTable {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrizeTableFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrizeTableFromDict(dict)
 }
 
 func NewPrizeTableFromDict(data map[string]interface{}) PrizeTable {
-	return PrizeTable{
-		PrizeTableId: core.CastString(data["prizeTableId"]),
-		Name:         core.CastString(data["name"]),
-		Metadata:     core.CastString(data["metadata"]),
-		Prizes:       CastPrizes(core.CastArray(data["prizes"])),
-	}
+    return PrizeTable {
+        PrizeTableId: core.CastString(data["prizeTableId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        Prizes: CastPrizes(core.CastArray(data["prizes"])),
+    }
 }
 
 func (p PrizeTable) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"prizeTableId": p.PrizeTableId,
-		"name":         p.Name,
-		"metadata":     p.Metadata,
-		"prizes": CastPrizesFromDict(
-			p.Prizes,
-		),
-	}
+    return map[string]interface{} {
+        "prizeTableId": p.PrizeTableId,
+        "name": p.Name,
+        "metadata": p.Metadata,
+        "prizes": CastPrizesFromDict(
+        p.Prizes,
+    ),
+    }
 }
 
 func (p PrizeTable) Pointer() *PrizeTable {
-	return &p
+    return &p
 }
 
 func CastPrizeTables(data []interface{}) []PrizeTable {
@@ -386,40 +386,40 @@ func CastPrizeTables(data []interface{}) []PrizeTable {
 }
 
 func CastPrizeTablesFromDict(data []PrizeTable) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Probability struct {
 	Prize *DrawnPrize `json:"prize"`
-	Rate  *float32    `json:"rate"`
+	Rate *float32 `json:"rate"`
 }
 
 func NewProbabilityFromJson(data string) Probability {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewProbabilityFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewProbabilityFromDict(dict)
 }
 
 func NewProbabilityFromDict(data map[string]interface{}) Probability {
-	return Probability{
-		Prize: NewDrawnPrizeFromDict(core.CastMap(data["prize"])).Pointer(),
-		Rate:  core.CastFloat32(data["rate"]),
-	}
+    return Probability {
+        Prize: NewDrawnPrizeFromDict(core.CastMap(data["prize"])).Pointer(),
+        Rate: core.CastFloat32(data["rate"]),
+    }
 }
 
 func (p Probability) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"prize": p.Prize.ToDict(),
-		"rate":  p.Rate,
-	}
+    return map[string]interface{} {
+        "prize": p.Prize.ToDict(),
+        "rate": p.Rate,
+    }
 }
 
 func (p Probability) Pointer() *Probability {
-	return &p
+    return &p
 }
 
 func CastProbabilities(data []interface{}) []Probability {
@@ -431,40 +431,40 @@ func CastProbabilities(data []interface{}) []Probability {
 }
 
 func CastProbabilitiesFromDict(data []Probability) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type CurrentLotteryMaster struct {
 	NamespaceId *string `json:"namespaceId"`
-	Settings    *string `json:"settings"`
+	Settings *string `json:"settings"`
 }
 
 func NewCurrentLotteryMasterFromJson(data string) CurrentLotteryMaster {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCurrentLotteryMasterFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCurrentLotteryMasterFromDict(dict)
 }
 
 func NewCurrentLotteryMasterFromDict(data map[string]interface{}) CurrentLotteryMaster {
-	return CurrentLotteryMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
-	}
+    return CurrentLotteryMaster {
+        NamespaceId: core.CastString(data["namespaceId"]),
+        Settings: core.CastString(data["settings"]),
+    }
 }
 
 func (p CurrentLotteryMaster) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceId": p.NamespaceId,
-		"settings":    p.Settings,
-	}
+    return map[string]interface{} {
+        "namespaceId": p.NamespaceId,
+        "settings": p.Settings,
+    }
 }
 
 func (p CurrentLotteryMaster) Pointer() *CurrentLotteryMaster {
-	return &p
+    return &p
 }
 
 func CastCurrentLotteryMasters(data []interface{}) []CurrentLotteryMaster {
@@ -476,55 +476,55 @@ func CastCurrentLotteryMasters(data []interface{}) []CurrentLotteryMaster {
 }
 
 func CastCurrentLotteryMastersFromDict(data []CurrentLotteryMaster) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type GitHubCheckoutSetting struct {
-	ApiKeyId       *string `json:"apiKeyId"`
+	ApiKeyId *string `json:"apiKeyId"`
 	RepositoryName *string `json:"repositoryName"`
-	SourcePath     *string `json:"sourcePath"`
-	ReferenceType  *string `json:"referenceType"`
-	CommitHash     *string `json:"commitHash"`
-	BranchName     *string `json:"branchName"`
-	TagName        *string `json:"tagName"`
+	SourcePath *string `json:"sourcePath"`
+	ReferenceType *string `json:"referenceType"`
+	CommitHash *string `json:"commitHash"`
+	BranchName *string `json:"branchName"`
+	TagName *string `json:"tagName"`
 }
 
 func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGitHubCheckoutSettingFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
-	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
-	}
+    return GitHubCheckoutSetting {
+        ApiKeyId: core.CastString(data["apiKeyId"]),
+        RepositoryName: core.CastString(data["repositoryName"]),
+        SourcePath: core.CastString(data["sourcePath"]),
+        ReferenceType: core.CastString(data["referenceType"]),
+        CommitHash: core.CastString(data["commitHash"]),
+        BranchName: core.CastString(data["branchName"]),
+        TagName: core.CastString(data["tagName"]),
+    }
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"apiKeyId":       p.ApiKeyId,
-		"repositoryName": p.RepositoryName,
-		"sourcePath":     p.SourcePath,
-		"referenceType":  p.ReferenceType,
-		"commitHash":     p.CommitHash,
-		"branchName":     p.BranchName,
-		"tagName":        p.TagName,
-	}
+    return map[string]interface{} {
+        "apiKeyId": p.ApiKeyId,
+        "repositoryName": p.RepositoryName,
+        "sourcePath": p.SourcePath,
+        "referenceType": p.ReferenceType,
+        "commitHash": p.CommitHash,
+        "branchName": p.BranchName,
+        "tagName": p.TagName,
+    }
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
-	return &p
+    return &p
 }
 
 func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
@@ -536,11 +536,11 @@ func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
 }
 
 func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type LogSetting struct {
@@ -548,25 +548,25 @@ type LogSetting struct {
 }
 
 func NewLogSettingFromJson(data string) LogSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLogSettingFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
-	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
-	}
+    return LogSetting {
+        LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+    }
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"loggingNamespaceId": p.LoggingNamespaceId,
-	}
+    return map[string]interface{} {
+        "loggingNamespaceId": p.LoggingNamespaceId,
+    }
 }
 
 func (p LogSetting) Pointer() *LogSetting {
-	return &p
+    return &p
 }
 
 func CastLogSettings(data []interface{}) []LogSetting {
@@ -578,51 +578,51 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Prize struct {
-	PrizeId        *string         `json:"prizeId"`
-	Type           *string         `json:"type"`
+	PrizeId *string `json:"prizeId"`
+	Type *string `json:"type"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
-	PrizeTableName *string         `json:"prizeTableName"`
-	Weight         *int32          `json:"weight"`
+	PrizeTableName *string `json:"prizeTableName"`
+	Weight *int32 `json:"weight"`
 }
 
 func NewPrizeFromJson(data string) Prize {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrizeFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrizeFromDict(dict)
 }
 
 func NewPrizeFromDict(data map[string]interface{}) Prize {
-	return Prize{
-		PrizeId:        core.CastString(data["prizeId"]),
-		Type:           core.CastString(data["type"]),
-		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
-		PrizeTableName: core.CastString(data["prizeTableName"]),
-		Weight:         core.CastInt32(data["weight"]),
-	}
+    return Prize {
+        PrizeId: core.CastString(data["prizeId"]),
+        Type: core.CastString(data["type"]),
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+        PrizeTableName: core.CastString(data["prizeTableName"]),
+        Weight: core.CastInt32(data["weight"]),
+    }
 }
 
 func (p Prize) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"prizeId": p.PrizeId,
-		"type":    p.Type,
-		"acquireActions": CastAcquireActionsFromDict(
-			p.AcquireActions,
-		),
-		"prizeTableName": p.PrizeTableName,
-		"weight":         p.Weight,
-	}
+    return map[string]interface{} {
+        "prizeId": p.PrizeId,
+        "type": p.Type,
+        "acquireActions": CastAcquireActionsFromDict(
+        p.AcquireActions,
+    ),
+        "prizeTableName": p.PrizeTableName,
+        "weight": p.Weight,
+    }
 }
 
 func (p Prize) Pointer() *Prize {
-	return &p
+    return &p
 }
 
 func CastPrizes(data []interface{}) []Prize {
@@ -634,40 +634,40 @@ func CastPrizes(data []interface{}) []Prize {
 }
 
 func CastPrizesFromDict(data []Prize) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type AcquireAction struct {
-	Action  *string `json:"action"`
+	Action *string `json:"action"`
 	Request *string `json:"request"`
 }
 
 func NewAcquireActionFromJson(data string) AcquireAction {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAcquireActionFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireActionFromDict(dict)
 }
 
 func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
-	return AcquireAction{
-		Action:  core.CastString(data["action"]),
-		Request: core.CastString(data["request"]),
-	}
+    return AcquireAction {
+        Action: core.CastString(data["action"]),
+        Request: core.CastString(data["request"]),
+    }
 }
 
 func (p AcquireAction) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"action":  p.Action,
-		"request": p.Request,
-	}
+    return map[string]interface{} {
+        "action": p.Action,
+        "request": p.Request,
+    }
 }
 
 func (p AcquireAction) Pointer() *AcquireAction {
-	return &p
+    return &p
 }
 
 func CastAcquireActions(data []interface{}) []AcquireAction {
@@ -679,11 +679,11 @@ func CastAcquireActions(data []interface{}) []AcquireAction {
 }
 
 func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type DrawnPrize struct {
@@ -691,27 +691,27 @@ type DrawnPrize struct {
 }
 
 func NewDrawnPrizeFromJson(data string) DrawnPrize {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDrawnPrizeFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDrawnPrizeFromDict(dict)
 }
 
 func NewDrawnPrizeFromDict(data map[string]interface{}) DrawnPrize {
-	return DrawnPrize{
-		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
-	}
+    return DrawnPrize {
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+    }
 }
 
 func (p DrawnPrize) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"acquireActions": CastAcquireActionsFromDict(
-			p.AcquireActions,
-		),
-	}
+    return map[string]interface{} {
+        "acquireActions": CastAcquireActionsFromDict(
+        p.AcquireActions,
+    ),
+    }
 }
 
 func (p DrawnPrize) Pointer() *DrawnPrize {
-	return &p
+    return &p
 }
 
 func CastDrawnPrizes(data []interface{}) []DrawnPrize {
@@ -723,45 +723,45 @@ func CastDrawnPrizes(data []interface{}) []DrawnPrize {
 }
 
 func CastDrawnPrizesFromDict(data []DrawnPrize) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type BoxItem struct {
 	AcquireActions []AcquireAction `json:"acquireActions"`
-	Remaining      *int32          `json:"remaining"`
-	Initial        *int32          `json:"initial"`
+	Remaining *int32 `json:"remaining"`
+	Initial *int32 `json:"initial"`
 }
 
 func NewBoxItemFromJson(data string) BoxItem {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewBoxItemFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewBoxItemFromDict(dict)
 }
 
 func NewBoxItemFromDict(data map[string]interface{}) BoxItem {
-	return BoxItem{
-		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
-		Remaining:      core.CastInt32(data["remaining"]),
-		Initial:        core.CastInt32(data["initial"]),
-	}
+    return BoxItem {
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+        Remaining: core.CastInt32(data["remaining"]),
+        Initial: core.CastInt32(data["initial"]),
+    }
 }
 
 func (p BoxItem) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"acquireActions": CastAcquireActionsFromDict(
-			p.AcquireActions,
-		),
-		"remaining": p.Remaining,
-		"initial":   p.Initial,
-	}
+    return map[string]interface{} {
+        "acquireActions": CastAcquireActionsFromDict(
+        p.AcquireActions,
+    ),
+        "remaining": p.Remaining,
+        "initial": p.Initial,
+    }
 }
 
 func (p BoxItem) Pointer() *BoxItem {
-	return &p
+    return &p
 }
 
 func CastBoxItems(data []interface{}) []BoxItem {
@@ -773,48 +773,48 @@ func CastBoxItems(data []interface{}) []BoxItem {
 }
 
 func CastBoxItemsFromDict(data []BoxItem) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type BoxItems struct {
-	BoxId          *string   `json:"boxId"`
-	PrizeTableName *string   `json:"prizeTableName"`
-	UserId         *string   `json:"userId"`
-	Items          []BoxItem `json:"items"`
+	BoxId *string `json:"boxId"`
+	PrizeTableName *string `json:"prizeTableName"`
+	UserId *string `json:"userId"`
+	Items []BoxItem `json:"items"`
 }
 
 func NewBoxItemsFromJson(data string) BoxItems {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewBoxItemsFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewBoxItemsFromDict(dict)
 }
 
 func NewBoxItemsFromDict(data map[string]interface{}) BoxItems {
-	return BoxItems{
-		BoxId:          core.CastString(data["boxId"]),
-		PrizeTableName: core.CastString(data["prizeTableName"]),
-		UserId:         core.CastString(data["userId"]),
-		Items:          CastBoxItems(core.CastArray(data["items"])),
-	}
+    return BoxItems {
+        BoxId: core.CastString(data["boxId"]),
+        PrizeTableName: core.CastString(data["prizeTableName"]),
+        UserId: core.CastString(data["userId"]),
+        Items: CastBoxItems(core.CastArray(data["items"])),
+    }
 }
 
 func (p BoxItems) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"boxId":          p.BoxId,
-		"prizeTableName": p.PrizeTableName,
-		"userId":         p.UserId,
-		"items": CastBoxItemsFromDict(
-			p.Items,
-		),
-	}
+    return map[string]interface{} {
+        "boxId": p.BoxId,
+        "prizeTableName": p.PrizeTableName,
+        "userId": p.UserId,
+        "items": CastBoxItemsFromDict(
+        p.Items,
+    ),
+    }
 }
 
 func (p BoxItems) Pointer() *BoxItems {
-	return &p
+    return &p
 }
 
 func CastBoxItemses(data []interface{}) []BoxItems {
@@ -826,40 +826,40 @@ func CastBoxItemses(data []interface{}) []BoxItems {
 }
 
 func CastBoxItemsesFromDict(data []BoxItems) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Config struct {
-	Key   *string `json:"key"`
+	Key *string `json:"key"`
 	Value *string `json:"value"`
 }
 
 func NewConfigFromJson(data string) Config {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewConfigFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConfigFromDict(dict)
 }
 
 func NewConfigFromDict(data map[string]interface{}) Config {
-	return Config{
-		Key:   core.CastString(data["key"]),
-		Value: core.CastString(data["value"]),
-	}
+    return Config {
+        Key: core.CastString(data["key"]),
+        Value: core.CastString(data["value"]),
+    }
 }
 
 func (p Config) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"key":   p.Key,
-		"value": p.Value,
-	}
+    return map[string]interface{} {
+        "key": p.Key,
+        "value": p.Value,
+    }
 }
 
 func (p Config) Pointer() *Config {
-	return &p
+    return &p
 }
 
 func CastConfigs(data []interface{}) []Config {
@@ -871,9 +871,9 @@ func CastConfigs(data []interface{}) []Config {
 }
 
 func CastConfigsFromDict(data []Config) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }

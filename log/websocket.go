@@ -49,13 +49,13 @@ func (p Gs2LogWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -68,33 +68,33 @@ func (p Gs2LogWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "namespace",
-			"function":    "describeNamespaces",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "namespace",
+    		"function": "describeNamespaces",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -131,13 +131,13 @@ func (p Gs2LogWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -150,57 +150,57 @@ func (p Gs2LogWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "namespace",
-			"function":    "createNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "namespace",
+    		"function": "createNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Type != nil && *request.Type != "" {
-		bodies["type"] = *request.Type
-	}
-	if request.GcpCredentialJson != nil && *request.GcpCredentialJson != "" {
-		bodies["gcpCredentialJson"] = *request.GcpCredentialJson
-	}
-	if request.BigQueryDatasetName != nil && *request.BigQueryDatasetName != "" {
-		bodies["bigQueryDatasetName"] = *request.BigQueryDatasetName
-	}
-	if request.LogExpireDays != nil {
-		bodies["logExpireDays"] = *request.LogExpireDays
-	}
-	if request.AwsRegion != nil && *request.AwsRegion != "" {
-		bodies["awsRegion"] = *request.AwsRegion
-	}
-	if request.AwsAccessKeyId != nil && *request.AwsAccessKeyId != "" {
-		bodies["awsAccessKeyId"] = *request.AwsAccessKeyId
-	}
-	if request.AwsSecretAccessKey != nil && *request.AwsSecretAccessKey != "" {
-		bodies["awsSecretAccessKey"] = *request.AwsSecretAccessKey
-	}
-	if request.FirehoseStreamName != nil && *request.FirehoseStreamName != "" {
-		bodies["firehoseStreamName"] = *request.FirehoseStreamName
-	}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Type != nil && *request.Type != "" {
+        bodies["type"] = *request.Type
+    }
+    if request.GcpCredentialJson != nil && *request.GcpCredentialJson != "" {
+        bodies["gcpCredentialJson"] = *request.GcpCredentialJson
+    }
+    if request.BigQueryDatasetName != nil && *request.BigQueryDatasetName != "" {
+        bodies["bigQueryDatasetName"] = *request.BigQueryDatasetName
+    }
+    if request.LogExpireDays != nil {
+        bodies["logExpireDays"] = *request.LogExpireDays
+    }
+    if request.AwsRegion != nil && *request.AwsRegion != "" {
+        bodies["awsRegion"] = *request.AwsRegion
+    }
+    if request.AwsAccessKeyId != nil && *request.AwsAccessKeyId != "" {
+        bodies["awsAccessKeyId"] = *request.AwsAccessKeyId
+    }
+    if request.AwsSecretAccessKey != nil && *request.AwsSecretAccessKey != "" {
+        bodies["awsSecretAccessKey"] = *request.AwsSecretAccessKey
+    }
+    if request.FirehoseStreamName != nil && *request.FirehoseStreamName != "" {
+        bodies["firehoseStreamName"] = *request.FirehoseStreamName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -237,13 +237,13 @@ func (p Gs2LogWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -256,30 +256,30 @@ func (p Gs2LogWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "namespace",
-			"function":    "getNamespaceStatus",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "namespace",
+    		"function": "getNamespaceStatus",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -316,13 +316,13 @@ func (p Gs2LogWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -335,30 +335,30 @@ func (p Gs2LogWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "namespace",
-			"function":    "getNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "namespace",
+    		"function": "getNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -395,13 +395,13 @@ func (p Gs2LogWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -414,57 +414,57 @@ func (p Gs2LogWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "namespace",
-			"function":    "updateNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "namespace",
+    		"function": "updateNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Type != nil && *request.Type != "" {
-		bodies["type"] = *request.Type
-	}
-	if request.GcpCredentialJson != nil && *request.GcpCredentialJson != "" {
-		bodies["gcpCredentialJson"] = *request.GcpCredentialJson
-	}
-	if request.BigQueryDatasetName != nil && *request.BigQueryDatasetName != "" {
-		bodies["bigQueryDatasetName"] = *request.BigQueryDatasetName
-	}
-	if request.LogExpireDays != nil {
-		bodies["logExpireDays"] = *request.LogExpireDays
-	}
-	if request.AwsRegion != nil && *request.AwsRegion != "" {
-		bodies["awsRegion"] = *request.AwsRegion
-	}
-	if request.AwsAccessKeyId != nil && *request.AwsAccessKeyId != "" {
-		bodies["awsAccessKeyId"] = *request.AwsAccessKeyId
-	}
-	if request.AwsSecretAccessKey != nil && *request.AwsSecretAccessKey != "" {
-		bodies["awsSecretAccessKey"] = *request.AwsSecretAccessKey
-	}
-	if request.FirehoseStreamName != nil && *request.FirehoseStreamName != "" {
-		bodies["firehoseStreamName"] = *request.FirehoseStreamName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Type != nil && *request.Type != "" {
+        bodies["type"] = *request.Type
+    }
+    if request.GcpCredentialJson != nil && *request.GcpCredentialJson != "" {
+        bodies["gcpCredentialJson"] = *request.GcpCredentialJson
+    }
+    if request.BigQueryDatasetName != nil && *request.BigQueryDatasetName != "" {
+        bodies["bigQueryDatasetName"] = *request.BigQueryDatasetName
+    }
+    if request.LogExpireDays != nil {
+        bodies["logExpireDays"] = *request.LogExpireDays
+    }
+    if request.AwsRegion != nil && *request.AwsRegion != "" {
+        bodies["awsRegion"] = *request.AwsRegion
+    }
+    if request.AwsAccessKeyId != nil && *request.AwsAccessKeyId != "" {
+        bodies["awsAccessKeyId"] = *request.AwsAccessKeyId
+    }
+    if request.AwsSecretAccessKey != nil && *request.AwsSecretAccessKey != "" {
+        bodies["awsSecretAccessKey"] = *request.AwsSecretAccessKey
+    }
+    if request.FirehoseStreamName != nil && *request.FirehoseStreamName != "" {
+        bodies["firehoseStreamName"] = *request.FirehoseStreamName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -501,13 +501,13 @@ func (p Gs2LogWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -520,30 +520,30 @@ func (p Gs2LogWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "namespace",
-			"function":    "deleteNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "namespace",
+    		"function": "deleteNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -580,13 +580,13 @@ func (p Gs2LogWebSocketClient) queryAccessLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result QueryAccessLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- QueryAccessLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- QueryAccessLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- QueryAccessLogAsyncResult{
 		result: &result,
@@ -599,54 +599,54 @@ func (p Gs2LogWebSocketClient) QueryAccessLogAsync(
 	request *QueryAccessLogRequest,
 	callback chan<- QueryAccessLogAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "accessLog",
-			"function":    "queryAccessLog",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "accessLog",
+    		"function": "queryAccessLog",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Service != nil && *request.Service != "" {
-		bodies["service"] = *request.Service
-	}
-	if request.Method != nil && *request.Method != "" {
-		bodies["method"] = *request.Method
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Begin != nil {
-		bodies["begin"] = *request.Begin
-	}
-	if request.End != nil {
-		bodies["end"] = *request.End
-	}
-	if request.LongTerm != nil {
-		bodies["longTerm"] = *request.LongTerm
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Service != nil && *request.Service != "" {
+        bodies["service"] = *request.Service
+    }
+    if request.Method != nil && *request.Method != "" {
+        bodies["method"] = *request.Method
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.queryAccessLogAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -683,13 +683,13 @@ func (p Gs2LogWebSocketClient) countAccessLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CountAccessLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CountAccessLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CountAccessLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CountAccessLogAsyncResult{
 		result: &result,
@@ -702,54 +702,54 @@ func (p Gs2LogWebSocketClient) CountAccessLogAsync(
 	request *CountAccessLogRequest,
 	callback chan<- CountAccessLogAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "accessLog",
-			"function":    "countAccessLog",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "accessLog",
+    		"function": "countAccessLog",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Service != nil && *request.Service != "" {
-		bodies["service"] = *request.Service
-	}
-	if request.Method != nil && *request.Method != "" {
-		bodies["method"] = *request.Method
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Begin != nil {
-		bodies["begin"] = *request.Begin
-	}
-	if request.End != nil {
-		bodies["end"] = *request.End
-	}
-	if request.LongTerm != nil {
-		bodies["longTerm"] = *request.LongTerm
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Service != nil && *request.Service != "" {
+        bodies["service"] = *request.Service
+    }
+    if request.Method != nil && *request.Method != "" {
+        bodies["method"] = *request.Method
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.countAccessLogAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -786,13 +786,13 @@ func (p Gs2LogWebSocketClient) queryIssueStampSheetLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result QueryIssueStampSheetLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- QueryIssueStampSheetLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- QueryIssueStampSheetLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- QueryIssueStampSheetLogAsyncResult{
 		result: &result,
@@ -805,57 +805,57 @@ func (p Gs2LogWebSocketClient) QueryIssueStampSheetLogAsync(
 	request *QueryIssueStampSheetLogRequest,
 	callback chan<- QueryIssueStampSheetLogAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "issueStampSheetLog",
-			"function":    "queryIssueStampSheetLog",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "issueStampSheetLog",
+    		"function": "queryIssueStampSheetLog",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Service != nil && *request.Service != "" {
-		bodies["service"] = *request.Service
-	}
-	if request.Method != nil && *request.Method != "" {
-		bodies["method"] = *request.Method
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Action != nil && *request.Action != "" {
-		bodies["action"] = *request.Action
-	}
-	if request.Begin != nil {
-		bodies["begin"] = *request.Begin
-	}
-	if request.End != nil {
-		bodies["end"] = *request.End
-	}
-	if request.LongTerm != nil {
-		bodies["longTerm"] = *request.LongTerm
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Service != nil && *request.Service != "" {
+        bodies["service"] = *request.Service
+    }
+    if request.Method != nil && *request.Method != "" {
+        bodies["method"] = *request.Method
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Action != nil && *request.Action != "" {
+        bodies["action"] = *request.Action
+    }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.queryIssueStampSheetLogAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -892,13 +892,13 @@ func (p Gs2LogWebSocketClient) countIssueStampSheetLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CountIssueStampSheetLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CountIssueStampSheetLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CountIssueStampSheetLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CountIssueStampSheetLogAsyncResult{
 		result: &result,
@@ -911,57 +911,57 @@ func (p Gs2LogWebSocketClient) CountIssueStampSheetLogAsync(
 	request *CountIssueStampSheetLogRequest,
 	callback chan<- CountIssueStampSheetLogAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "issueStampSheetLog",
-			"function":    "countIssueStampSheetLog",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "issueStampSheetLog",
+    		"function": "countIssueStampSheetLog",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Service != nil && *request.Service != "" {
-		bodies["service"] = *request.Service
-	}
-	if request.Method != nil && *request.Method != "" {
-		bodies["method"] = *request.Method
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Action != nil && *request.Action != "" {
-		bodies["action"] = *request.Action
-	}
-	if request.Begin != nil {
-		bodies["begin"] = *request.Begin
-	}
-	if request.End != nil {
-		bodies["end"] = *request.End
-	}
-	if request.LongTerm != nil {
-		bodies["longTerm"] = *request.LongTerm
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Service != nil && *request.Service != "" {
+        bodies["service"] = *request.Service
+    }
+    if request.Method != nil && *request.Method != "" {
+        bodies["method"] = *request.Method
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Action != nil && *request.Action != "" {
+        bodies["action"] = *request.Action
+    }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.countIssueStampSheetLogAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -998,13 +998,13 @@ func (p Gs2LogWebSocketClient) queryExecuteStampSheetLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result QueryExecuteStampSheetLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- QueryExecuteStampSheetLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- QueryExecuteStampSheetLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- QueryExecuteStampSheetLogAsyncResult{
 		result: &result,
@@ -1017,57 +1017,57 @@ func (p Gs2LogWebSocketClient) QueryExecuteStampSheetLogAsync(
 	request *QueryExecuteStampSheetLogRequest,
 	callback chan<- QueryExecuteStampSheetLogAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "executeStampSheetLog",
-			"function":    "queryExecuteStampSheetLog",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "executeStampSheetLog",
+    		"function": "queryExecuteStampSheetLog",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Service != nil && *request.Service != "" {
-		bodies["service"] = *request.Service
-	}
-	if request.Method != nil && *request.Method != "" {
-		bodies["method"] = *request.Method
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Action != nil && *request.Action != "" {
-		bodies["action"] = *request.Action
-	}
-	if request.Begin != nil {
-		bodies["begin"] = *request.Begin
-	}
-	if request.End != nil {
-		bodies["end"] = *request.End
-	}
-	if request.LongTerm != nil {
-		bodies["longTerm"] = *request.LongTerm
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Service != nil && *request.Service != "" {
+        bodies["service"] = *request.Service
+    }
+    if request.Method != nil && *request.Method != "" {
+        bodies["method"] = *request.Method
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Action != nil && *request.Action != "" {
+        bodies["action"] = *request.Action
+    }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.queryExecuteStampSheetLogAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1104,13 +1104,13 @@ func (p Gs2LogWebSocketClient) countExecuteStampSheetLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CountExecuteStampSheetLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CountExecuteStampSheetLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CountExecuteStampSheetLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CountExecuteStampSheetLogAsyncResult{
 		result: &result,
@@ -1123,57 +1123,57 @@ func (p Gs2LogWebSocketClient) CountExecuteStampSheetLogAsync(
 	request *CountExecuteStampSheetLogRequest,
 	callback chan<- CountExecuteStampSheetLogAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "executeStampSheetLog",
-			"function":    "countExecuteStampSheetLog",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "executeStampSheetLog",
+    		"function": "countExecuteStampSheetLog",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Service != nil && *request.Service != "" {
-		bodies["service"] = *request.Service
-	}
-	if request.Method != nil && *request.Method != "" {
-		bodies["method"] = *request.Method
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Action != nil && *request.Action != "" {
-		bodies["action"] = *request.Action
-	}
-	if request.Begin != nil {
-		bodies["begin"] = *request.Begin
-	}
-	if request.End != nil {
-		bodies["end"] = *request.End
-	}
-	if request.LongTerm != nil {
-		bodies["longTerm"] = *request.LongTerm
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Service != nil && *request.Service != "" {
+        bodies["service"] = *request.Service
+    }
+    if request.Method != nil && *request.Method != "" {
+        bodies["method"] = *request.Method
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Action != nil && *request.Action != "" {
+        bodies["action"] = *request.Action
+    }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.countExecuteStampSheetLogAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1210,13 +1210,13 @@ func (p Gs2LogWebSocketClient) queryExecuteStampTaskLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result QueryExecuteStampTaskLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- QueryExecuteStampTaskLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- QueryExecuteStampTaskLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- QueryExecuteStampTaskLogAsyncResult{
 		result: &result,
@@ -1229,57 +1229,57 @@ func (p Gs2LogWebSocketClient) QueryExecuteStampTaskLogAsync(
 	request *QueryExecuteStampTaskLogRequest,
 	callback chan<- QueryExecuteStampTaskLogAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "executeStampTaskLog",
-			"function":    "queryExecuteStampTaskLog",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "executeStampTaskLog",
+    		"function": "queryExecuteStampTaskLog",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Service != nil && *request.Service != "" {
-		bodies["service"] = *request.Service
-	}
-	if request.Method != nil && *request.Method != "" {
-		bodies["method"] = *request.Method
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Action != nil && *request.Action != "" {
-		bodies["action"] = *request.Action
-	}
-	if request.Begin != nil {
-		bodies["begin"] = *request.Begin
-	}
-	if request.End != nil {
-		bodies["end"] = *request.End
-	}
-	if request.LongTerm != nil {
-		bodies["longTerm"] = *request.LongTerm
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Service != nil && *request.Service != "" {
+        bodies["service"] = *request.Service
+    }
+    if request.Method != nil && *request.Method != "" {
+        bodies["method"] = *request.Method
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Action != nil && *request.Action != "" {
+        bodies["action"] = *request.Action
+    }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.queryExecuteStampTaskLogAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1316,13 +1316,13 @@ func (p Gs2LogWebSocketClient) countExecuteStampTaskLogAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CountExecuteStampTaskLogResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CountExecuteStampTaskLogAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CountExecuteStampTaskLogAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CountExecuteStampTaskLogAsyncResult{
 		result: &result,
@@ -1335,57 +1335,57 @@ func (p Gs2LogWebSocketClient) CountExecuteStampTaskLogAsync(
 	request *CountExecuteStampTaskLogRequest,
 	callback chan<- CountExecuteStampTaskLogAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "log",
-			"component":   "executeStampTaskLog",
-			"function":    "countExecuteStampTaskLog",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "executeStampTaskLog",
+    		"function": "countExecuteStampTaskLog",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Service != nil && *request.Service != "" {
-		bodies["service"] = *request.Service
-	}
-	if request.Method != nil && *request.Method != "" {
-		bodies["method"] = *request.Method
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Action != nil && *request.Action != "" {
-		bodies["action"] = *request.Action
-	}
-	if request.Begin != nil {
-		bodies["begin"] = *request.Begin
-	}
-	if request.End != nil {
-		bodies["end"] = *request.End
-	}
-	if request.LongTerm != nil {
-		bodies["longTerm"] = *request.LongTerm
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Service != nil && *request.Service != "" {
+        bodies["service"] = *request.Service
+    }
+    if request.Method != nil && *request.Method != "" {
+        bodies["method"] = *request.Method
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Action != nil && *request.Action != "" {
+        bodies["action"] = *request.Action
+    }
+    if request.Begin != nil {
+        bodies["begin"] = *request.Begin
+    }
+    if request.End != nil {
+        bodies["end"] = *request.End
+    }
+    if request.LongTerm != nil {
+        bodies["longTerm"] = *request.LongTerm
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.countExecuteStampTaskLogAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)

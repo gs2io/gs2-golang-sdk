@@ -17,40 +17,40 @@ permissions and limitations under the License.
 package auth
 
 import (
-	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+    "encoding/json"
+    "github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type AccessToken struct {
-	Token  *string `json:"token"`
+	Token *string `json:"token"`
 	UserId *string `json:"userId"`
-	Expire *int64  `json:"expire"`
+	Expire *int64 `json:"expire"`
 }
 
 func NewAccessTokenFromJson(data string) AccessToken {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAccessTokenFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAccessTokenFromDict(dict)
 }
 
 func NewAccessTokenFromDict(data map[string]interface{}) AccessToken {
-	return AccessToken{
-		Token:  core.CastString(data["token"]),
-		UserId: core.CastString(data["userId"]),
-		Expire: core.CastInt64(data["expire"]),
-	}
+    return AccessToken {
+        Token: core.CastString(data["token"]),
+        UserId: core.CastString(data["userId"]),
+        Expire: core.CastInt64(data["expire"]),
+    }
 }
 
 func (p AccessToken) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"token":  p.Token,
-		"userId": p.UserId,
-		"expire": p.Expire,
-	}
+    return map[string]interface{} {
+        "token": p.Token,
+        "userId": p.UserId,
+        "expire": p.Expire,
+    }
 }
 
 func (p AccessToken) Pointer() *AccessToken {
-	return &p
+    return &p
 }
 
 func CastAccessTokens(data []interface{}) []AccessToken {
@@ -62,9 +62,9 @@ func CastAccessTokens(data []interface{}) []AccessToken {
 }
 
 func CastAccessTokensFromDict(data []AccessToken) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }

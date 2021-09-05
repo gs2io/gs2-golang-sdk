@@ -56,13 +56,13 @@ func describeNamespacesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -86,10 +86,10 @@ func (p Gs2ScheduleRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -141,13 +141,13 @@ func createNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -163,32 +163,32 @@ func (p Gs2ScheduleRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -232,13 +232,13 @@ func getNamespaceStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -252,19 +252,19 @@ func (p Gs2ScheduleRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -316,13 +316,13 @@ func getNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -336,19 +336,19 @@ func (p Gs2ScheduleRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -400,13 +400,13 @@ func updateNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -420,36 +420,36 @@ func (p Gs2ScheduleRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -493,13 +493,13 @@ func deleteNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -513,19 +513,19 @@ func (p Gs2ScheduleRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -577,13 +577,13 @@ func describeEventMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeEventMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeEventMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeEventMastersAsyncResult{
 		result: &result,
@@ -597,11 +597,11 @@ func (p Gs2ScheduleRestClient) DescribeEventMastersAsync(
 	callback chan<- DescribeEventMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/event"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -612,10 +612,10 @@ func (p Gs2ScheduleRestClient) DescribeEventMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeEventMastersAsyncHandler(
 		p,
@@ -667,13 +667,13 @@ func createEventMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateEventMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateEventMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateEventMasterAsyncResult{
 		result: &result,
@@ -687,75 +687,75 @@ func (p Gs2ScheduleRestClient) CreateEventMasterAsync(
 	callback chan<- CreateEventMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/event"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.ScheduleType != nil && *request.ScheduleType != "" {
-		bodies["scheduleType"] = *request.ScheduleType
-	}
-	if request.AbsoluteBegin != nil {
-		bodies["absoluteBegin"] = *request.AbsoluteBegin
-	}
-	if request.AbsoluteEnd != nil {
-		bodies["absoluteEnd"] = *request.AbsoluteEnd
-	}
-	if request.RepeatType != nil && *request.RepeatType != "" {
-		bodies["repeatType"] = *request.RepeatType
-	}
-	if request.RepeatBeginDayOfMonth != nil {
-		bodies["repeatBeginDayOfMonth"] = *request.RepeatBeginDayOfMonth
-	}
-	if request.RepeatEndDayOfMonth != nil {
-		bodies["repeatEndDayOfMonth"] = *request.RepeatEndDayOfMonth
-	}
-	if request.RepeatBeginDayOfWeek != nil && *request.RepeatBeginDayOfWeek != "" {
-		bodies["repeatBeginDayOfWeek"] = *request.RepeatBeginDayOfWeek
-	}
-	if request.RepeatEndDayOfWeek != nil && *request.RepeatEndDayOfWeek != "" {
-		bodies["repeatEndDayOfWeek"] = *request.RepeatEndDayOfWeek
-	}
-	if request.RepeatBeginHour != nil {
-		bodies["repeatBeginHour"] = *request.RepeatBeginHour
-	}
-	if request.RepeatEndHour != nil {
-		bodies["repeatEndHour"] = *request.RepeatEndHour
-	}
-	if request.RelativeTriggerName != nil && *request.RelativeTriggerName != "" {
-		bodies["relativeTriggerName"] = *request.RelativeTriggerName
-	}
-	if request.RelativeDuration != nil {
-		bodies["relativeDuration"] = *request.RelativeDuration
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ScheduleType != nil && *request.ScheduleType != "" {
+        bodies["scheduleType"] = *request.ScheduleType
+    }
+    if request.AbsoluteBegin != nil {
+        bodies["absoluteBegin"] = *request.AbsoluteBegin
+    }
+    if request.AbsoluteEnd != nil {
+        bodies["absoluteEnd"] = *request.AbsoluteEnd
+    }
+    if request.RepeatType != nil && *request.RepeatType != "" {
+        bodies["repeatType"] = *request.RepeatType
+    }
+    if request.RepeatBeginDayOfMonth != nil {
+        bodies["repeatBeginDayOfMonth"] = *request.RepeatBeginDayOfMonth
+    }
+    if request.RepeatEndDayOfMonth != nil {
+        bodies["repeatEndDayOfMonth"] = *request.RepeatEndDayOfMonth
+    }
+    if request.RepeatBeginDayOfWeek != nil && *request.RepeatBeginDayOfWeek != "" {
+        bodies["repeatBeginDayOfWeek"] = *request.RepeatBeginDayOfWeek
+    }
+    if request.RepeatEndDayOfWeek != nil && *request.RepeatEndDayOfWeek != "" {
+        bodies["repeatEndDayOfWeek"] = *request.RepeatEndDayOfWeek
+    }
+    if request.RepeatBeginHour != nil {
+        bodies["repeatBeginHour"] = *request.RepeatBeginHour
+    }
+    if request.RepeatEndHour != nil {
+        bodies["repeatEndHour"] = *request.RepeatEndHour
+    }
+    if request.RelativeTriggerName != nil && *request.RelativeTriggerName != "" {
+        bodies["relativeTriggerName"] = *request.RelativeTriggerName
+    }
+    if request.RelativeDuration != nil {
+        bodies["relativeDuration"] = *request.RelativeDuration
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createEventMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -799,13 +799,13 @@ func getEventMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetEventMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetEventMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetEventMasterAsyncResult{
 		result: &result,
@@ -819,24 +819,24 @@ func (p Gs2ScheduleRestClient) GetEventMasterAsync(
 	callback chan<- GetEventMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/event/{eventName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.EventName != nil && *request.EventName != "" {
-		path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
-	} else {
-		path = strings.ReplaceAll(path, "{eventName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.EventName != nil && *request.EventName != ""  {
+        path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
+    } else {
+        path = strings.ReplaceAll(path, "{eventName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getEventMasterAsyncHandler(
 		p,
@@ -888,13 +888,13 @@ func updateEventMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateEventMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateEventMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateEventMasterAsyncResult{
 		result: &result,
@@ -908,77 +908,77 @@ func (p Gs2ScheduleRestClient) UpdateEventMasterAsync(
 	callback chan<- UpdateEventMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/event/{eventName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.EventName != nil && *request.EventName != "" {
-		path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
-	} else {
-		path = strings.ReplaceAll(path, "{eventName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.EventName != nil && *request.EventName != ""  {
+        path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
+    } else {
+        path = strings.ReplaceAll(path, "{eventName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.ScheduleType != nil && *request.ScheduleType != "" {
-		bodies["scheduleType"] = *request.ScheduleType
-	}
-	if request.AbsoluteBegin != nil {
-		bodies["absoluteBegin"] = *request.AbsoluteBegin
-	}
-	if request.AbsoluteEnd != nil {
-		bodies["absoluteEnd"] = *request.AbsoluteEnd
-	}
-	if request.RepeatType != nil && *request.RepeatType != "" {
-		bodies["repeatType"] = *request.RepeatType
-	}
-	if request.RepeatBeginDayOfMonth != nil {
-		bodies["repeatBeginDayOfMonth"] = *request.RepeatBeginDayOfMonth
-	}
-	if request.RepeatEndDayOfMonth != nil {
-		bodies["repeatEndDayOfMonth"] = *request.RepeatEndDayOfMonth
-	}
-	if request.RepeatBeginDayOfWeek != nil && *request.RepeatBeginDayOfWeek != "" {
-		bodies["repeatBeginDayOfWeek"] = *request.RepeatBeginDayOfWeek
-	}
-	if request.RepeatEndDayOfWeek != nil && *request.RepeatEndDayOfWeek != "" {
-		bodies["repeatEndDayOfWeek"] = *request.RepeatEndDayOfWeek
-	}
-	if request.RepeatBeginHour != nil {
-		bodies["repeatBeginHour"] = *request.RepeatBeginHour
-	}
-	if request.RepeatEndHour != nil {
-		bodies["repeatEndHour"] = *request.RepeatEndHour
-	}
-	if request.RelativeTriggerName != nil && *request.RelativeTriggerName != "" {
-		bodies["relativeTriggerName"] = *request.RelativeTriggerName
-	}
-	if request.RelativeDuration != nil {
-		bodies["relativeDuration"] = *request.RelativeDuration
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ScheduleType != nil && *request.ScheduleType != "" {
+        bodies["scheduleType"] = *request.ScheduleType
+    }
+    if request.AbsoluteBegin != nil {
+        bodies["absoluteBegin"] = *request.AbsoluteBegin
+    }
+    if request.AbsoluteEnd != nil {
+        bodies["absoluteEnd"] = *request.AbsoluteEnd
+    }
+    if request.RepeatType != nil && *request.RepeatType != "" {
+        bodies["repeatType"] = *request.RepeatType
+    }
+    if request.RepeatBeginDayOfMonth != nil {
+        bodies["repeatBeginDayOfMonth"] = *request.RepeatBeginDayOfMonth
+    }
+    if request.RepeatEndDayOfMonth != nil {
+        bodies["repeatEndDayOfMonth"] = *request.RepeatEndDayOfMonth
+    }
+    if request.RepeatBeginDayOfWeek != nil && *request.RepeatBeginDayOfWeek != "" {
+        bodies["repeatBeginDayOfWeek"] = *request.RepeatBeginDayOfWeek
+    }
+    if request.RepeatEndDayOfWeek != nil && *request.RepeatEndDayOfWeek != "" {
+        bodies["repeatEndDayOfWeek"] = *request.RepeatEndDayOfWeek
+    }
+    if request.RepeatBeginHour != nil {
+        bodies["repeatBeginHour"] = *request.RepeatBeginHour
+    }
+    if request.RepeatEndHour != nil {
+        bodies["repeatEndHour"] = *request.RepeatEndHour
+    }
+    if request.RelativeTriggerName != nil && *request.RelativeTriggerName != "" {
+        bodies["relativeTriggerName"] = *request.RelativeTriggerName
+    }
+    if request.RelativeDuration != nil {
+        bodies["relativeDuration"] = *request.RelativeDuration
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateEventMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1022,13 +1022,13 @@ func deleteEventMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteEventMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteEventMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteEventMasterAsyncResult{
 		result: &result,
@@ -1042,24 +1042,24 @@ func (p Gs2ScheduleRestClient) DeleteEventMasterAsync(
 	callback chan<- DeleteEventMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/event/{eventName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.EventName != nil && *request.EventName != "" {
-		path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
-	} else {
-		path = strings.ReplaceAll(path, "{eventName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.EventName != nil && *request.EventName != ""  {
+        path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
+    } else {
+        path = strings.ReplaceAll(path, "{eventName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteEventMasterAsyncHandler(
 		p,
@@ -1111,13 +1111,13 @@ func describeTriggersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeTriggersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeTriggersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeTriggersAsyncResult{
 		result: &result,
@@ -1131,11 +1131,11 @@ func (p Gs2ScheduleRestClient) DescribeTriggersAsync(
 	callback chan<- DescribeTriggersAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/trigger"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1146,13 +1146,13 @@ func (p Gs2ScheduleRestClient) DescribeTriggersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeTriggersAsyncHandler(
 		p,
@@ -1204,13 +1204,13 @@ func describeTriggersByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeTriggersByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeTriggersByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeTriggersByUserIdAsyncResult{
 		result: &result,
@@ -1224,16 +1224,16 @@ func (p Gs2ScheduleRestClient) DescribeTriggersByUserIdAsync(
 	callback chan<- DescribeTriggersByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/trigger"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1244,10 +1244,10 @@ func (p Gs2ScheduleRestClient) DescribeTriggersByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeTriggersByUserIdAsyncHandler(
 		p,
@@ -1299,13 +1299,13 @@ func getTriggerAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetTriggerAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetTriggerAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetTriggerAsyncResult{
 		result: &result,
@@ -1319,27 +1319,27 @@ func (p Gs2ScheduleRestClient) GetTriggerAsync(
 	callback chan<- GetTriggerAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/trigger/{triggerName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.TriggerName != nil && *request.TriggerName != "" {
-		path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
-	} else {
-		path = strings.ReplaceAll(path, "{triggerName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TriggerName != nil && *request.TriggerName != ""  {
+        path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
+    } else {
+        path = strings.ReplaceAll(path, "{triggerName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getTriggerAsyncHandler(
 		p,
@@ -1391,13 +1391,13 @@ func getTriggerByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetTriggerByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetTriggerByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetTriggerByUserIdAsyncResult{
 		result: &result,
@@ -1411,29 +1411,29 @@ func (p Gs2ScheduleRestClient) GetTriggerByUserIdAsync(
 	callback chan<- GetTriggerByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/trigger/{triggerName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TriggerName != nil && *request.TriggerName != "" {
-		path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
-	} else {
-		path = strings.ReplaceAll(path, "{triggerName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TriggerName != nil && *request.TriggerName != ""  {
+        path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
+    } else {
+        path = strings.ReplaceAll(path, "{triggerName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getTriggerByUserIdAsyncHandler(
 		p,
@@ -1485,13 +1485,13 @@ func triggerByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- TriggerByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- TriggerByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- TriggerByUserIdAsyncResult{
 		result: &result,
@@ -1505,46 +1505,46 @@ func (p Gs2ScheduleRestClient) TriggerByUserIdAsync(
 	callback chan<- TriggerByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/trigger/{triggerName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.TriggerName != nil && *request.TriggerName != "" {
-		path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
-	} else {
-		path = strings.ReplaceAll(path, "{triggerName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TriggerName != nil && *request.TriggerName != ""  {
+        path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
+    } else {
+        path = strings.ReplaceAll(path, "{triggerName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.TriggerStrategy != nil && *request.TriggerStrategy != "" {
-		bodies["triggerStrategy"] = *request.TriggerStrategy
-	}
-	if request.Ttl != nil {
-		bodies["ttl"] = *request.Ttl
-	}
+    var bodies = core.Bodies{}
+    if request.TriggerStrategy != nil && *request.TriggerStrategy != "" {
+        bodies["triggerStrategy"] = *request.TriggerStrategy
+    }
+    if request.Ttl != nil {
+        bodies["ttl"] = *request.Ttl
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go triggerByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1588,13 +1588,13 @@ func deleteTriggerAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteTriggerAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteTriggerAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteTriggerAsyncResult{
 		result: &result,
@@ -1608,27 +1608,27 @@ func (p Gs2ScheduleRestClient) DeleteTriggerAsync(
 	callback chan<- DeleteTriggerAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/trigger/{triggerName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.TriggerName != nil && *request.TriggerName != "" {
-		path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
-	} else {
-		path = strings.ReplaceAll(path, "{triggerName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TriggerName != nil && *request.TriggerName != ""  {
+        path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
+    } else {
+        path = strings.ReplaceAll(path, "{triggerName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go deleteTriggerAsyncHandler(
 		p,
@@ -1680,13 +1680,13 @@ func deleteTriggerByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteTriggerByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteTriggerByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteTriggerByUserIdAsyncResult{
 		result: &result,
@@ -1700,29 +1700,29 @@ func (p Gs2ScheduleRestClient) DeleteTriggerByUserIdAsync(
 	callback chan<- DeleteTriggerByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/trigger/{triggerName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TriggerName != nil && *request.TriggerName != "" {
-		path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
-	} else {
-		path = strings.ReplaceAll(path, "{triggerName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TriggerName != nil && *request.TriggerName != ""  {
+        path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
+    } else {
+        path = strings.ReplaceAll(path, "{triggerName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteTriggerByUserIdAsyncHandler(
 		p,
@@ -1774,13 +1774,13 @@ func describeEventsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeEventsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeEventsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeEventsAsyncResult{
 		result: &result,
@@ -1794,22 +1794,22 @@ func (p Gs2ScheduleRestClient) DescribeEventsAsync(
 	callback chan<- DescribeEventsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/event"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeEventsAsyncHandler(
 		p,
@@ -1861,13 +1861,13 @@ func describeEventsByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeEventsByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeEventsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeEventsByUserIdAsyncResult{
 		result: &result,
@@ -1881,24 +1881,24 @@ func (p Gs2ScheduleRestClient) DescribeEventsByUserIdAsync(
 	callback chan<- DescribeEventsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/event"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeEventsByUserIdAsyncHandler(
 		p,
@@ -1950,13 +1950,13 @@ func describeRawEventsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeRawEventsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeRawEventsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeRawEventsAsyncResult{
 		result: &result,
@@ -1970,19 +1970,19 @@ func (p Gs2ScheduleRestClient) DescribeRawEventsAsync(
 	callback chan<- DescribeRawEventsAsyncResult,
 ) {
 	path := "/{namespaceName}/event"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeRawEventsAsyncHandler(
 		p,
@@ -2034,13 +2034,13 @@ func getEventAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetEventAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetEventAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetEventAsyncResult{
 		result: &result,
@@ -2054,27 +2054,27 @@ func (p Gs2ScheduleRestClient) GetEventAsync(
 	callback chan<- GetEventAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/event/{eventName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.EventName != nil && *request.EventName != "" {
-		path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
-	} else {
-		path = strings.ReplaceAll(path, "{eventName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.EventName != nil && *request.EventName != ""  {
+        path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
+    } else {
+        path = strings.ReplaceAll(path, "{eventName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getEventAsyncHandler(
 		p,
@@ -2126,13 +2126,13 @@ func getEventByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetEventByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetEventByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetEventByUserIdAsyncResult{
 		result: &result,
@@ -2146,29 +2146,29 @@ func (p Gs2ScheduleRestClient) GetEventByUserIdAsync(
 	callback chan<- GetEventByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/event/{eventName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.EventName != nil && *request.EventName != "" {
-		path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
-	} else {
-		path = strings.ReplaceAll(path, "{eventName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.EventName != nil && *request.EventName != ""  {
+        path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
+    } else {
+        path = strings.ReplaceAll(path, "{eventName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getEventByUserIdAsyncHandler(
 		p,
@@ -2220,13 +2220,13 @@ func getRawEventAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetRawEventAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetRawEventAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetRawEventAsyncResult{
 		result: &result,
@@ -2240,24 +2240,24 @@ func (p Gs2ScheduleRestClient) GetRawEventAsync(
 	callback chan<- GetRawEventAsyncResult,
 ) {
 	path := "/{namespaceName}/event/{eventName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.EventName != nil && *request.EventName != "" {
-		path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
-	} else {
-		path = strings.ReplaceAll(path, "{eventName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.EventName != nil && *request.EventName != ""  {
+        path = strings.ReplaceAll(path, "{eventName}", core.ToString(*request.EventName))
+    } else {
+        path = strings.ReplaceAll(path, "{eventName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getRawEventAsyncHandler(
 		p,
@@ -2309,13 +2309,13 @@ func exportMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ExportMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ExportMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -2329,19 +2329,19 @@ func (p Gs2ScheduleRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go exportMasterAsyncHandler(
 		p,
@@ -2393,13 +2393,13 @@ func getCurrentEventMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCurrentEventMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCurrentEventMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCurrentEventMasterAsyncResult{
 		result: &result,
@@ -2413,19 +2413,19 @@ func (p Gs2ScheduleRestClient) GetCurrentEventMasterAsync(
 	callback chan<- GetCurrentEventMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getCurrentEventMasterAsyncHandler(
 		p,
@@ -2477,13 +2477,13 @@ func updateCurrentEventMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentEventMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentEventMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentEventMasterAsyncResult{
 		result: &result,
@@ -2497,33 +2497,33 @@ func (p Gs2ScheduleRestClient) UpdateCurrentEventMasterAsync(
 	callback chan<- UpdateCurrentEventMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Settings != nil && *request.Settings != "" {
-		bodies["settings"] = *request.Settings
-	}
+    var bodies = core.Bodies{}
+    if request.Settings != nil && *request.Settings != "" {
+        bodies["settings"] = *request.Settings
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentEventMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2567,13 +2567,13 @@ func updateCurrentEventMasterFromGitHubAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentEventMasterFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentEventMasterFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentEventMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2587,33 +2587,33 @@ func (p Gs2ScheduleRestClient) UpdateCurrentEventMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentEventMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentEventMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)

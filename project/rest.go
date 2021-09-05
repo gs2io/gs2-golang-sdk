@@ -56,13 +56,13 @@ func createAccountAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateAccountAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateAccountAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateAccountAsyncResult{
 		result: &result,
@@ -78,35 +78,35 @@ func (p Gs2ProjectRestClient) CreateAccountAsync(
 	path := "/account"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Email != nil && *request.Email != "" {
-		bodies["email"] = *request.Email
-	}
-	if request.FullName != nil && *request.FullName != "" {
-		bodies["fullName"] = *request.FullName
-	}
-	if request.CompanyName != nil && *request.CompanyName != "" {
-		bodies["companyName"] = *request.CompanyName
-	}
-	if request.Password != nil && *request.Password != "" {
-		bodies["password"] = *request.Password
-	}
+    var bodies = core.Bodies{}
+    if request.Email != nil && *request.Email != "" {
+        bodies["email"] = *request.Email
+    }
+    if request.FullName != nil && *request.FullName != "" {
+        bodies["fullName"] = *request.FullName
+    }
+    if request.CompanyName != nil && *request.CompanyName != "" {
+        bodies["companyName"] = *request.CompanyName
+    }
+    if request.Password != nil && *request.Password != "" {
+        bodies["password"] = *request.Password
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createAccountAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -150,13 +150,13 @@ func verifyAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- VerifyAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- VerifyAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- VerifyAsyncResult{
 		result: &result,
@@ -172,26 +172,26 @@ func (p Gs2ProjectRestClient) VerifyAsync(
 	path := "/account/verify"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.VerifyToken != nil && *request.VerifyToken != "" {
-		bodies["verifyToken"] = *request.VerifyToken
-	}
+    var bodies = core.Bodies{}
+    if request.VerifyToken != nil && *request.VerifyToken != "" {
+        bodies["verifyToken"] = *request.VerifyToken
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go verifyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -235,13 +235,13 @@ func signInAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SignInAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SignInAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SignInAsyncResult{
 		result: &result,
@@ -257,29 +257,29 @@ func (p Gs2ProjectRestClient) SignInAsync(
 	path := "/account/signIn"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Email != nil && *request.Email != "" {
-		bodies["email"] = *request.Email
-	}
-	if request.Password != nil && *request.Password != "" {
-		bodies["password"] = *request.Password
-	}
+    var bodies = core.Bodies{}
+    if request.Email != nil && *request.Email != "" {
+        bodies["email"] = *request.Email
+    }
+    if request.Password != nil && *request.Password != "" {
+        bodies["password"] = *request.Password
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go signInAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -323,13 +323,13 @@ func issueAccountTokenAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- IssueAccountTokenAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IssueAccountTokenAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- IssueAccountTokenAsyncResult{
 		result: &result,
@@ -345,26 +345,26 @@ func (p Gs2ProjectRestClient) IssueAccountTokenAsync(
 	path := "/account/accountToken"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.AccountName != nil && *request.AccountName != "" {
-		bodies["accountName"] = *request.AccountName
-	}
+    var bodies = core.Bodies{}
+    if request.AccountName != nil && *request.AccountName != "" {
+        bodies["accountName"] = *request.AccountName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go issueAccountTokenAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -408,13 +408,13 @@ func forgetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ForgetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ForgetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ForgetAsyncResult{
 		result: &result,
@@ -430,26 +430,26 @@ func (p Gs2ProjectRestClient) ForgetAsync(
 	path := "/account/forget"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Email != nil && *request.Email != "" {
-		bodies["email"] = *request.Email
-	}
+    var bodies = core.Bodies{}
+    if request.Email != nil && *request.Email != "" {
+        bodies["email"] = *request.Email
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go forgetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -493,13 +493,13 @@ func issuePasswordAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- IssuePasswordAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IssuePasswordAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- IssuePasswordAsyncResult{
 		result: &result,
@@ -515,26 +515,26 @@ func (p Gs2ProjectRestClient) IssuePasswordAsync(
 	path := "/account/password/issue"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.IssuePasswordToken != nil && *request.IssuePasswordToken != "" {
-		bodies["issuePasswordToken"] = *request.IssuePasswordToken
-	}
+    var bodies = core.Bodies{}
+    if request.IssuePasswordToken != nil && *request.IssuePasswordToken != "" {
+        bodies["issuePasswordToken"] = *request.IssuePasswordToken
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go issuePasswordAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -578,13 +578,13 @@ func updateAccountAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateAccountAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateAccountAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateAccountAsyncResult{
 		result: &result,
@@ -600,38 +600,38 @@ func (p Gs2ProjectRestClient) UpdateAccountAsync(
 	path := "/account"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Email != nil && *request.Email != "" {
-		bodies["email"] = *request.Email
-	}
-	if request.FullName != nil && *request.FullName != "" {
-		bodies["fullName"] = *request.FullName
-	}
-	if request.CompanyName != nil && *request.CompanyName != "" {
-		bodies["companyName"] = *request.CompanyName
-	}
-	if request.Password != nil && *request.Password != "" {
-		bodies["password"] = *request.Password
-	}
-	if request.AccountToken != nil && *request.AccountToken != "" {
-		bodies["accountToken"] = *request.AccountToken
-	}
+    var bodies = core.Bodies{}
+    if request.Email != nil && *request.Email != "" {
+        bodies["email"] = *request.Email
+    }
+    if request.FullName != nil && *request.FullName != "" {
+        bodies["fullName"] = *request.FullName
+    }
+    if request.CompanyName != nil && *request.CompanyName != "" {
+        bodies["companyName"] = *request.CompanyName
+    }
+    if request.Password != nil && *request.Password != "" {
+        bodies["password"] = *request.Password
+    }
+    if request.AccountToken != nil && *request.AccountToken != "" {
+        bodies["accountToken"] = *request.AccountToken
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateAccountAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -675,13 +675,13 @@ func deleteAccountAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteAccountAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteAccountAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteAccountAsyncResult{
 		result: &result,
@@ -699,10 +699,10 @@ func (p Gs2ProjectRestClient) DeleteAccountAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteAccountAsyncHandler(
 		p,
@@ -754,13 +754,13 @@ func describeProjectsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeProjectsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeProjectsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeProjectsAsyncResult{
 		result: &result,
@@ -787,10 +787,10 @@ func (p Gs2ProjectRestClient) DescribeProjectsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeProjectsAsyncHandler(
 		p,
@@ -842,13 +842,13 @@ func createProjectAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateProjectAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateProjectAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateProjectAsyncResult{
 		result: &result,
@@ -864,47 +864,47 @@ func (p Gs2ProjectRestClient) CreateProjectAsync(
 	path := "/account/me/project"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.AccountToken != nil && *request.AccountToken != "" {
-		bodies["accountToken"] = *request.AccountToken
-	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Plan != nil && *request.Plan != "" {
-		bodies["plan"] = *request.Plan
-	}
-	if request.BillingMethodName != nil && *request.BillingMethodName != "" {
-		bodies["billingMethodName"] = *request.BillingMethodName
-	}
-	if request.EnableEventBridge != nil && *request.EnableEventBridge != "" {
-		bodies["enableEventBridge"] = *request.EnableEventBridge
-	}
-	if request.EventBridgeAwsAccountId != nil && *request.EventBridgeAwsAccountId != "" {
-		bodies["eventBridgeAwsAccountId"] = *request.EventBridgeAwsAccountId
-	}
-	if request.EventBridgeAwsRegion != nil && *request.EventBridgeAwsRegion != "" {
-		bodies["eventBridgeAwsRegion"] = *request.EventBridgeAwsRegion
-	}
+    var bodies = core.Bodies{}
+    if request.AccountToken != nil && *request.AccountToken != "" {
+        bodies["accountToken"] = *request.AccountToken
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Plan != nil && *request.Plan != "" {
+        bodies["plan"] = *request.Plan
+    }
+    if request.BillingMethodName != nil && *request.BillingMethodName != "" {
+        bodies["billingMethodName"] = *request.BillingMethodName
+    }
+    if request.EnableEventBridge != nil && *request.EnableEventBridge != "" {
+        bodies["enableEventBridge"] = *request.EnableEventBridge
+    }
+    if request.EventBridgeAwsAccountId != nil && *request.EventBridgeAwsAccountId != "" {
+        bodies["eventBridgeAwsAccountId"] = *request.EventBridgeAwsAccountId
+    }
+    if request.EventBridgeAwsRegion != nil && *request.EventBridgeAwsRegion != "" {
+        bodies["eventBridgeAwsRegion"] = *request.EventBridgeAwsRegion
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createProjectAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -948,13 +948,13 @@ func getProjectAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetProjectAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetProjectAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetProjectAsyncResult{
 		result: &result,
@@ -968,11 +968,11 @@ func (p Gs2ProjectRestClient) GetProjectAsync(
 	callback chan<- GetProjectAsyncResult,
 ) {
 	path := "/account/me/project/{projectName}"
-	if request.ProjectName != nil && *request.ProjectName != "" {
-		path = strings.ReplaceAll(path, "{projectName}", core.ToString(*request.ProjectName))
-	} else {
-		path = strings.ReplaceAll(path, "{projectName}", "null")
-	}
+    if request.ProjectName != nil && *request.ProjectName != ""  {
+        path = strings.ReplaceAll(path, "{projectName}", core.ToString(*request.ProjectName))
+    } else {
+        path = strings.ReplaceAll(path, "{projectName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -980,10 +980,10 @@ func (p Gs2ProjectRestClient) GetProjectAsync(
 		queryStrings["accountToken"] = core.ToString(*request.AccountToken)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getProjectAsyncHandler(
 		p,
@@ -1035,13 +1035,13 @@ func getProjectTokenAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetProjectTokenAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetProjectTokenAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetProjectTokenAsyncResult{
 		result: &result,
@@ -1055,33 +1055,33 @@ func (p Gs2ProjectRestClient) GetProjectTokenAsync(
 	callback chan<- GetProjectTokenAsyncResult,
 ) {
 	path := "/project/{projectName}/projectToken"
-	if request.ProjectName != nil && *request.ProjectName != "" {
-		path = strings.ReplaceAll(path, "{projectName}", core.ToString(*request.ProjectName))
-	} else {
-		path = strings.ReplaceAll(path, "{projectName}", "null")
-	}
+    if request.ProjectName != nil && *request.ProjectName != ""  {
+        path = strings.ReplaceAll(path, "{projectName}", core.ToString(*request.ProjectName))
+    } else {
+        path = strings.ReplaceAll(path, "{projectName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.AccountToken != nil && *request.AccountToken != "" {
-		bodies["accountToken"] = *request.AccountToken
-	}
+    var bodies = core.Bodies{}
+    if request.AccountToken != nil && *request.AccountToken != "" {
+        bodies["accountToken"] = *request.AccountToken
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getProjectTokenAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1125,13 +1125,13 @@ func getProjectTokenByIdentifierAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetProjectTokenByIdentifierAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetProjectTokenByIdentifierAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetProjectTokenByIdentifierAsyncResult{
 		result: &result,
@@ -1145,43 +1145,43 @@ func (p Gs2ProjectRestClient) GetProjectTokenByIdentifierAsync(
 	callback chan<- GetProjectTokenByIdentifierAsyncResult,
 ) {
 	path := "/account/{accountName}/project/{projectName}/user/{userName}/projectToken"
-	if request.AccountName != nil && *request.AccountName != "" {
-		path = strings.ReplaceAll(path, "{accountName}", core.ToString(*request.AccountName))
-	} else {
-		path = strings.ReplaceAll(path, "{accountName}", "null")
-	}
-	if request.ProjectName != nil && *request.ProjectName != "" {
-		path = strings.ReplaceAll(path, "{projectName}", core.ToString(*request.ProjectName))
-	} else {
-		path = strings.ReplaceAll(path, "{projectName}", "null")
-	}
-	if request.UserName != nil && *request.UserName != "" {
-		path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
-	} else {
-		path = strings.ReplaceAll(path, "{userName}", "null")
-	}
+    if request.AccountName != nil && *request.AccountName != ""  {
+        path = strings.ReplaceAll(path, "{accountName}", core.ToString(*request.AccountName))
+    } else {
+        path = strings.ReplaceAll(path, "{accountName}", "null")
+    }
+    if request.ProjectName != nil && *request.ProjectName != ""  {
+        path = strings.ReplaceAll(path, "{projectName}", core.ToString(*request.ProjectName))
+    } else {
+        path = strings.ReplaceAll(path, "{projectName}", "null")
+    }
+    if request.UserName != nil && *request.UserName != ""  {
+        path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
+    } else {
+        path = strings.ReplaceAll(path, "{userName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Password != nil && *request.Password != "" {
-		bodies["password"] = *request.Password
-	}
+    var bodies = core.Bodies{}
+    if request.Password != nil && *request.Password != "" {
+        bodies["password"] = *request.Password
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getProjectTokenByIdentifierAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1225,13 +1225,13 @@ func updateProjectAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateProjectAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateProjectAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateProjectAsyncResult{
 		result: &result,
@@ -1245,51 +1245,51 @@ func (p Gs2ProjectRestClient) UpdateProjectAsync(
 	callback chan<- UpdateProjectAsyncResult,
 ) {
 	path := "/account/me/project/{projectName}"
-	if request.ProjectName != nil && *request.ProjectName != "" {
-		path = strings.ReplaceAll(path, "{projectName}", core.ToString(*request.ProjectName))
-	} else {
-		path = strings.ReplaceAll(path, "{projectName}", "null")
-	}
+    if request.ProjectName != nil && *request.ProjectName != ""  {
+        path = strings.ReplaceAll(path, "{projectName}", core.ToString(*request.ProjectName))
+    } else {
+        path = strings.ReplaceAll(path, "{projectName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.AccountToken != nil && *request.AccountToken != "" {
-		bodies["accountToken"] = *request.AccountToken
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Plan != nil && *request.Plan != "" {
-		bodies["plan"] = *request.Plan
-	}
-	if request.BillingMethodName != nil && *request.BillingMethodName != "" {
-		bodies["billingMethodName"] = *request.BillingMethodName
-	}
-	if request.EnableEventBridge != nil && *request.EnableEventBridge != "" {
-		bodies["enableEventBridge"] = *request.EnableEventBridge
-	}
-	if request.EventBridgeAwsAccountId != nil && *request.EventBridgeAwsAccountId != "" {
-		bodies["eventBridgeAwsAccountId"] = *request.EventBridgeAwsAccountId
-	}
-	if request.EventBridgeAwsRegion != nil && *request.EventBridgeAwsRegion != "" {
-		bodies["eventBridgeAwsRegion"] = *request.EventBridgeAwsRegion
-	}
+    var bodies = core.Bodies{}
+    if request.AccountToken != nil && *request.AccountToken != "" {
+        bodies["accountToken"] = *request.AccountToken
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Plan != nil && *request.Plan != "" {
+        bodies["plan"] = *request.Plan
+    }
+    if request.BillingMethodName != nil && *request.BillingMethodName != "" {
+        bodies["billingMethodName"] = *request.BillingMethodName
+    }
+    if request.EnableEventBridge != nil && *request.EnableEventBridge != "" {
+        bodies["enableEventBridge"] = *request.EnableEventBridge
+    }
+    if request.EventBridgeAwsAccountId != nil && *request.EventBridgeAwsAccountId != "" {
+        bodies["eventBridgeAwsAccountId"] = *request.EventBridgeAwsAccountId
+    }
+    if request.EventBridgeAwsRegion != nil && *request.EventBridgeAwsRegion != "" {
+        bodies["eventBridgeAwsRegion"] = *request.EventBridgeAwsRegion
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateProjectAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1333,13 +1333,13 @@ func deleteProjectAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteProjectAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteProjectAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteProjectAsyncResult{
 		result: &result,
@@ -1353,11 +1353,11 @@ func (p Gs2ProjectRestClient) DeleteProjectAsync(
 	callback chan<- DeleteProjectAsyncResult,
 ) {
 	path := "/account/me/project/{projectName}"
-	if request.ProjectName != nil && *request.ProjectName != "" {
-		path = strings.ReplaceAll(path, "{projectName}", core.ToString(*request.ProjectName))
-	} else {
-		path = strings.ReplaceAll(path, "{projectName}", "null")
-	}
+    if request.ProjectName != nil && *request.ProjectName != ""  {
+        path = strings.ReplaceAll(path, "{projectName}", core.ToString(*request.ProjectName))
+    } else {
+        path = strings.ReplaceAll(path, "{projectName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1365,10 +1365,10 @@ func (p Gs2ProjectRestClient) DeleteProjectAsync(
 		queryStrings["accountToken"] = core.ToString(*request.AccountToken)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteProjectAsyncHandler(
 		p,
@@ -1420,13 +1420,13 @@ func describeBillingMethodsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBillingMethodsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBillingMethodsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeBillingMethodsAsyncResult{
 		result: &result,
@@ -1453,10 +1453,10 @@ func (p Gs2ProjectRestClient) DescribeBillingMethodsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeBillingMethodsAsyncHandler(
 		p,
@@ -1508,13 +1508,13 @@ func createBillingMethodAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateBillingMethodAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateBillingMethodAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateBillingMethodAsyncResult{
 		result: &result,
@@ -1530,38 +1530,38 @@ func (p Gs2ProjectRestClient) CreateBillingMethodAsync(
 	path := "/account/me/billingMethod"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.AccountToken != nil && *request.AccountToken != "" {
-		bodies["accountToken"] = *request.AccountToken
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.MethodType != nil && *request.MethodType != "" {
-		bodies["methodType"] = *request.MethodType
-	}
-	if request.CardCustomerId != nil && *request.CardCustomerId != "" {
-		bodies["cardCustomerId"] = *request.CardCustomerId
-	}
-	if request.PartnerId != nil && *request.PartnerId != "" {
-		bodies["partnerId"] = *request.PartnerId
-	}
+    var bodies = core.Bodies{}
+    if request.AccountToken != nil && *request.AccountToken != "" {
+        bodies["accountToken"] = *request.AccountToken
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.MethodType != nil && *request.MethodType != "" {
+        bodies["methodType"] = *request.MethodType
+    }
+    if request.CardCustomerId != nil && *request.CardCustomerId != "" {
+        bodies["cardCustomerId"] = *request.CardCustomerId
+    }
+    if request.PartnerId != nil && *request.PartnerId != "" {
+        bodies["partnerId"] = *request.PartnerId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createBillingMethodAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1605,13 +1605,13 @@ func getBillingMethodAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetBillingMethodAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBillingMethodAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetBillingMethodAsyncResult{
 		result: &result,
@@ -1625,11 +1625,11 @@ func (p Gs2ProjectRestClient) GetBillingMethodAsync(
 	callback chan<- GetBillingMethodAsyncResult,
 ) {
 	path := "/account/me/billingMethod/{billingMethodName}"
-	if request.BillingMethodName != nil && *request.BillingMethodName != "" {
-		path = strings.ReplaceAll(path, "{billingMethodName}", core.ToString(*request.BillingMethodName))
-	} else {
-		path = strings.ReplaceAll(path, "{billingMethodName}", "null")
-	}
+    if request.BillingMethodName != nil && *request.BillingMethodName != ""  {
+        path = strings.ReplaceAll(path, "{billingMethodName}", core.ToString(*request.BillingMethodName))
+    } else {
+        path = strings.ReplaceAll(path, "{billingMethodName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1637,10 +1637,10 @@ func (p Gs2ProjectRestClient) GetBillingMethodAsync(
 		queryStrings["accountToken"] = core.ToString(*request.AccountToken)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getBillingMethodAsyncHandler(
 		p,
@@ -1692,13 +1692,13 @@ func updateBillingMethodAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateBillingMethodAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateBillingMethodAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateBillingMethodAsyncResult{
 		result: &result,
@@ -1712,36 +1712,36 @@ func (p Gs2ProjectRestClient) UpdateBillingMethodAsync(
 	callback chan<- UpdateBillingMethodAsyncResult,
 ) {
 	path := "/account/me/billingMethod/{billingMethodName}"
-	if request.BillingMethodName != nil && *request.BillingMethodName != "" {
-		path = strings.ReplaceAll(path, "{billingMethodName}", core.ToString(*request.BillingMethodName))
-	} else {
-		path = strings.ReplaceAll(path, "{billingMethodName}", "null")
-	}
+    if request.BillingMethodName != nil && *request.BillingMethodName != ""  {
+        path = strings.ReplaceAll(path, "{billingMethodName}", core.ToString(*request.BillingMethodName))
+    } else {
+        path = strings.ReplaceAll(path, "{billingMethodName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.AccountToken != nil && *request.AccountToken != "" {
-		bodies["accountToken"] = *request.AccountToken
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
+    var bodies = core.Bodies{}
+    if request.AccountToken != nil && *request.AccountToken != "" {
+        bodies["accountToken"] = *request.AccountToken
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateBillingMethodAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1785,13 +1785,13 @@ func deleteBillingMethodAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteBillingMethodAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteBillingMethodAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteBillingMethodAsyncResult{
 		result: &result,
@@ -1805,11 +1805,11 @@ func (p Gs2ProjectRestClient) DeleteBillingMethodAsync(
 	callback chan<- DeleteBillingMethodAsyncResult,
 ) {
 	path := "/account/me/billingMethod/{billingMethodName}"
-	if request.BillingMethodName != nil && *request.BillingMethodName != "" {
-		path = strings.ReplaceAll(path, "{billingMethodName}", core.ToString(*request.BillingMethodName))
-	} else {
-		path = strings.ReplaceAll(path, "{billingMethodName}", "null")
-	}
+    if request.BillingMethodName != nil && *request.BillingMethodName != ""  {
+        path = strings.ReplaceAll(path, "{billingMethodName}", core.ToString(*request.BillingMethodName))
+    } else {
+        path = strings.ReplaceAll(path, "{billingMethodName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1817,10 +1817,10 @@ func (p Gs2ProjectRestClient) DeleteBillingMethodAsync(
 		queryStrings["accountToken"] = core.ToString(*request.AccountToken)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteBillingMethodAsyncHandler(
 		p,
@@ -1872,13 +1872,13 @@ func describeReceiptsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeReceiptsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReceiptsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeReceiptsAsyncResult{
 		result: &result,
@@ -1905,10 +1905,10 @@ func (p Gs2ProjectRestClient) DescribeReceiptsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeReceiptsAsyncHandler(
 		p,
@@ -1960,13 +1960,13 @@ func describeBillingsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBillingsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBillingsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeBillingsAsyncResult{
 		result: &result,
@@ -1980,21 +1980,21 @@ func (p Gs2ProjectRestClient) DescribeBillingsAsync(
 	callback chan<- DescribeBillingsAsyncResult,
 ) {
 	path := "/account/me/billing/{projectName}/{year}/{month}"
-	if request.ProjectName != nil && *request.ProjectName != "" {
-		path = strings.ReplaceAll(path, "{projectName}", core.ToString(*request.ProjectName))
-	} else {
-		path = strings.ReplaceAll(path, "{projectName}", "null")
-	}
-	if request.Year != nil {
-		path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
-	} else {
-		path = strings.ReplaceAll(path, "{year}", "null")
-	}
-	if request.Month != nil {
-		path = strings.ReplaceAll(path, "{month}", core.ToString(*request.Month))
-	} else {
-		path = strings.ReplaceAll(path, "{month}", "null")
-	}
+    if request.ProjectName != nil && *request.ProjectName != ""  {
+        path = strings.ReplaceAll(path, "{projectName}", core.ToString(*request.ProjectName))
+    } else {
+        path = strings.ReplaceAll(path, "{projectName}", "null")
+    }
+    if request.Year != nil {
+        path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
+    } else {
+        path = strings.ReplaceAll(path, "{year}", "null")
+    }
+    if request.Month != nil {
+        path = strings.ReplaceAll(path, "{month}", core.ToString(*request.Month))
+    } else {
+        path = strings.ReplaceAll(path, "{month}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2008,10 +2008,10 @@ func (p Gs2ProjectRestClient) DescribeBillingsAsync(
 		queryStrings["service"] = core.ToString(*request.Service)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeBillingsAsyncHandler(
 		p,
