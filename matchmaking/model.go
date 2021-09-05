@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package matchmaking
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId                                   *string              `json:"namespaceId"`
@@ -35,6 +38,12 @@ type Namespace struct {
 	LogSetting                                    *LogSetting          `json:"logSetting"`
 	CreatedAt                                     *int64               `json:"createdAt"`
 	UpdatedAt                                     *int64               `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -111,6 +120,12 @@ type Gathering struct {
 	UpdatedAt       *int64           `json:"updatedAt"`
 }
 
+func NewGatheringFromJson(data string) Gathering {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGatheringFromDict(dict)
+}
+
 func NewGatheringFromDict(data map[string]interface{}) Gathering {
 	return Gathering{
 		GatheringId:     core.CastString(data["gatheringId"]),
@@ -175,6 +190,12 @@ type RatingModelMaster struct {
 	UpdatedAt     *int64  `json:"updatedAt"`
 }
 
+func NewRatingModelMasterFromJson(data string) RatingModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRatingModelMasterFromDict(dict)
+}
+
 func NewRatingModelMasterFromDict(data map[string]interface{}) RatingModelMaster {
 	return RatingModelMaster{
 		RatingModelId: core.CastString(data["ratingModelId"]),
@@ -226,6 +247,12 @@ type RatingModel struct {
 	Volatility    *int32  `json:"volatility"`
 }
 
+func NewRatingModelFromJson(data string) RatingModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRatingModelFromDict(dict)
+}
+
 func NewRatingModelFromDict(data map[string]interface{}) RatingModel {
 	return RatingModel{
 		RatingModelId: core.CastString(data["ratingModelId"]),
@@ -269,6 +296,12 @@ type CurrentRatingModelMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentRatingModelMasterFromJson(data string) CurrentRatingModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentRatingModelMasterFromDict(dict)
+}
+
 func NewCurrentRatingModelMasterFromDict(data map[string]interface{}) CurrentRatingModelMaster {
 	return CurrentRatingModelMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -307,6 +340,12 @@ type NotificationSetting struct {
 	GatewayNamespaceId               *string `json:"gatewayNamespaceId"`
 	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
 	Sound                            *string `json:"sound"`
+}
+
+func NewNotificationSettingFromJson(data string) NotificationSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNotificationSettingFromDict(dict)
 }
 
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
@@ -349,6 +388,12 @@ type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
+}
+
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
 		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
@@ -389,6 +434,12 @@ type GitHubCheckoutSetting struct {
 	CommitHash     *string `json:"commitHash"`
 	BranchName     *string `json:"branchName"`
 	TagName        *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
@@ -441,6 +492,12 @@ type AttributeRange struct {
 	Max  *int32  `json:"max"`
 }
 
+func NewAttributeRangeFromJson(data string) AttributeRange {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAttributeRangeFromDict(dict)
+}
+
 func NewAttributeRangeFromDict(data map[string]interface{}) AttributeRange {
 	return AttributeRange{
 		Name: core.CastString(data["name"]),
@@ -482,6 +539,12 @@ type CapacityOfRole struct {
 	RoleAliases  []string `json:"roleAliases"`
 	Capacity     *int32   `json:"capacity"`
 	Participants []Player `json:"participants"`
+}
+
+func NewCapacityOfRoleFromJson(data string) CapacityOfRole {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCapacityOfRoleFromDict(dict)
 }
 
 func NewCapacityOfRoleFromDict(data map[string]interface{}) CapacityOfRole {
@@ -531,6 +594,12 @@ type Attribute struct {
 	Value *int32  `json:"value"`
 }
 
+func NewAttributeFromJson(data string) Attribute {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAttributeFromDict(dict)
+}
+
 func NewAttributeFromDict(data map[string]interface{}) Attribute {
 	return Attribute{
 		Name:  core.CastString(data["name"]),
@@ -570,6 +639,12 @@ type Player struct {
 	Attributes  []Attribute `json:"attributes"`
 	RoleName    *string     `json:"roleName"`
 	DenyUserIds []string    `json:"denyUserIds"`
+}
+
+func NewPlayerFromJson(data string) Player {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPlayerFromDict(dict)
 }
 
 func NewPlayerFromDict(data map[string]interface{}) Player {
@@ -623,6 +698,12 @@ type Rating struct {
 	UpdatedAt *int64   `json:"updatedAt"`
 }
 
+func NewRatingFromJson(data string) Rating {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRatingFromDict(dict)
+}
+
 func NewRatingFromDict(data map[string]interface{}) Rating {
 	return Rating{
 		RatingId:  core.CastString(data["ratingId"]),
@@ -670,6 +751,12 @@ type GameResult struct {
 	UserId *string `json:"userId"`
 }
 
+func NewGameResultFromJson(data string) GameResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGameResultFromDict(dict)
+}
+
 func NewGameResultFromDict(data map[string]interface{}) GameResult {
 	return GameResult{
 		Rank:   core.CastInt32(data["rank"]),
@@ -709,6 +796,12 @@ type Ballot struct {
 	RatingName     *string `json:"ratingName"`
 	GatheringName  *string `json:"gatheringName"`
 	NumberOfPlayer *int32  `json:"numberOfPlayer"`
+}
+
+func NewBallotFromJson(data string) Ballot {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBallotFromDict(dict)
 }
 
 func NewBallotFromDict(data map[string]interface{}) Ballot {
@@ -754,6 +847,12 @@ type SignedBallot struct {
 	Signature *string `json:"signature"`
 }
 
+func NewSignedBallotFromJson(data string) SignedBallot {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSignedBallotFromDict(dict)
+}
+
 func NewSignedBallotFromDict(data map[string]interface{}) SignedBallot {
 	return SignedBallot{
 		Body:      core.CastString(data["body"]),
@@ -791,6 +890,12 @@ func CastSignedBallotsFromDict(data []SignedBallot) []interface{} {
 type WrittenBallot struct {
 	Ballot      *Ballot      `json:"ballot"`
 	GameResults []GameResult `json:"gameResults"`
+}
+
+func NewWrittenBallotFromJson(data string) WrittenBallot {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewWrittenBallotFromDict(dict)
 }
 
 func NewWrittenBallotFromDict(data map[string]interface{}) WrittenBallot {
@@ -836,6 +941,12 @@ type Vote struct {
 	WrittenBallots []WrittenBallot `json:"writtenBallots"`
 	CreatedAt      *int64          `json:"createdAt"`
 	UpdatedAt      *int64          `json:"updatedAt"`
+}
+
+func NewVoteFromJson(data string) Vote {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVoteFromDict(dict)
 }
 
 func NewVoteFromDict(data map[string]interface{}) Vote {

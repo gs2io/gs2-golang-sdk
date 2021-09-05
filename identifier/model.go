@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package identifier
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type User struct {
 	UserId      *string `json:"userId"`
@@ -24,6 +27,12 @@ type User struct {
 	Description *string `json:"description"`
 	CreatedAt   *int64  `json:"createdAt"`
 	UpdatedAt   *int64  `json:"updatedAt"`
+}
+
+func NewUserFromJson(data string) User {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUserFromDict(dict)
 }
 
 func NewUserFromDict(data map[string]interface{}) User {
@@ -75,6 +84,12 @@ type SecurityPolicy struct {
 	UpdatedAt        *int64  `json:"updatedAt"`
 }
 
+func NewSecurityPolicyFromJson(data string) SecurityPolicy {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSecurityPolicyFromDict(dict)
+}
+
 func NewSecurityPolicyFromDict(data map[string]interface{}) SecurityPolicy {
 	return SecurityPolicy{
 		SecurityPolicyId: core.CastString(data["securityPolicyId"]),
@@ -124,6 +139,12 @@ type Identifier struct {
 	CreatedAt    *int64  `json:"createdAt"`
 }
 
+func NewIdentifierFromJson(data string) Identifier {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIdentifierFromDict(dict)
+}
+
 func NewIdentifierFromDict(data map[string]interface{}) Identifier {
 	return Identifier{
 		ClientId:     core.CastString(data["clientId"]),
@@ -168,6 +189,12 @@ type Password struct {
 	CreatedAt *int64  `json:"createdAt"`
 }
 
+func NewPasswordFromJson(data string) Password {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPasswordFromDict(dict)
+}
+
 func NewPasswordFromDict(data map[string]interface{}) Password {
 	return Password{
 		UserId:    core.CastString(data["userId"]),
@@ -210,6 +237,12 @@ type AttachSecurityPolicy struct {
 	AttachedAt        *int64   `json:"attachedAt"`
 }
 
+func NewAttachSecurityPolicyFromJson(data string) AttachSecurityPolicy {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAttachSecurityPolicyFromDict(dict)
+}
+
 func NewAttachSecurityPolicyFromDict(data map[string]interface{}) AttachSecurityPolicy {
 	return AttachSecurityPolicy{
 		UserId:            core.CastString(data["userId"]),
@@ -250,6 +283,12 @@ func CastAttachSecurityPoliciesFromDict(data []AttachSecurityPolicy) []interface
 
 type ProjectToken struct {
 	Token *string `json:"token"`
+}
+
+func NewProjectTokenFromJson(data string) ProjectToken {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewProjectTokenFromDict(dict)
 }
 
 func NewProjectTokenFromDict(data map[string]interface{}) ProjectToken {

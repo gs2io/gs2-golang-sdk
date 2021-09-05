@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package schedule
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -53,6 +62,12 @@ type CreateNamespaceRequest struct {
 	LogSetting         *LogSetting `json:"logSetting"`
 }
 
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
+}
+
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
 		Name:        core.CastString(data["name"]),
@@ -80,6 +95,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -101,6 +122,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -126,6 +153,12 @@ type UpdateNamespaceRequest struct {
 	NamespaceName      *string     `json:"namespaceName"`
 	Description        *string     `json:"description"`
 	LogSetting         *LogSetting `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -155,6 +188,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -178,6 +217,12 @@ type DescribeEventMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeEventMastersRequestFromJson(data string) DescribeEventMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeEventMastersRequestFromDict(dict)
 }
 
 func NewDescribeEventMastersRequestFromDict(data map[string]interface{}) DescribeEventMastersRequest {
@@ -220,6 +265,12 @@ type CreateEventMasterRequest struct {
 	RepeatEndHour         *int32  `json:"repeatEndHour"`
 	RelativeTriggerName   *string `json:"relativeTriggerName"`
 	RelativeDuration      *int32  `json:"relativeDuration"`
+}
+
+func NewCreateEventMasterRequestFromJson(data string) CreateEventMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateEventMasterRequestFromDict(dict)
 }
 
 func NewCreateEventMasterRequestFromDict(data map[string]interface{}) CreateEventMasterRequest {
@@ -276,6 +327,12 @@ type GetEventMasterRequest struct {
 	EventName          *string `json:"eventName"`
 }
 
+func NewGetEventMasterRequestFromJson(data string) GetEventMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetEventMasterRequestFromDict(dict)
+}
+
 func NewGetEventMasterRequestFromDict(data map[string]interface{}) GetEventMasterRequest {
 	return GetEventMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -314,6 +371,12 @@ type UpdateEventMasterRequest struct {
 	RepeatEndHour         *int32  `json:"repeatEndHour"`
 	RelativeTriggerName   *string `json:"relativeTriggerName"`
 	RelativeDuration      *int32  `json:"relativeDuration"`
+}
+
+func NewUpdateEventMasterRequestFromJson(data string) UpdateEventMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateEventMasterRequestFromDict(dict)
 }
 
 func NewUpdateEventMasterRequestFromDict(data map[string]interface{}) UpdateEventMasterRequest {
@@ -370,6 +433,12 @@ type DeleteEventMasterRequest struct {
 	EventName          *string `json:"eventName"`
 }
 
+func NewDeleteEventMasterRequestFromJson(data string) DeleteEventMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteEventMasterRequestFromDict(dict)
+}
+
 func NewDeleteEventMasterRequestFromDict(data map[string]interface{}) DeleteEventMasterRequest {
 	return DeleteEventMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -396,6 +465,12 @@ type DescribeTriggersRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeTriggersRequestFromJson(data string) DescribeTriggersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeTriggersRequestFromDict(dict)
 }
 
 func NewDescribeTriggersRequestFromDict(data map[string]interface{}) DescribeTriggersRequest {
@@ -430,6 +505,12 @@ type DescribeTriggersByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeTriggersByUserIdRequestFromJson(data string) DescribeTriggersByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeTriggersByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeTriggersByUserIdRequestFromDict(data map[string]interface{}) DescribeTriggersByUserIdRequest {
 	return DescribeTriggersByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -461,6 +542,12 @@ type GetTriggerRequest struct {
 	TriggerName        *string `json:"triggerName"`
 }
 
+func NewGetTriggerRequestFromJson(data string) GetTriggerRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetTriggerRequestFromDict(dict)
+}
+
 func NewGetTriggerRequestFromDict(data map[string]interface{}) GetTriggerRequest {
 	return GetTriggerRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -488,6 +575,12 @@ type GetTriggerByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	TriggerName        *string `json:"triggerName"`
+}
+
+func NewGetTriggerByUserIdRequestFromJson(data string) GetTriggerByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetTriggerByUserIdRequestFromDict(dict)
 }
 
 func NewGetTriggerByUserIdRequestFromDict(data map[string]interface{}) GetTriggerByUserIdRequest {
@@ -519,6 +612,12 @@ type TriggerByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	TriggerStrategy    *string `json:"triggerStrategy"`
 	Ttl                *int32  `json:"ttl"`
+}
+
+func NewTriggerByUserIdRequestFromJson(data string) TriggerByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewTriggerByUserIdRequestFromDict(dict)
 }
 
 func NewTriggerByUserIdRequestFromDict(data map[string]interface{}) TriggerByUserIdRequest {
@@ -554,6 +653,12 @@ type DeleteTriggerRequest struct {
 	TriggerName        *string `json:"triggerName"`
 }
 
+func NewDeleteTriggerRequestFromJson(data string) DeleteTriggerRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteTriggerRequestFromDict(dict)
+}
+
 func NewDeleteTriggerRequestFromDict(data map[string]interface{}) DeleteTriggerRequest {
 	return DeleteTriggerRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -581,6 +686,12 @@ type DeleteTriggerByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	TriggerName        *string `json:"triggerName"`
+}
+
+func NewDeleteTriggerByUserIdRequestFromJson(data string) DeleteTriggerByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteTriggerByUserIdRequestFromDict(dict)
 }
 
 func NewDeleteTriggerByUserIdRequestFromDict(data map[string]interface{}) DeleteTriggerByUserIdRequest {
@@ -611,6 +722,12 @@ type DescribeEventsRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
+func NewDescribeEventsRequestFromJson(data string) DescribeEventsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeEventsRequestFromDict(dict)
+}
+
 func NewDescribeEventsRequestFromDict(data map[string]interface{}) DescribeEventsRequest {
 	return DescribeEventsRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -635,6 +752,12 @@ type DescribeEventsByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewDescribeEventsByUserIdRequestFromJson(data string) DescribeEventsByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeEventsByUserIdRequestFromDict(dict)
 }
 
 func NewDescribeEventsByUserIdRequestFromDict(data map[string]interface{}) DescribeEventsByUserIdRequest {
@@ -662,6 +785,12 @@ type DescribeRawEventsRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDescribeRawEventsRequestFromJson(data string) DescribeRawEventsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeRawEventsRequestFromDict(dict)
+}
+
 func NewDescribeRawEventsRequestFromDict(data map[string]interface{}) DescribeRawEventsRequest {
 	return DescribeRawEventsRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -685,6 +814,12 @@ type GetEventRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	EventName          *string `json:"eventName"`
 	AccessToken        *string `json:"accessToken"`
+}
+
+func NewGetEventRequestFromJson(data string) GetEventRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetEventRequestFromDict(dict)
 }
 
 func NewGetEventRequestFromDict(data map[string]interface{}) GetEventRequest {
@@ -716,6 +851,12 @@ type GetEventByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 }
 
+func NewGetEventByUserIdRequestFromJson(data string) GetEventByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetEventByUserIdRequestFromDict(dict)
+}
+
 func NewGetEventByUserIdRequestFromDict(data map[string]interface{}) GetEventByUserIdRequest {
 	return GetEventByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -744,6 +885,12 @@ type GetRawEventRequest struct {
 	EventName          *string `json:"eventName"`
 }
 
+func NewGetRawEventRequestFromJson(data string) GetRawEventRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetRawEventRequestFromDict(dict)
+}
+
 func NewGetRawEventRequestFromDict(data map[string]interface{}) GetRawEventRequest {
 	return GetRawEventRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -769,6 +916,12 @@ type ExportMasterRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterRequestFromDict(dict)
+}
+
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -790,6 +943,12 @@ type GetCurrentEventMasterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetCurrentEventMasterRequestFromJson(data string) GetCurrentEventMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentEventMasterRequestFromDict(dict)
 }
 
 func NewGetCurrentEventMasterRequestFromDict(data map[string]interface{}) GetCurrentEventMasterRequest {
@@ -816,6 +975,12 @@ type UpdateCurrentEventMasterRequest struct {
 	Settings           *string `json:"settings"`
 }
 
+func NewUpdateCurrentEventMasterRequestFromJson(data string) UpdateCurrentEventMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentEventMasterRequestFromDict(dict)
+}
+
 func NewUpdateCurrentEventMasterRequestFromDict(data map[string]interface{}) UpdateCurrentEventMasterRequest {
 	return UpdateCurrentEventMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -840,6 +1005,12 @@ type UpdateCurrentEventMasterFromGitHubRequest struct {
 	DuplicationAvoider *string                `json:"duplicationAvoider"`
 	NamespaceName      *string                `json:"namespaceName"`
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
+}
+
+func NewUpdateCurrentEventMasterFromGitHubRequestFromJson(data string) UpdateCurrentEventMasterFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentEventMasterFromGitHubRequestFromDict(dict)
 }
 
 func NewUpdateCurrentEventMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentEventMasterFromGitHubRequest {

@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package account
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -130,6 +157,12 @@ type UpdateNamespaceResult struct {
 type UpdateNamespaceAsyncResult struct {
 	result *UpdateNamespaceResult
 	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
@@ -156,6 +189,12 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{}
 }
@@ -176,6 +215,12 @@ type DescribeAccountsResult struct {
 type DescribeAccountsAsyncResult struct {
 	result *DescribeAccountsResult
 	err    error
+}
+
+func NewDescribeAccountsResultFromJson(data string) DescribeAccountsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeAccountsResultFromDict(dict)
 }
 
 func NewDescribeAccountsResultFromDict(data map[string]interface{}) DescribeAccountsResult {
@@ -207,6 +252,12 @@ type CreateAccountAsyncResult struct {
 	err    error
 }
 
+func NewCreateAccountResultFromJson(data string) CreateAccountResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateAccountResultFromDict(dict)
+}
+
 func NewCreateAccountResultFromDict(data map[string]interface{}) CreateAccountResult {
 	return CreateAccountResult{
 		Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
@@ -230,6 +281,12 @@ type UpdateTimeOffsetResult struct {
 type UpdateTimeOffsetAsyncResult struct {
 	result *UpdateTimeOffsetResult
 	err    error
+}
+
+func NewUpdateTimeOffsetResultFromJson(data string) UpdateTimeOffsetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateTimeOffsetResultFromDict(dict)
 }
 
 func NewUpdateTimeOffsetResultFromDict(data map[string]interface{}) UpdateTimeOffsetResult {
@@ -257,6 +314,12 @@ type GetAccountAsyncResult struct {
 	err    error
 }
 
+func NewGetAccountResultFromJson(data string) GetAccountResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetAccountResultFromDict(dict)
+}
+
 func NewGetAccountResultFromDict(data map[string]interface{}) GetAccountResult {
 	return GetAccountResult{
 		Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
@@ -281,6 +344,12 @@ type DeleteAccountAsyncResult struct {
 	err    error
 }
 
+func NewDeleteAccountResultFromJson(data string) DeleteAccountResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteAccountResultFromDict(dict)
+}
+
 func NewDeleteAccountResultFromDict(data map[string]interface{}) DeleteAccountResult {
 	return DeleteAccountResult{}
 }
@@ -302,6 +371,12 @@ type AuthenticationResult struct {
 type AuthenticationAsyncResult struct {
 	result *AuthenticationResult
 	err    error
+}
+
+func NewAuthenticationResultFromJson(data string) AuthenticationResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAuthenticationResultFromDict(dict)
 }
 
 func NewAuthenticationResultFromDict(data map[string]interface{}) AuthenticationResult {
@@ -334,6 +409,12 @@ type DescribeTakeOversAsyncResult struct {
 	err    error
 }
 
+func NewDescribeTakeOversResultFromJson(data string) DescribeTakeOversResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeTakeOversResultFromDict(dict)
+}
+
 func NewDescribeTakeOversResultFromDict(data map[string]interface{}) DescribeTakeOversResult {
 	return DescribeTakeOversResult{
 		Items:         CastTakeOvers(core.CastArray(data["items"])),
@@ -362,6 +443,12 @@ type DescribeTakeOversByUserIdResult struct {
 type DescribeTakeOversByUserIdAsyncResult struct {
 	result *DescribeTakeOversByUserIdResult
 	err    error
+}
+
+func NewDescribeTakeOversByUserIdResultFromJson(data string) DescribeTakeOversByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeTakeOversByUserIdResultFromDict(dict)
 }
 
 func NewDescribeTakeOversByUserIdResultFromDict(data map[string]interface{}) DescribeTakeOversByUserIdResult {
@@ -393,6 +480,12 @@ type CreateTakeOverAsyncResult struct {
 	err    error
 }
 
+func NewCreateTakeOverResultFromJson(data string) CreateTakeOverResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateTakeOverResultFromDict(dict)
+}
+
 func NewCreateTakeOverResultFromDict(data map[string]interface{}) CreateTakeOverResult {
 	return CreateTakeOverResult{
 		Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
@@ -416,6 +509,12 @@ type CreateTakeOverByUserIdResult struct {
 type CreateTakeOverByUserIdAsyncResult struct {
 	result *CreateTakeOverByUserIdResult
 	err    error
+}
+
+func NewCreateTakeOverByUserIdResultFromJson(data string) CreateTakeOverByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateTakeOverByUserIdResultFromDict(dict)
 }
 
 func NewCreateTakeOverByUserIdResultFromDict(data map[string]interface{}) CreateTakeOverByUserIdResult {
@@ -443,6 +542,12 @@ type GetTakeOverAsyncResult struct {
 	err    error
 }
 
+func NewGetTakeOverResultFromJson(data string) GetTakeOverResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetTakeOverResultFromDict(dict)
+}
+
 func NewGetTakeOverResultFromDict(data map[string]interface{}) GetTakeOverResult {
 	return GetTakeOverResult{
 		Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
@@ -466,6 +571,12 @@ type GetTakeOverByUserIdResult struct {
 type GetTakeOverByUserIdAsyncResult struct {
 	result *GetTakeOverByUserIdResult
 	err    error
+}
+
+func NewGetTakeOverByUserIdResultFromJson(data string) GetTakeOverByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetTakeOverByUserIdResultFromDict(dict)
 }
 
 func NewGetTakeOverByUserIdResultFromDict(data map[string]interface{}) GetTakeOverByUserIdResult {
@@ -493,6 +604,12 @@ type UpdateTakeOverAsyncResult struct {
 	err    error
 }
 
+func NewUpdateTakeOverResultFromJson(data string) UpdateTakeOverResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateTakeOverResultFromDict(dict)
+}
+
 func NewUpdateTakeOverResultFromDict(data map[string]interface{}) UpdateTakeOverResult {
 	return UpdateTakeOverResult{
 		Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
@@ -516,6 +633,12 @@ type UpdateTakeOverByUserIdResult struct {
 type UpdateTakeOverByUserIdAsyncResult struct {
 	result *UpdateTakeOverByUserIdResult
 	err    error
+}
+
+func NewUpdateTakeOverByUserIdResultFromJson(data string) UpdateTakeOverByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateTakeOverByUserIdResultFromDict(dict)
 }
 
 func NewUpdateTakeOverByUserIdResultFromDict(data map[string]interface{}) UpdateTakeOverByUserIdResult {
@@ -542,6 +665,12 @@ type DeleteTakeOverAsyncResult struct {
 	err    error
 }
 
+func NewDeleteTakeOverResultFromJson(data string) DeleteTakeOverResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteTakeOverResultFromDict(dict)
+}
+
 func NewDeleteTakeOverResultFromDict(data map[string]interface{}) DeleteTakeOverResult {
 	return DeleteTakeOverResult{}
 }
@@ -560,6 +689,12 @@ type DeleteTakeOverByUserIdentifierResult struct {
 type DeleteTakeOverByUserIdentifierAsyncResult struct {
 	result *DeleteTakeOverByUserIdentifierResult
 	err    error
+}
+
+func NewDeleteTakeOverByUserIdentifierResultFromJson(data string) DeleteTakeOverByUserIdentifierResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteTakeOverByUserIdentifierResultFromDict(dict)
 }
 
 func NewDeleteTakeOverByUserIdentifierResultFromDict(data map[string]interface{}) DeleteTakeOverByUserIdentifierResult {
@@ -581,6 +716,12 @@ type DoTakeOverResult struct {
 type DoTakeOverAsyncResult struct {
 	result *DoTakeOverResult
 	err    error
+}
+
+func NewDoTakeOverResultFromJson(data string) DoTakeOverResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDoTakeOverResultFromDict(dict)
 }
 
 func NewDoTakeOverResultFromDict(data map[string]interface{}) DoTakeOverResult {

@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package key
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -53,6 +62,12 @@ type CreateNamespaceRequest struct {
 	LogSetting         *LogSetting `json:"logSetting"`
 }
 
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
+}
+
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
 		Name:        core.CastString(data["name"]),
@@ -80,6 +95,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -101,6 +122,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -126,6 +153,12 @@ type UpdateNamespaceRequest struct {
 	NamespaceName      *string     `json:"namespaceName"`
 	Description        *string     `json:"description"`
 	LogSetting         *LogSetting `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -155,6 +188,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -178,6 +217,12 @@ type DescribeKeysRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeKeysRequestFromJson(data string) DescribeKeysRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeKeysRequestFromDict(dict)
 }
 
 func NewDescribeKeysRequestFromDict(data map[string]interface{}) DescribeKeysRequest {
@@ -209,6 +254,12 @@ type CreateKeyRequest struct {
 	Description        *string `json:"description"`
 }
 
+func NewCreateKeyRequestFromJson(data string) CreateKeyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateKeyRequestFromDict(dict)
+}
+
 func NewCreateKeyRequestFromDict(data map[string]interface{}) CreateKeyRequest {
 	return CreateKeyRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -236,6 +287,12 @@ type UpdateKeyRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	KeyName            *string `json:"keyName"`
 	Description        *string `json:"description"`
+}
+
+func NewUpdateKeyRequestFromJson(data string) UpdateKeyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateKeyRequestFromDict(dict)
 }
 
 func NewUpdateKeyRequestFromDict(data map[string]interface{}) UpdateKeyRequest {
@@ -266,6 +323,12 @@ type GetKeyRequest struct {
 	KeyName            *string `json:"keyName"`
 }
 
+func NewGetKeyRequestFromJson(data string) GetKeyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetKeyRequestFromDict(dict)
+}
+
 func NewGetKeyRequestFromDict(data map[string]interface{}) GetKeyRequest {
 	return GetKeyRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -290,6 +353,12 @@ type DeleteKeyRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	KeyName            *string `json:"keyName"`
+}
+
+func NewDeleteKeyRequestFromJson(data string) DeleteKeyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteKeyRequestFromDict(dict)
 }
 
 func NewDeleteKeyRequestFromDict(data map[string]interface{}) DeleteKeyRequest {
@@ -317,6 +386,12 @@ type EncryptRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	KeyName            *string `json:"keyName"`
 	Data               *string `json:"data"`
+}
+
+func NewEncryptRequestFromJson(data string) EncryptRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEncryptRequestFromDict(dict)
 }
 
 func NewEncryptRequestFromDict(data map[string]interface{}) EncryptRequest {
@@ -348,6 +423,12 @@ type DecryptRequest struct {
 	Data               *string `json:"data"`
 }
 
+func NewDecryptRequestFromJson(data string) DecryptRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDecryptRequestFromDict(dict)
+}
+
 func NewDecryptRequestFromDict(data map[string]interface{}) DecryptRequest {
 	return DecryptRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -375,6 +456,12 @@ type DescribeGitHubApiKeysRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeGitHubApiKeysRequestFromJson(data string) DescribeGitHubApiKeysRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeGitHubApiKeysRequestFromDict(dict)
 }
 
 func NewDescribeGitHubApiKeysRequestFromDict(data map[string]interface{}) DescribeGitHubApiKeysRequest {
@@ -406,6 +493,12 @@ type CreateGitHubApiKeyRequest struct {
 	Description        *string `json:"description"`
 	ApiKey             *string `json:"apiKey"`
 	EncryptionKeyName  *string `json:"encryptionKeyName"`
+}
+
+func NewCreateGitHubApiKeyRequestFromJson(data string) CreateGitHubApiKeyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateGitHubApiKeyRequestFromDict(dict)
 }
 
 func NewCreateGitHubApiKeyRequestFromDict(data map[string]interface{}) CreateGitHubApiKeyRequest {
@@ -443,6 +536,12 @@ type UpdateGitHubApiKeyRequest struct {
 	EncryptionKeyName  *string `json:"encryptionKeyName"`
 }
 
+func NewUpdateGitHubApiKeyRequestFromJson(data string) UpdateGitHubApiKeyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateGitHubApiKeyRequestFromDict(dict)
+}
+
 func NewUpdateGitHubApiKeyRequestFromDict(data map[string]interface{}) UpdateGitHubApiKeyRequest {
 	return UpdateGitHubApiKeyRequest{
 		NamespaceName:     core.CastString(data["namespaceName"]),
@@ -475,6 +574,12 @@ type GetGitHubApiKeyRequest struct {
 	ApiKeyName         *string `json:"apiKeyName"`
 }
 
+func NewGetGitHubApiKeyRequestFromJson(data string) GetGitHubApiKeyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetGitHubApiKeyRequestFromDict(dict)
+}
+
 func NewGetGitHubApiKeyRequestFromDict(data map[string]interface{}) GetGitHubApiKeyRequest {
 	return GetGitHubApiKeyRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -499,6 +604,12 @@ type DeleteGitHubApiKeyRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	ApiKeyName         *string `json:"apiKeyName"`
+}
+
+func NewDeleteGitHubApiKeyRequestFromJson(data string) DeleteGitHubApiKeyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteGitHubApiKeyRequestFromDict(dict)
 }
 
 func NewDeleteGitHubApiKeyRequestFromDict(data map[string]interface{}) DeleteGitHubApiKeyRequest {

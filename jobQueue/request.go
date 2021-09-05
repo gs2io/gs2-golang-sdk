@@ -14,9 +14,12 @@ express or implied. See the License for the specific language governing
 permissions and limitations under the License.
 */
 
-package jobQueue
+package job_queue
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -52,6 +61,12 @@ type CreateNamespaceRequest struct {
 	Description        *string              `json:"description"`
 	PushNotification   *NotificationSetting `json:"pushNotification"`
 	LogSetting         *LogSetting          `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -83,6 +98,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -104,6 +125,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -130,6 +157,12 @@ type UpdateNamespaceRequest struct {
 	Description        *string              `json:"description"`
 	PushNotification   *NotificationSetting `json:"pushNotification"`
 	LogSetting         *LogSetting          `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -161,6 +194,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -185,6 +224,12 @@ type DescribeJobsByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeJobsByUserIdRequestFromJson(data string) DescribeJobsByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeJobsByUserIdRequestFromDict(dict)
 }
 
 func NewDescribeJobsByUserIdRequestFromDict(data map[string]interface{}) DescribeJobsByUserIdRequest {
@@ -218,6 +263,12 @@ type GetJobByUserIdRequest struct {
 	JobName            *string `json:"jobName"`
 }
 
+func NewGetJobByUserIdRequestFromJson(data string) GetJobByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetJobByUserIdRequestFromDict(dict)
+}
+
 func NewGetJobByUserIdRequestFromDict(data map[string]interface{}) GetJobByUserIdRequest {
 	return GetJobByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -245,6 +296,12 @@ type PushByUserIdRequest struct {
 	NamespaceName      *string    `json:"namespaceName"`
 	UserId             *string    `json:"userId"`
 	Jobs               []JobEntry `json:"jobs"`
+}
+
+func NewPushByUserIdRequestFromJson(data string) PushByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPushByUserIdRequestFromDict(dict)
 }
 
 func NewPushByUserIdRequestFromDict(data map[string]interface{}) PushByUserIdRequest {
@@ -277,6 +334,12 @@ type RunRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
+func NewRunRequestFromJson(data string) RunRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRunRequestFromDict(dict)
+}
+
 func NewRunRequestFromDict(data map[string]interface{}) RunRequest {
 	return RunRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -301,6 +364,12 @@ type RunByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewRunByUserIdRequestFromJson(data string) RunByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRunByUserIdRequestFromDict(dict)
 }
 
 func NewRunByUserIdRequestFromDict(data map[string]interface{}) RunByUserIdRequest {
@@ -328,6 +397,12 @@ type DeleteJobByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	JobName            *string `json:"jobName"`
+}
+
+func NewDeleteJobByUserIdRequestFromJson(data string) DeleteJobByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteJobByUserIdRequestFromDict(dict)
 }
 
 func NewDeleteJobByUserIdRequestFromDict(data map[string]interface{}) DeleteJobByUserIdRequest {
@@ -358,6 +433,12 @@ type PushByStampSheetRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewPushByStampSheetRequestFromJson(data string) PushByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPushByStampSheetRequestFromDict(dict)
+}
+
 func NewPushByStampSheetRequestFromDict(data map[string]interface{}) PushByStampSheetRequest {
 	return PushByStampSheetRequest{
 		StampSheet: core.CastString(data["stampSheet"]),
@@ -384,6 +465,12 @@ type DescribeDeadLetterJobsByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeDeadLetterJobsByUserIdRequestFromJson(data string) DescribeDeadLetterJobsByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDeadLetterJobsByUserIdRequestFromDict(dict)
 }
 
 func NewDescribeDeadLetterJobsByUserIdRequestFromDict(data map[string]interface{}) DescribeDeadLetterJobsByUserIdRequest {
@@ -417,6 +504,12 @@ type GetDeadLetterJobByUserIdRequest struct {
 	DeadLetterJobName  *string `json:"deadLetterJobName"`
 }
 
+func NewGetDeadLetterJobByUserIdRequestFromJson(data string) GetDeadLetterJobByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetDeadLetterJobByUserIdRequestFromDict(dict)
+}
+
 func NewGetDeadLetterJobByUserIdRequestFromDict(data map[string]interface{}) GetDeadLetterJobByUserIdRequest {
 	return GetDeadLetterJobByUserIdRequest{
 		NamespaceName:     core.CastString(data["namespaceName"]),
@@ -444,6 +537,12 @@ type DeleteDeadLetterJobByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	DeadLetterJobName  *string `json:"deadLetterJobName"`
+}
+
+func NewDeleteDeadLetterJobByUserIdRequestFromJson(data string) DeleteDeadLetterJobByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteDeadLetterJobByUserIdRequestFromDict(dict)
 }
 
 func NewDeleteDeadLetterJobByUserIdRequestFromDict(data map[string]interface{}) DeleteDeadLetterJobByUserIdRequest {

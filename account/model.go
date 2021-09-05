@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package account
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId              *string        `json:"namespaceId"`
@@ -30,6 +33,12 @@ type Namespace struct {
 	LogSetting               *LogSetting    `json:"logSetting"`
 	CreatedAt                *int64         `json:"createdAt"`
 	UpdatedAt                *int64         `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -92,6 +101,12 @@ type Account struct {
 	CreatedAt  *int64  `json:"createdAt"`
 }
 
+func NewAccountFromJson(data string) Account {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAccountFromDict(dict)
+}
+
 func NewAccountFromDict(data map[string]interface{}) Account {
 	return Account{
 		AccountId:  core.CastString(data["accountId"]),
@@ -139,6 +154,12 @@ type TakeOver struct {
 	UserIdentifier *string `json:"userIdentifier"`
 	Password       *string `json:"password"`
 	CreatedAt      *int64  `json:"createdAt"`
+}
+
+func NewTakeOverFromJson(data string) TakeOver {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewTakeOverFromDict(dict)
 }
 
 func NewTakeOverFromDict(data map[string]interface{}) TakeOver {
@@ -190,6 +211,12 @@ type ScriptSetting struct {
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
+}
+
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
 		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
@@ -230,6 +257,12 @@ func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

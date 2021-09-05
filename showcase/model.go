@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package showcase
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId      *string     `json:"namespaceId"`
@@ -27,6 +30,12 @@ type Namespace struct {
 	LogSetting       *LogSetting `json:"logSetting"`
 	CreatedAt        *int64      `json:"createdAt"`
 	UpdatedAt        *int64      `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -84,6 +93,12 @@ type SalesItemMaster struct {
 	AcquireActions []AcquireAction `json:"acquireActions"`
 	CreatedAt      *int64          `json:"createdAt"`
 	UpdatedAt      *int64          `json:"updatedAt"`
+}
+
+func NewSalesItemMasterFromJson(data string) SalesItemMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSalesItemMasterFromDict(dict)
 }
 
 func NewSalesItemMasterFromDict(data map[string]interface{}) SalesItemMaster {
@@ -146,6 +161,12 @@ type SalesItemGroupMaster struct {
 	UpdatedAt        *int64   `json:"updatedAt"`
 }
 
+func NewSalesItemGroupMasterFromJson(data string) SalesItemGroupMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSalesItemGroupMasterFromDict(dict)
+}
+
 func NewSalesItemGroupMasterFromDict(data map[string]interface{}) SalesItemGroupMaster {
 	return SalesItemGroupMaster{
 		SalesItemGroupId: core.CastString(data["salesItemGroupId"]),
@@ -203,6 +224,12 @@ type ShowcaseMaster struct {
 	UpdatedAt          *int64              `json:"updatedAt"`
 }
 
+func NewShowcaseMasterFromJson(data string) ShowcaseMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewShowcaseMasterFromDict(dict)
+}
+
 func NewShowcaseMasterFromDict(data map[string]interface{}) ShowcaseMaster {
 	return ShowcaseMaster{
 		ShowcaseId:         core.CastString(data["showcaseId"]),
@@ -256,6 +283,12 @@ type CurrentShowcaseMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentShowcaseMasterFromJson(data string) CurrentShowcaseMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentShowcaseMasterFromDict(dict)
+}
+
 func NewCurrentShowcaseMasterFromDict(data map[string]interface{}) CurrentShowcaseMaster {
 	return CurrentShowcaseMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -298,6 +331,12 @@ type GitHubCheckoutSetting struct {
 	CommitHash     *string `json:"commitHash"`
 	BranchName     *string `json:"branchName"`
 	TagName        *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
@@ -348,6 +387,12 @@ type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
+}
+
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
 		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
@@ -385,6 +430,12 @@ type SalesItem struct {
 	Metadata       *string         `json:"metadata"`
 	ConsumeActions []ConsumeAction `json:"consumeActions"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
+}
+
+func NewSalesItemFromJson(data string) SalesItem {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSalesItemFromDict(dict)
 }
 
 func NewSalesItemFromDict(data map[string]interface{}) SalesItem {
@@ -435,6 +486,12 @@ type SalesItemGroup struct {
 	SalesItems []SalesItem `json:"salesItems"`
 }
 
+func NewSalesItemGroupFromJson(data string) SalesItemGroup {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSalesItemGroupFromDict(dict)
+}
+
 func NewSalesItemGroupFromDict(data map[string]interface{}) SalesItemGroup {
 	return SalesItemGroup{
 		Name:       core.CastString(data["name"]),
@@ -479,6 +536,12 @@ type Showcase struct {
 	Metadata           *string       `json:"metadata"`
 	SalesPeriodEventId *string       `json:"salesPeriodEventId"`
 	DisplayItems       []DisplayItem `json:"displayItems"`
+}
+
+func NewShowcaseFromJson(data string) Showcase {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewShowcaseFromDict(dict)
 }
 
 func NewShowcaseFromDict(data map[string]interface{}) Showcase {
@@ -531,6 +594,12 @@ type DisplayItem struct {
 	SalesPeriodEventId *string         `json:"salesPeriodEventId"`
 }
 
+func NewDisplayItemFromJson(data string) DisplayItem {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDisplayItemFromDict(dict)
+}
+
 func NewDisplayItemFromDict(data map[string]interface{}) DisplayItem {
 	return DisplayItem{
 		DisplayItemId:      core.CastString(data["displayItemId"]),
@@ -576,6 +645,12 @@ type Config struct {
 	Value *string `json:"value"`
 }
 
+func NewConfigFromJson(data string) Config {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConfigFromDict(dict)
+}
+
 func NewConfigFromDict(data map[string]interface{}) Config {
 	return Config{
 		Key:   core.CastString(data["key"]),
@@ -615,6 +690,12 @@ type ConsumeAction struct {
 	Request *string `json:"request"`
 }
 
+func NewConsumeActionFromJson(data string) ConsumeAction {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConsumeActionFromDict(dict)
+}
+
 func NewConsumeActionFromDict(data map[string]interface{}) ConsumeAction {
 	return ConsumeAction{
 		Action:  core.CastString(data["action"]),
@@ -652,6 +733,12 @@ func CastConsumeActionsFromDict(data []ConsumeAction) []interface{} {
 type AcquireAction struct {
 	Action  *string `json:"action"`
 	Request *string `json:"request"`
+}
+
+func NewAcquireActionFromJson(data string) AcquireAction {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireActionFromDict(dict)
 }
 
 func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
@@ -694,6 +781,12 @@ type DisplayItemMaster struct {
 	SalesItemName      *string `json:"salesItemName"`
 	SalesItemGroupName *string `json:"salesItemGroupName"`
 	SalesPeriodEventId *string `json:"salesPeriodEventId"`
+}
+
+func NewDisplayItemMasterFromJson(data string) DisplayItemMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDisplayItemMasterFromDict(dict)
 }
 
 func NewDisplayItemMasterFromDict(data map[string]interface{}) DisplayItemMaster {

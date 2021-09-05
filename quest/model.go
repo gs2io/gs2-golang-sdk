@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package quest
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId         *string        `json:"namespaceId"`
@@ -30,6 +33,12 @@ type Namespace struct {
 	LogSetting          *LogSetting    `json:"logSetting"`
 	CreatedAt           *int64         `json:"createdAt"`
 	UpdatedAt           *int64         `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -94,6 +103,12 @@ type QuestGroupModelMaster struct {
 	UpdatedAt              *int64  `json:"updatedAt"`
 }
 
+func NewQuestGroupModelMasterFromJson(data string) QuestGroupModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQuestGroupModelMasterFromDict(dict)
+}
+
 func NewQuestGroupModelMasterFromDict(data map[string]interface{}) QuestGroupModelMaster {
 	return QuestGroupModelMaster{
 		QuestGroupModelId:      core.CastString(data["questGroupModelId"]),
@@ -151,6 +166,12 @@ type QuestModelMaster struct {
 	PremiseQuestNames      []string        `json:"premiseQuestNames"`
 	CreatedAt              *int64          `json:"createdAt"`
 	UpdatedAt              *int64          `json:"updatedAt"`
+}
+
+func NewQuestModelMasterFromJson(data string) QuestModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQuestModelMasterFromDict(dict)
 }
 
 func NewQuestModelMasterFromDict(data map[string]interface{}) QuestModelMaster {
@@ -220,6 +241,12 @@ type CurrentQuestMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentQuestMasterFromJson(data string) CurrentQuestMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentQuestMasterFromDict(dict)
+}
+
 func NewCurrentQuestMasterFromDict(data map[string]interface{}) CurrentQuestMaster {
 	return CurrentQuestMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -258,6 +285,12 @@ type Contents struct {
 	Metadata               *string         `json:"metadata"`
 	CompleteAcquireActions []AcquireAction `json:"completeAcquireActions"`
 	Weight                 *int32          `json:"weight"`
+}
+
+func NewContentsFromJson(data string) Contents {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewContentsFromDict(dict)
 }
 
 func NewContentsFromDict(data map[string]interface{}) Contents {
@@ -303,6 +336,12 @@ type ConsumeAction struct {
 	Request *string `json:"request"`
 }
 
+func NewConsumeActionFromJson(data string) ConsumeAction {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConsumeActionFromDict(dict)
+}
+
 func NewConsumeActionFromDict(data map[string]interface{}) ConsumeAction {
 	return ConsumeAction{
 		Action:  core.CastString(data["action"]),
@@ -340,6 +379,12 @@ func CastConsumeActionsFromDict(data []ConsumeAction) []interface{} {
 type AcquireAction struct {
 	Action  *string `json:"action"`
 	Request *string `json:"request"`
+}
+
+func NewAcquireActionFromJson(data string) AcquireAction {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireActionFromDict(dict)
 }
 
 func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
@@ -381,6 +426,12 @@ type Reward struct {
 	Request *string `json:"request"`
 	ItemId  *string `json:"itemId"`
 	Value   *int32  `json:"value"`
+}
+
+func NewRewardFromJson(data string) Reward {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRewardFromDict(dict)
 }
 
 func NewRewardFromDict(data map[string]interface{}) Reward {
@@ -426,6 +477,12 @@ type Config struct {
 	Value *string `json:"value"`
 }
 
+func NewConfigFromJson(data string) Config {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConfigFromDict(dict)
+}
+
 func NewConfigFromDict(data map[string]interface{}) Config {
 	return Config{
 		Key:   core.CastString(data["key"]),
@@ -468,6 +525,12 @@ type GitHubCheckoutSetting struct {
 	CommitHash     *string `json:"commitHash"`
 	BranchName     *string `json:"branchName"`
 	TagName        *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
@@ -521,6 +584,12 @@ type ScriptSetting struct {
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
+}
+
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
 		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
@@ -561,6 +630,12 @@ func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
@@ -605,6 +680,12 @@ type Progress struct {
 	Metadata      *string  `json:"metadata"`
 	CreatedAt     *int64   `json:"createdAt"`
 	UpdatedAt     *int64   `json:"updatedAt"`
+}
+
+func NewProgressFromJson(data string) Progress {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewProgressFromDict(dict)
 }
 
 func NewProgressFromDict(data map[string]interface{}) Progress {
@@ -666,6 +747,12 @@ type CompletedQuestList struct {
 	UpdatedAt            *int64   `json:"updatedAt"`
 }
 
+func NewCompletedQuestListFromJson(data string) CompletedQuestList {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCompletedQuestListFromDict(dict)
+}
+
 func NewCompletedQuestListFromDict(data map[string]interface{}) CompletedQuestList {
 	return CompletedQuestList{
 		CompletedQuestListId: core.CastString(data["completedQuestListId"]),
@@ -716,6 +803,12 @@ type QuestGroupModel struct {
 	Metadata               *string      `json:"metadata"`
 	Quests                 []QuestModel `json:"quests"`
 	ChallengePeriodEventId *string      `json:"challengePeriodEventId"`
+}
+
+func NewQuestGroupModelFromJson(data string) QuestGroupModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQuestGroupModelFromDict(dict)
 }
 
 func NewQuestGroupModelFromDict(data map[string]interface{}) QuestGroupModel {
@@ -769,6 +862,12 @@ type QuestModel struct {
 	ConsumeActions         []ConsumeAction `json:"consumeActions"`
 	FailedAcquireActions   []AcquireAction `json:"failedAcquireActions"`
 	PremiseQuestNames      []string        `json:"premiseQuestNames"`
+}
+
+func NewQuestModelFromJson(data string) QuestModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQuestModelFromDict(dict)
 }
 
 func NewQuestModelFromDict(data map[string]interface{}) QuestModel {

@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package lottery
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -55,6 +64,12 @@ type CreateNamespaceRequest struct {
 	LotteryTriggerScriptId   *string     `json:"lotteryTriggerScriptId"`
 	ChoicePrizeTableScriptId *string     `json:"choicePrizeTableScriptId"`
 	LogSetting               *LogSetting `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -92,6 +107,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -113,6 +134,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -142,6 +169,12 @@ type UpdateNamespaceRequest struct {
 	LotteryTriggerScriptId   *string     `json:"lotteryTriggerScriptId"`
 	ChoicePrizeTableScriptId *string     `json:"choicePrizeTableScriptId"`
 	LogSetting               *LogSetting `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -179,6 +212,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -202,6 +241,12 @@ type DescribeLotteryModelMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeLotteryModelMastersRequestFromJson(data string) DescribeLotteryModelMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeLotteryModelMastersRequestFromDict(dict)
 }
 
 func NewDescribeLotteryModelMastersRequestFromDict(data map[string]interface{}) DescribeLotteryModelMastersRequest {
@@ -236,6 +281,12 @@ type CreateLotteryModelMasterRequest struct {
 	Method                   *string `json:"method"`
 	PrizeTableName           *string `json:"prizeTableName"`
 	ChoicePrizeTableScriptId *string `json:"choicePrizeTableScriptId"`
+}
+
+func NewCreateLotteryModelMasterRequestFromJson(data string) CreateLotteryModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateLotteryModelMasterRequestFromDict(dict)
 }
 
 func NewCreateLotteryModelMasterRequestFromDict(data map[string]interface{}) CreateLotteryModelMasterRequest {
@@ -276,6 +327,12 @@ type GetLotteryModelMasterRequest struct {
 	LotteryName        *string `json:"lotteryName"`
 }
 
+func NewGetLotteryModelMasterRequestFromJson(data string) GetLotteryModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetLotteryModelMasterRequestFromDict(dict)
+}
+
 func NewGetLotteryModelMasterRequestFromDict(data map[string]interface{}) GetLotteryModelMasterRequest {
 	return GetLotteryModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -306,6 +363,12 @@ type UpdateLotteryModelMasterRequest struct {
 	Method                   *string `json:"method"`
 	PrizeTableName           *string `json:"prizeTableName"`
 	ChoicePrizeTableScriptId *string `json:"choicePrizeTableScriptId"`
+}
+
+func NewUpdateLotteryModelMasterRequestFromJson(data string) UpdateLotteryModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateLotteryModelMasterRequestFromDict(dict)
 }
 
 func NewUpdateLotteryModelMasterRequestFromDict(data map[string]interface{}) UpdateLotteryModelMasterRequest {
@@ -346,6 +409,12 @@ type DeleteLotteryModelMasterRequest struct {
 	LotteryName        *string `json:"lotteryName"`
 }
 
+func NewDeleteLotteryModelMasterRequestFromJson(data string) DeleteLotteryModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteLotteryModelMasterRequestFromDict(dict)
+}
+
 func NewDeleteLotteryModelMasterRequestFromDict(data map[string]interface{}) DeleteLotteryModelMasterRequest {
 	return DeleteLotteryModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -371,6 +440,12 @@ type DescribePrizeTableMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribePrizeTableMastersRequestFromJson(data string) DescribePrizeTableMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribePrizeTableMastersRequestFromDict(dict)
 }
 
 func NewDescribePrizeTableMastersRequestFromDict(data map[string]interface{}) DescribePrizeTableMastersRequest {
@@ -402,6 +477,12 @@ type CreatePrizeTableMasterRequest struct {
 	Description        *string `json:"description"`
 	Metadata           *string `json:"metadata"`
 	Prizes             []Prize `json:"prizes"`
+}
+
+func NewCreatePrizeTableMasterRequestFromJson(data string) CreatePrizeTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreatePrizeTableMasterRequestFromDict(dict)
 }
 
 func NewCreatePrizeTableMasterRequestFromDict(data map[string]interface{}) CreatePrizeTableMasterRequest {
@@ -438,6 +519,12 @@ type GetPrizeTableMasterRequest struct {
 	PrizeTableName     *string `json:"prizeTableName"`
 }
 
+func NewGetPrizeTableMasterRequestFromJson(data string) GetPrizeTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetPrizeTableMasterRequestFromDict(dict)
+}
+
 func NewGetPrizeTableMasterRequestFromDict(data map[string]interface{}) GetPrizeTableMasterRequest {
 	return GetPrizeTableMasterRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -465,6 +552,12 @@ type UpdatePrizeTableMasterRequest struct {
 	Description        *string `json:"description"`
 	Metadata           *string `json:"metadata"`
 	Prizes             []Prize `json:"prizes"`
+}
+
+func NewUpdatePrizeTableMasterRequestFromJson(data string) UpdatePrizeTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdatePrizeTableMasterRequestFromDict(dict)
 }
 
 func NewUpdatePrizeTableMasterRequestFromDict(data map[string]interface{}) UpdatePrizeTableMasterRequest {
@@ -501,6 +594,12 @@ type DeletePrizeTableMasterRequest struct {
 	PrizeTableName     *string `json:"prizeTableName"`
 }
 
+func NewDeletePrizeTableMasterRequestFromJson(data string) DeletePrizeTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeletePrizeTableMasterRequestFromDict(dict)
+}
+
 func NewDeletePrizeTableMasterRequestFromDict(data map[string]interface{}) DeletePrizeTableMasterRequest {
 	return DeletePrizeTableMasterRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -527,6 +626,12 @@ type DescribeBoxesRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeBoxesRequestFromJson(data string) DescribeBoxesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeBoxesRequestFromDict(dict)
 }
 
 func NewDescribeBoxesRequestFromDict(data map[string]interface{}) DescribeBoxesRequest {
@@ -561,6 +666,12 @@ type DescribeBoxesByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeBoxesByUserIdRequestFromJson(data string) DescribeBoxesByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeBoxesByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeBoxesByUserIdRequestFromDict(data map[string]interface{}) DescribeBoxesByUserIdRequest {
 	return DescribeBoxesByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -592,6 +703,12 @@ type GetBoxRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
+func NewGetBoxRequestFromJson(data string) GetBoxRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetBoxRequestFromDict(dict)
+}
+
 func NewGetBoxRequestFromDict(data map[string]interface{}) GetBoxRequest {
 	return GetBoxRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -619,6 +736,12 @@ type GetBoxByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PrizeTableName     *string `json:"prizeTableName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewGetBoxByUserIdRequestFromJson(data string) GetBoxByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetBoxByUserIdRequestFromDict(dict)
 }
 
 func NewGetBoxByUserIdRequestFromDict(data map[string]interface{}) GetBoxByUserIdRequest {
@@ -650,6 +773,12 @@ type GetRawBoxByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 }
 
+func NewGetRawBoxByUserIdRequestFromJson(data string) GetRawBoxByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetRawBoxByUserIdRequestFromDict(dict)
+}
+
 func NewGetRawBoxByUserIdRequestFromDict(data map[string]interface{}) GetRawBoxByUserIdRequest {
 	return GetRawBoxByUserIdRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -677,6 +806,12 @@ type ResetBoxRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PrizeTableName     *string `json:"prizeTableName"`
 	AccessToken        *string `json:"accessToken"`
+}
+
+func NewResetBoxRequestFromJson(data string) ResetBoxRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewResetBoxRequestFromDict(dict)
 }
 
 func NewResetBoxRequestFromDict(data map[string]interface{}) ResetBoxRequest {
@@ -708,6 +843,12 @@ type ResetBoxByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 }
 
+func NewResetBoxByUserIdRequestFromJson(data string) ResetBoxByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewResetBoxByUserIdRequestFromDict(dict)
+}
+
 func NewResetBoxByUserIdRequestFromDict(data map[string]interface{}) ResetBoxByUserIdRequest {
 	return ResetBoxByUserIdRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -735,6 +876,12 @@ type DescribeLotteryModelsRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDescribeLotteryModelsRequestFromJson(data string) DescribeLotteryModelsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeLotteryModelsRequestFromDict(dict)
+}
+
 func NewDescribeLotteryModelsRequestFromDict(data map[string]interface{}) DescribeLotteryModelsRequest {
 	return DescribeLotteryModelsRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -757,6 +904,12 @@ type GetLotteryModelRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	LotteryName        *string `json:"lotteryName"`
+}
+
+func NewGetLotteryModelRequestFromJson(data string) GetLotteryModelRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetLotteryModelRequestFromDict(dict)
 }
 
 func NewGetLotteryModelRequestFromDict(data map[string]interface{}) GetLotteryModelRequest {
@@ -784,6 +937,12 @@ type DescribePrizeTablesRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDescribePrizeTablesRequestFromJson(data string) DescribePrizeTablesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribePrizeTablesRequestFromDict(dict)
+}
+
 func NewDescribePrizeTablesRequestFromDict(data map[string]interface{}) DescribePrizeTablesRequest {
 	return DescribePrizeTablesRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -806,6 +965,12 @@ type GetPrizeTableRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	PrizeTableName     *string `json:"prizeTableName"`
+}
+
+func NewGetPrizeTableRequestFromJson(data string) GetPrizeTableRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetPrizeTableRequestFromDict(dict)
 }
 
 func NewGetPrizeTableRequestFromDict(data map[string]interface{}) GetPrizeTableRequest {
@@ -835,6 +1000,12 @@ type DrawByUserIdRequest struct {
 	UserId             *string  `json:"userId"`
 	Count              *int32   `json:"count"`
 	Config             []Config `json:"config"`
+}
+
+func NewDrawByUserIdRequestFromJson(data string) DrawByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDrawByUserIdRequestFromDict(dict)
 }
 
 func NewDrawByUserIdRequestFromDict(data map[string]interface{}) DrawByUserIdRequest {
@@ -872,6 +1043,12 @@ type DescribeProbabilitiesRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
+func NewDescribeProbabilitiesRequestFromJson(data string) DescribeProbabilitiesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeProbabilitiesRequestFromDict(dict)
+}
+
 func NewDescribeProbabilitiesRequestFromDict(data map[string]interface{}) DescribeProbabilitiesRequest {
 	return DescribeProbabilitiesRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -899,6 +1076,12 @@ type DescribeProbabilitiesByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	LotteryName        *string `json:"lotteryName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewDescribeProbabilitiesByUserIdRequestFromJson(data string) DescribeProbabilitiesByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeProbabilitiesByUserIdRequestFromDict(dict)
 }
 
 func NewDescribeProbabilitiesByUserIdRequestFromDict(data map[string]interface{}) DescribeProbabilitiesByUserIdRequest {
@@ -929,6 +1112,12 @@ type DrawByStampSheetRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewDrawByStampSheetRequestFromJson(data string) DrawByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDrawByStampSheetRequestFromDict(dict)
+}
+
 func NewDrawByStampSheetRequestFromDict(data map[string]interface{}) DrawByStampSheetRequest {
 	return DrawByStampSheetRequest{
 		StampSheet: core.CastString(data["stampSheet"]),
@@ -954,6 +1143,12 @@ type ExportMasterRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterRequestFromDict(dict)
+}
+
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -975,6 +1170,12 @@ type GetCurrentLotteryMasterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetCurrentLotteryMasterRequestFromJson(data string) GetCurrentLotteryMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentLotteryMasterRequestFromDict(dict)
 }
 
 func NewGetCurrentLotteryMasterRequestFromDict(data map[string]interface{}) GetCurrentLotteryMasterRequest {
@@ -1001,6 +1202,12 @@ type UpdateCurrentLotteryMasterRequest struct {
 	Settings           *string `json:"settings"`
 }
 
+func NewUpdateCurrentLotteryMasterRequestFromJson(data string) UpdateCurrentLotteryMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentLotteryMasterRequestFromDict(dict)
+}
+
 func NewUpdateCurrentLotteryMasterRequestFromDict(data map[string]interface{}) UpdateCurrentLotteryMasterRequest {
 	return UpdateCurrentLotteryMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1025,6 +1232,12 @@ type UpdateCurrentLotteryMasterFromGitHubRequest struct {
 	DuplicationAvoider *string                `json:"duplicationAvoider"`
 	NamespaceName      *string                `json:"namespaceName"`
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
+}
+
+func NewUpdateCurrentLotteryMasterFromGitHubRequestFromJson(data string) UpdateCurrentLotteryMasterFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentLotteryMasterFromGitHubRequestFromDict(dict)
 }
 
 func NewUpdateCurrentLotteryMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentLotteryMasterFromGitHubRequest {

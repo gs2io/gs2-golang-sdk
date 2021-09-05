@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package schedule
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId *string     `json:"namespaceId"`
@@ -25,6 +28,12 @@ type Namespace struct {
 	LogSetting  *LogSetting `json:"logSetting"`
 	CreatedAt   *int64      `json:"createdAt"`
 	UpdatedAt   *int64      `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -88,6 +97,12 @@ type EventMaster struct {
 	RelativeDuration      *int32  `json:"relativeDuration"`
 	CreatedAt             *int64  `json:"createdAt"`
 	UpdatedAt             *int64  `json:"updatedAt"`
+}
+
+func NewEventMasterFromJson(data string) EventMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEventMasterFromDict(dict)
 }
 
 func NewEventMasterFromDict(data map[string]interface{}) EventMaster {
@@ -164,6 +179,12 @@ type Trigger struct {
 	ExpiresAt *int64  `json:"expiresAt"`
 }
 
+func NewTriggerFromJson(data string) Trigger {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewTriggerFromDict(dict)
+}
+
 func NewTriggerFromDict(data map[string]interface{}) Trigger {
 	return Trigger{
 		TriggerId: core.CastString(data["triggerId"]),
@@ -220,6 +241,12 @@ type Event struct {
 	RepeatEndHour         *int32  `json:"repeatEndHour"`
 	RelativeTriggerName   *string `json:"relativeTriggerName"`
 	RelativeDuration      *int32  `json:"relativeDuration"`
+}
+
+func NewEventFromJson(data string) Event {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEventFromDict(dict)
 }
 
 func NewEventFromDict(data map[string]interface{}) Event {
@@ -287,6 +314,12 @@ type CurrentEventMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentEventMasterFromJson(data string) CurrentEventMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentEventMasterFromDict(dict)
+}
+
 func NewCurrentEventMasterFromDict(data map[string]interface{}) CurrentEventMaster {
 	return CurrentEventMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -329,6 +362,12 @@ type GitHubCheckoutSetting struct {
 	CommitHash     *string `json:"commitHash"`
 	BranchName     *string `json:"branchName"`
 	TagName        *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
@@ -377,6 +416,12 @@ func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interfac
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

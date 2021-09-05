@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package stamina
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -52,6 +61,12 @@ type CreateNamespaceRequest struct {
 	Description           *string        `json:"description"`
 	OverflowTriggerScript *ScriptSetting `json:"overflowTriggerScript"`
 	LogSetting            *LogSetting    `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -83,6 +98,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -104,6 +125,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -130,6 +157,12 @@ type UpdateNamespaceRequest struct {
 	Description           *string        `json:"description"`
 	OverflowTriggerScript *ScriptSetting `json:"overflowTriggerScript"`
 	LogSetting            *LogSetting    `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -161,6 +194,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -184,6 +223,12 @@ type DescribeStaminaModelMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeStaminaModelMastersRequestFromJson(data string) DescribeStaminaModelMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStaminaModelMastersRequestFromDict(dict)
 }
 
 func NewDescribeStaminaModelMastersRequestFromDict(data map[string]interface{}) DescribeStaminaModelMastersRequest {
@@ -222,6 +267,12 @@ type CreateStaminaModelMasterRequest struct {
 	MaxStaminaTableName      *string `json:"maxStaminaTableName"`
 	RecoverIntervalTableName *string `json:"recoverIntervalTableName"`
 	RecoverValueTableName    *string `json:"recoverValueTableName"`
+}
+
+func NewCreateStaminaModelMasterRequestFromJson(data string) CreateStaminaModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateStaminaModelMasterRequestFromDict(dict)
 }
 
 func NewCreateStaminaModelMasterRequestFromDict(data map[string]interface{}) CreateStaminaModelMasterRequest {
@@ -270,6 +321,12 @@ type GetStaminaModelMasterRequest struct {
 	StaminaName        *string `json:"staminaName"`
 }
 
+func NewGetStaminaModelMasterRequestFromJson(data string) GetStaminaModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStaminaModelMasterRequestFromDict(dict)
+}
+
 func NewGetStaminaModelMasterRequestFromDict(data map[string]interface{}) GetStaminaModelMasterRequest {
 	return GetStaminaModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -304,6 +361,12 @@ type UpdateStaminaModelMasterRequest struct {
 	MaxStaminaTableName      *string `json:"maxStaminaTableName"`
 	RecoverIntervalTableName *string `json:"recoverIntervalTableName"`
 	RecoverValueTableName    *string `json:"recoverValueTableName"`
+}
+
+func NewUpdateStaminaModelMasterRequestFromJson(data string) UpdateStaminaModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateStaminaModelMasterRequestFromDict(dict)
 }
 
 func NewUpdateStaminaModelMasterRequestFromDict(data map[string]interface{}) UpdateStaminaModelMasterRequest {
@@ -352,6 +415,12 @@ type DeleteStaminaModelMasterRequest struct {
 	StaminaName        *string `json:"staminaName"`
 }
 
+func NewDeleteStaminaModelMasterRequestFromJson(data string) DeleteStaminaModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteStaminaModelMasterRequestFromDict(dict)
+}
+
 func NewDeleteStaminaModelMasterRequestFromDict(data map[string]interface{}) DeleteStaminaModelMasterRequest {
 	return DeleteStaminaModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -377,6 +446,12 @@ type DescribeMaxStaminaTableMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeMaxStaminaTableMastersRequestFromJson(data string) DescribeMaxStaminaTableMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMaxStaminaTableMastersRequestFromDict(dict)
 }
 
 func NewDescribeMaxStaminaTableMastersRequestFromDict(data map[string]interface{}) DescribeMaxStaminaTableMastersRequest {
@@ -409,6 +484,12 @@ type CreateMaxStaminaTableMasterRequest struct {
 	Metadata           *string `json:"metadata"`
 	ExperienceModelId  *string `json:"experienceModelId"`
 	Values             []int32 `json:"values"`
+}
+
+func NewCreateMaxStaminaTableMasterRequestFromJson(data string) CreateMaxStaminaTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateMaxStaminaTableMasterRequestFromDict(dict)
 }
 
 func NewCreateMaxStaminaTableMasterRequestFromDict(data map[string]interface{}) CreateMaxStaminaTableMasterRequest {
@@ -447,6 +528,12 @@ type GetMaxStaminaTableMasterRequest struct {
 	MaxStaminaTableName *string `json:"maxStaminaTableName"`
 }
 
+func NewGetMaxStaminaTableMasterRequestFromJson(data string) GetMaxStaminaTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMaxStaminaTableMasterRequestFromDict(dict)
+}
+
 func NewGetMaxStaminaTableMasterRequestFromDict(data map[string]interface{}) GetMaxStaminaTableMasterRequest {
 	return GetMaxStaminaTableMasterRequest{
 		NamespaceName:       core.CastString(data["namespaceName"]),
@@ -475,6 +562,12 @@ type UpdateMaxStaminaTableMasterRequest struct {
 	Metadata            *string `json:"metadata"`
 	ExperienceModelId   *string `json:"experienceModelId"`
 	Values              []int32 `json:"values"`
+}
+
+func NewUpdateMaxStaminaTableMasterRequestFromJson(data string) UpdateMaxStaminaTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateMaxStaminaTableMasterRequestFromDict(dict)
 }
 
 func NewUpdateMaxStaminaTableMasterRequestFromDict(data map[string]interface{}) UpdateMaxStaminaTableMasterRequest {
@@ -513,6 +606,12 @@ type DeleteMaxStaminaTableMasterRequest struct {
 	MaxStaminaTableName *string `json:"maxStaminaTableName"`
 }
 
+func NewDeleteMaxStaminaTableMasterRequestFromJson(data string) DeleteMaxStaminaTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteMaxStaminaTableMasterRequestFromDict(dict)
+}
+
 func NewDeleteMaxStaminaTableMasterRequestFromDict(data map[string]interface{}) DeleteMaxStaminaTableMasterRequest {
 	return DeleteMaxStaminaTableMasterRequest{
 		NamespaceName:       core.CastString(data["namespaceName"]),
@@ -538,6 +637,12 @@ type DescribeRecoverIntervalTableMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeRecoverIntervalTableMastersRequestFromJson(data string) DescribeRecoverIntervalTableMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeRecoverIntervalTableMastersRequestFromDict(dict)
 }
 
 func NewDescribeRecoverIntervalTableMastersRequestFromDict(data map[string]interface{}) DescribeRecoverIntervalTableMastersRequest {
@@ -570,6 +675,12 @@ type CreateRecoverIntervalTableMasterRequest struct {
 	Metadata           *string `json:"metadata"`
 	ExperienceModelId  *string `json:"experienceModelId"`
 	Values             []int32 `json:"values"`
+}
+
+func NewCreateRecoverIntervalTableMasterRequestFromJson(data string) CreateRecoverIntervalTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateRecoverIntervalTableMasterRequestFromDict(dict)
 }
 
 func NewCreateRecoverIntervalTableMasterRequestFromDict(data map[string]interface{}) CreateRecoverIntervalTableMasterRequest {
@@ -608,6 +719,12 @@ type GetRecoverIntervalTableMasterRequest struct {
 	RecoverIntervalTableName *string `json:"recoverIntervalTableName"`
 }
 
+func NewGetRecoverIntervalTableMasterRequestFromJson(data string) GetRecoverIntervalTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetRecoverIntervalTableMasterRequestFromDict(dict)
+}
+
 func NewGetRecoverIntervalTableMasterRequestFromDict(data map[string]interface{}) GetRecoverIntervalTableMasterRequest {
 	return GetRecoverIntervalTableMasterRequest{
 		NamespaceName:            core.CastString(data["namespaceName"]),
@@ -636,6 +753,12 @@ type UpdateRecoverIntervalTableMasterRequest struct {
 	Metadata                 *string `json:"metadata"`
 	ExperienceModelId        *string `json:"experienceModelId"`
 	Values                   []int32 `json:"values"`
+}
+
+func NewUpdateRecoverIntervalTableMasterRequestFromJson(data string) UpdateRecoverIntervalTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateRecoverIntervalTableMasterRequestFromDict(dict)
 }
 
 func NewUpdateRecoverIntervalTableMasterRequestFromDict(data map[string]interface{}) UpdateRecoverIntervalTableMasterRequest {
@@ -674,6 +797,12 @@ type DeleteRecoverIntervalTableMasterRequest struct {
 	RecoverIntervalTableName *string `json:"recoverIntervalTableName"`
 }
 
+func NewDeleteRecoverIntervalTableMasterRequestFromJson(data string) DeleteRecoverIntervalTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteRecoverIntervalTableMasterRequestFromDict(dict)
+}
+
 func NewDeleteRecoverIntervalTableMasterRequestFromDict(data map[string]interface{}) DeleteRecoverIntervalTableMasterRequest {
 	return DeleteRecoverIntervalTableMasterRequest{
 		NamespaceName:            core.CastString(data["namespaceName"]),
@@ -699,6 +828,12 @@ type DescribeRecoverValueTableMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeRecoverValueTableMastersRequestFromJson(data string) DescribeRecoverValueTableMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeRecoverValueTableMastersRequestFromDict(dict)
 }
 
 func NewDescribeRecoverValueTableMastersRequestFromDict(data map[string]interface{}) DescribeRecoverValueTableMastersRequest {
@@ -731,6 +866,12 @@ type CreateRecoverValueTableMasterRequest struct {
 	Metadata           *string `json:"metadata"`
 	ExperienceModelId  *string `json:"experienceModelId"`
 	Values             []int32 `json:"values"`
+}
+
+func NewCreateRecoverValueTableMasterRequestFromJson(data string) CreateRecoverValueTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateRecoverValueTableMasterRequestFromDict(dict)
 }
 
 func NewCreateRecoverValueTableMasterRequestFromDict(data map[string]interface{}) CreateRecoverValueTableMasterRequest {
@@ -769,6 +910,12 @@ type GetRecoverValueTableMasterRequest struct {
 	RecoverValueTableName *string `json:"recoverValueTableName"`
 }
 
+func NewGetRecoverValueTableMasterRequestFromJson(data string) GetRecoverValueTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetRecoverValueTableMasterRequestFromDict(dict)
+}
+
 func NewGetRecoverValueTableMasterRequestFromDict(data map[string]interface{}) GetRecoverValueTableMasterRequest {
 	return GetRecoverValueTableMasterRequest{
 		NamespaceName:         core.CastString(data["namespaceName"]),
@@ -797,6 +944,12 @@ type UpdateRecoverValueTableMasterRequest struct {
 	Metadata              *string `json:"metadata"`
 	ExperienceModelId     *string `json:"experienceModelId"`
 	Values                []int32 `json:"values"`
+}
+
+func NewUpdateRecoverValueTableMasterRequestFromJson(data string) UpdateRecoverValueTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateRecoverValueTableMasterRequestFromDict(dict)
 }
 
 func NewUpdateRecoverValueTableMasterRequestFromDict(data map[string]interface{}) UpdateRecoverValueTableMasterRequest {
@@ -835,6 +988,12 @@ type DeleteRecoverValueTableMasterRequest struct {
 	RecoverValueTableName *string `json:"recoverValueTableName"`
 }
 
+func NewDeleteRecoverValueTableMasterRequestFromJson(data string) DeleteRecoverValueTableMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteRecoverValueTableMasterRequestFromDict(dict)
+}
+
 func NewDeleteRecoverValueTableMasterRequestFromDict(data map[string]interface{}) DeleteRecoverValueTableMasterRequest {
 	return DeleteRecoverValueTableMasterRequest{
 		NamespaceName:         core.CastString(data["namespaceName"]),
@@ -860,6 +1019,12 @@ type ExportMasterRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterRequestFromDict(dict)
+}
+
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -881,6 +1046,12 @@ type GetCurrentStaminaMasterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetCurrentStaminaMasterRequestFromJson(data string) GetCurrentStaminaMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentStaminaMasterRequestFromDict(dict)
 }
 
 func NewGetCurrentStaminaMasterRequestFromDict(data map[string]interface{}) GetCurrentStaminaMasterRequest {
@@ -905,6 +1076,12 @@ type UpdateCurrentStaminaMasterRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	Settings           *string `json:"settings"`
+}
+
+func NewUpdateCurrentStaminaMasterRequestFromJson(data string) UpdateCurrentStaminaMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentStaminaMasterRequestFromDict(dict)
 }
 
 func NewUpdateCurrentStaminaMasterRequestFromDict(data map[string]interface{}) UpdateCurrentStaminaMasterRequest {
@@ -933,6 +1110,12 @@ type UpdateCurrentStaminaMasterFromGitHubRequest struct {
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
+func NewUpdateCurrentStaminaMasterFromGitHubRequestFromJson(data string) UpdateCurrentStaminaMasterFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentStaminaMasterFromGitHubRequestFromDict(dict)
+}
+
 func NewUpdateCurrentStaminaMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentStaminaMasterFromGitHubRequest {
 	return UpdateCurrentStaminaMasterFromGitHubRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
@@ -958,6 +1141,12 @@ type DescribeStaminaModelsRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDescribeStaminaModelsRequestFromJson(data string) DescribeStaminaModelsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStaminaModelsRequestFromDict(dict)
+}
+
 func NewDescribeStaminaModelsRequestFromDict(data map[string]interface{}) DescribeStaminaModelsRequest {
 	return DescribeStaminaModelsRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -980,6 +1169,12 @@ type GetStaminaModelRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	StaminaName        *string `json:"staminaName"`
+}
+
+func NewGetStaminaModelRequestFromJson(data string) GetStaminaModelRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStaminaModelRequestFromDict(dict)
 }
 
 func NewGetStaminaModelRequestFromDict(data map[string]interface{}) GetStaminaModelRequest {
@@ -1008,6 +1203,12 @@ type DescribeStaminasRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeStaminasRequestFromJson(data string) DescribeStaminasRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStaminasRequestFromDict(dict)
 }
 
 func NewDescribeStaminasRequestFromDict(data map[string]interface{}) DescribeStaminasRequest {
@@ -1042,6 +1243,12 @@ type DescribeStaminasByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeStaminasByUserIdRequestFromJson(data string) DescribeStaminasByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStaminasByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeStaminasByUserIdRequestFromDict(data map[string]interface{}) DescribeStaminasByUserIdRequest {
 	return DescribeStaminasByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1073,6 +1280,12 @@ type GetStaminaRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
+func NewGetStaminaRequestFromJson(data string) GetStaminaRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStaminaRequestFromDict(dict)
+}
+
 func NewGetStaminaRequestFromDict(data map[string]interface{}) GetStaminaRequest {
 	return GetStaminaRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1100,6 +1313,12 @@ type GetStaminaByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	StaminaName        *string `json:"staminaName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewGetStaminaByUserIdRequestFromJson(data string) GetStaminaByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStaminaByUserIdRequestFromDict(dict)
 }
 
 func NewGetStaminaByUserIdRequestFromDict(data map[string]interface{}) GetStaminaByUserIdRequest {
@@ -1133,6 +1352,12 @@ type UpdateStaminaByUserIdRequest struct {
 	MaxValue               *int32  `json:"maxValue"`
 	RecoverIntervalMinutes *int32  `json:"recoverIntervalMinutes"`
 	RecoverValue           *int32  `json:"recoverValue"`
+}
+
+func NewUpdateStaminaByUserIdRequestFromJson(data string) UpdateStaminaByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateStaminaByUserIdRequestFromDict(dict)
 }
 
 func NewUpdateStaminaByUserIdRequestFromDict(data map[string]interface{}) UpdateStaminaByUserIdRequest {
@@ -1173,6 +1398,12 @@ type ConsumeStaminaRequest struct {
 	ConsumeValue       *int32  `json:"consumeValue"`
 }
 
+func NewConsumeStaminaRequestFromJson(data string) ConsumeStaminaRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConsumeStaminaRequestFromDict(dict)
+}
+
 func NewConsumeStaminaRequestFromDict(data map[string]interface{}) ConsumeStaminaRequest {
 	return ConsumeStaminaRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1203,6 +1434,12 @@ type ConsumeStaminaByUserIdRequest struct {
 	StaminaName        *string `json:"staminaName"`
 	UserId             *string `json:"userId"`
 	ConsumeValue       *int32  `json:"consumeValue"`
+}
+
+func NewConsumeStaminaByUserIdRequestFromJson(data string) ConsumeStaminaByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConsumeStaminaByUserIdRequestFromDict(dict)
 }
 
 func NewConsumeStaminaByUserIdRequestFromDict(data map[string]interface{}) ConsumeStaminaByUserIdRequest {
@@ -1237,6 +1474,12 @@ type RecoverStaminaByUserIdRequest struct {
 	RecoverValue       *int32  `json:"recoverValue"`
 }
 
+func NewRecoverStaminaByUserIdRequestFromJson(data string) RecoverStaminaByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRecoverStaminaByUserIdRequestFromDict(dict)
+}
+
 func NewRecoverStaminaByUserIdRequestFromDict(data map[string]interface{}) RecoverStaminaByUserIdRequest {
 	return RecoverStaminaByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1267,6 +1510,12 @@ type RaiseMaxValueByUserIdRequest struct {
 	StaminaName        *string `json:"staminaName"`
 	UserId             *string `json:"userId"`
 	RaiseValue         *int32  `json:"raiseValue"`
+}
+
+func NewRaiseMaxValueByUserIdRequestFromJson(data string) RaiseMaxValueByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRaiseMaxValueByUserIdRequestFromDict(dict)
 }
 
 func NewRaiseMaxValueByUserIdRequestFromDict(data map[string]interface{}) RaiseMaxValueByUserIdRequest {
@@ -1301,6 +1550,12 @@ type SetMaxValueByUserIdRequest struct {
 	MaxValue           *int32  `json:"maxValue"`
 }
 
+func NewSetMaxValueByUserIdRequestFromJson(data string) SetMaxValueByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetMaxValueByUserIdRequestFromDict(dict)
+}
+
 func NewSetMaxValueByUserIdRequestFromDict(data map[string]interface{}) SetMaxValueByUserIdRequest {
 	return SetMaxValueByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1331,6 +1586,12 @@ type SetRecoverIntervalByUserIdRequest struct {
 	StaminaName            *string `json:"staminaName"`
 	UserId                 *string `json:"userId"`
 	RecoverIntervalMinutes *int32  `json:"recoverIntervalMinutes"`
+}
+
+func NewSetRecoverIntervalByUserIdRequestFromJson(data string) SetRecoverIntervalByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetRecoverIntervalByUserIdRequestFromDict(dict)
 }
 
 func NewSetRecoverIntervalByUserIdRequestFromDict(data map[string]interface{}) SetRecoverIntervalByUserIdRequest {
@@ -1365,6 +1626,12 @@ type SetRecoverValueByUserIdRequest struct {
 	RecoverValue       *int32  `json:"recoverValue"`
 }
 
+func NewSetRecoverValueByUserIdRequestFromJson(data string) SetRecoverValueByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetRecoverValueByUserIdRequestFromDict(dict)
+}
+
 func NewSetRecoverValueByUserIdRequestFromDict(data map[string]interface{}) SetRecoverValueByUserIdRequest {
 	return SetRecoverValueByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1397,6 +1664,12 @@ type SetMaxValueByStatusRequest struct {
 	KeyId                 *string `json:"keyId"`
 	SignedStatusBody      *string `json:"signedStatusBody"`
 	SignedStatusSignature *string `json:"signedStatusSignature"`
+}
+
+func NewSetMaxValueByStatusRequestFromJson(data string) SetMaxValueByStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetMaxValueByStatusRequestFromDict(dict)
 }
 
 func NewSetMaxValueByStatusRequestFromDict(data map[string]interface{}) SetMaxValueByStatusRequest {
@@ -1437,6 +1710,12 @@ type SetRecoverIntervalByStatusRequest struct {
 	SignedStatusSignature *string `json:"signedStatusSignature"`
 }
 
+func NewSetRecoverIntervalByStatusRequestFromJson(data string) SetRecoverIntervalByStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetRecoverIntervalByStatusRequestFromDict(dict)
+}
+
 func NewSetRecoverIntervalByStatusRequestFromDict(data map[string]interface{}) SetRecoverIntervalByStatusRequest {
 	return SetRecoverIntervalByStatusRequest{
 		NamespaceName:         core.CastString(data["namespaceName"]),
@@ -1475,6 +1754,12 @@ type SetRecoverValueByStatusRequest struct {
 	SignedStatusSignature *string `json:"signedStatusSignature"`
 }
 
+func NewSetRecoverValueByStatusRequestFromJson(data string) SetRecoverValueByStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetRecoverValueByStatusRequestFromDict(dict)
+}
+
 func NewSetRecoverValueByStatusRequestFromDict(data map[string]interface{}) SetRecoverValueByStatusRequest {
 	return SetRecoverValueByStatusRequest{
 		NamespaceName:         core.CastString(data["namespaceName"]),
@@ -1510,6 +1795,12 @@ type DeleteStaminaByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 }
 
+func NewDeleteStaminaByUserIdRequestFromJson(data string) DeleteStaminaByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteStaminaByUserIdRequestFromDict(dict)
+}
+
 func NewDeleteStaminaByUserIdRequestFromDict(data map[string]interface{}) DeleteStaminaByUserIdRequest {
 	return DeleteStaminaByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1538,6 +1829,12 @@ type RecoverStaminaByStampSheetRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewRecoverStaminaByStampSheetRequestFromJson(data string) RecoverStaminaByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRecoverStaminaByStampSheetRequestFromDict(dict)
+}
+
 func NewRecoverStaminaByStampSheetRequestFromDict(data map[string]interface{}) RecoverStaminaByStampSheetRequest {
 	return RecoverStaminaByStampSheetRequest{
 		StampSheet: core.CastString(data["stampSheet"]),
@@ -1562,6 +1859,12 @@ type RaiseMaxValueByStampSheetRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StampSheet         *string `json:"stampSheet"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewRaiseMaxValueByStampSheetRequestFromJson(data string) RaiseMaxValueByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRaiseMaxValueByStampSheetRequestFromDict(dict)
 }
 
 func NewRaiseMaxValueByStampSheetRequestFromDict(data map[string]interface{}) RaiseMaxValueByStampSheetRequest {
@@ -1590,6 +1893,12 @@ type SetMaxValueByStampSheetRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewSetMaxValueByStampSheetRequestFromJson(data string) SetMaxValueByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetMaxValueByStampSheetRequestFromDict(dict)
+}
+
 func NewSetMaxValueByStampSheetRequestFromDict(data map[string]interface{}) SetMaxValueByStampSheetRequest {
 	return SetMaxValueByStampSheetRequest{
 		StampSheet: core.CastString(data["stampSheet"]),
@@ -1614,6 +1923,12 @@ type SetRecoverIntervalByStampSheetRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StampSheet         *string `json:"stampSheet"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewSetRecoverIntervalByStampSheetRequestFromJson(data string) SetRecoverIntervalByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetRecoverIntervalByStampSheetRequestFromDict(dict)
 }
 
 func NewSetRecoverIntervalByStampSheetRequestFromDict(data map[string]interface{}) SetRecoverIntervalByStampSheetRequest {
@@ -1642,6 +1957,12 @@ type SetRecoverValueByStampSheetRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewSetRecoverValueByStampSheetRequestFromJson(data string) SetRecoverValueByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetRecoverValueByStampSheetRequestFromDict(dict)
+}
+
 func NewSetRecoverValueByStampSheetRequestFromDict(data map[string]interface{}) SetRecoverValueByStampSheetRequest {
 	return SetRecoverValueByStampSheetRequest{
 		StampSheet: core.CastString(data["stampSheet"]),
@@ -1666,6 +1987,12 @@ type ConsumeStaminaByStampTaskRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StampTask          *string `json:"stampTask"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewConsumeStaminaByStampTaskRequestFromJson(data string) ConsumeStaminaByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConsumeStaminaByStampTaskRequestFromDict(dict)
 }
 
 func NewConsumeStaminaByStampTaskRequestFromDict(data map[string]interface{}) ConsumeStaminaByStampTaskRequest {

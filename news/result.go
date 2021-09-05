@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package news
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -130,6 +157,12 @@ type UpdateNamespaceResult struct {
 type UpdateNamespaceAsyncResult struct {
 	result *UpdateNamespaceResult
 	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
@@ -156,6 +189,12 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{}
 }
@@ -176,6 +215,12 @@ type PrepareUpdateCurrentNewsMasterResult struct {
 type PrepareUpdateCurrentNewsMasterAsyncResult struct {
 	result *PrepareUpdateCurrentNewsMasterResult
 	err    error
+}
+
+func NewPrepareUpdateCurrentNewsMasterResultFromJson(data string) PrepareUpdateCurrentNewsMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareUpdateCurrentNewsMasterResultFromDict(dict)
 }
 
 func NewPrepareUpdateCurrentNewsMasterResultFromDict(data map[string]interface{}) PrepareUpdateCurrentNewsMasterResult {
@@ -204,6 +249,12 @@ type UpdateCurrentNewsMasterAsyncResult struct {
 	err    error
 }
 
+func NewUpdateCurrentNewsMasterResultFromJson(data string) UpdateCurrentNewsMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentNewsMasterResultFromDict(dict)
+}
+
 func NewUpdateCurrentNewsMasterResultFromDict(data map[string]interface{}) UpdateCurrentNewsMasterResult {
 	return UpdateCurrentNewsMasterResult{}
 }
@@ -223,6 +274,12 @@ type PrepareUpdateCurrentNewsMasterFromGitHubResult struct {
 type PrepareUpdateCurrentNewsMasterFromGitHubAsyncResult struct {
 	result *PrepareUpdateCurrentNewsMasterFromGitHubResult
 	err    error
+}
+
+func NewPrepareUpdateCurrentNewsMasterFromGitHubResultFromJson(data string) PrepareUpdateCurrentNewsMasterFromGitHubResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareUpdateCurrentNewsMasterFromGitHubResultFromDict(dict)
 }
 
 func NewPrepareUpdateCurrentNewsMasterFromGitHubResultFromDict(data map[string]interface{}) PrepareUpdateCurrentNewsMasterFromGitHubResult {
@@ -250,6 +307,12 @@ type DescribeNewsResult struct {
 type DescribeNewsAsyncResult struct {
 	result *DescribeNewsResult
 	err    error
+}
+
+func NewDescribeNewsResultFromJson(data string) DescribeNewsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNewsResultFromDict(dict)
 }
 
 func NewDescribeNewsResultFromDict(data map[string]interface{}) DescribeNewsResult {
@@ -285,6 +348,12 @@ type DescribeNewsByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeNewsByUserIdResultFromJson(data string) DescribeNewsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNewsByUserIdResultFromDict(dict)
+}
+
 func NewDescribeNewsByUserIdResultFromDict(data map[string]interface{}) DescribeNewsByUserIdResult {
 	return DescribeNewsByUserIdResult{
 		Items:        CastNewses(core.CastArray(data["items"])),
@@ -318,6 +387,12 @@ type WantGrantAsyncResult struct {
 	err    error
 }
 
+func NewWantGrantResultFromJson(data string) WantGrantResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewWantGrantResultFromDict(dict)
+}
+
 func NewWantGrantResultFromDict(data map[string]interface{}) WantGrantResult {
 	return WantGrantResult{
 		Items:      CastSetCookieRequestEntries(core.CastArray(data["items"])),
@@ -349,6 +424,12 @@ type WantGrantByUserIdResult struct {
 type WantGrantByUserIdAsyncResult struct {
 	result *WantGrantByUserIdResult
 	err    error
+}
+
+func NewWantGrantByUserIdResultFromJson(data string) WantGrantByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewWantGrantByUserIdResultFromDict(dict)
 }
 
 func NewWantGrantByUserIdResultFromDict(data map[string]interface{}) WantGrantByUserIdResult {

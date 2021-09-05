@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package quest
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -56,6 +65,12 @@ type CreateNamespaceRequest struct {
 	QueueNamespaceId    *string        `json:"queueNamespaceId"`
 	KeyId               *string        `json:"keyId"`
 	LogSetting          *LogSetting    `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -95,6 +110,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -116,6 +137,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -146,6 +173,12 @@ type UpdateNamespaceRequest struct {
 	QueueNamespaceId    *string        `json:"queueNamespaceId"`
 	KeyId               *string        `json:"keyId"`
 	LogSetting          *LogSetting    `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -185,6 +218,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -208,6 +247,12 @@ type DescribeQuestGroupModelMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeQuestGroupModelMastersRequestFromJson(data string) DescribeQuestGroupModelMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeQuestGroupModelMastersRequestFromDict(dict)
 }
 
 func NewDescribeQuestGroupModelMastersRequestFromDict(data map[string]interface{}) DescribeQuestGroupModelMastersRequest {
@@ -239,6 +284,12 @@ type CreateQuestGroupModelMasterRequest struct {
 	Description            *string `json:"description"`
 	Metadata               *string `json:"metadata"`
 	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
+}
+
+func NewCreateQuestGroupModelMasterRequestFromJson(data string) CreateQuestGroupModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateQuestGroupModelMasterRequestFromDict(dict)
 }
 
 func NewCreateQuestGroupModelMasterRequestFromDict(data map[string]interface{}) CreateQuestGroupModelMasterRequest {
@@ -273,6 +324,12 @@ type GetQuestGroupModelMasterRequest struct {
 	QuestGroupName     *string `json:"questGroupName"`
 }
 
+func NewGetQuestGroupModelMasterRequestFromJson(data string) GetQuestGroupModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetQuestGroupModelMasterRequestFromDict(dict)
+}
+
 func NewGetQuestGroupModelMasterRequestFromDict(data map[string]interface{}) GetQuestGroupModelMasterRequest {
 	return GetQuestGroupModelMasterRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -300,6 +357,12 @@ type UpdateQuestGroupModelMasterRequest struct {
 	Description            *string `json:"description"`
 	Metadata               *string `json:"metadata"`
 	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
+}
+
+func NewUpdateQuestGroupModelMasterRequestFromJson(data string) UpdateQuestGroupModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateQuestGroupModelMasterRequestFromDict(dict)
 }
 
 func NewUpdateQuestGroupModelMasterRequestFromDict(data map[string]interface{}) UpdateQuestGroupModelMasterRequest {
@@ -334,6 +397,12 @@ type DeleteQuestGroupModelMasterRequest struct {
 	QuestGroupName     *string `json:"questGroupName"`
 }
 
+func NewDeleteQuestGroupModelMasterRequestFromJson(data string) DeleteQuestGroupModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteQuestGroupModelMasterRequestFromDict(dict)
+}
+
 func NewDeleteQuestGroupModelMasterRequestFromDict(data map[string]interface{}) DeleteQuestGroupModelMasterRequest {
 	return DeleteQuestGroupModelMasterRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -360,6 +429,12 @@ type DescribeQuestModelMastersRequest struct {
 	QuestGroupName     *string `json:"questGroupName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeQuestModelMastersRequestFromJson(data string) DescribeQuestModelMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeQuestModelMastersRequestFromDict(dict)
 }
 
 func NewDescribeQuestModelMastersRequestFromDict(data map[string]interface{}) DescribeQuestModelMastersRequest {
@@ -398,6 +473,12 @@ type CreateQuestModelMasterRequest struct {
 	ConsumeActions         []ConsumeAction `json:"consumeActions"`
 	FailedAcquireActions   []AcquireAction `json:"failedAcquireActions"`
 	PremiseQuestNames      []string        `json:"premiseQuestNames"`
+}
+
+func NewCreateQuestModelMasterRequestFromJson(data string) CreateQuestModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateQuestModelMasterRequestFromDict(dict)
 }
 
 func NewCreateQuestModelMasterRequestFromDict(data map[string]interface{}) CreateQuestModelMasterRequest {
@@ -451,6 +532,12 @@ type GetQuestModelMasterRequest struct {
 	QuestName          *string `json:"questName"`
 }
 
+func NewGetQuestModelMasterRequestFromJson(data string) GetQuestModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetQuestModelMasterRequestFromDict(dict)
+}
+
 func NewGetQuestModelMasterRequestFromDict(data map[string]interface{}) GetQuestModelMasterRequest {
 	return GetQuestModelMasterRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -485,6 +572,12 @@ type UpdateQuestModelMasterRequest struct {
 	ConsumeActions         []ConsumeAction `json:"consumeActions"`
 	FailedAcquireActions   []AcquireAction `json:"failedAcquireActions"`
 	PremiseQuestNames      []string        `json:"premiseQuestNames"`
+}
+
+func NewUpdateQuestModelMasterRequestFromJson(data string) UpdateQuestModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateQuestModelMasterRequestFromDict(dict)
 }
 
 func NewUpdateQuestModelMasterRequestFromDict(data map[string]interface{}) UpdateQuestModelMasterRequest {
@@ -538,6 +631,12 @@ type DeleteQuestModelMasterRequest struct {
 	QuestName          *string `json:"questName"`
 }
 
+func NewDeleteQuestModelMasterRequestFromJson(data string) DeleteQuestModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteQuestModelMasterRequestFromDict(dict)
+}
+
 func NewDeleteQuestModelMasterRequestFromDict(data map[string]interface{}) DeleteQuestModelMasterRequest {
 	return DeleteQuestModelMasterRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -565,6 +664,12 @@ type ExportMasterRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterRequestFromDict(dict)
+}
+
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -586,6 +691,12 @@ type GetCurrentQuestMasterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetCurrentQuestMasterRequestFromJson(data string) GetCurrentQuestMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentQuestMasterRequestFromDict(dict)
 }
 
 func NewGetCurrentQuestMasterRequestFromDict(data map[string]interface{}) GetCurrentQuestMasterRequest {
@@ -610,6 +721,12 @@ type UpdateCurrentQuestMasterRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	Settings           *string `json:"settings"`
+}
+
+func NewUpdateCurrentQuestMasterRequestFromJson(data string) UpdateCurrentQuestMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentQuestMasterRequestFromDict(dict)
 }
 
 func NewUpdateCurrentQuestMasterRequestFromDict(data map[string]interface{}) UpdateCurrentQuestMasterRequest {
@@ -638,6 +755,12 @@ type UpdateCurrentQuestMasterFromGitHubRequest struct {
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
+func NewUpdateCurrentQuestMasterFromGitHubRequestFromJson(data string) UpdateCurrentQuestMasterFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentQuestMasterFromGitHubRequestFromDict(dict)
+}
+
 func NewUpdateCurrentQuestMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentQuestMasterFromGitHubRequest {
 	return UpdateCurrentQuestMasterFromGitHubRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
@@ -664,6 +787,12 @@ type DescribeProgressesByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeProgressesByUserIdRequestFromJson(data string) DescribeProgressesByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeProgressesByUserIdRequestFromDict(dict)
 }
 
 func NewDescribeProgressesByUserIdRequestFromDict(data map[string]interface{}) DescribeProgressesByUserIdRequest {
@@ -697,6 +826,12 @@ type CreateProgressByUserIdRequest struct {
 	QuestModelId       *string  `json:"questModelId"`
 	Force              *bool    `json:"force"`
 	Config             []Config `json:"config"`
+}
+
+func NewCreateProgressByUserIdRequestFromJson(data string) CreateProgressByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateProgressByUserIdRequestFromDict(dict)
 }
 
 func NewCreateProgressByUserIdRequestFromDict(data map[string]interface{}) CreateProgressByUserIdRequest {
@@ -733,6 +868,12 @@ type GetProgressRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
+func NewGetProgressRequestFromJson(data string) GetProgressRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetProgressRequestFromDict(dict)
+}
+
 func NewGetProgressRequestFromDict(data map[string]interface{}) GetProgressRequest {
 	return GetProgressRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -757,6 +898,12 @@ type GetProgressByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewGetProgressByUserIdRequestFromJson(data string) GetProgressByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetProgressByUserIdRequestFromDict(dict)
 }
 
 func NewGetProgressByUserIdRequestFromDict(data map[string]interface{}) GetProgressByUserIdRequest {
@@ -787,6 +934,12 @@ type StartRequest struct {
 	AccessToken        *string  `json:"accessToken"`
 	Force              *bool    `json:"force"`
 	Config             []Config `json:"config"`
+}
+
+func NewStartRequestFromJson(data string) StartRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewStartRequestFromDict(dict)
 }
 
 func NewStartRequestFromDict(data map[string]interface{}) StartRequest {
@@ -829,6 +982,12 @@ type StartByUserIdRequest struct {
 	Config             []Config `json:"config"`
 }
 
+func NewStartByUserIdRequestFromJson(data string) StartByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewStartByUserIdRequestFromDict(dict)
+}
+
 func NewStartByUserIdRequestFromDict(data map[string]interface{}) StartByUserIdRequest {
 	return StartByUserIdRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -867,6 +1026,12 @@ type EndRequest struct {
 	Rewards            []Reward `json:"rewards"`
 	IsComplete         *bool    `json:"isComplete"`
 	Config             []Config `json:"config"`
+}
+
+func NewEndRequestFromJson(data string) EndRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEndRequestFromDict(dict)
 }
 
 func NewEndRequestFromDict(data map[string]interface{}) EndRequest {
@@ -911,6 +1076,12 @@ type EndByUserIdRequest struct {
 	Config             []Config `json:"config"`
 }
 
+func NewEndByUserIdRequestFromJson(data string) EndByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEndByUserIdRequestFromDict(dict)
+}
+
 func NewEndByUserIdRequestFromDict(data map[string]interface{}) EndByUserIdRequest {
 	return EndByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -949,6 +1120,12 @@ type DeleteProgressRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
+func NewDeleteProgressRequestFromJson(data string) DeleteProgressRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteProgressRequestFromDict(dict)
+}
+
 func NewDeleteProgressRequestFromDict(data map[string]interface{}) DeleteProgressRequest {
 	return DeleteProgressRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -973,6 +1150,12 @@ type DeleteProgressByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewDeleteProgressByUserIdRequestFromJson(data string) DeleteProgressByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteProgressByUserIdRequestFromDict(dict)
 }
 
 func NewDeleteProgressByUserIdRequestFromDict(data map[string]interface{}) DeleteProgressByUserIdRequest {
@@ -1001,6 +1184,12 @@ type CreateProgressByStampSheetRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewCreateProgressByStampSheetRequestFromJson(data string) CreateProgressByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateProgressByStampSheetRequestFromDict(dict)
+}
+
 func NewCreateProgressByStampSheetRequestFromDict(data map[string]interface{}) CreateProgressByStampSheetRequest {
 	return CreateProgressByStampSheetRequest{
 		StampSheet: core.CastString(data["stampSheet"]),
@@ -1025,6 +1214,12 @@ type DeleteProgressByStampTaskRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StampTask          *string `json:"stampTask"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewDeleteProgressByStampTaskRequestFromJson(data string) DeleteProgressByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteProgressByStampTaskRequestFromDict(dict)
 }
 
 func NewDeleteProgressByStampTaskRequestFromDict(data map[string]interface{}) DeleteProgressByStampTaskRequest {
@@ -1053,6 +1248,12 @@ type DescribeCompletedQuestListsRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeCompletedQuestListsRequestFromJson(data string) DescribeCompletedQuestListsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeCompletedQuestListsRequestFromDict(dict)
 }
 
 func NewDescribeCompletedQuestListsRequestFromDict(data map[string]interface{}) DescribeCompletedQuestListsRequest {
@@ -1087,6 +1288,12 @@ type DescribeCompletedQuestListsByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeCompletedQuestListsByUserIdRequestFromJson(data string) DescribeCompletedQuestListsByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeCompletedQuestListsByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeCompletedQuestListsByUserIdRequestFromDict(data map[string]interface{}) DescribeCompletedQuestListsByUserIdRequest {
 	return DescribeCompletedQuestListsByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1118,6 +1325,12 @@ type GetCompletedQuestListRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
+func NewGetCompletedQuestListRequestFromJson(data string) GetCompletedQuestListRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCompletedQuestListRequestFromDict(dict)
+}
+
 func NewGetCompletedQuestListRequestFromDict(data map[string]interface{}) GetCompletedQuestListRequest {
 	return GetCompletedQuestListRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -1145,6 +1358,12 @@ type GetCompletedQuestListByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	QuestGroupName     *string `json:"questGroupName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewGetCompletedQuestListByUserIdRequestFromJson(data string) GetCompletedQuestListByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCompletedQuestListByUserIdRequestFromDict(dict)
 }
 
 func NewGetCompletedQuestListByUserIdRequestFromDict(data map[string]interface{}) GetCompletedQuestListByUserIdRequest {
@@ -1176,6 +1395,12 @@ type DeleteCompletedQuestListByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 }
 
+func NewDeleteCompletedQuestListByUserIdRequestFromJson(data string) DeleteCompletedQuestListByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteCompletedQuestListByUserIdRequestFromDict(dict)
+}
+
 func NewDeleteCompletedQuestListByUserIdRequestFromDict(data map[string]interface{}) DeleteCompletedQuestListByUserIdRequest {
 	return DeleteCompletedQuestListByUserIdRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -1203,6 +1428,12 @@ type DescribeQuestGroupModelsRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDescribeQuestGroupModelsRequestFromJson(data string) DescribeQuestGroupModelsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeQuestGroupModelsRequestFromDict(dict)
+}
+
 func NewDescribeQuestGroupModelsRequestFromDict(data map[string]interface{}) DescribeQuestGroupModelsRequest {
 	return DescribeQuestGroupModelsRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1225,6 +1456,12 @@ type GetQuestGroupModelRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	QuestGroupName     *string `json:"questGroupName"`
+}
+
+func NewGetQuestGroupModelRequestFromJson(data string) GetQuestGroupModelRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetQuestGroupModelRequestFromDict(dict)
 }
 
 func NewGetQuestGroupModelRequestFromDict(data map[string]interface{}) GetQuestGroupModelRequest {
@@ -1253,6 +1490,12 @@ type DescribeQuestModelsRequest struct {
 	QuestGroupName     *string `json:"questGroupName"`
 }
 
+func NewDescribeQuestModelsRequestFromJson(data string) DescribeQuestModelsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeQuestModelsRequestFromDict(dict)
+}
+
 func NewDescribeQuestModelsRequestFromDict(data map[string]interface{}) DescribeQuestModelsRequest {
 	return DescribeQuestModelsRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -1278,6 +1521,12 @@ type GetQuestModelRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	QuestGroupName     *string `json:"questGroupName"`
 	QuestName          *string `json:"questName"`
+}
+
+func NewGetQuestModelRequestFromJson(data string) GetQuestModelRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetQuestModelRequestFromDict(dict)
 }
 
 func NewGetQuestModelRequestFromDict(data map[string]interface{}) GetQuestModelRequest {

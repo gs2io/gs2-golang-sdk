@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package project
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Account struct {
 	AccountId   *string `json:"accountId"`
@@ -28,6 +31,12 @@ type Account struct {
 	Status      *string `json:"status"`
 	CreatedAt   *int64  `json:"createdAt"`
 	UpdatedAt   *int64  `json:"updatedAt"`
+}
+
+func NewAccountFromJson(data string) Account {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAccountFromDict(dict)
 }
 
 func NewAccountFromDict(data map[string]interface{}) Account {
@@ -90,6 +99,12 @@ type Project struct {
 	EventBridgeAwsRegion    *string `json:"eventBridgeAwsRegion"`
 	CreatedAt               *int64  `json:"createdAt"`
 	UpdatedAt               *int64  `json:"updatedAt"`
+}
+
+func NewProjectFromJson(data string) Project {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewProjectFromDict(dict)
 }
 
 func NewProjectFromDict(data map[string]interface{}) Project {
@@ -158,6 +173,12 @@ type BillingMethod struct {
 	UpdatedAt         *int64  `json:"updatedAt"`
 }
 
+func NewBillingMethodFromJson(data string) BillingMethod {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBillingMethodFromDict(dict)
+}
+
 func NewBillingMethodFromDict(data map[string]interface{}) BillingMethod {
 	return BillingMethod{
 		BillingMethodId:   core.CastString(data["billingMethodId"]),
@@ -221,6 +242,12 @@ type Receipt struct {
 	UpdatedAt   *int64  `json:"updatedAt"`
 }
 
+func NewReceiptFromJson(data string) Receipt {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewReceiptFromDict(dict)
+}
+
 func NewReceiptFromDict(data map[string]interface{}) Receipt {
 	return Receipt{
 		ReceiptId:   core.CastString(data["receiptId"]),
@@ -281,6 +308,12 @@ type Billing struct {
 	Currency     *string `json:"currency"`
 	CreatedAt    *int64  `json:"createdAt"`
 	UpdatedAt    *int64  `json:"updatedAt"`
+}
+
+func NewBillingFromJson(data string) Billing {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBillingFromDict(dict)
 }
 
 func NewBillingFromDict(data map[string]interface{}) Billing {

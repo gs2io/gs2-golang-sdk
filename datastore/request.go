@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package datastore
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -52,6 +61,12 @@ type CreateNamespaceRequest struct {
 	Description        *string        `json:"description"`
 	LogSetting         *LogSetting    `json:"logSetting"`
 	DoneUploadScript   *ScriptSetting `json:"doneUploadScript"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -83,6 +98,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -104,6 +125,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -130,6 +157,12 @@ type UpdateNamespaceRequest struct {
 	Description        *string        `json:"description"`
 	LogSetting         *LogSetting    `json:"logSetting"`
 	DoneUploadScript   *ScriptSetting `json:"doneUploadScript"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -161,6 +194,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -186,6 +225,12 @@ type DescribeDataObjectsRequest struct {
 	Status             *string `json:"status"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeDataObjectsRequestFromJson(data string) DescribeDataObjectsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDataObjectsRequestFromDict(dict)
 }
 
 func NewDescribeDataObjectsRequestFromDict(data map[string]interface{}) DescribeDataObjectsRequest {
@@ -223,6 +268,12 @@ type DescribeDataObjectsByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeDataObjectsByUserIdRequestFromJson(data string) DescribeDataObjectsByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDataObjectsByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeDataObjectsByUserIdRequestFromDict(data map[string]interface{}) DescribeDataObjectsByUserIdRequest {
 	return DescribeDataObjectsByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -258,6 +309,12 @@ type PrepareUploadRequest struct {
 	Scope              *string  `json:"scope"`
 	AllowUserIds       []string `json:"allowUserIds"`
 	UpdateIfExists     *bool    `json:"updateIfExists"`
+}
+
+func NewPrepareUploadRequestFromJson(data string) PrepareUploadRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareUploadRequestFromDict(dict)
 }
 
 func NewPrepareUploadRequestFromDict(data map[string]interface{}) PrepareUploadRequest {
@@ -303,6 +360,12 @@ type PrepareUploadByUserIdRequest struct {
 	UpdateIfExists     *bool    `json:"updateIfExists"`
 }
 
+func NewPrepareUploadByUserIdRequestFromJson(data string) PrepareUploadByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareUploadByUserIdRequestFromDict(dict)
+}
+
 func NewPrepareUploadByUserIdRequestFromDict(data map[string]interface{}) PrepareUploadByUserIdRequest {
 	return PrepareUploadByUserIdRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -344,6 +407,12 @@ type UpdateDataObjectRequest struct {
 	AllowUserIds       []string `json:"allowUserIds"`
 }
 
+func NewUpdateDataObjectRequestFromJson(data string) UpdateDataObjectRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateDataObjectRequestFromDict(dict)
+}
+
 func NewUpdateDataObjectRequestFromDict(data map[string]interface{}) UpdateDataObjectRequest {
 	return UpdateDataObjectRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -379,6 +448,12 @@ type UpdateDataObjectByUserIdRequest struct {
 	UserId             *string  `json:"userId"`
 	Scope              *string  `json:"scope"`
 	AllowUserIds       []string `json:"allowUserIds"`
+}
+
+func NewUpdateDataObjectByUserIdRequestFromJson(data string) UpdateDataObjectByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateDataObjectByUserIdRequestFromDict(dict)
 }
 
 func NewUpdateDataObjectByUserIdRequestFromDict(data map[string]interface{}) UpdateDataObjectByUserIdRequest {
@@ -417,6 +492,12 @@ type PrepareReUploadRequest struct {
 	ContentType        *string `json:"contentType"`
 }
 
+func NewPrepareReUploadRequestFromJson(data string) PrepareReUploadRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareReUploadRequestFromDict(dict)
+}
+
 func NewPrepareReUploadRequestFromDict(data map[string]interface{}) PrepareReUploadRequest {
 	return PrepareReUploadRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -447,6 +528,12 @@ type PrepareReUploadByUserIdRequest struct {
 	DataObjectName     *string `json:"dataObjectName"`
 	UserId             *string `json:"userId"`
 	ContentType        *string `json:"contentType"`
+}
+
+func NewPrepareReUploadByUserIdRequestFromJson(data string) PrepareReUploadByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareReUploadByUserIdRequestFromDict(dict)
 }
 
 func NewPrepareReUploadByUserIdRequestFromDict(data map[string]interface{}) PrepareReUploadByUserIdRequest {
@@ -480,6 +567,12 @@ type DoneUploadRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
+func NewDoneUploadRequestFromJson(data string) DoneUploadRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDoneUploadRequestFromDict(dict)
+}
+
 func NewDoneUploadRequestFromDict(data map[string]interface{}) DoneUploadRequest {
 	return DoneUploadRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -507,6 +600,12 @@ type DoneUploadByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	DataObjectName     *string `json:"dataObjectName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewDoneUploadByUserIdRequestFromJson(data string) DoneUploadByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDoneUploadByUserIdRequestFromDict(dict)
 }
 
 func NewDoneUploadByUserIdRequestFromDict(data map[string]interface{}) DoneUploadByUserIdRequest {
@@ -538,6 +637,12 @@ type DeleteDataObjectRequest struct {
 	DataObjectName     *string `json:"dataObjectName"`
 }
 
+func NewDeleteDataObjectRequestFromJson(data string) DeleteDataObjectRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteDataObjectRequestFromDict(dict)
+}
+
 func NewDeleteDataObjectRequestFromDict(data map[string]interface{}) DeleteDataObjectRequest {
 	return DeleteDataObjectRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -565,6 +670,12 @@ type DeleteDataObjectByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	DataObjectName     *string `json:"dataObjectName"`
+}
+
+func NewDeleteDataObjectByUserIdRequestFromJson(data string) DeleteDataObjectByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteDataObjectByUserIdRequestFromDict(dict)
 }
 
 func NewDeleteDataObjectByUserIdRequestFromDict(data map[string]interface{}) DeleteDataObjectByUserIdRequest {
@@ -596,6 +707,12 @@ type PrepareDownloadRequest struct {
 	DataObjectId       *string `json:"dataObjectId"`
 }
 
+func NewPrepareDownloadRequestFromJson(data string) PrepareDownloadRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadRequestFromDict(dict)
+}
+
 func NewPrepareDownloadRequestFromDict(data map[string]interface{}) PrepareDownloadRequest {
 	return PrepareDownloadRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -623,6 +740,12 @@ type PrepareDownloadByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	DataObjectId       *string `json:"dataObjectId"`
+}
+
+func NewPrepareDownloadByUserIdRequestFromJson(data string) PrepareDownloadByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadByUserIdRequestFromDict(dict)
 }
 
 func NewPrepareDownloadByUserIdRequestFromDict(data map[string]interface{}) PrepareDownloadByUserIdRequest {
@@ -653,6 +776,12 @@ type PrepareDownloadByGenerationRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	DataObjectId       *string `json:"dataObjectId"`
 	Generation         *string `json:"generation"`
+}
+
+func NewPrepareDownloadByGenerationRequestFromJson(data string) PrepareDownloadByGenerationRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadByGenerationRequestFromDict(dict)
 }
 
 func NewPrepareDownloadByGenerationRequestFromDict(data map[string]interface{}) PrepareDownloadByGenerationRequest {
@@ -687,6 +816,12 @@ type PrepareDownloadByGenerationAndUserIdRequest struct {
 	Generation         *string `json:"generation"`
 }
 
+func NewPrepareDownloadByGenerationAndUserIdRequestFromJson(data string) PrepareDownloadByGenerationAndUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadByGenerationAndUserIdRequestFromDict(dict)
+}
+
 func NewPrepareDownloadByGenerationAndUserIdRequestFromDict(data map[string]interface{}) PrepareDownloadByGenerationAndUserIdRequest {
 	return PrepareDownloadByGenerationAndUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -718,6 +853,12 @@ type PrepareDownloadOwnDataRequest struct {
 	DataObjectName     *string `json:"dataObjectName"`
 }
 
+func NewPrepareDownloadOwnDataRequestFromJson(data string) PrepareDownloadOwnDataRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadOwnDataRequestFromDict(dict)
+}
+
 func NewPrepareDownloadOwnDataRequestFromDict(data map[string]interface{}) PrepareDownloadOwnDataRequest {
 	return PrepareDownloadOwnDataRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -745,6 +886,12 @@ type PrepareDownloadByUserIdAndDataObjectNameRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	DataObjectName     *string `json:"dataObjectName"`
+}
+
+func NewPrepareDownloadByUserIdAndDataObjectNameRequestFromJson(data string) PrepareDownloadByUserIdAndDataObjectNameRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadByUserIdAndDataObjectNameRequestFromDict(dict)
 }
 
 func NewPrepareDownloadByUserIdAndDataObjectNameRequestFromDict(data map[string]interface{}) PrepareDownloadByUserIdAndDataObjectNameRequest {
@@ -775,6 +922,12 @@ type PrepareDownloadOwnDataByGenerationRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	DataObjectName     *string `json:"dataObjectName"`
 	Generation         *string `json:"generation"`
+}
+
+func NewPrepareDownloadOwnDataByGenerationRequestFromJson(data string) PrepareDownloadOwnDataByGenerationRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadOwnDataByGenerationRequestFromDict(dict)
 }
 
 func NewPrepareDownloadOwnDataByGenerationRequestFromDict(data map[string]interface{}) PrepareDownloadOwnDataByGenerationRequest {
@@ -809,6 +962,12 @@ type PrepareDownloadByUserIdAndDataObjectNameAndGenerationRequest struct {
 	Generation         *string `json:"generation"`
 }
 
+func NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationRequestFromJson(data string) PrepareDownloadByUserIdAndDataObjectNameAndGenerationRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationRequestFromDict(dict)
+}
+
 func NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationRequestFromDict(data map[string]interface{}) PrepareDownloadByUserIdAndDataObjectNameAndGenerationRequest {
 	return PrepareDownloadByUserIdAndDataObjectNameAndGenerationRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -839,6 +998,12 @@ type RestoreDataObjectRequest struct {
 	DataObjectId       *string `json:"dataObjectId"`
 }
 
+func NewRestoreDataObjectRequestFromJson(data string) RestoreDataObjectRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRestoreDataObjectRequestFromDict(dict)
+}
+
 func NewRestoreDataObjectRequestFromDict(data map[string]interface{}) RestoreDataObjectRequest {
 	return RestoreDataObjectRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -866,6 +1031,12 @@ type DescribeDataObjectHistoriesRequest struct {
 	DataObjectName     *string `json:"dataObjectName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeDataObjectHistoriesRequestFromJson(data string) DescribeDataObjectHistoriesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDataObjectHistoriesRequestFromDict(dict)
 }
 
 func NewDescribeDataObjectHistoriesRequestFromDict(data map[string]interface{}) DescribeDataObjectHistoriesRequest {
@@ -903,6 +1074,12 @@ type DescribeDataObjectHistoriesByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeDataObjectHistoriesByUserIdRequestFromJson(data string) DescribeDataObjectHistoriesByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDataObjectHistoriesByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeDataObjectHistoriesByUserIdRequestFromDict(data map[string]interface{}) DescribeDataObjectHistoriesByUserIdRequest {
 	return DescribeDataObjectHistoriesByUserIdRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -937,6 +1114,12 @@ type GetDataObjectHistoryRequest struct {
 	Generation         *string `json:"generation"`
 }
 
+func NewGetDataObjectHistoryRequestFromJson(data string) GetDataObjectHistoryRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetDataObjectHistoryRequestFromDict(dict)
+}
+
 func NewGetDataObjectHistoryRequestFromDict(data map[string]interface{}) GetDataObjectHistoryRequest {
 	return GetDataObjectHistoryRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -967,6 +1150,12 @@ type GetDataObjectHistoryByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	DataObjectName     *string `json:"dataObjectName"`
 	Generation         *string `json:"generation"`
+}
+
+func NewGetDataObjectHistoryByUserIdRequestFromJson(data string) GetDataObjectHistoryByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetDataObjectHistoryByUserIdRequestFromDict(dict)
 }
 
 func NewGetDataObjectHistoryByUserIdRequestFromDict(data map[string]interface{}) GetDataObjectHistoryByUserIdRequest {

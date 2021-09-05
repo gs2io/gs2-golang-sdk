@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package project
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type CreateAccountResult struct {
 	Item *Account `json:"item"`
@@ -25,6 +28,12 @@ type CreateAccountResult struct {
 type CreateAccountAsyncResult struct {
 	result *CreateAccountResult
 	err    error
+}
+
+func NewCreateAccountResultFromJson(data string) CreateAccountResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateAccountResultFromDict(dict)
 }
 
 func NewCreateAccountResultFromDict(data map[string]interface{}) CreateAccountResult {
@@ -52,6 +61,12 @@ type VerifyAsyncResult struct {
 	err    error
 }
 
+func NewVerifyResultFromJson(data string) VerifyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyResultFromDict(dict)
+}
+
 func NewVerifyResultFromDict(data map[string]interface{}) VerifyResult {
 	return VerifyResult{
 		Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
@@ -76,6 +91,12 @@ type SignInResult struct {
 type SignInAsyncResult struct {
 	result *SignInResult
 	err    error
+}
+
+func NewSignInResultFromJson(data string) SignInResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSignInResultFromDict(dict)
 }
 
 func NewSignInResultFromDict(data map[string]interface{}) SignInResult {
@@ -105,6 +126,12 @@ type IssueAccountTokenAsyncResult struct {
 	err    error
 }
 
+func NewIssueAccountTokenResultFromJson(data string) IssueAccountTokenResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIssueAccountTokenResultFromDict(dict)
+}
+
 func NewIssueAccountTokenResultFromDict(data map[string]interface{}) IssueAccountTokenResult {
 	return IssueAccountTokenResult{
 		AccountToken: core.CastString(data["accountToken"]),
@@ -128,6 +155,12 @@ type ForgetResult struct {
 type ForgetAsyncResult struct {
 	result *ForgetResult
 	err    error
+}
+
+func NewForgetResultFromJson(data string) ForgetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewForgetResultFromDict(dict)
 }
 
 func NewForgetResultFromDict(data map[string]interface{}) ForgetResult {
@@ -155,6 +188,12 @@ type IssuePasswordAsyncResult struct {
 	err    error
 }
 
+func NewIssuePasswordResultFromJson(data string) IssuePasswordResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIssuePasswordResultFromDict(dict)
+}
+
 func NewIssuePasswordResultFromDict(data map[string]interface{}) IssuePasswordResult {
 	return IssuePasswordResult{
 		NewPassword: core.CastString(data["newPassword"]),
@@ -178,6 +217,12 @@ type UpdateAccountResult struct {
 type UpdateAccountAsyncResult struct {
 	result *UpdateAccountResult
 	err    error
+}
+
+func NewUpdateAccountResultFromJson(data string) UpdateAccountResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateAccountResultFromDict(dict)
 }
 
 func NewUpdateAccountResultFromDict(data map[string]interface{}) UpdateAccountResult {
@@ -204,6 +249,12 @@ type DeleteAccountAsyncResult struct {
 	err    error
 }
 
+func NewDeleteAccountResultFromJson(data string) DeleteAccountResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteAccountResultFromDict(dict)
+}
+
 func NewDeleteAccountResultFromDict(data map[string]interface{}) DeleteAccountResult {
 	return DeleteAccountResult{}
 }
@@ -224,6 +275,12 @@ type DescribeProjectsResult struct {
 type DescribeProjectsAsyncResult struct {
 	result *DescribeProjectsResult
 	err    error
+}
+
+func NewDescribeProjectsResultFromJson(data string) DescribeProjectsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeProjectsResultFromDict(dict)
 }
 
 func NewDescribeProjectsResultFromDict(data map[string]interface{}) DescribeProjectsResult {
@@ -255,6 +312,12 @@ type CreateProjectAsyncResult struct {
 	err    error
 }
 
+func NewCreateProjectResultFromJson(data string) CreateProjectResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateProjectResultFromDict(dict)
+}
+
 func NewCreateProjectResultFromDict(data map[string]interface{}) CreateProjectResult {
 	return CreateProjectResult{
 		Item: NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
@@ -278,6 +341,12 @@ type GetProjectResult struct {
 type GetProjectAsyncResult struct {
 	result *GetProjectResult
 	err    error
+}
+
+func NewGetProjectResultFromJson(data string) GetProjectResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetProjectResultFromDict(dict)
 }
 
 func NewGetProjectResultFromDict(data map[string]interface{}) GetProjectResult {
@@ -305,6 +374,12 @@ type GetProjectTokenResult struct {
 type GetProjectTokenAsyncResult struct {
 	result *GetProjectTokenResult
 	err    error
+}
+
+func NewGetProjectTokenResultFromJson(data string) GetProjectTokenResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetProjectTokenResultFromDict(dict)
 }
 
 func NewGetProjectTokenResultFromDict(data map[string]interface{}) GetProjectTokenResult {
@@ -338,6 +413,12 @@ type GetProjectTokenByIdentifierAsyncResult struct {
 	err    error
 }
 
+func NewGetProjectTokenByIdentifierResultFromJson(data string) GetProjectTokenByIdentifierResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetProjectTokenByIdentifierResultFromDict(dict)
+}
+
 func NewGetProjectTokenByIdentifierResultFromDict(data map[string]interface{}) GetProjectTokenByIdentifierResult {
 	return GetProjectTokenByIdentifierResult{
 		Item:         NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
@@ -367,6 +448,12 @@ type UpdateProjectAsyncResult struct {
 	err    error
 }
 
+func NewUpdateProjectResultFromJson(data string) UpdateProjectResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateProjectResultFromDict(dict)
+}
+
 func NewUpdateProjectResultFromDict(data map[string]interface{}) UpdateProjectResult {
 	return UpdateProjectResult{
 		Item: NewProjectFromDict(core.CastMap(data["item"])).Pointer(),
@@ -390,6 +477,12 @@ type DeleteProjectResult struct {
 type DeleteProjectAsyncResult struct {
 	result *DeleteProjectResult
 	err    error
+}
+
+func NewDeleteProjectResultFromJson(data string) DeleteProjectResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteProjectResultFromDict(dict)
 }
 
 func NewDeleteProjectResultFromDict(data map[string]interface{}) DeleteProjectResult {
@@ -416,6 +509,12 @@ type DescribeBillingMethodsResult struct {
 type DescribeBillingMethodsAsyncResult struct {
 	result *DescribeBillingMethodsResult
 	err    error
+}
+
+func NewDescribeBillingMethodsResultFromJson(data string) DescribeBillingMethodsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeBillingMethodsResultFromDict(dict)
 }
 
 func NewDescribeBillingMethodsResultFromDict(data map[string]interface{}) DescribeBillingMethodsResult {
@@ -447,6 +546,12 @@ type CreateBillingMethodAsyncResult struct {
 	err    error
 }
 
+func NewCreateBillingMethodResultFromJson(data string) CreateBillingMethodResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateBillingMethodResultFromDict(dict)
+}
+
 func NewCreateBillingMethodResultFromDict(data map[string]interface{}) CreateBillingMethodResult {
 	return CreateBillingMethodResult{
 		Item: NewBillingMethodFromDict(core.CastMap(data["item"])).Pointer(),
@@ -470,6 +575,12 @@ type GetBillingMethodResult struct {
 type GetBillingMethodAsyncResult struct {
 	result *GetBillingMethodResult
 	err    error
+}
+
+func NewGetBillingMethodResultFromJson(data string) GetBillingMethodResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetBillingMethodResultFromDict(dict)
 }
 
 func NewGetBillingMethodResultFromDict(data map[string]interface{}) GetBillingMethodResult {
@@ -497,6 +608,12 @@ type UpdateBillingMethodAsyncResult struct {
 	err    error
 }
 
+func NewUpdateBillingMethodResultFromJson(data string) UpdateBillingMethodResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateBillingMethodResultFromDict(dict)
+}
+
 func NewUpdateBillingMethodResultFromDict(data map[string]interface{}) UpdateBillingMethodResult {
 	return UpdateBillingMethodResult{
 		Item: NewBillingMethodFromDict(core.CastMap(data["item"])).Pointer(),
@@ -520,6 +637,12 @@ type DeleteBillingMethodResult struct {
 type DeleteBillingMethodAsyncResult struct {
 	result *DeleteBillingMethodResult
 	err    error
+}
+
+func NewDeleteBillingMethodResultFromJson(data string) DeleteBillingMethodResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteBillingMethodResultFromDict(dict)
 }
 
 func NewDeleteBillingMethodResultFromDict(data map[string]interface{}) DeleteBillingMethodResult {
@@ -546,6 +669,12 @@ type DescribeReceiptsResult struct {
 type DescribeReceiptsAsyncResult struct {
 	result *DescribeReceiptsResult
 	err    error
+}
+
+func NewDescribeReceiptsResultFromJson(data string) DescribeReceiptsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeReceiptsResultFromDict(dict)
 }
 
 func NewDescribeReceiptsResultFromDict(data map[string]interface{}) DescribeReceiptsResult {
@@ -575,6 +704,12 @@ type DescribeBillingsResult struct {
 type DescribeBillingsAsyncResult struct {
 	result *DescribeBillingsResult
 	err    error
+}
+
+func NewDescribeBillingsResultFromJson(data string) DescribeBillingsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeBillingsResultFromDict(dict)
 }
 
 func NewDescribeBillingsResultFromDict(data map[string]interface{}) DescribeBillingsResult {

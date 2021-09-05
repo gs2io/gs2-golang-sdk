@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package ranking
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId       *string        `json:"namespaceId"`
@@ -26,6 +29,12 @@ type Namespace struct {
 	LogSetting        *LogSetting    `json:"logSetting"`
 	CreatedAt         *int64         `json:"createdAt"`
 	UpdatedAt         *int64         `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -89,6 +98,12 @@ type CategoryModel struct {
 	EntryPeriodEventId         *string `json:"entryPeriodEventId"`
 	AccessPeriodEventId        *string `json:"accessPeriodEventId"`
 	Generation                 *string `json:"generation"`
+}
+
+func NewCategoryModelFromJson(data string) CategoryModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCategoryModelFromDict(dict)
 }
 
 func NewCategoryModelFromDict(data map[string]interface{}) CategoryModel {
@@ -169,6 +184,12 @@ type CategoryModelMaster struct {
 	UpdatedAt                  *int64  `json:"updatedAt"`
 }
 
+func NewCategoryModelMasterFromJson(data string) CategoryModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCategoryModelMasterFromDict(dict)
+}
+
 func NewCategoryModelMasterFromDict(data map[string]interface{}) CategoryModelMaster {
 	return CategoryModelMaster{
 		CategoryModelId:            core.CastString(data["categoryModelId"]),
@@ -241,6 +262,12 @@ type Subscribe struct {
 	CreatedAt     *int64   `json:"createdAt"`
 }
 
+func NewSubscribeFromJson(data string) Subscribe {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSubscribeFromDict(dict)
+}
+
 func NewSubscribeFromDict(data map[string]interface{}) Subscribe {
 	return Subscribe{
 		SubscribeId:   core.CastString(data["subscribeId"]),
@@ -292,6 +319,12 @@ type Score struct {
 	Score        *int64  `json:"score"`
 	Metadata     *string `json:"metadata"`
 	CreatedAt    *int64  `json:"createdAt"`
+}
+
+func NewScoreFromJson(data string) Score {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScoreFromDict(dict)
 }
 
 func NewScoreFromDict(data map[string]interface{}) Score {
@@ -349,6 +382,12 @@ type Ranking struct {
 	CreatedAt *int64  `json:"createdAt"`
 }
 
+func NewRankingFromJson(data string) Ranking {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRankingFromDict(dict)
+}
+
 func NewRankingFromDict(data map[string]interface{}) Ranking {
 	return Ranking{
 		Rank:      core.CastInt64(data["rank"]),
@@ -396,6 +435,12 @@ type CurrentRankingMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentRankingMasterFromJson(data string) CurrentRankingMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentRankingMasterFromDict(dict)
+}
+
 func NewCurrentRankingMasterFromDict(data map[string]interface{}) CurrentRankingMaster {
 	return CurrentRankingMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -433,6 +478,12 @@ func CastCurrentRankingMastersFromDict(data []CurrentRankingMaster) []interface{
 type CalculatedAt struct {
 	CategoryName *string `json:"categoryName"`
 	CalculatedAt *int64  `json:"calculatedAt"`
+}
+
+func NewCalculatedAtFromJson(data string) CalculatedAt {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCalculatedAtFromDict(dict)
 }
 
 func NewCalculatedAtFromDict(data map[string]interface{}) CalculatedAt {
@@ -473,6 +524,12 @@ type SubscribeUser struct {
 	CategoryName *string `json:"categoryName"`
 	UserId       *string `json:"userId"`
 	TargetUserId *string `json:"targetUserId"`
+}
+
+func NewSubscribeUserFromJson(data string) SubscribeUser {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSubscribeUserFromDict(dict)
 }
 
 func NewSubscribeUserFromDict(data map[string]interface{}) SubscribeUser {
@@ -521,6 +578,12 @@ type GitHubCheckoutSetting struct {
 	TagName        *string `json:"tagName"`
 }
 
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
+}
+
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
 		ApiKeyId:       core.CastString(data["apiKeyId"]),
@@ -567,6 +630,12 @@ func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interfac
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package friend
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId                *string              `json:"namespaceId"`
@@ -36,6 +39,12 @@ type Namespace struct {
 	LogSetting                 *LogSetting          `json:"logSetting"`
 	CreatedAt                  *int64               `json:"createdAt"`
 	UpdatedAt                  *int64               `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -112,6 +121,12 @@ type Profile struct {
 	UpdatedAt       *int64  `json:"updatedAt"`
 }
 
+func NewProfileFromJson(data string) Profile {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewProfileFromDict(dict)
+}
+
 func NewProfileFromDict(data map[string]interface{}) Profile {
 	return Profile{
 		ProfileId:       core.CastString(data["profileId"]),
@@ -164,6 +179,12 @@ type Follow struct {
 	UpdatedAt     *int64   `json:"updatedAt"`
 }
 
+func NewFollowFromJson(data string) Follow {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFollowFromDict(dict)
+}
+
 func NewFollowFromDict(data map[string]interface{}) Follow {
 	return Follow{
 		FollowId:      core.CastString(data["followId"]),
@@ -212,6 +233,12 @@ type Friend struct {
 	TargetUserIds []string `json:"targetUserIds"`
 	CreatedAt     *int64   `json:"createdAt"`
 	UpdatedAt     *int64   `json:"updatedAt"`
+}
+
+func NewFriendFromJson(data string) Friend {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFriendFromDict(dict)
 }
 
 func NewFriendFromDict(data map[string]interface{}) Friend {
@@ -264,6 +291,12 @@ type SendBox struct {
 	UpdatedAt     *int64   `json:"updatedAt"`
 }
 
+func NewSendBoxFromJson(data string) SendBox {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSendBoxFromDict(dict)
+}
+
 func NewSendBoxFromDict(data map[string]interface{}) SendBox {
 	return SendBox{
 		SendBoxId:     core.CastString(data["sendBoxId"]),
@@ -312,6 +345,12 @@ type Inbox struct {
 	FromUserIds []string `json:"fromUserIds"`
 	CreatedAt   *int64   `json:"createdAt"`
 	UpdatedAt   *int64   `json:"updatedAt"`
+}
+
+func NewInboxFromJson(data string) Inbox {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewInboxFromDict(dict)
 }
 
 func NewInboxFromDict(data map[string]interface{}) Inbox {
@@ -364,6 +403,12 @@ type BlackList struct {
 	UpdatedAt     *int64   `json:"updatedAt"`
 }
 
+func NewBlackListFromJson(data string) BlackList {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBlackListFromDict(dict)
+}
+
 func NewBlackListFromDict(data map[string]interface{}) BlackList {
 	return BlackList{
 		BlackListId:   core.CastString(data["blackListId"]),
@@ -412,6 +457,12 @@ type FollowUser struct {
 	FollowerProfile *string `json:"followerProfile"`
 }
 
+func NewFollowUserFromJson(data string) FollowUser {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFollowUserFromDict(dict)
+}
+
 func NewFollowUserFromDict(data map[string]interface{}) FollowUser {
 	return FollowUser{
 		UserId:          core.CastString(data["userId"]),
@@ -452,6 +503,12 @@ type FriendUser struct {
 	UserId        *string `json:"userId"`
 	PublicProfile *string `json:"publicProfile"`
 	FriendProfile *string `json:"friendProfile"`
+}
+
+func NewFriendUserFromJson(data string) FriendUser {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFriendUserFromDict(dict)
 }
 
 func NewFriendUserFromDict(data map[string]interface{}) FriendUser {
@@ -495,6 +552,12 @@ type FriendRequest struct {
 	TargetUserId *string `json:"targetUserId"`
 }
 
+func NewFriendRequestFromJson(data string) FriendRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFriendRequestFromDict(dict)
+}
+
 func NewFriendRequestFromDict(data map[string]interface{}) FriendRequest {
 	return FriendRequest{
 		UserId:       core.CastString(data["userId"]),
@@ -532,6 +595,12 @@ func CastFriendRequestsFromDict(data []FriendRequest) []interface{} {
 type PublicProfile struct {
 	UserId        *string `json:"userId"`
 	PublicProfile *string `json:"publicProfile"`
+}
+
+func NewPublicProfileFromJson(data string) PublicProfile {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPublicProfileFromDict(dict)
 }
 
 func NewPublicProfileFromDict(data map[string]interface{}) PublicProfile {
@@ -573,6 +642,12 @@ type ScriptSetting struct {
 	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
 	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
+}
+
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
 }
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
@@ -619,6 +694,12 @@ type NotificationSetting struct {
 	Sound                            *string `json:"sound"`
 }
 
+func NewNotificationSettingFromJson(data string) NotificationSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNotificationSettingFromDict(dict)
+}
+
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
 	return NotificationSetting{
 		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
@@ -657,6 +738,12 @@ func CastNotificationSettingsFromDict(data []NotificationSetting) []interface{} 
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

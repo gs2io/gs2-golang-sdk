@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package datastore
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId      *string        `json:"namespaceId"`
@@ -26,6 +29,12 @@ type Namespace struct {
 	LogSetting       *LogSetting    `json:"logSetting"`
 	CreatedAt        *int64         `json:"createdAt"`
 	UpdatedAt        *int64         `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -79,6 +88,12 @@ type ScriptSetting struct {
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
+}
+
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
 		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
@@ -128,6 +143,12 @@ type DataObject struct {
 	PreviousGeneration *string  `json:"previousGeneration"`
 	CreatedAt          *int64   `json:"createdAt"`
 	UpdatedAt          *int64   `json:"updatedAt"`
+}
+
+func NewDataObjectFromJson(data string) DataObject {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDataObjectFromDict(dict)
 }
 
 func NewDataObjectFromDict(data map[string]interface{}) DataObject {
@@ -190,6 +211,12 @@ type DataObjectHistory struct {
 	CreatedAt           *int64  `json:"createdAt"`
 }
 
+func NewDataObjectHistoryFromJson(data string) DataObjectHistory {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDataObjectHistoryFromDict(dict)
+}
+
 func NewDataObjectHistoryFromDict(data map[string]interface{}) DataObjectHistory {
 	return DataObjectHistory{
 		DataObjectHistoryId: core.CastString(data["dataObjectHistoryId"]),
@@ -232,6 +259,12 @@ func CastDataObjectHistoriesFromDict(data []DataObjectHistory) []interface{} {
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

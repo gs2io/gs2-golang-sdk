@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package realtime
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId        *string              `json:"namespaceId"`
@@ -28,6 +31,12 @@ type Namespace struct {
 	LogSetting         *LogSetting          `json:"logSetting"`
 	CreatedAt          *int64               `json:"createdAt"`
 	UpdatedAt          *int64               `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -89,6 +98,12 @@ type Room struct {
 	UpdatedAt           *int64   `json:"updatedAt"`
 }
 
+func NewRoomFromJson(data string) Room {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRoomFromDict(dict)
+}
+
 func NewRoomFromDict(data map[string]interface{}) Room {
 	return Room{
 		RoomId:              core.CastString(data["roomId"]),
@@ -143,6 +158,12 @@ type NotificationSetting struct {
 	Sound                            *string `json:"sound"`
 }
 
+func NewNotificationSettingFromJson(data string) NotificationSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNotificationSettingFromDict(dict)
+}
+
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
 	return NotificationSetting{
 		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
@@ -181,6 +202,12 @@ func CastNotificationSettingsFromDict(data []NotificationSetting) []interface{} 
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

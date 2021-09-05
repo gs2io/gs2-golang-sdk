@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package money
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId        *string        `json:"namespaceId"`
@@ -35,6 +38,12 @@ type Namespace struct {
 	LogSetting         *LogSetting    `json:"logSetting"`
 	CreatedAt          *int64         `json:"createdAt"`
 	UpdatedAt          *int64         `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -110,6 +119,12 @@ type Wallet struct {
 	UpdatedAt *int64         `json:"updatedAt"`
 }
 
+func NewWalletFromJson(data string) Wallet {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewWalletFromDict(dict)
+}
+
 func NewWalletFromDict(data map[string]interface{}) Wallet {
 	return Wallet{
 		WalletId:  core.CastString(data["walletId"]),
@@ -172,6 +187,12 @@ type Receipt struct {
 	CreatedAt     *int64   `json:"createdAt"`
 }
 
+func NewReceiptFromJson(data string) Receipt {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewReceiptFromDict(dict)
+}
+
 func NewReceiptFromDict(data map[string]interface{}) Receipt {
 	return Receipt{
 		ReceiptId:     core.CastString(data["receiptId"]),
@@ -229,6 +250,12 @@ type WalletDetail struct {
 	Count *int32   `json:"count"`
 }
 
+func NewWalletDetailFromJson(data string) WalletDetail {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewWalletDetailFromDict(dict)
+}
+
 func NewWalletDetailFromDict(data map[string]interface{}) WalletDetail {
 	return WalletDetail{
 		Price: core.CastFloat32(data["price"]),
@@ -268,6 +295,12 @@ type ScriptSetting struct {
 	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
 	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
+}
+
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
 }
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
@@ -310,6 +343,12 @@ func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

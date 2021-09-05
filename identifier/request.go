@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package identifier
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeUsersRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeUsersRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeUsersRequestFromJson(data string) DescribeUsersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeUsersRequestFromDict(dict)
 }
 
 func NewDescribeUsersRequestFromDict(data map[string]interface{}) DescribeUsersRequest {
@@ -52,6 +61,12 @@ type CreateUserRequest struct {
 	Description        *string `json:"description"`
 }
 
+func NewCreateUserRequestFromJson(data string) CreateUserRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateUserRequestFromDict(dict)
+}
+
 func NewCreateUserRequestFromDict(data map[string]interface{}) CreateUserRequest {
 	return CreateUserRequest{
 		Name:        core.CastString(data["name"]),
@@ -76,6 +91,12 @@ type UpdateUserRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserName           *string `json:"userName"`
 	Description        *string `json:"description"`
+}
+
+func NewUpdateUserRequestFromJson(data string) UpdateUserRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateUserRequestFromDict(dict)
 }
 
 func NewUpdateUserRequestFromDict(data map[string]interface{}) UpdateUserRequest {
@@ -103,6 +124,12 @@ type GetUserRequest struct {
 	UserName           *string `json:"userName"`
 }
 
+func NewGetUserRequestFromJson(data string) GetUserRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetUserRequestFromDict(dict)
+}
+
 func NewGetUserRequestFromDict(data map[string]interface{}) GetUserRequest {
 	return GetUserRequest{
 		UserName: core.CastString(data["userName"]),
@@ -124,6 +151,12 @@ type DeleteUserRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserName           *string `json:"userName"`
+}
+
+func NewDeleteUserRequestFromJson(data string) DeleteUserRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteUserRequestFromDict(dict)
 }
 
 func NewDeleteUserRequestFromDict(data map[string]interface{}) DeleteUserRequest {
@@ -148,6 +181,12 @@ type DescribeSecurityPoliciesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeSecurityPoliciesRequestFromJson(data string) DescribeSecurityPoliciesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSecurityPoliciesRequestFromDict(dict)
 }
 
 func NewDescribeSecurityPoliciesRequestFromDict(data map[string]interface{}) DescribeSecurityPoliciesRequest {
@@ -176,6 +215,12 @@ type DescribeCommonSecurityPoliciesRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeCommonSecurityPoliciesRequestFromJson(data string) DescribeCommonSecurityPoliciesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeCommonSecurityPoliciesRequestFromDict(dict)
+}
+
 func NewDescribeCommonSecurityPoliciesRequestFromDict(data map[string]interface{}) DescribeCommonSecurityPoliciesRequest {
 	return DescribeCommonSecurityPoliciesRequest{
 		PageToken: core.CastString(data["pageToken"]),
@@ -201,6 +246,12 @@ type CreateSecurityPolicyRequest struct {
 	Name               *string `json:"name"`
 	Description        *string `json:"description"`
 	Policy             *string `json:"policy"`
+}
+
+func NewCreateSecurityPolicyRequestFromJson(data string) CreateSecurityPolicyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateSecurityPolicyRequestFromDict(dict)
 }
 
 func NewCreateSecurityPolicyRequestFromDict(data map[string]interface{}) CreateSecurityPolicyRequest {
@@ -232,6 +283,12 @@ type UpdateSecurityPolicyRequest struct {
 	Policy             *string `json:"policy"`
 }
 
+func NewUpdateSecurityPolicyRequestFromJson(data string) UpdateSecurityPolicyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateSecurityPolicyRequestFromDict(dict)
+}
+
 func NewUpdateSecurityPolicyRequestFromDict(data map[string]interface{}) UpdateSecurityPolicyRequest {
 	return UpdateSecurityPolicyRequest{
 		SecurityPolicyName: core.CastString(data["securityPolicyName"]),
@@ -259,6 +316,12 @@ type GetSecurityPolicyRequest struct {
 	SecurityPolicyName *string `json:"securityPolicyName"`
 }
 
+func NewGetSecurityPolicyRequestFromJson(data string) GetSecurityPolicyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSecurityPolicyRequestFromDict(dict)
+}
+
 func NewGetSecurityPolicyRequestFromDict(data map[string]interface{}) GetSecurityPolicyRequest {
 	return GetSecurityPolicyRequest{
 		SecurityPolicyName: core.CastString(data["securityPolicyName"]),
@@ -280,6 +343,12 @@ type DeleteSecurityPolicyRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	SecurityPolicyName *string `json:"securityPolicyName"`
+}
+
+func NewDeleteSecurityPolicyRequestFromJson(data string) DeleteSecurityPolicyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteSecurityPolicyRequestFromDict(dict)
 }
 
 func NewDeleteSecurityPolicyRequestFromDict(data map[string]interface{}) DeleteSecurityPolicyRequest {
@@ -305,6 +374,12 @@ type DescribeIdentifiersRequest struct {
 	UserName           *string `json:"userName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeIdentifiersRequestFromJson(data string) DescribeIdentifiersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeIdentifiersRequestFromDict(dict)
 }
 
 func NewDescribeIdentifiersRequestFromDict(data map[string]interface{}) DescribeIdentifiersRequest {
@@ -334,6 +409,12 @@ type CreateIdentifierRequest struct {
 	UserName           *string `json:"userName"`
 }
 
+func NewCreateIdentifierRequestFromJson(data string) CreateIdentifierRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateIdentifierRequestFromDict(dict)
+}
+
 func NewCreateIdentifierRequestFromDict(data map[string]interface{}) CreateIdentifierRequest {
 	return CreateIdentifierRequest{
 		UserName: core.CastString(data["userName"]),
@@ -356,6 +437,12 @@ type GetIdentifierRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserName           *string `json:"userName"`
 	ClientId           *string `json:"clientId"`
+}
+
+func NewGetIdentifierRequestFromJson(data string) GetIdentifierRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetIdentifierRequestFromDict(dict)
 }
 
 func NewGetIdentifierRequestFromDict(data map[string]interface{}) GetIdentifierRequest {
@@ -384,6 +471,12 @@ type DeleteIdentifierRequest struct {
 	ClientId           *string `json:"clientId"`
 }
 
+func NewDeleteIdentifierRequestFromJson(data string) DeleteIdentifierRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteIdentifierRequestFromDict(dict)
+}
+
 func NewDeleteIdentifierRequestFromDict(data map[string]interface{}) DeleteIdentifierRequest {
 	return DeleteIdentifierRequest{
 		UserName: core.CastString(data["userName"]),
@@ -409,6 +502,12 @@ type DescribePasswordsRequest struct {
 	UserName           *string `json:"userName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribePasswordsRequestFromJson(data string) DescribePasswordsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribePasswordsRequestFromDict(dict)
 }
 
 func NewDescribePasswordsRequestFromDict(data map[string]interface{}) DescribePasswordsRequest {
@@ -439,6 +538,12 @@ type CreatePasswordRequest struct {
 	Password           *string `json:"password"`
 }
 
+func NewCreatePasswordRequestFromJson(data string) CreatePasswordRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreatePasswordRequestFromDict(dict)
+}
+
 func NewCreatePasswordRequestFromDict(data map[string]interface{}) CreatePasswordRequest {
 	return CreatePasswordRequest{
 		UserName: core.CastString(data["userName"]),
@@ -464,6 +569,12 @@ type GetPasswordRequest struct {
 	UserName           *string `json:"userName"`
 }
 
+func NewGetPasswordRequestFromJson(data string) GetPasswordRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetPasswordRequestFromDict(dict)
+}
+
 func NewGetPasswordRequestFromDict(data map[string]interface{}) GetPasswordRequest {
 	return GetPasswordRequest{
 		UserName: core.CastString(data["userName"]),
@@ -485,6 +596,12 @@ type DeletePasswordRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserName           *string `json:"userName"`
+}
+
+func NewDeletePasswordRequestFromJson(data string) DeletePasswordRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeletePasswordRequestFromDict(dict)
 }
 
 func NewDeletePasswordRequestFromDict(data map[string]interface{}) DeletePasswordRequest {
@@ -510,6 +627,12 @@ type GetHasSecurityPolicyRequest struct {
 	UserName           *string `json:"userName"`
 }
 
+func NewGetHasSecurityPolicyRequestFromJson(data string) GetHasSecurityPolicyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetHasSecurityPolicyRequestFromDict(dict)
+}
+
 func NewGetHasSecurityPolicyRequestFromDict(data map[string]interface{}) GetHasSecurityPolicyRequest {
 	return GetHasSecurityPolicyRequest{
 		UserName: core.CastString(data["userName"]),
@@ -532,6 +655,12 @@ type AttachSecurityPolicyRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserName           *string `json:"userName"`
 	SecurityPolicyId   *string `json:"securityPolicyId"`
+}
+
+func NewAttachSecurityPolicyRequestFromJson(data string) AttachSecurityPolicyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAttachSecurityPolicyRequestFromDict(dict)
 }
 
 func NewAttachSecurityPolicyRequestFromDict(data map[string]interface{}) AttachSecurityPolicyRequest {
@@ -560,6 +689,12 @@ type DetachSecurityPolicyRequest struct {
 	SecurityPolicyId   *string `json:"securityPolicyId"`
 }
 
+func NewDetachSecurityPolicyRequestFromJson(data string) DetachSecurityPolicyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDetachSecurityPolicyRequestFromDict(dict)
+}
+
 func NewDetachSecurityPolicyRequestFromDict(data map[string]interface{}) DetachSecurityPolicyRequest {
 	return DetachSecurityPolicyRequest{
 		UserName:         core.CastString(data["userName"]),
@@ -586,6 +721,12 @@ type LoginRequest struct {
 	ClientSecret       *string `json:"clientSecret"`
 }
 
+func NewLoginRequestFromJson(data string) LoginRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLoginRequestFromDict(dict)
+}
+
 func NewLoginRequestFromDict(data map[string]interface{}) LoginRequest {
 	return LoginRequest{
 		ClientId:     core.CastString(data["clientId"]),
@@ -610,6 +751,12 @@ type LoginByUserRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserName           *string `json:"userName"`
 	Password           *string `json:"password"`
+}
+
+func NewLoginByUserRequestFromJson(data string) LoginByUserRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLoginByUserRequestFromDict(dict)
 }
 
 func NewLoginByUserRequestFromDict(data map[string]interface{}) LoginByUserRequest {

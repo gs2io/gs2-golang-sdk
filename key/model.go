@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package key
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId *string     `json:"namespaceId"`
@@ -25,6 +28,12 @@ type Namespace struct {
 	LogSetting  *LogSetting `json:"logSetting"`
 	CreatedAt   *int64      `json:"createdAt"`
 	UpdatedAt   *int64      `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -77,6 +86,12 @@ type Key struct {
 	UpdatedAt   *int64  `json:"updatedAt"`
 }
 
+func NewKeyFromJson(data string) Key {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewKeyFromDict(dict)
+}
+
 func NewKeyFromDict(data map[string]interface{}) Key {
 	return Key{
 		KeyId:       core.CastString(data["keyId"]),
@@ -126,6 +141,12 @@ type GitHubApiKey struct {
 	UpdatedAt         *int64  `json:"updatedAt"`
 }
 
+func NewGitHubApiKeyFromJson(data string) GitHubApiKey {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubApiKeyFromDict(dict)
+}
+
 func NewGitHubApiKeyFromDict(data map[string]interface{}) GitHubApiKey {
 	return GitHubApiKey{
 		ApiKeyId:          core.CastString(data["apiKeyId"]),
@@ -170,6 +191,12 @@ func CastGitHubApiKeysFromDict(data []GitHubApiKey) []interface{} {
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

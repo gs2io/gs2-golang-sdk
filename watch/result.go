@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package watch
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type GetChartResult struct {
 	Item *Chart `json:"item"`
@@ -25,6 +28,12 @@ type GetChartResult struct {
 type GetChartAsyncResult struct {
 	result *GetChartResult
 	err    error
+}
+
+func NewGetChartResultFromJson(data string) GetChartResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetChartResultFromDict(dict)
 }
 
 func NewGetChartResultFromDict(data map[string]interface{}) GetChartResult {
@@ -52,6 +61,12 @@ type GetCumulativeAsyncResult struct {
 	err    error
 }
 
+func NewGetCumulativeResultFromJson(data string) GetCumulativeResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCumulativeResultFromDict(dict)
+}
+
 func NewGetCumulativeResultFromDict(data map[string]interface{}) GetCumulativeResult {
 	return GetCumulativeResult{
 		Item: NewCumulativeFromDict(core.CastMap(data["item"])).Pointer(),
@@ -76,6 +91,12 @@ type DescribeBillingActivitiesResult struct {
 type DescribeBillingActivitiesAsyncResult struct {
 	result *DescribeBillingActivitiesResult
 	err    error
+}
+
+func NewDescribeBillingActivitiesResultFromJson(data string) DescribeBillingActivitiesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeBillingActivitiesResultFromDict(dict)
 }
 
 func NewDescribeBillingActivitiesResultFromDict(data map[string]interface{}) DescribeBillingActivitiesResult {
@@ -105,6 +126,12 @@ type GetBillingActivityResult struct {
 type GetBillingActivityAsyncResult struct {
 	result *GetBillingActivityResult
 	err    error
+}
+
+func NewGetBillingActivityResultFromJson(data string) GetBillingActivityResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetBillingActivityResultFromDict(dict)
 }
 
 func NewGetBillingActivityResultFromDict(data map[string]interface{}) GetBillingActivityResult {

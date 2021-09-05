@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package gateway
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -130,6 +157,12 @@ type UpdateNamespaceResult struct {
 type UpdateNamespaceAsyncResult struct {
 	result *UpdateNamespaceResult
 	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
@@ -156,6 +189,12 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{}
 }
@@ -176,6 +215,12 @@ type DescribeWebSocketSessionsResult struct {
 type DescribeWebSocketSessionsAsyncResult struct {
 	result *DescribeWebSocketSessionsResult
 	err    error
+}
+
+func NewDescribeWebSocketSessionsResultFromJson(data string) DescribeWebSocketSessionsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeWebSocketSessionsResultFromDict(dict)
 }
 
 func NewDescribeWebSocketSessionsResultFromDict(data map[string]interface{}) DescribeWebSocketSessionsResult {
@@ -208,6 +253,12 @@ type DescribeWebSocketSessionsByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeWebSocketSessionsByUserIdResultFromJson(data string) DescribeWebSocketSessionsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeWebSocketSessionsByUserIdResultFromDict(dict)
+}
+
 func NewDescribeWebSocketSessionsByUserIdResultFromDict(data map[string]interface{}) DescribeWebSocketSessionsByUserIdResult {
 	return DescribeWebSocketSessionsByUserIdResult{
 		Items:         CastWebSocketSessions(core.CastArray(data["items"])),
@@ -237,6 +288,12 @@ type SetUserIdAsyncResult struct {
 	err    error
 }
 
+func NewSetUserIdResultFromJson(data string) SetUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetUserIdResultFromDict(dict)
+}
+
 func NewSetUserIdResultFromDict(data map[string]interface{}) SetUserIdResult {
 	return SetUserIdResult{
 		Item: NewWebSocketSessionFromDict(core.CastMap(data["item"])).Pointer(),
@@ -260,6 +317,12 @@ type SetUserIdByUserIdResult struct {
 type SetUserIdByUserIdAsyncResult struct {
 	result *SetUserIdByUserIdResult
 	err    error
+}
+
+func NewSetUserIdByUserIdResultFromJson(data string) SetUserIdByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetUserIdByUserIdResultFromDict(dict)
 }
 
 func NewSetUserIdByUserIdResultFromDict(data map[string]interface{}) SetUserIdByUserIdResult {
@@ -287,6 +350,12 @@ type SendNotificationAsyncResult struct {
 	err    error
 }
 
+func NewSendNotificationResultFromJson(data string) SendNotificationResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSendNotificationResultFromDict(dict)
+}
+
 func NewSendNotificationResultFromDict(data map[string]interface{}) SendNotificationResult {
 	return SendNotificationResult{
 		Protocol: core.CastString(data["protocol"]),
@@ -310,6 +379,12 @@ type SetFirebaseTokenResult struct {
 type SetFirebaseTokenAsyncResult struct {
 	result *SetFirebaseTokenResult
 	err    error
+}
+
+func NewSetFirebaseTokenResultFromJson(data string) SetFirebaseTokenResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetFirebaseTokenResultFromDict(dict)
 }
 
 func NewSetFirebaseTokenResultFromDict(data map[string]interface{}) SetFirebaseTokenResult {
@@ -337,6 +412,12 @@ type SetFirebaseTokenByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewSetFirebaseTokenByUserIdResultFromJson(data string) SetFirebaseTokenByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetFirebaseTokenByUserIdResultFromDict(dict)
+}
+
 func NewSetFirebaseTokenByUserIdResultFromDict(data map[string]interface{}) SetFirebaseTokenByUserIdResult {
 	return SetFirebaseTokenByUserIdResult{
 		Item: NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer(),
@@ -360,6 +441,12 @@ type GetFirebaseTokenResult struct {
 type GetFirebaseTokenAsyncResult struct {
 	result *GetFirebaseTokenResult
 	err    error
+}
+
+func NewGetFirebaseTokenResultFromJson(data string) GetFirebaseTokenResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFirebaseTokenResultFromDict(dict)
 }
 
 func NewGetFirebaseTokenResultFromDict(data map[string]interface{}) GetFirebaseTokenResult {
@@ -387,6 +474,12 @@ type GetFirebaseTokenByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewGetFirebaseTokenByUserIdResultFromJson(data string) GetFirebaseTokenByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFirebaseTokenByUserIdResultFromDict(dict)
+}
+
 func NewGetFirebaseTokenByUserIdResultFromDict(data map[string]interface{}) GetFirebaseTokenByUserIdResult {
 	return GetFirebaseTokenByUserIdResult{
 		Item: NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer(),
@@ -410,6 +503,12 @@ type DeleteFirebaseTokenResult struct {
 type DeleteFirebaseTokenAsyncResult struct {
 	result *DeleteFirebaseTokenResult
 	err    error
+}
+
+func NewDeleteFirebaseTokenResultFromJson(data string) DeleteFirebaseTokenResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteFirebaseTokenResultFromDict(dict)
 }
 
 func NewDeleteFirebaseTokenResultFromDict(data map[string]interface{}) DeleteFirebaseTokenResult {
@@ -437,6 +536,12 @@ type DeleteFirebaseTokenByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDeleteFirebaseTokenByUserIdResultFromJson(data string) DeleteFirebaseTokenByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteFirebaseTokenByUserIdResultFromDict(dict)
+}
+
 func NewDeleteFirebaseTokenByUserIdResultFromDict(data map[string]interface{}) DeleteFirebaseTokenByUserIdResult {
 	return DeleteFirebaseTokenByUserIdResult{
 		Item: NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer(),
@@ -459,6 +564,12 @@ type SendMobileNotificationByUserIdResult struct {
 type SendMobileNotificationByUserIdAsyncResult struct {
 	result *SendMobileNotificationByUserIdResult
 	err    error
+}
+
+func NewSendMobileNotificationByUserIdResultFromJson(data string) SendMobileNotificationByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSendMobileNotificationByUserIdResultFromDict(dict)
 }
 
 func NewSendMobileNotificationByUserIdResultFromDict(data map[string]interface{}) SendMobileNotificationByUserIdResult {

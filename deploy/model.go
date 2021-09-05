@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package deploy
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Stack struct {
 	StackId     *string `json:"stackId"`
@@ -26,6 +29,12 @@ type Stack struct {
 	Status      *string `json:"status"`
 	CreatedAt   *int64  `json:"createdAt"`
 	UpdatedAt   *int64  `json:"updatedAt"`
+}
+
+func NewStackFromJson(data string) Stack {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewStackFromDict(dict)
 }
 
 func NewStackFromDict(data map[string]interface{}) Stack {
@@ -84,6 +93,12 @@ type Resource struct {
 	OutputFields    []OutputField `json:"outputFields"`
 	WorkId          *string       `json:"workId"`
 	CreatedAt       *int64        `json:"createdAt"`
+}
+
+func NewResourceFromJson(data string) Resource {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewResourceFromDict(dict)
 }
 
 func NewResourceFromDict(data map[string]interface{}) Resource {
@@ -151,6 +166,12 @@ type Event struct {
 	EventAt      *int64  `json:"eventAt"`
 }
 
+func NewEventFromJson(data string) Event {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEventFromDict(dict)
+}
+
 func NewEventFromDict(data map[string]interface{}) Event {
 	return Event{
 		EventId:      core.CastString(data["eventId"]),
@@ -198,6 +219,12 @@ type Output struct {
 	Name      *string `json:"name"`
 	Value     *string `json:"value"`
 	CreatedAt *int64  `json:"createdAt"`
+}
+
+func NewOutputFromJson(data string) Output {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewOutputFromDict(dict)
 }
 
 func NewOutputFromDict(data map[string]interface{}) Output {
@@ -248,6 +275,12 @@ type GitHubCheckoutSetting struct {
 	TagName        *string `json:"tagName"`
 }
 
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
+}
+
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
 		ApiKeyId:       core.CastString(data["apiKeyId"]),
@@ -295,6 +328,12 @@ func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interfac
 type OutputField struct {
 	Name      *string `json:"name"`
 	FieldName *string `json:"fieldName"`
+}
+
+func NewOutputFieldFromJson(data string) OutputField {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewOutputFieldFromDict(dict)
 }
 
 func NewOutputFieldFromDict(data map[string]interface{}) OutputField {

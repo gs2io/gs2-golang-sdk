@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package log
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -58,6 +67,12 @@ type CreateNamespaceRequest struct {
 	AwsAccessKeyId      *string `json:"awsAccessKeyId"`
 	AwsSecretAccessKey  *string `json:"awsSecretAccessKey"`
 	FirehoseStreamName  *string `json:"firehoseStreamName"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -101,6 +116,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -122,6 +143,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -154,6 +181,12 @@ type UpdateNamespaceRequest struct {
 	AwsAccessKeyId      *string `json:"awsAccessKeyId"`
 	AwsSecretAccessKey  *string `json:"awsSecretAccessKey"`
 	FirehoseStreamName  *string `json:"firehoseStreamName"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -197,6 +230,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -226,6 +265,12 @@ type QueryAccessLogRequest struct {
 	LongTerm           *bool   `json:"longTerm"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewQueryAccessLogRequestFromJson(data string) QueryAccessLogRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryAccessLogRequestFromDict(dict)
 }
 
 func NewQueryAccessLogRequestFromDict(data map[string]interface{}) QueryAccessLogRequest {
@@ -275,6 +320,12 @@ type CountAccessLogRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewCountAccessLogRequestFromJson(data string) CountAccessLogRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountAccessLogRequestFromDict(dict)
+}
+
 func NewCountAccessLogRequestFromDict(data map[string]interface{}) CountAccessLogRequest {
 	return CountAccessLogRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -321,6 +372,12 @@ type QueryIssueStampSheetLogRequest struct {
 	LongTerm           *bool   `json:"longTerm"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewQueryIssueStampSheetLogRequestFromJson(data string) QueryIssueStampSheetLogRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryIssueStampSheetLogRequestFromDict(dict)
 }
 
 func NewQueryIssueStampSheetLogRequestFromDict(data map[string]interface{}) QueryIssueStampSheetLogRequest {
@@ -373,6 +430,12 @@ type CountIssueStampSheetLogRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewCountIssueStampSheetLogRequestFromJson(data string) CountIssueStampSheetLogRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountIssueStampSheetLogRequestFromDict(dict)
+}
+
 func NewCountIssueStampSheetLogRequestFromDict(data map[string]interface{}) CountIssueStampSheetLogRequest {
 	return CountIssueStampSheetLogRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -421,6 +484,12 @@ type QueryExecuteStampSheetLogRequest struct {
 	LongTerm           *bool   `json:"longTerm"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewQueryExecuteStampSheetLogRequestFromJson(data string) QueryExecuteStampSheetLogRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryExecuteStampSheetLogRequestFromDict(dict)
 }
 
 func NewQueryExecuteStampSheetLogRequestFromDict(data map[string]interface{}) QueryExecuteStampSheetLogRequest {
@@ -473,6 +542,12 @@ type CountExecuteStampSheetLogRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewCountExecuteStampSheetLogRequestFromJson(data string) CountExecuteStampSheetLogRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountExecuteStampSheetLogRequestFromDict(dict)
+}
+
 func NewCountExecuteStampSheetLogRequestFromDict(data map[string]interface{}) CountExecuteStampSheetLogRequest {
 	return CountExecuteStampSheetLogRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -523,6 +598,12 @@ type QueryExecuteStampTaskLogRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewQueryExecuteStampTaskLogRequestFromJson(data string) QueryExecuteStampTaskLogRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryExecuteStampTaskLogRequestFromDict(dict)
+}
+
 func NewQueryExecuteStampTaskLogRequestFromDict(data map[string]interface{}) QueryExecuteStampTaskLogRequest {
 	return QueryExecuteStampTaskLogRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -571,6 +652,12 @@ type CountExecuteStampTaskLogRequest struct {
 	LongTerm           *bool   `json:"longTerm"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewCountExecuteStampTaskLogRequestFromJson(data string) CountExecuteStampTaskLogRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountExecuteStampTaskLogRequestFromDict(dict)
 }
 
 func NewCountExecuteStampTaskLogRequestFromDict(data map[string]interface{}) CountExecuteStampTaskLogRequest {

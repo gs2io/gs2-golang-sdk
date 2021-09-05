@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package showcase
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -53,6 +62,12 @@ type CreateNamespaceRequest struct {
 	QueueNamespaceId   *string     `json:"queueNamespaceId"`
 	KeyId              *string     `json:"keyId"`
 	LogSetting         *LogSetting `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -86,6 +101,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -107,6 +128,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -134,6 +161,12 @@ type UpdateNamespaceRequest struct {
 	QueueNamespaceId   *string     `json:"queueNamespaceId"`
 	KeyId              *string     `json:"keyId"`
 	LogSetting         *LogSetting `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -167,6 +200,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -190,6 +229,12 @@ type DescribeSalesItemMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeSalesItemMastersRequestFromJson(data string) DescribeSalesItemMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSalesItemMastersRequestFromDict(dict)
 }
 
 func NewDescribeSalesItemMastersRequestFromDict(data map[string]interface{}) DescribeSalesItemMastersRequest {
@@ -222,6 +267,12 @@ type CreateSalesItemMasterRequest struct {
 	Metadata           *string         `json:"metadata"`
 	ConsumeActions     []ConsumeAction `json:"consumeActions"`
 	AcquireActions     []AcquireAction `json:"acquireActions"`
+}
+
+func NewCreateSalesItemMasterRequestFromJson(data string) CreateSalesItemMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateSalesItemMasterRequestFromDict(dict)
 }
 
 func NewCreateSalesItemMasterRequestFromDict(data map[string]interface{}) CreateSalesItemMasterRequest {
@@ -262,6 +313,12 @@ type GetSalesItemMasterRequest struct {
 	SalesItemName      *string `json:"salesItemName"`
 }
 
+func NewGetSalesItemMasterRequestFromJson(data string) GetSalesItemMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSalesItemMasterRequestFromDict(dict)
+}
+
 func NewGetSalesItemMasterRequestFromDict(data map[string]interface{}) GetSalesItemMasterRequest {
 	return GetSalesItemMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -290,6 +347,12 @@ type UpdateSalesItemMasterRequest struct {
 	Metadata           *string         `json:"metadata"`
 	ConsumeActions     []ConsumeAction `json:"consumeActions"`
 	AcquireActions     []AcquireAction `json:"acquireActions"`
+}
+
+func NewUpdateSalesItemMasterRequestFromJson(data string) UpdateSalesItemMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateSalesItemMasterRequestFromDict(dict)
 }
 
 func NewUpdateSalesItemMasterRequestFromDict(data map[string]interface{}) UpdateSalesItemMasterRequest {
@@ -330,6 +393,12 @@ type DeleteSalesItemMasterRequest struct {
 	SalesItemName      *string `json:"salesItemName"`
 }
 
+func NewDeleteSalesItemMasterRequestFromJson(data string) DeleteSalesItemMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteSalesItemMasterRequestFromDict(dict)
+}
+
 func NewDeleteSalesItemMasterRequestFromDict(data map[string]interface{}) DeleteSalesItemMasterRequest {
 	return DeleteSalesItemMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -355,6 +424,12 @@ type DescribeSalesItemGroupMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeSalesItemGroupMastersRequestFromJson(data string) DescribeSalesItemGroupMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSalesItemGroupMastersRequestFromDict(dict)
 }
 
 func NewDescribeSalesItemGroupMastersRequestFromDict(data map[string]interface{}) DescribeSalesItemGroupMastersRequest {
@@ -386,6 +461,12 @@ type CreateSalesItemGroupMasterRequest struct {
 	Description        *string  `json:"description"`
 	Metadata           *string  `json:"metadata"`
 	SalesItemNames     []string `json:"salesItemNames"`
+}
+
+func NewCreateSalesItemGroupMasterRequestFromJson(data string) CreateSalesItemGroupMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateSalesItemGroupMasterRequestFromDict(dict)
 }
 
 func NewCreateSalesItemGroupMasterRequestFromDict(data map[string]interface{}) CreateSalesItemGroupMasterRequest {
@@ -422,6 +503,12 @@ type GetSalesItemGroupMasterRequest struct {
 	SalesItemGroupName *string `json:"salesItemGroupName"`
 }
 
+func NewGetSalesItemGroupMasterRequestFromJson(data string) GetSalesItemGroupMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSalesItemGroupMasterRequestFromDict(dict)
+}
+
 func NewGetSalesItemGroupMasterRequestFromDict(data map[string]interface{}) GetSalesItemGroupMasterRequest {
 	return GetSalesItemGroupMasterRequest{
 		NamespaceName:      core.CastString(data["namespaceName"]),
@@ -449,6 +536,12 @@ type UpdateSalesItemGroupMasterRequest struct {
 	Description        *string  `json:"description"`
 	Metadata           *string  `json:"metadata"`
 	SalesItemNames     []string `json:"salesItemNames"`
+}
+
+func NewUpdateSalesItemGroupMasterRequestFromJson(data string) UpdateSalesItemGroupMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateSalesItemGroupMasterRequestFromDict(dict)
 }
 
 func NewUpdateSalesItemGroupMasterRequestFromDict(data map[string]interface{}) UpdateSalesItemGroupMasterRequest {
@@ -485,6 +578,12 @@ type DeleteSalesItemGroupMasterRequest struct {
 	SalesItemGroupName *string `json:"salesItemGroupName"`
 }
 
+func NewDeleteSalesItemGroupMasterRequestFromJson(data string) DeleteSalesItemGroupMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteSalesItemGroupMasterRequestFromDict(dict)
+}
+
 func NewDeleteSalesItemGroupMasterRequestFromDict(data map[string]interface{}) DeleteSalesItemGroupMasterRequest {
 	return DeleteSalesItemGroupMasterRequest{
 		NamespaceName:      core.CastString(data["namespaceName"]),
@@ -510,6 +609,12 @@ type DescribeShowcaseMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeShowcaseMastersRequestFromJson(data string) DescribeShowcaseMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeShowcaseMastersRequestFromDict(dict)
 }
 
 func NewDescribeShowcaseMastersRequestFromDict(data map[string]interface{}) DescribeShowcaseMastersRequest {
@@ -542,6 +647,12 @@ type CreateShowcaseMasterRequest struct {
 	Metadata           *string             `json:"metadata"`
 	DisplayItems       []DisplayItemMaster `json:"displayItems"`
 	SalesPeriodEventId *string             `json:"salesPeriodEventId"`
+}
+
+func NewCreateShowcaseMasterRequestFromJson(data string) CreateShowcaseMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateShowcaseMasterRequestFromDict(dict)
 }
 
 func NewCreateShowcaseMasterRequestFromDict(data map[string]interface{}) CreateShowcaseMasterRequest {
@@ -580,6 +691,12 @@ type GetShowcaseMasterRequest struct {
 	ShowcaseName       *string `json:"showcaseName"`
 }
 
+func NewGetShowcaseMasterRequestFromJson(data string) GetShowcaseMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetShowcaseMasterRequestFromDict(dict)
+}
+
 func NewGetShowcaseMasterRequestFromDict(data map[string]interface{}) GetShowcaseMasterRequest {
 	return GetShowcaseMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -608,6 +725,12 @@ type UpdateShowcaseMasterRequest struct {
 	Metadata           *string             `json:"metadata"`
 	DisplayItems       []DisplayItemMaster `json:"displayItems"`
 	SalesPeriodEventId *string             `json:"salesPeriodEventId"`
+}
+
+func NewUpdateShowcaseMasterRequestFromJson(data string) UpdateShowcaseMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateShowcaseMasterRequestFromDict(dict)
 }
 
 func NewUpdateShowcaseMasterRequestFromDict(data map[string]interface{}) UpdateShowcaseMasterRequest {
@@ -646,6 +769,12 @@ type DeleteShowcaseMasterRequest struct {
 	ShowcaseName       *string `json:"showcaseName"`
 }
 
+func NewDeleteShowcaseMasterRequestFromJson(data string) DeleteShowcaseMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteShowcaseMasterRequestFromDict(dict)
+}
+
 func NewDeleteShowcaseMasterRequestFromDict(data map[string]interface{}) DeleteShowcaseMasterRequest {
 	return DeleteShowcaseMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -671,6 +800,12 @@ type ExportMasterRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterRequestFromDict(dict)
+}
+
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -692,6 +827,12 @@ type GetCurrentShowcaseMasterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetCurrentShowcaseMasterRequestFromJson(data string) GetCurrentShowcaseMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentShowcaseMasterRequestFromDict(dict)
 }
 
 func NewGetCurrentShowcaseMasterRequestFromDict(data map[string]interface{}) GetCurrentShowcaseMasterRequest {
@@ -716,6 +857,12 @@ type UpdateCurrentShowcaseMasterRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	Settings           *string `json:"settings"`
+}
+
+func NewUpdateCurrentShowcaseMasterRequestFromJson(data string) UpdateCurrentShowcaseMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentShowcaseMasterRequestFromDict(dict)
 }
 
 func NewUpdateCurrentShowcaseMasterRequestFromDict(data map[string]interface{}) UpdateCurrentShowcaseMasterRequest {
@@ -744,6 +891,12 @@ type UpdateCurrentShowcaseMasterFromGitHubRequest struct {
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
+func NewUpdateCurrentShowcaseMasterFromGitHubRequestFromJson(data string) UpdateCurrentShowcaseMasterFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentShowcaseMasterFromGitHubRequestFromDict(dict)
+}
+
 func NewUpdateCurrentShowcaseMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentShowcaseMasterFromGitHubRequest {
 	return UpdateCurrentShowcaseMasterFromGitHubRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
@@ -768,6 +921,12 @@ type DescribeShowcasesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	AccessToken        *string `json:"accessToken"`
+}
+
+func NewDescribeShowcasesRequestFromJson(data string) DescribeShowcasesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeShowcasesRequestFromDict(dict)
 }
 
 func NewDescribeShowcasesRequestFromDict(data map[string]interface{}) DescribeShowcasesRequest {
@@ -796,6 +955,12 @@ type DescribeShowcasesByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 }
 
+func NewDescribeShowcasesByUserIdRequestFromJson(data string) DescribeShowcasesByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeShowcasesByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeShowcasesByUserIdRequestFromDict(data map[string]interface{}) DescribeShowcasesByUserIdRequest {
 	return DescribeShowcasesByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -821,6 +986,12 @@ type GetShowcaseRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	ShowcaseName       *string `json:"showcaseName"`
 	AccessToken        *string `json:"accessToken"`
+}
+
+func NewGetShowcaseRequestFromJson(data string) GetShowcaseRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetShowcaseRequestFromDict(dict)
 }
 
 func NewGetShowcaseRequestFromDict(data map[string]interface{}) GetShowcaseRequest {
@@ -852,6 +1023,12 @@ type GetShowcaseByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 }
 
+func NewGetShowcaseByUserIdRequestFromJson(data string) GetShowcaseByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetShowcaseByUserIdRequestFromDict(dict)
+}
+
 func NewGetShowcaseByUserIdRequestFromDict(data map[string]interface{}) GetShowcaseByUserIdRequest {
 	return GetShowcaseByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -881,6 +1058,12 @@ type BuyRequest struct {
 	DisplayItemId      *string  `json:"displayItemId"`
 	AccessToken        *string  `json:"accessToken"`
 	Config             []Config `json:"config"`
+}
+
+func NewBuyRequestFromJson(data string) BuyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBuyRequestFromDict(dict)
 }
 
 func NewBuyRequestFromDict(data map[string]interface{}) BuyRequest {
@@ -918,6 +1101,12 @@ type BuyByUserIdRequest struct {
 	DisplayItemId      *string  `json:"displayItemId"`
 	UserId             *string  `json:"userId"`
 	Config             []Config `json:"config"`
+}
+
+func NewBuyByUserIdRequestFromJson(data string) BuyByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBuyByUserIdRequestFromDict(dict)
 }
 
 func NewBuyByUserIdRequestFromDict(data map[string]interface{}) BuyByUserIdRequest {

@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package lottery
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId              *string     `json:"namespaceId"`
@@ -29,6 +32,12 @@ type Namespace struct {
 	LogSetting               *LogSetting `json:"logSetting"`
 	CreatedAt                *int64      `json:"createdAt"`
 	UpdatedAt                *int64      `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -94,6 +103,12 @@ type LotteryModelMaster struct {
 	UpdatedAt                *int64  `json:"updatedAt"`
 }
 
+func NewLotteryModelMasterFromJson(data string) LotteryModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLotteryModelMasterFromDict(dict)
+}
+
 func NewLotteryModelMasterFromDict(data map[string]interface{}) LotteryModelMaster {
 	return LotteryModelMaster{
 		LotteryModelId:           core.CastString(data["lotteryModelId"]),
@@ -154,6 +169,12 @@ type PrizeTableMaster struct {
 	UpdatedAt    *int64  `json:"updatedAt"`
 }
 
+func NewPrizeTableMasterFromJson(data string) PrizeTableMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrizeTableMasterFromDict(dict)
+}
+
 func NewPrizeTableMasterFromDict(data map[string]interface{}) PrizeTableMaster {
 	return PrizeTableMaster{
 		PrizeTableId: core.CastString(data["prizeTableId"]),
@@ -207,6 +228,12 @@ type Box struct {
 	DrawnIndexes   []int32 `json:"drawnIndexes"`
 	CreatedAt      *int64  `json:"createdAt"`
 	UpdatedAt      *int64  `json:"updatedAt"`
+}
+
+func NewBoxFromJson(data string) Box {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBoxFromDict(dict)
 }
 
 func NewBoxFromDict(data map[string]interface{}) Box {
@@ -263,6 +290,12 @@ type LotteryModel struct {
 	ChoicePrizeTableScriptId *string `json:"choicePrizeTableScriptId"`
 }
 
+func NewLotteryModelFromJson(data string) LotteryModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLotteryModelFromDict(dict)
+}
+
 func NewLotteryModelFromDict(data map[string]interface{}) LotteryModel {
 	return LotteryModel{
 		LotteryModelId:           core.CastString(data["lotteryModelId"]),
@@ -314,6 +347,12 @@ type PrizeTable struct {
 	Prizes       []Prize `json:"prizes"`
 }
 
+func NewPrizeTableFromJson(data string) PrizeTable {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrizeTableFromDict(dict)
+}
+
 func NewPrizeTableFromDict(data map[string]interface{}) PrizeTable {
 	return PrizeTable{
 		PrizeTableId: core.CastString(data["prizeTableId"]),
@@ -359,6 +398,12 @@ type Probability struct {
 	Rate  *float32    `json:"rate"`
 }
 
+func NewProbabilityFromJson(data string) Probability {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewProbabilityFromDict(dict)
+}
+
 func NewProbabilityFromDict(data map[string]interface{}) Probability {
 	return Probability{
 		Prize: NewDrawnPrizeFromDict(core.CastMap(data["prize"])).Pointer(),
@@ -396,6 +441,12 @@ func CastProbabilitiesFromDict(data []Probability) []interface{} {
 type CurrentLotteryMaster struct {
 	NamespaceId *string `json:"namespaceId"`
 	Settings    *string `json:"settings"`
+}
+
+func NewCurrentLotteryMasterFromJson(data string) CurrentLotteryMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentLotteryMasterFromDict(dict)
 }
 
 func NewCurrentLotteryMasterFromDict(data map[string]interface{}) CurrentLotteryMaster {
@@ -440,6 +491,12 @@ type GitHubCheckoutSetting struct {
 	CommitHash     *string `json:"commitHash"`
 	BranchName     *string `json:"branchName"`
 	TagName        *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
@@ -490,6 +547,12 @@ type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
+}
+
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
 		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
@@ -528,6 +591,12 @@ type Prize struct {
 	AcquireActions []AcquireAction `json:"acquireActions"`
 	PrizeTableName *string         `json:"prizeTableName"`
 	Weight         *int32          `json:"weight"`
+}
+
+func NewPrizeFromJson(data string) Prize {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrizeFromDict(dict)
 }
 
 func NewPrizeFromDict(data map[string]interface{}) Prize {
@@ -577,6 +646,12 @@ type AcquireAction struct {
 	Request *string `json:"request"`
 }
 
+func NewAcquireActionFromJson(data string) AcquireAction {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireActionFromDict(dict)
+}
+
 func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 	return AcquireAction{
 		Action:  core.CastString(data["action"]),
@@ -613,6 +688,12 @@ func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
 
 type DrawnPrize struct {
 	AcquireActions []AcquireAction `json:"acquireActions"`
+}
+
+func NewDrawnPrizeFromJson(data string) DrawnPrize {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDrawnPrizeFromDict(dict)
 }
 
 func NewDrawnPrizeFromDict(data map[string]interface{}) DrawnPrize {
@@ -653,6 +734,12 @@ type BoxItem struct {
 	AcquireActions []AcquireAction `json:"acquireActions"`
 	Remaining      *int32          `json:"remaining"`
 	Initial        *int32          `json:"initial"`
+}
+
+func NewBoxItemFromJson(data string) BoxItem {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBoxItemFromDict(dict)
 }
 
 func NewBoxItemFromDict(data map[string]interface{}) BoxItem {
@@ -700,6 +787,12 @@ type BoxItems struct {
 	Items          []BoxItem `json:"items"`
 }
 
+func NewBoxItemsFromJson(data string) BoxItems {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBoxItemsFromDict(dict)
+}
+
 func NewBoxItemsFromDict(data map[string]interface{}) BoxItems {
 	return BoxItems{
 		BoxId:          core.CastString(data["boxId"]),
@@ -743,6 +836,12 @@ func CastBoxItemsesFromDict(data []BoxItems) []interface{} {
 type Config struct {
 	Key   *string `json:"key"`
 	Value *string `json:"value"`
+}
+
+func NewConfigFromJson(data string) Config {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConfigFromDict(dict)
 }
 
 func NewConfigFromDict(data map[string]interface{}) Config {

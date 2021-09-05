@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package auth
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type LoginRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type LoginRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
 	TimeOffset         *int32  `json:"timeOffset"`
+}
+
+func NewLoginRequestFromJson(data string) LoginRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLoginRequestFromDict(dict)
 }
 
 func NewLoginRequestFromDict(data map[string]interface{}) LoginRequest {
@@ -52,6 +61,12 @@ type LoginBySignatureRequest struct {
 	KeyId              *string `json:"keyId"`
 	Body               *string `json:"body"`
 	Signature          *string `json:"signature"`
+}
+
+func NewLoginBySignatureRequestFromJson(data string) LoginBySignatureRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLoginBySignatureRequestFromDict(dict)
 }
 
 func NewLoginBySignatureRequestFromDict(data map[string]interface{}) LoginBySignatureRequest {

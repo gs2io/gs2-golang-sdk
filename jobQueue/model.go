@@ -14,9 +14,12 @@ express or implied. See the License for the specific language governing
 permissions and limitations under the License.
 */
 
-package jobQueue
+package job_queue
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId      *string              `json:"namespaceId"`
@@ -26,6 +29,12 @@ type Namespace struct {
 	LogSetting       *LogSetting          `json:"logSetting"`
 	CreatedAt        *int64               `json:"createdAt"`
 	UpdatedAt        *int64               `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -82,6 +91,12 @@ type Job struct {
 	MaxTryCount       *int32  `json:"maxTryCount"`
 	CreatedAt         *int64  `json:"createdAt"`
 	UpdatedAt         *int64  `json:"updatedAt"`
+}
+
+func NewJobFromJson(data string) Job {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewJobFromDict(dict)
 }
 
 func NewJobFromDict(data map[string]interface{}) Job {
@@ -141,6 +156,12 @@ type JobResult struct {
 	TryAt       *int64  `json:"tryAt"`
 }
 
+func NewJobResultFromJson(data string) JobResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewJobResultFromDict(dict)
+}
+
 func NewJobResultFromDict(data map[string]interface{}) JobResult {
 	return JobResult{
 		JobResultId: core.CastString(data["jobResultId"]),
@@ -192,6 +213,12 @@ type DeadLetterJob struct {
 	Result          []JobResultBody `json:"result"`
 	CreatedAt       *int64          `json:"createdAt"`
 	UpdatedAt       *int64          `json:"updatedAt"`
+}
+
+func NewDeadLetterJobFromJson(data string) DeadLetterJob {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeadLetterJobFromDict(dict)
 }
 
 func NewDeadLetterJobFromDict(data map[string]interface{}) DeadLetterJob {
@@ -248,6 +275,12 @@ type NotificationSetting struct {
 	Sound                            *string `json:"sound"`
 }
 
+func NewNotificationSettingFromJson(data string) NotificationSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNotificationSettingFromDict(dict)
+}
+
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
 	return NotificationSetting{
 		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
@@ -288,6 +321,12 @@ type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
+}
+
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
 		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
@@ -324,6 +363,12 @@ type JobEntry struct {
 	ScriptId    *string `json:"scriptId"`
 	Args        *string `json:"args"`
 	MaxTryCount *int32  `json:"maxTryCount"`
+}
+
+func NewJobEntryFromJson(data string) JobEntry {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewJobEntryFromDict(dict)
 }
 
 func NewJobEntryFromDict(data map[string]interface{}) JobEntry {
@@ -367,6 +412,12 @@ type JobResultBody struct {
 	StatusCode *int32  `json:"statusCode"`
 	Result     *string `json:"result"`
 	TryAt      *int64  `json:"tryAt"`
+}
+
+func NewJobResultBodyFromJson(data string) JobResultBody {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewJobResultBodyFromDict(dict)
 }
 
 func NewJobResultBodyFromDict(data map[string]interface{}) JobResultBody {

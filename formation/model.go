@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package formation
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId      *string        `json:"namespaceId"`
@@ -27,6 +30,12 @@ type Namespace struct {
 	LogSetting       *LogSetting    `json:"logSetting"`
 	CreatedAt        *int64         `json:"createdAt"`
 	UpdatedAt        *int64         `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -82,6 +91,12 @@ type FormModel struct {
 	Slots       []SlotModel `json:"slots"`
 }
 
+func NewFormModelFromJson(data string) FormModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFormModelFromDict(dict)
+}
+
 func NewFormModelFromDict(data map[string]interface{}) FormModel {
 	return FormModel{
 		FormModelId: core.CastString(data["formModelId"]),
@@ -130,6 +145,12 @@ type FormModelMaster struct {
 	Slots       []SlotModel `json:"slots"`
 	CreatedAt   *int64      `json:"createdAt"`
 	UpdatedAt   *int64      `json:"updatedAt"`
+}
+
+func NewFormModelMasterFromJson(data string) FormModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFormModelMasterFromDict(dict)
 }
 
 func NewFormModelMasterFromDict(data map[string]interface{}) FormModelMaster {
@@ -187,6 +208,12 @@ type MoldModel struct {
 	FormModel          *FormModel `json:"formModel"`
 }
 
+func NewMoldModelFromJson(data string) MoldModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMoldModelFromDict(dict)
+}
+
 func NewMoldModelFromDict(data map[string]interface{}) MoldModel {
 	return MoldModel{
 		MoldModelId:        core.CastString(data["moldModelId"]),
@@ -239,6 +266,12 @@ type MoldModelMaster struct {
 	FormModelName      *string `json:"formModelName"`
 	CreatedAt          *int64  `json:"createdAt"`
 	UpdatedAt          *int64  `json:"updatedAt"`
+}
+
+func NewMoldModelMasterFromJson(data string) MoldModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMoldModelMasterFromDict(dict)
 }
 
 func NewMoldModelMasterFromDict(data map[string]interface{}) MoldModelMaster {
@@ -294,6 +327,12 @@ type CurrentFormMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentFormMasterFromJson(data string) CurrentFormMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentFormMasterFromDict(dict)
+}
+
 func NewCurrentFormMasterFromDict(data map[string]interface{}) CurrentFormMaster {
 	return CurrentFormMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -335,6 +374,12 @@ type Mold struct {
 	Capacity  *int32  `json:"capacity"`
 	CreatedAt *int64  `json:"createdAt"`
 	UpdatedAt *int64  `json:"updatedAt"`
+}
+
+func NewMoldFromJson(data string) Mold {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMoldFromDict(dict)
 }
 
 func NewMoldFromDict(data map[string]interface{}) Mold {
@@ -388,6 +433,12 @@ type Form struct {
 	UpdatedAt *int64  `json:"updatedAt"`
 }
 
+func NewFormFromJson(data string) Form {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFormFromDict(dict)
+}
+
 func NewFormFromDict(data map[string]interface{}) Form {
 	return Form{
 		FormId:    core.CastString(data["formId"]),
@@ -438,6 +489,12 @@ type Slot struct {
 	Metadata   *string `json:"metadata"`
 }
 
+func NewSlotFromJson(data string) Slot {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSlotFromDict(dict)
+}
+
 func NewSlotFromDict(data map[string]interface{}) Slot {
 	return Slot{
 		Name:       core.CastString(data["name"]),
@@ -478,6 +535,12 @@ type SlotModel struct {
 	Name          *string `json:"name"`
 	PropertyRegex *string `json:"propertyRegex"`
 	Metadata      *string `json:"metadata"`
+}
+
+func NewSlotModelFromJson(data string) SlotModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSlotModelFromDict(dict)
 }
 
 func NewSlotModelFromDict(data map[string]interface{}) SlotModel {
@@ -522,6 +585,12 @@ type SlotWithSignature struct {
 	Body         *string `json:"body"`
 	Signature    *string `json:"signature"`
 	Metadata     *string `json:"metadata"`
+}
+
+func NewSlotWithSignatureFromJson(data string) SlotWithSignature {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSlotWithSignatureFromDict(dict)
 }
 
 func NewSlotWithSignatureFromDict(data map[string]interface{}) SlotWithSignature {
@@ -569,6 +638,12 @@ type AcquireActionConfig struct {
 	Config []Config `json:"config"`
 }
 
+func NewAcquireActionConfigFromJson(data string) AcquireActionConfig {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireActionConfigFromDict(dict)
+}
+
 func NewAcquireActionConfigFromDict(data map[string]interface{}) AcquireActionConfig {
 	return AcquireActionConfig{
 		Name:   core.CastString(data["name"]),
@@ -608,6 +683,12 @@ func CastAcquireActionConfigsFromDict(data []AcquireActionConfig) []interface{} 
 type Config struct {
 	Key   *string `json:"key"`
 	Value *string `json:"value"`
+}
+
+func NewConfigFromJson(data string) Config {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConfigFromDict(dict)
 }
 
 func NewConfigFromDict(data map[string]interface{}) Config {
@@ -652,6 +733,12 @@ type GitHubCheckoutSetting struct {
 	CommitHash     *string `json:"commitHash"`
 	BranchName     *string `json:"branchName"`
 	TagName        *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
@@ -705,6 +792,12 @@ type ScriptSetting struct {
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
+}
+
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
 		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
@@ -747,6 +840,12 @@ type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
+}
+
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
 		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
@@ -782,6 +881,12 @@ func CastLogSettingsFromDict(data []LogSetting) []interface{} {
 type AcquireAction struct {
 	Action  *string `json:"action"`
 	Request *string `json:"request"`
+}
+
+func NewAcquireActionFromJson(data string) AcquireAction {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireActionFromDict(dict)
 }
 
 func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {

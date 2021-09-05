@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package experience
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId              *string        `json:"namespaceId"`
@@ -30,6 +33,12 @@ type Namespace struct {
 	LogSetting               *LogSetting    `json:"logSetting"`
 	CreatedAt                *int64         `json:"createdAt"`
 	UpdatedAt                *int64         `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -97,6 +106,12 @@ type ExperienceModelMaster struct {
 	UpdatedAt         *int64  `json:"updatedAt"`
 }
 
+func NewExperienceModelMasterFromJson(data string) ExperienceModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExperienceModelMasterFromDict(dict)
+}
+
 func NewExperienceModelMasterFromDict(data map[string]interface{}) ExperienceModelMaster {
 	return ExperienceModelMaster{
 		ExperienceModelId: core.CastString(data["experienceModelId"]),
@@ -157,6 +172,12 @@ type ExperienceModel struct {
 	RankThreshold     *Threshold `json:"rankThreshold"`
 }
 
+func NewExperienceModelFromJson(data string) ExperienceModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExperienceModelFromDict(dict)
+}
+
 func NewExperienceModelFromDict(data map[string]interface{}) ExperienceModel {
 	return ExperienceModel{
 		ExperienceModelId: core.CastString(data["experienceModelId"]),
@@ -211,6 +232,12 @@ type ThresholdMaster struct {
 	UpdatedAt   *int64  `json:"updatedAt"`
 }
 
+func NewThresholdMasterFromJson(data string) ThresholdMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewThresholdMasterFromDict(dict)
+}
+
 func NewThresholdMasterFromDict(data map[string]interface{}) ThresholdMaster {
 	return ThresholdMaster{
 		ThresholdId: core.CastString(data["thresholdId"]),
@@ -262,6 +289,12 @@ type Threshold struct {
 	Values   []int64 `json:"values"`
 }
 
+func NewThresholdFromJson(data string) Threshold {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewThresholdFromDict(dict)
+}
+
 func NewThresholdFromDict(data map[string]interface{}) Threshold {
 	return Threshold{
 		Metadata: core.CastString(data["metadata"]),
@@ -301,6 +334,12 @@ func CastThresholdsFromDict(data []Threshold) []interface{} {
 type CurrentExperienceMaster struct {
 	NamespaceId *string `json:"namespaceId"`
 	Settings    *string `json:"settings"`
+}
+
+func NewCurrentExperienceMasterFromJson(data string) CurrentExperienceMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentExperienceMasterFromDict(dict)
 }
 
 func NewCurrentExperienceMasterFromDict(data map[string]interface{}) CurrentExperienceMaster {
@@ -347,6 +386,12 @@ type Status struct {
 	RankCapValue    *int64  `json:"rankCapValue"`
 	CreatedAt       *int64  `json:"createdAt"`
 	UpdatedAt       *int64  `json:"updatedAt"`
+}
+
+func NewStatusFromJson(data string) Status {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewStatusFromDict(dict)
 }
 
 func NewStatusFromDict(data map[string]interface{}) Status {
@@ -407,6 +452,12 @@ type GitHubCheckoutSetting struct {
 	TagName        *string `json:"tagName"`
 }
 
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
+}
+
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
 		ApiKeyId:       core.CastString(data["apiKeyId"]),
@@ -458,6 +509,12 @@ type ScriptSetting struct {
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
+}
+
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
 		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
@@ -498,6 +555,12 @@ func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

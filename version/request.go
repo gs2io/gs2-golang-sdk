@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package version
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -54,6 +63,12 @@ type CreateNamespaceRequest struct {
 	AcceptVersionScript         *ScriptSetting `json:"acceptVersionScript"`
 	CheckVersionTriggerScriptId *string        `json:"checkVersionTriggerScriptId"`
 	LogSetting                  *LogSetting    `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -89,6 +104,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -110,6 +131,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -138,6 +165,12 @@ type UpdateNamespaceRequest struct {
 	AcceptVersionScript         *ScriptSetting `json:"acceptVersionScript"`
 	CheckVersionTriggerScriptId *string        `json:"checkVersionTriggerScriptId"`
 	LogSetting                  *LogSetting    `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -173,6 +206,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -196,6 +235,12 @@ type DescribeVersionModelMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeVersionModelMastersRequestFromJson(data string) DescribeVersionModelMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeVersionModelMastersRequestFromDict(dict)
 }
 
 func NewDescribeVersionModelMastersRequestFromDict(data map[string]interface{}) DescribeVersionModelMastersRequest {
@@ -232,6 +277,12 @@ type CreateVersionModelMasterRequest struct {
 	CurrentVersion     *Version `json:"currentVersion"`
 	NeedSignature      *bool    `json:"needSignature"`
 	SignatureKeyId     *string  `json:"signatureKeyId"`
+}
+
+func NewCreateVersionModelMasterRequestFromJson(data string) CreateVersionModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateVersionModelMasterRequestFromDict(dict)
 }
 
 func NewCreateVersionModelMasterRequestFromDict(data map[string]interface{}) CreateVersionModelMasterRequest {
@@ -276,6 +327,12 @@ type GetVersionModelMasterRequest struct {
 	VersionName        *string `json:"versionName"`
 }
 
+func NewGetVersionModelMasterRequestFromJson(data string) GetVersionModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetVersionModelMasterRequestFromDict(dict)
+}
+
 func NewGetVersionModelMasterRequestFromDict(data map[string]interface{}) GetVersionModelMasterRequest {
 	return GetVersionModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -308,6 +365,12 @@ type UpdateVersionModelMasterRequest struct {
 	CurrentVersion     *Version `json:"currentVersion"`
 	NeedSignature      *bool    `json:"needSignature"`
 	SignatureKeyId     *string  `json:"signatureKeyId"`
+}
+
+func NewUpdateVersionModelMasterRequestFromJson(data string) UpdateVersionModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateVersionModelMasterRequestFromDict(dict)
 }
 
 func NewUpdateVersionModelMasterRequestFromDict(data map[string]interface{}) UpdateVersionModelMasterRequest {
@@ -352,6 +415,12 @@ type DeleteVersionModelMasterRequest struct {
 	VersionName        *string `json:"versionName"`
 }
 
+func NewDeleteVersionModelMasterRequestFromJson(data string) DeleteVersionModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteVersionModelMasterRequestFromDict(dict)
+}
+
 func NewDeleteVersionModelMasterRequestFromDict(data map[string]interface{}) DeleteVersionModelMasterRequest {
 	return DeleteVersionModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -377,6 +446,12 @@ type DescribeVersionModelsRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDescribeVersionModelsRequestFromJson(data string) DescribeVersionModelsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeVersionModelsRequestFromDict(dict)
+}
+
 func NewDescribeVersionModelsRequestFromDict(data map[string]interface{}) DescribeVersionModelsRequest {
 	return DescribeVersionModelsRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -399,6 +474,12 @@ type GetVersionModelRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	VersionName        *string `json:"versionName"`
+}
+
+func NewGetVersionModelRequestFromJson(data string) GetVersionModelRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetVersionModelRequestFromDict(dict)
 }
 
 func NewGetVersionModelRequestFromDict(data map[string]interface{}) GetVersionModelRequest {
@@ -427,6 +508,12 @@ type DescribeAcceptVersionsRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeAcceptVersionsRequestFromJson(data string) DescribeAcceptVersionsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeAcceptVersionsRequestFromDict(dict)
 }
 
 func NewDescribeAcceptVersionsRequestFromDict(data map[string]interface{}) DescribeAcceptVersionsRequest {
@@ -461,6 +548,12 @@ type DescribeAcceptVersionsByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeAcceptVersionsByUserIdRequestFromJson(data string) DescribeAcceptVersionsByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeAcceptVersionsByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeAcceptVersionsByUserIdRequestFromDict(data map[string]interface{}) DescribeAcceptVersionsByUserIdRequest {
 	return DescribeAcceptVersionsByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -492,6 +585,12 @@ type AcceptRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
+func NewAcceptRequestFromJson(data string) AcceptRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcceptRequestFromDict(dict)
+}
+
 func NewAcceptRequestFromDict(data map[string]interface{}) AcceptRequest {
 	return AcceptRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -519,6 +618,12 @@ type AcceptByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	VersionName        *string `json:"versionName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewAcceptByUserIdRequestFromJson(data string) AcceptByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcceptByUserIdRequestFromDict(dict)
 }
 
 func NewAcceptByUserIdRequestFromDict(data map[string]interface{}) AcceptByUserIdRequest {
@@ -550,6 +655,12 @@ type GetAcceptVersionRequest struct {
 	VersionName        *string `json:"versionName"`
 }
 
+func NewGetAcceptVersionRequestFromJson(data string) GetAcceptVersionRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetAcceptVersionRequestFromDict(dict)
+}
+
 func NewGetAcceptVersionRequestFromDict(data map[string]interface{}) GetAcceptVersionRequest {
 	return GetAcceptVersionRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -577,6 +688,12 @@ type GetAcceptVersionByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	VersionName        *string `json:"versionName"`
+}
+
+func NewGetAcceptVersionByUserIdRequestFromJson(data string) GetAcceptVersionByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetAcceptVersionByUserIdRequestFromDict(dict)
 }
 
 func NewGetAcceptVersionByUserIdRequestFromDict(data map[string]interface{}) GetAcceptVersionByUserIdRequest {
@@ -608,6 +725,12 @@ type DeleteAcceptVersionRequest struct {
 	VersionName        *string `json:"versionName"`
 }
 
+func NewDeleteAcceptVersionRequestFromJson(data string) DeleteAcceptVersionRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteAcceptVersionRequestFromDict(dict)
+}
+
 func NewDeleteAcceptVersionRequestFromDict(data map[string]interface{}) DeleteAcceptVersionRequest {
 	return DeleteAcceptVersionRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -637,6 +760,12 @@ type DeleteAcceptVersionByUserIdRequest struct {
 	VersionName        *string `json:"versionName"`
 }
 
+func NewDeleteAcceptVersionByUserIdRequestFromJson(data string) DeleteAcceptVersionByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteAcceptVersionByUserIdRequestFromDict(dict)
+}
+
 func NewDeleteAcceptVersionByUserIdRequestFromDict(data map[string]interface{}) DeleteAcceptVersionByUserIdRequest {
 	return DeleteAcceptVersionByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -664,6 +793,12 @@ type CheckVersionRequest struct {
 	NamespaceName      *string         `json:"namespaceName"`
 	AccessToken        *string         `json:"accessToken"`
 	TargetVersions     []TargetVersion `json:"targetVersions"`
+}
+
+func NewCheckVersionRequestFromJson(data string) CheckVersionRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCheckVersionRequestFromDict(dict)
 }
 
 func NewCheckVersionRequestFromDict(data map[string]interface{}) CheckVersionRequest {
@@ -697,6 +832,12 @@ type CheckVersionByUserIdRequest struct {
 	TargetVersions     []TargetVersion `json:"targetVersions"`
 }
 
+func NewCheckVersionByUserIdRequestFromJson(data string) CheckVersionByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCheckVersionByUserIdRequestFromDict(dict)
+}
+
 func NewCheckVersionByUserIdRequestFromDict(data map[string]interface{}) CheckVersionByUserIdRequest {
 	return CheckVersionByUserIdRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -728,6 +869,12 @@ type CalculateSignatureRequest struct {
 	Version            *Version `json:"version"`
 }
 
+func NewCalculateSignatureRequestFromJson(data string) CalculateSignatureRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCalculateSignatureRequestFromDict(dict)
+}
+
 func NewCalculateSignatureRequestFromDict(data map[string]interface{}) CalculateSignatureRequest {
 	return CalculateSignatureRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -755,6 +902,12 @@ type ExportMasterRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterRequestFromDict(dict)
+}
+
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -776,6 +929,12 @@ type GetCurrentVersionMasterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetCurrentVersionMasterRequestFromJson(data string) GetCurrentVersionMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentVersionMasterRequestFromDict(dict)
 }
 
 func NewGetCurrentVersionMasterRequestFromDict(data map[string]interface{}) GetCurrentVersionMasterRequest {
@@ -802,6 +961,12 @@ type UpdateCurrentVersionMasterRequest struct {
 	Settings           *string `json:"settings"`
 }
 
+func NewUpdateCurrentVersionMasterRequestFromJson(data string) UpdateCurrentVersionMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentVersionMasterRequestFromDict(dict)
+}
+
 func NewUpdateCurrentVersionMasterRequestFromDict(data map[string]interface{}) UpdateCurrentVersionMasterRequest {
 	return UpdateCurrentVersionMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -826,6 +991,12 @@ type UpdateCurrentVersionMasterFromGitHubRequest struct {
 	DuplicationAvoider *string                `json:"duplicationAvoider"`
 	NamespaceName      *string                `json:"namespaceName"`
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
+}
+
+func NewUpdateCurrentVersionMasterFromGitHubRequestFromJson(data string) UpdateCurrentVersionMasterFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentVersionMasterFromGitHubRequestFromDict(dict)
 }
 
 func NewUpdateCurrentVersionMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentVersionMasterFromGitHubRequest {

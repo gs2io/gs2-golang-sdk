@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package key
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -130,6 +157,12 @@ type UpdateNamespaceResult struct {
 type UpdateNamespaceAsyncResult struct {
 	result *UpdateNamespaceResult
 	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
@@ -156,6 +189,12 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{}
 }
@@ -176,6 +215,12 @@ type DescribeKeysResult struct {
 type DescribeKeysAsyncResult struct {
 	result *DescribeKeysResult
 	err    error
+}
+
+func NewDescribeKeysResultFromJson(data string) DescribeKeysResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeKeysResultFromDict(dict)
 }
 
 func NewDescribeKeysResultFromDict(data map[string]interface{}) DescribeKeysResult {
@@ -207,6 +252,12 @@ type CreateKeyAsyncResult struct {
 	err    error
 }
 
+func NewCreateKeyResultFromJson(data string) CreateKeyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateKeyResultFromDict(dict)
+}
+
 func NewCreateKeyResultFromDict(data map[string]interface{}) CreateKeyResult {
 	return CreateKeyResult{
 		Item: NewKeyFromDict(core.CastMap(data["item"])).Pointer(),
@@ -230,6 +281,12 @@ type UpdateKeyResult struct {
 type UpdateKeyAsyncResult struct {
 	result *UpdateKeyResult
 	err    error
+}
+
+func NewUpdateKeyResultFromJson(data string) UpdateKeyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateKeyResultFromDict(dict)
 }
 
 func NewUpdateKeyResultFromDict(data map[string]interface{}) UpdateKeyResult {
@@ -257,6 +314,12 @@ type GetKeyAsyncResult struct {
 	err    error
 }
 
+func NewGetKeyResultFromJson(data string) GetKeyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetKeyResultFromDict(dict)
+}
+
 func NewGetKeyResultFromDict(data map[string]interface{}) GetKeyResult {
 	return GetKeyResult{
 		Item: NewKeyFromDict(core.CastMap(data["item"])).Pointer(),
@@ -281,6 +344,12 @@ type DeleteKeyAsyncResult struct {
 	err    error
 }
 
+func NewDeleteKeyResultFromJson(data string) DeleteKeyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteKeyResultFromDict(dict)
+}
+
 func NewDeleteKeyResultFromDict(data map[string]interface{}) DeleteKeyResult {
 	return DeleteKeyResult{}
 }
@@ -300,6 +369,12 @@ type EncryptResult struct {
 type EncryptAsyncResult struct {
 	result *EncryptResult
 	err    error
+}
+
+func NewEncryptResultFromJson(data string) EncryptResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEncryptResultFromDict(dict)
 }
 
 func NewEncryptResultFromDict(data map[string]interface{}) EncryptResult {
@@ -327,6 +402,12 @@ type DecryptAsyncResult struct {
 	err    error
 }
 
+func NewDecryptResultFromJson(data string) DecryptResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDecryptResultFromDict(dict)
+}
+
 func NewDecryptResultFromDict(data map[string]interface{}) DecryptResult {
 	return DecryptResult{
 		Data: core.CastString(data["data"]),
@@ -351,6 +432,12 @@ type DescribeGitHubApiKeysResult struct {
 type DescribeGitHubApiKeysAsyncResult struct {
 	result *DescribeGitHubApiKeysResult
 	err    error
+}
+
+func NewDescribeGitHubApiKeysResultFromJson(data string) DescribeGitHubApiKeysResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeGitHubApiKeysResultFromDict(dict)
 }
 
 func NewDescribeGitHubApiKeysResultFromDict(data map[string]interface{}) DescribeGitHubApiKeysResult {
@@ -382,6 +469,12 @@ type CreateGitHubApiKeyAsyncResult struct {
 	err    error
 }
 
+func NewCreateGitHubApiKeyResultFromJson(data string) CreateGitHubApiKeyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateGitHubApiKeyResultFromDict(dict)
+}
+
 func NewCreateGitHubApiKeyResultFromDict(data map[string]interface{}) CreateGitHubApiKeyResult {
 	return CreateGitHubApiKeyResult{
 		Item: NewGitHubApiKeyFromDict(core.CastMap(data["item"])).Pointer(),
@@ -405,6 +498,12 @@ type UpdateGitHubApiKeyResult struct {
 type UpdateGitHubApiKeyAsyncResult struct {
 	result *UpdateGitHubApiKeyResult
 	err    error
+}
+
+func NewUpdateGitHubApiKeyResultFromJson(data string) UpdateGitHubApiKeyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateGitHubApiKeyResultFromDict(dict)
 }
 
 func NewUpdateGitHubApiKeyResultFromDict(data map[string]interface{}) UpdateGitHubApiKeyResult {
@@ -432,6 +531,12 @@ type GetGitHubApiKeyAsyncResult struct {
 	err    error
 }
 
+func NewGetGitHubApiKeyResultFromJson(data string) GetGitHubApiKeyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetGitHubApiKeyResultFromDict(dict)
+}
+
 func NewGetGitHubApiKeyResultFromDict(data map[string]interface{}) GetGitHubApiKeyResult {
 	return GetGitHubApiKeyResult{
 		Item: NewGitHubApiKeyFromDict(core.CastMap(data["item"])).Pointer(),
@@ -454,6 +559,12 @@ type DeleteGitHubApiKeyResult struct {
 type DeleteGitHubApiKeyAsyncResult struct {
 	result *DeleteGitHubApiKeyResult
 	err    error
+}
+
+func NewDeleteGitHubApiKeyResultFromJson(data string) DeleteGitHubApiKeyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteGitHubApiKeyResultFromDict(dict)
 }
 
 func NewDeleteGitHubApiKeyResultFromDict(data map[string]interface{}) DeleteGitHubApiKeyResult {

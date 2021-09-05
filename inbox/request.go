@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package inbox
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -58,6 +67,12 @@ type CreateNamespaceRequest struct {
 	KeyId                      *string              `json:"keyId"`
 	ReceiveNotification        *NotificationSetting `json:"receiveNotification"`
 	LogSetting                 *LogSetting          `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -101,6 +116,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -122,6 +143,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -154,6 +181,12 @@ type UpdateNamespaceRequest struct {
 	KeyId                      *string              `json:"keyId"`
 	ReceiveNotification        *NotificationSetting `json:"receiveNotification"`
 	LogSetting                 *LogSetting          `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -197,6 +230,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -221,6 +260,12 @@ type DescribeMessagesRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeMessagesRequestFromJson(data string) DescribeMessagesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMessagesRequestFromDict(dict)
 }
 
 func NewDescribeMessagesRequestFromDict(data map[string]interface{}) DescribeMessagesRequest {
@@ -255,6 +300,12 @@ type DescribeMessagesByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeMessagesByUserIdRequestFromJson(data string) DescribeMessagesByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMessagesByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeMessagesByUserIdRequestFromDict(data map[string]interface{}) DescribeMessagesByUserIdRequest {
 	return DescribeMessagesByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -287,6 +338,12 @@ type SendMessageByUserIdRequest struct {
 	ReadAcquireActions []AcquireAction `json:"readAcquireActions"`
 	ExpiresAt          *int64          `json:"expiresAt"`
 	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
+}
+
+func NewSendMessageByUserIdRequestFromJson(data string) SendMessageByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSendMessageByUserIdRequestFromDict(dict)
 }
 
 func NewSendMessageByUserIdRequestFromDict(data map[string]interface{}) SendMessageByUserIdRequest {
@@ -326,6 +383,12 @@ type GetMessageRequest struct {
 	MessageName        *string `json:"messageName"`
 }
 
+func NewGetMessageRequestFromJson(data string) GetMessageRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMessageRequestFromDict(dict)
+}
+
 func NewGetMessageRequestFromDict(data map[string]interface{}) GetMessageRequest {
 	return GetMessageRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -353,6 +416,12 @@ type GetMessageByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	MessageName        *string `json:"messageName"`
+}
+
+func NewGetMessageByUserIdRequestFromJson(data string) GetMessageByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMessageByUserIdRequestFromDict(dict)
 }
 
 func NewGetMessageByUserIdRequestFromDict(data map[string]interface{}) GetMessageByUserIdRequest {
@@ -383,6 +452,12 @@ type ReceiveGlobalMessageRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
+func NewReceiveGlobalMessageRequestFromJson(data string) ReceiveGlobalMessageRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewReceiveGlobalMessageRequestFromDict(dict)
+}
+
 func NewReceiveGlobalMessageRequestFromDict(data map[string]interface{}) ReceiveGlobalMessageRequest {
 	return ReceiveGlobalMessageRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -407,6 +482,12 @@ type ReceiveGlobalMessageByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewReceiveGlobalMessageByUserIdRequestFromJson(data string) ReceiveGlobalMessageByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewReceiveGlobalMessageByUserIdRequestFromDict(dict)
 }
 
 func NewReceiveGlobalMessageByUserIdRequestFromDict(data map[string]interface{}) ReceiveGlobalMessageByUserIdRequest {
@@ -434,6 +515,12 @@ type OpenMessageRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	AccessToken        *string `json:"accessToken"`
 	MessageName        *string `json:"messageName"`
+}
+
+func NewOpenMessageRequestFromJson(data string) OpenMessageRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewOpenMessageRequestFromDict(dict)
 }
 
 func NewOpenMessageRequestFromDict(data map[string]interface{}) OpenMessageRequest {
@@ -465,6 +552,12 @@ type OpenMessageByUserIdRequest struct {
 	MessageName        *string `json:"messageName"`
 }
 
+func NewOpenMessageByUserIdRequestFromJson(data string) OpenMessageByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewOpenMessageByUserIdRequestFromDict(dict)
+}
+
 func NewOpenMessageByUserIdRequestFromDict(data map[string]interface{}) OpenMessageByUserIdRequest {
 	return OpenMessageByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -493,6 +586,12 @@ type ReadMessageRequest struct {
 	AccessToken        *string  `json:"accessToken"`
 	MessageName        *string  `json:"messageName"`
 	Config             []Config `json:"config"`
+}
+
+func NewReadMessageRequestFromJson(data string) ReadMessageRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewReadMessageRequestFromDict(dict)
 }
 
 func NewReadMessageRequestFromDict(data map[string]interface{}) ReadMessageRequest {
@@ -529,6 +628,12 @@ type ReadMessageByUserIdRequest struct {
 	Config             []Config `json:"config"`
 }
 
+func NewReadMessageByUserIdRequestFromJson(data string) ReadMessageByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewReadMessageByUserIdRequestFromDict(dict)
+}
+
 func NewReadMessageByUserIdRequestFromDict(data map[string]interface{}) ReadMessageByUserIdRequest {
 	return ReadMessageByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -562,6 +667,12 @@ type DeleteMessageRequest struct {
 	MessageName        *string `json:"messageName"`
 }
 
+func NewDeleteMessageRequestFromJson(data string) DeleteMessageRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteMessageRequestFromDict(dict)
+}
+
 func NewDeleteMessageRequestFromDict(data map[string]interface{}) DeleteMessageRequest {
 	return DeleteMessageRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -589,6 +700,12 @@ type DeleteMessageByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	MessageName        *string `json:"messageName"`
+}
+
+func NewDeleteMessageByUserIdRequestFromJson(data string) DeleteMessageByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteMessageByUserIdRequestFromDict(dict)
 }
 
 func NewDeleteMessageByUserIdRequestFromDict(data map[string]interface{}) DeleteMessageByUserIdRequest {
@@ -619,6 +736,12 @@ type SendByStampSheetRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewSendByStampSheetRequestFromJson(data string) SendByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSendByStampSheetRequestFromDict(dict)
+}
+
 func NewSendByStampSheetRequestFromDict(data map[string]interface{}) SendByStampSheetRequest {
 	return SendByStampSheetRequest{
 		StampSheet: core.CastString(data["stampSheet"]),
@@ -643,6 +766,12 @@ type OpenByStampTaskRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StampTask          *string `json:"stampTask"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewOpenByStampTaskRequestFromJson(data string) OpenByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewOpenByStampTaskRequestFromDict(dict)
 }
 
 func NewOpenByStampTaskRequestFromDict(data map[string]interface{}) OpenByStampTaskRequest {
@@ -670,6 +799,12 @@ type ExportMasterRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterRequestFromDict(dict)
+}
+
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -691,6 +826,12 @@ type GetCurrentMessageMasterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetCurrentMessageMasterRequestFromJson(data string) GetCurrentMessageMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentMessageMasterRequestFromDict(dict)
 }
 
 func NewGetCurrentMessageMasterRequestFromDict(data map[string]interface{}) GetCurrentMessageMasterRequest {
@@ -715,6 +856,12 @@ type UpdateCurrentMessageMasterRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	Settings           *string `json:"settings"`
+}
+
+func NewUpdateCurrentMessageMasterRequestFromJson(data string) UpdateCurrentMessageMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentMessageMasterRequestFromDict(dict)
 }
 
 func NewUpdateCurrentMessageMasterRequestFromDict(data map[string]interface{}) UpdateCurrentMessageMasterRequest {
@@ -743,6 +890,12 @@ type UpdateCurrentMessageMasterFromGitHubRequest struct {
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
+func NewUpdateCurrentMessageMasterFromGitHubRequestFromJson(data string) UpdateCurrentMessageMasterFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentMessageMasterFromGitHubRequestFromDict(dict)
+}
+
 func NewUpdateCurrentMessageMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentMessageMasterFromGitHubRequest {
 	return UpdateCurrentMessageMasterFromGitHubRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
@@ -768,6 +921,12 @@ type DescribeGlobalMessageMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeGlobalMessageMastersRequestFromJson(data string) DescribeGlobalMessageMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeGlobalMessageMastersRequestFromDict(dict)
 }
 
 func NewDescribeGlobalMessageMastersRequestFromDict(data map[string]interface{}) DescribeGlobalMessageMastersRequest {
@@ -800,6 +959,12 @@ type CreateGlobalMessageMasterRequest struct {
 	ReadAcquireActions []AcquireAction `json:"readAcquireActions"`
 	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
 	ExpiresAt          *int64          `json:"expiresAt"`
+}
+
+func NewCreateGlobalMessageMasterRequestFromJson(data string) CreateGlobalMessageMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateGlobalMessageMasterRequestFromDict(dict)
 }
 
 func NewCreateGlobalMessageMasterRequestFromDict(data map[string]interface{}) CreateGlobalMessageMasterRequest {
@@ -838,6 +1003,12 @@ type GetGlobalMessageMasterRequest struct {
 	GlobalMessageName  *string `json:"globalMessageName"`
 }
 
+func NewGetGlobalMessageMasterRequestFromJson(data string) GetGlobalMessageMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetGlobalMessageMasterRequestFromDict(dict)
+}
+
 func NewGetGlobalMessageMasterRequestFromDict(data map[string]interface{}) GetGlobalMessageMasterRequest {
 	return GetGlobalMessageMasterRequest{
 		NamespaceName:     core.CastString(data["namespaceName"]),
@@ -866,6 +1037,12 @@ type UpdateGlobalMessageMasterRequest struct {
 	ReadAcquireActions []AcquireAction `json:"readAcquireActions"`
 	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
 	ExpiresAt          *int64          `json:"expiresAt"`
+}
+
+func NewUpdateGlobalMessageMasterRequestFromJson(data string) UpdateGlobalMessageMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateGlobalMessageMasterRequestFromDict(dict)
 }
 
 func NewUpdateGlobalMessageMasterRequestFromDict(data map[string]interface{}) UpdateGlobalMessageMasterRequest {
@@ -904,6 +1081,12 @@ type DeleteGlobalMessageMasterRequest struct {
 	GlobalMessageName  *string `json:"globalMessageName"`
 }
 
+func NewDeleteGlobalMessageMasterRequestFromJson(data string) DeleteGlobalMessageMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteGlobalMessageMasterRequestFromDict(dict)
+}
+
 func NewDeleteGlobalMessageMasterRequestFromDict(data map[string]interface{}) DeleteGlobalMessageMasterRequest {
 	return DeleteGlobalMessageMasterRequest{
 		NamespaceName:     core.CastString(data["namespaceName"]),
@@ -929,6 +1112,12 @@ type DescribeGlobalMessagesRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDescribeGlobalMessagesRequestFromJson(data string) DescribeGlobalMessagesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeGlobalMessagesRequestFromDict(dict)
+}
+
 func NewDescribeGlobalMessagesRequestFromDict(data map[string]interface{}) DescribeGlobalMessagesRequest {
 	return DescribeGlobalMessagesRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -951,6 +1140,12 @@ type GetGlobalMessageRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	GlobalMessageName  *string `json:"globalMessageName"`
+}
+
+func NewGetGlobalMessageRequestFromJson(data string) GetGlobalMessageRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetGlobalMessageRequestFromDict(dict)
 }
 
 func NewGetGlobalMessageRequestFromDict(data map[string]interface{}) GetGlobalMessageRequest {
@@ -979,6 +1174,12 @@ type GetReceivedByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 }
 
+func NewGetReceivedByUserIdRequestFromJson(data string) GetReceivedByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetReceivedByUserIdRequestFromDict(dict)
+}
+
 func NewGetReceivedByUserIdRequestFromDict(data map[string]interface{}) GetReceivedByUserIdRequest {
 	return GetReceivedByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1004,6 +1205,12 @@ type UpdateReceivedByUserIdRequest struct {
 	NamespaceName              *string  `json:"namespaceName"`
 	UserId                     *string  `json:"userId"`
 	ReceivedGlobalMessageNames []string `json:"receivedGlobalMessageNames"`
+}
+
+func NewUpdateReceivedByUserIdRequestFromJson(data string) UpdateReceivedByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateReceivedByUserIdRequestFromDict(dict)
 }
 
 func NewUpdateReceivedByUserIdRequestFromDict(data map[string]interface{}) UpdateReceivedByUserIdRequest {
@@ -1034,6 +1241,12 @@ type DeleteReceivedByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewDeleteReceivedByUserIdRequestFromJson(data string) DeleteReceivedByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteReceivedByUserIdRequestFromDict(dict)
 }
 
 func NewDeleteReceivedByUserIdRequestFromDict(data map[string]interface{}) DeleteReceivedByUserIdRequest {

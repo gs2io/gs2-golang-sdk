@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package watch
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type GetChartRequest struct {
 	RequestId          *string  `json:"requestId"`
@@ -32,6 +35,12 @@ type GetChartRequest struct {
 	Aggregator         *string  `json:"aggregator"`
 	Style              *string  `json:"style"`
 	Title              *string  `json:"title"`
+}
+
+func NewGetChartRequestFromJson(data string) GetChartRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetChartRequestFromDict(dict)
 }
 
 func NewGetChartRequestFromDict(data map[string]interface{}) GetChartRequest {
@@ -78,6 +87,12 @@ type GetCumulativeRequest struct {
 	ResourceGrn        *string `json:"resourceGrn"`
 }
 
+func NewGetCumulativeRequestFromJson(data string) GetCumulativeRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCumulativeRequestFromDict(dict)
+}
+
 func NewGetCumulativeRequestFromDict(data map[string]interface{}) GetCumulativeRequest {
 	return GetCumulativeRequest{
 		Name:        core.CastString(data["name"]),
@@ -105,6 +120,12 @@ type DescribeBillingActivitiesRequest struct {
 	Service            *string `json:"service"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeBillingActivitiesRequestFromJson(data string) DescribeBillingActivitiesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeBillingActivitiesRequestFromDict(dict)
 }
 
 func NewDescribeBillingActivitiesRequestFromDict(data map[string]interface{}) DescribeBillingActivitiesRequest {
@@ -139,6 +160,12 @@ type GetBillingActivityRequest struct {
 	Month              *int32  `json:"month"`
 	Service            *string `json:"service"`
 	ActivityType       *string `json:"activityType"`
+}
+
+func NewGetBillingActivityRequestFromJson(data string) GetBillingActivityRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetBillingActivityRequestFromDict(dict)
 }
 
 func NewGetBillingActivityRequestFromDict(data map[string]interface{}) GetBillingActivityRequest {

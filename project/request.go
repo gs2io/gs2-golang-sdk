@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package project
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type CreateAccountRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -26,6 +29,12 @@ type CreateAccountRequest struct {
 	FullName           *string `json:"fullName"`
 	CompanyName        *string `json:"companyName"`
 	Password           *string `json:"password"`
+}
+
+func NewCreateAccountRequestFromJson(data string) CreateAccountRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateAccountRequestFromDict(dict)
 }
 
 func NewCreateAccountRequestFromDict(data map[string]interface{}) CreateAccountRequest {
@@ -57,6 +66,12 @@ type VerifyRequest struct {
 	VerifyToken        *string `json:"verifyToken"`
 }
 
+func NewVerifyRequestFromJson(data string) VerifyRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRequestFromDict(dict)
+}
+
 func NewVerifyRequestFromDict(data map[string]interface{}) VerifyRequest {
 	return VerifyRequest{
 		VerifyToken: core.CastString(data["verifyToken"]),
@@ -79,6 +94,12 @@ type SignInRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	Email              *string `json:"email"`
 	Password           *string `json:"password"`
+}
+
+func NewSignInRequestFromJson(data string) SignInRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSignInRequestFromDict(dict)
 }
 
 func NewSignInRequestFromDict(data map[string]interface{}) SignInRequest {
@@ -106,6 +127,12 @@ type IssueAccountTokenRequest struct {
 	AccountName        *string `json:"accountName"`
 }
 
+func NewIssueAccountTokenRequestFromJson(data string) IssueAccountTokenRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIssueAccountTokenRequestFromDict(dict)
+}
+
 func NewIssueAccountTokenRequestFromDict(data map[string]interface{}) IssueAccountTokenRequest {
 	return IssueAccountTokenRequest{
 		AccountName: core.CastString(data["accountName"]),
@@ -129,6 +156,12 @@ type ForgetRequest struct {
 	Email              *string `json:"email"`
 }
 
+func NewForgetRequestFromJson(data string) ForgetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewForgetRequestFromDict(dict)
+}
+
 func NewForgetRequestFromDict(data map[string]interface{}) ForgetRequest {
 	return ForgetRequest{
 		Email: core.CastString(data["email"]),
@@ -150,6 +183,12 @@ type IssuePasswordRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	IssuePasswordToken *string `json:"issuePasswordToken"`
+}
+
+func NewIssuePasswordRequestFromJson(data string) IssuePasswordRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIssuePasswordRequestFromDict(dict)
 }
 
 func NewIssuePasswordRequestFromDict(data map[string]interface{}) IssuePasswordRequest {
@@ -177,6 +216,12 @@ type UpdateAccountRequest struct {
 	CompanyName        *string `json:"companyName"`
 	Password           *string `json:"password"`
 	AccountToken       *string `json:"accountToken"`
+}
+
+func NewUpdateAccountRequestFromJson(data string) UpdateAccountRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateAccountRequestFromDict(dict)
 }
 
 func NewUpdateAccountRequestFromDict(data map[string]interface{}) UpdateAccountRequest {
@@ -209,6 +254,12 @@ type DeleteAccountRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 }
 
+func NewDeleteAccountRequestFromJson(data string) DeleteAccountRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteAccountRequestFromDict(dict)
+}
+
 func NewDeleteAccountRequestFromDict(data map[string]interface{}) DeleteAccountRequest {
 	return DeleteAccountRequest{}
 }
@@ -228,6 +279,12 @@ type DescribeProjectsRequest struct {
 	AccountToken       *string `json:"accountToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeProjectsRequestFromJson(data string) DescribeProjectsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeProjectsRequestFromDict(dict)
 }
 
 func NewDescribeProjectsRequestFromDict(data map[string]interface{}) DescribeProjectsRequest {
@@ -262,6 +319,12 @@ type CreateProjectRequest struct {
 	EnableEventBridge       *string `json:"enableEventBridge"`
 	EventBridgeAwsAccountId *string `json:"eventBridgeAwsAccountId"`
 	EventBridgeAwsRegion    *string `json:"eventBridgeAwsRegion"`
+}
+
+func NewCreateProjectRequestFromJson(data string) CreateProjectRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateProjectRequestFromDict(dict)
 }
 
 func NewCreateProjectRequestFromDict(data map[string]interface{}) CreateProjectRequest {
@@ -302,6 +365,12 @@ type GetProjectRequest struct {
 	ProjectName        *string `json:"projectName"`
 }
 
+func NewGetProjectRequestFromJson(data string) GetProjectRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetProjectRequestFromDict(dict)
+}
+
 func NewGetProjectRequestFromDict(data map[string]interface{}) GetProjectRequest {
 	return GetProjectRequest{
 		AccountToken: core.CastString(data["accountToken"]),
@@ -326,6 +395,12 @@ type GetProjectTokenRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	ProjectName        *string `json:"projectName"`
 	AccountToken       *string `json:"accountToken"`
+}
+
+func NewGetProjectTokenRequestFromJson(data string) GetProjectTokenRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetProjectTokenRequestFromDict(dict)
 }
 
 func NewGetProjectTokenRequestFromDict(data map[string]interface{}) GetProjectTokenRequest {
@@ -354,6 +429,12 @@ type GetProjectTokenByIdentifierRequest struct {
 	ProjectName        *string `json:"projectName"`
 	UserName           *string `json:"userName"`
 	Password           *string `json:"password"`
+}
+
+func NewGetProjectTokenByIdentifierRequestFromJson(data string) GetProjectTokenByIdentifierRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetProjectTokenByIdentifierRequestFromDict(dict)
 }
 
 func NewGetProjectTokenByIdentifierRequestFromDict(data map[string]interface{}) GetProjectTokenByIdentifierRequest {
@@ -390,6 +471,12 @@ type UpdateProjectRequest struct {
 	EnableEventBridge       *string `json:"enableEventBridge"`
 	EventBridgeAwsAccountId *string `json:"eventBridgeAwsAccountId"`
 	EventBridgeAwsRegion    *string `json:"eventBridgeAwsRegion"`
+}
+
+func NewUpdateProjectRequestFromJson(data string) UpdateProjectRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateProjectRequestFromDict(dict)
 }
 
 func NewUpdateProjectRequestFromDict(data map[string]interface{}) UpdateProjectRequest {
@@ -430,6 +517,12 @@ type DeleteProjectRequest struct {
 	ProjectName        *string `json:"projectName"`
 }
 
+func NewDeleteProjectRequestFromJson(data string) DeleteProjectRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteProjectRequestFromDict(dict)
+}
+
 func NewDeleteProjectRequestFromDict(data map[string]interface{}) DeleteProjectRequest {
 	return DeleteProjectRequest{
 		AccountToken: core.CastString(data["accountToken"]),
@@ -455,6 +548,12 @@ type DescribeBillingMethodsRequest struct {
 	AccountToken       *string `json:"accountToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeBillingMethodsRequestFromJson(data string) DescribeBillingMethodsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeBillingMethodsRequestFromDict(dict)
 }
 
 func NewDescribeBillingMethodsRequestFromDict(data map[string]interface{}) DescribeBillingMethodsRequest {
@@ -486,6 +585,12 @@ type CreateBillingMethodRequest struct {
 	MethodType         *string `json:"methodType"`
 	CardCustomerId     *string `json:"cardCustomerId"`
 	PartnerId          *string `json:"partnerId"`
+}
+
+func NewCreateBillingMethodRequestFromJson(data string) CreateBillingMethodRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateBillingMethodRequestFromDict(dict)
 }
 
 func NewCreateBillingMethodRequestFromDict(data map[string]interface{}) CreateBillingMethodRequest {
@@ -520,6 +625,12 @@ type GetBillingMethodRequest struct {
 	BillingMethodName  *string `json:"billingMethodName"`
 }
 
+func NewGetBillingMethodRequestFromJson(data string) GetBillingMethodRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetBillingMethodRequestFromDict(dict)
+}
+
 func NewGetBillingMethodRequestFromDict(data map[string]interface{}) GetBillingMethodRequest {
 	return GetBillingMethodRequest{
 		AccountToken:      core.CastString(data["accountToken"]),
@@ -545,6 +656,12 @@ type UpdateBillingMethodRequest struct {
 	AccountToken       *string `json:"accountToken"`
 	BillingMethodName  *string `json:"billingMethodName"`
 	Description        *string `json:"description"`
+}
+
+func NewUpdateBillingMethodRequestFromJson(data string) UpdateBillingMethodRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateBillingMethodRequestFromDict(dict)
 }
 
 func NewUpdateBillingMethodRequestFromDict(data map[string]interface{}) UpdateBillingMethodRequest {
@@ -575,6 +692,12 @@ type DeleteBillingMethodRequest struct {
 	BillingMethodName  *string `json:"billingMethodName"`
 }
 
+func NewDeleteBillingMethodRequestFromJson(data string) DeleteBillingMethodRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteBillingMethodRequestFromDict(dict)
+}
+
 func NewDeleteBillingMethodRequestFromDict(data map[string]interface{}) DeleteBillingMethodRequest {
 	return DeleteBillingMethodRequest{
 		AccountToken:      core.CastString(data["accountToken"]),
@@ -600,6 +723,12 @@ type DescribeReceiptsRequest struct {
 	AccountToken       *string `json:"accountToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeReceiptsRequestFromJson(data string) DescribeReceiptsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeReceiptsRequestFromDict(dict)
 }
 
 func NewDescribeReceiptsRequestFromDict(data map[string]interface{}) DescribeReceiptsRequest {
@@ -632,6 +761,12 @@ type DescribeBillingsRequest struct {
 	Month              *int32  `json:"month"`
 	Region             *string `json:"region"`
 	Service            *string `json:"service"`
+}
+
+func NewDescribeBillingsRequestFromJson(data string) DescribeBillingsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeBillingsRequestFromDict(dict)
 }
 
 func NewDescribeBillingsRequestFromDict(data map[string]interface{}) DescribeBillingsRequest {

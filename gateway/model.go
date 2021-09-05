@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package gateway
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId    *string     `json:"namespaceId"`
@@ -26,6 +29,12 @@ type Namespace struct {
 	LogSetting     *LogSetting `json:"logSetting"`
 	CreatedAt      *int64      `json:"createdAt"`
 	UpdatedAt      *int64      `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -81,6 +90,12 @@ type WebSocketSession struct {
 	UpdatedAt          *int64  `json:"updatedAt"`
 }
 
+func NewWebSocketSessionFromJson(data string) WebSocketSession {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewWebSocketSessionFromDict(dict)
+}
+
 func NewWebSocketSessionFromDict(data map[string]interface{}) WebSocketSession {
 	return WebSocketSession{
 		WebSocketSessionId: core.CastString(data["webSocketSessionId"]),
@@ -131,6 +146,12 @@ type FirebaseToken struct {
 	UpdatedAt       *int64  `json:"updatedAt"`
 }
 
+func NewFirebaseTokenFromJson(data string) FirebaseToken {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFirebaseTokenFromDict(dict)
+}
+
 func NewFirebaseTokenFromDict(data map[string]interface{}) FirebaseToken {
 	return FirebaseToken{
 		FirebaseTokenId: core.CastString(data["firebaseTokenId"]),
@@ -173,6 +194,12 @@ func CastFirebaseTokensFromDict(data []FirebaseToken) []interface{} {
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package friend
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -130,6 +157,12 @@ type UpdateNamespaceResult struct {
 type UpdateNamespaceAsyncResult struct {
 	result *UpdateNamespaceResult
 	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
@@ -157,6 +190,12 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -180,6 +219,12 @@ type GetProfileResult struct {
 type GetProfileAsyncResult struct {
 	result *GetProfileResult
 	err    error
+}
+
+func NewGetProfileResultFromJson(data string) GetProfileResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetProfileResultFromDict(dict)
 }
 
 func NewGetProfileResultFromDict(data map[string]interface{}) GetProfileResult {
@@ -207,6 +252,12 @@ type GetProfileByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewGetProfileByUserIdResultFromJson(data string) GetProfileByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetProfileByUserIdResultFromDict(dict)
+}
+
 func NewGetProfileByUserIdResultFromDict(data map[string]interface{}) GetProfileByUserIdResult {
 	return GetProfileByUserIdResult{
 		Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
@@ -230,6 +281,12 @@ type UpdateProfileResult struct {
 type UpdateProfileAsyncResult struct {
 	result *UpdateProfileResult
 	err    error
+}
+
+func NewUpdateProfileResultFromJson(data string) UpdateProfileResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateProfileResultFromDict(dict)
 }
 
 func NewUpdateProfileResultFromDict(data map[string]interface{}) UpdateProfileResult {
@@ -257,6 +314,12 @@ type UpdateProfileByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewUpdateProfileByUserIdResultFromJson(data string) UpdateProfileByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateProfileByUserIdResultFromDict(dict)
+}
+
 func NewUpdateProfileByUserIdResultFromDict(data map[string]interface{}) UpdateProfileByUserIdResult {
 	return UpdateProfileByUserIdResult{
 		Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
@@ -281,6 +344,12 @@ type DeleteProfileByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDeleteProfileByUserIdResultFromJson(data string) DeleteProfileByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteProfileByUserIdResultFromDict(dict)
+}
+
 func NewDeleteProfileByUserIdResultFromDict(data map[string]interface{}) DeleteProfileByUserIdResult {
 	return DeleteProfileByUserIdResult{}
 }
@@ -300,6 +369,12 @@ type GetPublicProfileResult struct {
 type GetPublicProfileAsyncResult struct {
 	result *GetPublicProfileResult
 	err    error
+}
+
+func NewGetPublicProfileResultFromJson(data string) GetPublicProfileResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetPublicProfileResultFromDict(dict)
 }
 
 func NewGetPublicProfileResultFromDict(data map[string]interface{}) GetPublicProfileResult {
@@ -326,6 +401,12 @@ type DescribeFollowsResult struct {
 type DescribeFollowsAsyncResult struct {
 	result *DescribeFollowsResult
 	err    error
+}
+
+func NewDescribeFollowsResultFromJson(data string) DescribeFollowsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeFollowsResultFromDict(dict)
 }
 
 func NewDescribeFollowsResultFromDict(data map[string]interface{}) DescribeFollowsResult {
@@ -358,6 +439,12 @@ type DescribeFollowsByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeFollowsByUserIdResultFromJson(data string) DescribeFollowsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeFollowsByUserIdResultFromDict(dict)
+}
+
 func NewDescribeFollowsByUserIdResultFromDict(data map[string]interface{}) DescribeFollowsByUserIdResult {
 	return DescribeFollowsByUserIdResult{
 		Items:         CastFollowUsers(core.CastArray(data["items"])),
@@ -387,6 +474,12 @@ type GetFollowAsyncResult struct {
 	err    error
 }
 
+func NewGetFollowResultFromJson(data string) GetFollowResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFollowResultFromDict(dict)
+}
+
 func NewGetFollowResultFromDict(data map[string]interface{}) GetFollowResult {
 	return GetFollowResult{
 		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
@@ -410,6 +503,12 @@ type GetFollowByUserIdResult struct {
 type GetFollowByUserIdAsyncResult struct {
 	result *GetFollowByUserIdResult
 	err    error
+}
+
+func NewGetFollowByUserIdResultFromJson(data string) GetFollowByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFollowByUserIdResultFromDict(dict)
 }
 
 func NewGetFollowByUserIdResultFromDict(data map[string]interface{}) GetFollowByUserIdResult {
@@ -437,6 +536,12 @@ type FollowAsyncResult struct {
 	err    error
 }
 
+func NewFollowResultFromJson(data string) FollowResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFollowResultFromDict(dict)
+}
+
 func NewFollowResultFromDict(data map[string]interface{}) FollowResult {
 	return FollowResult{
 		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
@@ -460,6 +565,12 @@ type FollowByUserIdResult struct {
 type FollowByUserIdAsyncResult struct {
 	result *FollowByUserIdResult
 	err    error
+}
+
+func NewFollowByUserIdResultFromJson(data string) FollowByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFollowByUserIdResultFromDict(dict)
 }
 
 func NewFollowByUserIdResultFromDict(data map[string]interface{}) FollowByUserIdResult {
@@ -487,6 +598,12 @@ type UnfollowAsyncResult struct {
 	err    error
 }
 
+func NewUnfollowResultFromJson(data string) UnfollowResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnfollowResultFromDict(dict)
+}
+
 func NewUnfollowResultFromDict(data map[string]interface{}) UnfollowResult {
 	return UnfollowResult{
 		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
@@ -510,6 +627,12 @@ type UnfollowByUserIdResult struct {
 type UnfollowByUserIdAsyncResult struct {
 	result *UnfollowByUserIdResult
 	err    error
+}
+
+func NewUnfollowByUserIdResultFromJson(data string) UnfollowByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnfollowByUserIdResultFromDict(dict)
 }
 
 func NewUnfollowByUserIdResultFromDict(data map[string]interface{}) UnfollowByUserIdResult {
@@ -536,6 +659,12 @@ type DescribeFriendsResult struct {
 type DescribeFriendsAsyncResult struct {
 	result *DescribeFriendsResult
 	err    error
+}
+
+func NewDescribeFriendsResultFromJson(data string) DescribeFriendsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeFriendsResultFromDict(dict)
 }
 
 func NewDescribeFriendsResultFromDict(data map[string]interface{}) DescribeFriendsResult {
@@ -568,6 +697,12 @@ type DescribeFriendsByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeFriendsByUserIdResultFromJson(data string) DescribeFriendsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeFriendsByUserIdResultFromDict(dict)
+}
+
 func NewDescribeFriendsByUserIdResultFromDict(data map[string]interface{}) DescribeFriendsByUserIdResult {
 	return DescribeFriendsByUserIdResult{
 		Items:         CastFriendUsers(core.CastArray(data["items"])),
@@ -597,6 +732,12 @@ type GetFriendAsyncResult struct {
 	err    error
 }
 
+func NewGetFriendResultFromJson(data string) GetFriendResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFriendResultFromDict(dict)
+}
+
 func NewGetFriendResultFromDict(data map[string]interface{}) GetFriendResult {
 	return GetFriendResult{
 		Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
@@ -620,6 +761,12 @@ type GetFriendByUserIdResult struct {
 type GetFriendByUserIdAsyncResult struct {
 	result *GetFriendByUserIdResult
 	err    error
+}
+
+func NewGetFriendByUserIdResultFromJson(data string) GetFriendByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFriendByUserIdResultFromDict(dict)
 }
 
 func NewGetFriendByUserIdResultFromDict(data map[string]interface{}) GetFriendByUserIdResult {
@@ -647,6 +794,12 @@ type DeleteFriendAsyncResult struct {
 	err    error
 }
 
+func NewDeleteFriendResultFromJson(data string) DeleteFriendResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteFriendResultFromDict(dict)
+}
+
 func NewDeleteFriendResultFromDict(data map[string]interface{}) DeleteFriendResult {
 	return DeleteFriendResult{
 		Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
@@ -672,6 +825,12 @@ type DeleteFriendByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDeleteFriendByUserIdResultFromJson(data string) DeleteFriendByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteFriendByUserIdResultFromDict(dict)
+}
+
 func NewDeleteFriendByUserIdResultFromDict(data map[string]interface{}) DeleteFriendByUserIdResult {
 	return DeleteFriendByUserIdResult{
 		Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
@@ -695,6 +854,12 @@ type DescribeSendRequestsResult struct {
 type DescribeSendRequestsAsyncResult struct {
 	result *DescribeSendRequestsResult
 	err    error
+}
+
+func NewDescribeSendRequestsResultFromJson(data string) DescribeSendRequestsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSendRequestsResultFromDict(dict)
 }
 
 func NewDescribeSendRequestsResultFromDict(data map[string]interface{}) DescribeSendRequestsResult {
@@ -724,6 +889,12 @@ type DescribeSendRequestsByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeSendRequestsByUserIdResultFromJson(data string) DescribeSendRequestsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSendRequestsByUserIdResultFromDict(dict)
+}
+
 func NewDescribeSendRequestsByUserIdResultFromDict(data map[string]interface{}) DescribeSendRequestsByUserIdResult {
 	return DescribeSendRequestsByUserIdResult{
 		Items: CastFriendRequests(core.CastArray(data["items"])),
@@ -751,6 +922,12 @@ type GetSendRequestAsyncResult struct {
 	err    error
 }
 
+func NewGetSendRequestResultFromJson(data string) GetSendRequestResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSendRequestResultFromDict(dict)
+}
+
 func NewGetSendRequestResultFromDict(data map[string]interface{}) GetSendRequestResult {
 	return GetSendRequestResult{
 		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
@@ -774,6 +951,12 @@ type GetSendRequestByUserIdResult struct {
 type GetSendRequestByUserIdAsyncResult struct {
 	result *GetSendRequestByUserIdResult
 	err    error
+}
+
+func NewGetSendRequestByUserIdResultFromJson(data string) GetSendRequestByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSendRequestByUserIdResultFromDict(dict)
 }
 
 func NewGetSendRequestByUserIdResultFromDict(data map[string]interface{}) GetSendRequestByUserIdResult {
@@ -801,6 +984,12 @@ type SendRequestAsyncResult struct {
 	err    error
 }
 
+func NewSendRequestResultFromJson(data string) SendRequestResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSendRequestResultFromDict(dict)
+}
+
 func NewSendRequestResultFromDict(data map[string]interface{}) SendRequestResult {
 	return SendRequestResult{
 		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
@@ -824,6 +1013,12 @@ type SendRequestByUserIdResult struct {
 type SendRequestByUserIdAsyncResult struct {
 	result *SendRequestByUserIdResult
 	err    error
+}
+
+func NewSendRequestByUserIdResultFromJson(data string) SendRequestByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSendRequestByUserIdResultFromDict(dict)
 }
 
 func NewSendRequestByUserIdResultFromDict(data map[string]interface{}) SendRequestByUserIdResult {
@@ -851,6 +1046,12 @@ type DeleteRequestAsyncResult struct {
 	err    error
 }
 
+func NewDeleteRequestResultFromJson(data string) DeleteRequestResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteRequestResultFromDict(dict)
+}
+
 func NewDeleteRequestResultFromDict(data map[string]interface{}) DeleteRequestResult {
 	return DeleteRequestResult{
 		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
@@ -876,6 +1077,12 @@ type DeleteRequestByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDeleteRequestByUserIdResultFromJson(data string) DeleteRequestByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteRequestByUserIdResultFromDict(dict)
+}
+
 func NewDeleteRequestByUserIdResultFromDict(data map[string]interface{}) DeleteRequestByUserIdResult {
 	return DeleteRequestByUserIdResult{
 		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
@@ -899,6 +1106,12 @@ type DescribeReceiveRequestsResult struct {
 type DescribeReceiveRequestsAsyncResult struct {
 	result *DescribeReceiveRequestsResult
 	err    error
+}
+
+func NewDescribeReceiveRequestsResultFromJson(data string) DescribeReceiveRequestsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeReceiveRequestsResultFromDict(dict)
 }
 
 func NewDescribeReceiveRequestsResultFromDict(data map[string]interface{}) DescribeReceiveRequestsResult {
@@ -928,6 +1141,12 @@ type DescribeReceiveRequestsByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeReceiveRequestsByUserIdResultFromJson(data string) DescribeReceiveRequestsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeReceiveRequestsByUserIdResultFromDict(dict)
+}
+
 func NewDescribeReceiveRequestsByUserIdResultFromDict(data map[string]interface{}) DescribeReceiveRequestsByUserIdResult {
 	return DescribeReceiveRequestsByUserIdResult{
 		Items: CastFriendRequests(core.CastArray(data["items"])),
@@ -955,6 +1174,12 @@ type GetReceiveRequestAsyncResult struct {
 	err    error
 }
 
+func NewGetReceiveRequestResultFromJson(data string) GetReceiveRequestResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetReceiveRequestResultFromDict(dict)
+}
+
 func NewGetReceiveRequestResultFromDict(data map[string]interface{}) GetReceiveRequestResult {
 	return GetReceiveRequestResult{
 		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
@@ -978,6 +1203,12 @@ type GetReceiveRequestByUserIdResult struct {
 type GetReceiveRequestByUserIdAsyncResult struct {
 	result *GetReceiveRequestByUserIdResult
 	err    error
+}
+
+func NewGetReceiveRequestByUserIdResultFromJson(data string) GetReceiveRequestByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetReceiveRequestByUserIdResultFromDict(dict)
 }
 
 func NewGetReceiveRequestByUserIdResultFromDict(data map[string]interface{}) GetReceiveRequestByUserIdResult {
@@ -1005,6 +1236,12 @@ type AcceptRequestAsyncResult struct {
 	err    error
 }
 
+func NewAcceptRequestResultFromJson(data string) AcceptRequestResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcceptRequestResultFromDict(dict)
+}
+
 func NewAcceptRequestResultFromDict(data map[string]interface{}) AcceptRequestResult {
 	return AcceptRequestResult{
 		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
@@ -1028,6 +1265,12 @@ type AcceptRequestByUserIdResult struct {
 type AcceptRequestByUserIdAsyncResult struct {
 	result *AcceptRequestByUserIdResult
 	err    error
+}
+
+func NewAcceptRequestByUserIdResultFromJson(data string) AcceptRequestByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcceptRequestByUserIdResultFromDict(dict)
 }
 
 func NewAcceptRequestByUserIdResultFromDict(data map[string]interface{}) AcceptRequestByUserIdResult {
@@ -1055,6 +1298,12 @@ type RejectRequestAsyncResult struct {
 	err    error
 }
 
+func NewRejectRequestResultFromJson(data string) RejectRequestResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRejectRequestResultFromDict(dict)
+}
+
 func NewRejectRequestResultFromDict(data map[string]interface{}) RejectRequestResult {
 	return RejectRequestResult{
 		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
@@ -1080,6 +1329,12 @@ type RejectRequestByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewRejectRequestByUserIdResultFromJson(data string) RejectRequestByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRejectRequestByUserIdResultFromDict(dict)
+}
+
 func NewRejectRequestByUserIdResultFromDict(data map[string]interface{}) RejectRequestByUserIdResult {
 	return RejectRequestByUserIdResult{
 		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
@@ -1103,6 +1358,12 @@ type DescribeBlackListResult struct {
 type DescribeBlackListAsyncResult struct {
 	result *DescribeBlackListResult
 	err    error
+}
+
+func NewDescribeBlackListResultFromJson(data string) DescribeBlackListResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeBlackListResultFromDict(dict)
 }
 
 func NewDescribeBlackListResultFromDict(data map[string]interface{}) DescribeBlackListResult {
@@ -1132,6 +1393,12 @@ type DescribeBlackListByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeBlackListByUserIdResultFromJson(data string) DescribeBlackListByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeBlackListByUserIdResultFromDict(dict)
+}
+
 func NewDescribeBlackListByUserIdResultFromDict(data map[string]interface{}) DescribeBlackListByUserIdResult {
 	return DescribeBlackListByUserIdResult{
 		Items: core.CastStrings(core.CastArray(data["items"])),
@@ -1159,6 +1426,12 @@ type RegisterBlackListAsyncResult struct {
 	err    error
 }
 
+func NewRegisterBlackListResultFromJson(data string) RegisterBlackListResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRegisterBlackListResultFromDict(dict)
+}
+
 func NewRegisterBlackListResultFromDict(data map[string]interface{}) RegisterBlackListResult {
 	return RegisterBlackListResult{
 		Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
@@ -1182,6 +1455,12 @@ type RegisterBlackListByUserIdResult struct {
 type RegisterBlackListByUserIdAsyncResult struct {
 	result *RegisterBlackListByUserIdResult
 	err    error
+}
+
+func NewRegisterBlackListByUserIdResultFromJson(data string) RegisterBlackListByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRegisterBlackListByUserIdResultFromDict(dict)
 }
 
 func NewRegisterBlackListByUserIdResultFromDict(data map[string]interface{}) RegisterBlackListByUserIdResult {
@@ -1209,6 +1488,12 @@ type UnregisterBlackListAsyncResult struct {
 	err    error
 }
 
+func NewUnregisterBlackListResultFromJson(data string) UnregisterBlackListResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnregisterBlackListResultFromDict(dict)
+}
+
 func NewUnregisterBlackListResultFromDict(data map[string]interface{}) UnregisterBlackListResult {
 	return UnregisterBlackListResult{
 		Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
@@ -1232,6 +1517,12 @@ type UnregisterBlackListByUserIdResult struct {
 type UnregisterBlackListByUserIdAsyncResult struct {
 	result *UnregisterBlackListByUserIdResult
 	err    error
+}
+
+func NewUnregisterBlackListByUserIdResultFromJson(data string) UnregisterBlackListByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnregisterBlackListByUserIdResultFromDict(dict)
 }
 
 func NewUnregisterBlackListByUserIdResultFromDict(data map[string]interface{}) UnregisterBlackListByUserIdResult {

@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package lock
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -53,6 +62,12 @@ type CreateNamespaceRequest struct {
 	LogSetting         *LogSetting `json:"logSetting"`
 }
 
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
+}
+
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
 		Name:        core.CastString(data["name"]),
@@ -80,6 +95,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -101,6 +122,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -126,6 +153,12 @@ type UpdateNamespaceRequest struct {
 	NamespaceName      *string     `json:"namespaceName"`
 	Description        *string     `json:"description"`
 	LogSetting         *LogSetting `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -155,6 +188,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -179,6 +218,12 @@ type DescribeMutexesRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeMutexesRequestFromJson(data string) DescribeMutexesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMutexesRequestFromDict(dict)
 }
 
 func NewDescribeMutexesRequestFromDict(data map[string]interface{}) DescribeMutexesRequest {
@@ -213,6 +258,12 @@ type DescribeMutexesByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeMutexesByUserIdRequestFromJson(data string) DescribeMutexesByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMutexesByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeMutexesByUserIdRequestFromDict(data map[string]interface{}) DescribeMutexesByUserIdRequest {
 	return DescribeMutexesByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -244,6 +295,12 @@ type LockRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	TransactionId      *string `json:"transactionId"`
 	Ttl                *int64  `json:"ttl"`
+}
+
+func NewLockRequestFromJson(data string) LockRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLockRequestFromDict(dict)
 }
 
 func NewLockRequestFromDict(data map[string]interface{}) LockRequest {
@@ -281,6 +338,12 @@ type LockByUserIdRequest struct {
 	Ttl                *int64  `json:"ttl"`
 }
 
+func NewLockByUserIdRequestFromJson(data string) LockByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLockByUserIdRequestFromDict(dict)
+}
+
 func NewLockByUserIdRequestFromDict(data map[string]interface{}) LockByUserIdRequest {
 	return LockByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -315,6 +378,12 @@ type UnlockRequest struct {
 	TransactionId      *string `json:"transactionId"`
 }
 
+func NewUnlockRequestFromJson(data string) UnlockRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnlockRequestFromDict(dict)
+}
+
 func NewUnlockRequestFromDict(data map[string]interface{}) UnlockRequest {
 	return UnlockRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -345,6 +414,12 @@ type UnlockByUserIdRequest struct {
 	PropertyId         *string `json:"propertyId"`
 	UserId             *string `json:"userId"`
 	TransactionId      *string `json:"transactionId"`
+}
+
+func NewUnlockByUserIdRequestFromJson(data string) UnlockByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnlockByUserIdRequestFromDict(dict)
 }
 
 func NewUnlockByUserIdRequestFromDict(data map[string]interface{}) UnlockByUserIdRequest {
@@ -378,6 +453,12 @@ type GetMutexRequest struct {
 	PropertyId         *string `json:"propertyId"`
 }
 
+func NewGetMutexRequestFromJson(data string) GetMutexRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMutexRequestFromDict(dict)
+}
+
 func NewGetMutexRequestFromDict(data map[string]interface{}) GetMutexRequest {
 	return GetMutexRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -407,6 +488,12 @@ type GetMutexByUserIdRequest struct {
 	PropertyId         *string `json:"propertyId"`
 }
 
+func NewGetMutexByUserIdRequestFromJson(data string) GetMutexByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMutexByUserIdRequestFromDict(dict)
+}
+
 func NewGetMutexByUserIdRequestFromDict(data map[string]interface{}) GetMutexByUserIdRequest {
 	return GetMutexByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -434,6 +521,12 @@ type DeleteMutexByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	PropertyId         *string `json:"propertyId"`
+}
+
+func NewDeleteMutexByUserIdRequestFromJson(data string) DeleteMutexByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteMutexByUserIdRequestFromDict(dict)
 }
 
 func NewDeleteMutexByUserIdRequestFromDict(data map[string]interface{}) DeleteMutexByUserIdRequest {

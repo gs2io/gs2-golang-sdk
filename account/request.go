@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package account
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -56,6 +65,12 @@ type CreateNamespaceRequest struct {
 	CreateTakeOverScript     *ScriptSetting `json:"createTakeOverScript"`
 	DoTakeOverScript         *ScriptSetting `json:"doTakeOverScript"`
 	LogSetting               *LogSetting    `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -95,6 +110,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -116,6 +137,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -146,6 +173,12 @@ type UpdateNamespaceRequest struct {
 	CreateTakeOverScript     *ScriptSetting `json:"createTakeOverScript"`
 	DoTakeOverScript         *ScriptSetting `json:"doTakeOverScript"`
 	LogSetting               *LogSetting    `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -185,6 +218,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -208,6 +247,12 @@ type DescribeAccountsRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeAccountsRequestFromJson(data string) DescribeAccountsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeAccountsRequestFromDict(dict)
 }
 
 func NewDescribeAccountsRequestFromDict(data map[string]interface{}) DescribeAccountsRequest {
@@ -237,6 +282,12 @@ type CreateAccountRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewCreateAccountRequestFromJson(data string) CreateAccountRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateAccountRequestFromDict(dict)
+}
+
 func NewCreateAccountRequestFromDict(data map[string]interface{}) CreateAccountRequest {
 	return CreateAccountRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -260,6 +311,12 @@ type UpdateTimeOffsetRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	TimeOffset         *int32  `json:"timeOffset"`
+}
+
+func NewUpdateTimeOffsetRequestFromJson(data string) UpdateTimeOffsetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateTimeOffsetRequestFromDict(dict)
 }
 
 func NewUpdateTimeOffsetRequestFromDict(data map[string]interface{}) UpdateTimeOffsetRequest {
@@ -290,6 +347,12 @@ type GetAccountRequest struct {
 	UserId             *string `json:"userId"`
 }
 
+func NewGetAccountRequestFromJson(data string) GetAccountRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetAccountRequestFromDict(dict)
+}
+
 func NewGetAccountRequestFromDict(data map[string]interface{}) GetAccountRequest {
 	return GetAccountRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -314,6 +377,12 @@ type DeleteAccountRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewDeleteAccountRequestFromJson(data string) DeleteAccountRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteAccountRequestFromDict(dict)
 }
 
 func NewDeleteAccountRequestFromDict(data map[string]interface{}) DeleteAccountRequest {
@@ -342,6 +411,12 @@ type AuthenticationRequest struct {
 	UserId             *string `json:"userId"`
 	KeyId              *string `json:"keyId"`
 	Password           *string `json:"password"`
+}
+
+func NewAuthenticationRequestFromJson(data string) AuthenticationRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAuthenticationRequestFromDict(dict)
 }
 
 func NewAuthenticationRequestFromDict(data map[string]interface{}) AuthenticationRequest {
@@ -376,6 +451,12 @@ type DescribeTakeOversRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeTakeOversRequestFromJson(data string) DescribeTakeOversRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeTakeOversRequestFromDict(dict)
+}
+
 func NewDescribeTakeOversRequestFromDict(data map[string]interface{}) DescribeTakeOversRequest {
 	return DescribeTakeOversRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -406,6 +487,12 @@ type DescribeTakeOversByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeTakeOversByUserIdRequestFromJson(data string) DescribeTakeOversByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeTakeOversByUserIdRequestFromDict(dict)
 }
 
 func NewDescribeTakeOversByUserIdRequestFromDict(data map[string]interface{}) DescribeTakeOversByUserIdRequest {
@@ -439,6 +526,12 @@ type CreateTakeOverRequest struct {
 	Type               *int32  `json:"type"`
 	UserIdentifier     *string `json:"userIdentifier"`
 	Password           *string `json:"password"`
+}
+
+func NewCreateTakeOverRequestFromJson(data string) CreateTakeOverRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateTakeOverRequestFromDict(dict)
 }
 
 func NewCreateTakeOverRequestFromDict(data map[string]interface{}) CreateTakeOverRequest {
@@ -476,6 +569,12 @@ type CreateTakeOverByUserIdRequest struct {
 	Password           *string `json:"password"`
 }
 
+func NewCreateTakeOverByUserIdRequestFromJson(data string) CreateTakeOverByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateTakeOverByUserIdRequestFromDict(dict)
+}
+
 func NewCreateTakeOverByUserIdRequestFromDict(data map[string]interface{}) CreateTakeOverByUserIdRequest {
 	return CreateTakeOverByUserIdRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -509,6 +608,12 @@ type GetTakeOverRequest struct {
 	Type               *int32  `json:"type"`
 }
 
+func NewGetTakeOverRequestFromJson(data string) GetTakeOverRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetTakeOverRequestFromDict(dict)
+}
+
 func NewGetTakeOverRequestFromDict(data map[string]interface{}) GetTakeOverRequest {
 	return GetTakeOverRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -536,6 +641,12 @@ type GetTakeOverByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	Type               *int32  `json:"type"`
+}
+
+func NewGetTakeOverByUserIdRequestFromJson(data string) GetTakeOverByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetTakeOverByUserIdRequestFromDict(dict)
 }
 
 func NewGetTakeOverByUserIdRequestFromDict(data map[string]interface{}) GetTakeOverByUserIdRequest {
@@ -567,6 +678,12 @@ type UpdateTakeOverRequest struct {
 	Type               *int32  `json:"type"`
 	OldPassword        *string `json:"oldPassword"`
 	Password           *string `json:"password"`
+}
+
+func NewUpdateTakeOverRequestFromJson(data string) UpdateTakeOverRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateTakeOverRequestFromDict(dict)
 }
 
 func NewUpdateTakeOverRequestFromDict(data map[string]interface{}) UpdateTakeOverRequest {
@@ -604,6 +721,12 @@ type UpdateTakeOverByUserIdRequest struct {
 	Password           *string `json:"password"`
 }
 
+func NewUpdateTakeOverByUserIdRequestFromJson(data string) UpdateTakeOverByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateTakeOverByUserIdRequestFromDict(dict)
+}
+
 func NewUpdateTakeOverByUserIdRequestFromDict(data map[string]interface{}) UpdateTakeOverByUserIdRequest {
 	return UpdateTakeOverByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -638,6 +761,12 @@ type DeleteTakeOverRequest struct {
 	UserIdentifier     *string `json:"userIdentifier"`
 }
 
+func NewDeleteTakeOverRequestFromJson(data string) DeleteTakeOverRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteTakeOverRequestFromDict(dict)
+}
+
 func NewDeleteTakeOverRequestFromDict(data map[string]interface{}) DeleteTakeOverRequest {
 	return DeleteTakeOverRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -669,6 +798,12 @@ type DeleteTakeOverByUserIdentifierRequest struct {
 	UserIdentifier     *string `json:"userIdentifier"`
 }
 
+func NewDeleteTakeOverByUserIdentifierRequestFromJson(data string) DeleteTakeOverByUserIdentifierRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteTakeOverByUserIdentifierRequestFromDict(dict)
+}
+
 func NewDeleteTakeOverByUserIdentifierRequestFromDict(data map[string]interface{}) DeleteTakeOverByUserIdentifierRequest {
 	return DeleteTakeOverByUserIdentifierRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
@@ -697,6 +832,12 @@ type DoTakeOverRequest struct {
 	Type               *int32  `json:"type"`
 	UserIdentifier     *string `json:"userIdentifier"`
 	Password           *string `json:"password"`
+}
+
+func NewDoTakeOverRequestFromJson(data string) DoTakeOverRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDoTakeOverRequestFromDict(dict)
 }
 
 func NewDoTakeOverRequestFromDict(data map[string]interface{}) DoTakeOverRequest {

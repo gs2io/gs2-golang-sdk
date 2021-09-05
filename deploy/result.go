@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package deploy
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeStacksResult struct {
 	Items         []Stack `json:"items"`
@@ -26,6 +29,12 @@ type DescribeStacksResult struct {
 type DescribeStacksAsyncResult struct {
 	result *DescribeStacksResult
 	err    error
+}
+
+func NewDescribeStacksResultFromJson(data string) DescribeStacksResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStacksResultFromDict(dict)
 }
 
 func NewDescribeStacksResultFromDict(data map[string]interface{}) DescribeStacksResult {
@@ -57,6 +66,12 @@ type CreateStackAsyncResult struct {
 	err    error
 }
 
+func NewCreateStackResultFromJson(data string) CreateStackResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateStackResultFromDict(dict)
+}
+
 func NewCreateStackResultFromDict(data map[string]interface{}) CreateStackResult {
 	return CreateStackResult{
 		Item: NewStackFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type CreateStackFromGitHubResult struct {
 type CreateStackFromGitHubAsyncResult struct {
 	result *CreateStackFromGitHubResult
 	err    error
+}
+
+func NewCreateStackFromGitHubResultFromJson(data string) CreateStackFromGitHubResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateStackFromGitHubResultFromDict(dict)
 }
 
 func NewCreateStackFromGitHubResultFromDict(data map[string]interface{}) CreateStackFromGitHubResult {
@@ -106,6 +127,12 @@ type ValidateAsyncResult struct {
 	err    error
 }
 
+func NewValidateResultFromJson(data string) ValidateResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewValidateResultFromDict(dict)
+}
+
 func NewValidateResultFromDict(data map[string]interface{}) ValidateResult {
 	return ValidateResult{}
 }
@@ -125,6 +152,12 @@ type GetStackStatusResult struct {
 type GetStackStatusAsyncResult struct {
 	result *GetStackStatusResult
 	err    error
+}
+
+func NewGetStackStatusResultFromJson(data string) GetStackStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStackStatusResultFromDict(dict)
 }
 
 func NewGetStackStatusResultFromDict(data map[string]interface{}) GetStackStatusResult {
@@ -152,6 +185,12 @@ type GetStackAsyncResult struct {
 	err    error
 }
 
+func NewGetStackResultFromJson(data string) GetStackResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStackResultFromDict(dict)
+}
+
 func NewGetStackResultFromDict(data map[string]interface{}) GetStackResult {
 	return GetStackResult{
 		Item: NewStackFromDict(core.CastMap(data["item"])).Pointer(),
@@ -175,6 +214,12 @@ type UpdateStackResult struct {
 type UpdateStackAsyncResult struct {
 	result *UpdateStackResult
 	err    error
+}
+
+func NewUpdateStackResultFromJson(data string) UpdateStackResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateStackResultFromDict(dict)
 }
 
 func NewUpdateStackResultFromDict(data map[string]interface{}) UpdateStackResult {
@@ -202,6 +247,12 @@ type UpdateStackFromGitHubAsyncResult struct {
 	err    error
 }
 
+func NewUpdateStackFromGitHubResultFromJson(data string) UpdateStackFromGitHubResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateStackFromGitHubResultFromDict(dict)
+}
+
 func NewUpdateStackFromGitHubResultFromDict(data map[string]interface{}) UpdateStackFromGitHubResult {
 	return UpdateStackFromGitHubResult{
 		Item: NewStackFromDict(core.CastMap(data["item"])).Pointer(),
@@ -225,6 +276,12 @@ type DeleteStackResult struct {
 type DeleteStackAsyncResult struct {
 	result *DeleteStackResult
 	err    error
+}
+
+func NewDeleteStackResultFromJson(data string) DeleteStackResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteStackResultFromDict(dict)
 }
 
 func NewDeleteStackResultFromDict(data map[string]interface{}) DeleteStackResult {
@@ -252,6 +309,12 @@ type ForceDeleteStackAsyncResult struct {
 	err    error
 }
 
+func NewForceDeleteStackResultFromJson(data string) ForceDeleteStackResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewForceDeleteStackResultFromDict(dict)
+}
+
 func NewForceDeleteStackResultFromDict(data map[string]interface{}) ForceDeleteStackResult {
 	return ForceDeleteStackResult{
 		Item: NewStackFromDict(core.CastMap(data["item"])).Pointer(),
@@ -275,6 +338,12 @@ type DeleteStackResourcesResult struct {
 type DeleteStackResourcesAsyncResult struct {
 	result *DeleteStackResourcesResult
 	err    error
+}
+
+func NewDeleteStackResourcesResultFromJson(data string) DeleteStackResourcesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteStackResourcesResultFromDict(dict)
 }
 
 func NewDeleteStackResourcesResultFromDict(data map[string]interface{}) DeleteStackResourcesResult {
@@ -302,6 +371,12 @@ type DeleteStackEntityAsyncResult struct {
 	err    error
 }
 
+func NewDeleteStackEntityResultFromJson(data string) DeleteStackEntityResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteStackEntityResultFromDict(dict)
+}
+
 func NewDeleteStackEntityResultFromDict(data map[string]interface{}) DeleteStackEntityResult {
 	return DeleteStackEntityResult{
 		Item: NewStackFromDict(core.CastMap(data["item"])).Pointer(),
@@ -326,6 +401,12 @@ type DescribeResourcesResult struct {
 type DescribeResourcesAsyncResult struct {
 	result *DescribeResourcesResult
 	err    error
+}
+
+func NewDescribeResourcesResultFromJson(data string) DescribeResourcesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeResourcesResultFromDict(dict)
 }
 
 func NewDescribeResourcesResultFromDict(data map[string]interface{}) DescribeResourcesResult {
@@ -357,6 +438,12 @@ type GetResourceAsyncResult struct {
 	err    error
 }
 
+func NewGetResourceResultFromJson(data string) GetResourceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetResourceResultFromDict(dict)
+}
+
 func NewGetResourceResultFromDict(data map[string]interface{}) GetResourceResult {
 	return GetResourceResult{
 		Item: NewResourceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -381,6 +468,12 @@ type DescribeEventsResult struct {
 type DescribeEventsAsyncResult struct {
 	result *DescribeEventsResult
 	err    error
+}
+
+func NewDescribeEventsResultFromJson(data string) DescribeEventsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeEventsResultFromDict(dict)
 }
 
 func NewDescribeEventsResultFromDict(data map[string]interface{}) DescribeEventsResult {
@@ -412,6 +505,12 @@ type GetEventAsyncResult struct {
 	err    error
 }
 
+func NewGetEventResultFromJson(data string) GetEventResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetEventResultFromDict(dict)
+}
+
 func NewGetEventResultFromDict(data map[string]interface{}) GetEventResult {
 	return GetEventResult{
 		Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
@@ -436,6 +535,12 @@ type DescribeOutputsResult struct {
 type DescribeOutputsAsyncResult struct {
 	result *DescribeOutputsResult
 	err    error
+}
+
+func NewDescribeOutputsResultFromJson(data string) DescribeOutputsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeOutputsResultFromDict(dict)
 }
 
 func NewDescribeOutputsResultFromDict(data map[string]interface{}) DescribeOutputsResult {
@@ -465,6 +570,12 @@ type GetOutputResult struct {
 type GetOutputAsyncResult struct {
 	result *GetOutputResult
 	err    error
+}
+
+func NewGetOutputResultFromJson(data string) GetOutputResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetOutputResultFromDict(dict)
 }
 
 func NewGetOutputResultFromDict(data map[string]interface{}) GetOutputResult {

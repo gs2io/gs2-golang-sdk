@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package limit
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -130,6 +157,12 @@ type UpdateNamespaceResult struct {
 type UpdateNamespaceAsyncResult struct {
 	result *UpdateNamespaceResult
 	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
@@ -157,6 +190,12 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -181,6 +220,12 @@ type DescribeCountersResult struct {
 type DescribeCountersAsyncResult struct {
 	result *DescribeCountersResult
 	err    error
+}
+
+func NewDescribeCountersResultFromJson(data string) DescribeCountersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeCountersResultFromDict(dict)
 }
 
 func NewDescribeCountersResultFromDict(data map[string]interface{}) DescribeCountersResult {
@@ -213,6 +258,12 @@ type DescribeCountersByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeCountersByUserIdResultFromJson(data string) DescribeCountersByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeCountersByUserIdResultFromDict(dict)
+}
+
 func NewDescribeCountersByUserIdResultFromDict(data map[string]interface{}) DescribeCountersByUserIdResult {
 	return DescribeCountersByUserIdResult{
 		Items:         CastCounters(core.CastArray(data["items"])),
@@ -242,6 +293,12 @@ type GetCounterAsyncResult struct {
 	err    error
 }
 
+func NewGetCounterResultFromJson(data string) GetCounterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCounterResultFromDict(dict)
+}
+
 func NewGetCounterResultFromDict(data map[string]interface{}) GetCounterResult {
 	return GetCounterResult{
 		Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -265,6 +322,12 @@ type GetCounterByUserIdResult struct {
 type GetCounterByUserIdAsyncResult struct {
 	result *GetCounterByUserIdResult
 	err    error
+}
+
+func NewGetCounterByUserIdResultFromJson(data string) GetCounterByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCounterByUserIdResultFromDict(dict)
 }
 
 func NewGetCounterByUserIdResultFromDict(data map[string]interface{}) GetCounterByUserIdResult {
@@ -292,6 +355,12 @@ type CountUpAsyncResult struct {
 	err    error
 }
 
+func NewCountUpResultFromJson(data string) CountUpResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountUpResultFromDict(dict)
+}
+
 func NewCountUpResultFromDict(data map[string]interface{}) CountUpResult {
 	return CountUpResult{
 		Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -315,6 +384,12 @@ type CountUpByUserIdResult struct {
 type CountUpByUserIdAsyncResult struct {
 	result *CountUpByUserIdResult
 	err    error
+}
+
+func NewCountUpByUserIdResultFromJson(data string) CountUpByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountUpByUserIdResultFromDict(dict)
 }
 
 func NewCountUpByUserIdResultFromDict(data map[string]interface{}) CountUpByUserIdResult {
@@ -342,6 +417,12 @@ type DeleteCounterByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDeleteCounterByUserIdResultFromJson(data string) DeleteCounterByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteCounterByUserIdResultFromDict(dict)
+}
+
 func NewDeleteCounterByUserIdResultFromDict(data map[string]interface{}) DeleteCounterByUserIdResult {
 	return DeleteCounterByUserIdResult{
 		Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -366,6 +447,12 @@ type CountUpByStampTaskResult struct {
 type CountUpByStampTaskAsyncResult struct {
 	result *CountUpByStampTaskResult
 	err    error
+}
+
+func NewCountUpByStampTaskResultFromJson(data string) CountUpByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountUpByStampTaskResultFromDict(dict)
 }
 
 func NewCountUpByStampTaskResultFromDict(data map[string]interface{}) CountUpByStampTaskResult {
@@ -395,6 +482,12 @@ type DeleteByStampSheetAsyncResult struct {
 	err    error
 }
 
+func NewDeleteByStampSheetResultFromJson(data string) DeleteByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteByStampSheetResultFromDict(dict)
+}
+
 func NewDeleteByStampSheetResultFromDict(data map[string]interface{}) DeleteByStampSheetResult {
 	return DeleteByStampSheetResult{
 		Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -419,6 +512,12 @@ type DescribeLimitModelMastersResult struct {
 type DescribeLimitModelMastersAsyncResult struct {
 	result *DescribeLimitModelMastersResult
 	err    error
+}
+
+func NewDescribeLimitModelMastersResultFromJson(data string) DescribeLimitModelMastersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeLimitModelMastersResultFromDict(dict)
 }
 
 func NewDescribeLimitModelMastersResultFromDict(data map[string]interface{}) DescribeLimitModelMastersResult {
@@ -450,6 +549,12 @@ type CreateLimitModelMasterAsyncResult struct {
 	err    error
 }
 
+func NewCreateLimitModelMasterResultFromJson(data string) CreateLimitModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateLimitModelMasterResultFromDict(dict)
+}
+
 func NewCreateLimitModelMasterResultFromDict(data map[string]interface{}) CreateLimitModelMasterResult {
 	return CreateLimitModelMasterResult{
 		Item: NewLimitModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -473,6 +578,12 @@ type GetLimitModelMasterResult struct {
 type GetLimitModelMasterAsyncResult struct {
 	result *GetLimitModelMasterResult
 	err    error
+}
+
+func NewGetLimitModelMasterResultFromJson(data string) GetLimitModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetLimitModelMasterResultFromDict(dict)
 }
 
 func NewGetLimitModelMasterResultFromDict(data map[string]interface{}) GetLimitModelMasterResult {
@@ -500,6 +611,12 @@ type UpdateLimitModelMasterAsyncResult struct {
 	err    error
 }
 
+func NewUpdateLimitModelMasterResultFromJson(data string) UpdateLimitModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateLimitModelMasterResultFromDict(dict)
+}
+
 func NewUpdateLimitModelMasterResultFromDict(data map[string]interface{}) UpdateLimitModelMasterResult {
 	return UpdateLimitModelMasterResult{
 		Item: NewLimitModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -523,6 +640,12 @@ type DeleteLimitModelMasterResult struct {
 type DeleteLimitModelMasterAsyncResult struct {
 	result *DeleteLimitModelMasterResult
 	err    error
+}
+
+func NewDeleteLimitModelMasterResultFromJson(data string) DeleteLimitModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteLimitModelMasterResultFromDict(dict)
 }
 
 func NewDeleteLimitModelMasterResultFromDict(data map[string]interface{}) DeleteLimitModelMasterResult {
@@ -550,6 +673,12 @@ type ExportMasterAsyncResult struct {
 	err    error
 }
 
+func NewExportMasterResultFromJson(data string) ExportMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterResultFromDict(dict)
+}
+
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
 	return ExportMasterResult{
 		Item: NewCurrentLimitMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -573,6 +702,12 @@ type GetCurrentLimitMasterResult struct {
 type GetCurrentLimitMasterAsyncResult struct {
 	result *GetCurrentLimitMasterResult
 	err    error
+}
+
+func NewGetCurrentLimitMasterResultFromJson(data string) GetCurrentLimitMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentLimitMasterResultFromDict(dict)
 }
 
 func NewGetCurrentLimitMasterResultFromDict(data map[string]interface{}) GetCurrentLimitMasterResult {
@@ -600,6 +735,12 @@ type UpdateCurrentLimitMasterAsyncResult struct {
 	err    error
 }
 
+func NewUpdateCurrentLimitMasterResultFromJson(data string) UpdateCurrentLimitMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentLimitMasterResultFromDict(dict)
+}
+
 func NewUpdateCurrentLimitMasterResultFromDict(data map[string]interface{}) UpdateCurrentLimitMasterResult {
 	return UpdateCurrentLimitMasterResult{
 		Item: NewCurrentLimitMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -623,6 +764,12 @@ type UpdateCurrentLimitMasterFromGitHubResult struct {
 type UpdateCurrentLimitMasterFromGitHubAsyncResult struct {
 	result *UpdateCurrentLimitMasterFromGitHubResult
 	err    error
+}
+
+func NewUpdateCurrentLimitMasterFromGitHubResultFromJson(data string) UpdateCurrentLimitMasterFromGitHubResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentLimitMasterFromGitHubResultFromDict(dict)
 }
 
 func NewUpdateCurrentLimitMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentLimitMasterFromGitHubResult {
@@ -650,6 +797,12 @@ type DescribeLimitModelsAsyncResult struct {
 	err    error
 }
 
+func NewDescribeLimitModelsResultFromJson(data string) DescribeLimitModelsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeLimitModelsResultFromDict(dict)
+}
+
 func NewDescribeLimitModelsResultFromDict(data map[string]interface{}) DescribeLimitModelsResult {
 	return DescribeLimitModelsResult{
 		Items: CastLimitModels(core.CastArray(data["items"])),
@@ -675,6 +828,12 @@ type GetLimitModelResult struct {
 type GetLimitModelAsyncResult struct {
 	result *GetLimitModelResult
 	err    error
+}
+
+func NewGetLimitModelResultFromJson(data string) GetLimitModelResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetLimitModelResultFromDict(dict)
 }
 
 func NewGetLimitModelResultFromDict(data map[string]interface{}) GetLimitModelResult {

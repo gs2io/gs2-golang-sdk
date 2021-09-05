@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package lock
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId *string     `json:"namespaceId"`
@@ -25,6 +28,12 @@ type Namespace struct {
 	LogSetting  *LogSetting `json:"logSetting"`
 	CreatedAt   *int64      `json:"createdAt"`
 	UpdatedAt   *int64      `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -77,6 +86,12 @@ type Mutex struct {
 	CreatedAt     *int64  `json:"createdAt"`
 }
 
+func NewMutexFromJson(data string) Mutex {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMutexFromDict(dict)
+}
+
 func NewMutexFromDict(data map[string]interface{}) Mutex {
 	return Mutex{
 		MutexId:       core.CastString(data["mutexId"]),
@@ -119,6 +134,12 @@ func CastMutexesFromDict(data []Mutex) []interface{} {
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

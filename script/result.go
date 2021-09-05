@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package script
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -130,6 +157,12 @@ type UpdateNamespaceResult struct {
 type UpdateNamespaceAsyncResult struct {
 	result *UpdateNamespaceResult
 	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
@@ -156,6 +189,12 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{}
 }
@@ -176,6 +215,12 @@ type DescribeScriptsResult struct {
 type DescribeScriptsAsyncResult struct {
 	result *DescribeScriptsResult
 	err    error
+}
+
+func NewDescribeScriptsResultFromJson(data string) DescribeScriptsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeScriptsResultFromDict(dict)
 }
 
 func NewDescribeScriptsResultFromDict(data map[string]interface{}) DescribeScriptsResult {
@@ -207,6 +252,12 @@ type CreateScriptAsyncResult struct {
 	err    error
 }
 
+func NewCreateScriptResultFromJson(data string) CreateScriptResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateScriptResultFromDict(dict)
+}
+
 func NewCreateScriptResultFromDict(data map[string]interface{}) CreateScriptResult {
 	return CreateScriptResult{
 		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
@@ -230,6 +281,12 @@ type CreateScriptFromGitHubResult struct {
 type CreateScriptFromGitHubAsyncResult struct {
 	result *CreateScriptFromGitHubResult
 	err    error
+}
+
+func NewCreateScriptFromGitHubResultFromJson(data string) CreateScriptFromGitHubResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateScriptFromGitHubResultFromDict(dict)
 }
 
 func NewCreateScriptFromGitHubResultFromDict(data map[string]interface{}) CreateScriptFromGitHubResult {
@@ -257,6 +314,12 @@ type GetScriptAsyncResult struct {
 	err    error
 }
 
+func NewGetScriptResultFromJson(data string) GetScriptResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetScriptResultFromDict(dict)
+}
+
 func NewGetScriptResultFromDict(data map[string]interface{}) GetScriptResult {
 	return GetScriptResult{
 		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
@@ -280,6 +343,12 @@ type UpdateScriptResult struct {
 type UpdateScriptAsyncResult struct {
 	result *UpdateScriptResult
 	err    error
+}
+
+func NewUpdateScriptResultFromJson(data string) UpdateScriptResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateScriptResultFromDict(dict)
 }
 
 func NewUpdateScriptResultFromDict(data map[string]interface{}) UpdateScriptResult {
@@ -307,6 +376,12 @@ type UpdateScriptFromGitHubAsyncResult struct {
 	err    error
 }
 
+func NewUpdateScriptFromGitHubResultFromJson(data string) UpdateScriptFromGitHubResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateScriptFromGitHubResultFromDict(dict)
+}
+
 func NewUpdateScriptFromGitHubResultFromDict(data map[string]interface{}) UpdateScriptFromGitHubResult {
 	return UpdateScriptFromGitHubResult{
 		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
@@ -329,6 +404,12 @@ type DeleteScriptResult struct {
 type DeleteScriptAsyncResult struct {
 	result *DeleteScriptResult
 	err    error
+}
+
+func NewDeleteScriptResultFromJson(data string) DeleteScriptResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteScriptResultFromDict(dict)
 }
 
 func NewDeleteScriptResultFromDict(data map[string]interface{}) DeleteScriptResult {
@@ -354,6 +435,12 @@ type InvokeScriptResult struct {
 type InvokeScriptAsyncResult struct {
 	result *InvokeScriptResult
 	err    error
+}
+
+func NewInvokeScriptResultFromJson(data string) InvokeScriptResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewInvokeScriptResultFromDict(dict)
 }
 
 func NewInvokeScriptResultFromDict(data map[string]interface{}) InvokeScriptResult {
@@ -393,6 +480,12 @@ type DebugInvokeResult struct {
 type DebugInvokeAsyncResult struct {
 	result *DebugInvokeResult
 	err    error
+}
+
+func NewDebugInvokeResultFromJson(data string) DebugInvokeResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDebugInvokeResultFromDict(dict)
 }
 
 func NewDebugInvokeResultFromDict(data map[string]interface{}) DebugInvokeResult {

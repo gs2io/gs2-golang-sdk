@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package version
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -130,6 +157,12 @@ type UpdateNamespaceResult struct {
 type UpdateNamespaceAsyncResult struct {
 	result *UpdateNamespaceResult
 	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
@@ -157,6 +190,12 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -181,6 +220,12 @@ type DescribeVersionModelMastersResult struct {
 type DescribeVersionModelMastersAsyncResult struct {
 	result *DescribeVersionModelMastersResult
 	err    error
+}
+
+func NewDescribeVersionModelMastersResultFromJson(data string) DescribeVersionModelMastersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeVersionModelMastersResultFromDict(dict)
 }
 
 func NewDescribeVersionModelMastersResultFromDict(data map[string]interface{}) DescribeVersionModelMastersResult {
@@ -212,6 +257,12 @@ type CreateVersionModelMasterAsyncResult struct {
 	err    error
 }
 
+func NewCreateVersionModelMasterResultFromJson(data string) CreateVersionModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateVersionModelMasterResultFromDict(dict)
+}
+
 func NewCreateVersionModelMasterResultFromDict(data map[string]interface{}) CreateVersionModelMasterResult {
 	return CreateVersionModelMasterResult{
 		Item: NewVersionModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -235,6 +286,12 @@ type GetVersionModelMasterResult struct {
 type GetVersionModelMasterAsyncResult struct {
 	result *GetVersionModelMasterResult
 	err    error
+}
+
+func NewGetVersionModelMasterResultFromJson(data string) GetVersionModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetVersionModelMasterResultFromDict(dict)
 }
 
 func NewGetVersionModelMasterResultFromDict(data map[string]interface{}) GetVersionModelMasterResult {
@@ -262,6 +319,12 @@ type UpdateVersionModelMasterAsyncResult struct {
 	err    error
 }
 
+func NewUpdateVersionModelMasterResultFromJson(data string) UpdateVersionModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateVersionModelMasterResultFromDict(dict)
+}
+
 func NewUpdateVersionModelMasterResultFromDict(data map[string]interface{}) UpdateVersionModelMasterResult {
 	return UpdateVersionModelMasterResult{
 		Item: NewVersionModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -287,6 +350,12 @@ type DeleteVersionModelMasterAsyncResult struct {
 	err    error
 }
 
+func NewDeleteVersionModelMasterResultFromJson(data string) DeleteVersionModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteVersionModelMasterResultFromDict(dict)
+}
+
 func NewDeleteVersionModelMasterResultFromDict(data map[string]interface{}) DeleteVersionModelMasterResult {
 	return DeleteVersionModelMasterResult{
 		Item: NewVersionModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -310,6 +379,12 @@ type DescribeVersionModelsResult struct {
 type DescribeVersionModelsAsyncResult struct {
 	result *DescribeVersionModelsResult
 	err    error
+}
+
+func NewDescribeVersionModelsResultFromJson(data string) DescribeVersionModelsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeVersionModelsResultFromDict(dict)
 }
 
 func NewDescribeVersionModelsResultFromDict(data map[string]interface{}) DescribeVersionModelsResult {
@@ -339,6 +414,12 @@ type GetVersionModelAsyncResult struct {
 	err    error
 }
 
+func NewGetVersionModelResultFromJson(data string) GetVersionModelResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetVersionModelResultFromDict(dict)
+}
+
 func NewGetVersionModelResultFromDict(data map[string]interface{}) GetVersionModelResult {
 	return GetVersionModelResult{
 		Item: NewVersionModelFromDict(core.CastMap(data["item"])).Pointer(),
@@ -363,6 +444,12 @@ type DescribeAcceptVersionsResult struct {
 type DescribeAcceptVersionsAsyncResult struct {
 	result *DescribeAcceptVersionsResult
 	err    error
+}
+
+func NewDescribeAcceptVersionsResultFromJson(data string) DescribeAcceptVersionsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeAcceptVersionsResultFromDict(dict)
 }
 
 func NewDescribeAcceptVersionsResultFromDict(data map[string]interface{}) DescribeAcceptVersionsResult {
@@ -395,6 +482,12 @@ type DescribeAcceptVersionsByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeAcceptVersionsByUserIdResultFromJson(data string) DescribeAcceptVersionsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeAcceptVersionsByUserIdResultFromDict(dict)
+}
+
 func NewDescribeAcceptVersionsByUserIdResultFromDict(data map[string]interface{}) DescribeAcceptVersionsByUserIdResult {
 	return DescribeAcceptVersionsByUserIdResult{
 		Items:         CastAcceptVersions(core.CastArray(data["items"])),
@@ -424,6 +517,12 @@ type AcceptAsyncResult struct {
 	err    error
 }
 
+func NewAcceptResultFromJson(data string) AcceptResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcceptResultFromDict(dict)
+}
+
 func NewAcceptResultFromDict(data map[string]interface{}) AcceptResult {
 	return AcceptResult{
 		Item: NewAcceptVersionFromDict(core.CastMap(data["item"])).Pointer(),
@@ -447,6 +546,12 @@ type AcceptByUserIdResult struct {
 type AcceptByUserIdAsyncResult struct {
 	result *AcceptByUserIdResult
 	err    error
+}
+
+func NewAcceptByUserIdResultFromJson(data string) AcceptByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcceptByUserIdResultFromDict(dict)
 }
 
 func NewAcceptByUserIdResultFromDict(data map[string]interface{}) AcceptByUserIdResult {
@@ -474,6 +579,12 @@ type GetAcceptVersionAsyncResult struct {
 	err    error
 }
 
+func NewGetAcceptVersionResultFromJson(data string) GetAcceptVersionResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetAcceptVersionResultFromDict(dict)
+}
+
 func NewGetAcceptVersionResultFromDict(data map[string]interface{}) GetAcceptVersionResult {
 	return GetAcceptVersionResult{
 		Item: NewAcceptVersionFromDict(core.CastMap(data["item"])).Pointer(),
@@ -497,6 +608,12 @@ type GetAcceptVersionByUserIdResult struct {
 type GetAcceptVersionByUserIdAsyncResult struct {
 	result *GetAcceptVersionByUserIdResult
 	err    error
+}
+
+func NewGetAcceptVersionByUserIdResultFromJson(data string) GetAcceptVersionByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetAcceptVersionByUserIdResultFromDict(dict)
 }
 
 func NewGetAcceptVersionByUserIdResultFromDict(data map[string]interface{}) GetAcceptVersionByUserIdResult {
@@ -523,6 +640,12 @@ type DeleteAcceptVersionAsyncResult struct {
 	err    error
 }
 
+func NewDeleteAcceptVersionResultFromJson(data string) DeleteAcceptVersionResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteAcceptVersionResultFromDict(dict)
+}
+
 func NewDeleteAcceptVersionResultFromDict(data map[string]interface{}) DeleteAcceptVersionResult {
 	return DeleteAcceptVersionResult{}
 }
@@ -541,6 +664,12 @@ type DeleteAcceptVersionByUserIdResult struct {
 type DeleteAcceptVersionByUserIdAsyncResult struct {
 	result *DeleteAcceptVersionByUserIdResult
 	err    error
+}
+
+func NewDeleteAcceptVersionByUserIdResultFromJson(data string) DeleteAcceptVersionByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteAcceptVersionByUserIdResultFromDict(dict)
 }
 
 func NewDeleteAcceptVersionByUserIdResultFromDict(data map[string]interface{}) DeleteAcceptVersionByUserIdResult {
@@ -564,6 +693,12 @@ type CheckVersionResult struct {
 type CheckVersionAsyncResult struct {
 	result *CheckVersionResult
 	err    error
+}
+
+func NewCheckVersionResultFromJson(data string) CheckVersionResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCheckVersionResultFromDict(dict)
 }
 
 func NewCheckVersionResultFromDict(data map[string]interface{}) CheckVersionResult {
@@ -601,6 +736,12 @@ type CheckVersionByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewCheckVersionByUserIdResultFromJson(data string) CheckVersionByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCheckVersionByUserIdResultFromDict(dict)
+}
+
 func NewCheckVersionByUserIdResultFromDict(data map[string]interface{}) CheckVersionByUserIdResult {
 	return CheckVersionByUserIdResult{
 		ProjectToken: core.CastString(data["projectToken"]),
@@ -635,6 +776,12 @@ type CalculateSignatureAsyncResult struct {
 	err    error
 }
 
+func NewCalculateSignatureResultFromJson(data string) CalculateSignatureResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCalculateSignatureResultFromDict(dict)
+}
+
 func NewCalculateSignatureResultFromDict(data map[string]interface{}) CalculateSignatureResult {
 	return CalculateSignatureResult{
 		Body:      core.CastString(data["body"]),
@@ -662,6 +809,12 @@ type ExportMasterAsyncResult struct {
 	err    error
 }
 
+func NewExportMasterResultFromJson(data string) ExportMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterResultFromDict(dict)
+}
+
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
 	return ExportMasterResult{
 		Item: NewCurrentVersionMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -685,6 +838,12 @@ type GetCurrentVersionMasterResult struct {
 type GetCurrentVersionMasterAsyncResult struct {
 	result *GetCurrentVersionMasterResult
 	err    error
+}
+
+func NewGetCurrentVersionMasterResultFromJson(data string) GetCurrentVersionMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentVersionMasterResultFromDict(dict)
 }
 
 func NewGetCurrentVersionMasterResultFromDict(data map[string]interface{}) GetCurrentVersionMasterResult {
@@ -712,6 +871,12 @@ type UpdateCurrentVersionMasterAsyncResult struct {
 	err    error
 }
 
+func NewUpdateCurrentVersionMasterResultFromJson(data string) UpdateCurrentVersionMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentVersionMasterResultFromDict(dict)
+}
+
 func NewUpdateCurrentVersionMasterResultFromDict(data map[string]interface{}) UpdateCurrentVersionMasterResult {
 	return UpdateCurrentVersionMasterResult{
 		Item: NewCurrentVersionMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -735,6 +900,12 @@ type UpdateCurrentVersionMasterFromGitHubResult struct {
 type UpdateCurrentVersionMasterFromGitHubAsyncResult struct {
 	result *UpdateCurrentVersionMasterFromGitHubResult
 	err    error
+}
+
+func NewUpdateCurrentVersionMasterFromGitHubResultFromJson(data string) UpdateCurrentVersionMasterFromGitHubResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentVersionMasterFromGitHubResultFromDict(dict)
 }
 
 func NewUpdateCurrentVersionMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentVersionMasterFromGitHubResult {

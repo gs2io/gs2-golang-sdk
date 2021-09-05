@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package news
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId *string     `json:"namespaceId"`
@@ -26,6 +29,12 @@ type Namespace struct {
 	LogSetting  *LogSetting `json:"logSetting"`
 	CreatedAt   *int64      `json:"createdAt"`
 	UpdatedAt   *int64      `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -81,6 +90,12 @@ type News struct {
 	FrontMatter     *string `json:"frontMatter"`
 }
 
+func NewNewsFromJson(data string) News {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNewsFromDict(dict)
+}
+
 func NewNewsFromDict(data map[string]interface{}) News {
 	return News{
 		Section:         core.CastString(data["section"]),
@@ -128,6 +143,12 @@ type SetCookieRequestEntry struct {
 	Value *string `json:"value"`
 }
 
+func NewSetCookieRequestEntryFromJson(data string) SetCookieRequestEntry {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetCookieRequestEntryFromDict(dict)
+}
+
 func NewSetCookieRequestEntryFromDict(data map[string]interface{}) SetCookieRequestEntry {
 	return SetCookieRequestEntry{
 		Key:   core.CastString(data["key"]),
@@ -164,6 +185,12 @@ func CastSetCookieRequestEntriesFromDict(data []SetCookieRequestEntry) []interfa
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
@@ -206,6 +233,12 @@ type GitHubCheckoutSetting struct {
 	CommitHash     *string `json:"commitHash"`
 	BranchName     *string `json:"branchName"`
 	TagName        *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {

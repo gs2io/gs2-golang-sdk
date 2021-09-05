@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package log
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -132,6 +159,12 @@ type UpdateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
+}
+
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -155,6 +188,12 @@ type DeleteNamespaceResult struct {
 type DeleteNamespaceAsyncResult struct {
 	result *DeleteNamespaceResult
 	err    error
+}
+
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
 }
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
@@ -183,6 +222,12 @@ type QueryAccessLogResult struct {
 type QueryAccessLogAsyncResult struct {
 	result *QueryAccessLogResult
 	err    error
+}
+
+func NewQueryAccessLogResultFromJson(data string) QueryAccessLogResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryAccessLogResultFromDict(dict)
 }
 
 func NewQueryAccessLogResultFromDict(data map[string]interface{}) QueryAccessLogResult {
@@ -221,6 +266,12 @@ type CountAccessLogAsyncResult struct {
 	err    error
 }
 
+func NewCountAccessLogResultFromJson(data string) CountAccessLogResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountAccessLogResultFromDict(dict)
+}
+
 func NewCountAccessLogResultFromDict(data map[string]interface{}) CountAccessLogResult {
 	return CountAccessLogResult{
 		Items:         CastAccessLogCounts(core.CastArray(data["items"])),
@@ -255,6 +306,12 @@ type QueryIssueStampSheetLogResult struct {
 type QueryIssueStampSheetLogAsyncResult struct {
 	result *QueryIssueStampSheetLogResult
 	err    error
+}
+
+func NewQueryIssueStampSheetLogResultFromJson(data string) QueryIssueStampSheetLogResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryIssueStampSheetLogResultFromDict(dict)
 }
 
 func NewQueryIssueStampSheetLogResultFromDict(data map[string]interface{}) QueryIssueStampSheetLogResult {
@@ -293,6 +350,12 @@ type CountIssueStampSheetLogAsyncResult struct {
 	err    error
 }
 
+func NewCountIssueStampSheetLogResultFromJson(data string) CountIssueStampSheetLogResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountIssueStampSheetLogResultFromDict(dict)
+}
+
 func NewCountIssueStampSheetLogResultFromDict(data map[string]interface{}) CountIssueStampSheetLogResult {
 	return CountIssueStampSheetLogResult{
 		Items:         CastIssueStampSheetLogCounts(core.CastArray(data["items"])),
@@ -327,6 +390,12 @@ type QueryExecuteStampSheetLogResult struct {
 type QueryExecuteStampSheetLogAsyncResult struct {
 	result *QueryExecuteStampSheetLogResult
 	err    error
+}
+
+func NewQueryExecuteStampSheetLogResultFromJson(data string) QueryExecuteStampSheetLogResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryExecuteStampSheetLogResultFromDict(dict)
 }
 
 func NewQueryExecuteStampSheetLogResultFromDict(data map[string]interface{}) QueryExecuteStampSheetLogResult {
@@ -365,6 +434,12 @@ type CountExecuteStampSheetLogAsyncResult struct {
 	err    error
 }
 
+func NewCountExecuteStampSheetLogResultFromJson(data string) CountExecuteStampSheetLogResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountExecuteStampSheetLogResultFromDict(dict)
+}
+
 func NewCountExecuteStampSheetLogResultFromDict(data map[string]interface{}) CountExecuteStampSheetLogResult {
 	return CountExecuteStampSheetLogResult{
 		Items:         CastExecuteStampSheetLogCounts(core.CastArray(data["items"])),
@@ -401,6 +476,12 @@ type QueryExecuteStampTaskLogAsyncResult struct {
 	err    error
 }
 
+func NewQueryExecuteStampTaskLogResultFromJson(data string) QueryExecuteStampTaskLogResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryExecuteStampTaskLogResultFromDict(dict)
+}
+
 func NewQueryExecuteStampTaskLogResultFromDict(data map[string]interface{}) QueryExecuteStampTaskLogResult {
 	return QueryExecuteStampTaskLogResult{
 		Items:         CastExecuteStampTaskLogs(core.CastArray(data["items"])),
@@ -435,6 +516,12 @@ type CountExecuteStampTaskLogResult struct {
 type CountExecuteStampTaskLogAsyncResult struct {
 	result *CountExecuteStampTaskLogResult
 	err    error
+}
+
+func NewCountExecuteStampTaskLogResultFromJson(data string) CountExecuteStampTaskLogResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountExecuteStampTaskLogResultFromDict(dict)
 }
 
 func NewCountExecuteStampTaskLogResultFromDict(data map[string]interface{}) CountExecuteStampTaskLogResult {

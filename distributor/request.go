@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package distributor
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -52,6 +61,12 @@ type CreateNamespaceRequest struct {
 	Description        *string     `json:"description"`
 	AssumeUserId       *string     `json:"assumeUserId"`
 	LogSetting         *LogSetting `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -83,6 +98,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -104,6 +125,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -130,6 +157,12 @@ type UpdateNamespaceRequest struct {
 	Description        *string     `json:"description"`
 	AssumeUserId       *string     `json:"assumeUserId"`
 	LogSetting         *LogSetting `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -161,6 +194,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -184,6 +223,12 @@ type DescribeDistributorModelMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeDistributorModelMastersRequestFromJson(data string) DescribeDistributorModelMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDistributorModelMastersRequestFromDict(dict)
 }
 
 func NewDescribeDistributorModelMastersRequestFromDict(data map[string]interface{}) DescribeDistributorModelMastersRequest {
@@ -216,6 +261,12 @@ type CreateDistributorModelMasterRequest struct {
 	Metadata           *string  `json:"metadata"`
 	InboxNamespaceId   *string  `json:"inboxNamespaceId"`
 	WhiteListTargetIds []string `json:"whiteListTargetIds"`
+}
+
+func NewCreateDistributorModelMasterRequestFromJson(data string) CreateDistributorModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateDistributorModelMasterRequestFromDict(dict)
 }
 
 func NewCreateDistributorModelMasterRequestFromDict(data map[string]interface{}) CreateDistributorModelMasterRequest {
@@ -254,6 +305,12 @@ type GetDistributorModelMasterRequest struct {
 	DistributorName    *string `json:"distributorName"`
 }
 
+func NewGetDistributorModelMasterRequestFromJson(data string) GetDistributorModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetDistributorModelMasterRequestFromDict(dict)
+}
+
 func NewGetDistributorModelMasterRequestFromDict(data map[string]interface{}) GetDistributorModelMasterRequest {
 	return GetDistributorModelMasterRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
@@ -282,6 +339,12 @@ type UpdateDistributorModelMasterRequest struct {
 	Metadata           *string  `json:"metadata"`
 	InboxNamespaceId   *string  `json:"inboxNamespaceId"`
 	WhiteListTargetIds []string `json:"whiteListTargetIds"`
+}
+
+func NewUpdateDistributorModelMasterRequestFromJson(data string) UpdateDistributorModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateDistributorModelMasterRequestFromDict(dict)
 }
 
 func NewUpdateDistributorModelMasterRequestFromDict(data map[string]interface{}) UpdateDistributorModelMasterRequest {
@@ -320,6 +383,12 @@ type DeleteDistributorModelMasterRequest struct {
 	DistributorName    *string `json:"distributorName"`
 }
 
+func NewDeleteDistributorModelMasterRequestFromJson(data string) DeleteDistributorModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteDistributorModelMasterRequestFromDict(dict)
+}
+
 func NewDeleteDistributorModelMasterRequestFromDict(data map[string]interface{}) DeleteDistributorModelMasterRequest {
 	return DeleteDistributorModelMasterRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
@@ -345,6 +414,12 @@ type DescribeDistributorModelsRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDescribeDistributorModelsRequestFromJson(data string) DescribeDistributorModelsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDistributorModelsRequestFromDict(dict)
+}
+
 func NewDescribeDistributorModelsRequestFromDict(data map[string]interface{}) DescribeDistributorModelsRequest {
 	return DescribeDistributorModelsRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -367,6 +442,12 @@ type GetDistributorModelRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	DistributorName    *string `json:"distributorName"`
+}
+
+func NewGetDistributorModelRequestFromJson(data string) GetDistributorModelRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetDistributorModelRequestFromDict(dict)
 }
 
 func NewGetDistributorModelRequestFromDict(data map[string]interface{}) GetDistributorModelRequest {
@@ -394,6 +475,12 @@ type ExportMasterRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterRequestFromDict(dict)
+}
+
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -415,6 +502,12 @@ type GetCurrentDistributorMasterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetCurrentDistributorMasterRequestFromJson(data string) GetCurrentDistributorMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentDistributorMasterRequestFromDict(dict)
 }
 
 func NewGetCurrentDistributorMasterRequestFromDict(data map[string]interface{}) GetCurrentDistributorMasterRequest {
@@ -439,6 +532,12 @@ type UpdateCurrentDistributorMasterRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	Settings           *string `json:"settings"`
+}
+
+func NewUpdateCurrentDistributorMasterRequestFromJson(data string) UpdateCurrentDistributorMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentDistributorMasterRequestFromDict(dict)
 }
 
 func NewUpdateCurrentDistributorMasterRequestFromDict(data map[string]interface{}) UpdateCurrentDistributorMasterRequest {
@@ -467,6 +566,12 @@ type UpdateCurrentDistributorMasterFromGitHubRequest struct {
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
+func NewUpdateCurrentDistributorMasterFromGitHubRequestFromJson(data string) UpdateCurrentDistributorMasterFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentDistributorMasterFromGitHubRequestFromDict(dict)
+}
+
 func NewUpdateCurrentDistributorMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentDistributorMasterFromGitHubRequest {
 	return UpdateCurrentDistributorMasterFromGitHubRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
@@ -493,6 +598,12 @@ type DistributeRequest struct {
 	DistributorName    *string             `json:"distributorName"`
 	UserId             *string             `json:"userId"`
 	DistributeResource *DistributeResource `json:"distributeResource"`
+}
+
+func NewDistributeRequestFromJson(data string) DistributeRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDistributeRequestFromDict(dict)
 }
 
 func NewDistributeRequestFromDict(data map[string]interface{}) DistributeRequest {
@@ -525,6 +636,12 @@ type DistributeWithoutOverflowProcessRequest struct {
 	DistributeResource *DistributeResource `json:"distributeResource"`
 }
 
+func NewDistributeWithoutOverflowProcessRequestFromJson(data string) DistributeWithoutOverflowProcessRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDistributeWithoutOverflowProcessRequestFromDict(dict)
+}
+
 func NewDistributeWithoutOverflowProcessRequestFromDict(data map[string]interface{}) DistributeWithoutOverflowProcessRequest {
 	return DistributeWithoutOverflowProcessRequest{
 		UserId:             core.CastString(data["userId"]),
@@ -550,6 +667,12 @@ type RunStampTaskRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	StampTask          *string `json:"stampTask"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewRunStampTaskRequestFromJson(data string) RunStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRunStampTaskRequestFromDict(dict)
 }
 
 func NewRunStampTaskRequestFromDict(data map[string]interface{}) RunStampTaskRequest {
@@ -581,6 +704,12 @@ type RunStampSheetRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewRunStampSheetRequestFromJson(data string) RunStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRunStampSheetRequestFromDict(dict)
+}
+
 func NewRunStampSheetRequestFromDict(data map[string]interface{}) RunStampSheetRequest {
 	return RunStampSheetRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -608,6 +737,12 @@ type RunStampSheetExpressRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	StampSheet         *string `json:"stampSheet"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewRunStampSheetExpressRequestFromJson(data string) RunStampSheetExpressRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRunStampSheetExpressRequestFromDict(dict)
 }
 
 func NewRunStampSheetExpressRequestFromDict(data map[string]interface{}) RunStampSheetExpressRequest {
@@ -638,6 +773,12 @@ type RunStampTaskWithoutNamespaceRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewRunStampTaskWithoutNamespaceRequestFromJson(data string) RunStampTaskWithoutNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRunStampTaskWithoutNamespaceRequestFromDict(dict)
+}
+
 func NewRunStampTaskWithoutNamespaceRequestFromDict(data map[string]interface{}) RunStampTaskWithoutNamespaceRequest {
 	return RunStampTaskWithoutNamespaceRequest{
 		StampTask: core.CastString(data["stampTask"]),
@@ -664,6 +805,12 @@ type RunStampSheetWithoutNamespaceRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewRunStampSheetWithoutNamespaceRequestFromJson(data string) RunStampSheetWithoutNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRunStampSheetWithoutNamespaceRequestFromDict(dict)
+}
+
 func NewRunStampSheetWithoutNamespaceRequestFromDict(data map[string]interface{}) RunStampSheetWithoutNamespaceRequest {
 	return RunStampSheetWithoutNamespaceRequest{
 		StampSheet: core.CastString(data["stampSheet"]),
@@ -688,6 +835,12 @@ type RunStampSheetExpressWithoutNamespaceRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StampSheet         *string `json:"stampSheet"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewRunStampSheetExpressWithoutNamespaceRequestFromJson(data string) RunStampSheetExpressWithoutNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRunStampSheetExpressWithoutNamespaceRequestFromDict(dict)
 }
 
 func NewRunStampSheetExpressWithoutNamespaceRequestFromDict(data map[string]interface{}) RunStampSheetExpressWithoutNamespaceRequest {

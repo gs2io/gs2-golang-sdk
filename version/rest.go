@@ -1570,14 +1570,16 @@ func (p Gs2VersionRestClient) AcceptByUserIdAsync(
 	} else {
 		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
 	if request.VersionName != nil && *request.VersionName != "" {
 		bodies["versionName"] = *request.VersionName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

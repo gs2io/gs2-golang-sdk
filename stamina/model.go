@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package stamina
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId           *string        `json:"namespaceId"`
@@ -26,6 +29,12 @@ type Namespace struct {
 	LogSetting            *LogSetting    `json:"logSetting"`
 	CreatedAt             *int64         `json:"createdAt"`
 	UpdatedAt             *int64         `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -87,6 +96,12 @@ type StaminaModelMaster struct {
 	RecoverValueTableName    *string `json:"recoverValueTableName"`
 	CreatedAt                *int64  `json:"createdAt"`
 	UpdatedAt                *int64  `json:"updatedAt"`
+}
+
+func NewStaminaModelMasterFromJson(data string) StaminaModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewStaminaModelMasterFromDict(dict)
 }
 
 func NewStaminaModelMasterFromDict(data map[string]interface{}) StaminaModelMaster {
@@ -158,6 +173,12 @@ type MaxStaminaTableMaster struct {
 	UpdatedAt         *int64  `json:"updatedAt"`
 }
 
+func NewMaxStaminaTableMasterFromJson(data string) MaxStaminaTableMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMaxStaminaTableMasterFromDict(dict)
+}
+
 func NewMaxStaminaTableMasterFromDict(data map[string]interface{}) MaxStaminaTableMaster {
 	return MaxStaminaTableMaster{
 		MaxStaminaTableId: core.CastString(data["maxStaminaTableId"]),
@@ -215,6 +236,12 @@ type RecoverIntervalTableMaster struct {
 	Values                 []int32 `json:"values"`
 	CreatedAt              *int64  `json:"createdAt"`
 	UpdatedAt              *int64  `json:"updatedAt"`
+}
+
+func NewRecoverIntervalTableMasterFromJson(data string) RecoverIntervalTableMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRecoverIntervalTableMasterFromDict(dict)
 }
 
 func NewRecoverIntervalTableMasterFromDict(data map[string]interface{}) RecoverIntervalTableMaster {
@@ -276,6 +303,12 @@ type RecoverValueTableMaster struct {
 	UpdatedAt           *int64  `json:"updatedAt"`
 }
 
+func NewRecoverValueTableMasterFromJson(data string) RecoverValueTableMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRecoverValueTableMasterFromDict(dict)
+}
+
 func NewRecoverValueTableMasterFromDict(data map[string]interface{}) RecoverValueTableMaster {
 	return RecoverValueTableMaster{
 		RecoverValueTableId: core.CastString(data["recoverValueTableId"]),
@@ -329,6 +362,12 @@ type CurrentStaminaMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentStaminaMasterFromJson(data string) CurrentStaminaMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentStaminaMasterFromDict(dict)
+}
+
 func NewCurrentStaminaMasterFromDict(data map[string]interface{}) CurrentStaminaMaster {
 	return CurrentStaminaMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -375,6 +414,12 @@ type StaminaModel struct {
 	MaxStaminaTable        *MaxStaminaTable      `json:"maxStaminaTable"`
 	RecoverIntervalTable   *RecoverIntervalTable `json:"recoverIntervalTable"`
 	RecoverValueTable      *RecoverValueTable    `json:"recoverValueTable"`
+}
+
+func NewStaminaModelFromJson(data string) StaminaModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewStaminaModelFromDict(dict)
 }
 
 func NewStaminaModelFromDict(data map[string]interface{}) StaminaModel {
@@ -437,6 +482,12 @@ type MaxStaminaTable struct {
 	Values            []int32 `json:"values"`
 }
 
+func NewMaxStaminaTableFromJson(data string) MaxStaminaTable {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMaxStaminaTableFromDict(dict)
+}
+
 func NewMaxStaminaTableFromDict(data map[string]interface{}) MaxStaminaTable {
 	return MaxStaminaTable{
 		MaxStaminaTableId: core.CastString(data["maxStaminaTableId"]),
@@ -487,6 +538,12 @@ type RecoverIntervalTable struct {
 	Values                 []int32 `json:"values"`
 }
 
+func NewRecoverIntervalTableFromJson(data string) RecoverIntervalTable {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRecoverIntervalTableFromDict(dict)
+}
+
 func NewRecoverIntervalTableFromDict(data map[string]interface{}) RecoverIntervalTable {
 	return RecoverIntervalTable{
 		RecoverIntervalTableId: core.CastString(data["recoverIntervalTableId"]),
@@ -535,6 +592,12 @@ type RecoverValueTable struct {
 	Metadata            *string `json:"metadata"`
 	ExperienceModelId   *string `json:"experienceModelId"`
 	Values              []int32 `json:"values"`
+}
+
+func NewRecoverValueTableFromJson(data string) RecoverValueTable {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRecoverValueTableFromDict(dict)
 }
 
 func NewRecoverValueTableFromDict(data map[string]interface{}) RecoverValueTable {
@@ -592,6 +655,12 @@ type Stamina struct {
 	LastRecoveredAt        *int64  `json:"lastRecoveredAt"`
 	CreatedAt              *int64  `json:"createdAt"`
 	UpdatedAt              *int64  `json:"updatedAt"`
+}
+
+func NewStaminaFromJson(data string) Stamina {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewStaminaFromDict(dict)
 }
 
 func NewStaminaFromDict(data map[string]interface{}) Stamina {
@@ -658,6 +727,12 @@ type GitHubCheckoutSetting struct {
 	TagName        *string `json:"tagName"`
 }
 
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
+}
+
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
 		ApiKeyId:       core.CastString(data["apiKeyId"]),
@@ -706,6 +781,12 @@ type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
+}
+
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
 		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
@@ -743,6 +824,12 @@ type ScriptSetting struct {
 	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
 	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
+}
+
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
 }
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {

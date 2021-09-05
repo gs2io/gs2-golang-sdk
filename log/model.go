@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package log
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId         *string `json:"namespaceId"`
@@ -32,6 +35,12 @@ type Namespace struct {
 	FirehoseStreamName  *string `json:"firehoseStreamName"`
 	CreatedAt           *int64  `json:"createdAt"`
 	UpdatedAt           *int64  `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -100,6 +109,12 @@ type AccessLog struct {
 	Result    *string `json:"result"`
 }
 
+func NewAccessLogFromJson(data string) AccessLog {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAccessLogFromDict(dict)
+}
+
 func NewAccessLogFromDict(data map[string]interface{}) AccessLog {
 	return AccessLog{
 		Timestamp: core.CastInt64(data["timestamp"]),
@@ -151,6 +166,12 @@ type AccessLogCount struct {
 	Count   *int64  `json:"count"`
 }
 
+func NewAccessLogCountFromJson(data string) AccessLogCount {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAccessLogCountFromDict(dict)
+}
+
 func NewAccessLogCountFromDict(data map[string]interface{}) AccessLogCount {
 	return AccessLogCount{
 		Service: core.CastString(data["service"]),
@@ -198,6 +219,12 @@ type IssueStampSheetLog struct {
 	Action        *string `json:"action"`
 	Args          *string `json:"args"`
 	Tasks         *string `json:"tasks"`
+}
+
+func NewIssueStampSheetLogFromJson(data string) IssueStampSheetLog {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIssueStampSheetLogFromDict(dict)
 }
 
 func NewIssueStampSheetLogFromDict(data map[string]interface{}) IssueStampSheetLog {
@@ -254,6 +281,12 @@ type IssueStampSheetLogCount struct {
 	Count   *int64  `json:"count"`
 }
 
+func NewIssueStampSheetLogCountFromJson(data string) IssueStampSheetLogCount {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIssueStampSheetLogCountFromDict(dict)
+}
+
 func NewIssueStampSheetLogCountFromDict(data map[string]interface{}) IssueStampSheetLogCount {
 	return IssueStampSheetLogCount{
 		Service: core.CastString(data["service"]),
@@ -302,6 +335,12 @@ type ExecuteStampSheetLog struct {
 	UserId        *string `json:"userId"`
 	Action        *string `json:"action"`
 	Args          *string `json:"args"`
+}
+
+func NewExecuteStampSheetLogFromJson(data string) ExecuteStampSheetLog {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExecuteStampSheetLogFromDict(dict)
 }
 
 func NewExecuteStampSheetLogFromDict(data map[string]interface{}) ExecuteStampSheetLog {
@@ -356,6 +395,12 @@ type ExecuteStampSheetLogCount struct {
 	Count   *int64  `json:"count"`
 }
 
+func NewExecuteStampSheetLogCountFromJson(data string) ExecuteStampSheetLogCount {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExecuteStampSheetLogCountFromDict(dict)
+}
+
 func NewExecuteStampSheetLogCountFromDict(data map[string]interface{}) ExecuteStampSheetLogCount {
 	return ExecuteStampSheetLogCount{
 		Service: core.CastString(data["service"]),
@@ -404,6 +449,12 @@ type ExecuteStampTaskLog struct {
 	UserId    *string `json:"userId"`
 	Action    *string `json:"action"`
 	Args      *string `json:"args"`
+}
+
+func NewExecuteStampTaskLogFromJson(data string) ExecuteStampTaskLog {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExecuteStampTaskLogFromDict(dict)
 }
 
 func NewExecuteStampTaskLogFromDict(data map[string]interface{}) ExecuteStampTaskLog {
@@ -456,6 +507,12 @@ type ExecuteStampTaskLogCount struct {
 	UserId  *string `json:"userId"`
 	Action  *string `json:"action"`
 	Count   *int64  `json:"count"`
+}
+
+func NewExecuteStampTaskLogCountFromJson(data string) ExecuteStampTaskLogCount {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExecuteStampTaskLogCountFromDict(dict)
 }
 
 func NewExecuteStampTaskLogCountFromDict(data map[string]interface{}) ExecuteStampTaskLogCount {

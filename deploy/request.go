@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package deploy
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeStacksRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeStacksRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeStacksRequestFromJson(data string) DescribeStacksRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStacksRequestFromDict(dict)
 }
 
 func NewDescribeStacksRequestFromDict(data map[string]interface{}) DescribeStacksRequest {
@@ -51,6 +60,12 @@ type CreateStackRequest struct {
 	Name               *string `json:"name"`
 	Description        *string `json:"description"`
 	Template           *string `json:"template"`
+}
+
+func NewCreateStackRequestFromJson(data string) CreateStackRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateStackRequestFromDict(dict)
 }
 
 func NewCreateStackRequestFromDict(data map[string]interface{}) CreateStackRequest {
@@ -82,6 +97,12 @@ type CreateStackFromGitHubRequest struct {
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
+func NewCreateStackFromGitHubRequestFromJson(data string) CreateStackFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateStackFromGitHubRequestFromDict(dict)
+}
+
 func NewCreateStackFromGitHubRequestFromDict(data map[string]interface{}) CreateStackFromGitHubRequest {
 	return CreateStackFromGitHubRequest{
 		Name:            core.CastString(data["name"]),
@@ -109,6 +130,12 @@ type ValidateRequest struct {
 	Template           *string `json:"template"`
 }
 
+func NewValidateRequestFromJson(data string) ValidateRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewValidateRequestFromDict(dict)
+}
+
 func NewValidateRequestFromDict(data map[string]interface{}) ValidateRequest {
 	return ValidateRequest{
 		Template: core.CastString(data["template"]),
@@ -130,6 +157,12 @@ type GetStackStatusRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StackName          *string `json:"stackName"`
+}
+
+func NewGetStackStatusRequestFromJson(data string) GetStackStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStackStatusRequestFromDict(dict)
 }
 
 func NewGetStackStatusRequestFromDict(data map[string]interface{}) GetStackStatusRequest {
@@ -155,6 +188,12 @@ type GetStackRequest struct {
 	StackName          *string `json:"stackName"`
 }
 
+func NewGetStackRequestFromJson(data string) GetStackRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStackRequestFromDict(dict)
+}
+
 func NewGetStackRequestFromDict(data map[string]interface{}) GetStackRequest {
 	return GetStackRequest{
 		StackName: core.CastString(data["stackName"]),
@@ -178,6 +217,12 @@ type UpdateStackRequest struct {
 	StackName          *string `json:"stackName"`
 	Description        *string `json:"description"`
 	Template           *string `json:"template"`
+}
+
+func NewUpdateStackRequestFromJson(data string) UpdateStackRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateStackRequestFromDict(dict)
 }
 
 func NewUpdateStackRequestFromDict(data map[string]interface{}) UpdateStackRequest {
@@ -209,6 +254,12 @@ type UpdateStackFromGitHubRequest struct {
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
+func NewUpdateStackFromGitHubRequestFromJson(data string) UpdateStackFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateStackFromGitHubRequestFromDict(dict)
+}
+
 func NewUpdateStackFromGitHubRequestFromDict(data map[string]interface{}) UpdateStackFromGitHubRequest {
 	return UpdateStackFromGitHubRequest{
 		StackName:       core.CastString(data["stackName"]),
@@ -236,6 +287,12 @@ type DeleteStackRequest struct {
 	StackName          *string `json:"stackName"`
 }
 
+func NewDeleteStackRequestFromJson(data string) DeleteStackRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteStackRequestFromDict(dict)
+}
+
 func NewDeleteStackRequestFromDict(data map[string]interface{}) DeleteStackRequest {
 	return DeleteStackRequest{
 		StackName: core.CastString(data["stackName"]),
@@ -257,6 +314,12 @@ type ForceDeleteStackRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StackName          *string `json:"stackName"`
+}
+
+func NewForceDeleteStackRequestFromJson(data string) ForceDeleteStackRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewForceDeleteStackRequestFromDict(dict)
 }
 
 func NewForceDeleteStackRequestFromDict(data map[string]interface{}) ForceDeleteStackRequest {
@@ -282,6 +345,12 @@ type DeleteStackResourcesRequest struct {
 	StackName          *string `json:"stackName"`
 }
 
+func NewDeleteStackResourcesRequestFromJson(data string) DeleteStackResourcesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteStackResourcesRequestFromDict(dict)
+}
+
 func NewDeleteStackResourcesRequestFromDict(data map[string]interface{}) DeleteStackResourcesRequest {
 	return DeleteStackResourcesRequest{
 		StackName: core.CastString(data["stackName"]),
@@ -303,6 +372,12 @@ type DeleteStackEntityRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StackName          *string `json:"stackName"`
+}
+
+func NewDeleteStackEntityRequestFromJson(data string) DeleteStackEntityRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteStackEntityRequestFromDict(dict)
 }
 
 func NewDeleteStackEntityRequestFromDict(data map[string]interface{}) DeleteStackEntityRequest {
@@ -328,6 +403,12 @@ type DescribeResourcesRequest struct {
 	StackName          *string `json:"stackName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeResourcesRequestFromJson(data string) DescribeResourcesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeResourcesRequestFromDict(dict)
 }
 
 func NewDescribeResourcesRequestFromDict(data map[string]interface{}) DescribeResourcesRequest {
@@ -358,6 +439,12 @@ type GetResourceRequest struct {
 	ResourceName       *string `json:"resourceName"`
 }
 
+func NewGetResourceRequestFromJson(data string) GetResourceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetResourceRequestFromDict(dict)
+}
+
 func NewGetResourceRequestFromDict(data map[string]interface{}) GetResourceRequest {
 	return GetResourceRequest{
 		StackName:    core.CastString(data["stackName"]),
@@ -383,6 +470,12 @@ type DescribeEventsRequest struct {
 	StackName          *string `json:"stackName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeEventsRequestFromJson(data string) DescribeEventsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeEventsRequestFromDict(dict)
 }
 
 func NewDescribeEventsRequestFromDict(data map[string]interface{}) DescribeEventsRequest {
@@ -413,6 +506,12 @@ type GetEventRequest struct {
 	EventName          *string `json:"eventName"`
 }
 
+func NewGetEventRequestFromJson(data string) GetEventRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetEventRequestFromDict(dict)
+}
+
 func NewGetEventRequestFromDict(data map[string]interface{}) GetEventRequest {
 	return GetEventRequest{
 		StackName: core.CastString(data["stackName"]),
@@ -438,6 +537,12 @@ type DescribeOutputsRequest struct {
 	StackName          *string `json:"stackName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeOutputsRequestFromJson(data string) DescribeOutputsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeOutputsRequestFromDict(dict)
 }
 
 func NewDescribeOutputsRequestFromDict(data map[string]interface{}) DescribeOutputsRequest {
@@ -466,6 +571,12 @@ type GetOutputRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StackName          *string `json:"stackName"`
 	OutputName         *string `json:"outputName"`
+}
+
+func NewGetOutputRequestFromJson(data string) GetOutputRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetOutputRequestFromDict(dict)
 }
 
 func NewGetOutputRequestFromDict(data map[string]interface{}) GetOutputRequest {

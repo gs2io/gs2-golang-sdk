@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package dictionary
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId          *string        `json:"namespaceId"`
@@ -27,6 +30,12 @@ type Namespace struct {
 	LogSetting           *LogSetting    `json:"logSetting"`
 	CreatedAt            *int64         `json:"createdAt"`
 	UpdatedAt            *int64         `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -81,6 +90,12 @@ type EntryModel struct {
 	Metadata     *string `json:"metadata"`
 }
 
+func NewEntryModelFromJson(data string) EntryModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEntryModelFromDict(dict)
+}
+
 func NewEntryModelFromDict(data map[string]interface{}) EntryModel {
 	return EntryModel{
 		EntryModelId: core.CastString(data["entryModelId"]),
@@ -124,6 +139,12 @@ type EntryModelMaster struct {
 	Metadata     *string `json:"metadata"`
 	CreatedAt    *int64  `json:"createdAt"`
 	UpdatedAt    *int64  `json:"updatedAt"`
+}
+
+func NewEntryModelMasterFromJson(data string) EntryModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEntryModelMasterFromDict(dict)
 }
 
 func NewEntryModelMasterFromDict(data map[string]interface{}) EntryModelMaster {
@@ -175,6 +196,12 @@ type Entry struct {
 	AcquiredAt *int64  `json:"acquiredAt"`
 }
 
+func NewEntryFromJson(data string) Entry {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEntryFromDict(dict)
+}
+
 func NewEntryFromDict(data map[string]interface{}) Entry {
 	return Entry{
 		EntryId:    core.CastString(data["entryId"]),
@@ -218,6 +245,12 @@ type CurrentEntryMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentEntryMasterFromJson(data string) CurrentEntryMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentEntryMasterFromDict(dict)
+}
+
 func NewCurrentEntryMasterFromDict(data map[string]interface{}) CurrentEntryMaster {
 	return CurrentEntryMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -255,6 +288,12 @@ func CastCurrentEntryMastersFromDict(data []CurrentEntryMaster) []interface{} {
 type Config struct {
 	Key   *string `json:"key"`
 	Value *string `json:"value"`
+}
+
+func NewConfigFromJson(data string) Config {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConfigFromDict(dict)
 }
 
 func NewConfigFromDict(data map[string]interface{}) Config {
@@ -299,6 +338,12 @@ type GitHubCheckoutSetting struct {
 	CommitHash     *string `json:"commitHash"`
 	BranchName     *string `json:"branchName"`
 	TagName        *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
@@ -352,6 +397,12 @@ type ScriptSetting struct {
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
+}
+
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
 		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
@@ -392,6 +443,12 @@ func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

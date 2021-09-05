@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package gateway
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -52,6 +61,12 @@ type CreateNamespaceRequest struct {
 	Description        *string     `json:"description"`
 	FirebaseSecret     *string     `json:"firebaseSecret"`
 	LogSetting         *LogSetting `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -83,6 +98,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -104,6 +125,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -130,6 +157,12 @@ type UpdateNamespaceRequest struct {
 	Description        *string     `json:"description"`
 	FirebaseSecret     *string     `json:"firebaseSecret"`
 	LogSetting         *LogSetting `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -161,6 +194,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -185,6 +224,12 @@ type DescribeWebSocketSessionsRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeWebSocketSessionsRequestFromJson(data string) DescribeWebSocketSessionsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeWebSocketSessionsRequestFromDict(dict)
 }
 
 func NewDescribeWebSocketSessionsRequestFromDict(data map[string]interface{}) DescribeWebSocketSessionsRequest {
@@ -219,6 +264,12 @@ type DescribeWebSocketSessionsByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeWebSocketSessionsByUserIdRequestFromJson(data string) DescribeWebSocketSessionsByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeWebSocketSessionsByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeWebSocketSessionsByUserIdRequestFromDict(data map[string]interface{}) DescribeWebSocketSessionsByUserIdRequest {
 	return DescribeWebSocketSessionsByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -250,6 +301,12 @@ type SetUserIdRequest struct {
 	AllowConcurrentAccess *bool   `json:"allowConcurrentAccess"`
 }
 
+func NewSetUserIdRequestFromJson(data string) SetUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetUserIdRequestFromDict(dict)
+}
+
 func NewSetUserIdRequestFromDict(data map[string]interface{}) SetUserIdRequest {
 	return SetUserIdRequest{
 		NamespaceName:         core.CastString(data["namespaceName"]),
@@ -277,6 +334,12 @@ type SetUserIdByUserIdRequest struct {
 	NamespaceName         *string `json:"namespaceName"`
 	UserId                *string `json:"userId"`
 	AllowConcurrentAccess *bool   `json:"allowConcurrentAccess"`
+}
+
+func NewSetUserIdByUserIdRequestFromJson(data string) SetUserIdByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetUserIdByUserIdRequestFromDict(dict)
 }
 
 func NewSetUserIdByUserIdRequestFromDict(data map[string]interface{}) SetUserIdByUserIdRequest {
@@ -309,6 +372,12 @@ type SendNotificationRequest struct {
 	Payload                          *string `json:"payload"`
 	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
 	Sound                            *string `json:"sound"`
+}
+
+func NewSendNotificationRequestFromJson(data string) SendNotificationRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSendNotificationRequestFromDict(dict)
 }
 
 func NewSendNotificationRequestFromDict(data map[string]interface{}) SendNotificationRequest {
@@ -346,6 +415,12 @@ type SetFirebaseTokenRequest struct {
 	Token              *string `json:"token"`
 }
 
+func NewSetFirebaseTokenRequestFromJson(data string) SetFirebaseTokenRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetFirebaseTokenRequestFromDict(dict)
+}
+
 func NewSetFirebaseTokenRequestFromDict(data map[string]interface{}) SetFirebaseTokenRequest {
 	return SetFirebaseTokenRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -373,6 +448,12 @@ type SetFirebaseTokenByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	Token              *string `json:"token"`
+}
+
+func NewSetFirebaseTokenByUserIdRequestFromJson(data string) SetFirebaseTokenByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetFirebaseTokenByUserIdRequestFromDict(dict)
 }
 
 func NewSetFirebaseTokenByUserIdRequestFromDict(data map[string]interface{}) SetFirebaseTokenByUserIdRequest {
@@ -403,6 +484,12 @@ type GetFirebaseTokenRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
+func NewGetFirebaseTokenRequestFromJson(data string) GetFirebaseTokenRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFirebaseTokenRequestFromDict(dict)
+}
+
 func NewGetFirebaseTokenRequestFromDict(data map[string]interface{}) GetFirebaseTokenRequest {
 	return GetFirebaseTokenRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -427,6 +514,12 @@ type GetFirebaseTokenByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewGetFirebaseTokenByUserIdRequestFromJson(data string) GetFirebaseTokenByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFirebaseTokenByUserIdRequestFromDict(dict)
 }
 
 func NewGetFirebaseTokenByUserIdRequestFromDict(data map[string]interface{}) GetFirebaseTokenByUserIdRequest {
@@ -455,6 +548,12 @@ type DeleteFirebaseTokenRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
+func NewDeleteFirebaseTokenRequestFromJson(data string) DeleteFirebaseTokenRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteFirebaseTokenRequestFromDict(dict)
+}
+
 func NewDeleteFirebaseTokenRequestFromDict(data map[string]interface{}) DeleteFirebaseTokenRequest {
 	return DeleteFirebaseTokenRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -479,6 +578,12 @@ type DeleteFirebaseTokenByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
+}
+
+func NewDeleteFirebaseTokenByUserIdRequestFromJson(data string) DeleteFirebaseTokenByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteFirebaseTokenByUserIdRequestFromDict(dict)
 }
 
 func NewDeleteFirebaseTokenByUserIdRequestFromDict(data map[string]interface{}) DeleteFirebaseTokenByUserIdRequest {
@@ -508,6 +613,12 @@ type SendMobileNotificationByUserIdRequest struct {
 	Subject            *string `json:"subject"`
 	Payload            *string `json:"payload"`
 	Sound              *string `json:"sound"`
+}
+
+func NewSendMobileNotificationByUserIdRequestFromJson(data string) SendMobileNotificationByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSendMobileNotificationByUserIdRequestFromDict(dict)
 }
 
 func NewSendMobileNotificationByUserIdRequestFromDict(data map[string]interface{}) SendMobileNotificationByUserIdRequest {

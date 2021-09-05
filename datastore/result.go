@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package datastore
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -130,6 +157,12 @@ type UpdateNamespaceResult struct {
 type UpdateNamespaceAsyncResult struct {
 	result *UpdateNamespaceResult
 	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
@@ -157,6 +190,12 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -181,6 +220,12 @@ type DescribeDataObjectsResult struct {
 type DescribeDataObjectsAsyncResult struct {
 	result *DescribeDataObjectsResult
 	err    error
+}
+
+func NewDescribeDataObjectsResultFromJson(data string) DescribeDataObjectsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDataObjectsResultFromDict(dict)
 }
 
 func NewDescribeDataObjectsResultFromDict(data map[string]interface{}) DescribeDataObjectsResult {
@@ -213,6 +258,12 @@ type DescribeDataObjectsByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeDataObjectsByUserIdResultFromJson(data string) DescribeDataObjectsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDataObjectsByUserIdResultFromDict(dict)
+}
+
 func NewDescribeDataObjectsByUserIdResultFromDict(data map[string]interface{}) DescribeDataObjectsByUserIdResult {
 	return DescribeDataObjectsByUserIdResult{
 		Items:         CastDataObjects(core.CastArray(data["items"])),
@@ -243,6 +294,12 @@ type PrepareUploadAsyncResult struct {
 	err    error
 }
 
+func NewPrepareUploadResultFromJson(data string) PrepareUploadResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareUploadResultFromDict(dict)
+}
+
 func NewPrepareUploadResultFromDict(data map[string]interface{}) PrepareUploadResult {
 	return PrepareUploadResult{
 		Item:      NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
@@ -269,6 +326,12 @@ type PrepareUploadByUserIdResult struct {
 type PrepareUploadByUserIdAsyncResult struct {
 	result *PrepareUploadByUserIdResult
 	err    error
+}
+
+func NewPrepareUploadByUserIdResultFromJson(data string) PrepareUploadByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareUploadByUserIdResultFromDict(dict)
 }
 
 func NewPrepareUploadByUserIdResultFromDict(data map[string]interface{}) PrepareUploadByUserIdResult {
@@ -298,6 +361,12 @@ type UpdateDataObjectAsyncResult struct {
 	err    error
 }
 
+func NewUpdateDataObjectResultFromJson(data string) UpdateDataObjectResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateDataObjectResultFromDict(dict)
+}
+
 func NewUpdateDataObjectResultFromDict(data map[string]interface{}) UpdateDataObjectResult {
 	return UpdateDataObjectResult{
 		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
@@ -321,6 +390,12 @@ type UpdateDataObjectByUserIdResult struct {
 type UpdateDataObjectByUserIdAsyncResult struct {
 	result *UpdateDataObjectByUserIdResult
 	err    error
+}
+
+func NewUpdateDataObjectByUserIdResultFromJson(data string) UpdateDataObjectByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateDataObjectByUserIdResultFromDict(dict)
 }
 
 func NewUpdateDataObjectByUserIdResultFromDict(data map[string]interface{}) UpdateDataObjectByUserIdResult {
@@ -347,6 +422,12 @@ type PrepareReUploadResult struct {
 type PrepareReUploadAsyncResult struct {
 	result *PrepareReUploadResult
 	err    error
+}
+
+func NewPrepareReUploadResultFromJson(data string) PrepareReUploadResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareReUploadResultFromDict(dict)
 }
 
 func NewPrepareReUploadResultFromDict(data map[string]interface{}) PrepareReUploadResult {
@@ -377,6 +458,12 @@ type PrepareReUploadByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewPrepareReUploadByUserIdResultFromJson(data string) PrepareReUploadByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareReUploadByUserIdResultFromDict(dict)
+}
+
 func NewPrepareReUploadByUserIdResultFromDict(data map[string]interface{}) PrepareReUploadByUserIdResult {
 	return PrepareReUploadByUserIdResult{
 		Item:      NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
@@ -404,6 +491,12 @@ type DoneUploadAsyncResult struct {
 	err    error
 }
 
+func NewDoneUploadResultFromJson(data string) DoneUploadResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDoneUploadResultFromDict(dict)
+}
+
 func NewDoneUploadResultFromDict(data map[string]interface{}) DoneUploadResult {
 	return DoneUploadResult{
 		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
@@ -427,6 +520,12 @@ type DoneUploadByUserIdResult struct {
 type DoneUploadByUserIdAsyncResult struct {
 	result *DoneUploadByUserIdResult
 	err    error
+}
+
+func NewDoneUploadByUserIdResultFromJson(data string) DoneUploadByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDoneUploadByUserIdResultFromDict(dict)
 }
 
 func NewDoneUploadByUserIdResultFromDict(data map[string]interface{}) DoneUploadByUserIdResult {
@@ -454,6 +553,12 @@ type DeleteDataObjectAsyncResult struct {
 	err    error
 }
 
+func NewDeleteDataObjectResultFromJson(data string) DeleteDataObjectResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteDataObjectResultFromDict(dict)
+}
+
 func NewDeleteDataObjectResultFromDict(data map[string]interface{}) DeleteDataObjectResult {
 	return DeleteDataObjectResult{
 		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
@@ -477,6 +582,12 @@ type DeleteDataObjectByUserIdResult struct {
 type DeleteDataObjectByUserIdAsyncResult struct {
 	result *DeleteDataObjectByUserIdResult
 	err    error
+}
+
+func NewDeleteDataObjectByUserIdResultFromJson(data string) DeleteDataObjectByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteDataObjectByUserIdResultFromDict(dict)
 }
 
 func NewDeleteDataObjectByUserIdResultFromDict(data map[string]interface{}) DeleteDataObjectByUserIdResult {
@@ -504,6 +615,12 @@ type PrepareDownloadResult struct {
 type PrepareDownloadAsyncResult struct {
 	result *PrepareDownloadResult
 	err    error
+}
+
+func NewPrepareDownloadResultFromJson(data string) PrepareDownloadResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadResultFromDict(dict)
 }
 
 func NewPrepareDownloadResultFromDict(data map[string]interface{}) PrepareDownloadResult {
@@ -537,6 +654,12 @@ type PrepareDownloadByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewPrepareDownloadByUserIdResultFromJson(data string) PrepareDownloadByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadByUserIdResultFromDict(dict)
+}
+
 func NewPrepareDownloadByUserIdResultFromDict(data map[string]interface{}) PrepareDownloadByUserIdResult {
 	return PrepareDownloadByUserIdResult{
 		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
@@ -566,6 +689,12 @@ type PrepareDownloadByGenerationResult struct {
 type PrepareDownloadByGenerationAsyncResult struct {
 	result *PrepareDownloadByGenerationResult
 	err    error
+}
+
+func NewPrepareDownloadByGenerationResultFromJson(data string) PrepareDownloadByGenerationResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadByGenerationResultFromDict(dict)
 }
 
 func NewPrepareDownloadByGenerationResultFromDict(data map[string]interface{}) PrepareDownloadByGenerationResult {
@@ -599,6 +728,12 @@ type PrepareDownloadByGenerationAndUserIdAsyncResult struct {
 	err    error
 }
 
+func NewPrepareDownloadByGenerationAndUserIdResultFromJson(data string) PrepareDownloadByGenerationAndUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadByGenerationAndUserIdResultFromDict(dict)
+}
+
 func NewPrepareDownloadByGenerationAndUserIdResultFromDict(data map[string]interface{}) PrepareDownloadByGenerationAndUserIdResult {
 	return PrepareDownloadByGenerationAndUserIdResult{
 		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
@@ -628,6 +763,12 @@ type PrepareDownloadOwnDataResult struct {
 type PrepareDownloadOwnDataAsyncResult struct {
 	result *PrepareDownloadOwnDataResult
 	err    error
+}
+
+func NewPrepareDownloadOwnDataResultFromJson(data string) PrepareDownloadOwnDataResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadOwnDataResultFromDict(dict)
 }
 
 func NewPrepareDownloadOwnDataResultFromDict(data map[string]interface{}) PrepareDownloadOwnDataResult {
@@ -661,6 +802,12 @@ type PrepareDownloadByUserIdAndDataObjectNameAsyncResult struct {
 	err    error
 }
 
+func NewPrepareDownloadByUserIdAndDataObjectNameResultFromJson(data string) PrepareDownloadByUserIdAndDataObjectNameResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadByUserIdAndDataObjectNameResultFromDict(dict)
+}
+
 func NewPrepareDownloadByUserIdAndDataObjectNameResultFromDict(data map[string]interface{}) PrepareDownloadByUserIdAndDataObjectNameResult {
 	return PrepareDownloadByUserIdAndDataObjectNameResult{
 		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
@@ -690,6 +837,12 @@ type PrepareDownloadOwnDataByGenerationResult struct {
 type PrepareDownloadOwnDataByGenerationAsyncResult struct {
 	result *PrepareDownloadOwnDataByGenerationResult
 	err    error
+}
+
+func NewPrepareDownloadOwnDataByGenerationResultFromJson(data string) PrepareDownloadOwnDataByGenerationResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadOwnDataByGenerationResultFromDict(dict)
 }
 
 func NewPrepareDownloadOwnDataByGenerationResultFromDict(data map[string]interface{}) PrepareDownloadOwnDataByGenerationResult {
@@ -723,6 +876,12 @@ type PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncResult struct {
 	err    error
 }
 
+func NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationResultFromJson(data string) PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationResultFromDict(dict)
+}
+
 func NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationResultFromDict(data map[string]interface{}) PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult {
 	return PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult{
 		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
@@ -752,6 +911,12 @@ type RestoreDataObjectAsyncResult struct {
 	err    error
 }
 
+func NewRestoreDataObjectResultFromJson(data string) RestoreDataObjectResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRestoreDataObjectResultFromDict(dict)
+}
+
 func NewRestoreDataObjectResultFromDict(data map[string]interface{}) RestoreDataObjectResult {
 	return RestoreDataObjectResult{
 		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
@@ -776,6 +941,12 @@ type DescribeDataObjectHistoriesResult struct {
 type DescribeDataObjectHistoriesAsyncResult struct {
 	result *DescribeDataObjectHistoriesResult
 	err    error
+}
+
+func NewDescribeDataObjectHistoriesResultFromJson(data string) DescribeDataObjectHistoriesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDataObjectHistoriesResultFromDict(dict)
 }
 
 func NewDescribeDataObjectHistoriesResultFromDict(data map[string]interface{}) DescribeDataObjectHistoriesResult {
@@ -808,6 +979,12 @@ type DescribeDataObjectHistoriesByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeDataObjectHistoriesByUserIdResultFromJson(data string) DescribeDataObjectHistoriesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDataObjectHistoriesByUserIdResultFromDict(dict)
+}
+
 func NewDescribeDataObjectHistoriesByUserIdResultFromDict(data map[string]interface{}) DescribeDataObjectHistoriesByUserIdResult {
 	return DescribeDataObjectHistoriesByUserIdResult{
 		Items:         CastDataObjectHistories(core.CastArray(data["items"])),
@@ -837,6 +1014,12 @@ type GetDataObjectHistoryAsyncResult struct {
 	err    error
 }
 
+func NewGetDataObjectHistoryResultFromJson(data string) GetDataObjectHistoryResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetDataObjectHistoryResultFromDict(dict)
+}
+
 func NewGetDataObjectHistoryResultFromDict(data map[string]interface{}) GetDataObjectHistoryResult {
 	return GetDataObjectHistoryResult{
 		Item: NewDataObjectHistoryFromDict(core.CastMap(data["item"])).Pointer(),
@@ -860,6 +1043,12 @@ type GetDataObjectHistoryByUserIdResult struct {
 type GetDataObjectHistoryByUserIdAsyncResult struct {
 	result *GetDataObjectHistoryByUserIdResult
 	err    error
+}
+
+func NewGetDataObjectHistoryByUserIdResultFromJson(data string) GetDataObjectHistoryByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetDataObjectHistoryByUserIdResultFromDict(dict)
 }
 
 func NewGetDataObjectHistoryByUserIdResultFromDict(data map[string]interface{}) GetDataObjectHistoryByUserIdResult {

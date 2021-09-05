@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package limit
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -53,6 +62,12 @@ type CreateNamespaceRequest struct {
 	LogSetting         *LogSetting `json:"logSetting"`
 }
 
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
+}
+
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
 		Name:        core.CastString(data["name"]),
@@ -80,6 +95,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -101,6 +122,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -126,6 +153,12 @@ type UpdateNamespaceRequest struct {
 	NamespaceName      *string     `json:"namespaceName"`
 	Description        *string     `json:"description"`
 	LogSetting         *LogSetting `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -155,6 +188,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -180,6 +219,12 @@ type DescribeCountersRequest struct {
 	LimitName          *string `json:"limitName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeCountersRequestFromJson(data string) DescribeCountersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeCountersRequestFromDict(dict)
 }
 
 func NewDescribeCountersRequestFromDict(data map[string]interface{}) DescribeCountersRequest {
@@ -217,6 +262,12 @@ type DescribeCountersByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeCountersByUserIdRequestFromJson(data string) DescribeCountersByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeCountersByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeCountersByUserIdRequestFromDict(data map[string]interface{}) DescribeCountersByUserIdRequest {
 	return DescribeCountersByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -251,6 +302,12 @@ type GetCounterRequest struct {
 	CounterName        *string `json:"counterName"`
 }
 
+func NewGetCounterRequestFromJson(data string) GetCounterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCounterRequestFromDict(dict)
+}
+
 func NewGetCounterRequestFromDict(data map[string]interface{}) GetCounterRequest {
 	return GetCounterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -281,6 +338,12 @@ type GetCounterByUserIdRequest struct {
 	LimitName          *string `json:"limitName"`
 	UserId             *string `json:"userId"`
 	CounterName        *string `json:"counterName"`
+}
+
+func NewGetCounterByUserIdRequestFromJson(data string) GetCounterByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCounterByUserIdRequestFromDict(dict)
 }
 
 func NewGetCounterByUserIdRequestFromDict(data map[string]interface{}) GetCounterByUserIdRequest {
@@ -315,6 +378,12 @@ type CountUpRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	CountUpValue       *int32  `json:"countUpValue"`
 	MaxValue           *int32  `json:"maxValue"`
+}
+
+func NewCountUpRequestFromJson(data string) CountUpRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountUpRequestFromDict(dict)
 }
 
 func NewCountUpRequestFromDict(data map[string]interface{}) CountUpRequest {
@@ -355,6 +424,12 @@ type CountUpByUserIdRequest struct {
 	MaxValue           *int32  `json:"maxValue"`
 }
 
+func NewCountUpByUserIdRequestFromJson(data string) CountUpByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountUpByUserIdRequestFromDict(dict)
+}
+
 func NewCountUpByUserIdRequestFromDict(data map[string]interface{}) CountUpByUserIdRequest {
 	return CountUpByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -391,6 +466,12 @@ type DeleteCounterByUserIdRequest struct {
 	CounterName        *string `json:"counterName"`
 }
 
+func NewDeleteCounterByUserIdRequestFromJson(data string) DeleteCounterByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteCounterByUserIdRequestFromDict(dict)
+}
+
 func NewDeleteCounterByUserIdRequestFromDict(data map[string]interface{}) DeleteCounterByUserIdRequest {
 	return DeleteCounterByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -421,6 +502,12 @@ type CountUpByStampTaskRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewCountUpByStampTaskRequestFromJson(data string) CountUpByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCountUpByStampTaskRequestFromDict(dict)
+}
+
 func NewCountUpByStampTaskRequestFromDict(data map[string]interface{}) CountUpByStampTaskRequest {
 	return CountUpByStampTaskRequest{
 		StampTask: core.CastString(data["stampTask"]),
@@ -445,6 +532,12 @@ type DeleteByStampSheetRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StampSheet         *string `json:"stampSheet"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewDeleteByStampSheetRequestFromJson(data string) DeleteByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteByStampSheetRequestFromDict(dict)
 }
 
 func NewDeleteByStampSheetRequestFromDict(data map[string]interface{}) DeleteByStampSheetRequest {
@@ -472,6 +565,12 @@ type DescribeLimitModelMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeLimitModelMastersRequestFromJson(data string) DescribeLimitModelMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeLimitModelMastersRequestFromDict(dict)
 }
 
 func NewDescribeLimitModelMastersRequestFromDict(data map[string]interface{}) DescribeLimitModelMastersRequest {
@@ -506,6 +605,12 @@ type CreateLimitModelMasterRequest struct {
 	ResetDayOfMonth    *int32  `json:"resetDayOfMonth"`
 	ResetDayOfWeek     *string `json:"resetDayOfWeek"`
 	ResetHour          *int32  `json:"resetHour"`
+}
+
+func NewCreateLimitModelMasterRequestFromJson(data string) CreateLimitModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateLimitModelMasterRequestFromDict(dict)
 }
 
 func NewCreateLimitModelMasterRequestFromDict(data map[string]interface{}) CreateLimitModelMasterRequest {
@@ -546,6 +651,12 @@ type GetLimitModelMasterRequest struct {
 	LimitName          *string `json:"limitName"`
 }
 
+func NewGetLimitModelMasterRequestFromJson(data string) GetLimitModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetLimitModelMasterRequestFromDict(dict)
+}
+
 func NewGetLimitModelMasterRequestFromDict(data map[string]interface{}) GetLimitModelMasterRequest {
 	return GetLimitModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -576,6 +687,12 @@ type UpdateLimitModelMasterRequest struct {
 	ResetDayOfMonth    *int32  `json:"resetDayOfMonth"`
 	ResetDayOfWeek     *string `json:"resetDayOfWeek"`
 	ResetHour          *int32  `json:"resetHour"`
+}
+
+func NewUpdateLimitModelMasterRequestFromJson(data string) UpdateLimitModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateLimitModelMasterRequestFromDict(dict)
 }
 
 func NewUpdateLimitModelMasterRequestFromDict(data map[string]interface{}) UpdateLimitModelMasterRequest {
@@ -616,6 +733,12 @@ type DeleteLimitModelMasterRequest struct {
 	LimitName          *string `json:"limitName"`
 }
 
+func NewDeleteLimitModelMasterRequestFromJson(data string) DeleteLimitModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteLimitModelMasterRequestFromDict(dict)
+}
+
 func NewDeleteLimitModelMasterRequestFromDict(data map[string]interface{}) DeleteLimitModelMasterRequest {
 	return DeleteLimitModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -641,6 +764,12 @@ type ExportMasterRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterRequestFromDict(dict)
+}
+
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -662,6 +791,12 @@ type GetCurrentLimitMasterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetCurrentLimitMasterRequestFromJson(data string) GetCurrentLimitMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentLimitMasterRequestFromDict(dict)
 }
 
 func NewGetCurrentLimitMasterRequestFromDict(data map[string]interface{}) GetCurrentLimitMasterRequest {
@@ -686,6 +821,12 @@ type UpdateCurrentLimitMasterRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	Settings           *string `json:"settings"`
+}
+
+func NewUpdateCurrentLimitMasterRequestFromJson(data string) UpdateCurrentLimitMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentLimitMasterRequestFromDict(dict)
 }
 
 func NewUpdateCurrentLimitMasterRequestFromDict(data map[string]interface{}) UpdateCurrentLimitMasterRequest {
@@ -714,6 +855,12 @@ type UpdateCurrentLimitMasterFromGitHubRequest struct {
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
+func NewUpdateCurrentLimitMasterFromGitHubRequestFromJson(data string) UpdateCurrentLimitMasterFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentLimitMasterFromGitHubRequestFromDict(dict)
+}
+
 func NewUpdateCurrentLimitMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentLimitMasterFromGitHubRequest {
 	return UpdateCurrentLimitMasterFromGitHubRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
@@ -739,6 +886,12 @@ type DescribeLimitModelsRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDescribeLimitModelsRequestFromJson(data string) DescribeLimitModelsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeLimitModelsRequestFromDict(dict)
+}
+
 func NewDescribeLimitModelsRequestFromDict(data map[string]interface{}) DescribeLimitModelsRequest {
 	return DescribeLimitModelsRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -761,6 +914,12 @@ type GetLimitModelRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	LimitName          *string `json:"limitName"`
+}
+
+func NewGetLimitModelRequestFromJson(data string) GetLimitModelRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetLimitModelRequestFromDict(dict)
 }
 
 func NewGetLimitModelRequestFromDict(data map[string]interface{}) GetLimitModelRequest {

@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package exchange
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId          *string     `json:"namespaceId"`
@@ -29,6 +32,12 @@ type Namespace struct {
 	LogSetting           *LogSetting `json:"logSetting"`
 	CreatedAt            *int64      `json:"createdAt"`
 	UpdatedAt            *int64      `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -91,6 +100,12 @@ type RateModel struct {
 	EnableSkip         *bool           `json:"enableSkip"`
 	SkipConsumeActions []ConsumeAction `json:"skipConsumeActions"`
 	AcquireActions     []AcquireAction `json:"acquireActions"`
+}
+
+func NewRateModelFromJson(data string) RateModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRateModelFromDict(dict)
 }
 
 func NewRateModelFromDict(data map[string]interface{}) RateModel {
@@ -162,6 +177,12 @@ type RateModelMaster struct {
 	UpdatedAt          *int64          `json:"updatedAt"`
 }
 
+func NewRateModelMasterFromJson(data string) RateModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRateModelMasterFromDict(dict)
+}
+
 func NewRateModelMasterFromDict(data map[string]interface{}) RateModelMaster {
 	return RateModelMaster{
 		RateModelId:        core.CastString(data["rateModelId"]),
@@ -227,6 +248,12 @@ type CurrentRateMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentRateMasterFromJson(data string) CurrentRateMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentRateMasterFromDict(dict)
+}
+
 func NewCurrentRateMasterFromDict(data map[string]interface{}) CurrentRateMaster {
 	return CurrentRateMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -268,6 +295,12 @@ type Await struct {
 	Name        *string `json:"name"`
 	Count       *int32  `json:"count"`
 	ExchangedAt *int64  `json:"exchangedAt"`
+}
+
+func NewAwaitFromJson(data string) Await {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAwaitFromDict(dict)
 }
 
 func NewAwaitFromDict(data map[string]interface{}) Await {
@@ -317,6 +350,12 @@ type Config struct {
 	Value *string `json:"value"`
 }
 
+func NewConfigFromJson(data string) Config {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConfigFromDict(dict)
+}
+
 func NewConfigFromDict(data map[string]interface{}) Config {
 	return Config{
 		Key:   core.CastString(data["key"]),
@@ -359,6 +398,12 @@ type GitHubCheckoutSetting struct {
 	CommitHash     *string `json:"commitHash"`
 	BranchName     *string `json:"branchName"`
 	TagName        *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
@@ -409,6 +454,12 @@ type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
+}
+
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
 		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
@@ -444,6 +495,12 @@ func CastLogSettingsFromDict(data []LogSetting) []interface{} {
 type AcquireAction struct {
 	Action  *string `json:"action"`
 	Request *string `json:"request"`
+}
+
+func NewAcquireActionFromJson(data string) AcquireAction {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireActionFromDict(dict)
 }
 
 func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
@@ -483,6 +540,12 @@ func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
 type ConsumeAction struct {
 	Action  *string `json:"action"`
 	Request *string `json:"request"`
+}
+
+func NewConsumeActionFromJson(data string) ConsumeAction {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConsumeActionFromDict(dict)
 }
 
 func NewConsumeActionFromDict(data map[string]interface{}) ConsumeAction {

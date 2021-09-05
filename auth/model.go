@@ -16,12 +16,21 @@ permissions and limitations under the License.
 
 package auth
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type AccessToken struct {
 	Token  *string `json:"token"`
 	UserId *string `json:"userId"`
 	Expire *int64  `json:"expire"`
+}
+
+func NewAccessTokenFromJson(data string) AccessToken {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAccessTokenFromDict(dict)
 }
 
 func NewAccessTokenFromDict(data map[string]interface{}) AccessToken {

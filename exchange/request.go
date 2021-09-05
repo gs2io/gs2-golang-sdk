@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package exchange
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -55,6 +64,12 @@ type CreateNamespaceRequest struct {
 	QueueNamespaceId     *string     `json:"queueNamespaceId"`
 	KeyId                *string     `json:"keyId"`
 	LogSetting           *LogSetting `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -92,6 +107,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -113,6 +134,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -142,6 +169,12 @@ type UpdateNamespaceRequest struct {
 	QueueNamespaceId     *string     `json:"queueNamespaceId"`
 	KeyId                *string     `json:"keyId"`
 	LogSetting           *LogSetting `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -179,6 +212,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -200,6 +239,12 @@ type DescribeRateModelsRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewDescribeRateModelsRequestFromJson(data string) DescribeRateModelsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeRateModelsRequestFromDict(dict)
 }
 
 func NewDescribeRateModelsRequestFromDict(data map[string]interface{}) DescribeRateModelsRequest {
@@ -224,6 +269,12 @@ type GetRateModelRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	RateName           *string `json:"rateName"`
+}
+
+func NewGetRateModelRequestFromJson(data string) GetRateModelRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetRateModelRequestFromDict(dict)
 }
 
 func NewGetRateModelRequestFromDict(data map[string]interface{}) GetRateModelRequest {
@@ -251,6 +302,12 @@ type DescribeRateModelMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeRateModelMastersRequestFromJson(data string) DescribeRateModelMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeRateModelMastersRequestFromDict(dict)
 }
 
 func NewDescribeRateModelMastersRequestFromDict(data map[string]interface{}) DescribeRateModelMastersRequest {
@@ -287,6 +344,12 @@ type CreateRateModelMasterRequest struct {
 	SkipConsumeActions []ConsumeAction `json:"skipConsumeActions"`
 	AcquireActions     []AcquireAction `json:"acquireActions"`
 	ConsumeActions     []ConsumeAction `json:"consumeActions"`
+}
+
+func NewCreateRateModelMasterRequestFromJson(data string) CreateRateModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateRateModelMasterRequestFromDict(dict)
 }
 
 func NewCreateRateModelMasterRequestFromDict(data map[string]interface{}) CreateRateModelMasterRequest {
@@ -337,6 +400,12 @@ type GetRateModelMasterRequest struct {
 	RateName           *string `json:"rateName"`
 }
 
+func NewGetRateModelMasterRequestFromJson(data string) GetRateModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetRateModelMasterRequestFromDict(dict)
+}
+
 func NewGetRateModelMasterRequestFromDict(data map[string]interface{}) GetRateModelMasterRequest {
 	return GetRateModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -369,6 +438,12 @@ type UpdateRateModelMasterRequest struct {
 	SkipConsumeActions []ConsumeAction `json:"skipConsumeActions"`
 	AcquireActions     []AcquireAction `json:"acquireActions"`
 	ConsumeActions     []ConsumeAction `json:"consumeActions"`
+}
+
+func NewUpdateRateModelMasterRequestFromJson(data string) UpdateRateModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateRateModelMasterRequestFromDict(dict)
 }
 
 func NewUpdateRateModelMasterRequestFromDict(data map[string]interface{}) UpdateRateModelMasterRequest {
@@ -419,6 +494,12 @@ type DeleteRateModelMasterRequest struct {
 	RateName           *string `json:"rateName"`
 }
 
+func NewDeleteRateModelMasterRequestFromJson(data string) DeleteRateModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteRateModelMasterRequestFromDict(dict)
+}
+
 func NewDeleteRateModelMasterRequestFromDict(data map[string]interface{}) DeleteRateModelMasterRequest {
 	return DeleteRateModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -446,6 +527,12 @@ type ExchangeRequest struct {
 	AccessToken        *string  `json:"accessToken"`
 	Count              *int32   `json:"count"`
 	Config             []Config `json:"config"`
+}
+
+func NewExchangeRequestFromJson(data string) ExchangeRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExchangeRequestFromDict(dict)
 }
 
 func NewExchangeRequestFromDict(data map[string]interface{}) ExchangeRequest {
@@ -485,6 +572,12 @@ type ExchangeByUserIdRequest struct {
 	Config             []Config `json:"config"`
 }
 
+func NewExchangeByUserIdRequestFromJson(data string) ExchangeByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExchangeByUserIdRequestFromDict(dict)
+}
+
 func NewExchangeByUserIdRequestFromDict(data map[string]interface{}) ExchangeByUserIdRequest {
 	return ExchangeByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -519,6 +612,12 @@ type ExchangeByStampSheetRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewExchangeByStampSheetRequestFromJson(data string) ExchangeByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExchangeByStampSheetRequestFromDict(dict)
+}
+
 func NewExchangeByStampSheetRequestFromDict(data map[string]interface{}) ExchangeByStampSheetRequest {
 	return ExchangeByStampSheetRequest{
 		StampSheet: core.CastString(data["stampSheet"]),
@@ -544,6 +643,12 @@ type ExportMasterRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterRequestFromDict(dict)
+}
+
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -565,6 +670,12 @@ type GetCurrentRateMasterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetCurrentRateMasterRequestFromJson(data string) GetCurrentRateMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentRateMasterRequestFromDict(dict)
 }
 
 func NewGetCurrentRateMasterRequestFromDict(data map[string]interface{}) GetCurrentRateMasterRequest {
@@ -589,6 +700,12 @@ type UpdateCurrentRateMasterRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	Settings           *string `json:"settings"`
+}
+
+func NewUpdateCurrentRateMasterRequestFromJson(data string) UpdateCurrentRateMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentRateMasterRequestFromDict(dict)
 }
 
 func NewUpdateCurrentRateMasterRequestFromDict(data map[string]interface{}) UpdateCurrentRateMasterRequest {
@@ -617,6 +734,12 @@ type UpdateCurrentRateMasterFromGitHubRequest struct {
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
+func NewUpdateCurrentRateMasterFromGitHubRequestFromJson(data string) UpdateCurrentRateMasterFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentRateMasterFromGitHubRequestFromDict(dict)
+}
+
 func NewUpdateCurrentRateMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentRateMasterFromGitHubRequest {
 	return UpdateCurrentRateMasterFromGitHubRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
@@ -643,6 +766,12 @@ type CreateAwaitByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	RateName           *string `json:"rateName"`
 	Count              *int32  `json:"count"`
+}
+
+func NewCreateAwaitByUserIdRequestFromJson(data string) CreateAwaitByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateAwaitByUserIdRequestFromDict(dict)
 }
 
 func NewCreateAwaitByUserIdRequestFromDict(data map[string]interface{}) CreateAwaitByUserIdRequest {
@@ -676,6 +805,12 @@ type DescribeAwaitsRequest struct {
 	RateName           *string `json:"rateName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeAwaitsRequestFromJson(data string) DescribeAwaitsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeAwaitsRequestFromDict(dict)
 }
 
 func NewDescribeAwaitsRequestFromDict(data map[string]interface{}) DescribeAwaitsRequest {
@@ -713,6 +848,12 @@ type DescribeAwaitsByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeAwaitsByUserIdRequestFromJson(data string) DescribeAwaitsByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeAwaitsByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeAwaitsByUserIdRequestFromDict(data map[string]interface{}) DescribeAwaitsByUserIdRequest {
 	return DescribeAwaitsByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -747,6 +888,12 @@ type GetAwaitRequest struct {
 	AwaitName          *string `json:"awaitName"`
 }
 
+func NewGetAwaitRequestFromJson(data string) GetAwaitRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetAwaitRequestFromDict(dict)
+}
+
 func NewGetAwaitRequestFromDict(data map[string]interface{}) GetAwaitRequest {
 	return GetAwaitRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -777,6 +924,12 @@ type GetAwaitByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	RateName           *string `json:"rateName"`
 	AwaitName          *string `json:"awaitName"`
+}
+
+func NewGetAwaitByUserIdRequestFromJson(data string) GetAwaitByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetAwaitByUserIdRequestFromDict(dict)
 }
 
 func NewGetAwaitByUserIdRequestFromDict(data map[string]interface{}) GetAwaitByUserIdRequest {
@@ -810,6 +963,12 @@ type AcquireRequest struct {
 	RateName           *string  `json:"rateName"`
 	AwaitName          *string  `json:"awaitName"`
 	Config             []Config `json:"config"`
+}
+
+func NewAcquireRequestFromJson(data string) AcquireRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireRequestFromDict(dict)
 }
 
 func NewAcquireRequestFromDict(data map[string]interface{}) AcquireRequest {
@@ -849,6 +1008,12 @@ type AcquireByUserIdRequest struct {
 	Config             []Config `json:"config"`
 }
 
+func NewAcquireByUserIdRequestFromJson(data string) AcquireByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireByUserIdRequestFromDict(dict)
+}
+
 func NewAcquireByUserIdRequestFromDict(data map[string]interface{}) AcquireByUserIdRequest {
 	return AcquireByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -884,6 +1049,12 @@ type AcquireForceByUserIdRequest struct {
 	RateName           *string  `json:"rateName"`
 	AwaitName          *string  `json:"awaitName"`
 	Config             []Config `json:"config"`
+}
+
+func NewAcquireForceByUserIdRequestFromJson(data string) AcquireForceByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireForceByUserIdRequestFromDict(dict)
 }
 
 func NewAcquireForceByUserIdRequestFromDict(data map[string]interface{}) AcquireForceByUserIdRequest {
@@ -923,6 +1094,12 @@ type SkipRequest struct {
 	Config             []Config `json:"config"`
 }
 
+func NewSkipRequestFromJson(data string) SkipRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSkipRequestFromDict(dict)
+}
+
 func NewSkipRequestFromDict(data map[string]interface{}) SkipRequest {
 	return SkipRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -958,6 +1135,12 @@ type SkipByUserIdRequest struct {
 	RateName           *string  `json:"rateName"`
 	AwaitName          *string  `json:"awaitName"`
 	Config             []Config `json:"config"`
+}
+
+func NewSkipByUserIdRequestFromJson(data string) SkipByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSkipByUserIdRequestFromDict(dict)
 }
 
 func NewSkipByUserIdRequestFromDict(data map[string]interface{}) SkipByUserIdRequest {
@@ -996,6 +1179,12 @@ type DeleteAwaitRequest struct {
 	AwaitName          *string `json:"awaitName"`
 }
 
+func NewDeleteAwaitRequestFromJson(data string) DeleteAwaitRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteAwaitRequestFromDict(dict)
+}
+
 func NewDeleteAwaitRequestFromDict(data map[string]interface{}) DeleteAwaitRequest {
 	return DeleteAwaitRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1028,6 +1217,12 @@ type DeleteAwaitByUserIdRequest struct {
 	AwaitName          *string `json:"awaitName"`
 }
 
+func NewDeleteAwaitByUserIdRequestFromJson(data string) DeleteAwaitByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteAwaitByUserIdRequestFromDict(dict)
+}
+
 func NewDeleteAwaitByUserIdRequestFromDict(data map[string]interface{}) DeleteAwaitByUserIdRequest {
 	return DeleteAwaitByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1058,6 +1253,12 @@ type CreateAwaitByStampSheetRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewCreateAwaitByStampSheetRequestFromJson(data string) CreateAwaitByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateAwaitByStampSheetRequestFromDict(dict)
+}
+
 func NewCreateAwaitByStampSheetRequestFromDict(data map[string]interface{}) CreateAwaitByStampSheetRequest {
 	return CreateAwaitByStampSheetRequest{
 		StampSheet: core.CastString(data["stampSheet"]),
@@ -1082,6 +1283,12 @@ type DeleteAwaitByStampTaskRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StampTask          *string `json:"stampTask"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewDeleteAwaitByStampTaskRequestFromJson(data string) DeleteAwaitByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteAwaitByStampTaskRequestFromDict(dict)
 }
 
 func NewDeleteAwaitByStampTaskRequestFromDict(data map[string]interface{}) DeleteAwaitByStampTaskRequest {

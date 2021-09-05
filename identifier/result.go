@@ -12,11 +12,16 @@ or in the "license" file accompanying this file. This file is distributed
 on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 express or implied. See the License for the specific language governing
 permissions and limitations under the License.
+
+deny overwrite
 */
 
 package identifier
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeUsersResult struct {
 	Items         []User  `json:"items"`
@@ -26,6 +31,12 @@ type DescribeUsersResult struct {
 type DescribeUsersAsyncResult struct {
 	result *DescribeUsersResult
 	err    error
+}
+
+func NewDescribeUsersResultFromJson(data string) DescribeUsersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeUsersResultFromDict(dict)
 }
 
 func NewDescribeUsersResultFromDict(data map[string]interface{}) DescribeUsersResult {
@@ -57,6 +68,12 @@ type CreateUserAsyncResult struct {
 	err    error
 }
 
+func NewCreateUserResultFromJson(data string) CreateUserResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateUserResultFromDict(dict)
+}
+
 func NewCreateUserResultFromDict(data map[string]interface{}) CreateUserResult {
 	return CreateUserResult{
 		Item: NewUserFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +97,12 @@ type UpdateUserResult struct {
 type UpdateUserAsyncResult struct {
 	result *UpdateUserResult
 	err    error
+}
+
+func NewUpdateUserResultFromJson(data string) UpdateUserResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateUserResultFromDict(dict)
 }
 
 func NewUpdateUserResultFromDict(data map[string]interface{}) UpdateUserResult {
@@ -107,6 +130,12 @@ type GetUserAsyncResult struct {
 	err    error
 }
 
+func NewGetUserResultFromJson(data string) GetUserResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetUserResultFromDict(dict)
+}
+
 func NewGetUserResultFromDict(data map[string]interface{}) GetUserResult {
 	return GetUserResult{
 		Item: NewUserFromDict(core.CastMap(data["item"])).Pointer(),
@@ -131,6 +160,12 @@ type DeleteUserAsyncResult struct {
 	err    error
 }
 
+func NewDeleteUserResultFromJson(data string) DeleteUserResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteUserResultFromDict(dict)
+}
+
 func NewDeleteUserResultFromDict(data map[string]interface{}) DeleteUserResult {
 	return DeleteUserResult{}
 }
@@ -151,6 +186,12 @@ type DescribeSecurityPoliciesResult struct {
 type DescribeSecurityPoliciesAsyncResult struct {
 	result *DescribeSecurityPoliciesResult
 	err    error
+}
+
+func NewDescribeSecurityPoliciesResultFromJson(data string) DescribeSecurityPoliciesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSecurityPoliciesResultFromDict(dict)
 }
 
 func NewDescribeSecurityPoliciesResultFromDict(data map[string]interface{}) DescribeSecurityPoliciesResult {
@@ -183,6 +224,12 @@ type DescribeCommonSecurityPoliciesAsyncResult struct {
 	err    error
 }
 
+func NewDescribeCommonSecurityPoliciesResultFromJson(data string) DescribeCommonSecurityPoliciesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeCommonSecurityPoliciesResultFromDict(dict)
+}
+
 func NewDescribeCommonSecurityPoliciesResultFromDict(data map[string]interface{}) DescribeCommonSecurityPoliciesResult {
 	return DescribeCommonSecurityPoliciesResult{
 		Items:         CastSecurityPolicies(core.CastArray(data["items"])),
@@ -212,6 +259,12 @@ type CreateSecurityPolicyAsyncResult struct {
 	err    error
 }
 
+func NewCreateSecurityPolicyResultFromJson(data string) CreateSecurityPolicyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateSecurityPolicyResultFromDict(dict)
+}
+
 func NewCreateSecurityPolicyResultFromDict(data map[string]interface{}) CreateSecurityPolicyResult {
 	return CreateSecurityPolicyResult{
 		Item: NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer(),
@@ -235,6 +288,12 @@ type UpdateSecurityPolicyResult struct {
 type UpdateSecurityPolicyAsyncResult struct {
 	result *UpdateSecurityPolicyResult
 	err    error
+}
+
+func NewUpdateSecurityPolicyResultFromJson(data string) UpdateSecurityPolicyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateSecurityPolicyResultFromDict(dict)
 }
 
 func NewUpdateSecurityPolicyResultFromDict(data map[string]interface{}) UpdateSecurityPolicyResult {
@@ -262,6 +321,12 @@ type GetSecurityPolicyAsyncResult struct {
 	err    error
 }
 
+func NewGetSecurityPolicyResultFromJson(data string) GetSecurityPolicyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSecurityPolicyResultFromDict(dict)
+}
+
 func NewGetSecurityPolicyResultFromDict(data map[string]interface{}) GetSecurityPolicyResult {
 	return GetSecurityPolicyResult{
 		Item: NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer(),
@@ -286,6 +351,12 @@ type DeleteSecurityPolicyAsyncResult struct {
 	err    error
 }
 
+func NewDeleteSecurityPolicyResultFromJson(data string) DeleteSecurityPolicyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteSecurityPolicyResultFromDict(dict)
+}
+
 func NewDeleteSecurityPolicyResultFromDict(data map[string]interface{}) DeleteSecurityPolicyResult {
 	return DeleteSecurityPolicyResult{}
 }
@@ -306,6 +377,12 @@ type DescribeIdentifiersResult struct {
 type DescribeIdentifiersAsyncResult struct {
 	result *DescribeIdentifiersResult
 	err    error
+}
+
+func NewDescribeIdentifiersResultFromJson(data string) DescribeIdentifiersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeIdentifiersResultFromDict(dict)
 }
 
 func NewDescribeIdentifiersResultFromDict(data map[string]interface{}) DescribeIdentifiersResult {
@@ -338,6 +415,12 @@ type CreateIdentifierAsyncResult struct {
 	err    error
 }
 
+func NewCreateIdentifierResultFromJson(data string) CreateIdentifierResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateIdentifierResultFromDict(dict)
+}
+
 func NewCreateIdentifierResultFromDict(data map[string]interface{}) CreateIdentifierResult {
 	return CreateIdentifierResult{
 		Item:         NewIdentifierFromDict(core.CastMap(data["item"])).Pointer(),
@@ -365,6 +448,12 @@ type GetIdentifierAsyncResult struct {
 	err    error
 }
 
+func NewGetIdentifierResultFromJson(data string) GetIdentifierResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetIdentifierResultFromDict(dict)
+}
+
 func NewGetIdentifierResultFromDict(data map[string]interface{}) GetIdentifierResult {
 	return GetIdentifierResult{
 		Item: NewIdentifierFromDict(core.CastMap(data["item"])).Pointer(),
@@ -389,6 +478,12 @@ type DeleteIdentifierAsyncResult struct {
 	err    error
 }
 
+func NewDeleteIdentifierResultFromJson(data string) DeleteIdentifierResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteIdentifierResultFromDict(dict)
+}
+
 func NewDeleteIdentifierResultFromDict(data map[string]interface{}) DeleteIdentifierResult {
 	return DeleteIdentifierResult{}
 }
@@ -409,6 +504,12 @@ type DescribePasswordsResult struct {
 type DescribePasswordsAsyncResult struct {
 	result *DescribePasswordsResult
 	err    error
+}
+
+func NewDescribePasswordsResultFromJson(data string) DescribePasswordsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribePasswordsResultFromDict(dict)
 }
 
 func NewDescribePasswordsResultFromDict(data map[string]interface{}) DescribePasswordsResult {
@@ -440,6 +541,12 @@ type CreatePasswordAsyncResult struct {
 	err    error
 }
 
+func NewCreatePasswordResultFromJson(data string) CreatePasswordResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreatePasswordResultFromDict(dict)
+}
+
 func NewCreatePasswordResultFromDict(data map[string]interface{}) CreatePasswordResult {
 	return CreatePasswordResult{
 		Item: NewPasswordFromDict(core.CastMap(data["item"])).Pointer(),
@@ -463,6 +570,12 @@ type GetPasswordResult struct {
 type GetPasswordAsyncResult struct {
 	result *GetPasswordResult
 	err    error
+}
+
+func NewGetPasswordResultFromJson(data string) GetPasswordResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetPasswordResultFromDict(dict)
 }
 
 func NewGetPasswordResultFromDict(data map[string]interface{}) GetPasswordResult {
@@ -489,6 +602,12 @@ type DeletePasswordAsyncResult struct {
 	err    error
 }
 
+func NewDeletePasswordResultFromJson(data string) DeletePasswordResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeletePasswordResultFromDict(dict)
+}
+
 func NewDeletePasswordResultFromDict(data map[string]interface{}) DeletePasswordResult {
 	return DeletePasswordResult{}
 }
@@ -508,6 +627,12 @@ type GetHasSecurityPolicyResult struct {
 type GetHasSecurityPolicyAsyncResult struct {
 	result *GetHasSecurityPolicyResult
 	err    error
+}
+
+func NewGetHasSecurityPolicyResultFromJson(data string) GetHasSecurityPolicyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetHasSecurityPolicyResultFromDict(dict)
 }
 
 func NewGetHasSecurityPolicyResultFromDict(data map[string]interface{}) GetHasSecurityPolicyResult {
@@ -537,6 +662,12 @@ type AttachSecurityPolicyAsyncResult struct {
 	err    error
 }
 
+func NewAttachSecurityPolicyResultFromJson(data string) AttachSecurityPolicyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAttachSecurityPolicyResultFromDict(dict)
+}
+
 func NewAttachSecurityPolicyResultFromDict(data map[string]interface{}) AttachSecurityPolicyResult {
 	return AttachSecurityPolicyResult{
 		Items: CastSecurityPolicies(core.CastArray(data["items"])),
@@ -564,6 +695,12 @@ type DetachSecurityPolicyAsyncResult struct {
 	err    error
 }
 
+func NewDetachSecurityPolicyResultFromJson(data string) DetachSecurityPolicyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDetachSecurityPolicyResultFromDict(dict)
+}
+
 func NewDetachSecurityPolicyResultFromDict(data map[string]interface{}) DetachSecurityPolicyResult {
 	return DetachSecurityPolicyResult{
 		Items: CastSecurityPolicies(core.CastArray(data["items"])),
@@ -583,9 +720,9 @@ func (p DetachSecurityPolicyResult) Pointer() *DetachSecurityPolicyResult {
 }
 
 type LoginResult struct {
-	AccessToken *string `json:"accessToken"`
-	TokenType   *string `json:"tokenType"`
-	ExpiresIn   *int32  `json:"expiresIn"`
+	AccessToken *string `json:"access_token"`
+	TokenType   *string `json:"token_type"`
+	ExpiresIn   *int32  `json:"expires_in"`
 }
 
 type LoginAsyncResult struct {
@@ -593,19 +730,25 @@ type LoginAsyncResult struct {
 	err    error
 }
 
+func NewLoginResultFromJson(data string) LoginResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLoginResultFromDict(dict)
+}
+
 func NewLoginResultFromDict(data map[string]interface{}) LoginResult {
 	return LoginResult{
-		AccessToken: core.CastString(data["accessToken"]),
-		TokenType:   core.CastString(data["tokenType"]),
-		ExpiresIn:   core.CastInt32(data["expiresIn"]),
+		AccessToken: core.CastString(data["access_token"]),
+		TokenType:   core.CastString(data["token_type"]),
+		ExpiresIn:   core.CastInt32(data["expires_in"]),
 	}
 }
 
 func (p LoginResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"accessToken": p.AccessToken,
-		"tokenType":   p.TokenType,
-		"expiresIn":   p.ExpiresIn,
+		"access_token": p.AccessToken,
+		"token_type":   p.TokenType,
+		"expires_in":   p.ExpiresIn,
 	}
 }
 
@@ -620,6 +763,12 @@ type LoginByUserResult struct {
 type LoginByUserAsyncResult struct {
 	result *LoginByUserResult
 	err    error
+}
+
+func NewLoginByUserResultFromJson(data string) LoginByUserResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLoginByUserResultFromDict(dict)
 }
 
 func NewLoginByUserResultFromDict(data map[string]interface{}) LoginByUserResult {

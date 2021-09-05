@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package distributor
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId  *string     `json:"namespaceId"`
@@ -26,6 +29,12 @@ type Namespace struct {
 	LogSetting   *LogSetting `json:"logSetting"`
 	CreatedAt    *int64      `json:"createdAt"`
 	UpdatedAt    *int64      `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -81,6 +90,12 @@ type DistributorModelMaster struct {
 	WhiteListTargetIds []string `json:"whiteListTargetIds"`
 	CreatedAt          *int64   `json:"createdAt"`
 	UpdatedAt          *int64   `json:"updatedAt"`
+}
+
+func NewDistributorModelMasterFromJson(data string) DistributorModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDistributorModelMasterFromDict(dict)
 }
 
 func NewDistributorModelMasterFromDict(data map[string]interface{}) DistributorModelMaster {
@@ -139,6 +154,12 @@ type DistributorModel struct {
 	WhiteListTargetIds []string `json:"whiteListTargetIds"`
 }
 
+func NewDistributorModelFromJson(data string) DistributorModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDistributorModelFromDict(dict)
+}
+
 func NewDistributorModelFromDict(data map[string]interface{}) DistributorModel {
 	return DistributorModel{
 		DistributorModelId: core.CastString(data["distributorModelId"]),
@@ -186,6 +207,12 @@ type CurrentDistributorMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentDistributorMasterFromJson(data string) CurrentDistributorMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentDistributorMasterFromDict(dict)
+}
+
 func NewCurrentDistributorMasterFromDict(data map[string]interface{}) CurrentDistributorMaster {
 	return CurrentDistributorMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -228,6 +255,12 @@ type GitHubCheckoutSetting struct {
 	CommitHash     *string `json:"commitHash"`
 	BranchName     *string `json:"branchName"`
 	TagName        *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
@@ -279,6 +312,12 @@ type DistributeResource struct {
 	Request *string `json:"request"`
 }
 
+func NewDistributeResourceFromJson(data string) DistributeResource {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDistributeResourceFromDict(dict)
+}
+
 func NewDistributeResourceFromDict(data map[string]interface{}) DistributeResource {
 	return DistributeResource{
 		Action:  core.CastString(data["action"]),
@@ -315,6 +354,12 @@ func CastDistributeResourcesFromDict(data []DistributeResource) []interface{} {
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package limit
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId *string     `json:"namespaceId"`
@@ -25,6 +28,12 @@ type Namespace struct {
 	LogSetting  *LogSetting `json:"logSetting"`
 	CreatedAt   *int64      `json:"createdAt"`
 	UpdatedAt   *int64      `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -77,6 +86,12 @@ type Counter struct {
 	Count     *int32  `json:"count"`
 	CreatedAt *int64  `json:"createdAt"`
 	UpdatedAt *int64  `json:"updatedAt"`
+}
+
+func NewCounterFromJson(data string) Counter {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCounterFromDict(dict)
 }
 
 func NewCounterFromDict(data map[string]interface{}) Counter {
@@ -136,6 +151,12 @@ type LimitModelMaster struct {
 	UpdatedAt       *int64  `json:"updatedAt"`
 }
 
+func NewLimitModelMasterFromJson(data string) LimitModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLimitModelMasterFromDict(dict)
+}
+
 func NewLimitModelMasterFromDict(data map[string]interface{}) LimitModelMaster {
 	return LimitModelMaster{
 		LimitModelId:    core.CastString(data["limitModelId"]),
@@ -191,6 +212,12 @@ type CurrentLimitMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentLimitMasterFromJson(data string) CurrentLimitMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentLimitMasterFromDict(dict)
+}
+
 func NewCurrentLimitMasterFromDict(data map[string]interface{}) CurrentLimitMaster {
 	return CurrentLimitMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -233,6 +260,12 @@ type GitHubCheckoutSetting struct {
 	CommitHash     *string `json:"commitHash"`
 	BranchName     *string `json:"branchName"`
 	TagName        *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
@@ -283,6 +316,12 @@ type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
+}
+
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
 		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
@@ -323,6 +362,12 @@ type LimitModel struct {
 	ResetDayOfMonth *int32  `json:"resetDayOfMonth"`
 	ResetDayOfWeek  *string `json:"resetDayOfWeek"`
 	ResetHour       *int32  `json:"resetHour"`
+}
+
+func NewLimitModelFromJson(data string) LimitModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLimitModelFromDict(dict)
 }
 
 func NewLimitModelFromDict(data map[string]interface{}) LimitModel {

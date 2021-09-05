@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package inbox
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId                *string              `json:"namespaceId"`
@@ -32,6 +35,12 @@ type Namespace struct {
 	LogSetting                 *LogSetting          `json:"logSetting"`
 	CreatedAt                  *int64               `json:"createdAt"`
 	UpdatedAt                  *int64               `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -102,6 +111,12 @@ type Message struct {
 	ExpiresAt          *int64          `json:"expiresAt"`
 }
 
+func NewMessageFromJson(data string) Message {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMessageFromDict(dict)
+}
+
 func NewMessageFromDict(data map[string]interface{}) Message {
 	return Message{
 		MessageId:          core.CastString(data["messageId"]),
@@ -157,6 +172,12 @@ type CurrentMessageMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentMessageMasterFromJson(data string) CurrentMessageMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentMessageMasterFromDict(dict)
+}
+
 func NewCurrentMessageMasterFromDict(data map[string]interface{}) CurrentMessageMaster {
 	return CurrentMessageMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -199,6 +220,12 @@ type GlobalMessageMaster struct {
 	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
 	CreatedAt          *int64          `json:"createdAt"`
 	ExpiresAt          *int64          `json:"expiresAt"`
+}
+
+func NewGlobalMessageMasterFromJson(data string) GlobalMessageMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGlobalMessageMasterFromDict(dict)
 }
 
 func NewGlobalMessageMasterFromDict(data map[string]interface{}) GlobalMessageMaster {
@@ -256,6 +283,12 @@ type GlobalMessage struct {
 	ExpiresAt          *int64          `json:"expiresAt"`
 }
 
+func NewGlobalMessageFromJson(data string) GlobalMessage {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGlobalMessageFromDict(dict)
+}
+
 func NewGlobalMessageFromDict(data map[string]interface{}) GlobalMessage {
 	return GlobalMessage{
 		GlobalMessageId:    core.CastString(data["globalMessageId"]),
@@ -308,6 +341,12 @@ type Received struct {
 	UpdatedAt                  *int64   `json:"updatedAt"`
 }
 
+func NewReceivedFromJson(data string) Received {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewReceivedFromDict(dict)
+}
+
 func NewReceivedFromDict(data map[string]interface{}) Received {
 	return Received{
 		ReceivedId:                 core.CastString(data["receivedId"]),
@@ -355,6 +394,12 @@ type Config struct {
 	Value *string `json:"value"`
 }
 
+func NewConfigFromJson(data string) Config {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConfigFromDict(dict)
+}
+
 func NewConfigFromDict(data map[string]interface{}) Config {
 	return Config{
 		Key:   core.CastString(data["key"]),
@@ -394,6 +439,12 @@ type ScriptSetting struct {
 	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
 	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
+}
+
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
 }
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
@@ -440,6 +491,12 @@ type NotificationSetting struct {
 	Sound                            *string `json:"sound"`
 }
 
+func NewNotificationSettingFromJson(data string) NotificationSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNotificationSettingFromDict(dict)
+}
+
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
 	return NotificationSetting{
 		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
@@ -484,6 +541,12 @@ type GitHubCheckoutSetting struct {
 	CommitHash     *string `json:"commitHash"`
 	BranchName     *string `json:"branchName"`
 	TagName        *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
@@ -534,6 +597,12 @@ type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
+}
+
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
 		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
@@ -570,6 +639,12 @@ type TimeSpan struct {
 	Days    *int32 `json:"days"`
 	Hours   *int32 `json:"hours"`
 	Minutes *int32 `json:"minutes"`
+}
+
+func NewTimeSpanFromJson(data string) TimeSpan {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewTimeSpanFromDict(dict)
 }
 
 func NewTimeSpanFromDict(data map[string]interface{}) TimeSpan {
@@ -611,6 +686,12 @@ func CastTimeSpansFromDict(data []TimeSpan) []interface{} {
 type AcquireAction struct {
 	Action  *string `json:"action"`
 	Request *string `json:"request"`
+}
+
+func NewAcquireActionFromJson(data string) AcquireAction {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireActionFromDict(dict)
 }
 
 func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {

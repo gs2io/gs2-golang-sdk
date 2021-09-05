@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package mission
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Complete struct {
 	CompleteId                *string  `json:"completeId"`
@@ -26,6 +29,12 @@ type Complete struct {
 	ReceivedMissionTaskNames  []string `json:"receivedMissionTaskNames"`
 	CreatedAt                 *int64   `json:"createdAt"`
 	UpdatedAt                 *int64   `json:"updatedAt"`
+}
+
+func NewCompleteFromJson(data string) Complete {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCompleteFromDict(dict)
 }
 
 func NewCompleteFromDict(data map[string]interface{}) Complete {
@@ -82,6 +91,12 @@ type NotificationSetting struct {
 	Sound                            *string `json:"sound"`
 }
 
+func NewNotificationSettingFromJson(data string) NotificationSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNotificationSettingFromDict(dict)
+}
+
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
 	return NotificationSetting{
 		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
@@ -127,6 +142,12 @@ type CounterModelMaster struct {
 	ChallengePeriodEventId *string             `json:"challengePeriodEventId"`
 	CreatedAt              *int64              `json:"createdAt"`
 	UpdatedAt              *int64              `json:"updatedAt"`
+}
+
+func NewCounterModelMasterFromJson(data string) CounterModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCounterModelMasterFromDict(dict)
 }
 
 func NewCounterModelMasterFromDict(data map[string]interface{}) CounterModelMaster {
@@ -184,6 +205,12 @@ type CounterScopeModel struct {
 	ResetHour       *int32  `json:"resetHour"`
 }
 
+func NewCounterScopeModelFromJson(data string) CounterScopeModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCounterScopeModelFromDict(dict)
+}
+
 func NewCounterScopeModelFromDict(data map[string]interface{}) CounterScopeModel {
 	return CounterScopeModel{
 		ResetType:       core.CastString(data["resetType"]),
@@ -227,6 +254,12 @@ type Config struct {
 	Value *string `json:"value"`
 }
 
+func NewConfigFromJson(data string) Config {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConfigFromDict(dict)
+}
+
 func NewConfigFromDict(data map[string]interface{}) Config {
 	return Config{
 		Key:   core.CastString(data["key"]),
@@ -264,6 +297,12 @@ func CastConfigsFromDict(data []Config) []interface{} {
 type AcquireAction struct {
 	Action  *string `json:"action"`
 	Request *string `json:"request"`
+}
+
+func NewAcquireActionFromJson(data string) AcquireAction {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireActionFromDict(dict)
 }
 
 func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
@@ -312,6 +351,12 @@ type MissionGroupModelMaster struct {
 	CompleteNotificationNamespaceId *string `json:"completeNotificationNamespaceId"`
 	CreatedAt                       *int64  `json:"createdAt"`
 	UpdatedAt                       *int64  `json:"updatedAt"`
+}
+
+func NewMissionGroupModelMasterFromJson(data string) MissionGroupModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMissionGroupModelMasterFromDict(dict)
 }
 
 func NewMissionGroupModelMasterFromDict(data map[string]interface{}) MissionGroupModelMaster {
@@ -381,6 +426,12 @@ type Namespace struct {
 	UpdatedAt              *int64               `json:"updatedAt"`
 }
 
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
+}
+
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
 		NamespaceId:            core.CastString(data["namespaceId"]),
@@ -444,6 +495,12 @@ type Counter struct {
 	UpdatedAt *int64        `json:"updatedAt"`
 }
 
+func NewCounterFromJson(data string) Counter {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCounterFromDict(dict)
+}
+
 func NewCounterFromDict(data map[string]interface{}) Counter {
 	return Counter{
 		CounterId: core.CastString(data["counterId"]),
@@ -492,6 +549,12 @@ type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
+}
+
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
 		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
@@ -532,6 +595,12 @@ type GitHubCheckoutSetting struct {
 	CommitHash     *string `json:"commitHash"`
 	BranchName     *string `json:"branchName"`
 	TagName        *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
@@ -583,6 +652,12 @@ type CurrentMissionMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentMissionMasterFromJson(data string) CurrentMissionMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentMissionMasterFromDict(dict)
+}
+
 func NewCurrentMissionMasterFromDict(data map[string]interface{}) CurrentMissionMaster {
 	return CurrentMissionMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -623,6 +698,12 @@ type CounterModel struct {
 	Metadata               *string             `json:"metadata"`
 	Scopes                 []CounterScopeModel `json:"scopes"`
 	ChallengePeriodEventId *string             `json:"challengePeriodEventId"`
+}
+
+func NewCounterModelFromJson(data string) CounterModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCounterModelFromDict(dict)
 }
 
 func NewCounterModelFromDict(data map[string]interface{}) CounterModel {
@@ -677,6 +758,12 @@ type MissionGroupModel struct {
 	ResetDayOfWeek                  *string            `json:"resetDayOfWeek"`
 	ResetHour                       *int32             `json:"resetHour"`
 	CompleteNotificationNamespaceId *string            `json:"completeNotificationNamespaceId"`
+}
+
+func NewMissionGroupModelFromJson(data string) MissionGroupModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMissionGroupModelFromDict(dict)
 }
 
 func NewMissionGroupModelFromDict(data map[string]interface{}) MissionGroupModel {
@@ -740,6 +827,12 @@ type MissionTaskModel struct {
 	PremiseMissionTaskName *string         `json:"premiseMissionTaskName"`
 }
 
+func NewMissionTaskModelFromJson(data string) MissionTaskModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMissionTaskModelFromDict(dict)
+}
+
 func NewMissionTaskModelFromDict(data map[string]interface{}) MissionTaskModel {
 	return MissionTaskModel{
 		MissionTaskId:          core.CastString(data["missionTaskId"]),
@@ -795,6 +888,12 @@ type ScriptSetting struct {
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
+}
+
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
 		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
@@ -837,6 +936,12 @@ type ScopedValue struct {
 	ResetType *string `json:"resetType"`
 	Value     *int64  `json:"value"`
 	UpdatedAt *int64  `json:"updatedAt"`
+}
+
+func NewScopedValueFromJson(data string) ScopedValue {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScopedValueFromDict(dict)
 }
 
 func NewScopedValueFromDict(data map[string]interface{}) ScopedValue {
@@ -887,6 +992,12 @@ type MissionTaskModelMaster struct {
 	PremiseMissionTaskName *string         `json:"premiseMissionTaskName"`
 	CreatedAt              *int64          `json:"createdAt"`
 	UpdatedAt              *int64          `json:"updatedAt"`
+}
+
+func NewMissionTaskModelMasterFromJson(data string) MissionTaskModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMissionTaskModelMasterFromDict(dict)
 }
 
 func NewMissionTaskModelMasterFromDict(data map[string]interface{}) MissionTaskModelMaster {

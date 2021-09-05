@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package chat
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId           *string              `json:"namespaceId"`
@@ -32,6 +35,12 @@ type Namespace struct {
 	LogSetting            *LogSetting          `json:"logSetting"`
 	CreatedAt             *int64               `json:"createdAt"`
 	UpdatedAt             *int64               `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -101,6 +110,12 @@ type Room struct {
 	UpdatedAt        *int64   `json:"updatedAt"`
 }
 
+func NewRoomFromJson(data string) Room {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRoomFromDict(dict)
+}
+
 func NewRoomFromDict(data map[string]interface{}) Room {
 	return Room{
 		RoomId:           core.CastString(data["roomId"]),
@@ -159,6 +174,12 @@ type Message struct {
 	CreatedAt *int64  `json:"createdAt"`
 }
 
+func NewMessageFromJson(data string) Message {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMessageFromDict(dict)
+}
+
 func NewMessageFromDict(data map[string]interface{}) Message {
 	return Message{
 		MessageId: core.CastString(data["messageId"]),
@@ -211,6 +232,12 @@ type Subscribe struct {
 	CreatedAt         *int64             `json:"createdAt"`
 }
 
+func NewSubscribeFromJson(data string) Subscribe {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSubscribeFromDict(dict)
+}
+
 func NewSubscribeFromDict(data map[string]interface{}) Subscribe {
 	return Subscribe{
 		SubscribeId:       core.CastString(data["subscribeId"]),
@@ -258,6 +285,12 @@ type NotificationType struct {
 	EnableTransferMobilePushNotification *bool  `json:"enableTransferMobilePushNotification"`
 }
 
+func NewNotificationTypeFromJson(data string) NotificationType {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNotificationTypeFromDict(dict)
+}
+
 func NewNotificationTypeFromDict(data map[string]interface{}) NotificationType {
 	return NotificationType{
 		Category:                             core.CastInt32(data["category"]),
@@ -297,6 +330,12 @@ type ScriptSetting struct {
 	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
 	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
+}
+
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
 }
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
@@ -343,6 +382,12 @@ type NotificationSetting struct {
 	Sound                            *string `json:"sound"`
 }
 
+func NewNotificationSettingFromJson(data string) NotificationSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNotificationSettingFromDict(dict)
+}
+
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
 	return NotificationSetting{
 		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
@@ -381,6 +426,12 @@ func CastNotificationSettingsFromDict(data []NotificationSetting) []interface{} 
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

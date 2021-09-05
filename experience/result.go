@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package experience
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -130,6 +157,12 @@ type UpdateNamespaceResult struct {
 type UpdateNamespaceAsyncResult struct {
 	result *UpdateNamespaceResult
 	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
@@ -157,6 +190,12 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -181,6 +220,12 @@ type DescribeExperienceModelMastersResult struct {
 type DescribeExperienceModelMastersAsyncResult struct {
 	result *DescribeExperienceModelMastersResult
 	err    error
+}
+
+func NewDescribeExperienceModelMastersResultFromJson(data string) DescribeExperienceModelMastersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeExperienceModelMastersResultFromDict(dict)
 }
 
 func NewDescribeExperienceModelMastersResultFromDict(data map[string]interface{}) DescribeExperienceModelMastersResult {
@@ -212,6 +257,12 @@ type CreateExperienceModelMasterAsyncResult struct {
 	err    error
 }
 
+func NewCreateExperienceModelMasterResultFromJson(data string) CreateExperienceModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateExperienceModelMasterResultFromDict(dict)
+}
+
 func NewCreateExperienceModelMasterResultFromDict(data map[string]interface{}) CreateExperienceModelMasterResult {
 	return CreateExperienceModelMasterResult{
 		Item: NewExperienceModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -235,6 +286,12 @@ type GetExperienceModelMasterResult struct {
 type GetExperienceModelMasterAsyncResult struct {
 	result *GetExperienceModelMasterResult
 	err    error
+}
+
+func NewGetExperienceModelMasterResultFromJson(data string) GetExperienceModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetExperienceModelMasterResultFromDict(dict)
 }
 
 func NewGetExperienceModelMasterResultFromDict(data map[string]interface{}) GetExperienceModelMasterResult {
@@ -262,6 +319,12 @@ type UpdateExperienceModelMasterAsyncResult struct {
 	err    error
 }
 
+func NewUpdateExperienceModelMasterResultFromJson(data string) UpdateExperienceModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateExperienceModelMasterResultFromDict(dict)
+}
+
 func NewUpdateExperienceModelMasterResultFromDict(data map[string]interface{}) UpdateExperienceModelMasterResult {
 	return UpdateExperienceModelMasterResult{
 		Item: NewExperienceModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -287,6 +350,12 @@ type DeleteExperienceModelMasterAsyncResult struct {
 	err    error
 }
 
+func NewDeleteExperienceModelMasterResultFromJson(data string) DeleteExperienceModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteExperienceModelMasterResultFromDict(dict)
+}
+
 func NewDeleteExperienceModelMasterResultFromDict(data map[string]interface{}) DeleteExperienceModelMasterResult {
 	return DeleteExperienceModelMasterResult{
 		Item: NewExperienceModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -310,6 +379,12 @@ type DescribeExperienceModelsResult struct {
 type DescribeExperienceModelsAsyncResult struct {
 	result *DescribeExperienceModelsResult
 	err    error
+}
+
+func NewDescribeExperienceModelsResultFromJson(data string) DescribeExperienceModelsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeExperienceModelsResultFromDict(dict)
 }
 
 func NewDescribeExperienceModelsResultFromDict(data map[string]interface{}) DescribeExperienceModelsResult {
@@ -339,6 +414,12 @@ type GetExperienceModelAsyncResult struct {
 	err    error
 }
 
+func NewGetExperienceModelResultFromJson(data string) GetExperienceModelResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetExperienceModelResultFromDict(dict)
+}
+
 func NewGetExperienceModelResultFromDict(data map[string]interface{}) GetExperienceModelResult {
 	return GetExperienceModelResult{
 		Item: NewExperienceModelFromDict(core.CastMap(data["item"])).Pointer(),
@@ -363,6 +444,12 @@ type DescribeThresholdMastersResult struct {
 type DescribeThresholdMastersAsyncResult struct {
 	result *DescribeThresholdMastersResult
 	err    error
+}
+
+func NewDescribeThresholdMastersResultFromJson(data string) DescribeThresholdMastersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeThresholdMastersResultFromDict(dict)
 }
 
 func NewDescribeThresholdMastersResultFromDict(data map[string]interface{}) DescribeThresholdMastersResult {
@@ -394,6 +481,12 @@ type CreateThresholdMasterAsyncResult struct {
 	err    error
 }
 
+func NewCreateThresholdMasterResultFromJson(data string) CreateThresholdMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateThresholdMasterResultFromDict(dict)
+}
+
 func NewCreateThresholdMasterResultFromDict(data map[string]interface{}) CreateThresholdMasterResult {
 	return CreateThresholdMasterResult{
 		Item: NewThresholdMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -417,6 +510,12 @@ type GetThresholdMasterResult struct {
 type GetThresholdMasterAsyncResult struct {
 	result *GetThresholdMasterResult
 	err    error
+}
+
+func NewGetThresholdMasterResultFromJson(data string) GetThresholdMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetThresholdMasterResultFromDict(dict)
 }
 
 func NewGetThresholdMasterResultFromDict(data map[string]interface{}) GetThresholdMasterResult {
@@ -444,6 +543,12 @@ type UpdateThresholdMasterAsyncResult struct {
 	err    error
 }
 
+func NewUpdateThresholdMasterResultFromJson(data string) UpdateThresholdMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateThresholdMasterResultFromDict(dict)
+}
+
 func NewUpdateThresholdMasterResultFromDict(data map[string]interface{}) UpdateThresholdMasterResult {
 	return UpdateThresholdMasterResult{
 		Item: NewThresholdMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -467,6 +572,12 @@ type DeleteThresholdMasterResult struct {
 type DeleteThresholdMasterAsyncResult struct {
 	result *DeleteThresholdMasterResult
 	err    error
+}
+
+func NewDeleteThresholdMasterResultFromJson(data string) DeleteThresholdMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteThresholdMasterResultFromDict(dict)
 }
 
 func NewDeleteThresholdMasterResultFromDict(data map[string]interface{}) DeleteThresholdMasterResult {
@@ -494,6 +605,12 @@ type ExportMasterAsyncResult struct {
 	err    error
 }
 
+func NewExportMasterResultFromJson(data string) ExportMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterResultFromDict(dict)
+}
+
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
 	return ExportMasterResult{
 		Item: NewCurrentExperienceMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -517,6 +634,12 @@ type GetCurrentExperienceMasterResult struct {
 type GetCurrentExperienceMasterAsyncResult struct {
 	result *GetCurrentExperienceMasterResult
 	err    error
+}
+
+func NewGetCurrentExperienceMasterResultFromJson(data string) GetCurrentExperienceMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentExperienceMasterResultFromDict(dict)
 }
 
 func NewGetCurrentExperienceMasterResultFromDict(data map[string]interface{}) GetCurrentExperienceMasterResult {
@@ -544,6 +667,12 @@ type UpdateCurrentExperienceMasterAsyncResult struct {
 	err    error
 }
 
+func NewUpdateCurrentExperienceMasterResultFromJson(data string) UpdateCurrentExperienceMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentExperienceMasterResultFromDict(dict)
+}
+
 func NewUpdateCurrentExperienceMasterResultFromDict(data map[string]interface{}) UpdateCurrentExperienceMasterResult {
 	return UpdateCurrentExperienceMasterResult{
 		Item: NewCurrentExperienceMasterFromDict(core.CastMap(data["item"])).Pointer(),
@@ -567,6 +696,12 @@ type UpdateCurrentExperienceMasterFromGitHubResult struct {
 type UpdateCurrentExperienceMasterFromGitHubAsyncResult struct {
 	result *UpdateCurrentExperienceMasterFromGitHubResult
 	err    error
+}
+
+func NewUpdateCurrentExperienceMasterFromGitHubResultFromJson(data string) UpdateCurrentExperienceMasterFromGitHubResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentExperienceMasterFromGitHubResultFromDict(dict)
 }
 
 func NewUpdateCurrentExperienceMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentExperienceMasterFromGitHubResult {
@@ -593,6 +728,12 @@ type DescribeStatusesResult struct {
 type DescribeStatusesAsyncResult struct {
 	result *DescribeStatusesResult
 	err    error
+}
+
+func NewDescribeStatusesResultFromJson(data string) DescribeStatusesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStatusesResultFromDict(dict)
 }
 
 func NewDescribeStatusesResultFromDict(data map[string]interface{}) DescribeStatusesResult {
@@ -625,6 +766,12 @@ type DescribeStatusesByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeStatusesByUserIdResultFromJson(data string) DescribeStatusesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStatusesByUserIdResultFromDict(dict)
+}
+
 func NewDescribeStatusesByUserIdResultFromDict(data map[string]interface{}) DescribeStatusesByUserIdResult {
 	return DescribeStatusesByUserIdResult{
 		Items:         CastStatuses(core.CastArray(data["items"])),
@@ -654,6 +801,12 @@ type GetStatusAsyncResult struct {
 	err    error
 }
 
+func NewGetStatusResultFromJson(data string) GetStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStatusResultFromDict(dict)
+}
+
 func NewGetStatusResultFromDict(data map[string]interface{}) GetStatusResult {
 	return GetStatusResult{
 		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
@@ -677,6 +830,12 @@ type GetStatusByUserIdResult struct {
 type GetStatusByUserIdAsyncResult struct {
 	result *GetStatusByUserIdResult
 	err    error
+}
+
+func NewGetStatusByUserIdResultFromJson(data string) GetStatusByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStatusByUserIdResultFromDict(dict)
 }
 
 func NewGetStatusByUserIdResultFromDict(data map[string]interface{}) GetStatusByUserIdResult {
@@ -704,6 +863,12 @@ type GetStatusWithSignatureResult struct {
 type GetStatusWithSignatureAsyncResult struct {
 	result *GetStatusWithSignatureResult
 	err    error
+}
+
+func NewGetStatusWithSignatureResultFromJson(data string) GetStatusWithSignatureResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStatusWithSignatureResultFromDict(dict)
 }
 
 func NewGetStatusWithSignatureResultFromDict(data map[string]interface{}) GetStatusWithSignatureResult {
@@ -737,6 +902,12 @@ type GetStatusWithSignatureByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewGetStatusWithSignatureByUserIdResultFromJson(data string) GetStatusWithSignatureByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStatusWithSignatureByUserIdResultFromDict(dict)
+}
+
 func NewGetStatusWithSignatureByUserIdResultFromDict(data map[string]interface{}) GetStatusWithSignatureByUserIdResult {
 	return GetStatusWithSignatureByUserIdResult{
 		Item:      NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
@@ -766,6 +937,12 @@ type AddExperienceByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewAddExperienceByUserIdResultFromJson(data string) AddExperienceByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddExperienceByUserIdResultFromDict(dict)
+}
+
 func NewAddExperienceByUserIdResultFromDict(data map[string]interface{}) AddExperienceByUserIdResult {
 	return AddExperienceByUserIdResult{
 		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
@@ -789,6 +966,12 @@ type SetExperienceByUserIdResult struct {
 type SetExperienceByUserIdAsyncResult struct {
 	result *SetExperienceByUserIdResult
 	err    error
+}
+
+func NewSetExperienceByUserIdResultFromJson(data string) SetExperienceByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetExperienceByUserIdResultFromDict(dict)
 }
 
 func NewSetExperienceByUserIdResultFromDict(data map[string]interface{}) SetExperienceByUserIdResult {
@@ -816,6 +999,12 @@ type AddRankCapByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewAddRankCapByUserIdResultFromJson(data string) AddRankCapByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddRankCapByUserIdResultFromDict(dict)
+}
+
 func NewAddRankCapByUserIdResultFromDict(data map[string]interface{}) AddRankCapByUserIdResult {
 	return AddRankCapByUserIdResult{
 		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
@@ -839,6 +1028,12 @@ type SetRankCapByUserIdResult struct {
 type SetRankCapByUserIdAsyncResult struct {
 	result *SetRankCapByUserIdResult
 	err    error
+}
+
+func NewSetRankCapByUserIdResultFromJson(data string) SetRankCapByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetRankCapByUserIdResultFromDict(dict)
 }
 
 func NewSetRankCapByUserIdResultFromDict(data map[string]interface{}) SetRankCapByUserIdResult {
@@ -866,6 +1061,12 @@ type DeleteStatusByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDeleteStatusByUserIdResultFromJson(data string) DeleteStatusByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteStatusByUserIdResultFromDict(dict)
+}
+
 func NewDeleteStatusByUserIdResultFromDict(data map[string]interface{}) DeleteStatusByUserIdResult {
 	return DeleteStatusByUserIdResult{
 		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
@@ -889,6 +1090,12 @@ type AddExperienceByStampSheetResult struct {
 type AddExperienceByStampSheetAsyncResult struct {
 	result *AddExperienceByStampSheetResult
 	err    error
+}
+
+func NewAddExperienceByStampSheetResultFromJson(data string) AddExperienceByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddExperienceByStampSheetResultFromDict(dict)
 }
 
 func NewAddExperienceByStampSheetResultFromDict(data map[string]interface{}) AddExperienceByStampSheetResult {
@@ -916,6 +1123,12 @@ type AddRankCapByStampSheetAsyncResult struct {
 	err    error
 }
 
+func NewAddRankCapByStampSheetResultFromJson(data string) AddRankCapByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddRankCapByStampSheetResultFromDict(dict)
+}
+
 func NewAddRankCapByStampSheetResultFromDict(data map[string]interface{}) AddRankCapByStampSheetResult {
 	return AddRankCapByStampSheetResult{
 		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
@@ -939,6 +1152,12 @@ type SetRankCapByStampSheetResult struct {
 type SetRankCapByStampSheetAsyncResult struct {
 	result *SetRankCapByStampSheetResult
 	err    error
+}
+
+func NewSetRankCapByStampSheetResultFromJson(data string) SetRankCapByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetRankCapByStampSheetResultFromDict(dict)
 }
 
 func NewSetRankCapByStampSheetResultFromDict(data map[string]interface{}) SetRankCapByStampSheetResult {

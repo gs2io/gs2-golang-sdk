@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package money
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -130,6 +157,12 @@ type UpdateNamespaceResult struct {
 type UpdateNamespaceAsyncResult struct {
 	result *UpdateNamespaceResult
 	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
@@ -156,6 +189,12 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{}
 }
@@ -176,6 +215,12 @@ type DescribeWalletsResult struct {
 type DescribeWalletsAsyncResult struct {
 	result *DescribeWalletsResult
 	err    error
+}
+
+func NewDescribeWalletsResultFromJson(data string) DescribeWalletsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeWalletsResultFromDict(dict)
 }
 
 func NewDescribeWalletsResultFromDict(data map[string]interface{}) DescribeWalletsResult {
@@ -208,6 +253,12 @@ type DescribeWalletsByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeWalletsByUserIdResultFromJson(data string) DescribeWalletsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeWalletsByUserIdResultFromDict(dict)
+}
+
 func NewDescribeWalletsByUserIdResultFromDict(data map[string]interface{}) DescribeWalletsByUserIdResult {
 	return DescribeWalletsByUserIdResult{
 		Items:         CastWallets(core.CastArray(data["items"])),
@@ -237,6 +288,12 @@ type GetWalletAsyncResult struct {
 	err    error
 }
 
+func NewGetWalletResultFromJson(data string) GetWalletResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetWalletResultFromDict(dict)
+}
+
 func NewGetWalletResultFromDict(data map[string]interface{}) GetWalletResult {
 	return GetWalletResult{
 		Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
@@ -260,6 +317,12 @@ type GetWalletByUserIdResult struct {
 type GetWalletByUserIdAsyncResult struct {
 	result *GetWalletByUserIdResult
 	err    error
+}
+
+func NewGetWalletByUserIdResultFromJson(data string) GetWalletByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetWalletByUserIdResultFromDict(dict)
 }
 
 func NewGetWalletByUserIdResultFromDict(data map[string]interface{}) GetWalletByUserIdResult {
@@ -287,6 +350,12 @@ type DepositByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDepositByUserIdResultFromJson(data string) DepositByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDepositByUserIdResultFromDict(dict)
+}
+
 func NewDepositByUserIdResultFromDict(data map[string]interface{}) DepositByUserIdResult {
 	return DepositByUserIdResult{
 		Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
@@ -311,6 +380,12 @@ type WithdrawResult struct {
 type WithdrawAsyncResult struct {
 	result *WithdrawResult
 	err    error
+}
+
+func NewWithdrawResultFromJson(data string) WithdrawResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewWithdrawResultFromDict(dict)
 }
 
 func NewWithdrawResultFromDict(data map[string]interface{}) WithdrawResult {
@@ -341,6 +416,12 @@ type WithdrawByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewWithdrawByUserIdResultFromJson(data string) WithdrawByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewWithdrawByUserIdResultFromDict(dict)
+}
+
 func NewWithdrawByUserIdResultFromDict(data map[string]interface{}) WithdrawByUserIdResult {
 	return WithdrawByUserIdResult{
 		Item:  NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
@@ -368,6 +449,12 @@ type DepositByStampSheetAsyncResult struct {
 	err    error
 }
 
+func NewDepositByStampSheetResultFromJson(data string) DepositByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDepositByStampSheetResultFromDict(dict)
+}
+
 func NewDepositByStampSheetResultFromDict(data map[string]interface{}) DepositByStampSheetResult {
 	return DepositByStampSheetResult{
 		Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
@@ -393,6 +480,12 @@ type WithdrawByStampTaskResult struct {
 type WithdrawByStampTaskAsyncResult struct {
 	result *WithdrawByStampTaskResult
 	err    error
+}
+
+func NewWithdrawByStampTaskResultFromJson(data string) WithdrawByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewWithdrawByStampTaskResultFromDict(dict)
 }
 
 func NewWithdrawByStampTaskResultFromDict(data map[string]interface{}) WithdrawByStampTaskResult {
@@ -425,6 +518,12 @@ type DescribeReceiptsAsyncResult struct {
 	err    error
 }
 
+func NewDescribeReceiptsResultFromJson(data string) DescribeReceiptsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeReceiptsResultFromDict(dict)
+}
+
 func NewDescribeReceiptsResultFromDict(data map[string]interface{}) DescribeReceiptsResult {
 	return DescribeReceiptsResult{
 		Items:         CastReceipts(core.CastArray(data["items"])),
@@ -454,6 +553,12 @@ type GetByUserIdAndTransactionIdAsyncResult struct {
 	err    error
 }
 
+func NewGetByUserIdAndTransactionIdResultFromJson(data string) GetByUserIdAndTransactionIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetByUserIdAndTransactionIdResultFromDict(dict)
+}
+
 func NewGetByUserIdAndTransactionIdResultFromDict(data map[string]interface{}) GetByUserIdAndTransactionIdResult {
 	return GetByUserIdAndTransactionIdResult{
 		Item: NewReceiptFromDict(core.CastMap(data["item"])).Pointer(),
@@ -477,6 +582,12 @@ type RecordReceiptResult struct {
 type RecordReceiptAsyncResult struct {
 	result *RecordReceiptResult
 	err    error
+}
+
+func NewRecordReceiptResultFromJson(data string) RecordReceiptResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRecordReceiptResultFromDict(dict)
 }
 
 func NewRecordReceiptResultFromDict(data map[string]interface{}) RecordReceiptResult {
@@ -503,6 +614,12 @@ type RecordReceiptByStampTaskResult struct {
 type RecordReceiptByStampTaskAsyncResult struct {
 	result *RecordReceiptByStampTaskResult
 	err    error
+}
+
+func NewRecordReceiptByStampTaskResultFromJson(data string) RecordReceiptByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRecordReceiptByStampTaskResultFromDict(dict)
 }
 
 func NewRecordReceiptByStampTaskResultFromDict(data map[string]interface{}) RecordReceiptByStampTaskResult {

@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package version
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId                 *string        `json:"namespaceId"`
@@ -28,6 +31,12 @@ type Namespace struct {
 	LogSetting                  *LogSetting    `json:"logSetting"`
 	CreatedAt                   *int64         `json:"createdAt"`
 	UpdatedAt                   *int64         `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -93,6 +102,12 @@ type VersionModelMaster struct {
 	UpdatedAt      *int64   `json:"updatedAt"`
 }
 
+func NewVersionModelMasterFromJson(data string) VersionModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVersionModelMasterFromDict(dict)
+}
+
 func NewVersionModelMasterFromDict(data map[string]interface{}) VersionModelMaster {
 	return VersionModelMaster{
 		VersionModelId: core.CastString(data["versionModelId"]),
@@ -153,6 +168,12 @@ type Version struct {
 	Micro *int32 `json:"micro"`
 }
 
+func NewVersionFromJson(data string) Version {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVersionFromDict(dict)
+}
+
 func NewVersionFromDict(data map[string]interface{}) Version {
 	return Version{
 		Major: core.CastInt32(data["major"]),
@@ -199,6 +220,12 @@ type VersionModel struct {
 	CurrentVersion *Version `json:"currentVersion"`
 	NeedSignature  *bool    `json:"needSignature"`
 	SignatureKeyId *string  `json:"signatureKeyId"`
+}
+
+func NewVersionModelFromJson(data string) VersionModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVersionModelFromDict(dict)
 }
 
 func NewVersionModelFromDict(data map[string]interface{}) VersionModel {
@@ -258,6 +285,12 @@ type AcceptVersion struct {
 	UpdatedAt       *int64   `json:"updatedAt"`
 }
 
+func NewAcceptVersionFromJson(data string) AcceptVersion {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcceptVersionFromDict(dict)
+}
+
 func NewAcceptVersionFromDict(data map[string]interface{}) AcceptVersion {
 	return AcceptVersion{
 		AcceptVersionId: core.CastString(data["acceptVersionId"]),
@@ -305,6 +338,12 @@ type Status struct {
 	CurrentVersion *Version      `json:"currentVersion"`
 }
 
+func NewStatusFromJson(data string) Status {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewStatusFromDict(dict)
+}
+
 func NewStatusFromDict(data map[string]interface{}) Status {
 	return Status{
 		VersionModel:   NewVersionModelFromDict(core.CastMap(data["versionModel"])).Pointer(),
@@ -344,6 +383,12 @@ type TargetVersion struct {
 	Version     *Version `json:"version"`
 	Body        *string  `json:"body"`
 	Signature   *string  `json:"signature"`
+}
+
+func NewTargetVersionFromJson(data string) TargetVersion {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewTargetVersionFromDict(dict)
 }
 
 func NewTargetVersionFromDict(data map[string]interface{}) TargetVersion {
@@ -391,6 +436,12 @@ type SignTargetVersion struct {
 	Version       *Version `json:"version"`
 }
 
+func NewSignTargetVersionFromJson(data string) SignTargetVersion {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSignTargetVersionFromDict(dict)
+}
+
 func NewSignTargetVersionFromDict(data map[string]interface{}) SignTargetVersion {
 	return SignTargetVersion{
 		Region:        core.CastString(data["region"]),
@@ -434,6 +485,12 @@ type CurrentVersionMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentVersionMasterFromJson(data string) CurrentVersionMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentVersionMasterFromDict(dict)
+}
+
 func NewCurrentVersionMasterFromDict(data map[string]interface{}) CurrentVersionMaster {
 	return CurrentVersionMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -473,6 +530,12 @@ type ScriptSetting struct {
 	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
 	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
+}
+
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
 }
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
@@ -523,6 +586,12 @@ type GitHubCheckoutSetting struct {
 	TagName        *string `json:"tagName"`
 }
 
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
+}
+
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
 		ApiKeyId:       core.CastString(data["apiKeyId"]),
@@ -569,6 +638,12 @@ func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interfac
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package formation
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -53,6 +62,12 @@ type CreateNamespaceRequest struct {
 	UpdateMoldScript   *ScriptSetting `json:"updateMoldScript"`
 	UpdateFormScript   *ScriptSetting `json:"updateFormScript"`
 	LogSetting         *LogSetting    `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -86,6 +101,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -107,6 +128,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -134,6 +161,12 @@ type UpdateNamespaceRequest struct {
 	UpdateMoldScript   *ScriptSetting `json:"updateMoldScript"`
 	UpdateFormScript   *ScriptSetting `json:"updateFormScript"`
 	LogSetting         *LogSetting    `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -167,6 +200,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -190,6 +229,12 @@ type DescribeFormModelMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeFormModelMastersRequestFromJson(data string) DescribeFormModelMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeFormModelMastersRequestFromDict(dict)
 }
 
 func NewDescribeFormModelMastersRequestFromDict(data map[string]interface{}) DescribeFormModelMastersRequest {
@@ -221,6 +266,12 @@ type CreateFormModelMasterRequest struct {
 	Description        *string     `json:"description"`
 	Metadata           *string     `json:"metadata"`
 	Slots              []SlotModel `json:"slots"`
+}
+
+func NewCreateFormModelMasterRequestFromJson(data string) CreateFormModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateFormModelMasterRequestFromDict(dict)
 }
 
 func NewCreateFormModelMasterRequestFromDict(data map[string]interface{}) CreateFormModelMasterRequest {
@@ -257,6 +308,12 @@ type GetFormModelMasterRequest struct {
 	FormModelName      *string `json:"formModelName"`
 }
 
+func NewGetFormModelMasterRequestFromJson(data string) GetFormModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFormModelMasterRequestFromDict(dict)
+}
+
 func NewGetFormModelMasterRequestFromDict(data map[string]interface{}) GetFormModelMasterRequest {
 	return GetFormModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -284,6 +341,12 @@ type UpdateFormModelMasterRequest struct {
 	Description        *string     `json:"description"`
 	Metadata           *string     `json:"metadata"`
 	Slots              []SlotModel `json:"slots"`
+}
+
+func NewUpdateFormModelMasterRequestFromJson(data string) UpdateFormModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateFormModelMasterRequestFromDict(dict)
 }
 
 func NewUpdateFormModelMasterRequestFromDict(data map[string]interface{}) UpdateFormModelMasterRequest {
@@ -320,6 +383,12 @@ type DeleteFormModelMasterRequest struct {
 	FormModelName      *string `json:"formModelName"`
 }
 
+func NewDeleteFormModelMasterRequestFromJson(data string) DeleteFormModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteFormModelMasterRequestFromDict(dict)
+}
+
 func NewDeleteFormModelMasterRequestFromDict(data map[string]interface{}) DeleteFormModelMasterRequest {
 	return DeleteFormModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -345,6 +414,12 @@ type DescribeMoldModelsRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDescribeMoldModelsRequestFromJson(data string) DescribeMoldModelsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMoldModelsRequestFromDict(dict)
+}
+
 func NewDescribeMoldModelsRequestFromDict(data map[string]interface{}) DescribeMoldModelsRequest {
 	return DescribeMoldModelsRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -367,6 +442,12 @@ type GetMoldModelRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	MoldName           *string `json:"moldName"`
+}
+
+func NewGetMoldModelRequestFromJson(data string) GetMoldModelRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMoldModelRequestFromDict(dict)
 }
 
 func NewGetMoldModelRequestFromDict(data map[string]interface{}) GetMoldModelRequest {
@@ -394,6 +475,12 @@ type DescribeMoldModelMastersRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeMoldModelMastersRequestFromJson(data string) DescribeMoldModelMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMoldModelMastersRequestFromDict(dict)
 }
 
 func NewDescribeMoldModelMastersRequestFromDict(data map[string]interface{}) DescribeMoldModelMastersRequest {
@@ -427,6 +514,12 @@ type CreateMoldModelMasterRequest struct {
 	FormModelName      *string `json:"formModelName"`
 	InitialMaxCapacity *int32  `json:"initialMaxCapacity"`
 	MaxCapacity        *int32  `json:"maxCapacity"`
+}
+
+func NewCreateMoldModelMasterRequestFromJson(data string) CreateMoldModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateMoldModelMasterRequestFromDict(dict)
 }
 
 func NewCreateMoldModelMasterRequestFromDict(data map[string]interface{}) CreateMoldModelMasterRequest {
@@ -465,6 +558,12 @@ type GetMoldModelMasterRequest struct {
 	MoldName           *string `json:"moldName"`
 }
 
+func NewGetMoldModelMasterRequestFromJson(data string) GetMoldModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMoldModelMasterRequestFromDict(dict)
+}
+
 func NewGetMoldModelMasterRequestFromDict(data map[string]interface{}) GetMoldModelMasterRequest {
 	return GetMoldModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -494,6 +593,12 @@ type UpdateMoldModelMasterRequest struct {
 	FormModelName      *string `json:"formModelName"`
 	InitialMaxCapacity *int32  `json:"initialMaxCapacity"`
 	MaxCapacity        *int32  `json:"maxCapacity"`
+}
+
+func NewUpdateMoldModelMasterRequestFromJson(data string) UpdateMoldModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateMoldModelMasterRequestFromDict(dict)
 }
 
 func NewUpdateMoldModelMasterRequestFromDict(data map[string]interface{}) UpdateMoldModelMasterRequest {
@@ -532,6 +637,12 @@ type DeleteMoldModelMasterRequest struct {
 	MoldName           *string `json:"moldName"`
 }
 
+func NewDeleteMoldModelMasterRequestFromJson(data string) DeleteMoldModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteMoldModelMasterRequestFromDict(dict)
+}
+
 func NewDeleteMoldModelMasterRequestFromDict(data map[string]interface{}) DeleteMoldModelMasterRequest {
 	return DeleteMoldModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -557,6 +668,12 @@ type ExportMasterRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterRequestFromDict(dict)
+}
+
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -578,6 +695,12 @@ type GetCurrentFormMasterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetCurrentFormMasterRequestFromJson(data string) GetCurrentFormMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentFormMasterRequestFromDict(dict)
 }
 
 func NewGetCurrentFormMasterRequestFromDict(data map[string]interface{}) GetCurrentFormMasterRequest {
@@ -602,6 +725,12 @@ type UpdateCurrentFormMasterRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	Settings           *string `json:"settings"`
+}
+
+func NewUpdateCurrentFormMasterRequestFromJson(data string) UpdateCurrentFormMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentFormMasterRequestFromDict(dict)
 }
 
 func NewUpdateCurrentFormMasterRequestFromDict(data map[string]interface{}) UpdateCurrentFormMasterRequest {
@@ -630,6 +759,12 @@ type UpdateCurrentFormMasterFromGitHubRequest struct {
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
+func NewUpdateCurrentFormMasterFromGitHubRequestFromJson(data string) UpdateCurrentFormMasterFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentFormMasterFromGitHubRequestFromDict(dict)
+}
+
 func NewUpdateCurrentFormMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentFormMasterFromGitHubRequest {
 	return UpdateCurrentFormMasterFromGitHubRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
@@ -656,6 +791,12 @@ type DescribeMoldsRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeMoldsRequestFromJson(data string) DescribeMoldsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMoldsRequestFromDict(dict)
 }
 
 func NewDescribeMoldsRequestFromDict(data map[string]interface{}) DescribeMoldsRequest {
@@ -690,6 +831,12 @@ type DescribeMoldsByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeMoldsByUserIdRequestFromJson(data string) DescribeMoldsByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMoldsByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeMoldsByUserIdRequestFromDict(data map[string]interface{}) DescribeMoldsByUserIdRequest {
 	return DescribeMoldsByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -721,6 +868,12 @@ type GetMoldRequest struct {
 	MoldName           *string `json:"moldName"`
 }
 
+func NewGetMoldRequestFromJson(data string) GetMoldRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMoldRequestFromDict(dict)
+}
+
 func NewGetMoldRequestFromDict(data map[string]interface{}) GetMoldRequest {
 	return GetMoldRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -748,6 +901,12 @@ type GetMoldByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	MoldName           *string `json:"moldName"`
+}
+
+func NewGetMoldByUserIdRequestFromJson(data string) GetMoldByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMoldByUserIdRequestFromDict(dict)
 }
 
 func NewGetMoldByUserIdRequestFromDict(data map[string]interface{}) GetMoldByUserIdRequest {
@@ -778,6 +937,12 @@ type SetMoldCapacityByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	MoldName           *string `json:"moldName"`
 	Capacity           *int32  `json:"capacity"`
+}
+
+func NewSetMoldCapacityByUserIdRequestFromJson(data string) SetMoldCapacityByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetMoldCapacityByUserIdRequestFromDict(dict)
 }
 
 func NewSetMoldCapacityByUserIdRequestFromDict(data map[string]interface{}) SetMoldCapacityByUserIdRequest {
@@ -812,6 +977,12 @@ type AddMoldCapacityByUserIdRequest struct {
 	Capacity           *int32  `json:"capacity"`
 }
 
+func NewAddMoldCapacityByUserIdRequestFromJson(data string) AddMoldCapacityByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddMoldCapacityByUserIdRequestFromDict(dict)
+}
+
 func NewAddMoldCapacityByUserIdRequestFromDict(data map[string]interface{}) AddMoldCapacityByUserIdRequest {
 	return AddMoldCapacityByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -843,6 +1014,12 @@ type DeleteMoldRequest struct {
 	MoldName           *string `json:"moldName"`
 }
 
+func NewDeleteMoldRequestFromJson(data string) DeleteMoldRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteMoldRequestFromDict(dict)
+}
+
 func NewDeleteMoldRequestFromDict(data map[string]interface{}) DeleteMoldRequest {
 	return DeleteMoldRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -870,6 +1047,12 @@ type DeleteMoldByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	MoldName           *string `json:"moldName"`
+}
+
+func NewDeleteMoldByUserIdRequestFromJson(data string) DeleteMoldByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteMoldByUserIdRequestFromDict(dict)
 }
 
 func NewDeleteMoldByUserIdRequestFromDict(data map[string]interface{}) DeleteMoldByUserIdRequest {
@@ -900,6 +1083,12 @@ type AddCapacityByStampSheetRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewAddCapacityByStampSheetRequestFromJson(data string) AddCapacityByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddCapacityByStampSheetRequestFromDict(dict)
+}
+
 func NewAddCapacityByStampSheetRequestFromDict(data map[string]interface{}) AddCapacityByStampSheetRequest {
 	return AddCapacityByStampSheetRequest{
 		StampSheet: core.CastString(data["stampSheet"]),
@@ -924,6 +1113,12 @@ type SetCapacityByStampSheetRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StampSheet         *string `json:"stampSheet"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewSetCapacityByStampSheetRequestFromJson(data string) SetCapacityByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetCapacityByStampSheetRequestFromDict(dict)
 }
 
 func NewSetCapacityByStampSheetRequestFromDict(data map[string]interface{}) SetCapacityByStampSheetRequest {
@@ -953,6 +1148,12 @@ type DescribeFormsRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeFormsRequestFromJson(data string) DescribeFormsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeFormsRequestFromDict(dict)
 }
 
 func NewDescribeFormsRequestFromDict(data map[string]interface{}) DescribeFormsRequest {
@@ -990,6 +1191,12 @@ type DescribeFormsByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeFormsByUserIdRequestFromJson(data string) DescribeFormsByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeFormsByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeFormsByUserIdRequestFromDict(data map[string]interface{}) DescribeFormsByUserIdRequest {
 	return DescribeFormsByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1024,6 +1231,12 @@ type GetFormRequest struct {
 	Index              *int32  `json:"index"`
 }
 
+func NewGetFormRequestFromJson(data string) GetFormRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFormRequestFromDict(dict)
+}
+
 func NewGetFormRequestFromDict(data map[string]interface{}) GetFormRequest {
 	return GetFormRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1054,6 +1267,12 @@ type GetFormByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	MoldName           *string `json:"moldName"`
 	Index              *int32  `json:"index"`
+}
+
+func NewGetFormByUserIdRequestFromJson(data string) GetFormByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFormByUserIdRequestFromDict(dict)
 }
 
 func NewGetFormByUserIdRequestFromDict(data map[string]interface{}) GetFormByUserIdRequest {
@@ -1087,6 +1306,12 @@ type GetFormWithSignatureRequest struct {
 	MoldName           *string `json:"moldName"`
 	Index              *int32  `json:"index"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewGetFormWithSignatureRequestFromJson(data string) GetFormWithSignatureRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFormWithSignatureRequestFromDict(dict)
 }
 
 func NewGetFormWithSignatureRequestFromDict(data map[string]interface{}) GetFormWithSignatureRequest {
@@ -1124,6 +1349,12 @@ type GetFormWithSignatureByUserIdRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewGetFormWithSignatureByUserIdRequestFromJson(data string) GetFormWithSignatureByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFormWithSignatureByUserIdRequestFromDict(dict)
+}
+
 func NewGetFormWithSignatureByUserIdRequestFromDict(data map[string]interface{}) GetFormWithSignatureByUserIdRequest {
 	return GetFormWithSignatureByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1157,6 +1388,12 @@ type SetFormByUserIdRequest struct {
 	MoldName           *string `json:"moldName"`
 	Index              *int32  `json:"index"`
 	Slots              []Slot  `json:"slots"`
+}
+
+func NewSetFormByUserIdRequestFromJson(data string) SetFormByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetFormByUserIdRequestFromDict(dict)
 }
 
 func NewSetFormByUserIdRequestFromDict(data map[string]interface{}) SetFormByUserIdRequest {
@@ -1195,6 +1432,12 @@ type SetFormWithSignatureRequest struct {
 	Index              *int32              `json:"index"`
 	Slots              []SlotWithSignature `json:"slots"`
 	KeyId              *string             `json:"keyId"`
+}
+
+func NewSetFormWithSignatureRequestFromJson(data string) SetFormWithSignatureRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetFormWithSignatureRequestFromDict(dict)
 }
 
 func NewSetFormWithSignatureRequestFromDict(data map[string]interface{}) SetFormWithSignatureRequest {
@@ -1239,6 +1482,12 @@ type AcquireActionsToFormPropertiesRequest struct {
 	Config             []AcquireActionConfig `json:"config"`
 }
 
+func NewAcquireActionsToFormPropertiesRequestFromJson(data string) AcquireActionsToFormPropertiesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireActionsToFormPropertiesRequestFromDict(dict)
+}
+
 func NewAcquireActionsToFormPropertiesRequestFromDict(data map[string]interface{}) AcquireActionsToFormPropertiesRequest {
 	return AcquireActionsToFormPropertiesRequest{
 		NamespaceName:    core.CastString(data["namespaceName"]),
@@ -1281,6 +1530,12 @@ type DeleteFormRequest struct {
 	Index              *int32  `json:"index"`
 }
 
+func NewDeleteFormRequestFromJson(data string) DeleteFormRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteFormRequestFromDict(dict)
+}
+
 func NewDeleteFormRequestFromDict(data map[string]interface{}) DeleteFormRequest {
 	return DeleteFormRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1313,6 +1568,12 @@ type DeleteFormByUserIdRequest struct {
 	Index              *int32  `json:"index"`
 }
 
+func NewDeleteFormByUserIdRequestFromJson(data string) DeleteFormByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteFormByUserIdRequestFromDict(dict)
+}
+
 func NewDeleteFormByUserIdRequestFromDict(data map[string]interface{}) DeleteFormByUserIdRequest {
 	return DeleteFormByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -1341,6 +1602,12 @@ type AcquireActionToFormPropertiesByStampSheetRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StampSheet         *string `json:"stampSheet"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewAcquireActionToFormPropertiesByStampSheetRequestFromJson(data string) AcquireActionToFormPropertiesByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireActionToFormPropertiesByStampSheetRequestFromDict(dict)
 }
 
 func NewAcquireActionToFormPropertiesByStampSheetRequestFromDict(data map[string]interface{}) AcquireActionToFormPropertiesByStampSheetRequest {

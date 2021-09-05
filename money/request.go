@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package money
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -60,6 +69,12 @@ type CreateNamespaceRequest struct {
 	DepositScript      *ScriptSetting `json:"depositScript"`
 	WithdrawScript     *ScriptSetting `json:"withdrawScript"`
 	LogSetting         *LogSetting    `json:"logSetting"`
+}
+
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -107,6 +122,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -128,6 +149,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -160,6 +187,12 @@ type UpdateNamespaceRequest struct {
 	DepositScript      *ScriptSetting `json:"depositScript"`
 	WithdrawScript     *ScriptSetting `json:"withdrawScript"`
 	LogSetting         *LogSetting    `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -203,6 +236,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -227,6 +266,12 @@ type DescribeWalletsRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeWalletsRequestFromJson(data string) DescribeWalletsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeWalletsRequestFromDict(dict)
 }
 
 func NewDescribeWalletsRequestFromDict(data map[string]interface{}) DescribeWalletsRequest {
@@ -261,6 +306,12 @@ type DescribeWalletsByUserIdRequest struct {
 	Limit              *int32  `json:"limit"`
 }
 
+func NewDescribeWalletsByUserIdRequestFromJson(data string) DescribeWalletsByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeWalletsByUserIdRequestFromDict(dict)
+}
+
 func NewDescribeWalletsByUserIdRequestFromDict(data map[string]interface{}) DescribeWalletsByUserIdRequest {
 	return DescribeWalletsByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -292,6 +343,12 @@ type GetWalletRequest struct {
 	Slot               *int32  `json:"slot"`
 }
 
+func NewGetWalletRequestFromJson(data string) GetWalletRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetWalletRequestFromDict(dict)
+}
+
 func NewGetWalletRequestFromDict(data map[string]interface{}) GetWalletRequest {
 	return GetWalletRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -319,6 +376,12 @@ type GetWalletByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	Slot               *int32  `json:"slot"`
+}
+
+func NewGetWalletByUserIdRequestFromJson(data string) GetWalletByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetWalletByUserIdRequestFromDict(dict)
 }
 
 func NewGetWalletByUserIdRequestFromDict(data map[string]interface{}) GetWalletByUserIdRequest {
@@ -350,6 +413,12 @@ type DepositByUserIdRequest struct {
 	Slot               *int32   `json:"slot"`
 	Price              *float32 `json:"price"`
 	Count              *int32   `json:"count"`
+}
+
+func NewDepositByUserIdRequestFromJson(data string) DepositByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDepositByUserIdRequestFromDict(dict)
 }
 
 func NewDepositByUserIdRequestFromDict(data map[string]interface{}) DepositByUserIdRequest {
@@ -387,6 +456,12 @@ type WithdrawRequest struct {
 	PaidOnly           *bool   `json:"paidOnly"`
 }
 
+func NewWithdrawRequestFromJson(data string) WithdrawRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewWithdrawRequestFromDict(dict)
+}
+
 func NewWithdrawRequestFromDict(data map[string]interface{}) WithdrawRequest {
 	return WithdrawRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -422,6 +497,12 @@ type WithdrawByUserIdRequest struct {
 	PaidOnly           *bool   `json:"paidOnly"`
 }
 
+func NewWithdrawByUserIdRequestFromJson(data string) WithdrawByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewWithdrawByUserIdRequestFromDict(dict)
+}
+
 func NewWithdrawByUserIdRequestFromDict(data map[string]interface{}) WithdrawByUserIdRequest {
 	return WithdrawByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -454,6 +535,12 @@ type DepositByStampSheetRequest struct {
 	KeyId              *string `json:"keyId"`
 }
 
+func NewDepositByStampSheetRequestFromJson(data string) DepositByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDepositByStampSheetRequestFromDict(dict)
+}
+
 func NewDepositByStampSheetRequestFromDict(data map[string]interface{}) DepositByStampSheetRequest {
 	return DepositByStampSheetRequest{
 		StampSheet: core.CastString(data["stampSheet"]),
@@ -478,6 +565,12 @@ type WithdrawByStampTaskRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StampTask          *string `json:"stampTask"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewWithdrawByStampTaskRequestFromJson(data string) WithdrawByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewWithdrawByStampTaskRequestFromDict(dict)
 }
 
 func NewWithdrawByStampTaskRequestFromDict(data map[string]interface{}) WithdrawByStampTaskRequest {
@@ -509,6 +602,12 @@ type DescribeReceiptsRequest struct {
 	End                *int64  `json:"end"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeReceiptsRequestFromJson(data string) DescribeReceiptsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeReceiptsRequestFromDict(dict)
 }
 
 func NewDescribeReceiptsRequestFromDict(data map[string]interface{}) DescribeReceiptsRequest {
@@ -548,6 +647,12 @@ type GetByUserIdAndTransactionIdRequest struct {
 	TransactionId      *string `json:"transactionId"`
 }
 
+func NewGetByUserIdAndTransactionIdRequestFromJson(data string) GetByUserIdAndTransactionIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetByUserIdAndTransactionIdRequestFromDict(dict)
+}
+
 func NewGetByUserIdAndTransactionIdRequestFromDict(data map[string]interface{}) GetByUserIdAndTransactionIdRequest {
 	return GetByUserIdAndTransactionIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -578,6 +683,12 @@ type RecordReceiptRequest struct {
 	Receipt            *string `json:"receipt"`
 }
 
+func NewRecordReceiptRequestFromJson(data string) RecordReceiptRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRecordReceiptRequestFromDict(dict)
+}
+
 func NewRecordReceiptRequestFromDict(data map[string]interface{}) RecordReceiptRequest {
 	return RecordReceiptRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -606,6 +717,12 @@ type RecordReceiptByStampTaskRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	StampTask          *string `json:"stampTask"`
 	KeyId              *string `json:"keyId"`
+}
+
+func NewRecordReceiptByStampTaskRequestFromJson(data string) RecordReceiptByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRecordReceiptByStampTaskRequestFromDict(dict)
 }
 
 func NewRecordReceiptByStampTaskRequestFromDict(data map[string]interface{}) RecordReceiptByStampTaskRequest {

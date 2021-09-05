@@ -16,12 +16,21 @@ permissions and limitations under the License.
 
 package watch
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Chart struct {
 	ChartId *string `json:"chartId"`
 	EmbedId *string `json:"embedId"`
 	Html    *string `json:"html"`
+}
+
+func NewChartFromJson(data string) Chart {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewChartFromDict(dict)
 }
 
 func NewChartFromDict(data map[string]interface{}) Chart {
@@ -66,6 +75,12 @@ type Cumulative struct {
 	Name         *string `json:"name"`
 	Value        *int64  `json:"value"`
 	UpdatedAt    *int64  `json:"updatedAt"`
+}
+
+func NewCumulativeFromJson(data string) Cumulative {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCumulativeFromDict(dict)
 }
 
 func NewCumulativeFromDict(data map[string]interface{}) Cumulative {
@@ -115,6 +130,12 @@ type BillingActivity struct {
 	Service           *string `json:"service"`
 	ActivityType      *string `json:"activityType"`
 	Value             *int64  `json:"value"`
+}
+
+func NewBillingActivityFromJson(data string) BillingActivity {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBillingActivityFromDict(dict)
 }
 
 func NewBillingActivityFromDict(data map[string]interface{}) BillingActivity {

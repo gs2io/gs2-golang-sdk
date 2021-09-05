@@ -14,9 +14,12 @@ express or implied. See the License for the specific language governing
 permissions and limitations under the License.
 */
 
-package jobQueue
+package job_queue
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -130,6 +157,12 @@ type UpdateNamespaceResult struct {
 type UpdateNamespaceAsyncResult struct {
 	result *UpdateNamespaceResult
 	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
@@ -157,6 +190,12 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -181,6 +220,12 @@ type DescribeJobsByUserIdResult struct {
 type DescribeJobsByUserIdAsyncResult struct {
 	result *DescribeJobsByUserIdResult
 	err    error
+}
+
+func NewDescribeJobsByUserIdResultFromJson(data string) DescribeJobsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeJobsByUserIdResultFromDict(dict)
 }
 
 func NewDescribeJobsByUserIdResultFromDict(data map[string]interface{}) DescribeJobsByUserIdResult {
@@ -212,6 +257,12 @@ type GetJobByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewGetJobByUserIdResultFromJson(data string) GetJobByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetJobByUserIdResultFromDict(dict)
+}
+
 func NewGetJobByUserIdResultFromDict(data map[string]interface{}) GetJobByUserIdResult {
 	return GetJobByUserIdResult{
 		Item: NewJobFromDict(core.CastMap(data["item"])).Pointer(),
@@ -235,6 +286,12 @@ type PushByUserIdResult struct {
 type PushByUserIdAsyncResult struct {
 	result *PushByUserIdResult
 	err    error
+}
+
+func NewPushByUserIdResultFromJson(data string) PushByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPushByUserIdResultFromDict(dict)
 }
 
 func NewPushByUserIdResultFromDict(data map[string]interface{}) PushByUserIdResult {
@@ -264,6 +321,12 @@ type RunResult struct {
 type RunAsyncResult struct {
 	result *RunResult
 	err    error
+}
+
+func NewRunResultFromJson(data string) RunResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRunResultFromDict(dict)
 }
 
 func NewRunResultFromDict(data map[string]interface{}) RunResult {
@@ -297,6 +360,12 @@ type RunByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewRunByUserIdResultFromJson(data string) RunByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRunByUserIdResultFromDict(dict)
+}
+
 func NewRunByUserIdResultFromDict(data map[string]interface{}) RunByUserIdResult {
 	return RunByUserIdResult{
 		Item:      NewJobFromDict(core.CastMap(data["item"])).Pointer(),
@@ -326,6 +395,12 @@ type DeleteJobByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDeleteJobByUserIdResultFromJson(data string) DeleteJobByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteJobByUserIdResultFromDict(dict)
+}
+
 func NewDeleteJobByUserIdResultFromDict(data map[string]interface{}) DeleteJobByUserIdResult {
 	return DeleteJobByUserIdResult{
 		Item: NewJobFromDict(core.CastMap(data["item"])).Pointer(),
@@ -349,6 +424,12 @@ type PushByStampSheetResult struct {
 type PushByStampSheetAsyncResult struct {
 	result *PushByStampSheetResult
 	err    error
+}
+
+func NewPushByStampSheetResultFromJson(data string) PushByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPushByStampSheetResultFromDict(dict)
 }
 
 func NewPushByStampSheetResultFromDict(data map[string]interface{}) PushByStampSheetResult {
@@ -377,6 +458,12 @@ type DescribeDeadLetterJobsByUserIdResult struct {
 type DescribeDeadLetterJobsByUserIdAsyncResult struct {
 	result *DescribeDeadLetterJobsByUserIdResult
 	err    error
+}
+
+func NewDescribeDeadLetterJobsByUserIdResultFromJson(data string) DescribeDeadLetterJobsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDeadLetterJobsByUserIdResultFromDict(dict)
 }
 
 func NewDescribeDeadLetterJobsByUserIdResultFromDict(data map[string]interface{}) DescribeDeadLetterJobsByUserIdResult {
@@ -408,6 +495,12 @@ type GetDeadLetterJobByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewGetDeadLetterJobByUserIdResultFromJson(data string) GetDeadLetterJobByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetDeadLetterJobByUserIdResultFromDict(dict)
+}
+
 func NewGetDeadLetterJobByUserIdResultFromDict(data map[string]interface{}) GetDeadLetterJobByUserIdResult {
 	return GetDeadLetterJobByUserIdResult{
 		Item: NewDeadLetterJobFromDict(core.CastMap(data["item"])).Pointer(),
@@ -431,6 +524,12 @@ type DeleteDeadLetterJobByUserIdResult struct {
 type DeleteDeadLetterJobByUserIdAsyncResult struct {
 	result *DeleteDeadLetterJobByUserIdResult
 	err    error
+}
+
+func NewDeleteDeadLetterJobByUserIdResultFromJson(data string) DeleteDeadLetterJobByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteDeadLetterJobByUserIdResultFromDict(dict)
 }
 
 func NewDeleteDeadLetterJobByUserIdResultFromDict(data map[string]interface{}) DeleteDeadLetterJobByUserIdResult {

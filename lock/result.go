@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package lock
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesResult struct {
 	Items         []Namespace `json:"items"`
@@ -26,6 +29,12 @@ type DescribeNamespacesResult struct {
 type DescribeNamespacesAsyncResult struct {
 	result *DescribeNamespacesResult
 	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
@@ -57,6 +66,12 @@ type CreateNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -80,6 +95,12 @@ type GetNamespaceStatusResult struct {
 type GetNamespaceStatusAsyncResult struct {
 	result *GetNamespaceStatusResult
 	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
@@ -107,6 +128,12 @@ type GetNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -130,6 +157,12 @@ type UpdateNamespaceResult struct {
 type UpdateNamespaceAsyncResult struct {
 	result *UpdateNamespaceResult
 	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
@@ -157,6 +190,12 @@ type DeleteNamespaceAsyncResult struct {
 	err    error
 }
 
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
 		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
@@ -181,6 +220,12 @@ type DescribeMutexesResult struct {
 type DescribeMutexesAsyncResult struct {
 	result *DescribeMutexesResult
 	err    error
+}
+
+func NewDescribeMutexesResultFromJson(data string) DescribeMutexesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMutexesResultFromDict(dict)
 }
 
 func NewDescribeMutexesResultFromDict(data map[string]interface{}) DescribeMutexesResult {
@@ -213,6 +258,12 @@ type DescribeMutexesByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewDescribeMutexesByUserIdResultFromJson(data string) DescribeMutexesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMutexesByUserIdResultFromDict(dict)
+}
+
 func NewDescribeMutexesByUserIdResultFromDict(data map[string]interface{}) DescribeMutexesByUserIdResult {
 	return DescribeMutexesByUserIdResult{
 		Items:         CastMutexes(core.CastArray(data["items"])),
@@ -242,6 +293,12 @@ type LockAsyncResult struct {
 	err    error
 }
 
+func NewLockResultFromJson(data string) LockResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLockResultFromDict(dict)
+}
+
 func NewLockResultFromDict(data map[string]interface{}) LockResult {
 	return LockResult{
 		Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
@@ -265,6 +322,12 @@ type LockByUserIdResult struct {
 type LockByUserIdAsyncResult struct {
 	result *LockByUserIdResult
 	err    error
+}
+
+func NewLockByUserIdResultFromJson(data string) LockByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLockByUserIdResultFromDict(dict)
 }
 
 func NewLockByUserIdResultFromDict(data map[string]interface{}) LockByUserIdResult {
@@ -292,6 +355,12 @@ type UnlockAsyncResult struct {
 	err    error
 }
 
+func NewUnlockResultFromJson(data string) UnlockResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnlockResultFromDict(dict)
+}
+
 func NewUnlockResultFromDict(data map[string]interface{}) UnlockResult {
 	return UnlockResult{
 		Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
@@ -315,6 +384,12 @@ type UnlockByUserIdResult struct {
 type UnlockByUserIdAsyncResult struct {
 	result *UnlockByUserIdResult
 	err    error
+}
+
+func NewUnlockByUserIdResultFromJson(data string) UnlockByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnlockByUserIdResultFromDict(dict)
 }
 
 func NewUnlockByUserIdResultFromDict(data map[string]interface{}) UnlockByUserIdResult {
@@ -342,6 +417,12 @@ type GetMutexAsyncResult struct {
 	err    error
 }
 
+func NewGetMutexResultFromJson(data string) GetMutexResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMutexResultFromDict(dict)
+}
+
 func NewGetMutexResultFromDict(data map[string]interface{}) GetMutexResult {
 	return GetMutexResult{
 		Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
@@ -367,6 +448,12 @@ type GetMutexByUserIdAsyncResult struct {
 	err    error
 }
 
+func NewGetMutexByUserIdResultFromJson(data string) GetMutexByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMutexByUserIdResultFromDict(dict)
+}
+
 func NewGetMutexByUserIdResultFromDict(data map[string]interface{}) GetMutexByUserIdResult {
 	return GetMutexByUserIdResult{
 		Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
@@ -390,6 +477,12 @@ type DeleteMutexByUserIdResult struct {
 type DeleteMutexByUserIdAsyncResult struct {
 	result *DeleteMutexByUserIdResult
 	err    error
+}
+
+func NewDeleteMutexByUserIdResultFromJson(data string) DeleteMutexByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteMutexByUserIdResultFromDict(dict)
 }
 
 func NewDeleteMutexByUserIdResultFromDict(data map[string]interface{}) DeleteMutexByUserIdResult {

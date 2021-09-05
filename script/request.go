@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package script
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type DescribeNamespacesRequest struct {
 	RequestId          *string `json:"requestId"`
@@ -24,6 +27,12 @@ type DescribeNamespacesRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -53,6 +62,12 @@ type CreateNamespaceRequest struct {
 	LogSetting         *LogSetting `json:"logSetting"`
 }
 
+func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
+}
+
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
 		Name:        core.CastString(data["name"]),
@@ -80,6 +95,12 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
+}
+
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -101,6 +122,12 @@ type GetNamespaceRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
+}
+
+func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -126,6 +153,12 @@ type UpdateNamespaceRequest struct {
 	NamespaceName      *string     `json:"namespaceName"`
 	Description        *string     `json:"description"`
 	LogSetting         *LogSetting `json:"logSetting"`
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -155,6 +188,12 @@ type DeleteNamespaceRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 }
 
+func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
+}
+
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -178,6 +217,12 @@ type DescribeScriptsRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+}
+
+func NewDescribeScriptsRequestFromJson(data string) DescribeScriptsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeScriptsRequestFromDict(dict)
 }
 
 func NewDescribeScriptsRequestFromDict(data map[string]interface{}) DescribeScriptsRequest {
@@ -208,6 +253,12 @@ type CreateScriptRequest struct {
 	Name               *string `json:"name"`
 	Description        *string `json:"description"`
 	Script             *string `json:"script"`
+}
+
+func NewCreateScriptRequestFromJson(data string) CreateScriptRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateScriptRequestFromDict(dict)
 }
 
 func NewCreateScriptRequestFromDict(data map[string]interface{}) CreateScriptRequest {
@@ -242,6 +293,12 @@ type CreateScriptFromGitHubRequest struct {
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
+func NewCreateScriptFromGitHubRequestFromJson(data string) CreateScriptFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateScriptFromGitHubRequestFromDict(dict)
+}
+
 func NewCreateScriptFromGitHubRequestFromDict(data map[string]interface{}) CreateScriptFromGitHubRequest {
 	return CreateScriptFromGitHubRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
@@ -272,6 +329,12 @@ type GetScriptRequest struct {
 	ScriptName         *string `json:"scriptName"`
 }
 
+func NewGetScriptRequestFromJson(data string) GetScriptRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetScriptRequestFromDict(dict)
+}
+
 func NewGetScriptRequestFromDict(data map[string]interface{}) GetScriptRequest {
 	return GetScriptRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -298,6 +361,12 @@ type UpdateScriptRequest struct {
 	ScriptName         *string `json:"scriptName"`
 	Description        *string `json:"description"`
 	Script             *string `json:"script"`
+}
+
+func NewUpdateScriptRequestFromJson(data string) UpdateScriptRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateScriptRequestFromDict(dict)
 }
 
 func NewUpdateScriptRequestFromDict(data map[string]interface{}) UpdateScriptRequest {
@@ -332,6 +401,12 @@ type UpdateScriptFromGitHubRequest struct {
 	CheckoutSetting    *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
+func NewUpdateScriptFromGitHubRequestFromJson(data string) UpdateScriptFromGitHubRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateScriptFromGitHubRequestFromDict(dict)
+}
+
 func NewUpdateScriptFromGitHubRequestFromDict(data map[string]interface{}) UpdateScriptFromGitHubRequest {
 	return UpdateScriptFromGitHubRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
@@ -362,6 +437,12 @@ type DeleteScriptRequest struct {
 	ScriptName         *string `json:"scriptName"`
 }
 
+func NewDeleteScriptRequestFromJson(data string) DeleteScriptRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteScriptRequestFromDict(dict)
+}
+
 func NewDeleteScriptRequestFromDict(data map[string]interface{}) DeleteScriptRequest {
 	return DeleteScriptRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
@@ -388,6 +469,12 @@ type InvokeScriptRequest struct {
 	Args               *string `json:"args"`
 }
 
+func NewInvokeScriptRequestFromJson(data string) InvokeScriptRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewInvokeScriptRequestFromDict(dict)
+}
+
 func NewInvokeScriptRequestFromDict(data map[string]interface{}) InvokeScriptRequest {
 	return InvokeScriptRequest{
 		ScriptId: core.CastString(data["scriptId"]),
@@ -412,6 +499,12 @@ type DebugInvokeRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	Script             *string `json:"script"`
 	Args               *string `json:"args"`
+}
+
+func NewDebugInvokeRequestFromJson(data string) DebugInvokeRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDebugInvokeRequestFromDict(dict)
 }
 
 func NewDebugInvokeRequestFromDict(data map[string]interface{}) DebugInvokeRequest {

@@ -16,7 +16,10 @@ permissions and limitations under the License.
 
 package inventory
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type Namespace struct {
 	NamespaceId    *string        `json:"namespaceId"`
@@ -28,6 +31,12 @@ type Namespace struct {
 	LogSetting     *LogSetting    `json:"logSetting"`
 	CreatedAt      *int64         `json:"createdAt"`
 	UpdatedAt      *int64         `json:"updatedAt"`
+}
+
+func NewNamespaceFromJson(data string) Namespace {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -90,6 +99,12 @@ type InventoryModelMaster struct {
 	UpdatedAt             *int64  `json:"updatedAt"`
 }
 
+func NewInventoryModelMasterFromJson(data string) InventoryModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewInventoryModelMasterFromDict(dict)
+}
+
 func NewInventoryModelMasterFromDict(data map[string]interface{}) InventoryModelMaster {
 	return InventoryModelMaster{
 		InventoryModelId:      core.CastString(data["inventoryModelId"]),
@@ -146,6 +161,12 @@ type InventoryModel struct {
 	MaxCapacity           *int32      `json:"maxCapacity"`
 	ProtectReferencedItem *bool       `json:"protectReferencedItem"`
 	ItemModels            []ItemModel `json:"itemModels"`
+}
+
+func NewInventoryModelFromJson(data string) InventoryModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewInventoryModelFromDict(dict)
 }
 
 func NewInventoryModelFromDict(data map[string]interface{}) InventoryModel {
@@ -207,6 +228,12 @@ type ItemModelMaster struct {
 	UpdatedAt           *int64  `json:"updatedAt"`
 }
 
+func NewItemModelMasterFromJson(data string) ItemModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewItemModelMasterFromDict(dict)
+}
+
 func NewItemModelMasterFromDict(data map[string]interface{}) ItemModelMaster {
 	return ItemModelMaster{
 		ItemModelId:         core.CastString(data["itemModelId"]),
@@ -266,6 +293,12 @@ type ItemModel struct {
 	SortValue           *int32  `json:"sortValue"`
 }
 
+func NewItemModelFromJson(data string) ItemModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewItemModelFromDict(dict)
+}
+
 func NewItemModelFromDict(data map[string]interface{}) ItemModel {
 	return ItemModel{
 		ItemModelId:         core.CastString(data["itemModelId"]),
@@ -313,6 +346,12 @@ type CurrentItemModelMaster struct {
 	Settings    *string `json:"settings"`
 }
 
+func NewCurrentItemModelMasterFromJson(data string) CurrentItemModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentItemModelMasterFromDict(dict)
+}
+
 func NewCurrentItemModelMasterFromDict(data map[string]interface{}) CurrentItemModelMaster {
 	return CurrentItemModelMaster{
 		NamespaceId: core.CastString(data["namespaceId"]),
@@ -355,6 +394,12 @@ type Inventory struct {
 	CurrentInventoryMaxCapacity   *int32  `json:"currentInventoryMaxCapacity"`
 	CreatedAt                     *int64  `json:"createdAt"`
 	UpdatedAt                     *int64  `json:"updatedAt"`
+}
+
+func NewInventoryFromJson(data string) Inventory {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewInventoryFromDict(dict)
 }
 
 func NewInventoryFromDict(data map[string]interface{}) Inventory {
@@ -413,6 +458,12 @@ type ItemSet struct {
 	ExpiresAt     *int64   `json:"expiresAt"`
 	CreatedAt     *int64   `json:"createdAt"`
 	UpdatedAt     *int64   `json:"updatedAt"`
+}
+
+func NewItemSetFromJson(data string) ItemSet {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewItemSetFromDict(dict)
 }
 
 func NewItemSetFromDict(data map[string]interface{}) ItemSet {
@@ -479,6 +530,12 @@ type GitHubCheckoutSetting struct {
 	TagName        *string `json:"tagName"`
 }
 
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
+}
+
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
 		ApiKeyId:       core.CastString(data["apiKeyId"]),
@@ -530,6 +587,12 @@ type ScriptSetting struct {
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
+}
+
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
 		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
@@ -570,6 +633,12 @@ func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
 
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
