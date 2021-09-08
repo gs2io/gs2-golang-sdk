@@ -372,6 +372,37 @@ func (p UpdateRoomResult) Pointer() *UpdateRoomResult {
     return &p
 }
 
+type UpdateRoomFromBackendResult struct {
+    Item *Room `json:"item"`
+}
+
+type UpdateRoomFromBackendAsyncResult struct {
+	result *UpdateRoomFromBackendResult
+	err    error
+}
+
+func NewUpdateRoomFromBackendResultFromJson(data string) UpdateRoomFromBackendResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateRoomFromBackendResultFromDict(dict)
+}
+
+func NewUpdateRoomFromBackendResultFromDict(data map[string]interface{}) UpdateRoomFromBackendResult {
+    return UpdateRoomFromBackendResult {
+        Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UpdateRoomFromBackendResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateRoomFromBackendResult) Pointer() *UpdateRoomFromBackendResult {
+    return &p
+}
+
 type DeleteRoomResult struct {
     Item *Room `json:"item"`
 }
@@ -467,6 +498,39 @@ func (p DescribeMessagesResult) Pointer() *DescribeMessagesResult {
     return &p
 }
 
+type DescribeMessagesByUserIdResult struct {
+    Items []Message `json:"items"`
+}
+
+type DescribeMessagesByUserIdAsyncResult struct {
+	result *DescribeMessagesByUserIdResult
+	err    error
+}
+
+func NewDescribeMessagesByUserIdResultFromJson(data string) DescribeMessagesByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeMessagesByUserIdResultFromDict(dict)
+}
+
+func NewDescribeMessagesByUserIdResultFromDict(data map[string]interface{}) DescribeMessagesByUserIdResult {
+    return DescribeMessagesByUserIdResult {
+        Items: CastMessages(core.CastArray(data["items"])),
+    }
+}
+
+func (p DescribeMessagesByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastMessagesFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p DescribeMessagesByUserIdResult) Pointer() *DescribeMessagesByUserIdResult {
+    return &p
+}
+
 type PostResult struct {
     Item *Message `json:"item"`
 }
@@ -557,6 +621,37 @@ func (p GetMessageResult) ToDict() map[string]interface{} {
 }
 
 func (p GetMessageResult) Pointer() *GetMessageResult {
+    return &p
+}
+
+type GetMessageByUserIdResult struct {
+    Item *Message `json:"item"`
+}
+
+type GetMessageByUserIdAsyncResult struct {
+	result *GetMessageByUserIdResult
+	err    error
+}
+
+func NewGetMessageByUserIdResultFromJson(data string) GetMessageByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetMessageByUserIdResultFromDict(dict)
+}
+
+func NewGetMessageByUserIdResultFromDict(data map[string]interface{}) GetMessageByUserIdResult {
+    return GetMessageByUserIdResult {
+        Item: NewMessageFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetMessageByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetMessageByUserIdResult) Pointer() *GetMessageByUserIdResult {
     return &p
 }
 

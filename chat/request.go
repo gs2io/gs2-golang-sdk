@@ -420,6 +420,7 @@ type UpdateRoomRequest struct {
     Metadata *string `json:"metadata"`
     Password *string `json:"password"`
     WhiteListUserIds []string `json:"whiteListUserIds"`
+    AccessToken *string `json:"accessToken"`
 }
 
 func NewUpdateRoomRequestFromJson(data string) UpdateRoomRequest {
@@ -435,6 +436,7 @@ func NewUpdateRoomRequestFromDict(data map[string]interface{}) UpdateRoomRequest
         Metadata: core.CastString(data["metadata"]),
         Password: core.CastString(data["password"]),
         WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
+        AccessToken: core.CastString(data["accessToken"]),
     }
 }
 
@@ -447,10 +449,57 @@ func (p UpdateRoomRequest) ToDict() map[string]interface{} {
         "whiteListUserIds": core.CastStringsFromDict(
             p.WhiteListUserIds,
         ),
+        "accessToken": p.AccessToken,
     }
 }
 
 func (p UpdateRoomRequest) Pointer() *UpdateRoomRequest {
+    return &p
+}
+
+type UpdateRoomFromBackendRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    RoomName *string `json:"roomName"`
+    Metadata *string `json:"metadata"`
+    Password *string `json:"password"`
+    WhiteListUserIds []string `json:"whiteListUserIds"`
+    UserId *string `json:"userId"`
+}
+
+func NewUpdateRoomFromBackendRequestFromJson(data string) UpdateRoomFromBackendRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateRoomFromBackendRequestFromDict(dict)
+}
+
+func NewUpdateRoomFromBackendRequestFromDict(data map[string]interface{}) UpdateRoomFromBackendRequest {
+    return UpdateRoomFromBackendRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RoomName: core.CastString(data["roomName"]),
+        Metadata: core.CastString(data["metadata"]),
+        Password: core.CastString(data["password"]),
+        WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
+        UserId: core.CastString(data["userId"]),
+    }
+}
+
+func (p UpdateRoomFromBackendRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "roomName": p.RoomName,
+        "metadata": p.Metadata,
+        "password": p.Password,
+        "whiteListUserIds": core.CastStringsFromDict(
+            p.WhiteListUserIds,
+        ),
+        "userId": p.UserId,
+    }
+}
+
+func (p UpdateRoomFromBackendRequest) Pointer() *UpdateRoomFromBackendRequest {
     return &p
 }
 
@@ -531,6 +580,7 @@ type DescribeMessagesRequest struct {
     NamespaceName *string `json:"namespaceName"`
     RoomName *string `json:"roomName"`
     Password *string `json:"password"`
+    AccessToken *string `json:"accessToken"`
     StartAt *int64 `json:"startAt"`
     Limit *int32 `json:"limit"`
 }
@@ -546,6 +596,7 @@ func NewDescribeMessagesRequestFromDict(data map[string]interface{}) DescribeMes
         NamespaceName: core.CastString(data["namespaceName"]),
         RoomName: core.CastString(data["roomName"]),
         Password: core.CastString(data["password"]),
+        AccessToken: core.CastString(data["accessToken"]),
         StartAt: core.CastInt64(data["startAt"]),
         Limit: core.CastInt32(data["limit"]),
     }
@@ -556,12 +607,57 @@ func (p DescribeMessagesRequest) ToDict() map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "roomName": p.RoomName,
         "password": p.Password,
+        "accessToken": p.AccessToken,
         "startAt": p.StartAt,
         "limit": p.Limit,
     }
 }
 
 func (p DescribeMessagesRequest) Pointer() *DescribeMessagesRequest {
+    return &p
+}
+
+type DescribeMessagesByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    RoomName *string `json:"roomName"`
+    Password *string `json:"password"`
+    UserId *string `json:"userId"`
+    StartAt *int64 `json:"startAt"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeMessagesByUserIdRequestFromJson(data string) DescribeMessagesByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeMessagesByUserIdRequestFromDict(dict)
+}
+
+func NewDescribeMessagesByUserIdRequestFromDict(data map[string]interface{}) DescribeMessagesByUserIdRequest {
+    return DescribeMessagesByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RoomName: core.CastString(data["roomName"]),
+        Password: core.CastString(data["password"]),
+        UserId: core.CastString(data["userId"]),
+        StartAt: core.CastInt64(data["startAt"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeMessagesByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "roomName": p.RoomName,
+        "password": p.Password,
+        "userId": p.UserId,
+        "startAt": p.StartAt,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeMessagesByUserIdRequest) Pointer() *DescribeMessagesByUserIdRequest {
     return &p
 }
 
@@ -660,6 +756,8 @@ type GetMessageRequest struct {
     NamespaceName *string `json:"namespaceName"`
     RoomName *string `json:"roomName"`
     MessageName *string `json:"messageName"`
+    Password *string `json:"password"`
+    AccessToken *string `json:"accessToken"`
 }
 
 func NewGetMessageRequestFromJson(data string) GetMessageRequest {
@@ -673,6 +771,8 @@ func NewGetMessageRequestFromDict(data map[string]interface{}) GetMessageRequest
         NamespaceName: core.CastString(data["namespaceName"]),
         RoomName: core.CastString(data["roomName"]),
         MessageName: core.CastString(data["messageName"]),
+        Password: core.CastString(data["password"]),
+        AccessToken: core.CastString(data["accessToken"]),
     }
 }
 
@@ -681,10 +781,53 @@ func (p GetMessageRequest) ToDict() map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "roomName": p.RoomName,
         "messageName": p.MessageName,
+        "password": p.Password,
+        "accessToken": p.AccessToken,
     }
 }
 
 func (p GetMessageRequest) Pointer() *GetMessageRequest {
+    return &p
+}
+
+type GetMessageByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    RoomName *string `json:"roomName"`
+    MessageName *string `json:"messageName"`
+    Password *string `json:"password"`
+    UserId *string `json:"userId"`
+}
+
+func NewGetMessageByUserIdRequestFromJson(data string) GetMessageByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetMessageByUserIdRequestFromDict(dict)
+}
+
+func NewGetMessageByUserIdRequestFromDict(data map[string]interface{}) GetMessageByUserIdRequest {
+    return GetMessageByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RoomName: core.CastString(data["roomName"]),
+        MessageName: core.CastString(data["messageName"]),
+        Password: core.CastString(data["password"]),
+        UserId: core.CastString(data["userId"]),
+    }
+}
+
+func (p GetMessageByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "roomName": p.RoomName,
+        "messageName": p.MessageName,
+        "password": p.Password,
+        "userId": p.UserId,
+    }
+}
+
+func (p GetMessageByUserIdRequest) Pointer() *GetMessageByUserIdRequest {
     return &p
 }
 
