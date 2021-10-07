@@ -851,6 +851,7 @@ func (p DeleteFriendByUserIdResult) Pointer() *DeleteFriendByUserIdResult {
 
 type DescribeSendRequestsResult struct {
     Items []FriendRequest `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeSendRequestsAsyncResult struct {
@@ -867,6 +868,7 @@ func NewDescribeSendRequestsResultFromJson(data string) DescribeSendRequestsResu
 func NewDescribeSendRequestsResultFromDict(data map[string]interface{}) DescribeSendRequestsResult {
     return DescribeSendRequestsResult {
         Items: CastFriendRequests(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
     }
 }
 
@@ -875,6 +877,7 @@ func (p DescribeSendRequestsResult) ToDict() map[string]interface{} {
         "items": CastFriendRequestsFromDict(
             p.Items,
         ),
+        "nextPageToken": p.NextPageToken,
     }
 }
 
@@ -884,6 +887,7 @@ func (p DescribeSendRequestsResult) Pointer() *DescribeSendRequestsResult {
 
 type DescribeSendRequestsByUserIdResult struct {
     Items []FriendRequest `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeSendRequestsByUserIdAsyncResult struct {
@@ -900,6 +904,7 @@ func NewDescribeSendRequestsByUserIdResultFromJson(data string) DescribeSendRequ
 func NewDescribeSendRequestsByUserIdResultFromDict(data map[string]interface{}) DescribeSendRequestsByUserIdResult {
     return DescribeSendRequestsByUserIdResult {
         Items: CastFriendRequests(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
     }
 }
 
@@ -908,6 +913,7 @@ func (p DescribeSendRequestsByUserIdResult) ToDict() map[string]interface{} {
         "items": CastFriendRequestsFromDict(
             p.Items,
         ),
+        "nextPageToken": p.NextPageToken,
     }
 }
 
@@ -1103,6 +1109,7 @@ func (p DeleteRequestByUserIdResult) Pointer() *DeleteRequestByUserIdResult {
 
 type DescribeReceiveRequestsResult struct {
     Items []FriendRequest `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeReceiveRequestsAsyncResult struct {
@@ -1119,6 +1126,7 @@ func NewDescribeReceiveRequestsResultFromJson(data string) DescribeReceiveReques
 func NewDescribeReceiveRequestsResultFromDict(data map[string]interface{}) DescribeReceiveRequestsResult {
     return DescribeReceiveRequestsResult {
         Items: CastFriendRequests(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
     }
 }
 
@@ -1127,6 +1135,7 @@ func (p DescribeReceiveRequestsResult) ToDict() map[string]interface{} {
         "items": CastFriendRequestsFromDict(
             p.Items,
         ),
+        "nextPageToken": p.NextPageToken,
     }
 }
 
@@ -1136,6 +1145,7 @@ func (p DescribeReceiveRequestsResult) Pointer() *DescribeReceiveRequestsResult 
 
 type DescribeReceiveRequestsByUserIdResult struct {
     Items []FriendRequest `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeReceiveRequestsByUserIdAsyncResult struct {
@@ -1152,6 +1162,7 @@ func NewDescribeReceiveRequestsByUserIdResultFromJson(data string) DescribeRecei
 func NewDescribeReceiveRequestsByUserIdResultFromDict(data map[string]interface{}) DescribeReceiveRequestsByUserIdResult {
     return DescribeReceiveRequestsByUserIdResult {
         Items: CastFriendRequests(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
     }
 }
 
@@ -1160,6 +1171,7 @@ func (p DescribeReceiveRequestsByUserIdResult) ToDict() map[string]interface{} {
         "items": CastFriendRequestsFromDict(
             p.Items,
         ),
+        "nextPageToken": p.NextPageToken,
     }
 }
 

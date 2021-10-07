@@ -1018,6 +1018,8 @@ type DescribeSendRequestsRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
 }
 
 func NewDescribeSendRequestsRequestFromJson(data string) DescribeSendRequestsRequest {
@@ -1030,6 +1032,8 @@ func NewDescribeSendRequestsRequestFromDict(data map[string]interface{}) Describ
     return DescribeSendRequestsRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         AccessToken: core.CastString(data["accessToken"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
     }
 }
 
@@ -1037,6 +1041,8 @@ func (p DescribeSendRequestsRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "accessToken": p.AccessToken,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
     }
 }
 
@@ -1050,6 +1056,8 @@ type DescribeSendRequestsByUserIdRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
 }
 
 func NewDescribeSendRequestsByUserIdRequestFromJson(data string) DescribeSendRequestsByUserIdRequest {
@@ -1062,6 +1070,8 @@ func NewDescribeSendRequestsByUserIdRequestFromDict(data map[string]interface{})
     return DescribeSendRequestsByUserIdRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         UserId: core.CastString(data["userId"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
     }
 }
 
@@ -1069,6 +1079,8 @@ func (p DescribeSendRequestsByUserIdRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "userId": p.UserId,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
     }
 }
 
@@ -1292,6 +1304,8 @@ type DescribeReceiveRequestsRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
 }
 
 func NewDescribeReceiveRequestsRequestFromJson(data string) DescribeReceiveRequestsRequest {
@@ -1304,6 +1318,8 @@ func NewDescribeReceiveRequestsRequestFromDict(data map[string]interface{}) Desc
     return DescribeReceiveRequestsRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         AccessToken: core.CastString(data["accessToken"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
     }
 }
 
@@ -1311,6 +1327,8 @@ func (p DescribeReceiveRequestsRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "accessToken": p.AccessToken,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
     }
 }
 
@@ -1324,6 +1342,8 @@ type DescribeReceiveRequestsByUserIdRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
 }
 
 func NewDescribeReceiveRequestsByUserIdRequestFromJson(data string) DescribeReceiveRequestsByUserIdRequest {
@@ -1336,6 +1356,8 @@ func NewDescribeReceiveRequestsByUserIdRequestFromDict(data map[string]interface
     return DescribeReceiveRequestsByUserIdRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         UserId: core.CastString(data["userId"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
     }
 }
 
@@ -1343,6 +1365,8 @@ func (p DescribeReceiveRequestsByUserIdRequest) ToDict() map[string]interface{} 
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "userId": p.UserId,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
     }
 }
 

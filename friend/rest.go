@@ -2561,6 +2561,12 @@ func (p Gs2FriendRestClient) DescribeSendRequestsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
 
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
@@ -2653,6 +2659,12 @@ func (p Gs2FriendRestClient) DescribeSendRequestsByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
 
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
@@ -3301,6 +3313,12 @@ func (p Gs2FriendRestClient) DescribeReceiveRequestsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
 
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
@@ -3393,6 +3411,12 @@ func (p Gs2FriendRestClient) DescribeReceiveRequestsByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
 
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {

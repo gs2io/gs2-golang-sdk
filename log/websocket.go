@@ -718,13 +718,13 @@ func (p Gs2LogWebSocketClient) CountAccessLogAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.Service != nil && *request.Service != "" {
+    if request.Service != nil {
         bodies["service"] = *request.Service
     }
-    if request.Method != nil && *request.Method != "" {
+    if request.Method != nil {
         bodies["method"] = *request.Method
     }
-    if request.UserId != nil && *request.UserId != "" {
+    if request.UserId != nil {
         bodies["userId"] = *request.UserId
     }
     if request.Begin != nil {
@@ -927,16 +927,16 @@ func (p Gs2LogWebSocketClient) CountIssueStampSheetLogAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.Service != nil && *request.Service != "" {
+    if request.Service != nil {
         bodies["service"] = *request.Service
     }
-    if request.Method != nil && *request.Method != "" {
+    if request.Method != nil {
         bodies["method"] = *request.Method
     }
-    if request.UserId != nil && *request.UserId != "" {
+    if request.UserId != nil {
         bodies["userId"] = *request.UserId
     }
-    if request.Action != nil && *request.Action != "" {
+    if request.Action != nil {
         bodies["action"] = *request.Action
     }
     if request.Begin != nil {
@@ -1139,16 +1139,16 @@ func (p Gs2LogWebSocketClient) CountExecuteStampSheetLogAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.Service != nil && *request.Service != "" {
+    if request.Service != nil {
         bodies["service"] = *request.Service
     }
-    if request.Method != nil && *request.Method != "" {
+    if request.Method != nil {
         bodies["method"] = *request.Method
     }
-    if request.UserId != nil && *request.UserId != "" {
+    if request.UserId != nil {
         bodies["userId"] = *request.UserId
     }
-    if request.Action != nil && *request.Action != "" {
+    if request.Action != nil {
         bodies["action"] = *request.Action
     }
     if request.Begin != nil {
@@ -1351,16 +1351,16 @@ func (p Gs2LogWebSocketClient) CountExecuteStampTaskLogAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.Service != nil && *request.Service != "" {
+    if request.Service != nil {
         bodies["service"] = *request.Service
     }
-    if request.Method != nil && *request.Method != "" {
+    if request.Method != nil {
         bodies["method"] = *request.Method
     }
-    if request.UserId != nil && *request.UserId != "" {
+    if request.UserId != nil {
         bodies["userId"] = *request.UserId
     }
-    if request.Action != nil && *request.Action != "" {
+    if request.Action != nil {
         bodies["action"] = *request.Action
     }
     if request.Begin != nil {
@@ -1396,6 +1396,91 @@ func (p Gs2LogWebSocketClient) CountExecuteStampTaskLog(
 ) (*CountExecuteStampTaskLogResult, error) {
 	callback := make(chan CountExecuteStampTaskLogAsyncResult, 1)
 	go p.CountExecuteStampTaskLogAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LogWebSocketClient) putLogAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PutLogAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PutLogAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PutLogResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PutLogAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- PutLogAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogWebSocketClient) PutLogAsync(
+	request *PutLogRequest,
+	callback chan<- PutLogAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "log",
+    		"function": "putLog",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.LoggingNamespaceId != nil && *request.LoggingNamespaceId != "" {
+        bodies["loggingNamespaceId"] = *request.LoggingNamespaceId
+    }
+    if request.LogCategory != nil && *request.LogCategory != "" {
+        bodies["logCategory"] = *request.LogCategory
+    }
+    if request.Payload != nil && *request.Payload != "" {
+        bodies["payload"] = *request.Payload
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.putLogAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogWebSocketClient) PutLog(
+	request *PutLogRequest,
+) (*PutLogResult, error) {
+	callback := make(chan PutLogAsyncResult, 1)
+	go p.PutLogAsync(
 		request,
 		callback,
 	)

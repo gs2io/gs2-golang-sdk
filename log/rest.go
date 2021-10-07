@@ -1474,3 +1474,94 @@ func (p Gs2LogRestClient) CountExecuteStampTaskLog(
 	asyncResult := <-callback
 	return asyncResult.result, asyncResult.err
 }
+
+func putLogAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- PutLogAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PutLogAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PutLogResult
+	if asyncResult.Err != nil {
+		callback <- PutLogAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PutLogAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- PutLogAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) PutLogAsync(
+	request *PutLogRequest,
+	callback chan<- PutLogAsyncResult,
+) {
+	path := "/log/put"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.LoggingNamespaceId != nil && *request.LoggingNamespaceId != "" {
+        bodies["loggingNamespaceId"] = *request.LoggingNamespaceId
+    }
+    if request.LogCategory != nil && *request.LogCategory != "" {
+        bodies["logCategory"] = *request.LogCategory
+    }
+    if request.Payload != nil && *request.Payload != "" {
+        bodies["payload"] = *request.Payload
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go putLogAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) PutLog(
+	request *PutLogRequest,
+) (*PutLogResult, error) {
+	callback := make(chan PutLogAsyncResult, 1)
+	go p.PutLogAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}

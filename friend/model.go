@@ -435,7 +435,7 @@ func (p BlackList) Pointer() *BlackList {
     return &p
 }
 
-func CastBlackLists(data []interface{}) []BlackList {
+func CastBlackList(data []interface{}) []BlackList {
 	v := make([]BlackList, 0)
 	for _, d := range data {
 		v = append(v, NewBlackListFromDict(d.(map[string]interface{})))
@@ -443,7 +443,7 @@ func CastBlackLists(data []interface{}) []BlackList {
 	return v
 }
 
-func CastBlackListsFromDict(data []BlackList) []interface{} {
+func CastBlackListFromDict(data []BlackList) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

@@ -310,9 +310,9 @@ type CountAccessLogRequest struct {
     ContextStack *string `json:"contextStack"`
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
-    Service *string `json:"service"`
-    Method *string `json:"method"`
-    UserId *string `json:"userId"`
+    Service *bool `json:"service"`
+    Method *bool `json:"method"`
+    UserId *bool `json:"userId"`
     Begin *int64 `json:"begin"`
     End *int64 `json:"end"`
     LongTerm *bool `json:"longTerm"`
@@ -329,9 +329,9 @@ func NewCountAccessLogRequestFromJson(data string) CountAccessLogRequest {
 func NewCountAccessLogRequestFromDict(data map[string]interface{}) CountAccessLogRequest {
     return CountAccessLogRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
-        Service: core.CastString(data["service"]),
-        Method: core.CastString(data["method"]),
-        UserId: core.CastString(data["userId"]),
+        Service: core.CastBool(data["service"]),
+        Method: core.CastBool(data["method"]),
+        UserId: core.CastBool(data["userId"]),
         Begin: core.CastInt64(data["begin"]),
         End: core.CastInt64(data["end"]),
         LongTerm: core.CastBool(data["longTerm"]),
@@ -419,10 +419,10 @@ type CountIssueStampSheetLogRequest struct {
     ContextStack *string `json:"contextStack"`
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
-    Service *string `json:"service"`
-    Method *string `json:"method"`
-    UserId *string `json:"userId"`
-    Action *string `json:"action"`
+    Service *bool `json:"service"`
+    Method *bool `json:"method"`
+    UserId *bool `json:"userId"`
+    Action *bool `json:"action"`
     Begin *int64 `json:"begin"`
     End *int64 `json:"end"`
     LongTerm *bool `json:"longTerm"`
@@ -439,10 +439,10 @@ func NewCountIssueStampSheetLogRequestFromJson(data string) CountIssueStampSheet
 func NewCountIssueStampSheetLogRequestFromDict(data map[string]interface{}) CountIssueStampSheetLogRequest {
     return CountIssueStampSheetLogRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
-        Service: core.CastString(data["service"]),
-        Method: core.CastString(data["method"]),
-        UserId: core.CastString(data["userId"]),
-        Action: core.CastString(data["action"]),
+        Service: core.CastBool(data["service"]),
+        Method: core.CastBool(data["method"]),
+        UserId: core.CastBool(data["userId"]),
+        Action: core.CastBool(data["action"]),
         Begin: core.CastInt64(data["begin"]),
         End: core.CastInt64(data["end"]),
         LongTerm: core.CastBool(data["longTerm"]),
@@ -531,10 +531,10 @@ type CountExecuteStampSheetLogRequest struct {
     ContextStack *string `json:"contextStack"`
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
-    Service *string `json:"service"`
-    Method *string `json:"method"`
-    UserId *string `json:"userId"`
-    Action *string `json:"action"`
+    Service *bool `json:"service"`
+    Method *bool `json:"method"`
+    UserId *bool `json:"userId"`
+    Action *bool `json:"action"`
     Begin *int64 `json:"begin"`
     End *int64 `json:"end"`
     LongTerm *bool `json:"longTerm"`
@@ -551,10 +551,10 @@ func NewCountExecuteStampSheetLogRequestFromJson(data string) CountExecuteStampS
 func NewCountExecuteStampSheetLogRequestFromDict(data map[string]interface{}) CountExecuteStampSheetLogRequest {
     return CountExecuteStampSheetLogRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
-        Service: core.CastString(data["service"]),
-        Method: core.CastString(data["method"]),
-        UserId: core.CastString(data["userId"]),
-        Action: core.CastString(data["action"]),
+        Service: core.CastBool(data["service"]),
+        Method: core.CastBool(data["method"]),
+        UserId: core.CastBool(data["userId"]),
+        Action: core.CastBool(data["action"]),
         Begin: core.CastInt64(data["begin"]),
         End: core.CastInt64(data["end"]),
         LongTerm: core.CastBool(data["longTerm"]),
@@ -643,10 +643,10 @@ type CountExecuteStampTaskLogRequest struct {
     ContextStack *string `json:"contextStack"`
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
-    Service *string `json:"service"`
-    Method *string `json:"method"`
-    UserId *string `json:"userId"`
-    Action *string `json:"action"`
+    Service *bool `json:"service"`
+    Method *bool `json:"method"`
+    UserId *bool `json:"userId"`
+    Action *bool `json:"action"`
     Begin *int64 `json:"begin"`
     End *int64 `json:"end"`
     LongTerm *bool `json:"longTerm"`
@@ -663,10 +663,10 @@ func NewCountExecuteStampTaskLogRequestFromJson(data string) CountExecuteStampTa
 func NewCountExecuteStampTaskLogRequestFromDict(data map[string]interface{}) CountExecuteStampTaskLogRequest {
     return CountExecuteStampTaskLogRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
-        Service: core.CastString(data["service"]),
-        Method: core.CastString(data["method"]),
-        UserId: core.CastString(data["userId"]),
-        Action: core.CastString(data["action"]),
+        Service: core.CastBool(data["service"]),
+        Method: core.CastBool(data["method"]),
+        UserId: core.CastBool(data["userId"]),
+        Action: core.CastBool(data["action"]),
         Begin: core.CastInt64(data["begin"]),
         End: core.CastInt64(data["end"]),
         LongTerm: core.CastBool(data["longTerm"]),
@@ -691,5 +691,40 @@ func (p CountExecuteStampTaskLogRequest) ToDict() map[string]interface{} {
 }
 
 func (p CountExecuteStampTaskLogRequest) Pointer() *CountExecuteStampTaskLogRequest {
+    return &p
+}
+
+type PutLogRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    LoggingNamespaceId *string `json:"loggingNamespaceId"`
+    LogCategory *string `json:"logCategory"`
+    Payload *string `json:"payload"`
+}
+
+func NewPutLogRequestFromJson(data string) PutLogRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPutLogRequestFromDict(dict)
+}
+
+func NewPutLogRequestFromDict(data map[string]interface{}) PutLogRequest {
+    return PutLogRequest {
+        LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+        LogCategory: core.CastString(data["logCategory"]),
+        Payload: core.CastString(data["payload"]),
+    }
+}
+
+func (p PutLogRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "loggingNamespaceId": p.LoggingNamespaceId,
+        "logCategory": p.LogCategory,
+        "payload": p.Payload,
+    }
+}
+
+func (p PutLogRequest) Pointer() *PutLogRequest {
     return &p
 }
