@@ -1051,6 +1051,34 @@ func (p PutScoreByUserIdResult) Pointer() *PutScoreByUserIdResult {
     return &p
 }
 
+type CalcRankingResult struct {
+}
+
+type CalcRankingAsyncResult struct {
+	result *CalcRankingResult
+	err    error
+}
+
+func NewCalcRankingResultFromJson(data string) CalcRankingResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCalcRankingResultFromDict(dict)
+}
+
+func NewCalcRankingResultFromDict(data map[string]interface{}) CalcRankingResult {
+    return CalcRankingResult {
+    }
+}
+
+func (p CalcRankingResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+    }
+}
+
+func (p CalcRankingResult) Pointer() *CalcRankingResult {
+    return &p
+}
+
 type ExportMasterResult struct {
     Item *CurrentRankingMaster `json:"item"`
 }

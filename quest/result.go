@@ -1084,14 +1084,14 @@ func NewDescribeCompletedQuestListsResultFromJson(data string) DescribeCompleted
 
 func NewDescribeCompletedQuestListsResultFromDict(data map[string]interface{}) DescribeCompletedQuestListsResult {
     return DescribeCompletedQuestListsResult {
-        Items: CastCompletedQuestLists(core.CastArray(data["items"])),
+        Items: CastCompletedQuestList(core.CastArray(data["items"])),
         NextPageToken: core.CastString(data["nextPageToken"]),
     }
 }
 
 func (p DescribeCompletedQuestListsResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
-        "items": CastCompletedQuestListsFromDict(
+        "items": CastCompletedQuestListFromDict(
             p.Items,
         ),
         "nextPageToken": p.NextPageToken,
@@ -1120,14 +1120,14 @@ func NewDescribeCompletedQuestListsByUserIdResultFromJson(data string) DescribeC
 
 func NewDescribeCompletedQuestListsByUserIdResultFromDict(data map[string]interface{}) DescribeCompletedQuestListsByUserIdResult {
     return DescribeCompletedQuestListsByUserIdResult {
-        Items: CastCompletedQuestLists(core.CastArray(data["items"])),
+        Items: CastCompletedQuestList(core.CastArray(data["items"])),
         NextPageToken: core.CastString(data["nextPageToken"]),
     }
 }
 
 func (p DescribeCompletedQuestListsByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
-        "items": CastCompletedQuestListsFromDict(
+        "items": CastCompletedQuestListFromDict(
             p.Items,
         ),
         "nextPageToken": p.NextPageToken,

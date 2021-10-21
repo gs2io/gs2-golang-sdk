@@ -259,6 +259,7 @@ type Subscribe struct {
 	CategoryName *string `json:"categoryName"`
 	UserId *string `json:"userId"`
 	TargetUserIds []string `json:"targetUserIds"`
+	SubscribedUserIds []string `json:"subscribedUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 }
 
@@ -274,6 +275,7 @@ func NewSubscribeFromDict(data map[string]interface{}) Subscribe {
         CategoryName: core.CastString(data["categoryName"]),
         UserId: core.CastString(data["userId"]),
         TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
+        SubscribedUserIds: core.CastStrings(core.CastArray(data["subscribedUserIds"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
     }
 }
@@ -285,6 +287,9 @@ func (p Subscribe) ToDict() map[string]interface{} {
         "userId": p.UserId,
         "targetUserIds": core.CastStringsFromDict(
         p.TargetUserIds,
+    ),
+        "subscribedUserIds": core.CastStringsFromDict(
+        p.SubscribedUserIds,
     ),
         "createdAt": p.CreatedAt,
     }

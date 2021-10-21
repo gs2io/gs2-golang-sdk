@@ -1267,6 +1267,38 @@ func (p PutScoreByUserIdRequest) Pointer() *PutScoreByUserIdRequest {
     return &p
 }
 
+type CalcRankingRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    CategoryName *string `json:"categoryName"`
+}
+
+func NewCalcRankingRequestFromJson(data string) CalcRankingRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCalcRankingRequestFromDict(dict)
+}
+
+func NewCalcRankingRequestFromDict(data map[string]interface{}) CalcRankingRequest {
+    return CalcRankingRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        CategoryName: core.CastString(data["categoryName"]),
+    }
+}
+
+func (p CalcRankingRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "categoryName": p.CategoryName,
+    }
+}
+
+func (p CalcRankingRequest) Pointer() *CalcRankingRequest {
+    return &p
+}
+
 type ExportMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`

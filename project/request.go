@@ -252,6 +252,7 @@ type DeleteAccountRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     DuplicationAvoider *string `json:"duplicationAvoider"`
+    AccountToken *string `json:"accountToken"`
 }
 
 func NewDeleteAccountRequestFromJson(data string) DeleteAccountRequest {
@@ -262,11 +263,13 @@ func NewDeleteAccountRequestFromJson(data string) DeleteAccountRequest {
 
 func NewDeleteAccountRequestFromDict(data map[string]interface{}) DeleteAccountRequest {
     return DeleteAccountRequest {
+        AccountToken: core.CastString(data["accountToken"]),
     }
 }
 
 func (p DeleteAccountRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "accountToken": p.AccountToken,
     }
 }
 

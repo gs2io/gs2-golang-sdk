@@ -781,7 +781,7 @@ func (p CompletedQuestList) Pointer() *CompletedQuestList {
     return &p
 }
 
-func CastCompletedQuestLists(data []interface{}) []CompletedQuestList {
+func CastCompletedQuestList(data []interface{}) []CompletedQuestList {
 	v := make([]CompletedQuestList, 0)
 	for _, d := range data {
 		v = append(v, NewCompletedQuestListFromDict(d.(map[string]interface{})))
@@ -789,7 +789,7 @@ func CastCompletedQuestLists(data []interface{}) []CompletedQuestList {
 	return v
 }
 
-func CastCompletedQuestListsFromDict(data []CompletedQuestList) []interface{} {
+func CastCompletedQuestListFromDict(data []CompletedQuestList) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

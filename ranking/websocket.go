@@ -2903,6 +2903,88 @@ func (p Gs2RankingWebSocketClient) PutScoreByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2RankingWebSocketClient) calcRankingAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- CalcRankingAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CalcRankingAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CalcRankingResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CalcRankingAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- CalcRankingAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2RankingWebSocketClient) CalcRankingAsync(
+	request *CalcRankingRequest,
+	callback chan<- CalcRankingAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "ranking",
+    		"component": "ranking",
+    		"function": "calcRanking",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.calcRankingAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2RankingWebSocketClient) CalcRanking(
+	request *CalcRankingRequest,
+) (*CalcRankingResult, error) {
+	callback := make(chan CalcRankingAsyncResult, 1)
+	go p.CalcRankingAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2RankingWebSocketClient) exportMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- ExportMasterAsyncResult,

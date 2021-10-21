@@ -3152,6 +3152,98 @@ func (p Gs2RankingRestClient) PutScoreByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func calcRankingAsyncHandler(
+	client Gs2RankingRestClient,
+	job *core.NetworkJob,
+	callback chan<- CalcRankingAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CalcRankingAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CalcRankingResult
+	if asyncResult.Err != nil {
+		callback <- CalcRankingAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CalcRankingAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- CalcRankingAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2RankingRestClient) CalcRankingAsync(
+	request *CalcRankingRequest,
+	callback chan<- CalcRankingAsyncResult,
+) {
+	path := "/{namespaceName}/category/{categoryName}/calc/ranking"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.CategoryName != nil && *request.CategoryName != ""  {
+        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{categoryName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go calcRankingAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("ranking").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2RankingRestClient) CalcRanking(
+	request *CalcRankingRequest,
+) (*CalcRankingResult, error) {
+	callback := make(chan CalcRankingAsyncResult, 1)
+	go p.CalcRankingAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func exportMasterAsyncHandler(
 	client Gs2RankingRestClient,
 	job *core.NetworkJob,

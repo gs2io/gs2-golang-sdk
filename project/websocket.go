@@ -658,6 +658,9 @@ func (p Gs2ProjectWebSocketClient) DeleteAccountAsync(
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
+    if request.AccountToken != nil && *request.AccountToken != "" {
+        bodies["accountToken"] = *request.AccountToken
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}

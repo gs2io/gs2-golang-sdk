@@ -179,6 +179,9 @@ func (p Gs2EnhanceRestClient) CreateNamespaceAsync(
     if request.KeyId != nil && *request.KeyId != "" {
         bodies["keyId"] = *request.KeyId
     }
+    if request.EnhanceScript != nil {
+        bodies["enhanceScript"] = request.EnhanceScript.ToDict()
+    }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
     }
@@ -448,6 +451,9 @@ func (p Gs2EnhanceRestClient) UpdateNamespaceAsync(
     }
     if request.KeyId != nil && *request.KeyId != "" {
         bodies["keyId"] = *request.KeyId
+    }
+    if request.EnhanceScript != nil {
+        bodies["enhanceScript"] = request.EnhanceScript.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()

@@ -62,6 +62,7 @@ type CreateNamespaceRequest struct {
     EnableDirectEnhance *bool `json:"enableDirectEnhance"`
     QueueNamespaceId *string `json:"queueNamespaceId"`
     KeyId *string `json:"keyId"`
+    EnhanceScript *ScriptSetting `json:"enhanceScript"`
     LogSetting *LogSetting `json:"logSetting"`
 }
 
@@ -78,6 +79,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
         EnableDirectEnhance: core.CastBool(data["enableDirectEnhance"]),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
+        EnhanceScript: NewScriptSettingFromDict(core.CastMap(data["enhanceScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
     }
 }
@@ -89,6 +91,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
         "enableDirectEnhance": p.EnableDirectEnhance,
         "queueNamespaceId": p.QueueNamespaceId,
         "keyId": p.KeyId,
+        "enhanceScript": p.EnhanceScript.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
     }
 }
@@ -164,6 +167,7 @@ type UpdateNamespaceRequest struct {
     EnableDirectEnhance *bool `json:"enableDirectEnhance"`
     QueueNamespaceId *string `json:"queueNamespaceId"`
     KeyId *string `json:"keyId"`
+    EnhanceScript *ScriptSetting `json:"enhanceScript"`
     LogSetting *LogSetting `json:"logSetting"`
 }
 
@@ -180,6 +184,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
         EnableDirectEnhance: core.CastBool(data["enableDirectEnhance"]),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
+        EnhanceScript: NewScriptSettingFromDict(core.CastMap(data["enhanceScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
     }
 }
@@ -191,6 +196,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
         "enableDirectEnhance": p.EnableDirectEnhance,
         "queueNamespaceId": p.QueueNamespaceId,
         "keyId": p.KeyId,
+        "enhanceScript": p.EnhanceScript.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
     }
 }
