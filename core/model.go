@@ -61,12 +61,12 @@ func (p BasicGs2Credential) GetClientSecret() *ClientSecret {
 
 type ProjectTokenGs2Credential struct {
 	IGs2Credential
-	ownerId      OwnerId
-	projectToken ProjectToken
+	OwnerId      OwnerId
+	ProjectToken ProjectToken
 }
 
 func (p ProjectTokenGs2Credential) GetClientId() *ClientId {
-	clientId := ClientId(p.ownerId)
+	clientId := ClientId(p.OwnerId)
 	return &clientId
 }
 
@@ -75,7 +75,7 @@ func (p ProjectTokenGs2Credential) GetClientSecret() *ClientSecret {
 }
 
 func (p ProjectTokenGs2Credential) getProjectToken() *ProjectToken {
-	return &p.projectToken
+	return &p.ProjectToken
 }
 
 type Gs2Result interface {
