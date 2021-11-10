@@ -331,7 +331,7 @@ func (p *Gs2RestSession) connectAsync(
 
 	projectTokenCredential, isProjectTokenCredential := p.Credential.(ProjectTokenGs2Credential)
 	if isProjectTokenCredential {
-		p.projectToken = projectTokenCredential.projectToken
+		p.projectToken = projectTokenCredential.ProjectToken
 		callback <- AsyncResult{}
 		return
 	} else {
