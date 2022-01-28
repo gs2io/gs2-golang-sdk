@@ -27,6 +27,7 @@ type Complete struct {
 	MissionGroupName *string `json:"missionGroupName"`
 	CompletedMissionTaskNames []string `json:"completedMissionTaskNames"`
 	ReceivedMissionTaskNames []string `json:"receivedMissionTaskNames"`
+	NextResetAt *int64 `json:"nextResetAt"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -44,6 +45,7 @@ func NewCompleteFromDict(data map[string]interface{}) Complete {
         MissionGroupName: core.CastString(data["missionGroupName"]),
         CompletedMissionTaskNames: core.CastStrings(core.CastArray(data["completedMissionTaskNames"])),
         ReceivedMissionTaskNames: core.CastStrings(core.CastArray(data["receivedMissionTaskNames"])),
+        NextResetAt: core.CastInt64(data["nextResetAt"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
     }
@@ -60,6 +62,7 @@ func (p Complete) ToDict() map[string]interface{} {
         "receivedMissionTaskNames": core.CastStringsFromDict(
         p.ReceivedMissionTaskNames,
     ),
+        "nextResetAt": p.NextResetAt,
         "createdAt": p.CreatedAt,
         "updatedAt": p.UpdatedAt,
     }
@@ -935,6 +938,7 @@ func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
 type ScopedValue struct {
 	ResetType *string `json:"resetType"`
 	Value *int64 `json:"value"`
+	NextResetAt *int64 `json:"nextResetAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
 
@@ -948,6 +952,7 @@ func NewScopedValueFromDict(data map[string]interface{}) ScopedValue {
     return ScopedValue {
         ResetType: core.CastString(data["resetType"]),
         Value: core.CastInt64(data["value"]),
+        NextResetAt: core.CastInt64(data["nextResetAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
     }
 }
@@ -956,6 +961,7 @@ func (p ScopedValue) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "resetType": p.ResetType,
         "value": p.Value,
+        "nextResetAt": p.NextResetAt,
         "updatedAt": p.UpdatedAt,
     }
 }

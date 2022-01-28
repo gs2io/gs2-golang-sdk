@@ -748,6 +748,9 @@ func (p Gs2MatchmakingWebSocketClient) CreateGatheringAsync(
     if request.ExpiresAt != nil {
         bodies["expiresAt"] = *request.ExpiresAt
     }
+    if request.ExpiresAtTimeSpan != nil {
+        bodies["expiresAtTimeSpan"] = request.ExpiresAtTimeSpan.ToDict()
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -859,6 +862,9 @@ func (p Gs2MatchmakingWebSocketClient) CreateGatheringByUserIdAsync(
     }
     if request.ExpiresAt != nil {
         bodies["expiresAt"] = *request.ExpiresAt
+    }
+    if request.ExpiresAtTimeSpan != nil {
+        bodies["expiresAtTimeSpan"] = request.ExpiresAtTimeSpan.ToDict()
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -3155,7 +3161,7 @@ func (p Gs2MatchmakingWebSocketClient) GetBallotAsync(
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "matchmaking",
-    		"component": "vote",
+    		"component": "ballot",
     		"function": "getBallot",
             "contentType": "application/json",
     		"requestId": requestId,
@@ -3252,7 +3258,7 @@ func (p Gs2MatchmakingWebSocketClient) GetBallotByUserIdAsync(
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "matchmaking",
-    		"component": "vote",
+    		"component": "ballot",
     		"function": "getBallotByUserId",
             "contentType": "application/json",
     		"requestId": requestId,

@@ -1590,6 +1590,111 @@ func (p ConsumeItemSetByUserIdRequest) Pointer() *ConsumeItemSetByUserIdRequest 
     return &p
 }
 
+type DeleteItemSetByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    UserId *string `json:"userId"`
+    ItemName *string `json:"itemName"`
+    ItemSetName *string `json:"itemSetName"`
+}
+
+func NewDeleteItemSetByUserIdRequestFromJson(data string) DeleteItemSetByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteItemSetByUserIdRequestFromDict(dict)
+}
+
+func NewDeleteItemSetByUserIdRequestFromDict(data map[string]interface{}) DeleteItemSetByUserIdRequest {
+    return DeleteItemSetByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        ItemName: core.CastString(data["itemName"]),
+        ItemSetName: core.CastString(data["itemSetName"]),
+    }
+}
+
+func (p DeleteItemSetByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "userId": p.UserId,
+        "itemName": p.ItemName,
+        "itemSetName": p.ItemSetName,
+    }
+}
+
+func (p DeleteItemSetByUserIdRequest) Pointer() *DeleteItemSetByUserIdRequest {
+    return &p
+}
+
+type AcquireItemSetByStampSheetRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewAcquireItemSetByStampSheetRequestFromJson(data string) AcquireItemSetByStampSheetRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireItemSetByStampSheetRequestFromDict(dict)
+}
+
+func NewAcquireItemSetByStampSheetRequestFromDict(data map[string]interface{}) AcquireItemSetByStampSheetRequest {
+    return AcquireItemSetByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p AcquireItemSetByStampSheetRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p AcquireItemSetByStampSheetRequest) Pointer() *AcquireItemSetByStampSheetRequest {
+    return &p
+}
+
+type ConsumeItemSetByStampTaskRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    StampTask *string `json:"stampTask"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewConsumeItemSetByStampTaskRequestFromJson(data string) ConsumeItemSetByStampTaskRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeItemSetByStampTaskRequestFromDict(dict)
+}
+
+func NewConsumeItemSetByStampTaskRequestFromDict(data map[string]interface{}) ConsumeItemSetByStampTaskRequest {
+    return ConsumeItemSetByStampTaskRequest {
+        StampTask: core.CastString(data["stampTask"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p ConsumeItemSetByStampTaskRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampTask": p.StampTask,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p ConsumeItemSetByStampTaskRequest) Pointer() *ConsumeItemSetByStampTaskRequest {
+    return &p
+}
+
 type DescribeReferenceOfRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
@@ -2030,79 +2135,6 @@ func (p DeleteReferenceOfByUserIdRequest) Pointer() *DeleteReferenceOfByUserIdRe
     return &p
 }
 
-type DeleteItemSetByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    InventoryName *string `json:"inventoryName"`
-    UserId *string `json:"userId"`
-    ItemName *string `json:"itemName"`
-    ItemSetName *string `json:"itemSetName"`
-}
-
-func NewDeleteItemSetByUserIdRequestFromJson(data string) DeleteItemSetByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteItemSetByUserIdRequestFromDict(dict)
-}
-
-func NewDeleteItemSetByUserIdRequestFromDict(data map[string]interface{}) DeleteItemSetByUserIdRequest {
-    return DeleteItemSetByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        InventoryName: core.CastString(data["inventoryName"]),
-        UserId: core.CastString(data["userId"]),
-        ItemName: core.CastString(data["itemName"]),
-        ItemSetName: core.CastString(data["itemSetName"]),
-    }
-}
-
-func (p DeleteItemSetByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "inventoryName": p.InventoryName,
-        "userId": p.UserId,
-        "itemName": p.ItemName,
-        "itemSetName": p.ItemSetName,
-    }
-}
-
-func (p DeleteItemSetByUserIdRequest) Pointer() *DeleteItemSetByUserIdRequest {
-    return &p
-}
-
-type AcquireItemSetByStampSheetRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    StampSheet *string `json:"stampSheet"`
-    KeyId *string `json:"keyId"`
-}
-
-func NewAcquireItemSetByStampSheetRequestFromJson(data string) AcquireItemSetByStampSheetRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewAcquireItemSetByStampSheetRequestFromDict(dict)
-}
-
-func NewAcquireItemSetByStampSheetRequestFromDict(data map[string]interface{}) AcquireItemSetByStampSheetRequest {
-    return AcquireItemSetByStampSheetRequest {
-        StampSheet: core.CastString(data["stampSheet"]),
-        KeyId: core.CastString(data["keyId"]),
-    }
-}
-
-func (p AcquireItemSetByStampSheetRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "stampSheet": p.StampSheet,
-        "keyId": p.KeyId,
-    }
-}
-
-func (p AcquireItemSetByStampSheetRequest) Pointer() *AcquireItemSetByStampSheetRequest {
-    return &p
-}
-
 type AddReferenceOfItemSetByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
@@ -2164,38 +2196,6 @@ func (p DeleteReferenceOfItemSetByStampSheetRequest) ToDict() map[string]interfa
 }
 
 func (p DeleteReferenceOfItemSetByStampSheetRequest) Pointer() *DeleteReferenceOfItemSetByStampSheetRequest {
-    return &p
-}
-
-type ConsumeItemSetByStampTaskRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    StampTask *string `json:"stampTask"`
-    KeyId *string `json:"keyId"`
-}
-
-func NewConsumeItemSetByStampTaskRequestFromJson(data string) ConsumeItemSetByStampTaskRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewConsumeItemSetByStampTaskRequestFromDict(dict)
-}
-
-func NewConsumeItemSetByStampTaskRequestFromDict(data map[string]interface{}) ConsumeItemSetByStampTaskRequest {
-    return ConsumeItemSetByStampTaskRequest {
-        StampTask: core.CastString(data["stampTask"]),
-        KeyId: core.CastString(data["keyId"]),
-    }
-}
-
-func (p ConsumeItemSetByStampTaskRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "stampTask": p.StampTask,
-        "keyId": p.KeyId,
-    }
-}
-
-func (p ConsumeItemSetByStampTaskRequest) Pointer() *ConsumeItemSetByStampTaskRequest {
     return &p
 }
 

@@ -4038,6 +4038,284 @@ func (p Gs2InventoryRestClient) ConsumeItemSetByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func deleteItemSetByUserIdAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteItemSetByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteItemSetByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteItemSetByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DeleteItemSetByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteItemSetByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteItemSetByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) DeleteItemSetByUserIdAsync(
+	request *DeleteItemSetByUserIdRequest,
+	callback chan<- DeleteItemSetByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ItemSetName != nil {
+		queryStrings["itemSetName"] = core.ToString(*request.ItemSetName)
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go deleteItemSetByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) DeleteItemSetByUserId(
+	request *DeleteItemSetByUserIdRequest,
+) (*DeleteItemSetByUserIdResult, error) {
+	callback := make(chan DeleteItemSetByUserIdAsyncResult, 1)
+	go p.DeleteItemSetByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func acquireItemSetByStampSheetAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- AcquireItemSetByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcquireItemSetByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcquireItemSetByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- AcquireItemSetByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcquireItemSetByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- AcquireItemSetByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) AcquireItemSetByStampSheetAsync(
+	request *AcquireItemSetByStampSheetRequest,
+	callback chan<- AcquireItemSetByStampSheetAsyncResult,
+) {
+	path := "/stamp/item/acquire"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go acquireItemSetByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) AcquireItemSetByStampSheet(
+	request *AcquireItemSetByStampSheetRequest,
+) (*AcquireItemSetByStampSheetResult, error) {
+	callback := make(chan AcquireItemSetByStampSheetAsyncResult, 1)
+	go p.AcquireItemSetByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func consumeItemSetByStampTaskAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- ConsumeItemSetByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ConsumeItemSetByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ConsumeItemSetByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- ConsumeItemSetByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ConsumeItemSetByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- ConsumeItemSetByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) ConsumeItemSetByStampTaskAsync(
+	request *ConsumeItemSetByStampTaskRequest,
+	callback chan<- ConsumeItemSetByStampTaskAsyncResult,
+) {
+	path := "/stamp/item/consume"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go consumeItemSetByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) ConsumeItemSetByStampTask(
+	request *ConsumeItemSetByStampTaskRequest,
+) (*ConsumeItemSetByStampTaskResult, error) {
+	callback := make(chan ConsumeItemSetByStampTaskAsyncResult, 1)
+	go p.ConsumeItemSetByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describeReferenceOfAsyncHandler(
 	client Gs2InventoryRestClient,
 	job *core.NetworkJob,
@@ -5126,196 +5404,6 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func deleteItemSetByUserIdAsyncHandler(
-	client Gs2InventoryRestClient,
-	job *core.NetworkJob,
-	callback chan<- DeleteItemSetByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DeleteItemSetByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DeleteItemSetByUserIdResult
-	if asyncResult.Err != nil {
-		callback <- DeleteItemSetByUserIdAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteItemSetByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DeleteItemSetByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryRestClient) DeleteItemSetByUserIdAsync(
-	request *DeleteItemSetByUserIdRequest,
-	callback chan<- DeleteItemSetByUserIdAsyncResult,
-) {
-	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.InventoryName != nil && *request.InventoryName != ""  {
-        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{inventoryName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.ItemName != nil && *request.ItemName != ""  {
-        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
-    } else {
-        path = strings.ReplaceAll(path, "{itemName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-	if request.ItemSetName != nil {
-		queryStrings["itemSetName"] = core.ToString(*request.ItemSetName)
-	}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go deleteItemSetByUserIdAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:       core.Delete,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryRestClient) DeleteItemSetByUserId(
-	request *DeleteItemSetByUserIdRequest,
-) (*DeleteItemSetByUserIdResult, error) {
-	callback := make(chan DeleteItemSetByUserIdAsyncResult, 1)
-	go p.DeleteItemSetByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func acquireItemSetByStampSheetAsyncHandler(
-	client Gs2InventoryRestClient,
-	job *core.NetworkJob,
-	callback chan<- AcquireItemSetByStampSheetAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- AcquireItemSetByStampSheetAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result AcquireItemSetByStampSheetResult
-	if asyncResult.Err != nil {
-		callback <- AcquireItemSetByStampSheetAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AcquireItemSetByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- AcquireItemSetByStampSheetAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryRestClient) AcquireItemSetByStampSheetAsync(
-	request *AcquireItemSetByStampSheetRequest,
-	callback chan<- AcquireItemSetByStampSheetAsyncResult,
-) {
-	path := "/stamp/item/acquire"
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go acquireItemSetByStampSheetAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryRestClient) AcquireItemSetByStampSheet(
-	request *AcquireItemSetByStampSheetRequest,
-) (*AcquireItemSetByStampSheetResult, error) {
-	callback := make(chan AcquireItemSetByStampSheetAsyncResult, 1)
-	go p.AcquireItemSetByStampSheetAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
 func addReferenceOfItemSetByStampSheetAsyncHandler(
 	client Gs2InventoryRestClient,
 	job *core.NetworkJob,
@@ -5485,94 +5573,6 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfItemSetByStampSheet(
 ) (*DeleteReferenceOfItemSetByStampSheetResult, error) {
 	callback := make(chan DeleteReferenceOfItemSetByStampSheetAsyncResult, 1)
 	go p.DeleteReferenceOfItemSetByStampSheetAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func consumeItemSetByStampTaskAsyncHandler(
-	client Gs2InventoryRestClient,
-	job *core.NetworkJob,
-	callback chan<- ConsumeItemSetByStampTaskAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- ConsumeItemSetByStampTaskAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result ConsumeItemSetByStampTaskResult
-	if asyncResult.Err != nil {
-		callback <- ConsumeItemSetByStampTaskAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ConsumeItemSetByStampTaskAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- ConsumeItemSetByStampTaskAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryRestClient) ConsumeItemSetByStampTaskAsync(
-	request *ConsumeItemSetByStampTaskRequest,
-	callback chan<- ConsumeItemSetByStampTaskAsyncResult,
-) {
-	path := "/stamp/item/consume"
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampTask != nil && *request.StampTask != "" {
-        bodies["stampTask"] = *request.StampTask
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go consumeItemSetByStampTaskAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryRestClient) ConsumeItemSetByStampTask(
-	request *ConsumeItemSetByStampTaskRequest,
-) (*ConsumeItemSetByStampTaskResult, error) {
-	callback := make(chan ConsumeItemSetByStampTaskAsyncResult, 1)
-	go p.ConsumeItemSetByStampTaskAsync(
 		request,
 		callback,
 	)

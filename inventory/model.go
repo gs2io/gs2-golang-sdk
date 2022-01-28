@@ -160,7 +160,6 @@ type InventoryModel struct {
 	InitialCapacity *int32 `json:"initialCapacity"`
 	MaxCapacity *int32 `json:"maxCapacity"`
 	ProtectReferencedItem *bool `json:"protectReferencedItem"`
-	ItemModels []ItemModel `json:"itemModels"`
 }
 
 func NewInventoryModelFromJson(data string) InventoryModel {
@@ -177,7 +176,6 @@ func NewInventoryModelFromDict(data map[string]interface{}) InventoryModel {
         InitialCapacity: core.CastInt32(data["initialCapacity"]),
         MaxCapacity: core.CastInt32(data["maxCapacity"]),
         ProtectReferencedItem: core.CastBool(data["protectReferencedItem"]),
-        ItemModels: CastItemModels(core.CastArray(data["itemModels"])),
     }
 }
 
@@ -189,9 +187,6 @@ func (p InventoryModel) ToDict() map[string]interface{} {
         "initialCapacity": p.InitialCapacity,
         "maxCapacity": p.MaxCapacity,
         "protectReferencedItem": p.ProtectReferencedItem,
-        "itemModels": CastItemModelsFromDict(
-        p.ItemModels,
-    ),
     }
 }
 
@@ -513,6 +508,51 @@ func CastItemSets(data []interface{}) []ItemSet {
 }
 
 func CastItemSetsFromDict(data []ItemSet) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type ReferenceOf struct {
+	ReferenceOfId *string `json:"referenceOfId"`
+	Name *string `json:"name"`
+}
+
+func NewReferenceOfFromJson(data string) ReferenceOf {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewReferenceOfFromDict(dict)
+}
+
+func NewReferenceOfFromDict(data map[string]interface{}) ReferenceOf {
+    return ReferenceOf {
+        ReferenceOfId: core.CastString(data["referenceOfId"]),
+        Name: core.CastString(data["name"]),
+    }
+}
+
+func (p ReferenceOf) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "referenceOfId": p.ReferenceOfId,
+        "name": p.Name,
+    }
+}
+
+func (p ReferenceOf) Pointer() *ReferenceOf {
+    return &p
+}
+
+func CastReferenceOves(data []interface{}) []ReferenceOf {
+	v := make([]ReferenceOf, 0)
+	for _, d := range data {
+		v = append(v, NewReferenceOfFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastReferenceOvesFromDict(data []ReferenceOf) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

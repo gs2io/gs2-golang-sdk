@@ -2644,6 +2644,94 @@ func (p Gs2LotteryRestClient) DrawByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func drawByStampSheetAsyncHandler(
+	client Gs2LotteryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DrawByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DrawByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DrawByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- DrawByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DrawByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DrawByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryRestClient) DrawByStampSheetAsync(
+	request *DrawByStampSheetRequest,
+	callback chan<- DrawByStampSheetAsyncResult,
+) {
+	path := "/stamp/draw"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go drawByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryRestClient) DrawByStampSheet(
+	request *DrawByStampSheetRequest,
+) (*DrawByStampSheetResult, error) {
+	callback := make(chan DrawByStampSheetAsyncResult, 1)
+	go p.DrawByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describeProbabilitiesAsyncHandler(
 	client Gs2LotteryRestClient,
 	job *core.NetworkJob,
@@ -2823,94 +2911,6 @@ func (p Gs2LotteryRestClient) DescribeProbabilitiesByUserId(
 ) (*DescribeProbabilitiesByUserIdResult, error) {
 	callback := make(chan DescribeProbabilitiesByUserIdAsyncResult, 1)
 	go p.DescribeProbabilitiesByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func drawByStampSheetAsyncHandler(
-	client Gs2LotteryRestClient,
-	job *core.NetworkJob,
-	callback chan<- DrawByStampSheetAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DrawByStampSheetAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DrawByStampSheetResult
-	if asyncResult.Err != nil {
-		callback <- DrawByStampSheetAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DrawByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DrawByStampSheetAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2LotteryRestClient) DrawByStampSheetAsync(
-	request *DrawByStampSheetRequest,
-	callback chan<- DrawByStampSheetAsyncResult,
-) {
-	path := "/stamp/draw"
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go drawByStampSheetAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2LotteryRestClient) DrawByStampSheet(
-	request *DrawByStampSheetRequest,
-) (*DrawByStampSheetResult, error) {
-	callback := make(chan DrawByStampSheetAsyncResult, 1)
-	go p.DrawByStampSheetAsync(
 		request,
 		callback,
 	)

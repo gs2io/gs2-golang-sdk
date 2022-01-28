@@ -1082,10 +1082,10 @@ func (p Gs2FriendRestClient) DeleteProfileByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func getPublicProfileAsyncHandler(
+func describeFriendsAsyncHandler(
 	client Gs2FriendRestClient,
 	job *core.NetworkJob,
-	callback chan<- GetPublicProfileAsyncResult,
+	callback chan<- DescribeFriendsAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -1094,15 +1094,15 @@ func getPublicProfileAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- GetPublicProfileAsyncResult{
+		callback <- DescribeFriendsAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result GetPublicProfileResult
+	var result DescribeFriendsResult
 	if asyncResult.Err != nil {
-		callback <- GetPublicProfileAsyncResult{
+		callback <- DescribeFriendsAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -1110,24 +1110,120 @@ func getPublicProfileAsyncHandler(
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- GetPublicProfileAsyncResult{
+            callback <- DescribeFriendsAsyncResult{
                 err: err,
             }
             return
         }
 	}
-	callback <- GetPublicProfileAsyncResult{
+	callback <- DescribeFriendsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2FriendRestClient) GetPublicProfileAsync(
-	request *GetPublicProfileRequest,
-	callback chan<- GetPublicProfileAsyncResult,
+func (p Gs2FriendRestClient) DescribeFriendsAsync(
+	request *DescribeFriendsRequest,
+	callback chan<- DescribeFriendsAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/profile/public"
+	path := "/{namespaceName}/user/me/friend"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.WithProfile != nil {
+		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
+	}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+
+	go describeFriendsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendRestClient) DescribeFriends(
+	request *DescribeFriendsRequest,
+) (*DescribeFriendsResult, error) {
+	callback := make(chan DescribeFriendsAsyncResult, 1)
+	go p.DescribeFriendsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeFriendsByUserIdAsyncHandler(
+	client Gs2FriendRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeFriendsByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeFriendsByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeFriendsByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DescribeFriendsByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeFriendsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeFriendsByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendRestClient) DescribeFriendsByUserIdAsync(
+	request *DescribeFriendsByUserIdRequest,
+	callback chan<- DescribeFriendsByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/friend"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -1141,13 +1237,22 @@ func (p Gs2FriendRestClient) GetPublicProfileAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.WithProfile != nil {
+		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
+	}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
 
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
 
-	go getPublicProfileAsyncHandler(
+	go describeFriendsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
@@ -1159,11 +1264,577 @@ func (p Gs2FriendRestClient) GetPublicProfileAsync(
 	)
 }
 
-func (p Gs2FriendRestClient) GetPublicProfile(
-	request *GetPublicProfileRequest,
-) (*GetPublicProfileResult, error) {
-	callback := make(chan GetPublicProfileAsyncResult, 1)
-	go p.GetPublicProfileAsync(
+func (p Gs2FriendRestClient) DescribeFriendsByUserId(
+	request *DescribeFriendsByUserIdRequest,
+) (*DescribeFriendsByUserIdResult, error) {
+	callback := make(chan DescribeFriendsByUserIdAsyncResult, 1)
+	go p.DescribeFriendsByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeBlackListAsyncHandler(
+	client Gs2FriendRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeBlackListAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBlackListAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBlackListResult
+	if asyncResult.Err != nil {
+		callback <- DescribeBlackListAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBlackListAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeBlackListAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendRestClient) DescribeBlackListAsync(
+	request *DescribeBlackListRequest,
+	callback chan<- DescribeBlackListAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/blackList"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+
+	go describeBlackListAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendRestClient) DescribeBlackList(
+	request *DescribeBlackListRequest,
+) (*DescribeBlackListResult, error) {
+	callback := make(chan DescribeBlackListAsyncResult, 1)
+	go p.DescribeBlackListAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeBlackListByUserIdAsyncHandler(
+	client Gs2FriendRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeBlackListByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBlackListByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBlackListByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DescribeBlackListByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBlackListByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeBlackListByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendRestClient) DescribeBlackListByUserIdAsync(
+	request *DescribeBlackListByUserIdRequest,
+	callback chan<- DescribeBlackListByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/blackList"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go describeBlackListByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendRestClient) DescribeBlackListByUserId(
+	request *DescribeBlackListByUserIdRequest,
+) (*DescribeBlackListByUserIdResult, error) {
+	callback := make(chan DescribeBlackListByUserIdAsyncResult, 1)
+	go p.DescribeBlackListByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func registerBlackListAsyncHandler(
+	client Gs2FriendRestClient,
+	job *core.NetworkJob,
+	callback chan<- RegisterBlackListAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RegisterBlackListAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RegisterBlackListResult
+	if asyncResult.Err != nil {
+		callback <- RegisterBlackListAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RegisterBlackListAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- RegisterBlackListAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendRestClient) RegisterBlackListAsync(
+	request *RegisterBlackListRequest,
+	callback chan<- RegisterBlackListAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/blackList/{targetUserId}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+
+	go registerBlackListAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendRestClient) RegisterBlackList(
+	request *RegisterBlackListRequest,
+) (*RegisterBlackListResult, error) {
+	callback := make(chan RegisterBlackListAsyncResult, 1)
+	go p.RegisterBlackListAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func registerBlackListByUserIdAsyncHandler(
+	client Gs2FriendRestClient,
+	job *core.NetworkJob,
+	callback chan<- RegisterBlackListByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RegisterBlackListByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RegisterBlackListByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- RegisterBlackListByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RegisterBlackListByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- RegisterBlackListByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendRestClient) RegisterBlackListByUserIdAsync(
+	request *RegisterBlackListByUserIdRequest,
+	callback chan<- RegisterBlackListByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/blackList/{targetUserId}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go registerBlackListByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendRestClient) RegisterBlackListByUserId(
+	request *RegisterBlackListByUserIdRequest,
+) (*RegisterBlackListByUserIdResult, error) {
+	callback := make(chan RegisterBlackListByUserIdAsyncResult, 1)
+	go p.RegisterBlackListByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func unregisterBlackListAsyncHandler(
+	client Gs2FriendRestClient,
+	job *core.NetworkJob,
+	callback chan<- UnregisterBlackListAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnregisterBlackListAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnregisterBlackListResult
+	if asyncResult.Err != nil {
+		callback <- UnregisterBlackListAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnregisterBlackListAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- UnregisterBlackListAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendRestClient) UnregisterBlackListAsync(
+	request *UnregisterBlackListRequest,
+	callback chan<- UnregisterBlackListAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/blackList/{targetUserId}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+
+	go unregisterBlackListAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendRestClient) UnregisterBlackList(
+	request *UnregisterBlackListRequest,
+) (*UnregisterBlackListResult, error) {
+	callback := make(chan UnregisterBlackListAsyncResult, 1)
+	go p.UnregisterBlackListAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func unregisterBlackListByUserIdAsyncHandler(
+	client Gs2FriendRestClient,
+	job *core.NetworkJob,
+	callback chan<- UnregisterBlackListByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnregisterBlackListByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnregisterBlackListByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- UnregisterBlackListByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnregisterBlackListByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- UnregisterBlackListByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendRestClient) UnregisterBlackListByUserIdAsync(
+	request *UnregisterBlackListByUserIdRequest,
+	callback chan<- UnregisterBlackListByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/blackList/{targetUserId}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != ""  {
+        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+    } else {
+        path = strings.ReplaceAll(path, "{targetUserId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go unregisterBlackListByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendRestClient) UnregisterBlackListByUserId(
+	request *UnregisterBlackListByUserIdRequest,
+) (*UnregisterBlackListByUserIdResult, error) {
+	callback := make(chan UnregisterBlackListByUserIdAsyncResult, 1)
+	go p.UnregisterBlackListByUserIdAsync(
 		request,
 		callback,
 	)
@@ -1928,200 +2599,6 @@ func (p Gs2FriendRestClient) UnfollowByUserId(
 ) (*UnfollowByUserIdResult, error) {
 	callback := make(chan UnfollowByUserIdAsyncResult, 1)
 	go p.UnfollowByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func describeFriendsAsyncHandler(
-	client Gs2FriendRestClient,
-	job *core.NetworkJob,
-	callback chan<- DescribeFriendsAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeFriendsAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeFriendsResult
-	if asyncResult.Err != nil {
-		callback <- DescribeFriendsAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeFriendsAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeFriendsAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendRestClient) DescribeFriendsAsync(
-	request *DescribeFriendsRequest,
-	callback chan<- DescribeFriendsAsyncResult,
-) {
-	path := "/{namespaceName}/user/me/friend"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-	if request.WithProfile != nil {
-		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
-	}
-	if request.PageToken != nil {
-		queryStrings["pageToken"] = core.ToString(*request.PageToken)
-	}
-	if request.Limit != nil {
-		queryStrings["limit"] = core.ToString(*request.Limit)
-	}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-
-	go describeFriendsAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:       core.Get,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendRestClient) DescribeFriends(
-	request *DescribeFriendsRequest,
-) (*DescribeFriendsResult, error) {
-	callback := make(chan DescribeFriendsAsyncResult, 1)
-	go p.DescribeFriendsAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func describeFriendsByUserIdAsyncHandler(
-	client Gs2FriendRestClient,
-	job *core.NetworkJob,
-	callback chan<- DescribeFriendsByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeFriendsByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeFriendsByUserIdResult
-	if asyncResult.Err != nil {
-		callback <- DescribeFriendsByUserIdAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeFriendsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeFriendsByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendRestClient) DescribeFriendsByUserIdAsync(
-	request *DescribeFriendsByUserIdRequest,
-	callback chan<- DescribeFriendsByUserIdAsyncResult,
-) {
-	path := "/{namespaceName}/user/{userId}/friend"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-	if request.WithProfile != nil {
-		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
-	}
-	if request.PageToken != nil {
-		queryStrings["pageToken"] = core.ToString(*request.PageToken)
-	}
-	if request.Limit != nil {
-		queryStrings["limit"] = core.ToString(*request.Limit)
-	}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go describeFriendsByUserIdAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:       core.Get,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendRestClient) DescribeFriendsByUserId(
-	request *DescribeFriendsByUserIdRequest,
-) (*DescribeFriendsByUserIdResult, error) {
-	callback := make(chan DescribeFriendsByUserIdAsyncResult, 1)
-	go p.DescribeFriendsByUserIdAsync(
 		request,
 		callback,
 	)
@@ -4011,10 +4488,10 @@ func (p Gs2FriendRestClient) RejectRequestByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func describeBlackListAsyncHandler(
+func getPublicProfileAsyncHandler(
 	client Gs2FriendRestClient,
 	job *core.NetworkJob,
-	callback chan<- DescribeBlackListAsyncResult,
+	callback chan<- GetPublicProfileAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -4023,15 +4500,15 @@ func describeBlackListAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- DescribeBlackListAsyncResult{
+		callback <- GetPublicProfileAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result DescribeBlackListResult
+	var result GetPublicProfileResult
 	if asyncResult.Err != nil {
-		callback <- DescribeBlackListAsyncResult{
+		callback <- GetPublicProfileAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -4039,28 +4516,33 @@ func describeBlackListAsyncHandler(
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- DescribeBlackListAsyncResult{
+            callback <- GetPublicProfileAsyncResult{
                 err: err,
             }
             return
         }
 	}
-	callback <- DescribeBlackListAsyncResult{
+	callback <- GetPublicProfileAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2FriendRestClient) DescribeBlackListAsync(
-	request *DescribeBlackListRequest,
-	callback chan<- DescribeBlackListAsyncResult,
+func (p Gs2FriendRestClient) GetPublicProfileAsync(
+	request *GetPublicProfileRequest,
+	callback chan<- GetPublicProfileAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/blackList"
+	path := "/{namespaceName}/user/{userId}/profile/public"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
     }
 
 	replacer := strings.NewReplacer()
@@ -4070,11 +4552,8 @@ func (p Gs2FriendRestClient) DescribeBlackListAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
 
-	go describeBlackListAsyncHandler(
+	go getPublicProfileAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
@@ -4086,478 +4565,11 @@ func (p Gs2FriendRestClient) DescribeBlackListAsync(
 	)
 }
 
-func (p Gs2FriendRestClient) DescribeBlackList(
-	request *DescribeBlackListRequest,
-) (*DescribeBlackListResult, error) {
-	callback := make(chan DescribeBlackListAsyncResult, 1)
-	go p.DescribeBlackListAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func describeBlackListByUserIdAsyncHandler(
-	client Gs2FriendRestClient,
-	job *core.NetworkJob,
-	callback chan<- DescribeBlackListByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeBlackListByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeBlackListByUserIdResult
-	if asyncResult.Err != nil {
-		callback <- DescribeBlackListByUserIdAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeBlackListByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeBlackListByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendRestClient) DescribeBlackListByUserIdAsync(
-	request *DescribeBlackListByUserIdRequest,
-	callback chan<- DescribeBlackListByUserIdAsyncResult,
-) {
-	path := "/{namespaceName}/user/{userId}/blackList"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go describeBlackListByUserIdAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:       core.Get,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendRestClient) DescribeBlackListByUserId(
-	request *DescribeBlackListByUserIdRequest,
-) (*DescribeBlackListByUserIdResult, error) {
-	callback := make(chan DescribeBlackListByUserIdAsyncResult, 1)
-	go p.DescribeBlackListByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func registerBlackListAsyncHandler(
-	client Gs2FriendRestClient,
-	job *core.NetworkJob,
-	callback chan<- RegisterBlackListAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- RegisterBlackListAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result RegisterBlackListResult
-	if asyncResult.Err != nil {
-		callback <- RegisterBlackListAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RegisterBlackListAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- RegisterBlackListAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendRestClient) RegisterBlackListAsync(
-	request *RegisterBlackListRequest,
-	callback chan<- RegisterBlackListAsyncResult,
-) {
-	path := "/{namespaceName}/user/me/blackList/{targetUserId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != ""  {
-        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-    } else {
-        path = strings.ReplaceAll(path, "{targetUserId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-
-	go registerBlackListAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendRestClient) RegisterBlackList(
-	request *RegisterBlackListRequest,
-) (*RegisterBlackListResult, error) {
-	callback := make(chan RegisterBlackListAsyncResult, 1)
-	go p.RegisterBlackListAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func registerBlackListByUserIdAsyncHandler(
-	client Gs2FriendRestClient,
-	job *core.NetworkJob,
-	callback chan<- RegisterBlackListByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- RegisterBlackListByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result RegisterBlackListByUserIdResult
-	if asyncResult.Err != nil {
-		callback <- RegisterBlackListByUserIdAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RegisterBlackListByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- RegisterBlackListByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendRestClient) RegisterBlackListByUserIdAsync(
-	request *RegisterBlackListByUserIdRequest,
-	callback chan<- RegisterBlackListByUserIdAsyncResult,
-) {
-	path := "/{namespaceName}/user/{userId}/blackList/{targetUserId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != ""  {
-        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-    } else {
-        path = strings.ReplaceAll(path, "{targetUserId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go registerBlackListByUserIdAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendRestClient) RegisterBlackListByUserId(
-	request *RegisterBlackListByUserIdRequest,
-) (*RegisterBlackListByUserIdResult, error) {
-	callback := make(chan RegisterBlackListByUserIdAsyncResult, 1)
-	go p.RegisterBlackListByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func unregisterBlackListAsyncHandler(
-	client Gs2FriendRestClient,
-	job *core.NetworkJob,
-	callback chan<- UnregisterBlackListAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- UnregisterBlackListAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result UnregisterBlackListResult
-	if asyncResult.Err != nil {
-		callback <- UnregisterBlackListAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UnregisterBlackListAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- UnregisterBlackListAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendRestClient) UnregisterBlackListAsync(
-	request *UnregisterBlackListRequest,
-	callback chan<- UnregisterBlackListAsyncResult,
-) {
-	path := "/{namespaceName}/user/me/blackList/{targetUserId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != ""  {
-        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-    } else {
-        path = strings.ReplaceAll(path, "{targetUserId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-
-	go unregisterBlackListAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:       core.Delete,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendRestClient) UnregisterBlackList(
-	request *UnregisterBlackListRequest,
-) (*UnregisterBlackListResult, error) {
-	callback := make(chan UnregisterBlackListAsyncResult, 1)
-	go p.UnregisterBlackListAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func unregisterBlackListByUserIdAsyncHandler(
-	client Gs2FriendRestClient,
-	job *core.NetworkJob,
-	callback chan<- UnregisterBlackListByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- UnregisterBlackListByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result UnregisterBlackListByUserIdResult
-	if asyncResult.Err != nil {
-		callback <- UnregisterBlackListByUserIdAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UnregisterBlackListByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- UnregisterBlackListByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendRestClient) UnregisterBlackListByUserIdAsync(
-	request *UnregisterBlackListByUserIdRequest,
-	callback chan<- UnregisterBlackListByUserIdAsyncResult,
-) {
-	path := "/{namespaceName}/user/{userId}/blackList/{targetUserId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != ""  {
-        path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-    } else {
-        path = strings.ReplaceAll(path, "{targetUserId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go unregisterBlackListByUserIdAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
-			Method:       core.Delete,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendRestClient) UnregisterBlackListByUserId(
-	request *UnregisterBlackListByUserIdRequest,
-) (*UnregisterBlackListByUserIdResult, error) {
-	callback := make(chan UnregisterBlackListByUserIdAsyncResult, 1)
-	go p.UnregisterBlackListByUserIdAsync(
+func (p Gs2FriendRestClient) GetPublicProfile(
+	request *GetPublicProfileRequest,
+) (*GetPublicProfileResult, error) {
+	callback := make(chan GetPublicProfileAsyncResult, 1)
+	go p.GetPublicProfileAsync(
 		request,
 		callback,
 	)

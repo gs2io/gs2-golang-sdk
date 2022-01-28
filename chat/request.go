@@ -837,6 +837,7 @@ type DeleteMessageRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RoomName *string `json:"roomName"`
+    UserId *string `json:"userId"`
     MessageName *string `json:"messageName"`
 }
 
@@ -850,6 +851,7 @@ func NewDeleteMessageRequestFromDict(data map[string]interface{}) DeleteMessageR
     return DeleteMessageRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         RoomName: core.CastString(data["roomName"]),
+        UserId: core.CastString(data["userId"]),
         MessageName: core.CastString(data["messageName"]),
     }
 }
@@ -858,6 +860,7 @@ func (p DeleteMessageRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "roomName": p.RoomName,
+        "userId": p.UserId,
         "messageName": p.MessageName,
     }
 }

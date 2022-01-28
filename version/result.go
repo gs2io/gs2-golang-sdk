@@ -633,6 +633,7 @@ func (p GetAcceptVersionByUserIdResult) Pointer() *GetAcceptVersionByUserIdResul
 }
 
 type DeleteAcceptVersionResult struct {
+    Item *AcceptVersion `json:"item"`
 }
 
 type DeleteAcceptVersionAsyncResult struct {
@@ -648,11 +649,13 @@ func NewDeleteAcceptVersionResultFromJson(data string) DeleteAcceptVersionResult
 
 func NewDeleteAcceptVersionResultFromDict(data map[string]interface{}) DeleteAcceptVersionResult {
     return DeleteAcceptVersionResult {
+        Item: NewAcceptVersionFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteAcceptVersionResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 
@@ -661,6 +664,7 @@ func (p DeleteAcceptVersionResult) Pointer() *DeleteAcceptVersionResult {
 }
 
 type DeleteAcceptVersionByUserIdResult struct {
+    Item *AcceptVersion `json:"item"`
 }
 
 type DeleteAcceptVersionByUserIdAsyncResult struct {
@@ -676,11 +680,13 @@ func NewDeleteAcceptVersionByUserIdResultFromJson(data string) DeleteAcceptVersi
 
 func NewDeleteAcceptVersionByUserIdResultFromDict(data map[string]interface{}) DeleteAcceptVersionByUserIdResult {
     return DeleteAcceptVersionByUserIdResult {
+        Item: NewAcceptVersionFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteAcceptVersionByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 

@@ -182,6 +182,7 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -197,11 +198,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
     return DeleteNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 
@@ -401,6 +404,7 @@ func (p UpdateScriptFromGitHubResult) Pointer() *UpdateScriptFromGitHubResult {
 }
 
 type DeleteScriptResult struct {
+    Item *Script `json:"item"`
 }
 
 type DeleteScriptAsyncResult struct {
@@ -416,11 +420,13 @@ func NewDeleteScriptResultFromJson(data string) DeleteScriptResult {
 
 func NewDeleteScriptResultFromDict(data map[string]interface{}) DeleteScriptResult {
     return DeleteScriptResult {
+        Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteScriptResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 

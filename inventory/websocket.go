@@ -3717,961 +3717,6 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2InventoryWebSocketClient) describeReferenceOfAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeReferenceOfAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeReferenceOfAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeReferenceOfResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeReferenceOfAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeReferenceOfAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryWebSocketClient) DescribeReferenceOfAsync(
-	request *DescribeReferenceOfRequest,
-	callback chan<- DescribeReferenceOfAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "inventory",
-    		"component": "itemSet",
-    		"function": "describeReferenceOf",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.InventoryName != nil && *request.InventoryName != "" {
-        bodies["inventoryName"] = *request.InventoryName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.ItemName != nil && *request.ItemName != "" {
-        bodies["itemName"] = *request.ItemName
-    }
-    if request.ItemSetName != nil && *request.ItemSetName != "" {
-        bodies["itemSetName"] = *request.ItemSetName
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.describeReferenceOfAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryWebSocketClient) DescribeReferenceOf(
-	request *DescribeReferenceOfRequest,
-) (*DescribeReferenceOfResult, error) {
-	callback := make(chan DescribeReferenceOfAsyncResult, 1)
-	go p.DescribeReferenceOfAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2InventoryWebSocketClient) describeReferenceOfByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeReferenceOfByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeReferenceOfByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeReferenceOfByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeReferenceOfByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeReferenceOfByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryWebSocketClient) DescribeReferenceOfByUserIdAsync(
-	request *DescribeReferenceOfByUserIdRequest,
-	callback chan<- DescribeReferenceOfByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "inventory",
-    		"component": "itemSet",
-    		"function": "describeReferenceOfByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.InventoryName != nil && *request.InventoryName != "" {
-        bodies["inventoryName"] = *request.InventoryName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ItemName != nil && *request.ItemName != "" {
-        bodies["itemName"] = *request.ItemName
-    }
-    if request.ItemSetName != nil && *request.ItemSetName != "" {
-        bodies["itemSetName"] = *request.ItemSetName
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.describeReferenceOfByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryWebSocketClient) DescribeReferenceOfByUserId(
-	request *DescribeReferenceOfByUserIdRequest,
-) (*DescribeReferenceOfByUserIdResult, error) {
-	callback := make(chan DescribeReferenceOfByUserIdAsyncResult, 1)
-	go p.DescribeReferenceOfByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2InventoryWebSocketClient) getReferenceOfAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetReferenceOfAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetReferenceOfAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetReferenceOfResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetReferenceOfAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetReferenceOfAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryWebSocketClient) GetReferenceOfAsync(
-	request *GetReferenceOfRequest,
-	callback chan<- GetReferenceOfAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "inventory",
-    		"component": "itemSet",
-    		"function": "getReferenceOf",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.InventoryName != nil && *request.InventoryName != "" {
-        bodies["inventoryName"] = *request.InventoryName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.ItemName != nil && *request.ItemName != "" {
-        bodies["itemName"] = *request.ItemName
-    }
-    if request.ItemSetName != nil && *request.ItemSetName != "" {
-        bodies["itemSetName"] = *request.ItemSetName
-    }
-    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-        bodies["referenceOf"] = *request.ReferenceOf
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.getReferenceOfAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryWebSocketClient) GetReferenceOf(
-	request *GetReferenceOfRequest,
-) (*GetReferenceOfResult, error) {
-	callback := make(chan GetReferenceOfAsyncResult, 1)
-	go p.GetReferenceOfAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2InventoryWebSocketClient) getReferenceOfByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetReferenceOfByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetReferenceOfByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetReferenceOfByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetReferenceOfByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetReferenceOfByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryWebSocketClient) GetReferenceOfByUserIdAsync(
-	request *GetReferenceOfByUserIdRequest,
-	callback chan<- GetReferenceOfByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "inventory",
-    		"component": "itemSet",
-    		"function": "getReferenceOfByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.InventoryName != nil && *request.InventoryName != "" {
-        bodies["inventoryName"] = *request.InventoryName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ItemName != nil && *request.ItemName != "" {
-        bodies["itemName"] = *request.ItemName
-    }
-    if request.ItemSetName != nil && *request.ItemSetName != "" {
-        bodies["itemSetName"] = *request.ItemSetName
-    }
-    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-        bodies["referenceOf"] = *request.ReferenceOf
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.getReferenceOfByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryWebSocketClient) GetReferenceOfByUserId(
-	request *GetReferenceOfByUserIdRequest,
-) (*GetReferenceOfByUserIdResult, error) {
-	callback := make(chan GetReferenceOfByUserIdAsyncResult, 1)
-	go p.GetReferenceOfByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2InventoryWebSocketClient) verifyReferenceOfAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- VerifyReferenceOfAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- VerifyReferenceOfAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result VerifyReferenceOfResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- VerifyReferenceOfAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- VerifyReferenceOfAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryWebSocketClient) VerifyReferenceOfAsync(
-	request *VerifyReferenceOfRequest,
-	callback chan<- VerifyReferenceOfAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "inventory",
-    		"component": "itemSet",
-    		"function": "verifyReferenceOf",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.InventoryName != nil && *request.InventoryName != "" {
-        bodies["inventoryName"] = *request.InventoryName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.ItemName != nil && *request.ItemName != "" {
-        bodies["itemName"] = *request.ItemName
-    }
-    if request.ItemSetName != nil && *request.ItemSetName != "" {
-        bodies["itemSetName"] = *request.ItemSetName
-    }
-    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-        bodies["referenceOf"] = *request.ReferenceOf
-    }
-    if request.VerifyType != nil && *request.VerifyType != "" {
-        bodies["verifyType"] = *request.VerifyType
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.verifyReferenceOfAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryWebSocketClient) VerifyReferenceOf(
-	request *VerifyReferenceOfRequest,
-) (*VerifyReferenceOfResult, error) {
-	callback := make(chan VerifyReferenceOfAsyncResult, 1)
-	go p.VerifyReferenceOfAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2InventoryWebSocketClient) verifyReferenceOfByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- VerifyReferenceOfByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- VerifyReferenceOfByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result VerifyReferenceOfByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- VerifyReferenceOfByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- VerifyReferenceOfByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryWebSocketClient) VerifyReferenceOfByUserIdAsync(
-	request *VerifyReferenceOfByUserIdRequest,
-	callback chan<- VerifyReferenceOfByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "inventory",
-    		"component": "itemSet",
-    		"function": "verifyReferenceOfByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.InventoryName != nil && *request.InventoryName != "" {
-        bodies["inventoryName"] = *request.InventoryName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ItemName != nil && *request.ItemName != "" {
-        bodies["itemName"] = *request.ItemName
-    }
-    if request.ItemSetName != nil && *request.ItemSetName != "" {
-        bodies["itemSetName"] = *request.ItemSetName
-    }
-    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-        bodies["referenceOf"] = *request.ReferenceOf
-    }
-    if request.VerifyType != nil && *request.VerifyType != "" {
-        bodies["verifyType"] = *request.VerifyType
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.verifyReferenceOfByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryWebSocketClient) VerifyReferenceOfByUserId(
-	request *VerifyReferenceOfByUserIdRequest,
-) (*VerifyReferenceOfByUserIdResult, error) {
-	callback := make(chan VerifyReferenceOfByUserIdAsyncResult, 1)
-	go p.VerifyReferenceOfByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2InventoryWebSocketClient) addReferenceOfAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- AddReferenceOfAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- AddReferenceOfAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result AddReferenceOfResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AddReferenceOfAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- AddReferenceOfAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryWebSocketClient) AddReferenceOfAsync(
-	request *AddReferenceOfRequest,
-	callback chan<- AddReferenceOfAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "inventory",
-    		"component": "itemSet",
-    		"function": "addReferenceOf",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.InventoryName != nil && *request.InventoryName != "" {
-        bodies["inventoryName"] = *request.InventoryName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.ItemName != nil && *request.ItemName != "" {
-        bodies["itemName"] = *request.ItemName
-    }
-    if request.ItemSetName != nil && *request.ItemSetName != "" {
-        bodies["itemSetName"] = *request.ItemSetName
-    }
-    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-        bodies["referenceOf"] = *request.ReferenceOf
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.addReferenceOfAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryWebSocketClient) AddReferenceOf(
-	request *AddReferenceOfRequest,
-) (*AddReferenceOfResult, error) {
-	callback := make(chan AddReferenceOfAsyncResult, 1)
-	go p.AddReferenceOfAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2InventoryWebSocketClient) addReferenceOfByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- AddReferenceOfByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- AddReferenceOfByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result AddReferenceOfByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AddReferenceOfByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- AddReferenceOfByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryWebSocketClient) AddReferenceOfByUserIdAsync(
-	request *AddReferenceOfByUserIdRequest,
-	callback chan<- AddReferenceOfByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "inventory",
-    		"component": "itemSet",
-    		"function": "addReferenceOfByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.InventoryName != nil && *request.InventoryName != "" {
-        bodies["inventoryName"] = *request.InventoryName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ItemName != nil && *request.ItemName != "" {
-        bodies["itemName"] = *request.ItemName
-    }
-    if request.ItemSetName != nil && *request.ItemSetName != "" {
-        bodies["itemSetName"] = *request.ItemSetName
-    }
-    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-        bodies["referenceOf"] = *request.ReferenceOf
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.addReferenceOfByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryWebSocketClient) AddReferenceOfByUserId(
-	request *AddReferenceOfByUserIdRequest,
-) (*AddReferenceOfByUserIdResult, error) {
-	callback := make(chan AddReferenceOfByUserIdAsyncResult, 1)
-	go p.AddReferenceOfByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2InventoryWebSocketClient) deleteReferenceOfAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DeleteReferenceOfAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DeleteReferenceOfAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DeleteReferenceOfResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteReferenceOfAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DeleteReferenceOfAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryWebSocketClient) DeleteReferenceOfAsync(
-	request *DeleteReferenceOfRequest,
-	callback chan<- DeleteReferenceOfAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "inventory",
-    		"component": "itemSet",
-    		"function": "deleteReferenceOf",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.InventoryName != nil && *request.InventoryName != "" {
-        bodies["inventoryName"] = *request.InventoryName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.ItemName != nil && *request.ItemName != "" {
-        bodies["itemName"] = *request.ItemName
-    }
-    if request.ItemSetName != nil && *request.ItemSetName != "" {
-        bodies["itemSetName"] = *request.ItemSetName
-    }
-    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-        bodies["referenceOf"] = *request.ReferenceOf
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.deleteReferenceOfAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryWebSocketClient) DeleteReferenceOf(
-	request *DeleteReferenceOfRequest,
-) (*DeleteReferenceOfResult, error) {
-	callback := make(chan DeleteReferenceOfAsyncResult, 1)
-	go p.DeleteReferenceOfAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2InventoryWebSocketClient) deleteReferenceOfByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DeleteReferenceOfByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DeleteReferenceOfByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DeleteReferenceOfByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteReferenceOfByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DeleteReferenceOfByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryWebSocketClient) DeleteReferenceOfByUserIdAsync(
-	request *DeleteReferenceOfByUserIdRequest,
-	callback chan<- DeleteReferenceOfByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "inventory",
-    		"component": "itemSet",
-    		"function": "deleteReferenceOfByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.InventoryName != nil && *request.InventoryName != "" {
-        bodies["inventoryName"] = *request.InventoryName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ItemName != nil && *request.ItemName != "" {
-        bodies["itemName"] = *request.ItemName
-    }
-    if request.ItemSetName != nil && *request.ItemSetName != "" {
-        bodies["itemSetName"] = *request.ItemSetName
-    }
-    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
-        bodies["referenceOf"] = *request.ReferenceOf
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.deleteReferenceOfByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryWebSocketClient) DeleteReferenceOfByUserId(
-	request *DeleteReferenceOfByUserIdRequest,
-) (*DeleteReferenceOfByUserIdResult, error) {
-	callback := make(chan DeleteReferenceOfByUserIdAsyncResult, 1)
-	go p.DeleteReferenceOfByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
 func (p Gs2InventoryWebSocketClient) deleteItemSetByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DeleteItemSetByUserIdAsyncResult,
@@ -4845,170 +3890,6 @@ func (p Gs2InventoryWebSocketClient) AcquireItemSetByStampSheet(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2InventoryWebSocketClient) addReferenceOfItemSetByStampSheetAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- AddReferenceOfItemSetByStampSheetAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- AddReferenceOfItemSetByStampSheetAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result AddReferenceOfItemSetByStampSheetResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AddReferenceOfItemSetByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- AddReferenceOfItemSetByStampSheetAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryWebSocketClient) AddReferenceOfItemSetByStampSheetAsync(
-	request *AddReferenceOfItemSetByStampSheetRequest,
-	callback chan<- AddReferenceOfItemSetByStampSheetAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "inventory",
-    		"component": "itemSet",
-    		"function": "addReferenceOfItemSetByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.addReferenceOfItemSetByStampSheetAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryWebSocketClient) AddReferenceOfItemSetByStampSheet(
-	request *AddReferenceOfItemSetByStampSheetRequest,
-) (*AddReferenceOfItemSetByStampSheetResult, error) {
-	callback := make(chan AddReferenceOfItemSetByStampSheetAsyncResult, 1)
-	go p.AddReferenceOfItemSetByStampSheetAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2InventoryWebSocketClient) deleteReferenceOfItemSetByStampSheetAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DeleteReferenceOfItemSetByStampSheetAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DeleteReferenceOfItemSetByStampSheetAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DeleteReferenceOfItemSetByStampSheetResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteReferenceOfItemSetByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DeleteReferenceOfItemSetByStampSheetAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2InventoryWebSocketClient) DeleteReferenceOfItemSetByStampSheetAsync(
-	request *DeleteReferenceOfItemSetByStampSheetRequest,
-	callback chan<- DeleteReferenceOfItemSetByStampSheetAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "inventory",
-    		"component": "itemSet",
-    		"function": "deleteReferenceOfItemSetByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.deleteReferenceOfItemSetByStampSheetAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2InventoryWebSocketClient) DeleteReferenceOfItemSetByStampSheet(
-	request *DeleteReferenceOfItemSetByStampSheetRequest,
-) (*DeleteReferenceOfItemSetByStampSheetResult, error) {
-	callback := make(chan DeleteReferenceOfItemSetByStampSheetAsyncResult, 1)
-	go p.DeleteReferenceOfItemSetByStampSheetAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
 func (p Gs2InventoryWebSocketClient) consumeItemSetByStampTaskAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- ConsumeItemSetByStampTaskAsyncResult,
@@ -5091,6 +3972,1125 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetByStampTask(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2InventoryWebSocketClient) describeReferenceOfAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeReferenceOfAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeReferenceOfAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeReferenceOfResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeReferenceOfAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeReferenceOfAsync(
+	request *DescribeReferenceOfRequest,
+	callback chan<- DescribeReferenceOfAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "referenceOf",
+    		"function": "describeReferenceOf",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.describeReferenceOfAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeReferenceOf(
+	request *DescribeReferenceOfRequest,
+) (*DescribeReferenceOfResult, error) {
+	callback := make(chan DescribeReferenceOfAsyncResult, 1)
+	go p.DescribeReferenceOfAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) describeReferenceOfByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeReferenceOfByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeReferenceOfByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeReferenceOfByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeReferenceOfByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeReferenceOfByUserIdAsync(
+	request *DescribeReferenceOfByUserIdRequest,
+	callback chan<- DescribeReferenceOfByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "referenceOf",
+    		"function": "describeReferenceOfByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeReferenceOfByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeReferenceOfByUserId(
+	request *DescribeReferenceOfByUserIdRequest,
+) (*DescribeReferenceOfByUserIdResult, error) {
+	callback := make(chan DescribeReferenceOfByUserIdAsyncResult, 1)
+	go p.DescribeReferenceOfByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) getReferenceOfAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetReferenceOfAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetReferenceOfAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetReferenceOfResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetReferenceOfAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) GetReferenceOfAsync(
+	request *GetReferenceOfRequest,
+	callback chan<- GetReferenceOfAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "referenceOf",
+    		"function": "getReferenceOf",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.getReferenceOfAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) GetReferenceOf(
+	request *GetReferenceOfRequest,
+) (*GetReferenceOfResult, error) {
+	callback := make(chan GetReferenceOfAsyncResult, 1)
+	go p.GetReferenceOfAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) getReferenceOfByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetReferenceOfByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetReferenceOfByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetReferenceOfByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetReferenceOfByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) GetReferenceOfByUserIdAsync(
+	request *GetReferenceOfByUserIdRequest,
+	callback chan<- GetReferenceOfByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "referenceOf",
+    		"function": "getReferenceOfByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getReferenceOfByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) GetReferenceOfByUserId(
+	request *GetReferenceOfByUserIdRequest,
+) (*GetReferenceOfByUserIdResult, error) {
+	callback := make(chan GetReferenceOfByUserIdAsyncResult, 1)
+	go p.GetReferenceOfByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) verifyReferenceOfAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyReferenceOfAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyReferenceOfAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyReferenceOfResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- VerifyReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- VerifyReferenceOfAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyReferenceOfAsync(
+	request *VerifyReferenceOfRequest,
+	callback chan<- VerifyReferenceOfAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "referenceOf",
+    		"function": "verifyReferenceOf",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
+    if request.VerifyType != nil && *request.VerifyType != "" {
+        bodies["verifyType"] = *request.VerifyType
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.verifyReferenceOfAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyReferenceOf(
+	request *VerifyReferenceOfRequest,
+) (*VerifyReferenceOfResult, error) {
+	callback := make(chan VerifyReferenceOfAsyncResult, 1)
+	go p.VerifyReferenceOfAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) verifyReferenceOfByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyReferenceOfByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyReferenceOfByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyReferenceOfByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- VerifyReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- VerifyReferenceOfByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyReferenceOfByUserIdAsync(
+	request *VerifyReferenceOfByUserIdRequest,
+	callback chan<- VerifyReferenceOfByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "referenceOf",
+    		"function": "verifyReferenceOfByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
+    if request.VerifyType != nil && *request.VerifyType != "" {
+        bodies["verifyType"] = *request.VerifyType
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.verifyReferenceOfByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyReferenceOfByUserId(
+	request *VerifyReferenceOfByUserIdRequest,
+) (*VerifyReferenceOfByUserIdResult, error) {
+	callback := make(chan VerifyReferenceOfByUserIdAsyncResult, 1)
+	go p.VerifyReferenceOfByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) addReferenceOfAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- AddReferenceOfAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AddReferenceOfAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AddReferenceOfResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- AddReferenceOfAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) AddReferenceOfAsync(
+	request *AddReferenceOfRequest,
+	callback chan<- AddReferenceOfAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "referenceOf",
+    		"function": "addReferenceOf",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.addReferenceOfAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) AddReferenceOf(
+	request *AddReferenceOfRequest,
+) (*AddReferenceOfResult, error) {
+	callback := make(chan AddReferenceOfAsyncResult, 1)
+	go p.AddReferenceOfAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) addReferenceOfByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- AddReferenceOfByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AddReferenceOfByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AddReferenceOfByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- AddReferenceOfByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) AddReferenceOfByUserIdAsync(
+	request *AddReferenceOfByUserIdRequest,
+	callback chan<- AddReferenceOfByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "referenceOf",
+    		"function": "addReferenceOfByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.addReferenceOfByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) AddReferenceOfByUserId(
+	request *AddReferenceOfByUserIdRequest,
+) (*AddReferenceOfByUserIdResult, error) {
+	callback := make(chan AddReferenceOfByUserIdAsyncResult, 1)
+	go p.AddReferenceOfByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) deleteReferenceOfAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteReferenceOfAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteReferenceOfAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteReferenceOfResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteReferenceOfAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteReferenceOfAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DeleteReferenceOfAsync(
+	request *DeleteReferenceOfRequest,
+	callback chan<- DeleteReferenceOfAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "referenceOf",
+    		"function": "deleteReferenceOf",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.deleteReferenceOfAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DeleteReferenceOf(
+	request *DeleteReferenceOfRequest,
+) (*DeleteReferenceOfResult, error) {
+	callback := make(chan DeleteReferenceOfAsyncResult, 1)
+	go p.DeleteReferenceOfAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) deleteReferenceOfByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteReferenceOfByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteReferenceOfByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteReferenceOfByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteReferenceOfByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteReferenceOfByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DeleteReferenceOfByUserIdAsync(
+	request *DeleteReferenceOfByUserIdRequest,
+	callback chan<- DeleteReferenceOfByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "referenceOf",
+    		"function": "deleteReferenceOfByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ItemSetName != nil && *request.ItemSetName != "" {
+        bodies["itemSetName"] = *request.ItemSetName
+    }
+    if request.ReferenceOf != nil && *request.ReferenceOf != "" {
+        bodies["referenceOf"] = *request.ReferenceOf
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.deleteReferenceOfByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DeleteReferenceOfByUserId(
+	request *DeleteReferenceOfByUserIdRequest,
+) (*DeleteReferenceOfByUserIdResult, error) {
+	callback := make(chan DeleteReferenceOfByUserIdAsyncResult, 1)
+	go p.DeleteReferenceOfByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) addReferenceOfItemSetByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- AddReferenceOfItemSetByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AddReferenceOfItemSetByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AddReferenceOfItemSetByStampSheetResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddReferenceOfItemSetByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- AddReferenceOfItemSetByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) AddReferenceOfItemSetByStampSheetAsync(
+	request *AddReferenceOfItemSetByStampSheetRequest,
+	callback chan<- AddReferenceOfItemSetByStampSheetAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "referenceOf",
+    		"function": "addReferenceOfItemSetByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.addReferenceOfItemSetByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) AddReferenceOfItemSetByStampSheet(
+	request *AddReferenceOfItemSetByStampSheetRequest,
+) (*AddReferenceOfItemSetByStampSheetResult, error) {
+	callback := make(chan AddReferenceOfItemSetByStampSheetAsyncResult, 1)
+	go p.AddReferenceOfItemSetByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) deleteReferenceOfItemSetByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteReferenceOfItemSetByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteReferenceOfItemSetByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteReferenceOfItemSetByStampSheetResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteReferenceOfItemSetByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteReferenceOfItemSetByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DeleteReferenceOfItemSetByStampSheetAsync(
+	request *DeleteReferenceOfItemSetByStampSheetRequest,
+	callback chan<- DeleteReferenceOfItemSetByStampSheetAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "referenceOf",
+    		"function": "deleteReferenceOfItemSetByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.deleteReferenceOfItemSetByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DeleteReferenceOfItemSetByStampSheet(
+	request *DeleteReferenceOfItemSetByStampSheetRequest,
+) (*DeleteReferenceOfItemSetByStampSheetResult, error) {
+	callback := make(chan DeleteReferenceOfItemSetByStampSheetAsyncResult, 1)
+	go p.DeleteReferenceOfItemSetByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2InventoryWebSocketClient) verifyReferenceOfByStampTaskAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- VerifyReferenceOfByStampTaskAsyncResult,
@@ -5133,7 +5133,7 @@ func (p Gs2InventoryWebSocketClient) VerifyReferenceOfByStampTaskAsync(
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "inventory",
-    		"component": "itemSet",
+    		"component": "referenceOf",
     		"function": "verifyReferenceOfByStampTask",
             "contentType": "application/json",
     		"requestId": requestId,

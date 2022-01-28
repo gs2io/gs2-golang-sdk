@@ -512,76 +512,6 @@ func (p DeleteCategoryModelMasterRequest) Pointer() *DeleteCategoryModelMasterRe
     return &p
 }
 
-type DescribeSubscribesByCategoryNameRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    CategoryName *string `json:"categoryName"`
-    AccessToken *string `json:"accessToken"`
-}
-
-func NewDescribeSubscribesByCategoryNameRequestFromJson(data string) DescribeSubscribesByCategoryNameRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeSubscribesByCategoryNameRequestFromDict(dict)
-}
-
-func NewDescribeSubscribesByCategoryNameRequestFromDict(data map[string]interface{}) DescribeSubscribesByCategoryNameRequest {
-    return DescribeSubscribesByCategoryNameRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        CategoryName: core.CastString(data["categoryName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-    }
-}
-
-func (p DescribeSubscribesByCategoryNameRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "categoryName": p.CategoryName,
-        "accessToken": p.AccessToken,
-    }
-}
-
-func (p DescribeSubscribesByCategoryNameRequest) Pointer() *DescribeSubscribesByCategoryNameRequest {
-    return &p
-}
-
-type DescribeSubscribesByCategoryNameAndUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    CategoryName *string `json:"categoryName"`
-    UserId *string `json:"userId"`
-}
-
-func NewDescribeSubscribesByCategoryNameAndUserIdRequestFromJson(data string) DescribeSubscribesByCategoryNameAndUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeSubscribesByCategoryNameAndUserIdRequestFromDict(dict)
-}
-
-func NewDescribeSubscribesByCategoryNameAndUserIdRequestFromDict(data map[string]interface{}) DescribeSubscribesByCategoryNameAndUserIdRequest {
-    return DescribeSubscribesByCategoryNameAndUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        CategoryName: core.CastString(data["categoryName"]),
-        UserId: core.CastString(data["userId"]),
-    }
-}
-
-func (p DescribeSubscribesByCategoryNameAndUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "categoryName": p.CategoryName,
-        "userId": p.UserId,
-    }
-}
-
-func (p DescribeSubscribesByCategoryNameAndUserIdRequest) Pointer() *DescribeSubscribesByCategoryNameAndUserIdRequest {
-    return &p
-}
-
 type SubscribeRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
@@ -655,158 +585,6 @@ func (p SubscribeByUserIdRequest) ToDict() map[string]interface{} {
 }
 
 func (p SubscribeByUserIdRequest) Pointer() *SubscribeByUserIdRequest {
-    return &p
-}
-
-type GetSubscribeRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    CategoryName *string `json:"categoryName"`
-    AccessToken *string `json:"accessToken"`
-    TargetUserId *string `json:"targetUserId"`
-}
-
-func NewGetSubscribeRequestFromJson(data string) GetSubscribeRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetSubscribeRequestFromDict(dict)
-}
-
-func NewGetSubscribeRequestFromDict(data map[string]interface{}) GetSubscribeRequest {
-    return GetSubscribeRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        CategoryName: core.CastString(data["categoryName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-        TargetUserId: core.CastString(data["targetUserId"]),
-    }
-}
-
-func (p GetSubscribeRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "categoryName": p.CategoryName,
-        "accessToken": p.AccessToken,
-        "targetUserId": p.TargetUserId,
-    }
-}
-
-func (p GetSubscribeRequest) Pointer() *GetSubscribeRequest {
-    return &p
-}
-
-type GetSubscribeByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    CategoryName *string `json:"categoryName"`
-    UserId *string `json:"userId"`
-    TargetUserId *string `json:"targetUserId"`
-}
-
-func NewGetSubscribeByUserIdRequestFromJson(data string) GetSubscribeByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetSubscribeByUserIdRequestFromDict(dict)
-}
-
-func NewGetSubscribeByUserIdRequestFromDict(data map[string]interface{}) GetSubscribeByUserIdRequest {
-    return GetSubscribeByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        CategoryName: core.CastString(data["categoryName"]),
-        UserId: core.CastString(data["userId"]),
-        TargetUserId: core.CastString(data["targetUserId"]),
-    }
-}
-
-func (p GetSubscribeByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "categoryName": p.CategoryName,
-        "userId": p.UserId,
-        "targetUserId": p.TargetUserId,
-    }
-}
-
-func (p GetSubscribeByUserIdRequest) Pointer() *GetSubscribeByUserIdRequest {
-    return &p
-}
-
-type UnsubscribeRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    CategoryName *string `json:"categoryName"`
-    AccessToken *string `json:"accessToken"`
-    TargetUserId *string `json:"targetUserId"`
-}
-
-func NewUnsubscribeRequestFromJson(data string) UnsubscribeRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUnsubscribeRequestFromDict(dict)
-}
-
-func NewUnsubscribeRequestFromDict(data map[string]interface{}) UnsubscribeRequest {
-    return UnsubscribeRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        CategoryName: core.CastString(data["categoryName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-        TargetUserId: core.CastString(data["targetUserId"]),
-    }
-}
-
-func (p UnsubscribeRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "categoryName": p.CategoryName,
-        "accessToken": p.AccessToken,
-        "targetUserId": p.TargetUserId,
-    }
-}
-
-func (p UnsubscribeRequest) Pointer() *UnsubscribeRequest {
-    return &p
-}
-
-type UnsubscribeByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    CategoryName *string `json:"categoryName"`
-    UserId *string `json:"userId"`
-    TargetUserId *string `json:"targetUserId"`
-}
-
-func NewUnsubscribeByUserIdRequestFromJson(data string) UnsubscribeByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUnsubscribeByUserIdRequestFromDict(dict)
-}
-
-func NewUnsubscribeByUserIdRequestFromDict(data map[string]interface{}) UnsubscribeByUserIdRequest {
-    return UnsubscribeByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        CategoryName: core.CastString(data["categoryName"]),
-        UserId: core.CastString(data["userId"]),
-        TargetUserId: core.CastString(data["targetUserId"]),
-    }
-}
-
-func (p UnsubscribeByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "categoryName": p.CategoryName,
-        "userId": p.UserId,
-        "targetUserId": p.TargetUserId,
-    }
-}
-
-func (p UnsubscribeByUserIdRequest) Pointer() *UnsubscribeByUserIdRequest {
     return &p
 }
 
@@ -1418,5 +1196,227 @@ func (p UpdateCurrentRankingMasterFromGitHubRequest) ToDict() map[string]interfa
 }
 
 func (p UpdateCurrentRankingMasterFromGitHubRequest) Pointer() *UpdateCurrentRankingMasterFromGitHubRequest {
+    return &p
+}
+
+type GetSubscribeRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    CategoryName *string `json:"categoryName"`
+    AccessToken *string `json:"accessToken"`
+    TargetUserId *string `json:"targetUserId"`
+}
+
+func NewGetSubscribeRequestFromJson(data string) GetSubscribeRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSubscribeRequestFromDict(dict)
+}
+
+func NewGetSubscribeRequestFromDict(data map[string]interface{}) GetSubscribeRequest {
+    return GetSubscribeRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        CategoryName: core.CastString(data["categoryName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        TargetUserId: core.CastString(data["targetUserId"]),
+    }
+}
+
+func (p GetSubscribeRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "categoryName": p.CategoryName,
+        "accessToken": p.AccessToken,
+        "targetUserId": p.TargetUserId,
+    }
+}
+
+func (p GetSubscribeRequest) Pointer() *GetSubscribeRequest {
+    return &p
+}
+
+type GetSubscribeByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    CategoryName *string `json:"categoryName"`
+    UserId *string `json:"userId"`
+    TargetUserId *string `json:"targetUserId"`
+}
+
+func NewGetSubscribeByUserIdRequestFromJson(data string) GetSubscribeByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSubscribeByUserIdRequestFromDict(dict)
+}
+
+func NewGetSubscribeByUserIdRequestFromDict(data map[string]interface{}) GetSubscribeByUserIdRequest {
+    return GetSubscribeByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        CategoryName: core.CastString(data["categoryName"]),
+        UserId: core.CastString(data["userId"]),
+        TargetUserId: core.CastString(data["targetUserId"]),
+    }
+}
+
+func (p GetSubscribeByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "categoryName": p.CategoryName,
+        "userId": p.UserId,
+        "targetUserId": p.TargetUserId,
+    }
+}
+
+func (p GetSubscribeByUserIdRequest) Pointer() *GetSubscribeByUserIdRequest {
+    return &p
+}
+
+type UnsubscribeRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    CategoryName *string `json:"categoryName"`
+    AccessToken *string `json:"accessToken"`
+    TargetUserId *string `json:"targetUserId"`
+}
+
+func NewUnsubscribeRequestFromJson(data string) UnsubscribeRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnsubscribeRequestFromDict(dict)
+}
+
+func NewUnsubscribeRequestFromDict(data map[string]interface{}) UnsubscribeRequest {
+    return UnsubscribeRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        CategoryName: core.CastString(data["categoryName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        TargetUserId: core.CastString(data["targetUserId"]),
+    }
+}
+
+func (p UnsubscribeRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "categoryName": p.CategoryName,
+        "accessToken": p.AccessToken,
+        "targetUserId": p.TargetUserId,
+    }
+}
+
+func (p UnsubscribeRequest) Pointer() *UnsubscribeRequest {
+    return &p
+}
+
+type UnsubscribeByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    CategoryName *string `json:"categoryName"`
+    UserId *string `json:"userId"`
+    TargetUserId *string `json:"targetUserId"`
+}
+
+func NewUnsubscribeByUserIdRequestFromJson(data string) UnsubscribeByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnsubscribeByUserIdRequestFromDict(dict)
+}
+
+func NewUnsubscribeByUserIdRequestFromDict(data map[string]interface{}) UnsubscribeByUserIdRequest {
+    return UnsubscribeByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        CategoryName: core.CastString(data["categoryName"]),
+        UserId: core.CastString(data["userId"]),
+        TargetUserId: core.CastString(data["targetUserId"]),
+    }
+}
+
+func (p UnsubscribeByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "categoryName": p.CategoryName,
+        "userId": p.UserId,
+        "targetUserId": p.TargetUserId,
+    }
+}
+
+func (p UnsubscribeByUserIdRequest) Pointer() *UnsubscribeByUserIdRequest {
+    return &p
+}
+
+type DescribeSubscribesByCategoryNameRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    CategoryName *string `json:"categoryName"`
+    AccessToken *string `json:"accessToken"`
+}
+
+func NewDescribeSubscribesByCategoryNameRequestFromJson(data string) DescribeSubscribesByCategoryNameRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSubscribesByCategoryNameRequestFromDict(dict)
+}
+
+func NewDescribeSubscribesByCategoryNameRequestFromDict(data map[string]interface{}) DescribeSubscribesByCategoryNameRequest {
+    return DescribeSubscribesByCategoryNameRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        CategoryName: core.CastString(data["categoryName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+    }
+}
+
+func (p DescribeSubscribesByCategoryNameRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "categoryName": p.CategoryName,
+        "accessToken": p.AccessToken,
+    }
+}
+
+func (p DescribeSubscribesByCategoryNameRequest) Pointer() *DescribeSubscribesByCategoryNameRequest {
+    return &p
+}
+
+type DescribeSubscribesByCategoryNameAndUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    CategoryName *string `json:"categoryName"`
+    UserId *string `json:"userId"`
+}
+
+func NewDescribeSubscribesByCategoryNameAndUserIdRequestFromJson(data string) DescribeSubscribesByCategoryNameAndUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSubscribesByCategoryNameAndUserIdRequestFromDict(dict)
+}
+
+func NewDescribeSubscribesByCategoryNameAndUserIdRequestFromDict(data map[string]interface{}) DescribeSubscribesByCategoryNameAndUserIdRequest {
+    return DescribeSubscribesByCategoryNameAndUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        CategoryName: core.CastString(data["categoryName"]),
+        UserId: core.CastString(data["userId"]),
+    }
+}
+
+func (p DescribeSubscribesByCategoryNameAndUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "categoryName": p.CategoryName,
+        "userId": p.UserId,
+    }
+}
+
+func (p DescribeSubscribesByCategoryNameAndUserIdRequest) Pointer() *DescribeSubscribesByCategoryNameAndUserIdRequest {
     return &p
 }

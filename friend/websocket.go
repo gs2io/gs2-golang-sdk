@@ -1019,798 +1019,6 @@ func (p Gs2FriendWebSocketClient) DeleteProfileByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2FriendWebSocketClient) getPublicProfileAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetPublicProfileAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetPublicProfileAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetPublicProfileResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetPublicProfileAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetPublicProfileAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) GetPublicProfileAsync(
-	request *GetPublicProfileRequest,
-	callback chan<- GetPublicProfileAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "profile",
-    		"function": "getPublicProfile",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.getPublicProfileAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) GetPublicProfile(
-	request *GetPublicProfileRequest,
-) (*GetPublicProfileResult, error) {
-	callback := make(chan GetPublicProfileAsyncResult, 1)
-	go p.GetPublicProfileAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) describeFollowsAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeFollowsAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeFollowsAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeFollowsResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeFollowsAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeFollowsAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) DescribeFollowsAsync(
-	request *DescribeFollowsRequest,
-	callback chan<- DescribeFollowsAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "follow",
-    		"function": "describeFollows",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.WithProfile != nil {
-        bodies["withProfile"] = *request.WithProfile
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.describeFollowsAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) DescribeFollows(
-	request *DescribeFollowsRequest,
-) (*DescribeFollowsResult, error) {
-	callback := make(chan DescribeFollowsAsyncResult, 1)
-	go p.DescribeFollowsAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) describeFollowsByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeFollowsByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeFollowsByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeFollowsByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeFollowsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeFollowsByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) DescribeFollowsByUserIdAsync(
-	request *DescribeFollowsByUserIdRequest,
-	callback chan<- DescribeFollowsByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "follow",
-    		"function": "describeFollowsByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.WithProfile != nil {
-        bodies["withProfile"] = *request.WithProfile
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.describeFollowsByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) DescribeFollowsByUserId(
-	request *DescribeFollowsByUserIdRequest,
-) (*DescribeFollowsByUserIdResult, error) {
-	callback := make(chan DescribeFollowsByUserIdAsyncResult, 1)
-	go p.DescribeFollowsByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) getFollowAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetFollowAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetFollowAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetFollowResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFollowAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetFollowAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) GetFollowAsync(
-	request *GetFollowRequest,
-	callback chan<- GetFollowAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "follow",
-    		"function": "getFollow",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-    if request.WithProfile != nil {
-        bodies["withProfile"] = *request.WithProfile
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.getFollowAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) GetFollow(
-	request *GetFollowRequest,
-) (*GetFollowResult, error) {
-	callback := make(chan GetFollowAsyncResult, 1)
-	go p.GetFollowAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) getFollowByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetFollowByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetFollowByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetFollowByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFollowByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetFollowByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) GetFollowByUserIdAsync(
-	request *GetFollowByUserIdRequest,
-	callback chan<- GetFollowByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "follow",
-    		"function": "getFollowByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-    if request.WithProfile != nil {
-        bodies["withProfile"] = *request.WithProfile
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.getFollowByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) GetFollowByUserId(
-	request *GetFollowByUserIdRequest,
-) (*GetFollowByUserIdResult, error) {
-	callback := make(chan GetFollowByUserIdAsyncResult, 1)
-	go p.GetFollowByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) followAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- FollowAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- FollowAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result FollowResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- FollowAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- FollowAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) FollowAsync(
-	request *FollowRequest,
-	callback chan<- FollowAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "follow",
-    		"function": "follow",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.followAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) Follow(
-	request *FollowRequest,
-) (*FollowResult, error) {
-	callback := make(chan FollowAsyncResult, 1)
-	go p.FollowAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) followByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- FollowByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- FollowByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result FollowByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- FollowByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- FollowByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) FollowByUserIdAsync(
-	request *FollowByUserIdRequest,
-	callback chan<- FollowByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "follow",
-    		"function": "followByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.followByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) FollowByUserId(
-	request *FollowByUserIdRequest,
-) (*FollowByUserIdResult, error) {
-	callback := make(chan FollowByUserIdAsyncResult, 1)
-	go p.FollowByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) unfollowAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- UnfollowAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- UnfollowAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result UnfollowResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UnfollowAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- UnfollowAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) UnfollowAsync(
-	request *UnfollowRequest,
-	callback chan<- UnfollowAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "follow",
-    		"function": "unfollow",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.unfollowAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) Unfollow(
-	request *UnfollowRequest,
-) (*UnfollowResult, error) {
-	callback := make(chan UnfollowAsyncResult, 1)
-	go p.UnfollowAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) unfollowByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- UnfollowByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- UnfollowByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result UnfollowByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UnfollowByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- UnfollowByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) UnfollowByUserIdAsync(
-	request *UnfollowByUserIdRequest,
-	callback chan<- UnfollowByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "follow",
-    		"function": "unfollowByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.unfollowByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) UnfollowByUserId(
-	request *UnfollowByUserIdRequest,
-) (*UnfollowByUserIdResult, error) {
-	callback := make(chan UnfollowByUserIdAsyncResult, 1)
-	go p.UnfollowByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
 func (p Gs2FriendWebSocketClient) describeFriendsAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribeFriendsAsyncResult,
@@ -1996,1754 +1204,6 @@ func (p Gs2FriendWebSocketClient) DescribeFriendsByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2FriendWebSocketClient) getFriendAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetFriendAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetFriendAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetFriendResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFriendAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetFriendAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) GetFriendAsync(
-	request *GetFriendRequest,
-	callback chan<- GetFriendAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "friend",
-    		"function": "getFriend",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-    if request.WithProfile != nil {
-        bodies["withProfile"] = *request.WithProfile
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.getFriendAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) GetFriend(
-	request *GetFriendRequest,
-) (*GetFriendResult, error) {
-	callback := make(chan GetFriendAsyncResult, 1)
-	go p.GetFriendAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) getFriendByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetFriendByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetFriendByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetFriendByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFriendByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetFriendByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) GetFriendByUserIdAsync(
-	request *GetFriendByUserIdRequest,
-	callback chan<- GetFriendByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "friend",
-    		"function": "getFriendByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-    if request.WithProfile != nil {
-        bodies["withProfile"] = *request.WithProfile
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.getFriendByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) GetFriendByUserId(
-	request *GetFriendByUserIdRequest,
-) (*GetFriendByUserIdResult, error) {
-	callback := make(chan GetFriendByUserIdAsyncResult, 1)
-	go p.GetFriendByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) deleteFriendAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DeleteFriendAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DeleteFriendAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DeleteFriendResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteFriendAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DeleteFriendAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) DeleteFriendAsync(
-	request *DeleteFriendRequest,
-	callback chan<- DeleteFriendAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "friend",
-    		"function": "deleteFriend",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.deleteFriendAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) DeleteFriend(
-	request *DeleteFriendRequest,
-) (*DeleteFriendResult, error) {
-	callback := make(chan DeleteFriendAsyncResult, 1)
-	go p.DeleteFriendAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) deleteFriendByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DeleteFriendByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DeleteFriendByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DeleteFriendByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteFriendByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DeleteFriendByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) DeleteFriendByUserIdAsync(
-	request *DeleteFriendByUserIdRequest,
-	callback chan<- DeleteFriendByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "friend",
-    		"function": "deleteFriendByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.deleteFriendByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) DeleteFriendByUserId(
-	request *DeleteFriendByUserIdRequest,
-) (*DeleteFriendByUserIdResult, error) {
-	callback := make(chan DeleteFriendByUserIdAsyncResult, 1)
-	go p.DeleteFriendByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) describeSendRequestsAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeSendRequestsAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeSendRequestsAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeSendRequestsResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeSendRequestsAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeSendRequestsAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) DescribeSendRequestsAsync(
-	request *DescribeSendRequestsRequest,
-	callback chan<- DescribeSendRequestsAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "sendBox",
-    		"function": "describeSendRequests",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.describeSendRequestsAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) DescribeSendRequests(
-	request *DescribeSendRequestsRequest,
-) (*DescribeSendRequestsResult, error) {
-	callback := make(chan DescribeSendRequestsAsyncResult, 1)
-	go p.DescribeSendRequestsAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) describeSendRequestsByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeSendRequestsByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeSendRequestsByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeSendRequestsByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeSendRequestsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeSendRequestsByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) DescribeSendRequestsByUserIdAsync(
-	request *DescribeSendRequestsByUserIdRequest,
-	callback chan<- DescribeSendRequestsByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "sendBox",
-    		"function": "describeSendRequestsByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.describeSendRequestsByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) DescribeSendRequestsByUserId(
-	request *DescribeSendRequestsByUserIdRequest,
-) (*DescribeSendRequestsByUserIdResult, error) {
-	callback := make(chan DescribeSendRequestsByUserIdAsyncResult, 1)
-	go p.DescribeSendRequestsByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) getSendRequestAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetSendRequestAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetSendRequestAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetSendRequestResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetSendRequestAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetSendRequestAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) GetSendRequestAsync(
-	request *GetSendRequestRequest,
-	callback chan<- GetSendRequestAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "sendBox",
-    		"function": "getSendRequest",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.getSendRequestAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) GetSendRequest(
-	request *GetSendRequestRequest,
-) (*GetSendRequestResult, error) {
-	callback := make(chan GetSendRequestAsyncResult, 1)
-	go p.GetSendRequestAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) getSendRequestByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetSendRequestByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetSendRequestByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetSendRequestByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetSendRequestByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetSendRequestByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) GetSendRequestByUserIdAsync(
-	request *GetSendRequestByUserIdRequest,
-	callback chan<- GetSendRequestByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "sendBox",
-    		"function": "getSendRequestByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.getSendRequestByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) GetSendRequestByUserId(
-	request *GetSendRequestByUserIdRequest,
-) (*GetSendRequestByUserIdResult, error) {
-	callback := make(chan GetSendRequestByUserIdAsyncResult, 1)
-	go p.GetSendRequestByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) sendRequestAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- SendRequestAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- SendRequestAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result SendRequestResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SendRequestAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- SendRequestAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) SendRequestAsync(
-	request *SendRequestRequest,
-	callback chan<- SendRequestAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "sendBox",
-    		"function": "sendRequest",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.sendRequestAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) SendRequest(
-	request *SendRequestRequest,
-) (*SendRequestResult, error) {
-	callback := make(chan SendRequestAsyncResult, 1)
-	go p.SendRequestAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) sendRequestByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- SendRequestByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- SendRequestByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result SendRequestByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SendRequestByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- SendRequestByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) SendRequestByUserIdAsync(
-	request *SendRequestByUserIdRequest,
-	callback chan<- SendRequestByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "sendBox",
-    		"function": "sendRequestByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.sendRequestByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) SendRequestByUserId(
-	request *SendRequestByUserIdRequest,
-) (*SendRequestByUserIdResult, error) {
-	callback := make(chan SendRequestByUserIdAsyncResult, 1)
-	go p.SendRequestByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) deleteRequestAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DeleteRequestAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DeleteRequestAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DeleteRequestResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteRequestAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DeleteRequestAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) DeleteRequestAsync(
-	request *DeleteRequestRequest,
-	callback chan<- DeleteRequestAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "sendBox",
-    		"function": "deleteRequest",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.deleteRequestAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) DeleteRequest(
-	request *DeleteRequestRequest,
-) (*DeleteRequestResult, error) {
-	callback := make(chan DeleteRequestAsyncResult, 1)
-	go p.DeleteRequestAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) deleteRequestByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DeleteRequestByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DeleteRequestByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DeleteRequestByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteRequestByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DeleteRequestByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) DeleteRequestByUserIdAsync(
-	request *DeleteRequestByUserIdRequest,
-	callback chan<- DeleteRequestByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "sendBox",
-    		"function": "deleteRequestByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.TargetUserId != nil && *request.TargetUserId != "" {
-        bodies["targetUserId"] = *request.TargetUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.deleteRequestByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) DeleteRequestByUserId(
-	request *DeleteRequestByUserIdRequest,
-) (*DeleteRequestByUserIdResult, error) {
-	callback := make(chan DeleteRequestByUserIdAsyncResult, 1)
-	go p.DeleteRequestByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) describeReceiveRequestsAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeReceiveRequestsAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeReceiveRequestsAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeReceiveRequestsResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeReceiveRequestsAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeReceiveRequestsAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) DescribeReceiveRequestsAsync(
-	request *DescribeReceiveRequestsRequest,
-	callback chan<- DescribeReceiveRequestsAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "inbox",
-    		"function": "describeReceiveRequests",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.describeReceiveRequestsAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) DescribeReceiveRequests(
-	request *DescribeReceiveRequestsRequest,
-) (*DescribeReceiveRequestsResult, error) {
-	callback := make(chan DescribeReceiveRequestsAsyncResult, 1)
-	go p.DescribeReceiveRequestsAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) describeReceiveRequestsByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeReceiveRequestsByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeReceiveRequestsByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeReceiveRequestsByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeReceiveRequestsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeReceiveRequestsByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) DescribeReceiveRequestsByUserIdAsync(
-	request *DescribeReceiveRequestsByUserIdRequest,
-	callback chan<- DescribeReceiveRequestsByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "inbox",
-    		"function": "describeReceiveRequestsByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.describeReceiveRequestsByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) DescribeReceiveRequestsByUserId(
-	request *DescribeReceiveRequestsByUserIdRequest,
-) (*DescribeReceiveRequestsByUserIdResult, error) {
-	callback := make(chan DescribeReceiveRequestsByUserIdAsyncResult, 1)
-	go p.DescribeReceiveRequestsByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) getReceiveRequestAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetReceiveRequestAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetReceiveRequestAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetReceiveRequestResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetReceiveRequestAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetReceiveRequestAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) GetReceiveRequestAsync(
-	request *GetReceiveRequestRequest,
-	callback chan<- GetReceiveRequestAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "inbox",
-    		"function": "getReceiveRequest",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.FromUserId != nil && *request.FromUserId != "" {
-        bodies["fromUserId"] = *request.FromUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.getReceiveRequestAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) GetReceiveRequest(
-	request *GetReceiveRequestRequest,
-) (*GetReceiveRequestResult, error) {
-	callback := make(chan GetReceiveRequestAsyncResult, 1)
-	go p.GetReceiveRequestAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) getReceiveRequestByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetReceiveRequestByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetReceiveRequestByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetReceiveRequestByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetReceiveRequestByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetReceiveRequestByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) GetReceiveRequestByUserIdAsync(
-	request *GetReceiveRequestByUserIdRequest,
-	callback chan<- GetReceiveRequestByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "inbox",
-    		"function": "getReceiveRequestByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.FromUserId != nil && *request.FromUserId != "" {
-        bodies["fromUserId"] = *request.FromUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.getReceiveRequestByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) GetReceiveRequestByUserId(
-	request *GetReceiveRequestByUserIdRequest,
-) (*GetReceiveRequestByUserIdResult, error) {
-	callback := make(chan GetReceiveRequestByUserIdAsyncResult, 1)
-	go p.GetReceiveRequestByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) acceptRequestAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- AcceptRequestAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- AcceptRequestAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result AcceptRequestResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AcceptRequestAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- AcceptRequestAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) AcceptRequestAsync(
-	request *AcceptRequestRequest,
-	callback chan<- AcceptRequestAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "inbox",
-    		"function": "acceptRequest",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.FromUserId != nil && *request.FromUserId != "" {
-        bodies["fromUserId"] = *request.FromUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.acceptRequestAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) AcceptRequest(
-	request *AcceptRequestRequest,
-) (*AcceptRequestResult, error) {
-	callback := make(chan AcceptRequestAsyncResult, 1)
-	go p.AcceptRequestAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) acceptRequestByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- AcceptRequestByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- AcceptRequestByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result AcceptRequestByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AcceptRequestByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- AcceptRequestByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) AcceptRequestByUserIdAsync(
-	request *AcceptRequestByUserIdRequest,
-	callback chan<- AcceptRequestByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "inbox",
-    		"function": "acceptRequestByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.FromUserId != nil && *request.FromUserId != "" {
-        bodies["fromUserId"] = *request.FromUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.acceptRequestByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) AcceptRequestByUserId(
-	request *AcceptRequestByUserIdRequest,
-) (*AcceptRequestByUserIdResult, error) {
-	callback := make(chan AcceptRequestByUserIdAsyncResult, 1)
-	go p.AcceptRequestByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) rejectRequestAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- RejectRequestAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- RejectRequestAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result RejectRequestResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RejectRequestAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- RejectRequestAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) RejectRequestAsync(
-	request *RejectRequestRequest,
-	callback chan<- RejectRequestAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "inbox",
-    		"function": "rejectRequest",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.FromUserId != nil && *request.FromUserId != "" {
-        bodies["fromUserId"] = *request.FromUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.rejectRequestAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) RejectRequest(
-	request *RejectRequestRequest,
-) (*RejectRequestResult, error) {
-	callback := make(chan RejectRequestAsyncResult, 1)
-	go p.RejectRequestAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2FriendWebSocketClient) rejectRequestByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- RejectRequestByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- RejectRequestByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result RejectRequestByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RejectRequestByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- RejectRequestByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FriendWebSocketClient) RejectRequestByUserIdAsync(
-	request *RejectRequestByUserIdRequest,
-	callback chan<- RejectRequestByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "friend",
-    		"component": "inbox",
-    		"function": "rejectRequestByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.FromUserId != nil && *request.FromUserId != "" {
-        bodies["fromUserId"] = *request.FromUserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.rejectRequestByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FriendWebSocketClient) RejectRequestByUserId(
-	request *RejectRequestByUserIdRequest,
-) (*RejectRequestByUserIdResult, error) {
-	callback := make(chan RejectRequestByUserIdAsyncResult, 1)
-	go p.RejectRequestByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
 func (p Gs2FriendWebSocketClient) describeBlackListAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribeBlackListAsyncResult,
@@ -3800,6 +1260,12 @@ func (p Gs2FriendWebSocketClient) DescribeBlackListAsync(
     }
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -3885,6 +1351,12 @@ func (p Gs2FriendWebSocketClient) DescribeBlackListByUserIdAsync(
     }
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -4250,6 +1722,2546 @@ func (p Gs2FriendWebSocketClient) UnregisterBlackListByUserId(
 ) (*UnregisterBlackListByUserIdResult, error) {
 	callback := make(chan UnregisterBlackListByUserIdAsyncResult, 1)
 	go p.UnregisterBlackListByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) describeFollowsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeFollowsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeFollowsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeFollowsResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeFollowsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeFollowsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) DescribeFollowsAsync(
+	request *DescribeFollowsRequest,
+	callback chan<- DescribeFollowsAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "followUser",
+    		"function": "describeFollows",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.WithProfile != nil {
+        bodies["withProfile"] = *request.WithProfile
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.describeFollowsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) DescribeFollows(
+	request *DescribeFollowsRequest,
+) (*DescribeFollowsResult, error) {
+	callback := make(chan DescribeFollowsAsyncResult, 1)
+	go p.DescribeFollowsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) describeFollowsByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeFollowsByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeFollowsByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeFollowsByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeFollowsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeFollowsByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) DescribeFollowsByUserIdAsync(
+	request *DescribeFollowsByUserIdRequest,
+	callback chan<- DescribeFollowsByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "followUser",
+    		"function": "describeFollowsByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.WithProfile != nil {
+        bodies["withProfile"] = *request.WithProfile
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeFollowsByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) DescribeFollowsByUserId(
+	request *DescribeFollowsByUserIdRequest,
+) (*DescribeFollowsByUserIdResult, error) {
+	callback := make(chan DescribeFollowsByUserIdAsyncResult, 1)
+	go p.DescribeFollowsByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) getFollowAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetFollowAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetFollowAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetFollowResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetFollowAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetFollowAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) GetFollowAsync(
+	request *GetFollowRequest,
+	callback chan<- GetFollowAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "followUser",
+    		"function": "getFollow",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+    if request.WithProfile != nil {
+        bodies["withProfile"] = *request.WithProfile
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.getFollowAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) GetFollow(
+	request *GetFollowRequest,
+) (*GetFollowResult, error) {
+	callback := make(chan GetFollowAsyncResult, 1)
+	go p.GetFollowAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) getFollowByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetFollowByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetFollowByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetFollowByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetFollowByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetFollowByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) GetFollowByUserIdAsync(
+	request *GetFollowByUserIdRequest,
+	callback chan<- GetFollowByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "followUser",
+    		"function": "getFollowByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+    if request.WithProfile != nil {
+        bodies["withProfile"] = *request.WithProfile
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getFollowByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) GetFollowByUserId(
+	request *GetFollowByUserIdRequest,
+) (*GetFollowByUserIdResult, error) {
+	callback := make(chan GetFollowByUserIdAsyncResult, 1)
+	go p.GetFollowByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) followAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- FollowAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- FollowAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result FollowResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- FollowAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- FollowAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) FollowAsync(
+	request *FollowRequest,
+	callback chan<- FollowAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "followUser",
+    		"function": "follow",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.followAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) Follow(
+	request *FollowRequest,
+) (*FollowResult, error) {
+	callback := make(chan FollowAsyncResult, 1)
+	go p.FollowAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) followByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- FollowByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- FollowByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result FollowByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- FollowByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- FollowByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) FollowByUserIdAsync(
+	request *FollowByUserIdRequest,
+	callback chan<- FollowByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "followUser",
+    		"function": "followByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.followByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) FollowByUserId(
+	request *FollowByUserIdRequest,
+) (*FollowByUserIdResult, error) {
+	callback := make(chan FollowByUserIdAsyncResult, 1)
+	go p.FollowByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) unfollowAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UnfollowAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnfollowAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnfollowResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnfollowAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- UnfollowAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) UnfollowAsync(
+	request *UnfollowRequest,
+	callback chan<- UnfollowAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "followUser",
+    		"function": "unfollow",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.unfollowAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) Unfollow(
+	request *UnfollowRequest,
+) (*UnfollowResult, error) {
+	callback := make(chan UnfollowAsyncResult, 1)
+	go p.UnfollowAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) unfollowByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UnfollowByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnfollowByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnfollowByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnfollowByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- UnfollowByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) UnfollowByUserIdAsync(
+	request *UnfollowByUserIdRequest,
+	callback chan<- UnfollowByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "followUser",
+    		"function": "unfollowByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.unfollowByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) UnfollowByUserId(
+	request *UnfollowByUserIdRequest,
+) (*UnfollowByUserIdResult, error) {
+	callback := make(chan UnfollowByUserIdAsyncResult, 1)
+	go p.UnfollowByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) getFriendAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetFriendAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetFriendAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetFriendResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetFriendAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetFriendAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) GetFriendAsync(
+	request *GetFriendRequest,
+	callback chan<- GetFriendAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "friendUser",
+    		"function": "getFriend",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+    if request.WithProfile != nil {
+        bodies["withProfile"] = *request.WithProfile
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.getFriendAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) GetFriend(
+	request *GetFriendRequest,
+) (*GetFriendResult, error) {
+	callback := make(chan GetFriendAsyncResult, 1)
+	go p.GetFriendAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) getFriendByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetFriendByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetFriendByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetFriendByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetFriendByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetFriendByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) GetFriendByUserIdAsync(
+	request *GetFriendByUserIdRequest,
+	callback chan<- GetFriendByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "friendUser",
+    		"function": "getFriendByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+    if request.WithProfile != nil {
+        bodies["withProfile"] = *request.WithProfile
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getFriendByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) GetFriendByUserId(
+	request *GetFriendByUserIdRequest,
+) (*GetFriendByUserIdResult, error) {
+	callback := make(chan GetFriendByUserIdAsyncResult, 1)
+	go p.GetFriendByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) deleteFriendAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteFriendAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteFriendAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteFriendResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteFriendAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteFriendAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) DeleteFriendAsync(
+	request *DeleteFriendRequest,
+	callback chan<- DeleteFriendAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "friendUser",
+    		"function": "deleteFriend",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.deleteFriendAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) DeleteFriend(
+	request *DeleteFriendRequest,
+) (*DeleteFriendResult, error) {
+	callback := make(chan DeleteFriendAsyncResult, 1)
+	go p.DeleteFriendAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) deleteFriendByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteFriendByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteFriendByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteFriendByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteFriendByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteFriendByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) DeleteFriendByUserIdAsync(
+	request *DeleteFriendByUserIdRequest,
+	callback chan<- DeleteFriendByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "friendUser",
+    		"function": "deleteFriendByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.deleteFriendByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) DeleteFriendByUserId(
+	request *DeleteFriendByUserIdRequest,
+) (*DeleteFriendByUserIdResult, error) {
+	callback := make(chan DeleteFriendByUserIdAsyncResult, 1)
+	go p.DeleteFriendByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) describeSendRequestsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeSendRequestsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeSendRequestsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeSendRequestsResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeSendRequestsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeSendRequestsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) DescribeSendRequestsAsync(
+	request *DescribeSendRequestsRequest,
+	callback chan<- DescribeSendRequestsAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "sendFriendRequest",
+    		"function": "describeSendRequests",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.describeSendRequestsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) DescribeSendRequests(
+	request *DescribeSendRequestsRequest,
+) (*DescribeSendRequestsResult, error) {
+	callback := make(chan DescribeSendRequestsAsyncResult, 1)
+	go p.DescribeSendRequestsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) describeSendRequestsByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeSendRequestsByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeSendRequestsByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeSendRequestsByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeSendRequestsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeSendRequestsByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) DescribeSendRequestsByUserIdAsync(
+	request *DescribeSendRequestsByUserIdRequest,
+	callback chan<- DescribeSendRequestsByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "sendFriendRequest",
+    		"function": "describeSendRequestsByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeSendRequestsByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) DescribeSendRequestsByUserId(
+	request *DescribeSendRequestsByUserIdRequest,
+) (*DescribeSendRequestsByUserIdResult, error) {
+	callback := make(chan DescribeSendRequestsByUserIdAsyncResult, 1)
+	go p.DescribeSendRequestsByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) getSendRequestAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetSendRequestAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSendRequestAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSendRequestResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSendRequestAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetSendRequestAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) GetSendRequestAsync(
+	request *GetSendRequestRequest,
+	callback chan<- GetSendRequestAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "sendFriendRequest",
+    		"function": "getSendRequest",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.getSendRequestAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) GetSendRequest(
+	request *GetSendRequestRequest,
+) (*GetSendRequestResult, error) {
+	callback := make(chan GetSendRequestAsyncResult, 1)
+	go p.GetSendRequestAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) getSendRequestByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetSendRequestByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSendRequestByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSendRequestByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSendRequestByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetSendRequestByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) GetSendRequestByUserIdAsync(
+	request *GetSendRequestByUserIdRequest,
+	callback chan<- GetSendRequestByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "sendFriendRequest",
+    		"function": "getSendRequestByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getSendRequestByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) GetSendRequestByUserId(
+	request *GetSendRequestByUserIdRequest,
+) (*GetSendRequestByUserIdResult, error) {
+	callback := make(chan GetSendRequestByUserIdAsyncResult, 1)
+	go p.GetSendRequestByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) sendRequestAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SendRequestAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SendRequestAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SendRequestResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SendRequestAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- SendRequestAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) SendRequestAsync(
+	request *SendRequestRequest,
+	callback chan<- SendRequestAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "sendFriendRequest",
+    		"function": "sendRequest",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.sendRequestAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) SendRequest(
+	request *SendRequestRequest,
+) (*SendRequestResult, error) {
+	callback := make(chan SendRequestAsyncResult, 1)
+	go p.SendRequestAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) sendRequestByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SendRequestByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SendRequestByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SendRequestByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SendRequestByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- SendRequestByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) SendRequestByUserIdAsync(
+	request *SendRequestByUserIdRequest,
+	callback chan<- SendRequestByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "sendFriendRequest",
+    		"function": "sendRequestByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.sendRequestByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) SendRequestByUserId(
+	request *SendRequestByUserIdRequest,
+) (*SendRequestByUserIdResult, error) {
+	callback := make(chan SendRequestByUserIdAsyncResult, 1)
+	go p.SendRequestByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) deleteRequestAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteRequestAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteRequestAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteRequestResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteRequestAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteRequestAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) DeleteRequestAsync(
+	request *DeleteRequestRequest,
+	callback chan<- DeleteRequestAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "sendFriendRequest",
+    		"function": "deleteRequest",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.deleteRequestAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) DeleteRequest(
+	request *DeleteRequestRequest,
+) (*DeleteRequestResult, error) {
+	callback := make(chan DeleteRequestAsyncResult, 1)
+	go p.DeleteRequestAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) deleteRequestByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteRequestByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteRequestByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteRequestByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteRequestByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteRequestByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) DeleteRequestByUserIdAsync(
+	request *DeleteRequestByUserIdRequest,
+	callback chan<- DeleteRequestByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "sendFriendRequest",
+    		"function": "deleteRequestByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TargetUserId != nil && *request.TargetUserId != "" {
+        bodies["targetUserId"] = *request.TargetUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.deleteRequestByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) DeleteRequestByUserId(
+	request *DeleteRequestByUserIdRequest,
+) (*DeleteRequestByUserIdResult, error) {
+	callback := make(chan DeleteRequestByUserIdAsyncResult, 1)
+	go p.DeleteRequestByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) describeReceiveRequestsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeReceiveRequestsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeReceiveRequestsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeReceiveRequestsResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReceiveRequestsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeReceiveRequestsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) DescribeReceiveRequestsAsync(
+	request *DescribeReceiveRequestsRequest,
+	callback chan<- DescribeReceiveRequestsAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "receiveFriendRequest",
+    		"function": "describeReceiveRequests",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.describeReceiveRequestsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) DescribeReceiveRequests(
+	request *DescribeReceiveRequestsRequest,
+) (*DescribeReceiveRequestsResult, error) {
+	callback := make(chan DescribeReceiveRequestsAsyncResult, 1)
+	go p.DescribeReceiveRequestsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) describeReceiveRequestsByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeReceiveRequestsByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeReceiveRequestsByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeReceiveRequestsByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReceiveRequestsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeReceiveRequestsByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) DescribeReceiveRequestsByUserIdAsync(
+	request *DescribeReceiveRequestsByUserIdRequest,
+	callback chan<- DescribeReceiveRequestsByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "receiveFriendRequest",
+    		"function": "describeReceiveRequestsByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeReceiveRequestsByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) DescribeReceiveRequestsByUserId(
+	request *DescribeReceiveRequestsByUserIdRequest,
+) (*DescribeReceiveRequestsByUserIdResult, error) {
+	callback := make(chan DescribeReceiveRequestsByUserIdAsyncResult, 1)
+	go p.DescribeReceiveRequestsByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) getReceiveRequestAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetReceiveRequestAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetReceiveRequestAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetReceiveRequestResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetReceiveRequestAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetReceiveRequestAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) GetReceiveRequestAsync(
+	request *GetReceiveRequestRequest,
+	callback chan<- GetReceiveRequestAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "receiveFriendRequest",
+    		"function": "getReceiveRequest",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.FromUserId != nil && *request.FromUserId != "" {
+        bodies["fromUserId"] = *request.FromUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.getReceiveRequestAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) GetReceiveRequest(
+	request *GetReceiveRequestRequest,
+) (*GetReceiveRequestResult, error) {
+	callback := make(chan GetReceiveRequestAsyncResult, 1)
+	go p.GetReceiveRequestAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) getReceiveRequestByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetReceiveRequestByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetReceiveRequestByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetReceiveRequestByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetReceiveRequestByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetReceiveRequestByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) GetReceiveRequestByUserIdAsync(
+	request *GetReceiveRequestByUserIdRequest,
+	callback chan<- GetReceiveRequestByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "receiveFriendRequest",
+    		"function": "getReceiveRequestByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.FromUserId != nil && *request.FromUserId != "" {
+        bodies["fromUserId"] = *request.FromUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getReceiveRequestByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) GetReceiveRequestByUserId(
+	request *GetReceiveRequestByUserIdRequest,
+) (*GetReceiveRequestByUserIdResult, error) {
+	callback := make(chan GetReceiveRequestByUserIdAsyncResult, 1)
+	go p.GetReceiveRequestByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) acceptRequestAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- AcceptRequestAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcceptRequestAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcceptRequestResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcceptRequestAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- AcceptRequestAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) AcceptRequestAsync(
+	request *AcceptRequestRequest,
+	callback chan<- AcceptRequestAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "receiveFriendRequest",
+    		"function": "acceptRequest",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.FromUserId != nil && *request.FromUserId != "" {
+        bodies["fromUserId"] = *request.FromUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.acceptRequestAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) AcceptRequest(
+	request *AcceptRequestRequest,
+) (*AcceptRequestResult, error) {
+	callback := make(chan AcceptRequestAsyncResult, 1)
+	go p.AcceptRequestAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) acceptRequestByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- AcceptRequestByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcceptRequestByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcceptRequestByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcceptRequestByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- AcceptRequestByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) AcceptRequestByUserIdAsync(
+	request *AcceptRequestByUserIdRequest,
+	callback chan<- AcceptRequestByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "receiveFriendRequest",
+    		"function": "acceptRequestByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.FromUserId != nil && *request.FromUserId != "" {
+        bodies["fromUserId"] = *request.FromUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.acceptRequestByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) AcceptRequestByUserId(
+	request *AcceptRequestByUserIdRequest,
+) (*AcceptRequestByUserIdResult, error) {
+	callback := make(chan AcceptRequestByUserIdAsyncResult, 1)
+	go p.AcceptRequestByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) rejectRequestAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- RejectRequestAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RejectRequestAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RejectRequestResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RejectRequestAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- RejectRequestAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) RejectRequestAsync(
+	request *RejectRequestRequest,
+	callback chan<- RejectRequestAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "receiveFriendRequest",
+    		"function": "rejectRequest",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.FromUserId != nil && *request.FromUserId != "" {
+        bodies["fromUserId"] = *request.FromUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.rejectRequestAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) RejectRequest(
+	request *RejectRequestRequest,
+) (*RejectRequestResult, error) {
+	callback := make(chan RejectRequestAsyncResult, 1)
+	go p.RejectRequestAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) rejectRequestByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- RejectRequestByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RejectRequestByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RejectRequestByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RejectRequestByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- RejectRequestByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) RejectRequestByUserIdAsync(
+	request *RejectRequestByUserIdRequest,
+	callback chan<- RejectRequestByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "receiveFriendRequest",
+    		"function": "rejectRequestByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.FromUserId != nil && *request.FromUserId != "" {
+        bodies["fromUserId"] = *request.FromUserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.rejectRequestByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) RejectRequestByUserId(
+	request *RejectRequestByUserIdRequest,
+) (*RejectRequestByUserIdResult, error) {
+	callback := make(chan RejectRequestByUserIdAsyncResult, 1)
+	go p.RejectRequestByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FriendWebSocketClient) getPublicProfileAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetPublicProfileAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetPublicProfileAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetPublicProfileResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetPublicProfileAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetPublicProfileAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) GetPublicProfileAsync(
+	request *GetPublicProfileRequest,
+	callback chan<- GetPublicProfileAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "friend",
+    		"component": "publicProfile",
+    		"function": "getPublicProfile",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getPublicProfileAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) GetPublicProfile(
+	request *GetPublicProfileRequest,
+) (*GetPublicProfileResult, error) {
+	callback := make(chan GetPublicProfileAsyncResult, 1)
+	go p.GetPublicProfileAsync(
 		request,
 		callback,
 	)

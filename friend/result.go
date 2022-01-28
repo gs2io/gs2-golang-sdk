@@ -364,34 +364,271 @@ func (p DeleteProfileByUserIdResult) Pointer() *DeleteProfileByUserIdResult {
     return &p
 }
 
-type GetPublicProfileResult struct {
-    Item *PublicProfile `json:"item"`
+type DescribeFriendsResult struct {
+    Items []FriendUser `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
-type GetPublicProfileAsyncResult struct {
-	result *GetPublicProfileResult
+type DescribeFriendsAsyncResult struct {
+	result *DescribeFriendsResult
 	err    error
 }
 
-func NewGetPublicProfileResultFromJson(data string) GetPublicProfileResult {
+func NewDescribeFriendsResultFromJson(data string) DescribeFriendsResult {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetPublicProfileResultFromDict(dict)
+    return NewDescribeFriendsResultFromDict(dict)
 }
 
-func NewGetPublicProfileResultFromDict(data map[string]interface{}) GetPublicProfileResult {
-    return GetPublicProfileResult {
-        Item: NewPublicProfileFromDict(core.CastMap(data["item"])).Pointer(),
+func NewDescribeFriendsResultFromDict(data map[string]interface{}) DescribeFriendsResult {
+    return DescribeFriendsResult {
+        Items: CastFriendUsers(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
     }
 }
 
-func (p GetPublicProfileResult) ToDict() map[string]interface{} {
+func (p DescribeFriendsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastFriendUsersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeFriendsResult) Pointer() *DescribeFriendsResult {
+    return &p
+}
+
+type DescribeFriendsByUserIdResult struct {
+    Items []FriendUser `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeFriendsByUserIdAsyncResult struct {
+	result *DescribeFriendsByUserIdResult
+	err    error
+}
+
+func NewDescribeFriendsByUserIdResultFromJson(data string) DescribeFriendsByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeFriendsByUserIdResultFromDict(dict)
+}
+
+func NewDescribeFriendsByUserIdResultFromDict(data map[string]interface{}) DescribeFriendsByUserIdResult {
+    return DescribeFriendsByUserIdResult {
+        Items: CastFriendUsers(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeFriendsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastFriendUsersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeFriendsByUserIdResult) Pointer() *DescribeFriendsByUserIdResult {
+    return &p
+}
+
+type DescribeBlackListResult struct {
+    Items []string `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeBlackListAsyncResult struct {
+	result *DescribeBlackListResult
+	err    error
+}
+
+func NewDescribeBlackListResultFromJson(data string) DescribeBlackListResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBlackListResultFromDict(dict)
+}
+
+func NewDescribeBlackListResultFromDict(data map[string]interface{}) DescribeBlackListResult {
+    return DescribeBlackListResult {
+        Items: core.CastStrings(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeBlackListResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": core.CastStringsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeBlackListResult) Pointer() *DescribeBlackListResult {
+    return &p
+}
+
+type DescribeBlackListByUserIdResult struct {
+    Items []string `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeBlackListByUserIdAsyncResult struct {
+	result *DescribeBlackListByUserIdResult
+	err    error
+}
+
+func NewDescribeBlackListByUserIdResultFromJson(data string) DescribeBlackListByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBlackListByUserIdResultFromDict(dict)
+}
+
+func NewDescribeBlackListByUserIdResultFromDict(data map[string]interface{}) DescribeBlackListByUserIdResult {
+    return DescribeBlackListByUserIdResult {
+        Items: core.CastStrings(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeBlackListByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": core.CastStringsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeBlackListByUserIdResult) Pointer() *DescribeBlackListByUserIdResult {
+    return &p
+}
+
+type RegisterBlackListResult struct {
+    Item *BlackList `json:"item"`
+}
+
+type RegisterBlackListAsyncResult struct {
+	result *RegisterBlackListResult
+	err    error
+}
+
+func NewRegisterBlackListResultFromJson(data string) RegisterBlackListResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRegisterBlackListResultFromDict(dict)
+}
+
+func NewRegisterBlackListResultFromDict(data map[string]interface{}) RegisterBlackListResult {
+    return RegisterBlackListResult {
+        Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p RegisterBlackListResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
     }
 }
 
-func (p GetPublicProfileResult) Pointer() *GetPublicProfileResult {
+func (p RegisterBlackListResult) Pointer() *RegisterBlackListResult {
+    return &p
+}
+
+type RegisterBlackListByUserIdResult struct {
+    Item *BlackList `json:"item"`
+}
+
+type RegisterBlackListByUserIdAsyncResult struct {
+	result *RegisterBlackListByUserIdResult
+	err    error
+}
+
+func NewRegisterBlackListByUserIdResultFromJson(data string) RegisterBlackListByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRegisterBlackListByUserIdResultFromDict(dict)
+}
+
+func NewRegisterBlackListByUserIdResultFromDict(data map[string]interface{}) RegisterBlackListByUserIdResult {
+    return RegisterBlackListByUserIdResult {
+        Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p RegisterBlackListByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p RegisterBlackListByUserIdResult) Pointer() *RegisterBlackListByUserIdResult {
+    return &p
+}
+
+type UnregisterBlackListResult struct {
+    Item *BlackList `json:"item"`
+}
+
+type UnregisterBlackListAsyncResult struct {
+	result *UnregisterBlackListResult
+	err    error
+}
+
+func NewUnregisterBlackListResultFromJson(data string) UnregisterBlackListResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnregisterBlackListResultFromDict(dict)
+}
+
+func NewUnregisterBlackListResultFromDict(data map[string]interface{}) UnregisterBlackListResult {
+    return UnregisterBlackListResult {
+        Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UnregisterBlackListResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UnregisterBlackListResult) Pointer() *UnregisterBlackListResult {
+    return &p
+}
+
+type UnregisterBlackListByUserIdResult struct {
+    Item *BlackList `json:"item"`
+}
+
+type UnregisterBlackListByUserIdAsyncResult struct {
+	result *UnregisterBlackListByUserIdResult
+	err    error
+}
+
+func NewUnregisterBlackListByUserIdResultFromJson(data string) UnregisterBlackListByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnregisterBlackListByUserIdResultFromDict(dict)
+}
+
+func NewUnregisterBlackListByUserIdResultFromDict(data map[string]interface{}) UnregisterBlackListByUserIdResult {
+    return UnregisterBlackListByUserIdResult {
+        Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UnregisterBlackListByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UnregisterBlackListByUserIdResult) Pointer() *UnregisterBlackListByUserIdResult {
     return &p
 }
 
@@ -650,78 +887,6 @@ func (p UnfollowByUserIdResult) ToDict() map[string]interface{} {
 }
 
 func (p UnfollowByUserIdResult) Pointer() *UnfollowByUserIdResult {
-    return &p
-}
-
-type DescribeFriendsResult struct {
-    Items []FriendUser `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-}
-
-type DescribeFriendsAsyncResult struct {
-	result *DescribeFriendsResult
-	err    error
-}
-
-func NewDescribeFriendsResultFromJson(data string) DescribeFriendsResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeFriendsResultFromDict(dict)
-}
-
-func NewDescribeFriendsResultFromDict(data map[string]interface{}) DescribeFriendsResult {
-    return DescribeFriendsResult {
-        Items: CastFriendUsers(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
-}
-
-func (p DescribeFriendsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastFriendUsersFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
-}
-
-func (p DescribeFriendsResult) Pointer() *DescribeFriendsResult {
-    return &p
-}
-
-type DescribeFriendsByUserIdResult struct {
-    Items []FriendUser `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-}
-
-type DescribeFriendsByUserIdAsyncResult struct {
-	result *DescribeFriendsByUserIdResult
-	err    error
-}
-
-func NewDescribeFriendsByUserIdResultFromJson(data string) DescribeFriendsByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeFriendsByUserIdResultFromDict(dict)
-}
-
-func NewDescribeFriendsByUserIdResultFromDict(data map[string]interface{}) DescribeFriendsByUserIdResult {
-    return DescribeFriendsByUserIdResult {
-        Items: CastFriendUsers(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
-}
-
-func (p DescribeFriendsByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastFriendUsersFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
-}
-
-func (p DescribeFriendsByUserIdResult) Pointer() *DescribeFriendsByUserIdResult {
     return &p
 }
 
@@ -1365,192 +1530,33 @@ func (p RejectRequestByUserIdResult) Pointer() *RejectRequestByUserIdResult {
     return &p
 }
 
-type DescribeBlackListResult struct {
-    Items []string `json:"items"`
+type GetPublicProfileResult struct {
+    Item *PublicProfile `json:"item"`
 }
 
-type DescribeBlackListAsyncResult struct {
-	result *DescribeBlackListResult
+type GetPublicProfileAsyncResult struct {
+	result *GetPublicProfileResult
 	err    error
 }
 
-func NewDescribeBlackListResultFromJson(data string) DescribeBlackListResult {
+func NewGetPublicProfileResultFromJson(data string) GetPublicProfileResult {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeBlackListResultFromDict(dict)
+    return NewGetPublicProfileResultFromDict(dict)
 }
 
-func NewDescribeBlackListResultFromDict(data map[string]interface{}) DescribeBlackListResult {
-    return DescribeBlackListResult {
-        Items: core.CastStrings(core.CastArray(data["items"])),
+func NewGetPublicProfileResultFromDict(data map[string]interface{}) GetPublicProfileResult {
+    return GetPublicProfileResult {
+        Item: NewPublicProfileFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
-func (p DescribeBlackListResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": core.CastStringsFromDict(
-            p.Items,
-        ),
-    }
-}
-
-func (p DescribeBlackListResult) Pointer() *DescribeBlackListResult {
-    return &p
-}
-
-type DescribeBlackListByUserIdResult struct {
-    Items []string `json:"items"`
-}
-
-type DescribeBlackListByUserIdAsyncResult struct {
-	result *DescribeBlackListByUserIdResult
-	err    error
-}
-
-func NewDescribeBlackListByUserIdResultFromJson(data string) DescribeBlackListByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeBlackListByUserIdResultFromDict(dict)
-}
-
-func NewDescribeBlackListByUserIdResultFromDict(data map[string]interface{}) DescribeBlackListByUserIdResult {
-    return DescribeBlackListByUserIdResult {
-        Items: core.CastStrings(core.CastArray(data["items"])),
-    }
-}
-
-func (p DescribeBlackListByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": core.CastStringsFromDict(
-            p.Items,
-        ),
-    }
-}
-
-func (p DescribeBlackListByUserIdResult) Pointer() *DescribeBlackListByUserIdResult {
-    return &p
-}
-
-type RegisterBlackListResult struct {
-    Item *BlackList `json:"item"`
-}
-
-type RegisterBlackListAsyncResult struct {
-	result *RegisterBlackListResult
-	err    error
-}
-
-func NewRegisterBlackListResultFromJson(data string) RegisterBlackListResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewRegisterBlackListResultFromDict(dict)
-}
-
-func NewRegisterBlackListResultFromDict(data map[string]interface{}) RegisterBlackListResult {
-    return RegisterBlackListResult {
-        Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
-    }
-}
-
-func (p RegisterBlackListResult) ToDict() map[string]interface{} {
+func (p GetPublicProfileResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
     }
 }
 
-func (p RegisterBlackListResult) Pointer() *RegisterBlackListResult {
-    return &p
-}
-
-type RegisterBlackListByUserIdResult struct {
-    Item *BlackList `json:"item"`
-}
-
-type RegisterBlackListByUserIdAsyncResult struct {
-	result *RegisterBlackListByUserIdResult
-	err    error
-}
-
-func NewRegisterBlackListByUserIdResultFromJson(data string) RegisterBlackListByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewRegisterBlackListByUserIdResultFromDict(dict)
-}
-
-func NewRegisterBlackListByUserIdResultFromDict(data map[string]interface{}) RegisterBlackListByUserIdResult {
-    return RegisterBlackListByUserIdResult {
-        Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
-    }
-}
-
-func (p RegisterBlackListByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
-}
-
-func (p RegisterBlackListByUserIdResult) Pointer() *RegisterBlackListByUserIdResult {
-    return &p
-}
-
-type UnregisterBlackListResult struct {
-    Item *BlackList `json:"item"`
-}
-
-type UnregisterBlackListAsyncResult struct {
-	result *UnregisterBlackListResult
-	err    error
-}
-
-func NewUnregisterBlackListResultFromJson(data string) UnregisterBlackListResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUnregisterBlackListResultFromDict(dict)
-}
-
-func NewUnregisterBlackListResultFromDict(data map[string]interface{}) UnregisterBlackListResult {
-    return UnregisterBlackListResult {
-        Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
-    }
-}
-
-func (p UnregisterBlackListResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
-}
-
-func (p UnregisterBlackListResult) Pointer() *UnregisterBlackListResult {
-    return &p
-}
-
-type UnregisterBlackListByUserIdResult struct {
-    Item *BlackList `json:"item"`
-}
-
-type UnregisterBlackListByUserIdAsyncResult struct {
-	result *UnregisterBlackListByUserIdResult
-	err    error
-}
-
-func NewUnregisterBlackListByUserIdResultFromJson(data string) UnregisterBlackListByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUnregisterBlackListByUserIdResultFromDict(dict)
-}
-
-func NewUnregisterBlackListByUserIdResultFromDict(data map[string]interface{}) UnregisterBlackListByUserIdResult {
-    return UnregisterBlackListByUserIdResult {
-        Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
-    }
-}
-
-func (p UnregisterBlackListByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
-}
-
-func (p UnregisterBlackListByUserIdResult) Pointer() *UnregisterBlackListByUserIdResult {
+func (p GetPublicProfileResult) Pointer() *GetPublicProfileResult {
     return &p
 }

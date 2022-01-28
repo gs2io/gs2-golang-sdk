@@ -1034,6 +1034,38 @@ func (p DrawByUserIdRequest) Pointer() *DrawByUserIdRequest {
     return &p
 }
 
+type DrawByStampSheetRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewDrawByStampSheetRequestFromJson(data string) DrawByStampSheetRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDrawByStampSheetRequestFromDict(dict)
+}
+
+func NewDrawByStampSheetRequestFromDict(data map[string]interface{}) DrawByStampSheetRequest {
+    return DrawByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p DrawByStampSheetRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p DrawByStampSheetRequest) Pointer() *DrawByStampSheetRequest {
+    return &p
+}
+
 type DescribeProbabilitiesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
@@ -1101,38 +1133,6 @@ func (p DescribeProbabilitiesByUserIdRequest) ToDict() map[string]interface{} {
 }
 
 func (p DescribeProbabilitiesByUserIdRequest) Pointer() *DescribeProbabilitiesByUserIdRequest {
-    return &p
-}
-
-type DrawByStampSheetRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    StampSheet *string `json:"stampSheet"`
-    KeyId *string `json:"keyId"`
-}
-
-func NewDrawByStampSheetRequestFromJson(data string) DrawByStampSheetRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDrawByStampSheetRequestFromDict(dict)
-}
-
-func NewDrawByStampSheetRequestFromDict(data map[string]interface{}) DrawByStampSheetRequest {
-    return DrawByStampSheetRequest {
-        StampSheet: core.CastString(data["stampSheet"]),
-        KeyId: core.CastString(data["keyId"]),
-    }
-}
-
-func (p DrawByStampSheetRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "stampSheet": p.StampSheet,
-        "keyId": p.KeyId,
-    }
-}
-
-func (p DrawByStampSheetRequest) Pointer() *DrawByStampSheetRequest {
     return &p
 }
 

@@ -580,6 +580,7 @@ func (p ReadMessageByUserIdResult) Pointer() *ReadMessageByUserIdResult {
 }
 
 type DeleteMessageResult struct {
+    Item *Message `json:"item"`
 }
 
 type DeleteMessageAsyncResult struct {
@@ -595,11 +596,13 @@ func NewDeleteMessageResultFromJson(data string) DeleteMessageResult {
 
 func NewDeleteMessageResultFromDict(data map[string]interface{}) DeleteMessageResult {
     return DeleteMessageResult {
+        Item: NewMessageFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteMessageResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 
@@ -608,6 +611,7 @@ func (p DeleteMessageResult) Pointer() *DeleteMessageResult {
 }
 
 type DeleteMessageByUserIdResult struct {
+    Item *Message `json:"item"`
 }
 
 type DeleteMessageByUserIdAsyncResult struct {
@@ -623,11 +627,13 @@ func NewDeleteMessageByUserIdResultFromJson(data string) DeleteMessageByUserIdRe
 
 func NewDeleteMessageByUserIdResultFromDict(data map[string]interface{}) DeleteMessageByUserIdResult {
     return DeleteMessageByUserIdResult {
+        Item: NewMessageFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteMessageByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 
@@ -954,6 +960,7 @@ func (p UpdateGlobalMessageMasterResult) Pointer() *UpdateGlobalMessageMasterRes
 }
 
 type DeleteGlobalMessageMasterResult struct {
+    Item *GlobalMessageMaster `json:"item"`
 }
 
 type DeleteGlobalMessageMasterAsyncResult struct {
@@ -969,11 +976,13 @@ func NewDeleteGlobalMessageMasterResultFromJson(data string) DeleteGlobalMessage
 
 func NewDeleteGlobalMessageMasterResultFromDict(data map[string]interface{}) DeleteGlobalMessageMasterResult {
     return DeleteGlobalMessageMasterResult {
+        Item: NewGlobalMessageMasterFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteGlobalMessageMasterResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 
@@ -1077,6 +1086,7 @@ func (p GetReceivedByUserIdResult) Pointer() *GetReceivedByUserIdResult {
 }
 
 type UpdateReceivedByUserIdResult struct {
+    Item *Received `json:"item"`
 }
 
 type UpdateReceivedByUserIdAsyncResult struct {
@@ -1092,11 +1102,13 @@ func NewUpdateReceivedByUserIdResultFromJson(data string) UpdateReceivedByUserId
 
 func NewUpdateReceivedByUserIdResultFromDict(data map[string]interface{}) UpdateReceivedByUserIdResult {
     return UpdateReceivedByUserIdResult {
+        Item: NewReceivedFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p UpdateReceivedByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 
@@ -1105,6 +1117,7 @@ func (p UpdateReceivedByUserIdResult) Pointer() *UpdateReceivedByUserIdResult {
 }
 
 type DeleteReceivedByUserIdResult struct {
+    Item *Received `json:"item"`
 }
 
 type DeleteReceivedByUserIdAsyncResult struct {
@@ -1120,11 +1133,13 @@ func NewDeleteReceivedByUserIdResultFromJson(data string) DeleteReceivedByUserId
 
 func NewDeleteReceivedByUserIdResultFromDict(data map[string]interface{}) DeleteReceivedByUserIdResult {
     return DeleteReceivedByUserIdResult {
+        Item: NewReceivedFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteReceivedByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 

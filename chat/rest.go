@@ -2060,6 +2060,9 @@ func (p Gs2ChatRestClient) DeleteMessageAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.UserId != nil {
+		queryStrings["userId"] = core.ToString(*request.UserId)
+	}
 
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {

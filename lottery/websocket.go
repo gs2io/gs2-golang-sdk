@@ -2458,6 +2458,88 @@ func (p Gs2LotteryWebSocketClient) DrawByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2LotteryWebSocketClient) drawByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DrawByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DrawByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DrawByStampSheetResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DrawByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DrawByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryWebSocketClient) DrawByStampSheetAsync(
+	request *DrawByStampSheetRequest,
+	callback chan<- DrawByStampSheetAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lottery",
+    		"component": "lottery",
+    		"function": "drawByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.drawByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryWebSocketClient) DrawByStampSheet(
+	request *DrawByStampSheetRequest,
+) (*DrawByStampSheetResult, error) {
+	callback := make(chan DrawByStampSheetAsyncResult, 1)
+	go p.DrawByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2LotteryWebSocketClient) describeProbabilitiesAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribeProbabilitiesAsyncResult,
@@ -2500,7 +2582,7 @@ func (p Gs2LotteryWebSocketClient) DescribeProbabilitiesAsync(
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "lottery",
-    		"component": "lottery",
+    		"component": "probability",
     		"function": "describeProbabilities",
             "contentType": "application/json",
     		"requestId": requestId,
@@ -2588,7 +2670,7 @@ func (p Gs2LotteryWebSocketClient) DescribeProbabilitiesByUserIdAsync(
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "lottery",
-    		"component": "lottery",
+    		"component": "probability",
     		"function": "describeProbabilitiesByUserId",
             "contentType": "application/json",
     		"requestId": requestId,
@@ -2624,88 +2706,6 @@ func (p Gs2LotteryWebSocketClient) DescribeProbabilitiesByUserId(
 ) (*DescribeProbabilitiesByUserIdResult, error) {
 	callback := make(chan DescribeProbabilitiesByUserIdAsyncResult, 1)
 	go p.DescribeProbabilitiesByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2LotteryWebSocketClient) drawByStampSheetAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DrawByStampSheetAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DrawByStampSheetAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DrawByStampSheetResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DrawByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DrawByStampSheetAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2LotteryWebSocketClient) DrawByStampSheetAsync(
-	request *DrawByStampSheetRequest,
-	callback chan<- DrawByStampSheetAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "lottery",
-    		"component": "lottery",
-    		"function": "drawByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.drawByStampSheetAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2LotteryWebSocketClient) DrawByStampSheet(
-	request *DrawByStampSheetRequest,
-) (*DrawByStampSheetResult, error) {
-	callback := make(chan DrawByStampSheetAsyncResult, 1)
-	go p.DrawByStampSheetAsync(
 		request,
 		callback,
 	)

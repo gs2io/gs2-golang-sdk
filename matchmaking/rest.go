@@ -782,6 +782,9 @@ func (p Gs2MatchmakingRestClient) CreateGatheringAsync(
     if request.ExpiresAt != nil {
         bodies["expiresAt"] = *request.ExpiresAt
     }
+    if request.ExpiresAtTimeSpan != nil {
+        bodies["expiresAtTimeSpan"] = request.ExpiresAtTimeSpan.ToDict()
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -903,6 +906,9 @@ func (p Gs2MatchmakingRestClient) CreateGatheringByUserIdAsync(
     }
     if request.ExpiresAt != nil {
         bodies["expiresAt"] = *request.ExpiresAt
+    }
+    if request.ExpiresAtTimeSpan != nil {
+        bodies["expiresAtTimeSpan"] = request.ExpiresAtTimeSpan.ToDict()
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

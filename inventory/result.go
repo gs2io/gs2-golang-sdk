@@ -1433,6 +1433,129 @@ func (p ConsumeItemSetByUserIdResult) Pointer() *ConsumeItemSetByUserIdResult {
     return &p
 }
 
+type DeleteItemSetByUserIdResult struct {
+    Items []ItemSet `json:"items"`
+    ItemModel *ItemModel `json:"itemModel"`
+    Inventory *Inventory `json:"inventory"`
+}
+
+type DeleteItemSetByUserIdAsyncResult struct {
+	result *DeleteItemSetByUserIdResult
+	err    error
+}
+
+func NewDeleteItemSetByUserIdResultFromJson(data string) DeleteItemSetByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteItemSetByUserIdResultFromDict(dict)
+}
+
+func NewDeleteItemSetByUserIdResultFromDict(data map[string]interface{}) DeleteItemSetByUserIdResult {
+    return DeleteItemSetByUserIdResult {
+        Items: CastItemSets(core.CastArray(data["items"])),
+        ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
+        Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
+    }
+}
+
+func (p DeleteItemSetByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastItemSetsFromDict(
+            p.Items,
+        ),
+        "itemModel": p.ItemModel.ToDict(),
+        "inventory": p.Inventory.ToDict(),
+    }
+}
+
+func (p DeleteItemSetByUserIdResult) Pointer() *DeleteItemSetByUserIdResult {
+    return &p
+}
+
+type AcquireItemSetByStampSheetResult struct {
+    Items []ItemSet `json:"items"`
+    ItemModel *ItemModel `json:"itemModel"`
+    Inventory *Inventory `json:"inventory"`
+    OverflowCount *int64 `json:"overflowCount"`
+}
+
+type AcquireItemSetByStampSheetAsyncResult struct {
+	result *AcquireItemSetByStampSheetResult
+	err    error
+}
+
+func NewAcquireItemSetByStampSheetResultFromJson(data string) AcquireItemSetByStampSheetResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireItemSetByStampSheetResultFromDict(dict)
+}
+
+func NewAcquireItemSetByStampSheetResultFromDict(data map[string]interface{}) AcquireItemSetByStampSheetResult {
+    return AcquireItemSetByStampSheetResult {
+        Items: CastItemSets(core.CastArray(data["items"])),
+        ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
+        Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
+        OverflowCount: core.CastInt64(data["overflowCount"]),
+    }
+}
+
+func (p AcquireItemSetByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastItemSetsFromDict(
+            p.Items,
+        ),
+        "itemModel": p.ItemModel.ToDict(),
+        "inventory": p.Inventory.ToDict(),
+        "overflowCount": p.OverflowCount,
+    }
+}
+
+func (p AcquireItemSetByStampSheetResult) Pointer() *AcquireItemSetByStampSheetResult {
+    return &p
+}
+
+type ConsumeItemSetByStampTaskResult struct {
+    Items []ItemSet `json:"items"`
+    ItemModel *ItemModel `json:"itemModel"`
+    Inventory *Inventory `json:"inventory"`
+    NewContextStack *string `json:"newContextStack"`
+}
+
+type ConsumeItemSetByStampTaskAsyncResult struct {
+	result *ConsumeItemSetByStampTaskResult
+	err    error
+}
+
+func NewConsumeItemSetByStampTaskResultFromJson(data string) ConsumeItemSetByStampTaskResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeItemSetByStampTaskResultFromDict(dict)
+}
+
+func NewConsumeItemSetByStampTaskResultFromDict(data map[string]interface{}) ConsumeItemSetByStampTaskResult {
+    return ConsumeItemSetByStampTaskResult {
+        Items: CastItemSets(core.CastArray(data["items"])),
+        ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
+        Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
+        NewContextStack: core.CastString(data["newContextStack"]),
+    }
+}
+
+func (p ConsumeItemSetByStampTaskResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastItemSetsFromDict(
+            p.Items,
+        ),
+        "itemModel": p.ItemModel.ToDict(),
+        "inventory": p.Inventory.ToDict(),
+        "newContextStack": p.NewContextStack,
+    }
+}
+
+func (p ConsumeItemSetByStampTaskResult) Pointer() *ConsumeItemSetByStampTaskResult {
+    return &p
+}
+
 type DescribeReferenceOfResult struct {
     Items []string `json:"items"`
     ItemSet *ItemSet `json:"itemSet"`
@@ -1853,87 +1976,6 @@ func (p DeleteReferenceOfByUserIdResult) Pointer() *DeleteReferenceOfByUserIdRes
     return &p
 }
 
-type DeleteItemSetByUserIdResult struct {
-    Items []ItemSet `json:"items"`
-    ItemModel *ItemModel `json:"itemModel"`
-    Inventory *Inventory `json:"inventory"`
-}
-
-type DeleteItemSetByUserIdAsyncResult struct {
-	result *DeleteItemSetByUserIdResult
-	err    error
-}
-
-func NewDeleteItemSetByUserIdResultFromJson(data string) DeleteItemSetByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteItemSetByUserIdResultFromDict(dict)
-}
-
-func NewDeleteItemSetByUserIdResultFromDict(data map[string]interface{}) DeleteItemSetByUserIdResult {
-    return DeleteItemSetByUserIdResult {
-        Items: CastItemSets(core.CastArray(data["items"])),
-        ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
-        Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
-    }
-}
-
-func (p DeleteItemSetByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastItemSetsFromDict(
-            p.Items,
-        ),
-        "itemModel": p.ItemModel.ToDict(),
-        "inventory": p.Inventory.ToDict(),
-    }
-}
-
-func (p DeleteItemSetByUserIdResult) Pointer() *DeleteItemSetByUserIdResult {
-    return &p
-}
-
-type AcquireItemSetByStampSheetResult struct {
-    Items []ItemSet `json:"items"`
-    ItemModel *ItemModel `json:"itemModel"`
-    Inventory *Inventory `json:"inventory"`
-    OverflowCount *int64 `json:"overflowCount"`
-}
-
-type AcquireItemSetByStampSheetAsyncResult struct {
-	result *AcquireItemSetByStampSheetResult
-	err    error
-}
-
-func NewAcquireItemSetByStampSheetResultFromJson(data string) AcquireItemSetByStampSheetResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewAcquireItemSetByStampSheetResultFromDict(dict)
-}
-
-func NewAcquireItemSetByStampSheetResultFromDict(data map[string]interface{}) AcquireItemSetByStampSheetResult {
-    return AcquireItemSetByStampSheetResult {
-        Items: CastItemSets(core.CastArray(data["items"])),
-        ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
-        Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
-        OverflowCount: core.CastInt64(data["overflowCount"]),
-    }
-}
-
-func (p AcquireItemSetByStampSheetResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastItemSetsFromDict(
-            p.Items,
-        ),
-        "itemModel": p.ItemModel.ToDict(),
-        "inventory": p.Inventory.ToDict(),
-        "overflowCount": p.OverflowCount,
-    }
-}
-
-func (p AcquireItemSetByStampSheetResult) Pointer() *AcquireItemSetByStampSheetResult {
-    return &p
-}
-
 type AddReferenceOfItemSetByStampSheetResult struct {
     Item []string `json:"item"`
     ItemSet *ItemSet `json:"itemSet"`
@@ -2015,48 +2057,6 @@ func (p DeleteReferenceOfItemSetByStampSheetResult) ToDict() map[string]interfac
 }
 
 func (p DeleteReferenceOfItemSetByStampSheetResult) Pointer() *DeleteReferenceOfItemSetByStampSheetResult {
-    return &p
-}
-
-type ConsumeItemSetByStampTaskResult struct {
-    Items []ItemSet `json:"items"`
-    ItemModel *ItemModel `json:"itemModel"`
-    Inventory *Inventory `json:"inventory"`
-    NewContextStack *string `json:"newContextStack"`
-}
-
-type ConsumeItemSetByStampTaskAsyncResult struct {
-	result *ConsumeItemSetByStampTaskResult
-	err    error
-}
-
-func NewConsumeItemSetByStampTaskResultFromJson(data string) ConsumeItemSetByStampTaskResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewConsumeItemSetByStampTaskResultFromDict(dict)
-}
-
-func NewConsumeItemSetByStampTaskResultFromDict(data map[string]interface{}) ConsumeItemSetByStampTaskResult {
-    return ConsumeItemSetByStampTaskResult {
-        Items: CastItemSets(core.CastArray(data["items"])),
-        ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
-        Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
-        NewContextStack: core.CastString(data["newContextStack"]),
-    }
-}
-
-func (p ConsumeItemSetByStampTaskResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastItemSetsFromDict(
-            p.Items,
-        ),
-        "itemModel": p.ItemModel.ToDict(),
-        "inventory": p.Inventory.ToDict(),
-        "newContextStack": p.NewContextStack,
-    }
-}
-
-func (p ConsumeItemSetByStampTaskResult) Pointer() *ConsumeItemSetByStampTaskResult {
     return &p
 }
 

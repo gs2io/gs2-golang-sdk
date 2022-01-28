@@ -923,6 +923,48 @@ func (p DrawByUserIdResult) Pointer() *DrawByUserIdResult {
     return &p
 }
 
+type DrawByStampSheetResult struct {
+    Items []DrawnPrize `json:"items"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    BoxItems *BoxItems `json:"boxItems"`
+}
+
+type DrawByStampSheetAsyncResult struct {
+	result *DrawByStampSheetResult
+	err    error
+}
+
+func NewDrawByStampSheetResultFromJson(data string) DrawByStampSheetResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDrawByStampSheetResultFromDict(dict)
+}
+
+func NewDrawByStampSheetResultFromDict(data map[string]interface{}) DrawByStampSheetResult {
+    return DrawByStampSheetResult {
+        Items: CastDrawnPrizes(core.CastArray(data["items"])),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        BoxItems: NewBoxItemsFromDict(core.CastMap(data["boxItems"])).Pointer(),
+    }
+}
+
+func (p DrawByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastDrawnPrizesFromDict(
+            p.Items,
+        ),
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "boxItems": p.BoxItems.ToDict(),
+    }
+}
+
+func (p DrawByStampSheetResult) Pointer() *DrawByStampSheetResult {
+    return &p
+}
+
 type DescribeProbabilitiesResult struct {
     Items []Probability `json:"items"`
 }
@@ -986,48 +1028,6 @@ func (p DescribeProbabilitiesByUserIdResult) ToDict() map[string]interface{} {
 }
 
 func (p DescribeProbabilitiesByUserIdResult) Pointer() *DescribeProbabilitiesByUserIdResult {
-    return &p
-}
-
-type DrawByStampSheetResult struct {
-    Items []DrawnPrize `json:"items"`
-    StampSheet *string `json:"stampSheet"`
-    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-    BoxItems *BoxItems `json:"boxItems"`
-}
-
-type DrawByStampSheetAsyncResult struct {
-	result *DrawByStampSheetResult
-	err    error
-}
-
-func NewDrawByStampSheetResultFromJson(data string) DrawByStampSheetResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDrawByStampSheetResultFromDict(dict)
-}
-
-func NewDrawByStampSheetResultFromDict(data map[string]interface{}) DrawByStampSheetResult {
-    return DrawByStampSheetResult {
-        Items: CastDrawnPrizes(core.CastArray(data["items"])),
-        StampSheet: core.CastString(data["stampSheet"]),
-        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-        BoxItems: NewBoxItemsFromDict(core.CastMap(data["boxItems"])).Pointer(),
-    }
-}
-
-func (p DrawByStampSheetResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastDrawnPrizesFromDict(
-            p.Items,
-        ),
-        "stampSheet": p.StampSheet,
-        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-        "boxItems": p.BoxItems.ToDict(),
-    }
-}
-
-func (p DrawByStampSheetResult) Pointer() *DrawByStampSheetResult {
     return &p
 }
 

@@ -316,6 +316,7 @@ type CreateGatheringRequest struct {
     CapacityOfRoles []CapacityOfRole `json:"capacityOfRoles"`
     AllowUserIds []string `json:"allowUserIds"`
     ExpiresAt *int64 `json:"expiresAt"`
+    ExpiresAtTimeSpan *TimeSpan `json:"expiresAtTimeSpan"`
 }
 
 func NewCreateGatheringRequestFromJson(data string) CreateGatheringRequest {
@@ -333,6 +334,7 @@ func NewCreateGatheringRequestFromDict(data map[string]interface{}) CreateGather
         CapacityOfRoles: CastCapacityOfRoles(core.CastArray(data["capacityOfRoles"])),
         AllowUserIds: core.CastStrings(core.CastArray(data["allowUserIds"])),
         ExpiresAt: core.CastInt64(data["expiresAt"]),
+        ExpiresAtTimeSpan: NewTimeSpanFromDict(core.CastMap(data["expiresAtTimeSpan"])).Pointer(),
     }
 }
 
@@ -351,6 +353,7 @@ func (p CreateGatheringRequest) ToDict() map[string]interface{} {
             p.AllowUserIds,
         ),
         "expiresAt": p.ExpiresAt,
+        "expiresAtTimeSpan": p.ExpiresAtTimeSpan.ToDict(),
     }
 }
 
@@ -369,6 +372,7 @@ type CreateGatheringByUserIdRequest struct {
     CapacityOfRoles []CapacityOfRole `json:"capacityOfRoles"`
     AllowUserIds []string `json:"allowUserIds"`
     ExpiresAt *int64 `json:"expiresAt"`
+    ExpiresAtTimeSpan *TimeSpan `json:"expiresAtTimeSpan"`
 }
 
 func NewCreateGatheringByUserIdRequestFromJson(data string) CreateGatheringByUserIdRequest {
@@ -386,6 +390,7 @@ func NewCreateGatheringByUserIdRequestFromDict(data map[string]interface{}) Crea
         CapacityOfRoles: CastCapacityOfRoles(core.CastArray(data["capacityOfRoles"])),
         AllowUserIds: core.CastStrings(core.CastArray(data["allowUserIds"])),
         ExpiresAt: core.CastInt64(data["expiresAt"]),
+        ExpiresAtTimeSpan: NewTimeSpanFromDict(core.CastMap(data["expiresAtTimeSpan"])).Pointer(),
     }
 }
 
@@ -404,6 +409,7 @@ func (p CreateGatheringByUserIdRequest) ToDict() map[string]interface{} {
             p.AllowUserIds,
         ),
         "expiresAt": p.ExpiresAt,
+        "expiresAtTimeSpan": p.ExpiresAtTimeSpan.ToDict(),
     }
 }
 

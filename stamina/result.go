@@ -1558,6 +1558,7 @@ func (p SetRecoverValueByStatusResult) Pointer() *SetRecoverValueByStatusResult 
 }
 
 type DeleteStaminaByUserIdResult struct {
+    Item *Stamina `json:"item"`
 }
 
 type DeleteStaminaByUserIdAsyncResult struct {
@@ -1573,11 +1574,13 @@ func NewDeleteStaminaByUserIdResultFromJson(data string) DeleteStaminaByUserIdRe
 
 func NewDeleteStaminaByUserIdResultFromDict(data map[string]interface{}) DeleteStaminaByUserIdResult {
     return DeleteStaminaByUserIdResult {
+        Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteStaminaByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 

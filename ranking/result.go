@@ -436,72 +436,6 @@ func (p DeleteCategoryModelMasterResult) Pointer() *DeleteCategoryModelMasterRes
     return &p
 }
 
-type DescribeSubscribesByCategoryNameResult struct {
-    Items []SubscribeUser `json:"items"`
-}
-
-type DescribeSubscribesByCategoryNameAsyncResult struct {
-	result *DescribeSubscribesByCategoryNameResult
-	err    error
-}
-
-func NewDescribeSubscribesByCategoryNameResultFromJson(data string) DescribeSubscribesByCategoryNameResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeSubscribesByCategoryNameResultFromDict(dict)
-}
-
-func NewDescribeSubscribesByCategoryNameResultFromDict(data map[string]interface{}) DescribeSubscribesByCategoryNameResult {
-    return DescribeSubscribesByCategoryNameResult {
-        Items: CastSubscribeUsers(core.CastArray(data["items"])),
-    }
-}
-
-func (p DescribeSubscribesByCategoryNameResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastSubscribeUsersFromDict(
-            p.Items,
-        ),
-    }
-}
-
-func (p DescribeSubscribesByCategoryNameResult) Pointer() *DescribeSubscribesByCategoryNameResult {
-    return &p
-}
-
-type DescribeSubscribesByCategoryNameAndUserIdResult struct {
-    Items []SubscribeUser `json:"items"`
-}
-
-type DescribeSubscribesByCategoryNameAndUserIdAsyncResult struct {
-	result *DescribeSubscribesByCategoryNameAndUserIdResult
-	err    error
-}
-
-func NewDescribeSubscribesByCategoryNameAndUserIdResultFromJson(data string) DescribeSubscribesByCategoryNameAndUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeSubscribesByCategoryNameAndUserIdResultFromDict(dict)
-}
-
-func NewDescribeSubscribesByCategoryNameAndUserIdResultFromDict(data map[string]interface{}) DescribeSubscribesByCategoryNameAndUserIdResult {
-    return DescribeSubscribesByCategoryNameAndUserIdResult {
-        Items: CastSubscribeUsers(core.CastArray(data["items"])),
-    }
-}
-
-func (p DescribeSubscribesByCategoryNameAndUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastSubscribeUsersFromDict(
-            p.Items,
-        ),
-    }
-}
-
-func (p DescribeSubscribesByCategoryNameAndUserIdResult) Pointer() *DescribeSubscribesByCategoryNameAndUserIdResult {
-    return &p
-}
-
 type SubscribeResult struct {
     Item *SubscribeUser `json:"item"`
 }
@@ -561,130 +495,6 @@ func (p SubscribeByUserIdResult) ToDict() map[string]interface{} {
 }
 
 func (p SubscribeByUserIdResult) Pointer() *SubscribeByUserIdResult {
-    return &p
-}
-
-type GetSubscribeResult struct {
-    Item *SubscribeUser `json:"item"`
-}
-
-type GetSubscribeAsyncResult struct {
-	result *GetSubscribeResult
-	err    error
-}
-
-func NewGetSubscribeResultFromJson(data string) GetSubscribeResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetSubscribeResultFromDict(dict)
-}
-
-func NewGetSubscribeResultFromDict(data map[string]interface{}) GetSubscribeResult {
-    return GetSubscribeResult {
-        Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
-}
-
-func (p GetSubscribeResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
-}
-
-func (p GetSubscribeResult) Pointer() *GetSubscribeResult {
-    return &p
-}
-
-type GetSubscribeByUserIdResult struct {
-    Item *SubscribeUser `json:"item"`
-}
-
-type GetSubscribeByUserIdAsyncResult struct {
-	result *GetSubscribeByUserIdResult
-	err    error
-}
-
-func NewGetSubscribeByUserIdResultFromJson(data string) GetSubscribeByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetSubscribeByUserIdResultFromDict(dict)
-}
-
-func NewGetSubscribeByUserIdResultFromDict(data map[string]interface{}) GetSubscribeByUserIdResult {
-    return GetSubscribeByUserIdResult {
-        Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
-}
-
-func (p GetSubscribeByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
-}
-
-func (p GetSubscribeByUserIdResult) Pointer() *GetSubscribeByUserIdResult {
-    return &p
-}
-
-type UnsubscribeResult struct {
-    Item *SubscribeUser `json:"item"`
-}
-
-type UnsubscribeAsyncResult struct {
-	result *UnsubscribeResult
-	err    error
-}
-
-func NewUnsubscribeResultFromJson(data string) UnsubscribeResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUnsubscribeResultFromDict(dict)
-}
-
-func NewUnsubscribeResultFromDict(data map[string]interface{}) UnsubscribeResult {
-    return UnsubscribeResult {
-        Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
-}
-
-func (p UnsubscribeResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
-}
-
-func (p UnsubscribeResult) Pointer() *UnsubscribeResult {
-    return &p
-}
-
-type UnsubscribeByUserIdResult struct {
-    Item *SubscribeUser `json:"item"`
-}
-
-type UnsubscribeByUserIdAsyncResult struct {
-	result *UnsubscribeByUserIdResult
-	err    error
-}
-
-func NewUnsubscribeByUserIdResultFromJson(data string) UnsubscribeByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUnsubscribeByUserIdResultFromDict(dict)
-}
-
-func NewUnsubscribeByUserIdResultFromDict(data map[string]interface{}) UnsubscribeByUserIdResult {
-    return UnsubscribeByUserIdResult {
-        Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
-    }
-}
-
-func (p UnsubscribeByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
-}
-
-func (p UnsubscribeByUserIdResult) Pointer() *UnsubscribeByUserIdResult {
     return &p
 }
 
@@ -1200,5 +1010,195 @@ func (p UpdateCurrentRankingMasterFromGitHubResult) ToDict() map[string]interfac
 }
 
 func (p UpdateCurrentRankingMasterFromGitHubResult) Pointer() *UpdateCurrentRankingMasterFromGitHubResult {
+    return &p
+}
+
+type GetSubscribeResult struct {
+    Item *SubscribeUser `json:"item"`
+}
+
+type GetSubscribeAsyncResult struct {
+	result *GetSubscribeResult
+	err    error
+}
+
+func NewGetSubscribeResultFromJson(data string) GetSubscribeResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSubscribeResultFromDict(dict)
+}
+
+func NewGetSubscribeResultFromDict(data map[string]interface{}) GetSubscribeResult {
+    return GetSubscribeResult {
+        Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetSubscribeResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetSubscribeResult) Pointer() *GetSubscribeResult {
+    return &p
+}
+
+type GetSubscribeByUserIdResult struct {
+    Item *SubscribeUser `json:"item"`
+}
+
+type GetSubscribeByUserIdAsyncResult struct {
+	result *GetSubscribeByUserIdResult
+	err    error
+}
+
+func NewGetSubscribeByUserIdResultFromJson(data string) GetSubscribeByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSubscribeByUserIdResultFromDict(dict)
+}
+
+func NewGetSubscribeByUserIdResultFromDict(data map[string]interface{}) GetSubscribeByUserIdResult {
+    return GetSubscribeByUserIdResult {
+        Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetSubscribeByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetSubscribeByUserIdResult) Pointer() *GetSubscribeByUserIdResult {
+    return &p
+}
+
+type UnsubscribeResult struct {
+    Item *SubscribeUser `json:"item"`
+}
+
+type UnsubscribeAsyncResult struct {
+	result *UnsubscribeResult
+	err    error
+}
+
+func NewUnsubscribeResultFromJson(data string) UnsubscribeResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnsubscribeResultFromDict(dict)
+}
+
+func NewUnsubscribeResultFromDict(data map[string]interface{}) UnsubscribeResult {
+    return UnsubscribeResult {
+        Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UnsubscribeResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UnsubscribeResult) Pointer() *UnsubscribeResult {
+    return &p
+}
+
+type UnsubscribeByUserIdResult struct {
+    Item *SubscribeUser `json:"item"`
+}
+
+type UnsubscribeByUserIdAsyncResult struct {
+	result *UnsubscribeByUserIdResult
+	err    error
+}
+
+func NewUnsubscribeByUserIdResultFromJson(data string) UnsubscribeByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnsubscribeByUserIdResultFromDict(dict)
+}
+
+func NewUnsubscribeByUserIdResultFromDict(data map[string]interface{}) UnsubscribeByUserIdResult {
+    return UnsubscribeByUserIdResult {
+        Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UnsubscribeByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UnsubscribeByUserIdResult) Pointer() *UnsubscribeByUserIdResult {
+    return &p
+}
+
+type DescribeSubscribesByCategoryNameResult struct {
+    Items []SubscribeUser `json:"items"`
+}
+
+type DescribeSubscribesByCategoryNameAsyncResult struct {
+	result *DescribeSubscribesByCategoryNameResult
+	err    error
+}
+
+func NewDescribeSubscribesByCategoryNameResultFromJson(data string) DescribeSubscribesByCategoryNameResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSubscribesByCategoryNameResultFromDict(dict)
+}
+
+func NewDescribeSubscribesByCategoryNameResultFromDict(data map[string]interface{}) DescribeSubscribesByCategoryNameResult {
+    return DescribeSubscribesByCategoryNameResult {
+        Items: CastSubscribeUsers(core.CastArray(data["items"])),
+    }
+}
+
+func (p DescribeSubscribesByCategoryNameResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSubscribeUsersFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p DescribeSubscribesByCategoryNameResult) Pointer() *DescribeSubscribesByCategoryNameResult {
+    return &p
+}
+
+type DescribeSubscribesByCategoryNameAndUserIdResult struct {
+    Items []SubscribeUser `json:"items"`
+}
+
+type DescribeSubscribesByCategoryNameAndUserIdAsyncResult struct {
+	result *DescribeSubscribesByCategoryNameAndUserIdResult
+	err    error
+}
+
+func NewDescribeSubscribesByCategoryNameAndUserIdResultFromJson(data string) DescribeSubscribesByCategoryNameAndUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSubscribesByCategoryNameAndUserIdResultFromDict(dict)
+}
+
+func NewDescribeSubscribesByCategoryNameAndUserIdResultFromDict(data map[string]interface{}) DescribeSubscribesByCategoryNameAndUserIdResult {
+    return DescribeSubscribesByCategoryNameAndUserIdResult {
+        Items: CastSubscribeUsers(core.CastArray(data["items"])),
+    }
+}
+
+func (p DescribeSubscribesByCategoryNameAndUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSubscribeUsersFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p DescribeSubscribesByCategoryNameAndUserIdResult) Pointer() *DescribeSubscribesByCategoryNameAndUserIdResult {
     return &p
 }

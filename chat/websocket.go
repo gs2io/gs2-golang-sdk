@@ -1923,6 +1923,9 @@ func (p Gs2ChatWebSocketClient) DeleteMessageAsync(
     if request.RoomName != nil && *request.RoomName != "" {
         bodies["roomName"] = *request.RoomName
     }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
     if request.MessageName != nil && *request.MessageName != "" {
         bodies["messageName"] = *request.MessageName
     }

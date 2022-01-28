@@ -992,3 +992,51 @@ func CastVotesFromDict(data []Vote) []interface{} {
     }
     return v
 }
+
+type TimeSpan struct {
+	Days *int32 `json:"days"`
+	Hours *int32 `json:"hours"`
+	Minutes *int32 `json:"minutes"`
+}
+
+func NewTimeSpanFromJson(data string) TimeSpan {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewTimeSpanFromDict(dict)
+}
+
+func NewTimeSpanFromDict(data map[string]interface{}) TimeSpan {
+    return TimeSpan {
+        Days: core.CastInt32(data["days"]),
+        Hours: core.CastInt32(data["hours"]),
+        Minutes: core.CastInt32(data["minutes"]),
+    }
+}
+
+func (p TimeSpan) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "days": p.Days,
+        "hours": p.Hours,
+        "minutes": p.Minutes,
+    }
+}
+
+func (p TimeSpan) Pointer() *TimeSpan {
+    return &p
+}
+
+func CastTimeSpans(data []interface{}) []TimeSpan {
+	v := make([]TimeSpan, 0)
+	for _, d := range data {
+		v = append(v, NewTimeSpanFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTimeSpansFromDict(data []TimeSpan) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}

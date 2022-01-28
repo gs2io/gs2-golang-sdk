@@ -84,6 +84,7 @@ type Counter struct {
 	Name *string `json:"name"`
 	UserId *string `json:"userId"`
 	Count *int32 `json:"count"`
+	NextResetAt *int64 `json:"nextResetAt"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -101,6 +102,7 @@ func NewCounterFromDict(data map[string]interface{}) Counter {
         Name: core.CastString(data["name"]),
         UserId: core.CastString(data["userId"]),
         Count: core.CastInt32(data["count"]),
+        NextResetAt: core.CastInt64(data["nextResetAt"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
     }
@@ -113,6 +115,7 @@ func (p Counter) ToDict() map[string]interface{} {
         "name": p.Name,
         "userId": p.UserId,
         "count": p.Count,
+        "nextResetAt": p.NextResetAt,
         "createdAt": p.CreatedAt,
         "updatedAt": p.UpdatedAt,
     }

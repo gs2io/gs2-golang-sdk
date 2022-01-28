@@ -592,6 +592,96 @@ func CastFriendRequestsFromDict(data []FriendRequest) []interface{} {
     return v
 }
 
+type SendFriendRequest struct {
+	UserId *string `json:"userId"`
+	TargetUserId *string `json:"targetUserId"`
+}
+
+func NewSendFriendRequestFromJson(data string) SendFriendRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSendFriendRequestFromDict(dict)
+}
+
+func NewSendFriendRequestFromDict(data map[string]interface{}) SendFriendRequest {
+    return SendFriendRequest {
+        UserId: core.CastString(data["userId"]),
+        TargetUserId: core.CastString(data["targetUserId"]),
+    }
+}
+
+func (p SendFriendRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "userId": p.UserId,
+        "targetUserId": p.TargetUserId,
+    }
+}
+
+func (p SendFriendRequest) Pointer() *SendFriendRequest {
+    return &p
+}
+
+func CastSendFriendRequests(data []interface{}) []SendFriendRequest {
+	v := make([]SendFriendRequest, 0)
+	for _, d := range data {
+		v = append(v, NewSendFriendRequestFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSendFriendRequestsFromDict(data []SendFriendRequest) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type ReceiveFriendRequest struct {
+	UserId *string `json:"userId"`
+	TargetUserId *string `json:"targetUserId"`
+}
+
+func NewReceiveFriendRequestFromJson(data string) ReceiveFriendRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewReceiveFriendRequestFromDict(dict)
+}
+
+func NewReceiveFriendRequestFromDict(data map[string]interface{}) ReceiveFriendRequest {
+    return ReceiveFriendRequest {
+        UserId: core.CastString(data["userId"]),
+        TargetUserId: core.CastString(data["targetUserId"]),
+    }
+}
+
+func (p ReceiveFriendRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "userId": p.UserId,
+        "targetUserId": p.TargetUserId,
+    }
+}
+
+func (p ReceiveFriendRequest) Pointer() *ReceiveFriendRequest {
+    return &p
+}
+
+func CastReceiveFriendRequests(data []interface{}) []ReceiveFriendRequest {
+	v := make([]ReceiveFriendRequest, 0)
+	for _, d := range data {
+		v = append(v, NewReceiveFriendRequestFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastReceiveFriendRequestsFromDict(data []ReceiveFriendRequest) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
 type PublicProfile struct {
 	UserId *string `json:"userId"`
 	PublicProfile *string `json:"publicProfile"`

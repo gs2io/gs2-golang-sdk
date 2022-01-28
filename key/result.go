@@ -182,6 +182,7 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
+    Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -197,11 +198,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
     return DeleteNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 
@@ -339,6 +342,7 @@ func (p GetKeyResult) Pointer() *GetKeyResult {
 }
 
 type DeleteKeyResult struct {
+    Item *Key `json:"item"`
 }
 
 type DeleteKeyAsyncResult struct {
@@ -354,11 +358,13 @@ func NewDeleteKeyResultFromJson(data string) DeleteKeyResult {
 
 func NewDeleteKeyResultFromDict(data map[string]interface{}) DeleteKeyResult {
     return DeleteKeyResult {
+        Item: NewKeyFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteKeyResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 
@@ -558,6 +564,7 @@ func (p GetGitHubApiKeyResult) Pointer() *GetGitHubApiKeyResult {
 }
 
 type DeleteGitHubApiKeyResult struct {
+    Item *GitHubApiKey `json:"item"`
 }
 
 type DeleteGitHubApiKeyAsyncResult struct {
@@ -573,11 +580,13 @@ func NewDeleteGitHubApiKeyResultFromJson(data string) DeleteGitHubApiKeyResult {
 
 func NewDeleteGitHubApiKeyResultFromDict(data map[string]interface{}) DeleteGitHubApiKeyResult {
     return DeleteGitHubApiKeyResult {
+        Item: NewGitHubApiKeyFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteGitHubApiKeyResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 

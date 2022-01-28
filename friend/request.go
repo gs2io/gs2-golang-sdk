@@ -454,35 +454,301 @@ func (p DeleteProfileByUserIdRequest) Pointer() *DeleteProfileByUserIdRequest {
     return &p
 }
 
-type GetPublicProfileRequest struct {
+type DescribeFriendsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    WithProfile *bool `json:"withProfile"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeFriendsRequestFromJson(data string) DescribeFriendsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeFriendsRequestFromDict(dict)
+}
+
+func NewDescribeFriendsRequestFromDict(data map[string]interface{}) DescribeFriendsRequest {
+    return DescribeFriendsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        WithProfile: core.CastBool(data["withProfile"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeFriendsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "withProfile": p.WithProfile,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeFriendsRequest) Pointer() *DescribeFriendsRequest {
+    return &p
+}
+
+type DescribeFriendsByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
+    WithProfile *bool `json:"withProfile"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
 }
 
-func NewGetPublicProfileRequestFromJson(data string) GetPublicProfileRequest {
+func NewDescribeFriendsByUserIdRequestFromJson(data string) DescribeFriendsByUserIdRequest {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetPublicProfileRequestFromDict(dict)
+    return NewDescribeFriendsByUserIdRequestFromDict(dict)
 }
 
-func NewGetPublicProfileRequestFromDict(data map[string]interface{}) GetPublicProfileRequest {
-    return GetPublicProfileRequest {
+func NewDescribeFriendsByUserIdRequestFromDict(data map[string]interface{}) DescribeFriendsByUserIdRequest {
+    return DescribeFriendsByUserIdRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         UserId: core.CastString(data["userId"]),
+        WithProfile: core.CastBool(data["withProfile"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
     }
 }
 
-func (p GetPublicProfileRequest) ToDict() map[string]interface{} {
+func (p DescribeFriendsByUserIdRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "userId": p.UserId,
+        "withProfile": p.WithProfile,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
     }
 }
 
-func (p GetPublicProfileRequest) Pointer() *GetPublicProfileRequest {
+func (p DescribeFriendsByUserIdRequest) Pointer() *DescribeFriendsByUserIdRequest {
+    return &p
+}
+
+type DescribeBlackListRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeBlackListRequestFromJson(data string) DescribeBlackListRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBlackListRequestFromDict(dict)
+}
+
+func NewDescribeBlackListRequestFromDict(data map[string]interface{}) DescribeBlackListRequest {
+    return DescribeBlackListRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeBlackListRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeBlackListRequest) Pointer() *DescribeBlackListRequest {
+    return &p
+}
+
+type DescribeBlackListByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeBlackListByUserIdRequestFromJson(data string) DescribeBlackListByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBlackListByUserIdRequestFromDict(dict)
+}
+
+func NewDescribeBlackListByUserIdRequestFromDict(data map[string]interface{}) DescribeBlackListByUserIdRequest {
+    return DescribeBlackListByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeBlackListByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeBlackListByUserIdRequest) Pointer() *DescribeBlackListByUserIdRequest {
+    return &p
+}
+
+type RegisterBlackListRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    TargetUserId *string `json:"targetUserId"`
+}
+
+func NewRegisterBlackListRequestFromJson(data string) RegisterBlackListRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRegisterBlackListRequestFromDict(dict)
+}
+
+func NewRegisterBlackListRequestFromDict(data map[string]interface{}) RegisterBlackListRequest {
+    return RegisterBlackListRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        TargetUserId: core.CastString(data["targetUserId"]),
+    }
+}
+
+func (p RegisterBlackListRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "targetUserId": p.TargetUserId,
+    }
+}
+
+func (p RegisterBlackListRequest) Pointer() *RegisterBlackListRequest {
+    return &p
+}
+
+type RegisterBlackListByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    TargetUserId *string `json:"targetUserId"`
+}
+
+func NewRegisterBlackListByUserIdRequestFromJson(data string) RegisterBlackListByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRegisterBlackListByUserIdRequestFromDict(dict)
+}
+
+func NewRegisterBlackListByUserIdRequestFromDict(data map[string]interface{}) RegisterBlackListByUserIdRequest {
+    return RegisterBlackListByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        TargetUserId: core.CastString(data["targetUserId"]),
+    }
+}
+
+func (p RegisterBlackListByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "targetUserId": p.TargetUserId,
+    }
+}
+
+func (p RegisterBlackListByUserIdRequest) Pointer() *RegisterBlackListByUserIdRequest {
+    return &p
+}
+
+type UnregisterBlackListRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    TargetUserId *string `json:"targetUserId"`
+}
+
+func NewUnregisterBlackListRequestFromJson(data string) UnregisterBlackListRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnregisterBlackListRequestFromDict(dict)
+}
+
+func NewUnregisterBlackListRequestFromDict(data map[string]interface{}) UnregisterBlackListRequest {
+    return UnregisterBlackListRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        TargetUserId: core.CastString(data["targetUserId"]),
+    }
+}
+
+func (p UnregisterBlackListRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "targetUserId": p.TargetUserId,
+    }
+}
+
+func (p UnregisterBlackListRequest) Pointer() *UnregisterBlackListRequest {
+    return &p
+}
+
+type UnregisterBlackListByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    TargetUserId *string `json:"targetUserId"`
+}
+
+func NewUnregisterBlackListByUserIdRequestFromJson(data string) UnregisterBlackListByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnregisterBlackListByUserIdRequestFromDict(dict)
+}
+
+func NewUnregisterBlackListByUserIdRequestFromDict(data map[string]interface{}) UnregisterBlackListByUserIdRequest {
+    return UnregisterBlackListByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        TargetUserId: core.CastString(data["targetUserId"]),
+    }
+}
+
+func (p UnregisterBlackListByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "targetUserId": p.TargetUserId,
+    }
+}
+
+func (p UnregisterBlackListByUserIdRequest) Pointer() *UnregisterBlackListByUserIdRequest {
     return &p
 }
 
@@ -781,88 +1047,6 @@ func (p UnfollowByUserIdRequest) ToDict() map[string]interface{} {
 }
 
 func (p UnfollowByUserIdRequest) Pointer() *UnfollowByUserIdRequest {
-    return &p
-}
-
-type DescribeFriendsRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    AccessToken *string `json:"accessToken"`
-    WithProfile *bool `json:"withProfile"`
-    PageToken *string `json:"pageToken"`
-    Limit *int32 `json:"limit"`
-}
-
-func NewDescribeFriendsRequestFromJson(data string) DescribeFriendsRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeFriendsRequestFromDict(dict)
-}
-
-func NewDescribeFriendsRequestFromDict(data map[string]interface{}) DescribeFriendsRequest {
-    return DescribeFriendsRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-        WithProfile: core.CastBool(data["withProfile"]),
-        PageToken: core.CastString(data["pageToken"]),
-        Limit: core.CastInt32(data["limit"]),
-    }
-}
-
-func (p DescribeFriendsRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "accessToken": p.AccessToken,
-        "withProfile": p.WithProfile,
-        "pageToken": p.PageToken,
-        "limit": p.Limit,
-    }
-}
-
-func (p DescribeFriendsRequest) Pointer() *DescribeFriendsRequest {
-    return &p
-}
-
-type DescribeFriendsByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    UserId *string `json:"userId"`
-    WithProfile *bool `json:"withProfile"`
-    PageToken *string `json:"pageToken"`
-    Limit *int32 `json:"limit"`
-}
-
-func NewDescribeFriendsByUserIdRequestFromJson(data string) DescribeFriendsByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeFriendsByUserIdRequestFromDict(dict)
-}
-
-func NewDescribeFriendsByUserIdRequestFromDict(data map[string]interface{}) DescribeFriendsByUserIdRequest {
-    return DescribeFriendsByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        UserId: core.CastString(data["userId"]),
-        WithProfile: core.CastBool(data["withProfile"]),
-        PageToken: core.CastString(data["pageToken"]),
-        Limit: core.CastInt32(data["limit"]),
-    }
-}
-
-func (p DescribeFriendsByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "userId": p.UserId,
-        "withProfile": p.WithProfile,
-        "pageToken": p.PageToken,
-        "limit": p.Limit,
-    }
-}
-
-func (p DescribeFriendsByUserIdRequest) Pointer() *DescribeFriendsByUserIdRequest {
     return &p
 }
 
@@ -1584,39 +1768,7 @@ func (p RejectRequestByUserIdRequest) Pointer() *RejectRequestByUserIdRequest {
     return &p
 }
 
-type DescribeBlackListRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    AccessToken *string `json:"accessToken"`
-}
-
-func NewDescribeBlackListRequestFromJson(data string) DescribeBlackListRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeBlackListRequestFromDict(dict)
-}
-
-func NewDescribeBlackListRequestFromDict(data map[string]interface{}) DescribeBlackListRequest {
-    return DescribeBlackListRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-    }
-}
-
-func (p DescribeBlackListRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "accessToken": p.AccessToken,
-    }
-}
-
-func (p DescribeBlackListRequest) Pointer() *DescribeBlackListRequest {
-    return &p
-}
-
-type DescribeBlackListByUserIdRequest struct {
+type GetPublicProfileRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -1624,166 +1776,26 @@ type DescribeBlackListByUserIdRequest struct {
     UserId *string `json:"userId"`
 }
 
-func NewDescribeBlackListByUserIdRequestFromJson(data string) DescribeBlackListByUserIdRequest {
+func NewGetPublicProfileRequestFromJson(data string) GetPublicProfileRequest {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeBlackListByUserIdRequestFromDict(dict)
+    return NewGetPublicProfileRequestFromDict(dict)
 }
 
-func NewDescribeBlackListByUserIdRequestFromDict(data map[string]interface{}) DescribeBlackListByUserIdRequest {
-    return DescribeBlackListByUserIdRequest {
+func NewGetPublicProfileRequestFromDict(data map[string]interface{}) GetPublicProfileRequest {
+    return GetPublicProfileRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         UserId: core.CastString(data["userId"]),
     }
 }
 
-func (p DescribeBlackListByUserIdRequest) ToDict() map[string]interface{} {
+func (p GetPublicProfileRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "userId": p.UserId,
     }
 }
 
-func (p DescribeBlackListByUserIdRequest) Pointer() *DescribeBlackListByUserIdRequest {
-    return &p
-}
-
-type RegisterBlackListRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    AccessToken *string `json:"accessToken"`
-    TargetUserId *string `json:"targetUserId"`
-}
-
-func NewRegisterBlackListRequestFromJson(data string) RegisterBlackListRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewRegisterBlackListRequestFromDict(dict)
-}
-
-func NewRegisterBlackListRequestFromDict(data map[string]interface{}) RegisterBlackListRequest {
-    return RegisterBlackListRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-        TargetUserId: core.CastString(data["targetUserId"]),
-    }
-}
-
-func (p RegisterBlackListRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "accessToken": p.AccessToken,
-        "targetUserId": p.TargetUserId,
-    }
-}
-
-func (p RegisterBlackListRequest) Pointer() *RegisterBlackListRequest {
-    return &p
-}
-
-type RegisterBlackListByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    UserId *string `json:"userId"`
-    TargetUserId *string `json:"targetUserId"`
-}
-
-func NewRegisterBlackListByUserIdRequestFromJson(data string) RegisterBlackListByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewRegisterBlackListByUserIdRequestFromDict(dict)
-}
-
-func NewRegisterBlackListByUserIdRequestFromDict(data map[string]interface{}) RegisterBlackListByUserIdRequest {
-    return RegisterBlackListByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        UserId: core.CastString(data["userId"]),
-        TargetUserId: core.CastString(data["targetUserId"]),
-    }
-}
-
-func (p RegisterBlackListByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "userId": p.UserId,
-        "targetUserId": p.TargetUserId,
-    }
-}
-
-func (p RegisterBlackListByUserIdRequest) Pointer() *RegisterBlackListByUserIdRequest {
-    return &p
-}
-
-type UnregisterBlackListRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    AccessToken *string `json:"accessToken"`
-    TargetUserId *string `json:"targetUserId"`
-}
-
-func NewUnregisterBlackListRequestFromJson(data string) UnregisterBlackListRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUnregisterBlackListRequestFromDict(dict)
-}
-
-func NewUnregisterBlackListRequestFromDict(data map[string]interface{}) UnregisterBlackListRequest {
-    return UnregisterBlackListRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-        TargetUserId: core.CastString(data["targetUserId"]),
-    }
-}
-
-func (p UnregisterBlackListRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "accessToken": p.AccessToken,
-        "targetUserId": p.TargetUserId,
-    }
-}
-
-func (p UnregisterBlackListRequest) Pointer() *UnregisterBlackListRequest {
-    return &p
-}
-
-type UnregisterBlackListByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    UserId *string `json:"userId"`
-    TargetUserId *string `json:"targetUserId"`
-}
-
-func NewUnregisterBlackListByUserIdRequestFromJson(data string) UnregisterBlackListByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUnregisterBlackListByUserIdRequestFromDict(dict)
-}
-
-func NewUnregisterBlackListByUserIdRequestFromDict(data map[string]interface{}) UnregisterBlackListByUserIdRequest {
-    return UnregisterBlackListByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        UserId: core.CastString(data["userId"]),
-        TargetUserId: core.CastString(data["targetUserId"]),
-    }
-}
-
-func (p UnregisterBlackListByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "userId": p.UserId,
-        "targetUserId": p.TargetUserId,
-    }
-}
-
-func (p UnregisterBlackListByUserIdRequest) Pointer() *UnregisterBlackListByUserIdRequest {
+func (p GetPublicProfileRequest) Pointer() *GetPublicProfileRequest {
     return &p
 }
