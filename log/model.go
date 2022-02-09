@@ -33,6 +33,7 @@ type Namespace struct {
 	AwsAccessKeyId *string `json:"awsAccessKeyId"`
 	AwsSecretAccessKey *string `json:"awsSecretAccessKey"`
 	FirehoseStreamName *string `json:"firehoseStreamName"`
+	Status *string `json:"status"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -56,6 +57,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         AwsAccessKeyId: core.CastString(data["awsAccessKeyId"]),
         AwsSecretAccessKey: core.CastString(data["awsSecretAccessKey"]),
         FirehoseStreamName: core.CastString(data["firehoseStreamName"]),
+        Status: core.CastString(data["status"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
     }
@@ -74,6 +76,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "awsAccessKeyId": p.AwsAccessKeyId,
         "awsSecretAccessKey": p.AwsSecretAccessKey,
         "firehoseStreamName": p.FirehoseStreamName,
+        "status": p.Status,
         "createdAt": p.CreatedAt,
         "updatedAt": p.UpdatedAt,
     }
@@ -218,7 +221,7 @@ type IssueStampSheetLog struct {
 	UserId *string `json:"userId"`
 	Action *string `json:"action"`
 	Args *string `json:"args"`
-	Tasks *string `json:"tasks"`
+	Tasks []string `json:"tasks"`
 }
 
 func NewIssueStampSheetLogFromJson(data string) IssueStampSheetLog {
@@ -236,7 +239,7 @@ func NewIssueStampSheetLogFromDict(data map[string]interface{}) IssueStampSheetL
         UserId: core.CastString(data["userId"]),
         Action: core.CastString(data["action"]),
         Args: core.CastString(data["args"]),
-        Tasks: core.CastString(data["tasks"]),
+        Tasks: core.CastStrings(core.CastArray(data["tasks"])),
     }
 }
 
@@ -249,7 +252,9 @@ func (p IssueStampSheetLog) ToDict() map[string]interface{} {
         "userId": p.UserId,
         "action": p.Action,
         "args": p.Args,
-        "tasks": p.Tasks,
+        "tasks": core.CastStringsFromDict(
+        p.Tasks,
+    ),
     }
 }
 
