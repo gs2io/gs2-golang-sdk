@@ -17,49 +17,74 @@ permissions and limitations under the License.
 package key
 
 import (
-    "encoding/json"
-    "github.com/gs2io/gs2-golang-sdk/core"
+	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Namespace struct {
-	NamespaceId *string `json:"namespaceId"`
-	Name *string `json:"name"`
-	Description *string `json:"description"`
-	LogSetting *LogSetting `json:"logSetting"`
-	CreatedAt *int64 `json:"createdAt"`
-	UpdatedAt *int64 `json:"updatedAt"`
+	NamespaceId *string     `json:"namespaceId"`
+	Name        *string     `json:"name"`
+	Description *string     `json:"description"`
+	LogSetting  *LogSetting `json:"logSetting"`
+	CreatedAt   *int64      `json:"createdAt"`
+	UpdatedAt   *int64      `json:"updatedAt"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewNamespaceFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
-    return Namespace {
-        NamespaceId: core.CastString(data["namespaceId"]),
-        Name: core.CastString(data["name"]),
-        Description: core.CastString(data["description"]),
-        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-        UpdatedAt: core.CastInt64(data["updatedAt"]),
-    }
+	return Namespace{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Name:        core.CastString(data["name"]),
+		Description: core.CastString(data["description"]),
+		LogSetting:  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:   core.CastInt64(data["createdAt"]),
+		UpdatedAt:   core.CastInt64(data["updatedAt"]),
+	}
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceId": p.NamespaceId,
-        "name": p.Name,
-        "description": p.Description,
-        "logSetting": p.LogSetting.ToDict(),
-        "createdAt": p.CreatedAt,
-        "updatedAt": p.UpdatedAt,
-    }
+
+	var namespaceId *string
+	if p.NamespaceId != nil {
+		namespaceId = p.NamespaceId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var description *string
+	if p.Description != nil {
+		description = p.Description
+	}
+	var logSetting map[string]interface{}
+	if p.LogSetting != nil {
+		logSetting = p.LogSetting.ToDict()
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	return map[string]interface{}{
+		"namespaceId": namespaceId,
+		"name":        name,
+		"description": description,
+		"logSetting":  logSetting,
+		"createdAt":   createdAt,
+		"updatedAt":   updatedAt,
+	}
 }
 
 func (p Namespace) Pointer() *Namespace {
-    return &p
+	return &p
 }
 
 func CastNamespaces(data []interface{}) []Namespace {
@@ -71,49 +96,70 @@ func CastNamespaces(data []interface{}) []Namespace {
 }
 
 func CastNamespacesFromDict(data []Namespace) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Key struct {
-	KeyId *string `json:"keyId"`
-	Name *string `json:"name"`
+	KeyId       *string `json:"keyId"`
+	Name        *string `json:"name"`
 	Description *string `json:"description"`
-	CreatedAt *int64 `json:"createdAt"`
-	UpdatedAt *int64 `json:"updatedAt"`
+	CreatedAt   *int64  `json:"createdAt"`
+	UpdatedAt   *int64  `json:"updatedAt"`
 }
 
 func NewKeyFromJson(data string) Key {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewKeyFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewKeyFromDict(dict)
 }
 
 func NewKeyFromDict(data map[string]interface{}) Key {
-    return Key {
-        KeyId: core.CastString(data["keyId"]),
-        Name: core.CastString(data["name"]),
-        Description: core.CastString(data["description"]),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-        UpdatedAt: core.CastInt64(data["updatedAt"]),
-    }
+	return Key{
+		KeyId:       core.CastString(data["keyId"]),
+		Name:        core.CastString(data["name"]),
+		Description: core.CastString(data["description"]),
+		CreatedAt:   core.CastInt64(data["createdAt"]),
+		UpdatedAt:   core.CastInt64(data["updatedAt"]),
+	}
 }
 
 func (p Key) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "keyId": p.KeyId,
-        "name": p.Name,
-        "description": p.Description,
-        "createdAt": p.CreatedAt,
-        "updatedAt": p.UpdatedAt,
-    }
+
+	var keyId *string
+	if p.KeyId != nil {
+		keyId = p.KeyId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var description *string
+	if p.Description != nil {
+		description = p.Description
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	return map[string]interface{}{
+		"keyId":       keyId,
+		"name":        name,
+		"description": description,
+		"createdAt":   createdAt,
+		"updatedAt":   updatedAt,
+	}
 }
 
 func (p Key) Pointer() *Key {
-    return &p
+	return &p
 }
 
 func CastKeys(data []interface{}) []Key {
@@ -125,52 +171,77 @@ func CastKeys(data []interface{}) []Key {
 }
 
 func CastKeysFromDict(data []Key) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GitHubApiKey struct {
-	ApiKeyId *string `json:"apiKeyId"`
-	Name *string `json:"name"`
-	Description *string `json:"description"`
+	ApiKeyId          *string `json:"apiKeyId"`
+	Name              *string `json:"name"`
+	Description       *string `json:"description"`
 	EncryptionKeyName *string `json:"encryptionKeyName"`
-	CreatedAt *int64 `json:"createdAt"`
-	UpdatedAt *int64 `json:"updatedAt"`
+	CreatedAt         *int64  `json:"createdAt"`
+	UpdatedAt         *int64  `json:"updatedAt"`
 }
 
 func NewGitHubApiKeyFromJson(data string) GitHubApiKey {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGitHubApiKeyFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubApiKeyFromDict(dict)
 }
 
 func NewGitHubApiKeyFromDict(data map[string]interface{}) GitHubApiKey {
-    return GitHubApiKey {
-        ApiKeyId: core.CastString(data["apiKeyId"]),
-        Name: core.CastString(data["name"]),
-        Description: core.CastString(data["description"]),
-        EncryptionKeyName: core.CastString(data["encryptionKeyName"]),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-        UpdatedAt: core.CastInt64(data["updatedAt"]),
-    }
+	return GitHubApiKey{
+		ApiKeyId:          core.CastString(data["apiKeyId"]),
+		Name:              core.CastString(data["name"]),
+		Description:       core.CastString(data["description"]),
+		EncryptionKeyName: core.CastString(data["encryptionKeyName"]),
+		CreatedAt:         core.CastInt64(data["createdAt"]),
+		UpdatedAt:         core.CastInt64(data["updatedAt"]),
+	}
 }
 
 func (p GitHubApiKey) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "apiKeyId": p.ApiKeyId,
-        "name": p.Name,
-        "description": p.Description,
-        "encryptionKeyName": p.EncryptionKeyName,
-        "createdAt": p.CreatedAt,
-        "updatedAt": p.UpdatedAt,
-    }
+
+	var apiKeyId *string
+	if p.ApiKeyId != nil {
+		apiKeyId = p.ApiKeyId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var description *string
+	if p.Description != nil {
+		description = p.Description
+	}
+	var encryptionKeyName *string
+	if p.EncryptionKeyName != nil {
+		encryptionKeyName = p.EncryptionKeyName
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	return map[string]interface{}{
+		"apiKeyId":          apiKeyId,
+		"name":              name,
+		"description":       description,
+		"encryptionKeyName": encryptionKeyName,
+		"createdAt":         createdAt,
+		"updatedAt":         updatedAt,
+	}
 }
 
 func (p GitHubApiKey) Pointer() *GitHubApiKey {
-    return &p
+	return &p
 }
 
 func CastGitHubApiKeys(data []interface{}) []GitHubApiKey {
@@ -182,11 +253,11 @@ func CastGitHubApiKeys(data []interface{}) []GitHubApiKey {
 }
 
 func CastGitHubApiKeysFromDict(data []GitHubApiKey) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
@@ -194,25 +265,30 @@ type LogSetting struct {
 }
 
 func NewLogSettingFromJson(data string) LogSetting {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewLogSettingFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
-    return LogSetting {
-        LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
-    }
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "loggingNamespaceId": p.LoggingNamespaceId,
-    }
+
+	var loggingNamespaceId *string
+	if p.LoggingNamespaceId != nil {
+		loggingNamespaceId = p.LoggingNamespaceId
+	}
+	return map[string]interface{}{
+		"loggingNamespaceId": loggingNamespaceId,
+	}
 }
 
 func (p LogSetting) Pointer() *LogSetting {
-    return &p
+	return &p
 }
 
 func CastLogSettings(data []interface{}) []LogSetting {
@@ -224,9 +300,9 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

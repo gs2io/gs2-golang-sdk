@@ -182,6 +182,7 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
+	Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -196,11 +197,15 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 }
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
-	return DeleteNamespaceResult{}
+	return DeleteNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
@@ -337,6 +342,7 @@ func (p GetAccountResult) Pointer() *GetAccountResult {
 }
 
 type DeleteAccountResult struct {
+	Item *Account `json:"item"`
 }
 
 type DeleteAccountAsyncResult struct {
@@ -351,11 +357,15 @@ func NewDeleteAccountResultFromJson(data string) DeleteAccountResult {
 }
 
 func NewDeleteAccountResultFromDict(data map[string]interface{}) DeleteAccountResult {
-	return DeleteAccountResult{}
+	return DeleteAccountResult{
+		Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteAccountResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteAccountResult) Pointer() *DeleteAccountResult {
@@ -658,6 +668,7 @@ func (p UpdateTakeOverByUserIdResult) Pointer() *UpdateTakeOverByUserIdResult {
 }
 
 type DeleteTakeOverResult struct {
+	Item *TakeOver `json:"item"`
 }
 
 type DeleteTakeOverAsyncResult struct {
@@ -672,11 +683,15 @@ func NewDeleteTakeOverResultFromJson(data string) DeleteTakeOverResult {
 }
 
 func NewDeleteTakeOverResultFromDict(data map[string]interface{}) DeleteTakeOverResult {
-	return DeleteTakeOverResult{}
+	return DeleteTakeOverResult{
+		Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteTakeOverResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteTakeOverResult) Pointer() *DeleteTakeOverResult {
@@ -684,6 +699,7 @@ func (p DeleteTakeOverResult) Pointer() *DeleteTakeOverResult {
 }
 
 type DeleteTakeOverByUserIdentifierResult struct {
+	Item *TakeOver `json:"item"`
 }
 
 type DeleteTakeOverByUserIdentifierAsyncResult struct {
@@ -698,11 +714,15 @@ func NewDeleteTakeOverByUserIdentifierResultFromJson(data string) DeleteTakeOver
 }
 
 func NewDeleteTakeOverByUserIdentifierResultFromDict(data map[string]interface{}) DeleteTakeOverByUserIdentifierResult {
-	return DeleteTakeOverByUserIdentifierResult{}
+	return DeleteTakeOverByUserIdentifierResult{
+		Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteTakeOverByUserIdentifierResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteTakeOverByUserIdentifierResult) Pointer() *DeleteTakeOverByUserIdentifierResult {

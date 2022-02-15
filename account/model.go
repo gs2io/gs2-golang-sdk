@@ -58,18 +58,63 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
+
+	var namespaceId *string
+	if p.NamespaceId != nil {
+		namespaceId = p.NamespaceId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var description *string
+	if p.Description != nil {
+		description = p.Description
+	}
+	var changePasswordIfTakeOver *bool
+	if p.ChangePasswordIfTakeOver != nil {
+		changePasswordIfTakeOver = p.ChangePasswordIfTakeOver
+	}
+	var createAccountScript map[string]interface{}
+	if p.CreateAccountScript != nil {
+		createAccountScript = p.CreateAccountScript.ToDict()
+	}
+	var authenticationScript map[string]interface{}
+	if p.AuthenticationScript != nil {
+		authenticationScript = p.AuthenticationScript.ToDict()
+	}
+	var createTakeOverScript map[string]interface{}
+	if p.CreateTakeOverScript != nil {
+		createTakeOverScript = p.CreateTakeOverScript.ToDict()
+	}
+	var doTakeOverScript map[string]interface{}
+	if p.DoTakeOverScript != nil {
+		doTakeOverScript = p.DoTakeOverScript.ToDict()
+	}
+	var logSetting map[string]interface{}
+	if p.LogSetting != nil {
+		logSetting = p.LogSetting.ToDict()
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
 	return map[string]interface{}{
-		"namespaceId":              p.NamespaceId,
-		"name":                     p.Name,
-		"description":              p.Description,
-		"changePasswordIfTakeOver": p.ChangePasswordIfTakeOver,
-		"createAccountScript":      p.CreateAccountScript.ToDict(),
-		"authenticationScript":     p.AuthenticationScript.ToDict(),
-		"createTakeOverScript":     p.CreateTakeOverScript.ToDict(),
-		"doTakeOverScript":         p.DoTakeOverScript.ToDict(),
-		"logSetting":               p.LogSetting.ToDict(),
-		"createdAt":                p.CreatedAt,
-		"updatedAt":                p.UpdatedAt,
+		"namespaceId":              namespaceId,
+		"name":                     name,
+		"description":              description,
+		"changePasswordIfTakeOver": changePasswordIfTakeOver,
+		"createAccountScript":      createAccountScript,
+		"authenticationScript":     authenticationScript,
+		"createTakeOverScript":     createTakeOverScript,
+		"doTakeOverScript":         doTakeOverScript,
+		"logSetting":               logSetting,
+		"createdAt":                createdAt,
+		"updatedAt":                updatedAt,
 	}
 }
 
@@ -118,12 +163,33 @@ func NewAccountFromDict(data map[string]interface{}) Account {
 }
 
 func (p Account) ToDict() map[string]interface{} {
+
+	var accountId *string
+	if p.AccountId != nil {
+		accountId = p.AccountId
+	}
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var password *string
+	if p.Password != nil {
+		password = p.Password
+	}
+	var timeOffset *int32
+	if p.TimeOffset != nil {
+		timeOffset = p.TimeOffset
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
 	return map[string]interface{}{
-		"accountId":  p.AccountId,
-		"userId":     p.UserId,
-		"password":   p.Password,
-		"timeOffset": p.TimeOffset,
-		"createdAt":  p.CreatedAt,
+		"accountId":  accountId,
+		"userId":     userId,
+		"password":   password,
+		"timeOffset": timeOffset,
+		"createdAt":  createdAt,
 	}
 }
 
@@ -174,13 +240,38 @@ func NewTakeOverFromDict(data map[string]interface{}) TakeOver {
 }
 
 func (p TakeOver) ToDict() map[string]interface{} {
+
+	var takeOverId *string
+	if p.TakeOverId != nil {
+		takeOverId = p.TakeOverId
+	}
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var _type *int32
+	if p.Type != nil {
+		_type = p.Type
+	}
+	var userIdentifier *string
+	if p.UserIdentifier != nil {
+		userIdentifier = p.UserIdentifier
+	}
+	var password *string
+	if p.Password != nil {
+		password = p.Password
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
 	return map[string]interface{}{
-		"takeOverId":     p.TakeOverId,
-		"userId":         p.UserId,
-		"type":           p.Type,
-		"userIdentifier": p.UserIdentifier,
-		"password":       p.Password,
-		"createdAt":      p.CreatedAt,
+		"takeOverId":     takeOverId,
+		"userId":         userId,
+		"type":           _type,
+		"userIdentifier": userIdentifier,
+		"password":       password,
+		"createdAt":      createdAt,
 	}
 }
 
@@ -227,11 +318,28 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
+
+	var triggerScriptId *string
+	if p.TriggerScriptId != nil {
+		triggerScriptId = p.TriggerScriptId
+	}
+	var doneTriggerTargetType *string
+	if p.DoneTriggerTargetType != nil {
+		doneTriggerTargetType = p.DoneTriggerTargetType
+	}
+	var doneTriggerScriptId *string
+	if p.DoneTriggerScriptId != nil {
+		doneTriggerScriptId = p.DoneTriggerScriptId
+	}
+	var doneTriggerQueueNamespaceId *string
+	if p.DoneTriggerQueueNamespaceId != nil {
+		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+	}
 	return map[string]interface{}{
-		"triggerScriptId":             p.TriggerScriptId,
-		"doneTriggerTargetType":       p.DoneTriggerTargetType,
-		"doneTriggerScriptId":         p.DoneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": p.DoneTriggerQueueNamespaceId,
+		"triggerScriptId":             triggerScriptId,
+		"doneTriggerTargetType":       doneTriggerTargetType,
+		"doneTriggerScriptId":         doneTriggerScriptId,
+		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
 	}
 }
 
@@ -272,8 +380,13 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
+
+	var loggingNamespaceId *string
+	if p.LoggingNamespaceId != nil {
+		loggingNamespaceId = p.LoggingNamespaceId
+	}
 	return map[string]interface{}{
-		"loggingNamespaceId": p.LoggingNamespaceId,
+		"loggingNamespaceId": loggingNamespaceId,
 	}
 }
 
