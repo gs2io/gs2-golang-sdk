@@ -63,6 +63,7 @@ type CreateNamespaceRequest struct {
     EnableDirectExchange *bool `json:"enableDirectExchange"`
     QueueNamespaceId *string `json:"queueNamespaceId"`
     KeyId *string `json:"keyId"`
+    ExchangeScript *ScriptSetting `json:"exchangeScript"`
     LogSetting *LogSetting `json:"logSetting"`
 }
 
@@ -80,6 +81,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
         EnableDirectExchange: core.CastBool(data["enableDirectExchange"]),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
+        ExchangeScript: NewScriptSettingFromDict(core.CastMap(data["exchangeScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
     }
 }
@@ -92,6 +94,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
         "enableDirectExchange": p.EnableDirectExchange,
         "queueNamespaceId": p.QueueNamespaceId,
         "keyId": p.KeyId,
+        "exchangeScript": p.ExchangeScript.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
     }
 }
@@ -168,6 +171,7 @@ type UpdateNamespaceRequest struct {
     EnableDirectExchange *bool `json:"enableDirectExchange"`
     QueueNamespaceId *string `json:"queueNamespaceId"`
     KeyId *string `json:"keyId"`
+    ExchangeScript *ScriptSetting `json:"exchangeScript"`
     LogSetting *LogSetting `json:"logSetting"`
 }
 
@@ -185,6 +189,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
         EnableDirectExchange: core.CastBool(data["enableDirectExchange"]),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
+        ExchangeScript: NewScriptSettingFromDict(core.CastMap(data["exchangeScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
     }
 }
@@ -197,6 +202,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
         "enableDirectExchange": p.EnableDirectExchange,
         "queueNamespaceId": p.QueueNamespaceId,
         "keyId": p.KeyId,
+        "exchangeScript": p.ExchangeScript.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
     }
 }

@@ -181,6 +181,9 @@ func (p Gs2ExchangeWebSocketClient) CreateNamespaceAsync(
     if request.KeyId != nil && *request.KeyId != "" {
         bodies["keyId"] = *request.KeyId
     }
+    if request.ExchangeScript != nil {
+        bodies["exchangeScript"] = request.ExchangeScript.ToDict()
+    }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
     }
@@ -435,6 +438,9 @@ func (p Gs2ExchangeWebSocketClient) UpdateNamespaceAsync(
     }
     if request.KeyId != nil && *request.KeyId != "" {
         bodies["keyId"] = *request.KeyId
+    }
+    if request.ExchangeScript != nil {
+        bodies["exchangeScript"] = request.ExchangeScript.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()

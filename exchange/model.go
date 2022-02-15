@@ -29,6 +29,7 @@ type Namespace struct {
 	EnableAwaitExchange *bool `json:"enableAwaitExchange"`
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	KeyId *string `json:"keyId"`
+	ExchangeScript *ScriptSetting `json:"exchangeScript"`
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
@@ -49,6 +50,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         EnableAwaitExchange: core.CastBool(data["enableAwaitExchange"]),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
+        ExchangeScript: NewScriptSettingFromDict(core.CastMap(data["exchangeScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
@@ -64,6 +66,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "enableAwaitExchange": p.EnableAwaitExchange,
         "queueNamespaceId": p.QueueNamespaceId,
         "keyId": p.KeyId,
+        "exchangeScript": p.ExchangeScript.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
         "createdAt": p.CreatedAt,
         "updatedAt": p.UpdatedAt,
@@ -443,6 +446,57 @@ func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
 }
 
 func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type ScriptSetting struct {
+	TriggerScriptId *string `json:"triggerScriptId"`
+	DoneTriggerTargetType *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId *string `json:"doneTriggerScriptId"`
+	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
+}
+
+func NewScriptSettingFromJson(data string) ScriptSetting {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewScriptSettingFromDict(dict)
+}
+
+func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
+    return ScriptSetting {
+        TriggerScriptId: core.CastString(data["triggerScriptId"]),
+        DoneTriggerTargetType: core.CastString(data["doneTriggerTargetType"]),
+        DoneTriggerScriptId: core.CastString(data["doneTriggerScriptId"]),
+        DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+    }
+}
+
+func (p ScriptSetting) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "triggerScriptId": p.TriggerScriptId,
+        "doneTriggerTargetType": p.DoneTriggerTargetType,
+        "doneTriggerScriptId": p.DoneTriggerScriptId,
+        "doneTriggerQueueNamespaceId": p.DoneTriggerQueueNamespaceId,
+    }
+}
+
+func (p ScriptSetting) Pointer() *ScriptSetting {
+    return &p
+}
+
+func CastScriptSettings(data []interface{}) []ScriptSetting {
+	v := make([]ScriptSetting, 0)
+	for _, d := range data {
+		v = append(v, NewScriptSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())
