@@ -16,6 +16,7 @@
 package core
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -221,6 +222,17 @@ func (p Gs2RestSession) CreateAuthorizationHeader() map[string]string {
 	}
 }
 
+func MarshalJson(v interface{}) ([]byte, error) {
+	buffer := bytes.NewBuffer(make([]byte, 0))
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v)
+	if err != nil {
+		return nil, err
+	}
+	return buffer.Bytes(), nil
+}
+
 func (p Gs2RestSession) send(job *NetworkJob) error {
 
 	if p.connection == nil {
@@ -232,7 +244,7 @@ func (p Gs2RestSession) send(job *NetworkJob) error {
 		return err
 	}
 
-	bodies, err := json.Marshal(job.Bodies)
+	bodies, err := MarshalJson(job.Bodies)
 	if err != nil {
 		err := BadRequestException{}
 		job.Callback <- AsyncResult{
