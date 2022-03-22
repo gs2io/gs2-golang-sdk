@@ -54,16 +54,53 @@ func NewAccountFromDict(data map[string]interface{}) Account {
 }
 
 func (p Account) ToDict() map[string]interface{} {
+    
+    var accountId *string
+    if p.AccountId != nil {
+        accountId = p.AccountId
+    }
+    var ownerId *string
+    if p.OwnerId != nil {
+        ownerId = p.OwnerId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var email *string
+    if p.Email != nil {
+        email = p.Email
+    }
+    var fullName *string
+    if p.FullName != nil {
+        fullName = p.FullName
+    }
+    var companyName *string
+    if p.CompanyName != nil {
+        companyName = p.CompanyName
+    }
+    var status *string
+    if p.Status != nil {
+        status = p.Status
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
     return map[string]interface{} {
-        "accountId": p.AccountId,
-        "ownerId": p.OwnerId,
-        "name": p.Name,
-        "email": p.Email,
-        "fullName": p.FullName,
-        "companyName": p.CompanyName,
-        "status": p.Status,
-        "createdAt": p.CreatedAt,
-        "updatedAt": p.UpdatedAt,
+        "accountId": accountId,
+        "ownerId": ownerId,
+        "name": name,
+        "email": email,
+        "fullName": fullName,
+        "companyName": companyName,
+        "status": status,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
     }
 }
 
@@ -124,18 +161,63 @@ func NewProjectFromDict(data map[string]interface{}) Project {
 }
 
 func (p Project) ToDict() map[string]interface{} {
+    
+    var projectId *string
+    if p.ProjectId != nil {
+        projectId = p.ProjectId
+    }
+    var accountName *string
+    if p.AccountName != nil {
+        accountName = p.AccountName
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var description *string
+    if p.Description != nil {
+        description = p.Description
+    }
+    var plan *string
+    if p.Plan != nil {
+        plan = p.Plan
+    }
+    var billingMethodName *string
+    if p.BillingMethodName != nil {
+        billingMethodName = p.BillingMethodName
+    }
+    var enableEventBridge *string
+    if p.EnableEventBridge != nil {
+        enableEventBridge = p.EnableEventBridge
+    }
+    var eventBridgeAwsAccountId *string
+    if p.EventBridgeAwsAccountId != nil {
+        eventBridgeAwsAccountId = p.EventBridgeAwsAccountId
+    }
+    var eventBridgeAwsRegion *string
+    if p.EventBridgeAwsRegion != nil {
+        eventBridgeAwsRegion = p.EventBridgeAwsRegion
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
     return map[string]interface{} {
-        "projectId": p.ProjectId,
-        "accountName": p.AccountName,
-        "name": p.Name,
-        "description": p.Description,
-        "plan": p.Plan,
-        "billingMethodName": p.BillingMethodName,
-        "enableEventBridge": p.EnableEventBridge,
-        "eventBridgeAwsAccountId": p.EventBridgeAwsAccountId,
-        "eventBridgeAwsRegion": p.EventBridgeAwsRegion,
-        "createdAt": p.CreatedAt,
-        "updatedAt": p.UpdatedAt,
+        "projectId": projectId,
+        "accountName": accountName,
+        "name": name,
+        "description": description,
+        "plan": plan,
+        "billingMethodName": billingMethodName,
+        "enableEventBridge": enableEventBridge,
+        "eventBridgeAwsAccountId": eventBridgeAwsAccountId,
+        "eventBridgeAwsRegion": eventBridgeAwsRegion,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
     }
 }
 
@@ -196,18 +278,63 @@ func NewBillingMethodFromDict(data map[string]interface{}) BillingMethod {
 }
 
 func (p BillingMethod) ToDict() map[string]interface{} {
+    
+    var billingMethodId *string
+    if p.BillingMethodId != nil {
+        billingMethodId = p.BillingMethodId
+    }
+    var accountName *string
+    if p.AccountName != nil {
+        accountName = p.AccountName
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var description *string
+    if p.Description != nil {
+        description = p.Description
+    }
+    var methodType *string
+    if p.MethodType != nil {
+        methodType = p.MethodType
+    }
+    var cardSignatureName *string
+    if p.CardSignatureName != nil {
+        cardSignatureName = p.CardSignatureName
+    }
+    var cardBrand *string
+    if p.CardBrand != nil {
+        cardBrand = p.CardBrand
+    }
+    var cardLast4 *string
+    if p.CardLast4 != nil {
+        cardLast4 = p.CardLast4
+    }
+    var partnerId *string
+    if p.PartnerId != nil {
+        partnerId = p.PartnerId
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
     return map[string]interface{} {
-        "billingMethodId": p.BillingMethodId,
-        "accountName": p.AccountName,
-        "name": p.Name,
-        "description": p.Description,
-        "methodType": p.MethodType,
-        "cardSignatureName": p.CardSignatureName,
-        "cardBrand": p.CardBrand,
-        "cardLast4": p.CardLast4,
-        "partnerId": p.PartnerId,
-        "createdAt": p.CreatedAt,
-        "updatedAt": p.UpdatedAt,
+        "billingMethodId": billingMethodId,
+        "accountName": accountName,
+        "name": name,
+        "description": description,
+        "methodType": methodType,
+        "cardSignatureName": cardSignatureName,
+        "cardBrand": cardBrand,
+        "cardLast4": cardLast4,
+        "partnerId": partnerId,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
     }
 }
 
@@ -262,15 +389,48 @@ func NewReceiptFromDict(data map[string]interface{}) Receipt {
 }
 
 func (p Receipt) ToDict() map[string]interface{} {
+    
+    var receiptId *string
+    if p.ReceiptId != nil {
+        receiptId = p.ReceiptId
+    }
+    var accountName *string
+    if p.AccountName != nil {
+        accountName = p.AccountName
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var date *int64
+    if p.Date != nil {
+        date = p.Date
+    }
+    var amount *string
+    if p.Amount != nil {
+        amount = p.Amount
+    }
+    var pdfUrl *string
+    if p.PdfUrl != nil {
+        pdfUrl = p.PdfUrl
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
     return map[string]interface{} {
-        "receiptId": p.ReceiptId,
-        "accountName": p.AccountName,
-        "name": p.Name,
-        "date": p.Date,
-        "amount": p.Amount,
-        "pdfUrl": p.PdfUrl,
-        "createdAt": p.CreatedAt,
-        "updatedAt": p.UpdatedAt,
+        "receiptId": receiptId,
+        "accountName": accountName,
+        "name": name,
+        "date": date,
+        "amount": amount,
+        "pdfUrl": pdfUrl,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
     }
 }
 
@@ -302,7 +462,7 @@ type Billing struct {
 	Region *string `json:"region"`
 	Service *string `json:"service"`
 	ActivityType *string `json:"activityType"`
-	Unit *int64 `json:"unit"`
+	Unit *float64 `json:"unit"`
 	UnitName *string `json:"unitName"`
 	Price *int64 `json:"price"`
 	Currency *string `json:"currency"`
@@ -325,7 +485,7 @@ func NewBillingFromDict(data map[string]interface{}) Billing {
         Region: core.CastString(data["region"]),
         Service: core.CastString(data["service"]),
         ActivityType: core.CastString(data["activityType"]),
-        Unit: core.CastInt64(data["unit"]),
+        Unit: core.CastFloat64(data["unit"]),
         UnitName: core.CastString(data["unitName"]),
         Price: core.CastInt64(data["price"]),
         Currency: core.CastString(data["currency"]),
@@ -335,20 +495,73 @@ func NewBillingFromDict(data map[string]interface{}) Billing {
 }
 
 func (p Billing) ToDict() map[string]interface{} {
+    
+    var billingId *string
+    if p.BillingId != nil {
+        billingId = p.BillingId
+    }
+    var projectName *string
+    if p.ProjectName != nil {
+        projectName = p.ProjectName
+    }
+    var year *int32
+    if p.Year != nil {
+        year = p.Year
+    }
+    var month *int32
+    if p.Month != nil {
+        month = p.Month
+    }
+    var region *string
+    if p.Region != nil {
+        region = p.Region
+    }
+    var service *string
+    if p.Service != nil {
+        service = p.Service
+    }
+    var activityType *string
+    if p.ActivityType != nil {
+        activityType = p.ActivityType
+    }
+    var unit *float64
+    if p.Unit != nil {
+        unit = p.Unit
+    }
+    var unitName *string
+    if p.UnitName != nil {
+        unitName = p.UnitName
+    }
+    var price *int64
+    if p.Price != nil {
+        price = p.Price
+    }
+    var currency *string
+    if p.Currency != nil {
+        currency = p.Currency
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
     return map[string]interface{} {
-        "billingId": p.BillingId,
-        "projectName": p.ProjectName,
-        "year": p.Year,
-        "month": p.Month,
-        "region": p.Region,
-        "service": p.Service,
-        "activityType": p.ActivityType,
-        "unit": p.Unit,
-        "unitName": p.UnitName,
-        "price": p.Price,
-        "currency": p.Currency,
-        "createdAt": p.CreatedAt,
-        "updatedAt": p.UpdatedAt,
+        "billingId": billingId,
+        "projectName": projectName,
+        "year": year,
+        "month": month,
+        "region": region,
+        "service": service,
+        "activityType": activityType,
+        "unit": unit,
+        "unitName": unitName,
+        "price": price,
+        "currency": currency,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
     }
 }
 

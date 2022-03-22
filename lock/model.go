@@ -17,74 +17,74 @@ permissions and limitations under the License.
 package lock
 
 import (
-	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+    "encoding/json"
+    "github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Namespace struct {
-	NamespaceId *string     `json:"namespaceId"`
-	Name        *string     `json:"name"`
-	Description *string     `json:"description"`
-	LogSetting  *LogSetting `json:"logSetting"`
-	CreatedAt   *int64      `json:"createdAt"`
-	UpdatedAt   *int64      `json:"updatedAt"`
+	NamespaceId *string `json:"namespaceId"`
+	Name *string `json:"name"`
+	Description *string `json:"description"`
+	LogSetting *LogSetting `json:"logSetting"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewNamespaceFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
-	return Namespace{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		LogSetting:  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-	}
+    return Namespace {
+        NamespaceId: core.CastString(data["namespaceId"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
-	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
-	}
-	var name *string
-	if p.Name != nil {
-		name = p.Name
-	}
-	var description *string
-	if p.Description != nil {
-		description = p.Description
-	}
-	var logSetting map[string]interface{}
-	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
-	}
-	var createdAt *int64
-	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
-	}
-	var updatedAt *int64
-	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
-	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"name":        name,
-		"description": description,
-		"logSetting":  logSetting,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-	}
+    
+    var namespaceId *string
+    if p.NamespaceId != nil {
+        namespaceId = p.NamespaceId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var description *string
+    if p.Description != nil {
+        description = p.Description
+    }
+    var logSetting map[string]interface{}
+    if p.LogSetting != nil {
+        logSetting = p.LogSetting.ToDict()
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "namespaceId": namespaceId,
+        "name": name,
+        "description": description,
+        "logSetting": logSetting,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
 }
 
 func (p Namespace) Pointer() *Namespace {
-	return &p
+    return &p
 }
 
 func CastNamespaces(data []interface{}) []Namespace {
@@ -96,70 +96,70 @@ func CastNamespaces(data []interface{}) []Namespace {
 }
 
 func CastNamespacesFromDict(data []Namespace) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Mutex struct {
-	MutexId       *string `json:"mutexId"`
-	UserId        *string `json:"userId"`
-	PropertyId    *string `json:"propertyId"`
+	MutexId *string `json:"mutexId"`
+	UserId *string `json:"userId"`
+	PropertyId *string `json:"propertyId"`
 	TransactionId *string `json:"transactionId"`
-	CreatedAt     *int64  `json:"createdAt"`
+	CreatedAt *int64 `json:"createdAt"`
 }
 
 func NewMutexFromJson(data string) Mutex {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMutexFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewMutexFromDict(dict)
 }
 
 func NewMutexFromDict(data map[string]interface{}) Mutex {
-	return Mutex{
-		MutexId:       core.CastString(data["mutexId"]),
-		UserId:        core.CastString(data["userId"]),
-		PropertyId:    core.CastString(data["propertyId"]),
-		TransactionId: core.CastString(data["transactionId"]),
-		CreatedAt:     core.CastInt64(data["createdAt"]),
-	}
+    return Mutex {
+        MutexId: core.CastString(data["mutexId"]),
+        UserId: core.CastString(data["userId"]),
+        PropertyId: core.CastString(data["propertyId"]),
+        TransactionId: core.CastString(data["transactionId"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+    }
 }
 
 func (p Mutex) ToDict() map[string]interface{} {
-
-	var mutexId *string
-	if p.MutexId != nil {
-		mutexId = p.MutexId
-	}
-	var userId *string
-	if p.UserId != nil {
-		userId = p.UserId
-	}
-	var propertyId *string
-	if p.PropertyId != nil {
-		propertyId = p.PropertyId
-	}
-	var transactionId *string
-	if p.TransactionId != nil {
-		transactionId = p.TransactionId
-	}
-	var createdAt *int64
-	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
-	}
-	return map[string]interface{}{
-		"mutexId":       mutexId,
-		"userId":        userId,
-		"propertyId":    propertyId,
-		"transactionId": transactionId,
-		"createdAt":     createdAt,
-	}
+    
+    var mutexId *string
+    if p.MutexId != nil {
+        mutexId = p.MutexId
+    }
+    var userId *string
+    if p.UserId != nil {
+        userId = p.UserId
+    }
+    var propertyId *string
+    if p.PropertyId != nil {
+        propertyId = p.PropertyId
+    }
+    var transactionId *string
+    if p.TransactionId != nil {
+        transactionId = p.TransactionId
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    return map[string]interface{} {
+        "mutexId": mutexId,
+        "userId": userId,
+        "propertyId": propertyId,
+        "transactionId": transactionId,
+        "createdAt": createdAt,
+    }
 }
 
 func (p Mutex) Pointer() *Mutex {
-	return &p
+    return &p
 }
 
 func CastMutexes(data []interface{}) []Mutex {
@@ -171,11 +171,11 @@ func CastMutexes(data []interface{}) []Mutex {
 }
 
 func CastMutexesFromDict(data []Mutex) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type LogSetting struct {
@@ -183,30 +183,30 @@ type LogSetting struct {
 }
 
 func NewLogSettingFromJson(data string) LogSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLogSettingFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
-	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
-	}
+    return LogSetting {
+        LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+    }
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
-	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
-	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+    
+    var loggingNamespaceId *string
+    if p.LoggingNamespaceId != nil {
+        loggingNamespaceId = p.LoggingNamespaceId
+    }
+    return map[string]interface{} {
+        "loggingNamespaceId": loggingNamespaceId,
+    }
 }
 
 func (p LogSetting) Pointer() *LogSetting {
-	return &p
+    return &p
 }
 
 func CastLogSettings(data []interface{}) []LogSetting {
@@ -218,9 +218,9 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }

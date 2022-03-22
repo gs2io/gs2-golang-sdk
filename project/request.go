@@ -29,6 +29,7 @@ type CreateAccountRequest struct {
     FullName *string `json:"fullName"`
     CompanyName *string `json:"companyName"`
     Password *string `json:"password"`
+    Lang *string `json:"lang"`
 }
 
 func NewCreateAccountRequestFromJson(data string) CreateAccountRequest {
@@ -43,6 +44,7 @@ func NewCreateAccountRequestFromDict(data map[string]interface{}) CreateAccountR
         FullName: core.CastString(data["fullName"]),
         CompanyName: core.CastString(data["companyName"]),
         Password: core.CastString(data["password"]),
+        Lang: core.CastString(data["lang"]),
     }
 }
 
@@ -52,6 +54,7 @@ func (p CreateAccountRequest) ToDict() map[string]interface{} {
         "fullName": p.FullName,
         "companyName": p.CompanyName,
         "password": p.Password,
+        "lang": p.Lang,
     }
 }
 
@@ -154,6 +157,7 @@ type ForgetRequest struct {
     ContextStack *string `json:"contextStack"`
     DuplicationAvoider *string `json:"duplicationAvoider"`
     Email *string `json:"email"`
+    Lang *string `json:"lang"`
 }
 
 func NewForgetRequestFromJson(data string) ForgetRequest {
@@ -165,12 +169,14 @@ func NewForgetRequestFromJson(data string) ForgetRequest {
 func NewForgetRequestFromDict(data map[string]interface{}) ForgetRequest {
     return ForgetRequest {
         Email: core.CastString(data["email"]),
+        Lang: core.CastString(data["lang"]),
     }
 }
 
 func (p ForgetRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "email": p.Email,
+        "lang": p.Lang,
     }
 }
 

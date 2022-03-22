@@ -17,95 +17,95 @@ permissions and limitations under the License.
 package inventory
 
 import (
-	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
+    "encoding/json"
+    "github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Namespace struct {
-	NamespaceId    *string        `json:"namespaceId"`
-	Name           *string        `json:"name"`
-	Description    *string        `json:"description"`
-	AcquireScript  *ScriptSetting `json:"acquireScript"`
+	NamespaceId *string `json:"namespaceId"`
+	Name *string `json:"name"`
+	Description *string `json:"description"`
+	AcquireScript *ScriptSetting `json:"acquireScript"`
 	OverflowScript *ScriptSetting `json:"overflowScript"`
-	ConsumeScript  *ScriptSetting `json:"consumeScript"`
-	LogSetting     *LogSetting    `json:"logSetting"`
-	CreatedAt      *int64         `json:"createdAt"`
-	UpdatedAt      *int64         `json:"updatedAt"`
+	ConsumeScript *ScriptSetting `json:"consumeScript"`
+	LogSetting *LogSetting `json:"logSetting"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewNamespaceFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
-	return Namespace{
-		NamespaceId:    core.CastString(data["namespaceId"]),
-		Name:           core.CastString(data["name"]),
-		Description:    core.CastString(data["description"]),
-		AcquireScript:  NewScriptSettingFromDict(core.CastMap(data["acquireScript"])).Pointer(),
-		OverflowScript: NewScriptSettingFromDict(core.CastMap(data["overflowScript"])).Pointer(),
-		ConsumeScript:  NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer(),
-		LogSetting:     NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:      core.CastInt64(data["createdAt"]),
-		UpdatedAt:      core.CastInt64(data["updatedAt"]),
-	}
+    return Namespace {
+        NamespaceId: core.CastString(data["namespaceId"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        AcquireScript: NewScriptSettingFromDict(core.CastMap(data["acquireScript"])).Pointer(),
+        OverflowScript: NewScriptSettingFromDict(core.CastMap(data["overflowScript"])).Pointer(),
+        ConsumeScript: NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer(),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
-	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
-	}
-	var name *string
-	if p.Name != nil {
-		name = p.Name
-	}
-	var description *string
-	if p.Description != nil {
-		description = p.Description
-	}
-	var acquireScript map[string]interface{}
-	if p.AcquireScript != nil {
-		acquireScript = p.AcquireScript.ToDict()
-	}
-	var overflowScript map[string]interface{}
-	if p.OverflowScript != nil {
-		overflowScript = p.OverflowScript.ToDict()
-	}
-	var consumeScript map[string]interface{}
-	if p.ConsumeScript != nil {
-		consumeScript = p.ConsumeScript.ToDict()
-	}
-	var logSetting map[string]interface{}
-	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
-	}
-	var createdAt *int64
-	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
-	}
-	var updatedAt *int64
-	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
-	}
-	return map[string]interface{}{
-		"namespaceId":    namespaceId,
-		"name":           name,
-		"description":    description,
-		"acquireScript":  acquireScript,
-		"overflowScript": overflowScript,
-		"consumeScript":  consumeScript,
-		"logSetting":     logSetting,
-		"createdAt":      createdAt,
-		"updatedAt":      updatedAt,
-	}
+    
+    var namespaceId *string
+    if p.NamespaceId != nil {
+        namespaceId = p.NamespaceId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var description *string
+    if p.Description != nil {
+        description = p.Description
+    }
+    var acquireScript map[string]interface{}
+    if p.AcquireScript != nil {
+        acquireScript = p.AcquireScript.ToDict()
+    }
+    var overflowScript map[string]interface{}
+    if p.OverflowScript != nil {
+        overflowScript = p.OverflowScript.ToDict()
+    }
+    var consumeScript map[string]interface{}
+    if p.ConsumeScript != nil {
+        consumeScript = p.ConsumeScript.ToDict()
+    }
+    var logSetting map[string]interface{}
+    if p.LogSetting != nil {
+        logSetting = p.LogSetting.ToDict()
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "namespaceId": namespaceId,
+        "name": name,
+        "description": description,
+        "acquireScript": acquireScript,
+        "overflowScript": overflowScript,
+        "consumeScript": consumeScript,
+        "logSetting": logSetting,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
 }
 
 func (p Namespace) Pointer() *Namespace {
-	return &p
+    return &p
 }
 
 func CastNamespaces(data []interface{}) []Namespace {
@@ -117,98 +117,98 @@ func CastNamespaces(data []interface{}) []Namespace {
 }
 
 func CastNamespacesFromDict(data []Namespace) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type InventoryModelMaster struct {
-	InventoryModelId      *string `json:"inventoryModelId"`
-	Name                  *string `json:"name"`
-	Metadata              *string `json:"metadata"`
-	Description           *string `json:"description"`
-	InitialCapacity       *int32  `json:"initialCapacity"`
-	MaxCapacity           *int32  `json:"maxCapacity"`
-	ProtectReferencedItem *bool   `json:"protectReferencedItem"`
-	CreatedAt             *int64  `json:"createdAt"`
-	UpdatedAt             *int64  `json:"updatedAt"`
+	InventoryModelId *string `json:"inventoryModelId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	Description *string `json:"description"`
+	InitialCapacity *int32 `json:"initialCapacity"`
+	MaxCapacity *int32 `json:"maxCapacity"`
+	ProtectReferencedItem *bool `json:"protectReferencedItem"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewInventoryModelMasterFromJson(data string) InventoryModelMaster {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryModelMasterFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewInventoryModelMasterFromDict(dict)
 }
 
 func NewInventoryModelMasterFromDict(data map[string]interface{}) InventoryModelMaster {
-	return InventoryModelMaster{
-		InventoryModelId:      core.CastString(data["inventoryModelId"]),
-		Name:                  core.CastString(data["name"]),
-		Metadata:              core.CastString(data["metadata"]),
-		Description:           core.CastString(data["description"]),
-		InitialCapacity:       core.CastInt32(data["initialCapacity"]),
-		MaxCapacity:           core.CastInt32(data["maxCapacity"]),
-		ProtectReferencedItem: core.CastBool(data["protectReferencedItem"]),
-		CreatedAt:             core.CastInt64(data["createdAt"]),
-		UpdatedAt:             core.CastInt64(data["updatedAt"]),
-	}
+    return InventoryModelMaster {
+        InventoryModelId: core.CastString(data["inventoryModelId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        Description: core.CastString(data["description"]),
+        InitialCapacity: core.CastInt32(data["initialCapacity"]),
+        MaxCapacity: core.CastInt32(data["maxCapacity"]),
+        ProtectReferencedItem: core.CastBool(data["protectReferencedItem"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p InventoryModelMaster) ToDict() map[string]interface{} {
-
-	var inventoryModelId *string
-	if p.InventoryModelId != nil {
-		inventoryModelId = p.InventoryModelId
-	}
-	var name *string
-	if p.Name != nil {
-		name = p.Name
-	}
-	var metadata *string
-	if p.Metadata != nil {
-		metadata = p.Metadata
-	}
-	var description *string
-	if p.Description != nil {
-		description = p.Description
-	}
-	var initialCapacity *int32
-	if p.InitialCapacity != nil {
-		initialCapacity = p.InitialCapacity
-	}
-	var maxCapacity *int32
-	if p.MaxCapacity != nil {
-		maxCapacity = p.MaxCapacity
-	}
-	var protectReferencedItem *bool
-	if p.ProtectReferencedItem != nil {
-		protectReferencedItem = p.ProtectReferencedItem
-	}
-	var createdAt *int64
-	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
-	}
-	var updatedAt *int64
-	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
-	}
-	return map[string]interface{}{
-		"inventoryModelId":      inventoryModelId,
-		"name":                  name,
-		"metadata":              metadata,
-		"description":           description,
-		"initialCapacity":       initialCapacity,
-		"maxCapacity":           maxCapacity,
-		"protectReferencedItem": protectReferencedItem,
-		"createdAt":             createdAt,
-		"updatedAt":             updatedAt,
-	}
+    
+    var inventoryModelId *string
+    if p.InventoryModelId != nil {
+        inventoryModelId = p.InventoryModelId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var description *string
+    if p.Description != nil {
+        description = p.Description
+    }
+    var initialCapacity *int32
+    if p.InitialCapacity != nil {
+        initialCapacity = p.InitialCapacity
+    }
+    var maxCapacity *int32
+    if p.MaxCapacity != nil {
+        maxCapacity = p.MaxCapacity
+    }
+    var protectReferencedItem *bool
+    if p.ProtectReferencedItem != nil {
+        protectReferencedItem = p.ProtectReferencedItem
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "inventoryModelId": inventoryModelId,
+        "name": name,
+        "metadata": metadata,
+        "description": description,
+        "initialCapacity": initialCapacity,
+        "maxCapacity": maxCapacity,
+        "protectReferencedItem": protectReferencedItem,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
 }
 
 func (p InventoryModelMaster) Pointer() *InventoryModelMaster {
-	return &p
+    return &p
 }
 
 func CastInventoryModelMasters(data []interface{}) []InventoryModelMaster {
@@ -220,77 +220,77 @@ func CastInventoryModelMasters(data []interface{}) []InventoryModelMaster {
 }
 
 func CastInventoryModelMastersFromDict(data []InventoryModelMaster) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type InventoryModel struct {
-	InventoryModelId      *string `json:"inventoryModelId"`
-	Name                  *string `json:"name"`
-	Metadata              *string `json:"metadata"`
-	InitialCapacity       *int32  `json:"initialCapacity"`
-	MaxCapacity           *int32  `json:"maxCapacity"`
-	ProtectReferencedItem *bool   `json:"protectReferencedItem"`
+	InventoryModelId *string `json:"inventoryModelId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	InitialCapacity *int32 `json:"initialCapacity"`
+	MaxCapacity *int32 `json:"maxCapacity"`
+	ProtectReferencedItem *bool `json:"protectReferencedItem"`
 }
 
 func NewInventoryModelFromJson(data string) InventoryModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryModelFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewInventoryModelFromDict(dict)
 }
 
 func NewInventoryModelFromDict(data map[string]interface{}) InventoryModel {
-	return InventoryModel{
-		InventoryModelId:      core.CastString(data["inventoryModelId"]),
-		Name:                  core.CastString(data["name"]),
-		Metadata:              core.CastString(data["metadata"]),
-		InitialCapacity:       core.CastInt32(data["initialCapacity"]),
-		MaxCapacity:           core.CastInt32(data["maxCapacity"]),
-		ProtectReferencedItem: core.CastBool(data["protectReferencedItem"]),
-	}
+    return InventoryModel {
+        InventoryModelId: core.CastString(data["inventoryModelId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        InitialCapacity: core.CastInt32(data["initialCapacity"]),
+        MaxCapacity: core.CastInt32(data["maxCapacity"]),
+        ProtectReferencedItem: core.CastBool(data["protectReferencedItem"]),
+    }
 }
 
 func (p InventoryModel) ToDict() map[string]interface{} {
-
-	var inventoryModelId *string
-	if p.InventoryModelId != nil {
-		inventoryModelId = p.InventoryModelId
-	}
-	var name *string
-	if p.Name != nil {
-		name = p.Name
-	}
-	var metadata *string
-	if p.Metadata != nil {
-		metadata = p.Metadata
-	}
-	var initialCapacity *int32
-	if p.InitialCapacity != nil {
-		initialCapacity = p.InitialCapacity
-	}
-	var maxCapacity *int32
-	if p.MaxCapacity != nil {
-		maxCapacity = p.MaxCapacity
-	}
-	var protectReferencedItem *bool
-	if p.ProtectReferencedItem != nil {
-		protectReferencedItem = p.ProtectReferencedItem
-	}
-	return map[string]interface{}{
-		"inventoryModelId":      inventoryModelId,
-		"name":                  name,
-		"metadata":              metadata,
-		"initialCapacity":       initialCapacity,
-		"maxCapacity":           maxCapacity,
-		"protectReferencedItem": protectReferencedItem,
-	}
+    
+    var inventoryModelId *string
+    if p.InventoryModelId != nil {
+        inventoryModelId = p.InventoryModelId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var initialCapacity *int32
+    if p.InitialCapacity != nil {
+        initialCapacity = p.InitialCapacity
+    }
+    var maxCapacity *int32
+    if p.MaxCapacity != nil {
+        maxCapacity = p.MaxCapacity
+    }
+    var protectReferencedItem *bool
+    if p.ProtectReferencedItem != nil {
+        protectReferencedItem = p.ProtectReferencedItem
+    }
+    return map[string]interface{} {
+        "inventoryModelId": inventoryModelId,
+        "name": name,
+        "metadata": metadata,
+        "initialCapacity": initialCapacity,
+        "maxCapacity": maxCapacity,
+        "protectReferencedItem": protectReferencedItem,
+    }
 }
 
 func (p InventoryModel) Pointer() *InventoryModel {
-	return &p
+    return &p
 }
 
 func CastInventoryModels(data []interface{}) []InventoryModel {
@@ -302,105 +302,105 @@ func CastInventoryModels(data []interface{}) []InventoryModel {
 }
 
 func CastInventoryModelsFromDict(data []InventoryModel) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type ItemModelMaster struct {
-	ItemModelId         *string `json:"itemModelId"`
-	InventoryName       *string `json:"inventoryName"`
-	Name                *string `json:"name"`
-	Description         *string `json:"description"`
-	Metadata            *string `json:"metadata"`
-	StackingLimit       *int64  `json:"stackingLimit"`
-	AllowMultipleStacks *bool   `json:"allowMultipleStacks"`
-	SortValue           *int32  `json:"sortValue"`
-	CreatedAt           *int64  `json:"createdAt"`
-	UpdatedAt           *int64  `json:"updatedAt"`
+	ItemModelId *string `json:"itemModelId"`
+	InventoryName *string `json:"inventoryName"`
+	Name *string `json:"name"`
+	Description *string `json:"description"`
+	Metadata *string `json:"metadata"`
+	StackingLimit *int64 `json:"stackingLimit"`
+	AllowMultipleStacks *bool `json:"allowMultipleStacks"`
+	SortValue *int32 `json:"sortValue"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewItemModelMasterFromJson(data string) ItemModelMaster {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewItemModelMasterFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewItemModelMasterFromDict(dict)
 }
 
 func NewItemModelMasterFromDict(data map[string]interface{}) ItemModelMaster {
-	return ItemModelMaster{
-		ItemModelId:         core.CastString(data["itemModelId"]),
-		InventoryName:       core.CastString(data["inventoryName"]),
-		Name:                core.CastString(data["name"]),
-		Description:         core.CastString(data["description"]),
-		Metadata:            core.CastString(data["metadata"]),
-		StackingLimit:       core.CastInt64(data["stackingLimit"]),
-		AllowMultipleStacks: core.CastBool(data["allowMultipleStacks"]),
-		SortValue:           core.CastInt32(data["sortValue"]),
-		CreatedAt:           core.CastInt64(data["createdAt"]),
-		UpdatedAt:           core.CastInt64(data["updatedAt"]),
-	}
+    return ItemModelMaster {
+        ItemModelId: core.CastString(data["itemModelId"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        StackingLimit: core.CastInt64(data["stackingLimit"]),
+        AllowMultipleStacks: core.CastBool(data["allowMultipleStacks"]),
+        SortValue: core.CastInt32(data["sortValue"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p ItemModelMaster) ToDict() map[string]interface{} {
-
-	var itemModelId *string
-	if p.ItemModelId != nil {
-		itemModelId = p.ItemModelId
-	}
-	var inventoryName *string
-	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
-	}
-	var name *string
-	if p.Name != nil {
-		name = p.Name
-	}
-	var description *string
-	if p.Description != nil {
-		description = p.Description
-	}
-	var metadata *string
-	if p.Metadata != nil {
-		metadata = p.Metadata
-	}
-	var stackingLimit *int64
-	if p.StackingLimit != nil {
-		stackingLimit = p.StackingLimit
-	}
-	var allowMultipleStacks *bool
-	if p.AllowMultipleStacks != nil {
-		allowMultipleStacks = p.AllowMultipleStacks
-	}
-	var sortValue *int32
-	if p.SortValue != nil {
-		sortValue = p.SortValue
-	}
-	var createdAt *int64
-	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
-	}
-	var updatedAt *int64
-	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
-	}
-	return map[string]interface{}{
-		"itemModelId":         itemModelId,
-		"inventoryName":       inventoryName,
-		"name":                name,
-		"description":         description,
-		"metadata":            metadata,
-		"stackingLimit":       stackingLimit,
-		"allowMultipleStacks": allowMultipleStacks,
-		"sortValue":           sortValue,
-		"createdAt":           createdAt,
-		"updatedAt":           updatedAt,
-	}
+    
+    var itemModelId *string
+    if p.ItemModelId != nil {
+        itemModelId = p.ItemModelId
+    }
+    var inventoryName *string
+    if p.InventoryName != nil {
+        inventoryName = p.InventoryName
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var description *string
+    if p.Description != nil {
+        description = p.Description
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var stackingLimit *int64
+    if p.StackingLimit != nil {
+        stackingLimit = p.StackingLimit
+    }
+    var allowMultipleStacks *bool
+    if p.AllowMultipleStacks != nil {
+        allowMultipleStacks = p.AllowMultipleStacks
+    }
+    var sortValue *int32
+    if p.SortValue != nil {
+        sortValue = p.SortValue
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "itemModelId": itemModelId,
+        "inventoryName": inventoryName,
+        "name": name,
+        "description": description,
+        "metadata": metadata,
+        "stackingLimit": stackingLimit,
+        "allowMultipleStacks": allowMultipleStacks,
+        "sortValue": sortValue,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
 }
 
 func (p ItemModelMaster) Pointer() *ItemModelMaster {
-	return &p
+    return &p
 }
 
 func CastItemModelMasters(data []interface{}) []ItemModelMaster {
@@ -412,77 +412,77 @@ func CastItemModelMasters(data []interface{}) []ItemModelMaster {
 }
 
 func CastItemModelMastersFromDict(data []ItemModelMaster) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type ItemModel struct {
-	ItemModelId         *string `json:"itemModelId"`
-	Name                *string `json:"name"`
-	Metadata            *string `json:"metadata"`
-	StackingLimit       *int64  `json:"stackingLimit"`
-	AllowMultipleStacks *bool   `json:"allowMultipleStacks"`
-	SortValue           *int32  `json:"sortValue"`
+	ItemModelId *string `json:"itemModelId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	StackingLimit *int64 `json:"stackingLimit"`
+	AllowMultipleStacks *bool `json:"allowMultipleStacks"`
+	SortValue *int32 `json:"sortValue"`
 }
 
 func NewItemModelFromJson(data string) ItemModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewItemModelFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewItemModelFromDict(dict)
 }
 
 func NewItemModelFromDict(data map[string]interface{}) ItemModel {
-	return ItemModel{
-		ItemModelId:         core.CastString(data["itemModelId"]),
-		Name:                core.CastString(data["name"]),
-		Metadata:            core.CastString(data["metadata"]),
-		StackingLimit:       core.CastInt64(data["stackingLimit"]),
-		AllowMultipleStacks: core.CastBool(data["allowMultipleStacks"]),
-		SortValue:           core.CastInt32(data["sortValue"]),
-	}
+    return ItemModel {
+        ItemModelId: core.CastString(data["itemModelId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        StackingLimit: core.CastInt64(data["stackingLimit"]),
+        AllowMultipleStacks: core.CastBool(data["allowMultipleStacks"]),
+        SortValue: core.CastInt32(data["sortValue"]),
+    }
 }
 
 func (p ItemModel) ToDict() map[string]interface{} {
-
-	var itemModelId *string
-	if p.ItemModelId != nil {
-		itemModelId = p.ItemModelId
-	}
-	var name *string
-	if p.Name != nil {
-		name = p.Name
-	}
-	var metadata *string
-	if p.Metadata != nil {
-		metadata = p.Metadata
-	}
-	var stackingLimit *int64
-	if p.StackingLimit != nil {
-		stackingLimit = p.StackingLimit
-	}
-	var allowMultipleStacks *bool
-	if p.AllowMultipleStacks != nil {
-		allowMultipleStacks = p.AllowMultipleStacks
-	}
-	var sortValue *int32
-	if p.SortValue != nil {
-		sortValue = p.SortValue
-	}
-	return map[string]interface{}{
-		"itemModelId":         itemModelId,
-		"name":                name,
-		"metadata":            metadata,
-		"stackingLimit":       stackingLimit,
-		"allowMultipleStacks": allowMultipleStacks,
-		"sortValue":           sortValue,
-	}
+    
+    var itemModelId *string
+    if p.ItemModelId != nil {
+        itemModelId = p.ItemModelId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var stackingLimit *int64
+    if p.StackingLimit != nil {
+        stackingLimit = p.StackingLimit
+    }
+    var allowMultipleStacks *bool
+    if p.AllowMultipleStacks != nil {
+        allowMultipleStacks = p.AllowMultipleStacks
+    }
+    var sortValue *int32
+    if p.SortValue != nil {
+        sortValue = p.SortValue
+    }
+    return map[string]interface{} {
+        "itemModelId": itemModelId,
+        "name": name,
+        "metadata": metadata,
+        "stackingLimit": stackingLimit,
+        "allowMultipleStacks": allowMultipleStacks,
+        "sortValue": sortValue,
+    }
 }
 
 func (p ItemModel) Pointer() *ItemModel {
-	return &p
+    return &p
 }
 
 func CastItemModels(data []interface{}) []ItemModel {
@@ -494,49 +494,49 @@ func CastItemModels(data []interface{}) []ItemModel {
 }
 
 func CastItemModelsFromDict(data []ItemModel) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type CurrentItemModelMaster struct {
 	NamespaceId *string `json:"namespaceId"`
-	Settings    *string `json:"settings"`
+	Settings *string `json:"settings"`
 }
 
 func NewCurrentItemModelMasterFromJson(data string) CurrentItemModelMaster {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCurrentItemModelMasterFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCurrentItemModelMasterFromDict(dict)
 }
 
 func NewCurrentItemModelMasterFromDict(data map[string]interface{}) CurrentItemModelMaster {
-	return CurrentItemModelMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
-	}
+    return CurrentItemModelMaster {
+        NamespaceId: core.CastString(data["namespaceId"]),
+        Settings: core.CastString(data["settings"]),
+    }
 }
 
 func (p CurrentItemModelMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
-	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
-	}
-	var settings *string
-	if p.Settings != nil {
-		settings = p.Settings
-	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+    
+    var namespaceId *string
+    if p.NamespaceId != nil {
+        namespaceId = p.NamespaceId
+    }
+    var settings *string
+    if p.Settings != nil {
+        settings = p.Settings
+    }
+    return map[string]interface{} {
+        "namespaceId": namespaceId,
+        "settings": settings,
+    }
 }
 
 func (p CurrentItemModelMaster) Pointer() *CurrentItemModelMaster {
-	return &p
+    return &p
 }
 
 func CastCurrentItemModelMasters(data []interface{}) []CurrentItemModelMaster {
@@ -548,84 +548,84 @@ func CastCurrentItemModelMasters(data []interface{}) []CurrentItemModelMaster {
 }
 
 func CastCurrentItemModelMastersFromDict(data []CurrentItemModelMaster) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type Inventory struct {
-	InventoryId                   *string `json:"inventoryId"`
-	InventoryName                 *string `json:"inventoryName"`
-	UserId                        *string `json:"userId"`
-	CurrentInventoryCapacityUsage *int32  `json:"currentInventoryCapacityUsage"`
-	CurrentInventoryMaxCapacity   *int32  `json:"currentInventoryMaxCapacity"`
-	CreatedAt                     *int64  `json:"createdAt"`
-	UpdatedAt                     *int64  `json:"updatedAt"`
+	InventoryId *string `json:"inventoryId"`
+	InventoryName *string `json:"inventoryName"`
+	UserId *string `json:"userId"`
+	CurrentInventoryCapacityUsage *int32 `json:"currentInventoryCapacityUsage"`
+	CurrentInventoryMaxCapacity *int32 `json:"currentInventoryMaxCapacity"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewInventoryFromJson(data string) Inventory {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewInventoryFromDict(dict)
 }
 
 func NewInventoryFromDict(data map[string]interface{}) Inventory {
-	return Inventory{
-		InventoryId:                   core.CastString(data["inventoryId"]),
-		InventoryName:                 core.CastString(data["inventoryName"]),
-		UserId:                        core.CastString(data["userId"]),
-		CurrentInventoryCapacityUsage: core.CastInt32(data["currentInventoryCapacityUsage"]),
-		CurrentInventoryMaxCapacity:   core.CastInt32(data["currentInventoryMaxCapacity"]),
-		CreatedAt:                     core.CastInt64(data["createdAt"]),
-		UpdatedAt:                     core.CastInt64(data["updatedAt"]),
-	}
+    return Inventory {
+        InventoryId: core.CastString(data["inventoryId"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        CurrentInventoryCapacityUsage: core.CastInt32(data["currentInventoryCapacityUsage"]),
+        CurrentInventoryMaxCapacity: core.CastInt32(data["currentInventoryMaxCapacity"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p Inventory) ToDict() map[string]interface{} {
-
-	var inventoryId *string
-	if p.InventoryId != nil {
-		inventoryId = p.InventoryId
-	}
-	var inventoryName *string
-	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
-	}
-	var userId *string
-	if p.UserId != nil {
-		userId = p.UserId
-	}
-	var currentInventoryCapacityUsage *int32
-	if p.CurrentInventoryCapacityUsage != nil {
-		currentInventoryCapacityUsage = p.CurrentInventoryCapacityUsage
-	}
-	var currentInventoryMaxCapacity *int32
-	if p.CurrentInventoryMaxCapacity != nil {
-		currentInventoryMaxCapacity = p.CurrentInventoryMaxCapacity
-	}
-	var createdAt *int64
-	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
-	}
-	var updatedAt *int64
-	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
-	}
-	return map[string]interface{}{
-		"inventoryId":                   inventoryId,
-		"inventoryName":                 inventoryName,
-		"userId":                        userId,
-		"currentInventoryCapacityUsage": currentInventoryCapacityUsage,
-		"currentInventoryMaxCapacity":   currentInventoryMaxCapacity,
-		"createdAt":                     createdAt,
-		"updatedAt":                     updatedAt,
-	}
+    
+    var inventoryId *string
+    if p.InventoryId != nil {
+        inventoryId = p.InventoryId
+    }
+    var inventoryName *string
+    if p.InventoryName != nil {
+        inventoryName = p.InventoryName
+    }
+    var userId *string
+    if p.UserId != nil {
+        userId = p.UserId
+    }
+    var currentInventoryCapacityUsage *int32
+    if p.CurrentInventoryCapacityUsage != nil {
+        currentInventoryCapacityUsage = p.CurrentInventoryCapacityUsage
+    }
+    var currentInventoryMaxCapacity *int32
+    if p.CurrentInventoryMaxCapacity != nil {
+        currentInventoryMaxCapacity = p.CurrentInventoryMaxCapacity
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "inventoryId": inventoryId,
+        "inventoryName": inventoryName,
+        "userId": userId,
+        "currentInventoryCapacityUsage": currentInventoryCapacityUsage,
+        "currentInventoryMaxCapacity": currentInventoryMaxCapacity,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
 }
 
 func (p Inventory) Pointer() *Inventory {
-	return &p
+    return &p
 }
 
 func CastInventories(data []interface{}) []Inventory {
@@ -637,114 +637,114 @@ func CastInventories(data []interface{}) []Inventory {
 }
 
 func CastInventoriesFromDict(data []Inventory) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type ItemSet struct {
-	ItemSetId     *string  `json:"itemSetId"`
-	Name          *string  `json:"name"`
-	InventoryName *string  `json:"inventoryName"`
-	UserId        *string  `json:"userId"`
-	ItemName      *string  `json:"itemName"`
-	Count         *int64   `json:"count"`
-	ReferenceOf   []string `json:"referenceOf"`
-	SortValue     *int32   `json:"sortValue"`
-	ExpiresAt     *int64   `json:"expiresAt"`
-	CreatedAt     *int64   `json:"createdAt"`
-	UpdatedAt     *int64   `json:"updatedAt"`
+	ItemSetId *string `json:"itemSetId"`
+	Name *string `json:"name"`
+	InventoryName *string `json:"inventoryName"`
+	UserId *string `json:"userId"`
+	ItemName *string `json:"itemName"`
+	Count *int64 `json:"count"`
+	ReferenceOf []string `json:"referenceOf"`
+	SortValue *int32 `json:"sortValue"`
+	ExpiresAt *int64 `json:"expiresAt"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
 }
 
 func NewItemSetFromJson(data string) ItemSet {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewItemSetFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewItemSetFromDict(dict)
 }
 
 func NewItemSetFromDict(data map[string]interface{}) ItemSet {
-	return ItemSet{
-		ItemSetId:     core.CastString(data["itemSetId"]),
-		Name:          core.CastString(data["name"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		Count:         core.CastInt64(data["count"]),
-		ReferenceOf:   core.CastStrings(core.CastArray(data["referenceOf"])),
-		SortValue:     core.CastInt32(data["sortValue"]),
-		ExpiresAt:     core.CastInt64(data["expiresAt"]),
-		CreatedAt:     core.CastInt64(data["createdAt"]),
-		UpdatedAt:     core.CastInt64(data["updatedAt"]),
-	}
+    return ItemSet {
+        ItemSetId: core.CastString(data["itemSetId"]),
+        Name: core.CastString(data["name"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        ItemName: core.CastString(data["itemName"]),
+        Count: core.CastInt64(data["count"]),
+        ReferenceOf: core.CastStrings(core.CastArray(data["referenceOf"])),
+        SortValue: core.CastInt32(data["sortValue"]),
+        ExpiresAt: core.CastInt64(data["expiresAt"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
 }
 
 func (p ItemSet) ToDict() map[string]interface{} {
-
-	var itemSetId *string
-	if p.ItemSetId != nil {
-		itemSetId = p.ItemSetId
-	}
-	var name *string
-	if p.Name != nil {
-		name = p.Name
-	}
-	var inventoryName *string
-	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
-	}
-	var userId *string
-	if p.UserId != nil {
-		userId = p.UserId
-	}
-	var itemName *string
-	if p.ItemName != nil {
-		itemName = p.ItemName
-	}
-	var count *int64
-	if p.Count != nil {
-		count = p.Count
-	}
-	var referenceOf []interface{}
-	if p.ReferenceOf != nil {
-		referenceOf = core.CastStringsFromDict(
-			p.ReferenceOf,
-		)
-	}
-	var sortValue *int32
-	if p.SortValue != nil {
-		sortValue = p.SortValue
-	}
-	var expiresAt *int64
-	if p.ExpiresAt != nil {
-		expiresAt = p.ExpiresAt
-	}
-	var createdAt *int64
-	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
-	}
-	var updatedAt *int64
-	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
-	}
-	return map[string]interface{}{
-		"itemSetId":     itemSetId,
-		"name":          name,
-		"inventoryName": inventoryName,
-		"userId":        userId,
-		"itemName":      itemName,
-		"count":         count,
-		"referenceOf":   referenceOf,
-		"sortValue":     sortValue,
-		"expiresAt":     expiresAt,
-		"createdAt":     createdAt,
-		"updatedAt":     updatedAt,
-	}
+    
+    var itemSetId *string
+    if p.ItemSetId != nil {
+        itemSetId = p.ItemSetId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var inventoryName *string
+    if p.InventoryName != nil {
+        inventoryName = p.InventoryName
+    }
+    var userId *string
+    if p.UserId != nil {
+        userId = p.UserId
+    }
+    var itemName *string
+    if p.ItemName != nil {
+        itemName = p.ItemName
+    }
+    var count *int64
+    if p.Count != nil {
+        count = p.Count
+    }
+    var referenceOf []interface{}
+    if p.ReferenceOf != nil {
+        referenceOf = core.CastStringsFromDict(
+            p.ReferenceOf,
+        )
+    }
+    var sortValue *int32
+    if p.SortValue != nil {
+        sortValue = p.SortValue
+    }
+    var expiresAt *int64
+    if p.ExpiresAt != nil {
+        expiresAt = p.ExpiresAt
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "itemSetId": itemSetId,
+        "name": name,
+        "inventoryName": inventoryName,
+        "userId": userId,
+        "itemName": itemName,
+        "count": count,
+        "referenceOf": referenceOf,
+        "sortValue": sortValue,
+        "expiresAt": expiresAt,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
 }
 
 func (p ItemSet) Pointer() *ItemSet {
-	return &p
+    return &p
 }
 
 func CastItemSets(data []interface{}) []ItemSet {
@@ -756,49 +756,49 @@ func CastItemSets(data []interface{}) []ItemSet {
 }
 
 func CastItemSetsFromDict(data []ItemSet) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type ReferenceOf struct {
 	ReferenceOfId *string `json:"referenceOfId"`
-	Name          *string `json:"name"`
+	Name *string `json:"name"`
 }
 
 func NewReferenceOfFromJson(data string) ReferenceOf {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewReferenceOfFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewReferenceOfFromDict(dict)
 }
 
 func NewReferenceOfFromDict(data map[string]interface{}) ReferenceOf {
-	return ReferenceOf{
-		ReferenceOfId: core.CastString(data["referenceOfId"]),
-		Name:          core.CastString(data["name"]),
-	}
+    return ReferenceOf {
+        ReferenceOfId: core.CastString(data["referenceOfId"]),
+        Name: core.CastString(data["name"]),
+    }
 }
 
 func (p ReferenceOf) ToDict() map[string]interface{} {
-
-	var referenceOfId *string
-	if p.ReferenceOfId != nil {
-		referenceOfId = p.ReferenceOfId
-	}
-	var name *string
-	if p.Name != nil {
-		name = p.Name
-	}
-	return map[string]interface{}{
-		"referenceOfId": referenceOfId,
-		"name":          name,
-	}
+    
+    var referenceOfId *string
+    if p.ReferenceOfId != nil {
+        referenceOfId = p.ReferenceOfId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    return map[string]interface{} {
+        "referenceOfId": referenceOfId,
+        "name": name,
+    }
 }
 
 func (p ReferenceOf) Pointer() *ReferenceOf {
-	return &p
+    return &p
 }
 
 func CastReferenceOves(data []interface{}) []ReferenceOf {
@@ -810,84 +810,84 @@ func CastReferenceOves(data []interface{}) []ReferenceOf {
 }
 
 func CastReferenceOvesFromDict(data []ReferenceOf) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type GitHubCheckoutSetting struct {
-	ApiKeyId       *string `json:"apiKeyId"`
+	ApiKeyId *string `json:"apiKeyId"`
 	RepositoryName *string `json:"repositoryName"`
-	SourcePath     *string `json:"sourcePath"`
-	ReferenceType  *string `json:"referenceType"`
-	CommitHash     *string `json:"commitHash"`
-	BranchName     *string `json:"branchName"`
-	TagName        *string `json:"tagName"`
+	SourcePath *string `json:"sourcePath"`
+	ReferenceType *string `json:"referenceType"`
+	CommitHash *string `json:"commitHash"`
+	BranchName *string `json:"branchName"`
+	TagName *string `json:"tagName"`
 }
 
 func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGitHubCheckoutSettingFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
-	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
-	}
+    return GitHubCheckoutSetting {
+        ApiKeyId: core.CastString(data["apiKeyId"]),
+        RepositoryName: core.CastString(data["repositoryName"]),
+        SourcePath: core.CastString(data["sourcePath"]),
+        ReferenceType: core.CastString(data["referenceType"]),
+        CommitHash: core.CastString(data["commitHash"]),
+        BranchName: core.CastString(data["branchName"]),
+        TagName: core.CastString(data["tagName"]),
+    }
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
-	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
-	}
-	var repositoryName *string
-	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
-	}
-	var sourcePath *string
-	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
-	}
-	var referenceType *string
-	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
-	}
-	var commitHash *string
-	if p.CommitHash != nil {
-		commitHash = p.CommitHash
-	}
-	var branchName *string
-	if p.BranchName != nil {
-		branchName = p.BranchName
-	}
-	var tagName *string
-	if p.TagName != nil {
-		tagName = p.TagName
-	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+    
+    var apiKeyId *string
+    if p.ApiKeyId != nil {
+        apiKeyId = p.ApiKeyId
+    }
+    var repositoryName *string
+    if p.RepositoryName != nil {
+        repositoryName = p.RepositoryName
+    }
+    var sourcePath *string
+    if p.SourcePath != nil {
+        sourcePath = p.SourcePath
+    }
+    var referenceType *string
+    if p.ReferenceType != nil {
+        referenceType = p.ReferenceType
+    }
+    var commitHash *string
+    if p.CommitHash != nil {
+        commitHash = p.CommitHash
+    }
+    var branchName *string
+    if p.BranchName != nil {
+        branchName = p.BranchName
+    }
+    var tagName *string
+    if p.TagName != nil {
+        tagName = p.TagName
+    }
+    return map[string]interface{} {
+        "apiKeyId": apiKeyId,
+        "repositoryName": repositoryName,
+        "sourcePath": sourcePath,
+        "referenceType": referenceType,
+        "commitHash": commitHash,
+        "branchName": branchName,
+        "tagName": tagName,
+    }
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
-	return &p
+    return &p
 }
 
 func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
@@ -899,63 +899,63 @@ func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
 }
 
 func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type ScriptSetting struct {
-	TriggerScriptId             *string `json:"triggerScriptId"`
-	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
-	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
+	TriggerScriptId *string `json:"triggerScriptId"`
+	DoneTriggerTargetType *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId *string `json:"doneTriggerScriptId"`
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
 func NewScriptSettingFromJson(data string) ScriptSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewScriptSettingFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewScriptSettingFromDict(dict)
 }
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
-	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
-	}
+    return ScriptSetting {
+        TriggerScriptId: core.CastString(data["triggerScriptId"]),
+        DoneTriggerTargetType: core.CastString(data["doneTriggerTargetType"]),
+        DoneTriggerScriptId: core.CastString(data["doneTriggerScriptId"]),
+        DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+    }
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
-	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
-	}
-	var doneTriggerTargetType *string
-	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
-	}
-	var doneTriggerScriptId *string
-	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
-	}
-	var doneTriggerQueueNamespaceId *string
-	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
-	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+    
+    var triggerScriptId *string
+    if p.TriggerScriptId != nil {
+        triggerScriptId = p.TriggerScriptId
+    }
+    var doneTriggerTargetType *string
+    if p.DoneTriggerTargetType != nil {
+        doneTriggerTargetType = p.DoneTriggerTargetType
+    }
+    var doneTriggerScriptId *string
+    if p.DoneTriggerScriptId != nil {
+        doneTriggerScriptId = p.DoneTriggerScriptId
+    }
+    var doneTriggerQueueNamespaceId *string
+    if p.DoneTriggerQueueNamespaceId != nil {
+        doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+    }
+    return map[string]interface{} {
+        "triggerScriptId": triggerScriptId,
+        "doneTriggerTargetType": doneTriggerTargetType,
+        "doneTriggerScriptId": doneTriggerScriptId,
+        "doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
+    }
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
-	return &p
+    return &p
 }
 
 func CastScriptSettings(data []interface{}) []ScriptSetting {
@@ -967,11 +967,11 @@ func CastScriptSettings(data []interface{}) []ScriptSetting {
 }
 
 func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }
 
 type LogSetting struct {
@@ -979,30 +979,30 @@ type LogSetting struct {
 }
 
 func NewLogSettingFromJson(data string) LogSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLogSettingFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
-	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
-	}
+    return LogSetting {
+        LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+    }
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
-	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
-	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+    
+    var loggingNamespaceId *string
+    if p.LoggingNamespaceId != nil {
+        loggingNamespaceId = p.LoggingNamespaceId
+    }
+    return map[string]interface{} {
+        "loggingNamespaceId": loggingNamespaceId,
+    }
 }
 
 func (p LogSetting) Pointer() *LogSetting {
-	return &p
+    return &p
 }
 
 func CastLogSettings(data []interface{}) []LogSetting {
@@ -1014,9 +1014,9 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
 }

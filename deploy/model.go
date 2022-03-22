@@ -50,14 +50,43 @@ func NewStackFromDict(data map[string]interface{}) Stack {
 }
 
 func (p Stack) ToDict() map[string]interface{} {
+    
+    var stackId *string
+    if p.StackId != nil {
+        stackId = p.StackId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var description *string
+    if p.Description != nil {
+        description = p.Description
+    }
+    var template *string
+    if p.Template != nil {
+        template = p.Template
+    }
+    var status *string
+    if p.Status != nil {
+        status = p.Status
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
     return map[string]interface{} {
-        "stackId": p.StackId,
-        "name": p.Name,
-        "description": p.Description,
-        "template": p.Template,
-        "status": p.Status,
-        "createdAt": p.CreatedAt,
-        "updatedAt": p.UpdatedAt,
+        "stackId": stackId,
+        "name": name,
+        "description": description,
+        "template": template,
+        "status": status,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
     }
 }
 
@@ -118,22 +147,67 @@ func NewResourceFromDict(data map[string]interface{}) Resource {
 }
 
 func (p Resource) ToDict() map[string]interface{} {
+    
+    var resourceId *string
+    if p.ResourceId != nil {
+        resourceId = p.ResourceId
+    }
+    var _type *string
+    if p.Type != nil {
+        _type = p.Type
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var request *string
+    if p.Request != nil {
+        request = p.Request
+    }
+    var response *string
+    if p.Response != nil {
+        response = p.Response
+    }
+    var rollbackContext *string
+    if p.RollbackContext != nil {
+        rollbackContext = p.RollbackContext
+    }
+    var rollbackRequest *string
+    if p.RollbackRequest != nil {
+        rollbackRequest = p.RollbackRequest
+    }
+    var rollbackAfter []interface{}
+    if p.RollbackAfter != nil {
+        rollbackAfter = core.CastStringsFromDict(
+            p.RollbackAfter,
+        )
+    }
+    var outputFields []interface{}
+    if p.OutputFields != nil {
+        outputFields = CastOutputFieldsFromDict(
+            p.OutputFields,
+        )
+    }
+    var workId *string
+    if p.WorkId != nil {
+        workId = p.WorkId
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
     return map[string]interface{} {
-        "resourceId": p.ResourceId,
-        "type": p.Type,
-        "name": p.Name,
-        "request": p.Request,
-        "response": p.Response,
-        "rollbackContext": p.RollbackContext,
-        "rollbackRequest": p.RollbackRequest,
-        "rollbackAfter": core.CastStringsFromDict(
-        p.RollbackAfter,
-    ),
-        "outputFields": CastOutputFieldsFromDict(
-        p.OutputFields,
-    ),
-        "workId": p.WorkId,
-        "createdAt": p.CreatedAt,
+        "resourceId": resourceId,
+        "type": _type,
+        "name": name,
+        "request": request,
+        "response": response,
+        "rollbackContext": rollbackContext,
+        "rollbackRequest": rollbackRequest,
+        "rollbackAfter": rollbackAfter,
+        "outputFields": outputFields,
+        "workId": workId,
+        "createdAt": createdAt,
     }
 }
 
@@ -184,13 +258,38 @@ func NewEventFromDict(data map[string]interface{}) Event {
 }
 
 func (p Event) ToDict() map[string]interface{} {
+    
+    var eventId *string
+    if p.EventId != nil {
+        eventId = p.EventId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var resourceName *string
+    if p.ResourceName != nil {
+        resourceName = p.ResourceName
+    }
+    var _type *string
+    if p.Type != nil {
+        _type = p.Type
+    }
+    var message *string
+    if p.Message != nil {
+        message = p.Message
+    }
+    var eventAt *int64
+    if p.EventAt != nil {
+        eventAt = p.EventAt
+    }
     return map[string]interface{} {
-        "eventId": p.EventId,
-        "name": p.Name,
-        "resourceName": p.ResourceName,
-        "type": p.Type,
-        "message": p.Message,
-        "eventAt": p.EventAt,
+        "eventId": eventId,
+        "name": name,
+        "resourceName": resourceName,
+        "type": _type,
+        "message": message,
+        "eventAt": eventAt,
     }
 }
 
@@ -237,11 +336,28 @@ func NewOutputFromDict(data map[string]interface{}) Output {
 }
 
 func (p Output) ToDict() map[string]interface{} {
+    
+    var outputId *string
+    if p.OutputId != nil {
+        outputId = p.OutputId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var value *string
+    if p.Value != nil {
+        value = p.Value
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
     return map[string]interface{} {
-        "outputId": p.OutputId,
-        "name": p.Name,
-        "value": p.Value,
-        "createdAt": p.CreatedAt,
+        "outputId": outputId,
+        "name": name,
+        "value": value,
+        "createdAt": createdAt,
     }
 }
 
@@ -294,14 +410,43 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+    
+    var apiKeyId *string
+    if p.ApiKeyId != nil {
+        apiKeyId = p.ApiKeyId
+    }
+    var repositoryName *string
+    if p.RepositoryName != nil {
+        repositoryName = p.RepositoryName
+    }
+    var sourcePath *string
+    if p.SourcePath != nil {
+        sourcePath = p.SourcePath
+    }
+    var referenceType *string
+    if p.ReferenceType != nil {
+        referenceType = p.ReferenceType
+    }
+    var commitHash *string
+    if p.CommitHash != nil {
+        commitHash = p.CommitHash
+    }
+    var branchName *string
+    if p.BranchName != nil {
+        branchName = p.BranchName
+    }
+    var tagName *string
+    if p.TagName != nil {
+        tagName = p.TagName
+    }
     return map[string]interface{} {
-        "apiKeyId": p.ApiKeyId,
-        "repositoryName": p.RepositoryName,
-        "sourcePath": p.SourcePath,
-        "referenceType": p.ReferenceType,
-        "commitHash": p.CommitHash,
-        "branchName": p.BranchName,
-        "tagName": p.TagName,
+        "apiKeyId": apiKeyId,
+        "repositoryName": repositoryName,
+        "sourcePath": sourcePath,
+        "referenceType": referenceType,
+        "commitHash": commitHash,
+        "branchName": branchName,
+        "tagName": tagName,
     }
 }
 
@@ -344,9 +489,18 @@ func NewOutputFieldFromDict(data map[string]interface{}) OutputField {
 }
 
 func (p OutputField) ToDict() map[string]interface{} {
+    
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var fieldName *string
+    if p.FieldName != nil {
+        fieldName = p.FieldName
+    }
     return map[string]interface{} {
-        "name": p.Name,
-        "fieldName": p.FieldName,
+        "name": name,
+        "fieldName": fieldName,
     }
 }
 

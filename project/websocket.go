@@ -93,6 +93,9 @@ func (p Gs2ProjectWebSocketClient) CreateAccountAsync(
     if request.Password != nil && *request.Password != "" {
         bodies["password"] = *request.Password
     }
+    if request.Lang != nil && *request.Lang != "" {
+        bodies["lang"] = *request.Lang
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -411,6 +414,9 @@ func (p Gs2ProjectWebSocketClient) ForgetAsync(
 	}
     if request.Email != nil && *request.Email != "" {
         bodies["email"] = *request.Email
+    }
+    if request.Lang != nil && *request.Lang != "" {
+        bodies["lang"] = *request.Lang
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
