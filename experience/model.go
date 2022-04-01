@@ -546,6 +546,7 @@ type Status struct {
 	ExperienceValue *int64 `json:"experienceValue"`
 	RankValue *int64 `json:"rankValue"`
 	RankCapValue *int64 `json:"rankCapValue"`
+	NextRankUpExperienceValue *int64 `json:"nextRankUpExperienceValue"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -565,6 +566,7 @@ func NewStatusFromDict(data map[string]interface{}) Status {
         ExperienceValue: core.CastInt64(data["experienceValue"]),
         RankValue: core.CastInt64(data["rankValue"]),
         RankCapValue: core.CastInt64(data["rankCapValue"]),
+        NextRankUpExperienceValue: core.CastInt64(data["nextRankUpExperienceValue"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
     }
@@ -600,6 +602,10 @@ func (p Status) ToDict() map[string]interface{} {
     if p.RankCapValue != nil {
         rankCapValue = p.RankCapValue
     }
+    var nextRankUpExperienceValue *int64
+    if p.NextRankUpExperienceValue != nil {
+        nextRankUpExperienceValue = p.NextRankUpExperienceValue
+    }
     var createdAt *int64
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
@@ -616,6 +622,7 @@ func (p Status) ToDict() map[string]interface{} {
         "experienceValue": experienceValue,
         "rankValue": rankValue,
         "rankCapValue": rankCapValue,
+        "nextRankUpExperienceValue": nextRankUpExperienceValue,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
     }

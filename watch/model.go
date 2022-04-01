@@ -42,10 +42,23 @@ func NewChartFromDict(data map[string]interface{}) Chart {
 }
 
 func (p Chart) ToDict() map[string]interface{} {
+    
+    var chartId *string
+    if p.ChartId != nil {
+        chartId = p.ChartId
+    }
+    var embedId *string
+    if p.EmbedId != nil {
+        embedId = p.EmbedId
+    }
+    var html *string
+    if p.Html != nil {
+        html = p.Html
+    }
     return map[string]interface{} {
-        "chartId": p.ChartId,
-        "embedId": p.EmbedId,
-        "html": p.Html,
+        "chartId": chartId,
+        "embedId": embedId,
+        "html": html,
     }
 }
 
@@ -94,12 +107,33 @@ func NewCumulativeFromDict(data map[string]interface{}) Cumulative {
 }
 
 func (p Cumulative) ToDict() map[string]interface{} {
+    
+    var cumulativeId *string
+    if p.CumulativeId != nil {
+        cumulativeId = p.CumulativeId
+    }
+    var resourceGrn *string
+    if p.ResourceGrn != nil {
+        resourceGrn = p.ResourceGrn
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var value *int64
+    if p.Value != nil {
+        value = p.Value
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
     return map[string]interface{} {
-        "cumulativeId": p.CumulativeId,
-        "resourceGrn": p.ResourceGrn,
-        "name": p.Name,
-        "value": p.Value,
-        "updatedAt": p.UpdatedAt,
+        "cumulativeId": cumulativeId,
+        "resourceGrn": resourceGrn,
+        "name": name,
+        "value": value,
+        "updatedAt": updatedAt,
     }
 }
 
@@ -150,13 +184,38 @@ func NewBillingActivityFromDict(data map[string]interface{}) BillingActivity {
 }
 
 func (p BillingActivity) ToDict() map[string]interface{} {
+    
+    var billingActivityId *string
+    if p.BillingActivityId != nil {
+        billingActivityId = p.BillingActivityId
+    }
+    var year *int32
+    if p.Year != nil {
+        year = p.Year
+    }
+    var month *int32
+    if p.Month != nil {
+        month = p.Month
+    }
+    var service *string
+    if p.Service != nil {
+        service = p.Service
+    }
+    var activityType *string
+    if p.ActivityType != nil {
+        activityType = p.ActivityType
+    }
+    var value *int64
+    if p.Value != nil {
+        value = p.Value
+    }
     return map[string]interface{} {
-        "billingActivityId": p.BillingActivityId,
-        "year": p.Year,
-        "month": p.Month,
-        "service": p.Service,
-        "activityType": p.ActivityType,
-        "value": p.Value,
+        "billingActivityId": billingActivityId,
+        "year": year,
+        "month": month,
+        "service": service,
+        "activityType": activityType,
+        "value": value,
     }
 }
 
@@ -173,6 +232,104 @@ func CastBillingActivities(data []interface{}) []BillingActivity {
 }
 
 func CastBillingActivitiesFromDict(data []BillingActivity) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type StatsEvent struct {
+	Grn *string `json:"grn"`
+	Service *string `json:"service"`
+	Method *string `json:"method"`
+	Metric *string `json:"metric"`
+	Cumulative *bool `json:"cumulative"`
+	Value *float64 `json:"value"`
+	Tags []string `json:"tags"`
+	CallAt *int64 `json:"callAt"`
+}
+
+func NewStatsEventFromJson(data string) StatsEvent {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewStatsEventFromDict(dict)
+}
+
+func NewStatsEventFromDict(data map[string]interface{}) StatsEvent {
+    return StatsEvent {
+        Grn: core.CastString(data["grn"]),
+        Service: core.CastString(data["service"]),
+        Method: core.CastString(data["method"]),
+        Metric: core.CastString(data["metric"]),
+        Cumulative: core.CastBool(data["cumulative"]),
+        Value: core.CastFloat64(data["value"]),
+        Tags: core.CastStrings(core.CastArray(data["tags"])),
+        CallAt: core.CastInt64(data["callAt"]),
+    }
+}
+
+func (p StatsEvent) ToDict() map[string]interface{} {
+    
+    var grn *string
+    if p.Grn != nil {
+        grn = p.Grn
+    }
+    var service *string
+    if p.Service != nil {
+        service = p.Service
+    }
+    var method *string
+    if p.Method != nil {
+        method = p.Method
+    }
+    var metric *string
+    if p.Metric != nil {
+        metric = p.Metric
+    }
+    var cumulative *bool
+    if p.Cumulative != nil {
+        cumulative = p.Cumulative
+    }
+    var value *float64
+    if p.Value != nil {
+        value = p.Value
+    }
+    var tags []interface{}
+    if p.Tags != nil {
+        tags = core.CastStringsFromDict(
+            p.Tags,
+        )
+    }
+    var callAt *int64
+    if p.CallAt != nil {
+        callAt = p.CallAt
+    }
+    return map[string]interface{} {
+        "grn": grn,
+        "service": service,
+        "method": method,
+        "metric": metric,
+        "cumulative": cumulative,
+        "value": value,
+        "tags": tags,
+        "callAt": callAt,
+    }
+}
+
+func (p StatsEvent) Pointer() *StatsEvent {
+    return &p
+}
+
+func CastStatsEvents(data []interface{}) []StatsEvent {
+	v := make([]StatsEvent, 0)
+	for _, d := range data {
+		v = append(v, NewStatsEventFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastStatsEventsFromDict(data []StatsEvent) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

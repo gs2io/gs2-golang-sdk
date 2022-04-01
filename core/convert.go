@@ -49,61 +49,116 @@ func ToString(data interface{}) string {
 }
 
 func CastString(value interface{}) *string {
-	v, ok := value.(*string)
-	if ok {
-		return v
+	{
+		v, ok := value.(string)
+		if ok {
+			return &v
+		}
+	}
+	{
+		v, ok := value.(*string)
+		if ok {
+			return v
+		}
 	}
 	return nil
 }
 
 func CastInt32(value interface{}) *int32 {
-	v, ok := value.(*int32)
-	if ok {
-		return v
+	{
+		v, ok := value.(int32)
+		if ok {
+			return &v
+		}
+	}
+	{
+		v, ok := value.(*int32)
+		if ok {
+			return v
+		}
 	}
 	return nil
 }
 
 func CastInt64(value interface{}) *int64 {
-	v, ok := value.(*int64)
-	if ok {
-		return v
+	{
+		v, ok := value.(int64)
+		if ok {
+			return &v
+		}
+	}
+	{
+		v, ok := value.(*int64)
+		if ok {
+			return v
+		}
 	}
 	return nil
 }
 
 func CastFloat32(value interface{}) *float32 {
-	v, ok := value.(*float32)
-	if ok {
-		return v
+	{
+		v, ok := value.(float32)
+		if ok {
+			return &v
+		}
+	}
+	{
+		v, ok := value.(*float32)
+		if ok {
+			return v
+		}
 	}
 	return nil
 }
 
 func CastFloat64(value interface{}) *float64 {
-	v, ok := value.(*float64)
-	if ok {
-		return v
+	{
+		v, ok := value.(float64)
+		if ok {
+			return &v
+		}
+	}
+	{
+		v, ok := value.(*float64)
+		if ok {
+			return v
+		}
 	}
 	return nil
 }
 
 func CastBool(value interface{}) *bool {
-	v, ok := value.(*bool)
-	if ok {
-		return v
+	{
+		v, ok := value.(bool)
+		if ok {
+			return &v
+		}
+	}
+	{
+		v, ok := value.(*bool)
+		if ok {
+			return v
+		}
 	}
 	return nil
 }
 
 func CastUserId(value interface{}) *string {
-	v, ok := value.(*string)
-	if ok {
-		return v
+	{
+		v, ok := value.(string)
+		if ok {
+			return &v
+		}
+	}
+	{
+		v, ok := value.(*string)
+		if ok {
+			return v
+		}
 	}
 	return nil
 }
-
 
 func CastMap(value interface{}) map[string]interface{} {
 	v, ok := value.(map[string]interface{})
@@ -113,8 +168,6 @@ func CastMap(value interface{}) map[string]interface{} {
 	return nil
 }
 
-
-
 func CastArray(value interface{}) []interface{} {
 	v, ok := value.([]interface{})
 	if ok {
@@ -122,7 +175,6 @@ func CastArray(value interface{}) []interface{} {
 	}
 	return nil
 }
-
 
 func CastStrings(value []interface{}) []string {
 	v := make([]string, 0)
@@ -132,7 +184,6 @@ func CastStrings(value []interface{}) []string {
 	return v
 }
 
-
 func CastStringsFromDict(value []string) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
@@ -140,7 +191,6 @@ func CastStringsFromDict(value []string) []interface{} {
 	}
 	return v
 }
-
 
 func Cast2Strings(value []interface{}) [][]string {
 	v := make([][]string, 0)
@@ -150,7 +200,6 @@ func Cast2Strings(value []interface{}) [][]string {
 	return v
 }
 
-
 func Cast2StringsFromDict(value [][]string) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
@@ -158,7 +207,6 @@ func Cast2StringsFromDict(value [][]string) []interface{} {
 	}
 	return v
 }
-
 
 func CastInt32s(value []interface{}) []int32 {
 	v := make([]int32, 0)
@@ -168,7 +216,6 @@ func CastInt32s(value []interface{}) []int32 {
 	return v
 }
 
-
 func CastInt32sFromDict(value []int32) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
@@ -176,7 +223,6 @@ func CastInt32sFromDict(value []int32) []interface{} {
 	}
 	return v
 }
-
 
 func CastInt64s(value []interface{}) []int64 {
 	v := make([]int64, 0)
@@ -186,7 +232,6 @@ func CastInt64s(value []interface{}) []int64 {
 	return v
 }
 
-
 func CastInt64sFromDict(value []int64) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
@@ -194,7 +239,6 @@ func CastInt64sFromDict(value []int64) []interface{} {
 	}
 	return v
 }
-
 
 func CastFloat32s(value []interface{}) []float32 {
 	v := make([]float32, 0)
@@ -204,7 +248,6 @@ func CastFloat32s(value []interface{}) []float32 {
 	return v
 }
 
-
 func CastFloat32sFromDict(value []float32) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
@@ -212,7 +255,6 @@ func CastFloat32sFromDict(value []float32) []interface{} {
 	}
 	return v
 }
-
 
 func CastFloat64s(value []interface{}) []float64 {
 	v := make([]float64, 0)
@@ -222,7 +264,6 @@ func CastFloat64s(value []interface{}) []float64 {
 	return v
 }
 
-
 func CastFloat64sFromDict(value []float64) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
@@ -230,7 +271,6 @@ func CastFloat64sFromDict(value []float64) []interface{} {
 	}
 	return v
 }
-
 
 func CastBools(value []interface{}) []bool {
 	v := make([]bool, 0)
@@ -240,7 +280,6 @@ func CastBools(value []interface{}) []bool {
 	return v
 }
 
-
 func CastBoolsFromDict(value []bool) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
@@ -249,7 +288,6 @@ func CastBoolsFromDict(value []bool) []interface{} {
 	return v
 }
 
-
 func CastUserIds(value []interface{}) []string {
 	v := make([]string, 0)
 	for _, d := range value {
@@ -257,7 +295,6 @@ func CastUserIds(value []interface{}) []string {
 	}
 	return v
 }
-
 
 func CastUserIdsFromDict(value []string) []interface{} {
 	v := make([]interface{}, 0)

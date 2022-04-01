@@ -274,6 +274,7 @@ func CastWalletsFromDict(data []Wallet) []interface{} {
 type Receipt struct {
 	ReceiptId *string `json:"receiptId"`
 	TransactionId *string `json:"transactionId"`
+	PurchaseToken *string `json:"purchaseToken"`
 	UserId *string `json:"userId"`
 	Type *string `json:"type"`
 	Slot *int32 `json:"slot"`
@@ -295,6 +296,7 @@ func NewReceiptFromDict(data map[string]interface{}) Receipt {
     return Receipt {
         ReceiptId: core.CastString(data["receiptId"]),
         TransactionId: core.CastString(data["transactionId"]),
+        PurchaseToken: core.CastString(data["purchaseToken"]),
         UserId: core.CastString(data["userId"]),
         Type: core.CastString(data["type"]),
         Slot: core.CastInt32(data["slot"]),
@@ -316,6 +318,10 @@ func (p Receipt) ToDict() map[string]interface{} {
     var transactionId *string
     if p.TransactionId != nil {
         transactionId = p.TransactionId
+    }
+    var purchaseToken *string
+    if p.PurchaseToken != nil {
+        purchaseToken = p.PurchaseToken
     }
     var userId *string
     if p.UserId != nil {
@@ -356,6 +362,7 @@ func (p Receipt) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "receiptId": receiptId,
         "transactionId": transactionId,
+        "purchaseToken": purchaseToken,
         "userId": userId,
         "type": _type,
         "slot": slot,

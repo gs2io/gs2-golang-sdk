@@ -42,10 +42,23 @@ func NewAccessTokenFromDict(data map[string]interface{}) AccessToken {
 }
 
 func (p AccessToken) ToDict() map[string]interface{} {
+    
+    var token *string
+    if p.Token != nil {
+        token = p.Token
+    }
+    var userId *string
+    if p.UserId != nil {
+        userId = p.UserId
+    }
+    var expire *int64
+    if p.Expire != nil {
+        expire = p.Expire
+    }
     return map[string]interface{} {
-        "token": p.Token,
-        "userId": p.UserId,
-        "expire": p.Expire,
+        "token": token,
+        "userId": userId,
+        "expire": expire,
     }
 }
 
