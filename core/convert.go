@@ -1,6 +1,7 @@
 package core
 
 import (
+	"encoding/json"
 	"fmt"
 )
 
@@ -59,6 +60,14 @@ func CastString(value interface{}) *string {
 		v, ok := value.(*string)
 		if ok {
 			return v
+		}
+	}
+	{
+		v, ok := value.(map[string]interface{})
+		if ok {
+			v2, _ := json.Marshal(v)
+			v3 := string(v2)
+			return &v3
 		}
 	}
 	return nil
