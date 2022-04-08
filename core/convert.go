@@ -3,6 +3,7 @@ package core
 import (
 	"encoding/json"
 	"fmt"
+	"strconv"
 )
 
 func ToString(data interface{}) string {
@@ -74,67 +75,37 @@ func CastString(value interface{}) *string {
 }
 
 func CastInt32(value interface{}) *int32 {
-	{
-		v, ok := value.(int32)
-		if ok {
-			return &v
-		}
+	v, err := strconv.ParseInt(fmt.Sprintf("%v", value), 10, 32)
+	if err != nil {
+		return nil
 	}
-	{
-		v, ok := value.(*int32)
-		if ok {
-			return v
-		}
-	}
-	return nil
+	v2 := int32(v)
+	return &v2
 }
 
 func CastInt64(value interface{}) *int64 {
-	{
-		v, ok := value.(int64)
-		if ok {
-			return &v
-		}
+	v, err := strconv.ParseInt(fmt.Sprintf("%v", value), 10, 64)
+	if err != nil {
+		return nil
 	}
-	{
-		v, ok := value.(*int64)
-		if ok {
-			return v
-		}
-	}
-	return nil
+	return &v
 }
 
 func CastFloat32(value interface{}) *float32 {
-	{
-		v, ok := value.(float32)
-		if ok {
-			return &v
-		}
+	v, err := strconv.ParseFloat(fmt.Sprintf("%v", value), 32)
+	if err != nil {
+		return nil
 	}
-	{
-		v, ok := value.(*float32)
-		if ok {
-			return v
-		}
-	}
-	return nil
+	v2 := float32(v)
+	return &v2
 }
 
 func CastFloat64(value interface{}) *float64 {
-	{
-		v, ok := value.(float64)
-		if ok {
-			return &v
-		}
+	v, err := strconv.ParseFloat(fmt.Sprintf("%v", value), 64)
+	if err != nil {
+		return nil
 	}
-	{
-		v, ok := value.(*float64)
-		if ok {
-			return v
-		}
-	}
-	return nil
+	return &v
 }
 
 func CastBool(value interface{}) *bool {
