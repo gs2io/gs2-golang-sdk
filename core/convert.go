@@ -75,6 +75,43 @@ func CastString(value interface{}) *string {
 }
 
 func CastInt32(value interface{}) *int32 {
+	if v, ok := value.(*int32); ok {
+		return CastInt32(*v)
+	}
+	if v, ok := value.(int32); ok {
+		return &v
+	}
+	if v, ok := value.(*int64); ok {
+		return CastInt32(*v)
+	}
+	if v, ok := value.(int64); ok {
+		v2 := int32(v)
+		return &v2
+	}
+	if v, ok := value.(*float32); ok {
+		return CastInt32(*v)
+	}
+	if v, ok := value.(float32); ok {
+		v2 := int32(v)
+		return &v2
+	}
+	if v, ok := value.(*float64); ok {
+		return CastInt32(*v)
+	}
+	if v, ok := value.(float64); ok {
+		v2 := int32(v)
+		return &v2
+	}
+	if v, ok := value.(*string); ok {
+		return CastInt32(*v)
+	}
+	if v, ok := value.(string); ok {
+		v2, err := strconv.ParseInt(v, 10, 32)
+		if err != nil {
+			return nil
+		}
+		return CastInt32(v2)
+	}
 	v, err := strconv.ParseInt(fmt.Sprintf("%v", value), 10, 32)
 	if err != nil {
 		return nil
@@ -84,6 +121,43 @@ func CastInt32(value interface{}) *int32 {
 }
 
 func CastInt64(value interface{}) *int64 {
+	if v, ok := value.(*int32); ok {
+		return CastInt64(*v)
+	}
+	if v, ok := value.(int32); ok {
+		v2 := int64(v)
+		return &v2
+	}
+	if v, ok := value.(*int64); ok {
+		return CastInt64(*v)
+	}
+	if v, ok := value.(int64); ok {
+		return &v
+	}
+	if v, ok := value.(*float32); ok {
+		return CastInt64(*v)
+	}
+	if v, ok := value.(float32); ok {
+		v2 := int64(v)
+		return &v2
+	}
+	if v, ok := value.(*float64); ok {
+		return CastInt64(*v)
+	}
+	if v, ok := value.(float64); ok {
+		v2 := int64(v)
+		return &v2
+	}
+	if v, ok := value.(*string); ok {
+		return CastInt64(*v)
+	}
+	if v, ok := value.(string); ok {
+		v2, err := strconv.ParseInt(v, 10, 64)
+		if err != nil {
+			return nil
+		}
+		return CastInt64(v2)
+	}
 	v, err := strconv.ParseInt(fmt.Sprintf("%v", value), 10, 64)
 	if err != nil {
 		return nil
@@ -92,6 +166,43 @@ func CastInt64(value interface{}) *int64 {
 }
 
 func CastFloat32(value interface{}) *float32 {
+	if v, ok := value.(*int32); ok {
+		return CastFloat32(*v)
+	}
+	if v, ok := value.(int32); ok {
+		v2 := float32(v)
+		return &v2
+	}
+	if v, ok := value.(*int64); ok {
+		return CastFloat32(*v)
+	}
+	if v, ok := value.(int64); ok {
+		v2 := float32(v)
+		return &v2
+	}
+	if v, ok := value.(*float32); ok {
+		return CastFloat32(*v)
+	}
+	if v, ok := value.(float32); ok {
+		return &v
+	}
+	if v, ok := value.(*float64); ok {
+		return CastFloat32(*v)
+	}
+	if v, ok := value.(float64); ok {
+		v2 := float32(v)
+		return &v2
+	}
+	if v, ok := value.(*string); ok {
+		return CastFloat32(*v)
+	}
+	if v, ok := value.(string); ok {
+		v2, err := strconv.ParseInt(v, 10, 64)
+		if err != nil {
+			return nil
+		}
+		return CastFloat32(v2)
+	}
 	v, err := strconv.ParseFloat(fmt.Sprintf("%v", value), 32)
 	if err != nil {
 		return nil
@@ -101,6 +212,43 @@ func CastFloat32(value interface{}) *float32 {
 }
 
 func CastFloat64(value interface{}) *float64 {
+	if v, ok := value.(*int32); ok {
+		return CastFloat64(*v)
+	}
+	if v, ok := value.(int32); ok {
+		v2 := float64(v)
+		return &v2
+	}
+	if v, ok := value.(*int64); ok {
+		return CastFloat64(*v)
+	}
+	if v, ok := value.(int64); ok {
+		v2 := float64(v)
+		return &v2
+	}
+	if v, ok := value.(*float32); ok {
+		return CastFloat64(*v)
+	}
+	if v, ok := value.(float32); ok {
+		v2 := float64(v)
+		return &v2
+	}
+	if v, ok := value.(*float64); ok {
+		return CastFloat64(*v)
+	}
+	if v, ok := value.(float64); ok {
+		return &v
+	}
+	if v, ok := value.(*string); ok {
+		return CastFloat64(*v)
+	}
+	if v, ok := value.(string); ok {
+		v2, err := strconv.ParseInt(v, 10, 64)
+		if err != nil {
+			return nil
+		}
+		return CastFloat64(v2)
+	}
 	v, err := strconv.ParseFloat(fmt.Sprintf("%v", value), 64)
 	if err != nil {
 		return nil
