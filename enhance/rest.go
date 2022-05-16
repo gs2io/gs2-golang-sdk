@@ -1463,6 +1463,9 @@ func (p Gs2EnhanceRestClient) DirectEnhanceByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go directEnhanceByUserIdAsyncHandler(
 		p,
@@ -1751,6 +1754,9 @@ func (p Gs2EnhanceRestClient) CreateProgressByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go createProgressByUserIdAsyncHandler(
@@ -2160,6 +2166,9 @@ func (p Gs2EnhanceRestClient) StartByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go startByUserIdAsyncHandler(
 		p,
@@ -2356,6 +2365,9 @@ func (p Gs2EnhanceRestClient) EndByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go endByUserIdAsyncHandler(
 		p,
@@ -2531,6 +2543,9 @@ func (p Gs2EnhanceRestClient) DeleteProgressByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteProgressByUserIdAsyncHandler(

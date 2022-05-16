@@ -2707,6 +2707,9 @@ func (p Gs2InventoryRestClient) AddCapacityByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go addCapacityByUserIdAsyncHandler(
 		p,
@@ -2807,6 +2810,9 @@ func (p Gs2InventoryRestClient) SetCapacityByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go setCapacityByUserIdAsyncHandler(
 		p,
@@ -2900,6 +2906,9 @@ func (p Gs2InventoryRestClient) DeleteInventoryByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteInventoryByUserIdAsyncHandler(
@@ -3799,6 +3808,9 @@ func (p Gs2InventoryRestClient) AcquireItemSetByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go acquireItemSetByUserIdAsyncHandler(
 		p,
@@ -4013,6 +4025,9 @@ func (p Gs2InventoryRestClient) ConsumeItemSetByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go consumeItemSetByUserIdAsyncHandler(
 		p,
@@ -4114,6 +4129,9 @@ func (p Gs2InventoryRestClient) DeleteItemSetByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteItemSetByUserIdAsyncHandler(
@@ -4945,6 +4963,9 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go verifyReferenceOfByUserIdAsyncHandler(
 		p,
@@ -5163,6 +5184,9 @@ func (p Gs2InventoryRestClient) AddReferenceOfByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go addReferenceOfByUserIdAsyncHandler(
 		p,
@@ -5378,6 +5402,9 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteReferenceOfByUserIdAsyncHandler(

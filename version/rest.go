@@ -1589,6 +1589,9 @@ func (p Gs2VersionRestClient) AcceptByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go acceptByUserIdAsyncHandler(
 		p,
@@ -1961,6 +1964,9 @@ func (p Gs2VersionRestClient) DeleteAcceptVersionByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go deleteAcceptVersionByUserIdAsyncHandler(
 		p,
@@ -2156,6 +2162,9 @@ func (p Gs2VersionRestClient) CheckVersionByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go checkVersionByUserIdAsyncHandler(

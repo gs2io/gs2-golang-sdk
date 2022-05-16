@@ -666,37 +666,6 @@ func (p GetBoxByUserIdResult) Pointer() *GetBoxByUserIdResult {
     return &p
 }
 
-type GetRawBoxByUserIdResult struct {
-    Item *Box `json:"item"`
-}
-
-type GetRawBoxByUserIdAsyncResult struct {
-	result *GetRawBoxByUserIdResult
-	err    error
-}
-
-func NewGetRawBoxByUserIdResultFromJson(data string) GetRawBoxByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetRawBoxByUserIdResultFromDict(dict)
-}
-
-func NewGetRawBoxByUserIdResultFromDict(data map[string]interface{}) GetRawBoxByUserIdResult {
-    return GetRawBoxByUserIdResult {
-        Item: NewBoxFromDict(core.CastMap(data["item"])).Pointer(),
-    }
-}
-
-func (p GetRawBoxByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
-}
-
-func (p GetRawBoxByUserIdResult) Pointer() *GetRawBoxByUserIdResult {
-    return &p
-}
-
 type ResetBoxResult struct {
 }
 
@@ -885,7 +854,6 @@ type DrawByUserIdResult struct {
     Items []DrawnPrize `json:"items"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-    BoxItems *BoxItems `json:"boxItems"`
 }
 
 type DrawByUserIdAsyncResult struct {
@@ -904,7 +872,6 @@ func NewDrawByUserIdResultFromDict(data map[string]interface{}) DrawByUserIdResu
         Items: CastDrawnPrizes(core.CastArray(data["items"])),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-        BoxItems: NewBoxItemsFromDict(core.CastMap(data["boxItems"])).Pointer(),
     }
 }
 
@@ -915,7 +882,6 @@ func (p DrawByUserIdResult) ToDict() map[string]interface{} {
         ),
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-        "boxItems": p.BoxItems.ToDict(),
     }
 }
 
@@ -927,7 +893,6 @@ type DrawByStampSheetResult struct {
     Items []DrawnPrize `json:"items"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-    BoxItems *BoxItems `json:"boxItems"`
 }
 
 type DrawByStampSheetAsyncResult struct {
@@ -946,7 +911,6 @@ func NewDrawByStampSheetResultFromDict(data map[string]interface{}) DrawByStampS
         Items: CastDrawnPrizes(core.CastArray(data["items"])),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-        BoxItems: NewBoxItemsFromDict(core.CastMap(data["boxItems"])).Pointer(),
     }
 }
 
@@ -957,7 +921,6 @@ func (p DrawByStampSheetResult) ToDict() map[string]interface{} {
         ),
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-        "boxItems": p.BoxItems.ToDict(),
     }
 }
 

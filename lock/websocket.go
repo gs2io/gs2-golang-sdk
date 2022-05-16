@@ -861,6 +861,9 @@ func (p Gs2LockWebSocketClient) LockByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.lockByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1040,6 +1043,9 @@ func (p Gs2LockWebSocketClient) UnlockByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.unlockByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1298,6 +1304,9 @@ func (p Gs2LockWebSocketClient) DeleteMutexByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteMutexByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

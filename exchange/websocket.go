@@ -1366,6 +1366,9 @@ func (p Gs2ExchangeWebSocketClient) ExchangeByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.exchangeByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1858,6 +1861,9 @@ func (p Gs2ExchangeWebSocketClient) CreateAwaitByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.createAwaitByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2415,6 +2421,9 @@ func (p Gs2ExchangeWebSocketClient) AcquireByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.acquireByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2510,6 +2519,9 @@ func (p Gs2ExchangeWebSocketClient) AcquireForceByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.acquireForceByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2703,6 +2715,9 @@ func (p Gs2ExchangeWebSocketClient) SkipByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.skipByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2882,6 +2897,9 @@ func (p Gs2ExchangeWebSocketClient) DeleteAwaitByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteAwaitByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

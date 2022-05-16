@@ -24,7 +24,6 @@ import (
 type DescribeNamespacesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -56,7 +55,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 type CreateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     LogSetting *LogSetting `json:"logSetting"`
@@ -91,7 +89,6 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 type GetNamespaceStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -120,7 +117,6 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 type GetNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -149,7 +145,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 type UpdateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     LogSetting *LogSetting `json:"logSetting"`
@@ -184,7 +179,6 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 type DeleteNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -213,7 +207,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 type DescribeScriptsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -248,7 +241,6 @@ func (p DescribeScriptsRequest) Pointer() *DescribeScriptsRequest {
 type CreateScriptRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -286,7 +278,6 @@ func (p CreateScriptRequest) Pointer() *CreateScriptRequest {
 type CreateScriptFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -324,7 +315,6 @@ func (p CreateScriptFromGitHubRequest) Pointer() *CreateScriptFromGitHubRequest 
 type GetScriptRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     ScriptName *string `json:"scriptName"`
 }
@@ -356,7 +346,6 @@ func (p GetScriptRequest) Pointer() *GetScriptRequest {
 type UpdateScriptRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     ScriptName *string `json:"scriptName"`
     Description *string `json:"description"`
@@ -394,7 +383,6 @@ func (p UpdateScriptRequest) Pointer() *UpdateScriptRequest {
 type UpdateScriptFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     ScriptName *string `json:"scriptName"`
     Description *string `json:"description"`
@@ -432,7 +420,6 @@ func (p UpdateScriptFromGitHubRequest) Pointer() *UpdateScriptFromGitHubRequest 
 type DeleteScriptRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     ScriptName *string `json:"scriptName"`
 }
@@ -464,7 +451,6 @@ func (p DeleteScriptRequest) Pointer() *DeleteScriptRequest {
 type InvokeScriptRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     ScriptId *string `json:"scriptId"`
     Args *string `json:"args"`
 }
@@ -496,7 +482,6 @@ func (p InvokeScriptRequest) Pointer() *InvokeScriptRequest {
 type DebugInvokeRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Script *string `json:"script"`
     Args *string `json:"args"`
 }

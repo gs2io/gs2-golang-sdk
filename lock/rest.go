@@ -918,6 +918,9 @@ func (p Gs2LockRestClient) LockByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go lockByUserIdAsyncHandler(
 		p,
@@ -1115,6 +1118,9 @@ func (p Gs2LockRestClient) UnlockByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go unlockByUserIdAsyncHandler(
@@ -1395,6 +1401,9 @@ func (p Gs2LockRestClient) DeleteMutexByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteMutexByUserIdAsyncHandler(

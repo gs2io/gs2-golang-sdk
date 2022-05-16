@@ -1771,6 +1771,9 @@ func (p Gs2ChatRestClient) PostByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go postByUserIdAsyncHandler(
 		p,
@@ -2557,6 +2560,9 @@ func (p Gs2ChatRestClient) SubscribeByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go subscribeByUserIdAsyncHandler(
 		p,
@@ -2949,6 +2955,9 @@ func (p Gs2ChatRestClient) UpdateNotificationTypeByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go updateNotificationTypeByUserIdAsyncHandler(
 		p,
@@ -3134,6 +3143,9 @@ func (p Gs2ChatRestClient) UnsubscribeByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go unsubscribeByUserIdAsyncHandler(

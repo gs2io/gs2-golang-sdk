@@ -24,7 +24,6 @@ import (
 type DescribeNamespacesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -56,7 +55,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 type CreateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     LogSetting *LogSetting `json:"logSetting"`
@@ -91,7 +89,6 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 type GetNamespaceStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -120,7 +117,6 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 type GetNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -149,7 +145,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 type UpdateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     LogSetting *LogSetting `json:"logSetting"`
@@ -184,7 +179,6 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 type DeleteNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -213,7 +207,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 type DescribeCountersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     LimitName *string `json:"limitName"`
@@ -254,7 +247,6 @@ func (p DescribeCountersRequest) Pointer() *DescribeCountersRequest {
 type DescribeCountersByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     LimitName *string `json:"limitName"`
@@ -295,7 +287,6 @@ func (p DescribeCountersByUserIdRequest) Pointer() *DescribeCountersByUserIdRequ
 type GetCounterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     LimitName *string `json:"limitName"`
     AccessToken *string `json:"accessToken"`
@@ -333,7 +324,6 @@ func (p GetCounterRequest) Pointer() *GetCounterRequest {
 type GetCounterByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     LimitName *string `json:"limitName"`
     UserId *string `json:"userId"`
@@ -371,7 +361,6 @@ func (p GetCounterByUserIdRequest) Pointer() *GetCounterByUserIdRequest {
 type CountUpRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     LimitName *string `json:"limitName"`
     CounterName *string `json:"counterName"`
@@ -497,7 +486,6 @@ func (p DeleteCounterByUserIdRequest) Pointer() *DeleteCounterByUserIdRequest {
 type CountUpByStampTaskRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampTask *string `json:"stampTask"`
     KeyId *string `json:"keyId"`
 }
@@ -529,7 +517,6 @@ func (p CountUpByStampTaskRequest) Pointer() *CountUpByStampTaskRequest {
 type DeleteByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }
@@ -561,7 +548,6 @@ func (p DeleteByStampSheetRequest) Pointer() *DeleteByStampSheetRequest {
 type DescribeLimitModelMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -596,7 +582,6 @@ func (p DescribeLimitModelMastersRequest) Pointer() *DescribeLimitModelMastersRe
 type CreateLimitModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -646,7 +631,6 @@ func (p CreateLimitModelMasterRequest) Pointer() *CreateLimitModelMasterRequest 
 type GetLimitModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     LimitName *string `json:"limitName"`
 }
@@ -678,7 +662,6 @@ func (p GetLimitModelMasterRequest) Pointer() *GetLimitModelMasterRequest {
 type UpdateLimitModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     LimitName *string `json:"limitName"`
     Description *string `json:"description"`
@@ -728,7 +711,6 @@ func (p UpdateLimitModelMasterRequest) Pointer() *UpdateLimitModelMasterRequest 
 type DeleteLimitModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     LimitName *string `json:"limitName"`
 }
@@ -760,7 +742,6 @@ func (p DeleteLimitModelMasterRequest) Pointer() *DeleteLimitModelMasterRequest 
 type ExportMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -789,7 +770,6 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 type GetCurrentLimitMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -818,7 +798,6 @@ func (p GetCurrentLimitMasterRequest) Pointer() *GetCurrentLimitMasterRequest {
 type UpdateCurrentLimitMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Settings *string `json:"settings"`
 }
@@ -850,7 +829,6 @@ func (p UpdateCurrentLimitMasterRequest) Pointer() *UpdateCurrentLimitMasterRequ
 type UpdateCurrentLimitMasterFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
@@ -882,7 +860,6 @@ func (p UpdateCurrentLimitMasterFromGitHubRequest) Pointer() *UpdateCurrentLimit
 type DescribeLimitModelsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -911,7 +888,6 @@ func (p DescribeLimitModelsRequest) Pointer() *DescribeLimitModelsRequest {
 type GetLimitModelRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     LimitName *string `json:"limitName"`
 }

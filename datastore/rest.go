@@ -946,6 +946,9 @@ func (p Gs2DatastoreRestClient) PrepareUploadByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go prepareUploadByUserIdAsyncHandler(
 		p,
@@ -1158,6 +1161,9 @@ func (p Gs2DatastoreRestClient) UpdateDataObjectByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go updateDataObjectByUserIdAsyncHandler(
 		p,
@@ -1356,6 +1362,9 @@ func (p Gs2DatastoreRestClient) PrepareReUploadByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go prepareReUploadByUserIdAsyncHandler(
 		p,
@@ -1548,6 +1557,9 @@ func (p Gs2DatastoreRestClient) DoneUploadByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go doneUploadByUserIdAsyncHandler(
 		p,
@@ -1733,6 +1745,9 @@ func (p Gs2DatastoreRestClient) DeleteDataObjectByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteDataObjectByUserIdAsyncHandler(
@@ -1921,6 +1936,9 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go prepareDownloadByUserIdAsyncHandler(
@@ -2120,6 +2138,9 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByGenerationAndUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go prepareDownloadByGenerationAndUserIdAsyncHandler(
 		p,
@@ -2308,6 +2329,9 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByUserIdAndDataObjectNameAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go prepareDownloadByUserIdAndDataObjectNameAsyncHandler(
@@ -2510,6 +2534,9 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByUserIdAndDataObjectNameAndGener
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go prepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncHandler(

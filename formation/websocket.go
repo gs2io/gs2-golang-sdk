@@ -2314,6 +2314,9 @@ func (p Gs2FormationWebSocketClient) SetMoldCapacityByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setMoldCapacityByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2402,6 +2405,9 @@ func (p Gs2FormationWebSocketClient) AddMoldCapacityByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.addMoldCapacityByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2575,6 +2581,9 @@ func (p Gs2FormationWebSocketClient) DeleteMoldByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteMoldByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3383,6 +3392,9 @@ func (p Gs2FormationWebSocketClient) SetFormByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setFormByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3588,6 +3600,9 @@ func (p Gs2FormationWebSocketClient) AcquireActionsToFormPropertiesAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.acquireActionsToFormPropertiesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3767,6 +3782,9 @@ func (p Gs2FormationWebSocketClient) DeleteFormByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteFormByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

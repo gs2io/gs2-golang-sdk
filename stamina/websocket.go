@@ -3243,6 +3243,9 @@ func (p Gs2StaminaWebSocketClient) UpdateStaminaByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.updateStaminaByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3422,6 +3425,9 @@ func (p Gs2StaminaWebSocketClient) ConsumeStaminaByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.consumeStaminaByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3510,6 +3516,9 @@ func (p Gs2StaminaWebSocketClient) RecoverStaminaByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.recoverStaminaByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3598,6 +3607,9 @@ func (p Gs2StaminaWebSocketClient) RaiseMaxValueByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.raiseMaxValueByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3686,6 +3698,9 @@ func (p Gs2StaminaWebSocketClient) SetMaxValueByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setMaxValueByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3774,6 +3789,9 @@ func (p Gs2StaminaWebSocketClient) SetRecoverIntervalByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setRecoverIntervalByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3862,6 +3880,9 @@ func (p Gs2StaminaWebSocketClient) SetRecoverValueByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setRecoverValueByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4238,6 +4259,9 @@ func (p Gs2StaminaWebSocketClient) DeleteStaminaByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteStaminaByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

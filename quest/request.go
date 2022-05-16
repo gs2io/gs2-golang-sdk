@@ -24,7 +24,6 @@ import (
 type DescribeNamespacesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -56,7 +55,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 type CreateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     StartQuestScript *ScriptSetting `json:"startQuestScript"`
@@ -106,7 +104,6 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 type GetNamespaceStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -135,7 +132,6 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 type GetNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -164,7 +160,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 type UpdateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     StartQuestScript *ScriptSetting `json:"startQuestScript"`
@@ -214,7 +209,6 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 type DeleteNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -243,7 +237,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 type DescribeQuestGroupModelMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -278,7 +271,6 @@ func (p DescribeQuestGroupModelMastersRequest) Pointer() *DescribeQuestGroupMode
 type CreateQuestGroupModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -319,7 +311,6 @@ func (p CreateQuestGroupModelMasterRequest) Pointer() *CreateQuestGroupModelMast
 type GetQuestGroupModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
 }
@@ -351,7 +342,6 @@ func (p GetQuestGroupModelMasterRequest) Pointer() *GetQuestGroupModelMasterRequ
 type UpdateQuestGroupModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
     Description *string `json:"description"`
@@ -392,7 +382,6 @@ func (p UpdateQuestGroupModelMasterRequest) Pointer() *UpdateQuestGroupModelMast
 type DeleteQuestGroupModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
 }
@@ -424,7 +413,6 @@ func (p DeleteQuestGroupModelMasterRequest) Pointer() *DeleteQuestGroupModelMast
 type DescribeQuestModelMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
     PageToken *string `json:"pageToken"`
@@ -462,7 +450,6 @@ func (p DescribeQuestModelMastersRequest) Pointer() *DescribeQuestModelMastersRe
 type CreateQuestModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
     Name *string `json:"name"`
@@ -526,7 +513,6 @@ func (p CreateQuestModelMasterRequest) Pointer() *CreateQuestModelMasterRequest 
 type GetQuestModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
     QuestName *string `json:"questName"`
@@ -561,7 +547,6 @@ func (p GetQuestModelMasterRequest) Pointer() *GetQuestModelMasterRequest {
 type UpdateQuestModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
     QuestName *string `json:"questName"`
@@ -625,7 +610,6 @@ func (p UpdateQuestModelMasterRequest) Pointer() *UpdateQuestModelMasterRequest 
 type DeleteQuestModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
     QuestName *string `json:"questName"`
@@ -660,7 +644,6 @@ func (p DeleteQuestModelMasterRequest) Pointer() *DeleteQuestModelMasterRequest 
 type ExportMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -689,7 +672,6 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 type GetCurrentQuestMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -718,7 +700,6 @@ func (p GetCurrentQuestMasterRequest) Pointer() *GetCurrentQuestMasterRequest {
 type UpdateCurrentQuestMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Settings *string `json:"settings"`
 }
@@ -750,7 +731,6 @@ func (p UpdateCurrentQuestMasterRequest) Pointer() *UpdateCurrentQuestMasterRequ
 type UpdateCurrentQuestMasterFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
@@ -782,7 +762,6 @@ func (p UpdateCurrentQuestMasterFromGitHubRequest) Pointer() *UpdateCurrentQuest
 type DescribeProgressesByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     PageToken *string `json:"pageToken"`
@@ -863,7 +842,6 @@ func (p CreateProgressByUserIdRequest) Pointer() *CreateProgressByUserIdRequest 
 type GetProgressRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
 }
@@ -895,7 +873,6 @@ func (p GetProgressRequest) Pointer() *GetProgressRequest {
 type GetProgressByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
 }
@@ -927,7 +904,6 @@ func (p GetProgressByUserIdRequest) Pointer() *GetProgressByUserIdRequest {
 type StartRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
     QuestName *string `json:"questName"`
@@ -1019,7 +995,6 @@ func (p StartByUserIdRequest) Pointer() *StartByUserIdRequest {
 type EndRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TransactionId *string `json:"transactionId"`
@@ -1115,7 +1090,6 @@ func (p EndByUserIdRequest) Pointer() *EndByUserIdRequest {
 type DeleteProgressRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
 }
@@ -1179,7 +1153,6 @@ func (p DeleteProgressByUserIdRequest) Pointer() *DeleteProgressByUserIdRequest 
 type CreateProgressByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }
@@ -1211,7 +1184,6 @@ func (p CreateProgressByStampSheetRequest) Pointer() *CreateProgressByStampSheet
 type DeleteProgressByStampTaskRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampTask *string `json:"stampTask"`
     KeyId *string `json:"keyId"`
 }
@@ -1243,7 +1215,6 @@ func (p DeleteProgressByStampTaskRequest) Pointer() *DeleteProgressByStampTaskRe
 type DescribeCompletedQuestListsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     PageToken *string `json:"pageToken"`
@@ -1281,7 +1252,6 @@ func (p DescribeCompletedQuestListsRequest) Pointer() *DescribeCompletedQuestLis
 type DescribeCompletedQuestListsByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     PageToken *string `json:"pageToken"`
@@ -1319,7 +1289,6 @@ func (p DescribeCompletedQuestListsByUserIdRequest) Pointer() *DescribeCompleted
 type GetCompletedQuestListRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
     AccessToken *string `json:"accessToken"`
@@ -1354,7 +1323,6 @@ func (p GetCompletedQuestListRequest) Pointer() *GetCompletedQuestListRequest {
 type GetCompletedQuestListByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
     UserId *string `json:"userId"`
@@ -1424,7 +1392,6 @@ func (p DeleteCompletedQuestListByUserIdRequest) Pointer() *DeleteCompletedQuest
 type DescribeQuestGroupModelsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -1453,7 +1420,6 @@ func (p DescribeQuestGroupModelsRequest) Pointer() *DescribeQuestGroupModelsRequ
 type GetQuestGroupModelRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
 }
@@ -1485,7 +1451,6 @@ func (p GetQuestGroupModelRequest) Pointer() *GetQuestGroupModelRequest {
 type DescribeQuestModelsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
 }
@@ -1517,7 +1482,6 @@ func (p DescribeQuestModelsRequest) Pointer() *DescribeQuestModelsRequest {
 type GetQuestModelRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
     QuestName *string `json:"questName"`

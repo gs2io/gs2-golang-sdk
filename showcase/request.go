@@ -24,7 +24,6 @@ import (
 type DescribeNamespacesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -56,7 +55,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 type CreateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     QueueNamespaceId *string `json:"queueNamespaceId"`
@@ -97,7 +95,6 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 type GetNamespaceStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -126,7 +123,6 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 type GetNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -155,7 +151,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 type UpdateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     QueueNamespaceId *string `json:"queueNamespaceId"`
@@ -196,7 +191,6 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 type DeleteNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -225,7 +219,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 type DescribeSalesItemMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -260,7 +253,6 @@ func (p DescribeSalesItemMastersRequest) Pointer() *DescribeSalesItemMastersRequ
 type CreateSalesItemMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -308,7 +300,6 @@ func (p CreateSalesItemMasterRequest) Pointer() *CreateSalesItemMasterRequest {
 type GetSalesItemMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     SalesItemName *string `json:"salesItemName"`
 }
@@ -340,7 +331,6 @@ func (p GetSalesItemMasterRequest) Pointer() *GetSalesItemMasterRequest {
 type UpdateSalesItemMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     SalesItemName *string `json:"salesItemName"`
     Description *string `json:"description"`
@@ -388,7 +378,6 @@ func (p UpdateSalesItemMasterRequest) Pointer() *UpdateSalesItemMasterRequest {
 type DeleteSalesItemMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     SalesItemName *string `json:"salesItemName"`
 }
@@ -420,7 +409,6 @@ func (p DeleteSalesItemMasterRequest) Pointer() *DeleteSalesItemMasterRequest {
 type DescribeSalesItemGroupMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -455,7 +443,6 @@ func (p DescribeSalesItemGroupMastersRequest) Pointer() *DescribeSalesItemGroupM
 type CreateSalesItemGroupMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -498,7 +485,6 @@ func (p CreateSalesItemGroupMasterRequest) Pointer() *CreateSalesItemGroupMaster
 type GetSalesItemGroupMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     SalesItemGroupName *string `json:"salesItemGroupName"`
 }
@@ -530,7 +516,6 @@ func (p GetSalesItemGroupMasterRequest) Pointer() *GetSalesItemGroupMasterReques
 type UpdateSalesItemGroupMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     SalesItemGroupName *string `json:"salesItemGroupName"`
     Description *string `json:"description"`
@@ -573,7 +558,6 @@ func (p UpdateSalesItemGroupMasterRequest) Pointer() *UpdateSalesItemGroupMaster
 type DeleteSalesItemGroupMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     SalesItemGroupName *string `json:"salesItemGroupName"`
 }
@@ -605,7 +589,6 @@ func (p DeleteSalesItemGroupMasterRequest) Pointer() *DeleteSalesItemGroupMaster
 type DescribeShowcaseMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -640,7 +623,6 @@ func (p DescribeShowcaseMastersRequest) Pointer() *DescribeShowcaseMastersReques
 type CreateShowcaseMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -686,7 +668,6 @@ func (p CreateShowcaseMasterRequest) Pointer() *CreateShowcaseMasterRequest {
 type GetShowcaseMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     ShowcaseName *string `json:"showcaseName"`
 }
@@ -718,7 +699,6 @@ func (p GetShowcaseMasterRequest) Pointer() *GetShowcaseMasterRequest {
 type UpdateShowcaseMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     ShowcaseName *string `json:"showcaseName"`
     Description *string `json:"description"`
@@ -764,7 +744,6 @@ func (p UpdateShowcaseMasterRequest) Pointer() *UpdateShowcaseMasterRequest {
 type DeleteShowcaseMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     ShowcaseName *string `json:"showcaseName"`
 }
@@ -796,7 +775,6 @@ func (p DeleteShowcaseMasterRequest) Pointer() *DeleteShowcaseMasterRequest {
 type ExportMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -825,7 +803,6 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 type GetCurrentShowcaseMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -854,7 +831,6 @@ func (p GetCurrentShowcaseMasterRequest) Pointer() *GetCurrentShowcaseMasterRequ
 type UpdateCurrentShowcaseMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Settings *string `json:"settings"`
 }
@@ -886,7 +862,6 @@ func (p UpdateCurrentShowcaseMasterRequest) Pointer() *UpdateCurrentShowcaseMast
 type UpdateCurrentShowcaseMasterFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
@@ -918,7 +893,6 @@ func (p UpdateCurrentShowcaseMasterFromGitHubRequest) Pointer() *UpdateCurrentSh
 type DescribeShowcasesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
 }
@@ -950,7 +924,6 @@ func (p DescribeShowcasesRequest) Pointer() *DescribeShowcasesRequest {
 type DescribeShowcasesByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
 }
@@ -982,7 +955,6 @@ func (p DescribeShowcasesByUserIdRequest) Pointer() *DescribeShowcasesByUserIdRe
 type GetShowcaseRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     ShowcaseName *string `json:"showcaseName"`
     AccessToken *string `json:"accessToken"`
@@ -1017,7 +989,6 @@ func (p GetShowcaseRequest) Pointer() *GetShowcaseRequest {
 type GetShowcaseByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     ShowcaseName *string `json:"showcaseName"`
     UserId *string `json:"userId"`
@@ -1052,7 +1023,6 @@ func (p GetShowcaseByUserIdRequest) Pointer() *GetShowcaseByUserIdRequest {
 type BuyRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     ShowcaseName *string `json:"showcaseName"`
     DisplayItemId *string `json:"displayItemId"`
@@ -1095,7 +1065,6 @@ func (p BuyRequest) Pointer() *BuyRequest {
 type BuyByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     ShowcaseName *string `json:"showcaseName"`
     DisplayItemId *string `json:"displayItemId"`

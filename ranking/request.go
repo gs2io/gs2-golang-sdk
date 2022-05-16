@@ -24,7 +24,6 @@ import (
 type DescribeNamespacesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -56,7 +55,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 type CreateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     LogSetting *LogSetting `json:"logSetting"`
@@ -91,7 +89,6 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 type GetNamespaceStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -120,7 +117,6 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 type GetNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -149,7 +145,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 type UpdateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     LogSetting *LogSetting `json:"logSetting"`
@@ -184,7 +179,6 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 type DeleteNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -213,7 +207,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 type DescribeCategoryModelsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -242,7 +235,6 @@ func (p DescribeCategoryModelsRequest) Pointer() *DescribeCategoryModelsRequest 
 type GetCategoryModelRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
 }
@@ -274,7 +266,6 @@ func (p GetCategoryModelRequest) Pointer() *GetCategoryModelRequest {
 type DescribeCategoryModelMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -309,7 +300,6 @@ func (p DescribeCategoryModelMastersRequest) Pointer() *DescribeCategoryModelMas
 type CreateCategoryModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -380,7 +370,6 @@ func (p CreateCategoryModelMasterRequest) Pointer() *CreateCategoryModelMasterRe
 type GetCategoryModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
 }
@@ -412,7 +401,6 @@ func (p GetCategoryModelMasterRequest) Pointer() *GetCategoryModelMasterRequest 
 type UpdateCategoryModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     Description *string `json:"description"`
@@ -483,7 +471,6 @@ func (p UpdateCategoryModelMasterRequest) Pointer() *UpdateCategoryModelMasterRe
 type DeleteCategoryModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
 }
@@ -515,7 +502,6 @@ func (p DeleteCategoryModelMasterRequest) Pointer() *DeleteCategoryModelMasterRe
 type SubscribeRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`
@@ -591,7 +577,6 @@ func (p SubscribeByUserIdRequest) Pointer() *SubscribeByUserIdRequest {
 type DescribeScoresRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`
@@ -635,7 +620,6 @@ func (p DescribeScoresRequest) Pointer() *DescribeScoresRequest {
 type DescribeScoresByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     UserId *string `json:"userId"`
@@ -679,7 +663,6 @@ func (p DescribeScoresByUserIdRequest) Pointer() *DescribeScoresByUserIdRequest 
 type GetScoreRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`
@@ -720,7 +703,6 @@ func (p GetScoreRequest) Pointer() *GetScoreRequest {
 type GetScoreByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     UserId *string `json:"userId"`
@@ -761,7 +743,6 @@ func (p GetScoreByUserIdRequest) Pointer() *GetScoreByUserIdRequest {
 type DescribeRankingsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`
@@ -805,7 +786,6 @@ func (p DescribeRankingsRequest) Pointer() *DescribeRankingsRequest {
 type DescribeRankingssByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     UserId *string `json:"userId"`
@@ -849,7 +829,6 @@ func (p DescribeRankingssByUserIdRequest) Pointer() *DescribeRankingssByUserIdRe
 type DescribeNearRankingsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     Score *int64 `json:"score"`
@@ -884,7 +863,6 @@ func (p DescribeNearRankingsRequest) Pointer() *DescribeNearRankingsRequest {
 type GetRankingRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`
@@ -925,7 +903,6 @@ func (p GetRankingRequest) Pointer() *GetRankingRequest {
 type GetRankingByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     UserId *string `json:"userId"`
@@ -966,7 +943,6 @@ func (p GetRankingByUserIdRequest) Pointer() *GetRankingByUserIdRequest {
 type PutScoreRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`
@@ -1048,7 +1024,6 @@ func (p PutScoreByUserIdRequest) Pointer() *PutScoreByUserIdRequest {
 type CalcRankingRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
 }
@@ -1080,7 +1055,6 @@ func (p CalcRankingRequest) Pointer() *CalcRankingRequest {
 type ExportMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -1109,7 +1083,6 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 type GetCurrentRankingMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -1138,7 +1111,6 @@ func (p GetCurrentRankingMasterRequest) Pointer() *GetCurrentRankingMasterReques
 type UpdateCurrentRankingMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Settings *string `json:"settings"`
 }
@@ -1170,7 +1142,6 @@ func (p UpdateCurrentRankingMasterRequest) Pointer() *UpdateCurrentRankingMaster
 type UpdateCurrentRankingMasterFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
@@ -1202,7 +1173,6 @@ func (p UpdateCurrentRankingMasterFromGitHubRequest) Pointer() *UpdateCurrentRan
 type GetSubscribeRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`
@@ -1240,7 +1210,6 @@ func (p GetSubscribeRequest) Pointer() *GetSubscribeRequest {
 type GetSubscribeByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     UserId *string `json:"userId"`
@@ -1278,7 +1247,6 @@ func (p GetSubscribeByUserIdRequest) Pointer() *GetSubscribeByUserIdRequest {
 type UnsubscribeRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`
@@ -1354,7 +1322,6 @@ func (p UnsubscribeByUserIdRequest) Pointer() *UnsubscribeByUserIdRequest {
 type DescribeSubscribesByCategoryNameRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`
@@ -1389,7 +1356,6 @@ func (p DescribeSubscribesByCategoryNameRequest) Pointer() *DescribeSubscribesBy
 type DescribeSubscribesByCategoryNameAndUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     UserId *string `json:"userId"`

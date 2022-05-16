@@ -862,6 +862,9 @@ func (p Gs2InboxRestClient) SendMessageByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go sendMessageByUserIdAsyncHandler(
 		p,
@@ -1230,6 +1233,9 @@ func (p Gs2InboxRestClient) ReceiveGlobalMessageByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go receiveGlobalMessageByUserIdAsyncHandler(
 		p,
@@ -1421,6 +1427,9 @@ func (p Gs2InboxRestClient) OpenMessageByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go openMessageByUserIdAsyncHandler(
@@ -1628,6 +1637,9 @@ func (p Gs2InboxRestClient) ReadMessageByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go readMessageByUserIdAsyncHandler(
 		p,
@@ -1813,6 +1825,9 @@ func (p Gs2InboxRestClient) DeleteMessageByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteMessageByUserIdAsyncHandler(
@@ -3181,6 +3196,9 @@ func (p Gs2InboxRestClient) UpdateReceivedByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go updateReceivedByUserIdAsyncHandler(
 		p,
@@ -3269,6 +3287,9 @@ func (p Gs2InboxRestClient) DeleteReceivedByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteReceivedByUserIdAsyncHandler(

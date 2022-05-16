@@ -1366,6 +1366,9 @@ func (p Gs2EnhanceWebSocketClient) DirectEnhanceByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.directEnhanceByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1634,6 +1637,9 @@ func (p Gs2EnhanceWebSocketClient) CreateProgressByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.createProgressByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2014,6 +2020,9 @@ func (p Gs2EnhanceWebSocketClient) StartByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.startByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2195,6 +2204,9 @@ func (p Gs2EnhanceWebSocketClient) EndByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.endByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2362,6 +2374,9 @@ func (p Gs2EnhanceWebSocketClient) DeleteProgressByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteProgressByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

@@ -918,6 +918,9 @@ func (p Gs2MatchmakingRestClient) CreateGatheringByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go createGatheringByUserIdAsyncHandler(
 		p,
@@ -1123,6 +1126,9 @@ func (p Gs2MatchmakingRestClient) UpdateGatheringByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go updateGatheringByUserIdAsyncHandler(
@@ -1411,6 +1417,9 @@ func (p Gs2MatchmakingRestClient) DoMatchmakingByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go doMatchmakingByUserIdAsyncHandler(
 		p,
@@ -1685,6 +1694,9 @@ func (p Gs2MatchmakingRestClient) CancelMatchmakingByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go cancelMatchmakingByUserIdAsyncHandler(
@@ -3330,6 +3342,9 @@ func (p Gs2MatchmakingRestClient) DeleteRatingAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteRatingAsyncHandler(

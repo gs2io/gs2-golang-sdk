@@ -862,6 +862,7 @@ func (p PutScoreByUserIdResult) Pointer() *PutScoreByUserIdResult {
 }
 
 type CalcRankingResult struct {
+    Processing *bool `json:"processing"`
 }
 
 type CalcRankingAsyncResult struct {
@@ -877,11 +878,13 @@ func NewCalcRankingResultFromJson(data string) CalcRankingResult {
 
 func NewCalcRankingResultFromDict(data map[string]interface{}) CalcRankingResult {
     return CalcRankingResult {
+        Processing: core.CastBool(data["processing"]),
     }
 }
 
 func (p CalcRankingResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "processing": p.Processing,
     }
 }
 

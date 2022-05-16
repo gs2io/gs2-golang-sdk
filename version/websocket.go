@@ -1489,6 +1489,9 @@ func (p Gs2VersionWebSocketClient) AcceptByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.acceptByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1835,6 +1838,9 @@ func (p Gs2VersionWebSocketClient) DeleteAcceptVersionByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteAcceptVersionByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2016,6 +2022,9 @@ func (p Gs2VersionWebSocketClient) CheckVersionByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.checkVersionByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

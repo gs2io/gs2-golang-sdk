@@ -3492,6 +3492,9 @@ func (p Gs2StaminaRestClient) UpdateStaminaByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go updateStaminaByUserIdAsyncHandler(
 		p,
@@ -3690,6 +3693,9 @@ func (p Gs2StaminaRestClient) ConsumeStaminaByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go consumeStaminaByUserIdAsyncHandler(
 		p,
@@ -3789,6 +3795,9 @@ func (p Gs2StaminaRestClient) RecoverStaminaByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go recoverStaminaByUserIdAsyncHandler(
@@ -3890,6 +3899,9 @@ func (p Gs2StaminaRestClient) RaiseMaxValueByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go raiseMaxValueByUserIdAsyncHandler(
 		p,
@@ -3989,6 +4001,9 @@ func (p Gs2StaminaRestClient) SetMaxValueByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go setMaxValueByUserIdAsyncHandler(
@@ -4090,6 +4105,9 @@ func (p Gs2StaminaRestClient) SetRecoverIntervalByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go setRecoverIntervalByUserIdAsyncHandler(
 		p,
@@ -4189,6 +4207,9 @@ func (p Gs2StaminaRestClient) SetRecoverValueByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go setRecoverValueByUserIdAsyncHandler(
@@ -4595,6 +4616,9 @@ func (p Gs2StaminaRestClient) DeleteStaminaByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteStaminaByUserIdAsyncHandler(

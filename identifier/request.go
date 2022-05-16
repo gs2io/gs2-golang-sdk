@@ -24,7 +24,6 @@ import (
 type DescribeUsersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -56,7 +55,6 @@ func (p DescribeUsersRequest) Pointer() *DescribeUsersRequest {
 type CreateUserRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
 }
@@ -88,7 +86,6 @@ func (p CreateUserRequest) Pointer() *CreateUserRequest {
 type UpdateUserRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
     Description *string `json:"description"`
 }
@@ -120,7 +117,6 @@ func (p UpdateUserRequest) Pointer() *UpdateUserRequest {
 type GetUserRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
 }
 
@@ -149,7 +145,6 @@ func (p GetUserRequest) Pointer() *GetUserRequest {
 type DeleteUserRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
 }
 
@@ -178,7 +173,6 @@ func (p DeleteUserRequest) Pointer() *DeleteUserRequest {
 type DescribeSecurityPoliciesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -210,7 +204,6 @@ func (p DescribeSecurityPoliciesRequest) Pointer() *DescribeSecurityPoliciesRequ
 type DescribeCommonSecurityPoliciesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -242,7 +235,6 @@ func (p DescribeCommonSecurityPoliciesRequest) Pointer() *DescribeCommonSecurity
 type CreateSecurityPolicyRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     Policy *string `json:"policy"`
@@ -277,7 +269,6 @@ func (p CreateSecurityPolicyRequest) Pointer() *CreateSecurityPolicyRequest {
 type UpdateSecurityPolicyRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     SecurityPolicyName *string `json:"securityPolicyName"`
     Description *string `json:"description"`
     Policy *string `json:"policy"`
@@ -312,7 +303,6 @@ func (p UpdateSecurityPolicyRequest) Pointer() *UpdateSecurityPolicyRequest {
 type GetSecurityPolicyRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     SecurityPolicyName *string `json:"securityPolicyName"`
 }
 
@@ -341,7 +331,6 @@ func (p GetSecurityPolicyRequest) Pointer() *GetSecurityPolicyRequest {
 type DeleteSecurityPolicyRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     SecurityPolicyName *string `json:"securityPolicyName"`
 }
 
@@ -370,7 +359,6 @@ func (p DeleteSecurityPolicyRequest) Pointer() *DeleteSecurityPolicyRequest {
 type DescribeIdentifiersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -405,7 +393,6 @@ func (p DescribeIdentifiersRequest) Pointer() *DescribeIdentifiersRequest {
 type CreateIdentifierRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
 }
 
@@ -434,7 +421,6 @@ func (p CreateIdentifierRequest) Pointer() *CreateIdentifierRequest {
 type GetIdentifierRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
     ClientId *string `json:"clientId"`
 }
@@ -466,7 +452,6 @@ func (p GetIdentifierRequest) Pointer() *GetIdentifierRequest {
 type DeleteIdentifierRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
     ClientId *string `json:"clientId"`
 }
@@ -498,7 +483,6 @@ func (p DeleteIdentifierRequest) Pointer() *DeleteIdentifierRequest {
 type DescribePasswordsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -533,7 +517,6 @@ func (p DescribePasswordsRequest) Pointer() *DescribePasswordsRequest {
 type CreatePasswordRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
     Password *string `json:"password"`
 }
@@ -565,7 +548,6 @@ func (p CreatePasswordRequest) Pointer() *CreatePasswordRequest {
 type GetPasswordRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
 }
 
@@ -594,7 +576,6 @@ func (p GetPasswordRequest) Pointer() *GetPasswordRequest {
 type DeletePasswordRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
 }
 
@@ -623,7 +604,6 @@ func (p DeletePasswordRequest) Pointer() *DeletePasswordRequest {
 type GetHasSecurityPolicyRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
 }
 
@@ -652,7 +632,6 @@ func (p GetHasSecurityPolicyRequest) Pointer() *GetHasSecurityPolicyRequest {
 type AttachSecurityPolicyRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
     SecurityPolicyId *string `json:"securityPolicyId"`
 }
@@ -684,7 +663,6 @@ func (p AttachSecurityPolicyRequest) Pointer() *AttachSecurityPolicyRequest {
 type DetachSecurityPolicyRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
     SecurityPolicyId *string `json:"securityPolicyId"`
 }
@@ -716,7 +694,6 @@ func (p DetachSecurityPolicyRequest) Pointer() *DetachSecurityPolicyRequest {
 type LoginRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     ClientId *string `json:"clientId"`
     ClientSecret *string `json:"clientSecret"`
 }
@@ -748,7 +725,6 @@ func (p LoginRequest) Pointer() *LoginRequest {
 type LoginByUserRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserName *string `json:"userName"`
     Password *string `json:"password"`
 }

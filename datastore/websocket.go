@@ -893,6 +893,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareUploadByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.prepareUploadByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1086,6 +1089,9 @@ func (p Gs2DatastoreWebSocketClient) UpdateDataObjectByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.updateDataObjectByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1265,6 +1271,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareReUploadByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.prepareReUploadByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1438,6 +1447,9 @@ func (p Gs2DatastoreWebSocketClient) DoneUploadByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.doneUploadByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1611,6 +1623,9 @@ func (p Gs2DatastoreWebSocketClient) DeleteDataObjectByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteDataObjectByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1784,6 +1799,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.prepareDownloadByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1963,6 +1981,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByGenerationAndUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.prepareDownloadByGenerationAndUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2136,6 +2157,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByUserIdAndDataObjectNameAsy
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.prepareDownloadByUserIdAndDataObjectNameAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2315,6 +2339,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByUserIdAndDataObjectNameAnd
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.prepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncHandler(
 		&core.WebSocketNetworkJob{

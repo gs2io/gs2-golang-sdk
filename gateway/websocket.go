@@ -855,6 +855,9 @@ func (p Gs2GatewayWebSocketClient) SetUserIdByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setUserIdByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -949,6 +952,9 @@ func (p Gs2GatewayWebSocketClient) SendNotificationAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.sendNotificationAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1122,6 +1128,9 @@ func (p Gs2GatewayWebSocketClient) SetFirebaseTokenByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setFirebaseTokenByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1456,6 +1465,9 @@ func (p Gs2GatewayWebSocketClient) DeleteFirebaseTokenByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteFirebaseTokenByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1547,6 +1559,9 @@ func (p Gs2GatewayWebSocketClient) SendMobileNotificationByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.sendMobileNotificationByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

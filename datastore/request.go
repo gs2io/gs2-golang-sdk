@@ -24,7 +24,6 @@ import (
 type DescribeNamespacesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -56,7 +55,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 type CreateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     LogSetting *LogSetting `json:"logSetting"`
@@ -94,7 +92,6 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 type GetNamespaceStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -123,7 +120,6 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 type GetNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -152,7 +148,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 type UpdateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     LogSetting *LogSetting `json:"logSetting"`
@@ -190,7 +185,6 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 type DeleteNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -219,7 +213,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 type DescribeDataObjectsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     Status *string `json:"status"`
@@ -260,7 +253,6 @@ func (p DescribeDataObjectsRequest) Pointer() *DescribeDataObjectsRequest {
 type DescribeDataObjectsByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     Status *string `json:"status"`
@@ -301,7 +293,6 @@ func (p DescribeDataObjectsByUserIdRequest) Pointer() *DescribeDataObjectsByUser
 type PrepareUploadRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     Name *string `json:"name"`
@@ -399,7 +390,6 @@ func (p PrepareUploadByUserIdRequest) Pointer() *PrepareUploadByUserIdRequest {
 type UpdateDataObjectRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     DataObjectName *string `json:"dataObjectName"`
     AccessToken *string `json:"accessToken"`
@@ -485,7 +475,6 @@ func (p UpdateDataObjectByUserIdRequest) Pointer() *UpdateDataObjectByUserIdRequ
 type PrepareReUploadRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     DataObjectName *string `json:"dataObjectName"`
     AccessToken *string `json:"accessToken"`
@@ -561,7 +550,6 @@ func (p PrepareReUploadByUserIdRequest) Pointer() *PrepareReUploadByUserIdReques
 type DoneUploadRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     DataObjectName *string `json:"dataObjectName"`
     AccessToken *string `json:"accessToken"`
@@ -631,7 +619,6 @@ func (p DoneUploadByUserIdRequest) Pointer() *DoneUploadByUserIdRequest {
 type DeleteDataObjectRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     DataObjectName *string `json:"dataObjectName"`
@@ -701,7 +688,6 @@ func (p DeleteDataObjectByUserIdRequest) Pointer() *DeleteDataObjectByUserIdRequ
 type PrepareDownloadRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     DataObjectId *string `json:"dataObjectId"`
@@ -771,7 +757,6 @@ func (p PrepareDownloadByUserIdRequest) Pointer() *PrepareDownloadByUserIdReques
 type PrepareDownloadByGenerationRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     DataObjectId *string `json:"dataObjectId"`
@@ -847,7 +832,6 @@ func (p PrepareDownloadByGenerationAndUserIdRequest) Pointer() *PrepareDownloadB
 type PrepareDownloadOwnDataRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     DataObjectName *string `json:"dataObjectName"`
@@ -917,7 +901,6 @@ func (p PrepareDownloadByUserIdAndDataObjectNameRequest) Pointer() *PrepareDownl
 type PrepareDownloadOwnDataByGenerationRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     DataObjectName *string `json:"dataObjectName"`
@@ -993,7 +976,6 @@ func (p PrepareDownloadByUserIdAndDataObjectNameAndGenerationRequest) Pointer() 
 type RestoreDataObjectRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     DataObjectId *string `json:"dataObjectId"`
 }
@@ -1025,7 +1007,6 @@ func (p RestoreDataObjectRequest) Pointer() *RestoreDataObjectRequest {
 type DescribeDataObjectHistoriesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     DataObjectName *string `json:"dataObjectName"`
@@ -1066,7 +1047,6 @@ func (p DescribeDataObjectHistoriesRequest) Pointer() *DescribeDataObjectHistori
 type DescribeDataObjectHistoriesByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     DataObjectName *string `json:"dataObjectName"`
@@ -1107,7 +1087,6 @@ func (p DescribeDataObjectHistoriesByUserIdRequest) Pointer() *DescribeDataObjec
 type GetDataObjectHistoryRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     DataObjectName *string `json:"dataObjectName"`
@@ -1145,7 +1124,6 @@ func (p GetDataObjectHistoryRequest) Pointer() *GetDataObjectHistoryRequest {
 type GetDataObjectHistoryByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     DataObjectName *string `json:"dataObjectName"`

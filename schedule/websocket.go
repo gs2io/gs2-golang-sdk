@@ -1437,6 +1437,9 @@ func (p Gs2ScheduleWebSocketClient) TriggerByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.triggerByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1610,6 +1613,9 @@ func (p Gs2ScheduleWebSocketClient) DeleteTriggerByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteTriggerByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

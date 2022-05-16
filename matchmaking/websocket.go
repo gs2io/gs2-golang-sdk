@@ -869,6 +869,9 @@ func (p Gs2MatchmakingWebSocketClient) CreateGatheringByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.createGatheringByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1056,6 +1059,9 @@ func (p Gs2MatchmakingWebSocketClient) UpdateGatheringByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.updateGatheringByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1320,6 +1326,9 @@ func (p Gs2MatchmakingWebSocketClient) DoMatchmakingByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.doMatchmakingByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1575,6 +1584,9 @@ func (p Gs2MatchmakingWebSocketClient) CancelMatchmakingByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.cancelMatchmakingByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3097,6 +3109,9 @@ func (p Gs2MatchmakingWebSocketClient) DeleteRatingAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteRatingAsyncHandler(
 		&core.WebSocketNetworkJob{

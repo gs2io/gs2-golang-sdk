@@ -2736,6 +2736,9 @@ func (p Gs2ExperienceRestClient) AddExperienceByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go addExperienceByUserIdAsyncHandler(
 		p,
@@ -2840,6 +2843,9 @@ func (p Gs2ExperienceRestClient) SetExperienceByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go setExperienceByUserIdAsyncHandler(
@@ -2946,6 +2952,9 @@ func (p Gs2ExperienceRestClient) AddRankCapByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go addRankCapByUserIdAsyncHandler(
 		p,
@@ -3051,6 +3060,9 @@ func (p Gs2ExperienceRestClient) SetRankCapByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go setRankCapByUserIdAsyncHandler(
 		p,
@@ -3149,6 +3161,9 @@ func (p Gs2ExperienceRestClient) DeleteStatusByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteStatusByUserIdAsyncHandler(

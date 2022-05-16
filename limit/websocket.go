@@ -1052,6 +1052,9 @@ func (p Gs2LimitWebSocketClient) CountUpByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.countUpByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1140,6 +1143,9 @@ func (p Gs2LimitWebSocketClient) DeleteCounterByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteCounterByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

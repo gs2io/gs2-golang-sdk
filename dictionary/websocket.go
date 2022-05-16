@@ -1363,6 +1363,9 @@ func (p Gs2DictionaryWebSocketClient) AddEntriesByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.addEntriesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1797,6 +1800,9 @@ func (p Gs2DictionaryWebSocketClient) ResetByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.resetByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

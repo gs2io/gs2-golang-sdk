@@ -149,7 +149,6 @@ func (p IssueAccountTokenResult) Pointer() *IssueAccountTokenResult {
 }
 
 type ForgetResult struct {
-    IssuePasswordToken *string `json:"issuePasswordToken"`
 }
 
 type ForgetAsyncResult struct {
@@ -165,13 +164,11 @@ func NewForgetResultFromJson(data string) ForgetResult {
 
 func NewForgetResultFromDict(data map[string]interface{}) ForgetResult {
     return ForgetResult {
-        IssuePasswordToken: core.CastString(data["issuePasswordToken"]),
     }
 }
 
 func (p ForgetResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
-        "issuePasswordToken": p.IssuePasswordToken,
     }
 }
 
@@ -242,6 +239,7 @@ func (p UpdateAccountResult) Pointer() *UpdateAccountResult {
 }
 
 type DeleteAccountResult struct {
+    Item *Account `json:"item"`
 }
 
 type DeleteAccountAsyncResult struct {
@@ -257,11 +255,13 @@ func NewDeleteAccountResultFromJson(data string) DeleteAccountResult {
 
 func NewDeleteAccountResultFromDict(data map[string]interface{}) DeleteAccountResult {
     return DeleteAccountResult {
+        Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteAccountResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 

@@ -1659,6 +1659,9 @@ func (p Gs2ChatWebSocketClient) PostByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.postByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2386,6 +2389,9 @@ func (p Gs2ChatWebSocketClient) SubscribeByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.subscribeByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2746,6 +2752,9 @@ func (p Gs2ChatWebSocketClient) UpdateNotificationTypeByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.updateNotificationTypeByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2919,6 +2928,9 @@ func (p Gs2ChatWebSocketClient) UnsubscribeByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.unsubscribeByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

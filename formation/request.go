@@ -24,7 +24,6 @@ import (
 type DescribeNamespacesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -56,7 +55,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 type CreateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     UpdateMoldScript *ScriptSetting `json:"updateMoldScript"`
@@ -97,7 +95,6 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 type GetNamespaceStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -126,7 +123,6 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 type GetNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -155,7 +151,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 type UpdateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     UpdateMoldScript *ScriptSetting `json:"updateMoldScript"`
@@ -196,7 +191,6 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 type DeleteNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -225,7 +219,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 type DescribeFormModelMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -260,7 +253,6 @@ func (p DescribeFormModelMastersRequest) Pointer() *DescribeFormModelMastersRequ
 type CreateFormModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -303,7 +295,6 @@ func (p CreateFormModelMasterRequest) Pointer() *CreateFormModelMasterRequest {
 type GetFormModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     FormModelName *string `json:"formModelName"`
 }
@@ -335,7 +326,6 @@ func (p GetFormModelMasterRequest) Pointer() *GetFormModelMasterRequest {
 type UpdateFormModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     FormModelName *string `json:"formModelName"`
     Description *string `json:"description"`
@@ -378,7 +368,6 @@ func (p UpdateFormModelMasterRequest) Pointer() *UpdateFormModelMasterRequest {
 type DeleteFormModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     FormModelName *string `json:"formModelName"`
 }
@@ -410,7 +399,6 @@ func (p DeleteFormModelMasterRequest) Pointer() *DeleteFormModelMasterRequest {
 type DescribeMoldModelsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -439,7 +427,6 @@ func (p DescribeMoldModelsRequest) Pointer() *DescribeMoldModelsRequest {
 type GetMoldModelRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MoldName *string `json:"moldName"`
 }
@@ -471,7 +458,6 @@ func (p GetMoldModelRequest) Pointer() *GetMoldModelRequest {
 type DescribeMoldModelMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -506,7 +492,6 @@ func (p DescribeMoldModelMastersRequest) Pointer() *DescribeMoldModelMastersRequ
 type CreateMoldModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -553,7 +538,6 @@ func (p CreateMoldModelMasterRequest) Pointer() *CreateMoldModelMasterRequest {
 type GetMoldModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MoldName *string `json:"moldName"`
 }
@@ -585,7 +569,6 @@ func (p GetMoldModelMasterRequest) Pointer() *GetMoldModelMasterRequest {
 type UpdateMoldModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MoldName *string `json:"moldName"`
     Description *string `json:"description"`
@@ -632,7 +615,6 @@ func (p UpdateMoldModelMasterRequest) Pointer() *UpdateMoldModelMasterRequest {
 type DeleteMoldModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MoldName *string `json:"moldName"`
 }
@@ -664,7 +646,6 @@ func (p DeleteMoldModelMasterRequest) Pointer() *DeleteMoldModelMasterRequest {
 type ExportMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -693,7 +674,6 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 type GetCurrentFormMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -722,7 +702,6 @@ func (p GetCurrentFormMasterRequest) Pointer() *GetCurrentFormMasterRequest {
 type UpdateCurrentFormMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Settings *string `json:"settings"`
 }
@@ -754,7 +733,6 @@ func (p UpdateCurrentFormMasterRequest) Pointer() *UpdateCurrentFormMasterReques
 type UpdateCurrentFormMasterFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
@@ -786,7 +764,6 @@ func (p UpdateCurrentFormMasterFromGitHubRequest) Pointer() *UpdateCurrentFormMa
 type DescribeMoldsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     PageToken *string `json:"pageToken"`
@@ -824,7 +801,6 @@ func (p DescribeMoldsRequest) Pointer() *DescribeMoldsRequest {
 type DescribeMoldsByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     PageToken *string `json:"pageToken"`
@@ -862,7 +838,6 @@ func (p DescribeMoldsByUserIdRequest) Pointer() *DescribeMoldsByUserIdRequest {
 type GetMoldRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     MoldName *string `json:"moldName"`
@@ -897,7 +872,6 @@ func (p GetMoldRequest) Pointer() *GetMoldRequest {
 type GetMoldByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     MoldName *string `json:"moldName"`
@@ -1008,7 +982,6 @@ func (p AddMoldCapacityByUserIdRequest) Pointer() *AddMoldCapacityByUserIdReques
 type DeleteMoldRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     MoldName *string `json:"moldName"`
@@ -1078,7 +1051,6 @@ func (p DeleteMoldByUserIdRequest) Pointer() *DeleteMoldByUserIdRequest {
 type AddCapacityByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }
@@ -1110,7 +1082,6 @@ func (p AddCapacityByStampSheetRequest) Pointer() *AddCapacityByStampSheetReques
 type SetCapacityByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }
@@ -1142,7 +1113,6 @@ func (p SetCapacityByStampSheetRequest) Pointer() *SetCapacityByStampSheetReques
 type DescribeFormsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MoldName *string `json:"moldName"`
     AccessToken *string `json:"accessToken"`
@@ -1183,7 +1153,6 @@ func (p DescribeFormsRequest) Pointer() *DescribeFormsRequest {
 type DescribeFormsByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MoldName *string `json:"moldName"`
     UserId *string `json:"userId"`
@@ -1224,7 +1193,6 @@ func (p DescribeFormsByUserIdRequest) Pointer() *DescribeFormsByUserIdRequest {
 type GetFormRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     MoldName *string `json:"moldName"`
@@ -1262,7 +1230,6 @@ func (p GetFormRequest) Pointer() *GetFormRequest {
 type GetFormByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     MoldName *string `json:"moldName"`
@@ -1300,7 +1267,6 @@ func (p GetFormByUserIdRequest) Pointer() *GetFormByUserIdRequest {
 type GetFormWithSignatureRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     MoldName *string `json:"moldName"`
@@ -1341,7 +1307,6 @@ func (p GetFormWithSignatureRequest) Pointer() *GetFormWithSignatureRequest {
 type GetFormWithSignatureByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     MoldName *string `json:"moldName"`
@@ -1425,7 +1390,6 @@ func (p SetFormByUserIdRequest) Pointer() *SetFormByUserIdRequest {
 type SetFormWithSignatureRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     MoldName *string `json:"moldName"`
@@ -1523,7 +1487,6 @@ func (p AcquireActionsToFormPropertiesRequest) Pointer() *AcquireActionsToFormPr
 type DeleteFormRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     MoldName *string `json:"moldName"`
@@ -1599,7 +1562,6 @@ func (p DeleteFormByUserIdRequest) Pointer() *DeleteFormByUserIdRequest {
 type AcquireActionToFormPropertiesByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }

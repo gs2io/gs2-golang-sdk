@@ -1911,100 +1911,6 @@ func (p Gs2LotteryRestClient) GetBoxByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func getRawBoxByUserIdAsyncHandler(
-	client Gs2LotteryRestClient,
-	job *core.NetworkJob,
-	callback chan<- GetRawBoxByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetRawBoxByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetRawBoxByUserIdResult
-	if asyncResult.Err != nil {
-		callback <- GetRawBoxByUserIdAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRawBoxByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetRawBoxByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2LotteryRestClient) GetRawBoxByUserIdAsync(
-	request *GetRawBoxByUserIdRequest,
-	callback chan<- GetRawBoxByUserIdAsyncResult,
-) {
-	path := "/{namespaceName}/user/{userId}/box/{prizeTableName}/raw"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
-        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
-    } else {
-        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go getRawBoxByUserIdAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:       core.Get,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2LotteryRestClient) GetRawBoxByUserId(
-	request *GetRawBoxByUserIdRequest,
-) (*GetRawBoxByUserIdResult, error) {
-	callback := make(chan GetRawBoxByUserIdAsyncResult, 1)
-	go p.GetRawBoxByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
 func resetBoxAsyncHandler(
 	client Gs2LotteryRestClient,
 	job *core.NetworkJob,
@@ -2165,6 +2071,9 @@ func (p Gs2LotteryRestClient) ResetBoxByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go resetBoxByUserIdAsyncHandler(
@@ -2618,6 +2527,9 @@ func (p Gs2LotteryRestClient) DrawByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go drawByUserIdAsyncHandler(

@@ -167,9 +167,6 @@ func (p Gs2AuthRestClient) LoginBySignatureAsync(
 
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
     if request.KeyId != nil && *request.KeyId != "" {
         bodies["keyId"] = *request.KeyId
     }

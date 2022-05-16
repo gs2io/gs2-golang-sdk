@@ -915,6 +915,9 @@ func (p Gs2FriendWebSocketClient) UpdateProfileByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.updateProfileByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -997,6 +1000,9 @@ func (p Gs2FriendWebSocketClient) DeleteProfileByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteProfileByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1534,6 +1540,9 @@ func (p Gs2FriendWebSocketClient) RegisterBlackListByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.registerBlackListByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1707,6 +1716,9 @@ func (p Gs2FriendWebSocketClient) UnregisterBlackListByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.unregisterBlackListByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2244,6 +2256,9 @@ func (p Gs2FriendWebSocketClient) FollowByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.followByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2417,6 +2432,9 @@ func (p Gs2FriendWebSocketClient) UnfollowByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.unfollowByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2769,6 +2787,9 @@ func (p Gs2FriendWebSocketClient) DeleteFriendByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteFriendByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3294,6 +3315,9 @@ func (p Gs2FriendWebSocketClient) SendRequestByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.sendRequestByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3467,6 +3491,9 @@ func (p Gs2FriendWebSocketClient) DeleteRequestByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteRequestByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3992,6 +4019,9 @@ func (p Gs2FriendWebSocketClient) AcceptRequestByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.acceptRequestByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4165,6 +4195,9 @@ func (p Gs2FriendWebSocketClient) RejectRequestByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.rejectRequestByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

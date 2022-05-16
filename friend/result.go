@@ -337,6 +337,7 @@ func (p UpdateProfileByUserIdResult) Pointer() *UpdateProfileByUserIdResult {
 }
 
 type DeleteProfileByUserIdResult struct {
+    Item *Profile `json:"item"`
 }
 
 type DeleteProfileByUserIdAsyncResult struct {
@@ -352,11 +353,13 @@ func NewDeleteProfileByUserIdResultFromJson(data string) DeleteProfileByUserIdRe
 
 func NewDeleteProfileByUserIdResultFromDict(data map[string]interface{}) DeleteProfileByUserIdResult {
     return DeleteProfileByUserIdResult {
+        Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
 func (p DeleteProfileByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "item": p.Item.ToDict(),
     }
 }
 

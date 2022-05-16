@@ -24,7 +24,6 @@ import (
 type DescribeCompletesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     PageToken *string `json:"pageToken"`
@@ -62,7 +61,6 @@ func (p DescribeCompletesRequest) Pointer() *DescribeCompletesRequest {
 type DescribeCompletesByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     PageToken *string `json:"pageToken"`
@@ -100,7 +98,6 @@ func (p DescribeCompletesByUserIdRequest) Pointer() *DescribeCompletesByUserIdRe
 type CompleteRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
     MissionTaskName *string `json:"missionTaskName"`
@@ -224,7 +221,6 @@ func (p ReceiveByUserIdRequest) Pointer() *ReceiveByUserIdRequest {
 type GetCompleteRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
     AccessToken *string `json:"accessToken"`
@@ -259,7 +255,6 @@ func (p GetCompleteRequest) Pointer() *GetCompleteRequest {
 type GetCompleteByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
     UserId *string `json:"userId"`
@@ -329,7 +324,6 @@ func (p DeleteCompleteByUserIdRequest) Pointer() *DeleteCompleteByUserIdRequest 
 type ReceiveByStampTaskRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampTask *string `json:"stampTask"`
     KeyId *string `json:"keyId"`
 }
@@ -361,7 +355,6 @@ func (p ReceiveByStampTaskRequest) Pointer() *ReceiveByStampTaskRequest {
 type DescribeCounterModelMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -396,7 +389,6 @@ func (p DescribeCounterModelMastersRequest) Pointer() *DescribeCounterModelMaste
 type CreateCounterModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Metadata *string `json:"metadata"`
@@ -442,7 +434,6 @@ func (p CreateCounterModelMasterRequest) Pointer() *CreateCounterModelMasterRequ
 type GetCounterModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CounterName *string `json:"counterName"`
 }
@@ -474,7 +465,6 @@ func (p GetCounterModelMasterRequest) Pointer() *GetCounterModelMasterRequest {
 type UpdateCounterModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CounterName *string `json:"counterName"`
     Metadata *string `json:"metadata"`
@@ -520,7 +510,6 @@ func (p UpdateCounterModelMasterRequest) Pointer() *UpdateCounterModelMasterRequ
 type DeleteCounterModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CounterName *string `json:"counterName"`
 }
@@ -552,7 +541,6 @@ func (p DeleteCounterModelMasterRequest) Pointer() *DeleteCounterModelMasterRequ
 type DescribeMissionGroupModelMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -587,7 +575,6 @@ func (p DescribeMissionGroupModelMastersRequest) Pointer() *DescribeMissionGroup
 type CreateMissionGroupModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Metadata *string `json:"metadata"`
@@ -640,7 +627,6 @@ func (p CreateMissionGroupModelMasterRequest) Pointer() *CreateMissionGroupModel
 type GetMissionGroupModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
 }
@@ -672,7 +658,6 @@ func (p GetMissionGroupModelMasterRequest) Pointer() *GetMissionGroupModelMaster
 type UpdateMissionGroupModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
     Metadata *string `json:"metadata"`
@@ -725,7 +710,6 @@ func (p UpdateMissionGroupModelMasterRequest) Pointer() *UpdateMissionGroupModel
 type DeleteMissionGroupModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
 }
@@ -757,7 +741,6 @@ func (p DeleteMissionGroupModelMasterRequest) Pointer() *DeleteMissionGroupModel
 type DescribeNamespacesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -789,7 +772,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 type CreateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     MissionCompleteScript *ScriptSetting `json:"missionCompleteScript"`
@@ -842,7 +824,6 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 type GetNamespaceStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -871,7 +852,6 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 type GetNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -900,7 +880,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 type UpdateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     MissionCompleteScript *ScriptSetting `json:"missionCompleteScript"`
@@ -953,7 +932,6 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 type DeleteNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -982,7 +960,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 type DescribeCountersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     PageToken *string `json:"pageToken"`
@@ -1020,7 +997,6 @@ func (p DescribeCountersRequest) Pointer() *DescribeCountersRequest {
 type DescribeCountersByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     PageToken *string `json:"pageToken"`
@@ -1096,7 +1072,6 @@ func (p IncreaseCounterByUserIdRequest) Pointer() *IncreaseCounterByUserIdReques
 type GetCounterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CounterName *string `json:"counterName"`
     AccessToken *string `json:"accessToken"`
@@ -1131,7 +1106,6 @@ func (p GetCounterRequest) Pointer() *GetCounterRequest {
 type GetCounterByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CounterName *string `json:"counterName"`
     UserId *string `json:"userId"`
@@ -1201,7 +1175,6 @@ func (p DeleteCounterByUserIdRequest) Pointer() *DeleteCounterByUserIdRequest {
 type IncreaseByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }
@@ -1233,7 +1206,6 @@ func (p IncreaseByStampSheetRequest) Pointer() *IncreaseByStampSheetRequest {
 type ExportMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -1262,7 +1234,6 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 type GetCurrentMissionMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -1291,7 +1262,6 @@ func (p GetCurrentMissionMasterRequest) Pointer() *GetCurrentMissionMasterReques
 type UpdateCurrentMissionMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Settings *string `json:"settings"`
 }
@@ -1323,7 +1293,6 @@ func (p UpdateCurrentMissionMasterRequest) Pointer() *UpdateCurrentMissionMaster
 type UpdateCurrentMissionMasterFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
@@ -1355,7 +1324,6 @@ func (p UpdateCurrentMissionMasterFromGitHubRequest) Pointer() *UpdateCurrentMis
 type DescribeCounterModelsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -1384,7 +1352,6 @@ func (p DescribeCounterModelsRequest) Pointer() *DescribeCounterModelsRequest {
 type GetCounterModelRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CounterName *string `json:"counterName"`
 }
@@ -1416,7 +1383,6 @@ func (p GetCounterModelRequest) Pointer() *GetCounterModelRequest {
 type DescribeMissionGroupModelsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -1445,7 +1411,6 @@ func (p DescribeMissionGroupModelsRequest) Pointer() *DescribeMissionGroupModels
 type GetMissionGroupModelRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
 }
@@ -1477,7 +1442,6 @@ func (p GetMissionGroupModelRequest) Pointer() *GetMissionGroupModelRequest {
 type DescribeMissionTaskModelsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
 }
@@ -1509,7 +1473,6 @@ func (p DescribeMissionTaskModelsRequest) Pointer() *DescribeMissionTaskModelsRe
 type GetMissionTaskModelRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
     MissionTaskName *string `json:"missionTaskName"`
@@ -1544,7 +1507,6 @@ func (p GetMissionTaskModelRequest) Pointer() *GetMissionTaskModelRequest {
 type DescribeMissionTaskModelMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
     PageToken *string `json:"pageToken"`
@@ -1582,7 +1544,6 @@ func (p DescribeMissionTaskModelMastersRequest) Pointer() *DescribeMissionTaskMo
 type CreateMissionTaskModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
     Name *string `json:"name"`
@@ -1640,7 +1601,6 @@ func (p CreateMissionTaskModelMasterRequest) Pointer() *CreateMissionTaskModelMa
 type GetMissionTaskModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
     MissionTaskName *string `json:"missionTaskName"`
@@ -1675,7 +1635,6 @@ func (p GetMissionTaskModelMasterRequest) Pointer() *GetMissionTaskModelMasterRe
 type UpdateMissionTaskModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
     MissionTaskName *string `json:"missionTaskName"`
@@ -1733,7 +1692,6 @@ func (p UpdateMissionTaskModelMasterRequest) Pointer() *UpdateMissionTaskModelMa
 type DeleteMissionTaskModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
     MissionTaskName *string `json:"missionTaskName"`

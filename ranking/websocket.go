@@ -1328,6 +1328,9 @@ func (p Gs2RankingWebSocketClient) SubscribeByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.subscribeByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2350,6 +2353,9 @@ func (p Gs2RankingWebSocketClient) PutScoreByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.putScoreByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3112,6 +3118,9 @@ func (p Gs2RankingWebSocketClient) UnsubscribeByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.unsubscribeByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

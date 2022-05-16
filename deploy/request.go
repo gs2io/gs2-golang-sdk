@@ -24,7 +24,6 @@ import (
 type DescribeStacksRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -56,7 +55,6 @@ func (p DescribeStacksRequest) Pointer() *DescribeStacksRequest {
 type CreateStackRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     Template *string `json:"template"`
@@ -91,7 +89,6 @@ func (p CreateStackRequest) Pointer() *CreateStackRequest {
 type CreateStackFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
@@ -126,7 +123,6 @@ func (p CreateStackFromGitHubRequest) Pointer() *CreateStackFromGitHubRequest {
 type ValidateRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Template *string `json:"template"`
 }
 
@@ -155,7 +151,6 @@ func (p ValidateRequest) Pointer() *ValidateRequest {
 type GetStackStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
 }
 
@@ -184,7 +179,6 @@ func (p GetStackStatusRequest) Pointer() *GetStackStatusRequest {
 type GetStackRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
 }
 
@@ -213,7 +207,6 @@ func (p GetStackRequest) Pointer() *GetStackRequest {
 type UpdateStackRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
     Description *string `json:"description"`
     Template *string `json:"template"`
@@ -248,7 +241,6 @@ func (p UpdateStackRequest) Pointer() *UpdateStackRequest {
 type UpdateStackFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
     Description *string `json:"description"`
     CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
@@ -283,7 +275,6 @@ func (p UpdateStackFromGitHubRequest) Pointer() *UpdateStackFromGitHubRequest {
 type DeleteStackRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
 }
 
@@ -312,7 +303,6 @@ func (p DeleteStackRequest) Pointer() *DeleteStackRequest {
 type ForceDeleteStackRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
 }
 
@@ -341,7 +331,6 @@ func (p ForceDeleteStackRequest) Pointer() *ForceDeleteStackRequest {
 type DeleteStackResourcesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
 }
 
@@ -370,7 +359,6 @@ func (p DeleteStackResourcesRequest) Pointer() *DeleteStackResourcesRequest {
 type DeleteStackEntityRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
 }
 
@@ -399,7 +387,6 @@ func (p DeleteStackEntityRequest) Pointer() *DeleteStackEntityRequest {
 type DescribeResourcesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -434,7 +421,6 @@ func (p DescribeResourcesRequest) Pointer() *DescribeResourcesRequest {
 type GetResourceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
     ResourceName *string `json:"resourceName"`
 }
@@ -466,7 +452,6 @@ func (p GetResourceRequest) Pointer() *GetResourceRequest {
 type DescribeEventsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -501,7 +486,6 @@ func (p DescribeEventsRequest) Pointer() *DescribeEventsRequest {
 type GetEventRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
     EventName *string `json:"eventName"`
 }
@@ -533,7 +517,6 @@ func (p GetEventRequest) Pointer() *GetEventRequest {
 type DescribeOutputsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -568,7 +551,6 @@ func (p DescribeOutputsRequest) Pointer() *DescribeOutputsRequest {
 type GetOutputRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StackName *string `json:"stackName"`
     OutputName *string `json:"outputName"`
 }

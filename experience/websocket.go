@@ -2538,6 +2538,9 @@ func (p Gs2ExperienceWebSocketClient) AddExperienceByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.addExperienceByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2629,6 +2632,9 @@ func (p Gs2ExperienceWebSocketClient) SetExperienceByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setExperienceByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2720,6 +2726,9 @@ func (p Gs2ExperienceWebSocketClient) AddRankCapByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.addRankCapByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2811,6 +2820,9 @@ func (p Gs2ExperienceWebSocketClient) SetRankCapByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setRankCapByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2899,6 +2911,9 @@ func (p Gs2ExperienceWebSocketClient) DeleteStatusByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

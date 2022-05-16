@@ -163,9 +163,6 @@ func (p Gs2AuthWebSocketClient) LoginBySignatureAsync(
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
     if request.KeyId != nil && *request.KeyId != "" {
         bodies["keyId"] = *request.KeyId
     }

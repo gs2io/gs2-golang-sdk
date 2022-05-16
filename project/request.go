@@ -24,7 +24,6 @@ import (
 type CreateAccountRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Email *string `json:"email"`
     FullName *string `json:"fullName"`
     CompanyName *string `json:"companyName"`
@@ -65,7 +64,6 @@ func (p CreateAccountRequest) Pointer() *CreateAccountRequest {
 type VerifyRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     VerifyToken *string `json:"verifyToken"`
 }
 
@@ -94,7 +92,6 @@ func (p VerifyRequest) Pointer() *VerifyRequest {
 type SignInRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Email *string `json:"email"`
     Password *string `json:"password"`
 }
@@ -126,7 +123,6 @@ func (p SignInRequest) Pointer() *SignInRequest {
 type IssueAccountTokenRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountName *string `json:"accountName"`
 }
 
@@ -155,7 +151,6 @@ func (p IssueAccountTokenRequest) Pointer() *IssueAccountTokenRequest {
 type ForgetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Email *string `json:"email"`
     Lang *string `json:"lang"`
 }
@@ -187,7 +182,6 @@ func (p ForgetRequest) Pointer() *ForgetRequest {
 type IssuePasswordRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     IssuePasswordToken *string `json:"issuePasswordToken"`
 }
 
@@ -216,7 +210,6 @@ func (p IssuePasswordRequest) Pointer() *IssuePasswordRequest {
 type UpdateAccountRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Email *string `json:"email"`
     FullName *string `json:"fullName"`
     CompanyName *string `json:"companyName"`
@@ -257,7 +250,6 @@ func (p UpdateAccountRequest) Pointer() *UpdateAccountRequest {
 type DeleteAccountRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountToken *string `json:"accountToken"`
 }
 
@@ -286,7 +278,6 @@ func (p DeleteAccountRequest) Pointer() *DeleteAccountRequest {
 type DescribeProjectsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountToken *string `json:"accountToken"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -321,7 +312,6 @@ func (p DescribeProjectsRequest) Pointer() *DescribeProjectsRequest {
 type CreateProjectRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountToken *string `json:"accountToken"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -371,7 +361,6 @@ func (p CreateProjectRequest) Pointer() *CreateProjectRequest {
 type GetProjectRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountToken *string `json:"accountToken"`
     ProjectName *string `json:"projectName"`
 }
@@ -403,7 +392,6 @@ func (p GetProjectRequest) Pointer() *GetProjectRequest {
 type GetProjectTokenRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     ProjectName *string `json:"projectName"`
     AccountToken *string `json:"accountToken"`
 }
@@ -435,7 +423,6 @@ func (p GetProjectTokenRequest) Pointer() *GetProjectTokenRequest {
 type GetProjectTokenByIdentifierRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountName *string `json:"accountName"`
     ProjectName *string `json:"projectName"`
     UserName *string `json:"userName"`
@@ -473,7 +460,6 @@ func (p GetProjectTokenByIdentifierRequest) Pointer() *GetProjectTokenByIdentifi
 type UpdateProjectRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountToken *string `json:"accountToken"`
     ProjectName *string `json:"projectName"`
     Description *string `json:"description"`
@@ -523,7 +509,6 @@ func (p UpdateProjectRequest) Pointer() *UpdateProjectRequest {
 type DeleteProjectRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountToken *string `json:"accountToken"`
     ProjectName *string `json:"projectName"`
 }
@@ -555,7 +540,6 @@ func (p DeleteProjectRequest) Pointer() *DeleteProjectRequest {
 type DescribeBillingMethodsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountToken *string `json:"accountToken"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -590,7 +574,6 @@ func (p DescribeBillingMethodsRequest) Pointer() *DescribeBillingMethodsRequest 
 type CreateBillingMethodRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountToken *string `json:"accountToken"`
     Description *string `json:"description"`
     MethodType *string `json:"methodType"`
@@ -631,7 +614,6 @@ func (p CreateBillingMethodRequest) Pointer() *CreateBillingMethodRequest {
 type GetBillingMethodRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountToken *string `json:"accountToken"`
     BillingMethodName *string `json:"billingMethodName"`
 }
@@ -663,7 +645,6 @@ func (p GetBillingMethodRequest) Pointer() *GetBillingMethodRequest {
 type UpdateBillingMethodRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountToken *string `json:"accountToken"`
     BillingMethodName *string `json:"billingMethodName"`
     Description *string `json:"description"`
@@ -698,7 +679,6 @@ func (p UpdateBillingMethodRequest) Pointer() *UpdateBillingMethodRequest {
 type DeleteBillingMethodRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountToken *string `json:"accountToken"`
     BillingMethodName *string `json:"billingMethodName"`
 }
@@ -730,7 +710,6 @@ func (p DeleteBillingMethodRequest) Pointer() *DeleteBillingMethodRequest {
 type DescribeReceiptsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountToken *string `json:"accountToken"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -765,7 +744,6 @@ func (p DescribeReceiptsRequest) Pointer() *DescribeReceiptsRequest {
 type DescribeBillingsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     AccountToken *string `json:"accountToken"`
     ProjectName *string `json:"projectName"`
     Year *int32 `json:"year"`

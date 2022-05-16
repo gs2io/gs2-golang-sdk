@@ -24,7 +24,6 @@ import (
 type GetChartRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Metrics *string `json:"metrics"`
     Grn *string `json:"grn"`
     Queries []string `json:"queries"`
@@ -82,7 +81,6 @@ func (p GetChartRequest) Pointer() *GetChartRequest {
 type GetCumulativeRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     ResourceGrn *string `json:"resourceGrn"`
 }
@@ -114,7 +112,6 @@ func (p GetCumulativeRequest) Pointer() *GetCumulativeRequest {
 type DescribeBillingActivitiesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Year *int32 `json:"year"`
     Month *int32 `json:"month"`
     Service *string `json:"service"`
@@ -155,7 +152,6 @@ func (p DescribeBillingActivitiesRequest) Pointer() *DescribeBillingActivitiesRe
 type GetBillingActivityRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Year *int32 `json:"year"`
     Month *int32 `json:"month"`
     Service *string `json:"service"`

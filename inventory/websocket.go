@@ -2506,6 +2506,9 @@ func (p Gs2InventoryWebSocketClient) AddCapacityByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.addCapacityByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2594,6 +2597,9 @@ func (p Gs2InventoryWebSocketClient) SetCapacityByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setCapacityByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2679,6 +2685,9 @@ func (p Gs2InventoryWebSocketClient) DeleteInventoryByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteInventoryByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3504,6 +3513,9 @@ func (p Gs2InventoryWebSocketClient) AcquireItemSetByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.acquireItemSetByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3695,6 +3707,9 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.consumeItemSetByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3786,6 +3801,9 @@ func (p Gs2InventoryWebSocketClient) DeleteItemSetByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteItemSetByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4523,6 +4541,9 @@ func (p Gs2InventoryWebSocketClient) VerifyReferenceOfByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.verifyReferenceOfByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4714,6 +4735,9 @@ func (p Gs2InventoryWebSocketClient) AddReferenceOfByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.addReferenceOfByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4905,6 +4929,9 @@ func (p Gs2InventoryWebSocketClient) DeleteReferenceOfByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteReferenceOfByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

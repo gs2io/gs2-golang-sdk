@@ -1463,6 +1463,9 @@ func (p Gs2ExchangeRestClient) ExchangeByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go exchangeByUserIdAsyncHandler(
 		p,
@@ -1998,6 +2001,9 @@ func (p Gs2ExchangeRestClient) CreateAwaitByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go createAwaitByUserIdAsyncHandler(
@@ -2605,6 +2611,9 @@ func (p Gs2ExchangeRestClient) AcquireByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go acquireByUserIdAsyncHandler(
 		p,
@@ -2713,6 +2722,9 @@ func (p Gs2ExchangeRestClient) AcquireForceByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go acquireForceByUserIdAsyncHandler(
@@ -2930,6 +2942,9 @@ func (p Gs2ExchangeRestClient) SkipByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go skipByUserIdAsyncHandler(
 		p,
@@ -3125,6 +3140,9 @@ func (p Gs2ExchangeRestClient) DeleteAwaitByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteAwaitByUserIdAsyncHandler(

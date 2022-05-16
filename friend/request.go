@@ -24,7 +24,6 @@ import (
 type DescribeNamespacesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -56,7 +55,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 type CreateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     FollowScript *ScriptSetting `json:"followScript"`
@@ -124,7 +122,6 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 type GetNamespaceStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -153,7 +150,6 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 type GetNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -182,7 +178,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 type UpdateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     FollowScript *ScriptSetting `json:"followScript"`
@@ -250,7 +245,6 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 type DeleteNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -279,7 +273,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 type GetProfileRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
 }
@@ -311,7 +304,6 @@ func (p GetProfileRequest) Pointer() *GetProfileRequest {
 type GetProfileByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
 }
@@ -343,7 +335,6 @@ func (p GetProfileByUserIdRequest) Pointer() *GetProfileByUserIdRequest {
 type UpdateProfileRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     PublicProfile *string `json:"publicProfile"`
@@ -457,7 +448,6 @@ func (p DeleteProfileByUserIdRequest) Pointer() *DeleteProfileByUserIdRequest {
 type DescribeFriendsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     WithProfile *bool `json:"withProfile"`
@@ -498,7 +488,6 @@ func (p DescribeFriendsRequest) Pointer() *DescribeFriendsRequest {
 type DescribeFriendsByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     WithProfile *bool `json:"withProfile"`
@@ -539,7 +528,6 @@ func (p DescribeFriendsByUserIdRequest) Pointer() *DescribeFriendsByUserIdReques
 type DescribeBlackListRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     PageToken *string `json:"pageToken"`
@@ -577,7 +565,6 @@ func (p DescribeBlackListRequest) Pointer() *DescribeBlackListRequest {
 type DescribeBlackListByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     PageToken *string `json:"pageToken"`
@@ -615,7 +602,6 @@ func (p DescribeBlackListByUserIdRequest) Pointer() *DescribeBlackListByUserIdRe
 type RegisterBlackListRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TargetUserId *string `json:"targetUserId"`
@@ -685,7 +671,6 @@ func (p RegisterBlackListByUserIdRequest) Pointer() *RegisterBlackListByUserIdRe
 type UnregisterBlackListRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TargetUserId *string `json:"targetUserId"`
@@ -755,7 +740,6 @@ func (p UnregisterBlackListByUserIdRequest) Pointer() *UnregisterBlackListByUser
 type DescribeFollowsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     WithProfile *bool `json:"withProfile"`
@@ -796,7 +780,6 @@ func (p DescribeFollowsRequest) Pointer() *DescribeFollowsRequest {
 type DescribeFollowsByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     WithProfile *bool `json:"withProfile"`
@@ -837,7 +820,6 @@ func (p DescribeFollowsByUserIdRequest) Pointer() *DescribeFollowsByUserIdReques
 type GetFollowRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TargetUserId *string `json:"targetUserId"`
@@ -875,7 +857,6 @@ func (p GetFollowRequest) Pointer() *GetFollowRequest {
 type GetFollowByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     TargetUserId *string `json:"targetUserId"`
@@ -913,7 +894,6 @@ func (p GetFollowByUserIdRequest) Pointer() *GetFollowByUserIdRequest {
 type FollowRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TargetUserId *string `json:"targetUserId"`
@@ -983,7 +963,6 @@ func (p FollowByUserIdRequest) Pointer() *FollowByUserIdRequest {
 type UnfollowRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TargetUserId *string `json:"targetUserId"`
@@ -1053,7 +1032,6 @@ func (p UnfollowByUserIdRequest) Pointer() *UnfollowByUserIdRequest {
 type GetFriendRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TargetUserId *string `json:"targetUserId"`
@@ -1091,7 +1069,6 @@ func (p GetFriendRequest) Pointer() *GetFriendRequest {
 type GetFriendByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     TargetUserId *string `json:"targetUserId"`
@@ -1129,7 +1106,6 @@ func (p GetFriendByUserIdRequest) Pointer() *GetFriendByUserIdRequest {
 type DeleteFriendRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TargetUserId *string `json:"targetUserId"`
@@ -1199,7 +1175,6 @@ func (p DeleteFriendByUserIdRequest) Pointer() *DeleteFriendByUserIdRequest {
 type DescribeSendRequestsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     PageToken *string `json:"pageToken"`
@@ -1237,7 +1212,6 @@ func (p DescribeSendRequestsRequest) Pointer() *DescribeSendRequestsRequest {
 type DescribeSendRequestsByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     PageToken *string `json:"pageToken"`
@@ -1275,7 +1249,6 @@ func (p DescribeSendRequestsByUserIdRequest) Pointer() *DescribeSendRequestsByUs
 type GetSendRequestRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TargetUserId *string `json:"targetUserId"`
@@ -1310,7 +1283,6 @@ func (p GetSendRequestRequest) Pointer() *GetSendRequestRequest {
 type GetSendRequestByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     TargetUserId *string `json:"targetUserId"`
@@ -1345,7 +1317,6 @@ func (p GetSendRequestByUserIdRequest) Pointer() *GetSendRequestByUserIdRequest 
 type SendRequestRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TargetUserId *string `json:"targetUserId"`
@@ -1415,7 +1386,6 @@ func (p SendRequestByUserIdRequest) Pointer() *SendRequestByUserIdRequest {
 type DeleteRequestRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TargetUserId *string `json:"targetUserId"`
@@ -1485,7 +1455,6 @@ func (p DeleteRequestByUserIdRequest) Pointer() *DeleteRequestByUserIdRequest {
 type DescribeReceiveRequestsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     PageToken *string `json:"pageToken"`
@@ -1523,7 +1492,6 @@ func (p DescribeReceiveRequestsRequest) Pointer() *DescribeReceiveRequestsReques
 type DescribeReceiveRequestsByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     PageToken *string `json:"pageToken"`
@@ -1561,7 +1529,6 @@ func (p DescribeReceiveRequestsByUserIdRequest) Pointer() *DescribeReceiveReques
 type GetReceiveRequestRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     FromUserId *string `json:"fromUserId"`
@@ -1596,7 +1563,6 @@ func (p GetReceiveRequestRequest) Pointer() *GetReceiveRequestRequest {
 type GetReceiveRequestByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     FromUserId *string `json:"fromUserId"`
@@ -1631,7 +1597,6 @@ func (p GetReceiveRequestByUserIdRequest) Pointer() *GetReceiveRequestByUserIdRe
 type AcceptRequestRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     FromUserId *string `json:"fromUserId"`
@@ -1701,7 +1666,6 @@ func (p AcceptRequestByUserIdRequest) Pointer() *AcceptRequestByUserIdRequest {
 type RejectRequestRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     FromUserId *string `json:"fromUserId"`
@@ -1771,7 +1735,6 @@ func (p RejectRequestByUserIdRequest) Pointer() *RejectRequestByUserIdRequest {
 type GetPublicProfileRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
 }

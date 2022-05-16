@@ -908,6 +908,9 @@ func (p Gs2GatewayRestClient) SetUserIdByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go setUserIdByUserIdAsyncHandler(
 		p,
@@ -1011,6 +1014,9 @@ func (p Gs2GatewayRestClient) SendNotificationAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go sendNotificationAsyncHandler(
@@ -1199,6 +1205,9 @@ func (p Gs2GatewayRestClient) SetFirebaseTokenByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go setFirebaseTokenByUserIdAsyncHandler(
@@ -1552,6 +1561,9 @@ func (p Gs2GatewayRestClient) DeleteFirebaseTokenByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go deleteFirebaseTokenByUserIdAsyncHandler(
 		p,
@@ -1652,6 +1664,9 @@ func (p Gs2GatewayRestClient) SendMobileNotificationByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go sendMobileNotificationByUserIdAsyncHandler(

@@ -25,6 +25,7 @@ type AccessToken struct {
 	Token *string `json:"token"`
 	UserId *string `json:"userId"`
 	Expire *int64 `json:"expire"`
+	TimeOffset *int32 `json:"timeOffset"`
 }
 
 func NewAccessTokenFromJson(data string) AccessToken {
@@ -38,6 +39,7 @@ func NewAccessTokenFromDict(data map[string]interface{}) AccessToken {
         Token: core.CastString(data["token"]),
         UserId: core.CastString(data["userId"]),
         Expire: core.CastInt64(data["expire"]),
+        TimeOffset: core.CastInt32(data["timeOffset"]),
     }
 }
 
@@ -55,10 +57,15 @@ func (p AccessToken) ToDict() map[string]interface{} {
     if p.Expire != nil {
         expire = p.Expire
     }
+    var timeOffset *int32
+    if p.TimeOffset != nil {
+        timeOffset = p.TimeOffset
+    }
     return map[string]interface{} {
         "token": token,
         "userId": userId,
         "expire": expire,
+        "timeOffset": timeOffset,
     }
 }
 

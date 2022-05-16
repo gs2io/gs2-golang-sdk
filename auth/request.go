@@ -24,7 +24,6 @@ import (
 type LoginRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     UserId *string `json:"userId"`
     TimeOffset *int32 `json:"timeOffset"`
 }
@@ -56,8 +55,6 @@ func (p LoginRequest) Pointer() *LoginRequest {
 type LoginBySignatureRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    UserId *string `json:"userId"`
     KeyId *string `json:"keyId"`
     Body *string `json:"body"`
     Signature *string `json:"signature"`
@@ -71,7 +68,6 @@ func NewLoginBySignatureRequestFromJson(data string) LoginBySignatureRequest {
 
 func NewLoginBySignatureRequestFromDict(data map[string]interface{}) LoginBySignatureRequest {
     return LoginBySignatureRequest {
-        UserId: core.CastString(data["userId"]),
         KeyId: core.CastString(data["keyId"]),
         Body: core.CastString(data["body"]),
         Signature: core.CastString(data["signature"]),
@@ -80,7 +76,6 @@ func NewLoginBySignatureRequestFromDict(data map[string]interface{}) LoginBySign
 
 func (p LoginBySignatureRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
-        "userId": p.UserId,
         "keyId": p.KeyId,
         "body": p.Body,
         "signature": p.Signature,

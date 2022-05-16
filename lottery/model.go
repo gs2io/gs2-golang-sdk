@@ -335,6 +335,7 @@ func CastPrizeTableMastersFromDict(data []PrizeTableMaster) []interface{} {
 type Box struct {
 	BoxId *string `json:"boxId"`
 	PrizeTableName *string `json:"prizeTableName"`
+	Index *int32 `json:"index"`
 	UserId *string `json:"userId"`
 	DrawnIndexes []int32 `json:"drawnIndexes"`
 	CreatedAt *int64 `json:"createdAt"`
@@ -351,6 +352,7 @@ func NewBoxFromDict(data map[string]interface{}) Box {
     return Box {
         BoxId: core.CastString(data["boxId"]),
         PrizeTableName: core.CastString(data["prizeTableName"]),
+        Index: core.CastInt32(data["index"]),
         UserId: core.CastString(data["userId"]),
         DrawnIndexes: core.CastInt32s(core.CastArray(data["drawnIndexes"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
@@ -367,6 +369,10 @@ func (p Box) ToDict() map[string]interface{} {
     var prizeTableName *string
     if p.PrizeTableName != nil {
         prizeTableName = p.PrizeTableName
+    }
+    var index *int32
+    if p.Index != nil {
+        index = p.Index
     }
     var userId *string
     if p.UserId != nil {
@@ -389,6 +395,7 @@ func (p Box) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "boxId": boxId,
         "prizeTableName": prizeTableName,
+        "index": index,
         "userId": userId,
         "drawnIndexes": drawnIndexes,
         "createdAt": createdAt,

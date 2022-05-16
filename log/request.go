@@ -24,7 +24,6 @@ import (
 type DescribeNamespacesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -56,7 +55,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 type CreateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     Type *string `json:"type"`
@@ -112,7 +110,6 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 type GetNamespaceStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -141,7 +138,6 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 type GetNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -170,7 +166,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 type UpdateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     Type *string `json:"type"`
@@ -226,7 +221,6 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 type DeleteNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -255,7 +249,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 type QueryAccessLogRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Service *string `json:"service"`
     Method *string `json:"method"`
@@ -308,7 +301,6 @@ func (p QueryAccessLogRequest) Pointer() *QueryAccessLogRequest {
 type CountAccessLogRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Service *bool `json:"service"`
     Method *bool `json:"method"`
@@ -361,7 +353,6 @@ func (p CountAccessLogRequest) Pointer() *CountAccessLogRequest {
 type QueryIssueStampSheetLogRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Service *string `json:"service"`
     Method *string `json:"method"`
@@ -417,7 +408,6 @@ func (p QueryIssueStampSheetLogRequest) Pointer() *QueryIssueStampSheetLogReques
 type CountIssueStampSheetLogRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Service *bool `json:"service"`
     Method *bool `json:"method"`
@@ -473,7 +463,6 @@ func (p CountIssueStampSheetLogRequest) Pointer() *CountIssueStampSheetLogReques
 type QueryExecuteStampSheetLogRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Service *string `json:"service"`
     Method *string `json:"method"`
@@ -529,7 +518,6 @@ func (p QueryExecuteStampSheetLogRequest) Pointer() *QueryExecuteStampSheetLogRe
 type CountExecuteStampSheetLogRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Service *bool `json:"service"`
     Method *bool `json:"method"`
@@ -585,7 +573,6 @@ func (p CountExecuteStampSheetLogRequest) Pointer() *CountExecuteStampSheetLogRe
 type QueryExecuteStampTaskLogRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Service *string `json:"service"`
     Method *string `json:"method"`
@@ -641,7 +628,6 @@ func (p QueryExecuteStampTaskLogRequest) Pointer() *QueryExecuteStampTaskLogRequ
 type CountExecuteStampTaskLogRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Service *bool `json:"service"`
     Method *bool `json:"method"`
@@ -697,7 +683,6 @@ func (p CountExecuteStampTaskLogRequest) Pointer() *CountExecuteStampTaskLogRequ
 type PutLogRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     LoggingNamespaceId *string `json:"loggingNamespaceId"`
     LogCategory *string `json:"logCategory"`
     Payload *string `json:"payload"`

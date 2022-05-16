@@ -765,6 +765,9 @@ func (p Gs2JobQueueWebSocketClient) PushByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.pushByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -932,6 +935,9 @@ func (p Gs2JobQueueWebSocketClient) RunByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.runByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1017,6 +1023,9 @@ func (p Gs2JobQueueWebSocketClient) DeleteJobByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteJobByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1357,6 +1366,9 @@ func (p Gs2JobQueueWebSocketClient) DeleteDeadLetterJobByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteDeadLetterJobByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

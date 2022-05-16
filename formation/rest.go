@@ -2489,6 +2489,9 @@ func (p Gs2FormationRestClient) SetMoldCapacityByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go setMoldCapacityByUserIdAsyncHandler(
 		p,
@@ -2588,6 +2591,9 @@ func (p Gs2FormationRestClient) AddMoldCapacityByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go addMoldCapacityByUserIdAsyncHandler(
@@ -2774,6 +2780,9 @@ func (p Gs2FormationRestClient) DeleteMoldByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteMoldByUserIdAsyncHandler(
@@ -3656,6 +3665,9 @@ func (p Gs2FormationRestClient) SetFormByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go setFormByUserIdAsyncHandler(
 		p,
@@ -3884,6 +3896,9 @@ func (p Gs2FormationRestClient) AcquireActionsToFormPropertiesAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go acquireActionsToFormPropertiesAsyncHandler(
 		p,
@@ -4079,6 +4094,9 @@ func (p Gs2FormationRestClient) DeleteFormByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteFormByUserIdAsyncHandler(

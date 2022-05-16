@@ -988,6 +988,9 @@ func (p Gs2MoneyWebSocketClient) DepositByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.depositByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1173,6 +1176,9 @@ func (p Gs2MoneyWebSocketClient) WithdrawByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.withdrawByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1607,6 +1613,9 @@ func (p Gs2MoneyWebSocketClient) RecordReceiptAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.recordReceiptAsyncHandler(
 		&core.WebSocketNetworkJob{

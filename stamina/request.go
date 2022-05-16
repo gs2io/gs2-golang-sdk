@@ -24,7 +24,6 @@ import (
 type DescribeNamespacesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -56,7 +55,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 type CreateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     OverflowTriggerScript *ScriptSetting `json:"overflowTriggerScript"`
@@ -94,7 +92,6 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 type GetNamespaceStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -123,7 +120,6 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 type GetNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -152,7 +148,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 type UpdateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     OverflowTriggerScript *ScriptSetting `json:"overflowTriggerScript"`
@@ -190,7 +185,6 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 type DeleteNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -219,7 +213,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 type DescribeStaminaModelMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -254,7 +247,6 @@ func (p DescribeStaminaModelMastersRequest) Pointer() *DescribeStaminaModelMaste
 type CreateStaminaModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -316,7 +308,6 @@ func (p CreateStaminaModelMasterRequest) Pointer() *CreateStaminaModelMasterRequ
 type GetStaminaModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
 }
@@ -348,7 +339,6 @@ func (p GetStaminaModelMasterRequest) Pointer() *GetStaminaModelMasterRequest {
 type UpdateStaminaModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
     Description *string `json:"description"`
@@ -410,7 +400,6 @@ func (p UpdateStaminaModelMasterRequest) Pointer() *UpdateStaminaModelMasterRequ
 type DeleteStaminaModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
 }
@@ -442,7 +431,6 @@ func (p DeleteStaminaModelMasterRequest) Pointer() *DeleteStaminaModelMasterRequ
 type DescribeMaxStaminaTableMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -477,7 +465,6 @@ func (p DescribeMaxStaminaTableMastersRequest) Pointer() *DescribeMaxStaminaTabl
 type CreateMaxStaminaTableMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -523,7 +510,6 @@ func (p CreateMaxStaminaTableMasterRequest) Pointer() *CreateMaxStaminaTableMast
 type GetMaxStaminaTableMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MaxStaminaTableName *string `json:"maxStaminaTableName"`
 }
@@ -555,7 +541,6 @@ func (p GetMaxStaminaTableMasterRequest) Pointer() *GetMaxStaminaTableMasterRequ
 type UpdateMaxStaminaTableMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MaxStaminaTableName *string `json:"maxStaminaTableName"`
     Description *string `json:"description"`
@@ -601,7 +586,6 @@ func (p UpdateMaxStaminaTableMasterRequest) Pointer() *UpdateMaxStaminaTableMast
 type DeleteMaxStaminaTableMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MaxStaminaTableName *string `json:"maxStaminaTableName"`
 }
@@ -633,7 +617,6 @@ func (p DeleteMaxStaminaTableMasterRequest) Pointer() *DeleteMaxStaminaTableMast
 type DescribeRecoverIntervalTableMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -668,7 +651,6 @@ func (p DescribeRecoverIntervalTableMastersRequest) Pointer() *DescribeRecoverIn
 type CreateRecoverIntervalTableMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -714,7 +696,6 @@ func (p CreateRecoverIntervalTableMasterRequest) Pointer() *CreateRecoverInterva
 type GetRecoverIntervalTableMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RecoverIntervalTableName *string `json:"recoverIntervalTableName"`
 }
@@ -746,7 +727,6 @@ func (p GetRecoverIntervalTableMasterRequest) Pointer() *GetRecoverIntervalTable
 type UpdateRecoverIntervalTableMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RecoverIntervalTableName *string `json:"recoverIntervalTableName"`
     Description *string `json:"description"`
@@ -792,7 +772,6 @@ func (p UpdateRecoverIntervalTableMasterRequest) Pointer() *UpdateRecoverInterva
 type DeleteRecoverIntervalTableMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RecoverIntervalTableName *string `json:"recoverIntervalTableName"`
 }
@@ -824,7 +803,6 @@ func (p DeleteRecoverIntervalTableMasterRequest) Pointer() *DeleteRecoverInterva
 type DescribeRecoverValueTableMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -859,7 +837,6 @@ func (p DescribeRecoverValueTableMastersRequest) Pointer() *DescribeRecoverValue
 type CreateRecoverValueTableMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -905,7 +882,6 @@ func (p CreateRecoverValueTableMasterRequest) Pointer() *CreateRecoverValueTable
 type GetRecoverValueTableMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RecoverValueTableName *string `json:"recoverValueTableName"`
 }
@@ -937,7 +913,6 @@ func (p GetRecoverValueTableMasterRequest) Pointer() *GetRecoverValueTableMaster
 type UpdateRecoverValueTableMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RecoverValueTableName *string `json:"recoverValueTableName"`
     Description *string `json:"description"`
@@ -983,7 +958,6 @@ func (p UpdateRecoverValueTableMasterRequest) Pointer() *UpdateRecoverValueTable
 type DeleteRecoverValueTableMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RecoverValueTableName *string `json:"recoverValueTableName"`
 }
@@ -1015,7 +989,6 @@ func (p DeleteRecoverValueTableMasterRequest) Pointer() *DeleteRecoverValueTable
 type ExportMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -1044,7 +1017,6 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 type GetCurrentStaminaMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -1073,7 +1045,6 @@ func (p GetCurrentStaminaMasterRequest) Pointer() *GetCurrentStaminaMasterReques
 type UpdateCurrentStaminaMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Settings *string `json:"settings"`
 }
@@ -1105,7 +1076,6 @@ func (p UpdateCurrentStaminaMasterRequest) Pointer() *UpdateCurrentStaminaMaster
 type UpdateCurrentStaminaMasterFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
@@ -1137,7 +1107,6 @@ func (p UpdateCurrentStaminaMasterFromGitHubRequest) Pointer() *UpdateCurrentSta
 type DescribeStaminaModelsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -1166,7 +1135,6 @@ func (p DescribeStaminaModelsRequest) Pointer() *DescribeStaminaModelsRequest {
 type GetStaminaModelRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
 }
@@ -1198,7 +1166,6 @@ func (p GetStaminaModelRequest) Pointer() *GetStaminaModelRequest {
 type DescribeStaminasRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     PageToken *string `json:"pageToken"`
@@ -1236,7 +1203,6 @@ func (p DescribeStaminasRequest) Pointer() *DescribeStaminasRequest {
 type DescribeStaminasByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     PageToken *string `json:"pageToken"`
@@ -1274,7 +1240,6 @@ func (p DescribeStaminasByUserIdRequest) Pointer() *DescribeStaminasByUserIdRequ
 type GetStaminaRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
     AccessToken *string `json:"accessToken"`
@@ -1309,7 +1274,6 @@ func (p GetStaminaRequest) Pointer() *GetStaminaRequest {
 type GetStaminaByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
     UserId *string `json:"userId"`
@@ -1391,7 +1355,6 @@ func (p UpdateStaminaByUserIdRequest) Pointer() *UpdateStaminaByUserIdRequest {
 type ConsumeStaminaRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
     AccessToken *string `json:"accessToken"`
@@ -1657,7 +1620,6 @@ func (p SetRecoverValueByUserIdRequest) Pointer() *SetRecoverValueByUserIdReques
 type SetMaxValueByStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
     AccessToken *string `json:"accessToken"`
@@ -1701,7 +1663,6 @@ func (p SetMaxValueByStatusRequest) Pointer() *SetMaxValueByStatusRequest {
 type SetRecoverIntervalByStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
     AccessToken *string `json:"accessToken"`
@@ -1745,7 +1706,6 @@ func (p SetRecoverIntervalByStatusRequest) Pointer() *SetRecoverIntervalByStatus
 type SetRecoverValueByStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
     AccessToken *string `json:"accessToken"`
@@ -1824,7 +1784,6 @@ func (p DeleteStaminaByUserIdRequest) Pointer() *DeleteStaminaByUserIdRequest {
 type RecoverStaminaByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }
@@ -1856,7 +1815,6 @@ func (p RecoverStaminaByStampSheetRequest) Pointer() *RecoverStaminaByStampSheet
 type RaiseMaxValueByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }
@@ -1888,7 +1846,6 @@ func (p RaiseMaxValueByStampSheetRequest) Pointer() *RaiseMaxValueByStampSheetRe
 type SetMaxValueByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }
@@ -1920,7 +1877,6 @@ func (p SetMaxValueByStampSheetRequest) Pointer() *SetMaxValueByStampSheetReques
 type SetRecoverIntervalByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }
@@ -1952,7 +1908,6 @@ func (p SetRecoverIntervalByStampSheetRequest) Pointer() *SetRecoverIntervalBySt
 type SetRecoverValueByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }
@@ -1984,7 +1939,6 @@ func (p SetRecoverValueByStampSheetRequest) Pointer() *SetRecoverValueByStampShe
 type ConsumeStaminaByStampTaskRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampTask *string `json:"stampTask"`
     KeyId *string `json:"keyId"`
 }

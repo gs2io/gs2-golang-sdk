@@ -1429,6 +1429,9 @@ func (p Gs2RankingRestClient) SubscribeByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go subscribeByUserIdAsyncHandler(
 		p,
@@ -2549,6 +2552,9 @@ func (p Gs2RankingRestClient) PutScoreByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go putScoreByUserIdAsyncHandler(
 		p,
@@ -3380,6 +3386,9 @@ func (p Gs2RankingRestClient) UnsubscribeByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go unsubscribeByUserIdAsyncHandler(

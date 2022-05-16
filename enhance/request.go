@@ -24,7 +24,6 @@ import (
 type DescribeNamespacesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
 }
@@ -56,7 +55,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 type CreateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     Name *string `json:"name"`
     Description *string `json:"description"`
     EnableDirectEnhance *bool `json:"enableDirectEnhance"`
@@ -103,7 +101,6 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 type GetNamespaceStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -132,7 +129,6 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 type GetNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -161,7 +157,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 type UpdateNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     EnableDirectEnhance *bool `json:"enableDirectEnhance"`
@@ -208,7 +203,6 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 type DeleteNamespaceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -237,7 +231,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 type DescribeRateModelsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -266,7 +259,6 @@ func (p DescribeRateModelsRequest) Pointer() *DescribeRateModelsRequest {
 type GetRateModelRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RateName *string `json:"rateName"`
 }
@@ -298,7 +290,6 @@ func (p GetRateModelRequest) Pointer() *GetRateModelRequest {
 type DescribeRateModelMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -333,7 +324,6 @@ func (p DescribeRateModelMastersRequest) Pointer() *DescribeRateModelMastersRequ
 type CreateRateModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     Description *string `json:"description"`
@@ -393,7 +383,6 @@ func (p CreateRateModelMasterRequest) Pointer() *CreateRateModelMasterRequest {
 type GetRateModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RateName *string `json:"rateName"`
 }
@@ -425,7 +414,6 @@ func (p GetRateModelMasterRequest) Pointer() *GetRateModelMasterRequest {
 type UpdateRateModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RateName *string `json:"rateName"`
     Description *string `json:"description"`
@@ -485,7 +473,6 @@ func (p UpdateRateModelMasterRequest) Pointer() *UpdateRateModelMasterRequest {
 type DeleteRateModelMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RateName *string `json:"rateName"`
 }
@@ -517,7 +504,6 @@ func (p DeleteRateModelMasterRequest) Pointer() *DeleteRateModelMasterRequest {
 type DirectEnhanceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RateName *string `json:"rateName"`
     AccessToken *string `json:"accessToken"`
@@ -613,7 +599,6 @@ func (p DirectEnhanceByUserIdRequest) Pointer() *DirectEnhanceByUserIdRequest {
 type DirectEnhanceByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }
@@ -645,7 +630,6 @@ func (p DirectEnhanceByStampSheetRequest) Pointer() *DirectEnhanceByStampSheetRe
 type DescribeProgressesByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     PageToken *string `json:"pageToken"`
@@ -729,7 +713,6 @@ func (p CreateProgressByUserIdRequest) Pointer() *CreateProgressByUserIdRequest 
 type GetProgressRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
 }
@@ -761,7 +744,6 @@ func (p GetProgressRequest) Pointer() *GetProgressRequest {
 type GetProgressByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
 }
@@ -793,7 +775,6 @@ func (p GetProgressByUserIdRequest) Pointer() *GetProgressByUserIdRequest {
 type StartRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RateName *string `json:"rateName"`
     TargetItemSetId *string `json:"targetItemSetId"`
@@ -895,7 +876,6 @@ func (p StartByUserIdRequest) Pointer() *StartByUserIdRequest {
 type EndRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     Config []Config `json:"config"`
@@ -969,7 +949,6 @@ func (p EndByUserIdRequest) Pointer() *EndByUserIdRequest {
 type DeleteProgressRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
 }
@@ -1033,7 +1012,6 @@ func (p DeleteProgressByUserIdRequest) Pointer() *DeleteProgressByUserIdRequest 
 type CreateProgressByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }
@@ -1065,7 +1043,6 @@ func (p CreateProgressByStampSheetRequest) Pointer() *CreateProgressByStampSheet
 type DeleteProgressByStampTaskRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     StampTask *string `json:"stampTask"`
     KeyId *string `json:"keyId"`
 }
@@ -1097,7 +1074,6 @@ func (p DeleteProgressByStampTaskRequest) Pointer() *DeleteProgressByStampTaskRe
 type ExportMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -1126,7 +1102,6 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 type GetCurrentRateMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
 }
 
@@ -1155,7 +1130,6 @@ func (p GetCurrentRateMasterRequest) Pointer() *GetCurrentRateMasterRequest {
 type UpdateCurrentRateMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Settings *string `json:"settings"`
 }
@@ -1187,7 +1161,6 @@ func (p UpdateCurrentRateMasterRequest) Pointer() *UpdateCurrentRateMasterReques
 type UpdateCurrentRateMasterFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }

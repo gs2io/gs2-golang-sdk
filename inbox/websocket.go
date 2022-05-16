@@ -816,6 +816,9 @@ func (p Gs2InboxWebSocketClient) SendMessageByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.sendMessageByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1156,6 +1159,9 @@ func (p Gs2InboxWebSocketClient) ReceiveGlobalMessageByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.receiveGlobalMessageByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1329,6 +1335,9 @@ func (p Gs2InboxWebSocketClient) OpenMessageByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.openMessageByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1516,6 +1525,9 @@ func (p Gs2InboxWebSocketClient) ReadMessageByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.readMessageByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1689,6 +1701,9 @@ func (p Gs2InboxWebSocketClient) DeleteMessageByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteMessageByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2952,6 +2967,9 @@ func (p Gs2InboxWebSocketClient) UpdateReceivedByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.updateReceivedByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3034,6 +3052,9 @@ func (p Gs2InboxWebSocketClient) DeleteReceivedByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteReceivedByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
