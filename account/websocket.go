@@ -172,6 +172,9 @@ func (p Gs2AccountWebSocketClient) CreateNamespaceAsync(
     if request.ChangePasswordIfTakeOver != nil {
         bodies["changePasswordIfTakeOver"] = *request.ChangePasswordIfTakeOver
     }
+    if request.DifferentUserIdForLoginAndDataRetention != nil {
+        bodies["differentUserIdForLoginAndDataRetention"] = *request.DifferentUserIdForLoginAndDataRetention
+    }
     if request.CreateAccountScript != nil {
         bodies["createAccountScript"] = request.CreateAccountScript.ToDict()
     }
@@ -429,6 +432,9 @@ func (p Gs2AccountWebSocketClient) UpdateNamespaceAsync(
     }
     if request.ChangePasswordIfTakeOver != nil {
         bodies["changePasswordIfTakeOver"] = *request.ChangePasswordIfTakeOver
+    }
+    if request.DifferentUserIdForLoginAndDataRetention != nil {
+        bodies["differentUserIdForLoginAndDataRetention"] = *request.DifferentUserIdForLoginAndDataRetention
     }
     if request.CreateAccountScript != nil {
         bodies["createAccountScript"] = request.CreateAccountScript.ToDict()
@@ -2041,6 +2047,170 @@ func (p Gs2AccountWebSocketClient) DoTakeOver(
 ) (*DoTakeOverResult, error) {
 	callback := make(chan DoTakeOverAsyncResult, 1)
 	go p.DoTakeOverAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2AccountWebSocketClient) getDataOwnerByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetDataOwnerByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetDataOwnerByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetDataOwnerByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetDataOwnerByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetDataOwnerByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountWebSocketClient) GetDataOwnerByUserIdAsync(
+	request *GetDataOwnerByUserIdRequest,
+	callback chan<- GetDataOwnerByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "account",
+    		"component": "dataOwner",
+    		"function": "getDataOwnerByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getDataOwnerByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountWebSocketClient) GetDataOwnerByUserId(
+	request *GetDataOwnerByUserIdRequest,
+) (*GetDataOwnerByUserIdResult, error) {
+	callback := make(chan GetDataOwnerByUserIdAsyncResult, 1)
+	go p.GetDataOwnerByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2AccountWebSocketClient) deleteDataOwnerByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteDataOwnerByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteDataOwnerByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteDataOwnerByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteDataOwnerByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteDataOwnerByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountWebSocketClient) DeleteDataOwnerByUserIdAsync(
+	request *DeleteDataOwnerByUserIdRequest,
+	callback chan<- DeleteDataOwnerByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "account",
+    		"component": "dataOwner",
+    		"function": "deleteDataOwnerByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.deleteDataOwnerByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountWebSocketClient) DeleteDataOwnerByUserId(
+	request *DeleteDataOwnerByUserIdRequest,
+) (*DeleteDataOwnerByUserIdResult, error) {
+	callback := make(chan DeleteDataOwnerByUserIdAsyncResult, 1)
+	go p.DeleteDataOwnerByUserIdAsync(
 		request,
 		callback,
 	)

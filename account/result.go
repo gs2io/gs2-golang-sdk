@@ -759,3 +759,65 @@ func (p DoTakeOverResult) ToDict() map[string]interface{} {
 func (p DoTakeOverResult) Pointer() *DoTakeOverResult {
     return &p
 }
+
+type GetDataOwnerByUserIdResult struct {
+    Item *DataOwner `json:"item"`
+}
+
+type GetDataOwnerByUserIdAsyncResult struct {
+	result *GetDataOwnerByUserIdResult
+	err    error
+}
+
+func NewGetDataOwnerByUserIdResultFromJson(data string) GetDataOwnerByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetDataOwnerByUserIdResultFromDict(dict)
+}
+
+func NewGetDataOwnerByUserIdResultFromDict(data map[string]interface{}) GetDataOwnerByUserIdResult {
+    return GetDataOwnerByUserIdResult {
+        Item: NewDataOwnerFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetDataOwnerByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetDataOwnerByUserIdResult) Pointer() *GetDataOwnerByUserIdResult {
+    return &p
+}
+
+type DeleteDataOwnerByUserIdResult struct {
+    Item *DataOwner `json:"item"`
+}
+
+type DeleteDataOwnerByUserIdAsyncResult struct {
+	result *DeleteDataOwnerByUserIdResult
+	err    error
+}
+
+func NewDeleteDataOwnerByUserIdResultFromJson(data string) DeleteDataOwnerByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteDataOwnerByUserIdResultFromDict(dict)
+}
+
+func NewDeleteDataOwnerByUserIdResultFromDict(data map[string]interface{}) DeleteDataOwnerByUserIdResult {
+    return DeleteDataOwnerByUserIdResult {
+        Item: NewDataOwnerFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p DeleteDataOwnerByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p DeleteDataOwnerByUserIdResult) Pointer() *DeleteDataOwnerByUserIdResult {
+    return &p
+}

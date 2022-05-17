@@ -26,6 +26,7 @@ type Namespace struct {
 	Name *string `json:"name"`
 	Description *string `json:"description"`
 	ChangePasswordIfTakeOver *bool `json:"changePasswordIfTakeOver"`
+	DifferentUserIdForLoginAndDataRetention *bool `json:"differentUserIdForLoginAndDataRetention"`
 	CreateAccountScript *ScriptSetting `json:"createAccountScript"`
 	AuthenticationScript *ScriptSetting `json:"authenticationScript"`
 	CreateTakeOverScript *ScriptSetting `json:"createTakeOverScript"`
@@ -47,6 +48,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
         ChangePasswordIfTakeOver: core.CastBool(data["changePasswordIfTakeOver"]),
+        DifferentUserIdForLoginAndDataRetention: core.CastBool(data["differentUserIdForLoginAndDataRetention"]),
         CreateAccountScript: NewScriptSettingFromDict(core.CastMap(data["createAccountScript"])).Pointer(),
         AuthenticationScript: NewScriptSettingFromDict(core.CastMap(data["authenticationScript"])).Pointer(),
         CreateTakeOverScript: NewScriptSettingFromDict(core.CastMap(data["createTakeOverScript"])).Pointer(),
@@ -74,6 +76,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     var changePasswordIfTakeOver *bool
     if p.ChangePasswordIfTakeOver != nil {
         changePasswordIfTakeOver = p.ChangePasswordIfTakeOver
+    }
+    var differentUserIdForLoginAndDataRetention *bool
+    if p.DifferentUserIdForLoginAndDataRetention != nil {
+        differentUserIdForLoginAndDataRetention = p.DifferentUserIdForLoginAndDataRetention
     }
     var createAccountScript map[string]interface{}
     if p.CreateAccountScript != nil {
@@ -108,6 +114,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "name": name,
         "description": description,
         "changePasswordIfTakeOver": changePasswordIfTakeOver,
+        "differentUserIdForLoginAndDataRetention": differentUserIdForLoginAndDataRetention,
         "createAccountScript": createAccountScript,
         "authenticationScript": authenticationScript,
         "createTakeOverScript": createTakeOverScript,
@@ -288,6 +295,74 @@ func CastTakeOvers(data []interface{}) []TakeOver {
 }
 
 func CastTakeOversFromDict(data []TakeOver) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type DataOwner struct {
+	DataOwnerId *string `json:"dataOwnerId"`
+	UserId *string `json:"userId"`
+	Name *string `json:"name"`
+	CreatedAt *int64 `json:"createdAt"`
+}
+
+func NewDataOwnerFromJson(data string) DataOwner {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDataOwnerFromDict(dict)
+}
+
+func NewDataOwnerFromDict(data map[string]interface{}) DataOwner {
+    return DataOwner {
+        DataOwnerId: core.CastString(data["dataOwnerId"]),
+        UserId: core.CastString(data["userId"]),
+        Name: core.CastString(data["name"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+    }
+}
+
+func (p DataOwner) ToDict() map[string]interface{} {
+    
+    var dataOwnerId *string
+    if p.DataOwnerId != nil {
+        dataOwnerId = p.DataOwnerId
+    }
+    var userId *string
+    if p.UserId != nil {
+        userId = p.UserId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    return map[string]interface{} {
+        "dataOwnerId": dataOwnerId,
+        "userId": userId,
+        "name": name,
+        "createdAt": createdAt,
+    }
+}
+
+func (p DataOwner) Pointer() *DataOwner {
+    return &p
+}
+
+func CastDataOwners(data []interface{}) []DataOwner {
+	v := make([]DataOwner, 0)
+	for _, d := range data {
+		v = append(v, NewDataOwnerFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastDataOwnersFromDict(data []DataOwner) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

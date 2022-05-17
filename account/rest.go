@@ -173,6 +173,9 @@ func (p Gs2AccountRestClient) CreateNamespaceAsync(
     if request.ChangePasswordIfTakeOver != nil {
         bodies["changePasswordIfTakeOver"] = *request.ChangePasswordIfTakeOver
     }
+    if request.DifferentUserIdForLoginAndDataRetention != nil {
+        bodies["differentUserIdForLoginAndDataRetention"] = *request.DifferentUserIdForLoginAndDataRetention
+    }
     if request.CreateAccountScript != nil {
         bodies["createAccountScript"] = request.CreateAccountScript.ToDict()
     }
@@ -448,6 +451,9 @@ func (p Gs2AccountRestClient) UpdateNamespaceAsync(
     }
     if request.ChangePasswordIfTakeOver != nil {
         bodies["changePasswordIfTakeOver"] = *request.ChangePasswordIfTakeOver
+    }
+    if request.DifferentUserIdForLoginAndDataRetention != nil {
+        bodies["differentUserIdForLoginAndDataRetention"] = *request.DifferentUserIdForLoginAndDataRetention
     }
     if request.CreateAccountScript != nil {
         bodies["createAccountScript"] = request.CreateAccountScript.ToDict()
@@ -2199,6 +2205,184 @@ func (p Gs2AccountRestClient) DoTakeOver(
 ) (*DoTakeOverResult, error) {
 	callback := make(chan DoTakeOverAsyncResult, 1)
 	go p.DoTakeOverAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getDataOwnerByUserIdAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetDataOwnerByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetDataOwnerByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetDataOwnerByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- GetDataOwnerByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetDataOwnerByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetDataOwnerByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) GetDataOwnerByUserIdAsync(
+	request *GetDataOwnerByUserIdRequest,
+	callback chan<- GetDataOwnerByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/account/{userId}/dataOwner"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getDataOwnerByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) GetDataOwnerByUserId(
+	request *GetDataOwnerByUserIdRequest,
+) (*GetDataOwnerByUserIdResult, error) {
+	callback := make(chan GetDataOwnerByUserIdAsyncResult, 1)
+	go p.GetDataOwnerByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteDataOwnerByUserIdAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteDataOwnerByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteDataOwnerByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteDataOwnerByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DeleteDataOwnerByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteDataOwnerByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteDataOwnerByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) DeleteDataOwnerByUserIdAsync(
+	request *DeleteDataOwnerByUserIdRequest,
+	callback chan<- DeleteDataOwnerByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/account/{userId}/dataOwner"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go deleteDataOwnerByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) DeleteDataOwnerByUserId(
+	request *DeleteDataOwnerByUserIdRequest,
+) (*DeleteDataOwnerByUserIdResult, error) {
+	callback := make(chan DeleteDataOwnerByUserIdAsyncResult, 1)
+	go p.DeleteDataOwnerByUserIdAsync(
 		request,
 		callback,
 	)

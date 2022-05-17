@@ -58,6 +58,7 @@ type CreateNamespaceRequest struct {
     Name *string `json:"name"`
     Description *string `json:"description"`
     ChangePasswordIfTakeOver *bool `json:"changePasswordIfTakeOver"`
+    DifferentUserIdForLoginAndDataRetention *bool `json:"differentUserIdForLoginAndDataRetention"`
     CreateAccountScript *ScriptSetting `json:"createAccountScript"`
     AuthenticationScript *ScriptSetting `json:"authenticationScript"`
     CreateTakeOverScript *ScriptSetting `json:"createTakeOverScript"`
@@ -76,6 +77,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
         ChangePasswordIfTakeOver: core.CastBool(data["changePasswordIfTakeOver"]),
+        DifferentUserIdForLoginAndDataRetention: core.CastBool(data["differentUserIdForLoginAndDataRetention"]),
         CreateAccountScript: NewScriptSettingFromDict(core.CastMap(data["createAccountScript"])).Pointer(),
         AuthenticationScript: NewScriptSettingFromDict(core.CastMap(data["authenticationScript"])).Pointer(),
         CreateTakeOverScript: NewScriptSettingFromDict(core.CastMap(data["createTakeOverScript"])).Pointer(),
@@ -89,6 +91,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
         "name": p.Name,
         "description": p.Description,
         "changePasswordIfTakeOver": p.ChangePasswordIfTakeOver,
+        "differentUserIdForLoginAndDataRetention": p.DifferentUserIdForLoginAndDataRetention,
         "createAccountScript": p.CreateAccountScript.ToDict(),
         "authenticationScript": p.AuthenticationScript.ToDict(),
         "createTakeOverScript": p.CreateTakeOverScript.ToDict(),
@@ -163,6 +166,7 @@ type UpdateNamespaceRequest struct {
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     ChangePasswordIfTakeOver *bool `json:"changePasswordIfTakeOver"`
+    DifferentUserIdForLoginAndDataRetention *bool `json:"differentUserIdForLoginAndDataRetention"`
     CreateAccountScript *ScriptSetting `json:"createAccountScript"`
     AuthenticationScript *ScriptSetting `json:"authenticationScript"`
     CreateTakeOverScript *ScriptSetting `json:"createTakeOverScript"`
@@ -181,6 +185,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
         NamespaceName: core.CastString(data["namespaceName"]),
         Description: core.CastString(data["description"]),
         ChangePasswordIfTakeOver: core.CastBool(data["changePasswordIfTakeOver"]),
+        DifferentUserIdForLoginAndDataRetention: core.CastBool(data["differentUserIdForLoginAndDataRetention"]),
         CreateAccountScript: NewScriptSettingFromDict(core.CastMap(data["createAccountScript"])).Pointer(),
         AuthenticationScript: NewScriptSettingFromDict(core.CastMap(data["authenticationScript"])).Pointer(),
         CreateTakeOverScript: NewScriptSettingFromDict(core.CastMap(data["createTakeOverScript"])).Pointer(),
@@ -194,6 +199,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "description": p.Description,
         "changePasswordIfTakeOver": p.ChangePasswordIfTakeOver,
+        "differentUserIdForLoginAndDataRetention": p.DifferentUserIdForLoginAndDataRetention,
         "createAccountScript": p.CreateAccountScript.ToDict(),
         "authenticationScript": p.AuthenticationScript.ToDict(),
         "createTakeOverScript": p.CreateTakeOverScript.ToDict(),
@@ -840,5 +846,67 @@ func (p DoTakeOverRequest) ToDict() map[string]interface{} {
 }
 
 func (p DoTakeOverRequest) Pointer() *DoTakeOverRequest {
+    return &p
+}
+
+type GetDataOwnerByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+}
+
+func NewGetDataOwnerByUserIdRequestFromJson(data string) GetDataOwnerByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetDataOwnerByUserIdRequestFromDict(dict)
+}
+
+func NewGetDataOwnerByUserIdRequestFromDict(data map[string]interface{}) GetDataOwnerByUserIdRequest {
+    return GetDataOwnerByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+    }
+}
+
+func (p GetDataOwnerByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+    }
+}
+
+func (p GetDataOwnerByUserIdRequest) Pointer() *GetDataOwnerByUserIdRequest {
+    return &p
+}
+
+type DeleteDataOwnerByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+}
+
+func NewDeleteDataOwnerByUserIdRequestFromJson(data string) DeleteDataOwnerByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteDataOwnerByUserIdRequestFromDict(dict)
+}
+
+func NewDeleteDataOwnerByUserIdRequestFromDict(data map[string]interface{}) DeleteDataOwnerByUserIdRequest {
+    return DeleteDataOwnerByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+    }
+}
+
+func (p DeleteDataOwnerByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+    }
+}
+
+func (p DeleteDataOwnerByUserIdRequest) Pointer() *DeleteDataOwnerByUserIdRequest {
     return &p
 }
