@@ -187,6 +187,13 @@ func (p *Gs2WebSocketSession) receive() {
 
 	exit := make(chan string)
 
+	defer func() {
+		err := recover()
+		if err == "repeated read on failed websocket connection" {
+			exit <- "disconnect"
+		}
+	}()
+
 	for {
 		if p.connection == nil || p.connection.client == nil {
 			continue
