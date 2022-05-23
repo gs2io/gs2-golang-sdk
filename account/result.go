@@ -310,6 +310,37 @@ func (p UpdateTimeOffsetResult) Pointer() *UpdateTimeOffsetResult {
     return &p
 }
 
+type UpdateBannedResult struct {
+    Item *Account `json:"item"`
+}
+
+type UpdateBannedAsyncResult struct {
+	result *UpdateBannedResult
+	err    error
+}
+
+func NewUpdateBannedResultFromJson(data string) UpdateBannedResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateBannedResultFromDict(dict)
+}
+
+func NewUpdateBannedResultFromDict(data map[string]interface{}) UpdateBannedResult {
+    return UpdateBannedResult {
+        Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UpdateBannedResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateBannedResult) Pointer() *UpdateBannedResult {
+    return &p
+}
+
 type GetAccountResult struct {
     Item *Account `json:"item"`
 }

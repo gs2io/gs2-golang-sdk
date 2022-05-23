@@ -337,6 +337,41 @@ func (p UpdateTimeOffsetRequest) Pointer() *UpdateTimeOffsetRequest {
     return &p
 }
 
+type UpdateBannedRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    Banned *bool `json:"banned"`
+}
+
+func NewUpdateBannedRequestFromJson(data string) UpdateBannedRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateBannedRequestFromDict(dict)
+}
+
+func NewUpdateBannedRequestFromDict(data map[string]interface{}) UpdateBannedRequest {
+    return UpdateBannedRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        Banned: core.CastBool(data["banned"]),
+    }
+}
+
+func (p UpdateBannedRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "banned": p.Banned,
+    }
+}
+
+func (p UpdateBannedRequest) Pointer() *UpdateBannedRequest {
+    return &p
+}
+
 type GetAccountRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`

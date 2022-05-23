@@ -150,6 +150,7 @@ type Account struct {
 	UserId *string `json:"userId"`
 	Password *string `json:"password"`
 	TimeOffset *int32 `json:"timeOffset"`
+	Banned *bool `json:"banned"`
 	CreatedAt *int64 `json:"createdAt"`
 }
 
@@ -165,6 +166,7 @@ func NewAccountFromDict(data map[string]interface{}) Account {
         UserId: core.CastString(data["userId"]),
         Password: core.CastString(data["password"]),
         TimeOffset: core.CastInt32(data["timeOffset"]),
+        Banned: core.CastBool(data["banned"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
     }
 }
@@ -187,6 +189,10 @@ func (p Account) ToDict() map[string]interface{} {
     if p.TimeOffset != nil {
         timeOffset = p.TimeOffset
     }
+    var banned *bool
+    if p.Banned != nil {
+        banned = p.Banned
+    }
     var createdAt *int64
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
@@ -196,6 +202,7 @@ func (p Account) ToDict() map[string]interface{} {
         "userId": userId,
         "password": password,
         "timeOffset": timeOffset,
+        "banned": banned,
         "createdAt": createdAt,
     }
 }

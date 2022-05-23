@@ -807,6 +807,94 @@ func (p Gs2AccountWebSocketClient) UpdateTimeOffset(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2AccountWebSocketClient) updateBannedAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UpdateBannedAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateBannedAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateBannedResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateBannedAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- UpdateBannedAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountWebSocketClient) UpdateBannedAsync(
+	request *UpdateBannedRequest,
+	callback chan<- UpdateBannedAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "account",
+    		"component": "account",
+    		"function": "updateBanned",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Banned != nil {
+        bodies["banned"] = *request.Banned
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.updateBannedAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountWebSocketClient) UpdateBanned(
+	request *UpdateBannedRequest,
+) (*UpdateBannedResult, error) {
+	callback := make(chan UpdateBannedAsyncResult, 1)
+	go p.UpdateBannedAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2AccountWebSocketClient) getAccountAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- GetAccountAsyncResult,
