@@ -1719,6 +1719,12 @@ func (p Gs2EnhanceWebSocketClient) GetProgressAsync(
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
     }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+    if request.ProgressName != nil && *request.ProgressName != "" {
+        bodies["progressName"] = *request.ProgressName
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -1803,6 +1809,12 @@ func (p Gs2EnhanceWebSocketClient) GetProgressByUserIdAsync(
     }
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
+    }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+    if request.ProgressName != nil && *request.ProgressName != "" {
+        bodies["progressName"] = *request.ProgressName
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -2102,6 +2114,12 @@ func (p Gs2EnhanceWebSocketClient) EndAsync(
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
     }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+    if request.ProgressName != nil && *request.ProgressName != "" {
+        bodies["progressName"] = *request.ProgressName
+    }
     if request.Config != nil {
         var _config []interface {}
         for _, item := range request.Config {
@@ -2193,6 +2211,12 @@ func (p Gs2EnhanceWebSocketClient) EndByUserIdAsync(
     }
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
+    }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+    if request.ProgressName != nil && *request.ProgressName != "" {
+        bodies["progressName"] = *request.ProgressName
     }
     if request.Config != nil {
         var _config []interface {}
@@ -2286,6 +2310,12 @@ func (p Gs2EnhanceWebSocketClient) DeleteProgressAsync(
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
     }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+    if request.ProgressName != nil && *request.ProgressName != "" {
+        bodies["progressName"] = *request.ProgressName
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -2370,6 +2400,12 @@ func (p Gs2EnhanceWebSocketClient) DeleteProgressByUserIdAsync(
     }
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
+    }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+    if request.ProgressName != nil && *request.ProgressName != "" {
+        bodies["progressName"] = *request.ProgressName
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

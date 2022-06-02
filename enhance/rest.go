@@ -1828,11 +1828,21 @@ func (p Gs2EnhanceRestClient) GetProgressAsync(
 	request *GetProgressRequest,
 	callback chan<- GetProgressAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/progress"
+	path := "/{namespaceName}/user/me/progress/{rateName}/progress/{progressName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+    if request.ProgressName != nil && *request.ProgressName != ""  {
+        path = strings.ReplaceAll(path, "{progressName}", core.ToString(*request.ProgressName))
+    } else {
+        path = strings.ReplaceAll(path, "{progressName}", "null")
     }
 
 	replacer := strings.NewReplacer()
@@ -1915,7 +1925,7 @@ func (p Gs2EnhanceRestClient) GetProgressByUserIdAsync(
 	request *GetProgressByUserIdRequest,
 	callback chan<- GetProgressByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/progress"
+	path := "/{namespaceName}/user/{userId}/progress/{rateName}/progress/{progressName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -1925,6 +1935,16 @@ func (p Gs2EnhanceRestClient) GetProgressByUserIdAsync(
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+    if request.ProgressName != nil && *request.ProgressName != ""  {
+        path = strings.ReplaceAll(path, "{progressName}", core.ToString(*request.ProgressName))
+    } else {
+        path = strings.ReplaceAll(path, "{progressName}", "null")
     }
 
 	replacer := strings.NewReplacer()
@@ -2239,11 +2259,21 @@ func (p Gs2EnhanceRestClient) EndAsync(
 	request *EndRequest,
 	callback chan<- EndAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/progress/end"
+	path := "/{namespaceName}/user/me/progress/rate/{rateName}/progress/{progressName}/end"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+    if request.ProgressName != nil && *request.ProgressName != ""  {
+        path = strings.ReplaceAll(path, "{progressName}", core.ToString(*request.ProgressName))
+    } else {
+        path = strings.ReplaceAll(path, "{progressName}", "null")
     }
 
 	replacer := strings.NewReplacer()
@@ -2336,7 +2366,7 @@ func (p Gs2EnhanceRestClient) EndByUserIdAsync(
 	request *EndByUserIdRequest,
 	callback chan<- EndByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/progress/end"
+	path := "/{namespaceName}/user/{userId}/progress/rate/{rateName}/progress/{progressName}/end"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2346,6 +2376,16 @@ func (p Gs2EnhanceRestClient) EndByUserIdAsync(
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+    if request.ProgressName != nil && *request.ProgressName != ""  {
+        path = strings.ReplaceAll(path, "{progressName}", core.ToString(*request.ProgressName))
+    } else {
+        path = strings.ReplaceAll(path, "{progressName}", "null")
     }
 
 	replacer := strings.NewReplacer()
@@ -2438,11 +2478,21 @@ func (p Gs2EnhanceRestClient) DeleteProgressAsync(
 	request *DeleteProgressRequest,
 	callback chan<- DeleteProgressAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/progress"
+	path := "/{namespaceName}/user/me/progress/rate/{rateName}/progress/{progressName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+    if request.ProgressName != nil && *request.ProgressName != ""  {
+        path = strings.ReplaceAll(path, "{progressName}", core.ToString(*request.ProgressName))
+    } else {
+        path = strings.ReplaceAll(path, "{progressName}", "null")
     }
 
 	replacer := strings.NewReplacer()
@@ -2525,7 +2575,7 @@ func (p Gs2EnhanceRestClient) DeleteProgressByUserIdAsync(
 	request *DeleteProgressByUserIdRequest,
 	callback chan<- DeleteProgressByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/progress"
+	path := "/{namespaceName}/user/{userId}/progress/rate/{rateName}/progress/{progressName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2535,6 +2585,16 @@ func (p Gs2EnhanceRestClient) DeleteProgressByUserIdAsync(
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+    if request.ProgressName != nil && *request.ProgressName != ""  {
+        path = strings.ReplaceAll(path, "{progressName}", core.ToString(*request.ProgressName))
+    } else {
+        path = strings.ReplaceAll(path, "{progressName}", "null")
     }
 
 	replacer := strings.NewReplacer()
