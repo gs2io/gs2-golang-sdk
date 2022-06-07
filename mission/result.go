@@ -94,8 +94,10 @@ func (p DescribeCompletesByUserIdResult) Pointer() *DescribeCompletesByUserIdRes
 }
 
 type CompleteResult struct {
+    TransactionId *string `json:"transactionId"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type CompleteAsyncResult struct {
@@ -111,15 +113,19 @@ func NewCompleteResultFromJson(data string) CompleteResult {
 
 func NewCompleteResultFromDict(data map[string]interface{}) CompleteResult {
     return CompleteResult {
+        TransactionId: core.CastString(data["transactionId"]),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
     }
 }
 
 func (p CompleteResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "transactionId": p.TransactionId,
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
     }
 }
 
@@ -128,8 +134,10 @@ func (p CompleteResult) Pointer() *CompleteResult {
 }
 
 type CompleteByUserIdResult struct {
+    TransactionId *string `json:"transactionId"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type CompleteByUserIdAsyncResult struct {
@@ -145,15 +153,19 @@ func NewCompleteByUserIdResultFromJson(data string) CompleteByUserIdResult {
 
 func NewCompleteByUserIdResultFromDict(data map[string]interface{}) CompleteByUserIdResult {
     return CompleteByUserIdResult {
+        TransactionId: core.CastString(data["transactionId"]),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
     }
 }
 
 func (p CompleteByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "transactionId": p.TransactionId,
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
     }
 }
 

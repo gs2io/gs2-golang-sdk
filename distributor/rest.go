@@ -173,6 +173,9 @@ func (p Gs2DistributorRestClient) CreateNamespaceAsync(
     if request.AssumeUserId != nil && *request.AssumeUserId != "" {
         bodies["assumeUserId"] = *request.AssumeUserId
     }
+    if request.AutoRunStampSheetNotification != nil {
+        bodies["autoRunStampSheetNotification"] = request.AutoRunStampSheetNotification.ToDict()
+    }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
     }
@@ -436,6 +439,9 @@ func (p Gs2DistributorRestClient) UpdateNamespaceAsync(
     }
     if request.AssumeUserId != nil && *request.AssumeUserId != "" {
         bodies["assumeUserId"] = *request.AssumeUserId
+    }
+    if request.AutoRunStampSheetNotification != nil {
+        bodies["autoRunStampSheetNotification"] = request.AutoRunStampSheetNotification.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
@@ -2282,6 +2288,192 @@ func (p Gs2DistributorRestClient) RunStampSheetExpressWithoutNamespace(
 ) (*RunStampSheetExpressWithoutNamespaceResult, error) {
 	callback := make(chan RunStampSheetExpressWithoutNamespaceAsyncResult, 1)
 	go p.RunStampSheetExpressWithoutNamespaceAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getStampSheetResultAsyncHandler(
+	client Gs2DistributorRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetStampSheetResultAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetStampSheetResultAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetStampSheetResultResult
+	if asyncResult.Err != nil {
+		callback <- GetStampSheetResultAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetStampSheetResultAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetStampSheetResultAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorRestClient) GetStampSheetResultAsync(
+	request *GetStampSheetResultRequest,
+	callback chan<- GetStampSheetResultAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/stampSheet/{transactionId}/result"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.TransactionId != nil && *request.TransactionId != ""  {
+        path = strings.ReplaceAll(path, "{transactionId}", core.ToString(*request.TransactionId))
+    } else {
+        path = strings.ReplaceAll(path, "{transactionId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+
+	go getStampSheetResultAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorRestClient) GetStampSheetResult(
+	request *GetStampSheetResultRequest,
+) (*GetStampSheetResultResult, error) {
+	callback := make(chan GetStampSheetResultAsyncResult, 1)
+	go p.GetStampSheetResultAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getStampSheetResultByUserIdAsyncHandler(
+	client Gs2DistributorRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetStampSheetResultByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetStampSheetResultByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetStampSheetResultByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- GetStampSheetResultByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetStampSheetResultByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetStampSheetResultByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorRestClient) GetStampSheetResultByUserIdAsync(
+	request *GetStampSheetResultByUserIdRequest,
+	callback chan<- GetStampSheetResultByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/stampSheet/{transactionId}/result"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.TransactionId != nil && *request.TransactionId != ""  {
+        path = strings.ReplaceAll(path, "{transactionId}", core.ToString(*request.TransactionId))
+    } else {
+        path = strings.ReplaceAll(path, "{transactionId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getStampSheetResultByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorRestClient) GetStampSheetResultByUserId(
+	request *GetStampSheetResultByUserIdRequest,
+) (*GetStampSheetResultByUserIdResult, error) {
+	callback := make(chan GetStampSheetResultByUserIdAsyncResult, 1)
+	go p.GetStampSheetResultByUserIdAsync(
 		request,
 		callback,
 	)

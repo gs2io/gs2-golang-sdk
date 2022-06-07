@@ -58,6 +58,7 @@ type CreateNamespaceRequest struct {
     Name *string `json:"name"`
     Description *string `json:"description"`
     AssumeUserId *string `json:"assumeUserId"`
+    AutoRunStampSheetNotification *NotificationSetting `json:"autoRunStampSheetNotification"`
     LogSetting *LogSetting `json:"logSetting"`
 }
 
@@ -72,6 +73,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
         AssumeUserId: core.CastString(data["assumeUserId"]),
+        AutoRunStampSheetNotification: NewNotificationSettingFromDict(core.CastMap(data["autoRunStampSheetNotification"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
     }
 }
@@ -81,6 +83,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
         "name": p.Name,
         "description": p.Description,
         "assumeUserId": p.AssumeUserId,
+        "autoRunStampSheetNotification": p.AutoRunStampSheetNotification.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
     }
 }
@@ -151,6 +154,7 @@ type UpdateNamespaceRequest struct {
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     AssumeUserId *string `json:"assumeUserId"`
+    AutoRunStampSheetNotification *NotificationSetting `json:"autoRunStampSheetNotification"`
     LogSetting *LogSetting `json:"logSetting"`
 }
 
@@ -165,6 +169,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
         NamespaceName: core.CastString(data["namespaceName"]),
         Description: core.CastString(data["description"]),
         AssumeUserId: core.CastString(data["assumeUserId"]),
+        AutoRunStampSheetNotification: NewNotificationSettingFromDict(core.CastMap(data["autoRunStampSheetNotification"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
     }
 }
@@ -174,6 +179,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "description": p.Description,
         "assumeUserId": p.AssumeUserId,
+        "autoRunStampSheetNotification": p.AutoRunStampSheetNotification.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
     }
 }
@@ -833,5 +839,73 @@ func (p RunStampSheetExpressWithoutNamespaceRequest) ToDict() map[string]interfa
 }
 
 func (p RunStampSheetExpressWithoutNamespaceRequest) Pointer() *RunStampSheetExpressWithoutNamespaceRequest {
+    return &p
+}
+
+type GetStampSheetResultRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    TransactionId *string `json:"transactionId"`
+}
+
+func NewGetStampSheetResultRequestFromJson(data string) GetStampSheetResultRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetStampSheetResultRequestFromDict(dict)
+}
+
+func NewGetStampSheetResultRequestFromDict(data map[string]interface{}) GetStampSheetResultRequest {
+    return GetStampSheetResultRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        TransactionId: core.CastString(data["transactionId"]),
+    }
+}
+
+func (p GetStampSheetResultRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "transactionId": p.TransactionId,
+    }
+}
+
+func (p GetStampSheetResultRequest) Pointer() *GetStampSheetResultRequest {
+    return &p
+}
+
+type GetStampSheetResultByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    TransactionId *string `json:"transactionId"`
+}
+
+func NewGetStampSheetResultByUserIdRequestFromJson(data string) GetStampSheetResultByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetStampSheetResultByUserIdRequestFromDict(dict)
+}
+
+func NewGetStampSheetResultByUserIdRequestFromDict(data map[string]interface{}) GetStampSheetResultByUserIdRequest {
+    return GetStampSheetResultByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        TransactionId: core.CastString(data["transactionId"]),
+    }
+}
+
+func (p GetStampSheetResultByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "transactionId": p.TransactionId,
+    }
+}
+
+func (p GetStampSheetResultByUserIdRequest) Pointer() *GetStampSheetResultByUserIdRequest {
     return &p
 }

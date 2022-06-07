@@ -852,8 +852,10 @@ func (p GetPrizeTableResult) Pointer() *GetPrizeTableResult {
 
 type DrawByUserIdResult struct {
     Items []DrawnPrize `json:"items"`
+    TransactionId *string `json:"transactionId"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type DrawByUserIdAsyncResult struct {
@@ -870,8 +872,10 @@ func NewDrawByUserIdResultFromJson(data string) DrawByUserIdResult {
 func NewDrawByUserIdResultFromDict(data map[string]interface{}) DrawByUserIdResult {
     return DrawByUserIdResult {
         Items: CastDrawnPrizes(core.CastArray(data["items"])),
+        TransactionId: core.CastString(data["transactionId"]),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
     }
 }
 
@@ -880,8 +884,10 @@ func (p DrawByUserIdResult) ToDict() map[string]interface{} {
         "items": CastDrawnPrizesFromDict(
             p.Items,
         ),
+        "transactionId": p.TransactionId,
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
     }
 }
 
@@ -891,8 +897,10 @@ func (p DrawByUserIdResult) Pointer() *DrawByUserIdResult {
 
 type DrawByStampSheetResult struct {
     Items []DrawnPrize `json:"items"`
+    TransactionId *string `json:"transactionId"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type DrawByStampSheetAsyncResult struct {
@@ -909,8 +917,10 @@ func NewDrawByStampSheetResultFromJson(data string) DrawByStampSheetResult {
 func NewDrawByStampSheetResultFromDict(data map[string]interface{}) DrawByStampSheetResult {
     return DrawByStampSheetResult {
         Items: CastDrawnPrizes(core.CastArray(data["items"])),
+        TransactionId: core.CastString(data["transactionId"]),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
     }
 }
 
@@ -919,8 +929,10 @@ func (p DrawByStampSheetResult) ToDict() map[string]interface{} {
         "items": CastDrawnPrizesFromDict(
             p.Items,
         ),
+        "transactionId": p.TransactionId,
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
     }
 }
 

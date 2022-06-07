@@ -798,8 +798,10 @@ func (p GetProgressByUserIdResult) Pointer() *GetProgressByUserIdResult {
 }
 
 type StartResult struct {
+    TransactionId *string `json:"transactionId"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type StartAsyncResult struct {
@@ -815,15 +817,19 @@ func NewStartResultFromJson(data string) StartResult {
 
 func NewStartResultFromDict(data map[string]interface{}) StartResult {
     return StartResult {
+        TransactionId: core.CastString(data["transactionId"]),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
     }
 }
 
 func (p StartResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "transactionId": p.TransactionId,
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
     }
 }
 
@@ -832,8 +838,10 @@ func (p StartResult) Pointer() *StartResult {
 }
 
 type StartByUserIdResult struct {
+    TransactionId *string `json:"transactionId"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type StartByUserIdAsyncResult struct {
@@ -849,15 +857,19 @@ func NewStartByUserIdResultFromJson(data string) StartByUserIdResult {
 
 func NewStartByUserIdResultFromDict(data map[string]interface{}) StartByUserIdResult {
     return StartByUserIdResult {
+        TransactionId: core.CastString(data["transactionId"]),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
     }
 }
 
 func (p StartByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "transactionId": p.TransactionId,
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
     }
 }
 
@@ -867,8 +879,10 @@ func (p StartByUserIdResult) Pointer() *StartByUserIdResult {
 
 type EndResult struct {
     Item *Progress `json:"item"`
+    TransactionId *string `json:"transactionId"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type EndAsyncResult struct {
@@ -885,16 +899,20 @@ func NewEndResultFromJson(data string) EndResult {
 func NewEndResultFromDict(data map[string]interface{}) EndResult {
     return EndResult {
         Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
     }
 }
 
 func (p EndResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
     }
 }
 
@@ -904,8 +922,10 @@ func (p EndResult) Pointer() *EndResult {
 
 type EndByUserIdResult struct {
     Item *Progress `json:"item"`
+    TransactionId *string `json:"transactionId"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type EndByUserIdAsyncResult struct {
@@ -922,16 +942,20 @@ func NewEndByUserIdResultFromJson(data string) EndByUserIdResult {
 func NewEndByUserIdResultFromDict(data map[string]interface{}) EndByUserIdResult {
     return EndByUserIdResult {
         Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
     }
 }
 
 func (p EndByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
     }
 }
 

@@ -1385,8 +1385,10 @@ func (p SetFormWithSignatureResult) Pointer() *SetFormWithSignatureResult {
 type AcquireActionsToFormPropertiesResult struct {
     Item *Form `json:"item"`
     Mold *Mold `json:"mold"`
+    TransactionId *string `json:"transactionId"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type AcquireActionsToFormPropertiesAsyncResult struct {
@@ -1404,8 +1406,10 @@ func NewAcquireActionsToFormPropertiesResultFromDict(data map[string]interface{}
     return AcquireActionsToFormPropertiesResult {
         Item: NewFormFromDict(core.CastMap(data["item"])).Pointer(),
         Mold: NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
     }
 }
 
@@ -1413,8 +1417,10 @@ func (p AcquireActionsToFormPropertiesResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
         "mold": p.Mold.ToDict(),
+        "transactionId": p.TransactionId,
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
     }
 }
 
@@ -1505,8 +1511,10 @@ func (p DeleteFormByUserIdResult) Pointer() *DeleteFormByUserIdResult {
 type AcquireActionToFormPropertiesByStampSheetResult struct {
     Item *Form `json:"item"`
     Mold *Mold `json:"mold"`
+    TransactionId *string `json:"transactionId"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type AcquireActionToFormPropertiesByStampSheetAsyncResult struct {
@@ -1524,8 +1532,10 @@ func NewAcquireActionToFormPropertiesByStampSheetResultFromDict(data map[string]
     return AcquireActionToFormPropertiesByStampSheetResult {
         Item: NewFormFromDict(core.CastMap(data["item"])).Pointer(),
         Mold: NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
     }
 }
 
@@ -1533,8 +1543,10 @@ func (p AcquireActionToFormPropertiesByStampSheetResult) ToDict() map[string]int
     return map[string]interface{} {
         "item": p.Item.ToDict(),
         "mold": p.Mold.ToDict(),
+        "transactionId": p.TransactionId,
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
     }
 }
 

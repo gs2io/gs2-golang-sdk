@@ -26,12 +26,13 @@ type Namespace struct {
 	Name *string `json:"name"`
 	Description *string `json:"description"`
 	EnableDirectEnhance *bool `json:"enableDirectEnhance"`
-	QueueNamespaceId *string `json:"queueNamespaceId"`
-	KeyId *string `json:"keyId"`
+	TransactionSetting *TransactionSetting `json:"transactionSetting"`
 	EnhanceScript *ScriptSetting `json:"enhanceScript"`
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	QueueNamespaceId *string `json:"queueNamespaceId"`
+	KeyId *string `json:"keyId"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -46,12 +47,13 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
         EnableDirectEnhance: core.CastBool(data["enableDirectEnhance"]),
-        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
-        KeyId: core.CastString(data["keyId"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         EnhanceScript: NewScriptSettingFromDict(core.CastMap(data["enhanceScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
     }
 }
 
@@ -73,13 +75,9 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.EnableDirectEnhance != nil {
         enableDirectEnhance = p.EnableDirectEnhance
     }
-    var queueNamespaceId *string
-    if p.QueueNamespaceId != nil {
-        queueNamespaceId = p.QueueNamespaceId
-    }
-    var keyId *string
-    if p.KeyId != nil {
-        keyId = p.KeyId
+    var transactionSetting map[string]interface{}
+    if p.TransactionSetting != nil {
+        transactionSetting = p.TransactionSetting.ToDict()
     }
     var enhanceScript map[string]interface{}
     if p.EnhanceScript != nil {
@@ -97,17 +95,26 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var queueNamespaceId *string
+    if p.QueueNamespaceId != nil {
+        queueNamespaceId = p.QueueNamespaceId
+    }
+    var keyId *string
+    if p.KeyId != nil {
+        keyId = p.KeyId
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
         "description": description,
         "enableDirectEnhance": enableDirectEnhance,
-        "queueNamespaceId": queueNamespaceId,
-        "keyId": keyId,
+        "transactionSetting": transactionSetting,
         "enhanceScript": enhanceScript,
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "queueNamespaceId": queueNamespaceId,
+        "keyId": keyId,
     }
 }
 
@@ -530,6 +537,114 @@ func CastCurrentRateMastersFromDict(data []CurrentRateMaster) []interface{} {
     return v
 }
 
+type BonusRate struct {
+	Rate *float32 `json:"rate"`
+	Weight *int32 `json:"weight"`
+}
+
+func NewBonusRateFromJson(data string) BonusRate {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewBonusRateFromDict(dict)
+}
+
+func NewBonusRateFromDict(data map[string]interface{}) BonusRate {
+    return BonusRate {
+        Rate: core.CastFloat32(data["rate"]),
+        Weight: core.CastInt32(data["weight"]),
+    }
+}
+
+func (p BonusRate) ToDict() map[string]interface{} {
+    
+    var rate *float32
+    if p.Rate != nil {
+        rate = p.Rate
+    }
+    var weight *int32
+    if p.Weight != nil {
+        weight = p.Weight
+    }
+    return map[string]interface{} {
+        "rate": rate,
+        "weight": weight,
+    }
+}
+
+func (p BonusRate) Pointer() *BonusRate {
+    return &p
+}
+
+func CastBonusRates(data []interface{}) []BonusRate {
+	v := make([]BonusRate, 0)
+	for _, d := range data {
+		v = append(v, NewBonusRateFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBonusRatesFromDict(data []BonusRate) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type Material struct {
+	MaterialItemSetId *string `json:"materialItemSetId"`
+	Count *int32 `json:"count"`
+}
+
+func NewMaterialFromJson(data string) Material {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewMaterialFromDict(dict)
+}
+
+func NewMaterialFromDict(data map[string]interface{}) Material {
+    return Material {
+        MaterialItemSetId: core.CastString(data["materialItemSetId"]),
+        Count: core.CastInt32(data["count"]),
+    }
+}
+
+func (p Material) ToDict() map[string]interface{} {
+    
+    var materialItemSetId *string
+    if p.MaterialItemSetId != nil {
+        materialItemSetId = p.MaterialItemSetId
+    }
+    var count *int32
+    if p.Count != nil {
+        count = p.Count
+    }
+    return map[string]interface{} {
+        "materialItemSetId": materialItemSetId,
+        "count": count,
+    }
+}
+
+func (p Material) Pointer() *Material {
+    return &p
+}
+
+func CastMaterials(data []interface{}) []Material {
+	v := make([]Material, 0)
+	for _, d := range data {
+		v = append(v, NewMaterialFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastMaterialsFromDict(data []Material) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
 type Config struct {
 	Key *string `json:"key"`
 	Value *string `json:"value"`
@@ -788,107 +903,67 @@ func CastLogSettingsFromDict(data []LogSetting) []interface{} {
     return v
 }
 
-type BonusRate struct {
-	Rate *float32 `json:"rate"`
-	Weight *int32 `json:"weight"`
+type TransactionSetting struct {
+	EnableAutoRun *bool `json:"enableAutoRun"`
+	DistributorNamespaceId *string `json:"distributorNamespaceId"`
+	KeyId *string `json:"keyId"`
+	QueueNamespaceId *string `json:"queueNamespaceId"`
 }
 
-func NewBonusRateFromJson(data string) BonusRate {
+func NewTransactionSettingFromJson(data string) TransactionSetting {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewBonusRateFromDict(dict)
+    return NewTransactionSettingFromDict(dict)
 }
 
-func NewBonusRateFromDict(data map[string]interface{}) BonusRate {
-    return BonusRate {
-        Rate: core.CastFloat32(data["rate"]),
-        Weight: core.CastInt32(data["weight"]),
+func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
+    return TransactionSetting {
+        EnableAutoRun: core.CastBool(data["enableAutoRun"]),
+        DistributorNamespaceId: core.CastString(data["distributorNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
     }
 }
 
-func (p BonusRate) ToDict() map[string]interface{} {
+func (p TransactionSetting) ToDict() map[string]interface{} {
     
-    var rate *float32
-    if p.Rate != nil {
-        rate = p.Rate
+    var enableAutoRun *bool
+    if p.EnableAutoRun != nil {
+        enableAutoRun = p.EnableAutoRun
     }
-    var weight *int32
-    if p.Weight != nil {
-        weight = p.Weight
+    var distributorNamespaceId *string
+    if p.DistributorNamespaceId != nil {
+        distributorNamespaceId = p.DistributorNamespaceId
+    }
+    var keyId *string
+    if p.KeyId != nil {
+        keyId = p.KeyId
+    }
+    var queueNamespaceId *string
+    if p.QueueNamespaceId != nil {
+        queueNamespaceId = p.QueueNamespaceId
     }
     return map[string]interface{} {
-        "rate": rate,
-        "weight": weight,
+        "enableAutoRun": enableAutoRun,
+        "distributorNamespaceId": distributorNamespaceId,
+        "keyId": keyId,
+        "queueNamespaceId": queueNamespaceId,
     }
 }
 
-func (p BonusRate) Pointer() *BonusRate {
+func (p TransactionSetting) Pointer() *TransactionSetting {
     return &p
 }
 
-func CastBonusRates(data []interface{}) []BonusRate {
-	v := make([]BonusRate, 0)
+func CastTransactionSettings(data []interface{}) []TransactionSetting {
+	v := make([]TransactionSetting, 0)
 	for _, d := range data {
-		v = append(v, NewBonusRateFromDict(d.(map[string]interface{})))
+		v = append(v, NewTransactionSettingFromDict(d.(map[string]interface{})))
 	}
 	return v
 }
 
-func CastBonusRatesFromDict(data []BonusRate) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
-}
-
-type Material struct {
-	MaterialItemSetId *string `json:"materialItemSetId"`
-	Count *int32 `json:"count"`
-}
-
-func NewMaterialFromJson(data string) Material {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewMaterialFromDict(dict)
-}
-
-func NewMaterialFromDict(data map[string]interface{}) Material {
-    return Material {
-        MaterialItemSetId: core.CastString(data["materialItemSetId"]),
-        Count: core.CastInt32(data["count"]),
-    }
-}
-
-func (p Material) ToDict() map[string]interface{} {
-    
-    var materialItemSetId *string
-    if p.MaterialItemSetId != nil {
-        materialItemSetId = p.MaterialItemSetId
-    }
-    var count *int32
-    if p.Count != nil {
-        count = p.Count
-    }
-    return map[string]interface{} {
-        "materialItemSetId": materialItemSetId,
-        "count": count,
-    }
-}
-
-func (p Material) Pointer() *Material {
-    return &p
-}
-
-func CastMaterials(data []interface{}) []Material {
-	v := make([]Material, 0)
-	for _, d := range data {
-		v = append(v, NewMaterialFromDict(d.(map[string]interface{})))
-	}
-	return v
-}
-
-func CastMaterialsFromDict(data []Material) []interface{} {
+func CastTransactionSettingsFromDict(data []TransactionSetting) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

@@ -26,6 +26,7 @@ type Namespace struct {
 	Name *string `json:"name"`
 	Description *string `json:"description"`
 	AssumeUserId *string `json:"assumeUserId"`
+	AutoRunStampSheetNotification *NotificationSetting `json:"autoRunStampSheetNotification"`
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
@@ -43,6 +44,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
         AssumeUserId: core.CastString(data["assumeUserId"]),
+        AutoRunStampSheetNotification: NewNotificationSettingFromDict(core.CastMap(data["autoRunStampSheetNotification"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
@@ -67,6 +69,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.AssumeUserId != nil {
         assumeUserId = p.AssumeUserId
     }
+    var autoRunStampSheetNotification map[string]interface{}
+    if p.AutoRunStampSheetNotification != nil {
+        autoRunStampSheetNotification = p.AutoRunStampSheetNotification.ToDict()
+    }
     var logSetting map[string]interface{}
     if p.LogSetting != nil {
         logSetting = p.LogSetting.ToDict()
@@ -84,6 +90,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "name": name,
         "description": description,
         "assumeUserId": assumeUserId,
+        "autoRunStampSheetNotification": autoRunStampSheetNotification,
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
@@ -339,6 +346,97 @@ func CastCurrentDistributorMastersFromDict(data []CurrentDistributorMaster) []in
     return v
 }
 
+type StampSheetResult struct {
+	StampSheetResultId *string `json:"stampSheetResultId"`
+	UserId *string `json:"userId"`
+	TransactionId *string `json:"transactionId"`
+	TaskResults []string `json:"taskResults"`
+	SheetResult *string `json:"sheetResult"`
+	NextTransactionId *string `json:"nextTransactionId"`
+	CreatedAt *int64 `json:"createdAt"`
+}
+
+func NewStampSheetResultFromJson(data string) StampSheetResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewStampSheetResultFromDict(dict)
+}
+
+func NewStampSheetResultFromDict(data map[string]interface{}) StampSheetResult {
+    return StampSheetResult {
+        StampSheetResultId: core.CastString(data["stampSheetResultId"]),
+        UserId: core.CastString(data["userId"]),
+        TransactionId: core.CastString(data["transactionId"]),
+        TaskResults: core.CastStrings(core.CastArray(data["taskResults"])),
+        SheetResult: core.CastString(data["sheetResult"]),
+        NextTransactionId: core.CastString(data["nextTransactionId"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+    }
+}
+
+func (p StampSheetResult) ToDict() map[string]interface{} {
+    
+    var stampSheetResultId *string
+    if p.StampSheetResultId != nil {
+        stampSheetResultId = p.StampSheetResultId
+    }
+    var userId *string
+    if p.UserId != nil {
+        userId = p.UserId
+    }
+    var transactionId *string
+    if p.TransactionId != nil {
+        transactionId = p.TransactionId
+    }
+    var taskResults []interface{}
+    if p.TaskResults != nil {
+        taskResults = core.CastStringsFromDict(
+            p.TaskResults,
+        )
+    }
+    var sheetResult *string
+    if p.SheetResult != nil {
+        sheetResult = p.SheetResult
+    }
+    var nextTransactionId *string
+    if p.NextTransactionId != nil {
+        nextTransactionId = p.NextTransactionId
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    return map[string]interface{} {
+        "stampSheetResultId": stampSheetResultId,
+        "userId": userId,
+        "transactionId": transactionId,
+        "taskResults": taskResults,
+        "sheetResult": sheetResult,
+        "nextTransactionId": nextTransactionId,
+        "createdAt": createdAt,
+    }
+}
+
+func (p StampSheetResult) Pointer() *StampSheetResult {
+    return &p
+}
+
+func CastStampSheetResults(data []interface{}) []StampSheetResult {
+	v := make([]StampSheetResult, 0)
+	for _, d := range data {
+		v = append(v, NewStampSheetResultFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastStampSheetResultsFromDict(data []StampSheetResult) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
 type GitHubCheckoutSetting struct {
 	ApiKeyId *string `json:"apiKeyId"`
 	RepositoryName *string `json:"repositoryName"`
@@ -522,6 +620,67 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type NotificationSetting struct {
+	GatewayNamespaceId *string `json:"gatewayNamespaceId"`
+	EnableTransferMobileNotification *bool `json:"enableTransferMobileNotification"`
+	Sound *string `json:"sound"`
+}
+
+func NewNotificationSettingFromJson(data string) NotificationSetting {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewNotificationSettingFromDict(dict)
+}
+
+func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
+    return NotificationSetting {
+        GatewayNamespaceId: core.CastString(data["gatewayNamespaceId"]),
+        EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
+        Sound: core.CastString(data["sound"]),
+    }
+}
+
+func (p NotificationSetting) ToDict() map[string]interface{} {
+    
+    var gatewayNamespaceId *string
+    if p.GatewayNamespaceId != nil {
+        gatewayNamespaceId = p.GatewayNamespaceId
+    }
+    var enableTransferMobileNotification *bool
+    if p.EnableTransferMobileNotification != nil {
+        enableTransferMobileNotification = p.EnableTransferMobileNotification
+    }
+    var sound *string
+    if p.Sound != nil {
+        sound = p.Sound
+    }
+    return map[string]interface{} {
+        "gatewayNamespaceId": gatewayNamespaceId,
+        "enableTransferMobileNotification": enableTransferMobileNotification,
+        "sound": sound,
+    }
+}
+
+func (p NotificationSetting) Pointer() *NotificationSetting {
+    return &p
+}
+
+func CastNotificationSettings(data []interface{}) []NotificationSetting {
+	v := make([]NotificationSetting, 0)
+	for _, d := range data {
+		v = append(v, NewNotificationSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNotificationSettingsFromDict(data []NotificationSetting) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

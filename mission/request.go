@@ -774,13 +774,14 @@ type CreateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     Name *string `json:"name"`
     Description *string `json:"description"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     MissionCompleteScript *ScriptSetting `json:"missionCompleteScript"`
     CounterIncrementScript *ScriptSetting `json:"counterIncrementScript"`
     ReceiveRewardsScript *ScriptSetting `json:"receiveRewardsScript"`
-    QueueNamespaceId *string `json:"queueNamespaceId"`
-    KeyId *string `json:"keyId"`
     CompleteNotification *NotificationSetting `json:"completeNotification"`
     LogSetting *LogSetting `json:"logSetting"`
+    QueueNamespaceId *string `json:"queueNamespaceId"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
@@ -793,13 +794,14 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
     return CreateNamespaceRequest {
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         MissionCompleteScript: NewScriptSettingFromDict(core.CastMap(data["missionCompleteScript"])).Pointer(),
         CounterIncrementScript: NewScriptSettingFromDict(core.CastMap(data["counterIncrementScript"])).Pointer(),
         ReceiveRewardsScript: NewScriptSettingFromDict(core.CastMap(data["receiveRewardsScript"])).Pointer(),
-        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
-        KeyId: core.CastString(data["keyId"]),
         CompleteNotification: NewNotificationSettingFromDict(core.CastMap(data["completeNotification"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
     }
 }
 
@@ -807,13 +809,14 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "name": p.Name,
         "description": p.Description,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "missionCompleteScript": p.MissionCompleteScript.ToDict(),
         "counterIncrementScript": p.CounterIncrementScript.ToDict(),
         "receiveRewardsScript": p.ReceiveRewardsScript.ToDict(),
-        "queueNamespaceId": p.QueueNamespaceId,
-        "keyId": p.KeyId,
         "completeNotification": p.CompleteNotification.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
+        "queueNamespaceId": p.QueueNamespaceId,
+        "keyId": p.KeyId,
     }
 }
 
@@ -882,13 +885,14 @@ type UpdateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     MissionCompleteScript *ScriptSetting `json:"missionCompleteScript"`
     CounterIncrementScript *ScriptSetting `json:"counterIncrementScript"`
     ReceiveRewardsScript *ScriptSetting `json:"receiveRewardsScript"`
-    QueueNamespaceId *string `json:"queueNamespaceId"`
-    KeyId *string `json:"keyId"`
     CompleteNotification *NotificationSetting `json:"completeNotification"`
     LogSetting *LogSetting `json:"logSetting"`
+    QueueNamespaceId *string `json:"queueNamespaceId"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -901,13 +905,14 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
     return UpdateNamespaceRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         Description: core.CastString(data["description"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         MissionCompleteScript: NewScriptSettingFromDict(core.CastMap(data["missionCompleteScript"])).Pointer(),
         CounterIncrementScript: NewScriptSettingFromDict(core.CastMap(data["counterIncrementScript"])).Pointer(),
         ReceiveRewardsScript: NewScriptSettingFromDict(core.CastMap(data["receiveRewardsScript"])).Pointer(),
-        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
-        KeyId: core.CastString(data["keyId"]),
         CompleteNotification: NewNotificationSettingFromDict(core.CastMap(data["completeNotification"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
     }
 }
 
@@ -915,13 +920,14 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "description": p.Description,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "missionCompleteScript": p.MissionCompleteScript.ToDict(),
         "counterIncrementScript": p.CounterIncrementScript.ToDict(),
         "receiveRewardsScript": p.ReceiveRewardsScript.ToDict(),
-        "queueNamespaceId": p.QueueNamespaceId,
-        "keyId": p.KeyId,
         "completeNotification": p.CompleteNotification.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
+        "queueNamespaceId": p.QueueNamespaceId,
+        "keyId": p.KeyId,
     }
 }
 

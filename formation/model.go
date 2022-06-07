@@ -25,6 +25,7 @@ type Namespace struct {
 	NamespaceId *string `json:"namespaceId"`
 	Name *string `json:"name"`
 	Description *string `json:"description"`
+	TransactionSetting *TransactionSetting `json:"transactionSetting"`
 	UpdateMoldScript *ScriptSetting `json:"updateMoldScript"`
 	UpdateFormScript *ScriptSetting `json:"updateFormScript"`
 	LogSetting *LogSetting `json:"logSetting"`
@@ -43,6 +44,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         NamespaceId: core.CastString(data["namespaceId"]),
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         UpdateMoldScript: NewScriptSettingFromDict(core.CastMap(data["updateMoldScript"])).Pointer(),
         UpdateFormScript: NewScriptSettingFromDict(core.CastMap(data["updateFormScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
@@ -64,6 +66,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     var description *string
     if p.Description != nil {
         description = p.Description
+    }
+    var transactionSetting map[string]interface{}
+    if p.TransactionSetting != nil {
+        transactionSetting = p.TransactionSetting.ToDict()
     }
     var updateMoldScript map[string]interface{}
     if p.UpdateMoldScript != nil {
@@ -89,6 +95,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
         "description": description,
+        "transactionSetting": transactionSetting,
         "updateMoldScript": updateMoldScript,
         "updateFormScript": updateFormScript,
         "logSetting": logSetting,
@@ -880,6 +887,60 @@ func CastSlotWithSignaturesFromDict(data []SlotWithSignature) []interface{} {
     return v
 }
 
+type AcquireAction struct {
+	Action *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func NewAcquireActionFromJson(data string) AcquireAction {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireActionFromDict(dict)
+}
+
+func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
+    return AcquireAction {
+        Action: core.CastString(data["action"]),
+        Request: core.CastString(data["request"]),
+    }
+}
+
+func (p AcquireAction) ToDict() map[string]interface{} {
+    
+    var action *string
+    if p.Action != nil {
+        action = p.Action
+    }
+    var request *string
+    if p.Request != nil {
+        request = p.Request
+    }
+    return map[string]interface{} {
+        "action": action,
+        "request": request,
+    }
+}
+
+func (p AcquireAction) Pointer() *AcquireAction {
+    return &p
+}
+
+func CastAcquireActions(data []interface{}) []AcquireAction {
+	v := make([]AcquireAction, 0)
+	for _, d := range data {
+		v = append(v, NewAcquireActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
 type AcquireActionConfig struct {
 	Name *string `json:"name"`
 	Config []Config `json:"config"`
@@ -1194,53 +1255,67 @@ func CastLogSettingsFromDict(data []LogSetting) []interface{} {
     return v
 }
 
-type AcquireAction struct {
-	Action *string `json:"action"`
-	Request *string `json:"request"`
+type TransactionSetting struct {
+	EnableAutoRun *bool `json:"enableAutoRun"`
+	DistributorNamespaceId *string `json:"distributorNamespaceId"`
+	KeyId *string `json:"keyId"`
+	QueueNamespaceId *string `json:"queueNamespaceId"`
 }
 
-func NewAcquireActionFromJson(data string) AcquireAction {
+func NewTransactionSettingFromJson(data string) TransactionSetting {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewAcquireActionFromDict(dict)
+    return NewTransactionSettingFromDict(dict)
 }
 
-func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
-    return AcquireAction {
-        Action: core.CastString(data["action"]),
-        Request: core.CastString(data["request"]),
+func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
+    return TransactionSetting {
+        EnableAutoRun: core.CastBool(data["enableAutoRun"]),
+        DistributorNamespaceId: core.CastString(data["distributorNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
     }
 }
 
-func (p AcquireAction) ToDict() map[string]interface{} {
+func (p TransactionSetting) ToDict() map[string]interface{} {
     
-    var action *string
-    if p.Action != nil {
-        action = p.Action
+    var enableAutoRun *bool
+    if p.EnableAutoRun != nil {
+        enableAutoRun = p.EnableAutoRun
     }
-    var request *string
-    if p.Request != nil {
-        request = p.Request
+    var distributorNamespaceId *string
+    if p.DistributorNamespaceId != nil {
+        distributorNamespaceId = p.DistributorNamespaceId
+    }
+    var keyId *string
+    if p.KeyId != nil {
+        keyId = p.KeyId
+    }
+    var queueNamespaceId *string
+    if p.QueueNamespaceId != nil {
+        queueNamespaceId = p.QueueNamespaceId
     }
     return map[string]interface{} {
-        "action": action,
-        "request": request,
+        "enableAutoRun": enableAutoRun,
+        "distributorNamespaceId": distributorNamespaceId,
+        "keyId": keyId,
+        "queueNamespaceId": queueNamespaceId,
     }
 }
 
-func (p AcquireAction) Pointer() *AcquireAction {
+func (p TransactionSetting) Pointer() *TransactionSetting {
     return &p
 }
 
-func CastAcquireActions(data []interface{}) []AcquireAction {
-	v := make([]AcquireAction, 0)
+func CastTransactionSettings(data []interface{}) []TransactionSetting {
+	v := make([]TransactionSetting, 0)
 	for _, d := range data {
-		v = append(v, NewAcquireActionFromDict(d.(map[string]interface{})))
+		v = append(v, NewTransactionSettingFromDict(d.(map[string]interface{})))
 	}
 	return v
 }
 
-func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
+func CastTransactionSettingsFromDict(data []TransactionSetting) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

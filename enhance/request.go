@@ -58,10 +58,11 @@ type CreateNamespaceRequest struct {
     Name *string `json:"name"`
     Description *string `json:"description"`
     EnableDirectEnhance *bool `json:"enableDirectEnhance"`
-    QueueNamespaceId *string `json:"queueNamespaceId"`
-    KeyId *string `json:"keyId"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     EnhanceScript *ScriptSetting `json:"enhanceScript"`
     LogSetting *LogSetting `json:"logSetting"`
+    QueueNamespaceId *string `json:"queueNamespaceId"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
@@ -75,10 +76,11 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
         EnableDirectEnhance: core.CastBool(data["enableDirectEnhance"]),
-        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
-        KeyId: core.CastString(data["keyId"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         EnhanceScript: NewScriptSettingFromDict(core.CastMap(data["enhanceScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
     }
 }
 
@@ -87,10 +89,11 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
         "name": p.Name,
         "description": p.Description,
         "enableDirectEnhance": p.EnableDirectEnhance,
-        "queueNamespaceId": p.QueueNamespaceId,
-        "keyId": p.KeyId,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "enhanceScript": p.EnhanceScript.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
+        "queueNamespaceId": p.QueueNamespaceId,
+        "keyId": p.KeyId,
     }
 }
 
@@ -160,10 +163,11 @@ type UpdateNamespaceRequest struct {
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     EnableDirectEnhance *bool `json:"enableDirectEnhance"`
-    QueueNamespaceId *string `json:"queueNamespaceId"`
-    KeyId *string `json:"keyId"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     EnhanceScript *ScriptSetting `json:"enhanceScript"`
     LogSetting *LogSetting `json:"logSetting"`
+    QueueNamespaceId *string `json:"queueNamespaceId"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -177,10 +181,11 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
         NamespaceName: core.CastString(data["namespaceName"]),
         Description: core.CastString(data["description"]),
         EnableDirectEnhance: core.CastBool(data["enableDirectEnhance"]),
-        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
-        KeyId: core.CastString(data["keyId"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         EnhanceScript: NewScriptSettingFromDict(core.CastMap(data["enhanceScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
     }
 }
 
@@ -189,10 +194,11 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "description": p.Description,
         "enableDirectEnhance": p.EnableDirectEnhance,
-        "queueNamespaceId": p.QueueNamespaceId,
-        "keyId": p.KeyId,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "enhanceScript": p.EnhanceScript.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
+        "queueNamespaceId": p.QueueNamespaceId,
+        "keyId": p.KeyId,
     }
 }
 

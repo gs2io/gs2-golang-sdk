@@ -946,8 +946,10 @@ func (p GetShowcaseByUserIdResult) Pointer() *GetShowcaseByUserIdResult {
 
 type BuyResult struct {
     Item *SalesItem `json:"item"`
+    TransactionId *string `json:"transactionId"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type BuyAsyncResult struct {
@@ -964,16 +966,20 @@ func NewBuyResultFromJson(data string) BuyResult {
 func NewBuyResultFromDict(data map[string]interface{}) BuyResult {
     return BuyResult {
         Item: NewSalesItemFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
     }
 }
 
 func (p BuyResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
     }
 }
 
@@ -983,8 +989,10 @@ func (p BuyResult) Pointer() *BuyResult {
 
 type BuyByUserIdResult struct {
     Item *SalesItem `json:"item"`
+    TransactionId *string `json:"transactionId"`
     StampSheet *string `json:"stampSheet"`
     StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type BuyByUserIdAsyncResult struct {
@@ -1001,16 +1009,20 @@ func NewBuyByUserIdResultFromJson(data string) BuyByUserIdResult {
 func NewBuyByUserIdResultFromDict(data map[string]interface{}) BuyByUserIdResult {
     return BuyByUserIdResult {
         Item: NewSalesItemFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
         StampSheet: core.CastString(data["stampSheet"]),
         StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
     }
 }
 
 func (p BuyByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
         "stampSheet": p.StampSheet,
         "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
     }
 }
 

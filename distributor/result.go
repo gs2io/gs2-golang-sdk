@@ -832,3 +832,65 @@ func (p RunStampSheetExpressWithoutNamespaceResult) ToDict() map[string]interfac
 func (p RunStampSheetExpressWithoutNamespaceResult) Pointer() *RunStampSheetExpressWithoutNamespaceResult {
     return &p
 }
+
+type GetStampSheetResultResult struct {
+    Item *StampSheetResult `json:"item"`
+}
+
+type GetStampSheetResultAsyncResult struct {
+	result *GetStampSheetResultResult
+	err    error
+}
+
+func NewGetStampSheetResultResultFromJson(data string) GetStampSheetResultResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetStampSheetResultResultFromDict(dict)
+}
+
+func NewGetStampSheetResultResultFromDict(data map[string]interface{}) GetStampSheetResultResult {
+    return GetStampSheetResultResult {
+        Item: NewStampSheetResultFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetStampSheetResultResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetStampSheetResultResult) Pointer() *GetStampSheetResultResult {
+    return &p
+}
+
+type GetStampSheetResultByUserIdResult struct {
+    Item *StampSheetResult `json:"item"`
+}
+
+type GetStampSheetResultByUserIdAsyncResult struct {
+	result *GetStampSheetResultByUserIdResult
+	err    error
+}
+
+func NewGetStampSheetResultByUserIdResultFromJson(data string) GetStampSheetResultByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetStampSheetResultByUserIdResultFromDict(dict)
+}
+
+func NewGetStampSheetResultByUserIdResultFromDict(data map[string]interface{}) GetStampSheetResultByUserIdResult {
+    return GetStampSheetResultByUserIdResult {
+        Item: NewStampSheetResultFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetStampSheetResultByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetStampSheetResultByUserIdResult) Pointer() *GetStampSheetResultByUserIdResult {
+    return &p
+}

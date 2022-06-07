@@ -170,6 +170,9 @@ func (p Gs2FormationRestClient) CreateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
     if request.UpdateMoldScript != nil {
         bodies["updateMoldScript"] = request.UpdateMoldScript.ToDict()
     }
@@ -436,6 +439,9 @@ func (p Gs2FormationRestClient) UpdateNamespaceAsync(
     var bodies = core.Bodies{}
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
+    }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
     }
     if request.UpdateMoldScript != nil {
         bodies["updateMoldScript"] = request.UpdateMoldScript.ToDict()
@@ -3874,12 +3880,6 @@ func (p Gs2FormationRestClient) AcquireActionsToFormPropertiesAsync(
     var bodies = core.Bodies{}
     if request.AcquireAction != nil {
         bodies["acquireAction"] = request.AcquireAction.ToDict()
-    }
-    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
-        bodies["queueNamespaceId"] = *request.QueueNamespaceId
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
     }
     if request.Config != nil {
         var _config []interface {}

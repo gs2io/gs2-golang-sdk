@@ -172,6 +172,9 @@ func (p Gs2DistributorWebSocketClient) CreateNamespaceAsync(
     if request.AssumeUserId != nil && *request.AssumeUserId != "" {
         bodies["assumeUserId"] = *request.AssumeUserId
     }
+    if request.AutoRunStampSheetNotification != nil {
+        bodies["autoRunStampSheetNotification"] = request.AutoRunStampSheetNotification.ToDict()
+    }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
     }
@@ -417,6 +420,9 @@ func (p Gs2DistributorWebSocketClient) UpdateNamespaceAsync(
     }
     if request.AssumeUserId != nil && *request.AssumeUserId != "" {
         bodies["assumeUserId"] = *request.AssumeUserId
+    }
+    if request.AutoRunStampSheetNotification != nil {
+        bodies["autoRunStampSheetNotification"] = request.AutoRunStampSheetNotification.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
@@ -2117,6 +2123,179 @@ func (p Gs2DistributorWebSocketClient) RunStampSheetExpressWithoutNamespace(
 ) (*RunStampSheetExpressWithoutNamespaceResult, error) {
 	callback := make(chan RunStampSheetExpressWithoutNamespaceAsyncResult, 1)
 	go p.RunStampSheetExpressWithoutNamespaceAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2DistributorWebSocketClient) getStampSheetResultAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetStampSheetResultAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetStampSheetResultAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetStampSheetResultResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetStampSheetResultAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetStampSheetResultAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorWebSocketClient) GetStampSheetResultAsync(
+	request *GetStampSheetResultRequest,
+	callback chan<- GetStampSheetResultAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "distributor",
+    		"component": "stampSheetResult",
+    		"function": "getStampSheetResult",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.TransactionId != nil && *request.TransactionId != "" {
+        bodies["transactionId"] = *request.TransactionId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.getStampSheetResultAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorWebSocketClient) GetStampSheetResult(
+	request *GetStampSheetResultRequest,
+) (*GetStampSheetResultResult, error) {
+	callback := make(chan GetStampSheetResultAsyncResult, 1)
+	go p.GetStampSheetResultAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2DistributorWebSocketClient) getStampSheetResultByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetStampSheetResultByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetStampSheetResultByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetStampSheetResultByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetStampSheetResultByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetStampSheetResultByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorWebSocketClient) GetStampSheetResultByUserIdAsync(
+	request *GetStampSheetResultByUserIdRequest,
+	callback chan<- GetStampSheetResultByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "distributor",
+    		"component": "stampSheetResult",
+    		"function": "getStampSheetResultByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.TransactionId != nil && *request.TransactionId != "" {
+        bodies["transactionId"] = *request.TransactionId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getStampSheetResultByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorWebSocketClient) GetStampSheetResultByUserId(
+	request *GetStampSheetResultByUserIdRequest,
+) (*GetStampSheetResultByUserIdResult, error) {
+	callback := make(chan GetStampSheetResultByUserIdAsyncResult, 1)
+	go p.GetStampSheetResultByUserIdAsync(
 		request,
 		callback,
 	)

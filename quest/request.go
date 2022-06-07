@@ -57,12 +57,13 @@ type CreateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     Name *string `json:"name"`
     Description *string `json:"description"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     StartQuestScript *ScriptSetting `json:"startQuestScript"`
     CompleteQuestScript *ScriptSetting `json:"completeQuestScript"`
     FailedQuestScript *ScriptSetting `json:"failedQuestScript"`
+    LogSetting *LogSetting `json:"logSetting"`
     QueueNamespaceId *string `json:"queueNamespaceId"`
     KeyId *string `json:"keyId"`
-    LogSetting *LogSetting `json:"logSetting"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
@@ -75,12 +76,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
     return CreateNamespaceRequest {
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         StartQuestScript: NewScriptSettingFromDict(core.CastMap(data["startQuestScript"])).Pointer(),
         CompleteQuestScript: NewScriptSettingFromDict(core.CastMap(data["completeQuestScript"])).Pointer(),
         FailedQuestScript: NewScriptSettingFromDict(core.CastMap(data["failedQuestScript"])).Pointer(),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
-        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
     }
 }
 
@@ -88,12 +90,13 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "name": p.Name,
         "description": p.Description,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "startQuestScript": p.StartQuestScript.ToDict(),
         "completeQuestScript": p.CompleteQuestScript.ToDict(),
         "failedQuestScript": p.FailedQuestScript.ToDict(),
+        "logSetting": p.LogSetting.ToDict(),
         "queueNamespaceId": p.QueueNamespaceId,
         "keyId": p.KeyId,
-        "logSetting": p.LogSetting.ToDict(),
     }
 }
 
@@ -162,12 +165,13 @@ type UpdateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     StartQuestScript *ScriptSetting `json:"startQuestScript"`
     CompleteQuestScript *ScriptSetting `json:"completeQuestScript"`
     FailedQuestScript *ScriptSetting `json:"failedQuestScript"`
+    LogSetting *LogSetting `json:"logSetting"`
     QueueNamespaceId *string `json:"queueNamespaceId"`
     KeyId *string `json:"keyId"`
-    LogSetting *LogSetting `json:"logSetting"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -180,12 +184,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
     return UpdateNamespaceRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         Description: core.CastString(data["description"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         StartQuestScript: NewScriptSettingFromDict(core.CastMap(data["startQuestScript"])).Pointer(),
         CompleteQuestScript: NewScriptSettingFromDict(core.CastMap(data["completeQuestScript"])).Pointer(),
         FailedQuestScript: NewScriptSettingFromDict(core.CastMap(data["failedQuestScript"])).Pointer(),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
-        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
     }
 }
 
@@ -193,12 +198,13 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "description": p.Description,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "startQuestScript": p.StartQuestScript.ToDict(),
         "completeQuestScript": p.CompleteQuestScript.ToDict(),
         "failedQuestScript": p.FailedQuestScript.ToDict(),
+        "logSetting": p.LogSetting.ToDict(),
         "queueNamespaceId": p.QueueNamespaceId,
         "keyId": p.KeyId,
-        "logSetting": p.LogSetting.ToDict(),
     }
 }
 

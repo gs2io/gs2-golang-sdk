@@ -58,13 +58,14 @@ type CreateNamespaceRequest struct {
     Name *string `json:"name"`
     Description *string `json:"description"`
     IsAutomaticDeletingEnabled *bool `json:"isAutomaticDeletingEnabled"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     ReceiveMessageScript *ScriptSetting `json:"receiveMessageScript"`
     ReadMessageScript *ScriptSetting `json:"readMessageScript"`
     DeleteMessageScript *ScriptSetting `json:"deleteMessageScript"`
-    QueueNamespaceId *string `json:"queueNamespaceId"`
-    KeyId *string `json:"keyId"`
     ReceiveNotification *NotificationSetting `json:"receiveNotification"`
     LogSetting *LogSetting `json:"logSetting"`
+    QueueNamespaceId *string `json:"queueNamespaceId"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
@@ -78,13 +79,14 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
         IsAutomaticDeletingEnabled: core.CastBool(data["isAutomaticDeletingEnabled"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         ReceiveMessageScript: NewScriptSettingFromDict(core.CastMap(data["receiveMessageScript"])).Pointer(),
         ReadMessageScript: NewScriptSettingFromDict(core.CastMap(data["readMessageScript"])).Pointer(),
         DeleteMessageScript: NewScriptSettingFromDict(core.CastMap(data["deleteMessageScript"])).Pointer(),
-        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
-        KeyId: core.CastString(data["keyId"]),
         ReceiveNotification: NewNotificationSettingFromDict(core.CastMap(data["receiveNotification"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
     }
 }
 
@@ -93,13 +95,14 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
         "name": p.Name,
         "description": p.Description,
         "isAutomaticDeletingEnabled": p.IsAutomaticDeletingEnabled,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "receiveMessageScript": p.ReceiveMessageScript.ToDict(),
         "readMessageScript": p.ReadMessageScript.ToDict(),
         "deleteMessageScript": p.DeleteMessageScript.ToDict(),
-        "queueNamespaceId": p.QueueNamespaceId,
-        "keyId": p.KeyId,
         "receiveNotification": p.ReceiveNotification.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
+        "queueNamespaceId": p.QueueNamespaceId,
+        "keyId": p.KeyId,
     }
 }
 
@@ -169,13 +172,14 @@ type UpdateNamespaceRequest struct {
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     IsAutomaticDeletingEnabled *bool `json:"isAutomaticDeletingEnabled"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     ReceiveMessageScript *ScriptSetting `json:"receiveMessageScript"`
     ReadMessageScript *ScriptSetting `json:"readMessageScript"`
     DeleteMessageScript *ScriptSetting `json:"deleteMessageScript"`
-    QueueNamespaceId *string `json:"queueNamespaceId"`
-    KeyId *string `json:"keyId"`
     ReceiveNotification *NotificationSetting `json:"receiveNotification"`
     LogSetting *LogSetting `json:"logSetting"`
+    QueueNamespaceId *string `json:"queueNamespaceId"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -189,13 +193,14 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
         NamespaceName: core.CastString(data["namespaceName"]),
         Description: core.CastString(data["description"]),
         IsAutomaticDeletingEnabled: core.CastBool(data["isAutomaticDeletingEnabled"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         ReceiveMessageScript: NewScriptSettingFromDict(core.CastMap(data["receiveMessageScript"])).Pointer(),
         ReadMessageScript: NewScriptSettingFromDict(core.CastMap(data["readMessageScript"])).Pointer(),
         DeleteMessageScript: NewScriptSettingFromDict(core.CastMap(data["deleteMessageScript"])).Pointer(),
-        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
-        KeyId: core.CastString(data["keyId"]),
         ReceiveNotification: NewNotificationSettingFromDict(core.CastMap(data["receiveNotification"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
     }
 }
 
@@ -204,13 +209,14 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "description": p.Description,
         "isAutomaticDeletingEnabled": p.IsAutomaticDeletingEnabled,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "receiveMessageScript": p.ReceiveMessageScript.ToDict(),
         "readMessageScript": p.ReadMessageScript.ToDict(),
         "deleteMessageScript": p.DeleteMessageScript.ToDict(),
-        "queueNamespaceId": p.QueueNamespaceId,
-        "keyId": p.KeyId,
         "receiveNotification": p.ReceiveNotification.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
+        "queueNamespaceId": p.QueueNamespaceId,
+        "keyId": p.KeyId,
     }
 }
 

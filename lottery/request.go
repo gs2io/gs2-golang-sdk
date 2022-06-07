@@ -57,11 +57,12 @@ type CreateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     Name *string `json:"name"`
     Description *string `json:"description"`
-    QueueNamespaceId *string `json:"queueNamespaceId"`
-    KeyId *string `json:"keyId"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     LotteryTriggerScriptId *string `json:"lotteryTriggerScriptId"`
     ChoicePrizeTableScriptId *string `json:"choicePrizeTableScriptId"`
     LogSetting *LogSetting `json:"logSetting"`
+    QueueNamespaceId *string `json:"queueNamespaceId"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
@@ -74,11 +75,12 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
     return CreateNamespaceRequest {
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
-        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
-        KeyId: core.CastString(data["keyId"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         LotteryTriggerScriptId: core.CastString(data["lotteryTriggerScriptId"]),
         ChoicePrizeTableScriptId: core.CastString(data["choicePrizeTableScriptId"]),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
     }
 }
 
@@ -86,11 +88,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "name": p.Name,
         "description": p.Description,
-        "queueNamespaceId": p.QueueNamespaceId,
-        "keyId": p.KeyId,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "lotteryTriggerScriptId": p.LotteryTriggerScriptId,
         "choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
         "logSetting": p.LogSetting.ToDict(),
+        "queueNamespaceId": p.QueueNamespaceId,
+        "keyId": p.KeyId,
     }
 }
 
@@ -159,11 +162,12 @@ type UpdateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
-    QueueNamespaceId *string `json:"queueNamespaceId"`
-    KeyId *string `json:"keyId"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     LotteryTriggerScriptId *string `json:"lotteryTriggerScriptId"`
     ChoicePrizeTableScriptId *string `json:"choicePrizeTableScriptId"`
     LogSetting *LogSetting `json:"logSetting"`
+    QueueNamespaceId *string `json:"queueNamespaceId"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -176,11 +180,12 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
     return UpdateNamespaceRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         Description: core.CastString(data["description"]),
-        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
-        KeyId: core.CastString(data["keyId"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         LotteryTriggerScriptId: core.CastString(data["lotteryTriggerScriptId"]),
         ChoicePrizeTableScriptId: core.CastString(data["choicePrizeTableScriptId"]),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
     }
 }
 
@@ -188,11 +193,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "description": p.Description,
-        "queueNamespaceId": p.QueueNamespaceId,
-        "keyId": p.KeyId,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "lotteryTriggerScriptId": p.LotteryTriggerScriptId,
         "choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
         "logSetting": p.LogSetting.ToDict(),
+        "queueNamespaceId": p.QueueNamespaceId,
+        "keyId": p.KeyId,
     }
 }
 

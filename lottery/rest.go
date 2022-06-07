@@ -170,11 +170,8 @@ func (p Gs2LotteryRestClient) CreateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
-    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
-        bodies["queueNamespaceId"] = *request.QueueNamespaceId
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
     }
     if request.LotteryTriggerScriptId != nil && *request.LotteryTriggerScriptId != "" {
         bodies["lotteryTriggerScriptId"] = *request.LotteryTriggerScriptId
@@ -184,6 +181,12 @@ func (p Gs2LotteryRestClient) CreateNamespaceAsync(
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
+    }
+    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
+        bodies["queueNamespaceId"] = *request.QueueNamespaceId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -443,11 +446,8 @@ func (p Gs2LotteryRestClient) UpdateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
-    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
-        bodies["queueNamespaceId"] = *request.QueueNamespaceId
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
     }
     if request.LotteryTriggerScriptId != nil && *request.LotteryTriggerScriptId != "" {
         bodies["lotteryTriggerScriptId"] = *request.LotteryTriggerScriptId
@@ -457,6 +457,12 @@ func (p Gs2LotteryRestClient) UpdateNamespaceAsync(
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
+    }
+    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
+        bodies["queueNamespaceId"] = *request.QueueNamespaceId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

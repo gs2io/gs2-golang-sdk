@@ -169,6 +169,9 @@ func (p Gs2ShowcaseWebSocketClient) CreateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
     if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
         bodies["queueNamespaceId"] = *request.QueueNamespaceId
     }
@@ -418,14 +421,17 @@ func (p Gs2ShowcaseWebSocketClient) UpdateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
     if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
         bodies["queueNamespaceId"] = *request.QueueNamespaceId
     }
     if request.KeyId != nil && *request.KeyId != "" {
         bodies["keyId"] = *request.KeyId
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

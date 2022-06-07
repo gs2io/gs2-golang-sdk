@@ -24,12 +24,13 @@ import (
 type Namespace struct {
 	NamespaceId *string `json:"namespaceId"`
 	Name *string `json:"name"`
-	QueueNamespaceId *string `json:"queueNamespaceId"`
-	KeyId *string `json:"keyId"`
 	Description *string `json:"description"`
+	TransactionSetting *TransactionSetting `json:"transactionSetting"`
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	QueueNamespaceId *string `json:"queueNamespaceId"`
+	KeyId *string `json:"keyId"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -42,12 +43,13 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
     return Namespace {
         NamespaceId: core.CastString(data["namespaceId"]),
         Name: core.CastString(data["name"]),
-        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
-        KeyId: core.CastString(data["keyId"]),
         Description: core.CastString(data["description"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
     }
 }
 
@@ -61,17 +63,13 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.Name != nil {
         name = p.Name
     }
-    var queueNamespaceId *string
-    if p.QueueNamespaceId != nil {
-        queueNamespaceId = p.QueueNamespaceId
-    }
-    var keyId *string
-    if p.KeyId != nil {
-        keyId = p.KeyId
-    }
     var description *string
     if p.Description != nil {
         description = p.Description
+    }
+    var transactionSetting map[string]interface{}
+    if p.TransactionSetting != nil {
+        transactionSetting = p.TransactionSetting.ToDict()
     }
     var logSetting map[string]interface{}
     if p.LogSetting != nil {
@@ -85,15 +83,24 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var queueNamespaceId *string
+    if p.QueueNamespaceId != nil {
+        queueNamespaceId = p.QueueNamespaceId
+    }
+    var keyId *string
+    if p.KeyId != nil {
+        keyId = p.KeyId
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
-        "queueNamespaceId": queueNamespaceId,
-        "keyId": keyId,
         "description": description,
+        "transactionSetting": transactionSetting,
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "queueNamespaceId": queueNamespaceId,
+        "keyId": keyId,
     }
 }
 
@@ -460,142 +467,6 @@ func CastCurrentShowcaseMastersFromDict(data []CurrentShowcaseMaster) []interfac
     return v
 }
 
-type GitHubCheckoutSetting struct {
-	ApiKeyId *string `json:"apiKeyId"`
-	RepositoryName *string `json:"repositoryName"`
-	SourcePath *string `json:"sourcePath"`
-	ReferenceType *string `json:"referenceType"`
-	CommitHash *string `json:"commitHash"`
-	BranchName *string `json:"branchName"`
-	TagName *string `json:"tagName"`
-}
-
-func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGitHubCheckoutSettingFromDict(dict)
-}
-
-func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
-    return GitHubCheckoutSetting {
-        ApiKeyId: core.CastString(data["apiKeyId"]),
-        RepositoryName: core.CastString(data["repositoryName"]),
-        SourcePath: core.CastString(data["sourcePath"]),
-        ReferenceType: core.CastString(data["referenceType"]),
-        CommitHash: core.CastString(data["commitHash"]),
-        BranchName: core.CastString(data["branchName"]),
-        TagName: core.CastString(data["tagName"]),
-    }
-}
-
-func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-    
-    var apiKeyId *string
-    if p.ApiKeyId != nil {
-        apiKeyId = p.ApiKeyId
-    }
-    var repositoryName *string
-    if p.RepositoryName != nil {
-        repositoryName = p.RepositoryName
-    }
-    var sourcePath *string
-    if p.SourcePath != nil {
-        sourcePath = p.SourcePath
-    }
-    var referenceType *string
-    if p.ReferenceType != nil {
-        referenceType = p.ReferenceType
-    }
-    var commitHash *string
-    if p.CommitHash != nil {
-        commitHash = p.CommitHash
-    }
-    var branchName *string
-    if p.BranchName != nil {
-        branchName = p.BranchName
-    }
-    var tagName *string
-    if p.TagName != nil {
-        tagName = p.TagName
-    }
-    return map[string]interface{} {
-        "apiKeyId": apiKeyId,
-        "repositoryName": repositoryName,
-        "sourcePath": sourcePath,
-        "referenceType": referenceType,
-        "commitHash": commitHash,
-        "branchName": branchName,
-        "tagName": tagName,
-    }
-}
-
-func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
-    return &p
-}
-
-func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
-	v := make([]GitHubCheckoutSetting, 0)
-	for _, d := range data {
-		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
-	}
-	return v
-}
-
-func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
-}
-
-type LogSetting struct {
-	LoggingNamespaceId *string `json:"loggingNamespaceId"`
-}
-
-func NewLogSettingFromJson(data string) LogSetting {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewLogSettingFromDict(dict)
-}
-
-func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
-    return LogSetting {
-        LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
-    }
-}
-
-func (p LogSetting) ToDict() map[string]interface{} {
-    
-    var loggingNamespaceId *string
-    if p.LoggingNamespaceId != nil {
-        loggingNamespaceId = p.LoggingNamespaceId
-    }
-    return map[string]interface{} {
-        "loggingNamespaceId": loggingNamespaceId,
-    }
-}
-
-func (p LogSetting) Pointer() *LogSetting {
-    return &p
-}
-
-func CastLogSettings(data []interface{}) []LogSetting {
-	v := make([]LogSetting, 0)
-	for _, d := range data {
-		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
-	}
-	return v
-}
-
-func CastLogSettingsFromDict(data []LogSetting) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
-}
-
 type SalesItem struct {
 	Name *string `json:"name"`
 	Metadata *string `json:"metadata"`
@@ -883,53 +754,74 @@ func CastDisplayItemsFromDict(data []DisplayItem) []interface{} {
     return v
 }
 
-type Config struct {
-	Key *string `json:"key"`
-	Value *string `json:"value"`
+type DisplayItemMaster struct {
+	DisplayItemId *string `json:"displayItemId"`
+	Type *string `json:"type"`
+	SalesItemName *string `json:"salesItemName"`
+	SalesItemGroupName *string `json:"salesItemGroupName"`
+	SalesPeriodEventId *string `json:"salesPeriodEventId"`
 }
 
-func NewConfigFromJson(data string) Config {
+func NewDisplayItemMasterFromJson(data string) DisplayItemMaster {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewConfigFromDict(dict)
+    return NewDisplayItemMasterFromDict(dict)
 }
 
-func NewConfigFromDict(data map[string]interface{}) Config {
-    return Config {
-        Key: core.CastString(data["key"]),
-        Value: core.CastString(data["value"]),
+func NewDisplayItemMasterFromDict(data map[string]interface{}) DisplayItemMaster {
+    return DisplayItemMaster {
+        DisplayItemId: core.CastString(data["displayItemId"]),
+        Type: core.CastString(data["type"]),
+        SalesItemName: core.CastString(data["salesItemName"]),
+        SalesItemGroupName: core.CastString(data["salesItemGroupName"]),
+        SalesPeriodEventId: core.CastString(data["salesPeriodEventId"]),
     }
 }
 
-func (p Config) ToDict() map[string]interface{} {
+func (p DisplayItemMaster) ToDict() map[string]interface{} {
     
-    var key *string
-    if p.Key != nil {
-        key = p.Key
+    var displayItemId *string
+    if p.DisplayItemId != nil {
+        displayItemId = p.DisplayItemId
     }
-    var value *string
-    if p.Value != nil {
-        value = p.Value
+    var _type *string
+    if p.Type != nil {
+        _type = p.Type
+    }
+    var salesItemName *string
+    if p.SalesItemName != nil {
+        salesItemName = p.SalesItemName
+    }
+    var salesItemGroupName *string
+    if p.SalesItemGroupName != nil {
+        salesItemGroupName = p.SalesItemGroupName
+    }
+    var salesPeriodEventId *string
+    if p.SalesPeriodEventId != nil {
+        salesPeriodEventId = p.SalesPeriodEventId
     }
     return map[string]interface{} {
-        "key": key,
-        "value": value,
+        "displayItemId": displayItemId,
+        "type": _type,
+        "salesItemName": salesItemName,
+        "salesItemGroupName": salesItemGroupName,
+        "salesPeriodEventId": salesPeriodEventId,
     }
 }
 
-func (p Config) Pointer() *Config {
+func (p DisplayItemMaster) Pointer() *DisplayItemMaster {
     return &p
 }
 
-func CastConfigs(data []interface{}) []Config {
-	v := make([]Config, 0)
+func CastDisplayItemMasters(data []interface{}) []DisplayItemMaster {
+	v := make([]DisplayItemMaster, 0)
 	for _, d := range data {
-		v = append(v, NewConfigFromDict(d.(map[string]interface{})))
+		v = append(v, NewDisplayItemMasterFromDict(d.(map[string]interface{})))
 	}
 	return v
 }
 
-func CastConfigsFromDict(data []Config) []interface{} {
+func CastDisplayItemMastersFromDict(data []DisplayItemMaster) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())
@@ -1045,74 +937,257 @@ func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
     return v
 }
 
-type DisplayItemMaster struct {
-	DisplayItemId *string `json:"displayItemId"`
-	Type *string `json:"type"`
-	SalesItemName *string `json:"salesItemName"`
-	SalesItemGroupName *string `json:"salesItemGroupName"`
-	SalesPeriodEventId *string `json:"salesPeriodEventId"`
+type Config struct {
+	Key *string `json:"key"`
+	Value *string `json:"value"`
 }
 
-func NewDisplayItemMasterFromJson(data string) DisplayItemMaster {
+func NewConfigFromJson(data string) Config {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewDisplayItemMasterFromDict(dict)
+    return NewConfigFromDict(dict)
 }
 
-func NewDisplayItemMasterFromDict(data map[string]interface{}) DisplayItemMaster {
-    return DisplayItemMaster {
-        DisplayItemId: core.CastString(data["displayItemId"]),
-        Type: core.CastString(data["type"]),
-        SalesItemName: core.CastString(data["salesItemName"]),
-        SalesItemGroupName: core.CastString(data["salesItemGroupName"]),
-        SalesPeriodEventId: core.CastString(data["salesPeriodEventId"]),
+func NewConfigFromDict(data map[string]interface{}) Config {
+    return Config {
+        Key: core.CastString(data["key"]),
+        Value: core.CastString(data["value"]),
     }
 }
 
-func (p DisplayItemMaster) ToDict() map[string]interface{} {
+func (p Config) ToDict() map[string]interface{} {
     
-    var displayItemId *string
-    if p.DisplayItemId != nil {
-        displayItemId = p.DisplayItemId
+    var key *string
+    if p.Key != nil {
+        key = p.Key
     }
-    var _type *string
-    if p.Type != nil {
-        _type = p.Type
-    }
-    var salesItemName *string
-    if p.SalesItemName != nil {
-        salesItemName = p.SalesItemName
-    }
-    var salesItemGroupName *string
-    if p.SalesItemGroupName != nil {
-        salesItemGroupName = p.SalesItemGroupName
-    }
-    var salesPeriodEventId *string
-    if p.SalesPeriodEventId != nil {
-        salesPeriodEventId = p.SalesPeriodEventId
+    var value *string
+    if p.Value != nil {
+        value = p.Value
     }
     return map[string]interface{} {
-        "displayItemId": displayItemId,
-        "type": _type,
-        "salesItemName": salesItemName,
-        "salesItemGroupName": salesItemGroupName,
-        "salesPeriodEventId": salesPeriodEventId,
+        "key": key,
+        "value": value,
     }
 }
 
-func (p DisplayItemMaster) Pointer() *DisplayItemMaster {
+func (p Config) Pointer() *Config {
     return &p
 }
 
-func CastDisplayItemMasters(data []interface{}) []DisplayItemMaster {
-	v := make([]DisplayItemMaster, 0)
+func CastConfigs(data []interface{}) []Config {
+	v := make([]Config, 0)
 	for _, d := range data {
-		v = append(v, NewDisplayItemMasterFromDict(d.(map[string]interface{})))
+		v = append(v, NewConfigFromDict(d.(map[string]interface{})))
 	}
 	return v
 }
 
-func CastDisplayItemMastersFromDict(data []DisplayItemMaster) []interface{} {
+func CastConfigsFromDict(data []Config) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type GitHubCheckoutSetting struct {
+	ApiKeyId *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath *string `json:"sourcePath"`
+	ReferenceType *string `json:"referenceType"`
+	CommitHash *string `json:"commitHash"`
+	BranchName *string `json:"branchName"`
+	TagName *string `json:"tagName"`
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGitHubCheckoutSettingFromDict(dict)
+}
+
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+    return GitHubCheckoutSetting {
+        ApiKeyId: core.CastString(data["apiKeyId"]),
+        RepositoryName: core.CastString(data["repositoryName"]),
+        SourcePath: core.CastString(data["sourcePath"]),
+        ReferenceType: core.CastString(data["referenceType"]),
+        CommitHash: core.CastString(data["commitHash"]),
+        BranchName: core.CastString(data["branchName"]),
+        TagName: core.CastString(data["tagName"]),
+    }
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+    
+    var apiKeyId *string
+    if p.ApiKeyId != nil {
+        apiKeyId = p.ApiKeyId
+    }
+    var repositoryName *string
+    if p.RepositoryName != nil {
+        repositoryName = p.RepositoryName
+    }
+    var sourcePath *string
+    if p.SourcePath != nil {
+        sourcePath = p.SourcePath
+    }
+    var referenceType *string
+    if p.ReferenceType != nil {
+        referenceType = p.ReferenceType
+    }
+    var commitHash *string
+    if p.CommitHash != nil {
+        commitHash = p.CommitHash
+    }
+    var branchName *string
+    if p.BranchName != nil {
+        branchName = p.BranchName
+    }
+    var tagName *string
+    if p.TagName != nil {
+        tagName = p.TagName
+    }
+    return map[string]interface{} {
+        "apiKeyId": apiKeyId,
+        "repositoryName": repositoryName,
+        "sourcePath": sourcePath,
+        "referenceType": referenceType,
+        "commitHash": commitHash,
+        "branchName": branchName,
+        "tagName": tagName,
+    }
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+    return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type LogSetting struct {
+	LoggingNamespaceId *string `json:"loggingNamespaceId"`
+}
+
+func NewLogSettingFromJson(data string) LogSetting {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewLogSettingFromDict(dict)
+}
+
+func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
+    return LogSetting {
+        LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+    }
+}
+
+func (p LogSetting) ToDict() map[string]interface{} {
+    
+    var loggingNamespaceId *string
+    if p.LoggingNamespaceId != nil {
+        loggingNamespaceId = p.LoggingNamespaceId
+    }
+    return map[string]interface{} {
+        "loggingNamespaceId": loggingNamespaceId,
+    }
+}
+
+func (p LogSetting) Pointer() *LogSetting {
+    return &p
+}
+
+func CastLogSettings(data []interface{}) []LogSetting {
+	v := make([]LogSetting, 0)
+	for _, d := range data {
+		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type TransactionSetting struct {
+	EnableAutoRun *bool `json:"enableAutoRun"`
+	DistributorNamespaceId *string `json:"distributorNamespaceId"`
+	KeyId *string `json:"keyId"`
+	QueueNamespaceId *string `json:"queueNamespaceId"`
+}
+
+func NewTransactionSettingFromJson(data string) TransactionSetting {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewTransactionSettingFromDict(dict)
+}
+
+func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
+    return TransactionSetting {
+        EnableAutoRun: core.CastBool(data["enableAutoRun"]),
+        DistributorNamespaceId: core.CastString(data["distributorNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+    }
+}
+
+func (p TransactionSetting) ToDict() map[string]interface{} {
+    
+    var enableAutoRun *bool
+    if p.EnableAutoRun != nil {
+        enableAutoRun = p.EnableAutoRun
+    }
+    var distributorNamespaceId *string
+    if p.DistributorNamespaceId != nil {
+        distributorNamespaceId = p.DistributorNamespaceId
+    }
+    var keyId *string
+    if p.KeyId != nil {
+        keyId = p.KeyId
+    }
+    var queueNamespaceId *string
+    if p.QueueNamespaceId != nil {
+        queueNamespaceId = p.QueueNamespaceId
+    }
+    return map[string]interface{} {
+        "enableAutoRun": enableAutoRun,
+        "distributorNamespaceId": distributorNamespaceId,
+        "keyId": keyId,
+        "queueNamespaceId": queueNamespaceId,
+    }
+}
+
+func (p TransactionSetting) Pointer() *TransactionSetting {
+    return &p
+}
+
+func CastTransactionSettings(data []interface{}) []TransactionSetting {
+	v := make([]TransactionSetting, 0)
+	for _, d := range data {
+		v = append(v, NewTransactionSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTransactionSettingsFromDict(data []TransactionSetting) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

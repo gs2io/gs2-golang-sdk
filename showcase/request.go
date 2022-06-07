@@ -57,6 +57,7 @@ type CreateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     Name *string `json:"name"`
     Description *string `json:"description"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     QueueNamespaceId *string `json:"queueNamespaceId"`
     KeyId *string `json:"keyId"`
     LogSetting *LogSetting `json:"logSetting"`
@@ -72,6 +73,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
     return CreateNamespaceRequest {
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
@@ -82,6 +84,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "name": p.Name,
         "description": p.Description,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "queueNamespaceId": p.QueueNamespaceId,
         "keyId": p.KeyId,
         "logSetting": p.LogSetting.ToDict(),
@@ -153,9 +156,10 @@ type UpdateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
+    LogSetting *LogSetting `json:"logSetting"`
     QueueNamespaceId *string `json:"queueNamespaceId"`
     KeyId *string `json:"keyId"`
-    LogSetting *LogSetting `json:"logSetting"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -168,9 +172,10 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
     return UpdateNamespaceRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         Description: core.CastString(data["description"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
-        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
     }
 }
 
@@ -178,9 +183,10 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "description": p.Description,
+        "transactionSetting": p.TransactionSetting.ToDict(),
+        "logSetting": p.LogSetting.ToDict(),
         "queueNamespaceId": p.QueueNamespaceId,
         "keyId": p.KeyId,
-        "logSetting": p.LogSetting.ToDict(),
     }
 }
 

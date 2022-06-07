@@ -172,6 +172,9 @@ func (p Gs2InboxWebSocketClient) CreateNamespaceAsync(
     if request.IsAutomaticDeletingEnabled != nil {
         bodies["isAutomaticDeletingEnabled"] = *request.IsAutomaticDeletingEnabled
     }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
     if request.ReceiveMessageScript != nil {
         bodies["receiveMessageScript"] = request.ReceiveMessageScript.ToDict()
     }
@@ -181,17 +184,17 @@ func (p Gs2InboxWebSocketClient) CreateNamespaceAsync(
     if request.DeleteMessageScript != nil {
         bodies["deleteMessageScript"] = request.DeleteMessageScript.ToDict()
     }
-    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
-        bodies["queueNamespaceId"] = *request.QueueNamespaceId
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
     if request.ReceiveNotification != nil {
         bodies["receiveNotification"] = request.ReceiveNotification.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
+    }
+    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
+        bodies["queueNamespaceId"] = *request.QueueNamespaceId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -436,6 +439,9 @@ func (p Gs2InboxWebSocketClient) UpdateNamespaceAsync(
     if request.IsAutomaticDeletingEnabled != nil {
         bodies["isAutomaticDeletingEnabled"] = *request.IsAutomaticDeletingEnabled
     }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
     if request.ReceiveMessageScript != nil {
         bodies["receiveMessageScript"] = request.ReceiveMessageScript.ToDict()
     }
@@ -445,17 +451,17 @@ func (p Gs2InboxWebSocketClient) UpdateNamespaceAsync(
     if request.DeleteMessageScript != nil {
         bodies["deleteMessageScript"] = request.DeleteMessageScript.ToDict()
     }
-    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
-        bodies["queueNamespaceId"] = *request.QueueNamespaceId
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
     if request.ReceiveNotification != nil {
         bodies["receiveNotification"] = request.ReceiveNotification.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
+    }
+    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
+        bodies["queueNamespaceId"] = *request.QueueNamespaceId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

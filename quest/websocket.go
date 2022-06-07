@@ -169,6 +169,9 @@ func (p Gs2QuestWebSocketClient) CreateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
     if request.StartQuestScript != nil {
         bodies["startQuestScript"] = request.StartQuestScript.ToDict()
     }
@@ -178,14 +181,14 @@ func (p Gs2QuestWebSocketClient) CreateNamespaceAsync(
     if request.FailedQuestScript != nil {
         bodies["failedQuestScript"] = request.FailedQuestScript.ToDict()
     }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
     if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
         bodies["queueNamespaceId"] = *request.QueueNamespaceId
     }
     if request.KeyId != nil && *request.KeyId != "" {
         bodies["keyId"] = *request.KeyId
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -427,6 +430,9 @@ func (p Gs2QuestWebSocketClient) UpdateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
     if request.StartQuestScript != nil {
         bodies["startQuestScript"] = request.StartQuestScript.ToDict()
     }
@@ -436,14 +442,14 @@ func (p Gs2QuestWebSocketClient) UpdateNamespaceAsync(
     if request.FailedQuestScript != nil {
         bodies["failedQuestScript"] = request.FailedQuestScript.ToDict()
     }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
     if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
         bodies["queueNamespaceId"] = *request.QueueNamespaceId
     }
     if request.KeyId != nil && *request.KeyId != "" {
         bodies["keyId"] = *request.KeyId
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

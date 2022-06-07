@@ -59,10 +59,11 @@ type CreateNamespaceRequest struct {
     Description *string `json:"description"`
     EnableAwaitExchange *bool `json:"enableAwaitExchange"`
     EnableDirectExchange *bool `json:"enableDirectExchange"`
-    QueueNamespaceId *string `json:"queueNamespaceId"`
-    KeyId *string `json:"keyId"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     ExchangeScript *ScriptSetting `json:"exchangeScript"`
     LogSetting *LogSetting `json:"logSetting"`
+    QueueNamespaceId *string `json:"queueNamespaceId"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
@@ -77,10 +78,11 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
         Description: core.CastString(data["description"]),
         EnableAwaitExchange: core.CastBool(data["enableAwaitExchange"]),
         EnableDirectExchange: core.CastBool(data["enableDirectExchange"]),
-        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
-        KeyId: core.CastString(data["keyId"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         ExchangeScript: NewScriptSettingFromDict(core.CastMap(data["exchangeScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
     }
 }
 
@@ -90,10 +92,11 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
         "description": p.Description,
         "enableAwaitExchange": p.EnableAwaitExchange,
         "enableDirectExchange": p.EnableDirectExchange,
-        "queueNamespaceId": p.QueueNamespaceId,
-        "keyId": p.KeyId,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "exchangeScript": p.ExchangeScript.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
+        "queueNamespaceId": p.QueueNamespaceId,
+        "keyId": p.KeyId,
     }
 }
 
@@ -164,10 +167,11 @@ type UpdateNamespaceRequest struct {
     Description *string `json:"description"`
     EnableAwaitExchange *bool `json:"enableAwaitExchange"`
     EnableDirectExchange *bool `json:"enableDirectExchange"`
-    QueueNamespaceId *string `json:"queueNamespaceId"`
-    KeyId *string `json:"keyId"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     ExchangeScript *ScriptSetting `json:"exchangeScript"`
     LogSetting *LogSetting `json:"logSetting"`
+    QueueNamespaceId *string `json:"queueNamespaceId"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -182,10 +186,11 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
         Description: core.CastString(data["description"]),
         EnableAwaitExchange: core.CastBool(data["enableAwaitExchange"]),
         EnableDirectExchange: core.CastBool(data["enableDirectExchange"]),
-        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
-        KeyId: core.CastString(data["keyId"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         ExchangeScript: NewScriptSettingFromDict(core.CastMap(data["exchangeScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
     }
 }
 
@@ -195,10 +200,11 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
         "description": p.Description,
         "enableAwaitExchange": p.EnableAwaitExchange,
         "enableDirectExchange": p.EnableDirectExchange,
-        "queueNamespaceId": p.QueueNamespaceId,
-        "keyId": p.KeyId,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "exchangeScript": p.ExchangeScript.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
+        "queueNamespaceId": p.QueueNamespaceId,
+        "keyId": p.KeyId,
     }
 }
 

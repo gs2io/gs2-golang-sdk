@@ -57,6 +57,7 @@ type CreateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     Name *string `json:"name"`
     Description *string `json:"description"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     UpdateMoldScript *ScriptSetting `json:"updateMoldScript"`
     UpdateFormScript *ScriptSetting `json:"updateFormScript"`
     LogSetting *LogSetting `json:"logSetting"`
@@ -72,6 +73,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
     return CreateNamespaceRequest {
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         UpdateMoldScript: NewScriptSettingFromDict(core.CastMap(data["updateMoldScript"])).Pointer(),
         UpdateFormScript: NewScriptSettingFromDict(core.CastMap(data["updateFormScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
@@ -82,6 +84,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "name": p.Name,
         "description": p.Description,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "updateMoldScript": p.UpdateMoldScript.ToDict(),
         "updateFormScript": p.UpdateFormScript.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
@@ -153,6 +156,7 @@ type UpdateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     UpdateMoldScript *ScriptSetting `json:"updateMoldScript"`
     UpdateFormScript *ScriptSetting `json:"updateFormScript"`
     LogSetting *LogSetting `json:"logSetting"`
@@ -168,6 +172,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
     return UpdateNamespaceRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         Description: core.CastString(data["description"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         UpdateMoldScript: NewScriptSettingFromDict(core.CastMap(data["updateMoldScript"])).Pointer(),
         UpdateFormScript: NewScriptSettingFromDict(core.CastMap(data["updateFormScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
@@ -178,6 +183,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "description": p.Description,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "updateMoldScript": p.UpdateMoldScript.ToDict(),
         "updateFormScript": p.UpdateFormScript.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
@@ -1441,8 +1447,6 @@ type AcquireActionsToFormPropertiesRequest struct {
     MoldName *string `json:"moldName"`
     Index *int32 `json:"index"`
     AcquireAction *AcquireAction `json:"acquireAction"`
-    QueueNamespaceId *string `json:"queueNamespaceId"`
-    KeyId *string `json:"keyId"`
     Config []AcquireActionConfig `json:"config"`
 }
 
@@ -1459,8 +1463,6 @@ func NewAcquireActionsToFormPropertiesRequestFromDict(data map[string]interface{
         MoldName: core.CastString(data["moldName"]),
         Index: core.CastInt32(data["index"]),
         AcquireAction: NewAcquireActionFromDict(core.CastMap(data["acquireAction"])).Pointer(),
-        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
-        KeyId: core.CastString(data["keyId"]),
         Config: CastAcquireActionConfigs(core.CastArray(data["config"])),
     }
 }
@@ -1472,8 +1474,6 @@ func (p AcquireActionsToFormPropertiesRequest) ToDict() map[string]interface{} {
         "moldName": p.MoldName,
         "index": p.Index,
         "acquireAction": p.AcquireAction.ToDict(),
-        "queueNamespaceId": p.QueueNamespaceId,
-        "keyId": p.KeyId,
         "config": CastAcquireActionConfigsFromDict(
             p.Config,
         ),
