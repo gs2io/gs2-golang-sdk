@@ -61,7 +61,9 @@ type CreateNamespaceRequest struct {
     LotteryTriggerScriptId *string `json:"lotteryTriggerScriptId"`
     ChoicePrizeTableScriptId *string `json:"choicePrizeTableScriptId"`
     LogSetting *LogSetting `json:"logSetting"`
+    // Deprecated: should not be used
     QueueNamespaceId *string `json:"queueNamespaceId"`
+    // Deprecated: should not be used
     KeyId *string `json:"keyId"`
 }
 
@@ -166,7 +168,9 @@ type UpdateNamespaceRequest struct {
     LotteryTriggerScriptId *string `json:"lotteryTriggerScriptId"`
     ChoicePrizeTableScriptId *string `json:"choicePrizeTableScriptId"`
     LogSetting *LogSetting `json:"logSetting"`
+    // Deprecated: should not be used
     QueueNamespaceId *string `json:"queueNamespaceId"`
+    // Deprecated: should not be used
     KeyId *string `json:"keyId"`
 }
 

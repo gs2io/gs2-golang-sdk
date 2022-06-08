@@ -780,7 +780,9 @@ type CreateNamespaceRequest struct {
     ReceiveRewardsScript *ScriptSetting `json:"receiveRewardsScript"`
     CompleteNotification *NotificationSetting `json:"completeNotification"`
     LogSetting *LogSetting `json:"logSetting"`
+    // Deprecated: should not be used
     QueueNamespaceId *string `json:"queueNamespaceId"`
+    // Deprecated: should not be used
     KeyId *string `json:"keyId"`
 }
 
@@ -891,7 +893,9 @@ type UpdateNamespaceRequest struct {
     ReceiveRewardsScript *ScriptSetting `json:"receiveRewardsScript"`
     CompleteNotification *NotificationSetting `json:"completeNotification"`
     LogSetting *LogSetting `json:"logSetting"`
+    // Deprecated: should not be used
     QueueNamespaceId *string `json:"queueNamespaceId"`
+    // Deprecated: should not be used
     KeyId *string `json:"keyId"`
 }
 

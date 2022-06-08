@@ -450,6 +450,68 @@ func (p PushByStampSheetResult) Pointer() *PushByStampSheetResult {
     return &p
 }
 
+type GetJobResultResult struct {
+    Item *JobResult `json:"item"`
+}
+
+type GetJobResultAsyncResult struct {
+	result *GetJobResultResult
+	err    error
+}
+
+func NewGetJobResultResultFromJson(data string) GetJobResultResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetJobResultResultFromDict(dict)
+}
+
+func NewGetJobResultResultFromDict(data map[string]interface{}) GetJobResultResult {
+    return GetJobResultResult {
+        Item: NewJobResultFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetJobResultResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetJobResultResult) Pointer() *GetJobResultResult {
+    return &p
+}
+
+type GetJobResultByUserIdResult struct {
+    Item *JobResult `json:"item"`
+}
+
+type GetJobResultByUserIdAsyncResult struct {
+	result *GetJobResultByUserIdResult
+	err    error
+}
+
+func NewGetJobResultByUserIdResultFromJson(data string) GetJobResultByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetJobResultByUserIdResultFromDict(dict)
+}
+
+func NewGetJobResultByUserIdResultFromDict(data map[string]interface{}) GetJobResultByUserIdResult {
+    return GetJobResultByUserIdResult {
+        Item: NewJobResultFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetJobResultByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetJobResultByUserIdResult) Pointer() *GetJobResultByUserIdResult {
+    return &p
+}
+
 type DescribeDeadLetterJobsByUserIdResult struct {
     Items []DeadLetterJob `json:"items"`
     NextPageToken *string `json:"nextPageToken"`

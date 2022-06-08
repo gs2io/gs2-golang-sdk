@@ -57,7 +57,9 @@ type CreateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     Name *string `json:"name"`
     Description *string `json:"description"`
+    EnableAutoRun *bool `json:"enableAutoRun"`
     PushNotification *NotificationSetting `json:"pushNotification"`
+    RunNotification *NotificationSetting `json:"runNotification"`
     LogSetting *LogSetting `json:"logSetting"`
 }
 
@@ -71,7 +73,9 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
     return CreateNamespaceRequest {
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
+        EnableAutoRun: core.CastBool(data["enableAutoRun"]),
         PushNotification: NewNotificationSettingFromDict(core.CastMap(data["pushNotification"])).Pointer(),
+        RunNotification: NewNotificationSettingFromDict(core.CastMap(data["runNotification"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
     }
 }
@@ -80,7 +84,9 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "name": p.Name,
         "description": p.Description,
+        "enableAutoRun": p.EnableAutoRun,
         "pushNotification": p.PushNotification.ToDict(),
+        "runNotification": p.RunNotification.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
     }
 }
@@ -150,7 +156,9 @@ type UpdateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
+    EnableAutoRun *bool `json:"enableAutoRun"`
     PushNotification *NotificationSetting `json:"pushNotification"`
+    RunNotification *NotificationSetting `json:"runNotification"`
     LogSetting *LogSetting `json:"logSetting"`
 }
 
@@ -164,7 +172,9 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
     return UpdateNamespaceRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         Description: core.CastString(data["description"]),
+        EnableAutoRun: core.CastBool(data["enableAutoRun"]),
         PushNotification: NewNotificationSettingFromDict(core.CastMap(data["pushNotification"])).Pointer(),
+        RunNotification: NewNotificationSettingFromDict(core.CastMap(data["runNotification"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
     }
 }
@@ -173,7 +183,9 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "description": p.Description,
+        "enableAutoRun": p.EnableAutoRun,
         "pushNotification": p.PushNotification.ToDict(),
+        "runNotification": p.RunNotification.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
     }
 }
@@ -444,6 +456,74 @@ func (p PushByStampSheetRequest) ToDict() map[string]interface{} {
 }
 
 func (p PushByStampSheetRequest) Pointer() *PushByStampSheetRequest {
+    return &p
+}
+
+type GetJobResultRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    JobName *string `json:"jobName"`
+}
+
+func NewGetJobResultRequestFromJson(data string) GetJobResultRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetJobResultRequestFromDict(dict)
+}
+
+func NewGetJobResultRequestFromDict(data map[string]interface{}) GetJobResultRequest {
+    return GetJobResultRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        JobName: core.CastString(data["jobName"]),
+    }
+}
+
+func (p GetJobResultRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "jobName": p.JobName,
+    }
+}
+
+func (p GetJobResultRequest) Pointer() *GetJobResultRequest {
+    return &p
+}
+
+type GetJobResultByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    JobName *string `json:"jobName"`
+}
+
+func NewGetJobResultByUserIdRequestFromJson(data string) GetJobResultByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetJobResultByUserIdRequestFromDict(dict)
+}
+
+func NewGetJobResultByUserIdRequestFromDict(data map[string]interface{}) GetJobResultByUserIdRequest {
+    return GetJobResultByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        JobName: core.CastString(data["jobName"]),
+    }
+}
+
+func (p GetJobResultByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "jobName": p.JobName,
+    }
+}
+
+func (p GetJobResultByUserIdRequest) Pointer() *GetJobResultByUserIdRequest {
     return &p
 }
 

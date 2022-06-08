@@ -62,7 +62,9 @@ type CreateNamespaceRequest struct {
     CompleteQuestScript *ScriptSetting `json:"completeQuestScript"`
     FailedQuestScript *ScriptSetting `json:"failedQuestScript"`
     LogSetting *LogSetting `json:"logSetting"`
+    // Deprecated: should not be used
     QueueNamespaceId *string `json:"queueNamespaceId"`
+    // Deprecated: should not be used
     KeyId *string `json:"keyId"`
 }
 
@@ -170,7 +172,9 @@ type UpdateNamespaceRequest struct {
     CompleteQuestScript *ScriptSetting `json:"completeQuestScript"`
     FailedQuestScript *ScriptSetting `json:"failedQuestScript"`
     LogSetting *LogSetting `json:"logSetting"`
+    // Deprecated: should not be used
     QueueNamespaceId *string `json:"queueNamespaceId"`
+    // Deprecated: should not be used
     KeyId *string `json:"keyId"`
 }
 

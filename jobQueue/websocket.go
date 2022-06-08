@@ -169,8 +169,14 @@ func (p Gs2JobQueueWebSocketClient) CreateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
+    if request.EnableAutoRun != nil {
+        bodies["enableAutoRun"] = *request.EnableAutoRun
+    }
     if request.PushNotification != nil {
         bodies["pushNotification"] = request.PushNotification.ToDict()
+    }
+    if request.RunNotification != nil {
+        bodies["runNotification"] = request.RunNotification.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
@@ -415,8 +421,14 @@ func (p Gs2JobQueueWebSocketClient) UpdateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
+    if request.EnableAutoRun != nil {
+        bodies["enableAutoRun"] = *request.EnableAutoRun
+    }
     if request.PushNotification != nil {
         bodies["pushNotification"] = request.PushNotification.ToDict()
+    }
+    if request.RunNotification != nil {
+        bodies["runNotification"] = request.RunNotification.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
@@ -1123,6 +1135,179 @@ func (p Gs2JobQueueWebSocketClient) PushByStampSheet(
 ) (*PushByStampSheetResult, error) {
 	callback := make(chan PushByStampSheetAsyncResult, 1)
 	go p.PushByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2JobQueueWebSocketClient) getJobResultAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetJobResultAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetJobResultAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetJobResultResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetJobResultAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetJobResultAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2JobQueueWebSocketClient) GetJobResultAsync(
+	request *GetJobResultRequest,
+	callback chan<- GetJobResultAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "job_queue",
+    		"component": "jobResult",
+    		"function": "getJobResult",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.JobName != nil && *request.JobName != "" {
+        bodies["jobName"] = *request.JobName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.getJobResultAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2JobQueueWebSocketClient) GetJobResult(
+	request *GetJobResultRequest,
+) (*GetJobResultResult, error) {
+	callback := make(chan GetJobResultAsyncResult, 1)
+	go p.GetJobResultAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2JobQueueWebSocketClient) getJobResultByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetJobResultByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetJobResultByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetJobResultByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetJobResultByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetJobResultByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2JobQueueWebSocketClient) GetJobResultByUserIdAsync(
+	request *GetJobResultByUserIdRequest,
+	callback chan<- GetJobResultByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "job_queue",
+    		"component": "jobResult",
+    		"function": "getJobResultByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.JobName != nil && *request.JobName != "" {
+        bodies["jobName"] = *request.JobName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getJobResultByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2JobQueueWebSocketClient) GetJobResultByUserId(
+	request *GetJobResultByUserIdRequest,
+) (*GetJobResultByUserIdResult, error) {
+	callback := make(chan GetJobResultByUserIdAsyncResult, 1)
+	go p.GetJobResultByUserIdAsync(
 		request,
 		callback,
 	)

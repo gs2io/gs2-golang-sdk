@@ -58,7 +58,9 @@ type CreateNamespaceRequest struct {
     Name *string `json:"name"`
     Description *string `json:"description"`
     TransactionSetting *TransactionSetting `json:"transactionSetting"`
+    // Deprecated: should not be used
     QueueNamespaceId *string `json:"queueNamespaceId"`
+    // Deprecated: should not be used
     KeyId *string `json:"keyId"`
     LogSetting *LogSetting `json:"logSetting"`
 }
@@ -158,7 +160,9 @@ type UpdateNamespaceRequest struct {
     Description *string `json:"description"`
     TransactionSetting *TransactionSetting `json:"transactionSetting"`
     LogSetting *LogSetting `json:"logSetting"`
+    // Deprecated: should not be used
     QueueNamespaceId *string `json:"queueNamespaceId"`
+    // Deprecated: should not be used
     KeyId *string `json:"keyId"`
 }
 

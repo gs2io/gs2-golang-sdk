@@ -31,7 +31,9 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+    // Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
+    // Deprecated: should not be used
 	KeyId *string `json:"keyId"`
 }
 

@@ -25,6 +25,8 @@ type Namespace struct {
 	NamespaceId *string `json:"namespaceId"`
 	Name *string `json:"name"`
 	Description *string `json:"description"`
+	EnableAutoRun *bool `json:"enableAutoRun"`
+	RunNotification *NotificationSetting `json:"runNotification"`
 	PushNotification *NotificationSetting `json:"pushNotification"`
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
@@ -42,6 +44,8 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         NamespaceId: core.CastString(data["namespaceId"]),
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
+        EnableAutoRun: core.CastBool(data["enableAutoRun"]),
+        RunNotification: NewNotificationSettingFromDict(core.CastMap(data["runNotification"])).Pointer(),
         PushNotification: NewNotificationSettingFromDict(core.CastMap(data["pushNotification"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
@@ -63,6 +67,14 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.Description != nil {
         description = p.Description
     }
+    var enableAutoRun *bool
+    if p.EnableAutoRun != nil {
+        enableAutoRun = p.EnableAutoRun
+    }
+    var runNotification map[string]interface{}
+    if p.RunNotification != nil {
+        runNotification = p.RunNotification.ToDict()
+    }
     var pushNotification map[string]interface{}
     if p.PushNotification != nil {
         pushNotification = p.PushNotification.ToDict()
@@ -83,6 +95,8 @@ func (p Namespace) ToDict() map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
         "description": description,
+        "enableAutoRun": enableAutoRun,
+        "runNotification": runNotification,
         "pushNotification": pushNotification,
         "logSetting": logSetting,
         "createdAt": createdAt,

@@ -170,8 +170,14 @@ func (p Gs2JobQueueRestClient) CreateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
+    if request.EnableAutoRun != nil {
+        bodies["enableAutoRun"] = *request.EnableAutoRun
+    }
     if request.PushNotification != nil {
         bodies["pushNotification"] = request.PushNotification.ToDict()
+    }
+    if request.RunNotification != nil {
+        bodies["runNotification"] = request.RunNotification.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
@@ -434,8 +440,14 @@ func (p Gs2JobQueueRestClient) UpdateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
+    if request.EnableAutoRun != nil {
+        bodies["enableAutoRun"] = *request.EnableAutoRun
+    }
     if request.PushNotification != nil {
         bodies["pushNotification"] = request.PushNotification.ToDict()
+    }
+    if request.RunNotification != nil {
+        bodies["runNotification"] = request.RunNotification.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
@@ -1211,6 +1223,192 @@ func (p Gs2JobQueueRestClient) PushByStampSheet(
 ) (*PushByStampSheetResult, error) {
 	callback := make(chan PushByStampSheetAsyncResult, 1)
 	go p.PushByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getJobResultAsyncHandler(
+	client Gs2JobQueueRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetJobResultAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetJobResultAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetJobResultResult
+	if asyncResult.Err != nil {
+		callback <- GetJobResultAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetJobResultAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetJobResultAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2JobQueueRestClient) GetJobResultAsync(
+	request *GetJobResultRequest,
+	callback chan<- GetJobResultAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/job/{jobName}/result"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.JobName != nil && *request.JobName != ""  {
+        path = strings.ReplaceAll(path, "{jobName}", core.ToString(*request.JobName))
+    } else {
+        path = strings.ReplaceAll(path, "{jobName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+
+	go getJobResultAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2JobQueueRestClient) GetJobResult(
+	request *GetJobResultRequest,
+) (*GetJobResultResult, error) {
+	callback := make(chan GetJobResultAsyncResult, 1)
+	go p.GetJobResultAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getJobResultByUserIdAsyncHandler(
+	client Gs2JobQueueRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetJobResultByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetJobResultByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetJobResultByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- GetJobResultByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetJobResultByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetJobResultByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2JobQueueRestClient) GetJobResultByUserIdAsync(
+	request *GetJobResultByUserIdRequest,
+	callback chan<- GetJobResultByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/job/{jobName}/result"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.JobName != nil && *request.JobName != ""  {
+        path = strings.ReplaceAll(path, "{jobName}", core.ToString(*request.JobName))
+    } else {
+        path = strings.ReplaceAll(path, "{jobName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getJobResultByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2JobQueueRestClient) GetJobResultByUserId(
+	request *GetJobResultByUserIdRequest,
+) (*GetJobResultByUserIdResult, error) {
+	callback := make(chan GetJobResultByUserIdAsyncResult, 1)
+	go p.GetJobResultByUserIdAsync(
 		request,
 		callback,
 	)
