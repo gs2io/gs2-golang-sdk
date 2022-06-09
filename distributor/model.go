@@ -350,6 +350,8 @@ type StampSheetResult struct {
 	StampSheetResultId *string `json:"stampSheetResultId"`
 	UserId *string `json:"userId"`
 	TransactionId *string `json:"transactionId"`
+	TaskRequests []ConsumeAction `json:"taskRequests"`
+	SheetRequest *AcquireAction `json:"sheetRequest"`
 	TaskResults []string `json:"taskResults"`
 	SheetResult *string `json:"sheetResult"`
 	NextTransactionId *string `json:"nextTransactionId"`
@@ -367,6 +369,8 @@ func NewStampSheetResultFromDict(data map[string]interface{}) StampSheetResult {
         StampSheetResultId: core.CastString(data["stampSheetResultId"]),
         UserId: core.CastString(data["userId"]),
         TransactionId: core.CastString(data["transactionId"]),
+        TaskRequests: CastConsumeActions(core.CastArray(data["taskRequests"])),
+        SheetRequest: NewAcquireActionFromDict(core.CastMap(data["sheetRequest"])).Pointer(),
         TaskResults: core.CastStrings(core.CastArray(data["taskResults"])),
         SheetResult: core.CastString(data["sheetResult"]),
         NextTransactionId: core.CastString(data["nextTransactionId"]),
@@ -387,6 +391,16 @@ func (p StampSheetResult) ToDict() map[string]interface{} {
     var transactionId *string
     if p.TransactionId != nil {
         transactionId = p.TransactionId
+    }
+    var taskRequests []interface{}
+    if p.TaskRequests != nil {
+        taskRequests = CastConsumeActionsFromDict(
+            p.TaskRequests,
+        )
+    }
+    var sheetRequest map[string]interface{}
+    if p.SheetRequest != nil {
+        sheetRequest = p.SheetRequest.ToDict()
     }
     var taskResults []interface{}
     if p.TaskResults != nil {
@@ -410,6 +424,8 @@ func (p StampSheetResult) ToDict() map[string]interface{} {
         "stampSheetResultId": stampSheetResultId,
         "userId": userId,
         "transactionId": transactionId,
+        "taskRequests": taskRequests,
+        "sheetRequest": sheetRequest,
         "taskResults": taskResults,
         "sheetResult": sheetResult,
         "nextTransactionId": nextTransactionId,
@@ -430,6 +446,114 @@ func CastStampSheetResults(data []interface{}) []StampSheetResult {
 }
 
 func CastStampSheetResultsFromDict(data []StampSheetResult) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type AcquireAction struct {
+	Action *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func NewAcquireActionFromJson(data string) AcquireAction {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireActionFromDict(dict)
+}
+
+func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
+    return AcquireAction {
+        Action: core.CastString(data["action"]),
+        Request: core.CastString(data["request"]),
+    }
+}
+
+func (p AcquireAction) ToDict() map[string]interface{} {
+    
+    var action *string
+    if p.Action != nil {
+        action = p.Action
+    }
+    var request *string
+    if p.Request != nil {
+        request = p.Request
+    }
+    return map[string]interface{} {
+        "action": action,
+        "request": request,
+    }
+}
+
+func (p AcquireAction) Pointer() *AcquireAction {
+    return &p
+}
+
+func CastAcquireActions(data []interface{}) []AcquireAction {
+	v := make([]AcquireAction, 0)
+	for _, d := range data {
+		v = append(v, NewAcquireActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type ConsumeAction struct {
+	Action *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func NewConsumeActionFromJson(data string) ConsumeAction {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeActionFromDict(dict)
+}
+
+func NewConsumeActionFromDict(data map[string]interface{}) ConsumeAction {
+    return ConsumeAction {
+        Action: core.CastString(data["action"]),
+        Request: core.CastString(data["request"]),
+    }
+}
+
+func (p ConsumeAction) ToDict() map[string]interface{} {
+    
+    var action *string
+    if p.Action != nil {
+        action = p.Action
+    }
+    var request *string
+    if p.Request != nil {
+        request = p.Request
+    }
+    return map[string]interface{} {
+        "action": action,
+        "request": request,
+    }
+}
+
+func (p ConsumeAction) Pointer() *ConsumeAction {
+    return &p
+}
+
+func CastConsumeActions(data []interface{}) []ConsumeAction {
+	v := make([]ConsumeAction, 0)
+	for _, d := range data {
+		v = append(v, NewConsumeActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastConsumeActionsFromDict(data []ConsumeAction) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())
