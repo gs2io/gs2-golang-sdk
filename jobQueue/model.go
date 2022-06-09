@@ -230,6 +230,8 @@ func CastJobsFromDict(data []Job) []interface{} {
 type JobResult struct {
 	JobResultId *string `json:"jobResultId"`
 	JobId *string `json:"jobId"`
+	ScriptId *string `json:"scriptId"`
+	Args *string `json:"args"`
 	TryNumber *int32 `json:"tryNumber"`
 	StatusCode *int32 `json:"statusCode"`
 	Result *string `json:"result"`
@@ -246,6 +248,8 @@ func NewJobResultFromDict(data map[string]interface{}) JobResult {
     return JobResult {
         JobResultId: core.CastString(data["jobResultId"]),
         JobId: core.CastString(data["jobId"]),
+        ScriptId: core.CastString(data["scriptId"]),
+        Args: core.CastString(data["args"]),
         TryNumber: core.CastInt32(data["tryNumber"]),
         StatusCode: core.CastInt32(data["statusCode"]),
         Result: core.CastString(data["result"]),
@@ -262,6 +266,14 @@ func (p JobResult) ToDict() map[string]interface{} {
     var jobId *string
     if p.JobId != nil {
         jobId = p.JobId
+    }
+    var scriptId *string
+    if p.ScriptId != nil {
+        scriptId = p.ScriptId
+    }
+    var args *string
+    if p.Args != nil {
+        args = p.Args
     }
     var tryNumber *int32
     if p.TryNumber != nil {
@@ -282,6 +294,8 @@ func (p JobResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "jobResultId": jobResultId,
         "jobId": jobId,
+        "scriptId": scriptId,
+        "args": args,
         "tryNumber": tryNumber,
         "statusCode": statusCode,
         "result": result,

@@ -281,6 +281,7 @@ func (p GetJobByUserIdResult) Pointer() *GetJobByUserIdResult {
 
 type PushByUserIdResult struct {
     Items []Job `json:"items"`
+    AutoRun *bool `json:"autoRun"`
 }
 
 type PushByUserIdAsyncResult struct {
@@ -297,6 +298,7 @@ func NewPushByUserIdResultFromJson(data string) PushByUserIdResult {
 func NewPushByUserIdResultFromDict(data map[string]interface{}) PushByUserIdResult {
     return PushByUserIdResult {
         Items: CastJobs(core.CastArray(data["items"])),
+        AutoRun: core.CastBool(data["autoRun"]),
     }
 }
 
@@ -305,6 +307,7 @@ func (p PushByUserIdResult) ToDict() map[string]interface{} {
         "items": CastJobsFromDict(
             p.Items,
         ),
+        "autoRun": p.AutoRun,
     }
 }
 
@@ -419,6 +422,7 @@ func (p DeleteJobByUserIdResult) Pointer() *DeleteJobByUserIdResult {
 
 type PushByStampSheetResult struct {
     Items []Job `json:"items"`
+    AutoRun *bool `json:"autoRun"`
 }
 
 type PushByStampSheetAsyncResult struct {
@@ -435,6 +439,7 @@ func NewPushByStampSheetResultFromJson(data string) PushByStampSheetResult {
 func NewPushByStampSheetResultFromDict(data map[string]interface{}) PushByStampSheetResult {
     return PushByStampSheetResult {
         Items: CastJobs(core.CastArray(data["items"])),
+        AutoRun: core.CastBool(data["autoRun"]),
     }
 }
 
@@ -443,6 +448,7 @@ func (p PushByStampSheetResult) ToDict() map[string]interface{} {
         "items": CastJobsFromDict(
             p.Items,
         ),
+        "autoRun": p.AutoRun,
     }
 }
 
