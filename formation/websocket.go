@@ -537,6 +537,167 @@ func (p Gs2FormationWebSocketClient) DeleteNamespace(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2FormationWebSocketClient) describeFormModelsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeFormModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeFormModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeFormModelsResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeFormModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeFormModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) DescribeFormModelsAsync(
+	request *DescribeFormModelsRequest,
+	callback chan<- DescribeFormModelsAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "formModel",
+    		"function": "describeFormModels",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeFormModelsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) DescribeFormModels(
+	request *DescribeFormModelsRequest,
+) (*DescribeFormModelsResult, error) {
+	callback := make(chan DescribeFormModelsAsyncResult, 1)
+	go p.DescribeFormModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FormationWebSocketClient) getFormModelAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetFormModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetFormModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetFormModelResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetFormModelAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetFormModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) GetFormModelAsync(
+	request *GetFormModelRequest,
+	callback chan<- GetFormModelAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "formModel",
+    		"function": "getFormModel",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.FormModelName != nil && *request.FormModelName != "" {
+        bodies["formModelName"] = *request.FormModelName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getFormModelAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) GetFormModel(
+	request *GetFormModelRequest,
+) (*GetFormModelResult, error) {
+	callback := make(chan GetFormModelAsyncResult, 1)
+	go p.GetFormModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2FormationWebSocketClient) describeFormModelMastersAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribeFormModelMastersAsyncResult,
@@ -3882,6 +4043,1119 @@ func (p Gs2FormationWebSocketClient) AcquireActionToFormPropertiesByStampSheet(
 ) (*AcquireActionToFormPropertiesByStampSheetResult, error) {
 	callback := make(chan AcquireActionToFormPropertiesByStampSheetAsyncResult, 1)
 	go p.AcquireActionToFormPropertiesByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FormationWebSocketClient) describePropertyFormsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribePropertyFormsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribePropertyFormsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribePropertyFormsResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribePropertyFormsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribePropertyFormsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) DescribePropertyFormsAsync(
+	request *DescribePropertyFormsRequest,
+	callback chan<- DescribePropertyFormsAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "propertyForm",
+    		"function": "describePropertyForms",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.FormModelName != nil && *request.FormModelName != "" {
+        bodies["formModelName"] = *request.FormModelName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.describePropertyFormsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) DescribePropertyForms(
+	request *DescribePropertyFormsRequest,
+) (*DescribePropertyFormsResult, error) {
+	callback := make(chan DescribePropertyFormsAsyncResult, 1)
+	go p.DescribePropertyFormsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FormationWebSocketClient) describePropertyFormsByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribePropertyFormsByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribePropertyFormsByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribePropertyFormsByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribePropertyFormsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribePropertyFormsByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) DescribePropertyFormsByUserIdAsync(
+	request *DescribePropertyFormsByUserIdRequest,
+	callback chan<- DescribePropertyFormsByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "propertyForm",
+    		"function": "describePropertyFormsByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.FormModelName != nil && *request.FormModelName != "" {
+        bodies["formModelName"] = *request.FormModelName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describePropertyFormsByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) DescribePropertyFormsByUserId(
+	request *DescribePropertyFormsByUserIdRequest,
+) (*DescribePropertyFormsByUserIdResult, error) {
+	callback := make(chan DescribePropertyFormsByUserIdAsyncResult, 1)
+	go p.DescribePropertyFormsByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FormationWebSocketClient) getPropertyFormAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetPropertyFormAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetPropertyFormAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetPropertyFormResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetPropertyFormAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetPropertyFormAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) GetPropertyFormAsync(
+	request *GetPropertyFormRequest,
+	callback chan<- GetPropertyFormAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "propertyForm",
+    		"function": "getPropertyForm",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.FormModelName != nil && *request.FormModelName != "" {
+        bodies["formModelName"] = *request.FormModelName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.getPropertyFormAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) GetPropertyForm(
+	request *GetPropertyFormRequest,
+) (*GetPropertyFormResult, error) {
+	callback := make(chan GetPropertyFormAsyncResult, 1)
+	go p.GetPropertyFormAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FormationWebSocketClient) getPropertyFormByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetPropertyFormByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetPropertyFormByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetPropertyFormByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetPropertyFormByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetPropertyFormByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) GetPropertyFormByUserIdAsync(
+	request *GetPropertyFormByUserIdRequest,
+	callback chan<- GetPropertyFormByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "propertyForm",
+    		"function": "getPropertyFormByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.FormModelName != nil && *request.FormModelName != "" {
+        bodies["formModelName"] = *request.FormModelName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getPropertyFormByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) GetPropertyFormByUserId(
+	request *GetPropertyFormByUserIdRequest,
+) (*GetPropertyFormByUserIdResult, error) {
+	callback := make(chan GetPropertyFormByUserIdAsyncResult, 1)
+	go p.GetPropertyFormByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FormationWebSocketClient) getPropertyFormWithSignatureAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetPropertyFormWithSignatureAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetPropertyFormWithSignatureAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetPropertyFormWithSignatureResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetPropertyFormWithSignatureAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetPropertyFormWithSignatureAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) GetPropertyFormWithSignatureAsync(
+	request *GetPropertyFormWithSignatureRequest,
+	callback chan<- GetPropertyFormWithSignatureAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "propertyForm",
+    		"function": "getPropertyFormWithSignature",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.FormModelName != nil && *request.FormModelName != "" {
+        bodies["formModelName"] = *request.FormModelName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.getPropertyFormWithSignatureAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) GetPropertyFormWithSignature(
+	request *GetPropertyFormWithSignatureRequest,
+) (*GetPropertyFormWithSignatureResult, error) {
+	callback := make(chan GetPropertyFormWithSignatureAsyncResult, 1)
+	go p.GetPropertyFormWithSignatureAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FormationWebSocketClient) getPropertyFormWithSignatureByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetPropertyFormWithSignatureByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetPropertyFormWithSignatureByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetPropertyFormWithSignatureByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetPropertyFormWithSignatureByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetPropertyFormWithSignatureByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) GetPropertyFormWithSignatureByUserIdAsync(
+	request *GetPropertyFormWithSignatureByUserIdRequest,
+	callback chan<- GetPropertyFormWithSignatureByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "propertyForm",
+    		"function": "getPropertyFormWithSignatureByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.FormModelName != nil && *request.FormModelName != "" {
+        bodies["formModelName"] = *request.FormModelName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getPropertyFormWithSignatureByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) GetPropertyFormWithSignatureByUserId(
+	request *GetPropertyFormWithSignatureByUserIdRequest,
+) (*GetPropertyFormWithSignatureByUserIdResult, error) {
+	callback := make(chan GetPropertyFormWithSignatureByUserIdAsyncResult, 1)
+	go p.GetPropertyFormWithSignatureByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FormationWebSocketClient) setPropertyFormByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SetPropertyFormByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetPropertyFormByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetPropertyFormByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetPropertyFormByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- SetPropertyFormByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) SetPropertyFormByUserIdAsync(
+	request *SetPropertyFormByUserIdRequest,
+	callback chan<- SetPropertyFormByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "propertyForm",
+    		"function": "setPropertyFormByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.FormModelName != nil && *request.FormModelName != "" {
+        bodies["formModelName"] = *request.FormModelName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+    if request.Slots != nil {
+        var _slots []interface {}
+        for _, item := range request.Slots {
+            _slots = append(_slots, item)
+        }
+        bodies["slots"] = _slots
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.setPropertyFormByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) SetPropertyFormByUserId(
+	request *SetPropertyFormByUserIdRequest,
+) (*SetPropertyFormByUserIdResult, error) {
+	callback := make(chan SetPropertyFormByUserIdAsyncResult, 1)
+	go p.SetPropertyFormByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FormationWebSocketClient) setPropertyFormWithSignatureAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SetPropertyFormWithSignatureAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetPropertyFormWithSignatureAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetPropertyFormWithSignatureResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetPropertyFormWithSignatureAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- SetPropertyFormWithSignatureAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) SetPropertyFormWithSignatureAsync(
+	request *SetPropertyFormWithSignatureRequest,
+	callback chan<- SetPropertyFormWithSignatureAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "propertyForm",
+    		"function": "setPropertyFormWithSignature",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.FormModelName != nil && *request.FormModelName != "" {
+        bodies["formModelName"] = *request.FormModelName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+    if request.Slots != nil {
+        var _slots []interface {}
+        for _, item := range request.Slots {
+            _slots = append(_slots, item)
+        }
+        bodies["slots"] = _slots
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.setPropertyFormWithSignatureAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) SetPropertyFormWithSignature(
+	request *SetPropertyFormWithSignatureRequest,
+) (*SetPropertyFormWithSignatureResult, error) {
+	callback := make(chan SetPropertyFormWithSignatureAsyncResult, 1)
+	go p.SetPropertyFormWithSignatureAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FormationWebSocketClient) acquireActionsToPropertyFormPropertiesAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- AcquireActionsToPropertyFormPropertiesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcquireActionsToPropertyFormPropertiesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcquireActionsToPropertyFormPropertiesResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcquireActionsToPropertyFormPropertiesAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- AcquireActionsToPropertyFormPropertiesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) AcquireActionsToPropertyFormPropertiesAsync(
+	request *AcquireActionsToPropertyFormPropertiesRequest,
+	callback chan<- AcquireActionsToPropertyFormPropertiesAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "propertyForm",
+    		"function": "acquireActionsToPropertyFormProperties",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.FormModelName != nil && *request.FormModelName != "" {
+        bodies["formModelName"] = *request.FormModelName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+    if request.AcquireAction != nil {
+        bodies["acquireAction"] = request.AcquireAction.ToDict()
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.acquireActionsToPropertyFormPropertiesAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) AcquireActionsToPropertyFormProperties(
+	request *AcquireActionsToPropertyFormPropertiesRequest,
+) (*AcquireActionsToPropertyFormPropertiesResult, error) {
+	callback := make(chan AcquireActionsToPropertyFormPropertiesAsyncResult, 1)
+	go p.AcquireActionsToPropertyFormPropertiesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FormationWebSocketClient) deletePropertyFormAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeletePropertyFormAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeletePropertyFormAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeletePropertyFormResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeletePropertyFormAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeletePropertyFormAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) DeletePropertyFormAsync(
+	request *DeletePropertyFormRequest,
+	callback chan<- DeletePropertyFormAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "propertyForm",
+    		"function": "deletePropertyForm",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.FormModelName != nil && *request.FormModelName != "" {
+        bodies["formModelName"] = *request.FormModelName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.deletePropertyFormAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) DeletePropertyForm(
+	request *DeletePropertyFormRequest,
+) (*DeletePropertyFormResult, error) {
+	callback := make(chan DeletePropertyFormAsyncResult, 1)
+	go p.DeletePropertyFormAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FormationWebSocketClient) deletePropertyFormByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeletePropertyFormByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeletePropertyFormByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeletePropertyFormByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeletePropertyFormByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeletePropertyFormByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) DeletePropertyFormByUserIdAsync(
+	request *DeletePropertyFormByUserIdRequest,
+	callback chan<- DeletePropertyFormByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "propertyForm",
+    		"function": "deletePropertyFormByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.FormModelName != nil && *request.FormModelName != "" {
+        bodies["formModelName"] = *request.FormModelName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.deletePropertyFormByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) DeletePropertyFormByUserId(
+	request *DeletePropertyFormByUserIdRequest,
+) (*DeletePropertyFormByUserIdResult, error) {
+	callback := make(chan DeletePropertyFormByUserIdAsyncResult, 1)
+	go p.DeletePropertyFormByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2FormationWebSocketClient) acquireActionToPropertyFormPropertiesByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- AcquireActionToPropertyFormPropertiesByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcquireActionToPropertyFormPropertiesByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcquireActionToPropertyFormPropertiesByStampSheetResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcquireActionToPropertyFormPropertiesByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- AcquireActionToPropertyFormPropertiesByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) AcquireActionToPropertyFormPropertiesByStampSheetAsync(
+	request *AcquireActionToPropertyFormPropertiesByStampSheetRequest,
+	callback chan<- AcquireActionToPropertyFormPropertiesByStampSheetAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "formation",
+    		"component": "propertyForm",
+    		"function": "acquireActionToPropertyFormPropertiesByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.acquireActionToPropertyFormPropertiesByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) AcquireActionToPropertyFormPropertiesByStampSheet(
+	request *AcquireActionToPropertyFormPropertiesByStampSheetRequest,
+) (*AcquireActionToPropertyFormPropertiesByStampSheetResult, error) {
+	callback := make(chan AcquireActionToPropertyFormPropertiesByStampSheetAsyncResult, 1)
+	go p.AcquireActionToPropertyFormPropertiesByStampSheetAsync(
 		request,
 		callback,
 	)

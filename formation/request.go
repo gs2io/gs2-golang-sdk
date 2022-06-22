@@ -222,6 +222,65 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
     return &p
 }
 
+type DescribeFormModelsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+}
+
+func NewDescribeFormModelsRequestFromJson(data string) DescribeFormModelsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeFormModelsRequestFromDict(dict)
+}
+
+func NewDescribeFormModelsRequestFromDict(data map[string]interface{}) DescribeFormModelsRequest {
+    return DescribeFormModelsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
+}
+
+func (p DescribeFormModelsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
+}
+
+func (p DescribeFormModelsRequest) Pointer() *DescribeFormModelsRequest {
+    return &p
+}
+
+type GetFormModelRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    FormModelName *string `json:"formModelName"`
+}
+
+func NewGetFormModelRequestFromJson(data string) GetFormModelRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetFormModelRequestFromDict(dict)
+}
+
+func NewGetFormModelRequestFromDict(data map[string]interface{}) GetFormModelRequest {
+    return GetFormModelRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        FormModelName: core.CastString(data["formModelName"]),
+    }
+}
+
+func (p GetFormModelRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "formModelName": p.FormModelName,
+    }
+}
+
+func (p GetFormModelRequest) Pointer() *GetFormModelRequest {
+    return &p
+}
+
 type DescribeFormModelMastersRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
@@ -1587,5 +1646,479 @@ func (p AcquireActionToFormPropertiesByStampSheetRequest) ToDict() map[string]in
 }
 
 func (p AcquireActionToFormPropertiesByStampSheetRequest) Pointer() *AcquireActionToFormPropertiesByStampSheetRequest {
+    return &p
+}
+
+type DescribePropertyFormsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    FormModelName *string `json:"formModelName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribePropertyFormsRequestFromJson(data string) DescribePropertyFormsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribePropertyFormsRequestFromDict(dict)
+}
+
+func NewDescribePropertyFormsRequestFromDict(data map[string]interface{}) DescribePropertyFormsRequest {
+    return DescribePropertyFormsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        FormModelName: core.CastString(data["formModelName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribePropertyFormsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "formModelName": p.FormModelName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribePropertyFormsRequest) Pointer() *DescribePropertyFormsRequest {
+    return &p
+}
+
+type DescribePropertyFormsByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    FormModelName *string `json:"formModelName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribePropertyFormsByUserIdRequestFromJson(data string) DescribePropertyFormsByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribePropertyFormsByUserIdRequestFromDict(dict)
+}
+
+func NewDescribePropertyFormsByUserIdRequestFromDict(data map[string]interface{}) DescribePropertyFormsByUserIdRequest {
+    return DescribePropertyFormsByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        FormModelName: core.CastString(data["formModelName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribePropertyFormsByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "formModelName": p.FormModelName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribePropertyFormsByUserIdRequest) Pointer() *DescribePropertyFormsByUserIdRequest {
+    return &p
+}
+
+type GetPropertyFormRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    FormModelName *string `json:"formModelName"`
+    PropertyId *string `json:"propertyId"`
+}
+
+func NewGetPropertyFormRequestFromJson(data string) GetPropertyFormRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetPropertyFormRequestFromDict(dict)
+}
+
+func NewGetPropertyFormRequestFromDict(data map[string]interface{}) GetPropertyFormRequest {
+    return GetPropertyFormRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        FormModelName: core.CastString(data["formModelName"]),
+        PropertyId: core.CastString(data["propertyId"]),
+    }
+}
+
+func (p GetPropertyFormRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "formModelName": p.FormModelName,
+        "propertyId": p.PropertyId,
+    }
+}
+
+func (p GetPropertyFormRequest) Pointer() *GetPropertyFormRequest {
+    return &p
+}
+
+type GetPropertyFormByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    FormModelName *string `json:"formModelName"`
+    PropertyId *string `json:"propertyId"`
+}
+
+func NewGetPropertyFormByUserIdRequestFromJson(data string) GetPropertyFormByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetPropertyFormByUserIdRequestFromDict(dict)
+}
+
+func NewGetPropertyFormByUserIdRequestFromDict(data map[string]interface{}) GetPropertyFormByUserIdRequest {
+    return GetPropertyFormByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        FormModelName: core.CastString(data["formModelName"]),
+        PropertyId: core.CastString(data["propertyId"]),
+    }
+}
+
+func (p GetPropertyFormByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "formModelName": p.FormModelName,
+        "propertyId": p.PropertyId,
+    }
+}
+
+func (p GetPropertyFormByUserIdRequest) Pointer() *GetPropertyFormByUserIdRequest {
+    return &p
+}
+
+type GetPropertyFormWithSignatureRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    FormModelName *string `json:"formModelName"`
+    PropertyId *string `json:"propertyId"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewGetPropertyFormWithSignatureRequestFromJson(data string) GetPropertyFormWithSignatureRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetPropertyFormWithSignatureRequestFromDict(dict)
+}
+
+func NewGetPropertyFormWithSignatureRequestFromDict(data map[string]interface{}) GetPropertyFormWithSignatureRequest {
+    return GetPropertyFormWithSignatureRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        FormModelName: core.CastString(data["formModelName"]),
+        PropertyId: core.CastString(data["propertyId"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p GetPropertyFormWithSignatureRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "formModelName": p.FormModelName,
+        "propertyId": p.PropertyId,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p GetPropertyFormWithSignatureRequest) Pointer() *GetPropertyFormWithSignatureRequest {
+    return &p
+}
+
+type GetPropertyFormWithSignatureByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    FormModelName *string `json:"formModelName"`
+    PropertyId *string `json:"propertyId"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewGetPropertyFormWithSignatureByUserIdRequestFromJson(data string) GetPropertyFormWithSignatureByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetPropertyFormWithSignatureByUserIdRequestFromDict(dict)
+}
+
+func NewGetPropertyFormWithSignatureByUserIdRequestFromDict(data map[string]interface{}) GetPropertyFormWithSignatureByUserIdRequest {
+    return GetPropertyFormWithSignatureByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        FormModelName: core.CastString(data["formModelName"]),
+        PropertyId: core.CastString(data["propertyId"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p GetPropertyFormWithSignatureByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "formModelName": p.FormModelName,
+        "propertyId": p.PropertyId,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p GetPropertyFormWithSignatureByUserIdRequest) Pointer() *GetPropertyFormWithSignatureByUserIdRequest {
+    return &p
+}
+
+type SetPropertyFormByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    FormModelName *string `json:"formModelName"`
+    PropertyId *string `json:"propertyId"`
+    Slots []Slot `json:"slots"`
+}
+
+func NewSetPropertyFormByUserIdRequestFromJson(data string) SetPropertyFormByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetPropertyFormByUserIdRequestFromDict(dict)
+}
+
+func NewSetPropertyFormByUserIdRequestFromDict(data map[string]interface{}) SetPropertyFormByUserIdRequest {
+    return SetPropertyFormByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        FormModelName: core.CastString(data["formModelName"]),
+        PropertyId: core.CastString(data["propertyId"]),
+        Slots: CastSlots(core.CastArray(data["slots"])),
+    }
+}
+
+func (p SetPropertyFormByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "formModelName": p.FormModelName,
+        "propertyId": p.PropertyId,
+        "slots": CastSlotsFromDict(
+            p.Slots,
+        ),
+    }
+}
+
+func (p SetPropertyFormByUserIdRequest) Pointer() *SetPropertyFormByUserIdRequest {
+    return &p
+}
+
+type SetPropertyFormWithSignatureRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    FormModelName *string `json:"formModelName"`
+    PropertyId *string `json:"propertyId"`
+    Slots []SlotWithSignature `json:"slots"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewSetPropertyFormWithSignatureRequestFromJson(data string) SetPropertyFormWithSignatureRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetPropertyFormWithSignatureRequestFromDict(dict)
+}
+
+func NewSetPropertyFormWithSignatureRequestFromDict(data map[string]interface{}) SetPropertyFormWithSignatureRequest {
+    return SetPropertyFormWithSignatureRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        FormModelName: core.CastString(data["formModelName"]),
+        PropertyId: core.CastString(data["propertyId"]),
+        Slots: CastSlotWithSignatures(core.CastArray(data["slots"])),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p SetPropertyFormWithSignatureRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "formModelName": p.FormModelName,
+        "propertyId": p.PropertyId,
+        "slots": CastSlotWithSignaturesFromDict(
+            p.Slots,
+        ),
+        "keyId": p.KeyId,
+    }
+}
+
+func (p SetPropertyFormWithSignatureRequest) Pointer() *SetPropertyFormWithSignatureRequest {
+    return &p
+}
+
+type AcquireActionsToPropertyFormPropertiesRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    FormModelName *string `json:"formModelName"`
+    PropertyId *string `json:"propertyId"`
+    AcquireAction *AcquireAction `json:"acquireAction"`
+    Config []AcquireActionConfig `json:"config"`
+}
+
+func NewAcquireActionsToPropertyFormPropertiesRequestFromJson(data string) AcquireActionsToPropertyFormPropertiesRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireActionsToPropertyFormPropertiesRequestFromDict(dict)
+}
+
+func NewAcquireActionsToPropertyFormPropertiesRequestFromDict(data map[string]interface{}) AcquireActionsToPropertyFormPropertiesRequest {
+    return AcquireActionsToPropertyFormPropertiesRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        FormModelName: core.CastString(data["formModelName"]),
+        PropertyId: core.CastString(data["propertyId"]),
+        AcquireAction: NewAcquireActionFromDict(core.CastMap(data["acquireAction"])).Pointer(),
+        Config: CastAcquireActionConfigs(core.CastArray(data["config"])),
+    }
+}
+
+func (p AcquireActionsToPropertyFormPropertiesRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "formModelName": p.FormModelName,
+        "propertyId": p.PropertyId,
+        "acquireAction": p.AcquireAction.ToDict(),
+        "config": CastAcquireActionConfigsFromDict(
+            p.Config,
+        ),
+    }
+}
+
+func (p AcquireActionsToPropertyFormPropertiesRequest) Pointer() *AcquireActionsToPropertyFormPropertiesRequest {
+    return &p
+}
+
+type DeletePropertyFormRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    FormModelName *string `json:"formModelName"`
+    PropertyId *string `json:"propertyId"`
+}
+
+func NewDeletePropertyFormRequestFromJson(data string) DeletePropertyFormRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeletePropertyFormRequestFromDict(dict)
+}
+
+func NewDeletePropertyFormRequestFromDict(data map[string]interface{}) DeletePropertyFormRequest {
+    return DeletePropertyFormRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        FormModelName: core.CastString(data["formModelName"]),
+        PropertyId: core.CastString(data["propertyId"]),
+    }
+}
+
+func (p DeletePropertyFormRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "formModelName": p.FormModelName,
+        "propertyId": p.PropertyId,
+    }
+}
+
+func (p DeletePropertyFormRequest) Pointer() *DeletePropertyFormRequest {
+    return &p
+}
+
+type DeletePropertyFormByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    FormModelName *string `json:"formModelName"`
+    PropertyId *string `json:"propertyId"`
+}
+
+func NewDeletePropertyFormByUserIdRequestFromJson(data string) DeletePropertyFormByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeletePropertyFormByUserIdRequestFromDict(dict)
+}
+
+func NewDeletePropertyFormByUserIdRequestFromDict(data map[string]interface{}) DeletePropertyFormByUserIdRequest {
+    return DeletePropertyFormByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        FormModelName: core.CastString(data["formModelName"]),
+        PropertyId: core.CastString(data["propertyId"]),
+    }
+}
+
+func (p DeletePropertyFormByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "formModelName": p.FormModelName,
+        "propertyId": p.PropertyId,
+    }
+}
+
+func (p DeletePropertyFormByUserIdRequest) Pointer() *DeletePropertyFormByUserIdRequest {
+    return &p
+}
+
+type AcquireActionToPropertyFormPropertiesByStampSheetRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewAcquireActionToPropertyFormPropertiesByStampSheetRequestFromJson(data string) AcquireActionToPropertyFormPropertiesByStampSheetRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireActionToPropertyFormPropertiesByStampSheetRequestFromDict(dict)
+}
+
+func NewAcquireActionToPropertyFormPropertiesByStampSheetRequestFromDict(data map[string]interface{}) AcquireActionToPropertyFormPropertiesByStampSheetRequest {
+    return AcquireActionToPropertyFormPropertiesByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p AcquireActionToPropertyFormPropertiesByStampSheetRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p AcquireActionToPropertyFormPropertiesByStampSheetRequest) Pointer() *AcquireActionToPropertyFormPropertiesByStampSheetRequest {
     return &p
 }

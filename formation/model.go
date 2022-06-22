@@ -690,6 +690,97 @@ func CastFormsFromDict(data []Form) []interface{} {
     return v
 }
 
+type PropertyForm struct {
+	FormId *string `json:"formId"`
+	UserId *string `json:"userId"`
+	Name *string `json:"name"`
+	PropertyId *string `json:"propertyId"`
+	Slots []Slot `json:"slots"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
+}
+
+func NewPropertyFormFromJson(data string) PropertyForm {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPropertyFormFromDict(dict)
+}
+
+func NewPropertyFormFromDict(data map[string]interface{}) PropertyForm {
+    return PropertyForm {
+        FormId: core.CastString(data["formId"]),
+        UserId: core.CastString(data["userId"]),
+        Name: core.CastString(data["name"]),
+        PropertyId: core.CastString(data["propertyId"]),
+        Slots: CastSlots(core.CastArray(data["slots"])),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
+}
+
+func (p PropertyForm) ToDict() map[string]interface{} {
+    
+    var formId *string
+    if p.FormId != nil {
+        formId = p.FormId
+    }
+    var userId *string
+    if p.UserId != nil {
+        userId = p.UserId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var propertyId *string
+    if p.PropertyId != nil {
+        propertyId = p.PropertyId
+    }
+    var slots []interface{}
+    if p.Slots != nil {
+        slots = CastSlotsFromDict(
+            p.Slots,
+        )
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "formId": formId,
+        "userId": userId,
+        "name": name,
+        "propertyId": propertyId,
+        "slots": slots,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
+}
+
+func (p PropertyForm) Pointer() *PropertyForm {
+    return &p
+}
+
+func CastPropertyForms(data []interface{}) []PropertyForm {
+	v := make([]PropertyForm, 0)
+	for _, d := range data {
+		v = append(v, NewPropertyFormFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastPropertyFormsFromDict(data []PropertyForm) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
 type Slot struct {
 	Name *string `json:"name"`
 	PropertyId *string `json:"propertyId"`

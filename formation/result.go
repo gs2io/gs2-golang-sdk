@@ -212,6 +212,70 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
     return &p
 }
 
+type DescribeFormModelsResult struct {
+    Items []FormModel `json:"items"`
+}
+
+type DescribeFormModelsAsyncResult struct {
+	result *DescribeFormModelsResult
+	err    error
+}
+
+func NewDescribeFormModelsResultFromJson(data string) DescribeFormModelsResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeFormModelsResultFromDict(dict)
+}
+
+func NewDescribeFormModelsResultFromDict(data map[string]interface{}) DescribeFormModelsResult {
+    return DescribeFormModelsResult {
+        Items: CastFormModels(core.CastArray(data["items"])),
+    }
+}
+
+func (p DescribeFormModelsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastFormModelsFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p DescribeFormModelsResult) Pointer() *DescribeFormModelsResult {
+    return &p
+}
+
+type GetFormModelResult struct {
+    Item *FormModel `json:"item"`
+}
+
+type GetFormModelAsyncResult struct {
+	result *GetFormModelResult
+	err    error
+}
+
+func NewGetFormModelResultFromJson(data string) GetFormModelResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetFormModelResultFromDict(dict)
+}
+
+func NewGetFormModelResultFromDict(data map[string]interface{}) GetFormModelResult {
+    return GetFormModelResult {
+        Item: NewFormModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetFormModelResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetFormModelResult) Pointer() *GetFormModelResult {
+    return &p
+}
+
 type DescribeFormModelMastersResult struct {
     Items []FormModelMaster `json:"items"`
     NextPageToken *string `json:"nextPageToken"`
@@ -1551,5 +1615,447 @@ func (p AcquireActionToFormPropertiesByStampSheetResult) ToDict() map[string]int
 }
 
 func (p AcquireActionToFormPropertiesByStampSheetResult) Pointer() *AcquireActionToFormPropertiesByStampSheetResult {
+    return &p
+}
+
+type DescribePropertyFormsResult struct {
+    Items []PropertyForm `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribePropertyFormsAsyncResult struct {
+	result *DescribePropertyFormsResult
+	err    error
+}
+
+func NewDescribePropertyFormsResultFromJson(data string) DescribePropertyFormsResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribePropertyFormsResultFromDict(dict)
+}
+
+func NewDescribePropertyFormsResultFromDict(data map[string]interface{}) DescribePropertyFormsResult {
+    return DescribePropertyFormsResult {
+        Items: CastPropertyForms(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribePropertyFormsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastPropertyFormsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribePropertyFormsResult) Pointer() *DescribePropertyFormsResult {
+    return &p
+}
+
+type DescribePropertyFormsByUserIdResult struct {
+    Items []PropertyForm `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribePropertyFormsByUserIdAsyncResult struct {
+	result *DescribePropertyFormsByUserIdResult
+	err    error
+}
+
+func NewDescribePropertyFormsByUserIdResultFromJson(data string) DescribePropertyFormsByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribePropertyFormsByUserIdResultFromDict(dict)
+}
+
+func NewDescribePropertyFormsByUserIdResultFromDict(data map[string]interface{}) DescribePropertyFormsByUserIdResult {
+    return DescribePropertyFormsByUserIdResult {
+        Items: CastPropertyForms(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribePropertyFormsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastPropertyFormsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribePropertyFormsByUserIdResult) Pointer() *DescribePropertyFormsByUserIdResult {
+    return &p
+}
+
+type GetPropertyFormResult struct {
+    Item *PropertyForm `json:"item"`
+    FormModel *FormModel `json:"formModel"`
+}
+
+type GetPropertyFormAsyncResult struct {
+	result *GetPropertyFormResult
+	err    error
+}
+
+func NewGetPropertyFormResultFromJson(data string) GetPropertyFormResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetPropertyFormResultFromDict(dict)
+}
+
+func NewGetPropertyFormResultFromDict(data map[string]interface{}) GetPropertyFormResult {
+    return GetPropertyFormResult {
+        Item: NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
+        FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+    }
+}
+
+func (p GetPropertyFormResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "formModel": p.FormModel.ToDict(),
+    }
+}
+
+func (p GetPropertyFormResult) Pointer() *GetPropertyFormResult {
+    return &p
+}
+
+type GetPropertyFormByUserIdResult struct {
+    Item *PropertyForm `json:"item"`
+    FormModel *FormModel `json:"formModel"`
+}
+
+type GetPropertyFormByUserIdAsyncResult struct {
+	result *GetPropertyFormByUserIdResult
+	err    error
+}
+
+func NewGetPropertyFormByUserIdResultFromJson(data string) GetPropertyFormByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetPropertyFormByUserIdResultFromDict(dict)
+}
+
+func NewGetPropertyFormByUserIdResultFromDict(data map[string]interface{}) GetPropertyFormByUserIdResult {
+    return GetPropertyFormByUserIdResult {
+        Item: NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
+        FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+    }
+}
+
+func (p GetPropertyFormByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "formModel": p.FormModel.ToDict(),
+    }
+}
+
+func (p GetPropertyFormByUserIdResult) Pointer() *GetPropertyFormByUserIdResult {
+    return &p
+}
+
+type GetPropertyFormWithSignatureResult struct {
+    Item *PropertyForm `json:"item"`
+    Body *string `json:"body"`
+    Signature *string `json:"signature"`
+    FormModel *FormModel `json:"formModel"`
+}
+
+type GetPropertyFormWithSignatureAsyncResult struct {
+	result *GetPropertyFormWithSignatureResult
+	err    error
+}
+
+func NewGetPropertyFormWithSignatureResultFromJson(data string) GetPropertyFormWithSignatureResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetPropertyFormWithSignatureResultFromDict(dict)
+}
+
+func NewGetPropertyFormWithSignatureResultFromDict(data map[string]interface{}) GetPropertyFormWithSignatureResult {
+    return GetPropertyFormWithSignatureResult {
+        Item: NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
+        Body: core.CastString(data["body"]),
+        Signature: core.CastString(data["signature"]),
+        FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+    }
+}
+
+func (p GetPropertyFormWithSignatureResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "body": p.Body,
+        "signature": p.Signature,
+        "formModel": p.FormModel.ToDict(),
+    }
+}
+
+func (p GetPropertyFormWithSignatureResult) Pointer() *GetPropertyFormWithSignatureResult {
+    return &p
+}
+
+type GetPropertyFormWithSignatureByUserIdResult struct {
+    Item *PropertyForm `json:"item"`
+    Body *string `json:"body"`
+    Signature *string `json:"signature"`
+    FormModel *FormModel `json:"formModel"`
+}
+
+type GetPropertyFormWithSignatureByUserIdAsyncResult struct {
+	result *GetPropertyFormWithSignatureByUserIdResult
+	err    error
+}
+
+func NewGetPropertyFormWithSignatureByUserIdResultFromJson(data string) GetPropertyFormWithSignatureByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetPropertyFormWithSignatureByUserIdResultFromDict(dict)
+}
+
+func NewGetPropertyFormWithSignatureByUserIdResultFromDict(data map[string]interface{}) GetPropertyFormWithSignatureByUserIdResult {
+    return GetPropertyFormWithSignatureByUserIdResult {
+        Item: NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
+        Body: core.CastString(data["body"]),
+        Signature: core.CastString(data["signature"]),
+        FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+    }
+}
+
+func (p GetPropertyFormWithSignatureByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "body": p.Body,
+        "signature": p.Signature,
+        "formModel": p.FormModel.ToDict(),
+    }
+}
+
+func (p GetPropertyFormWithSignatureByUserIdResult) Pointer() *GetPropertyFormWithSignatureByUserIdResult {
+    return &p
+}
+
+type SetPropertyFormByUserIdResult struct {
+    Item *PropertyForm `json:"item"`
+    FormModel *FormModel `json:"formModel"`
+}
+
+type SetPropertyFormByUserIdAsyncResult struct {
+	result *SetPropertyFormByUserIdResult
+	err    error
+}
+
+func NewSetPropertyFormByUserIdResultFromJson(data string) SetPropertyFormByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetPropertyFormByUserIdResultFromDict(dict)
+}
+
+func NewSetPropertyFormByUserIdResultFromDict(data map[string]interface{}) SetPropertyFormByUserIdResult {
+    return SetPropertyFormByUserIdResult {
+        Item: NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
+        FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+    }
+}
+
+func (p SetPropertyFormByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "formModel": p.FormModel.ToDict(),
+    }
+}
+
+func (p SetPropertyFormByUserIdResult) Pointer() *SetPropertyFormByUserIdResult {
+    return &p
+}
+
+type SetPropertyFormWithSignatureResult struct {
+    Item *PropertyForm `json:"item"`
+    FormModel *FormModel `json:"formModel"`
+}
+
+type SetPropertyFormWithSignatureAsyncResult struct {
+	result *SetPropertyFormWithSignatureResult
+	err    error
+}
+
+func NewSetPropertyFormWithSignatureResultFromJson(data string) SetPropertyFormWithSignatureResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetPropertyFormWithSignatureResultFromDict(dict)
+}
+
+func NewSetPropertyFormWithSignatureResultFromDict(data map[string]interface{}) SetPropertyFormWithSignatureResult {
+    return SetPropertyFormWithSignatureResult {
+        Item: NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
+        FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+    }
+}
+
+func (p SetPropertyFormWithSignatureResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "formModel": p.FormModel.ToDict(),
+    }
+}
+
+func (p SetPropertyFormWithSignatureResult) Pointer() *SetPropertyFormWithSignatureResult {
+    return &p
+}
+
+type AcquireActionsToPropertyFormPropertiesResult struct {
+    Item *PropertyForm `json:"item"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
+}
+
+type AcquireActionsToPropertyFormPropertiesAsyncResult struct {
+	result *AcquireActionsToPropertyFormPropertiesResult
+	err    error
+}
+
+func NewAcquireActionsToPropertyFormPropertiesResultFromJson(data string) AcquireActionsToPropertyFormPropertiesResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireActionsToPropertyFormPropertiesResultFromDict(dict)
+}
+
+func NewAcquireActionsToPropertyFormPropertiesResultFromDict(data map[string]interface{}) AcquireActionsToPropertyFormPropertiesResult {
+    return AcquireActionsToPropertyFormPropertiesResult {
+        Item: NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+    }
+}
+
+func (p AcquireActionsToPropertyFormPropertiesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+    }
+}
+
+func (p AcquireActionsToPropertyFormPropertiesResult) Pointer() *AcquireActionsToPropertyFormPropertiesResult {
+    return &p
+}
+
+type DeletePropertyFormResult struct {
+    Item *PropertyForm `json:"item"`
+    FormModel *FormModel `json:"formModel"`
+}
+
+type DeletePropertyFormAsyncResult struct {
+	result *DeletePropertyFormResult
+	err    error
+}
+
+func NewDeletePropertyFormResultFromJson(data string) DeletePropertyFormResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeletePropertyFormResultFromDict(dict)
+}
+
+func NewDeletePropertyFormResultFromDict(data map[string]interface{}) DeletePropertyFormResult {
+    return DeletePropertyFormResult {
+        Item: NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
+        FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+    }
+}
+
+func (p DeletePropertyFormResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "formModel": p.FormModel.ToDict(),
+    }
+}
+
+func (p DeletePropertyFormResult) Pointer() *DeletePropertyFormResult {
+    return &p
+}
+
+type DeletePropertyFormByUserIdResult struct {
+    Item *PropertyForm `json:"item"`
+    FormModel *FormModel `json:"formModel"`
+}
+
+type DeletePropertyFormByUserIdAsyncResult struct {
+	result *DeletePropertyFormByUserIdResult
+	err    error
+}
+
+func NewDeletePropertyFormByUserIdResultFromJson(data string) DeletePropertyFormByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeletePropertyFormByUserIdResultFromDict(dict)
+}
+
+func NewDeletePropertyFormByUserIdResultFromDict(data map[string]interface{}) DeletePropertyFormByUserIdResult {
+    return DeletePropertyFormByUserIdResult {
+        Item: NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
+        FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+    }
+}
+
+func (p DeletePropertyFormByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "formModel": p.FormModel.ToDict(),
+    }
+}
+
+func (p DeletePropertyFormByUserIdResult) Pointer() *DeletePropertyFormByUserIdResult {
+    return &p
+}
+
+type AcquireActionToPropertyFormPropertiesByStampSheetResult struct {
+    Item *PropertyForm `json:"item"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
+}
+
+type AcquireActionToPropertyFormPropertiesByStampSheetAsyncResult struct {
+	result *AcquireActionToPropertyFormPropertiesByStampSheetResult
+	err    error
+}
+
+func NewAcquireActionToPropertyFormPropertiesByStampSheetResultFromJson(data string) AcquireActionToPropertyFormPropertiesByStampSheetResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireActionToPropertyFormPropertiesByStampSheetResultFromDict(dict)
+}
+
+func NewAcquireActionToPropertyFormPropertiesByStampSheetResultFromDict(data map[string]interface{}) AcquireActionToPropertyFormPropertiesByStampSheetResult {
+    return AcquireActionToPropertyFormPropertiesByStampSheetResult {
+        Item: NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+    }
+}
+
+func (p AcquireActionToPropertyFormPropertiesByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+    }
+}
+
+func (p AcquireActionToPropertyFormPropertiesByStampSheetResult) Pointer() *AcquireActionToPropertyFormPropertiesByStampSheetResult {
     return &p
 }
