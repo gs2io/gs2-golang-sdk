@@ -563,6 +563,7 @@ type Inventory struct {
 	CurrentInventoryMaxCapacity *int32 `json:"currentInventoryMaxCapacity"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewInventoryFromJson(data string) Inventory {
@@ -580,6 +581,7 @@ func NewInventoryFromDict(data map[string]interface{}) Inventory {
         CurrentInventoryMaxCapacity: core.CastInt32(data["currentInventoryMaxCapacity"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -613,6 +615,10 @@ func (p Inventory) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "inventoryId": inventoryId,
         "inventoryName": inventoryName,
@@ -621,6 +627,7 @@ func (p Inventory) ToDict() map[string]interface{} {
         "currentInventoryMaxCapacity": currentInventoryMaxCapacity,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
