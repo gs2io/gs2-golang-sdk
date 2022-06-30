@@ -1037,6 +1037,7 @@ type BuyRequest struct {
     ShowcaseName *string `json:"showcaseName"`
     DisplayItemId *string `json:"displayItemId"`
     AccessToken *string `json:"accessToken"`
+    Quantity *int32 `json:"quantity"`
     Config []Config `json:"config"`
 }
 
@@ -1052,6 +1053,7 @@ func NewBuyRequestFromDict(data map[string]interface{}) BuyRequest {
         ShowcaseName: core.CastString(data["showcaseName"]),
         DisplayItemId: core.CastString(data["displayItemId"]),
         AccessToken: core.CastString(data["accessToken"]),
+        Quantity: core.CastInt32(data["quantity"]),
         Config: CastConfigs(core.CastArray(data["config"])),
     }
 }
@@ -1062,6 +1064,7 @@ func (p BuyRequest) ToDict() map[string]interface{} {
         "showcaseName": p.ShowcaseName,
         "displayItemId": p.DisplayItemId,
         "accessToken": p.AccessToken,
+        "quantity": p.Quantity,
         "config": CastConfigsFromDict(
             p.Config,
         ),
@@ -1079,6 +1082,7 @@ type BuyByUserIdRequest struct {
     ShowcaseName *string `json:"showcaseName"`
     DisplayItemId *string `json:"displayItemId"`
     UserId *string `json:"userId"`
+    Quantity *int32 `json:"quantity"`
     Config []Config `json:"config"`
 }
 
@@ -1094,6 +1098,7 @@ func NewBuyByUserIdRequestFromDict(data map[string]interface{}) BuyByUserIdReque
         ShowcaseName: core.CastString(data["showcaseName"]),
         DisplayItemId: core.CastString(data["displayItemId"]),
         UserId: core.CastString(data["userId"]),
+        Quantity: core.CastInt32(data["quantity"]),
         Config: CastConfigs(core.CastArray(data["config"])),
     }
 }
@@ -1104,6 +1109,7 @@ func (p BuyByUserIdRequest) ToDict() map[string]interface{} {
         "showcaseName": p.ShowcaseName,
         "displayItemId": p.DisplayItemId,
         "userId": p.UserId,
+        "quantity": p.Quantity,
         "config": CastConfigsFromDict(
             p.Config,
         ),

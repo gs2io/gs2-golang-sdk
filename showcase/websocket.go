@@ -2599,6 +2599,9 @@ func (p Gs2ShowcaseWebSocketClient) BuyAsync(
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
     }
+    if request.Quantity != nil {
+        bodies["quantity"] = *request.Quantity
+    }
     if request.Config != nil {
         var _config []interface {}
         for _, item := range request.Config {
@@ -2696,6 +2699,9 @@ func (p Gs2ShowcaseWebSocketClient) BuyByUserIdAsync(
     }
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
+    }
+    if request.Quantity != nil {
+        bodies["quantity"] = *request.Quantity
     }
     if request.Config != nil {
         var _config []interface {}

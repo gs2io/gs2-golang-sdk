@@ -2791,6 +2791,9 @@ func (p Gs2ShowcaseRestClient) BuyAsync(
 
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
+    if request.Quantity != nil {
+        bodies["quantity"] = *request.Quantity
+    }
     if request.Config != nil {
         var _config []interface {}
         for _, item := range request.Config {
@@ -2903,6 +2906,9 @@ func (p Gs2ShowcaseRestClient) BuyByUserIdAsync(
 
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
+    if request.Quantity != nil {
+        bodies["quantity"] = *request.Quantity
+    }
     if request.Config != nil {
         var _config []interface {}
         for _, item := range request.Config {
