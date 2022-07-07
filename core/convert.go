@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
+	"time"
 )
 
 func ToString(data interface{}) string {
@@ -149,9 +150,21 @@ func CastInt64(value interface{}) *int64 {
 		return &v2
 	}
 	if v, ok := value.(*string); ok {
+		if len(*v) == 25 && (*v)[10] == uint8('T') {
+			if t, err := time.Parse(time.RFC3339Nano, *v); err == nil {
+				v2 := t.UTC().UnixNano() / int64(time.Millisecond)
+				return &v2
+			}
+		}
 		return CastInt64(*v)
 	}
 	if v, ok := value.(string); ok {
+		if len(v) == 25 && v[10] == uint8('T') {
+			if t, err := time.Parse(time.RFC3339Nano, v); err == nil {
+				v2 := t.UTC().UnixNano() / int64(time.Millisecond)
+				return &v2
+			}
+		}
 		v2, err := strconv.ParseInt(v, 10, 64)
 		if err != nil {
 			return nil
