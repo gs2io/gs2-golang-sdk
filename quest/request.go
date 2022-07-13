@@ -467,6 +467,7 @@ type CreateQuestModelMasterRequest struct {
     Metadata *string `json:"metadata"`
     Contents []Contents `json:"contents"`
     ChallengePeriodEventId *string `json:"challengePeriodEventId"`
+    FirstCompleteAcquireActions []AcquireAction `json:"firstCompleteAcquireActions"`
     ConsumeActions []ConsumeAction `json:"consumeActions"`
     FailedAcquireActions []AcquireAction `json:"failedAcquireActions"`
     PremiseQuestNames []string `json:"premiseQuestNames"`
@@ -487,6 +488,7 @@ func NewCreateQuestModelMasterRequestFromDict(data map[string]interface{}) Creat
         Metadata: core.CastString(data["metadata"]),
         Contents: CastContentses(core.CastArray(data["contents"])),
         ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+        FirstCompleteAcquireActions: CastAcquireActions(core.CastArray(data["firstCompleteAcquireActions"])),
         ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
         FailedAcquireActions: CastAcquireActions(core.CastArray(data["failedAcquireActions"])),
         PremiseQuestNames: core.CastStrings(core.CastArray(data["premiseQuestNames"])),
@@ -504,6 +506,9 @@ func (p CreateQuestModelMasterRequest) ToDict() map[string]interface{} {
             p.Contents,
         ),
         "challengePeriodEventId": p.ChallengePeriodEventId,
+        "firstCompleteAcquireActions": CastAcquireActionsFromDict(
+            p.FirstCompleteAcquireActions,
+        ),
         "consumeActions": CastConsumeActionsFromDict(
             p.ConsumeActions,
         ),
@@ -564,6 +569,7 @@ type UpdateQuestModelMasterRequest struct {
     Metadata *string `json:"metadata"`
     Contents []Contents `json:"contents"`
     ChallengePeriodEventId *string `json:"challengePeriodEventId"`
+    FirstCompleteAcquireActions []AcquireAction `json:"firstCompleteAcquireActions"`
     ConsumeActions []ConsumeAction `json:"consumeActions"`
     FailedAcquireActions []AcquireAction `json:"failedAcquireActions"`
     PremiseQuestNames []string `json:"premiseQuestNames"`
@@ -584,6 +590,7 @@ func NewUpdateQuestModelMasterRequestFromDict(data map[string]interface{}) Updat
         Metadata: core.CastString(data["metadata"]),
         Contents: CastContentses(core.CastArray(data["contents"])),
         ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+        FirstCompleteAcquireActions: CastAcquireActions(core.CastArray(data["firstCompleteAcquireActions"])),
         ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
         FailedAcquireActions: CastAcquireActions(core.CastArray(data["failedAcquireActions"])),
         PremiseQuestNames: core.CastStrings(core.CastArray(data["premiseQuestNames"])),
@@ -601,6 +608,9 @@ func (p UpdateQuestModelMasterRequest) ToDict() map[string]interface{} {
             p.Contents,
         ),
         "challengePeriodEventId": p.ChallengePeriodEventId,
+        "firstCompleteAcquireActions": CastAcquireActionsFromDict(
+            p.FirstCompleteAcquireActions,
+        ),
         "consumeActions": CastConsumeActionsFromDict(
             p.ConsumeActions,
         ),

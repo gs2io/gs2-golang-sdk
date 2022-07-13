@@ -1150,6 +1150,13 @@ func (p Gs2QuestWebSocketClient) CreateQuestModelMasterAsync(
     if request.ChallengePeriodEventId != nil && *request.ChallengePeriodEventId != "" {
         bodies["challengePeriodEventId"] = *request.ChallengePeriodEventId
     }
+    if request.FirstCompleteAcquireActions != nil {
+        var _firstCompleteAcquireActions []interface {}
+        for _, item := range request.FirstCompleteAcquireActions {
+            _firstCompleteAcquireActions = append(_firstCompleteAcquireActions, item)
+        }
+        bodies["firstCompleteAcquireActions"] = _firstCompleteAcquireActions
+    }
     if request.ConsumeActions != nil {
         var _consumeActions []interface {}
         for _, item := range request.ConsumeActions {
@@ -1356,6 +1363,13 @@ func (p Gs2QuestWebSocketClient) UpdateQuestModelMasterAsync(
     }
     if request.ChallengePeriodEventId != nil && *request.ChallengePeriodEventId != "" {
         bodies["challengePeriodEventId"] = *request.ChallengePeriodEventId
+    }
+    if request.FirstCompleteAcquireActions != nil {
+        var _firstCompleteAcquireActions []interface {}
+        for _, item := range request.FirstCompleteAcquireActions {
+            _firstCompleteAcquireActions = append(_firstCompleteAcquireActions, item)
+        }
+        bodies["firstCompleteAcquireActions"] = _firstCompleteAcquireActions
     }
     if request.ConsumeActions != nil {
         var _consumeActions []interface {}

@@ -244,6 +244,7 @@ type QuestModelMaster struct {
 	Metadata *string `json:"metadata"`
 	Contents []Contents `json:"contents"`
 	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
+	FirstCompleteAcquireActions []AcquireAction `json:"firstCompleteAcquireActions"`
 	ConsumeActions []ConsumeAction `json:"consumeActions"`
 	FailedAcquireActions []AcquireAction `json:"failedAcquireActions"`
 	PremiseQuestNames []string `json:"premiseQuestNames"`
@@ -266,6 +267,7 @@ func NewQuestModelMasterFromDict(data map[string]interface{}) QuestModelMaster {
         Metadata: core.CastString(data["metadata"]),
         Contents: CastContentses(core.CastArray(data["contents"])),
         ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+        FirstCompleteAcquireActions: CastAcquireActions(core.CastArray(data["firstCompleteAcquireActions"])),
         ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
         FailedAcquireActions: CastAcquireActions(core.CastArray(data["failedAcquireActions"])),
         PremiseQuestNames: core.CastStrings(core.CastArray(data["premiseQuestNames"])),
@@ -306,6 +308,12 @@ func (p QuestModelMaster) ToDict() map[string]interface{} {
     if p.ChallengePeriodEventId != nil {
         challengePeriodEventId = p.ChallengePeriodEventId
     }
+    var firstCompleteAcquireActions []interface{}
+    if p.FirstCompleteAcquireActions != nil {
+        firstCompleteAcquireActions = CastAcquireActionsFromDict(
+            p.FirstCompleteAcquireActions,
+        )
+    }
     var consumeActions []interface{}
     if p.ConsumeActions != nil {
         consumeActions = CastConsumeActionsFromDict(
@@ -340,6 +348,7 @@ func (p QuestModelMaster) ToDict() map[string]interface{} {
         "metadata": metadata,
         "contents": contents,
         "challengePeriodEventId": challengePeriodEventId,
+        "firstCompleteAcquireActions": firstCompleteAcquireActions,
         "consumeActions": consumeActions,
         "failedAcquireActions": failedAcquireActions,
         "premiseQuestNames": premiseQuestNames,
@@ -825,6 +834,7 @@ type QuestModel struct {
 	Metadata *string `json:"metadata"`
 	Contents []Contents `json:"contents"`
 	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
+	FirstCompleteAcquireActions []AcquireAction `json:"firstCompleteAcquireActions"`
 	ConsumeActions []ConsumeAction `json:"consumeActions"`
 	FailedAcquireActions []AcquireAction `json:"failedAcquireActions"`
 	PremiseQuestNames []string `json:"premiseQuestNames"`
@@ -843,6 +853,7 @@ func NewQuestModelFromDict(data map[string]interface{}) QuestModel {
         Metadata: core.CastString(data["metadata"]),
         Contents: CastContentses(core.CastArray(data["contents"])),
         ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+        FirstCompleteAcquireActions: CastAcquireActions(core.CastArray(data["firstCompleteAcquireActions"])),
         ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
         FailedAcquireActions: CastAcquireActions(core.CastArray(data["failedAcquireActions"])),
         PremiseQuestNames: core.CastStrings(core.CastArray(data["premiseQuestNames"])),
@@ -873,6 +884,12 @@ func (p QuestModel) ToDict() map[string]interface{} {
     if p.ChallengePeriodEventId != nil {
         challengePeriodEventId = p.ChallengePeriodEventId
     }
+    var firstCompleteAcquireActions []interface{}
+    if p.FirstCompleteAcquireActions != nil {
+        firstCompleteAcquireActions = CastAcquireActionsFromDict(
+            p.FirstCompleteAcquireActions,
+        )
+    }
     var consumeActions []interface{}
     if p.ConsumeActions != nil {
         consumeActions = CastConsumeActionsFromDict(
@@ -897,6 +914,7 @@ func (p QuestModel) ToDict() map[string]interface{} {
         "metadata": metadata,
         "contents": contents,
         "challengePeriodEventId": challengePeriodEventId,
+        "firstCompleteAcquireActions": firstCompleteAcquireActions,
         "consumeActions": consumeActions,
         "failedAcquireActions": failedAcquireActions,
         "premiseQuestNames": premiseQuestNames,
