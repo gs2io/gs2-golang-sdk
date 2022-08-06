@@ -703,6 +703,8 @@ type Prize struct {
 	PrizeId *string `json:"prizeId"`
 	Type *string `json:"type"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
+	DrawnLimit *int32 `json:"drawnLimit"`
+	LimitFailOverPrizeId *string `json:"limitFailOverPrizeId"`
 	PrizeTableName *string `json:"prizeTableName"`
 	Weight *int32 `json:"weight"`
 }
@@ -718,6 +720,8 @@ func NewPrizeFromDict(data map[string]interface{}) Prize {
         PrizeId: core.CastString(data["prizeId"]),
         Type: core.CastString(data["type"]),
         AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+        DrawnLimit: core.CastInt32(data["drawnLimit"]),
+        LimitFailOverPrizeId: core.CastString(data["limitFailOverPrizeId"]),
         PrizeTableName: core.CastString(data["prizeTableName"]),
         Weight: core.CastInt32(data["weight"]),
     }
@@ -739,6 +743,14 @@ func (p Prize) ToDict() map[string]interface{} {
             p.AcquireActions,
         )
     }
+    var drawnLimit *int32
+    if p.DrawnLimit != nil {
+        drawnLimit = p.DrawnLimit
+    }
+    var limitFailOverPrizeId *string
+    if p.LimitFailOverPrizeId != nil {
+        limitFailOverPrizeId = p.LimitFailOverPrizeId
+    }
     var prizeTableName *string
     if p.PrizeTableName != nil {
         prizeTableName = p.PrizeTableName
@@ -751,6 +763,8 @@ func (p Prize) ToDict() map[string]interface{} {
         "prizeId": prizeId,
         "type": _type,
         "acquireActions": acquireActions,
+        "drawnLimit": drawnLimit,
+        "limitFailOverPrizeId": limitFailOverPrizeId,
         "prizeTableName": prizeTableName,
         "weight": weight,
     }
@@ -776,7 +790,83 @@ func CastPrizesFromDict(data []Prize) []interface{} {
     return v
 }
 
+type PrizeLimit struct {
+	PrizeLimitId *string `json:"prizeLimitId"`
+	PrizeId *string `json:"prizeId"`
+	DrawnCount *int32 `json:"drawnCount"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
+}
+
+func NewPrizeLimitFromJson(data string) PrizeLimit {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPrizeLimitFromDict(dict)
+}
+
+func NewPrizeLimitFromDict(data map[string]interface{}) PrizeLimit {
+    return PrizeLimit {
+        PrizeLimitId: core.CastString(data["prizeLimitId"]),
+        PrizeId: core.CastString(data["prizeId"]),
+        DrawnCount: core.CastInt32(data["drawnCount"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
+}
+
+func (p PrizeLimit) ToDict() map[string]interface{} {
+    
+    var prizeLimitId *string
+    if p.PrizeLimitId != nil {
+        prizeLimitId = p.PrizeLimitId
+    }
+    var prizeId *string
+    if p.PrizeId != nil {
+        prizeId = p.PrizeId
+    }
+    var drawnCount *int32
+    if p.DrawnCount != nil {
+        drawnCount = p.DrawnCount
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "prizeLimitId": prizeLimitId,
+        "prizeId": prizeId,
+        "drawnCount": drawnCount,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
+}
+
+func (p PrizeLimit) Pointer() *PrizeLimit {
+    return &p
+}
+
+func CastPrizeLimits(data []interface{}) []PrizeLimit {
+	v := make([]PrizeLimit, 0)
+	for _, d := range data {
+		v = append(v, NewPrizeLimitFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastPrizeLimitsFromDict(data []PrizeLimit) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
 type DrawnPrize struct {
+	PrizeId *string `json:"prizeId"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
 }
 
@@ -788,12 +878,17 @@ func NewDrawnPrizeFromJson(data string) DrawnPrize {
 
 func NewDrawnPrizeFromDict(data map[string]interface{}) DrawnPrize {
     return DrawnPrize {
+        PrizeId: core.CastString(data["prizeId"]),
         AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
     }
 }
 
 func (p DrawnPrize) ToDict() map[string]interface{} {
     
+    var prizeId *string
+    if p.PrizeId != nil {
+        prizeId = p.PrizeId
+    }
     var acquireActions []interface{}
     if p.AcquireActions != nil {
         acquireActions = CastAcquireActionsFromDict(
@@ -801,6 +896,7 @@ func (p DrawnPrize) ToDict() map[string]interface{} {
         )
     }
     return map[string]interface{} {
+        "prizeId": prizeId,
         "acquireActions": acquireActions,
     }
 }

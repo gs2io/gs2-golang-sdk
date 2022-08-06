@@ -3183,3 +3183,286 @@ func (p Gs2LotteryRestClient) UpdateCurrentLotteryMasterFromGitHub(
 	asyncResult := <-callback
 	return asyncResult.result, asyncResult.err
 }
+
+func describePrizeLimitsAsyncHandler(
+	client Gs2LotteryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribePrizeLimitsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribePrizeLimitsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribePrizeLimitsResult
+	if asyncResult.Err != nil {
+		callback <- DescribePrizeLimitsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribePrizeLimitsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribePrizeLimitsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryRestClient) DescribePrizeLimitsAsync(
+	request *DescribePrizeLimitsRequest,
+	callback chan<- DescribePrizeLimitsAsyncResult,
+) {
+	path := "/{namespaceName}/prizeLimit/{prizeTableName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go describePrizeLimitsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryRestClient) DescribePrizeLimits(
+	request *DescribePrizeLimitsRequest,
+) (*DescribePrizeLimitsResult, error) {
+	callback := make(chan DescribePrizeLimitsAsyncResult, 1)
+	go p.DescribePrizeLimitsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getPrizeLimitAsyncHandler(
+	client Gs2LotteryRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetPrizeLimitAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetPrizeLimitAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetPrizeLimitResult
+	if asyncResult.Err != nil {
+		callback <- GetPrizeLimitAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetPrizeLimitAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetPrizeLimitAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryRestClient) GetPrizeLimitAsync(
+	request *GetPrizeLimitRequest,
+	callback chan<- GetPrizeLimitAsyncResult,
+) {
+	path := "/{namespaceName}/prizeLimit/{prizeTableName}/{prizeId}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
+    if request.PrizeId != nil && *request.PrizeId != ""  {
+        path = strings.ReplaceAll(path, "{prizeId}", core.ToString(*request.PrizeId))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getPrizeLimitAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryRestClient) GetPrizeLimit(
+	request *GetPrizeLimitRequest,
+) (*GetPrizeLimitResult, error) {
+	callback := make(chan GetPrizeLimitAsyncResult, 1)
+	go p.GetPrizeLimitAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func resetPrizeLimitAsyncHandler(
+	client Gs2LotteryRestClient,
+	job *core.NetworkJob,
+	callback chan<- ResetPrizeLimitAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ResetPrizeLimitAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ResetPrizeLimitResult
+	if asyncResult.Err != nil {
+		callback <- ResetPrizeLimitAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ResetPrizeLimitAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- ResetPrizeLimitAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryRestClient) ResetPrizeLimitAsync(
+	request *ResetPrizeLimitRequest,
+	callback chan<- ResetPrizeLimitAsyncResult,
+) {
+	path := "/{namespaceName}/prizeLimit/{prizeTableName}/{prizeId}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
+    if request.PrizeId != nil && *request.PrizeId != ""  {
+        path = strings.ReplaceAll(path, "{prizeId}", core.ToString(*request.PrizeId))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go resetPrizeLimitAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryRestClient) ResetPrizeLimit(
+	request *ResetPrizeLimitRequest,
+) (*ResetPrizeLimitResult, error) {
+	callback := make(chan ResetPrizeLimitAsyncResult, 1)
+	go p.ResetPrizeLimitAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}

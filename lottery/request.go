@@ -1200,3 +1200,108 @@ func (p UpdateCurrentLotteryMasterFromGitHubRequest) ToDict() map[string]interfa
 func (p UpdateCurrentLotteryMasterFromGitHubRequest) Pointer() *UpdateCurrentLotteryMasterFromGitHubRequest {
     return &p
 }
+
+type DescribePrizeLimitsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PrizeTableName *string `json:"prizeTableName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribePrizeLimitsRequestFromJson(data string) DescribePrizeLimitsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribePrizeLimitsRequestFromDict(dict)
+}
+
+func NewDescribePrizeLimitsRequestFromDict(data map[string]interface{}) DescribePrizeLimitsRequest {
+    return DescribePrizeLimitsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PrizeTableName: core.CastString(data["prizeTableName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribePrizeLimitsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "prizeTableName": p.PrizeTableName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribePrizeLimitsRequest) Pointer() *DescribePrizeLimitsRequest {
+    return &p
+}
+
+type GetPrizeLimitRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PrizeTableName *string `json:"prizeTableName"`
+    PrizeId *string `json:"prizeId"`
+}
+
+func NewGetPrizeLimitRequestFromJson(data string) GetPrizeLimitRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetPrizeLimitRequestFromDict(dict)
+}
+
+func NewGetPrizeLimitRequestFromDict(data map[string]interface{}) GetPrizeLimitRequest {
+    return GetPrizeLimitRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PrizeTableName: core.CastString(data["prizeTableName"]),
+        PrizeId: core.CastString(data["prizeId"]),
+    }
+}
+
+func (p GetPrizeLimitRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "prizeTableName": p.PrizeTableName,
+        "prizeId": p.PrizeId,
+    }
+}
+
+func (p GetPrizeLimitRequest) Pointer() *GetPrizeLimitRequest {
+    return &p
+}
+
+type ResetPrizeLimitRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PrizeTableName *string `json:"prizeTableName"`
+    PrizeId *string `json:"prizeId"`
+}
+
+func NewResetPrizeLimitRequestFromJson(data string) ResetPrizeLimitRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewResetPrizeLimitRequestFromDict(dict)
+}
+
+func NewResetPrizeLimitRequestFromDict(data map[string]interface{}) ResetPrizeLimitRequest {
+    return ResetPrizeLimitRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PrizeTableName: core.CastString(data["prizeTableName"]),
+        PrizeId: core.CastString(data["prizeId"]),
+    }
+}
+
+func (p ResetPrizeLimitRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "prizeTableName": p.PrizeTableName,
+        "prizeId": p.PrizeId,
+    }
+}
+
+func (p ResetPrizeLimitRequest) Pointer() *ResetPrizeLimitRequest {
+    return &p
+}

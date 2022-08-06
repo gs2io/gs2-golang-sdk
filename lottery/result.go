@@ -1129,3 +1129,98 @@ func (p UpdateCurrentLotteryMasterFromGitHubResult) ToDict() map[string]interfac
 func (p UpdateCurrentLotteryMasterFromGitHubResult) Pointer() *UpdateCurrentLotteryMasterFromGitHubResult {
     return &p
 }
+
+type DescribePrizeLimitsResult struct {
+    Items []PrizeLimit `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribePrizeLimitsAsyncResult struct {
+	result *DescribePrizeLimitsResult
+	err    error
+}
+
+func NewDescribePrizeLimitsResultFromJson(data string) DescribePrizeLimitsResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribePrizeLimitsResultFromDict(dict)
+}
+
+func NewDescribePrizeLimitsResultFromDict(data map[string]interface{}) DescribePrizeLimitsResult {
+    return DescribePrizeLimitsResult {
+        Items: CastPrizeLimits(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribePrizeLimitsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastPrizeLimitsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribePrizeLimitsResult) Pointer() *DescribePrizeLimitsResult {
+    return &p
+}
+
+type GetPrizeLimitResult struct {
+    Item *PrizeLimit `json:"item"`
+}
+
+type GetPrizeLimitAsyncResult struct {
+	result *GetPrizeLimitResult
+	err    error
+}
+
+func NewGetPrizeLimitResultFromJson(data string) GetPrizeLimitResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetPrizeLimitResultFromDict(dict)
+}
+
+func NewGetPrizeLimitResultFromDict(data map[string]interface{}) GetPrizeLimitResult {
+    return GetPrizeLimitResult {
+        Item: NewPrizeLimitFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetPrizeLimitResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetPrizeLimitResult) Pointer() *GetPrizeLimitResult {
+    return &p
+}
+
+type ResetPrizeLimitResult struct {
+}
+
+type ResetPrizeLimitAsyncResult struct {
+	result *ResetPrizeLimitResult
+	err    error
+}
+
+func NewResetPrizeLimitResultFromJson(data string) ResetPrizeLimitResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewResetPrizeLimitResultFromDict(dict)
+}
+
+func NewResetPrizeLimitResultFromDict(data map[string]interface{}) ResetPrizeLimitResult {
+    return ResetPrizeLimitResult {
+    }
+}
+
+func (p ResetPrizeLimitResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+    }
+}
+
+func (p ResetPrizeLimitResult) Pointer() *ResetPrizeLimitResult {
+    return &p
+}

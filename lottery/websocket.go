@@ -2961,3 +2961,261 @@ func (p Gs2LotteryWebSocketClient) UpdateCurrentLotteryMasterFromGitHub(
 	asyncResult := <-callback
 	return asyncResult.result, asyncResult.err
 }
+
+func (p Gs2LotteryWebSocketClient) describePrizeLimitsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribePrizeLimitsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribePrizeLimitsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribePrizeLimitsResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribePrizeLimitsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribePrizeLimitsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryWebSocketClient) DescribePrizeLimitsAsync(
+	request *DescribePrizeLimitsRequest,
+	callback chan<- DescribePrizeLimitsAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lottery",
+    		"component": "prizeLimit",
+    		"function": "describePrizeLimits",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != "" {
+        bodies["prizeTableName"] = *request.PrizeTableName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describePrizeLimitsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryWebSocketClient) DescribePrizeLimits(
+	request *DescribePrizeLimitsRequest,
+) (*DescribePrizeLimitsResult, error) {
+	callback := make(chan DescribePrizeLimitsAsyncResult, 1)
+	go p.DescribePrizeLimitsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LotteryWebSocketClient) getPrizeLimitAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetPrizeLimitAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetPrizeLimitAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetPrizeLimitResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetPrizeLimitAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetPrizeLimitAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryWebSocketClient) GetPrizeLimitAsync(
+	request *GetPrizeLimitRequest,
+	callback chan<- GetPrizeLimitAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lottery",
+    		"component": "prizeLimit",
+    		"function": "getPrizeLimit",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != "" {
+        bodies["prizeTableName"] = *request.PrizeTableName
+    }
+    if request.PrizeId != nil && *request.PrizeId != "" {
+        bodies["prizeId"] = *request.PrizeId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getPrizeLimitAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryWebSocketClient) GetPrizeLimit(
+	request *GetPrizeLimitRequest,
+) (*GetPrizeLimitResult, error) {
+	callback := make(chan GetPrizeLimitAsyncResult, 1)
+	go p.GetPrizeLimitAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LotteryWebSocketClient) resetPrizeLimitAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ResetPrizeLimitAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ResetPrizeLimitAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ResetPrizeLimitResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ResetPrizeLimitAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- ResetPrizeLimitAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryWebSocketClient) ResetPrizeLimitAsync(
+	request *ResetPrizeLimitRequest,
+	callback chan<- ResetPrizeLimitAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lottery",
+    		"component": "prizeLimit",
+    		"function": "resetPrizeLimit",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != "" {
+        bodies["prizeTableName"] = *request.PrizeTableName
+    }
+    if request.PrizeId != nil && *request.PrizeId != "" {
+        bodies["prizeId"] = *request.PrizeId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.resetPrizeLimitAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryWebSocketClient) ResetPrizeLimit(
+	request *ResetPrizeLimitRequest,
+) (*ResetPrizeLimitResult, error) {
+	callback := make(chan ResetPrizeLimitAsyncResult, 1)
+	go p.ResetPrizeLimitAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
