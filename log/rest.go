@@ -1701,7 +1701,7 @@ func (p Gs2LogRestClient) CreateInsightAsync(
 	request *CreateInsightRequest,
 	callback chan<- CreateInsightAsyncResult,
 ) {
-	path := "/{namespaceName}/insight/{insightName}"
+	path := "/{namespaceName}/insight"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
