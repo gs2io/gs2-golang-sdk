@@ -1487,3 +1487,331 @@ func (p Gs2LogWebSocketClient) PutLog(
 	asyncResult := <-callback
 	return asyncResult.result, asyncResult.err
 }
+
+func (p Gs2LogWebSocketClient) describeInsightsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeInsightsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeInsightsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeInsightsResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeInsightsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeInsightsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogWebSocketClient) DescribeInsightsAsync(
+	request *DescribeInsightsRequest,
+	callback chan<- DescribeInsightsAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "insight",
+    		"function": "describeInsights",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeInsightsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogWebSocketClient) DescribeInsights(
+	request *DescribeInsightsRequest,
+) (*DescribeInsightsResult, error) {
+	callback := make(chan DescribeInsightsAsyncResult, 1)
+	go p.DescribeInsightsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LogWebSocketClient) createInsightAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- CreateInsightAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateInsightAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateInsightResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateInsightAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- CreateInsightAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogWebSocketClient) CreateInsightAsync(
+	request *CreateInsightRequest,
+	callback chan<- CreateInsightAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "insight",
+    		"function": "createInsight",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.createInsightAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogWebSocketClient) CreateInsight(
+	request *CreateInsightRequest,
+) (*CreateInsightResult, error) {
+	callback := make(chan CreateInsightAsyncResult, 1)
+	go p.CreateInsightAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LogWebSocketClient) getInsightAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetInsightAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetInsightAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetInsightResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetInsightAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetInsightAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogWebSocketClient) GetInsightAsync(
+	request *GetInsightRequest,
+	callback chan<- GetInsightAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "insight",
+    		"function": "getInsight",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InsightName != nil && *request.InsightName != "" {
+        bodies["insightName"] = *request.InsightName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getInsightAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogWebSocketClient) GetInsight(
+	request *GetInsightRequest,
+) (*GetInsightResult, error) {
+	callback := make(chan GetInsightAsyncResult, 1)
+	go p.GetInsightAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LogWebSocketClient) deleteInsightAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteInsightAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteInsightAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteInsightResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteInsightAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteInsightAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogWebSocketClient) DeleteInsightAsync(
+	request *DeleteInsightRequest,
+	callback chan<- DeleteInsightAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "log",
+    		"component": "insight",
+    		"function": "deleteInsight",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InsightName != nil && *request.InsightName != "" {
+        bodies["insightName"] = *request.InsightName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.deleteInsightAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogWebSocketClient) DeleteInsight(
+	request *DeleteInsightRequest,
+) (*DeleteInsightResult, error) {
+	callback := make(chan DeleteInsightAsyncResult, 1)
+	go p.DeleteInsightAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}

@@ -713,3 +713,127 @@ func (p PutLogRequest) ToDict() map[string]interface{} {
 func (p PutLogRequest) Pointer() *PutLogRequest {
     return &p
 }
+
+type DescribeInsightsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeInsightsRequestFromJson(data string) DescribeInsightsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeInsightsRequestFromDict(dict)
+}
+
+func NewDescribeInsightsRequestFromDict(data map[string]interface{}) DescribeInsightsRequest {
+    return DescribeInsightsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeInsightsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeInsightsRequest) Pointer() *DescribeInsightsRequest {
+    return &p
+}
+
+type CreateInsightRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+}
+
+func NewCreateInsightRequestFromJson(data string) CreateInsightRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateInsightRequestFromDict(dict)
+}
+
+func NewCreateInsightRequestFromDict(data map[string]interface{}) CreateInsightRequest {
+    return CreateInsightRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
+}
+
+func (p CreateInsightRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
+}
+
+func (p CreateInsightRequest) Pointer() *CreateInsightRequest {
+    return &p
+}
+
+type GetInsightRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InsightName *string `json:"insightName"`
+}
+
+func NewGetInsightRequestFromJson(data string) GetInsightRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetInsightRequestFromDict(dict)
+}
+
+func NewGetInsightRequestFromDict(data map[string]interface{}) GetInsightRequest {
+    return GetInsightRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InsightName: core.CastString(data["insightName"]),
+    }
+}
+
+func (p GetInsightRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "insightName": p.InsightName,
+    }
+}
+
+func (p GetInsightRequest) Pointer() *GetInsightRequest {
+    return &p
+}
+
+type DeleteInsightRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InsightName *string `json:"insightName"`
+}
+
+func NewDeleteInsightRequestFromJson(data string) DeleteInsightRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteInsightRequestFromDict(dict)
+}
+
+func NewDeleteInsightRequestFromDict(data map[string]interface{}) DeleteInsightRequest {
+    return DeleteInsightRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InsightName: core.CastString(data["insightName"]),
+    }
+}
+
+func (p DeleteInsightRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "insightName": p.InsightName,
+    }
+}
+
+func (p DeleteInsightRequest) Pointer() *DeleteInsightRequest {
+    return &p
+}

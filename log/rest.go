@@ -1565,3 +1565,358 @@ func (p Gs2LogRestClient) PutLog(
 	asyncResult := <-callback
 	return asyncResult.result, asyncResult.err
 }
+
+func describeInsightsAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeInsightsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeInsightsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeInsightsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeInsightsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeInsightsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeInsightsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) DescribeInsightsAsync(
+	request *DescribeInsightsRequest,
+	callback chan<- DescribeInsightsAsyncResult,
+) {
+	path := "/{namespaceName}/insight"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go describeInsightsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) DescribeInsights(
+	request *DescribeInsightsRequest,
+) (*DescribeInsightsResult, error) {
+	callback := make(chan DescribeInsightsAsyncResult, 1)
+	go p.DescribeInsightsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func createInsightAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- CreateInsightAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateInsightAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateInsightResult
+	if asyncResult.Err != nil {
+		callback <- CreateInsightAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateInsightAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- CreateInsightAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) CreateInsightAsync(
+	request *CreateInsightRequest,
+	callback chan<- CreateInsightAsyncResult,
+) {
+	path := "/{namespaceName}/insight/{insightName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go createInsightAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) CreateInsight(
+	request *CreateInsightRequest,
+) (*CreateInsightResult, error) {
+	callback := make(chan CreateInsightAsyncResult, 1)
+	go p.CreateInsightAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getInsightAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetInsightAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetInsightAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetInsightResult
+	if asyncResult.Err != nil {
+		callback <- GetInsightAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetInsightAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetInsightAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) GetInsightAsync(
+	request *GetInsightRequest,
+	callback chan<- GetInsightAsyncResult,
+) {
+	path := "/{namespaceName}/insight/{insightName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InsightName != nil && *request.InsightName != ""  {
+        path = strings.ReplaceAll(path, "{insightName}", core.ToString(*request.InsightName))
+    } else {
+        path = strings.ReplaceAll(path, "{insightName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getInsightAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) GetInsight(
+	request *GetInsightRequest,
+) (*GetInsightResult, error) {
+	callback := make(chan GetInsightAsyncResult, 1)
+	go p.GetInsightAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteInsightAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteInsightAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteInsightAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteInsightResult
+	if asyncResult.Err != nil {
+		callback <- DeleteInsightAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteInsightAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteInsightAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) DeleteInsightAsync(
+	request *DeleteInsightRequest,
+	callback chan<- DeleteInsightAsyncResult,
+) {
+	path := "/{namespaceName}/insight/{insightName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InsightName != nil && *request.InsightName != ""  {
+        path = strings.ReplaceAll(path, "{insightName}", core.ToString(*request.InsightName))
+    } else {
+        path = strings.ReplaceAll(path, "{insightName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go deleteInsightAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) DeleteInsight(
+	request *DeleteInsightRequest,
+) (*DeleteInsightResult, error) {
+	callback := make(chan DeleteInsightAsyncResult, 1)
+	go p.DeleteInsightAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}

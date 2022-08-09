@@ -816,3 +816,92 @@ func CastExecuteStampTaskLogCountsFromDict(data []ExecuteStampTaskLogCount) []in
     }
     return v
 }
+
+type Insight struct {
+	InsightId *string `json:"insightId"`
+	Name *string `json:"name"`
+	TaskId *string `json:"taskId"`
+	Host *string `json:"host"`
+	Password *string `json:"password"`
+	Status *string `json:"status"`
+	CreatedAt *int64 `json:"createdAt"`
+}
+
+func NewInsightFromJson(data string) Insight {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewInsightFromDict(dict)
+}
+
+func NewInsightFromDict(data map[string]interface{}) Insight {
+    return Insight {
+        InsightId: core.CastString(data["insightId"]),
+        Name: core.CastString(data["name"]),
+        TaskId: core.CastString(data["taskId"]),
+        Host: core.CastString(data["host"]),
+        Password: core.CastString(data["password"]),
+        Status: core.CastString(data["status"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+    }
+}
+
+func (p Insight) ToDict() map[string]interface{} {
+    
+    var insightId *string
+    if p.InsightId != nil {
+        insightId = p.InsightId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var taskId *string
+    if p.TaskId != nil {
+        taskId = p.TaskId
+    }
+    var host *string
+    if p.Host != nil {
+        host = p.Host
+    }
+    var password *string
+    if p.Password != nil {
+        password = p.Password
+    }
+    var status *string
+    if p.Status != nil {
+        status = p.Status
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    return map[string]interface{} {
+        "insightId": insightId,
+        "name": name,
+        "taskId": taskId,
+        "host": host,
+        "password": password,
+        "status": status,
+        "createdAt": createdAt,
+    }
+}
+
+func (p Insight) Pointer() *Insight {
+    return &p
+}
+
+func CastInsights(data []interface{}) []Insight {
+	v := make([]Insight, 0)
+	for _, d := range data {
+		v = append(v, NewInsightFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastInsightsFromDict(data []Insight) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}

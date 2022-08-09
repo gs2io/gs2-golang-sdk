@@ -575,3 +575,132 @@ func (p PutLogResult) ToDict() map[string]interface{} {
 func (p PutLogResult) Pointer() *PutLogResult {
     return &p
 }
+
+type DescribeInsightsResult struct {
+    Items []Insight `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeInsightsAsyncResult struct {
+	result *DescribeInsightsResult
+	err    error
+}
+
+func NewDescribeInsightsResultFromJson(data string) DescribeInsightsResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeInsightsResultFromDict(dict)
+}
+
+func NewDescribeInsightsResultFromDict(data map[string]interface{}) DescribeInsightsResult {
+    return DescribeInsightsResult {
+        Items: CastInsights(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeInsightsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastInsightsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeInsightsResult) Pointer() *DescribeInsightsResult {
+    return &p
+}
+
+type CreateInsightResult struct {
+    Item *Insight `json:"item"`
+}
+
+type CreateInsightAsyncResult struct {
+	result *CreateInsightResult
+	err    error
+}
+
+func NewCreateInsightResultFromJson(data string) CreateInsightResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateInsightResultFromDict(dict)
+}
+
+func NewCreateInsightResultFromDict(data map[string]interface{}) CreateInsightResult {
+    return CreateInsightResult {
+        Item: NewInsightFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p CreateInsightResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p CreateInsightResult) Pointer() *CreateInsightResult {
+    return &p
+}
+
+type GetInsightResult struct {
+    Item *Insight `json:"item"`
+}
+
+type GetInsightAsyncResult struct {
+	result *GetInsightResult
+	err    error
+}
+
+func NewGetInsightResultFromJson(data string) GetInsightResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetInsightResultFromDict(dict)
+}
+
+func NewGetInsightResultFromDict(data map[string]interface{}) GetInsightResult {
+    return GetInsightResult {
+        Item: NewInsightFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetInsightResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetInsightResult) Pointer() *GetInsightResult {
+    return &p
+}
+
+type DeleteInsightResult struct {
+    Item *Insight `json:"item"`
+}
+
+type DeleteInsightAsyncResult struct {
+	result *DeleteInsightResult
+	err    error
+}
+
+func NewDeleteInsightResultFromJson(data string) DeleteInsightResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteInsightResultFromDict(dict)
+}
+
+func NewDeleteInsightResultFromDict(data map[string]interface{}) DeleteInsightResult {
+    return DeleteInsightResult {
+        Item: NewInsightFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p DeleteInsightResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p DeleteInsightResult) Pointer() *DeleteInsightResult {
+    return &p
+}
