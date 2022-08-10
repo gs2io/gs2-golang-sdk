@@ -26,6 +26,7 @@ type Namespace struct {
 	Name *string `json:"name"`
 	Description *string `json:"description"`
 	TransactionSetting *TransactionSetting `json:"transactionSetting"`
+	BuyScript *ScriptSetting `json:"buyScript"`
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
@@ -47,6 +48,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
         TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+        BuyScript: NewScriptSettingFromDict(core.CastMap(data["buyScript"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
@@ -73,6 +75,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.TransactionSetting != nil {
         transactionSetting = p.TransactionSetting.ToDict()
     }
+    var buyScript map[string]interface{}
+    if p.BuyScript != nil {
+        buyScript = p.BuyScript.ToDict()
+    }
     var logSetting map[string]interface{}
     if p.LogSetting != nil {
         logSetting = p.LogSetting.ToDict()
@@ -98,6 +104,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "name": name,
         "description": description,
         "transactionSetting": transactionSetting,
+        "buyScript": buyScript,
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
@@ -1190,6 +1197,74 @@ func CastTransactionSettings(data []interface{}) []TransactionSetting {
 }
 
 func CastTransactionSettingsFromDict(data []TransactionSetting) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type ScriptSetting struct {
+	TriggerScriptId *string `json:"triggerScriptId"`
+	DoneTriggerTargetType *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId *string `json:"doneTriggerScriptId"`
+	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
+}
+
+func NewScriptSettingFromJson(data string) ScriptSetting {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewScriptSettingFromDict(dict)
+}
+
+func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
+    return ScriptSetting {
+        TriggerScriptId: core.CastString(data["triggerScriptId"]),
+        DoneTriggerTargetType: core.CastString(data["doneTriggerTargetType"]),
+        DoneTriggerScriptId: core.CastString(data["doneTriggerScriptId"]),
+        DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+    }
+}
+
+func (p ScriptSetting) ToDict() map[string]interface{} {
+    
+    var triggerScriptId *string
+    if p.TriggerScriptId != nil {
+        triggerScriptId = p.TriggerScriptId
+    }
+    var doneTriggerTargetType *string
+    if p.DoneTriggerTargetType != nil {
+        doneTriggerTargetType = p.DoneTriggerTargetType
+    }
+    var doneTriggerScriptId *string
+    if p.DoneTriggerScriptId != nil {
+        doneTriggerScriptId = p.DoneTriggerScriptId
+    }
+    var doneTriggerQueueNamespaceId *string
+    if p.DoneTriggerQueueNamespaceId != nil {
+        doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+    }
+    return map[string]interface{} {
+        "triggerScriptId": triggerScriptId,
+        "doneTriggerTargetType": doneTriggerTargetType,
+        "doneTriggerScriptId": doneTriggerScriptId,
+        "doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
+    }
+}
+
+func (p ScriptSetting) Pointer() *ScriptSetting {
+    return &p
+}
+
+func CastScriptSettings(data []interface{}) []ScriptSetting {
+	v := make([]ScriptSetting, 0)
+	for _, d := range data {
+		v = append(v, NewScriptSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

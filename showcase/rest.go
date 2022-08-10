@@ -173,6 +173,9 @@ func (p Gs2ShowcaseRestClient) CreateNamespaceAsync(
     if request.TransactionSetting != nil {
         bodies["transactionSetting"] = request.TransactionSetting.ToDict()
     }
+    if request.BuyScript != nil {
+        bodies["buyScript"] = request.BuyScript.ToDict()
+    }
     if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
         bodies["queueNamespaceId"] = *request.QueueNamespaceId
     }
@@ -442,6 +445,9 @@ func (p Gs2ShowcaseRestClient) UpdateNamespaceAsync(
     }
     if request.TransactionSetting != nil {
         bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
+    if request.BuyScript != nil {
+        bodies["buyScript"] = request.BuyScript.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
