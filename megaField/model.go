@@ -636,9 +636,9 @@ func CastSpatialsFromDict(data []Spatial) []interface{} {
 }
 
 type Position struct {
-	X *float64 `json:"x"`
-	Y *float64 `json:"y"`
-	Z *float64 `json:"z"`
+	X *float32 `json:"x"`
+	Y *float32 `json:"y"`
+	Z *float32 `json:"z"`
 }
 
 func NewPositionFromJson(data string) Position {
@@ -649,23 +649,23 @@ func NewPositionFromJson(data string) Position {
 
 func NewPositionFromDict(data map[string]interface{}) Position {
     return Position {
-        X: core.CastFloat64(data["x"]),
-        Y: core.CastFloat64(data["y"]),
-        Z: core.CastFloat64(data["z"]),
+        X: core.CastFloat32(data["x"]),
+        Y: core.CastFloat32(data["y"]),
+        Z: core.CastFloat32(data["z"]),
     }
 }
 
 func (p Position) ToDict() map[string]interface{} {
     
-    var x *float64
+    var x *float32
     if p.X != nil {
         x = p.X
     }
-    var y *float64
+    var y *float32
     if p.Y != nil {
         y = p.Y
     }
-    var z *float64
+    var z *float32
     if p.Z != nil {
         z = p.Z
     }
@@ -758,7 +758,7 @@ func CastMyPositionsFromDict(data []MyPosition) []interface{} {
 }
 
 type Scope struct {
-	R *float64 `json:"r"`
+	R *float32 `json:"r"`
 	Limit *int32 `json:"limit"`
 }
 
@@ -770,14 +770,14 @@ func NewScopeFromJson(data string) Scope {
 
 func NewScopeFromDict(data map[string]interface{}) Scope {
     return Scope {
-        R: core.CastFloat64(data["r"]),
+        R: core.CastFloat32(data["r"]),
         Limit: core.CastInt32(data["limit"]),
     }
 }
 
 func (p Scope) ToDict() map[string]interface{} {
     
-    var r *float64
+    var r *float32
     if p.R != nil {
         r = p.R
     }
@@ -812,9 +812,9 @@ func CastScopesFromDict(data []Scope) []interface{} {
 }
 
 type Vector struct {
-	X *float64 `json:"x"`
-	Y *float64 `json:"y"`
-	Z *float64 `json:"z"`
+	X *float32 `json:"x"`
+	Y *float32 `json:"y"`
+	Z *float32 `json:"z"`
 }
 
 func NewVectorFromJson(data string) Vector {
@@ -825,23 +825,23 @@ func NewVectorFromJson(data string) Vector {
 
 func NewVectorFromDict(data map[string]interface{}) Vector {
     return Vector {
-        X: core.CastFloat64(data["x"]),
-        Y: core.CastFloat64(data["y"]),
-        Z: core.CastFloat64(data["z"]),
+        X: core.CastFloat32(data["x"]),
+        Y: core.CastFloat32(data["y"]),
+        Z: core.CastFloat32(data["z"]),
     }
 }
 
 func (p Vector) ToDict() map[string]interface{} {
     
-    var x *float64
+    var x *float32
     if p.X != nil {
         x = p.X
     }
-    var y *float64
+    var y *float32
     if p.Y != nil {
         y = p.Y
     }
-    var z *float64
+    var z *float32
     if p.Z != nil {
         z = p.Z
     }

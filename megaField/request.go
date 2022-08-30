@@ -984,7 +984,7 @@ type NearUserIdsRequest struct {
     AreaModelName *string `json:"areaModelName"`
     LayerModelName *string `json:"layerModelName"`
     Point *Position `json:"point"`
-    R *float64 `json:"r"`
+    R *float32 `json:"r"`
     Limit *int32 `json:"limit"`
 }
 
@@ -1001,7 +1001,7 @@ func NewNearUserIdsRequestFromDict(data map[string]interface{}) NearUserIdsReque
         AreaModelName: core.CastString(data["areaModelName"]),
         LayerModelName: core.CastString(data["layerModelName"]),
         Point: NewPositionFromDict(core.CastMap(data["point"])).Pointer(),
-        R: core.CastFloat64(data["r"]),
+        R: core.CastFloat32(data["r"]),
         Limit: core.CastInt32(data["limit"]),
     }
 }
@@ -1030,7 +1030,7 @@ type NearUserIdsFromSystemRequest struct {
     AreaModelName *string `json:"areaModelName"`
     LayerModelName *string `json:"layerModelName"`
     Point *Position `json:"point"`
-    R *float64 `json:"r"`
+    R *float32 `json:"r"`
     Limit *int32 `json:"limit"`
 }
 
@@ -1046,7 +1046,7 @@ func NewNearUserIdsFromSystemRequestFromDict(data map[string]interface{}) NearUs
         AreaModelName: core.CastString(data["areaModelName"]),
         LayerModelName: core.CastString(data["layerModelName"]),
         Point: NewPositionFromDict(core.CastMap(data["point"])).Pointer(),
-        R: core.CastFloat64(data["r"]),
+        R: core.CastFloat32(data["r"]),
         Limit: core.CastInt32(data["limit"]),
     }
 }
