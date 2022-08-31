@@ -2904,7 +2904,7 @@ func (p Gs2MegaFieldRestClient) ActionAsync(
 	request *ActionRequest,
 	callback chan<- ActionAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/spatial/{areaModelName}/{layerModelName}"
+	path := "/{namespaceName}/user/me/spatial/{areaModelName}/{layerModelName}/action"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -3010,7 +3010,7 @@ func (p Gs2MegaFieldRestClient) ActionByUserIdAsync(
 	request *ActionByUserIdRequest,
 	callback chan<- ActionByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/spatial/{areaModelName}/{layerModelName}"
+	path := "/{namespaceName}/user/{userId}/spatial/{areaModelName}/{layerModelName}/action"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
