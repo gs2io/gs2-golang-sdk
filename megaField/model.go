@@ -758,6 +758,7 @@ func CastMyPositionsFromDict(data []MyPosition) []interface{} {
 }
 
 type Scope struct {
+	LayerName *string `json:"layerName"`
 	R *float32 `json:"r"`
 	Limit *int32 `json:"limit"`
 }
@@ -770,6 +771,7 @@ func NewScopeFromJson(data string) Scope {
 
 func NewScopeFromDict(data map[string]interface{}) Scope {
     return Scope {
+        LayerName: core.CastString(data["layerName"]),
         R: core.CastFloat32(data["r"]),
         Limit: core.CastInt32(data["limit"]),
     }
@@ -777,6 +779,10 @@ func NewScopeFromDict(data map[string]interface{}) Scope {
 
 func (p Scope) ToDict() map[string]interface{} {
     
+    var layerName *string
+    if p.LayerName != nil {
+        layerName = p.LayerName
+    }
     var r *float32
     if p.R != nil {
         r = p.R
@@ -786,6 +792,7 @@ func (p Scope) ToDict() map[string]interface{} {
         limit = p.Limit
     }
     return map[string]interface{} {
+        "layerName": layerName,
         "r": r,
         "limit": limit,
     }

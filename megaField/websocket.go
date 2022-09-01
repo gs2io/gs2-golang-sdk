@@ -2690,8 +2690,12 @@ func (p Gs2MegaFieldWebSocketClient) ActionAsync(
     if request.Position != nil {
         bodies["position"] = request.Position.ToDict()
     }
-    if request.Scope != nil {
-        bodies["scope"] = request.Scope.ToDict()
+    if request.Scopes != nil {
+        var _scopes []interface {}
+        for _, item := range request.Scopes {
+            _scopes = append(_scopes, item)
+        }
+        bodies["scopes"] = _scopes
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -2787,8 +2791,12 @@ func (p Gs2MegaFieldWebSocketClient) ActionByUserIdAsync(
     if request.Position != nil {
         bodies["position"] = request.Position.ToDict()
     }
-    if request.Scope != nil {
-        bodies["scope"] = request.Scope.ToDict()
+    if request.Scopes != nil {
+        var _scopes []interface {}
+        for _, item := range request.Scopes {
+            _scopes = append(_scopes, item)
+        }
+        bodies["scopes"] = _scopes
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

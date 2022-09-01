@@ -1074,7 +1074,7 @@ type ActionRequest struct {
     AreaModelName *string `json:"areaModelName"`
     LayerModelName *string `json:"layerModelName"`
     Position *MyPosition `json:"position"`
-    Scope *Scope `json:"scope"`
+    Scopes []Scope `json:"scopes"`
 }
 
 func NewActionRequestFromJson(data string) ActionRequest {
@@ -1090,7 +1090,7 @@ func NewActionRequestFromDict(data map[string]interface{}) ActionRequest {
         AreaModelName: core.CastString(data["areaModelName"]),
         LayerModelName: core.CastString(data["layerModelName"]),
         Position: NewMyPositionFromDict(core.CastMap(data["position"])).Pointer(),
-        Scope: NewScopeFromDict(core.CastMap(data["scope"])).Pointer(),
+        Scopes: CastScopes(core.CastArray(data["scopes"])),
     }
 }
 
@@ -1101,7 +1101,9 @@ func (p ActionRequest) ToDict() map[string]interface{} {
         "areaModelName": p.AreaModelName,
         "layerModelName": p.LayerModelName,
         "position": p.Position.ToDict(),
-        "scope": p.Scope.ToDict(),
+        "scopes": CastScopesFromDict(
+            p.Scopes,
+        ),
     }
 }
 
@@ -1118,7 +1120,7 @@ type ActionByUserIdRequest struct {
     AreaModelName *string `json:"areaModelName"`
     LayerModelName *string `json:"layerModelName"`
     Position *MyPosition `json:"position"`
-    Scope *Scope `json:"scope"`
+    Scopes []Scope `json:"scopes"`
 }
 
 func NewActionByUserIdRequestFromJson(data string) ActionByUserIdRequest {
@@ -1134,7 +1136,7 @@ func NewActionByUserIdRequestFromDict(data map[string]interface{}) ActionByUserI
         AreaModelName: core.CastString(data["areaModelName"]),
         LayerModelName: core.CastString(data["layerModelName"]),
         Position: NewMyPositionFromDict(core.CastMap(data["position"])).Pointer(),
-        Scope: NewScopeFromDict(core.CastMap(data["scope"])).Pointer(),
+        Scopes: CastScopes(core.CastArray(data["scopes"])),
     }
 }
 
@@ -1145,7 +1147,9 @@ func (p ActionByUserIdRequest) ToDict() map[string]interface{} {
         "areaModelName": p.AreaModelName,
         "layerModelName": p.LayerModelName,
         "position": p.Position.ToDict(),
-        "scope": p.Scope.ToDict(),
+        "scopes": CastScopesFromDict(
+            p.Scopes,
+        ),
     }
 }
 
