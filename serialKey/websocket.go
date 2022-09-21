@@ -780,9 +780,9 @@ func (p Gs2SerialKeyWebSocketClient) Issue(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2SerialKeyWebSocketClient) describeSerialCodesAsyncHandler(
+func (p Gs2SerialKeyWebSocketClient) describeSerialKeysAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeSerialCodesAsyncResult,
+	callback chan<- DescribeSerialKeysAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -791,39 +791,39 @@ func (p Gs2SerialKeyWebSocketClient) describeSerialCodesAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- DescribeSerialCodesAsyncResult{
+		callback <- DescribeSerialKeysAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result DescribeSerialCodesResult
+	var result DescribeSerialKeysResult
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- DescribeSerialCodesAsyncResult{
+            callback <- DescribeSerialKeysAsyncResult{
                 err: err,
             }
             return
         }
 	}
-	callback <- DescribeSerialCodesAsyncResult{
+	callback <- DescribeSerialKeysAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SerialKeyWebSocketClient) DescribeSerialCodesAsync(
-	request *DescribeSerialCodesRequest,
-	callback chan<- DescribeSerialCodesAsyncResult,
+func (p Gs2SerialKeyWebSocketClient) DescribeSerialKeysAsync(
+	request *DescribeSerialKeysRequest,
+	callback chan<- DescribeSerialKeysAsyncResult,
 ) {
     requestId := core.WebSocketRequestId(uuid.New().String())
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "serial_key",
     		"component": "serialKey",
-    		"function": "describeSerialCodes",
+    		"function": "describeSerialKeys",
             "contentType": "application/json",
     		"requestId": requestId,
 		},
@@ -850,7 +850,7 @@ func (p Gs2SerialKeyWebSocketClient) DescribeSerialCodesAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	go p.describeSerialCodesAsyncHandler(
+	go p.describeSerialKeysAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies: bodies,
@@ -859,11 +859,178 @@ func (p Gs2SerialKeyWebSocketClient) DescribeSerialCodesAsync(
 	)
 }
 
-func (p Gs2SerialKeyWebSocketClient) DescribeSerialCodes(
-	request *DescribeSerialCodesRequest,
-) (*DescribeSerialCodesResult, error) {
-	callback := make(chan DescribeSerialCodesAsyncResult, 1)
-	go p.DescribeSerialCodesAsync(
+func (p Gs2SerialKeyWebSocketClient) DescribeSerialKeys(
+	request *DescribeSerialKeysRequest,
+) (*DescribeSerialKeysResult, error) {
+	callback := make(chan DescribeSerialKeysAsyncResult, 1)
+	go p.DescribeSerialKeysAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2SerialKeyWebSocketClient) downloadSerialCodesAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DownloadSerialCodesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DownloadSerialCodesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DownloadSerialCodesResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DownloadSerialCodesAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DownloadSerialCodesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SerialKeyWebSocketClient) DownloadSerialCodesAsync(
+	request *DownloadSerialCodesRequest,
+	callback chan<- DownloadSerialCodesAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "serial_key",
+    		"component": "serialKey",
+    		"function": "downloadSerialCodes",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CampaignModelName != nil && *request.CampaignModelName != "" {
+        bodies["campaignModelName"] = *request.CampaignModelName
+    }
+    if request.IssueJobName != nil && *request.IssueJobName != "" {
+        bodies["issueJobName"] = *request.IssueJobName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.downloadSerialCodesAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SerialKeyWebSocketClient) DownloadSerialCodes(
+	request *DownloadSerialCodesRequest,
+) (*DownloadSerialCodesResult, error) {
+	callback := make(chan DownloadSerialCodesAsyncResult, 1)
+	go p.DownloadSerialCodesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2SerialKeyWebSocketClient) getSerialKeyAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetSerialKeyAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSerialKeyAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSerialKeyResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSerialKeyAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetSerialKeyAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SerialKeyWebSocketClient) GetSerialKeyAsync(
+	request *GetSerialKeyRequest,
+	callback chan<- GetSerialKeyAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "serial_key",
+    		"component": "serialKey",
+    		"function": "getSerialKey",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Code != nil && *request.Code != "" {
+        bodies["code"] = *request.Code
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getSerialKeyAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SerialKeyWebSocketClient) GetSerialKey(
+	request *GetSerialKeyRequest,
+) (*GetSerialKeyResult, error) {
+	callback := make(chan GetSerialKeyAsyncResult, 1)
+	go p.GetSerialKeyAsync(
 		request,
 		callback,
 	)

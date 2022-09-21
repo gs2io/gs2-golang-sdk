@@ -838,10 +838,10 @@ func (p Gs2SerialKeyRestClient) Issue(
 	return asyncResult.result, asyncResult.err
 }
 
-func describeSerialCodesAsyncHandler(
+func describeSerialKeysAsyncHandler(
 	client Gs2SerialKeyRestClient,
 	job *core.NetworkJob,
-	callback chan<- DescribeSerialCodesAsyncResult,
+	callback chan<- DescribeSerialKeysAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -850,15 +850,15 @@ func describeSerialCodesAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- DescribeSerialCodesAsyncResult{
+		callback <- DescribeSerialKeysAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result DescribeSerialCodesResult
+	var result DescribeSerialKeysResult
 	if asyncResult.Err != nil {
-		callback <- DescribeSerialCodesAsyncResult{
+		callback <- DescribeSerialKeysAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -866,24 +866,24 @@ func describeSerialCodesAsyncHandler(
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- DescribeSerialCodesAsyncResult{
+            callback <- DescribeSerialKeysAsyncResult{
                 err: err,
             }
             return
         }
 	}
-	callback <- DescribeSerialCodesAsyncResult{
+	callback <- DescribeSerialKeysAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SerialKeyRestClient) DescribeSerialCodesAsync(
-	request *DescribeSerialCodesRequest,
-	callback chan<- DescribeSerialCodesAsyncResult,
+func (p Gs2SerialKeyRestClient) DescribeSerialKeysAsync(
+	request *DescribeSerialKeysRequest,
+	callback chan<- DescribeSerialKeysAsyncResult,
 ) {
-	path := "/{namespaceName}/campaign/{campaignModelName}/issue/{issueJobName}/serialCode"
+	path := "/{namespaceName}/campaign/{campaignModelName}/issue/{issueJobName}/serialKey"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -914,7 +914,7 @@ func (p Gs2SerialKeyRestClient) DescribeSerialCodesAsync(
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
 
-	go describeSerialCodesAsyncHandler(
+	go describeSerialKeysAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
@@ -926,11 +926,194 @@ func (p Gs2SerialKeyRestClient) DescribeSerialCodesAsync(
 	)
 }
 
-func (p Gs2SerialKeyRestClient) DescribeSerialCodes(
-	request *DescribeSerialCodesRequest,
-) (*DescribeSerialCodesResult, error) {
-	callback := make(chan DescribeSerialCodesAsyncResult, 1)
-	go p.DescribeSerialCodesAsync(
+func (p Gs2SerialKeyRestClient) DescribeSerialKeys(
+	request *DescribeSerialKeysRequest,
+) (*DescribeSerialKeysResult, error) {
+	callback := make(chan DescribeSerialKeysAsyncResult, 1)
+	go p.DescribeSerialKeysAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func downloadSerialCodesAsyncHandler(
+	client Gs2SerialKeyRestClient,
+	job *core.NetworkJob,
+	callback chan<- DownloadSerialCodesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DownloadSerialCodesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DownloadSerialCodesResult
+	if asyncResult.Err != nil {
+		callback <- DownloadSerialCodesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DownloadSerialCodesAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DownloadSerialCodesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SerialKeyRestClient) DownloadSerialCodesAsync(
+	request *DownloadSerialCodesRequest,
+	callback chan<- DownloadSerialCodesAsyncResult,
+) {
+	path := "/{namespaceName}/campaign/{campaignModelName}/issue/{issueJobName}/serialCode/download"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.CampaignModelName != nil && *request.CampaignModelName != ""  {
+        path = strings.ReplaceAll(path, "{campaignModelName}", core.ToString(*request.CampaignModelName))
+    } else {
+        path = strings.ReplaceAll(path, "{campaignModelName}", "null")
+    }
+    if request.IssueJobName != nil && *request.IssueJobName != ""  {
+        path = strings.ReplaceAll(path, "{issueJobName}", core.ToString(*request.IssueJobName))
+    } else {
+        path = strings.ReplaceAll(path, "{issueJobName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go downloadSerialCodesAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SerialKeyRestClient) DownloadSerialCodes(
+	request *DownloadSerialCodesRequest,
+) (*DownloadSerialCodesResult, error) {
+	callback := make(chan DownloadSerialCodesAsyncResult, 1)
+	go p.DownloadSerialCodesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getSerialKeyAsyncHandler(
+	client Gs2SerialKeyRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetSerialKeyAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSerialKeyAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSerialKeyResult
+	if asyncResult.Err != nil {
+		callback <- GetSerialKeyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSerialKeyAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetSerialKeyAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SerialKeyRestClient) GetSerialKeyAsync(
+	request *GetSerialKeyRequest,
+	callback chan<- GetSerialKeyAsyncResult,
+) {
+	path := "/{namespaceName}/serialKey/{code}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.Code != nil && *request.Code != ""  {
+        path = strings.ReplaceAll(path, "{code}", core.ToString(*request.Code))
+    } else {
+        path = strings.ReplaceAll(path, "{code}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getSerialKeyAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SerialKeyRestClient) GetSerialKey(
+	request *GetSerialKeyRequest,
+) (*GetSerialKeyResult, error) {
+	callback := make(chan GetSerialKeyAsyncResult, 1)
+	go p.GetSerialKeyAsync(
 		request,
 		callback,
 	)

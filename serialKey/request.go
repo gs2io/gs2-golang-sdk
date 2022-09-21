@@ -312,7 +312,7 @@ func (p IssueRequest) Pointer() *IssueRequest {
     return &p
 }
 
-type DescribeSerialCodesRequest struct {
+type DescribeSerialKeysRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
@@ -322,14 +322,14 @@ type DescribeSerialCodesRequest struct {
     Limit *int32 `json:"limit"`
 }
 
-func NewDescribeSerialCodesRequestFromJson(data string) DescribeSerialCodesRequest {
+func NewDescribeSerialKeysRequestFromJson(data string) DescribeSerialKeysRequest {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeSerialCodesRequestFromDict(dict)
+    return NewDescribeSerialKeysRequestFromDict(dict)
 }
 
-func NewDescribeSerialCodesRequestFromDict(data map[string]interface{}) DescribeSerialCodesRequest {
-    return DescribeSerialCodesRequest {
+func NewDescribeSerialKeysRequestFromDict(data map[string]interface{}) DescribeSerialKeysRequest {
+    return DescribeSerialKeysRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         CampaignModelName: core.CastString(data["campaignModelName"]),
         IssueJobName: core.CastString(data["issueJobName"]),
@@ -338,7 +338,7 @@ func NewDescribeSerialCodesRequestFromDict(data map[string]interface{}) Describe
     }
 }
 
-func (p DescribeSerialCodesRequest) ToDict() map[string]interface{} {
+func (p DescribeSerialKeysRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "campaignModelName": p.CampaignModelName,
@@ -348,7 +348,72 @@ func (p DescribeSerialCodesRequest) ToDict() map[string]interface{} {
     }
 }
 
-func (p DescribeSerialCodesRequest) Pointer() *DescribeSerialCodesRequest {
+func (p DescribeSerialKeysRequest) Pointer() *DescribeSerialKeysRequest {
+    return &p
+}
+
+type DownloadSerialCodesRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    CampaignModelName *string `json:"campaignModelName"`
+    IssueJobName *string `json:"issueJobName"`
+}
+
+func NewDownloadSerialCodesRequestFromJson(data string) DownloadSerialCodesRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDownloadSerialCodesRequestFromDict(dict)
+}
+
+func NewDownloadSerialCodesRequestFromDict(data map[string]interface{}) DownloadSerialCodesRequest {
+    return DownloadSerialCodesRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        CampaignModelName: core.CastString(data["campaignModelName"]),
+        IssueJobName: core.CastString(data["issueJobName"]),
+    }
+}
+
+func (p DownloadSerialCodesRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "campaignModelName": p.CampaignModelName,
+        "issueJobName": p.IssueJobName,
+    }
+}
+
+func (p DownloadSerialCodesRequest) Pointer() *DownloadSerialCodesRequest {
+    return &p
+}
+
+type GetSerialKeyRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Code *string `json:"code"`
+}
+
+func NewGetSerialKeyRequestFromJson(data string) GetSerialKeyRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSerialKeyRequestFromDict(dict)
+}
+
+func NewGetSerialKeyRequestFromDict(data map[string]interface{}) GetSerialKeyRequest {
+    return GetSerialKeyRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Code: core.CastString(data["code"]),
+    }
+}
+
+func (p GetSerialKeyRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "code": p.Code,
+    }
+}
+
+func (p GetSerialKeyRequest) Pointer() *GetSerialKeyRequest {
     return &p
 }
 

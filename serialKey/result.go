@@ -310,39 +310,104 @@ func (p IssueResult) Pointer() *IssueResult {
     return &p
 }
 
-type DescribeSerialCodesResult struct {
-    Items []string `json:"items"`
+type DescribeSerialKeysResult struct {
+    Items []SerialKey `json:"items"`
     NextPageToken *string `json:"nextPageToken"`
 }
 
-type DescribeSerialCodesAsyncResult struct {
-	result *DescribeSerialCodesResult
+type DescribeSerialKeysAsyncResult struct {
+	result *DescribeSerialKeysResult
 	err    error
 }
 
-func NewDescribeSerialCodesResultFromJson(data string) DescribeSerialCodesResult {
+func NewDescribeSerialKeysResultFromJson(data string) DescribeSerialKeysResult {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeSerialCodesResultFromDict(dict)
+    return NewDescribeSerialKeysResultFromDict(dict)
 }
 
-func NewDescribeSerialCodesResultFromDict(data map[string]interface{}) DescribeSerialCodesResult {
-    return DescribeSerialCodesResult {
-        Items: core.CastStrings(core.CastArray(data["items"])),
+func NewDescribeSerialKeysResultFromDict(data map[string]interface{}) DescribeSerialKeysResult {
+    return DescribeSerialKeysResult {
+        Items: CastSerialKeys(core.CastArray(data["items"])),
         NextPageToken: core.CastString(data["nextPageToken"]),
     }
 }
 
-func (p DescribeSerialCodesResult) ToDict() map[string]interface{} {
+func (p DescribeSerialKeysResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
-        "items": core.CastStringsFromDict(
+        "items": CastSerialKeysFromDict(
             p.Items,
         ),
         "nextPageToken": p.NextPageToken,
     }
 }
 
-func (p DescribeSerialCodesResult) Pointer() *DescribeSerialCodesResult {
+func (p DescribeSerialKeysResult) Pointer() *DescribeSerialKeysResult {
+    return &p
+}
+
+type DownloadSerialCodesResult struct {
+    Url *string `json:"url"`
+}
+
+type DownloadSerialCodesAsyncResult struct {
+	result *DownloadSerialCodesResult
+	err    error
+}
+
+func NewDownloadSerialCodesResultFromJson(data string) DownloadSerialCodesResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDownloadSerialCodesResultFromDict(dict)
+}
+
+func NewDownloadSerialCodesResultFromDict(data map[string]interface{}) DownloadSerialCodesResult {
+    return DownloadSerialCodesResult {
+        Url: core.CastString(data["url"]),
+    }
+}
+
+func (p DownloadSerialCodesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "url": p.Url,
+    }
+}
+
+func (p DownloadSerialCodesResult) Pointer() *DownloadSerialCodesResult {
+    return &p
+}
+
+type GetSerialKeyResult struct {
+    Item *SerialKey `json:"item"`
+    CampaignModel *CampaignModel `json:"campaignModel"`
+}
+
+type GetSerialKeyAsyncResult struct {
+	result *GetSerialKeyResult
+	err    error
+}
+
+func NewGetSerialKeyResultFromJson(data string) GetSerialKeyResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSerialKeyResultFromDict(dict)
+}
+
+func NewGetSerialKeyResultFromDict(data map[string]interface{}) GetSerialKeyResult {
+    return GetSerialKeyResult {
+        Item: NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
+        CampaignModel: NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer(),
+    }
+}
+
+func (p GetSerialKeyResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "campaignModel": p.CampaignModel.ToDict(),
+    }
+}
+
+func (p GetSerialKeyResult) Pointer() *GetSerialKeyResult {
     return &p
 }
 
