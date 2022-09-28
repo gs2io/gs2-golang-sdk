@@ -569,6 +569,85 @@ func (p Gs2RealtimeRestClient) DeleteNamespace(
 	return asyncResult.result, asyncResult.err
 }
 
+func nowAsyncHandler(
+	client Gs2RealtimeRestClient,
+	job *core.NetworkJob,
+	callback chan<- NowAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- NowAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result NowResult
+	if asyncResult.Err != nil {
+		callback <- NowAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- NowAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- NowAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2RealtimeRestClient) NowAsync(
+	request *NowRequest,
+	callback chan<- NowAsyncResult,
+) {
+	path := "/now"
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go nowAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("realtime").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2RealtimeRestClient) Now(
+	request *NowRequest,
+) (*NowResult, error) {
+	callback := make(chan NowAsyncResult, 1)
+	go p.NowAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describeRoomsAsyncHandler(
 	client Gs2RealtimeRestClient,
 	job *core.NetworkJob,

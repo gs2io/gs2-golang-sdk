@@ -212,6 +212,37 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
     return &p
 }
 
+type NowResult struct {
+    Timestamp *int64 `json:"timestamp"`
+}
+
+type NowAsyncResult struct {
+	result *NowResult
+	err    error
+}
+
+func NewNowResultFromJson(data string) NowResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewNowResultFromDict(dict)
+}
+
+func NewNowResultFromDict(data map[string]interface{}) NowResult {
+    return NowResult {
+        Timestamp: core.CastInt64(data["timestamp"]),
+    }
+}
+
+func (p NowResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "timestamp": p.Timestamp,
+    }
+}
+
+func (p NowResult) Pointer() *NowResult {
+    return &p
+}
+
 type DescribeRoomsResult struct {
     Items []Room `json:"items"`
     NextPageToken *string `json:"nextPageToken"`

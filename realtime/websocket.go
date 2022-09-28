@@ -537,6 +537,82 @@ func (p Gs2RealtimeWebSocketClient) DeleteNamespace(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2RealtimeWebSocketClient) nowAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- NowAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- NowAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result NowResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- NowAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- NowAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2RealtimeWebSocketClient) NowAsync(
+	request *NowRequest,
+	callback chan<- NowAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "realtime",
+    		"component": "namespace",
+    		"function": "now",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.nowAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2RealtimeWebSocketClient) Now(
+	request *NowRequest,
+) (*NowResult, error) {
+	callback := make(chan NowAsyncResult, 1)
+	go p.NowAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2RealtimeWebSocketClient) describeRoomsAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribeRoomsAsyncResult,

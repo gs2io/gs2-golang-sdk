@@ -222,6 +222,31 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
     return &p
 }
 
+type NowRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+}
+
+func NewNowRequestFromJson(data string) NowRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewNowRequestFromDict(dict)
+}
+
+func NewNowRequestFromDict(data map[string]interface{}) NowRequest {
+    return NowRequest {
+    }
+}
+
+func (p NowRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+    }
+}
+
+func (p NowRequest) Pointer() *NowRequest {
+    return &p
+}
+
 type DescribeRoomsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
