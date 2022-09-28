@@ -623,6 +623,9 @@ func (p Gs2RealtimeRestClient) NowAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go nowAsyncHandler(
 		p,

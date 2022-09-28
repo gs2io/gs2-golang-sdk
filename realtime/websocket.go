@@ -588,9 +588,15 @@ func (p Gs2RealtimeWebSocketClient) NowAsync(
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.nowAsyncHandler(
 		&core.WebSocketNetworkJob{

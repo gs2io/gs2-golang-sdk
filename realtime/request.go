@@ -225,6 +225,7 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 type NowRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    AccessToken *string `json:"accessToken"`
 }
 
 func NewNowRequestFromJson(data string) NowRequest {
@@ -235,11 +236,13 @@ func NewNowRequestFromJson(data string) NowRequest {
 
 func NewNowRequestFromDict(data map[string]interface{}) NowRequest {
     return NowRequest {
+        AccessToken: core.CastString(data["accessToken"]),
     }
 }
 
 func (p NowRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
+        "accessToken": p.AccessToken,
     }
 }
 
