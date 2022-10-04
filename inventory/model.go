@@ -234,6 +234,7 @@ type InventoryModel struct {
 	InitialCapacity *int32 `json:"initialCapacity"`
 	MaxCapacity *int32 `json:"maxCapacity"`
 	ProtectReferencedItem *bool `json:"protectReferencedItem"`
+	ItemModels []ItemModel `json:"itemModels"`
 }
 
 func NewInventoryModelFromJson(data string) InventoryModel {
@@ -250,6 +251,7 @@ func NewInventoryModelFromDict(data map[string]interface{}) InventoryModel {
         InitialCapacity: core.CastInt32(data["initialCapacity"]),
         MaxCapacity: core.CastInt32(data["maxCapacity"]),
         ProtectReferencedItem: core.CastBool(data["protectReferencedItem"]),
+        ItemModels: CastItemModels(core.CastArray(data["itemModels"])),
     }
 }
 
@@ -279,6 +281,12 @@ func (p InventoryModel) ToDict() map[string]interface{} {
     if p.ProtectReferencedItem != nil {
         protectReferencedItem = p.ProtectReferencedItem
     }
+    var itemModels []interface{}
+    if p.ItemModels != nil {
+        itemModels = CastItemModelsFromDict(
+            p.ItemModels,
+        )
+    }
     return map[string]interface{} {
         "inventoryModelId": inventoryModelId,
         "name": name,
@@ -286,6 +294,7 @@ func (p InventoryModel) ToDict() map[string]interface{} {
         "initialCapacity": initialCapacity,
         "maxCapacity": maxCapacity,
         "protectReferencedItem": protectReferencedItem,
+        "itemModels": itemModels,
     }
 }
 
