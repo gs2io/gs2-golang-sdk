@@ -191,6 +191,9 @@ func (p Gs2MatchmakingRestClient) CreateNamespaceAsync(
     if request.CompleteMatchmakingTriggerScriptId != nil && *request.CompleteMatchmakingTriggerScriptId != "" {
         bodies["completeMatchmakingTriggerScriptId"] = *request.CompleteMatchmakingTriggerScriptId
     }
+    if request.ChangeRatingScript != nil {
+        bodies["changeRatingScript"] = request.ChangeRatingScript.ToDict()
+    }
     if request.JoinNotification != nil {
         bodies["joinNotification"] = request.JoinNotification.ToDict()
     }
@@ -481,6 +484,9 @@ func (p Gs2MatchmakingRestClient) UpdateNamespaceAsync(
     }
     if request.CompleteMatchmakingTriggerScriptId != nil && *request.CompleteMatchmakingTriggerScriptId != "" {
         bodies["completeMatchmakingTriggerScriptId"] = *request.CompleteMatchmakingTriggerScriptId
+    }
+    if request.ChangeRatingScript != nil {
+        bodies["changeRatingScript"] = request.ChangeRatingScript.ToDict()
     }
     if request.JoinNotification != nil {
         bodies["joinNotification"] = request.JoinNotification.ToDict()

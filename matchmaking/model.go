@@ -32,6 +32,7 @@ type Namespace struct {
 	CompleteMatchmakingTriggerType *string `json:"completeMatchmakingTriggerType"`
 	CompleteMatchmakingTriggerRealtimeNamespaceId *string `json:"completeMatchmakingTriggerRealtimeNamespaceId"`
 	CompleteMatchmakingTriggerScriptId *string `json:"completeMatchmakingTriggerScriptId"`
+	ChangeRatingScript *ScriptSetting `json:"changeRatingScript"`
 	JoinNotification *NotificationSetting `json:"joinNotification"`
 	LeaveNotification *NotificationSetting `json:"leaveNotification"`
 	CompleteNotification *NotificationSetting `json:"completeNotification"`
@@ -58,6 +59,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         CompleteMatchmakingTriggerType: core.CastString(data["completeMatchmakingTriggerType"]),
         CompleteMatchmakingTriggerRealtimeNamespaceId: core.CastString(data["completeMatchmakingTriggerRealtimeNamespaceId"]),
         CompleteMatchmakingTriggerScriptId: core.CastString(data["completeMatchmakingTriggerScriptId"]),
+        ChangeRatingScript: NewScriptSettingFromDict(core.CastMap(data["changeRatingScript"])).Pointer(),
         JoinNotification: NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer(),
         LeaveNotification: NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer(),
         CompleteNotification: NewNotificationSettingFromDict(core.CastMap(data["completeNotification"])).Pointer(),
@@ -109,6 +111,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.CompleteMatchmakingTriggerScriptId != nil {
         completeMatchmakingTriggerScriptId = p.CompleteMatchmakingTriggerScriptId
     }
+    var changeRatingScript map[string]interface{}
+    if p.ChangeRatingScript != nil {
+        changeRatingScript = p.ChangeRatingScript.ToDict()
+    }
     var joinNotification map[string]interface{}
     if p.JoinNotification != nil {
         joinNotification = p.JoinNotification.ToDict()
@@ -144,6 +150,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "completeMatchmakingTriggerType": completeMatchmakingTriggerType,
         "completeMatchmakingTriggerRealtimeNamespaceId": completeMatchmakingTriggerRealtimeNamespaceId,
         "completeMatchmakingTriggerScriptId": completeMatchmakingTriggerScriptId,
+        "changeRatingScript": changeRatingScript,
         "joinNotification": joinNotification,
         "leaveNotification": leaveNotification,
         "completeNotification": completeNotification,
@@ -486,6 +493,74 @@ func CastCurrentRatingModelMasters(data []interface{}) []CurrentRatingModelMaste
 }
 
 func CastCurrentRatingModelMastersFromDict(data []CurrentRatingModelMaster) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type ScriptSetting struct {
+	TriggerScriptId *string `json:"triggerScriptId"`
+	DoneTriggerTargetType *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId *string `json:"doneTriggerScriptId"`
+	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
+}
+
+func NewScriptSettingFromJson(data string) ScriptSetting {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewScriptSettingFromDict(dict)
+}
+
+func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
+    return ScriptSetting {
+        TriggerScriptId: core.CastString(data["triggerScriptId"]),
+        DoneTriggerTargetType: core.CastString(data["doneTriggerTargetType"]),
+        DoneTriggerScriptId: core.CastString(data["doneTriggerScriptId"]),
+        DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+    }
+}
+
+func (p ScriptSetting) ToDict() map[string]interface{} {
+    
+    var triggerScriptId *string
+    if p.TriggerScriptId != nil {
+        triggerScriptId = p.TriggerScriptId
+    }
+    var doneTriggerTargetType *string
+    if p.DoneTriggerTargetType != nil {
+        doneTriggerTargetType = p.DoneTriggerTargetType
+    }
+    var doneTriggerScriptId *string
+    if p.DoneTriggerScriptId != nil {
+        doneTriggerScriptId = p.DoneTriggerScriptId
+    }
+    var doneTriggerQueueNamespaceId *string
+    if p.DoneTriggerQueueNamespaceId != nil {
+        doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+    }
+    return map[string]interface{} {
+        "triggerScriptId": triggerScriptId,
+        "doneTriggerTargetType": doneTriggerTargetType,
+        "doneTriggerScriptId": doneTriggerScriptId,
+        "doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
+    }
+}
+
+func (p ScriptSetting) Pointer() *ScriptSetting {
+    return &p
+}
+
+func CastScriptSettings(data []interface{}) []ScriptSetting {
+	v := make([]ScriptSetting, 0)
+	for _, d := range data {
+		v = append(v, NewScriptSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

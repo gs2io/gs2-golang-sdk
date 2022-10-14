@@ -64,6 +64,7 @@ type CreateNamespaceRequest struct {
     CompleteMatchmakingTriggerType *string `json:"completeMatchmakingTriggerType"`
     CompleteMatchmakingTriggerRealtimeNamespaceId *string `json:"completeMatchmakingTriggerRealtimeNamespaceId"`
     CompleteMatchmakingTriggerScriptId *string `json:"completeMatchmakingTriggerScriptId"`
+    ChangeRatingScript *ScriptSetting `json:"changeRatingScript"`
     JoinNotification *NotificationSetting `json:"joinNotification"`
     LeaveNotification *NotificationSetting `json:"leaveNotification"`
     CompleteNotification *NotificationSetting `json:"completeNotification"`
@@ -87,6 +88,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
         CompleteMatchmakingTriggerType: core.CastString(data["completeMatchmakingTriggerType"]),
         CompleteMatchmakingTriggerRealtimeNamespaceId: core.CastString(data["completeMatchmakingTriggerRealtimeNamespaceId"]),
         CompleteMatchmakingTriggerScriptId: core.CastString(data["completeMatchmakingTriggerScriptId"]),
+        ChangeRatingScript: NewScriptSettingFromDict(core.CastMap(data["changeRatingScript"])).Pointer(),
         JoinNotification: NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer(),
         LeaveNotification: NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer(),
         CompleteNotification: NewNotificationSettingFromDict(core.CastMap(data["completeNotification"])).Pointer(),
@@ -105,6 +107,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
         "completeMatchmakingTriggerType": p.CompleteMatchmakingTriggerType,
         "completeMatchmakingTriggerRealtimeNamespaceId": p.CompleteMatchmakingTriggerRealtimeNamespaceId,
         "completeMatchmakingTriggerScriptId": p.CompleteMatchmakingTriggerScriptId,
+        "changeRatingScript": p.ChangeRatingScript.ToDict(),
         "joinNotification": p.JoinNotification.ToDict(),
         "leaveNotification": p.LeaveNotification.ToDict(),
         "completeNotification": p.CompleteNotification.ToDict(),
@@ -184,6 +187,7 @@ type UpdateNamespaceRequest struct {
     CompleteMatchmakingTriggerType *string `json:"completeMatchmakingTriggerType"`
     CompleteMatchmakingTriggerRealtimeNamespaceId *string `json:"completeMatchmakingTriggerRealtimeNamespaceId"`
     CompleteMatchmakingTriggerScriptId *string `json:"completeMatchmakingTriggerScriptId"`
+    ChangeRatingScript *ScriptSetting `json:"changeRatingScript"`
     JoinNotification *NotificationSetting `json:"joinNotification"`
     LeaveNotification *NotificationSetting `json:"leaveNotification"`
     CompleteNotification *NotificationSetting `json:"completeNotification"`
@@ -207,6 +211,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
         CompleteMatchmakingTriggerType: core.CastString(data["completeMatchmakingTriggerType"]),
         CompleteMatchmakingTriggerRealtimeNamespaceId: core.CastString(data["completeMatchmakingTriggerRealtimeNamespaceId"]),
         CompleteMatchmakingTriggerScriptId: core.CastString(data["completeMatchmakingTriggerScriptId"]),
+        ChangeRatingScript: NewScriptSettingFromDict(core.CastMap(data["changeRatingScript"])).Pointer(),
         JoinNotification: NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer(),
         LeaveNotification: NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer(),
         CompleteNotification: NewNotificationSettingFromDict(core.CastMap(data["completeNotification"])).Pointer(),
@@ -225,6 +230,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
         "completeMatchmakingTriggerType": p.CompleteMatchmakingTriggerType,
         "completeMatchmakingTriggerRealtimeNamespaceId": p.CompleteMatchmakingTriggerRealtimeNamespaceId,
         "completeMatchmakingTriggerScriptId": p.CompleteMatchmakingTriggerScriptId,
+        "changeRatingScript": p.ChangeRatingScript.ToDict(),
         "joinNotification": p.JoinNotification.ToDict(),
         "leaveNotification": p.LeaveNotification.ToDict(),
         "completeNotification": p.CompleteNotification.ToDict(),
