@@ -1084,6 +1084,7 @@ func (p BuyRequest) Pointer() *BuyRequest {
 type BuyByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     ShowcaseName *string `json:"showcaseName"`
     DisplayItemId *string `json:"displayItemId"`

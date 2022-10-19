@@ -2930,6 +2930,9 @@ func (p Gs2ShowcaseRestClient) BuyByUserIdAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go buyByUserIdAsyncHandler(
 		p,

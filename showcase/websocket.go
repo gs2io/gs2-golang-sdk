@@ -2719,6 +2719,9 @@ func (p Gs2ShowcaseWebSocketClient) BuyByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.buyByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
