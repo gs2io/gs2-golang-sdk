@@ -594,6 +594,7 @@ func CastScoresFromDict(data []Score) []interface{} {
 type Ranking struct {
 	Rank *int64 `json:"rank"`
 	Index *int64 `json:"index"`
+	CategoryName *string `json:"categoryName"`
 	UserId *string `json:"userId"`
 	Score *int64 `json:"score"`
 	Metadata *string `json:"metadata"`
@@ -610,6 +611,7 @@ func NewRankingFromDict(data map[string]interface{}) Ranking {
     return Ranking {
         Rank: core.CastInt64(data["rank"]),
         Index: core.CastInt64(data["index"]),
+        CategoryName: core.CastString(data["categoryName"]),
         UserId: core.CastString(data["userId"]),
         Score: core.CastInt64(data["score"]),
         Metadata: core.CastString(data["metadata"]),
@@ -626,6 +628,10 @@ func (p Ranking) ToDict() map[string]interface{} {
     var index *int64
     if p.Index != nil {
         index = p.Index
+    }
+    var categoryName *string
+    if p.CategoryName != nil {
+        categoryName = p.CategoryName
     }
     var userId *string
     if p.UserId != nil {
@@ -646,6 +652,7 @@ func (p Ranking) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "rank": rank,
         "index": index,
+        "categoryName": categoryName,
         "userId": userId,
         "score": score,
         "metadata": metadata,
