@@ -533,7 +533,7 @@ func (p DeletePrizeTableMasterResult) Pointer() *DeletePrizeTableMasterResult {
 }
 
 type DescribeBoxesResult struct {
-    Items []Box `json:"items"`
+    Items []BoxItems `json:"items"`
     NextPageToken *string `json:"nextPageToken"`
 }
 
@@ -550,14 +550,14 @@ func NewDescribeBoxesResultFromJson(data string) DescribeBoxesResult {
 
 func NewDescribeBoxesResultFromDict(data map[string]interface{}) DescribeBoxesResult {
     return DescribeBoxesResult {
-        Items: CastBoxes(core.CastArray(data["items"])),
+        Items: CastBoxItemses(core.CastArray(data["items"])),
         NextPageToken: core.CastString(data["nextPageToken"]),
     }
 }
 
 func (p DescribeBoxesResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
-        "items": CastBoxesFromDict(
+        "items": CastBoxItemsesFromDict(
             p.Items,
         ),
         "nextPageToken": p.NextPageToken,
@@ -569,7 +569,7 @@ func (p DescribeBoxesResult) Pointer() *DescribeBoxesResult {
 }
 
 type DescribeBoxesByUserIdResult struct {
-    Items []Box `json:"items"`
+    Items []BoxItems `json:"items"`
     NextPageToken *string `json:"nextPageToken"`
 }
 
@@ -586,14 +586,14 @@ func NewDescribeBoxesByUserIdResultFromJson(data string) DescribeBoxesByUserIdRe
 
 func NewDescribeBoxesByUserIdResultFromDict(data map[string]interface{}) DescribeBoxesByUserIdResult {
     return DescribeBoxesByUserIdResult {
-        Items: CastBoxes(core.CastArray(data["items"])),
+        Items: CastBoxItemses(core.CastArray(data["items"])),
         NextPageToken: core.CastString(data["nextPageToken"]),
     }
 }
 
 func (p DescribeBoxesByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
-        "items": CastBoxesFromDict(
+        "items": CastBoxItemsesFromDict(
             p.Items,
         ),
         "nextPageToken": p.NextPageToken,
