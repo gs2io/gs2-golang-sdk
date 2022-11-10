@@ -328,6 +328,7 @@ func (p CreateRoomRequest) Pointer() *CreateRoomRequest {
 type CreateRoomFromBackendRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
     UserId *string `json:"userId"`
@@ -449,6 +450,7 @@ func (p UpdateRoomRequest) Pointer() *UpdateRoomRequest {
 type UpdateRoomFromBackendRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RoomName *string `json:"roomName"`
     Metadata *string `json:"metadata"`
@@ -528,6 +530,7 @@ func (p DeleteRoomRequest) Pointer() *DeleteRoomRequest {
 type DeleteRoomFromBackendRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RoomName *string `json:"roomName"`
     UserId *string `json:"userId"`
@@ -815,6 +818,7 @@ func (p GetMessageByUserIdRequest) Pointer() *GetMessageByUserIdRequest {
 type DeleteMessageRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RoomName *string `json:"roomName"`
     UserId *string `json:"userId"`

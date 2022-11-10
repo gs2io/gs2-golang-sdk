@@ -642,6 +642,9 @@ func (p Gs2LogWebSocketClient) QueryAccessLogAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.queryAccessLogAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -851,6 +854,9 @@ func (p Gs2LogWebSocketClient) QueryIssueStampSheetLogAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.queryIssueStampSheetLogAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1063,6 +1069,9 @@ func (p Gs2LogWebSocketClient) QueryExecuteStampSheetLogAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.queryExecuteStampSheetLogAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1275,6 +1284,9 @@ func (p Gs2LogWebSocketClient) QueryExecuteStampTaskLogAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.queryExecuteStampTaskLogAsyncHandler(
 		&core.WebSocketNetworkJob{

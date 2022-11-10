@@ -1259,6 +1259,9 @@ func (p Gs2ScriptRestClient) InvokeScriptAsync(
     if request.ScriptId != nil && *request.ScriptId != "" {
         bodies["scriptId"] = *request.ScriptId
     }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
     if request.Args != nil && *request.Args != "" {
         bodies["args"] = *request.Args
     }

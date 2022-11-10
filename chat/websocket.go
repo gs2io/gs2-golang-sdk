@@ -823,6 +823,9 @@ func (p Gs2ChatWebSocketClient) CreateRoomFromBackendAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.createRoomFromBackendAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1104,6 +1107,9 @@ func (p Gs2ChatWebSocketClient) UpdateRoomFromBackendAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.updateRoomFromBackendAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1277,6 +1283,9 @@ func (p Gs2ChatWebSocketClient) DeleteRoomFromBackendAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteRoomFromBackendAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1935,6 +1944,9 @@ func (p Gs2ChatWebSocketClient) DeleteMessageAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteMessageAsyncHandler(
 		&core.WebSocketNetworkJob{

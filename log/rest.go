@@ -676,6 +676,9 @@ func (p Gs2LogRestClient) QueryAccessLogAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go queryAccessLogAsyncHandler(
 		p,
@@ -894,6 +897,9 @@ func (p Gs2LogRestClient) QueryIssueStampSheetLogAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go queryIssueStampSheetLogAsyncHandler(
@@ -1117,6 +1123,9 @@ func (p Gs2LogRestClient) QueryExecuteStampSheetLogAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go queryExecuteStampSheetLogAsyncHandler(
 		p,
@@ -1338,6 +1347,9 @@ func (p Gs2LogRestClient) QueryExecuteStampTaskLogAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go queryExecuteStampTaskLogAsyncHandler(

@@ -452,6 +452,7 @@ type InvokeScriptRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     ScriptId *string `json:"scriptId"`
+    UserId *string `json:"userId"`
     Args *string `json:"args"`
 }
 
@@ -464,6 +465,7 @@ func NewInvokeScriptRequestFromJson(data string) InvokeScriptRequest {
 func NewInvokeScriptRequestFromDict(data map[string]interface{}) InvokeScriptRequest {
     return InvokeScriptRequest {
         ScriptId: core.CastString(data["scriptId"]),
+        UserId: core.CastString(data["userId"]),
         Args: core.CastString(data["args"]),
     }
 }
@@ -471,6 +473,7 @@ func NewInvokeScriptRequestFromDict(data map[string]interface{}) InvokeScriptReq
 func (p InvokeScriptRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "scriptId": p.ScriptId,
+        "userId": p.UserId,
         "args": p.Args,
     }
 }

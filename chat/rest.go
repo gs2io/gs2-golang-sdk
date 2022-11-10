@@ -870,6 +870,9 @@ func (p Gs2ChatRestClient) CreateRoomFromBackendAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go createRoomFromBackendAsyncHandler(
 		p,
@@ -1175,6 +1178,9 @@ func (p Gs2ChatRestClient) UpdateRoomFromBackendAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go updateRoomFromBackendAsyncHandler(
 		p,
@@ -1358,6 +1364,9 @@ func (p Gs2ChatRestClient) DeleteRoomFromBackendAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteRoomFromBackendAsyncHandler(
@@ -2070,6 +2079,9 @@ func (p Gs2ChatRestClient) DeleteMessageAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteMessageAsyncHandler(
