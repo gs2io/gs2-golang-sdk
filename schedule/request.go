@@ -632,6 +632,7 @@ func (p TriggerByUserIdRequest) Pointer() *TriggerByUserIdRequest {
 type DeleteTriggerRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TriggerName *string `json:"triggerName"`

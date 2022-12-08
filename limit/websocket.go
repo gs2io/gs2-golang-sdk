@@ -958,6 +958,9 @@ func (p Gs2LimitWebSocketClient) CountUpAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.countUpAsyncHandler(
 		&core.WebSocketNetworkJob{

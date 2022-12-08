@@ -2112,6 +2112,9 @@ func (p Gs2MegaFieldWebSocketClient) PutPositionAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.putPositionAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2310,6 +2313,9 @@ func (p Gs2MegaFieldWebSocketClient) FetchPositionAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.fetchPositionAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2504,6 +2510,9 @@ func (p Gs2MegaFieldWebSocketClient) NearUserIdsAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.nearUserIdsAsyncHandler(
@@ -2702,6 +2711,9 @@ func (p Gs2MegaFieldWebSocketClient) ActionAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.actionAsyncHandler(

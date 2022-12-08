@@ -1240,6 +1240,9 @@ func (p Gs2RankingWebSocketClient) SubscribeAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.subscribeAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2262,6 +2265,9 @@ func (p Gs2RankingWebSocketClient) PutScoreAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.putScoreAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3029,6 +3035,9 @@ func (p Gs2RankingWebSocketClient) UnsubscribeAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.unsubscribeAsyncHandler(

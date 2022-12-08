@@ -2866,6 +2866,9 @@ func (p Gs2FormationRestClient) DeleteMoldAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go deleteMoldAsyncHandler(
 		p,
@@ -3957,6 +3960,9 @@ func (p Gs2FormationRestClient) SetFormWithSignatureAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go setFormWithSignatureAsyncHandler(
 		p,
@@ -4168,6 +4174,9 @@ func (p Gs2FormationRestClient) DeleteFormAsync(
     }
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteFormAsyncHandler(
@@ -5177,6 +5186,9 @@ func (p Gs2FormationRestClient) SetPropertyFormWithSignatureAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go setPropertyFormWithSignatureAsyncHandler(
 		p,
@@ -5388,6 +5400,9 @@ func (p Gs2FormationRestClient) DeletePropertyFormAsync(
     }
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deletePropertyFormAsyncHandler(

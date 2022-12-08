@@ -815,6 +815,9 @@ func (p Gs2LockRestClient) LockAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go lockAsyncHandler(
 		p,
@@ -1018,6 +1021,9 @@ func (p Gs2LockRestClient) UnlockAsync(
     }
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go unlockAsyncHandler(

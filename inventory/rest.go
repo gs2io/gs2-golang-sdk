@@ -3917,6 +3917,9 @@ func (p Gs2InventoryRestClient) ConsumeItemSetAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go consumeItemSetAsyncHandler(
 		p,
@@ -4846,6 +4849,9 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go verifyReferenceOfAsyncHandler(
 		p,
@@ -5074,6 +5080,9 @@ func (p Gs2InventoryRestClient) AddReferenceOfAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go addReferenceOfAsyncHandler(
 		p,
@@ -5293,6 +5302,9 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfAsync(
     }
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteReferenceOfAsyncHandler(

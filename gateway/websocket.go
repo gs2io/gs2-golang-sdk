@@ -770,6 +770,9 @@ func (p Gs2GatewayWebSocketClient) SetUserIdAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1207,6 +1210,9 @@ func (p Gs2GatewayWebSocketClient) SetFirebaseTokenAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setFirebaseTokenAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1546,6 +1552,9 @@ func (p Gs2GatewayWebSocketClient) DeleteFirebaseTokenAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.deleteFirebaseTokenAsyncHandler(

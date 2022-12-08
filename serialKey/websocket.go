@@ -1104,6 +1104,9 @@ func (p Gs2SerialKeyWebSocketClient) UseAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.useAsyncHandler(
 		&core.WebSocketNetworkJob{

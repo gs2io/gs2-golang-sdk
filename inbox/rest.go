@@ -1147,6 +1147,9 @@ func (p Gs2InboxRestClient) ReceiveGlobalMessageAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go receiveGlobalMessageAsyncHandler(
 		p,
@@ -1336,6 +1339,9 @@ func (p Gs2InboxRestClient) OpenMessageAsync(
     }
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go openMessageAsyncHandler(
@@ -1539,6 +1545,9 @@ func (p Gs2InboxRestClient) ReadMessageAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go readMessageAsyncHandler(
 		p,
@@ -1737,6 +1746,9 @@ func (p Gs2InboxRestClient) DeleteMessageAsync(
     }
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteMessageAsyncHandler(

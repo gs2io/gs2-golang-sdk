@@ -583,42 +583,6 @@ func (p DirectEnhanceByStampSheetResult) Pointer() *DirectEnhanceByStampSheetRes
     return &p
 }
 
-type DescribeProgressesByUserIdResult struct {
-    Items []Progress `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-}
-
-type DescribeProgressesByUserIdAsyncResult struct {
-	result *DescribeProgressesByUserIdResult
-	err    error
-}
-
-func NewDescribeProgressesByUserIdResultFromJson(data string) DescribeProgressesByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeProgressesByUserIdResultFromDict(dict)
-}
-
-func NewDescribeProgressesByUserIdResultFromDict(data map[string]interface{}) DescribeProgressesByUserIdResult {
-    return DescribeProgressesByUserIdResult {
-        Items: CastProgresses(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
-}
-
-func (p DescribeProgressesByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastProgressesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
-}
-
-func (p DescribeProgressesByUserIdResult) Pointer() *DescribeProgressesByUserIdResult {
-    return &p
-}
-
 type CreateProgressByUserIdResult struct {
     Item *Progress `json:"item"`
 }
@@ -652,7 +616,6 @@ func (p CreateProgressByUserIdResult) Pointer() *CreateProgressByUserIdResult {
 
 type GetProgressResult struct {
     Item *Progress `json:"item"`
-    RateModel *RateModel `json:"rateModel"`
 }
 
 type GetProgressAsyncResult struct {
@@ -669,14 +632,12 @@ func NewGetProgressResultFromJson(data string) GetProgressResult {
 func NewGetProgressResultFromDict(data map[string]interface{}) GetProgressResult {
     return GetProgressResult {
         Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-        RateModel: NewRateModelFromDict(core.CastMap(data["rateModel"])).Pointer(),
     }
 }
 
 func (p GetProgressResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
-        "rateModel": p.RateModel.ToDict(),
     }
 }
 
@@ -686,7 +647,6 @@ func (p GetProgressResult) Pointer() *GetProgressResult {
 
 type GetProgressByUserIdResult struct {
     Item *Progress `json:"item"`
-    RateModel *RateModel `json:"rateModel"`
 }
 
 type GetProgressByUserIdAsyncResult struct {
@@ -703,14 +663,12 @@ func NewGetProgressByUserIdResultFromJson(data string) GetProgressByUserIdResult
 func NewGetProgressByUserIdResultFromDict(data map[string]interface{}) GetProgressByUserIdResult {
     return GetProgressByUserIdResult {
         Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-        RateModel: NewRateModelFromDict(core.CastMap(data["rateModel"])).Pointer(),
     }
 }
 
 func (p GetProgressByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
-        "rateModel": p.RateModel.ToDict(),
     }
 }
 

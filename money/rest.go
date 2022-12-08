@@ -1155,6 +1155,9 @@ func (p Gs2MoneyRestClient) WithdrawAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go withdrawAsyncHandler(
 		p,

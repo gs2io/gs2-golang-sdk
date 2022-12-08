@@ -1528,6 +1528,9 @@ func (p Gs2ScheduleWebSocketClient) DeleteTriggerAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteTriggerAsyncHandler(
 		&core.WebSocketNetworkJob{

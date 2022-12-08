@@ -447,6 +447,7 @@ func (p GetMessageByUserIdRequest) Pointer() *GetMessageByUserIdRequest {
 type ReceiveGlobalMessageRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
 }
@@ -510,6 +511,7 @@ func (p ReceiveGlobalMessageByUserIdRequest) Pointer() *ReceiveGlobalMessageByUs
 type OpenMessageRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     MessageName *string `json:"messageName"`
@@ -579,6 +581,7 @@ func (p OpenMessageByUserIdRequest) Pointer() *OpenMessageByUserIdRequest {
 type ReadMessageRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     MessageName *string `json:"messageName"`
@@ -658,6 +661,7 @@ func (p ReadMessageByUserIdRequest) Pointer() *ReadMessageByUserIdRequest {
 type DeleteMessageRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     MessageName *string `json:"messageName"`

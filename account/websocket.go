@@ -1398,6 +1398,9 @@ func (p Gs2AccountWebSocketClient) CreateTakeOverAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.createTakeOverAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1759,6 +1762,9 @@ func (p Gs2AccountWebSocketClient) UpdateTakeOverAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.updateTakeOverAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1943,6 +1949,9 @@ func (p Gs2AccountWebSocketClient) DeleteTakeOverAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.deleteTakeOverAsyncHandler(

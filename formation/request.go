@@ -1047,6 +1047,7 @@ func (p AddMoldCapacityByUserIdRequest) Pointer() *AddMoldCapacityByUserIdReques
 type DeleteMoldRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     MoldName *string `json:"moldName"`
@@ -1455,6 +1456,7 @@ func (p SetFormByUserIdRequest) Pointer() *SetFormByUserIdRequest {
 type SetFormWithSignatureRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     MoldName *string `json:"moldName"`
@@ -1546,6 +1548,7 @@ func (p AcquireActionsToFormPropertiesRequest) Pointer() *AcquireActionsToFormPr
 type DeleteFormRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     MoldName *string `json:"moldName"`
@@ -1929,6 +1932,7 @@ func (p SetPropertyFormByUserIdRequest) Pointer() *SetPropertyFormByUserIdReques
 type SetPropertyFormWithSignatureRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     FormModelName *string `json:"formModelName"`
@@ -2020,6 +2024,7 @@ func (p AcquireActionsToPropertyFormPropertiesRequest) Pointer() *AcquireActions
 type DeletePropertyFormRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     FormModelName *string `json:"formModelName"`

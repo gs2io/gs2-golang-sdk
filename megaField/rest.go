@@ -2288,6 +2288,9 @@ func (p Gs2MegaFieldRestClient) PutPositionAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go putPositionAsyncHandler(
 		p,
@@ -2509,6 +2512,9 @@ func (p Gs2MegaFieldRestClient) FetchPositionAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go fetchPositionAsyncHandler(
 		p,
@@ -2724,6 +2730,9 @@ func (p Gs2MegaFieldRestClient) NearUserIdsAsync(
     }
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go nearUserIdsAsyncHandler(
@@ -2943,6 +2952,9 @@ func (p Gs2MegaFieldRestClient) ActionAsync(
     }
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go actionAsyncHandler(

@@ -725,6 +725,9 @@ func (p Gs2ChatWebSocketClient) CreateRoomAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.createRoomAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1009,6 +1012,9 @@ func (p Gs2ChatWebSocketClient) UpdateRoomAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.updateRoomAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1197,6 +1203,9 @@ func (p Gs2ChatWebSocketClient) DeleteRoomAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.deleteRoomAsyncHandler(
@@ -1573,6 +1582,9 @@ func (p Gs2ChatWebSocketClient) PostAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.postAsyncHandler(
@@ -2309,6 +2321,9 @@ func (p Gs2ChatWebSocketClient) SubscribeAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.subscribeAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2672,6 +2687,9 @@ func (p Gs2ChatWebSocketClient) UpdateNotificationTypeAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.updateNotificationTypeAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2854,6 +2872,9 @@ func (p Gs2ChatWebSocketClient) UnsubscribeAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.unsubscribeAsyncHandler(

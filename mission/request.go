@@ -98,6 +98,7 @@ func (p DescribeCompletesByUserIdRequest) Pointer() *DescribeCompletesByUserIdRe
 type CompleteRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     MissionGroupName *string `json:"missionGroupName"`
     MissionTaskName *string `json:"missionTaskName"`

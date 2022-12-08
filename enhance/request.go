@@ -514,6 +514,7 @@ func (p DeleteRateModelMasterRequest) Pointer() *DeleteRateModelMasterRequest {
 type DirectEnhanceRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RateName *string `json:"rateName"`
     AccessToken *string `json:"accessToken"`
@@ -637,43 +638,6 @@ func (p DirectEnhanceByStampSheetRequest) Pointer() *DirectEnhanceByStampSheetRe
     return &p
 }
 
-type DescribeProgressesByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    UserId *string `json:"userId"`
-    PageToken *string `json:"pageToken"`
-    Limit *int32 `json:"limit"`
-}
-
-func NewDescribeProgressesByUserIdRequestFromJson(data string) DescribeProgressesByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeProgressesByUserIdRequestFromDict(dict)
-}
-
-func NewDescribeProgressesByUserIdRequestFromDict(data map[string]interface{}) DescribeProgressesByUserIdRequest {
-    return DescribeProgressesByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        UserId: core.CastString(data["userId"]),
-        PageToken: core.CastString(data["pageToken"]),
-        Limit: core.CastInt32(data["limit"]),
-    }
-}
-
-func (p DescribeProgressesByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "userId": p.UserId,
-        "pageToken": p.PageToken,
-        "limit": p.Limit,
-    }
-}
-
-func (p DescribeProgressesByUserIdRequest) Pointer() *DescribeProgressesByUserIdRequest {
-    return &p
-}
-
 type CreateProgressByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
@@ -725,8 +689,6 @@ type GetProgressRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
-    RateName *string `json:"rateName"`
-    ProgressName *string `json:"progressName"`
 }
 
 func NewGetProgressRequestFromJson(data string) GetProgressRequest {
@@ -739,8 +701,6 @@ func NewGetProgressRequestFromDict(data map[string]interface{}) GetProgressReque
     return GetProgressRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         AccessToken: core.CastString(data["accessToken"]),
-        RateName: core.CastString(data["rateName"]),
-        ProgressName: core.CastString(data["progressName"]),
     }
 }
 
@@ -748,8 +708,6 @@ func (p GetProgressRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "accessToken": p.AccessToken,
-        "rateName": p.RateName,
-        "progressName": p.ProgressName,
     }
 }
 
@@ -762,8 +720,6 @@ type GetProgressByUserIdRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
-    RateName *string `json:"rateName"`
-    ProgressName *string `json:"progressName"`
 }
 
 func NewGetProgressByUserIdRequestFromJson(data string) GetProgressByUserIdRequest {
@@ -776,8 +732,6 @@ func NewGetProgressByUserIdRequestFromDict(data map[string]interface{}) GetProgr
     return GetProgressByUserIdRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         UserId: core.CastString(data["userId"]),
-        RateName: core.CastString(data["rateName"]),
-        ProgressName: core.CastString(data["progressName"]),
     }
 }
 
@@ -785,8 +739,6 @@ func (p GetProgressByUserIdRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "userId": p.UserId,
-        "rateName": p.RateName,
-        "progressName": p.ProgressName,
     }
 }
 
@@ -797,6 +749,7 @@ func (p GetProgressByUserIdRequest) Pointer() *GetProgressByUserIdRequest {
 type StartRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RateName *string `json:"rateName"`
     TargetItemSetId *string `json:"targetItemSetId"`
@@ -898,10 +851,9 @@ func (p StartByUserIdRequest) Pointer() *StartByUserIdRequest {
 type EndRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
-    RateName *string `json:"rateName"`
-    ProgressName *string `json:"progressName"`
     Config []Config `json:"config"`
 }
 
@@ -915,8 +867,6 @@ func NewEndRequestFromDict(data map[string]interface{}) EndRequest {
     return EndRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         AccessToken: core.CastString(data["accessToken"]),
-        RateName: core.CastString(data["rateName"]),
-        ProgressName: core.CastString(data["progressName"]),
         Config: CastConfigs(core.CastArray(data["config"])),
     }
 }
@@ -925,8 +875,6 @@ func (p EndRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "accessToken": p.AccessToken,
-        "rateName": p.RateName,
-        "progressName": p.ProgressName,
         "config": CastConfigsFromDict(
             p.Config,
         ),
@@ -943,8 +891,6 @@ type EndByUserIdRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
-    RateName *string `json:"rateName"`
-    ProgressName *string `json:"progressName"`
     Config []Config `json:"config"`
 }
 
@@ -958,8 +904,6 @@ func NewEndByUserIdRequestFromDict(data map[string]interface{}) EndByUserIdReque
     return EndByUserIdRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         UserId: core.CastString(data["userId"]),
-        RateName: core.CastString(data["rateName"]),
-        ProgressName: core.CastString(data["progressName"]),
         Config: CastConfigs(core.CastArray(data["config"])),
     }
 }
@@ -968,8 +912,6 @@ func (p EndByUserIdRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "userId": p.UserId,
-        "rateName": p.RateName,
-        "progressName": p.ProgressName,
         "config": CastConfigsFromDict(
             p.Config,
         ),
@@ -983,10 +925,9 @@ func (p EndByUserIdRequest) Pointer() *EndByUserIdRequest {
 type DeleteProgressRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
-    RateName *string `json:"rateName"`
-    ProgressName *string `json:"progressName"`
 }
 
 func NewDeleteProgressRequestFromJson(data string) DeleteProgressRequest {
@@ -999,8 +940,6 @@ func NewDeleteProgressRequestFromDict(data map[string]interface{}) DeleteProgres
     return DeleteProgressRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         AccessToken: core.CastString(data["accessToken"]),
-        RateName: core.CastString(data["rateName"]),
-        ProgressName: core.CastString(data["progressName"]),
     }
 }
 
@@ -1008,8 +947,6 @@ func (p DeleteProgressRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "accessToken": p.AccessToken,
-        "rateName": p.RateName,
-        "progressName": p.ProgressName,
     }
 }
 
@@ -1023,8 +960,6 @@ type DeleteProgressByUserIdRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
-    RateName *string `json:"rateName"`
-    ProgressName *string `json:"progressName"`
 }
 
 func NewDeleteProgressByUserIdRequestFromJson(data string) DeleteProgressByUserIdRequest {
@@ -1037,8 +972,6 @@ func NewDeleteProgressByUserIdRequestFromDict(data map[string]interface{}) Delet
     return DeleteProgressByUserIdRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         UserId: core.CastString(data["userId"]),
-        RateName: core.CastString(data["rateName"]),
-        ProgressName: core.CastString(data["progressName"]),
     }
 }
 
@@ -1046,8 +979,6 @@ func (p DeleteProgressByUserIdRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "userId": p.UserId,
-        "rateName": p.RateName,
-        "progressName": p.ProgressName,
     }
 }
 

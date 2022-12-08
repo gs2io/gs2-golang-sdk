@@ -281,6 +281,7 @@ func (p DescribeMutexesByUserIdRequest) Pointer() *DescribeMutexesByUserIdReques
 type LockRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PropertyId *string `json:"propertyId"`
     AccessToken *string `json:"accessToken"`
@@ -362,6 +363,7 @@ func (p LockByUserIdRequest) Pointer() *LockByUserIdRequest {
 type UnlockRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PropertyId *string `json:"propertyId"`
     AccessToken *string `json:"accessToken"`

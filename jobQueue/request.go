@@ -333,6 +333,7 @@ func (p PushByUserIdRequest) Pointer() *PushByUserIdRequest {
 type RunRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
 }

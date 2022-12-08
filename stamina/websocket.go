@@ -3337,6 +3337,9 @@ func (p Gs2StaminaWebSocketClient) ConsumeStaminaAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.consumeStaminaAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3980,6 +3983,9 @@ func (p Gs2StaminaWebSocketClient) SetMaxValueByStatusAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setMaxValueByStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4077,6 +4083,9 @@ func (p Gs2StaminaWebSocketClient) SetRecoverIntervalByStatusAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setRecoverIntervalByStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4173,6 +4182,9 @@ func (p Gs2StaminaWebSocketClient) SetRecoverValueByStatusAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.setRecoverValueByStatusAsyncHandler(

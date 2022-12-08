@@ -1039,6 +1039,7 @@ func (p GetShowcaseByUserIdRequest) Pointer() *GetShowcaseByUserIdRequest {
 type BuyRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     ShowcaseName *string `json:"showcaseName"`
     DisplayItemId *string `json:"displayItemId"`

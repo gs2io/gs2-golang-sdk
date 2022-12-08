@@ -361,6 +361,7 @@ func (p GetCounterByUserIdRequest) Pointer() *GetCounterByUserIdRequest {
 type CountUpRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     LimitName *string `json:"limitName"`
     CounterName *string `json:"counterName"`

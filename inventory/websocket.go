@@ -3613,6 +3613,9 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.consumeItemSetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4444,6 +4447,9 @@ func (p Gs2InventoryWebSocketClient) VerifyReferenceOfAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.verifyReferenceOfAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4641,6 +4647,9 @@ func (p Gs2InventoryWebSocketClient) AddReferenceOfAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.addReferenceOfAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4834,6 +4843,9 @@ func (p Gs2InventoryWebSocketClient) DeleteReferenceOfAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.deleteReferenceOfAsyncHandler(

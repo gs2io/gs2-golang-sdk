@@ -1494,6 +1494,9 @@ func (p Gs2VersionRestClient) AcceptAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go acceptAsyncHandler(
 		p,
@@ -1870,6 +1873,9 @@ func (p Gs2VersionRestClient) DeleteAcceptVersionAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go deleteAcceptVersionAsyncHandler(
 		p,
@@ -2063,6 +2069,9 @@ func (p Gs2VersionRestClient) CheckVersionAsync(
     }
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go checkVersionAsyncHandler(

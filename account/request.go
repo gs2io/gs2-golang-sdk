@@ -548,6 +548,7 @@ func (p DescribeTakeOversByUserIdRequest) Pointer() *DescribeTakeOversByUserIdRe
 type CreateTakeOverRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     Type *int32 `json:"type"`
@@ -697,6 +698,7 @@ func (p GetTakeOverByUserIdRequest) Pointer() *GetTakeOverByUserIdRequest {
 type UpdateTakeOverRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     Type *int32 `json:"type"`
@@ -778,6 +780,7 @@ func (p UpdateTakeOverByUserIdRequest) Pointer() *UpdateTakeOverByUserIdRequest 
 type DeleteTakeOverRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     Type *int32 `json:"type"`

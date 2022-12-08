@@ -1469,6 +1469,7 @@ func (p AcquireItemSetByUserIdRequest) Pointer() *AcquireItemSetByUserIdRequest 
 type ConsumeItemSetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     InventoryName *string `json:"inventoryName"`
     AccessToken *string `json:"accessToken"`
@@ -1825,6 +1826,7 @@ func (p GetReferenceOfByUserIdRequest) Pointer() *GetReferenceOfByUserIdRequest 
 type VerifyReferenceOfRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     InventoryName *string `json:"inventoryName"`
     AccessToken *string `json:"accessToken"`
@@ -1918,6 +1920,7 @@ func (p VerifyReferenceOfByUserIdRequest) Pointer() *VerifyReferenceOfByUserIdRe
 type AddReferenceOfRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     InventoryName *string `json:"inventoryName"`
     AccessToken *string `json:"accessToken"`
@@ -2005,6 +2008,7 @@ func (p AddReferenceOfByUserIdRequest) Pointer() *AddReferenceOfByUserIdRequest 
 type DeleteReferenceOfRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     InventoryName *string `json:"inventoryName"`
     AccessToken *string `json:"accessToken"`

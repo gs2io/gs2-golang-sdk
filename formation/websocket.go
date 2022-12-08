@@ -2663,6 +2663,9 @@ func (p Gs2FormationWebSocketClient) DeleteMoldAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteMoldAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3663,6 +3666,9 @@ func (p Gs2FormationWebSocketClient) SetFormWithSignatureAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setFormWithSignatureAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3854,6 +3860,9 @@ func (p Gs2FormationWebSocketClient) DeleteFormAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.deleteFormAsyncHandler(
@@ -4776,6 +4785,9 @@ func (p Gs2FormationWebSocketClient) SetPropertyFormWithSignatureAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.setPropertyFormWithSignatureAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4967,6 +4979,9 @@ func (p Gs2FormationWebSocketClient) DeletePropertyFormAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.deletePropertyFormAsyncHandler(

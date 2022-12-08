@@ -502,6 +502,7 @@ func (p DeleteCategoryModelMasterRequest) Pointer() *DeleteCategoryModelMasterRe
 type SubscribeRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`
@@ -943,6 +944,7 @@ func (p GetRankingByUserIdRequest) Pointer() *GetRankingByUserIdRequest {
 type PutScoreRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`
@@ -1247,6 +1249,7 @@ func (p GetSubscribeByUserIdRequest) Pointer() *GetSubscribeByUserIdRequest {
 type UnsubscribeRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`

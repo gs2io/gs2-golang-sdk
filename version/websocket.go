@@ -1404,6 +1404,9 @@ func (p Gs2VersionWebSocketClient) AcceptAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.acceptAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1753,6 +1756,9 @@ func (p Gs2VersionWebSocketClient) DeleteAcceptVersionAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteAcceptVersionAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1932,6 +1938,9 @@ func (p Gs2VersionWebSocketClient) CheckVersionAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.checkVersionAsyncHandler(

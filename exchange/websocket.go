@@ -1277,6 +1277,9 @@ func (p Gs2ExchangeWebSocketClient) ExchangeAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.exchangeAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2332,6 +2335,9 @@ func (p Gs2ExchangeWebSocketClient) AcquireAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.acquireAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2626,6 +2632,9 @@ func (p Gs2ExchangeWebSocketClient) SkipAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.skipAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2814,6 +2823,9 @@ func (p Gs2ExchangeWebSocketClient) DeleteAwaitAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.deleteAwaitAsyncHandler(

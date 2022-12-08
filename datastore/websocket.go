@@ -792,6 +792,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareUploadAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.prepareUploadAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -994,6 +997,9 @@ func (p Gs2DatastoreWebSocketClient) UpdateDataObjectAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.updateDataObjectAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1183,6 +1189,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareReUploadAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.prepareReUploadAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1362,6 +1371,9 @@ func (p Gs2DatastoreWebSocketClient) DoneUploadAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.doneUploadAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1538,6 +1550,9 @@ func (p Gs2DatastoreWebSocketClient) DeleteDataObjectAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteDataObjectAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1713,6 +1728,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.prepareDownloadAsyncHandler(
@@ -1893,6 +1911,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByGenerationAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.prepareDownloadByGenerationAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2072,6 +2093,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadOwnDataAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.prepareDownloadOwnDataAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2250,6 +2274,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadOwnDataByGenerationAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.prepareDownloadOwnDataByGenerationAsyncHandler(

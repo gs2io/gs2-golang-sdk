@@ -283,6 +283,7 @@ func (p DescribeRoomsRequest) Pointer() *DescribeRoomsRequest {
 type CreateRoomRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     Name *string `json:"name"`
@@ -405,6 +406,7 @@ func (p GetRoomRequest) Pointer() *GetRoomRequest {
 type UpdateRoomRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RoomName *string `json:"roomName"`
     Metadata *string `json:"metadata"`
@@ -496,6 +498,7 @@ func (p UpdateRoomFromBackendRequest) Pointer() *UpdateRoomFromBackendRequest {
 type DeleteRoomRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RoomName *string `json:"roomName"`
     AccessToken *string `json:"accessToken"`
@@ -651,6 +654,7 @@ func (p DescribeMessagesByUserIdRequest) Pointer() *DescribeMessagesByUserIdRequ
 type PostRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RoomName *string `json:"roomName"`
     AccessToken *string `json:"accessToken"`
@@ -967,6 +971,7 @@ func (p DescribeSubscribesByRoomNameRequest) Pointer() *DescribeSubscribesByRoom
 type SubscribeRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RoomName *string `json:"roomName"`
     AccessToken *string `json:"accessToken"`
@@ -1114,6 +1119,7 @@ func (p GetSubscribeByUserIdRequest) Pointer() *GetSubscribeByUserIdRequest {
 type UpdateNotificationTypeRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RoomName *string `json:"roomName"`
     AccessToken *string `json:"accessToken"`
@@ -1193,6 +1199,7 @@ func (p UpdateNotificationTypeByUserIdRequest) Pointer() *UpdateNotificationType
 type UnsubscribeRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     RoomName *string `json:"roomName"`
     AccessToken *string `json:"accessToken"`

@@ -564,6 +564,7 @@ func (p DescribeAcceptVersionsByUserIdRequest) Pointer() *DescribeAcceptVersions
 type AcceptRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     VersionName *string `json:"versionName"`
     AccessToken *string `json:"accessToken"`
@@ -701,6 +702,7 @@ func (p GetAcceptVersionByUserIdRequest) Pointer() *GetAcceptVersionByUserIdRequ
 type DeleteAcceptVersionRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     VersionName *string `json:"versionName"`
@@ -770,6 +772,7 @@ func (p DeleteAcceptVersionByUserIdRequest) Pointer() *DeleteAcceptVersionByUser
 type CheckVersionRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TargetVersions []TargetVersion `json:"targetVersions"`

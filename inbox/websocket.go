@@ -1083,6 +1083,9 @@ func (p Gs2InboxWebSocketClient) ReceiveGlobalMessageAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.receiveGlobalMessageAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1255,6 +1258,9 @@ func (p Gs2InboxWebSocketClient) OpenMessageAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.openMessageAsyncHandler(
@@ -1439,6 +1445,9 @@ func (p Gs2InboxWebSocketClient) ReadMessageAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.readMessageAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1621,6 +1630,9 @@ func (p Gs2InboxWebSocketClient) DeleteMessageAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.deleteMessageAsyncHandler(

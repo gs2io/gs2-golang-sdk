@@ -1355,6 +1355,7 @@ func (p UpdateStaminaByUserIdRequest) Pointer() *UpdateStaminaByUserIdRequest {
 type ConsumeStaminaRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
     AccessToken *string `json:"accessToken"`
@@ -1620,6 +1621,7 @@ func (p SetRecoverValueByUserIdRequest) Pointer() *SetRecoverValueByUserIdReques
 type SetMaxValueByStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
     AccessToken *string `json:"accessToken"`
@@ -1663,6 +1665,7 @@ func (p SetMaxValueByStatusRequest) Pointer() *SetMaxValueByStatusRequest {
 type SetRecoverIntervalByStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
     AccessToken *string `json:"accessToken"`
@@ -1706,6 +1709,7 @@ func (p SetRecoverIntervalByStatusRequest) Pointer() *SetRecoverIntervalByStatus
 type SetRecoverValueByStatusRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     StaminaName *string `json:"staminaName"`
     AccessToken *string `json:"accessToken"`

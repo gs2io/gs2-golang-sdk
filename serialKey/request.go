@@ -420,6 +420,7 @@ func (p GetSerialKeyRequest) Pointer() *GetSerialKeyRequest {
 type UseRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     Code *string `json:"code"`

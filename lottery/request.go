@@ -757,6 +757,7 @@ func (p GetBoxByUserIdRequest) Pointer() *GetBoxByUserIdRequest {
 type ResetBoxRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     PrizeTableName *string `json:"prizeTableName"`
     AccessToken *string `json:"accessToken"`

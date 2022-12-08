@@ -802,6 +802,9 @@ func (p Gs2MatchmakingRestClient) CreateGatheringAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go createGatheringAsyncHandler(
 		p,
@@ -1028,6 +1031,9 @@ func (p Gs2MatchmakingRestClient) UpdateGatheringAsync(
     }
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go updateGatheringAsyncHandler(
@@ -1325,6 +1331,9 @@ func (p Gs2MatchmakingRestClient) DoMatchmakingAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go doMatchmakingAsyncHandler(
 		p,
@@ -1606,6 +1615,9 @@ func (p Gs2MatchmakingRestClient) CancelMatchmakingAsync(
     }
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go cancelMatchmakingAsyncHandler(

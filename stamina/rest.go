@@ -3593,6 +3593,9 @@ func (p Gs2StaminaRestClient) ConsumeStaminaAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go consumeStaminaAsyncHandler(
 		p,
@@ -4315,6 +4318,9 @@ func (p Gs2StaminaRestClient) SetMaxValueByStatusAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go setMaxValueByStatusAsyncHandler(
 		p,
@@ -4419,6 +4425,9 @@ func (p Gs2StaminaRestClient) SetRecoverIntervalByStatusAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go setRecoverIntervalByStatusAsyncHandler(
 		p,
@@ -4522,6 +4531,9 @@ func (p Gs2StaminaRestClient) SetRecoverValueByStatusAsync(
     }
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go setRecoverValueByStatusAsyncHandler(

@@ -1498,6 +1498,9 @@ func (p Gs2AccountRestClient) CreateTakeOverAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go createTakeOverAsyncHandler(
 		p,
@@ -1889,6 +1892,9 @@ func (p Gs2AccountRestClient) UpdateTakeOverAsync(
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go updateTakeOverAsyncHandler(
 		p,
@@ -2089,6 +2095,9 @@ func (p Gs2AccountRestClient) DeleteTakeOverAsync(
     }
     if request.AccessToken != nil {
         headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteTakeOverAsyncHandler(

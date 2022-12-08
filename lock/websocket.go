@@ -770,6 +770,9 @@ func (p Gs2LockWebSocketClient) LockAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.lockAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -954,6 +957,9 @@ func (p Gs2LockWebSocketClient) UnlockAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.unlockAsyncHandler(

@@ -763,6 +763,9 @@ func (p Gs2MatchmakingWebSocketClient) CreateGatheringAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.createGatheringAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -972,6 +975,9 @@ func (p Gs2MatchmakingWebSocketClient) UpdateGatheringAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.updateGatheringAsyncHandler(
@@ -1244,6 +1250,9 @@ func (p Gs2MatchmakingWebSocketClient) DoMatchmakingAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.doMatchmakingAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1504,6 +1513,9 @@ func (p Gs2MatchmakingWebSocketClient) CancelMatchmakingAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.cancelMatchmakingAsyncHandler(

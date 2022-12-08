@@ -438,6 +438,7 @@ func (p DepositByUserIdRequest) Pointer() *DepositByUserIdRequest {
 type WithdrawRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     Slot *int32 `json:"slot"`

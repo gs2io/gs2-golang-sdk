@@ -287,6 +287,7 @@ func (p DescribeWebSocketSessionsByUserIdRequest) Pointer() *DescribeWebSocketSe
 type SetUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     AllowConcurrentAccess *bool `json:"allowConcurrentAccess"`
@@ -460,6 +461,7 @@ func (p DisconnectAllRequest) Pointer() *DisconnectAllRequest {
 type SetFirebaseTokenRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     Token *string `json:"token"`
@@ -591,6 +593,7 @@ func (p GetFirebaseTokenByUserIdRequest) Pointer() *GetFirebaseTokenByUserIdRequ
 type DeleteFirebaseTokenRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
 }

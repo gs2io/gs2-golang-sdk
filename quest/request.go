@@ -924,6 +924,7 @@ func (p GetProgressByUserIdRequest) Pointer() *GetProgressByUserIdRequest {
 type StartRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     QuestGroupName *string `json:"questGroupName"`
     QuestName *string `json:"questName"`
@@ -1015,6 +1016,7 @@ func (p StartByUserIdRequest) Pointer() *StartByUserIdRequest {
 type EndRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     TransactionId *string `json:"transactionId"`
@@ -1110,6 +1112,7 @@ func (p EndByUserIdRequest) Pointer() *EndByUserIdRequest {
 type DeleteProgressRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
 }

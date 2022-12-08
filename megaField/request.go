@@ -804,6 +804,7 @@ func (p UpdateCurrentFieldMasterFromGitHubRequest) Pointer() *UpdateCurrentField
 type PutPositionRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     AreaModelName *string `json:"areaModelName"`
@@ -897,6 +898,7 @@ func (p PutPositionByUserIdRequest) Pointer() *PutPositionByUserIdRequest {
 type FetchPositionRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     AreaModelName *string `json:"areaModelName"`
@@ -979,6 +981,7 @@ func (p FetchPositionFromSystemRequest) Pointer() *FetchPositionFromSystemReques
 type NearUserIdsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     AreaModelName *string `json:"areaModelName"`
@@ -1069,6 +1072,7 @@ func (p NearUserIdsFromSystemRequest) Pointer() *NearUserIdsFromSystemRequest {
 type ActionRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     AreaModelName *string `json:"areaModelName"`

@@ -2256,6 +2256,9 @@ func (p Gs2QuestWebSocketClient) StartAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.startAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2462,6 +2465,9 @@ func (p Gs2QuestWebSocketClient) EndAsync(
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.endAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2651,6 +2657,9 @@ func (p Gs2QuestWebSocketClient) DeleteProgressAsync(
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }
 
 	go p.deleteProgressAsyncHandler(

@@ -307,6 +307,7 @@ func (p DescribeGatheringsRequest) Pointer() *DescribeGatheringsRequest {
 type CreateGatheringRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     Player *Player `json:"player"`
@@ -418,6 +419,7 @@ func (p CreateGatheringByUserIdRequest) Pointer() *CreateGatheringByUserIdReques
 type UpdateGatheringRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     GatheringName *string `json:"gatheringName"`
     AccessToken *string `json:"accessToken"`
@@ -531,6 +533,7 @@ func (p DoMatchmakingByPlayerRequest) Pointer() *DoMatchmakingByPlayerRequest {
 type DoMatchmakingRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
     Player *Player `json:"player"`
@@ -637,6 +640,7 @@ func (p GetGatheringRequest) Pointer() *GetGatheringRequest {
 type CancelMatchmakingRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     GatheringName *string `json:"gatheringName"`
     AccessToken *string `json:"accessToken"`
