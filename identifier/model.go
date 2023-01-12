@@ -247,6 +247,7 @@ func CastIdentifiersFromDict(data []Identifier) []interface{} {
 }
 
 type Password struct {
+	PasswordId *string `json:"passwordId"`
 	UserId *string `json:"userId"`
 	UserName *string `json:"userName"`
 	CreatedAt *int64 `json:"createdAt"`
@@ -260,6 +261,7 @@ func NewPasswordFromJson(data string) Password {
 
 func NewPasswordFromDict(data map[string]interface{}) Password {
     return Password {
+        PasswordId: core.CastString(data["passwordId"]),
         UserId: core.CastString(data["userId"]),
         UserName: core.CastString(data["userName"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
@@ -268,6 +270,10 @@ func NewPasswordFromDict(data map[string]interface{}) Password {
 
 func (p Password) ToDict() map[string]interface{} {
     
+    var passwordId *string
+    if p.PasswordId != nil {
+        passwordId = p.PasswordId
+    }
     var userId *string
     if p.UserId != nil {
         userId = p.UserId
@@ -281,6 +287,7 @@ func (p Password) ToDict() map[string]interface{} {
         createdAt = p.CreatedAt
     }
     return map[string]interface{} {
+        "passwordId": passwordId,
         "userId": userId,
         "userName": userName,
         "createdAt": createdAt,
