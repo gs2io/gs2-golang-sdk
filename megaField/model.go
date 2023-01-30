@@ -257,7 +257,6 @@ func CastAreaModelMastersFromDict(data []AreaModelMaster) []interface{} {
 
 type LayerModel struct {
 	LayerModelId *string `json:"layerModelId"`
-	AreaModelName *string `json:"areaModelName"`
 	Name *string `json:"name"`
 	Metadata *string `json:"metadata"`
 }
@@ -271,7 +270,6 @@ func NewLayerModelFromJson(data string) LayerModel {
 func NewLayerModelFromDict(data map[string]interface{}) LayerModel {
     return LayerModel {
         LayerModelId: core.CastString(data["layerModelId"]),
-        AreaModelName: core.CastString(data["areaModelName"]),
         Name: core.CastString(data["name"]),
         Metadata: core.CastString(data["metadata"]),
     }
@@ -283,10 +281,6 @@ func (p LayerModel) ToDict() map[string]interface{} {
     if p.LayerModelId != nil {
         layerModelId = p.LayerModelId
     }
-    var areaModelName *string
-    if p.AreaModelName != nil {
-        areaModelName = p.AreaModelName
-    }
     var name *string
     if p.Name != nil {
         name = p.Name
@@ -297,7 +291,6 @@ func (p LayerModel) ToDict() map[string]interface{} {
     }
     return map[string]interface{} {
         "layerModelId": layerModelId,
-        "areaModelName": areaModelName,
         "name": name,
         "metadata": metadata,
     }
