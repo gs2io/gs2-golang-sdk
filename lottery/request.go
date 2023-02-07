@@ -612,218 +612,6 @@ func (p DeletePrizeTableMasterRequest) Pointer() *DeletePrizeTableMasterRequest 
     return &p
 }
 
-type DescribeBoxesRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    AccessToken *string `json:"accessToken"`
-    PageToken *string `json:"pageToken"`
-    Limit *int32 `json:"limit"`
-}
-
-func NewDescribeBoxesRequestFromJson(data string) DescribeBoxesRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeBoxesRequestFromDict(dict)
-}
-
-func NewDescribeBoxesRequestFromDict(data map[string]interface{}) DescribeBoxesRequest {
-    return DescribeBoxesRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-        PageToken: core.CastString(data["pageToken"]),
-        Limit: core.CastInt32(data["limit"]),
-    }
-}
-
-func (p DescribeBoxesRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "accessToken": p.AccessToken,
-        "pageToken": p.PageToken,
-        "limit": p.Limit,
-    }
-}
-
-func (p DescribeBoxesRequest) Pointer() *DescribeBoxesRequest {
-    return &p
-}
-
-type DescribeBoxesByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    UserId *string `json:"userId"`
-    PageToken *string `json:"pageToken"`
-    Limit *int32 `json:"limit"`
-}
-
-func NewDescribeBoxesByUserIdRequestFromJson(data string) DescribeBoxesByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeBoxesByUserIdRequestFromDict(dict)
-}
-
-func NewDescribeBoxesByUserIdRequestFromDict(data map[string]interface{}) DescribeBoxesByUserIdRequest {
-    return DescribeBoxesByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        UserId: core.CastString(data["userId"]),
-        PageToken: core.CastString(data["pageToken"]),
-        Limit: core.CastInt32(data["limit"]),
-    }
-}
-
-func (p DescribeBoxesByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "userId": p.UserId,
-        "pageToken": p.PageToken,
-        "limit": p.Limit,
-    }
-}
-
-func (p DescribeBoxesByUserIdRequest) Pointer() *DescribeBoxesByUserIdRequest {
-    return &p
-}
-
-type GetBoxRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    PrizeTableName *string `json:"prizeTableName"`
-    AccessToken *string `json:"accessToken"`
-}
-
-func NewGetBoxRequestFromJson(data string) GetBoxRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetBoxRequestFromDict(dict)
-}
-
-func NewGetBoxRequestFromDict(data map[string]interface{}) GetBoxRequest {
-    return GetBoxRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        PrizeTableName: core.CastString(data["prizeTableName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-    }
-}
-
-func (p GetBoxRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "prizeTableName": p.PrizeTableName,
-        "accessToken": p.AccessToken,
-    }
-}
-
-func (p GetBoxRequest) Pointer() *GetBoxRequest {
-    return &p
-}
-
-type GetBoxByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    PrizeTableName *string `json:"prizeTableName"`
-    UserId *string `json:"userId"`
-}
-
-func NewGetBoxByUserIdRequestFromJson(data string) GetBoxByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetBoxByUserIdRequestFromDict(dict)
-}
-
-func NewGetBoxByUserIdRequestFromDict(data map[string]interface{}) GetBoxByUserIdRequest {
-    return GetBoxByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        PrizeTableName: core.CastString(data["prizeTableName"]),
-        UserId: core.CastString(data["userId"]),
-    }
-}
-
-func (p GetBoxByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "prizeTableName": p.PrizeTableName,
-        "userId": p.UserId,
-    }
-}
-
-func (p GetBoxByUserIdRequest) Pointer() *GetBoxByUserIdRequest {
-    return &p
-}
-
-type ResetBoxRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    PrizeTableName *string `json:"prizeTableName"`
-    AccessToken *string `json:"accessToken"`
-}
-
-func NewResetBoxRequestFromJson(data string) ResetBoxRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewResetBoxRequestFromDict(dict)
-}
-
-func NewResetBoxRequestFromDict(data map[string]interface{}) ResetBoxRequest {
-    return ResetBoxRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        PrizeTableName: core.CastString(data["prizeTableName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-    }
-}
-
-func (p ResetBoxRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "prizeTableName": p.PrizeTableName,
-        "accessToken": p.AccessToken,
-    }
-}
-
-func (p ResetBoxRequest) Pointer() *ResetBoxRequest {
-    return &p
-}
-
-type ResetBoxByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    PrizeTableName *string `json:"prizeTableName"`
-    UserId *string `json:"userId"`
-}
-
-func NewResetBoxByUserIdRequestFromJson(data string) ResetBoxByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewResetBoxByUserIdRequestFromDict(dict)
-}
-
-func NewResetBoxByUserIdRequestFromDict(data map[string]interface{}) ResetBoxByUserIdRequest {
-    return ResetBoxByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        PrizeTableName: core.CastString(data["prizeTableName"]),
-        UserId: core.CastString(data["userId"]),
-    }
-}
-
-func (p ResetBoxByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "prizeTableName": p.PrizeTableName,
-        "userId": p.UserId,
-    }
-}
-
-func (p ResetBoxByUserIdRequest) Pointer() *ResetBoxByUserIdRequest {
-    return &p
-}
-
 type DescribeLotteryModelsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
@@ -1304,5 +1092,217 @@ func (p ResetPrizeLimitRequest) ToDict() map[string]interface{} {
 }
 
 func (p ResetPrizeLimitRequest) Pointer() *ResetPrizeLimitRequest {
+    return &p
+}
+
+type DescribeBoxesRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeBoxesRequestFromJson(data string) DescribeBoxesRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBoxesRequestFromDict(dict)
+}
+
+func NewDescribeBoxesRequestFromDict(data map[string]interface{}) DescribeBoxesRequest {
+    return DescribeBoxesRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeBoxesRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeBoxesRequest) Pointer() *DescribeBoxesRequest {
+    return &p
+}
+
+type DescribeBoxesByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeBoxesByUserIdRequestFromJson(data string) DescribeBoxesByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBoxesByUserIdRequestFromDict(dict)
+}
+
+func NewDescribeBoxesByUserIdRequestFromDict(data map[string]interface{}) DescribeBoxesByUserIdRequest {
+    return DescribeBoxesByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeBoxesByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeBoxesByUserIdRequest) Pointer() *DescribeBoxesByUserIdRequest {
+    return &p
+}
+
+type GetBoxRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PrizeTableName *string `json:"prizeTableName"`
+    AccessToken *string `json:"accessToken"`
+}
+
+func NewGetBoxRequestFromJson(data string) GetBoxRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBoxRequestFromDict(dict)
+}
+
+func NewGetBoxRequestFromDict(data map[string]interface{}) GetBoxRequest {
+    return GetBoxRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PrizeTableName: core.CastString(data["prizeTableName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+    }
+}
+
+func (p GetBoxRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "prizeTableName": p.PrizeTableName,
+        "accessToken": p.AccessToken,
+    }
+}
+
+func (p GetBoxRequest) Pointer() *GetBoxRequest {
+    return &p
+}
+
+type GetBoxByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PrizeTableName *string `json:"prizeTableName"`
+    UserId *string `json:"userId"`
+}
+
+func NewGetBoxByUserIdRequestFromJson(data string) GetBoxByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBoxByUserIdRequestFromDict(dict)
+}
+
+func NewGetBoxByUserIdRequestFromDict(data map[string]interface{}) GetBoxByUserIdRequest {
+    return GetBoxByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PrizeTableName: core.CastString(data["prizeTableName"]),
+        UserId: core.CastString(data["userId"]),
+    }
+}
+
+func (p GetBoxByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "prizeTableName": p.PrizeTableName,
+        "userId": p.UserId,
+    }
+}
+
+func (p GetBoxByUserIdRequest) Pointer() *GetBoxByUserIdRequest {
+    return &p
+}
+
+type ResetBoxRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    PrizeTableName *string `json:"prizeTableName"`
+    AccessToken *string `json:"accessToken"`
+}
+
+func NewResetBoxRequestFromJson(data string) ResetBoxRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewResetBoxRequestFromDict(dict)
+}
+
+func NewResetBoxRequestFromDict(data map[string]interface{}) ResetBoxRequest {
+    return ResetBoxRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PrizeTableName: core.CastString(data["prizeTableName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+    }
+}
+
+func (p ResetBoxRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "prizeTableName": p.PrizeTableName,
+        "accessToken": p.AccessToken,
+    }
+}
+
+func (p ResetBoxRequest) Pointer() *ResetBoxRequest {
+    return &p
+}
+
+type ResetBoxByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    PrizeTableName *string `json:"prizeTableName"`
+    UserId *string `json:"userId"`
+}
+
+func NewResetBoxByUserIdRequestFromJson(data string) ResetBoxByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewResetBoxByUserIdRequestFromDict(dict)
+}
+
+func NewResetBoxByUserIdRequestFromDict(data map[string]interface{}) ResetBoxByUserIdRequest {
+    return ResetBoxByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PrizeTableName: core.CastString(data["prizeTableName"]),
+        UserId: core.CastString(data["userId"]),
+    }
+}
+
+func (p ResetBoxByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "prizeTableName": p.PrizeTableName,
+        "userId": p.UserId,
+    }
+}
+
+func (p ResetBoxByUserIdRequest) Pointer() *ResetBoxByUserIdRequest {
     return &p
 }

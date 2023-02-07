@@ -532,196 +532,6 @@ func (p DeletePrizeTableMasterResult) Pointer() *DeletePrizeTableMasterResult {
     return &p
 }
 
-type DescribeBoxesResult struct {
-    Items []BoxItems `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-}
-
-type DescribeBoxesAsyncResult struct {
-	result *DescribeBoxesResult
-	err    error
-}
-
-func NewDescribeBoxesResultFromJson(data string) DescribeBoxesResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeBoxesResultFromDict(dict)
-}
-
-func NewDescribeBoxesResultFromDict(data map[string]interface{}) DescribeBoxesResult {
-    return DescribeBoxesResult {
-        Items: CastBoxItemses(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
-}
-
-func (p DescribeBoxesResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastBoxItemsesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
-}
-
-func (p DescribeBoxesResult) Pointer() *DescribeBoxesResult {
-    return &p
-}
-
-type DescribeBoxesByUserIdResult struct {
-    Items []BoxItems `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
-}
-
-type DescribeBoxesByUserIdAsyncResult struct {
-	result *DescribeBoxesByUserIdResult
-	err    error
-}
-
-func NewDescribeBoxesByUserIdResultFromJson(data string) DescribeBoxesByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeBoxesByUserIdResultFromDict(dict)
-}
-
-func NewDescribeBoxesByUserIdResultFromDict(data map[string]interface{}) DescribeBoxesByUserIdResult {
-    return DescribeBoxesByUserIdResult {
-        Items: CastBoxItemses(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
-}
-
-func (p DescribeBoxesByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastBoxItemsesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
-}
-
-func (p DescribeBoxesByUserIdResult) Pointer() *DescribeBoxesByUserIdResult {
-    return &p
-}
-
-type GetBoxResult struct {
-    Item *BoxItems `json:"item"`
-}
-
-type GetBoxAsyncResult struct {
-	result *GetBoxResult
-	err    error
-}
-
-func NewGetBoxResultFromJson(data string) GetBoxResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetBoxResultFromDict(dict)
-}
-
-func NewGetBoxResultFromDict(data map[string]interface{}) GetBoxResult {
-    return GetBoxResult {
-        Item: NewBoxItemsFromDict(core.CastMap(data["item"])).Pointer(),
-    }
-}
-
-func (p GetBoxResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
-}
-
-func (p GetBoxResult) Pointer() *GetBoxResult {
-    return &p
-}
-
-type GetBoxByUserIdResult struct {
-    Item *BoxItems `json:"item"`
-}
-
-type GetBoxByUserIdAsyncResult struct {
-	result *GetBoxByUserIdResult
-	err    error
-}
-
-func NewGetBoxByUserIdResultFromJson(data string) GetBoxByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetBoxByUserIdResultFromDict(dict)
-}
-
-func NewGetBoxByUserIdResultFromDict(data map[string]interface{}) GetBoxByUserIdResult {
-    return GetBoxByUserIdResult {
-        Item: NewBoxItemsFromDict(core.CastMap(data["item"])).Pointer(),
-    }
-}
-
-func (p GetBoxByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
-}
-
-func (p GetBoxByUserIdResult) Pointer() *GetBoxByUserIdResult {
-    return &p
-}
-
-type ResetBoxResult struct {
-}
-
-type ResetBoxAsyncResult struct {
-	result *ResetBoxResult
-	err    error
-}
-
-func NewResetBoxResultFromJson(data string) ResetBoxResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewResetBoxResultFromDict(dict)
-}
-
-func NewResetBoxResultFromDict(data map[string]interface{}) ResetBoxResult {
-    return ResetBoxResult {
-    }
-}
-
-func (p ResetBoxResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-    }
-}
-
-func (p ResetBoxResult) Pointer() *ResetBoxResult {
-    return &p
-}
-
-type ResetBoxByUserIdResult struct {
-}
-
-type ResetBoxByUserIdAsyncResult struct {
-	result *ResetBoxByUserIdResult
-	err    error
-}
-
-func NewResetBoxByUserIdResultFromJson(data string) ResetBoxByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewResetBoxByUserIdResultFromDict(dict)
-}
-
-func NewResetBoxByUserIdResultFromDict(data map[string]interface{}) ResetBoxByUserIdResult {
-    return ResetBoxByUserIdResult {
-    }
-}
-
-func (p ResetBoxByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-    }
-}
-
-func (p ResetBoxByUserIdResult) Pointer() *ResetBoxByUserIdResult {
-    return &p
-}
-
 type DescribeLotteryModelsResult struct {
     Items []LotteryModel `json:"items"`
 }
@@ -1222,5 +1032,195 @@ func (p ResetPrizeLimitResult) ToDict() map[string]interface{} {
 }
 
 func (p ResetPrizeLimitResult) Pointer() *ResetPrizeLimitResult {
+    return &p
+}
+
+type DescribeBoxesResult struct {
+    Items []BoxItems `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeBoxesAsyncResult struct {
+	result *DescribeBoxesResult
+	err    error
+}
+
+func NewDescribeBoxesResultFromJson(data string) DescribeBoxesResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBoxesResultFromDict(dict)
+}
+
+func NewDescribeBoxesResultFromDict(data map[string]interface{}) DescribeBoxesResult {
+    return DescribeBoxesResult {
+        Items: CastBoxItemses(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeBoxesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastBoxItemsesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeBoxesResult) Pointer() *DescribeBoxesResult {
+    return &p
+}
+
+type DescribeBoxesByUserIdResult struct {
+    Items []BoxItems `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeBoxesByUserIdAsyncResult struct {
+	result *DescribeBoxesByUserIdResult
+	err    error
+}
+
+func NewDescribeBoxesByUserIdResultFromJson(data string) DescribeBoxesByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBoxesByUserIdResultFromDict(dict)
+}
+
+func NewDescribeBoxesByUserIdResultFromDict(data map[string]interface{}) DescribeBoxesByUserIdResult {
+    return DescribeBoxesByUserIdResult {
+        Items: CastBoxItemses(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeBoxesByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastBoxItemsesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeBoxesByUserIdResult) Pointer() *DescribeBoxesByUserIdResult {
+    return &p
+}
+
+type GetBoxResult struct {
+    Item *BoxItems `json:"item"`
+}
+
+type GetBoxAsyncResult struct {
+	result *GetBoxResult
+	err    error
+}
+
+func NewGetBoxResultFromJson(data string) GetBoxResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBoxResultFromDict(dict)
+}
+
+func NewGetBoxResultFromDict(data map[string]interface{}) GetBoxResult {
+    return GetBoxResult {
+        Item: NewBoxItemsFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetBoxResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetBoxResult) Pointer() *GetBoxResult {
+    return &p
+}
+
+type GetBoxByUserIdResult struct {
+    Item *BoxItems `json:"item"`
+}
+
+type GetBoxByUserIdAsyncResult struct {
+	result *GetBoxByUserIdResult
+	err    error
+}
+
+func NewGetBoxByUserIdResultFromJson(data string) GetBoxByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBoxByUserIdResultFromDict(dict)
+}
+
+func NewGetBoxByUserIdResultFromDict(data map[string]interface{}) GetBoxByUserIdResult {
+    return GetBoxByUserIdResult {
+        Item: NewBoxItemsFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetBoxByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetBoxByUserIdResult) Pointer() *GetBoxByUserIdResult {
+    return &p
+}
+
+type ResetBoxResult struct {
+}
+
+type ResetBoxAsyncResult struct {
+	result *ResetBoxResult
+	err    error
+}
+
+func NewResetBoxResultFromJson(data string) ResetBoxResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewResetBoxResultFromDict(dict)
+}
+
+func NewResetBoxResultFromDict(data map[string]interface{}) ResetBoxResult {
+    return ResetBoxResult {
+    }
+}
+
+func (p ResetBoxResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+    }
+}
+
+func (p ResetBoxResult) Pointer() *ResetBoxResult {
+    return &p
+}
+
+type ResetBoxByUserIdResult struct {
+}
+
+type ResetBoxByUserIdAsyncResult struct {
+	result *ResetBoxByUserIdResult
+	err    error
+}
+
+func NewResetBoxByUserIdResultFromJson(data string) ResetBoxByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewResetBoxByUserIdResultFromDict(dict)
+}
+
+func NewResetBoxByUserIdResultFromDict(data map[string]interface{}) ResetBoxByUserIdResult {
+    return ResetBoxByUserIdResult {
+    }
+}
+
+func (p ResetBoxByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+    }
+}
+
+func (p ResetBoxByUserIdResult) Pointer() *ResetBoxByUserIdResult {
     return &p
 }

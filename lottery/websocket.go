@@ -1437,537 +1437,6 @@ func (p Gs2LotteryWebSocketClient) DeletePrizeTableMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2LotteryWebSocketClient) describeBoxesAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeBoxesAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeBoxesAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeBoxesResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeBoxesAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeBoxesAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2LotteryWebSocketClient) DescribeBoxesAsync(
-	request *DescribeBoxesRequest,
-	callback chan<- DescribeBoxesAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "lottery",
-    		"component": "box",
-    		"function": "describeBoxes",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.describeBoxesAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2LotteryWebSocketClient) DescribeBoxes(
-	request *DescribeBoxesRequest,
-) (*DescribeBoxesResult, error) {
-	callback := make(chan DescribeBoxesAsyncResult, 1)
-	go p.DescribeBoxesAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2LotteryWebSocketClient) describeBoxesByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeBoxesByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeBoxesByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeBoxesByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeBoxesByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeBoxesByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2LotteryWebSocketClient) DescribeBoxesByUserIdAsync(
-	request *DescribeBoxesByUserIdRequest,
-	callback chan<- DescribeBoxesByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "lottery",
-    		"component": "box",
-    		"function": "describeBoxesByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.describeBoxesByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2LotteryWebSocketClient) DescribeBoxesByUserId(
-	request *DescribeBoxesByUserIdRequest,
-) (*DescribeBoxesByUserIdResult, error) {
-	callback := make(chan DescribeBoxesByUserIdAsyncResult, 1)
-	go p.DescribeBoxesByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2LotteryWebSocketClient) getBoxAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetBoxAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetBoxAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetBoxResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetBoxAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetBoxAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2LotteryWebSocketClient) GetBoxAsync(
-	request *GetBoxRequest,
-	callback chan<- GetBoxAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "lottery",
-    		"component": "box",
-    		"function": "getBox",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-        bodies["prizeTableName"] = *request.PrizeTableName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-
-	go p.getBoxAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2LotteryWebSocketClient) GetBox(
-	request *GetBoxRequest,
-) (*GetBoxResult, error) {
-	callback := make(chan GetBoxAsyncResult, 1)
-	go p.GetBoxAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2LotteryWebSocketClient) getBoxByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetBoxByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetBoxByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetBoxByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetBoxByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetBoxByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2LotteryWebSocketClient) GetBoxByUserIdAsync(
-	request *GetBoxByUserIdRequest,
-	callback chan<- GetBoxByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "lottery",
-    		"component": "box",
-    		"function": "getBoxByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-        bodies["prizeTableName"] = *request.PrizeTableName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.getBoxByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2LotteryWebSocketClient) GetBoxByUserId(
-	request *GetBoxByUserIdRequest,
-) (*GetBoxByUserIdResult, error) {
-	callback := make(chan GetBoxByUserIdAsyncResult, 1)
-	go p.GetBoxByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2LotteryWebSocketClient) resetBoxAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- ResetBoxAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- ResetBoxAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result ResetBoxResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ResetBoxAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- ResetBoxAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2LotteryWebSocketClient) ResetBoxAsync(
-	request *ResetBoxRequest,
-	callback chan<- ResetBoxAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "lottery",
-    		"component": "box",
-    		"function": "resetBox",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-        bodies["prizeTableName"] = *request.PrizeTableName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
-
-	go p.resetBoxAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2LotteryWebSocketClient) ResetBox(
-	request *ResetBoxRequest,
-) (*ResetBoxResult, error) {
-	callback := make(chan ResetBoxAsyncResult, 1)
-	go p.ResetBoxAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2LotteryWebSocketClient) resetBoxByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- ResetBoxByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- ResetBoxByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result ResetBoxByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ResetBoxByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- ResetBoxByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2LotteryWebSocketClient) ResetBoxByUserIdAsync(
-	request *ResetBoxByUserIdRequest,
-	callback chan<- ResetBoxByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "lottery",
-    		"component": "box",
-    		"function": "resetBoxByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-        bodies["prizeTableName"] = *request.PrizeTableName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
-
-	go p.resetBoxByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2LotteryWebSocketClient) ResetBoxByUserId(
-	request *ResetBoxByUserIdRequest,
-) (*ResetBoxByUserIdResult, error) {
-	callback := make(chan ResetBoxByUserIdAsyncResult, 1)
-	go p.ResetBoxByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
 func (p Gs2LotteryWebSocketClient) describeLotteryModelsAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribeLotteryModelsAsyncResult,
@@ -3216,6 +2685,537 @@ func (p Gs2LotteryWebSocketClient) ResetPrizeLimit(
 ) (*ResetPrizeLimitResult, error) {
 	callback := make(chan ResetPrizeLimitAsyncResult, 1)
 	go p.ResetPrizeLimitAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LotteryWebSocketClient) describeBoxesAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeBoxesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBoxesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBoxesResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBoxesAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeBoxesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryWebSocketClient) DescribeBoxesAsync(
+	request *DescribeBoxesRequest,
+	callback chan<- DescribeBoxesAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lottery",
+    		"component": "boxItems",
+    		"function": "describeBoxes",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.describeBoxesAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryWebSocketClient) DescribeBoxes(
+	request *DescribeBoxesRequest,
+) (*DescribeBoxesResult, error) {
+	callback := make(chan DescribeBoxesAsyncResult, 1)
+	go p.DescribeBoxesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LotteryWebSocketClient) describeBoxesByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeBoxesByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBoxesByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBoxesByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBoxesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeBoxesByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryWebSocketClient) DescribeBoxesByUserIdAsync(
+	request *DescribeBoxesByUserIdRequest,
+	callback chan<- DescribeBoxesByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lottery",
+    		"component": "boxItems",
+    		"function": "describeBoxesByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeBoxesByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryWebSocketClient) DescribeBoxesByUserId(
+	request *DescribeBoxesByUserIdRequest,
+) (*DescribeBoxesByUserIdResult, error) {
+	callback := make(chan DescribeBoxesByUserIdAsyncResult, 1)
+	go p.DescribeBoxesByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LotteryWebSocketClient) getBoxAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetBoxAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBoxAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBoxResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBoxAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetBoxAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryWebSocketClient) GetBoxAsync(
+	request *GetBoxRequest,
+	callback chan<- GetBoxAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lottery",
+    		"component": "boxItems",
+    		"function": "getBox",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != "" {
+        bodies["prizeTableName"] = *request.PrizeTableName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.getBoxAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryWebSocketClient) GetBox(
+	request *GetBoxRequest,
+) (*GetBoxResult, error) {
+	callback := make(chan GetBoxAsyncResult, 1)
+	go p.GetBoxAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LotteryWebSocketClient) getBoxByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetBoxByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBoxByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBoxByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBoxByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetBoxByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryWebSocketClient) GetBoxByUserIdAsync(
+	request *GetBoxByUserIdRequest,
+	callback chan<- GetBoxByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lottery",
+    		"component": "boxItems",
+    		"function": "getBoxByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != "" {
+        bodies["prizeTableName"] = *request.PrizeTableName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getBoxByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryWebSocketClient) GetBoxByUserId(
+	request *GetBoxByUserIdRequest,
+) (*GetBoxByUserIdResult, error) {
+	callback := make(chan GetBoxByUserIdAsyncResult, 1)
+	go p.GetBoxByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LotteryWebSocketClient) resetBoxAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ResetBoxAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ResetBoxAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ResetBoxResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ResetBoxAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- ResetBoxAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryWebSocketClient) ResetBoxAsync(
+	request *ResetBoxRequest,
+	callback chan<- ResetBoxAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lottery",
+    		"component": "boxItems",
+    		"function": "resetBox",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != "" {
+        bodies["prizeTableName"] = *request.PrizeTableName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.resetBoxAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryWebSocketClient) ResetBox(
+	request *ResetBoxRequest,
+) (*ResetBoxResult, error) {
+	callback := make(chan ResetBoxAsyncResult, 1)
+	go p.ResetBoxAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LotteryWebSocketClient) resetBoxByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ResetBoxByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ResetBoxByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ResetBoxByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ResetBoxByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- ResetBoxByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryWebSocketClient) ResetBoxByUserIdAsync(
+	request *ResetBoxByUserIdRequest,
+	callback chan<- ResetBoxByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lottery",
+    		"component": "boxItems",
+    		"function": "resetBoxByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != "" {
+        bodies["prizeTableName"] = *request.PrizeTableName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.resetBoxByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryWebSocketClient) ResetBoxByUserId(
+	request *ResetBoxByUserIdRequest,
+) (*ResetBoxByUserIdResult, error) {
+	callback := make(chan ResetBoxByUserIdAsyncResult, 1)
+	go p.ResetBoxByUserIdAsync(
 		request,
 		callback,
 	)
