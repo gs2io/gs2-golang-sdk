@@ -879,7 +879,6 @@ type GetAwaitRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
-    RateName *string `json:"rateName"`
     AwaitName *string `json:"awaitName"`
 }
 
@@ -893,7 +892,6 @@ func NewGetAwaitRequestFromDict(data map[string]interface{}) GetAwaitRequest {
     return GetAwaitRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         AccessToken: core.CastString(data["accessToken"]),
-        RateName: core.CastString(data["rateName"]),
         AwaitName: core.CastString(data["awaitName"]),
     }
 }
@@ -902,7 +900,6 @@ func (p GetAwaitRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "accessToken": p.AccessToken,
-        "rateName": p.RateName,
         "awaitName": p.AwaitName,
     }
 }
@@ -916,7 +913,6 @@ type GetAwaitByUserIdRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
-    RateName *string `json:"rateName"`
     AwaitName *string `json:"awaitName"`
 }
 
@@ -930,7 +926,6 @@ func NewGetAwaitByUserIdRequestFromDict(data map[string]interface{}) GetAwaitByU
     return GetAwaitByUserIdRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         UserId: core.CastString(data["userId"]),
-        RateName: core.CastString(data["rateName"]),
         AwaitName: core.CastString(data["awaitName"]),
     }
 }
@@ -939,7 +934,6 @@ func (p GetAwaitByUserIdRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "userId": p.UserId,
-        "rateName": p.RateName,
         "awaitName": p.AwaitName,
     }
 }
@@ -954,7 +948,6 @@ type AcquireRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
-    RateName *string `json:"rateName"`
     AwaitName *string `json:"awaitName"`
     Config []Config `json:"config"`
 }
@@ -969,7 +962,6 @@ func NewAcquireRequestFromDict(data map[string]interface{}) AcquireRequest {
     return AcquireRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         AccessToken: core.CastString(data["accessToken"]),
-        RateName: core.CastString(data["rateName"]),
         AwaitName: core.CastString(data["awaitName"]),
         Config: CastConfigs(core.CastArray(data["config"])),
     }
@@ -979,7 +971,6 @@ func (p AcquireRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "accessToken": p.AccessToken,
-        "rateName": p.RateName,
         "awaitName": p.AwaitName,
         "config": CastConfigsFromDict(
             p.Config,
@@ -997,7 +988,6 @@ type AcquireByUserIdRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
-    RateName *string `json:"rateName"`
     AwaitName *string `json:"awaitName"`
     Config []Config `json:"config"`
 }
@@ -1012,7 +1002,6 @@ func NewAcquireByUserIdRequestFromDict(data map[string]interface{}) AcquireByUse
     return AcquireByUserIdRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         UserId: core.CastString(data["userId"]),
-        RateName: core.CastString(data["rateName"]),
         AwaitName: core.CastString(data["awaitName"]),
         Config: CastConfigs(core.CastArray(data["config"])),
     }
@@ -1022,7 +1011,6 @@ func (p AcquireByUserIdRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "userId": p.UserId,
-        "rateName": p.RateName,
         "awaitName": p.AwaitName,
         "config": CastConfigsFromDict(
             p.Config,
@@ -1040,7 +1028,6 @@ type AcquireForceByUserIdRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
-    RateName *string `json:"rateName"`
     AwaitName *string `json:"awaitName"`
     Config []Config `json:"config"`
 }
@@ -1055,7 +1042,6 @@ func NewAcquireForceByUserIdRequestFromDict(data map[string]interface{}) Acquire
     return AcquireForceByUserIdRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         UserId: core.CastString(data["userId"]),
-        RateName: core.CastString(data["rateName"]),
         AwaitName: core.CastString(data["awaitName"]),
         Config: CastConfigs(core.CastArray(data["config"])),
     }
@@ -1065,7 +1051,6 @@ func (p AcquireForceByUserIdRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "userId": p.UserId,
-        "rateName": p.RateName,
         "awaitName": p.AwaitName,
         "config": CastConfigsFromDict(
             p.Config,
@@ -1083,7 +1068,6 @@ type SkipRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
-    RateName *string `json:"rateName"`
     AwaitName *string `json:"awaitName"`
     Config []Config `json:"config"`
 }
@@ -1098,7 +1082,6 @@ func NewSkipRequestFromDict(data map[string]interface{}) SkipRequest {
     return SkipRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         AccessToken: core.CastString(data["accessToken"]),
-        RateName: core.CastString(data["rateName"]),
         AwaitName: core.CastString(data["awaitName"]),
         Config: CastConfigs(core.CastArray(data["config"])),
     }
@@ -1108,7 +1091,6 @@ func (p SkipRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "accessToken": p.AccessToken,
-        "rateName": p.RateName,
         "awaitName": p.AwaitName,
         "config": CastConfigsFromDict(
             p.Config,
@@ -1126,7 +1108,6 @@ type SkipByUserIdRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
-    RateName *string `json:"rateName"`
     AwaitName *string `json:"awaitName"`
     Config []Config `json:"config"`
 }
@@ -1141,7 +1122,6 @@ func NewSkipByUserIdRequestFromDict(data map[string]interface{}) SkipByUserIdReq
     return SkipByUserIdRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         UserId: core.CastString(data["userId"]),
-        RateName: core.CastString(data["rateName"]),
         AwaitName: core.CastString(data["awaitName"]),
         Config: CastConfigs(core.CastArray(data["config"])),
     }
@@ -1151,7 +1131,6 @@ func (p SkipByUserIdRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "userId": p.UserId,
-        "rateName": p.RateName,
         "awaitName": p.AwaitName,
         "config": CastConfigsFromDict(
             p.Config,
@@ -1169,7 +1148,6 @@ type DeleteAwaitRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
-    RateName *string `json:"rateName"`
     AwaitName *string `json:"awaitName"`
 }
 
@@ -1183,7 +1161,6 @@ func NewDeleteAwaitRequestFromDict(data map[string]interface{}) DeleteAwaitReque
     return DeleteAwaitRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         AccessToken: core.CastString(data["accessToken"]),
-        RateName: core.CastString(data["rateName"]),
         AwaitName: core.CastString(data["awaitName"]),
     }
 }
@@ -1192,7 +1169,6 @@ func (p DeleteAwaitRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "accessToken": p.AccessToken,
-        "rateName": p.RateName,
         "awaitName": p.AwaitName,
     }
 }
@@ -1207,7 +1183,6 @@ type DeleteAwaitByUserIdRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
-    RateName *string `json:"rateName"`
     AwaitName *string `json:"awaitName"`
 }
 
@@ -1221,7 +1196,6 @@ func NewDeleteAwaitByUserIdRequestFromDict(data map[string]interface{}) DeleteAw
     return DeleteAwaitByUserIdRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         UserId: core.CastString(data["userId"]),
-        RateName: core.CastString(data["rateName"]),
         AwaitName: core.CastString(data["awaitName"]),
     }
 }
@@ -1230,7 +1204,6 @@ func (p DeleteAwaitByUserIdRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "userId": p.UserId,
-        "rateName": p.RateName,
         "awaitName": p.AwaitName,
     }
 }

@@ -2278,16 +2278,11 @@ func (p Gs2ExchangeRestClient) GetAwaitAsync(
 	request *GetAwaitRequest,
 	callback chan<- GetAwaitAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/exchange/{rateName}/await/{awaitName}"
+	path := "/{namespaceName}/user/me/exchange/await/{awaitName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RateName != nil && *request.RateName != ""  {
-        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
-    } else {
-        path = strings.ReplaceAll(path, "{rateName}", "null")
     }
     if request.AwaitName != nil && *request.AwaitName != ""  {
         path = strings.ReplaceAll(path, "{awaitName}", core.ToString(*request.AwaitName))
@@ -2375,7 +2370,7 @@ func (p Gs2ExchangeRestClient) GetAwaitByUserIdAsync(
 	request *GetAwaitByUserIdRequest,
 	callback chan<- GetAwaitByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/exchange/{rateName}/await/{awaitName}"
+	path := "/{namespaceName}/user/{userId}/exchange/await/{awaitName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2385,11 +2380,6 @@ func (p Gs2ExchangeRestClient) GetAwaitByUserIdAsync(
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.RateName != nil && *request.RateName != ""  {
-        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
-    } else {
-        path = strings.ReplaceAll(path, "{rateName}", "null")
     }
     if request.AwaitName != nil && *request.AwaitName != ""  {
         path = strings.ReplaceAll(path, "{awaitName}", core.ToString(*request.AwaitName))
@@ -2474,16 +2464,11 @@ func (p Gs2ExchangeRestClient) AcquireAsync(
 	request *AcquireRequest,
 	callback chan<- AcquireAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/exchange/{rateName}/await/{awaitName}"
+	path := "/{namespaceName}/user/me/exchange/await/{awaitName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RateName != nil && *request.RateName != ""  {
-        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
-    } else {
-        path = strings.ReplaceAll(path, "{rateName}", "null")
     }
     if request.AwaitName != nil && *request.AwaitName != ""  {
         path = strings.ReplaceAll(path, "{awaitName}", core.ToString(*request.AwaitName))
@@ -2584,7 +2569,7 @@ func (p Gs2ExchangeRestClient) AcquireByUserIdAsync(
 	request *AcquireByUserIdRequest,
 	callback chan<- AcquireByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/exchange/{rateName}/await/{awaitName}"
+	path := "/{namespaceName}/user/{userId}/exchange/await/{awaitName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2594,11 +2579,6 @@ func (p Gs2ExchangeRestClient) AcquireByUserIdAsync(
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.RateName != nil && *request.RateName != ""  {
-        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
-    } else {
-        path = strings.ReplaceAll(path, "{rateName}", "null")
     }
     if request.AwaitName != nil && *request.AwaitName != ""  {
         path = strings.ReplaceAll(path, "{awaitName}", core.ToString(*request.AwaitName))
@@ -2696,7 +2676,7 @@ func (p Gs2ExchangeRestClient) AcquireForceByUserIdAsync(
 	request *AcquireForceByUserIdRequest,
 	callback chan<- AcquireForceByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/exchange/{rateName}/await/{awaitName}/force"
+	path := "/{namespaceName}/user/{userId}/exchange/await/{awaitName}/force"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2706,11 +2686,6 @@ func (p Gs2ExchangeRestClient) AcquireForceByUserIdAsync(
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.RateName != nil && *request.RateName != ""  {
-        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
-    } else {
-        path = strings.ReplaceAll(path, "{rateName}", "null")
     }
     if request.AwaitName != nil && *request.AwaitName != ""  {
         path = strings.ReplaceAll(path, "{awaitName}", core.ToString(*request.AwaitName))
@@ -2808,16 +2783,11 @@ func (p Gs2ExchangeRestClient) SkipAsync(
 	request *SkipRequest,
 	callback chan<- SkipAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/exchange/{rateName}/await/{awaitName}/skip"
+	path := "/{namespaceName}/user/me/exchange/await/{awaitName}/skip"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RateName != nil && *request.RateName != ""  {
-        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
-    } else {
-        path = strings.ReplaceAll(path, "{rateName}", "null")
     }
     if request.AwaitName != nil && *request.AwaitName != ""  {
         path = strings.ReplaceAll(path, "{awaitName}", core.ToString(*request.AwaitName))
@@ -2918,7 +2888,7 @@ func (p Gs2ExchangeRestClient) SkipByUserIdAsync(
 	request *SkipByUserIdRequest,
 	callback chan<- SkipByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/exchange/{rateName}/await/{awaitName}/skip"
+	path := "/{namespaceName}/user/{userId}/exchange/await/{awaitName}/skip"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2928,11 +2898,6 @@ func (p Gs2ExchangeRestClient) SkipByUserIdAsync(
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.RateName != nil && *request.RateName != ""  {
-        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
-    } else {
-        path = strings.ReplaceAll(path, "{rateName}", "null")
     }
     if request.AwaitName != nil && *request.AwaitName != ""  {
         path = strings.ReplaceAll(path, "{awaitName}", core.ToString(*request.AwaitName))
@@ -3030,16 +2995,11 @@ func (p Gs2ExchangeRestClient) DeleteAwaitAsync(
 	request *DeleteAwaitRequest,
 	callback chan<- DeleteAwaitAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/exchange/{rateName}/await/{awaitName}"
+	path := "/{namespaceName}/user/me/exchange/await/{awaitName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
         path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RateName != nil && *request.RateName != ""  {
-        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
-    } else {
-        path = strings.ReplaceAll(path, "{rateName}", "null")
     }
     if request.AwaitName != nil && *request.AwaitName != ""  {
         path = strings.ReplaceAll(path, "{awaitName}", core.ToString(*request.AwaitName))
@@ -3130,7 +3090,7 @@ func (p Gs2ExchangeRestClient) DeleteAwaitByUserIdAsync(
 	request *DeleteAwaitByUserIdRequest,
 	callback chan<- DeleteAwaitByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/exchange/{rateName}/await/{awaitName}"
+	path := "/{namespaceName}/user/{userId}/exchange/await/{awaitName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -3140,11 +3100,6 @@ func (p Gs2ExchangeRestClient) DeleteAwaitByUserIdAsync(
         path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
     } else {
         path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.RateName != nil && *request.RateName != ""  {
-        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
-    } else {
-        path = strings.ReplaceAll(path, "{rateName}", "null")
     }
     if request.AwaitName != nil && *request.AwaitName != ""  {
         path = strings.ReplaceAll(path, "{awaitName}", core.ToString(*request.AwaitName))

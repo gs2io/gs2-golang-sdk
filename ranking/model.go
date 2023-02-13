@@ -789,6 +789,7 @@ func CastCalculatedAtsFromDict(data []CalculatedAt) []interface{} {
 }
 
 type SubscribeUser struct {
+	SubscribeUserId *string `json:"subscribeUserId"`
 	CategoryName *string `json:"categoryName"`
 	UserId *string `json:"userId"`
 	TargetUserId *string `json:"targetUserId"`
@@ -802,6 +803,7 @@ func NewSubscribeUserFromJson(data string) SubscribeUser {
 
 func NewSubscribeUserFromDict(data map[string]interface{}) SubscribeUser {
     return SubscribeUser {
+        SubscribeUserId: core.CastString(data["subscribeUserId"]),
         CategoryName: core.CastString(data["categoryName"]),
         UserId: core.CastString(data["userId"]),
         TargetUserId: core.CastString(data["targetUserId"]),
@@ -810,6 +812,10 @@ func NewSubscribeUserFromDict(data map[string]interface{}) SubscribeUser {
 
 func (p SubscribeUser) ToDict() map[string]interface{} {
     
+    var subscribeUserId *string
+    if p.SubscribeUserId != nil {
+        subscribeUserId = p.SubscribeUserId
+    }
     var categoryName *string
     if p.CategoryName != nil {
         categoryName = p.CategoryName
@@ -823,6 +829,7 @@ func (p SubscribeUser) ToDict() map[string]interface{} {
         targetUserId = p.TargetUserId
     }
     return map[string]interface{} {
+        "subscribeUserId": subscribeUserId,
         "categoryName": categoryName,
         "userId": userId,
         "targetUserId": targetUserId,

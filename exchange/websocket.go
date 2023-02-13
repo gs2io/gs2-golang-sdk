@@ -2137,9 +2137,6 @@ func (p Gs2ExchangeWebSocketClient) GetAwaitAsync(
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
     }
-    if request.RateName != nil && *request.RateName != "" {
-        bodies["rateName"] = *request.RateName
-    }
     if request.AwaitName != nil && *request.AwaitName != "" {
         bodies["awaitName"] = *request.AwaitName
     }
@@ -2228,9 +2225,6 @@ func (p Gs2ExchangeWebSocketClient) GetAwaitByUserIdAsync(
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
     }
-    if request.RateName != nil && *request.RateName != "" {
-        bodies["rateName"] = *request.RateName
-    }
     if request.AwaitName != nil && *request.AwaitName != "" {
         bodies["awaitName"] = *request.AwaitName
     }
@@ -2315,9 +2309,6 @@ func (p Gs2ExchangeWebSocketClient) AcquireAsync(
     }
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
-    }
-    if request.RateName != nil && *request.RateName != "" {
-        bodies["rateName"] = *request.RateName
     }
     if request.AwaitName != nil && *request.AwaitName != "" {
         bodies["awaitName"] = *request.AwaitName
@@ -2417,9 +2408,6 @@ func (p Gs2ExchangeWebSocketClient) AcquireByUserIdAsync(
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
     }
-    if request.RateName != nil && *request.RateName != "" {
-        bodies["rateName"] = *request.RateName
-    }
     if request.AwaitName != nil && *request.AwaitName != "" {
         bodies["awaitName"] = *request.AwaitName
     }
@@ -2515,9 +2503,6 @@ func (p Gs2ExchangeWebSocketClient) AcquireForceByUserIdAsync(
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
     }
-    if request.RateName != nil && *request.RateName != "" {
-        bodies["rateName"] = *request.RateName
-    }
     if request.AwaitName != nil && *request.AwaitName != "" {
         bodies["awaitName"] = *request.AwaitName
     }
@@ -2612,9 +2597,6 @@ func (p Gs2ExchangeWebSocketClient) SkipAsync(
     }
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
-    }
-    if request.RateName != nil && *request.RateName != "" {
-        bodies["rateName"] = *request.RateName
     }
     if request.AwaitName != nil && *request.AwaitName != "" {
         bodies["awaitName"] = *request.AwaitName
@@ -2714,9 +2696,6 @@ func (p Gs2ExchangeWebSocketClient) SkipByUserIdAsync(
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
     }
-    if request.RateName != nil && *request.RateName != "" {
-        bodies["rateName"] = *request.RateName
-    }
     if request.AwaitName != nil && *request.AwaitName != "" {
         bodies["awaitName"] = *request.AwaitName
     }
@@ -2812,9 +2791,6 @@ func (p Gs2ExchangeWebSocketClient) DeleteAwaitAsync(
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
     }
-    if request.RateName != nil && *request.RateName != "" {
-        bodies["rateName"] = *request.RateName
-    }
     if request.AwaitName != nil && *request.AwaitName != "" {
         bodies["awaitName"] = *request.AwaitName
     }
@@ -2905,9 +2881,6 @@ func (p Gs2ExchangeWebSocketClient) DeleteAwaitByUserIdAsync(
     }
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
-    }
-    if request.RateName != nil && *request.RateName != "" {
-        bodies["rateName"] = *request.RateName
     }
     if request.AwaitName != nil && *request.AwaitName != "" {
         bodies["awaitName"] = *request.AwaitName
