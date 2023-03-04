@@ -68,6 +68,7 @@ type CreateNamespaceRequest struct {
     JoinNotification *NotificationSetting `json:"joinNotification"`
     LeaveNotification *NotificationSetting `json:"leaveNotification"`
     CompleteNotification *NotificationSetting `json:"completeNotification"`
+    ChangeRatingNotification *NotificationSetting `json:"changeRatingNotification"`
     LogSetting *LogSetting `json:"logSetting"`
 }
 
@@ -92,6 +93,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
         JoinNotification: NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer(),
         LeaveNotification: NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer(),
         CompleteNotification: NewNotificationSettingFromDict(core.CastMap(data["completeNotification"])).Pointer(),
+        ChangeRatingNotification: NewNotificationSettingFromDict(core.CastMap(data["changeRatingNotification"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
     }
 }
@@ -111,6 +113,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
         "joinNotification": p.JoinNotification.ToDict(),
         "leaveNotification": p.LeaveNotification.ToDict(),
         "completeNotification": p.CompleteNotification.ToDict(),
+        "changeRatingNotification": p.ChangeRatingNotification.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
     }
 }
@@ -191,6 +194,7 @@ type UpdateNamespaceRequest struct {
     JoinNotification *NotificationSetting `json:"joinNotification"`
     LeaveNotification *NotificationSetting `json:"leaveNotification"`
     CompleteNotification *NotificationSetting `json:"completeNotification"`
+    ChangeRatingNotification *NotificationSetting `json:"changeRatingNotification"`
     LogSetting *LogSetting `json:"logSetting"`
 }
 
@@ -215,6 +219,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
         JoinNotification: NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer(),
         LeaveNotification: NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer(),
         CompleteNotification: NewNotificationSettingFromDict(core.CastMap(data["completeNotification"])).Pointer(),
+        ChangeRatingNotification: NewNotificationSettingFromDict(core.CastMap(data["changeRatingNotification"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
     }
 }
@@ -234,6 +239,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
         "joinNotification": p.JoinNotification.ToDict(),
         "leaveNotification": p.LeaveNotification.ToDict(),
         "completeNotification": p.CompleteNotification.ToDict(),
+        "changeRatingNotification": p.ChangeRatingNotification.ToDict(),
         "logSetting": p.LogSetting.ToDict(),
     }
 }

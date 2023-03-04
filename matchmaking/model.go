@@ -36,6 +36,7 @@ type Namespace struct {
 	JoinNotification *NotificationSetting `json:"joinNotification"`
 	LeaveNotification *NotificationSetting `json:"leaveNotification"`
 	CompleteNotification *NotificationSetting `json:"completeNotification"`
+	ChangeRatingNotification *NotificationSetting `json:"changeRatingNotification"`
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
@@ -63,6 +64,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         JoinNotification: NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer(),
         LeaveNotification: NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer(),
         CompleteNotification: NewNotificationSettingFromDict(core.CastMap(data["completeNotification"])).Pointer(),
+        ChangeRatingNotification: NewNotificationSettingFromDict(core.CastMap(data["changeRatingNotification"])).Pointer(),
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
@@ -127,6 +129,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.CompleteNotification != nil {
         completeNotification = p.CompleteNotification.ToDict()
     }
+    var changeRatingNotification map[string]interface{}
+    if p.ChangeRatingNotification != nil {
+        changeRatingNotification = p.ChangeRatingNotification.ToDict()
+    }
     var logSetting map[string]interface{}
     if p.LogSetting != nil {
         logSetting = p.LogSetting.ToDict()
@@ -154,6 +160,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "joinNotification": joinNotification,
         "leaveNotification": leaveNotification,
         "completeNotification": completeNotification,
+        "changeRatingNotification": changeRatingNotification,
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,

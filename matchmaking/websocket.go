@@ -202,6 +202,9 @@ func (p Gs2MatchmakingWebSocketClient) CreateNamespaceAsync(
     if request.CompleteNotification != nil {
         bodies["completeNotification"] = request.CompleteNotification.ToDict()
     }
+    if request.ChangeRatingNotification != nil {
+        bodies["changeRatingNotification"] = request.ChangeRatingNotification.ToDict()
+    }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
     }
@@ -477,6 +480,9 @@ func (p Gs2MatchmakingWebSocketClient) UpdateNamespaceAsync(
     }
     if request.CompleteNotification != nil {
         bodies["completeNotification"] = request.CompleteNotification.ToDict()
+    }
+    if request.ChangeRatingNotification != nil {
+        bodies["changeRatingNotification"] = request.ChangeRatingNotification.ToDict()
     }
     if request.LogSetting != nil {
         bodies["logSetting"] = request.LogSetting.ToDict()
