@@ -57,6 +57,8 @@ func (p Gs2LotteryWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2LotteryWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -239,6 +243,8 @@ func (p Gs2LotteryWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -318,6 +324,8 @@ func (p Gs2LotteryWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -397,6 +405,8 @@ func (p Gs2LotteryWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -497,6 +507,8 @@ func (p Gs2LotteryWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -576,6 +588,8 @@ func (p Gs2LotteryWebSocketClient) describeLotteryModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeLotteryModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -661,6 +675,8 @@ func (p Gs2LotteryWebSocketClient) createLotteryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateLotteryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -761,6 +777,8 @@ func (p Gs2LotteryWebSocketClient) getLotteryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetLotteryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -843,6 +861,8 @@ func (p Gs2LotteryWebSocketClient) updateLotteryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateLotteryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -943,6 +963,8 @@ func (p Gs2LotteryWebSocketClient) deleteLotteryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteLotteryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1025,6 +1047,8 @@ func (p Gs2LotteryWebSocketClient) describePrizeTableMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribePrizeTableMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1110,6 +1134,8 @@ func (p Gs2LotteryWebSocketClient) createPrizeTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreatePrizeTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1205,6 +1231,8 @@ func (p Gs2LotteryWebSocketClient) getPrizeTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetPrizeTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1287,6 +1315,8 @@ func (p Gs2LotteryWebSocketClient) updatePrizeTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdatePrizeTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1382,6 +1412,8 @@ func (p Gs2LotteryWebSocketClient) deletePrizeTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeletePrizeTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1464,6 +1496,8 @@ func (p Gs2LotteryWebSocketClient) describeLotteryModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeLotteryModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1543,6 +1577,8 @@ func (p Gs2LotteryWebSocketClient) getLotteryModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetLotteryModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1625,6 +1661,8 @@ func (p Gs2LotteryWebSocketClient) describePrizeTablesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribePrizeTablesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1704,6 +1742,8 @@ func (p Gs2LotteryWebSocketClient) getPrizeTableAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetPrizeTableAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1786,6 +1826,14 @@ func (p Gs2LotteryWebSocketClient) drawByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "box.items.empty" {
+				asyncResult.Err = gs2err.SetClientError(Empty{})
+            }
+        }
+    }
 	callback <- DrawByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1884,6 +1932,8 @@ func (p Gs2LotteryWebSocketClient) drawByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DrawByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1966,6 +2016,8 @@ func (p Gs2LotteryWebSocketClient) describeProbabilitiesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeProbabilitiesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2054,6 +2106,8 @@ func (p Gs2LotteryWebSocketClient) describeProbabilitiesByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeProbabilitiesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2139,6 +2193,8 @@ func (p Gs2LotteryWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2218,6 +2274,8 @@ func (p Gs2LotteryWebSocketClient) getCurrentLotteryMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentLotteryMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2297,6 +2355,8 @@ func (p Gs2LotteryWebSocketClient) updateCurrentLotteryMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentLotteryMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2379,6 +2439,8 @@ func (p Gs2LotteryWebSocketClient) updateCurrentLotteryMasterFromGitHubAsyncHand
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentLotteryMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2461,6 +2523,8 @@ func (p Gs2LotteryWebSocketClient) describePrizeLimitsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribePrizeLimitsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2549,6 +2613,8 @@ func (p Gs2LotteryWebSocketClient) getPrizeLimitAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetPrizeLimitAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2634,6 +2700,8 @@ func (p Gs2LotteryWebSocketClient) resetPrizeLimitAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ResetPrizeLimitAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2719,6 +2787,8 @@ func (p Gs2LotteryWebSocketClient) describeBoxesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeBoxesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2810,6 +2880,8 @@ func (p Gs2LotteryWebSocketClient) describeBoxesByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeBoxesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2898,6 +2970,8 @@ func (p Gs2LotteryWebSocketClient) getBoxAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetBoxAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2986,6 +3060,8 @@ func (p Gs2LotteryWebSocketClient) getBoxByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetBoxByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3071,6 +3147,8 @@ func (p Gs2LotteryWebSocketClient) resetBoxAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ResetBoxAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3162,6 +3240,8 @@ func (p Gs2LotteryWebSocketClient) resetBoxByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ResetBoxByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

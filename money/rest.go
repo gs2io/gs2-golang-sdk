@@ -993,6 +993,12 @@ func depositByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DepositByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+        }
 		callback <- DepositByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1099,6 +1105,15 @@ func withdrawAsyncHandler(
 	asyncResult := <-internalCallback
 	var result WithdrawResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.balance.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
 		callback <- WithdrawAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1203,6 +1218,15 @@ func withdrawByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result WithdrawByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.balance.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
 		callback <- WithdrawByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1681,6 +1705,12 @@ func recordReceiptAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RecordReceiptResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "receipt.payload.invalid" {
+				asyncResult.Err = gs2err.SetClientError(ReceiptInvalid{})
+            }
+        }
 		callback <- RecordReceiptAsyncResult{
 			err: asyncResult.Err,
 		}

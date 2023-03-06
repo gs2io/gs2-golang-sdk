@@ -57,6 +57,8 @@ func (p Gs2DeployWebSocketClient) describeStacksAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeStacksAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2DeployWebSocketClient) createStackAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateStackAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -224,6 +228,8 @@ func (p Gs2DeployWebSocketClient) createStackFromGitHubAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateStackFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -309,6 +315,8 @@ func (p Gs2DeployWebSocketClient) validateAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ValidateAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -388,6 +396,8 @@ func (p Gs2DeployWebSocketClient) getStackStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStackStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -467,6 +477,8 @@ func (p Gs2DeployWebSocketClient) getStackAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStackAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -546,6 +558,8 @@ func (p Gs2DeployWebSocketClient) updateStackAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateStackAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -631,6 +645,8 @@ func (p Gs2DeployWebSocketClient) updateStackFromGitHubAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateStackFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -716,6 +732,8 @@ func (p Gs2DeployWebSocketClient) deleteStackAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteStackAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -795,6 +813,8 @@ func (p Gs2DeployWebSocketClient) forceDeleteStackAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ForceDeleteStackAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -874,6 +894,8 @@ func (p Gs2DeployWebSocketClient) deleteStackResourcesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteStackResourcesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -953,6 +975,8 @@ func (p Gs2DeployWebSocketClient) deleteStackEntityAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteStackEntityAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1032,6 +1056,8 @@ func (p Gs2DeployWebSocketClient) describeResourcesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeResourcesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1117,6 +1143,8 @@ func (p Gs2DeployWebSocketClient) getResourceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetResourceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1199,6 +1227,8 @@ func (p Gs2DeployWebSocketClient) describeEventsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeEventsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1284,6 +1314,8 @@ func (p Gs2DeployWebSocketClient) getEventAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetEventAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1366,6 +1398,8 @@ func (p Gs2DeployWebSocketClient) describeOutputsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeOutputsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1451,6 +1485,8 @@ func (p Gs2DeployWebSocketClient) getOutputAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetOutputAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

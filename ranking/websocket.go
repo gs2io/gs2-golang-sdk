@@ -57,6 +57,8 @@ func (p Gs2RankingWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2RankingWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -224,6 +228,8 @@ func (p Gs2RankingWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -303,6 +309,8 @@ func (p Gs2RankingWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -382,6 +390,8 @@ func (p Gs2RankingWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -467,6 +477,8 @@ func (p Gs2RankingWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -546,6 +558,8 @@ func (p Gs2RankingWebSocketClient) describeCategoryModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCategoryModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -625,6 +639,8 @@ func (p Gs2RankingWebSocketClient) getCategoryModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCategoryModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -707,6 +723,8 @@ func (p Gs2RankingWebSocketClient) describeCategoryModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCategoryModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -792,6 +810,8 @@ func (p Gs2RankingWebSocketClient) createCategoryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateCategoryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -913,6 +933,8 @@ func (p Gs2RankingWebSocketClient) getCategoryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCategoryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -995,6 +1017,8 @@ func (p Gs2RankingWebSocketClient) updateCategoryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCategoryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1116,6 +1140,8 @@ func (p Gs2RankingWebSocketClient) deleteCategoryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteCategoryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1198,6 +1224,8 @@ func (p Gs2RankingWebSocketClient) subscribeAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SubscribeAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1292,6 +1320,8 @@ func (p Gs2RankingWebSocketClient) subscribeByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SubscribeByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1383,6 +1413,8 @@ func (p Gs2RankingWebSocketClient) describeScoresAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeScoresAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1480,6 +1512,8 @@ func (p Gs2RankingWebSocketClient) describeScoresByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeScoresByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1574,6 +1608,8 @@ func (p Gs2RankingWebSocketClient) getScoreAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetScoreAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1668,6 +1704,8 @@ func (p Gs2RankingWebSocketClient) getScoreByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetScoreByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1759,6 +1797,8 @@ func (p Gs2RankingWebSocketClient) describeRankingsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRankingsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1856,6 +1896,8 @@ func (p Gs2RankingWebSocketClient) describeRankingssByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRankingssByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1950,6 +1992,8 @@ func (p Gs2RankingWebSocketClient) describeNearRankingsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNearRankingsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2035,6 +2079,8 @@ func (p Gs2RankingWebSocketClient) getRankingAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRankingAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2129,6 +2175,8 @@ func (p Gs2RankingWebSocketClient) getRankingByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRankingByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2220,6 +2268,8 @@ func (p Gs2RankingWebSocketClient) putScoreAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PutScoreAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2317,6 +2367,8 @@ func (p Gs2RankingWebSocketClient) putScoreByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PutScoreByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2411,6 +2463,8 @@ func (p Gs2RankingWebSocketClient) calcRankingAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CalcRankingAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2493,6 +2547,8 @@ func (p Gs2RankingWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2572,6 +2628,8 @@ func (p Gs2RankingWebSocketClient) getCurrentRankingMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentRankingMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2651,6 +2709,8 @@ func (p Gs2RankingWebSocketClient) updateCurrentRankingMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentRankingMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2733,6 +2793,8 @@ func (p Gs2RankingWebSocketClient) updateCurrentRankingMasterFromGitHubAsyncHand
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentRankingMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2815,6 +2877,8 @@ func (p Gs2RankingWebSocketClient) getSubscribeAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetSubscribeAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2906,6 +2970,8 @@ func (p Gs2RankingWebSocketClient) getSubscribeByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetSubscribeByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2994,6 +3060,8 @@ func (p Gs2RankingWebSocketClient) unsubscribeAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UnsubscribeAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3088,6 +3156,8 @@ func (p Gs2RankingWebSocketClient) unsubscribeByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UnsubscribeByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3179,6 +3249,8 @@ func (p Gs2RankingWebSocketClient) describeSubscribesByCategoryNameAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeSubscribesByCategoryNameAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3267,6 +3339,8 @@ func (p Gs2RankingWebSocketClient) describeSubscribesByCategoryNameAndUserIdAsyn
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeSubscribesByCategoryNameAndUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

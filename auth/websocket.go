@@ -57,6 +57,8 @@ func (p Gs2AuthWebSocketClient) loginAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- LoginAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2AuthWebSocketClient) loginBySignatureAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- LoginBySignatureAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

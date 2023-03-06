@@ -57,6 +57,8 @@ func (p Gs2MoneyWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2MoneyWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -251,6 +255,8 @@ func (p Gs2MoneyWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -330,6 +336,8 @@ func (p Gs2MoneyWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -409,6 +417,8 @@ func (p Gs2MoneyWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -515,6 +525,8 @@ func (p Gs2MoneyWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -594,6 +606,8 @@ func (p Gs2MoneyWebSocketClient) describeWalletsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeWalletsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -685,6 +699,8 @@ func (p Gs2MoneyWebSocketClient) describeWalletsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeWalletsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -773,6 +789,8 @@ func (p Gs2MoneyWebSocketClient) getWalletAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetWalletAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -861,6 +879,8 @@ func (p Gs2MoneyWebSocketClient) getWalletByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetWalletByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -946,6 +966,14 @@ func (p Gs2MoneyWebSocketClient) depositByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+        }
+    }
 	callback <- DepositByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1040,6 +1068,17 @@ func (p Gs2MoneyWebSocketClient) withdrawAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.balance.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
+    }
 	callback <- WithdrawAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1137,6 +1176,17 @@ func (p Gs2MoneyWebSocketClient) withdrawByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.balance.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
+    }
 	callback <- WithdrawByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1231,6 +1281,8 @@ func (p Gs2MoneyWebSocketClient) depositByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DepositByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1313,6 +1365,8 @@ func (p Gs2MoneyWebSocketClient) withdrawByStampTaskAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- WithdrawByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1395,6 +1449,8 @@ func (p Gs2MoneyWebSocketClient) describeReceiptsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeReceiptsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1492,6 +1548,8 @@ func (p Gs2MoneyWebSocketClient) getByUserIdAndTransactionIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetByUserIdAndTransactionIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1577,6 +1635,14 @@ func (p Gs2MoneyWebSocketClient) recordReceiptAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "receipt.payload.invalid" {
+				asyncResult.Err = gs2err.SetClientError(ReceiptInvalid{})
+            }
+        }
+    }
 	callback <- RecordReceiptAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1668,6 +1734,8 @@ func (p Gs2MoneyWebSocketClient) recordReceiptByStampTaskAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RecordReceiptByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

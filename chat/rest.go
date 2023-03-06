@@ -703,6 +703,12 @@ func createRoomAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateRoomResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+        }
 		callback <- CreateRoomAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1010,6 +1016,12 @@ func updateRoomAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateRoomResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+        }
 		callback <- UpdateRoomAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1232,6 +1244,12 @@ func deleteRoomAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteRoomResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+        }
 		callback <- DeleteRoomAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1422,6 +1440,18 @@ func describeMessagesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeMessagesResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
 		callback <- DescribeMessagesAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1523,6 +1553,18 @@ func describeMessagesByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeMessagesByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
 		callback <- DescribeMessagesByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1624,6 +1666,18 @@ func postAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PostResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
 		callback <- PostAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1731,6 +1785,18 @@ func postByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PostByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
 		callback <- PostByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1840,6 +1906,18 @@ func getMessageAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetMessageResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
 		callback <- GetMessageAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1940,6 +2018,18 @@ func getMessageByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetMessageByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
 		callback <- GetMessageByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}

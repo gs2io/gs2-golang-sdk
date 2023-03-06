@@ -57,6 +57,8 @@ func (p Gs2MissionWebSocketClient) describeCompletesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCompletesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -148,6 +150,8 @@ func (p Gs2MissionWebSocketClient) describeCompletesByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCompletesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -236,6 +240,8 @@ func (p Gs2MissionWebSocketClient) completeAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CompleteAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -337,6 +343,8 @@ func (p Gs2MissionWebSocketClient) completeByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CompleteByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -435,6 +443,8 @@ func (p Gs2MissionWebSocketClient) receiveByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ReceiveByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -526,6 +536,8 @@ func (p Gs2MissionWebSocketClient) getCompleteAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCompleteAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -614,6 +626,8 @@ func (p Gs2MissionWebSocketClient) getCompleteByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCompleteByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -699,6 +713,8 @@ func (p Gs2MissionWebSocketClient) deleteCompleteByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteCompleteByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -787,6 +803,8 @@ func (p Gs2MissionWebSocketClient) receiveByStampTaskAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ReceiveByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -869,6 +887,8 @@ func (p Gs2MissionWebSocketClient) describeCounterModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCounterModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -954,6 +974,8 @@ func (p Gs2MissionWebSocketClient) createCounterModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateCounterModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1052,6 +1074,8 @@ func (p Gs2MissionWebSocketClient) getCounterModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCounterModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1134,6 +1158,8 @@ func (p Gs2MissionWebSocketClient) updateCounterModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCounterModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1232,6 +1258,8 @@ func (p Gs2MissionWebSocketClient) deleteCounterModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteCounterModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1314,6 +1342,8 @@ func (p Gs2MissionWebSocketClient) describeMissionGroupModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeMissionGroupModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1399,6 +1429,8 @@ func (p Gs2MissionWebSocketClient) createMissionGroupModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateMissionGroupModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1502,6 +1534,8 @@ func (p Gs2MissionWebSocketClient) getMissionGroupModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetMissionGroupModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1584,6 +1618,8 @@ func (p Gs2MissionWebSocketClient) updateMissionGroupModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateMissionGroupModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1687,6 +1723,8 @@ func (p Gs2MissionWebSocketClient) deleteMissionGroupModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteMissionGroupModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1769,6 +1807,8 @@ func (p Gs2MissionWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1851,6 +1891,8 @@ func (p Gs2MissionWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1957,6 +1999,8 @@ func (p Gs2MissionWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2036,6 +2080,8 @@ func (p Gs2MissionWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2115,6 +2161,8 @@ func (p Gs2MissionWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2221,6 +2269,8 @@ func (p Gs2MissionWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2300,6 +2350,8 @@ func (p Gs2MissionWebSocketClient) describeCountersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCountersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2391,6 +2443,8 @@ func (p Gs2MissionWebSocketClient) describeCountersByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCountersByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2479,6 +2533,14 @@ func (p Gs2MissionWebSocketClient) increaseCounterByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "counter.increase.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+        }
+    }
 	callback <- IncreaseCounterByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2570,6 +2632,8 @@ func (p Gs2MissionWebSocketClient) getCounterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCounterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2658,6 +2722,8 @@ func (p Gs2MissionWebSocketClient) getCounterByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCounterByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2743,6 +2809,8 @@ func (p Gs2MissionWebSocketClient) deleteCounterByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteCounterByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2831,6 +2899,8 @@ func (p Gs2MissionWebSocketClient) increaseByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- IncreaseByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2913,6 +2983,8 @@ func (p Gs2MissionWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2992,6 +3064,8 @@ func (p Gs2MissionWebSocketClient) getCurrentMissionMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentMissionMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3071,6 +3145,8 @@ func (p Gs2MissionWebSocketClient) updateCurrentMissionMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentMissionMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3153,6 +3229,8 @@ func (p Gs2MissionWebSocketClient) updateCurrentMissionMasterFromGitHubAsyncHand
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentMissionMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3235,6 +3313,8 @@ func (p Gs2MissionWebSocketClient) describeCounterModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCounterModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3314,6 +3394,8 @@ func (p Gs2MissionWebSocketClient) getCounterModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCounterModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3396,6 +3478,8 @@ func (p Gs2MissionWebSocketClient) describeMissionGroupModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeMissionGroupModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3475,6 +3559,8 @@ func (p Gs2MissionWebSocketClient) getMissionGroupModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetMissionGroupModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3557,6 +3643,8 @@ func (p Gs2MissionWebSocketClient) describeMissionTaskModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeMissionTaskModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3639,6 +3727,8 @@ func (p Gs2MissionWebSocketClient) getMissionTaskModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetMissionTaskModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3724,6 +3814,8 @@ func (p Gs2MissionWebSocketClient) describeMissionTaskModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeMissionTaskModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3812,6 +3904,8 @@ func (p Gs2MissionWebSocketClient) createMissionTaskModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateMissionTaskModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3922,6 +4016,8 @@ func (p Gs2MissionWebSocketClient) getMissionTaskModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetMissionTaskModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4007,6 +4103,8 @@ func (p Gs2MissionWebSocketClient) updateMissionTaskModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateMissionTaskModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4117,6 +4215,8 @@ func (p Gs2MissionWebSocketClient) deleteMissionTaskModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteMissionTaskModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

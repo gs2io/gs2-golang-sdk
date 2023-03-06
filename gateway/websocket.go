@@ -57,6 +57,8 @@ func (p Gs2GatewayWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2GatewayWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -227,6 +231,8 @@ func (p Gs2GatewayWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -306,6 +312,8 @@ func (p Gs2GatewayWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -385,6 +393,8 @@ func (p Gs2GatewayWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -473,6 +483,8 @@ func (p Gs2GatewayWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -552,6 +564,8 @@ func (p Gs2GatewayWebSocketClient) describeWebSocketSessionsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeWebSocketSessionsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -643,6 +657,8 @@ func (p Gs2GatewayWebSocketClient) describeWebSocketSessionsByUserIdAsyncHandler
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeWebSocketSessionsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -731,6 +747,8 @@ func (p Gs2GatewayWebSocketClient) setUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -822,6 +840,8 @@ func (p Gs2GatewayWebSocketClient) setUserIdByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetUserIdByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -910,6 +930,8 @@ func (p Gs2GatewayWebSocketClient) sendNotificationAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SendNotificationAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1007,6 +1029,8 @@ func (p Gs2GatewayWebSocketClient) disconnectByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DisconnectByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1092,6 +1116,8 @@ func (p Gs2GatewayWebSocketClient) disconnectAllAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DisconnectAllAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1171,6 +1197,8 @@ func (p Gs2GatewayWebSocketClient) setFirebaseTokenAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetFirebaseTokenAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1262,6 +1290,8 @@ func (p Gs2GatewayWebSocketClient) setFirebaseTokenByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetFirebaseTokenByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1350,6 +1380,8 @@ func (p Gs2GatewayWebSocketClient) getFirebaseTokenAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetFirebaseTokenAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1435,6 +1467,8 @@ func (p Gs2GatewayWebSocketClient) getFirebaseTokenByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetFirebaseTokenByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1517,6 +1551,8 @@ func (p Gs2GatewayWebSocketClient) deleteFirebaseTokenAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteFirebaseTokenAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1605,6 +1641,8 @@ func (p Gs2GatewayWebSocketClient) deleteFirebaseTokenByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteFirebaseTokenByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1690,6 +1728,8 @@ func (p Gs2GatewayWebSocketClient) sendMobileNotificationByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SendMobileNotificationByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

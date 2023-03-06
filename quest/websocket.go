@@ -57,6 +57,8 @@ func (p Gs2QuestWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2QuestWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -242,6 +246,8 @@ func (p Gs2QuestWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -321,6 +327,8 @@ func (p Gs2QuestWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -400,6 +408,8 @@ func (p Gs2QuestWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -503,6 +513,8 @@ func (p Gs2QuestWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -582,6 +594,8 @@ func (p Gs2QuestWebSocketClient) describeQuestGroupModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeQuestGroupModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -667,6 +681,8 @@ func (p Gs2QuestWebSocketClient) createQuestGroupModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateQuestGroupModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -758,6 +774,8 @@ func (p Gs2QuestWebSocketClient) getQuestGroupModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetQuestGroupModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -840,6 +858,8 @@ func (p Gs2QuestWebSocketClient) updateQuestGroupModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateQuestGroupModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -931,6 +951,8 @@ func (p Gs2QuestWebSocketClient) deleteQuestGroupModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteQuestGroupModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1013,6 +1035,8 @@ func (p Gs2QuestWebSocketClient) describeQuestModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeQuestModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1101,6 +1125,8 @@ func (p Gs2QuestWebSocketClient) createQuestModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateQuestModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1230,6 +1256,8 @@ func (p Gs2QuestWebSocketClient) getQuestModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetQuestModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1315,6 +1343,8 @@ func (p Gs2QuestWebSocketClient) updateQuestModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateQuestModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1444,6 +1474,8 @@ func (p Gs2QuestWebSocketClient) deleteQuestModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteQuestModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1529,6 +1561,8 @@ func (p Gs2QuestWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1608,6 +1642,8 @@ func (p Gs2QuestWebSocketClient) getCurrentQuestMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentQuestMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1687,6 +1723,8 @@ func (p Gs2QuestWebSocketClient) updateCurrentQuestMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentQuestMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1769,6 +1807,8 @@ func (p Gs2QuestWebSocketClient) updateCurrentQuestMasterFromGitHubAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentQuestMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1851,6 +1891,8 @@ func (p Gs2QuestWebSocketClient) describeProgressesByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeProgressesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1939,6 +1981,8 @@ func (p Gs2QuestWebSocketClient) createProgressByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateProgressByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2037,6 +2081,8 @@ func (p Gs2QuestWebSocketClient) getProgressAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetProgressAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2122,6 +2168,8 @@ func (p Gs2QuestWebSocketClient) getProgressByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetProgressByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2204,6 +2252,14 @@ func (p Gs2QuestWebSocketClient) startAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "quest.progress.exists" {
+				asyncResult.Err = gs2err.SetClientError(InProgress{})
+            }
+        }
+    }
 	callback <- StartAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2308,6 +2364,14 @@ func (p Gs2QuestWebSocketClient) startByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "quest.progress.exists" {
+				asyncResult.Err = gs2err.SetClientError(InProgress{})
+            }
+        }
+    }
 	callback <- StartByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2409,6 +2473,8 @@ func (p Gs2QuestWebSocketClient) endAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- EndAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2517,6 +2583,8 @@ func (p Gs2QuestWebSocketClient) endByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- EndByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2622,6 +2690,8 @@ func (p Gs2QuestWebSocketClient) deleteProgressAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteProgressAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2710,6 +2780,8 @@ func (p Gs2QuestWebSocketClient) deleteProgressByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteProgressByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2795,6 +2867,8 @@ func (p Gs2QuestWebSocketClient) createProgressByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateProgressByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2877,6 +2951,8 @@ func (p Gs2QuestWebSocketClient) deleteProgressByStampTaskAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteProgressByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2959,6 +3035,8 @@ func (p Gs2QuestWebSocketClient) describeCompletedQuestListsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCompletedQuestListsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3050,6 +3128,8 @@ func (p Gs2QuestWebSocketClient) describeCompletedQuestListsByUserIdAsyncHandler
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCompletedQuestListsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3138,6 +3218,8 @@ func (p Gs2QuestWebSocketClient) getCompletedQuestListAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCompletedQuestListAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3226,6 +3308,8 @@ func (p Gs2QuestWebSocketClient) getCompletedQuestListByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCompletedQuestListByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3311,6 +3395,8 @@ func (p Gs2QuestWebSocketClient) deleteCompletedQuestListByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteCompletedQuestListByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3399,6 +3485,8 @@ func (p Gs2QuestWebSocketClient) describeQuestGroupModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeQuestGroupModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3478,6 +3566,8 @@ func (p Gs2QuestWebSocketClient) getQuestGroupModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetQuestGroupModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3560,6 +3650,8 @@ func (p Gs2QuestWebSocketClient) describeQuestModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeQuestModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3642,6 +3734,8 @@ func (p Gs2QuestWebSocketClient) getQuestModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetQuestModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

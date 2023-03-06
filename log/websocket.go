@@ -57,6 +57,8 @@ func (p Gs2LogWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2LogWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -245,6 +249,8 @@ func (p Gs2LogWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -324,6 +330,8 @@ func (p Gs2LogWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -403,6 +411,8 @@ func (p Gs2LogWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -509,6 +519,8 @@ func (p Gs2LogWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -588,6 +600,8 @@ func (p Gs2LogWebSocketClient) queryAccessLogAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- QueryAccessLogAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -694,6 +708,8 @@ func (p Gs2LogWebSocketClient) countAccessLogAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CountAccessLogAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -797,6 +813,8 @@ func (p Gs2LogWebSocketClient) queryIssueStampSheetLogAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- QueryIssueStampSheetLogAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -906,6 +924,8 @@ func (p Gs2LogWebSocketClient) countIssueStampSheetLogAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CountIssueStampSheetLogAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1012,6 +1032,8 @@ func (p Gs2LogWebSocketClient) queryExecuteStampSheetLogAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- QueryExecuteStampSheetLogAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1121,6 +1143,8 @@ func (p Gs2LogWebSocketClient) countExecuteStampSheetLogAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CountExecuteStampSheetLogAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1227,6 +1251,8 @@ func (p Gs2LogWebSocketClient) queryExecuteStampTaskLogAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- QueryExecuteStampTaskLogAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1336,6 +1362,8 @@ func (p Gs2LogWebSocketClient) countExecuteStampTaskLogAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CountExecuteStampTaskLogAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1442,6 +1470,8 @@ func (p Gs2LogWebSocketClient) putLogAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PutLogAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1527,6 +1557,8 @@ func (p Gs2LogWebSocketClient) describeInsightsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeInsightsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1612,6 +1644,8 @@ func (p Gs2LogWebSocketClient) createInsightAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateInsightAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1691,6 +1725,8 @@ func (p Gs2LogWebSocketClient) getInsightAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetInsightAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1773,6 +1809,8 @@ func (p Gs2LogWebSocketClient) deleteInsightAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteInsightAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

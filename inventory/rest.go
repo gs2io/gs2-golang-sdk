@@ -3739,6 +3739,12 @@ func acquireItemSetByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AcquireItemSetByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+        }
 		callback <- AcquireItemSetByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -3856,6 +3862,15 @@ func consumeItemSetAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ConsumeItemSetResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.count.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
 		callback <- ConsumeItemSetAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -3965,6 +3980,15 @@ func consumeItemSetByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ConsumeItemSetByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.count.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
 		callback <- ConsumeItemSetByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}

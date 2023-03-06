@@ -961,6 +961,12 @@ func countUpAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CountUpResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "limit.counter.overflow" {
+				asyncResult.Err = gs2err.SetClientError(Overflow{})
+            }
+        }
 		callback <- CountUpAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1070,6 +1076,12 @@ func countUpByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CountUpByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "limit.counter.overflow" {
+				asyncResult.Err = gs2err.SetClientError(Overflow{})
+            }
+        }
 		callback <- CountUpByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}

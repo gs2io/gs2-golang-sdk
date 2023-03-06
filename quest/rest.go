@@ -2363,6 +2363,12 @@ func startAsyncHandler(
 	asyncResult := <-internalCallback
 	var result StartResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "quest.progress.exists" {
+				asyncResult.Err = gs2err.SetClientError(InProgress{})
+            }
+        }
 		callback <- StartAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -2476,6 +2482,12 @@ func startByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result StartByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "quest.progress.exists" {
+				asyncResult.Err = gs2err.SetClientError(InProgress{})
+            }
+        }
 		callback <- StartByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}

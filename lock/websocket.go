@@ -57,6 +57,8 @@ func (p Gs2LockWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2LockWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -224,6 +228,8 @@ func (p Gs2LockWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -303,6 +309,8 @@ func (p Gs2LockWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -382,6 +390,8 @@ func (p Gs2LockWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -467,6 +477,8 @@ func (p Gs2LockWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -546,6 +558,8 @@ func (p Gs2LockWebSocketClient) describeMutexesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeMutexesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -637,6 +651,8 @@ func (p Gs2LockWebSocketClient) describeMutexesByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeMutexesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -725,6 +741,8 @@ func (p Gs2LockWebSocketClient) lockAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- LockAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -822,6 +840,8 @@ func (p Gs2LockWebSocketClient) lockByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- LockByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -916,6 +936,8 @@ func (p Gs2LockWebSocketClient) unlockAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UnlockAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1010,6 +1032,8 @@ func (p Gs2LockWebSocketClient) unlockByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UnlockByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1101,6 +1125,8 @@ func (p Gs2LockWebSocketClient) getMutexAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetMutexAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1189,6 +1215,8 @@ func (p Gs2LockWebSocketClient) getMutexByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetMutexByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1274,6 +1302,8 @@ func (p Gs2LockWebSocketClient) deleteMutexByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteMutexByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

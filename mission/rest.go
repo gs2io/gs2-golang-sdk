@@ -2661,6 +2661,12 @@ func increaseCounterByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result IncreaseCounterByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "counter.increase.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+        }
 		callback <- IncreaseCounterByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}

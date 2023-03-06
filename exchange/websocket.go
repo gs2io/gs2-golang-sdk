@@ -57,6 +57,8 @@ func (p Gs2ExchangeWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2ExchangeWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -242,6 +246,8 @@ func (p Gs2ExchangeWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -321,6 +327,8 @@ func (p Gs2ExchangeWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -400,6 +408,8 @@ func (p Gs2ExchangeWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -503,6 +513,8 @@ func (p Gs2ExchangeWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -582,6 +594,8 @@ func (p Gs2ExchangeWebSocketClient) describeRateModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRateModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -661,6 +675,8 @@ func (p Gs2ExchangeWebSocketClient) getRateModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRateModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -743,6 +759,8 @@ func (p Gs2ExchangeWebSocketClient) describeRateModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRateModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -828,6 +846,8 @@ func (p Gs2ExchangeWebSocketClient) createRateModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateRateModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -946,6 +966,8 @@ func (p Gs2ExchangeWebSocketClient) getRateModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRateModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1028,6 +1050,8 @@ func (p Gs2ExchangeWebSocketClient) updateRateModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateRateModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1146,6 +1170,8 @@ func (p Gs2ExchangeWebSocketClient) deleteRateModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteRateModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1228,6 +1254,8 @@ func (p Gs2ExchangeWebSocketClient) exchangeAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExchangeAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1329,6 +1357,8 @@ func (p Gs2ExchangeWebSocketClient) exchangeByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExchangeByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1427,6 +1457,8 @@ func (p Gs2ExchangeWebSocketClient) exchangeByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExchangeByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1509,6 +1541,8 @@ func (p Gs2ExchangeWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1588,6 +1622,8 @@ func (p Gs2ExchangeWebSocketClient) getCurrentRateMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentRateMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1667,6 +1703,8 @@ func (p Gs2ExchangeWebSocketClient) updateCurrentRateMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentRateMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1749,6 +1787,8 @@ func (p Gs2ExchangeWebSocketClient) updateCurrentRateMasterFromGitHubAsyncHandle
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentRateMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1831,6 +1871,8 @@ func (p Gs2ExchangeWebSocketClient) createAwaitByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateAwaitByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1922,6 +1964,8 @@ func (p Gs2ExchangeWebSocketClient) describeAwaitsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeAwaitsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2016,6 +2060,8 @@ func (p Gs2ExchangeWebSocketClient) describeAwaitsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeAwaitsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2107,6 +2153,8 @@ func (p Gs2ExchangeWebSocketClient) getAwaitAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetAwaitAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2195,6 +2243,8 @@ func (p Gs2ExchangeWebSocketClient) getAwaitByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetAwaitByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2280,6 +2330,8 @@ func (p Gs2ExchangeWebSocketClient) acquireAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AcquireAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2378,6 +2430,8 @@ func (p Gs2ExchangeWebSocketClient) acquireByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AcquireByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2473,6 +2527,8 @@ func (p Gs2ExchangeWebSocketClient) acquireForceByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AcquireForceByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2568,6 +2624,8 @@ func (p Gs2ExchangeWebSocketClient) skipAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SkipAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2666,6 +2724,8 @@ func (p Gs2ExchangeWebSocketClient) skipByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SkipByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2761,6 +2821,8 @@ func (p Gs2ExchangeWebSocketClient) deleteAwaitAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteAwaitAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2852,6 +2914,8 @@ func (p Gs2ExchangeWebSocketClient) deleteAwaitByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteAwaitByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2940,6 +3004,8 @@ func (p Gs2ExchangeWebSocketClient) createAwaitByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateAwaitByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3022,6 +3088,8 @@ func (p Gs2ExchangeWebSocketClient) deleteAwaitByStampTaskAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteAwaitByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

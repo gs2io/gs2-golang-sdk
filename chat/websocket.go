@@ -57,6 +57,8 @@ func (p Gs2ChatWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2ChatWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -245,6 +249,8 @@ func (p Gs2ChatWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -324,6 +330,8 @@ func (p Gs2ChatWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -403,6 +411,8 @@ func (p Gs2ChatWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -509,6 +519,8 @@ func (p Gs2ChatWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -588,6 +600,8 @@ func (p Gs2ChatWebSocketClient) describeRoomsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRoomsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -673,6 +687,14 @@ func (p Gs2ChatWebSocketClient) createRoomAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+        }
+    }
 	callback <- CreateRoomAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -777,6 +799,8 @@ func (p Gs2ChatWebSocketClient) createRoomFromBackendAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateRoomFromBackendAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -878,6 +902,8 @@ func (p Gs2ChatWebSocketClient) getRoomAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRoomAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -960,6 +986,14 @@ func (p Gs2ChatWebSocketClient) updateRoomAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+        }
+    }
 	callback <- UpdateRoomAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1064,6 +1098,8 @@ func (p Gs2ChatWebSocketClient) updateRoomFromBackendAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateRoomFromBackendAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1165,6 +1201,14 @@ func (p Gs2ChatWebSocketClient) deleteRoomAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+        }
+    }
 	callback <- DeleteRoomAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1256,6 +1300,8 @@ func (p Gs2ChatWebSocketClient) deleteRoomFromBackendAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteRoomFromBackendAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1344,6 +1390,20 @@ func (p Gs2ChatWebSocketClient) describeMessagesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
+    }
 	callback <- DescribeMessagesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1441,6 +1501,20 @@ func (p Gs2ChatWebSocketClient) describeMessagesByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
+    }
 	callback <- DescribeMessagesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1535,6 +1609,20 @@ func (p Gs2ChatWebSocketClient) postAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
+    }
 	callback <- PostAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1635,6 +1723,20 @@ func (p Gs2ChatWebSocketClient) postByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
+    }
 	callback <- PostByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1732,6 +1834,20 @@ func (p Gs2ChatWebSocketClient) getMessageAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
+    }
 	callback <- GetMessageAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1826,6 +1942,20 @@ func (p Gs2ChatWebSocketClient) getMessageByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
+    }
 	callback <- GetMessageByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1917,6 +2047,8 @@ func (p Gs2ChatWebSocketClient) deleteMessageAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteMessageAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2008,6 +2140,8 @@ func (p Gs2ChatWebSocketClient) describeSubscribesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeSubscribesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2099,6 +2233,8 @@ func (p Gs2ChatWebSocketClient) describeSubscribesByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeSubscribesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2187,6 +2323,8 @@ func (p Gs2ChatWebSocketClient) describeSubscribesByRoomNameAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeSubscribesByRoomNameAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2275,6 +2413,8 @@ func (p Gs2ChatWebSocketClient) subscribeAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SubscribeAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2373,6 +2513,8 @@ func (p Gs2ChatWebSocketClient) subscribeByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SubscribeByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2468,6 +2610,8 @@ func (p Gs2ChatWebSocketClient) getSubscribeAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetSubscribeAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2556,6 +2700,8 @@ func (p Gs2ChatWebSocketClient) getSubscribeByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetSubscribeByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2641,6 +2787,8 @@ func (p Gs2ChatWebSocketClient) updateNotificationTypeAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNotificationTypeAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2739,6 +2887,8 @@ func (p Gs2ChatWebSocketClient) updateNotificationTypeByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNotificationTypeByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2834,6 +2984,8 @@ func (p Gs2ChatWebSocketClient) unsubscribeAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UnsubscribeAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2925,6 +3077,8 @@ func (p Gs2ChatWebSocketClient) unsubscribeByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UnsubscribeByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

@@ -57,6 +57,8 @@ func (p Gs2EnhanceWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2EnhanceWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -239,6 +243,8 @@ func (p Gs2EnhanceWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -318,6 +324,8 @@ func (p Gs2EnhanceWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -397,6 +405,8 @@ func (p Gs2EnhanceWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -497,6 +507,8 @@ func (p Gs2EnhanceWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -576,6 +588,8 @@ func (p Gs2EnhanceWebSocketClient) describeRateModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRateModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -655,6 +669,8 @@ func (p Gs2EnhanceWebSocketClient) getRateModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRateModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -737,6 +753,8 @@ func (p Gs2EnhanceWebSocketClient) describeRateModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRateModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -822,6 +840,8 @@ func (p Gs2EnhanceWebSocketClient) createRateModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateRateModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -936,6 +956,8 @@ func (p Gs2EnhanceWebSocketClient) getRateModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRateModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1018,6 +1040,8 @@ func (p Gs2EnhanceWebSocketClient) updateRateModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateRateModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1132,6 +1156,8 @@ func (p Gs2EnhanceWebSocketClient) deleteRateModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteRateModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1214,6 +1240,8 @@ func (p Gs2EnhanceWebSocketClient) directEnhanceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DirectEnhanceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1322,6 +1350,8 @@ func (p Gs2EnhanceWebSocketClient) directEnhanceByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DirectEnhanceByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1427,6 +1457,8 @@ func (p Gs2EnhanceWebSocketClient) directEnhanceByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DirectEnhanceByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1509,6 +1541,8 @@ func (p Gs2EnhanceWebSocketClient) createProgressByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateProgressByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1610,6 +1644,8 @@ func (p Gs2EnhanceWebSocketClient) getProgressAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetProgressAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1695,6 +1731,8 @@ func (p Gs2EnhanceWebSocketClient) getProgressByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetProgressByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1777,6 +1815,8 @@ func (p Gs2EnhanceWebSocketClient) startAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- StartAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1888,6 +1928,8 @@ func (p Gs2EnhanceWebSocketClient) startByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- StartByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1996,6 +2038,8 @@ func (p Gs2EnhanceWebSocketClient) endAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- EndAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2091,6 +2135,8 @@ func (p Gs2EnhanceWebSocketClient) endByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- EndByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2183,6 +2229,8 @@ func (p Gs2EnhanceWebSocketClient) deleteProgressAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteProgressAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2271,6 +2319,8 @@ func (p Gs2EnhanceWebSocketClient) deleteProgressByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteProgressByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2356,6 +2406,8 @@ func (p Gs2EnhanceWebSocketClient) createProgressByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateProgressByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2438,6 +2490,8 @@ func (p Gs2EnhanceWebSocketClient) deleteProgressByStampTaskAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteProgressByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2520,6 +2574,8 @@ func (p Gs2EnhanceWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2599,6 +2655,8 @@ func (p Gs2EnhanceWebSocketClient) getCurrentRateMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentRateMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2678,6 +2736,8 @@ func (p Gs2EnhanceWebSocketClient) updateCurrentRateMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentRateMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2760,6 +2820,8 @@ func (p Gs2EnhanceWebSocketClient) updateCurrentRateMasterFromGitHubAsyncHandler
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentRateMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

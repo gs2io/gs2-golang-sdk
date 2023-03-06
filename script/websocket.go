@@ -57,6 +57,8 @@ func (p Gs2ScriptWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2ScriptWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -224,6 +228,8 @@ func (p Gs2ScriptWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -303,6 +309,8 @@ func (p Gs2ScriptWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -382,6 +390,8 @@ func (p Gs2ScriptWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -467,6 +477,8 @@ func (p Gs2ScriptWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -546,6 +558,8 @@ func (p Gs2ScriptWebSocketClient) describeScriptsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeScriptsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -631,6 +645,8 @@ func (p Gs2ScriptWebSocketClient) createScriptAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateScriptAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -719,6 +735,8 @@ func (p Gs2ScriptWebSocketClient) createScriptFromGitHubAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateScriptFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -807,6 +825,8 @@ func (p Gs2ScriptWebSocketClient) getScriptAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetScriptAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -889,6 +909,8 @@ func (p Gs2ScriptWebSocketClient) updateScriptAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateScriptAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -977,6 +999,8 @@ func (p Gs2ScriptWebSocketClient) updateScriptFromGitHubAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateScriptFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1065,6 +1089,8 @@ func (p Gs2ScriptWebSocketClient) deleteScriptAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteScriptAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1147,6 +1173,8 @@ func (p Gs2ScriptWebSocketClient) invokeScriptAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- InvokeScriptAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1232,6 +1260,8 @@ func (p Gs2ScriptWebSocketClient) debugInvokeAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DebugInvokeAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

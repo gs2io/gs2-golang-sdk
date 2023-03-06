@@ -57,6 +57,8 @@ func (p Gs2DistributorWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2DistributorWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -230,6 +234,8 @@ func (p Gs2DistributorWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -309,6 +315,8 @@ func (p Gs2DistributorWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -388,6 +396,8 @@ func (p Gs2DistributorWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -479,6 +489,8 @@ func (p Gs2DistributorWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -558,6 +570,8 @@ func (p Gs2DistributorWebSocketClient) describeDistributorModelMastersAsyncHandl
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeDistributorModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -643,6 +657,8 @@ func (p Gs2DistributorWebSocketClient) createDistributorModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateDistributorModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -741,6 +757,8 @@ func (p Gs2DistributorWebSocketClient) getDistributorModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetDistributorModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -823,6 +841,8 @@ func (p Gs2DistributorWebSocketClient) updateDistributorModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateDistributorModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -921,6 +941,8 @@ func (p Gs2DistributorWebSocketClient) deleteDistributorModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteDistributorModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1003,6 +1025,8 @@ func (p Gs2DistributorWebSocketClient) describeDistributorModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeDistributorModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1082,6 +1106,8 @@ func (p Gs2DistributorWebSocketClient) getDistributorModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetDistributorModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1164,6 +1190,8 @@ func (p Gs2DistributorWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1243,6 +1271,8 @@ func (p Gs2DistributorWebSocketClient) getCurrentDistributorMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentDistributorMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1322,6 +1352,8 @@ func (p Gs2DistributorWebSocketClient) updateCurrentDistributorMasterAsyncHandle
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentDistributorMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1404,6 +1436,8 @@ func (p Gs2DistributorWebSocketClient) updateCurrentDistributorMasterFromGitHubA
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentDistributorMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1486,6 +1520,8 @@ func (p Gs2DistributorWebSocketClient) distributeAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DistributeAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1574,6 +1610,8 @@ func (p Gs2DistributorWebSocketClient) distributeWithoutOverflowProcessAsyncHand
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DistributeWithoutOverflowProcessAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1656,6 +1694,8 @@ func (p Gs2DistributorWebSocketClient) runStampTaskAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RunStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1741,6 +1781,8 @@ func (p Gs2DistributorWebSocketClient) runStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RunStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1826,6 +1868,8 @@ func (p Gs2DistributorWebSocketClient) runStampSheetExpressAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RunStampSheetExpressAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1911,6 +1955,8 @@ func (p Gs2DistributorWebSocketClient) runStampTaskWithoutNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RunStampTaskWithoutNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1993,6 +2039,8 @@ func (p Gs2DistributorWebSocketClient) runStampSheetWithoutNamespaceAsyncHandler
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RunStampSheetWithoutNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2075,6 +2123,8 @@ func (p Gs2DistributorWebSocketClient) runStampSheetExpressWithoutNamespaceAsync
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RunStampSheetExpressWithoutNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2157,6 +2207,8 @@ func (p Gs2DistributorWebSocketClient) getStampSheetResultAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStampSheetResultAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2245,6 +2297,8 @@ func (p Gs2DistributorWebSocketClient) getStampSheetResultByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStampSheetResultByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

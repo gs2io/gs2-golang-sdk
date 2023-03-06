@@ -57,6 +57,8 @@ func (p Gs2AccountWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2AccountWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -242,6 +246,8 @@ func (p Gs2AccountWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -321,6 +327,8 @@ func (p Gs2AccountWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -400,6 +408,8 @@ func (p Gs2AccountWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -503,6 +513,8 @@ func (p Gs2AccountWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -582,6 +594,8 @@ func (p Gs2AccountWebSocketClient) describeAccountsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeAccountsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -667,6 +681,8 @@ func (p Gs2AccountWebSocketClient) createAccountAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateAccountAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -746,6 +762,8 @@ func (p Gs2AccountWebSocketClient) updateTimeOffsetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateTimeOffsetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -834,6 +852,8 @@ func (p Gs2AccountWebSocketClient) updateBannedAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateBannedAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -922,6 +942,8 @@ func (p Gs2AccountWebSocketClient) getAccountAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetAccountAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1004,6 +1026,8 @@ func (p Gs2AccountWebSocketClient) deleteAccountAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteAccountAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1086,6 +1110,17 @@ func (p Gs2AccountWebSocketClient) authenticationAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.banned.infinity" {
+				asyncResult.Err = gs2err.SetClientError(BannedInfinity{})
+            }
+        }
+    }
 	callback <- AuthenticationAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1174,6 +1209,8 @@ func (p Gs2AccountWebSocketClient) describeTakeOversAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeTakeOversAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1265,6 +1302,8 @@ func (p Gs2AccountWebSocketClient) describeTakeOversByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeTakeOversByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1353,6 +1392,8 @@ func (p Gs2AccountWebSocketClient) createTakeOverAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateTakeOverAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1450,6 +1491,8 @@ func (p Gs2AccountWebSocketClient) createTakeOverByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateTakeOverByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1544,6 +1587,8 @@ func (p Gs2AccountWebSocketClient) getTakeOverAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetTakeOverAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1632,6 +1677,8 @@ func (p Gs2AccountWebSocketClient) getTakeOverByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetTakeOverByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1717,6 +1764,14 @@ func (p Gs2AccountWebSocketClient) updateTakeOverAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
+    }
 	callback <- UpdateTakeOverAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1814,6 +1869,14 @@ func (p Gs2AccountWebSocketClient) updateTakeOverByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
+    }
 	callback <- UpdateTakeOverByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1908,6 +1971,8 @@ func (p Gs2AccountWebSocketClient) deleteTakeOverAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteTakeOverAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2002,6 +2067,8 @@ func (p Gs2AccountWebSocketClient) deleteTakeOverByUserIdentifierAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteTakeOverByUserIdentifierAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2090,6 +2157,14 @@ func (p Gs2AccountWebSocketClient) doTakeOverAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
+    }
 	callback <- DoTakeOverAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2178,6 +2253,8 @@ func (p Gs2AccountWebSocketClient) getDataOwnerByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetDataOwnerByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2260,6 +2337,8 @@ func (p Gs2AccountWebSocketClient) deleteDataOwnerByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteDataOwnerByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

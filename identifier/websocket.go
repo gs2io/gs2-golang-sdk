@@ -57,6 +57,8 @@ func (p Gs2IdentifierWebSocketClient) describeUsersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeUsersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2IdentifierWebSocketClient) createUserAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateUserAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -221,6 +225,8 @@ func (p Gs2IdentifierWebSocketClient) updateUserAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateUserAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -303,6 +309,8 @@ func (p Gs2IdentifierWebSocketClient) getUserAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetUserAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -382,6 +390,8 @@ func (p Gs2IdentifierWebSocketClient) deleteUserAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteUserAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -461,6 +471,8 @@ func (p Gs2IdentifierWebSocketClient) describeSecurityPoliciesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeSecurityPoliciesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -543,6 +555,8 @@ func (p Gs2IdentifierWebSocketClient) describeCommonSecurityPoliciesAsyncHandler
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCommonSecurityPoliciesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -625,6 +639,8 @@ func (p Gs2IdentifierWebSocketClient) createSecurityPolicyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateSecurityPolicyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -710,6 +726,8 @@ func (p Gs2IdentifierWebSocketClient) updateSecurityPolicyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateSecurityPolicyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -795,6 +813,8 @@ func (p Gs2IdentifierWebSocketClient) getSecurityPolicyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetSecurityPolicyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -874,6 +894,8 @@ func (p Gs2IdentifierWebSocketClient) deleteSecurityPolicyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteSecurityPolicyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -953,6 +975,8 @@ func (p Gs2IdentifierWebSocketClient) describeIdentifiersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeIdentifiersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1038,6 +1062,8 @@ func (p Gs2IdentifierWebSocketClient) createIdentifierAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateIdentifierAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1117,6 +1143,8 @@ func (p Gs2IdentifierWebSocketClient) getIdentifierAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetIdentifierAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1199,6 +1227,8 @@ func (p Gs2IdentifierWebSocketClient) deleteIdentifierAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteIdentifierAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1281,6 +1311,8 @@ func (p Gs2IdentifierWebSocketClient) describePasswordsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribePasswordsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1366,6 +1398,8 @@ func (p Gs2IdentifierWebSocketClient) createPasswordAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreatePasswordAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1448,6 +1482,8 @@ func (p Gs2IdentifierWebSocketClient) getPasswordAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetPasswordAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1527,6 +1563,8 @@ func (p Gs2IdentifierWebSocketClient) deletePasswordAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeletePasswordAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1606,6 +1644,8 @@ func (p Gs2IdentifierWebSocketClient) getHasSecurityPolicyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetHasSecurityPolicyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1685,6 +1725,8 @@ func (p Gs2IdentifierWebSocketClient) attachSecurityPolicyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AttachSecurityPolicyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1767,6 +1809,8 @@ func (p Gs2IdentifierWebSocketClient) detachSecurityPolicyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DetachSecurityPolicyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1849,6 +1893,8 @@ func (p Gs2IdentifierWebSocketClient) loginAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- LoginAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1931,6 +1977,8 @@ func (p Gs2IdentifierWebSocketClient) loginByUserAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- LoginByUserAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

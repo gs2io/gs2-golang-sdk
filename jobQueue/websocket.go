@@ -57,6 +57,8 @@ func (p Gs2JobQueueWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2JobQueueWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -233,6 +237,8 @@ func (p Gs2JobQueueWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -312,6 +318,8 @@ func (p Gs2JobQueueWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -391,6 +399,8 @@ func (p Gs2JobQueueWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -485,6 +495,8 @@ func (p Gs2JobQueueWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -564,6 +576,8 @@ func (p Gs2JobQueueWebSocketClient) describeJobsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeJobsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -652,6 +666,8 @@ func (p Gs2JobQueueWebSocketClient) getJobByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetJobByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -737,6 +753,8 @@ func (p Gs2JobQueueWebSocketClient) pushByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PushByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -829,6 +847,14 @@ func (p Gs2JobQueueWebSocketClient) runAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "jobQueue.execution.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+        }
+    }
 	callback <- RunAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -917,6 +943,14 @@ func (p Gs2JobQueueWebSocketClient) runByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "jobQueue.execution.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+        }
+    }
 	callback <- RunByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1002,6 +1036,8 @@ func (p Gs2JobQueueWebSocketClient) deleteJobByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteJobByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1090,6 +1126,8 @@ func (p Gs2JobQueueWebSocketClient) pushByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PushByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1172,6 +1210,8 @@ func (p Gs2JobQueueWebSocketClient) getJobResultAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetJobResultAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1260,6 +1300,8 @@ func (p Gs2JobQueueWebSocketClient) getJobResultByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetJobResultByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1345,6 +1387,8 @@ func (p Gs2JobQueueWebSocketClient) describeDeadLetterJobsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeDeadLetterJobsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1433,6 +1477,8 @@ func (p Gs2JobQueueWebSocketClient) getDeadLetterJobByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetDeadLetterJobByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1518,6 +1564,8 @@ func (p Gs2JobQueueWebSocketClient) deleteDeadLetterJobByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteDeadLetterJobByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

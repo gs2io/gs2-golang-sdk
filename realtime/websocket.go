@@ -57,6 +57,8 @@ func (p Gs2RealtimeWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2RealtimeWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -233,6 +237,8 @@ func (p Gs2RealtimeWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -312,6 +318,8 @@ func (p Gs2RealtimeWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -391,6 +399,8 @@ func (p Gs2RealtimeWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -485,6 +495,8 @@ func (p Gs2RealtimeWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -564,6 +576,8 @@ func (p Gs2RealtimeWebSocketClient) nowAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- NowAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -646,6 +660,8 @@ func (p Gs2RealtimeWebSocketClient) describeRoomsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRoomsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -731,6 +747,8 @@ func (p Gs2RealtimeWebSocketClient) wantRoomAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- WantRoomAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -820,6 +838,8 @@ func (p Gs2RealtimeWebSocketClient) getRoomAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRoomAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -902,6 +922,8 @@ func (p Gs2RealtimeWebSocketClient) deleteRoomAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteRoomAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

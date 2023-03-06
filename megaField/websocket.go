@@ -57,6 +57,8 @@ func (p Gs2MegaFieldWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2MegaFieldWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -224,6 +228,8 @@ func (p Gs2MegaFieldWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -303,6 +309,8 @@ func (p Gs2MegaFieldWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -382,6 +390,8 @@ func (p Gs2MegaFieldWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -467,6 +477,8 @@ func (p Gs2MegaFieldWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -546,6 +558,8 @@ func (p Gs2MegaFieldWebSocketClient) describeAreaModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeAreaModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -625,6 +639,8 @@ func (p Gs2MegaFieldWebSocketClient) getAreaModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetAreaModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -707,6 +723,8 @@ func (p Gs2MegaFieldWebSocketClient) describeAreaModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeAreaModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -792,6 +810,8 @@ func (p Gs2MegaFieldWebSocketClient) createAreaModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateAreaModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -880,6 +900,8 @@ func (p Gs2MegaFieldWebSocketClient) getAreaModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetAreaModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -962,6 +984,8 @@ func (p Gs2MegaFieldWebSocketClient) updateAreaModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateAreaModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1050,6 +1074,8 @@ func (p Gs2MegaFieldWebSocketClient) deleteAreaModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteAreaModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1132,6 +1158,8 @@ func (p Gs2MegaFieldWebSocketClient) describeLayerModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeLayerModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1214,6 +1242,8 @@ func (p Gs2MegaFieldWebSocketClient) getLayerModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetLayerModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1299,6 +1329,8 @@ func (p Gs2MegaFieldWebSocketClient) describeLayerModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeLayerModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1387,6 +1419,8 @@ func (p Gs2MegaFieldWebSocketClient) createLayerModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateLayerModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1478,6 +1512,8 @@ func (p Gs2MegaFieldWebSocketClient) getLayerModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetLayerModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1563,6 +1599,8 @@ func (p Gs2MegaFieldWebSocketClient) updateLayerModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateLayerModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1654,6 +1692,8 @@ func (p Gs2MegaFieldWebSocketClient) deleteLayerModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteLayerModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1739,6 +1779,8 @@ func (p Gs2MegaFieldWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1818,6 +1860,8 @@ func (p Gs2MegaFieldWebSocketClient) getCurrentFieldMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentFieldMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1897,6 +1941,8 @@ func (p Gs2MegaFieldWebSocketClient) updateCurrentFieldMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentFieldMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1979,6 +2025,8 @@ func (p Gs2MegaFieldWebSocketClient) updateCurrentFieldMasterFromGitHubAsyncHand
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentFieldMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2061,6 +2109,8 @@ func (p Gs2MegaFieldWebSocketClient) putPositionAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PutPositionAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2164,6 +2214,8 @@ func (p Gs2MegaFieldWebSocketClient) putPositionByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PutPositionByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2264,6 +2316,8 @@ func (p Gs2MegaFieldWebSocketClient) fetchPositionAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- FetchPositionAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2365,6 +2419,8 @@ func (p Gs2MegaFieldWebSocketClient) fetchPositionFromSystemAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- FetchPositionFromSystemAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2460,6 +2516,8 @@ func (p Gs2MegaFieldWebSocketClient) nearUserIdsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- NearUserIdsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2563,6 +2621,8 @@ func (p Gs2MegaFieldWebSocketClient) nearUserIdsFromSystemAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- NearUserIdsFromSystemAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2660,6 +2720,8 @@ func (p Gs2MegaFieldWebSocketClient) actionAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ActionAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2764,6 +2826,8 @@ func (p Gs2MegaFieldWebSocketClient) actionByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ActionByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

@@ -57,6 +57,8 @@ func (p Gs2FriendWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2FriendWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -257,6 +261,8 @@ func (p Gs2FriendWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -336,6 +342,8 @@ func (p Gs2FriendWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -415,6 +423,8 @@ func (p Gs2FriendWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -533,6 +543,8 @@ func (p Gs2FriendWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -612,6 +624,8 @@ func (p Gs2FriendWebSocketClient) getProfileAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetProfileAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -697,6 +711,8 @@ func (p Gs2FriendWebSocketClient) getProfileByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetProfileByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -779,6 +795,8 @@ func (p Gs2FriendWebSocketClient) updateProfileAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateProfileAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -876,6 +894,8 @@ func (p Gs2FriendWebSocketClient) updateProfileByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateProfileByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -970,6 +990,8 @@ func (p Gs2FriendWebSocketClient) deleteProfileByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteProfileByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1055,6 +1077,8 @@ func (p Gs2FriendWebSocketClient) describeFriendsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeFriendsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1149,6 +1173,8 @@ func (p Gs2FriendWebSocketClient) describeFriendsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeFriendsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1240,6 +1266,8 @@ func (p Gs2FriendWebSocketClient) describeBlackListAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeBlackListAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1331,6 +1359,8 @@ func (p Gs2FriendWebSocketClient) describeBlackListByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeBlackListByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1419,6 +1449,8 @@ func (p Gs2FriendWebSocketClient) registerBlackListAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RegisterBlackListAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1510,6 +1542,8 @@ func (p Gs2FriendWebSocketClient) registerBlackListByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RegisterBlackListByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1598,6 +1632,8 @@ func (p Gs2FriendWebSocketClient) unregisterBlackListAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UnregisterBlackListAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1689,6 +1725,8 @@ func (p Gs2FriendWebSocketClient) unregisterBlackListByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UnregisterBlackListByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1777,6 +1815,8 @@ func (p Gs2FriendWebSocketClient) describeFollowsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeFollowsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1871,6 +1911,8 @@ func (p Gs2FriendWebSocketClient) describeFollowsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeFollowsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1962,6 +2004,8 @@ func (p Gs2FriendWebSocketClient) getFollowAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetFollowAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2053,6 +2097,8 @@ func (p Gs2FriendWebSocketClient) getFollowByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetFollowByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2141,6 +2187,8 @@ func (p Gs2FriendWebSocketClient) followAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- FollowAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2232,6 +2280,8 @@ func (p Gs2FriendWebSocketClient) followByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- FollowByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2320,6 +2370,8 @@ func (p Gs2FriendWebSocketClient) unfollowAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UnfollowAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2411,6 +2463,8 @@ func (p Gs2FriendWebSocketClient) unfollowByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UnfollowByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2499,6 +2553,8 @@ func (p Gs2FriendWebSocketClient) getFriendAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetFriendAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2590,6 +2646,8 @@ func (p Gs2FriendWebSocketClient) getFriendByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetFriendByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2678,6 +2736,8 @@ func (p Gs2FriendWebSocketClient) deleteFriendAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteFriendAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2769,6 +2829,8 @@ func (p Gs2FriendWebSocketClient) deleteFriendByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteFriendByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2857,6 +2919,8 @@ func (p Gs2FriendWebSocketClient) describeSendRequestsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeSendRequestsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2948,6 +3012,8 @@ func (p Gs2FriendWebSocketClient) describeSendRequestsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeSendRequestsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3036,6 +3102,8 @@ func (p Gs2FriendWebSocketClient) getSendRequestAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetSendRequestAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3124,6 +3192,8 @@ func (p Gs2FriendWebSocketClient) getSendRequestByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetSendRequestByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3209,6 +3279,8 @@ func (p Gs2FriendWebSocketClient) sendRequestAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SendRequestAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3300,6 +3372,8 @@ func (p Gs2FriendWebSocketClient) sendRequestByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SendRequestByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3388,6 +3462,8 @@ func (p Gs2FriendWebSocketClient) deleteRequestAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteRequestAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3479,6 +3555,8 @@ func (p Gs2FriendWebSocketClient) deleteRequestByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteRequestByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3567,6 +3645,8 @@ func (p Gs2FriendWebSocketClient) describeReceiveRequestsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeReceiveRequestsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3658,6 +3738,8 @@ func (p Gs2FriendWebSocketClient) describeReceiveRequestsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeReceiveRequestsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3746,6 +3828,8 @@ func (p Gs2FriendWebSocketClient) getReceiveRequestAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetReceiveRequestAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3834,6 +3918,8 @@ func (p Gs2FriendWebSocketClient) getReceiveRequestByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetReceiveRequestByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3919,6 +4005,8 @@ func (p Gs2FriendWebSocketClient) acceptRequestAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AcceptRequestAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4010,6 +4098,8 @@ func (p Gs2FriendWebSocketClient) acceptRequestByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AcceptRequestByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4098,6 +4188,8 @@ func (p Gs2FriendWebSocketClient) rejectRequestAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RejectRequestAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4189,6 +4281,8 @@ func (p Gs2FriendWebSocketClient) rejectRequestByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RejectRequestByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4277,6 +4371,8 @@ func (p Gs2FriendWebSocketClient) getPublicProfileAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetPublicProfileAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

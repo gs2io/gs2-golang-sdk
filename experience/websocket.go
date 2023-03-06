@@ -57,6 +57,8 @@ func (p Gs2ExperienceWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2ExperienceWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -239,6 +243,8 @@ func (p Gs2ExperienceWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -318,6 +324,8 @@ func (p Gs2ExperienceWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -397,6 +405,8 @@ func (p Gs2ExperienceWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -497,6 +507,8 @@ func (p Gs2ExperienceWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -576,6 +588,8 @@ func (p Gs2ExperienceWebSocketClient) describeExperienceModelMastersAsyncHandler
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeExperienceModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -661,6 +675,8 @@ func (p Gs2ExperienceWebSocketClient) createExperienceModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateExperienceModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -761,6 +777,8 @@ func (p Gs2ExperienceWebSocketClient) getExperienceModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetExperienceModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -843,6 +861,8 @@ func (p Gs2ExperienceWebSocketClient) updateExperienceModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateExperienceModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -943,6 +963,8 @@ func (p Gs2ExperienceWebSocketClient) deleteExperienceModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteExperienceModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1025,6 +1047,8 @@ func (p Gs2ExperienceWebSocketClient) describeExperienceModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeExperienceModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1104,6 +1128,8 @@ func (p Gs2ExperienceWebSocketClient) getExperienceModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetExperienceModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1186,6 +1212,8 @@ func (p Gs2ExperienceWebSocketClient) describeThresholdMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeThresholdMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1271,6 +1299,8 @@ func (p Gs2ExperienceWebSocketClient) createThresholdMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateThresholdMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1366,6 +1396,8 @@ func (p Gs2ExperienceWebSocketClient) getThresholdMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetThresholdMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1448,6 +1480,8 @@ func (p Gs2ExperienceWebSocketClient) updateThresholdMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateThresholdMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1543,6 +1577,8 @@ func (p Gs2ExperienceWebSocketClient) deleteThresholdMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteThresholdMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1625,6 +1661,8 @@ func (p Gs2ExperienceWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1704,6 +1742,8 @@ func (p Gs2ExperienceWebSocketClient) getCurrentExperienceMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentExperienceMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1783,6 +1823,8 @@ func (p Gs2ExperienceWebSocketClient) updateCurrentExperienceMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentExperienceMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1865,6 +1907,8 @@ func (p Gs2ExperienceWebSocketClient) updateCurrentExperienceMasterFromGitHubAsy
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentExperienceMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1947,6 +1991,8 @@ func (p Gs2ExperienceWebSocketClient) describeStatusesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeStatusesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2041,6 +2087,8 @@ func (p Gs2ExperienceWebSocketClient) describeStatusesByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeStatusesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2132,6 +2180,8 @@ func (p Gs2ExperienceWebSocketClient) getStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2223,6 +2273,8 @@ func (p Gs2ExperienceWebSocketClient) getStatusByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2311,6 +2363,8 @@ func (p Gs2ExperienceWebSocketClient) getStatusWithSignatureAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStatusWithSignatureAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2405,6 +2459,8 @@ func (p Gs2ExperienceWebSocketClient) getStatusWithSignatureByUserIdAsyncHandler
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStatusWithSignatureByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2496,6 +2552,8 @@ func (p Gs2ExperienceWebSocketClient) addExperienceByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AddExperienceByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2590,6 +2648,8 @@ func (p Gs2ExperienceWebSocketClient) setExperienceByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetExperienceByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2684,6 +2744,8 @@ func (p Gs2ExperienceWebSocketClient) addRankCapByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AddRankCapByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2778,6 +2840,8 @@ func (p Gs2ExperienceWebSocketClient) setRankCapByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetRankCapByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2872,6 +2936,8 @@ func (p Gs2ExperienceWebSocketClient) deleteStatusByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2963,6 +3029,8 @@ func (p Gs2ExperienceWebSocketClient) addExperienceByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AddExperienceByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3045,6 +3113,8 @@ func (p Gs2ExperienceWebSocketClient) addRankCapByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AddRankCapByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3127,6 +3197,8 @@ func (p Gs2ExperienceWebSocketClient) setRankCapByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetRankCapByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

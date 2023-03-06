@@ -57,6 +57,8 @@ func (p Gs2ScheduleWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2ScheduleWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -224,6 +228,8 @@ func (p Gs2ScheduleWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -303,6 +309,8 @@ func (p Gs2ScheduleWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -382,6 +390,8 @@ func (p Gs2ScheduleWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -467,6 +477,8 @@ func (p Gs2ScheduleWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -546,6 +558,8 @@ func (p Gs2ScheduleWebSocketClient) describeEventMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeEventMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -631,6 +645,8 @@ func (p Gs2ScheduleWebSocketClient) createEventMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateEventMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -755,6 +771,8 @@ func (p Gs2ScheduleWebSocketClient) getEventMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetEventMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -837,6 +855,8 @@ func (p Gs2ScheduleWebSocketClient) updateEventMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateEventMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -961,6 +981,8 @@ func (p Gs2ScheduleWebSocketClient) deleteEventMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteEventMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1043,6 +1065,8 @@ func (p Gs2ScheduleWebSocketClient) describeTriggersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeTriggersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1134,6 +1158,8 @@ func (p Gs2ScheduleWebSocketClient) describeTriggersByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeTriggersByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1222,6 +1248,8 @@ func (p Gs2ScheduleWebSocketClient) getTriggerAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetTriggerAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1310,6 +1338,8 @@ func (p Gs2ScheduleWebSocketClient) getTriggerByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetTriggerByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1395,6 +1425,8 @@ func (p Gs2ScheduleWebSocketClient) triggerByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- TriggerByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1489,6 +1521,8 @@ func (p Gs2ScheduleWebSocketClient) deleteTriggerAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteTriggerAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1580,6 +1614,8 @@ func (p Gs2ScheduleWebSocketClient) deleteTriggerByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteTriggerByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1668,6 +1704,8 @@ func (p Gs2ScheduleWebSocketClient) describeEventsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeEventsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1753,6 +1791,8 @@ func (p Gs2ScheduleWebSocketClient) describeEventsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeEventsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1835,6 +1875,8 @@ func (p Gs2ScheduleWebSocketClient) describeRawEventsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRawEventsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1914,6 +1956,8 @@ func (p Gs2ScheduleWebSocketClient) getEventAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetEventAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2002,6 +2046,8 @@ func (p Gs2ScheduleWebSocketClient) getEventByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetEventByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2087,6 +2133,8 @@ func (p Gs2ScheduleWebSocketClient) getRawEventAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRawEventAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2169,6 +2217,8 @@ func (p Gs2ScheduleWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2248,6 +2298,8 @@ func (p Gs2ScheduleWebSocketClient) getCurrentEventMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentEventMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2327,6 +2379,8 @@ func (p Gs2ScheduleWebSocketClient) updateCurrentEventMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentEventMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2409,6 +2463,8 @@ func (p Gs2ScheduleWebSocketClient) updateCurrentEventMasterFromGitHubAsyncHandl
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentEventMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

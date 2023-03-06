@@ -57,6 +57,8 @@ func (p Gs2DatastoreWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2DatastoreWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -227,6 +231,8 @@ func (p Gs2DatastoreWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -306,6 +312,8 @@ func (p Gs2DatastoreWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -385,6 +393,8 @@ func (p Gs2DatastoreWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -473,6 +483,8 @@ func (p Gs2DatastoreWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -552,6 +564,8 @@ func (p Gs2DatastoreWebSocketClient) describeDataObjectsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeDataObjectsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -646,6 +660,8 @@ func (p Gs2DatastoreWebSocketClient) describeDataObjectsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeDataObjectsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -737,6 +753,8 @@ func (p Gs2DatastoreWebSocketClient) prepareUploadAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareUploadAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -844,6 +862,8 @@ func (p Gs2DatastoreWebSocketClient) prepareUploadByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareUploadByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -948,6 +968,8 @@ func (p Gs2DatastoreWebSocketClient) updateDataObjectAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateDataObjectAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1049,6 +1071,8 @@ func (p Gs2DatastoreWebSocketClient) updateDataObjectByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateDataObjectByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1147,6 +1171,8 @@ func (p Gs2DatastoreWebSocketClient) prepareReUploadAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareReUploadAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1241,6 +1267,8 @@ func (p Gs2DatastoreWebSocketClient) prepareReUploadByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareReUploadByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1332,6 +1360,17 @@ func (p Gs2DatastoreWebSocketClient) doneUploadAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.status.invalid" {
+				asyncResult.Err = gs2err.SetClientError(InvalidStatus{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.file.notUploaded" {
+				asyncResult.Err = gs2err.SetClientError(NotUploaded{})
+            }
+        }
+    }
 	callback <- DoneUploadAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1423,6 +1462,17 @@ func (p Gs2DatastoreWebSocketClient) doneUploadByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.status.invalid" {
+				asyncResult.Err = gs2err.SetClientError(InvalidStatus{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.file.notUploaded" {
+				asyncResult.Err = gs2err.SetClientError(NotUploaded{})
+            }
+        }
+    }
 	callback <- DoneUploadByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1511,6 +1561,14 @@ func (p Gs2DatastoreWebSocketClient) deleteDataObjectAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.status.invalid" {
+				asyncResult.Err = gs2err.SetClientError(InvalidStatus{})
+            }
+        }
+    }
 	callback <- DeleteDataObjectAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1602,6 +1660,14 @@ func (p Gs2DatastoreWebSocketClient) deleteDataObjectByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.status.invalid" {
+				asyncResult.Err = gs2err.SetClientError(InvalidStatus{})
+            }
+        }
+    }
 	callback <- DeleteDataObjectByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1690,6 +1756,8 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareDownloadAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1781,6 +1849,8 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareDownloadByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1869,6 +1939,8 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadByGenerationAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareDownloadByGenerationAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1963,6 +2035,8 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadByGenerationAndUserIdAsyncHa
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareDownloadByGenerationAndUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2054,6 +2128,8 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadOwnDataAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareDownloadOwnDataAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2145,6 +2221,8 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadByUserIdAndDataObjectNameAsy
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareDownloadByUserIdAndDataObjectNameAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2233,6 +2311,8 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadOwnDataByGenerationAsyncHand
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareDownloadOwnDataByGenerationAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2327,6 +2407,8 @@ func (p Gs2DatastoreWebSocketClient) prepareDownloadByUserIdAndDataObjectNameAnd
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2418,6 +2500,14 @@ func (p Gs2DatastoreWebSocketClient) restoreDataObjectAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.status.invalid" {
+				asyncResult.Err = gs2err.SetClientError(InvalidStatus{})
+            }
+        }
+    }
 	callback <- RestoreDataObjectAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2500,6 +2590,8 @@ func (p Gs2DatastoreWebSocketClient) describeDataObjectHistoriesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeDataObjectHistoriesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2594,6 +2686,8 @@ func (p Gs2DatastoreWebSocketClient) describeDataObjectHistoriesByUserIdAsyncHan
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeDataObjectHistoriesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2685,6 +2779,8 @@ func (p Gs2DatastoreWebSocketClient) getDataObjectHistoryAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetDataObjectHistoryAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2776,6 +2872,8 @@ func (p Gs2DatastoreWebSocketClient) getDataObjectHistoryByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetDataObjectHistoryByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

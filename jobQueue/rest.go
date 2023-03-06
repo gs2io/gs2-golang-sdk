@@ -880,6 +880,12 @@ func runAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RunResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "jobQueue.execution.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+        }
 		callback <- RunAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -973,6 +979,12 @@ func runByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RunByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "jobQueue.execution.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+        }
 		callback <- RunByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}

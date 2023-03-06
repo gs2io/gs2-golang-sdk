@@ -57,6 +57,8 @@ func (p Gs2KeyWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2KeyWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -224,6 +228,8 @@ func (p Gs2KeyWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -303,6 +309,8 @@ func (p Gs2KeyWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -382,6 +390,8 @@ func (p Gs2KeyWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -467,6 +477,8 @@ func (p Gs2KeyWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -546,6 +558,8 @@ func (p Gs2KeyWebSocketClient) describeKeysAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeKeysAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -631,6 +645,8 @@ func (p Gs2KeyWebSocketClient) createKeyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateKeyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -716,6 +732,8 @@ func (p Gs2KeyWebSocketClient) updateKeyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateKeyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -801,6 +819,8 @@ func (p Gs2KeyWebSocketClient) getKeyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetKeyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -883,6 +903,8 @@ func (p Gs2KeyWebSocketClient) deleteKeyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteKeyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -965,6 +987,8 @@ func (p Gs2KeyWebSocketClient) encryptAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- EncryptAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1050,6 +1074,8 @@ func (p Gs2KeyWebSocketClient) decryptAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DecryptAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1135,6 +1161,8 @@ func (p Gs2KeyWebSocketClient) describeGitHubApiKeysAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeGitHubApiKeysAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1220,6 +1248,8 @@ func (p Gs2KeyWebSocketClient) createGitHubApiKeyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateGitHubApiKeyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1311,6 +1341,8 @@ func (p Gs2KeyWebSocketClient) updateGitHubApiKeyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateGitHubApiKeyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1402,6 +1434,8 @@ func (p Gs2KeyWebSocketClient) getGitHubApiKeyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetGitHubApiKeyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1484,6 +1518,8 @@ func (p Gs2KeyWebSocketClient) deleteGitHubApiKeyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteGitHubApiKeyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

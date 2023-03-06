@@ -57,6 +57,8 @@ func (p Gs2FormationWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2FormationWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -233,6 +237,8 @@ func (p Gs2FormationWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -312,6 +318,8 @@ func (p Gs2FormationWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -391,6 +399,8 @@ func (p Gs2FormationWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -485,6 +495,8 @@ func (p Gs2FormationWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -564,6 +576,8 @@ func (p Gs2FormationWebSocketClient) describeFormModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeFormModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -643,6 +657,8 @@ func (p Gs2FormationWebSocketClient) getFormModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetFormModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -725,6 +741,8 @@ func (p Gs2FormationWebSocketClient) describeFormModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeFormModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -810,6 +828,8 @@ func (p Gs2FormationWebSocketClient) createFormModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateFormModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -905,6 +925,8 @@ func (p Gs2FormationWebSocketClient) getFormModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetFormModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -987,6 +1009,8 @@ func (p Gs2FormationWebSocketClient) updateFormModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateFormModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1082,6 +1106,8 @@ func (p Gs2FormationWebSocketClient) deleteFormModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteFormModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1164,6 +1190,8 @@ func (p Gs2FormationWebSocketClient) describeMoldModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeMoldModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1243,6 +1271,8 @@ func (p Gs2FormationWebSocketClient) getMoldModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetMoldModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1325,6 +1355,8 @@ func (p Gs2FormationWebSocketClient) describeMoldModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeMoldModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1410,6 +1442,8 @@ func (p Gs2FormationWebSocketClient) createMoldModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateMoldModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1507,6 +1541,8 @@ func (p Gs2FormationWebSocketClient) getMoldModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetMoldModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1589,6 +1625,8 @@ func (p Gs2FormationWebSocketClient) updateMoldModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateMoldModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1686,6 +1724,8 @@ func (p Gs2FormationWebSocketClient) deleteMoldModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteMoldModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1768,6 +1808,8 @@ func (p Gs2FormationWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1847,6 +1889,8 @@ func (p Gs2FormationWebSocketClient) getCurrentFormMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentFormMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1926,6 +1970,8 @@ func (p Gs2FormationWebSocketClient) updateCurrentFormMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentFormMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2008,6 +2054,8 @@ func (p Gs2FormationWebSocketClient) updateCurrentFormMasterFromGitHubAsyncHandl
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentFormMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2090,6 +2138,8 @@ func (p Gs2FormationWebSocketClient) describeMoldsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeMoldsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2181,6 +2231,8 @@ func (p Gs2FormationWebSocketClient) describeMoldsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeMoldsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2269,6 +2321,8 @@ func (p Gs2FormationWebSocketClient) getMoldAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetMoldAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2357,6 +2411,8 @@ func (p Gs2FormationWebSocketClient) getMoldByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetMoldByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2442,6 +2498,8 @@ func (p Gs2FormationWebSocketClient) setMoldCapacityByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetMoldCapacityByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2533,6 +2591,8 @@ func (p Gs2FormationWebSocketClient) addMoldCapacityByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AddMoldCapacityByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2624,6 +2684,8 @@ func (p Gs2FormationWebSocketClient) deleteMoldAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteMoldAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2715,6 +2777,8 @@ func (p Gs2FormationWebSocketClient) deleteMoldByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteMoldByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2803,6 +2867,8 @@ func (p Gs2FormationWebSocketClient) addCapacityByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AddCapacityByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2885,6 +2951,8 @@ func (p Gs2FormationWebSocketClient) setCapacityByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetCapacityByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2967,6 +3035,8 @@ func (p Gs2FormationWebSocketClient) describeFormsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeFormsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3061,6 +3131,8 @@ func (p Gs2FormationWebSocketClient) describeFormsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeFormsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3152,6 +3224,8 @@ func (p Gs2FormationWebSocketClient) getFormAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetFormAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3243,6 +3317,8 @@ func (p Gs2FormationWebSocketClient) getFormByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetFormByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3331,6 +3407,8 @@ func (p Gs2FormationWebSocketClient) getFormWithSignatureAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetFormWithSignatureAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3425,6 +3503,8 @@ func (p Gs2FormationWebSocketClient) getFormWithSignatureByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetFormWithSignatureByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3516,6 +3596,8 @@ func (p Gs2FormationWebSocketClient) setFormByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetFormByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3614,6 +3696,8 @@ func (p Gs2FormationWebSocketClient) setFormWithSignatureAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetFormWithSignatureAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3718,6 +3802,8 @@ func (p Gs2FormationWebSocketClient) acquireActionsToFormPropertiesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AcquireActionsToFormPropertiesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3819,6 +3905,8 @@ func (p Gs2FormationWebSocketClient) deleteFormAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteFormAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3913,6 +4001,8 @@ func (p Gs2FormationWebSocketClient) deleteFormByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteFormByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4004,6 +4094,8 @@ func (p Gs2FormationWebSocketClient) acquireActionToFormPropertiesByStampSheetAs
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AcquireActionToFormPropertiesByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4086,6 +4178,8 @@ func (p Gs2FormationWebSocketClient) describePropertyFormsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribePropertyFormsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4180,6 +4274,8 @@ func (p Gs2FormationWebSocketClient) describePropertyFormsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribePropertyFormsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4271,6 +4367,8 @@ func (p Gs2FormationWebSocketClient) getPropertyFormAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetPropertyFormAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4362,6 +4460,8 @@ func (p Gs2FormationWebSocketClient) getPropertyFormByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetPropertyFormByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4450,6 +4550,8 @@ func (p Gs2FormationWebSocketClient) getPropertyFormWithSignatureAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetPropertyFormWithSignatureAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4544,6 +4646,8 @@ func (p Gs2FormationWebSocketClient) getPropertyFormWithSignatureByUserIdAsyncHa
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetPropertyFormWithSignatureByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4635,6 +4739,8 @@ func (p Gs2FormationWebSocketClient) setPropertyFormByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetPropertyFormByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4733,6 +4839,8 @@ func (p Gs2FormationWebSocketClient) setPropertyFormWithSignatureAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetPropertyFormWithSignatureAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4837,6 +4945,8 @@ func (p Gs2FormationWebSocketClient) acquireActionsToPropertyFormPropertiesAsync
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AcquireActionsToPropertyFormPropertiesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4938,6 +5048,8 @@ func (p Gs2FormationWebSocketClient) deletePropertyFormAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeletePropertyFormAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -5032,6 +5144,8 @@ func (p Gs2FormationWebSocketClient) deletePropertyFormByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeletePropertyFormByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -5123,6 +5237,8 @@ func (p Gs2FormationWebSocketClient) acquireActionToPropertyFormPropertiesByStam
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AcquireActionToPropertyFormPropertiesByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

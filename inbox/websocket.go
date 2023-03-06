@@ -57,6 +57,8 @@ func (p Gs2InboxWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2InboxWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -248,6 +252,8 @@ func (p Gs2InboxWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -327,6 +333,8 @@ func (p Gs2InboxWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -406,6 +414,8 @@ func (p Gs2InboxWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -515,6 +525,8 @@ func (p Gs2InboxWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -594,6 +606,8 @@ func (p Gs2InboxWebSocketClient) describeMessagesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeMessagesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -685,6 +699,8 @@ func (p Gs2InboxWebSocketClient) describeMessagesByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeMessagesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -773,6 +789,8 @@ func (p Gs2InboxWebSocketClient) sendMessageByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SendMessageByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -874,6 +892,8 @@ func (p Gs2InboxWebSocketClient) getMessageAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetMessageAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -962,6 +982,8 @@ func (p Gs2InboxWebSocketClient) getMessageByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetMessageByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1047,6 +1069,8 @@ func (p Gs2InboxWebSocketClient) receiveGlobalMessageAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ReceiveGlobalMessageAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1135,6 +1159,8 @@ func (p Gs2InboxWebSocketClient) receiveGlobalMessageByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ReceiveGlobalMessageByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1220,6 +1246,8 @@ func (p Gs2InboxWebSocketClient) openMessageAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- OpenMessageAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1311,6 +1339,8 @@ func (p Gs2InboxWebSocketClient) openMessageByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- OpenMessageByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1399,6 +1429,8 @@ func (p Gs2InboxWebSocketClient) readMessageAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ReadMessageAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1497,6 +1529,8 @@ func (p Gs2InboxWebSocketClient) readMessageByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ReadMessageByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1592,6 +1626,8 @@ func (p Gs2InboxWebSocketClient) deleteMessageAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteMessageAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1683,6 +1719,8 @@ func (p Gs2InboxWebSocketClient) deleteMessageByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteMessageByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1771,6 +1809,8 @@ func (p Gs2InboxWebSocketClient) sendByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SendByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1853,6 +1893,8 @@ func (p Gs2InboxWebSocketClient) openByStampTaskAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- OpenByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1935,6 +1977,8 @@ func (p Gs2InboxWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2014,6 +2058,8 @@ func (p Gs2InboxWebSocketClient) getCurrentMessageMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentMessageMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2093,6 +2139,8 @@ func (p Gs2InboxWebSocketClient) updateCurrentMessageMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentMessageMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2175,6 +2223,8 @@ func (p Gs2InboxWebSocketClient) updateCurrentMessageMasterFromGitHubAsyncHandle
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentMessageMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2257,6 +2307,8 @@ func (p Gs2InboxWebSocketClient) describeGlobalMessageMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeGlobalMessageMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2342,6 +2394,8 @@ func (p Gs2InboxWebSocketClient) createGlobalMessageMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateGlobalMessageMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2440,6 +2494,8 @@ func (p Gs2InboxWebSocketClient) getGlobalMessageMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetGlobalMessageMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2522,6 +2578,8 @@ func (p Gs2InboxWebSocketClient) updateGlobalMessageMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateGlobalMessageMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2620,6 +2678,8 @@ func (p Gs2InboxWebSocketClient) deleteGlobalMessageMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteGlobalMessageMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2702,6 +2762,8 @@ func (p Gs2InboxWebSocketClient) describeGlobalMessagesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeGlobalMessagesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2781,6 +2843,8 @@ func (p Gs2InboxWebSocketClient) getGlobalMessageAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetGlobalMessageAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2863,6 +2927,8 @@ func (p Gs2InboxWebSocketClient) getReceivedByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetReceivedByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2945,6 +3011,8 @@ func (p Gs2InboxWebSocketClient) updateReceivedByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateReceivedByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3037,6 +3105,8 @@ func (p Gs2InboxWebSocketClient) deleteReceivedByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteReceivedByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

@@ -57,6 +57,8 @@ func (p Gs2VersionWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2VersionWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -233,6 +237,8 @@ func (p Gs2VersionWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -312,6 +318,8 @@ func (p Gs2VersionWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -391,6 +399,8 @@ func (p Gs2VersionWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -485,6 +495,8 @@ func (p Gs2VersionWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -564,6 +576,8 @@ func (p Gs2VersionWebSocketClient) describeVersionModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeVersionModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -649,6 +663,8 @@ func (p Gs2VersionWebSocketClient) createVersionModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateVersionModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -755,6 +771,8 @@ func (p Gs2VersionWebSocketClient) getVersionModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetVersionModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -837,6 +855,8 @@ func (p Gs2VersionWebSocketClient) updateVersionModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateVersionModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -943,6 +963,8 @@ func (p Gs2VersionWebSocketClient) deleteVersionModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteVersionModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1025,6 +1047,8 @@ func (p Gs2VersionWebSocketClient) describeVersionModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeVersionModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1104,6 +1128,8 @@ func (p Gs2VersionWebSocketClient) getVersionModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetVersionModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1186,6 +1212,8 @@ func (p Gs2VersionWebSocketClient) describeAcceptVersionsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeAcceptVersionsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1277,6 +1305,8 @@ func (p Gs2VersionWebSocketClient) describeAcceptVersionsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeAcceptVersionsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1365,6 +1395,8 @@ func (p Gs2VersionWebSocketClient) acceptAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AcceptAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1456,6 +1488,8 @@ func (p Gs2VersionWebSocketClient) acceptByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AcceptByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1544,6 +1578,8 @@ func (p Gs2VersionWebSocketClient) getAcceptVersionAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetAcceptVersionAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1632,6 +1668,8 @@ func (p Gs2VersionWebSocketClient) getAcceptVersionByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetAcceptVersionByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1717,6 +1755,8 @@ func (p Gs2VersionWebSocketClient) deleteAcceptVersionAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteAcceptVersionAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1808,6 +1848,8 @@ func (p Gs2VersionWebSocketClient) deleteAcceptVersionByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteAcceptVersionByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1896,6 +1938,8 @@ func (p Gs2VersionWebSocketClient) checkVersionAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CheckVersionAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1991,6 +2035,8 @@ func (p Gs2VersionWebSocketClient) checkVersionByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CheckVersionByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2083,6 +2129,8 @@ func (p Gs2VersionWebSocketClient) calculateSignatureAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CalculateSignatureAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2168,6 +2216,8 @@ func (p Gs2VersionWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2247,6 +2297,8 @@ func (p Gs2VersionWebSocketClient) getCurrentVersionMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentVersionMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2326,6 +2378,8 @@ func (p Gs2VersionWebSocketClient) updateCurrentVersionMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentVersionMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2408,6 +2462,8 @@ func (p Gs2VersionWebSocketClient) updateCurrentVersionMasterFromGitHubAsyncHand
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentVersionMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

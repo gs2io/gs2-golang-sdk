@@ -3540,6 +3540,12 @@ func consumeStaminaAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ConsumeStaminaResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "stamina.stamina.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
 		callback <- ConsumeStaminaAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -3641,6 +3647,12 @@ func consumeStaminaByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ConsumeStaminaByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "stamina.stamina.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
 		callback <- ConsumeStaminaByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}

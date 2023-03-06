@@ -57,6 +57,8 @@ func (p Gs2StaminaWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2StaminaWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -227,6 +231,8 @@ func (p Gs2StaminaWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -306,6 +312,8 @@ func (p Gs2StaminaWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -385,6 +393,8 @@ func (p Gs2StaminaWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -473,6 +483,8 @@ func (p Gs2StaminaWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -552,6 +564,8 @@ func (p Gs2StaminaWebSocketClient) describeStaminaModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeStaminaModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -637,6 +651,8 @@ func (p Gs2StaminaWebSocketClient) createStaminaModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateStaminaModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -749,6 +765,8 @@ func (p Gs2StaminaWebSocketClient) getStaminaModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStaminaModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -831,6 +849,8 @@ func (p Gs2StaminaWebSocketClient) updateStaminaModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateStaminaModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -943,6 +963,8 @@ func (p Gs2StaminaWebSocketClient) deleteStaminaModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteStaminaModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1025,6 +1047,8 @@ func (p Gs2StaminaWebSocketClient) describeMaxStaminaTableMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeMaxStaminaTableMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1110,6 +1134,8 @@ func (p Gs2StaminaWebSocketClient) createMaxStaminaTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateMaxStaminaTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1208,6 +1234,8 @@ func (p Gs2StaminaWebSocketClient) getMaxStaminaTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetMaxStaminaTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1290,6 +1318,8 @@ func (p Gs2StaminaWebSocketClient) updateMaxStaminaTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateMaxStaminaTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1388,6 +1418,8 @@ func (p Gs2StaminaWebSocketClient) deleteMaxStaminaTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteMaxStaminaTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1470,6 +1502,8 @@ func (p Gs2StaminaWebSocketClient) describeRecoverIntervalTableMastersAsyncHandl
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRecoverIntervalTableMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1555,6 +1589,8 @@ func (p Gs2StaminaWebSocketClient) createRecoverIntervalTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateRecoverIntervalTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1653,6 +1689,8 @@ func (p Gs2StaminaWebSocketClient) getRecoverIntervalTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRecoverIntervalTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1735,6 +1773,8 @@ func (p Gs2StaminaWebSocketClient) updateRecoverIntervalTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateRecoverIntervalTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1833,6 +1873,8 @@ func (p Gs2StaminaWebSocketClient) deleteRecoverIntervalTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteRecoverIntervalTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1915,6 +1957,8 @@ func (p Gs2StaminaWebSocketClient) describeRecoverValueTableMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRecoverValueTableMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2000,6 +2044,8 @@ func (p Gs2StaminaWebSocketClient) createRecoverValueTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateRecoverValueTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2098,6 +2144,8 @@ func (p Gs2StaminaWebSocketClient) getRecoverValueTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRecoverValueTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2180,6 +2228,8 @@ func (p Gs2StaminaWebSocketClient) updateRecoverValueTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateRecoverValueTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2278,6 +2328,8 @@ func (p Gs2StaminaWebSocketClient) deleteRecoverValueTableMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteRecoverValueTableMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2360,6 +2412,8 @@ func (p Gs2StaminaWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2439,6 +2493,8 @@ func (p Gs2StaminaWebSocketClient) getCurrentStaminaMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentStaminaMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2518,6 +2574,8 @@ func (p Gs2StaminaWebSocketClient) updateCurrentStaminaMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentStaminaMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2600,6 +2658,8 @@ func (p Gs2StaminaWebSocketClient) updateCurrentStaminaMasterFromGitHubAsyncHand
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentStaminaMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2682,6 +2742,8 @@ func (p Gs2StaminaWebSocketClient) describeStaminaModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeStaminaModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2761,6 +2823,8 @@ func (p Gs2StaminaWebSocketClient) getStaminaModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStaminaModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2843,6 +2907,8 @@ func (p Gs2StaminaWebSocketClient) describeStaminasAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeStaminasAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2934,6 +3000,8 @@ func (p Gs2StaminaWebSocketClient) describeStaminasByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeStaminasByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3022,6 +3090,8 @@ func (p Gs2StaminaWebSocketClient) getStaminaAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStaminaAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3110,6 +3180,8 @@ func (p Gs2StaminaWebSocketClient) getStaminaByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStaminaByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3195,6 +3267,8 @@ func (p Gs2StaminaWebSocketClient) updateStaminaByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateStaminaByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3295,6 +3369,14 @@ func (p Gs2StaminaWebSocketClient) consumeStaminaAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "stamina.stamina.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
+    }
 	callback <- ConsumeStaminaAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3389,6 +3471,14 @@ func (p Gs2StaminaWebSocketClient) consumeStaminaByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "stamina.stamina.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
+    }
 	callback <- ConsumeStaminaByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3480,6 +3570,8 @@ func (p Gs2StaminaWebSocketClient) recoverStaminaByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RecoverStaminaByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3571,6 +3663,8 @@ func (p Gs2StaminaWebSocketClient) raiseMaxValueByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RaiseMaxValueByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3662,6 +3756,8 @@ func (p Gs2StaminaWebSocketClient) setMaxValueByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetMaxValueByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3753,6 +3849,8 @@ func (p Gs2StaminaWebSocketClient) setRecoverIntervalByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetRecoverIntervalByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3844,6 +3942,8 @@ func (p Gs2StaminaWebSocketClient) setRecoverValueByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetRecoverValueByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3935,6 +4035,8 @@ func (p Gs2StaminaWebSocketClient) setMaxValueByStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetMaxValueByStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4035,6 +4137,8 @@ func (p Gs2StaminaWebSocketClient) setRecoverIntervalByStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetRecoverIntervalByStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4135,6 +4239,8 @@ func (p Gs2StaminaWebSocketClient) setRecoverValueByStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetRecoverValueByStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4235,6 +4341,8 @@ func (p Gs2StaminaWebSocketClient) deleteStaminaByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteStaminaByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4323,6 +4431,8 @@ func (p Gs2StaminaWebSocketClient) recoverStaminaByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RecoverStaminaByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4405,6 +4515,8 @@ func (p Gs2StaminaWebSocketClient) raiseMaxValueByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- RaiseMaxValueByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4487,6 +4599,8 @@ func (p Gs2StaminaWebSocketClient) setMaxValueByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetMaxValueByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4569,6 +4683,8 @@ func (p Gs2StaminaWebSocketClient) setRecoverIntervalByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetRecoverIntervalByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4651,6 +4767,8 @@ func (p Gs2StaminaWebSocketClient) setRecoverValueByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetRecoverValueByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4733,6 +4851,8 @@ func (p Gs2StaminaWebSocketClient) consumeStaminaByStampTaskAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ConsumeStaminaByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

@@ -57,6 +57,8 @@ func (p Gs2LimitWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2LimitWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -224,6 +228,8 @@ func (p Gs2LimitWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -303,6 +309,8 @@ func (p Gs2LimitWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -382,6 +390,8 @@ func (p Gs2LimitWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -467,6 +477,8 @@ func (p Gs2LimitWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -546,6 +558,8 @@ func (p Gs2LimitWebSocketClient) describeCountersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCountersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -640,6 +654,8 @@ func (p Gs2LimitWebSocketClient) describeCountersByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCountersByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -731,6 +747,8 @@ func (p Gs2LimitWebSocketClient) getCounterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCounterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -822,6 +840,8 @@ func (p Gs2LimitWebSocketClient) getCounterByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCounterByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -910,6 +930,14 @@ func (p Gs2LimitWebSocketClient) countUpAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "limit.counter.overflow" {
+				asyncResult.Err = gs2err.SetClientError(Overflow{})
+            }
+        }
+    }
 	callback <- CountUpAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1010,6 +1038,14 @@ func (p Gs2LimitWebSocketClient) countUpByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "limit.counter.overflow" {
+				asyncResult.Err = gs2err.SetClientError(Overflow{})
+            }
+        }
+    }
 	callback <- CountUpByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1107,6 +1143,8 @@ func (p Gs2LimitWebSocketClient) deleteCounterByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteCounterByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1198,6 +1236,8 @@ func (p Gs2LimitWebSocketClient) countUpByStampTaskAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CountUpByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1280,6 +1320,8 @@ func (p Gs2LimitWebSocketClient) deleteByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1362,6 +1404,8 @@ func (p Gs2LimitWebSocketClient) describeLimitModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeLimitModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1447,6 +1491,8 @@ func (p Gs2LimitWebSocketClient) createLimitModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateLimitModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1547,6 +1593,8 @@ func (p Gs2LimitWebSocketClient) getLimitModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetLimitModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1629,6 +1677,8 @@ func (p Gs2LimitWebSocketClient) updateLimitModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateLimitModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1729,6 +1779,8 @@ func (p Gs2LimitWebSocketClient) deleteLimitModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteLimitModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1811,6 +1863,8 @@ func (p Gs2LimitWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1890,6 +1944,8 @@ func (p Gs2LimitWebSocketClient) getCurrentLimitMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentLimitMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1969,6 +2025,8 @@ func (p Gs2LimitWebSocketClient) updateCurrentLimitMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentLimitMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2051,6 +2109,8 @@ func (p Gs2LimitWebSocketClient) updateCurrentLimitMasterFromGitHubAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentLimitMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2133,6 +2193,8 @@ func (p Gs2LimitWebSocketClient) describeLimitModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeLimitModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2212,6 +2274,8 @@ func (p Gs2LimitWebSocketClient) getLimitModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetLimitModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

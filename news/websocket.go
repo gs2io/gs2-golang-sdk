@@ -57,6 +57,8 @@ func (p Gs2NewsWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2NewsWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -224,6 +228,8 @@ func (p Gs2NewsWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -303,6 +309,8 @@ func (p Gs2NewsWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -382,6 +390,8 @@ func (p Gs2NewsWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -467,6 +477,8 @@ func (p Gs2NewsWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -546,6 +558,8 @@ func (p Gs2NewsWebSocketClient) prepareUpdateCurrentNewsMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareUpdateCurrentNewsMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -625,6 +639,8 @@ func (p Gs2NewsWebSocketClient) updateCurrentNewsMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentNewsMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -707,6 +723,8 @@ func (p Gs2NewsWebSocketClient) prepareUpdateCurrentNewsMasterFromGitHubAsyncHan
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PrepareUpdateCurrentNewsMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -789,6 +807,8 @@ func (p Gs2NewsWebSocketClient) describeNewsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNewsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -874,6 +894,8 @@ func (p Gs2NewsWebSocketClient) describeNewsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNewsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -956,6 +978,8 @@ func (p Gs2NewsWebSocketClient) wantGrantAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- WantGrantAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1041,6 +1065,8 @@ func (p Gs2NewsWebSocketClient) wantGrantByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- WantGrantByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

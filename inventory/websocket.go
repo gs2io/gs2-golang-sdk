@@ -57,6 +57,8 @@ func (p Gs2InventoryWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2InventoryWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -233,6 +237,8 @@ func (p Gs2InventoryWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -312,6 +318,8 @@ func (p Gs2InventoryWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -391,6 +399,8 @@ func (p Gs2InventoryWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -485,6 +495,8 @@ func (p Gs2InventoryWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -564,6 +576,8 @@ func (p Gs2InventoryWebSocketClient) describeInventoryModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeInventoryModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -649,6 +663,8 @@ func (p Gs2InventoryWebSocketClient) createInventoryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateInventoryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -746,6 +762,8 @@ func (p Gs2InventoryWebSocketClient) getInventoryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetInventoryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -828,6 +846,8 @@ func (p Gs2InventoryWebSocketClient) updateInventoryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateInventoryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -925,6 +945,8 @@ func (p Gs2InventoryWebSocketClient) deleteInventoryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteInventoryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1007,6 +1029,8 @@ func (p Gs2InventoryWebSocketClient) describeInventoryModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeInventoryModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1086,6 +1110,8 @@ func (p Gs2InventoryWebSocketClient) getInventoryModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetInventoryModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1168,6 +1194,8 @@ func (p Gs2InventoryWebSocketClient) describeItemModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeItemModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1256,6 +1284,8 @@ func (p Gs2InventoryWebSocketClient) createItemModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateItemModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1356,6 +1386,8 @@ func (p Gs2InventoryWebSocketClient) getItemModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetItemModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1441,6 +1473,8 @@ func (p Gs2InventoryWebSocketClient) updateItemModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateItemModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1541,6 +1575,8 @@ func (p Gs2InventoryWebSocketClient) deleteItemModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteItemModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1626,6 +1662,8 @@ func (p Gs2InventoryWebSocketClient) describeItemModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeItemModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1708,6 +1746,8 @@ func (p Gs2InventoryWebSocketClient) getItemModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetItemModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1793,6 +1833,8 @@ func (p Gs2InventoryWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1872,6 +1914,8 @@ func (p Gs2InventoryWebSocketClient) getCurrentItemModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentItemModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1951,6 +1995,8 @@ func (p Gs2InventoryWebSocketClient) updateCurrentItemModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentItemModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2033,6 +2079,8 @@ func (p Gs2InventoryWebSocketClient) updateCurrentItemModelMasterFromGitHubAsync
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentItemModelMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2115,6 +2163,8 @@ func (p Gs2InventoryWebSocketClient) describeInventoriesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeInventoriesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2206,6 +2256,8 @@ func (p Gs2InventoryWebSocketClient) describeInventoriesByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeInventoriesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2294,6 +2346,8 @@ func (p Gs2InventoryWebSocketClient) getInventoryAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetInventoryAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2382,6 +2436,8 @@ func (p Gs2InventoryWebSocketClient) getInventoryByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetInventoryByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2467,6 +2523,8 @@ func (p Gs2InventoryWebSocketClient) addCapacityByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AddCapacityByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2558,6 +2616,8 @@ func (p Gs2InventoryWebSocketClient) setCapacityByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetCapacityByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2649,6 +2709,8 @@ func (p Gs2InventoryWebSocketClient) deleteInventoryByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteInventoryByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2737,6 +2799,8 @@ func (p Gs2InventoryWebSocketClient) addCapacityByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AddCapacityByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2819,6 +2883,8 @@ func (p Gs2InventoryWebSocketClient) setCapacityByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- SetCapacityByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2901,6 +2967,8 @@ func (p Gs2InventoryWebSocketClient) describeItemSetsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeItemSetsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2995,6 +3063,8 @@ func (p Gs2InventoryWebSocketClient) describeItemSetsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeItemSetsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3086,6 +3156,8 @@ func (p Gs2InventoryWebSocketClient) getItemSetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetItemSetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3180,6 +3252,8 @@ func (p Gs2InventoryWebSocketClient) getItemSetByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetItemSetByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3271,6 +3345,8 @@ func (p Gs2InventoryWebSocketClient) getItemWithSignatureAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetItemWithSignatureAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3368,6 +3444,8 @@ func (p Gs2InventoryWebSocketClient) getItemWithSignatureByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetItemWithSignatureByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3462,6 +3540,14 @@ func (p Gs2InventoryWebSocketClient) acquireItemSetByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+        }
+    }
 	callback <- AcquireItemSetByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3565,6 +3651,17 @@ func (p Gs2InventoryWebSocketClient) consumeItemSetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.count.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
+    }
 	callback <- ConsumeItemSetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3665,6 +3762,17 @@ func (p Gs2InventoryWebSocketClient) consumeItemSetByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.count.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
+    }
 	callback <- ConsumeItemSetByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3762,6 +3870,8 @@ func (p Gs2InventoryWebSocketClient) deleteItemSetByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteItemSetByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3856,6 +3966,8 @@ func (p Gs2InventoryWebSocketClient) acquireItemSetByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AcquireItemSetByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3938,6 +4050,8 @@ func (p Gs2InventoryWebSocketClient) consumeItemSetByStampTaskAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ConsumeItemSetByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4020,6 +4134,8 @@ func (p Gs2InventoryWebSocketClient) describeReferenceOfAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeReferenceOfAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4114,6 +4230,8 @@ func (p Gs2InventoryWebSocketClient) describeReferenceOfByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeReferenceOfByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4205,6 +4323,8 @@ func (p Gs2InventoryWebSocketClient) getReferenceOfAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetReferenceOfAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4302,6 +4422,8 @@ func (p Gs2InventoryWebSocketClient) getReferenceOfByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetReferenceOfByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4396,6 +4518,8 @@ func (p Gs2InventoryWebSocketClient) verifyReferenceOfAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- VerifyReferenceOfAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4499,6 +4623,8 @@ func (p Gs2InventoryWebSocketClient) verifyReferenceOfByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- VerifyReferenceOfByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4599,6 +4725,8 @@ func (p Gs2InventoryWebSocketClient) addReferenceOfAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AddReferenceOfAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4699,6 +4827,8 @@ func (p Gs2InventoryWebSocketClient) addReferenceOfByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AddReferenceOfByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4796,6 +4926,8 @@ func (p Gs2InventoryWebSocketClient) deleteReferenceOfAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteReferenceOfAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4896,6 +5028,8 @@ func (p Gs2InventoryWebSocketClient) deleteReferenceOfByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteReferenceOfByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4993,6 +5127,8 @@ func (p Gs2InventoryWebSocketClient) addReferenceOfItemSetByStampSheetAsyncHandl
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AddReferenceOfItemSetByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -5075,6 +5211,8 @@ func (p Gs2InventoryWebSocketClient) deleteReferenceOfItemSetByStampSheetAsyncHa
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteReferenceOfItemSetByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -5157,6 +5295,8 @@ func (p Gs2InventoryWebSocketClient) verifyReferenceOfByStampTaskAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- VerifyReferenceOfByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

@@ -57,6 +57,8 @@ func (p Gs2ShowcaseWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2ShowcaseWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -236,6 +240,8 @@ func (p Gs2ShowcaseWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -315,6 +321,8 @@ func (p Gs2ShowcaseWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -394,6 +402,8 @@ func (p Gs2ShowcaseWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -491,6 +501,8 @@ func (p Gs2ShowcaseWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -570,6 +582,8 @@ func (p Gs2ShowcaseWebSocketClient) describeSalesItemMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeSalesItemMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -655,6 +669,8 @@ func (p Gs2ShowcaseWebSocketClient) createSalesItemMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateSalesItemMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -757,6 +773,8 @@ func (p Gs2ShowcaseWebSocketClient) getSalesItemMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetSalesItemMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -839,6 +857,8 @@ func (p Gs2ShowcaseWebSocketClient) updateSalesItemMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateSalesItemMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -941,6 +961,8 @@ func (p Gs2ShowcaseWebSocketClient) deleteSalesItemMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteSalesItemMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1023,6 +1045,8 @@ func (p Gs2ShowcaseWebSocketClient) describeSalesItemGroupMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeSalesItemGroupMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1108,6 +1132,8 @@ func (p Gs2ShowcaseWebSocketClient) createSalesItemGroupMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateSalesItemGroupMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1203,6 +1229,8 @@ func (p Gs2ShowcaseWebSocketClient) getSalesItemGroupMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetSalesItemGroupMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1285,6 +1313,8 @@ func (p Gs2ShowcaseWebSocketClient) updateSalesItemGroupMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateSalesItemGroupMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1380,6 +1410,8 @@ func (p Gs2ShowcaseWebSocketClient) deleteSalesItemGroupMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteSalesItemGroupMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1462,6 +1494,8 @@ func (p Gs2ShowcaseWebSocketClient) describeShowcaseMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeShowcaseMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1547,6 +1581,8 @@ func (p Gs2ShowcaseWebSocketClient) createShowcaseMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateShowcaseMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1645,6 +1681,8 @@ func (p Gs2ShowcaseWebSocketClient) getShowcaseMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetShowcaseMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1727,6 +1765,8 @@ func (p Gs2ShowcaseWebSocketClient) updateShowcaseMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateShowcaseMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1825,6 +1865,8 @@ func (p Gs2ShowcaseWebSocketClient) deleteShowcaseMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteShowcaseMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1907,6 +1949,8 @@ func (p Gs2ShowcaseWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1986,6 +2030,8 @@ func (p Gs2ShowcaseWebSocketClient) getCurrentShowcaseMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentShowcaseMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2065,6 +2111,8 @@ func (p Gs2ShowcaseWebSocketClient) updateCurrentShowcaseMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentShowcaseMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2147,6 +2195,8 @@ func (p Gs2ShowcaseWebSocketClient) updateCurrentShowcaseMasterFromGitHubAsyncHa
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentShowcaseMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2229,6 +2279,8 @@ func (p Gs2ShowcaseWebSocketClient) describeShowcasesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeShowcasesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2314,6 +2366,8 @@ func (p Gs2ShowcaseWebSocketClient) describeShowcasesByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeShowcasesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2396,6 +2450,8 @@ func (p Gs2ShowcaseWebSocketClient) getShowcaseAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetShowcaseAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2484,6 +2540,8 @@ func (p Gs2ShowcaseWebSocketClient) getShowcaseByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetShowcaseByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2569,6 +2627,8 @@ func (p Gs2ShowcaseWebSocketClient) buyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- BuyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2673,6 +2733,8 @@ func (p Gs2ShowcaseWebSocketClient) buyByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- BuyByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

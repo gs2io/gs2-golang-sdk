@@ -57,6 +57,8 @@ func (p Gs2SerialKeyWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2SerialKeyWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -224,6 +228,8 @@ func (p Gs2SerialKeyWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -303,6 +309,8 @@ func (p Gs2SerialKeyWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -382,6 +390,8 @@ func (p Gs2SerialKeyWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -467,6 +477,8 @@ func (p Gs2SerialKeyWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -546,6 +558,8 @@ func (p Gs2SerialKeyWebSocketClient) describeIssueJobsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeIssueJobsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -634,6 +648,8 @@ func (p Gs2SerialKeyWebSocketClient) getIssueJobAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetIssueJobAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -719,6 +735,8 @@ func (p Gs2SerialKeyWebSocketClient) issueAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- IssueAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -807,6 +825,8 @@ func (p Gs2SerialKeyWebSocketClient) describeSerialKeysAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeSerialKeysAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -898,6 +918,8 @@ func (p Gs2SerialKeyWebSocketClient) downloadSerialCodesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DownloadSerialCodesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -983,6 +1005,8 @@ func (p Gs2SerialKeyWebSocketClient) getSerialKeyAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetSerialKeyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1065,6 +1089,17 @@ func (p Gs2SerialKeyWebSocketClient) useAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "code.status.invalid" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyUsed{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "code.code.notFound" {
+				asyncResult.Err = gs2err.SetClientError(CodeNotFound{})
+            }
+        }
+    }
 	callback <- UseAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1156,6 +1191,8 @@ func (p Gs2SerialKeyWebSocketClient) useByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UseByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1244,6 +1281,8 @@ func (p Gs2SerialKeyWebSocketClient) useByStampTaskAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UseByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1326,6 +1365,8 @@ func (p Gs2SerialKeyWebSocketClient) describeCampaignModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCampaignModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1405,6 +1446,8 @@ func (p Gs2SerialKeyWebSocketClient) getCampaignModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCampaignModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1487,6 +1530,8 @@ func (p Gs2SerialKeyWebSocketClient) describeCampaignModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCampaignModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1572,6 +1617,8 @@ func (p Gs2SerialKeyWebSocketClient) createCampaignModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateCampaignModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1663,6 +1710,8 @@ func (p Gs2SerialKeyWebSocketClient) getCampaignModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCampaignModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1745,6 +1794,8 @@ func (p Gs2SerialKeyWebSocketClient) updateCampaignModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCampaignModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1836,6 +1887,8 @@ func (p Gs2SerialKeyWebSocketClient) deleteCampaignModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteCampaignModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1918,6 +1971,8 @@ func (p Gs2SerialKeyWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1997,6 +2052,8 @@ func (p Gs2SerialKeyWebSocketClient) getCurrentCampaignMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentCampaignMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2076,6 +2133,8 @@ func (p Gs2SerialKeyWebSocketClient) updateCurrentCampaignMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentCampaignMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2158,6 +2217,8 @@ func (p Gs2SerialKeyWebSocketClient) updateCurrentCampaignMasterFromGitHubAsyncH
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentCampaignMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

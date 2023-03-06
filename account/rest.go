@@ -1158,6 +1158,15 @@ func authenticationAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AuthenticationResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.banned.infinity" {
+				asyncResult.Err = gs2err.SetClientError(BannedInfinity{})
+            }
+        }
 		callback <- AuthenticationAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1836,6 +1845,12 @@ func updateTakeOverAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateTakeOverResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
 		callback <- UpdateTakeOverAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1940,6 +1955,12 @@ func updateTakeOverByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateTakeOverByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
 		callback <- UpdateTakeOverByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -2241,6 +2262,12 @@ func doTakeOverAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DoTakeOverResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+            }
+        }
 		callback <- DoTakeOverAsyncResult{
 			err: asyncResult.Err,
 		}

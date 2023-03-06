@@ -57,6 +57,8 @@ func (p Gs2DictionaryWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2DictionaryWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -230,6 +234,8 @@ func (p Gs2DictionaryWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -309,6 +315,8 @@ func (p Gs2DictionaryWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -388,6 +396,8 @@ func (p Gs2DictionaryWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -479,6 +489,8 @@ func (p Gs2DictionaryWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -558,6 +570,8 @@ func (p Gs2DictionaryWebSocketClient) describeEntryModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeEntryModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -637,6 +651,8 @@ func (p Gs2DictionaryWebSocketClient) getEntryModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetEntryModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -719,6 +735,8 @@ func (p Gs2DictionaryWebSocketClient) describeEntryModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeEntryModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -804,6 +822,8 @@ func (p Gs2DictionaryWebSocketClient) createEntryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateEntryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -892,6 +912,8 @@ func (p Gs2DictionaryWebSocketClient) getEntryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetEntryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -974,6 +996,8 @@ func (p Gs2DictionaryWebSocketClient) updateEntryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateEntryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1062,6 +1086,8 @@ func (p Gs2DictionaryWebSocketClient) deleteEntryModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteEntryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1144,6 +1170,8 @@ func (p Gs2DictionaryWebSocketClient) describeEntriesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeEntriesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1235,6 +1263,8 @@ func (p Gs2DictionaryWebSocketClient) describeEntriesByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeEntriesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1323,6 +1353,8 @@ func (p Gs2DictionaryWebSocketClient) addEntriesByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AddEntriesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1415,6 +1447,8 @@ func (p Gs2DictionaryWebSocketClient) getEntryAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetEntryAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1503,6 +1537,8 @@ func (p Gs2DictionaryWebSocketClient) getEntryByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetEntryByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1588,6 +1624,8 @@ func (p Gs2DictionaryWebSocketClient) getEntryWithSignatureAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetEntryWithSignatureAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1679,6 +1717,8 @@ func (p Gs2DictionaryWebSocketClient) getEntryWithSignatureByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetEntryWithSignatureByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1767,6 +1807,8 @@ func (p Gs2DictionaryWebSocketClient) resetByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ResetByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1852,6 +1894,8 @@ func (p Gs2DictionaryWebSocketClient) addEntriesByStampSheetAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- AddEntriesByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1934,6 +1978,8 @@ func (p Gs2DictionaryWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2013,6 +2059,8 @@ func (p Gs2DictionaryWebSocketClient) getCurrentEntryMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentEntryMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2092,6 +2140,8 @@ func (p Gs2DictionaryWebSocketClient) updateCurrentEntryMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentEntryMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2174,6 +2224,8 @@ func (p Gs2DictionaryWebSocketClient) updateCurrentEntryMasterFromGitHubAsyncHan
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentEntryMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

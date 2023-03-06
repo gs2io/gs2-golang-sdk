@@ -1419,6 +1419,15 @@ func doneUploadAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DoneUploadResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.status.invalid" {
+				asyncResult.Err = gs2err.SetClientError(InvalidStatus{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.file.notUploaded" {
+				asyncResult.Err = gs2err.SetClientError(NotUploaded{})
+            }
+        }
 		callback <- DoneUploadAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1517,6 +1526,15 @@ func doneUploadByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DoneUploadByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.status.invalid" {
+				asyncResult.Err = gs2err.SetClientError(InvalidStatus{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.file.notUploaded" {
+				asyncResult.Err = gs2err.SetClientError(NotUploaded{})
+            }
+        }
 		callback <- DoneUploadByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1617,6 +1635,12 @@ func deleteDataObjectAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteDataObjectResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.status.invalid" {
+				asyncResult.Err = gs2err.SetClientError(InvalidStatus{})
+            }
+        }
 		callback <- DeleteDataObjectAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1712,6 +1736,12 @@ func deleteDataObjectByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteDataObjectByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.status.invalid" {
+				asyncResult.Err = gs2err.SetClientError(InvalidStatus{})
+            }
+        }
 		callback <- DeleteDataObjectByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -2610,6 +2640,12 @@ func restoreDataObjectAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RestoreDataObjectResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "dataObject.status.invalid" {
+				asyncResult.Err = gs2err.SetClientError(InvalidStatus{})
+            }
+        }
 		callback <- RestoreDataObjectAsyncResult{
 			err: asyncResult.Err,
 		}

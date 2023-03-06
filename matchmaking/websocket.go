@@ -57,6 +57,8 @@ func (p Gs2MatchmakingWebSocketClient) describeNamespacesAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -139,6 +141,8 @@ func (p Gs2MatchmakingWebSocketClient) createNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -260,6 +264,8 @@ func (p Gs2MatchmakingWebSocketClient) getNamespaceStatusAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -339,6 +345,8 @@ func (p Gs2MatchmakingWebSocketClient) getNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -418,6 +426,8 @@ func (p Gs2MatchmakingWebSocketClient) updateNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -539,6 +549,8 @@ func (p Gs2MatchmakingWebSocketClient) deleteNamespaceAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -618,6 +630,8 @@ func (p Gs2MatchmakingWebSocketClient) describeGatheringsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeGatheringsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -703,6 +717,8 @@ func (p Gs2MatchmakingWebSocketClient) createGatheringAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateGatheringAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -821,6 +837,8 @@ func (p Gs2MatchmakingWebSocketClient) createGatheringByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateGatheringByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -936,6 +954,8 @@ func (p Gs2MatchmakingWebSocketClient) updateGatheringAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateGatheringAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1034,6 +1054,8 @@ func (p Gs2MatchmakingWebSocketClient) updateGatheringByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateGatheringByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1129,6 +1151,8 @@ func (p Gs2MatchmakingWebSocketClient) doMatchmakingByPlayerAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DoMatchmakingByPlayerAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1214,6 +1238,8 @@ func (p Gs2MatchmakingWebSocketClient) doMatchmakingAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DoMatchmakingAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1308,6 +1334,8 @@ func (p Gs2MatchmakingWebSocketClient) doMatchmakingByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DoMatchmakingByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1399,6 +1427,8 @@ func (p Gs2MatchmakingWebSocketClient) getGatheringAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetGatheringAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1481,6 +1511,8 @@ func (p Gs2MatchmakingWebSocketClient) cancelMatchmakingAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CancelMatchmakingAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1572,6 +1604,8 @@ func (p Gs2MatchmakingWebSocketClient) cancelMatchmakingByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CancelMatchmakingByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1660,6 +1694,8 @@ func (p Gs2MatchmakingWebSocketClient) deleteGatheringAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteGatheringAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1742,6 +1778,8 @@ func (p Gs2MatchmakingWebSocketClient) describeRatingModelMastersAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRatingModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1827,6 +1865,8 @@ func (p Gs2MatchmakingWebSocketClient) createRatingModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateRatingModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1918,6 +1958,8 @@ func (p Gs2MatchmakingWebSocketClient) getRatingModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRatingModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2000,6 +2042,8 @@ func (p Gs2MatchmakingWebSocketClient) updateRatingModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateRatingModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2091,6 +2135,8 @@ func (p Gs2MatchmakingWebSocketClient) deleteRatingModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteRatingModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2173,6 +2219,8 @@ func (p Gs2MatchmakingWebSocketClient) describeRatingModelsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRatingModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2252,6 +2300,8 @@ func (p Gs2MatchmakingWebSocketClient) getRatingModelAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRatingModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2334,6 +2384,8 @@ func (p Gs2MatchmakingWebSocketClient) exportMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2413,6 +2465,8 @@ func (p Gs2MatchmakingWebSocketClient) getCurrentRatingModelMasterAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentRatingModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2492,6 +2546,8 @@ func (p Gs2MatchmakingWebSocketClient) updateCurrentRatingModelMasterAsyncHandle
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentRatingModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2574,6 +2630,8 @@ func (p Gs2MatchmakingWebSocketClient) updateCurrentRatingModelMasterFromGitHubA
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentRatingModelMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2656,6 +2714,8 @@ func (p Gs2MatchmakingWebSocketClient) describeRatingsAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRatingsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2747,6 +2807,8 @@ func (p Gs2MatchmakingWebSocketClient) describeRatingsByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeRatingsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2835,6 +2897,8 @@ func (p Gs2MatchmakingWebSocketClient) getRatingAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRatingAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2923,6 +2987,8 @@ func (p Gs2MatchmakingWebSocketClient) getRatingByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetRatingByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3008,6 +3074,8 @@ func (p Gs2MatchmakingWebSocketClient) putResultAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PutResultAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3097,6 +3165,8 @@ func (p Gs2MatchmakingWebSocketClient) deleteRatingAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteRatingAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3185,6 +3255,8 @@ func (p Gs2MatchmakingWebSocketClient) getBallotAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetBallotAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3282,6 +3354,8 @@ func (p Gs2MatchmakingWebSocketClient) getBallotByUserIdAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetBallotByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3376,6 +3450,8 @@ func (p Gs2MatchmakingWebSocketClient) voteAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- VoteAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3471,6 +3547,8 @@ func (p Gs2MatchmakingWebSocketClient) voteMultipleAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- VoteMultipleAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3567,6 +3645,8 @@ func (p Gs2MatchmakingWebSocketClient) commitVoteAsyncHandler(
             return
         }
 	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CommitVoteAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,

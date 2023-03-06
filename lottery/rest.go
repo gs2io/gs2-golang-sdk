@@ -1909,6 +1909,12 @@ func drawByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DrawByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "box.items.empty" {
+				asyncResult.Err = gs2err.SetClientError(Empty{})
+            }
+        }
 		callback <- DrawByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
