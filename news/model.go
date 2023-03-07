@@ -110,6 +110,275 @@ func CastNamespacesFromDict(data []Namespace) []interface{} {
     return v
 }
 
+type Progress struct {
+	ProgressId *string `json:"progressId"`
+	UploadToken *string `json:"uploadToken"`
+	Generated *int32 `json:"generated"`
+	PatternCount *int32 `json:"patternCount"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
+}
+
+func NewProgressFromJson(data string) Progress {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewProgressFromDict(dict)
+}
+
+func NewProgressFromDict(data map[string]interface{}) Progress {
+    return Progress {
+        ProgressId: core.CastString(data["progressId"]),
+        UploadToken: core.CastString(data["uploadToken"]),
+        Generated: core.CastInt32(data["generated"]),
+        PatternCount: core.CastInt32(data["patternCount"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
+}
+
+func (p Progress) ToDict() map[string]interface{} {
+    
+    var progressId *string
+    if p.ProgressId != nil {
+        progressId = p.ProgressId
+    }
+    var uploadToken *string
+    if p.UploadToken != nil {
+        uploadToken = p.UploadToken
+    }
+    var generated *int32
+    if p.Generated != nil {
+        generated = p.Generated
+    }
+    var patternCount *int32
+    if p.PatternCount != nil {
+        patternCount = p.PatternCount
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "progressId": progressId,
+        "uploadToken": uploadToken,
+        "generated": generated,
+        "patternCount": patternCount,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
+}
+
+func (p Progress) Pointer() *Progress {
+    return &p
+}
+
+func CastProgresses(data []interface{}) []Progress {
+	v := make([]Progress, 0)
+	for _, d := range data {
+		v = append(v, NewProgressFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastProgressesFromDict(data []Progress) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type Output struct {
+	OutputId *string `json:"outputId"`
+	Name *string `json:"name"`
+	Text *string `json:"text"`
+	CreatedAt *int64 `json:"createdAt"`
+}
+
+func NewOutputFromJson(data string) Output {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewOutputFromDict(dict)
+}
+
+func NewOutputFromDict(data map[string]interface{}) Output {
+    return Output {
+        OutputId: core.CastString(data["outputId"]),
+        Name: core.CastString(data["name"]),
+        Text: core.CastString(data["text"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+    }
+}
+
+func (p Output) ToDict() map[string]interface{} {
+    
+    var outputId *string
+    if p.OutputId != nil {
+        outputId = p.OutputId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var text *string
+    if p.Text != nil {
+        text = p.Text
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    return map[string]interface{} {
+        "outputId": outputId,
+        "name": name,
+        "text": text,
+        "createdAt": createdAt,
+    }
+}
+
+func (p Output) Pointer() *Output {
+    return &p
+}
+
+func CastOutputs(data []interface{}) []Output {
+	v := make([]Output, 0)
+	for _, d := range data {
+		v = append(v, NewOutputFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastOutputsFromDict(data []Output) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type View struct {
+	Contents []Content `json:"contents"`
+	RemoveContents []Content `json:"removeContents"`
+}
+
+func NewViewFromJson(data string) View {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewViewFromDict(dict)
+}
+
+func NewViewFromDict(data map[string]interface{}) View {
+    return View {
+        Contents: CastContents(core.CastArray(data["contents"])),
+        RemoveContents: CastContents(core.CastArray(data["removeContents"])),
+    }
+}
+
+func (p View) ToDict() map[string]interface{} {
+    
+    var contents []interface{}
+    if p.Contents != nil {
+        contents = CastContentsFromDict(
+            p.Contents,
+        )
+    }
+    var removeContents []interface{}
+    if p.RemoveContents != nil {
+        removeContents = CastContentsFromDict(
+            p.RemoveContents,
+        )
+    }
+    return map[string]interface{} {
+        "contents": contents,
+        "removeContents": removeContents,
+    }
+}
+
+func (p View) Pointer() *View {
+    return &p
+}
+
+func CastViews(data []interface{}) []View {
+	v := make([]View, 0)
+	for _, d := range data {
+		v = append(v, NewViewFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastViewsFromDict(data []View) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type Content struct {
+	Section *string `json:"section"`
+	Content *string `json:"content"`
+	FrontMatter *string `json:"frontMatter"`
+}
+
+func NewContentFromJson(data string) Content {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewContentFromDict(dict)
+}
+
+func NewContentFromDict(data map[string]interface{}) Content {
+    return Content {
+        Section: core.CastString(data["section"]),
+        Content: core.CastString(data["content"]),
+        FrontMatter: core.CastString(data["frontMatter"]),
+    }
+}
+
+func (p Content) ToDict() map[string]interface{} {
+    
+    var section *string
+    if p.Section != nil {
+        section = p.Section
+    }
+    var content *string
+    if p.Content != nil {
+        content = p.Content
+    }
+    var frontMatter *string
+    if p.FrontMatter != nil {
+        frontMatter = p.FrontMatter
+    }
+    return map[string]interface{} {
+        "section": section,
+        "content": content,
+        "frontMatter": frontMatter,
+    }
+}
+
+func (p Content) Pointer() *Content {
+    return &p
+}
+
+func CastContents(data []interface{}) []Content {
+	v := make([]Content, 0)
+	for _, d := range data {
+		v = append(v, NewContentFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastContentsFromDict(data []Content) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
 type News struct {
 	Section *string `json:"section"`
 	Content *string `json:"content"`

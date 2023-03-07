@@ -551,6 +551,374 @@ func (p Gs2NewsRestClient) DeleteNamespace(
 	return asyncResult.result, asyncResult.err
 }
 
+func describeProgressesAsyncHandler(
+	client Gs2NewsRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeProgressesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeProgressesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeProgressesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeProgressesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeProgressesAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeProgressesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2NewsRestClient) DescribeProgressesAsync(
+	request *DescribeProgressesRequest,
+	callback chan<- DescribeProgressesAsyncResult,
+) {
+	path := "/{namespaceName}/progress"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go describeProgressesAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2NewsRestClient) DescribeProgresses(
+	request *DescribeProgressesRequest,
+) (*DescribeProgressesResult, error) {
+	callback := make(chan DescribeProgressesAsyncResult, 1)
+	go p.DescribeProgressesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getProgressAsyncHandler(
+	client Gs2NewsRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetProgressAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetProgressAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetProgressResult
+	if asyncResult.Err != nil {
+		callback <- GetProgressAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetProgressAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetProgressAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2NewsRestClient) GetProgressAsync(
+	request *GetProgressRequest,
+	callback chan<- GetProgressAsyncResult,
+) {
+	path := "/{namespaceName}/progress/{uploadToken}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UploadToken != nil && *request.UploadToken != ""  {
+        path = strings.ReplaceAll(path, "{uploadToken}", core.ToString(*request.UploadToken))
+    } else {
+        path = strings.ReplaceAll(path, "{uploadToken}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getProgressAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2NewsRestClient) GetProgress(
+	request *GetProgressRequest,
+) (*GetProgressResult, error) {
+	callback := make(chan GetProgressAsyncResult, 1)
+	go p.GetProgressAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeOutputsAsyncHandler(
+	client Gs2NewsRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeOutputsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeOutputsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeOutputsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeOutputsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeOutputsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeOutputsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2NewsRestClient) DescribeOutputsAsync(
+	request *DescribeOutputsRequest,
+	callback chan<- DescribeOutputsAsyncResult,
+) {
+	path := "/{namespaceName}/progress/{uploadToken}/output"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UploadToken != nil && *request.UploadToken != ""  {
+        path = strings.ReplaceAll(path, "{uploadToken}", core.ToString(*request.UploadToken))
+    } else {
+        path = strings.ReplaceAll(path, "{uploadToken}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go describeOutputsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2NewsRestClient) DescribeOutputs(
+	request *DescribeOutputsRequest,
+) (*DescribeOutputsResult, error) {
+	callback := make(chan DescribeOutputsAsyncResult, 1)
+	go p.DescribeOutputsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getOutputAsyncHandler(
+	client Gs2NewsRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetOutputAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetOutputAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetOutputResult
+	if asyncResult.Err != nil {
+		callback <- GetOutputAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetOutputAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetOutputAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2NewsRestClient) GetOutputAsync(
+	request *GetOutputRequest,
+	callback chan<- GetOutputAsyncResult,
+) {
+	path := "/{namespaceName}/progress/{uploadToken}/output/{outputName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UploadToken != nil && *request.UploadToken != ""  {
+        path = strings.ReplaceAll(path, "{uploadToken}", core.ToString(*request.UploadToken))
+    } else {
+        path = strings.ReplaceAll(path, "{uploadToken}", "null")
+    }
+    if request.OutputName != nil && *request.OutputName != ""  {
+        path = strings.ReplaceAll(path, "{outputName}", core.ToString(*request.OutputName))
+    } else {
+        path = strings.ReplaceAll(path, "{outputName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getOutputAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2NewsRestClient) GetOutput(
+	request *GetOutputRequest,
+) (*GetOutputResult, error) {
+	callback := make(chan GetOutputAsyncResult, 1)
+	go p.GetOutputAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func prepareUpdateCurrentNewsMasterAsyncHandler(
 	client Gs2NewsRestClient,
 	job *core.NetworkJob,

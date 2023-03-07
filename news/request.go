@@ -204,6 +204,142 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
     return &p
 }
 
+type DescribeProgressesRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeProgressesRequestFromJson(data string) DescribeProgressesRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeProgressesRequestFromDict(dict)
+}
+
+func NewDescribeProgressesRequestFromDict(data map[string]interface{}) DescribeProgressesRequest {
+    return DescribeProgressesRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeProgressesRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeProgressesRequest) Pointer() *DescribeProgressesRequest {
+    return &p
+}
+
+type GetProgressRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    UploadToken *string `json:"uploadToken"`
+}
+
+func NewGetProgressRequestFromJson(data string) GetProgressRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetProgressRequestFromDict(dict)
+}
+
+func NewGetProgressRequestFromDict(data map[string]interface{}) GetProgressRequest {
+    return GetProgressRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UploadToken: core.CastString(data["uploadToken"]),
+    }
+}
+
+func (p GetProgressRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "uploadToken": p.UploadToken,
+    }
+}
+
+func (p GetProgressRequest) Pointer() *GetProgressRequest {
+    return &p
+}
+
+type DescribeOutputsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    UploadToken *string `json:"uploadToken"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeOutputsRequestFromJson(data string) DescribeOutputsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeOutputsRequestFromDict(dict)
+}
+
+func NewDescribeOutputsRequestFromDict(data map[string]interface{}) DescribeOutputsRequest {
+    return DescribeOutputsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UploadToken: core.CastString(data["uploadToken"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeOutputsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "uploadToken": p.UploadToken,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeOutputsRequest) Pointer() *DescribeOutputsRequest {
+    return &p
+}
+
+type GetOutputRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    UploadToken *string `json:"uploadToken"`
+    OutputName *string `json:"outputName"`
+}
+
+func NewGetOutputRequestFromJson(data string) GetOutputRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetOutputRequestFromDict(dict)
+}
+
+func NewGetOutputRequestFromDict(data map[string]interface{}) GetOutputRequest {
+    return GetOutputRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UploadToken: core.CastString(data["uploadToken"]),
+        OutputName: core.CastString(data["outputName"]),
+    }
+}
+
+func (p GetOutputRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "uploadToken": p.UploadToken,
+        "outputName": p.OutputName,
+    }
+}
+
+func (p GetOutputRequest) Pointer() *GetOutputRequest {
+    return &p
+}
+
 type PrepareUpdateCurrentNewsMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`

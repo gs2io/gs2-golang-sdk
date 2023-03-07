@@ -212,6 +212,140 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
     return &p
 }
 
+type DescribeProgressesResult struct {
+    Items []Progress `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeProgressesAsyncResult struct {
+	result *DescribeProgressesResult
+	err    error
+}
+
+func NewDescribeProgressesResultFromJson(data string) DescribeProgressesResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeProgressesResultFromDict(dict)
+}
+
+func NewDescribeProgressesResultFromDict(data map[string]interface{}) DescribeProgressesResult {
+    return DescribeProgressesResult {
+        Items: CastProgresses(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeProgressesResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastProgressesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeProgressesResult) Pointer() *DescribeProgressesResult {
+    return &p
+}
+
+type GetProgressResult struct {
+    Item *Progress `json:"item"`
+}
+
+type GetProgressAsyncResult struct {
+	result *GetProgressResult
+	err    error
+}
+
+func NewGetProgressResultFromJson(data string) GetProgressResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetProgressResultFromDict(dict)
+}
+
+func NewGetProgressResultFromDict(data map[string]interface{}) GetProgressResult {
+    return GetProgressResult {
+        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetProgressResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetProgressResult) Pointer() *GetProgressResult {
+    return &p
+}
+
+type DescribeOutputsResult struct {
+    Items []Output `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeOutputsAsyncResult struct {
+	result *DescribeOutputsResult
+	err    error
+}
+
+func NewDescribeOutputsResultFromJson(data string) DescribeOutputsResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeOutputsResultFromDict(dict)
+}
+
+func NewDescribeOutputsResultFromDict(data map[string]interface{}) DescribeOutputsResult {
+    return DescribeOutputsResult {
+        Items: CastOutputs(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeOutputsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastOutputsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeOutputsResult) Pointer() *DescribeOutputsResult {
+    return &p
+}
+
+type GetOutputResult struct {
+    Item *Output `json:"item"`
+}
+
+type GetOutputAsyncResult struct {
+	result *GetOutputResult
+	err    error
+}
+
+func NewGetOutputResultFromJson(data string) GetOutputResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetOutputResultFromDict(dict)
+}
+
+func NewGetOutputResultFromDict(data map[string]interface{}) GetOutputResult {
+    return GetOutputResult {
+        Item: NewOutputFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetOutputResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetOutputResult) Pointer() *GetOutputResult {
+    return &p
+}
+
 type PrepareUpdateCurrentNewsMasterResult struct {
     UploadToken *string `json:"uploadToken"`
     TemplateUploadUrl *string `json:"templateUploadUrl"`

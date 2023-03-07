@@ -531,6 +531,354 @@ func (p Gs2NewsWebSocketClient) DeleteNamespace(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2NewsWebSocketClient) describeProgressesAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeProgressesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeProgressesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeProgressesResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeProgressesAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DescribeProgressesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2NewsWebSocketClient) DescribeProgressesAsync(
+	request *DescribeProgressesRequest,
+	callback chan<- DescribeProgressesAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "news",
+    		"component": "progress",
+    		"function": "describeProgresses",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeProgressesAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2NewsWebSocketClient) DescribeProgresses(
+	request *DescribeProgressesRequest,
+) (*DescribeProgressesResult, error) {
+	callback := make(chan DescribeProgressesAsyncResult, 1)
+	go p.DescribeProgressesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2NewsWebSocketClient) getProgressAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetProgressAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetProgressAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetProgressResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetProgressAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- GetProgressAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2NewsWebSocketClient) GetProgressAsync(
+	request *GetProgressRequest,
+	callback chan<- GetProgressAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "news",
+    		"component": "progress",
+    		"function": "getProgress",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UploadToken != nil && *request.UploadToken != "" {
+        bodies["uploadToken"] = *request.UploadToken
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getProgressAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2NewsWebSocketClient) GetProgress(
+	request *GetProgressRequest,
+) (*GetProgressResult, error) {
+	callback := make(chan GetProgressAsyncResult, 1)
+	go p.GetProgressAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2NewsWebSocketClient) describeOutputsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeOutputsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeOutputsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeOutputsResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeOutputsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DescribeOutputsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2NewsWebSocketClient) DescribeOutputsAsync(
+	request *DescribeOutputsRequest,
+	callback chan<- DescribeOutputsAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "news",
+    		"component": "output",
+    		"function": "describeOutputs",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UploadToken != nil && *request.UploadToken != "" {
+        bodies["uploadToken"] = *request.UploadToken
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeOutputsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2NewsWebSocketClient) DescribeOutputs(
+	request *DescribeOutputsRequest,
+) (*DescribeOutputsResult, error) {
+	callback := make(chan DescribeOutputsAsyncResult, 1)
+	go p.DescribeOutputsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2NewsWebSocketClient) getOutputAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetOutputAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetOutputAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetOutputResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetOutputAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- GetOutputAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2NewsWebSocketClient) GetOutputAsync(
+	request *GetOutputRequest,
+	callback chan<- GetOutputAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "news",
+    		"component": "output",
+    		"function": "getOutput",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UploadToken != nil && *request.UploadToken != "" {
+        bodies["uploadToken"] = *request.UploadToken
+    }
+    if request.OutputName != nil && *request.OutputName != "" {
+        bodies["outputName"] = *request.OutputName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getOutputAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2NewsWebSocketClient) GetOutput(
+	request *GetOutputRequest,
+) (*GetOutputResult, error) {
+	callback := make(chan GetOutputAsyncResult, 1)
+	go p.GetOutputAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2NewsWebSocketClient) prepareUpdateCurrentNewsMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- PrepareUpdateCurrentNewsMasterAsyncResult,
