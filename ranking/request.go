@@ -309,6 +309,7 @@ type CreateCategoryModelMasterRequest struct {
     OrderDirection *string `json:"orderDirection"`
     Scope *string `json:"scope"`
     UniqueByUserId *bool `json:"uniqueByUserId"`
+    Sum *bool `json:"sum"`
     CalculateFixedTimingHour *int32 `json:"calculateFixedTimingHour"`
     CalculateFixedTimingMinute *int32 `json:"calculateFixedTimingMinute"`
     CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
@@ -334,6 +335,7 @@ func NewCreateCategoryModelMasterRequestFromDict(data map[string]interface{}) Cr
         OrderDirection: core.CastString(data["orderDirection"]),
         Scope: core.CastString(data["scope"]),
         UniqueByUserId: core.CastBool(data["uniqueByUserId"]),
+        Sum: core.CastBool(data["sum"]),
         CalculateFixedTimingHour: core.CastInt32(data["calculateFixedTimingHour"]),
         CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
         CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
@@ -354,6 +356,7 @@ func (p CreateCategoryModelMasterRequest) ToDict() map[string]interface{} {
         "orderDirection": p.OrderDirection,
         "scope": p.Scope,
         "uniqueByUserId": p.UniqueByUserId,
+        "sum": p.Sum,
         "calculateFixedTimingHour": p.CalculateFixedTimingHour,
         "calculateFixedTimingMinute": p.CalculateFixedTimingMinute,
         "calculateIntervalMinutes": p.CalculateIntervalMinutes,
@@ -410,6 +413,7 @@ type UpdateCategoryModelMasterRequest struct {
     OrderDirection *string `json:"orderDirection"`
     Scope *string `json:"scope"`
     UniqueByUserId *bool `json:"uniqueByUserId"`
+    Sum *bool `json:"sum"`
     CalculateFixedTimingHour *int32 `json:"calculateFixedTimingHour"`
     CalculateFixedTimingMinute *int32 `json:"calculateFixedTimingMinute"`
     CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
@@ -435,6 +439,7 @@ func NewUpdateCategoryModelMasterRequestFromDict(data map[string]interface{}) Up
         OrderDirection: core.CastString(data["orderDirection"]),
         Scope: core.CastString(data["scope"]),
         UniqueByUserId: core.CastBool(data["uniqueByUserId"]),
+        Sum: core.CastBool(data["sum"]),
         CalculateFixedTimingHour: core.CastInt32(data["calculateFixedTimingHour"]),
         CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
         CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
@@ -455,6 +460,7 @@ func (p UpdateCategoryModelMasterRequest) ToDict() map[string]interface{} {
         "orderDirection": p.OrderDirection,
         "scope": p.Scope,
         "uniqueByUserId": p.UniqueByUserId,
+        "sum": p.Sum,
         "calculateFixedTimingHour": p.CalculateFixedTimingHour,
         "calculateFixedTimingMinute": p.CalculateFixedTimingMinute,
         "calculateIntervalMinutes": p.CalculateIntervalMinutes,

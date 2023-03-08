@@ -121,6 +121,7 @@ type CategoryModel struct {
 	OrderDirection *string `json:"orderDirection"`
 	Scope *string `json:"scope"`
 	UniqueByUserId *bool `json:"uniqueByUserId"`
+	Sum *bool `json:"sum"`
 	CalculateFixedTimingHour *int32 `json:"calculateFixedTimingHour"`
 	CalculateFixedTimingMinute *int32 `json:"calculateFixedTimingMinute"`
 	CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
@@ -145,6 +146,7 @@ func NewCategoryModelFromDict(data map[string]interface{}) CategoryModel {
         OrderDirection: core.CastString(data["orderDirection"]),
         Scope: core.CastString(data["scope"]),
         UniqueByUserId: core.CastBool(data["uniqueByUserId"]),
+        Sum: core.CastBool(data["sum"]),
         CalculateFixedTimingHour: core.CastInt32(data["calculateFixedTimingHour"]),
         CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
         CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
@@ -188,6 +190,10 @@ func (p CategoryModel) ToDict() map[string]interface{} {
     if p.UniqueByUserId != nil {
         uniqueByUserId = p.UniqueByUserId
     }
+    var sum *bool
+    if p.Sum != nil {
+        sum = p.Sum
+    }
     var calculateFixedTimingHour *int32
     if p.CalculateFixedTimingHour != nil {
         calculateFixedTimingHour = p.CalculateFixedTimingHour
@@ -221,6 +227,7 @@ func (p CategoryModel) ToDict() map[string]interface{} {
         "orderDirection": orderDirection,
         "scope": scope,
         "uniqueByUserId": uniqueByUserId,
+        "sum": sum,
         "calculateFixedTimingHour": calculateFixedTimingHour,
         "calculateFixedTimingMinute": calculateFixedTimingMinute,
         "calculateIntervalMinutes": calculateIntervalMinutes,
@@ -260,6 +267,7 @@ type CategoryModelMaster struct {
 	OrderDirection *string `json:"orderDirection"`
 	Scope *string `json:"scope"`
 	UniqueByUserId *bool `json:"uniqueByUserId"`
+	Sum *bool `json:"sum"`
 	CalculateFixedTimingHour *int32 `json:"calculateFixedTimingHour"`
 	CalculateFixedTimingMinute *int32 `json:"calculateFixedTimingMinute"`
 	CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
@@ -287,6 +295,7 @@ func NewCategoryModelMasterFromDict(data map[string]interface{}) CategoryModelMa
         OrderDirection: core.CastString(data["orderDirection"]),
         Scope: core.CastString(data["scope"]),
         UniqueByUserId: core.CastBool(data["uniqueByUserId"]),
+        Sum: core.CastBool(data["sum"]),
         CalculateFixedTimingHour: core.CastInt32(data["calculateFixedTimingHour"]),
         CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
         CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
@@ -336,6 +345,10 @@ func (p CategoryModelMaster) ToDict() map[string]interface{} {
     if p.UniqueByUserId != nil {
         uniqueByUserId = p.UniqueByUserId
     }
+    var sum *bool
+    if p.Sum != nil {
+        sum = p.Sum
+    }
     var calculateFixedTimingHour *int32
     if p.CalculateFixedTimingHour != nil {
         calculateFixedTimingHour = p.CalculateFixedTimingHour
@@ -378,6 +391,7 @@ func (p CategoryModelMaster) ToDict() map[string]interface{} {
         "orderDirection": orderDirection,
         "scope": scope,
         "uniqueByUserId": uniqueByUserId,
+        "sum": sum,
         "calculateFixedTimingHour": calculateFixedTimingHour,
         "calculateFixedTimingMinute": calculateFixedTimingMinute,
         "calculateIntervalMinutes": calculateIntervalMinutes,

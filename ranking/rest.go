@@ -892,6 +892,9 @@ func (p Gs2RankingRestClient) CreateCategoryModelMasterAsync(
     if request.UniqueByUserId != nil {
         bodies["uniqueByUserId"] = *request.UniqueByUserId
     }
+    if request.Sum != nil {
+        bodies["sum"] = *request.Sum
+    }
     if request.CalculateFixedTimingHour != nil {
         bodies["calculateFixedTimingHour"] = *request.CalculateFixedTimingHour
     }
@@ -1111,6 +1114,9 @@ func (p Gs2RankingRestClient) UpdateCategoryModelMasterAsync(
     }
     if request.UniqueByUserId != nil {
         bodies["uniqueByUserId"] = *request.UniqueByUserId
+    }
+    if request.Sum != nil {
+        bodies["sum"] = *request.Sum
     }
     if request.CalculateFixedTimingHour != nil {
         bodies["calculateFixedTimingHour"] = *request.CalculateFixedTimingHour
