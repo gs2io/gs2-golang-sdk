@@ -881,6 +881,13 @@ func (p Gs2RankingWebSocketClient) CreateCategoryModelMasterAsync(
     if request.AccessPeriodEventId != nil && *request.AccessPeriodEventId != "" {
         bodies["accessPeriodEventId"] = *request.AccessPeriodEventId
     }
+    if request.IgnoreUserIds != nil {
+        var _ignoreUserIds []interface {}
+        for _, item := range request.IgnoreUserIds {
+            _ignoreUserIds = append(_ignoreUserIds, item)
+        }
+        bodies["ignoreUserIds"] = _ignoreUserIds
+    }
     if request.Generation != nil && *request.Generation != "" {
         bodies["generation"] = *request.Generation
     }
@@ -1090,6 +1097,13 @@ func (p Gs2RankingWebSocketClient) UpdateCategoryModelMasterAsync(
     }
     if request.AccessPeriodEventId != nil && *request.AccessPeriodEventId != "" {
         bodies["accessPeriodEventId"] = *request.AccessPeriodEventId
+    }
+    if request.IgnoreUserIds != nil {
+        var _ignoreUserIds []interface {}
+        for _, item := range request.IgnoreUserIds {
+            _ignoreUserIds = append(_ignoreUserIds, item)
+        }
+        bodies["ignoreUserIds"] = _ignoreUserIds
     }
     if request.Generation != nil && *request.Generation != "" {
         bodies["generation"] = *request.Generation

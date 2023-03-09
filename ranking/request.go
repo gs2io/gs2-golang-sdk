@@ -315,6 +315,7 @@ type CreateCategoryModelMasterRequest struct {
     CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
     EntryPeriodEventId *string `json:"entryPeriodEventId"`
     AccessPeriodEventId *string `json:"accessPeriodEventId"`
+    IgnoreUserIds []string `json:"ignoreUserIds"`
     Generation *string `json:"generation"`
 }
 
@@ -341,6 +342,7 @@ func NewCreateCategoryModelMasterRequestFromDict(data map[string]interface{}) Cr
         CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
         EntryPeriodEventId: core.CastString(data["entryPeriodEventId"]),
         AccessPeriodEventId: core.CastString(data["accessPeriodEventId"]),
+        IgnoreUserIds: core.CastStrings(core.CastArray(data["ignoreUserIds"])),
         Generation: core.CastString(data["generation"]),
     }
 }
@@ -362,6 +364,9 @@ func (p CreateCategoryModelMasterRequest) ToDict() map[string]interface{} {
         "calculateIntervalMinutes": p.CalculateIntervalMinutes,
         "entryPeriodEventId": p.EntryPeriodEventId,
         "accessPeriodEventId": p.AccessPeriodEventId,
+        "ignoreUserIds": core.CastStringsFromDict(
+            p.IgnoreUserIds,
+        ),
         "generation": p.Generation,
     }
 }
@@ -419,6 +424,7 @@ type UpdateCategoryModelMasterRequest struct {
     CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
     EntryPeriodEventId *string `json:"entryPeriodEventId"`
     AccessPeriodEventId *string `json:"accessPeriodEventId"`
+    IgnoreUserIds []string `json:"ignoreUserIds"`
     Generation *string `json:"generation"`
 }
 
@@ -445,6 +451,7 @@ func NewUpdateCategoryModelMasterRequestFromDict(data map[string]interface{}) Up
         CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
         EntryPeriodEventId: core.CastString(data["entryPeriodEventId"]),
         AccessPeriodEventId: core.CastString(data["accessPeriodEventId"]),
+        IgnoreUserIds: core.CastStrings(core.CastArray(data["ignoreUserIds"])),
         Generation: core.CastString(data["generation"]),
     }
 }
@@ -466,6 +473,9 @@ func (p UpdateCategoryModelMasterRequest) ToDict() map[string]interface{} {
         "calculateIntervalMinutes": p.CalculateIntervalMinutes,
         "entryPeriodEventId": p.EntryPeriodEventId,
         "accessPeriodEventId": p.AccessPeriodEventId,
+        "ignoreUserIds": core.CastStringsFromDict(
+            p.IgnoreUserIds,
+        ),
         "generation": p.Generation,
     }
 }

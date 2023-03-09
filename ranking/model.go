@@ -127,6 +127,7 @@ type CategoryModel struct {
 	CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
 	EntryPeriodEventId *string `json:"entryPeriodEventId"`
 	AccessPeriodEventId *string `json:"accessPeriodEventId"`
+	IgnoreUserIds []string `json:"ignoreUserIds"`
 	Generation *string `json:"generation"`
 }
 
@@ -152,6 +153,7 @@ func NewCategoryModelFromDict(data map[string]interface{}) CategoryModel {
         CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
         EntryPeriodEventId: core.CastString(data["entryPeriodEventId"]),
         AccessPeriodEventId: core.CastString(data["accessPeriodEventId"]),
+        IgnoreUserIds: core.CastStrings(core.CastArray(data["ignoreUserIds"])),
         Generation: core.CastString(data["generation"]),
     }
 }
@@ -214,6 +216,12 @@ func (p CategoryModel) ToDict() map[string]interface{} {
     if p.AccessPeriodEventId != nil {
         accessPeriodEventId = p.AccessPeriodEventId
     }
+    var ignoreUserIds []interface{}
+    if p.IgnoreUserIds != nil {
+        ignoreUserIds = core.CastStringsFromDict(
+            p.IgnoreUserIds,
+        )
+    }
     var generation *string
     if p.Generation != nil {
         generation = p.Generation
@@ -233,6 +241,7 @@ func (p CategoryModel) ToDict() map[string]interface{} {
         "calculateIntervalMinutes": calculateIntervalMinutes,
         "entryPeriodEventId": entryPeriodEventId,
         "accessPeriodEventId": accessPeriodEventId,
+        "ignoreUserIds": ignoreUserIds,
         "generation": generation,
     }
 }
@@ -273,6 +282,7 @@ type CategoryModelMaster struct {
 	CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
 	EntryPeriodEventId *string `json:"entryPeriodEventId"`
 	AccessPeriodEventId *string `json:"accessPeriodEventId"`
+	IgnoreUserIds []string `json:"ignoreUserIds"`
 	Generation *string `json:"generation"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
@@ -301,6 +311,7 @@ func NewCategoryModelMasterFromDict(data map[string]interface{}) CategoryModelMa
         CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
         EntryPeriodEventId: core.CastString(data["entryPeriodEventId"]),
         AccessPeriodEventId: core.CastString(data["accessPeriodEventId"]),
+        IgnoreUserIds: core.CastStrings(core.CastArray(data["ignoreUserIds"])),
         Generation: core.CastString(data["generation"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
@@ -369,6 +380,12 @@ func (p CategoryModelMaster) ToDict() map[string]interface{} {
     if p.AccessPeriodEventId != nil {
         accessPeriodEventId = p.AccessPeriodEventId
     }
+    var ignoreUserIds []interface{}
+    if p.IgnoreUserIds != nil {
+        ignoreUserIds = core.CastStringsFromDict(
+            p.IgnoreUserIds,
+        )
+    }
     var generation *string
     if p.Generation != nil {
         generation = p.Generation
@@ -397,6 +414,7 @@ func (p CategoryModelMaster) ToDict() map[string]interface{} {
         "calculateIntervalMinutes": calculateIntervalMinutes,
         "entryPeriodEventId": entryPeriodEventId,
         "accessPeriodEventId": accessPeriodEventId,
+        "ignoreUserIds": ignoreUserIds,
         "generation": generation,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
