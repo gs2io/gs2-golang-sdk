@@ -2637,9 +2637,6 @@ func (p Gs2QuestRestClient) EndAsync(
 
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
-    if request.TransactionId != nil && *request.TransactionId != "" {
-        bodies["transactionId"] = *request.TransactionId
-    }
     if request.Rewards != nil {
         var _rewards []interface {}
         for _, item := range request.Rewards {
@@ -2755,9 +2752,6 @@ func (p Gs2QuestRestClient) EndByUserIdAsync(
 
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
-    if request.TransactionId != nil && *request.TransactionId != "" {
-        bodies["transactionId"] = *request.TransactionId
-    }
     if request.Rewards != nil {
         var _rewards []interface {}
         for _, item := range request.Rewards {

@@ -1019,7 +1019,6 @@ type EndRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     AccessToken *string `json:"accessToken"`
-    TransactionId *string `json:"transactionId"`
     Rewards []Reward `json:"rewards"`
     IsComplete *bool `json:"isComplete"`
     Config []Config `json:"config"`
@@ -1035,7 +1034,6 @@ func NewEndRequestFromDict(data map[string]interface{}) EndRequest {
     return EndRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         AccessToken: core.CastString(data["accessToken"]),
-        TransactionId: core.CastString(data["transactionId"]),
         Rewards: CastRewards(core.CastArray(data["rewards"])),
         IsComplete: core.CastBool(data["isComplete"]),
         Config: CastConfigs(core.CastArray(data["config"])),
@@ -1046,7 +1044,6 @@ func (p EndRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "accessToken": p.AccessToken,
-        "transactionId": p.TransactionId,
         "rewards": CastRewardsFromDict(
             p.Rewards,
         ),
@@ -1067,7 +1064,6 @@ type EndByUserIdRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
-    TransactionId *string `json:"transactionId"`
     Rewards []Reward `json:"rewards"`
     IsComplete *bool `json:"isComplete"`
     Config []Config `json:"config"`
@@ -1083,7 +1079,6 @@ func NewEndByUserIdRequestFromDict(data map[string]interface{}) EndByUserIdReque
     return EndByUserIdRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         UserId: core.CastString(data["userId"]),
-        TransactionId: core.CastString(data["transactionId"]),
         Rewards: CastRewards(core.CastArray(data["rewards"])),
         IsComplete: core.CastBool(data["isComplete"]),
         Config: CastConfigs(core.CastArray(data["config"])),
@@ -1094,7 +1089,6 @@ func (p EndByUserIdRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "userId": p.UserId,
-        "transactionId": p.TransactionId,
         "rewards": CastRewardsFromDict(
             p.Rewards,
         ),

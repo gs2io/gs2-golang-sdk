@@ -388,7 +388,7 @@ type Progress struct {
 	RateName *string `json:"rateName"`
 	Name *string `json:"name"`
 	PropertyId *string `json:"propertyId"`
-	ExperienceValue *int32 `json:"experienceValue"`
+	ExperienceValue *int64 `json:"experienceValue"`
 	Rate *float32 `json:"rate"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
@@ -407,7 +407,7 @@ func NewProgressFromDict(data map[string]interface{}) Progress {
         RateName: core.CastString(data["rateName"]),
         Name: core.CastString(data["name"]),
         PropertyId: core.CastString(data["propertyId"]),
-        ExperienceValue: core.CastInt32(data["experienceValue"]),
+        ExperienceValue: core.CastInt64(data["experienceValue"]),
         Rate: core.CastFloat32(data["rate"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
@@ -436,7 +436,7 @@ func (p Progress) ToDict() map[string]interface{} {
     if p.PropertyId != nil {
         propertyId = p.PropertyId
     }
-    var experienceValue *int32
+    var experienceValue *int64
     if p.ExperienceValue != nil {
         experienceValue = p.ExperienceValue
     }

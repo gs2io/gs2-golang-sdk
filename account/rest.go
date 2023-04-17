@@ -452,9 +452,6 @@ func (p Gs2AccountRestClient) UpdateNamespaceAsync(
     if request.ChangePasswordIfTakeOver != nil {
         bodies["changePasswordIfTakeOver"] = *request.ChangePasswordIfTakeOver
     }
-    if request.DifferentUserIdForLoginAndDataRetention != nil {
-        bodies["differentUserIdForLoginAndDataRetention"] = *request.DifferentUserIdForLoginAndDataRetention
-    }
     if request.CreateAccountScript != nil {
         bodies["createAccountScript"] = request.CreateAccountScript.ToDict()
     }
@@ -1113,6 +1110,9 @@ func (p Gs2AccountRestClient) DeleteAccountAsync(
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go deleteAccountAsyncHandler(
 		p,
@@ -1219,6 +1219,9 @@ func (p Gs2AccountRestClient) AuthenticationAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go authenticationAsyncHandler(
@@ -2498,6 +2501,9 @@ func (p Gs2AccountRestClient) DeleteDataOwnerByUserIdAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
     }
 
 	go deleteDataOwnerByUserIdAsyncHandler(

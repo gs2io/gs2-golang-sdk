@@ -2505,9 +2505,6 @@ func (p Gs2QuestWebSocketClient) EndAsync(
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
     }
-    if request.TransactionId != nil && *request.TransactionId != "" {
-        bodies["transactionId"] = *request.TransactionId
-    }
     if request.Rewards != nil {
         var _rewards []interface {}
         for _, item := range request.Rewards {
@@ -2614,9 +2611,6 @@ func (p Gs2QuestWebSocketClient) EndByUserIdAsync(
     }
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
-    }
-    if request.TransactionId != nil && *request.TransactionId != "" {
-        bodies["transactionId"] = *request.TransactionId
     }
     if request.Rewards != nil {
         var _rewards []interface {}

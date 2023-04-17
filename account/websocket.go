@@ -443,9 +443,6 @@ func (p Gs2AccountWebSocketClient) UpdateNamespaceAsync(
     if request.ChangePasswordIfTakeOver != nil {
         bodies["changePasswordIfTakeOver"] = *request.ChangePasswordIfTakeOver
     }
-    if request.DifferentUserIdForLoginAndDataRetention != nil {
-        bodies["differentUserIdForLoginAndDataRetention"] = *request.DifferentUserIdForLoginAndDataRetention
-    }
     if request.CreateAccountScript != nil {
         bodies["createAccountScript"] = request.CreateAccountScript.ToDict()
     }
@@ -1061,6 +1058,9 @@ func (p Gs2AccountWebSocketClient) DeleteAccountAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteAccountAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1160,6 +1160,9 @@ func (p Gs2AccountWebSocketClient) AuthenticationAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.authenticationAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2372,6 +2375,9 @@ func (p Gs2AccountWebSocketClient) DeleteDataOwnerByUserIdAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteDataOwnerByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{

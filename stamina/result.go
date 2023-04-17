@@ -1285,7 +1285,7 @@ func (p ConsumeStaminaByUserIdResult) Pointer() *ConsumeStaminaByUserIdResult {
 type RecoverStaminaByUserIdResult struct {
     Item *Stamina `json:"item"`
     StaminaModel *StaminaModel `json:"staminaModel"`
-    OverflowValue *int64 `json:"overflowValue"`
+    OverflowValue *int32 `json:"overflowValue"`
 }
 
 type RecoverStaminaByUserIdAsyncResult struct {
@@ -1303,7 +1303,7 @@ func NewRecoverStaminaByUserIdResultFromDict(data map[string]interface{}) Recove
     return RecoverStaminaByUserIdResult {
         Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
         StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-        OverflowValue: core.CastInt64(data["overflowValue"]),
+        OverflowValue: core.CastInt32(data["overflowValue"]),
     }
 }
 
@@ -1591,7 +1591,7 @@ func (p DeleteStaminaByUserIdResult) Pointer() *DeleteStaminaByUserIdResult {
 type RecoverStaminaByStampSheetResult struct {
     Item *Stamina `json:"item"`
     StaminaModel *StaminaModel `json:"staminaModel"`
-    OverflowValue *int64 `json:"overflowValue"`
+    OverflowValue *int32 `json:"overflowValue"`
 }
 
 type RecoverStaminaByStampSheetAsyncResult struct {
@@ -1609,7 +1609,7 @@ func NewRecoverStaminaByStampSheetResultFromDict(data map[string]interface{}) Re
     return RecoverStaminaByStampSheetResult {
         Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
         StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-        OverflowValue: core.CastInt64(data["overflowValue"]),
+        OverflowValue: core.CastInt32(data["overflowValue"]),
     }
 }
 

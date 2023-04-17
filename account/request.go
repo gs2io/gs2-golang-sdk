@@ -166,7 +166,6 @@ type UpdateNamespaceRequest struct {
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
     ChangePasswordIfTakeOver *bool `json:"changePasswordIfTakeOver"`
-    DifferentUserIdForLoginAndDataRetention *bool `json:"differentUserIdForLoginAndDataRetention"`
     CreateAccountScript *ScriptSetting `json:"createAccountScript"`
     AuthenticationScript *ScriptSetting `json:"authenticationScript"`
     CreateTakeOverScript *ScriptSetting `json:"createTakeOverScript"`
@@ -185,7 +184,6 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
         NamespaceName: core.CastString(data["namespaceName"]),
         Description: core.CastString(data["description"]),
         ChangePasswordIfTakeOver: core.CastBool(data["changePasswordIfTakeOver"]),
-        DifferentUserIdForLoginAndDataRetention: core.CastBool(data["differentUserIdForLoginAndDataRetention"]),
         CreateAccountScript: NewScriptSettingFromDict(core.CastMap(data["createAccountScript"])).Pointer(),
         AuthenticationScript: NewScriptSettingFromDict(core.CastMap(data["authenticationScript"])).Pointer(),
         CreateTakeOverScript: NewScriptSettingFromDict(core.CastMap(data["createTakeOverScript"])).Pointer(),
@@ -199,7 +197,6 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "description": p.Description,
         "changePasswordIfTakeOver": p.ChangePasswordIfTakeOver,
-        "differentUserIdForLoginAndDataRetention": p.DifferentUserIdForLoginAndDataRetention,
         "createAccountScript": p.CreateAccountScript.ToDict(),
         "authenticationScript": p.AuthenticationScript.ToDict(),
         "createTakeOverScript": p.CreateTakeOverScript.ToDict(),
@@ -406,6 +403,7 @@ func (p GetAccountRequest) Pointer() *GetAccountRequest {
 type DeleteAccountRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
 }
@@ -437,6 +435,7 @@ func (p DeleteAccountRequest) Pointer() *DeleteAccountRequest {
 type AuthenticationRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
     KeyId *string `json:"keyId"`
@@ -921,6 +920,7 @@ func (p GetDataOwnerByUserIdRequest) Pointer() *GetDataOwnerByUserIdRequest {
 type DeleteDataOwnerByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
 }
