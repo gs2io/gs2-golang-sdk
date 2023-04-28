@@ -301,6 +301,7 @@ type RatingModelMaster struct {
 	Name *string `json:"name"`
 	Metadata *string `json:"metadata"`
 	Description *string `json:"description"`
+	InitialValue *int32 `json:"initialValue"`
 	Volatility *int32 `json:"volatility"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
@@ -318,6 +319,7 @@ func NewRatingModelMasterFromDict(data map[string]interface{}) RatingModelMaster
         Name: core.CastString(data["name"]),
         Metadata: core.CastString(data["metadata"]),
         Description: core.CastString(data["description"]),
+        InitialValue: core.CastInt32(data["initialValue"]),
         Volatility: core.CastInt32(data["volatility"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
@@ -342,6 +344,10 @@ func (p RatingModelMaster) ToDict() map[string]interface{} {
     if p.Description != nil {
         description = p.Description
     }
+    var initialValue *int32
+    if p.InitialValue != nil {
+        initialValue = p.InitialValue
+    }
     var volatility *int32
     if p.Volatility != nil {
         volatility = p.Volatility
@@ -359,6 +365,7 @@ func (p RatingModelMaster) ToDict() map[string]interface{} {
         "name": name,
         "metadata": metadata,
         "description": description,
+        "initialValue": initialValue,
         "volatility": volatility,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
@@ -389,6 +396,7 @@ type RatingModel struct {
 	RatingModelId *string `json:"ratingModelId"`
 	Name *string `json:"name"`
 	Metadata *string `json:"metadata"`
+	InitialValue *int32 `json:"initialValue"`
 	Volatility *int32 `json:"volatility"`
 }
 
@@ -403,6 +411,7 @@ func NewRatingModelFromDict(data map[string]interface{}) RatingModel {
         RatingModelId: core.CastString(data["ratingModelId"]),
         Name: core.CastString(data["name"]),
         Metadata: core.CastString(data["metadata"]),
+        InitialValue: core.CastInt32(data["initialValue"]),
         Volatility: core.CastInt32(data["volatility"]),
     }
 }
@@ -421,6 +430,10 @@ func (p RatingModel) ToDict() map[string]interface{} {
     if p.Metadata != nil {
         metadata = p.Metadata
     }
+    var initialValue *int32
+    if p.InitialValue != nil {
+        initialValue = p.InitialValue
+    }
     var volatility *int32
     if p.Volatility != nil {
         volatility = p.Volatility
@@ -429,6 +442,7 @@ func (p RatingModel) ToDict() map[string]interface{} {
         "ratingModelId": ratingModelId,
         "name": name,
         "metadata": metadata,
+        "initialValue": initialValue,
         "volatility": volatility,
     }
 }

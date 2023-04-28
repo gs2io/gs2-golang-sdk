@@ -785,6 +785,7 @@ type CreateRatingModelMasterRequest struct {
     Name *string `json:"name"`
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
+    InitialValue *int32 `json:"initialValue"`
     Volatility *int32 `json:"volatility"`
 }
 
@@ -800,6 +801,7 @@ func NewCreateRatingModelMasterRequestFromDict(data map[string]interface{}) Crea
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
         Metadata: core.CastString(data["metadata"]),
+        InitialValue: core.CastInt32(data["initialValue"]),
         Volatility: core.CastInt32(data["volatility"]),
     }
 }
@@ -810,6 +812,7 @@ func (p CreateRatingModelMasterRequest) ToDict() map[string]interface{} {
         "name": p.Name,
         "description": p.Description,
         "metadata": p.Metadata,
+        "initialValue": p.InitialValue,
         "volatility": p.Volatility,
     }
 }
@@ -856,6 +859,7 @@ type UpdateRatingModelMasterRequest struct {
     RatingName *string `json:"ratingName"`
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
+    InitialValue *int32 `json:"initialValue"`
     Volatility *int32 `json:"volatility"`
 }
 
@@ -871,6 +875,7 @@ func NewUpdateRatingModelMasterRequestFromDict(data map[string]interface{}) Upda
         RatingName: core.CastString(data["ratingName"]),
         Description: core.CastString(data["description"]),
         Metadata: core.CastString(data["metadata"]),
+        InitialValue: core.CastInt32(data["initialValue"]),
         Volatility: core.CastInt32(data["volatility"]),
     }
 }
@@ -881,6 +886,7 @@ func (p UpdateRatingModelMasterRequest) ToDict() map[string]interface{} {
         "ratingName": p.RatingName,
         "description": p.Description,
         "metadata": p.Metadata,
+        "initialValue": p.InitialValue,
         "volatility": p.Volatility,
     }
 }

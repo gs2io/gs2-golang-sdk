@@ -1903,6 +1903,9 @@ func (p Gs2MatchmakingWebSocketClient) CreateRatingModelMasterAsync(
     if request.Metadata != nil && *request.Metadata != "" {
         bodies["metadata"] = *request.Metadata
     }
+    if request.InitialValue != nil {
+        bodies["initialValue"] = *request.InitialValue
+    }
     if request.Volatility != nil {
         bodies["volatility"] = *request.Volatility
     }
@@ -2079,6 +2082,9 @@ func (p Gs2MatchmakingWebSocketClient) UpdateRatingModelMasterAsync(
     }
     if request.Metadata != nil && *request.Metadata != "" {
         bodies["metadata"] = *request.Metadata
+    }
+    if request.InitialValue != nil {
+        bodies["initialValue"] = *request.InitialValue
     }
     if request.Volatility != nil {
         bodies["volatility"] = *request.Volatility
