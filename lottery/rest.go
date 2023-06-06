@@ -2005,6 +2005,331 @@ func (p Gs2LotteryRestClient) DrawByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func predictionAsyncHandler(
+	client Gs2LotteryRestClient,
+	job *core.NetworkJob,
+	callback chan<- PredictionAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PredictionAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PredictionResult
+	if asyncResult.Err != nil {
+		callback <- PredictionAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PredictionAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- PredictionAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryRestClient) PredictionAsync(
+	request *PredictionRequest,
+	callback chan<- PredictionAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/lottery/{lotteryName}/prediction"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LotteryName != nil && *request.LotteryName != ""  {
+        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+    } else {
+        path = strings.ReplaceAll(path, "{lotteryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.RandomSeed != nil {
+        bodies["randomSeed"] = *request.RandomSeed
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go predictionAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryRestClient) Prediction(
+	request *PredictionRequest,
+) (*PredictionResult, error) {
+	callback := make(chan PredictionAsyncResult, 1)
+	go p.PredictionAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func predictionByUserIdAsyncHandler(
+	client Gs2LotteryRestClient,
+	job *core.NetworkJob,
+	callback chan<- PredictionByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PredictionByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PredictionByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- PredictionByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PredictionByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- PredictionByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryRestClient) PredictionByUserIdAsync(
+	request *PredictionByUserIdRequest,
+	callback chan<- PredictionByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/lottery/{lotteryName}/prediction"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LotteryName != nil && *request.LotteryName != ""  {
+        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+    } else {
+        path = strings.ReplaceAll(path, "{lotteryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.RandomSeed != nil {
+        bodies["randomSeed"] = *request.RandomSeed
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go predictionByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryRestClient) PredictionByUserId(
+	request *PredictionByUserIdRequest,
+) (*PredictionByUserIdResult, error) {
+	callback := make(chan PredictionByUserIdAsyncResult, 1)
+	go p.PredictionByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func drawWithRandomSeedByUserIdAsyncHandler(
+	client Gs2LotteryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DrawWithRandomSeedByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DrawWithRandomSeedByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DrawWithRandomSeedByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DrawWithRandomSeedByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DrawWithRandomSeedByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DrawWithRandomSeedByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryRestClient) DrawWithRandomSeedByUserIdAsync(
+	request *DrawWithRandomSeedByUserIdRequest,
+	callback chan<- DrawWithRandomSeedByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/lottery/{lotteryName}/draw/withSeed"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LotteryName != nil && *request.LotteryName != ""  {
+        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+    } else {
+        path = strings.ReplaceAll(path, "{lotteryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.RandomSeed != nil {
+        bodies["randomSeed"] = *request.RandomSeed
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go drawWithRandomSeedByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryRestClient) DrawWithRandomSeedByUserId(
+	request *DrawWithRandomSeedByUserIdRequest,
+) (*DrawWithRandomSeedByUserIdResult, error) {
+	callback := make(chan DrawWithRandomSeedByUserIdAsyncResult, 1)
+	go p.DrawWithRandomSeedByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func drawByStampSheetAsyncHandler(
 	client Gs2LotteryRestClient,
 	job *core.NetworkJob,

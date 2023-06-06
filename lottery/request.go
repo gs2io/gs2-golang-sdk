@@ -773,6 +773,134 @@ func (p DrawByUserIdRequest) Pointer() *DrawByUserIdRequest {
     return &p
 }
 
+type PredictionRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    LotteryName *string `json:"lotteryName"`
+    UserId *string `json:"userId"`
+    RandomSeed *int64 `json:"randomSeed"`
+    Count *int32 `json:"count"`
+}
+
+func NewPredictionRequestFromJson(data string) PredictionRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPredictionRequestFromDict(dict)
+}
+
+func NewPredictionRequestFromDict(data map[string]interface{}) PredictionRequest {
+    return PredictionRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        LotteryName: core.CastString(data["lotteryName"]),
+        UserId: core.CastString(data["userId"]),
+        RandomSeed: core.CastInt64(data["randomSeed"]),
+        Count: core.CastInt32(data["count"]),
+    }
+}
+
+func (p PredictionRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "lotteryName": p.LotteryName,
+        "userId": p.UserId,
+        "randomSeed": p.RandomSeed,
+        "count": p.Count,
+    }
+}
+
+func (p PredictionRequest) Pointer() *PredictionRequest {
+    return &p
+}
+
+type PredictionByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    LotteryName *string `json:"lotteryName"`
+    UserId *string `json:"userId"`
+    RandomSeed *int64 `json:"randomSeed"`
+    Count *int32 `json:"count"`
+}
+
+func NewPredictionByUserIdRequestFromJson(data string) PredictionByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPredictionByUserIdRequestFromDict(dict)
+}
+
+func NewPredictionByUserIdRequestFromDict(data map[string]interface{}) PredictionByUserIdRequest {
+    return PredictionByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        LotteryName: core.CastString(data["lotteryName"]),
+        UserId: core.CastString(data["userId"]),
+        RandomSeed: core.CastInt64(data["randomSeed"]),
+        Count: core.CastInt32(data["count"]),
+    }
+}
+
+func (p PredictionByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "lotteryName": p.LotteryName,
+        "userId": p.UserId,
+        "randomSeed": p.RandomSeed,
+        "count": p.Count,
+    }
+}
+
+func (p PredictionByUserIdRequest) Pointer() *PredictionByUserIdRequest {
+    return &p
+}
+
+type DrawWithRandomSeedByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    LotteryName *string `json:"lotteryName"`
+    UserId *string `json:"userId"`
+    RandomSeed *int64 `json:"randomSeed"`
+    Count *int32 `json:"count"`
+    Config []Config `json:"config"`
+}
+
+func NewDrawWithRandomSeedByUserIdRequestFromJson(data string) DrawWithRandomSeedByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDrawWithRandomSeedByUserIdRequestFromDict(dict)
+}
+
+func NewDrawWithRandomSeedByUserIdRequestFromDict(data map[string]interface{}) DrawWithRandomSeedByUserIdRequest {
+    return DrawWithRandomSeedByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        LotteryName: core.CastString(data["lotteryName"]),
+        UserId: core.CastString(data["userId"]),
+        RandomSeed: core.CastInt64(data["randomSeed"]),
+        Count: core.CastInt32(data["count"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
+}
+
+func (p DrawWithRandomSeedByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "lotteryName": p.LotteryName,
+        "userId": p.UserId,
+        "randomSeed": p.RandomSeed,
+        "count": p.Count,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
+}
+
+func (p DrawWithRandomSeedByUserIdRequest) Pointer() *DrawWithRandomSeedByUserIdRequest {
+    return &p
+}
+
 type DrawByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`

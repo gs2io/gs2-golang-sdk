@@ -705,6 +705,117 @@ func (p DrawByUserIdResult) Pointer() *DrawByUserIdResult {
     return &p
 }
 
+type PredictionResult struct {
+    Items []DrawnPrize `json:"items"`
+}
+
+type PredictionAsyncResult struct {
+	result *PredictionResult
+	err    error
+}
+
+func NewPredictionResultFromJson(data string) PredictionResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPredictionResultFromDict(dict)
+}
+
+func NewPredictionResultFromDict(data map[string]interface{}) PredictionResult {
+    return PredictionResult {
+        Items: CastDrawnPrizes(core.CastArray(data["items"])),
+    }
+}
+
+func (p PredictionResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastDrawnPrizesFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p PredictionResult) Pointer() *PredictionResult {
+    return &p
+}
+
+type PredictionByUserIdResult struct {
+    Items []DrawnPrize `json:"items"`
+}
+
+type PredictionByUserIdAsyncResult struct {
+	result *PredictionByUserIdResult
+	err    error
+}
+
+func NewPredictionByUserIdResultFromJson(data string) PredictionByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPredictionByUserIdResultFromDict(dict)
+}
+
+func NewPredictionByUserIdResultFromDict(data map[string]interface{}) PredictionByUserIdResult {
+    return PredictionByUserIdResult {
+        Items: CastDrawnPrizes(core.CastArray(data["items"])),
+    }
+}
+
+func (p PredictionByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastDrawnPrizesFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p PredictionByUserIdResult) Pointer() *PredictionByUserIdResult {
+    return &p
+}
+
+type DrawWithRandomSeedByUserIdResult struct {
+    Items []DrawnPrize `json:"items"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
+}
+
+type DrawWithRandomSeedByUserIdAsyncResult struct {
+	result *DrawWithRandomSeedByUserIdResult
+	err    error
+}
+
+func NewDrawWithRandomSeedByUserIdResultFromJson(data string) DrawWithRandomSeedByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDrawWithRandomSeedByUserIdResultFromDict(dict)
+}
+
+func NewDrawWithRandomSeedByUserIdResultFromDict(data map[string]interface{}) DrawWithRandomSeedByUserIdResult {
+    return DrawWithRandomSeedByUserIdResult {
+        Items: CastDrawnPrizes(core.CastArray(data["items"])),
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+    }
+}
+
+func (p DrawWithRandomSeedByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastDrawnPrizesFromDict(
+            p.Items,
+        ),
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+    }
+}
+
+func (p DrawWithRandomSeedByUserIdResult) Pointer() *DrawWithRandomSeedByUserIdResult {
+    return &p
+}
+
 type DrawByStampSheetResult struct {
     Items []DrawnPrize `json:"items"`
     TransactionId *string `json:"transactionId"`

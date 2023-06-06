@@ -1905,6 +1905,301 @@ func (p Gs2LotteryWebSocketClient) DrawByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2LotteryWebSocketClient) predictionAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PredictionAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PredictionAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PredictionResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PredictionAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- PredictionAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryWebSocketClient) PredictionAsync(
+	request *PredictionRequest,
+	callback chan<- PredictionAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lottery",
+    		"component": "lottery",
+    		"function": "prediction",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.LotteryName != nil && *request.LotteryName != "" {
+        bodies["lotteryName"] = *request.LotteryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.RandomSeed != nil {
+        bodies["randomSeed"] = *request.RandomSeed
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.predictionAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryWebSocketClient) Prediction(
+	request *PredictionRequest,
+) (*PredictionResult, error) {
+	callback := make(chan PredictionAsyncResult, 1)
+	go p.PredictionAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LotteryWebSocketClient) predictionByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PredictionByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PredictionByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PredictionByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PredictionByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- PredictionByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryWebSocketClient) PredictionByUserIdAsync(
+	request *PredictionByUserIdRequest,
+	callback chan<- PredictionByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lottery",
+    		"component": "lottery",
+    		"function": "predictionByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.LotteryName != nil && *request.LotteryName != "" {
+        bodies["lotteryName"] = *request.LotteryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.RandomSeed != nil {
+        bodies["randomSeed"] = *request.RandomSeed
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.predictionByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryWebSocketClient) PredictionByUserId(
+	request *PredictionByUserIdRequest,
+) (*PredictionByUserIdResult, error) {
+	callback := make(chan PredictionByUserIdAsyncResult, 1)
+	go p.PredictionByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LotteryWebSocketClient) drawWithRandomSeedByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DrawWithRandomSeedByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DrawWithRandomSeedByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DrawWithRandomSeedByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DrawWithRandomSeedByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DrawWithRandomSeedByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryWebSocketClient) DrawWithRandomSeedByUserIdAsync(
+	request *DrawWithRandomSeedByUserIdRequest,
+	callback chan<- DrawWithRandomSeedByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "lottery",
+    		"component": "lottery",
+    		"function": "drawWithRandomSeedByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.LotteryName != nil && *request.LotteryName != "" {
+        bodies["lotteryName"] = *request.LotteryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.RandomSeed != nil {
+        bodies["randomSeed"] = *request.RandomSeed
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.drawWithRandomSeedByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryWebSocketClient) DrawWithRandomSeedByUserId(
+	request *DrawWithRandomSeedByUserIdRequest,
+) (*DrawWithRandomSeedByUserIdResult, error) {
+	callback := make(chan DrawWithRandomSeedByUserIdAsyncResult, 1)
+	go p.DrawWithRandomSeedByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2LotteryWebSocketClient) drawByStampSheetAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DrawByStampSheetAsyncResult,
