@@ -700,6 +700,7 @@ func (p DescribeRawEventsResult) Pointer() *DescribeRawEventsResult {
 
 type GetEventResult struct {
     Item *Event `json:"item"`
+    RepeatCount *int32 `json:"repeatCount"`
 }
 
 type GetEventAsyncResult struct {
@@ -716,12 +717,14 @@ func NewGetEventResultFromJson(data string) GetEventResult {
 func NewGetEventResultFromDict(data map[string]interface{}) GetEventResult {
     return GetEventResult {
         Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
+        RepeatCount: core.CastInt32(data["repeatCount"]),
     }
 }
 
 func (p GetEventResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
+        "repeatCount": p.RepeatCount,
     }
 }
 
@@ -731,6 +734,7 @@ func (p GetEventResult) Pointer() *GetEventResult {
 
 type GetEventByUserIdResult struct {
     Item *Event `json:"item"`
+    RepeatCount *int32 `json:"repeatCount"`
 }
 
 type GetEventByUserIdAsyncResult struct {
@@ -747,12 +751,14 @@ func NewGetEventByUserIdResultFromJson(data string) GetEventByUserIdResult {
 func NewGetEventByUserIdResultFromDict(data map[string]interface{}) GetEventByUserIdResult {
     return GetEventByUserIdResult {
         Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
+        RepeatCount: core.CastInt32(data["repeatCount"]),
     }
 }
 
 func (p GetEventByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
+        "repeatCount": p.RepeatCount,
     }
 }
 
