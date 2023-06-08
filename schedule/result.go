@@ -701,6 +701,8 @@ func (p DescribeRawEventsResult) Pointer() *DescribeRawEventsResult {
 type GetEventResult struct {
     Item *Event `json:"item"`
     RepeatCount *int32 `json:"repeatCount"`
+    InSchedule *bool `json:"inSchedule"`
+    RepeatSchedule *RepeatSchedule `json:"repeatSchedule"`
 }
 
 type GetEventAsyncResult struct {
@@ -718,6 +720,8 @@ func NewGetEventResultFromDict(data map[string]interface{}) GetEventResult {
     return GetEventResult {
         Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
         RepeatCount: core.CastInt32(data["repeatCount"]),
+        InSchedule: core.CastBool(data["inSchedule"]),
+        RepeatSchedule: NewRepeatScheduleFromDict(core.CastMap(data["repeatSchedule"])).Pointer(),
     }
 }
 
@@ -725,6 +729,8 @@ func (p GetEventResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
         "repeatCount": p.RepeatCount,
+        "inSchedule": p.InSchedule,
+        "repeatSchedule": p.RepeatSchedule.ToDict(),
     }
 }
 
@@ -735,6 +741,8 @@ func (p GetEventResult) Pointer() *GetEventResult {
 type GetEventByUserIdResult struct {
     Item *Event `json:"item"`
     RepeatCount *int32 `json:"repeatCount"`
+    InSchedule *bool `json:"inSchedule"`
+    RepeatSchedule *RepeatSchedule `json:"repeatSchedule"`
 }
 
 type GetEventByUserIdAsyncResult struct {
@@ -752,6 +760,8 @@ func NewGetEventByUserIdResultFromDict(data map[string]interface{}) GetEventByUs
     return GetEventByUserIdResult {
         Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
         RepeatCount: core.CastInt32(data["repeatCount"]),
+        InSchedule: core.CastBool(data["inSchedule"]),
+        RepeatSchedule: NewRepeatScheduleFromDict(core.CastMap(data["repeatSchedule"])).Pointer(),
     }
 }
 
@@ -759,6 +769,8 @@ func (p GetEventByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
         "repeatCount": p.RepeatCount,
+        "inSchedule": p.InSchedule,
+        "repeatSchedule": p.RepeatSchedule.ToDict(),
     }
 }
 

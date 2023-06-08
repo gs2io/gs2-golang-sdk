@@ -779,7 +779,7 @@ type PredictionRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     LotteryName *string `json:"lotteryName"`
-    UserId *string `json:"userId"`
+    AccessToken *string `json:"accessToken"`
     RandomSeed *int64 `json:"randomSeed"`
     Count *int32 `json:"count"`
 }
@@ -794,7 +794,7 @@ func NewPredictionRequestFromDict(data map[string]interface{}) PredictionRequest
     return PredictionRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         LotteryName: core.CastString(data["lotteryName"]),
-        UserId: core.CastString(data["userId"]),
+        AccessToken: core.CastString(data["accessToken"]),
         RandomSeed: core.CastInt64(data["randomSeed"]),
         Count: core.CastInt32(data["count"]),
     }
@@ -804,7 +804,7 @@ func (p PredictionRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "lotteryName": p.LotteryName,
-        "userId": p.UserId,
+        "accessToken": p.AccessToken,
         "randomSeed": p.RandomSeed,
         "count": p.Count,
     }

@@ -1964,8 +1964,8 @@ func (p Gs2LotteryWebSocketClient) PredictionAsync(
     if request.LotteryName != nil && *request.LotteryName != "" {
         bodies["lotteryName"] = *request.LotteryName
     }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
     }
     if request.RandomSeed != nil {
         bodies["randomSeed"] = *request.RandomSeed
@@ -1976,6 +1976,9 @@ func (p Gs2LotteryWebSocketClient) PredictionAsync(
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
     if request.DuplicationAvoider != nil {
       bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
     }

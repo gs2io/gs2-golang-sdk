@@ -716,9 +716,6 @@ func (p Gs2ScheduleWebSocketClient) CreateEventMasterAsync(
     if request.RelativeTriggerName != nil && *request.RelativeTriggerName != "" {
         bodies["relativeTriggerName"] = *request.RelativeTriggerName
     }
-    if request.RelativeDuration != nil {
-        bodies["relativeDuration"] = *request.RelativeDuration
-    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -925,9 +922,6 @@ func (p Gs2ScheduleWebSocketClient) UpdateEventMasterAsync(
     }
     if request.RelativeTriggerName != nil && *request.RelativeTriggerName != "" {
         bodies["relativeTriggerName"] = *request.RelativeTriggerName
-    }
-    if request.RelativeDuration != nil {
-        bodies["relativeDuration"] = *request.RelativeDuration
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -1991,6 +1985,9 @@ func (p Gs2ScheduleWebSocketClient) GetEventAsync(
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
     }
+    if request.IsInSchedule != nil {
+        bodies["isInSchedule"] = *request.IsInSchedule
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -2080,6 +2077,9 @@ func (p Gs2ScheduleWebSocketClient) GetEventByUserIdAsync(
     }
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
+    }
+    if request.IsInSchedule != nil {
+        bodies["isInSchedule"] = *request.IsInSchedule
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

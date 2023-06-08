@@ -2061,11 +2061,6 @@ func (p Gs2LotteryRestClient) PredictionAsync(
     } else {
         path = strings.ReplaceAll(path, "{lotteryName}", "null")
     }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
 
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
@@ -2082,6 +2077,9 @@ func (p Gs2LotteryRestClient) PredictionAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
     if request.DuplicationAvoider != nil {
       headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)

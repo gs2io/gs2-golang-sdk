@@ -256,7 +256,6 @@ type CreateEventMasterRequest struct {
     RepeatBeginHour *int32 `json:"repeatBeginHour"`
     RepeatEndHour *int32 `json:"repeatEndHour"`
     RelativeTriggerName *string `json:"relativeTriggerName"`
-    RelativeDuration *int32 `json:"relativeDuration"`
 }
 
 func NewCreateEventMasterRequestFromJson(data string) CreateEventMasterRequest {
@@ -282,7 +281,6 @@ func NewCreateEventMasterRequestFromDict(data map[string]interface{}) CreateEven
         RepeatBeginHour: core.CastInt32(data["repeatBeginHour"]),
         RepeatEndHour: core.CastInt32(data["repeatEndHour"]),
         RelativeTriggerName: core.CastString(data["relativeTriggerName"]),
-        RelativeDuration: core.CastInt32(data["relativeDuration"]),
     }
 }
 
@@ -303,7 +301,6 @@ func (p CreateEventMasterRequest) ToDict() map[string]interface{} {
         "repeatBeginHour": p.RepeatBeginHour,
         "repeatEndHour": p.RepeatEndHour,
         "relativeTriggerName": p.RelativeTriggerName,
-        "relativeDuration": p.RelativeDuration,
     }
 }
 
@@ -360,7 +357,6 @@ type UpdateEventMasterRequest struct {
     RepeatBeginHour *int32 `json:"repeatBeginHour"`
     RepeatEndHour *int32 `json:"repeatEndHour"`
     RelativeTriggerName *string `json:"relativeTriggerName"`
-    RelativeDuration *int32 `json:"relativeDuration"`
 }
 
 func NewUpdateEventMasterRequestFromJson(data string) UpdateEventMasterRequest {
@@ -386,7 +382,6 @@ func NewUpdateEventMasterRequestFromDict(data map[string]interface{}) UpdateEven
         RepeatBeginHour: core.CastInt32(data["repeatBeginHour"]),
         RepeatEndHour: core.CastInt32(data["repeatEndHour"]),
         RelativeTriggerName: core.CastString(data["relativeTriggerName"]),
-        RelativeDuration: core.CastInt32(data["relativeDuration"]),
     }
 }
 
@@ -407,7 +402,6 @@ func (p UpdateEventMasterRequest) ToDict() map[string]interface{} {
         "repeatBeginHour": p.RepeatBeginHour,
         "repeatEndHour": p.RepeatEndHour,
         "relativeTriggerName": p.RelativeTriggerName,
-        "relativeDuration": p.RelativeDuration,
     }
 }
 
@@ -795,6 +789,7 @@ type GetEventRequest struct {
     NamespaceName *string `json:"namespaceName"`
     EventName *string `json:"eventName"`
     AccessToken *string `json:"accessToken"`
+    IsInSchedule *bool `json:"isInSchedule"`
 }
 
 func NewGetEventRequestFromJson(data string) GetEventRequest {
@@ -808,6 +803,7 @@ func NewGetEventRequestFromDict(data map[string]interface{}) GetEventRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         EventName: core.CastString(data["eventName"]),
         AccessToken: core.CastString(data["accessToken"]),
+        IsInSchedule: core.CastBool(data["isInSchedule"]),
     }
 }
 
@@ -816,6 +812,7 @@ func (p GetEventRequest) ToDict() map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "eventName": p.EventName,
         "accessToken": p.AccessToken,
+        "isInSchedule": p.IsInSchedule,
     }
 }
 
@@ -829,6 +826,7 @@ type GetEventByUserIdRequest struct {
     NamespaceName *string `json:"namespaceName"`
     EventName *string `json:"eventName"`
     UserId *string `json:"userId"`
+    IsInSchedule *bool `json:"isInSchedule"`
 }
 
 func NewGetEventByUserIdRequestFromJson(data string) GetEventByUserIdRequest {
@@ -842,6 +840,7 @@ func NewGetEventByUserIdRequestFromDict(data map[string]interface{}) GetEventByU
         NamespaceName: core.CastString(data["namespaceName"]),
         EventName: core.CastString(data["eventName"]),
         UserId: core.CastString(data["userId"]),
+        IsInSchedule: core.CastBool(data["isInSchedule"]),
     }
 }
 
@@ -850,6 +849,7 @@ func (p GetEventByUserIdRequest) ToDict() map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "eventName": p.EventName,
         "userId": p.UserId,
+        "isInSchedule": p.IsInSchedule,
     }
 }
 
