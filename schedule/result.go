@@ -700,8 +700,9 @@ func (p DescribeRawEventsResult) Pointer() *DescribeRawEventsResult {
 
 type GetEventResult struct {
     Item *Event `json:"item"`
-    RepeatCount *int32 `json:"repeatCount"`
     InSchedule *bool `json:"inSchedule"`
+    ScheduleStartAt *int64 `json:"scheduleStartAt"`
+    ScheduleEndAt *int64 `json:"scheduleEndAt"`
     RepeatSchedule *RepeatSchedule `json:"repeatSchedule"`
 }
 
@@ -719,8 +720,9 @@ func NewGetEventResultFromJson(data string) GetEventResult {
 func NewGetEventResultFromDict(data map[string]interface{}) GetEventResult {
     return GetEventResult {
         Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
-        RepeatCount: core.CastInt32(data["repeatCount"]),
         InSchedule: core.CastBool(data["inSchedule"]),
+        ScheduleStartAt: core.CastInt64(data["scheduleStartAt"]),
+        ScheduleEndAt: core.CastInt64(data["scheduleEndAt"]),
         RepeatSchedule: NewRepeatScheduleFromDict(core.CastMap(data["repeatSchedule"])).Pointer(),
     }
 }
@@ -728,8 +730,9 @@ func NewGetEventResultFromDict(data map[string]interface{}) GetEventResult {
 func (p GetEventResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
-        "repeatCount": p.RepeatCount,
         "inSchedule": p.InSchedule,
+        "scheduleStartAt": p.ScheduleStartAt,
+        "scheduleEndAt": p.ScheduleEndAt,
         "repeatSchedule": p.RepeatSchedule.ToDict(),
     }
 }
@@ -740,8 +743,9 @@ func (p GetEventResult) Pointer() *GetEventResult {
 
 type GetEventByUserIdResult struct {
     Item *Event `json:"item"`
-    RepeatCount *int32 `json:"repeatCount"`
     InSchedule *bool `json:"inSchedule"`
+    ScheduleStartAt *int64 `json:"scheduleStartAt"`
+    ScheduleEndAt *int64 `json:"scheduleEndAt"`
     RepeatSchedule *RepeatSchedule `json:"repeatSchedule"`
 }
 
@@ -759,8 +763,9 @@ func NewGetEventByUserIdResultFromJson(data string) GetEventByUserIdResult {
 func NewGetEventByUserIdResultFromDict(data map[string]interface{}) GetEventByUserIdResult {
     return GetEventByUserIdResult {
         Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
-        RepeatCount: core.CastInt32(data["repeatCount"]),
         InSchedule: core.CastBool(data["inSchedule"]),
+        ScheduleStartAt: core.CastInt64(data["scheduleStartAt"]),
+        ScheduleEndAt: core.CastInt64(data["scheduleEndAt"]),
         RepeatSchedule: NewRepeatScheduleFromDict(core.CastMap(data["repeatSchedule"])).Pointer(),
     }
 }
@@ -768,8 +773,9 @@ func NewGetEventByUserIdResultFromDict(data map[string]interface{}) GetEventByUs
 func (p GetEventByUserIdResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
-        "repeatCount": p.RepeatCount,
         "inSchedule": p.InSchedule,
+        "scheduleStartAt": p.ScheduleStartAt,
+        "scheduleEndAt": p.ScheduleEndAt,
         "repeatSchedule": p.RepeatSchedule.ToDict(),
     }
 }
