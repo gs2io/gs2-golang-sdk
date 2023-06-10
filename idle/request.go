@@ -483,7 +483,6 @@ type DescribeStatusesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
-    CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -498,7 +497,6 @@ func NewDescribeStatusesRequestFromJson(data string) DescribeStatusesRequest {
 func NewDescribeStatusesRequestFromDict(data map[string]interface{}) DescribeStatusesRequest {
     return DescribeStatusesRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
-        CategoryName: core.CastString(data["categoryName"]),
         AccessToken: core.CastString(data["accessToken"]),
         PageToken: core.CastString(data["pageToken"]),
         Limit: core.CastInt32(data["limit"]),
@@ -508,7 +506,6 @@ func NewDescribeStatusesRequestFromDict(data map[string]interface{}) DescribeSta
 func (p DescribeStatusesRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
-        "categoryName": p.CategoryName,
         "accessToken": p.AccessToken,
         "pageToken": p.PageToken,
         "limit": p.Limit,
@@ -523,7 +520,6 @@ type DescribeStatusesByUserIdRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
-    CategoryName *string `json:"categoryName"`
     UserId *string `json:"userId"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -538,7 +534,6 @@ func NewDescribeStatusesByUserIdRequestFromJson(data string) DescribeStatusesByU
 func NewDescribeStatusesByUserIdRequestFromDict(data map[string]interface{}) DescribeStatusesByUserIdRequest {
     return DescribeStatusesByUserIdRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
-        CategoryName: core.CastString(data["categoryName"]),
         UserId: core.CastString(data["userId"]),
         PageToken: core.CastString(data["pageToken"]),
         Limit: core.CastInt32(data["limit"]),
@@ -548,7 +543,6 @@ func NewDescribeStatusesByUserIdRequestFromDict(data map[string]interface{}) Des
 func (p DescribeStatusesByUserIdRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
-        "categoryName": p.CategoryName,
         "userId": p.UserId,
         "pageToken": p.PageToken,
         "limit": p.Limit,
@@ -874,92 +868,92 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
     return &p
 }
 
-type GetCurrentIdleMasterRequest struct {
+type GetCurrentCategoryMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
 }
 
-func NewGetCurrentIdleMasterRequestFromJson(data string) GetCurrentIdleMasterRequest {
+func NewGetCurrentCategoryMasterRequestFromJson(data string) GetCurrentCategoryMasterRequest {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetCurrentIdleMasterRequestFromDict(dict)
+    return NewGetCurrentCategoryMasterRequestFromDict(dict)
 }
 
-func NewGetCurrentIdleMasterRequestFromDict(data map[string]interface{}) GetCurrentIdleMasterRequest {
-    return GetCurrentIdleMasterRequest {
+func NewGetCurrentCategoryMasterRequestFromDict(data map[string]interface{}) GetCurrentCategoryMasterRequest {
+    return GetCurrentCategoryMasterRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
     }
 }
 
-func (p GetCurrentIdleMasterRequest) ToDict() map[string]interface{} {
+func (p GetCurrentCategoryMasterRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
     }
 }
 
-func (p GetCurrentIdleMasterRequest) Pointer() *GetCurrentIdleMasterRequest {
+func (p GetCurrentCategoryMasterRequest) Pointer() *GetCurrentCategoryMasterRequest {
     return &p
 }
 
-type UpdateCurrentIdleMasterRequest struct {
+type UpdateCurrentCategoryMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     Settings *string `json:"settings"`
 }
 
-func NewUpdateCurrentIdleMasterRequestFromJson(data string) UpdateCurrentIdleMasterRequest {
+func NewUpdateCurrentCategoryMasterRequestFromJson(data string) UpdateCurrentCategoryMasterRequest {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateCurrentIdleMasterRequestFromDict(dict)
+    return NewUpdateCurrentCategoryMasterRequestFromDict(dict)
 }
 
-func NewUpdateCurrentIdleMasterRequestFromDict(data map[string]interface{}) UpdateCurrentIdleMasterRequest {
-    return UpdateCurrentIdleMasterRequest {
+func NewUpdateCurrentCategoryMasterRequestFromDict(data map[string]interface{}) UpdateCurrentCategoryMasterRequest {
+    return UpdateCurrentCategoryMasterRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         Settings: core.CastString(data["settings"]),
     }
 }
 
-func (p UpdateCurrentIdleMasterRequest) ToDict() map[string]interface{} {
+func (p UpdateCurrentCategoryMasterRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "settings": p.Settings,
     }
 }
 
-func (p UpdateCurrentIdleMasterRequest) Pointer() *UpdateCurrentIdleMasterRequest {
+func (p UpdateCurrentCategoryMasterRequest) Pointer() *UpdateCurrentCategoryMasterRequest {
     return &p
 }
 
-type UpdateCurrentIdleMasterFromGitHubRequest struct {
+type UpdateCurrentCategoryMasterFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
-func NewUpdateCurrentIdleMasterFromGitHubRequestFromJson(data string) UpdateCurrentIdleMasterFromGitHubRequest {
+func NewUpdateCurrentCategoryMasterFromGitHubRequestFromJson(data string) UpdateCurrentCategoryMasterFromGitHubRequest {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateCurrentIdleMasterFromGitHubRequestFromDict(dict)
+    return NewUpdateCurrentCategoryMasterFromGitHubRequestFromDict(dict)
 }
 
-func NewUpdateCurrentIdleMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentIdleMasterFromGitHubRequest {
-    return UpdateCurrentIdleMasterFromGitHubRequest {
+func NewUpdateCurrentCategoryMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentCategoryMasterFromGitHubRequest {
+    return UpdateCurrentCategoryMasterFromGitHubRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
     }
 }
 
-func (p UpdateCurrentIdleMasterFromGitHubRequest) ToDict() map[string]interface{} {
+func (p UpdateCurrentCategoryMasterFromGitHubRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "checkoutSetting": p.CheckoutSetting.ToDict(),
     }
 }
 
-func (p UpdateCurrentIdleMasterFromGitHubRequest) Pointer() *UpdateCurrentIdleMasterFromGitHubRequest {
+func (p UpdateCurrentCategoryMasterFromGitHubRequest) Pointer() *UpdateCurrentCategoryMasterFromGitHubRequest {
     return &p
 }

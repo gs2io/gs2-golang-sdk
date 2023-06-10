@@ -825,95 +825,95 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
     return &p
 }
 
-type GetCurrentIdleMasterResult struct {
+type GetCurrentCategoryMasterResult struct {
     Item *CurrentCategoryMaster `json:"item"`
 }
 
-type GetCurrentIdleMasterAsyncResult struct {
-	result *GetCurrentIdleMasterResult
+type GetCurrentCategoryMasterAsyncResult struct {
+	result *GetCurrentCategoryMasterResult
 	err    error
 }
 
-func NewGetCurrentIdleMasterResultFromJson(data string) GetCurrentIdleMasterResult {
+func NewGetCurrentCategoryMasterResultFromJson(data string) GetCurrentCategoryMasterResult {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetCurrentIdleMasterResultFromDict(dict)
+    return NewGetCurrentCategoryMasterResultFromDict(dict)
 }
 
-func NewGetCurrentIdleMasterResultFromDict(data map[string]interface{}) GetCurrentIdleMasterResult {
-    return GetCurrentIdleMasterResult {
+func NewGetCurrentCategoryMasterResultFromDict(data map[string]interface{}) GetCurrentCategoryMasterResult {
+    return GetCurrentCategoryMasterResult {
         Item: NewCurrentCategoryMasterFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
-func (p GetCurrentIdleMasterResult) ToDict() map[string]interface{} {
+func (p GetCurrentCategoryMasterResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
     }
 }
 
-func (p GetCurrentIdleMasterResult) Pointer() *GetCurrentIdleMasterResult {
+func (p GetCurrentCategoryMasterResult) Pointer() *GetCurrentCategoryMasterResult {
     return &p
 }
 
-type UpdateCurrentIdleMasterResult struct {
+type UpdateCurrentCategoryMasterResult struct {
     Item *CurrentCategoryMaster `json:"item"`
 }
 
-type UpdateCurrentIdleMasterAsyncResult struct {
-	result *UpdateCurrentIdleMasterResult
+type UpdateCurrentCategoryMasterAsyncResult struct {
+	result *UpdateCurrentCategoryMasterResult
 	err    error
 }
 
-func NewUpdateCurrentIdleMasterResultFromJson(data string) UpdateCurrentIdleMasterResult {
+func NewUpdateCurrentCategoryMasterResultFromJson(data string) UpdateCurrentCategoryMasterResult {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateCurrentIdleMasterResultFromDict(dict)
+    return NewUpdateCurrentCategoryMasterResultFromDict(dict)
 }
 
-func NewUpdateCurrentIdleMasterResultFromDict(data map[string]interface{}) UpdateCurrentIdleMasterResult {
-    return UpdateCurrentIdleMasterResult {
+func NewUpdateCurrentCategoryMasterResultFromDict(data map[string]interface{}) UpdateCurrentCategoryMasterResult {
+    return UpdateCurrentCategoryMasterResult {
         Item: NewCurrentCategoryMasterFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
-func (p UpdateCurrentIdleMasterResult) ToDict() map[string]interface{} {
+func (p UpdateCurrentCategoryMasterResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
     }
 }
 
-func (p UpdateCurrentIdleMasterResult) Pointer() *UpdateCurrentIdleMasterResult {
+func (p UpdateCurrentCategoryMasterResult) Pointer() *UpdateCurrentCategoryMasterResult {
     return &p
 }
 
-type UpdateCurrentIdleMasterFromGitHubResult struct {
+type UpdateCurrentCategoryMasterFromGitHubResult struct {
     Item *CurrentCategoryMaster `json:"item"`
 }
 
-type UpdateCurrentIdleMasterFromGitHubAsyncResult struct {
-	result *UpdateCurrentIdleMasterFromGitHubResult
+type UpdateCurrentCategoryMasterFromGitHubAsyncResult struct {
+	result *UpdateCurrentCategoryMasterFromGitHubResult
 	err    error
 }
 
-func NewUpdateCurrentIdleMasterFromGitHubResultFromJson(data string) UpdateCurrentIdleMasterFromGitHubResult {
+func NewUpdateCurrentCategoryMasterFromGitHubResultFromJson(data string) UpdateCurrentCategoryMasterFromGitHubResult {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateCurrentIdleMasterFromGitHubResultFromDict(dict)
+    return NewUpdateCurrentCategoryMasterFromGitHubResultFromDict(dict)
 }
 
-func NewUpdateCurrentIdleMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentIdleMasterFromGitHubResult {
-    return UpdateCurrentIdleMasterFromGitHubResult {
+func NewUpdateCurrentCategoryMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentCategoryMasterFromGitHubResult {
+    return UpdateCurrentCategoryMasterFromGitHubResult {
         Item: NewCurrentCategoryMasterFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
-func (p UpdateCurrentIdleMasterFromGitHubResult) ToDict() map[string]interface{} {
+func (p UpdateCurrentCategoryMasterFromGitHubResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
     }
 }
 
-func (p UpdateCurrentIdleMasterFromGitHubResult) Pointer() *UpdateCurrentIdleMasterFromGitHubResult {
+func (p UpdateCurrentCategoryMasterFromGitHubResult) Pointer() *UpdateCurrentCategoryMasterFromGitHubResult {
     return &p
 }

@@ -1237,9 +1237,6 @@ func (p Gs2IdleWebSocketClient) DescribeStatusesAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.CategoryName != nil && *request.CategoryName != "" {
-        bodies["categoryName"] = *request.CategoryName
-    }
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
     }
@@ -1332,9 +1329,6 @@ func (p Gs2IdleWebSocketClient) DescribeStatusesByUserIdAsync(
 	}
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CategoryName != nil && *request.CategoryName != "" {
-        bodies["categoryName"] = *request.CategoryName
     }
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
@@ -2185,9 +2179,9 @@ func (p Gs2IdleWebSocketClient) ExportMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2IdleWebSocketClient) getCurrentIdleMasterAsyncHandler(
+func (p Gs2IdleWebSocketClient) getCurrentCategoryMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- GetCurrentIdleMasterAsyncResult,
+	callback chan<- GetCurrentCategoryMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2196,17 +2190,17 @@ func (p Gs2IdleWebSocketClient) getCurrentIdleMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- GetCurrentIdleMasterAsyncResult{
+		callback <- GetCurrentCategoryMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result GetCurrentIdleMasterResult
+	var result GetCurrentCategoryMasterResult
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- GetCurrentIdleMasterAsyncResult{
+            callback <- GetCurrentCategoryMasterAsyncResult{
                 err: err,
             }
             return
@@ -2214,23 +2208,23 @@ func (p Gs2IdleWebSocketClient) getCurrentIdleMasterAsyncHandler(
 	}
     if asyncResult.Err != nil {
     }
-	callback <- GetCurrentIdleMasterAsyncResult{
+	callback <- GetCurrentCategoryMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2IdleWebSocketClient) GetCurrentIdleMasterAsync(
-	request *GetCurrentIdleMasterRequest,
-	callback chan<- GetCurrentIdleMasterAsyncResult,
+func (p Gs2IdleWebSocketClient) GetCurrentCategoryMasterAsync(
+	request *GetCurrentCategoryMasterRequest,
+	callback chan<- GetCurrentCategoryMasterAsyncResult,
 ) {
     requestId := core.WebSocketRequestId(uuid.New().String())
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "idle",
     		"component": "currentCategoryMaster",
-    		"function": "getCurrentIdleMaster",
+    		"function": "getCurrentCategoryMaster",
             "contentType": "application/json",
     		"requestId": requestId,
 		},
@@ -2245,7 +2239,7 @@ func (p Gs2IdleWebSocketClient) GetCurrentIdleMasterAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	go p.getCurrentIdleMasterAsyncHandler(
+	go p.getCurrentCategoryMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies: bodies,
@@ -2254,11 +2248,11 @@ func (p Gs2IdleWebSocketClient) GetCurrentIdleMasterAsync(
 	)
 }
 
-func (p Gs2IdleWebSocketClient) GetCurrentIdleMaster(
-	request *GetCurrentIdleMasterRequest,
-) (*GetCurrentIdleMasterResult, error) {
-	callback := make(chan GetCurrentIdleMasterAsyncResult, 1)
-	go p.GetCurrentIdleMasterAsync(
+func (p Gs2IdleWebSocketClient) GetCurrentCategoryMaster(
+	request *GetCurrentCategoryMasterRequest,
+) (*GetCurrentCategoryMasterResult, error) {
+	callback := make(chan GetCurrentCategoryMasterAsyncResult, 1)
+	go p.GetCurrentCategoryMasterAsync(
 		request,
 		callback,
 	)
@@ -2266,9 +2260,9 @@ func (p Gs2IdleWebSocketClient) GetCurrentIdleMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2IdleWebSocketClient) updateCurrentIdleMasterAsyncHandler(
+func (p Gs2IdleWebSocketClient) updateCurrentCategoryMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- UpdateCurrentIdleMasterAsyncResult,
+	callback chan<- UpdateCurrentCategoryMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2277,17 +2271,17 @@ func (p Gs2IdleWebSocketClient) updateCurrentIdleMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentIdleMasterAsyncResult{
+		callback <- UpdateCurrentCategoryMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentIdleMasterResult
+	var result UpdateCurrentCategoryMasterResult
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- UpdateCurrentIdleMasterAsyncResult{
+            callback <- UpdateCurrentCategoryMasterAsyncResult{
                 err: err,
             }
             return
@@ -2295,23 +2289,23 @@ func (p Gs2IdleWebSocketClient) updateCurrentIdleMasterAsyncHandler(
 	}
     if asyncResult.Err != nil {
     }
-	callback <- UpdateCurrentIdleMasterAsyncResult{
+	callback <- UpdateCurrentCategoryMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2IdleWebSocketClient) UpdateCurrentIdleMasterAsync(
-	request *UpdateCurrentIdleMasterRequest,
-	callback chan<- UpdateCurrentIdleMasterAsyncResult,
+func (p Gs2IdleWebSocketClient) UpdateCurrentCategoryMasterAsync(
+	request *UpdateCurrentCategoryMasterRequest,
+	callback chan<- UpdateCurrentCategoryMasterAsyncResult,
 ) {
     requestId := core.WebSocketRequestId(uuid.New().String())
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "idle",
     		"component": "currentCategoryMaster",
-    		"function": "updateCurrentIdleMaster",
+    		"function": "updateCurrentCategoryMaster",
             "contentType": "application/json",
     		"requestId": requestId,
 		},
@@ -2329,7 +2323,7 @@ func (p Gs2IdleWebSocketClient) UpdateCurrentIdleMasterAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	go p.updateCurrentIdleMasterAsyncHandler(
+	go p.updateCurrentCategoryMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies: bodies,
@@ -2338,11 +2332,11 @@ func (p Gs2IdleWebSocketClient) UpdateCurrentIdleMasterAsync(
 	)
 }
 
-func (p Gs2IdleWebSocketClient) UpdateCurrentIdleMaster(
-	request *UpdateCurrentIdleMasterRequest,
-) (*UpdateCurrentIdleMasterResult, error) {
-	callback := make(chan UpdateCurrentIdleMasterAsyncResult, 1)
-	go p.UpdateCurrentIdleMasterAsync(
+func (p Gs2IdleWebSocketClient) UpdateCurrentCategoryMaster(
+	request *UpdateCurrentCategoryMasterRequest,
+) (*UpdateCurrentCategoryMasterResult, error) {
+	callback := make(chan UpdateCurrentCategoryMasterAsyncResult, 1)
+	go p.UpdateCurrentCategoryMasterAsync(
 		request,
 		callback,
 	)
@@ -2350,9 +2344,9 @@ func (p Gs2IdleWebSocketClient) UpdateCurrentIdleMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2IdleWebSocketClient) updateCurrentIdleMasterFromGitHubAsyncHandler(
+func (p Gs2IdleWebSocketClient) updateCurrentCategoryMasterFromGitHubAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- UpdateCurrentIdleMasterFromGitHubAsyncResult,
+	callback chan<- UpdateCurrentCategoryMasterFromGitHubAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2361,17 +2355,17 @@ func (p Gs2IdleWebSocketClient) updateCurrentIdleMasterFromGitHubAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentIdleMasterFromGitHubAsyncResult{
+		callback <- UpdateCurrentCategoryMasterFromGitHubAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentIdleMasterFromGitHubResult
+	var result UpdateCurrentCategoryMasterFromGitHubResult
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- UpdateCurrentIdleMasterFromGitHubAsyncResult{
+            callback <- UpdateCurrentCategoryMasterFromGitHubAsyncResult{
                 err: err,
             }
             return
@@ -2379,23 +2373,23 @@ func (p Gs2IdleWebSocketClient) updateCurrentIdleMasterFromGitHubAsyncHandler(
 	}
     if asyncResult.Err != nil {
     }
-	callback <- UpdateCurrentIdleMasterFromGitHubAsyncResult{
+	callback <- UpdateCurrentCategoryMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2IdleWebSocketClient) UpdateCurrentIdleMasterFromGitHubAsync(
-	request *UpdateCurrentIdleMasterFromGitHubRequest,
-	callback chan<- UpdateCurrentIdleMasterFromGitHubAsyncResult,
+func (p Gs2IdleWebSocketClient) UpdateCurrentCategoryMasterFromGitHubAsync(
+	request *UpdateCurrentCategoryMasterFromGitHubRequest,
+	callback chan<- UpdateCurrentCategoryMasterFromGitHubAsyncResult,
 ) {
     requestId := core.WebSocketRequestId(uuid.New().String())
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "idle",
     		"component": "currentCategoryMaster",
-    		"function": "updateCurrentIdleMasterFromGitHub",
+    		"function": "updateCurrentCategoryMasterFromGitHub",
             "contentType": "application/json",
     		"requestId": requestId,
 		},
@@ -2413,7 +2407,7 @@ func (p Gs2IdleWebSocketClient) UpdateCurrentIdleMasterFromGitHubAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	go p.updateCurrentIdleMasterFromGitHubAsyncHandler(
+	go p.updateCurrentCategoryMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies: bodies,
@@ -2422,11 +2416,11 @@ func (p Gs2IdleWebSocketClient) UpdateCurrentIdleMasterFromGitHubAsync(
 	)
 }
 
-func (p Gs2IdleWebSocketClient) UpdateCurrentIdleMasterFromGitHub(
-	request *UpdateCurrentIdleMasterFromGitHubRequest,
-) (*UpdateCurrentIdleMasterFromGitHubResult, error) {
-	callback := make(chan UpdateCurrentIdleMasterFromGitHubAsyncResult, 1)
-	go p.UpdateCurrentIdleMasterFromGitHubAsync(
+func (p Gs2IdleWebSocketClient) UpdateCurrentCategoryMasterFromGitHub(
+	request *UpdateCurrentCategoryMasterFromGitHubRequest,
+) (*UpdateCurrentCategoryMasterFromGitHubResult, error) {
+	callback := make(chan UpdateCurrentCategoryMasterFromGitHubAsyncResult, 1)
+	go p.UpdateCurrentCategoryMasterFromGitHubAsync(
 		request,
 		callback,
 	)

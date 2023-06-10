@@ -1290,9 +1290,6 @@ func (p Gs2IdleRestClient) DescribeStatusesAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
-	if request.CategoryName != nil {
-		queryStrings["categoryName"] = core.ToString(*request.CategoryName)
-	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -1391,9 +1388,6 @@ func (p Gs2IdleRestClient) DescribeStatusesByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
-	if request.CategoryName != nil {
-		queryStrings["categoryName"] = core.ToString(*request.CategoryName)
-	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -2301,10 +2295,10 @@ func (p Gs2IdleRestClient) ExportMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func getCurrentIdleMasterAsyncHandler(
+func getCurrentCategoryMasterAsyncHandler(
 	client Gs2IdleRestClient,
 	job *core.NetworkJob,
-	callback chan<- GetCurrentIdleMasterAsyncResult,
+	callback chan<- GetCurrentCategoryMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2313,15 +2307,15 @@ func getCurrentIdleMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- GetCurrentIdleMasterAsyncResult{
+		callback <- GetCurrentCategoryMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result GetCurrentIdleMasterResult
+	var result GetCurrentCategoryMasterResult
 	if asyncResult.Err != nil {
-		callback <- GetCurrentIdleMasterAsyncResult{
+		callback <- GetCurrentCategoryMasterAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -2329,22 +2323,22 @@ func getCurrentIdleMasterAsyncHandler(
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- GetCurrentIdleMasterAsyncResult{
+            callback <- GetCurrentCategoryMasterAsyncResult{
                 err: err,
             }
             return
         }
 	}
-	callback <- GetCurrentIdleMasterAsyncResult{
+	callback <- GetCurrentCategoryMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2IdleRestClient) GetCurrentIdleMasterAsync(
-	request *GetCurrentIdleMasterRequest,
-	callback chan<- GetCurrentIdleMasterAsyncResult,
+func (p Gs2IdleRestClient) GetCurrentCategoryMasterAsync(
+	request *GetCurrentCategoryMasterRequest,
+	callback chan<- GetCurrentCategoryMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
@@ -2361,7 +2355,7 @@ func (p Gs2IdleRestClient) GetCurrentIdleMasterAsync(
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
 
-	go getCurrentIdleMasterAsyncHandler(
+	go getCurrentCategoryMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
@@ -2373,11 +2367,11 @@ func (p Gs2IdleRestClient) GetCurrentIdleMasterAsync(
 	)
 }
 
-func (p Gs2IdleRestClient) GetCurrentIdleMaster(
-	request *GetCurrentIdleMasterRequest,
-) (*GetCurrentIdleMasterResult, error) {
-	callback := make(chan GetCurrentIdleMasterAsyncResult, 1)
-	go p.GetCurrentIdleMasterAsync(
+func (p Gs2IdleRestClient) GetCurrentCategoryMaster(
+	request *GetCurrentCategoryMasterRequest,
+) (*GetCurrentCategoryMasterResult, error) {
+	callback := make(chan GetCurrentCategoryMasterAsyncResult, 1)
+	go p.GetCurrentCategoryMasterAsync(
 		request,
 		callback,
 	)
@@ -2385,10 +2379,10 @@ func (p Gs2IdleRestClient) GetCurrentIdleMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func updateCurrentIdleMasterAsyncHandler(
+func updateCurrentCategoryMasterAsyncHandler(
 	client Gs2IdleRestClient,
 	job *core.NetworkJob,
-	callback chan<- UpdateCurrentIdleMasterAsyncResult,
+	callback chan<- UpdateCurrentCategoryMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2397,15 +2391,15 @@ func updateCurrentIdleMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentIdleMasterAsyncResult{
+		callback <- UpdateCurrentCategoryMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentIdleMasterResult
+	var result UpdateCurrentCategoryMasterResult
 	if asyncResult.Err != nil {
-		callback <- UpdateCurrentIdleMasterAsyncResult{
+		callback <- UpdateCurrentCategoryMasterAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -2413,22 +2407,22 @@ func updateCurrentIdleMasterAsyncHandler(
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- UpdateCurrentIdleMasterAsyncResult{
+            callback <- UpdateCurrentCategoryMasterAsyncResult{
                 err: err,
             }
             return
         }
 	}
-	callback <- UpdateCurrentIdleMasterAsyncResult{
+	callback <- UpdateCurrentCategoryMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2IdleRestClient) UpdateCurrentIdleMasterAsync(
-	request *UpdateCurrentIdleMasterRequest,
-	callback chan<- UpdateCurrentIdleMasterAsyncResult,
+func (p Gs2IdleRestClient) UpdateCurrentCategoryMasterAsync(
+	request *UpdateCurrentCategoryMasterRequest,
+	callback chan<- UpdateCurrentCategoryMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
@@ -2451,7 +2445,7 @@ func (p Gs2IdleRestClient) UpdateCurrentIdleMasterAsync(
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
 
-	go updateCurrentIdleMasterAsyncHandler(
+	go updateCurrentCategoryMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
@@ -2463,11 +2457,11 @@ func (p Gs2IdleRestClient) UpdateCurrentIdleMasterAsync(
 	)
 }
 
-func (p Gs2IdleRestClient) UpdateCurrentIdleMaster(
-	request *UpdateCurrentIdleMasterRequest,
-) (*UpdateCurrentIdleMasterResult, error) {
-	callback := make(chan UpdateCurrentIdleMasterAsyncResult, 1)
-	go p.UpdateCurrentIdleMasterAsync(
+func (p Gs2IdleRestClient) UpdateCurrentCategoryMaster(
+	request *UpdateCurrentCategoryMasterRequest,
+) (*UpdateCurrentCategoryMasterResult, error) {
+	callback := make(chan UpdateCurrentCategoryMasterAsyncResult, 1)
+	go p.UpdateCurrentCategoryMasterAsync(
 		request,
 		callback,
 	)
@@ -2475,10 +2469,10 @@ func (p Gs2IdleRestClient) UpdateCurrentIdleMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func updateCurrentIdleMasterFromGitHubAsyncHandler(
+func updateCurrentCategoryMasterFromGitHubAsyncHandler(
 	client Gs2IdleRestClient,
 	job *core.NetworkJob,
-	callback chan<- UpdateCurrentIdleMasterFromGitHubAsyncResult,
+	callback chan<- UpdateCurrentCategoryMasterFromGitHubAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2487,15 +2481,15 @@ func updateCurrentIdleMasterFromGitHubAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentIdleMasterFromGitHubAsyncResult{
+		callback <- UpdateCurrentCategoryMasterFromGitHubAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentIdleMasterFromGitHubResult
+	var result UpdateCurrentCategoryMasterFromGitHubResult
 	if asyncResult.Err != nil {
-		callback <- UpdateCurrentIdleMasterFromGitHubAsyncResult{
+		callback <- UpdateCurrentCategoryMasterFromGitHubAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -2503,22 +2497,22 @@ func updateCurrentIdleMasterFromGitHubAsyncHandler(
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- UpdateCurrentIdleMasterFromGitHubAsyncResult{
+            callback <- UpdateCurrentCategoryMasterFromGitHubAsyncResult{
                 err: err,
             }
             return
         }
 	}
-	callback <- UpdateCurrentIdleMasterFromGitHubAsyncResult{
+	callback <- UpdateCurrentCategoryMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2IdleRestClient) UpdateCurrentIdleMasterFromGitHubAsync(
-	request *UpdateCurrentIdleMasterFromGitHubRequest,
-	callback chan<- UpdateCurrentIdleMasterFromGitHubAsyncResult,
+func (p Gs2IdleRestClient) UpdateCurrentCategoryMasterFromGitHubAsync(
+	request *UpdateCurrentCategoryMasterFromGitHubRequest,
+	callback chan<- UpdateCurrentCategoryMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
@@ -2541,7 +2535,7 @@ func (p Gs2IdleRestClient) UpdateCurrentIdleMasterFromGitHubAsync(
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
 
-	go updateCurrentIdleMasterFromGitHubAsyncHandler(
+	go updateCurrentCategoryMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
@@ -2553,11 +2547,11 @@ func (p Gs2IdleRestClient) UpdateCurrentIdleMasterFromGitHubAsync(
 	)
 }
 
-func (p Gs2IdleRestClient) UpdateCurrentIdleMasterFromGitHub(
-	request *UpdateCurrentIdleMasterFromGitHubRequest,
-) (*UpdateCurrentIdleMasterFromGitHubResult, error) {
-	callback := make(chan UpdateCurrentIdleMasterFromGitHubAsyncResult, 1)
-	go p.UpdateCurrentIdleMasterFromGitHubAsync(
+func (p Gs2IdleRestClient) UpdateCurrentCategoryMasterFromGitHub(
+	request *UpdateCurrentCategoryMasterFromGitHubRequest,
+) (*UpdateCurrentCategoryMasterFromGitHubResult, error) {
+	callback := make(chan UpdateCurrentCategoryMasterFromGitHubAsyncResult, 1)
+	go p.UpdateCurrentCategoryMasterFromGitHubAsync(
 		request,
 		callback,
 	)
