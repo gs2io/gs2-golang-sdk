@@ -386,6 +386,251 @@ func CastRateModelMastersFromDict(data []RateModelMaster) []interface{} {
     return v
 }
 
+type IncrementalRateModel struct {
+	IncrementalRateModelId *string `json:"incrementalRateModelId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	ConsumeAction *ConsumeAction `json:"consumeAction"`
+	CalculateType *string `json:"calculateType"`
+	BaseValue *int64 `json:"baseValue"`
+	CoefficientValue *int64 `json:"coefficientValue"`
+	CalculateScriptId *string `json:"calculateScriptId"`
+	ExchangeCountId *string `json:"exchangeCountId"`
+	AcquireActions []AcquireAction `json:"acquireActions"`
+}
+
+func NewIncrementalRateModelFromJson(data string) IncrementalRateModel {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementalRateModelFromDict(dict)
+}
+
+func NewIncrementalRateModelFromDict(data map[string]interface{}) IncrementalRateModel {
+    return IncrementalRateModel {
+        IncrementalRateModelId: core.CastString(data["incrementalRateModelId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        ConsumeAction: NewConsumeActionFromDict(core.CastMap(data["consumeAction"])).Pointer(),
+        CalculateType: core.CastString(data["calculateType"]),
+        BaseValue: core.CastInt64(data["baseValue"]),
+        CoefficientValue: core.CastInt64(data["coefficientValue"]),
+        CalculateScriptId: core.CastString(data["calculateScriptId"]),
+        ExchangeCountId: core.CastString(data["exchangeCountId"]),
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+    }
+}
+
+func (p IncrementalRateModel) ToDict() map[string]interface{} {
+    
+    var incrementalRateModelId *string
+    if p.IncrementalRateModelId != nil {
+        incrementalRateModelId = p.IncrementalRateModelId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var consumeAction map[string]interface{}
+    if p.ConsumeAction != nil {
+        consumeAction = p.ConsumeAction.ToDict()
+    }
+    var calculateType *string
+    if p.CalculateType != nil {
+        calculateType = p.CalculateType
+    }
+    var baseValue *int64
+    if p.BaseValue != nil {
+        baseValue = p.BaseValue
+    }
+    var coefficientValue *int64
+    if p.CoefficientValue != nil {
+        coefficientValue = p.CoefficientValue
+    }
+    var calculateScriptId *string
+    if p.CalculateScriptId != nil {
+        calculateScriptId = p.CalculateScriptId
+    }
+    var exchangeCountId *string
+    if p.ExchangeCountId != nil {
+        exchangeCountId = p.ExchangeCountId
+    }
+    var acquireActions []interface{}
+    if p.AcquireActions != nil {
+        acquireActions = CastAcquireActionsFromDict(
+            p.AcquireActions,
+        )
+    }
+    return map[string]interface{} {
+        "incrementalRateModelId": incrementalRateModelId,
+        "name": name,
+        "metadata": metadata,
+        "consumeAction": consumeAction,
+        "calculateType": calculateType,
+        "baseValue": baseValue,
+        "coefficientValue": coefficientValue,
+        "calculateScriptId": calculateScriptId,
+        "exchangeCountId": exchangeCountId,
+        "acquireActions": acquireActions,
+    }
+}
+
+func (p IncrementalRateModel) Pointer() *IncrementalRateModel {
+    return &p
+}
+
+func CastIncrementalRateModels(data []interface{}) []IncrementalRateModel {
+	v := make([]IncrementalRateModel, 0)
+	for _, d := range data {
+		v = append(v, NewIncrementalRateModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastIncrementalRateModelsFromDict(data []IncrementalRateModel) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type IncrementalRateModelMaster struct {
+	IncrementalRateModelId *string `json:"incrementalRateModelId"`
+	Name *string `json:"name"`
+	Description *string `json:"description"`
+	Metadata *string `json:"metadata"`
+	ConsumeAction *ConsumeAction `json:"consumeAction"`
+	CalculateType *string `json:"calculateType"`
+	BaseValue *int64 `json:"baseValue"`
+	CoefficientValue *int64 `json:"coefficientValue"`
+	CalculateScriptId *string `json:"calculateScriptId"`
+	ExchangeCountId *string `json:"exchangeCountId"`
+	AcquireActions []AcquireAction `json:"acquireActions"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
+}
+
+func NewIncrementalRateModelMasterFromJson(data string) IncrementalRateModelMaster {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementalRateModelMasterFromDict(dict)
+}
+
+func NewIncrementalRateModelMasterFromDict(data map[string]interface{}) IncrementalRateModelMaster {
+    return IncrementalRateModelMaster {
+        IncrementalRateModelId: core.CastString(data["incrementalRateModelId"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        ConsumeAction: NewConsumeActionFromDict(core.CastMap(data["consumeAction"])).Pointer(),
+        CalculateType: core.CastString(data["calculateType"]),
+        BaseValue: core.CastInt64(data["baseValue"]),
+        CoefficientValue: core.CastInt64(data["coefficientValue"]),
+        CalculateScriptId: core.CastString(data["calculateScriptId"]),
+        ExchangeCountId: core.CastString(data["exchangeCountId"]),
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
+}
+
+func (p IncrementalRateModelMaster) ToDict() map[string]interface{} {
+    
+    var incrementalRateModelId *string
+    if p.IncrementalRateModelId != nil {
+        incrementalRateModelId = p.IncrementalRateModelId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var description *string
+    if p.Description != nil {
+        description = p.Description
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var consumeAction map[string]interface{}
+    if p.ConsumeAction != nil {
+        consumeAction = p.ConsumeAction.ToDict()
+    }
+    var calculateType *string
+    if p.CalculateType != nil {
+        calculateType = p.CalculateType
+    }
+    var baseValue *int64
+    if p.BaseValue != nil {
+        baseValue = p.BaseValue
+    }
+    var coefficientValue *int64
+    if p.CoefficientValue != nil {
+        coefficientValue = p.CoefficientValue
+    }
+    var calculateScriptId *string
+    if p.CalculateScriptId != nil {
+        calculateScriptId = p.CalculateScriptId
+    }
+    var exchangeCountId *string
+    if p.ExchangeCountId != nil {
+        exchangeCountId = p.ExchangeCountId
+    }
+    var acquireActions []interface{}
+    if p.AcquireActions != nil {
+        acquireActions = CastAcquireActionsFromDict(
+            p.AcquireActions,
+        )
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "incrementalRateModelId": incrementalRateModelId,
+        "name": name,
+        "description": description,
+        "metadata": metadata,
+        "consumeAction": consumeAction,
+        "calculateType": calculateType,
+        "baseValue": baseValue,
+        "coefficientValue": coefficientValue,
+        "calculateScriptId": calculateScriptId,
+        "exchangeCountId": exchangeCountId,
+        "acquireActions": acquireActions,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
+}
+
+func (p IncrementalRateModelMaster) Pointer() *IncrementalRateModelMaster {
+    return &p
+}
+
+func CastIncrementalRateModelMasters(data []interface{}) []IncrementalRateModelMaster {
+	v := make([]IncrementalRateModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewIncrementalRateModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastIncrementalRateModelMastersFromDict(data []IncrementalRateModelMaster) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
 type CurrentRateMaster struct {
 	NamespaceId *string `json:"namespaceId"`
 	Settings *string `json:"settings"`

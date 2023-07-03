@@ -436,6 +436,230 @@ func (p DeleteRateModelMasterResult) Pointer() *DeleteRateModelMasterResult {
     return &p
 }
 
+type DescribeIncrementalRateModelsResult struct {
+    Items []IncrementalRateModel `json:"items"`
+}
+
+type DescribeIncrementalRateModelsAsyncResult struct {
+	result *DescribeIncrementalRateModelsResult
+	err    error
+}
+
+func NewDescribeIncrementalRateModelsResultFromJson(data string) DescribeIncrementalRateModelsResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeIncrementalRateModelsResultFromDict(dict)
+}
+
+func NewDescribeIncrementalRateModelsResultFromDict(data map[string]interface{}) DescribeIncrementalRateModelsResult {
+    return DescribeIncrementalRateModelsResult {
+        Items: CastIncrementalRateModels(core.CastArray(data["items"])),
+    }
+}
+
+func (p DescribeIncrementalRateModelsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastIncrementalRateModelsFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p DescribeIncrementalRateModelsResult) Pointer() *DescribeIncrementalRateModelsResult {
+    return &p
+}
+
+type GetIncrementalRateModelResult struct {
+    Item *IncrementalRateModel `json:"item"`
+}
+
+type GetIncrementalRateModelAsyncResult struct {
+	result *GetIncrementalRateModelResult
+	err    error
+}
+
+func NewGetIncrementalRateModelResultFromJson(data string) GetIncrementalRateModelResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetIncrementalRateModelResultFromDict(dict)
+}
+
+func NewGetIncrementalRateModelResultFromDict(data map[string]interface{}) GetIncrementalRateModelResult {
+    return GetIncrementalRateModelResult {
+        Item: NewIncrementalRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetIncrementalRateModelResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetIncrementalRateModelResult) Pointer() *GetIncrementalRateModelResult {
+    return &p
+}
+
+type DescribeIncrementalRateModelMastersResult struct {
+    Items []IncrementalRateModelMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeIncrementalRateModelMastersAsyncResult struct {
+	result *DescribeIncrementalRateModelMastersResult
+	err    error
+}
+
+func NewDescribeIncrementalRateModelMastersResultFromJson(data string) DescribeIncrementalRateModelMastersResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeIncrementalRateModelMastersResultFromDict(dict)
+}
+
+func NewDescribeIncrementalRateModelMastersResultFromDict(data map[string]interface{}) DescribeIncrementalRateModelMastersResult {
+    return DescribeIncrementalRateModelMastersResult {
+        Items: CastIncrementalRateModelMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeIncrementalRateModelMastersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastIncrementalRateModelMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeIncrementalRateModelMastersResult) Pointer() *DescribeIncrementalRateModelMastersResult {
+    return &p
+}
+
+type CreateIncrementalRateModelMasterResult struct {
+    Item *IncrementalRateModelMaster `json:"item"`
+}
+
+type CreateIncrementalRateModelMasterAsyncResult struct {
+	result *CreateIncrementalRateModelMasterResult
+	err    error
+}
+
+func NewCreateIncrementalRateModelMasterResultFromJson(data string) CreateIncrementalRateModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateIncrementalRateModelMasterResultFromDict(dict)
+}
+
+func NewCreateIncrementalRateModelMasterResultFromDict(data map[string]interface{}) CreateIncrementalRateModelMasterResult {
+    return CreateIncrementalRateModelMasterResult {
+        Item: NewIncrementalRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p CreateIncrementalRateModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p CreateIncrementalRateModelMasterResult) Pointer() *CreateIncrementalRateModelMasterResult {
+    return &p
+}
+
+type GetIncrementalRateModelMasterResult struct {
+    Item *IncrementalRateModelMaster `json:"item"`
+}
+
+type GetIncrementalRateModelMasterAsyncResult struct {
+	result *GetIncrementalRateModelMasterResult
+	err    error
+}
+
+func NewGetIncrementalRateModelMasterResultFromJson(data string) GetIncrementalRateModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetIncrementalRateModelMasterResultFromDict(dict)
+}
+
+func NewGetIncrementalRateModelMasterResultFromDict(data map[string]interface{}) GetIncrementalRateModelMasterResult {
+    return GetIncrementalRateModelMasterResult {
+        Item: NewIncrementalRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetIncrementalRateModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetIncrementalRateModelMasterResult) Pointer() *GetIncrementalRateModelMasterResult {
+    return &p
+}
+
+type UpdateIncrementalRateModelMasterResult struct {
+    Item *IncrementalRateModelMaster `json:"item"`
+}
+
+type UpdateIncrementalRateModelMasterAsyncResult struct {
+	result *UpdateIncrementalRateModelMasterResult
+	err    error
+}
+
+func NewUpdateIncrementalRateModelMasterResultFromJson(data string) UpdateIncrementalRateModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateIncrementalRateModelMasterResultFromDict(dict)
+}
+
+func NewUpdateIncrementalRateModelMasterResultFromDict(data map[string]interface{}) UpdateIncrementalRateModelMasterResult {
+    return UpdateIncrementalRateModelMasterResult {
+        Item: NewIncrementalRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UpdateIncrementalRateModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateIncrementalRateModelMasterResult) Pointer() *UpdateIncrementalRateModelMasterResult {
+    return &p
+}
+
+type DeleteIncrementalRateModelMasterResult struct {
+    Item *IncrementalRateModelMaster `json:"item"`
+}
+
+type DeleteIncrementalRateModelMasterAsyncResult struct {
+	result *DeleteIncrementalRateModelMasterResult
+	err    error
+}
+
+func NewDeleteIncrementalRateModelMasterResultFromJson(data string) DeleteIncrementalRateModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteIncrementalRateModelMasterResultFromDict(dict)
+}
+
+func NewDeleteIncrementalRateModelMasterResultFromDict(data map[string]interface{}) DeleteIncrementalRateModelMasterResult {
+    return DeleteIncrementalRateModelMasterResult {
+        Item: NewIncrementalRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p DeleteIncrementalRateModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p DeleteIncrementalRateModelMasterResult) Pointer() *DeleteIncrementalRateModelMasterResult {
+    return &p
+}
+
 type ExchangeResult struct {
     Item *RateModel `json:"item"`
     TransactionId *string `json:"transactionId"`
@@ -562,6 +786,197 @@ func (p ExchangeByStampSheetResult) ToDict() map[string]interface{} {
 }
 
 func (p ExchangeByStampSheetResult) Pointer() *ExchangeByStampSheetResult {
+    return &p
+}
+
+type IncrementalExchangeResult struct {
+    Item *IncrementalRateModel `json:"item"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
+}
+
+type IncrementalExchangeAsyncResult struct {
+	result *IncrementalExchangeResult
+	err    error
+}
+
+func NewIncrementalExchangeResultFromJson(data string) IncrementalExchangeResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementalExchangeResultFromDict(dict)
+}
+
+func NewIncrementalExchangeResultFromDict(data map[string]interface{}) IncrementalExchangeResult {
+    return IncrementalExchangeResult {
+        Item: NewIncrementalRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+    }
+}
+
+func (p IncrementalExchangeResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+    }
+}
+
+func (p IncrementalExchangeResult) Pointer() *IncrementalExchangeResult {
+    return &p
+}
+
+type IncrementalExchangeByUserIdResult struct {
+    Item *IncrementalRateModel `json:"item"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
+}
+
+type IncrementalExchangeByUserIdAsyncResult struct {
+	result *IncrementalExchangeByUserIdResult
+	err    error
+}
+
+func NewIncrementalExchangeByUserIdResultFromJson(data string) IncrementalExchangeByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementalExchangeByUserIdResultFromDict(dict)
+}
+
+func NewIncrementalExchangeByUserIdResultFromDict(data map[string]interface{}) IncrementalExchangeByUserIdResult {
+    return IncrementalExchangeByUserIdResult {
+        Item: NewIncrementalRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+    }
+}
+
+func (p IncrementalExchangeByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+    }
+}
+
+func (p IncrementalExchangeByUserIdResult) Pointer() *IncrementalExchangeByUserIdResult {
+    return &p
+}
+
+type IncrementalExchangeByStampSheetResult struct {
+    Item *IncrementalRateModel `json:"item"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
+}
+
+type IncrementalExchangeByStampSheetAsyncResult struct {
+	result *IncrementalExchangeByStampSheetResult
+	err    error
+}
+
+func NewIncrementalExchangeByStampSheetResultFromJson(data string) IncrementalExchangeByStampSheetResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementalExchangeByStampSheetResultFromDict(dict)
+}
+
+func NewIncrementalExchangeByStampSheetResultFromDict(data map[string]interface{}) IncrementalExchangeByStampSheetResult {
+    return IncrementalExchangeByStampSheetResult {
+        Item: NewIncrementalRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+    }
+}
+
+func (p IncrementalExchangeByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+    }
+}
+
+func (p IncrementalExchangeByStampSheetResult) Pointer() *IncrementalExchangeByStampSheetResult {
+    return &p
+}
+
+type UnlockIncrementalExchangeByUserIdResult struct {
+    Item *IncrementalRateModel `json:"item"`
+}
+
+type UnlockIncrementalExchangeByUserIdAsyncResult struct {
+	result *UnlockIncrementalExchangeByUserIdResult
+	err    error
+}
+
+func NewUnlockIncrementalExchangeByUserIdResultFromJson(data string) UnlockIncrementalExchangeByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnlockIncrementalExchangeByUserIdResultFromDict(dict)
+}
+
+func NewUnlockIncrementalExchangeByUserIdResultFromDict(data map[string]interface{}) UnlockIncrementalExchangeByUserIdResult {
+    return UnlockIncrementalExchangeByUserIdResult {
+        Item: NewIncrementalRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UnlockIncrementalExchangeByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UnlockIncrementalExchangeByUserIdResult) Pointer() *UnlockIncrementalExchangeByUserIdResult {
+    return &p
+}
+
+type UnlockIncrementalExchangeByStampSheetResult struct {
+    Item *IncrementalRateModel `json:"item"`
+}
+
+type UnlockIncrementalExchangeByStampSheetAsyncResult struct {
+	result *UnlockIncrementalExchangeByStampSheetResult
+	err    error
+}
+
+func NewUnlockIncrementalExchangeByStampSheetResultFromJson(data string) UnlockIncrementalExchangeByStampSheetResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnlockIncrementalExchangeByStampSheetResultFromDict(dict)
+}
+
+func NewUnlockIncrementalExchangeByStampSheetResultFromDict(data map[string]interface{}) UnlockIncrementalExchangeByStampSheetResult {
+    return UnlockIncrementalExchangeByStampSheetResult {
+        Item: NewIncrementalRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UnlockIncrementalExchangeByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UnlockIncrementalExchangeByStampSheetResult) Pointer() *UnlockIncrementalExchangeByStampSheetResult {
     return &p
 }
 

@@ -521,6 +521,281 @@ func (p DeleteRateModelMasterRequest) Pointer() *DeleteRateModelMasterRequest {
     return &p
 }
 
+type DescribeIncrementalRateModelsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+}
+
+func NewDescribeIncrementalRateModelsRequestFromJson(data string) DescribeIncrementalRateModelsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeIncrementalRateModelsRequestFromDict(dict)
+}
+
+func NewDescribeIncrementalRateModelsRequestFromDict(data map[string]interface{}) DescribeIncrementalRateModelsRequest {
+    return DescribeIncrementalRateModelsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
+}
+
+func (p DescribeIncrementalRateModelsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
+}
+
+func (p DescribeIncrementalRateModelsRequest) Pointer() *DescribeIncrementalRateModelsRequest {
+    return &p
+}
+
+type GetIncrementalRateModelRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+}
+
+func NewGetIncrementalRateModelRequestFromJson(data string) GetIncrementalRateModelRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetIncrementalRateModelRequestFromDict(dict)
+}
+
+func NewGetIncrementalRateModelRequestFromDict(data map[string]interface{}) GetIncrementalRateModelRequest {
+    return GetIncrementalRateModelRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+    }
+}
+
+func (p GetIncrementalRateModelRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+    }
+}
+
+func (p GetIncrementalRateModelRequest) Pointer() *GetIncrementalRateModelRequest {
+    return &p
+}
+
+type DescribeIncrementalRateModelMastersRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeIncrementalRateModelMastersRequestFromJson(data string) DescribeIncrementalRateModelMastersRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeIncrementalRateModelMastersRequestFromDict(dict)
+}
+
+func NewDescribeIncrementalRateModelMastersRequestFromDict(data map[string]interface{}) DescribeIncrementalRateModelMastersRequest {
+    return DescribeIncrementalRateModelMastersRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeIncrementalRateModelMastersRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeIncrementalRateModelMastersRequest) Pointer() *DescribeIncrementalRateModelMastersRequest {
+    return &p
+}
+
+type CreateIncrementalRateModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Name *string `json:"name"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+    ConsumeAction *ConsumeAction `json:"consumeAction"`
+    CalculateType *string `json:"calculateType"`
+    BaseValue *int64 `json:"baseValue"`
+    CoefficientValue *int64 `json:"coefficientValue"`
+    CalculateScriptId *string `json:"calculateScriptId"`
+    ExchangeCountId *string `json:"exchangeCountId"`
+    AcquireActions []AcquireAction `json:"acquireActions"`
+}
+
+func NewCreateIncrementalRateModelMasterRequestFromJson(data string) CreateIncrementalRateModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateIncrementalRateModelMasterRequestFromDict(dict)
+}
+
+func NewCreateIncrementalRateModelMasterRequestFromDict(data map[string]interface{}) CreateIncrementalRateModelMasterRequest {
+    return CreateIncrementalRateModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        ConsumeAction: NewConsumeActionFromDict(core.CastMap(data["consumeAction"])).Pointer(),
+        CalculateType: core.CastString(data["calculateType"]),
+        BaseValue: core.CastInt64(data["baseValue"]),
+        CoefficientValue: core.CastInt64(data["coefficientValue"]),
+        CalculateScriptId: core.CastString(data["calculateScriptId"]),
+        ExchangeCountId: core.CastString(data["exchangeCountId"]),
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+    }
+}
+
+func (p CreateIncrementalRateModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "name": p.Name,
+        "description": p.Description,
+        "metadata": p.Metadata,
+        "consumeAction": p.ConsumeAction.ToDict(),
+        "calculateType": p.CalculateType,
+        "baseValue": p.BaseValue,
+        "coefficientValue": p.CoefficientValue,
+        "calculateScriptId": p.CalculateScriptId,
+        "exchangeCountId": p.ExchangeCountId,
+        "acquireActions": CastAcquireActionsFromDict(
+            p.AcquireActions,
+        ),
+    }
+}
+
+func (p CreateIncrementalRateModelMasterRequest) Pointer() *CreateIncrementalRateModelMasterRequest {
+    return &p
+}
+
+type GetIncrementalRateModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+}
+
+func NewGetIncrementalRateModelMasterRequestFromJson(data string) GetIncrementalRateModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetIncrementalRateModelMasterRequestFromDict(dict)
+}
+
+func NewGetIncrementalRateModelMasterRequestFromDict(data map[string]interface{}) GetIncrementalRateModelMasterRequest {
+    return GetIncrementalRateModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+    }
+}
+
+func (p GetIncrementalRateModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+    }
+}
+
+func (p GetIncrementalRateModelMasterRequest) Pointer() *GetIncrementalRateModelMasterRequest {
+    return &p
+}
+
+type UpdateIncrementalRateModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+    ConsumeAction *ConsumeAction `json:"consumeAction"`
+    CalculateType *string `json:"calculateType"`
+    BaseValue *int64 `json:"baseValue"`
+    CoefficientValue *int64 `json:"coefficientValue"`
+    CalculateScriptId *string `json:"calculateScriptId"`
+    ExchangeCountId *string `json:"exchangeCountId"`
+    AcquireActions []AcquireAction `json:"acquireActions"`
+}
+
+func NewUpdateIncrementalRateModelMasterRequestFromJson(data string) UpdateIncrementalRateModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateIncrementalRateModelMasterRequestFromDict(dict)
+}
+
+func NewUpdateIncrementalRateModelMasterRequestFromDict(data map[string]interface{}) UpdateIncrementalRateModelMasterRequest {
+    return UpdateIncrementalRateModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        ConsumeAction: NewConsumeActionFromDict(core.CastMap(data["consumeAction"])).Pointer(),
+        CalculateType: core.CastString(data["calculateType"]),
+        BaseValue: core.CastInt64(data["baseValue"]),
+        CoefficientValue: core.CastInt64(data["coefficientValue"]),
+        CalculateScriptId: core.CastString(data["calculateScriptId"]),
+        ExchangeCountId: core.CastString(data["exchangeCountId"]),
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+    }
+}
+
+func (p UpdateIncrementalRateModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+        "description": p.Description,
+        "metadata": p.Metadata,
+        "consumeAction": p.ConsumeAction.ToDict(),
+        "calculateType": p.CalculateType,
+        "baseValue": p.BaseValue,
+        "coefficientValue": p.CoefficientValue,
+        "calculateScriptId": p.CalculateScriptId,
+        "exchangeCountId": p.ExchangeCountId,
+        "acquireActions": CastAcquireActionsFromDict(
+            p.AcquireActions,
+        ),
+    }
+}
+
+func (p UpdateIncrementalRateModelMasterRequest) Pointer() *UpdateIncrementalRateModelMasterRequest {
+    return &p
+}
+
+type DeleteIncrementalRateModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+}
+
+func NewDeleteIncrementalRateModelMasterRequestFromJson(data string) DeleteIncrementalRateModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteIncrementalRateModelMasterRequestFromDict(dict)
+}
+
+func NewDeleteIncrementalRateModelMasterRequestFromDict(data map[string]interface{}) DeleteIncrementalRateModelMasterRequest {
+    return DeleteIncrementalRateModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+    }
+}
+
+func (p DeleteIncrementalRateModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+    }
+}
+
+func (p DeleteIncrementalRateModelMasterRequest) Pointer() *DeleteIncrementalRateModelMasterRequest {
+    return &p
+}
+
 type ExchangeRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
@@ -635,6 +910,197 @@ func (p ExchangeByStampSheetRequest) ToDict() map[string]interface{} {
 }
 
 func (p ExchangeByStampSheetRequest) Pointer() *ExchangeByStampSheetRequest {
+    return &p
+}
+
+type IncrementalExchangeRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+    AccessToken *string `json:"accessToken"`
+    Count *int32 `json:"count"`
+    Config []Config `json:"config"`
+}
+
+func NewIncrementalExchangeRequestFromJson(data string) IncrementalExchangeRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementalExchangeRequestFromDict(dict)
+}
+
+func NewIncrementalExchangeRequestFromDict(data map[string]interface{}) IncrementalExchangeRequest {
+    return IncrementalExchangeRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        Count: core.CastInt32(data["count"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
+}
+
+func (p IncrementalExchangeRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+        "accessToken": p.AccessToken,
+        "count": p.Count,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
+}
+
+func (p IncrementalExchangeRequest) Pointer() *IncrementalExchangeRequest {
+    return &p
+}
+
+type IncrementalExchangeByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+    UserId *string `json:"userId"`
+    Count *int32 `json:"count"`
+    Config []Config `json:"config"`
+}
+
+func NewIncrementalExchangeByUserIdRequestFromJson(data string) IncrementalExchangeByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementalExchangeByUserIdRequestFromDict(dict)
+}
+
+func NewIncrementalExchangeByUserIdRequestFromDict(data map[string]interface{}) IncrementalExchangeByUserIdRequest {
+    return IncrementalExchangeByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+        UserId: core.CastString(data["userId"]),
+        Count: core.CastInt32(data["count"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
+}
+
+func (p IncrementalExchangeByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+        "userId": p.UserId,
+        "count": p.Count,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
+}
+
+func (p IncrementalExchangeByUserIdRequest) Pointer() *IncrementalExchangeByUserIdRequest {
+    return &p
+}
+
+type IncrementalExchangeByStampSheetRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewIncrementalExchangeByStampSheetRequestFromJson(data string) IncrementalExchangeByStampSheetRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementalExchangeByStampSheetRequestFromDict(dict)
+}
+
+func NewIncrementalExchangeByStampSheetRequestFromDict(data map[string]interface{}) IncrementalExchangeByStampSheetRequest {
+    return IncrementalExchangeByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p IncrementalExchangeByStampSheetRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p IncrementalExchangeByStampSheetRequest) Pointer() *IncrementalExchangeByStampSheetRequest {
+    return &p
+}
+
+type UnlockIncrementalExchangeByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+    UserId *string `json:"userId"`
+    Config []Config `json:"config"`
+    LockTransactionId *string `json:"lockTransactionId"`
+}
+
+func NewUnlockIncrementalExchangeByUserIdRequestFromJson(data string) UnlockIncrementalExchangeByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnlockIncrementalExchangeByUserIdRequestFromDict(dict)
+}
+
+func NewUnlockIncrementalExchangeByUserIdRequestFromDict(data map[string]interface{}) UnlockIncrementalExchangeByUserIdRequest {
+    return UnlockIncrementalExchangeByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+        UserId: core.CastString(data["userId"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+        LockTransactionId: core.CastString(data["lockTransactionId"]),
+    }
+}
+
+func (p UnlockIncrementalExchangeByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+        "userId": p.UserId,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+        "lockTransactionId": p.LockTransactionId,
+    }
+}
+
+func (p UnlockIncrementalExchangeByUserIdRequest) Pointer() *UnlockIncrementalExchangeByUserIdRequest {
+    return &p
+}
+
+type UnlockIncrementalExchangeByStampSheetRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewUnlockIncrementalExchangeByStampSheetRequestFromJson(data string) UnlockIncrementalExchangeByStampSheetRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnlockIncrementalExchangeByStampSheetRequestFromDict(dict)
+}
+
+func NewUnlockIncrementalExchangeByStampSheetRequestFromDict(data map[string]interface{}) UnlockIncrementalExchangeByStampSheetRequest {
+    return UnlockIncrementalExchangeByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p UnlockIncrementalExchangeByStampSheetRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p UnlockIncrementalExchangeByStampSheetRequest) Pointer() *UnlockIncrementalExchangeByStampSheetRequest {
     return &p
 }
 

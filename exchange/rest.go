@@ -1282,6 +1282,691 @@ func (p Gs2ExchangeRestClient) DeleteRateModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
+func describeIncrementalRateModelsAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeIncrementalRateModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeIncrementalRateModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeIncrementalRateModelsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeIncrementalRateModelsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeIncrementalRateModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeIncrementalRateModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) DescribeIncrementalRateModelsAsync(
+	request *DescribeIncrementalRateModelsRequest,
+	callback chan<- DescribeIncrementalRateModelsAsyncResult,
+) {
+	path := "/{namespaceName}/incremental/model"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go describeIncrementalRateModelsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) DescribeIncrementalRateModels(
+	request *DescribeIncrementalRateModelsRequest,
+) (*DescribeIncrementalRateModelsResult, error) {
+	callback := make(chan DescribeIncrementalRateModelsAsyncResult, 1)
+	go p.DescribeIncrementalRateModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getIncrementalRateModelAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetIncrementalRateModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetIncrementalRateModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetIncrementalRateModelResult
+	if asyncResult.Err != nil {
+		callback <- GetIncrementalRateModelAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetIncrementalRateModelAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetIncrementalRateModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) GetIncrementalRateModelAsync(
+	request *GetIncrementalRateModelRequest,
+	callback chan<- GetIncrementalRateModelAsyncResult,
+) {
+	path := "/{namespaceName}/incremental/model/{rateName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getIncrementalRateModelAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) GetIncrementalRateModel(
+	request *GetIncrementalRateModelRequest,
+) (*GetIncrementalRateModelResult, error) {
+	callback := make(chan GetIncrementalRateModelAsyncResult, 1)
+	go p.GetIncrementalRateModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeIncrementalRateModelMastersAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeIncrementalRateModelMastersAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeIncrementalRateModelMastersAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeIncrementalRateModelMastersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeIncrementalRateModelMastersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeIncrementalRateModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeIncrementalRateModelMastersAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) DescribeIncrementalRateModelMastersAsync(
+	request *DescribeIncrementalRateModelMastersRequest,
+	callback chan<- DescribeIncrementalRateModelMastersAsyncResult,
+) {
+	path := "/{namespaceName}/incremental/master/model"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go describeIncrementalRateModelMastersAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) DescribeIncrementalRateModelMasters(
+	request *DescribeIncrementalRateModelMastersRequest,
+) (*DescribeIncrementalRateModelMastersResult, error) {
+	callback := make(chan DescribeIncrementalRateModelMastersAsyncResult, 1)
+	go p.DescribeIncrementalRateModelMastersAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func createIncrementalRateModelMasterAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- CreateIncrementalRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateIncrementalRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateIncrementalRateModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- CreateIncrementalRateModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateIncrementalRateModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- CreateIncrementalRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) CreateIncrementalRateModelMasterAsync(
+	request *CreateIncrementalRateModelMasterRequest,
+	callback chan<- CreateIncrementalRateModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/incremental/master/model"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ConsumeAction != nil {
+        bodies["consumeAction"] = request.ConsumeAction.ToDict()
+    }
+    if request.CalculateType != nil && *request.CalculateType != "" {
+        bodies["calculateType"] = *request.CalculateType
+    }
+    if request.BaseValue != nil {
+        bodies["baseValue"] = *request.BaseValue
+    }
+    if request.CoefficientValue != nil {
+        bodies["coefficientValue"] = *request.CoefficientValue
+    }
+    if request.CalculateScriptId != nil && *request.CalculateScriptId != "" {
+        bodies["calculateScriptId"] = *request.CalculateScriptId
+    }
+    if request.ExchangeCountId != nil && *request.ExchangeCountId != "" {
+        bodies["exchangeCountId"] = *request.ExchangeCountId
+    }
+    if request.AcquireActions != nil {
+        var _acquireActions []interface {}
+        for _, item := range request.AcquireActions {
+            _acquireActions = append(_acquireActions, item)
+        }
+        bodies["acquireActions"] = _acquireActions
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go createIncrementalRateModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) CreateIncrementalRateModelMaster(
+	request *CreateIncrementalRateModelMasterRequest,
+) (*CreateIncrementalRateModelMasterResult, error) {
+	callback := make(chan CreateIncrementalRateModelMasterAsyncResult, 1)
+	go p.CreateIncrementalRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getIncrementalRateModelMasterAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetIncrementalRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetIncrementalRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetIncrementalRateModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- GetIncrementalRateModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetIncrementalRateModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetIncrementalRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) GetIncrementalRateModelMasterAsync(
+	request *GetIncrementalRateModelMasterRequest,
+	callback chan<- GetIncrementalRateModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/incremental/master/model/{rateName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getIncrementalRateModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) GetIncrementalRateModelMaster(
+	request *GetIncrementalRateModelMasterRequest,
+) (*GetIncrementalRateModelMasterResult, error) {
+	callback := make(chan GetIncrementalRateModelMasterAsyncResult, 1)
+	go p.GetIncrementalRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func updateIncrementalRateModelMasterAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- UpdateIncrementalRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateIncrementalRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateIncrementalRateModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- UpdateIncrementalRateModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateIncrementalRateModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- UpdateIncrementalRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) UpdateIncrementalRateModelMasterAsync(
+	request *UpdateIncrementalRateModelMasterRequest,
+	callback chan<- UpdateIncrementalRateModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/incremental/master/model/{rateName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ConsumeAction != nil {
+        bodies["consumeAction"] = request.ConsumeAction.ToDict()
+    }
+    if request.CalculateType != nil && *request.CalculateType != "" {
+        bodies["calculateType"] = *request.CalculateType
+    }
+    if request.BaseValue != nil {
+        bodies["baseValue"] = *request.BaseValue
+    }
+    if request.CoefficientValue != nil {
+        bodies["coefficientValue"] = *request.CoefficientValue
+    }
+    if request.CalculateScriptId != nil && *request.CalculateScriptId != "" {
+        bodies["calculateScriptId"] = *request.CalculateScriptId
+    }
+    if request.ExchangeCountId != nil && *request.ExchangeCountId != "" {
+        bodies["exchangeCountId"] = *request.ExchangeCountId
+    }
+    if request.AcquireActions != nil {
+        var _acquireActions []interface {}
+        for _, item := range request.AcquireActions {
+            _acquireActions = append(_acquireActions, item)
+        }
+        bodies["acquireActions"] = _acquireActions
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go updateIncrementalRateModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) UpdateIncrementalRateModelMaster(
+	request *UpdateIncrementalRateModelMasterRequest,
+) (*UpdateIncrementalRateModelMasterResult, error) {
+	callback := make(chan UpdateIncrementalRateModelMasterAsyncResult, 1)
+	go p.UpdateIncrementalRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteIncrementalRateModelMasterAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteIncrementalRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteIncrementalRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteIncrementalRateModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- DeleteIncrementalRateModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteIncrementalRateModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteIncrementalRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) DeleteIncrementalRateModelMasterAsync(
+	request *DeleteIncrementalRateModelMasterRequest,
+	callback chan<- DeleteIncrementalRateModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/incremental/master/model/{rateName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go deleteIncrementalRateModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) DeleteIncrementalRateModelMaster(
+	request *DeleteIncrementalRateModelMasterRequest,
+) (*DeleteIncrementalRateModelMasterResult, error) {
+	callback := make(chan DeleteIncrementalRateModelMasterAsyncResult, 1)
+	go p.DeleteIncrementalRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func exchangeAsyncHandler(
 	client Gs2ExchangeRestClient,
 	job *core.NetworkJob,
@@ -1581,6 +2266,510 @@ func (p Gs2ExchangeRestClient) ExchangeByStampSheet(
 ) (*ExchangeByStampSheetResult, error) {
 	callback := make(chan ExchangeByStampSheetAsyncResult, 1)
 	go p.ExchangeByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func incrementalExchangeAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- IncrementalExchangeAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IncrementalExchangeAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IncrementalExchangeResult
+	if asyncResult.Err != nil {
+		callback <- IncrementalExchangeAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IncrementalExchangeAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- IncrementalExchangeAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) IncrementalExchangeAsync(
+	request *IncrementalExchangeRequest,
+	callback chan<- IncrementalExchangeAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/incremental/exchange/{rateName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go incrementalExchangeAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) IncrementalExchange(
+	request *IncrementalExchangeRequest,
+) (*IncrementalExchangeResult, error) {
+	callback := make(chan IncrementalExchangeAsyncResult, 1)
+	go p.IncrementalExchangeAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func incrementalExchangeByUserIdAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- IncrementalExchangeByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IncrementalExchangeByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IncrementalExchangeByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- IncrementalExchangeByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IncrementalExchangeByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- IncrementalExchangeByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) IncrementalExchangeByUserIdAsync(
+	request *IncrementalExchangeByUserIdRequest,
+	callback chan<- IncrementalExchangeByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/incremental/exchange/{rateName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go incrementalExchangeByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) IncrementalExchangeByUserId(
+	request *IncrementalExchangeByUserIdRequest,
+) (*IncrementalExchangeByUserIdResult, error) {
+	callback := make(chan IncrementalExchangeByUserIdAsyncResult, 1)
+	go p.IncrementalExchangeByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func incrementalExchangeByStampSheetAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- IncrementalExchangeByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IncrementalExchangeByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IncrementalExchangeByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- IncrementalExchangeByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IncrementalExchangeByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- IncrementalExchangeByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) IncrementalExchangeByStampSheetAsync(
+	request *IncrementalExchangeByStampSheetRequest,
+	callback chan<- IncrementalExchangeByStampSheetAsyncResult,
+) {
+	path := "/stamp/incremental/exchange"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go incrementalExchangeByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) IncrementalExchangeByStampSheet(
+	request *IncrementalExchangeByStampSheetRequest,
+) (*IncrementalExchangeByStampSheetResult, error) {
+	callback := make(chan IncrementalExchangeByStampSheetAsyncResult, 1)
+	go p.IncrementalExchangeByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func unlockIncrementalExchangeByUserIdAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- UnlockIncrementalExchangeByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnlockIncrementalExchangeByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnlockIncrementalExchangeByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- UnlockIncrementalExchangeByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnlockIncrementalExchangeByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- UnlockIncrementalExchangeByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) UnlockIncrementalExchangeByUserIdAsync(
+	request *UnlockIncrementalExchangeByUserIdRequest,
+	callback chan<- UnlockIncrementalExchangeByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/incremental/exchange/{rateName}/unlock"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
+    if request.LockTransactionId != nil && *request.LockTransactionId != "" {
+        bodies["lockTransactionId"] = *request.LockTransactionId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go unlockIncrementalExchangeByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) UnlockIncrementalExchangeByUserId(
+	request *UnlockIncrementalExchangeByUserIdRequest,
+) (*UnlockIncrementalExchangeByUserIdResult, error) {
+	callback := make(chan UnlockIncrementalExchangeByUserIdAsyncResult, 1)
+	go p.UnlockIncrementalExchangeByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func unlockIncrementalExchangeByStampSheetAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- UnlockIncrementalExchangeByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnlockIncrementalExchangeByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnlockIncrementalExchangeByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- UnlockIncrementalExchangeByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnlockIncrementalExchangeByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- UnlockIncrementalExchangeByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) UnlockIncrementalExchangeByStampSheetAsync(
+	request *UnlockIncrementalExchangeByStampSheetRequest,
+	callback chan<- UnlockIncrementalExchangeByStampSheetAsyncResult,
+) {
+	path := "/stamp/incremental/exchange/unlock"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go unlockIncrementalExchangeByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) UnlockIncrementalExchangeByStampSheet(
+	request *UnlockIncrementalExchangeByStampSheetRequest,
+) (*UnlockIncrementalExchangeByStampSheetResult, error) {
+	callback := make(chan UnlockIncrementalExchangeByStampSheetAsyncResult, 1)
+	go p.UnlockIncrementalExchangeByStampSheetAsync(
 		request,
 		callback,
 	)

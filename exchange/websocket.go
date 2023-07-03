@@ -1227,6 +1227,656 @@ func (p Gs2ExchangeWebSocketClient) DeleteRateModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2ExchangeWebSocketClient) describeIncrementalRateModelsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeIncrementalRateModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeIncrementalRateModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeIncrementalRateModelsResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeIncrementalRateModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DescribeIncrementalRateModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeWebSocketClient) DescribeIncrementalRateModelsAsync(
+	request *DescribeIncrementalRateModelsRequest,
+	callback chan<- DescribeIncrementalRateModelsAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "exchange",
+    		"component": "incrementalRateModel",
+    		"function": "describeIncrementalRateModels",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeIncrementalRateModelsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeWebSocketClient) DescribeIncrementalRateModels(
+	request *DescribeIncrementalRateModelsRequest,
+) (*DescribeIncrementalRateModelsResult, error) {
+	callback := make(chan DescribeIncrementalRateModelsAsyncResult, 1)
+	go p.DescribeIncrementalRateModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExchangeWebSocketClient) getIncrementalRateModelAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetIncrementalRateModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetIncrementalRateModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetIncrementalRateModelResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetIncrementalRateModelAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- GetIncrementalRateModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeWebSocketClient) GetIncrementalRateModelAsync(
+	request *GetIncrementalRateModelRequest,
+	callback chan<- GetIncrementalRateModelAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "exchange",
+    		"component": "incrementalRateModel",
+    		"function": "getIncrementalRateModel",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getIncrementalRateModelAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeWebSocketClient) GetIncrementalRateModel(
+	request *GetIncrementalRateModelRequest,
+) (*GetIncrementalRateModelResult, error) {
+	callback := make(chan GetIncrementalRateModelAsyncResult, 1)
+	go p.GetIncrementalRateModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExchangeWebSocketClient) describeIncrementalRateModelMastersAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeIncrementalRateModelMastersAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeIncrementalRateModelMastersAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeIncrementalRateModelMastersResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeIncrementalRateModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DescribeIncrementalRateModelMastersAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeWebSocketClient) DescribeIncrementalRateModelMastersAsync(
+	request *DescribeIncrementalRateModelMastersRequest,
+	callback chan<- DescribeIncrementalRateModelMastersAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "exchange",
+    		"component": "incrementalRateModelMaster",
+    		"function": "describeIncrementalRateModelMasters",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeIncrementalRateModelMastersAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeWebSocketClient) DescribeIncrementalRateModelMasters(
+	request *DescribeIncrementalRateModelMastersRequest,
+) (*DescribeIncrementalRateModelMastersResult, error) {
+	callback := make(chan DescribeIncrementalRateModelMastersAsyncResult, 1)
+	go p.DescribeIncrementalRateModelMastersAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExchangeWebSocketClient) createIncrementalRateModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- CreateIncrementalRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateIncrementalRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateIncrementalRateModelMasterResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateIncrementalRateModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- CreateIncrementalRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeWebSocketClient) CreateIncrementalRateModelMasterAsync(
+	request *CreateIncrementalRateModelMasterRequest,
+	callback chan<- CreateIncrementalRateModelMasterAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "exchange",
+    		"component": "incrementalRateModelMaster",
+    		"function": "createIncrementalRateModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ConsumeAction != nil {
+        bodies["consumeAction"] = request.ConsumeAction.ToDict()
+    }
+    if request.CalculateType != nil && *request.CalculateType != "" {
+        bodies["calculateType"] = *request.CalculateType
+    }
+    if request.BaseValue != nil {
+        bodies["baseValue"] = *request.BaseValue
+    }
+    if request.CoefficientValue != nil {
+        bodies["coefficientValue"] = *request.CoefficientValue
+    }
+    if request.CalculateScriptId != nil && *request.CalculateScriptId != "" {
+        bodies["calculateScriptId"] = *request.CalculateScriptId
+    }
+    if request.ExchangeCountId != nil && *request.ExchangeCountId != "" {
+        bodies["exchangeCountId"] = *request.ExchangeCountId
+    }
+    if request.AcquireActions != nil {
+        var _acquireActions []interface {}
+        for _, item := range request.AcquireActions {
+            _acquireActions = append(_acquireActions, item)
+        }
+        bodies["acquireActions"] = _acquireActions
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.createIncrementalRateModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeWebSocketClient) CreateIncrementalRateModelMaster(
+	request *CreateIncrementalRateModelMasterRequest,
+) (*CreateIncrementalRateModelMasterResult, error) {
+	callback := make(chan CreateIncrementalRateModelMasterAsyncResult, 1)
+	go p.CreateIncrementalRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExchangeWebSocketClient) getIncrementalRateModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetIncrementalRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetIncrementalRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetIncrementalRateModelMasterResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetIncrementalRateModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- GetIncrementalRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeWebSocketClient) GetIncrementalRateModelMasterAsync(
+	request *GetIncrementalRateModelMasterRequest,
+	callback chan<- GetIncrementalRateModelMasterAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "exchange",
+    		"component": "incrementalRateModelMaster",
+    		"function": "getIncrementalRateModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getIncrementalRateModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeWebSocketClient) GetIncrementalRateModelMaster(
+	request *GetIncrementalRateModelMasterRequest,
+) (*GetIncrementalRateModelMasterResult, error) {
+	callback := make(chan GetIncrementalRateModelMasterAsyncResult, 1)
+	go p.GetIncrementalRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExchangeWebSocketClient) updateIncrementalRateModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UpdateIncrementalRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateIncrementalRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateIncrementalRateModelMasterResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateIncrementalRateModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- UpdateIncrementalRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeWebSocketClient) UpdateIncrementalRateModelMasterAsync(
+	request *UpdateIncrementalRateModelMasterRequest,
+	callback chan<- UpdateIncrementalRateModelMasterAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "exchange",
+    		"component": "incrementalRateModelMaster",
+    		"function": "updateIncrementalRateModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ConsumeAction != nil {
+        bodies["consumeAction"] = request.ConsumeAction.ToDict()
+    }
+    if request.CalculateType != nil && *request.CalculateType != "" {
+        bodies["calculateType"] = *request.CalculateType
+    }
+    if request.BaseValue != nil {
+        bodies["baseValue"] = *request.BaseValue
+    }
+    if request.CoefficientValue != nil {
+        bodies["coefficientValue"] = *request.CoefficientValue
+    }
+    if request.CalculateScriptId != nil && *request.CalculateScriptId != "" {
+        bodies["calculateScriptId"] = *request.CalculateScriptId
+    }
+    if request.ExchangeCountId != nil && *request.ExchangeCountId != "" {
+        bodies["exchangeCountId"] = *request.ExchangeCountId
+    }
+    if request.AcquireActions != nil {
+        var _acquireActions []interface {}
+        for _, item := range request.AcquireActions {
+            _acquireActions = append(_acquireActions, item)
+        }
+        bodies["acquireActions"] = _acquireActions
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.updateIncrementalRateModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeWebSocketClient) UpdateIncrementalRateModelMaster(
+	request *UpdateIncrementalRateModelMasterRequest,
+) (*UpdateIncrementalRateModelMasterResult, error) {
+	callback := make(chan UpdateIncrementalRateModelMasterAsyncResult, 1)
+	go p.UpdateIncrementalRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExchangeWebSocketClient) deleteIncrementalRateModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteIncrementalRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteIncrementalRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteIncrementalRateModelMasterResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteIncrementalRateModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DeleteIncrementalRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeWebSocketClient) DeleteIncrementalRateModelMasterAsync(
+	request *DeleteIncrementalRateModelMasterRequest,
+	callback chan<- DeleteIncrementalRateModelMasterAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "exchange",
+    		"component": "incrementalRateModelMaster",
+    		"function": "deleteIncrementalRateModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.deleteIncrementalRateModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeWebSocketClient) DeleteIncrementalRateModelMaster(
+	request *DeleteIncrementalRateModelMasterRequest,
+) (*DeleteIncrementalRateModelMasterResult, error) {
+	callback := make(chan DeleteIncrementalRateModelMasterAsyncResult, 1)
+	go p.DeleteIncrementalRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2ExchangeWebSocketClient) exchangeAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- ExchangeAsyncResult,
@@ -1507,6 +2157,477 @@ func (p Gs2ExchangeWebSocketClient) ExchangeByStampSheet(
 ) (*ExchangeByStampSheetResult, error) {
 	callback := make(chan ExchangeByStampSheetAsyncResult, 1)
 	go p.ExchangeByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExchangeWebSocketClient) incrementalExchangeAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- IncrementalExchangeAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IncrementalExchangeAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IncrementalExchangeResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IncrementalExchangeAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- IncrementalExchangeAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeWebSocketClient) IncrementalExchangeAsync(
+	request *IncrementalExchangeRequest,
+	callback chan<- IncrementalExchangeAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "exchange",
+    		"component": "exchange",
+    		"function": "incrementalExchange",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.incrementalExchangeAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeWebSocketClient) IncrementalExchange(
+	request *IncrementalExchangeRequest,
+) (*IncrementalExchangeResult, error) {
+	callback := make(chan IncrementalExchangeAsyncResult, 1)
+	go p.IncrementalExchangeAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExchangeWebSocketClient) incrementalExchangeByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- IncrementalExchangeByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IncrementalExchangeByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IncrementalExchangeByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IncrementalExchangeByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- IncrementalExchangeByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeWebSocketClient) IncrementalExchangeByUserIdAsync(
+	request *IncrementalExchangeByUserIdRequest,
+	callback chan<- IncrementalExchangeByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "exchange",
+    		"component": "exchange",
+    		"function": "incrementalExchangeByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.incrementalExchangeByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeWebSocketClient) IncrementalExchangeByUserId(
+	request *IncrementalExchangeByUserIdRequest,
+) (*IncrementalExchangeByUserIdResult, error) {
+	callback := make(chan IncrementalExchangeByUserIdAsyncResult, 1)
+	go p.IncrementalExchangeByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExchangeWebSocketClient) incrementalExchangeByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- IncrementalExchangeByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IncrementalExchangeByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IncrementalExchangeByStampSheetResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IncrementalExchangeByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- IncrementalExchangeByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeWebSocketClient) IncrementalExchangeByStampSheetAsync(
+	request *IncrementalExchangeByStampSheetRequest,
+	callback chan<- IncrementalExchangeByStampSheetAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "exchange",
+    		"component": "exchange",
+    		"function": "incrementalExchangeByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.incrementalExchangeByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeWebSocketClient) IncrementalExchangeByStampSheet(
+	request *IncrementalExchangeByStampSheetRequest,
+) (*IncrementalExchangeByStampSheetResult, error) {
+	callback := make(chan IncrementalExchangeByStampSheetAsyncResult, 1)
+	go p.IncrementalExchangeByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExchangeWebSocketClient) unlockIncrementalExchangeByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UnlockIncrementalExchangeByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnlockIncrementalExchangeByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnlockIncrementalExchangeByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnlockIncrementalExchangeByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- UnlockIncrementalExchangeByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeWebSocketClient) UnlockIncrementalExchangeByUserIdAsync(
+	request *UnlockIncrementalExchangeByUserIdRequest,
+	callback chan<- UnlockIncrementalExchangeByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "exchange",
+    		"component": "exchange",
+    		"function": "unlockIncrementalExchangeByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
+    if request.LockTransactionId != nil && *request.LockTransactionId != "" {
+        bodies["lockTransactionId"] = *request.LockTransactionId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.unlockIncrementalExchangeByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeWebSocketClient) UnlockIncrementalExchangeByUserId(
+	request *UnlockIncrementalExchangeByUserIdRequest,
+) (*UnlockIncrementalExchangeByUserIdResult, error) {
+	callback := make(chan UnlockIncrementalExchangeByUserIdAsyncResult, 1)
+	go p.UnlockIncrementalExchangeByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExchangeWebSocketClient) unlockIncrementalExchangeByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UnlockIncrementalExchangeByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnlockIncrementalExchangeByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnlockIncrementalExchangeByStampSheetResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnlockIncrementalExchangeByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- UnlockIncrementalExchangeByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeWebSocketClient) UnlockIncrementalExchangeByStampSheetAsync(
+	request *UnlockIncrementalExchangeByStampSheetRequest,
+	callback chan<- UnlockIncrementalExchangeByStampSheetAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "exchange",
+    		"component": "exchange",
+    		"function": "unlockIncrementalExchangeByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.unlockIncrementalExchangeByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeWebSocketClient) UnlockIncrementalExchangeByStampSheet(
+	request *UnlockIncrementalExchangeByStampSheetRequest,
+) (*UnlockIncrementalExchangeByStampSheetResult, error) {
+	callback := make(chan UnlockIncrementalExchangeByStampSheetAsyncResult, 1)
+	go p.UnlockIncrementalExchangeByStampSheetAsync(
 		request,
 		callback,
 	)
