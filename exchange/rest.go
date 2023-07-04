@@ -2643,13 +2643,6 @@ func (p Gs2ExchangeRestClient) UnlockIncrementalExchangeByUserIdAsync(
 
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
-    if request.Config != nil {
-        var _config []interface {}
-        for _, item := range request.Config {
-            _config = append(_config, item)
-        }
-        bodies["config"] = _config
-    }
     if request.LockTransactionId != nil && *request.LockTransactionId != "" {
         bodies["lockTransactionId"] = *request.LockTransactionId
     }

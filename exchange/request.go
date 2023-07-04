@@ -1037,7 +1037,6 @@ type UnlockIncrementalExchangeByUserIdRequest struct {
     NamespaceName *string `json:"namespaceName"`
     RateName *string `json:"rateName"`
     UserId *string `json:"userId"`
-    Config []Config `json:"config"`
     LockTransactionId *string `json:"lockTransactionId"`
 }
 
@@ -1052,7 +1051,6 @@ func NewUnlockIncrementalExchangeByUserIdRequestFromDict(data map[string]interfa
         NamespaceName: core.CastString(data["namespaceName"]),
         RateName: core.CastString(data["rateName"]),
         UserId: core.CastString(data["userId"]),
-        Config: CastConfigs(core.CastArray(data["config"])),
         LockTransactionId: core.CastString(data["lockTransactionId"]),
     }
 }
@@ -1062,9 +1060,6 @@ func (p UnlockIncrementalExchangeByUserIdRequest) ToDict() map[string]interface{
         "namespaceName": p.NamespaceName,
         "rateName": p.RateName,
         "userId": p.UserId,
-        "config": CastConfigsFromDict(
-            p.Config,
-        ),
         "lockTransactionId": p.LockTransactionId,
     }
 }

@@ -2513,13 +2513,6 @@ func (p Gs2ExchangeWebSocketClient) UnlockIncrementalExchangeByUserIdAsync(
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
     }
-    if request.Config != nil {
-        var _config []interface {}
-        for _, item := range request.Config {
-            _config = append(_config, item)
-        }
-        bodies["config"] = _config
-    }
     if request.LockTransactionId != nil && *request.LockTransactionId != "" {
         bodies["lockTransactionId"] = *request.LockTransactionId
     }
