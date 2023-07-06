@@ -737,6 +737,485 @@ func (p GetItemModelRequest) Pointer() *GetItemModelRequest {
     return &p
 }
 
+type DescribeSimpleInventoryModelMastersRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeSimpleInventoryModelMastersRequestFromJson(data string) DescribeSimpleInventoryModelMastersRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSimpleInventoryModelMastersRequestFromDict(dict)
+}
+
+func NewDescribeSimpleInventoryModelMastersRequestFromDict(data map[string]interface{}) DescribeSimpleInventoryModelMastersRequest {
+    return DescribeSimpleInventoryModelMastersRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeSimpleInventoryModelMastersRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeSimpleInventoryModelMastersRequest) Pointer() *DescribeSimpleInventoryModelMastersRequest {
+    return &p
+}
+
+type CreateSimpleInventoryModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Name *string `json:"name"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+}
+
+func NewCreateSimpleInventoryModelMasterRequestFromJson(data string) CreateSimpleInventoryModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateSimpleInventoryModelMasterRequestFromDict(dict)
+}
+
+func NewCreateSimpleInventoryModelMasterRequestFromDict(data map[string]interface{}) CreateSimpleInventoryModelMasterRequest {
+    return CreateSimpleInventoryModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+    }
+}
+
+func (p CreateSimpleInventoryModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "name": p.Name,
+        "description": p.Description,
+        "metadata": p.Metadata,
+    }
+}
+
+func (p CreateSimpleInventoryModelMasterRequest) Pointer() *CreateSimpleInventoryModelMasterRequest {
+    return &p
+}
+
+type GetSimpleInventoryModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+}
+
+func NewGetSimpleInventoryModelMasterRequestFromJson(data string) GetSimpleInventoryModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleInventoryModelMasterRequestFromDict(dict)
+}
+
+func NewGetSimpleInventoryModelMasterRequestFromDict(data map[string]interface{}) GetSimpleInventoryModelMasterRequest {
+    return GetSimpleInventoryModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+    }
+}
+
+func (p GetSimpleInventoryModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+    }
+}
+
+func (p GetSimpleInventoryModelMasterRequest) Pointer() *GetSimpleInventoryModelMasterRequest {
+    return &p
+}
+
+type UpdateSimpleInventoryModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+}
+
+func NewUpdateSimpleInventoryModelMasterRequestFromJson(data string) UpdateSimpleInventoryModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateSimpleInventoryModelMasterRequestFromDict(dict)
+}
+
+func NewUpdateSimpleInventoryModelMasterRequestFromDict(data map[string]interface{}) UpdateSimpleInventoryModelMasterRequest {
+    return UpdateSimpleInventoryModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+    }
+}
+
+func (p UpdateSimpleInventoryModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "description": p.Description,
+        "metadata": p.Metadata,
+    }
+}
+
+func (p UpdateSimpleInventoryModelMasterRequest) Pointer() *UpdateSimpleInventoryModelMasterRequest {
+    return &p
+}
+
+type DeleteSimpleInventoryModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+}
+
+func NewDeleteSimpleInventoryModelMasterRequestFromJson(data string) DeleteSimpleInventoryModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteSimpleInventoryModelMasterRequestFromDict(dict)
+}
+
+func NewDeleteSimpleInventoryModelMasterRequestFromDict(data map[string]interface{}) DeleteSimpleInventoryModelMasterRequest {
+    return DeleteSimpleInventoryModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+    }
+}
+
+func (p DeleteSimpleInventoryModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+    }
+}
+
+func (p DeleteSimpleInventoryModelMasterRequest) Pointer() *DeleteSimpleInventoryModelMasterRequest {
+    return &p
+}
+
+type DescribeSimpleInventoryModelsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+}
+
+func NewDescribeSimpleInventoryModelsRequestFromJson(data string) DescribeSimpleInventoryModelsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSimpleInventoryModelsRequestFromDict(dict)
+}
+
+func NewDescribeSimpleInventoryModelsRequestFromDict(data map[string]interface{}) DescribeSimpleInventoryModelsRequest {
+    return DescribeSimpleInventoryModelsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
+}
+
+func (p DescribeSimpleInventoryModelsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
+}
+
+func (p DescribeSimpleInventoryModelsRequest) Pointer() *DescribeSimpleInventoryModelsRequest {
+    return &p
+}
+
+type GetSimpleInventoryModelRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+}
+
+func NewGetSimpleInventoryModelRequestFromJson(data string) GetSimpleInventoryModelRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleInventoryModelRequestFromDict(dict)
+}
+
+func NewGetSimpleInventoryModelRequestFromDict(data map[string]interface{}) GetSimpleInventoryModelRequest {
+    return GetSimpleInventoryModelRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+    }
+}
+
+func (p GetSimpleInventoryModelRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+    }
+}
+
+func (p GetSimpleInventoryModelRequest) Pointer() *GetSimpleInventoryModelRequest {
+    return &p
+}
+
+type DescribeSimpleItemModelMastersRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeSimpleItemModelMastersRequestFromJson(data string) DescribeSimpleItemModelMastersRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSimpleItemModelMastersRequestFromDict(dict)
+}
+
+func NewDescribeSimpleItemModelMastersRequestFromDict(data map[string]interface{}) DescribeSimpleItemModelMastersRequest {
+    return DescribeSimpleItemModelMastersRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeSimpleItemModelMastersRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeSimpleItemModelMastersRequest) Pointer() *DescribeSimpleItemModelMastersRequest {
+    return &p
+}
+
+type CreateSimpleItemModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    Name *string `json:"name"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+}
+
+func NewCreateSimpleItemModelMasterRequestFromJson(data string) CreateSimpleItemModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateSimpleItemModelMasterRequestFromDict(dict)
+}
+
+func NewCreateSimpleItemModelMasterRequestFromDict(data map[string]interface{}) CreateSimpleItemModelMasterRequest {
+    return CreateSimpleItemModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+    }
+}
+
+func (p CreateSimpleItemModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "name": p.Name,
+        "description": p.Description,
+        "metadata": p.Metadata,
+    }
+}
+
+func (p CreateSimpleItemModelMasterRequest) Pointer() *CreateSimpleItemModelMasterRequest {
+    return &p
+}
+
+type GetSimpleItemModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    ItemName *string `json:"itemName"`
+}
+
+func NewGetSimpleItemModelMasterRequestFromJson(data string) GetSimpleItemModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleItemModelMasterRequestFromDict(dict)
+}
+
+func NewGetSimpleItemModelMasterRequestFromDict(data map[string]interface{}) GetSimpleItemModelMasterRequest {
+    return GetSimpleItemModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        ItemName: core.CastString(data["itemName"]),
+    }
+}
+
+func (p GetSimpleItemModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "itemName": p.ItemName,
+    }
+}
+
+func (p GetSimpleItemModelMasterRequest) Pointer() *GetSimpleItemModelMasterRequest {
+    return &p
+}
+
+type UpdateSimpleItemModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    ItemName *string `json:"itemName"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+}
+
+func NewUpdateSimpleItemModelMasterRequestFromJson(data string) UpdateSimpleItemModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateSimpleItemModelMasterRequestFromDict(dict)
+}
+
+func NewUpdateSimpleItemModelMasterRequestFromDict(data map[string]interface{}) UpdateSimpleItemModelMasterRequest {
+    return UpdateSimpleItemModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        ItemName: core.CastString(data["itemName"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+    }
+}
+
+func (p UpdateSimpleItemModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "itemName": p.ItemName,
+        "description": p.Description,
+        "metadata": p.Metadata,
+    }
+}
+
+func (p UpdateSimpleItemModelMasterRequest) Pointer() *UpdateSimpleItemModelMasterRequest {
+    return &p
+}
+
+type DeleteSimpleItemModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    ItemName *string `json:"itemName"`
+}
+
+func NewDeleteSimpleItemModelMasterRequestFromJson(data string) DeleteSimpleItemModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteSimpleItemModelMasterRequestFromDict(dict)
+}
+
+func NewDeleteSimpleItemModelMasterRequestFromDict(data map[string]interface{}) DeleteSimpleItemModelMasterRequest {
+    return DeleteSimpleItemModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        ItemName: core.CastString(data["itemName"]),
+    }
+}
+
+func (p DeleteSimpleItemModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "itemName": p.ItemName,
+    }
+}
+
+func (p DeleteSimpleItemModelMasterRequest) Pointer() *DeleteSimpleItemModelMasterRequest {
+    return &p
+}
+
+type DescribeSimpleItemModelsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+}
+
+func NewDescribeSimpleItemModelsRequestFromJson(data string) DescribeSimpleItemModelsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSimpleItemModelsRequestFromDict(dict)
+}
+
+func NewDescribeSimpleItemModelsRequestFromDict(data map[string]interface{}) DescribeSimpleItemModelsRequest {
+    return DescribeSimpleItemModelsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+    }
+}
+
+func (p DescribeSimpleItemModelsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+    }
+}
+
+func (p DescribeSimpleItemModelsRequest) Pointer() *DescribeSimpleItemModelsRequest {
+    return &p
+}
+
+type GetSimpleItemModelRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    ItemName *string `json:"itemName"`
+}
+
+func NewGetSimpleItemModelRequestFromJson(data string) GetSimpleItemModelRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleItemModelRequestFromDict(dict)
+}
+
+func NewGetSimpleItemModelRequestFromDict(data map[string]interface{}) GetSimpleItemModelRequest {
+    return GetSimpleItemModelRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        ItemName: core.CastString(data["itemName"]),
+    }
+}
+
+func (p GetSimpleItemModelRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "itemName": p.ItemName,
+    }
+}
+
+func (p GetSimpleItemModelRequest) Pointer() *GetSimpleItemModelRequest {
+    return &p
+}
+
 type ExportMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
@@ -2183,5 +2662,456 @@ func (p VerifyReferenceOfByStampTaskRequest) ToDict() map[string]interface{} {
 }
 
 func (p VerifyReferenceOfByStampTaskRequest) Pointer() *VerifyReferenceOfByStampTaskRequest {
+    return &p
+}
+
+type DescribeSimpleItemsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    AccessToken *string `json:"accessToken"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeSimpleItemsRequestFromJson(data string) DescribeSimpleItemsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSimpleItemsRequestFromDict(dict)
+}
+
+func NewDescribeSimpleItemsRequestFromDict(data map[string]interface{}) DescribeSimpleItemsRequest {
+    return DescribeSimpleItemsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeSimpleItemsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "accessToken": p.AccessToken,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeSimpleItemsRequest) Pointer() *DescribeSimpleItemsRequest {
+    return &p
+}
+
+type DescribeSimpleItemsByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    UserId *string `json:"userId"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeSimpleItemsByUserIdRequestFromJson(data string) DescribeSimpleItemsByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSimpleItemsByUserIdRequestFromDict(dict)
+}
+
+func NewDescribeSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) DescribeSimpleItemsByUserIdRequest {
+    return DescribeSimpleItemsByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeSimpleItemsByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "userId": p.UserId,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeSimpleItemsByUserIdRequest) Pointer() *DescribeSimpleItemsByUserIdRequest {
+    return &p
+}
+
+type GetSimpleItemRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    AccessToken *string `json:"accessToken"`
+    ItemName *string `json:"itemName"`
+}
+
+func NewGetSimpleItemRequestFromJson(data string) GetSimpleItemRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleItemRequestFromDict(dict)
+}
+
+func NewGetSimpleItemRequestFromDict(data map[string]interface{}) GetSimpleItemRequest {
+    return GetSimpleItemRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        ItemName: core.CastString(data["itemName"]),
+    }
+}
+
+func (p GetSimpleItemRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "accessToken": p.AccessToken,
+        "itemName": p.ItemName,
+    }
+}
+
+func (p GetSimpleItemRequest) Pointer() *GetSimpleItemRequest {
+    return &p
+}
+
+type GetSimpleItemByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    UserId *string `json:"userId"`
+    ItemName *string `json:"itemName"`
+}
+
+func NewGetSimpleItemByUserIdRequestFromJson(data string) GetSimpleItemByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleItemByUserIdRequestFromDict(dict)
+}
+
+func NewGetSimpleItemByUserIdRequestFromDict(data map[string]interface{}) GetSimpleItemByUserIdRequest {
+    return GetSimpleItemByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        ItemName: core.CastString(data["itemName"]),
+    }
+}
+
+func (p GetSimpleItemByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "userId": p.UserId,
+        "itemName": p.ItemName,
+    }
+}
+
+func (p GetSimpleItemByUserIdRequest) Pointer() *GetSimpleItemByUserIdRequest {
+    return &p
+}
+
+type GetSimpleItemWithSignatureRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    AccessToken *string `json:"accessToken"`
+    ItemName *string `json:"itemName"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewGetSimpleItemWithSignatureRequestFromJson(data string) GetSimpleItemWithSignatureRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleItemWithSignatureRequestFromDict(dict)
+}
+
+func NewGetSimpleItemWithSignatureRequestFromDict(data map[string]interface{}) GetSimpleItemWithSignatureRequest {
+    return GetSimpleItemWithSignatureRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        ItemName: core.CastString(data["itemName"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p GetSimpleItemWithSignatureRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "accessToken": p.AccessToken,
+        "itemName": p.ItemName,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p GetSimpleItemWithSignatureRequest) Pointer() *GetSimpleItemWithSignatureRequest {
+    return &p
+}
+
+type GetSimpleItemWithSignatureByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    UserId *string `json:"userId"`
+    ItemName *string `json:"itemName"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewGetSimpleItemWithSignatureByUserIdRequestFromJson(data string) GetSimpleItemWithSignatureByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleItemWithSignatureByUserIdRequestFromDict(dict)
+}
+
+func NewGetSimpleItemWithSignatureByUserIdRequestFromDict(data map[string]interface{}) GetSimpleItemWithSignatureByUserIdRequest {
+    return GetSimpleItemWithSignatureByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        ItemName: core.CastString(data["itemName"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p GetSimpleItemWithSignatureByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "userId": p.UserId,
+        "itemName": p.ItemName,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p GetSimpleItemWithSignatureByUserIdRequest) Pointer() *GetSimpleItemWithSignatureByUserIdRequest {
+    return &p
+}
+
+type AcquireSimpleItemsByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    UserId *string `json:"userId"`
+    AcquireCounts []AcquireCount `json:"acquireCounts"`
+}
+
+func NewAcquireSimpleItemsByUserIdRequestFromJson(data string) AcquireSimpleItemsByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireSimpleItemsByUserIdRequestFromDict(dict)
+}
+
+func NewAcquireSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) AcquireSimpleItemsByUserIdRequest {
+    return AcquireSimpleItemsByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        AcquireCounts: CastAcquireCounts(core.CastArray(data["acquireCounts"])),
+    }
+}
+
+func (p AcquireSimpleItemsByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "userId": p.UserId,
+        "acquireCounts": CastAcquireCountsFromDict(
+            p.AcquireCounts,
+        ),
+    }
+}
+
+func (p AcquireSimpleItemsByUserIdRequest) Pointer() *AcquireSimpleItemsByUserIdRequest {
+    return &p
+}
+
+type ConsumeSimpleItemsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    AccessToken *string `json:"accessToken"`
+    ConsumeCounts []ConsumeCount `json:"consumeCounts"`
+}
+
+func NewConsumeSimpleItemsRequestFromJson(data string) ConsumeSimpleItemsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeSimpleItemsRequestFromDict(dict)
+}
+
+func NewConsumeSimpleItemsRequestFromDict(data map[string]interface{}) ConsumeSimpleItemsRequest {
+    return ConsumeSimpleItemsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        ConsumeCounts: CastConsumeCounts(core.CastArray(data["consumeCounts"])),
+    }
+}
+
+func (p ConsumeSimpleItemsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "accessToken": p.AccessToken,
+        "consumeCounts": CastConsumeCountsFromDict(
+            p.ConsumeCounts,
+        ),
+    }
+}
+
+func (p ConsumeSimpleItemsRequest) Pointer() *ConsumeSimpleItemsRequest {
+    return &p
+}
+
+type ConsumeSimpleItemsByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    UserId *string `json:"userId"`
+    ConsumeCounts []ConsumeCount `json:"consumeCounts"`
+}
+
+func NewConsumeSimpleItemsByUserIdRequestFromJson(data string) ConsumeSimpleItemsByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeSimpleItemsByUserIdRequestFromDict(dict)
+}
+
+func NewConsumeSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) ConsumeSimpleItemsByUserIdRequest {
+    return ConsumeSimpleItemsByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        ConsumeCounts: CastConsumeCounts(core.CastArray(data["consumeCounts"])),
+    }
+}
+
+func (p ConsumeSimpleItemsByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "userId": p.UserId,
+        "consumeCounts": CastConsumeCountsFromDict(
+            p.ConsumeCounts,
+        ),
+    }
+}
+
+func (p ConsumeSimpleItemsByUserIdRequest) Pointer() *ConsumeSimpleItemsByUserIdRequest {
+    return &p
+}
+
+type DeleteSimpleItemsByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    UserId *string `json:"userId"`
+}
+
+func NewDeleteSimpleItemsByUserIdRequestFromJson(data string) DeleteSimpleItemsByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteSimpleItemsByUserIdRequestFromDict(dict)
+}
+
+func NewDeleteSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) DeleteSimpleItemsByUserIdRequest {
+    return DeleteSimpleItemsByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+    }
+}
+
+func (p DeleteSimpleItemsByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "userId": p.UserId,
+    }
+}
+
+func (p DeleteSimpleItemsByUserIdRequest) Pointer() *DeleteSimpleItemsByUserIdRequest {
+    return &p
+}
+
+type AcquireSimpleItemsByStampSheetRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewAcquireSimpleItemsByStampSheetRequestFromJson(data string) AcquireSimpleItemsByStampSheetRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireSimpleItemsByStampSheetRequestFromDict(dict)
+}
+
+func NewAcquireSimpleItemsByStampSheetRequestFromDict(data map[string]interface{}) AcquireSimpleItemsByStampSheetRequest {
+    return AcquireSimpleItemsByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p AcquireSimpleItemsByStampSheetRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p AcquireSimpleItemsByStampSheetRequest) Pointer() *AcquireSimpleItemsByStampSheetRequest {
+    return &p
+}
+
+type ConsumeSimpleItemsByStampTaskRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampTask *string `json:"stampTask"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewConsumeSimpleItemsByStampTaskRequestFromJson(data string) ConsumeSimpleItemsByStampTaskRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeSimpleItemsByStampTaskRequestFromDict(dict)
+}
+
+func NewConsumeSimpleItemsByStampTaskRequestFromDict(data map[string]interface{}) ConsumeSimpleItemsByStampTaskRequest {
+    return ConsumeSimpleItemsByStampTaskRequest {
+        StampTask: core.CastString(data["stampTask"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p ConsumeSimpleItemsByStampTaskRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampTask": p.StampTask,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p ConsumeSimpleItemsByStampTaskRequest) Pointer() *ConsumeSimpleItemsByStampTaskRequest {
     return &p
 }

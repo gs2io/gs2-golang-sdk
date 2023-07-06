@@ -510,6 +510,301 @@ func CastItemModelsFromDict(data []ItemModel) []interface{} {
     return v
 }
 
+type SimpleInventoryModelMaster struct {
+	InventoryModelId *string `json:"inventoryModelId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	Description *string `json:"description"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
+}
+
+func NewSimpleInventoryModelMasterFromJson(data string) SimpleInventoryModelMaster {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSimpleInventoryModelMasterFromDict(dict)
+}
+
+func NewSimpleInventoryModelMasterFromDict(data map[string]interface{}) SimpleInventoryModelMaster {
+    return SimpleInventoryModelMaster {
+        InventoryModelId: core.CastString(data["inventoryModelId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        Description: core.CastString(data["description"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
+}
+
+func (p SimpleInventoryModelMaster) ToDict() map[string]interface{} {
+    
+    var inventoryModelId *string
+    if p.InventoryModelId != nil {
+        inventoryModelId = p.InventoryModelId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var description *string
+    if p.Description != nil {
+        description = p.Description
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "inventoryModelId": inventoryModelId,
+        "name": name,
+        "metadata": metadata,
+        "description": description,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
+}
+
+func (p SimpleInventoryModelMaster) Pointer() *SimpleInventoryModelMaster {
+    return &p
+}
+
+func CastSimpleInventoryModelMasters(data []interface{}) []SimpleInventoryModelMaster {
+	v := make([]SimpleInventoryModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewSimpleInventoryModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSimpleInventoryModelMastersFromDict(data []SimpleInventoryModelMaster) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type SimpleInventoryModel struct {
+	InventoryModelId *string `json:"inventoryModelId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	SimpleItemModels []SimpleItemModel `json:"simpleItemModels"`
+}
+
+func NewSimpleInventoryModelFromJson(data string) SimpleInventoryModel {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSimpleInventoryModelFromDict(dict)
+}
+
+func NewSimpleInventoryModelFromDict(data map[string]interface{}) SimpleInventoryModel {
+    return SimpleInventoryModel {
+        InventoryModelId: core.CastString(data["inventoryModelId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        SimpleItemModels: CastSimpleItemModels(core.CastArray(data["simpleItemModels"])),
+    }
+}
+
+func (p SimpleInventoryModel) ToDict() map[string]interface{} {
+    
+    var inventoryModelId *string
+    if p.InventoryModelId != nil {
+        inventoryModelId = p.InventoryModelId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var simpleItemModels []interface{}
+    if p.SimpleItemModels != nil {
+        simpleItemModels = CastSimpleItemModelsFromDict(
+            p.SimpleItemModels,
+        )
+    }
+    return map[string]interface{} {
+        "inventoryModelId": inventoryModelId,
+        "name": name,
+        "metadata": metadata,
+        "simpleItemModels": simpleItemModels,
+    }
+}
+
+func (p SimpleInventoryModel) Pointer() *SimpleInventoryModel {
+    return &p
+}
+
+func CastSimpleInventoryModels(data []interface{}) []SimpleInventoryModel {
+	v := make([]SimpleInventoryModel, 0)
+	for _, d := range data {
+		v = append(v, NewSimpleInventoryModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSimpleInventoryModelsFromDict(data []SimpleInventoryModel) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type SimpleItemModelMaster struct {
+	ItemModelId *string `json:"itemModelId"`
+	Name *string `json:"name"`
+	Description *string `json:"description"`
+	Metadata *string `json:"metadata"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
+}
+
+func NewSimpleItemModelMasterFromJson(data string) SimpleItemModelMaster {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSimpleItemModelMasterFromDict(dict)
+}
+
+func NewSimpleItemModelMasterFromDict(data map[string]interface{}) SimpleItemModelMaster {
+    return SimpleItemModelMaster {
+        ItemModelId: core.CastString(data["itemModelId"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
+}
+
+func (p SimpleItemModelMaster) ToDict() map[string]interface{} {
+    
+    var itemModelId *string
+    if p.ItemModelId != nil {
+        itemModelId = p.ItemModelId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var description *string
+    if p.Description != nil {
+        description = p.Description
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "itemModelId": itemModelId,
+        "name": name,
+        "description": description,
+        "metadata": metadata,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
+}
+
+func (p SimpleItemModelMaster) Pointer() *SimpleItemModelMaster {
+    return &p
+}
+
+func CastSimpleItemModelMasters(data []interface{}) []SimpleItemModelMaster {
+	v := make([]SimpleItemModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewSimpleItemModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSimpleItemModelMastersFromDict(data []SimpleItemModelMaster) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type SimpleItemModel struct {
+	ItemModelId *string `json:"itemModelId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+}
+
+func NewSimpleItemModelFromJson(data string) SimpleItemModel {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSimpleItemModelFromDict(dict)
+}
+
+func NewSimpleItemModelFromDict(data map[string]interface{}) SimpleItemModel {
+    return SimpleItemModel {
+        ItemModelId: core.CastString(data["itemModelId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+    }
+}
+
+func (p SimpleItemModel) ToDict() map[string]interface{} {
+    
+    var itemModelId *string
+    if p.ItemModelId != nil {
+        itemModelId = p.ItemModelId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    return map[string]interface{} {
+        "itemModelId": itemModelId,
+        "name": name,
+        "metadata": metadata,
+    }
+}
+
+func (p SimpleItemModel) Pointer() *SimpleItemModel {
+    return &p
+}
+
+func CastSimpleItemModels(data []interface{}) []SimpleItemModel {
+	v := make([]SimpleItemModel, 0)
+	for _, d := range data {
+		v = append(v, NewSimpleItemModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSimpleItemModelsFromDict(data []SimpleItemModel) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
 type CurrentItemModelMaster struct {
 	NamespaceId *string `json:"namespaceId"`
 	Settings *string `json:"settings"`
@@ -833,6 +1128,158 @@ func CastReferenceOvesFromDict(data []ReferenceOf) []interface{} {
     return v
 }
 
+type SimpleInventory struct {
+	InventoryId *string `json:"inventoryId"`
+	InventoryName *string `json:"inventoryName"`
+	UserId *string `json:"userId"`
+	SimpleItems []SimpleItem `json:"simpleItems"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
+}
+
+func NewSimpleInventoryFromJson(data string) SimpleInventory {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSimpleInventoryFromDict(dict)
+}
+
+func NewSimpleInventoryFromDict(data map[string]interface{}) SimpleInventory {
+    return SimpleInventory {
+        InventoryId: core.CastString(data["inventoryId"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        SimpleItems: CastSimpleItems(core.CastArray(data["simpleItems"])),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
+}
+
+func (p SimpleInventory) ToDict() map[string]interface{} {
+    
+    var inventoryId *string
+    if p.InventoryId != nil {
+        inventoryId = p.InventoryId
+    }
+    var inventoryName *string
+    if p.InventoryName != nil {
+        inventoryName = p.InventoryName
+    }
+    var userId *string
+    if p.UserId != nil {
+        userId = p.UserId
+    }
+    var simpleItems []interface{}
+    if p.SimpleItems != nil {
+        simpleItems = CastSimpleItemsFromDict(
+            p.SimpleItems,
+        )
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "inventoryId": inventoryId,
+        "inventoryName": inventoryName,
+        "userId": userId,
+        "simpleItems": simpleItems,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
+}
+
+func (p SimpleInventory) Pointer() *SimpleInventory {
+    return &p
+}
+
+func CastSimpleInventories(data []interface{}) []SimpleInventory {
+	v := make([]SimpleInventory, 0)
+	for _, d := range data {
+		v = append(v, NewSimpleInventoryFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSimpleInventoriesFromDict(data []SimpleInventory) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type SimpleItem struct {
+	ItemId *string `json:"itemId"`
+	UserId *string `json:"userId"`
+	ItemName *string `json:"itemName"`
+	Count *int64 `json:"count"`
+}
+
+func NewSimpleItemFromJson(data string) SimpleItem {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSimpleItemFromDict(dict)
+}
+
+func NewSimpleItemFromDict(data map[string]interface{}) SimpleItem {
+    return SimpleItem {
+        ItemId: core.CastString(data["itemId"]),
+        UserId: core.CastString(data["userId"]),
+        ItemName: core.CastString(data["itemName"]),
+        Count: core.CastInt64(data["count"]),
+    }
+}
+
+func (p SimpleItem) ToDict() map[string]interface{} {
+    
+    var itemId *string
+    if p.ItemId != nil {
+        itemId = p.ItemId
+    }
+    var userId *string
+    if p.UserId != nil {
+        userId = p.UserId
+    }
+    var itemName *string
+    if p.ItemName != nil {
+        itemName = p.ItemName
+    }
+    var count *int64
+    if p.Count != nil {
+        count = p.Count
+    }
+    return map[string]interface{} {
+        "itemId": itemId,
+        "userId": userId,
+        "itemName": itemName,
+        "count": count,
+    }
+}
+
+func (p SimpleItem) Pointer() *SimpleItem {
+    return &p
+}
+
+func CastSimpleItems(data []interface{}) []SimpleItem {
+	v := make([]SimpleItem, 0)
+	for _, d := range data {
+		v = append(v, NewSimpleItemFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSimpleItemsFromDict(data []SimpleItem) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
 type GitHubCheckoutSetting struct {
 	ApiKeyId *string `json:"apiKeyId"`
 	RepositoryName *string `json:"repositoryName"`
@@ -1030,6 +1477,114 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type AcquireCount struct {
+	ItemName *string `json:"itemName"`
+	Count *int64 `json:"count"`
+}
+
+func NewAcquireCountFromJson(data string) AcquireCount {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireCountFromDict(dict)
+}
+
+func NewAcquireCountFromDict(data map[string]interface{}) AcquireCount {
+    return AcquireCount {
+        ItemName: core.CastString(data["itemName"]),
+        Count: core.CastInt64(data["count"]),
+    }
+}
+
+func (p AcquireCount) ToDict() map[string]interface{} {
+    
+    var itemName *string
+    if p.ItemName != nil {
+        itemName = p.ItemName
+    }
+    var count *int64
+    if p.Count != nil {
+        count = p.Count
+    }
+    return map[string]interface{} {
+        "itemName": itemName,
+        "count": count,
+    }
+}
+
+func (p AcquireCount) Pointer() *AcquireCount {
+    return &p
+}
+
+func CastAcquireCounts(data []interface{}) []AcquireCount {
+	v := make([]AcquireCount, 0)
+	for _, d := range data {
+		v = append(v, NewAcquireCountFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAcquireCountsFromDict(data []AcquireCount) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type ConsumeCount struct {
+	ItemName *string `json:"itemName"`
+	Count *int64 `json:"count"`
+}
+
+func NewConsumeCountFromJson(data string) ConsumeCount {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeCountFromDict(dict)
+}
+
+func NewConsumeCountFromDict(data map[string]interface{}) ConsumeCount {
+    return ConsumeCount {
+        ItemName: core.CastString(data["itemName"]),
+        Count: core.CastInt64(data["count"]),
+    }
+}
+
+func (p ConsumeCount) ToDict() map[string]interface{} {
+    
+    var itemName *string
+    if p.ItemName != nil {
+        itemName = p.ItemName
+    }
+    var count *int64
+    if p.Count != nil {
+        count = p.Count
+    }
+    return map[string]interface{} {
+        "itemName": itemName,
+        "count": count,
+    }
+}
+
+func (p ConsumeCount) Pointer() *ConsumeCount {
+    return &p
+}
+
+func CastConsumeCounts(data []interface{}) []ConsumeCount {
+	v := make([]ConsumeCount, 0)
+	for _, d := range data {
+		v = append(v, NewConsumeCountFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastConsumeCountsFromDict(data []ConsumeCount) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

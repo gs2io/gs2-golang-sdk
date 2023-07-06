@@ -660,6 +660,454 @@ func (p GetItemModelResult) Pointer() *GetItemModelResult {
     return &p
 }
 
+type DescribeSimpleInventoryModelMastersResult struct {
+    Items []SimpleInventoryModelMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeSimpleInventoryModelMastersAsyncResult struct {
+	result *DescribeSimpleInventoryModelMastersResult
+	err    error
+}
+
+func NewDescribeSimpleInventoryModelMastersResultFromJson(data string) DescribeSimpleInventoryModelMastersResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSimpleInventoryModelMastersResultFromDict(dict)
+}
+
+func NewDescribeSimpleInventoryModelMastersResultFromDict(data map[string]interface{}) DescribeSimpleInventoryModelMastersResult {
+    return DescribeSimpleInventoryModelMastersResult {
+        Items: CastSimpleInventoryModelMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeSimpleInventoryModelMastersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSimpleInventoryModelMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeSimpleInventoryModelMastersResult) Pointer() *DescribeSimpleInventoryModelMastersResult {
+    return &p
+}
+
+type CreateSimpleInventoryModelMasterResult struct {
+    Item *SimpleInventoryModelMaster `json:"item"`
+}
+
+type CreateSimpleInventoryModelMasterAsyncResult struct {
+	result *CreateSimpleInventoryModelMasterResult
+	err    error
+}
+
+func NewCreateSimpleInventoryModelMasterResultFromJson(data string) CreateSimpleInventoryModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateSimpleInventoryModelMasterResultFromDict(dict)
+}
+
+func NewCreateSimpleInventoryModelMasterResultFromDict(data map[string]interface{}) CreateSimpleInventoryModelMasterResult {
+    return CreateSimpleInventoryModelMasterResult {
+        Item: NewSimpleInventoryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p CreateSimpleInventoryModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p CreateSimpleInventoryModelMasterResult) Pointer() *CreateSimpleInventoryModelMasterResult {
+    return &p
+}
+
+type GetSimpleInventoryModelMasterResult struct {
+    Item *SimpleInventoryModelMaster `json:"item"`
+}
+
+type GetSimpleInventoryModelMasterAsyncResult struct {
+	result *GetSimpleInventoryModelMasterResult
+	err    error
+}
+
+func NewGetSimpleInventoryModelMasterResultFromJson(data string) GetSimpleInventoryModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleInventoryModelMasterResultFromDict(dict)
+}
+
+func NewGetSimpleInventoryModelMasterResultFromDict(data map[string]interface{}) GetSimpleInventoryModelMasterResult {
+    return GetSimpleInventoryModelMasterResult {
+        Item: NewSimpleInventoryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetSimpleInventoryModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetSimpleInventoryModelMasterResult) Pointer() *GetSimpleInventoryModelMasterResult {
+    return &p
+}
+
+type UpdateSimpleInventoryModelMasterResult struct {
+    Item *SimpleInventoryModelMaster `json:"item"`
+}
+
+type UpdateSimpleInventoryModelMasterAsyncResult struct {
+	result *UpdateSimpleInventoryModelMasterResult
+	err    error
+}
+
+func NewUpdateSimpleInventoryModelMasterResultFromJson(data string) UpdateSimpleInventoryModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateSimpleInventoryModelMasterResultFromDict(dict)
+}
+
+func NewUpdateSimpleInventoryModelMasterResultFromDict(data map[string]interface{}) UpdateSimpleInventoryModelMasterResult {
+    return UpdateSimpleInventoryModelMasterResult {
+        Item: NewSimpleInventoryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UpdateSimpleInventoryModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateSimpleInventoryModelMasterResult) Pointer() *UpdateSimpleInventoryModelMasterResult {
+    return &p
+}
+
+type DeleteSimpleInventoryModelMasterResult struct {
+    Item *SimpleInventoryModelMaster `json:"item"`
+}
+
+type DeleteSimpleInventoryModelMasterAsyncResult struct {
+	result *DeleteSimpleInventoryModelMasterResult
+	err    error
+}
+
+func NewDeleteSimpleInventoryModelMasterResultFromJson(data string) DeleteSimpleInventoryModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteSimpleInventoryModelMasterResultFromDict(dict)
+}
+
+func NewDeleteSimpleInventoryModelMasterResultFromDict(data map[string]interface{}) DeleteSimpleInventoryModelMasterResult {
+    return DeleteSimpleInventoryModelMasterResult {
+        Item: NewSimpleInventoryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p DeleteSimpleInventoryModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p DeleteSimpleInventoryModelMasterResult) Pointer() *DeleteSimpleInventoryModelMasterResult {
+    return &p
+}
+
+type DescribeSimpleInventoryModelsResult struct {
+    Items []SimpleInventoryModel `json:"items"`
+}
+
+type DescribeSimpleInventoryModelsAsyncResult struct {
+	result *DescribeSimpleInventoryModelsResult
+	err    error
+}
+
+func NewDescribeSimpleInventoryModelsResultFromJson(data string) DescribeSimpleInventoryModelsResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSimpleInventoryModelsResultFromDict(dict)
+}
+
+func NewDescribeSimpleInventoryModelsResultFromDict(data map[string]interface{}) DescribeSimpleInventoryModelsResult {
+    return DescribeSimpleInventoryModelsResult {
+        Items: CastSimpleInventoryModels(core.CastArray(data["items"])),
+    }
+}
+
+func (p DescribeSimpleInventoryModelsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSimpleInventoryModelsFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p DescribeSimpleInventoryModelsResult) Pointer() *DescribeSimpleInventoryModelsResult {
+    return &p
+}
+
+type GetSimpleInventoryModelResult struct {
+    Item *SimpleInventoryModel `json:"item"`
+}
+
+type GetSimpleInventoryModelAsyncResult struct {
+	result *GetSimpleInventoryModelResult
+	err    error
+}
+
+func NewGetSimpleInventoryModelResultFromJson(data string) GetSimpleInventoryModelResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleInventoryModelResultFromDict(dict)
+}
+
+func NewGetSimpleInventoryModelResultFromDict(data map[string]interface{}) GetSimpleInventoryModelResult {
+    return GetSimpleInventoryModelResult {
+        Item: NewSimpleInventoryModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetSimpleInventoryModelResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetSimpleInventoryModelResult) Pointer() *GetSimpleInventoryModelResult {
+    return &p
+}
+
+type DescribeSimpleItemModelMastersResult struct {
+    Items []SimpleItemModelMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeSimpleItemModelMastersAsyncResult struct {
+	result *DescribeSimpleItemModelMastersResult
+	err    error
+}
+
+func NewDescribeSimpleItemModelMastersResultFromJson(data string) DescribeSimpleItemModelMastersResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSimpleItemModelMastersResultFromDict(dict)
+}
+
+func NewDescribeSimpleItemModelMastersResultFromDict(data map[string]interface{}) DescribeSimpleItemModelMastersResult {
+    return DescribeSimpleItemModelMastersResult {
+        Items: CastSimpleItemModelMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeSimpleItemModelMastersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSimpleItemModelMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeSimpleItemModelMastersResult) Pointer() *DescribeSimpleItemModelMastersResult {
+    return &p
+}
+
+type CreateSimpleItemModelMasterResult struct {
+    Item *SimpleItemModelMaster `json:"item"`
+}
+
+type CreateSimpleItemModelMasterAsyncResult struct {
+	result *CreateSimpleItemModelMasterResult
+	err    error
+}
+
+func NewCreateSimpleItemModelMasterResultFromJson(data string) CreateSimpleItemModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateSimpleItemModelMasterResultFromDict(dict)
+}
+
+func NewCreateSimpleItemModelMasterResultFromDict(data map[string]interface{}) CreateSimpleItemModelMasterResult {
+    return CreateSimpleItemModelMasterResult {
+        Item: NewSimpleItemModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p CreateSimpleItemModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p CreateSimpleItemModelMasterResult) Pointer() *CreateSimpleItemModelMasterResult {
+    return &p
+}
+
+type GetSimpleItemModelMasterResult struct {
+    Item *SimpleItemModelMaster `json:"item"`
+}
+
+type GetSimpleItemModelMasterAsyncResult struct {
+	result *GetSimpleItemModelMasterResult
+	err    error
+}
+
+func NewGetSimpleItemModelMasterResultFromJson(data string) GetSimpleItemModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleItemModelMasterResultFromDict(dict)
+}
+
+func NewGetSimpleItemModelMasterResultFromDict(data map[string]interface{}) GetSimpleItemModelMasterResult {
+    return GetSimpleItemModelMasterResult {
+        Item: NewSimpleItemModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetSimpleItemModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetSimpleItemModelMasterResult) Pointer() *GetSimpleItemModelMasterResult {
+    return &p
+}
+
+type UpdateSimpleItemModelMasterResult struct {
+    Item *SimpleItemModelMaster `json:"item"`
+}
+
+type UpdateSimpleItemModelMasterAsyncResult struct {
+	result *UpdateSimpleItemModelMasterResult
+	err    error
+}
+
+func NewUpdateSimpleItemModelMasterResultFromJson(data string) UpdateSimpleItemModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateSimpleItemModelMasterResultFromDict(dict)
+}
+
+func NewUpdateSimpleItemModelMasterResultFromDict(data map[string]interface{}) UpdateSimpleItemModelMasterResult {
+    return UpdateSimpleItemModelMasterResult {
+        Item: NewSimpleItemModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UpdateSimpleItemModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateSimpleItemModelMasterResult) Pointer() *UpdateSimpleItemModelMasterResult {
+    return &p
+}
+
+type DeleteSimpleItemModelMasterResult struct {
+    Item *SimpleItemModelMaster `json:"item"`
+}
+
+type DeleteSimpleItemModelMasterAsyncResult struct {
+	result *DeleteSimpleItemModelMasterResult
+	err    error
+}
+
+func NewDeleteSimpleItemModelMasterResultFromJson(data string) DeleteSimpleItemModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteSimpleItemModelMasterResultFromDict(dict)
+}
+
+func NewDeleteSimpleItemModelMasterResultFromDict(data map[string]interface{}) DeleteSimpleItemModelMasterResult {
+    return DeleteSimpleItemModelMasterResult {
+        Item: NewSimpleItemModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p DeleteSimpleItemModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p DeleteSimpleItemModelMasterResult) Pointer() *DeleteSimpleItemModelMasterResult {
+    return &p
+}
+
+type DescribeSimpleItemModelsResult struct {
+    Items []SimpleItemModel `json:"items"`
+}
+
+type DescribeSimpleItemModelsAsyncResult struct {
+	result *DescribeSimpleItemModelsResult
+	err    error
+}
+
+func NewDescribeSimpleItemModelsResultFromJson(data string) DescribeSimpleItemModelsResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSimpleItemModelsResultFromDict(dict)
+}
+
+func NewDescribeSimpleItemModelsResultFromDict(data map[string]interface{}) DescribeSimpleItemModelsResult {
+    return DescribeSimpleItemModelsResult {
+        Items: CastSimpleItemModels(core.CastArray(data["items"])),
+    }
+}
+
+func (p DescribeSimpleItemModelsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSimpleItemModelsFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p DescribeSimpleItemModelsResult) Pointer() *DescribeSimpleItemModelsResult {
+    return &p
+}
+
+type GetSimpleItemModelResult struct {
+    Item *SimpleItemModel `json:"item"`
+}
+
+type GetSimpleItemModelAsyncResult struct {
+	result *GetSimpleItemModelResult
+	err    error
+}
+
+func NewGetSimpleItemModelResultFromJson(data string) GetSimpleItemModelResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleItemModelResultFromDict(dict)
+}
+
+func NewGetSimpleItemModelResultFromDict(data map[string]interface{}) GetSimpleItemModelResult {
+    return GetSimpleItemModelResult {
+        Item: NewSimpleItemModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetSimpleItemModelResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetSimpleItemModelResult) Pointer() *GetSimpleItemModelResult {
+    return &p
+}
+
 type ExportMasterResult struct {
     Item *CurrentItemModelMaster `json:"item"`
 }
@@ -2102,5 +2550,421 @@ func (p VerifyReferenceOfByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p VerifyReferenceOfByStampTaskResult) Pointer() *VerifyReferenceOfByStampTaskResult {
+    return &p
+}
+
+type DescribeSimpleItemsResult struct {
+    Items []SimpleItem `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeSimpleItemsAsyncResult struct {
+	result *DescribeSimpleItemsResult
+	err    error
+}
+
+func NewDescribeSimpleItemsResultFromJson(data string) DescribeSimpleItemsResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSimpleItemsResultFromDict(dict)
+}
+
+func NewDescribeSimpleItemsResultFromDict(data map[string]interface{}) DescribeSimpleItemsResult {
+    return DescribeSimpleItemsResult {
+        Items: CastSimpleItems(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeSimpleItemsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSimpleItemsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeSimpleItemsResult) Pointer() *DescribeSimpleItemsResult {
+    return &p
+}
+
+type DescribeSimpleItemsByUserIdResult struct {
+    Items []SimpleItem `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeSimpleItemsByUserIdAsyncResult struct {
+	result *DescribeSimpleItemsByUserIdResult
+	err    error
+}
+
+func NewDescribeSimpleItemsByUserIdResultFromJson(data string) DescribeSimpleItemsByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeSimpleItemsByUserIdResultFromDict(dict)
+}
+
+func NewDescribeSimpleItemsByUserIdResultFromDict(data map[string]interface{}) DescribeSimpleItemsByUserIdResult {
+    return DescribeSimpleItemsByUserIdResult {
+        Items: CastSimpleItems(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeSimpleItemsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSimpleItemsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeSimpleItemsByUserIdResult) Pointer() *DescribeSimpleItemsByUserIdResult {
+    return &p
+}
+
+type GetSimpleItemResult struct {
+    Item *SimpleItem `json:"item"`
+    ItemModel *SimpleItemModel `json:"itemModel"`
+}
+
+type GetSimpleItemAsyncResult struct {
+	result *GetSimpleItemResult
+	err    error
+}
+
+func NewGetSimpleItemResultFromJson(data string) GetSimpleItemResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleItemResultFromDict(dict)
+}
+
+func NewGetSimpleItemResultFromDict(data map[string]interface{}) GetSimpleItemResult {
+    return GetSimpleItemResult {
+        Item: NewSimpleItemFromDict(core.CastMap(data["item"])).Pointer(),
+        ItemModel: NewSimpleItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
+    }
+}
+
+func (p GetSimpleItemResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "itemModel": p.ItemModel.ToDict(),
+    }
+}
+
+func (p GetSimpleItemResult) Pointer() *GetSimpleItemResult {
+    return &p
+}
+
+type GetSimpleItemByUserIdResult struct {
+    Item *SimpleItem `json:"item"`
+    ItemModel *SimpleItemModel `json:"itemModel"`
+}
+
+type GetSimpleItemByUserIdAsyncResult struct {
+	result *GetSimpleItemByUserIdResult
+	err    error
+}
+
+func NewGetSimpleItemByUserIdResultFromJson(data string) GetSimpleItemByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleItemByUserIdResultFromDict(dict)
+}
+
+func NewGetSimpleItemByUserIdResultFromDict(data map[string]interface{}) GetSimpleItemByUserIdResult {
+    return GetSimpleItemByUserIdResult {
+        Item: NewSimpleItemFromDict(core.CastMap(data["item"])).Pointer(),
+        ItemModel: NewSimpleItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
+    }
+}
+
+func (p GetSimpleItemByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "itemModel": p.ItemModel.ToDict(),
+    }
+}
+
+func (p GetSimpleItemByUserIdResult) Pointer() *GetSimpleItemByUserIdResult {
+    return &p
+}
+
+type GetSimpleItemWithSignatureResult struct {
+    Item *SimpleItem `json:"item"`
+    SimpleItemModel *SimpleItemModel `json:"simpleItemModel"`
+    Body *string `json:"body"`
+    Signature *string `json:"signature"`
+}
+
+type GetSimpleItemWithSignatureAsyncResult struct {
+	result *GetSimpleItemWithSignatureResult
+	err    error
+}
+
+func NewGetSimpleItemWithSignatureResultFromJson(data string) GetSimpleItemWithSignatureResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleItemWithSignatureResultFromDict(dict)
+}
+
+func NewGetSimpleItemWithSignatureResultFromDict(data map[string]interface{}) GetSimpleItemWithSignatureResult {
+    return GetSimpleItemWithSignatureResult {
+        Item: NewSimpleItemFromDict(core.CastMap(data["item"])).Pointer(),
+        SimpleItemModel: NewSimpleItemModelFromDict(core.CastMap(data["simpleItemModel"])).Pointer(),
+        Body: core.CastString(data["body"]),
+        Signature: core.CastString(data["signature"]),
+    }
+}
+
+func (p GetSimpleItemWithSignatureResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "simpleItemModel": p.SimpleItemModel.ToDict(),
+        "body": p.Body,
+        "signature": p.Signature,
+    }
+}
+
+func (p GetSimpleItemWithSignatureResult) Pointer() *GetSimpleItemWithSignatureResult {
+    return &p
+}
+
+type GetSimpleItemWithSignatureByUserIdResult struct {
+    Item *SimpleItem `json:"item"`
+    SimpleItemModel *SimpleItemModel `json:"simpleItemModel"`
+    Body *string `json:"body"`
+    Signature *string `json:"signature"`
+}
+
+type GetSimpleItemWithSignatureByUserIdAsyncResult struct {
+	result *GetSimpleItemWithSignatureByUserIdResult
+	err    error
+}
+
+func NewGetSimpleItemWithSignatureByUserIdResultFromJson(data string) GetSimpleItemWithSignatureByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetSimpleItemWithSignatureByUserIdResultFromDict(dict)
+}
+
+func NewGetSimpleItemWithSignatureByUserIdResultFromDict(data map[string]interface{}) GetSimpleItemWithSignatureByUserIdResult {
+    return GetSimpleItemWithSignatureByUserIdResult {
+        Item: NewSimpleItemFromDict(core.CastMap(data["item"])).Pointer(),
+        SimpleItemModel: NewSimpleItemModelFromDict(core.CastMap(data["simpleItemModel"])).Pointer(),
+        Body: core.CastString(data["body"]),
+        Signature: core.CastString(data["signature"]),
+    }
+}
+
+func (p GetSimpleItemWithSignatureByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "simpleItemModel": p.SimpleItemModel.ToDict(),
+        "body": p.Body,
+        "signature": p.Signature,
+    }
+}
+
+func (p GetSimpleItemWithSignatureByUserIdResult) Pointer() *GetSimpleItemWithSignatureByUserIdResult {
+    return &p
+}
+
+type AcquireSimpleItemsByUserIdResult struct {
+    Items []SimpleItem `json:"items"`
+}
+
+type AcquireSimpleItemsByUserIdAsyncResult struct {
+	result *AcquireSimpleItemsByUserIdResult
+	err    error
+}
+
+func NewAcquireSimpleItemsByUserIdResultFromJson(data string) AcquireSimpleItemsByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireSimpleItemsByUserIdResultFromDict(dict)
+}
+
+func NewAcquireSimpleItemsByUserIdResultFromDict(data map[string]interface{}) AcquireSimpleItemsByUserIdResult {
+    return AcquireSimpleItemsByUserIdResult {
+        Items: CastSimpleItems(core.CastArray(data["items"])),
+    }
+}
+
+func (p AcquireSimpleItemsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSimpleItemsFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p AcquireSimpleItemsByUserIdResult) Pointer() *AcquireSimpleItemsByUserIdResult {
+    return &p
+}
+
+type ConsumeSimpleItemsResult struct {
+    Items []SimpleItem `json:"items"`
+}
+
+type ConsumeSimpleItemsAsyncResult struct {
+	result *ConsumeSimpleItemsResult
+	err    error
+}
+
+func NewConsumeSimpleItemsResultFromJson(data string) ConsumeSimpleItemsResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeSimpleItemsResultFromDict(dict)
+}
+
+func NewConsumeSimpleItemsResultFromDict(data map[string]interface{}) ConsumeSimpleItemsResult {
+    return ConsumeSimpleItemsResult {
+        Items: CastSimpleItems(core.CastArray(data["items"])),
+    }
+}
+
+func (p ConsumeSimpleItemsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSimpleItemsFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p ConsumeSimpleItemsResult) Pointer() *ConsumeSimpleItemsResult {
+    return &p
+}
+
+type ConsumeSimpleItemsByUserIdResult struct {
+    Items []SimpleItem `json:"items"`
+}
+
+type ConsumeSimpleItemsByUserIdAsyncResult struct {
+	result *ConsumeSimpleItemsByUserIdResult
+	err    error
+}
+
+func NewConsumeSimpleItemsByUserIdResultFromJson(data string) ConsumeSimpleItemsByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeSimpleItemsByUserIdResultFromDict(dict)
+}
+
+func NewConsumeSimpleItemsByUserIdResultFromDict(data map[string]interface{}) ConsumeSimpleItemsByUserIdResult {
+    return ConsumeSimpleItemsByUserIdResult {
+        Items: CastSimpleItems(core.CastArray(data["items"])),
+    }
+}
+
+func (p ConsumeSimpleItemsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSimpleItemsFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p ConsumeSimpleItemsByUserIdResult) Pointer() *ConsumeSimpleItemsByUserIdResult {
+    return &p
+}
+
+type DeleteSimpleItemsByUserIdResult struct {
+}
+
+type DeleteSimpleItemsByUserIdAsyncResult struct {
+	result *DeleteSimpleItemsByUserIdResult
+	err    error
+}
+
+func NewDeleteSimpleItemsByUserIdResultFromJson(data string) DeleteSimpleItemsByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteSimpleItemsByUserIdResultFromDict(dict)
+}
+
+func NewDeleteSimpleItemsByUserIdResultFromDict(data map[string]interface{}) DeleteSimpleItemsByUserIdResult {
+    return DeleteSimpleItemsByUserIdResult {
+    }
+}
+
+func (p DeleteSimpleItemsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+    }
+}
+
+func (p DeleteSimpleItemsByUserIdResult) Pointer() *DeleteSimpleItemsByUserIdResult {
+    return &p
+}
+
+type AcquireSimpleItemsByStampSheetResult struct {
+    Items []SimpleItem `json:"items"`
+}
+
+type AcquireSimpleItemsByStampSheetAsyncResult struct {
+	result *AcquireSimpleItemsByStampSheetResult
+	err    error
+}
+
+func NewAcquireSimpleItemsByStampSheetResultFromJson(data string) AcquireSimpleItemsByStampSheetResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireSimpleItemsByStampSheetResultFromDict(dict)
+}
+
+func NewAcquireSimpleItemsByStampSheetResultFromDict(data map[string]interface{}) AcquireSimpleItemsByStampSheetResult {
+    return AcquireSimpleItemsByStampSheetResult {
+        Items: CastSimpleItems(core.CastArray(data["items"])),
+    }
+}
+
+func (p AcquireSimpleItemsByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSimpleItemsFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p AcquireSimpleItemsByStampSheetResult) Pointer() *AcquireSimpleItemsByStampSheetResult {
+    return &p
+}
+
+type ConsumeSimpleItemsByStampTaskResult struct {
+    Items []SimpleItem `json:"items"`
+    NewContextStack *string `json:"newContextStack"`
+}
+
+type ConsumeSimpleItemsByStampTaskAsyncResult struct {
+	result *ConsumeSimpleItemsByStampTaskResult
+	err    error
+}
+
+func NewConsumeSimpleItemsByStampTaskResultFromJson(data string) ConsumeSimpleItemsByStampTaskResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeSimpleItemsByStampTaskResultFromDict(dict)
+}
+
+func NewConsumeSimpleItemsByStampTaskResultFromDict(data map[string]interface{}) ConsumeSimpleItemsByStampTaskResult {
+    return ConsumeSimpleItemsByStampTaskResult {
+        Items: CastSimpleItems(core.CastArray(data["items"])),
+        NewContextStack: core.CastString(data["newContextStack"]),
+    }
+}
+
+func (p ConsumeSimpleItemsByStampTaskResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastSimpleItemsFromDict(
+            p.Items,
+        ),
+        "newContextStack": p.NewContextStack,
+    }
+}
+
+func (p ConsumeSimpleItemsByStampTaskResult) Pointer() *ConsumeSimpleItemsByStampTaskResult {
     return &p
 }
