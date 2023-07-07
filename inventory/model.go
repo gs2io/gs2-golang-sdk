@@ -1132,7 +1132,6 @@ type SimpleInventory struct {
 	InventoryId *string `json:"inventoryId"`
 	InventoryName *string `json:"inventoryName"`
 	UserId *string `json:"userId"`
-	SimpleItems []SimpleItem `json:"simpleItems"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -1148,7 +1147,6 @@ func NewSimpleInventoryFromDict(data map[string]interface{}) SimpleInventory {
         InventoryId: core.CastString(data["inventoryId"]),
         InventoryName: core.CastString(data["inventoryName"]),
         UserId: core.CastString(data["userId"]),
-        SimpleItems: CastSimpleItems(core.CastArray(data["simpleItems"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
     }
@@ -1168,12 +1166,6 @@ func (p SimpleInventory) ToDict() map[string]interface{} {
     if p.UserId != nil {
         userId = p.UserId
     }
-    var simpleItems []interface{}
-    if p.SimpleItems != nil {
-        simpleItems = CastSimpleItemsFromDict(
-            p.SimpleItems,
-        )
-    }
     var createdAt *int64
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
@@ -1186,7 +1178,6 @@ func (p SimpleInventory) ToDict() map[string]interface{} {
         "inventoryId": inventoryId,
         "inventoryName": inventoryName,
         "userId": userId,
-        "simpleItems": simpleItems,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
     }
