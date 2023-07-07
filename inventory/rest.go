@@ -1955,7 +1955,7 @@ func (p Gs2InventoryRestClient) DescribeSimpleInventoryModelMastersAsync(
 	request *DescribeSimpleInventoryModelMastersRequest,
 	callback chan<- DescribeSimpleInventoryModelMastersAsyncResult,
 ) {
-	path := "/{namespaceName}/master/inventory"
+	path := "/{namespaceName}/master/simple/inventory"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2045,7 +2045,7 @@ func (p Gs2InventoryRestClient) CreateSimpleInventoryModelMasterAsync(
 	request *CreateSimpleInventoryModelMasterRequest,
 	callback chan<- CreateSimpleInventoryModelMasterAsyncResult,
 ) {
-	path := "/{namespaceName}/master/inventory"
+	path := "/{namespaceName}/master/simple/inventory"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2141,7 +2141,7 @@ func (p Gs2InventoryRestClient) GetSimpleInventoryModelMasterAsync(
 	request *GetSimpleInventoryModelMasterRequest,
 	callback chan<- GetSimpleInventoryModelMasterAsyncResult,
 ) {
-	path := "/{namespaceName}/master/inventory/{inventoryName}"
+	path := "/{namespaceName}/master/simple/inventory/{inventoryName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2230,7 +2230,7 @@ func (p Gs2InventoryRestClient) UpdateSimpleInventoryModelMasterAsync(
 	request *UpdateSimpleInventoryModelMasterRequest,
 	callback chan<- UpdateSimpleInventoryModelMasterAsyncResult,
 ) {
-	path := "/{namespaceName}/master/inventory/{inventoryName}"
+	path := "/{namespaceName}/master/simple/inventory/{inventoryName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2328,7 +2328,7 @@ func (p Gs2InventoryRestClient) DeleteSimpleInventoryModelMasterAsync(
 	request *DeleteSimpleInventoryModelMasterRequest,
 	callback chan<- DeleteSimpleInventoryModelMasterAsyncResult,
 ) {
-	path := "/{namespaceName}/master/inventory/{inventoryName}"
+	path := "/{namespaceName}/master/simple/inventory/{inventoryName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2417,7 +2417,7 @@ func (p Gs2InventoryRestClient) DescribeSimpleInventoryModelsAsync(
 	request *DescribeSimpleInventoryModelsRequest,
 	callback chan<- DescribeSimpleInventoryModelsAsyncResult,
 ) {
-	path := "/{namespaceName}/inventory"
+	path := "/{namespaceName}/simple/inventory"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2501,7 +2501,7 @@ func (p Gs2InventoryRestClient) GetSimpleInventoryModelAsync(
 	request *GetSimpleInventoryModelRequest,
 	callback chan<- GetSimpleInventoryModelAsyncResult,
 ) {
-	path := "/{namespaceName}/inventory/{inventoryName}"
+	path := "/{namespaceName}/simple/inventory/{inventoryName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2590,7 +2590,7 @@ func (p Gs2InventoryRestClient) DescribeSimpleItemModelMastersAsync(
 	request *DescribeSimpleItemModelMastersRequest,
 	callback chan<- DescribeSimpleItemModelMastersAsyncResult,
 ) {
-	path := "/{namespaceName}/master/inventory/{inventoryName}/item"
+	path := "/{namespaceName}/master/simple/inventory/{inventoryName}/item"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2685,7 +2685,7 @@ func (p Gs2InventoryRestClient) CreateSimpleItemModelMasterAsync(
 	request *CreateSimpleItemModelMasterRequest,
 	callback chan<- CreateSimpleItemModelMasterAsyncResult,
 ) {
-	path := "/{namespaceName}/master/inventory/{inventoryName}/item"
+	path := "/{namespaceName}/master/simple/inventory/{inventoryName}/item"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2786,7 +2786,7 @@ func (p Gs2InventoryRestClient) GetSimpleItemModelMasterAsync(
 	request *GetSimpleItemModelMasterRequest,
 	callback chan<- GetSimpleItemModelMasterAsyncResult,
 ) {
-	path := "/{namespaceName}/master/inventory/{inventoryName}/item/{itemName}"
+	path := "/{namespaceName}/master/simple/inventory/{inventoryName}/item/{itemName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2880,7 +2880,7 @@ func (p Gs2InventoryRestClient) UpdateSimpleItemModelMasterAsync(
 	request *UpdateSimpleItemModelMasterRequest,
 	callback chan<- UpdateSimpleItemModelMasterAsyncResult,
 ) {
-	path := "/{namespaceName}/master/inventory/{inventoryName}/item/{itemName}"
+	path := "/{namespaceName}/master/simple/inventory/{inventoryName}/item/{itemName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -2983,7 +2983,7 @@ func (p Gs2InventoryRestClient) DeleteSimpleItemModelMasterAsync(
 	request *DeleteSimpleItemModelMasterRequest,
 	callback chan<- DeleteSimpleItemModelMasterAsyncResult,
 ) {
-	path := "/{namespaceName}/master/inventory/{inventoryName}/item/{itemName}"
+	path := "/{namespaceName}/master/simple/inventory/{inventoryName}/item/{itemName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -3077,7 +3077,7 @@ func (p Gs2InventoryRestClient) DescribeSimpleItemModelsAsync(
 	request *DescribeSimpleItemModelsRequest,
 	callback chan<- DescribeSimpleItemModelsAsyncResult,
 ) {
-	path := "/{namespaceName}/inventory/{inventoryName}/item"
+	path := "/{namespaceName}/simple/inventory/{inventoryName}/item"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -3166,7 +3166,7 @@ func (p Gs2InventoryRestClient) GetSimpleItemModelAsync(
 	request *GetSimpleItemModelRequest,
 	callback chan<- GetSimpleItemModelAsyncResult,
 ) {
-	path := "/{namespaceName}/inventory/{inventoryName}/item/{itemName}"
+	path := "/{namespaceName}/simple/inventory/{inventoryName}/item/{itemName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
