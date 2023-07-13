@@ -1559,6 +1559,12 @@ func (p Gs2LoginRewardWebSocketClient) receiveAsyncHandler(
         }
 	}
     if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyReceived{})
+            }
+        }
     }
 	callback <- ReceiveAsyncResult{
 		result: &result,
@@ -1659,6 +1665,12 @@ func (p Gs2LoginRewardWebSocketClient) receiveByUserIdAsyncHandler(
         }
 	}
     if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyReceived{})
+            }
+        }
     }
 	callback <- ReceiveByUserIdAsyncResult{
 		result: &result,
@@ -1756,6 +1768,12 @@ func (p Gs2LoginRewardWebSocketClient) missedReceiveAsyncHandler(
         }
 	}
     if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyReceived{})
+            }
+        }
     }
 	callback <- MissedReceiveAsyncResult{
 		result: &result,
@@ -1859,6 +1877,12 @@ func (p Gs2LoginRewardWebSocketClient) missedReceiveByUserIdAsyncHandler(
         }
 	}
     if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyReceived{})
+            }
+        }
     }
 	callback <- MissedReceiveByUserIdAsyncResult{
 		result: &result,

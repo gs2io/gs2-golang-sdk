@@ -1624,6 +1624,12 @@ func receiveAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ReceiveResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyReceived{})
+            }
+        }
 		callback <- ReceiveAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1729,6 +1735,12 @@ func receiveByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ReceiveByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyReceived{})
+            }
+        }
 		callback <- ReceiveByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1836,6 +1848,12 @@ func missedReceiveAsyncHandler(
 	asyncResult := <-internalCallback
 	var result MissedReceiveResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyReceived{})
+            }
+        }
 		callback <- MissedReceiveAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -1944,6 +1962,12 @@ func missedReceiveByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result MissedReceiveByUserIdResult
 	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyReceived{})
+            }
+        }
 		callback <- MissedReceiveByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
