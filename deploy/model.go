@@ -118,7 +118,7 @@ type Resource struct {
 	Response *string `json:"response"`
 	RollbackContext *string `json:"rollbackContext"`
 	RollbackRequest *string `json:"rollbackRequest"`
-	RollbackAfter []string `json:"rollbackAfter"`
+	RollbackAfter []*string `json:"rollbackAfter"`
 	OutputFields []OutputField `json:"outputFields"`
 	WorkId *string `json:"workId"`
 	CreatedAt *int64 `json:"createdAt"`
