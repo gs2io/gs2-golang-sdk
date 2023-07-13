@@ -289,7 +289,7 @@ type CreateRoomRequest struct {
     Name *string `json:"name"`
     Metadata *string `json:"metadata"`
     Password *string `json:"password"`
-    WhiteListUserIds []string `json:"whiteListUserIds"`
+    WhiteListUserIds []*string `json:"whiteListUserIds"`
 }
 
 func NewCreateRoomRequestFromJson(data string) CreateRoomRequest {
@@ -335,7 +335,7 @@ type CreateRoomFromBackendRequest struct {
     UserId *string `json:"userId"`
     Metadata *string `json:"metadata"`
     Password *string `json:"password"`
-    WhiteListUserIds []string `json:"whiteListUserIds"`
+    WhiteListUserIds []*string `json:"whiteListUserIds"`
 }
 
 func NewCreateRoomFromBackendRequestFromJson(data string) CreateRoomFromBackendRequest {
@@ -411,7 +411,7 @@ type UpdateRoomRequest struct {
     RoomName *string `json:"roomName"`
     Metadata *string `json:"metadata"`
     Password *string `json:"password"`
-    WhiteListUserIds []string `json:"whiteListUserIds"`
+    WhiteListUserIds []*string `json:"whiteListUserIds"`
     AccessToken *string `json:"accessToken"`
 }
 
@@ -457,7 +457,7 @@ type UpdateRoomFromBackendRequest struct {
     RoomName *string `json:"roomName"`
     Metadata *string `json:"metadata"`
     Password *string `json:"password"`
-    WhiteListUserIds []string `json:"whiteListUserIds"`
+    WhiteListUserIds []*string `json:"whiteListUserIds"`
     UserId *string `json:"userId"`
 }
 

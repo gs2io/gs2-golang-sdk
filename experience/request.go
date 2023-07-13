@@ -528,7 +528,7 @@ type CreateThresholdMasterRequest struct {
     Name *string `json:"name"`
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
-    Values []int64 `json:"values"`
+    Values []*int64 `json:"values"`
 }
 
 func NewCreateThresholdMasterRequestFromJson(data string) CreateThresholdMasterRequest {
@@ -601,7 +601,7 @@ type UpdateThresholdMasterRequest struct {
     ThresholdName *string `json:"thresholdName"`
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
-    Values []int64 `json:"values"`
+    Values []*int64 `json:"values"`
 }
 
 func NewUpdateThresholdMasterRequestFromJson(data string) UpdateThresholdMasterRequest {

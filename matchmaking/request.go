@@ -319,7 +319,7 @@ type CreateGatheringRequest struct {
     Player *Player `json:"player"`
     AttributeRanges []AttributeRange `json:"attributeRanges"`
     CapacityOfRoles []CapacityOfRole `json:"capacityOfRoles"`
-    AllowUserIds []string `json:"allowUserIds"`
+    AllowUserIds []*string `json:"allowUserIds"`
     ExpiresAt *int64 `json:"expiresAt"`
     ExpiresAtTimeSpan *TimeSpan `json:"expiresAtTimeSpan"`
 }
@@ -375,7 +375,7 @@ type CreateGatheringByUserIdRequest struct {
     Player *Player `json:"player"`
     AttributeRanges []AttributeRange `json:"attributeRanges"`
     CapacityOfRoles []CapacityOfRole `json:"capacityOfRoles"`
-    AllowUserIds []string `json:"allowUserIds"`
+    AllowUserIds []*string `json:"allowUserIds"`
     ExpiresAt *int64 `json:"expiresAt"`
     ExpiresAtTimeSpan *TimeSpan `json:"expiresAtTimeSpan"`
 }

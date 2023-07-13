@@ -123,7 +123,7 @@ type DistributorModelMaster struct {
 	Description *string `json:"description"`
 	Metadata *string `json:"metadata"`
 	InboxNamespaceId *string `json:"inboxNamespaceId"`
-	WhiteListTargetIds []string `json:"whiteListTargetIds"`
+	WhiteListTargetIds []*string `json:"whiteListTargetIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -220,7 +220,7 @@ type DistributorModel struct {
 	Name *string `json:"name"`
 	Metadata *string `json:"metadata"`
 	InboxNamespaceId *string `json:"inboxNamespaceId"`
-	WhiteListTargetIds []string `json:"whiteListTargetIds"`
+	WhiteListTargetIds []*string `json:"whiteListTargetIds"`
 }
 
 func NewDistributorModelFromJson(data string) DistributorModel {
@@ -352,7 +352,7 @@ type StampSheetResult struct {
 	TransactionId *string `json:"transactionId"`
 	TaskRequests []ConsumeAction `json:"taskRequests"`
 	SheetRequest *AcquireAction `json:"sheetRequest"`
-	TaskResults []string `json:"taskResults"`
+	TaskResults []*string `json:"taskResults"`
 	SheetResult *string `json:"sheetResult"`
 	NextTransactionId *string `json:"nextTransactionId"`
 	CreatedAt *int64 `json:"createdAt"`

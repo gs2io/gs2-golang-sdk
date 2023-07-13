@@ -498,7 +498,7 @@ func CastGlobalMessagesFromDict(data []GlobalMessage) []interface{} {
 type Received struct {
 	ReceivedId *string `json:"receivedId"`
 	UserId *string `json:"userId"`
-	ReceivedGlobalMessageNames []string `json:"receivedGlobalMessageNames"`
+	ReceivedGlobalMessageNames []*string `json:"receivedGlobalMessageNames"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }

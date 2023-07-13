@@ -440,7 +440,7 @@ func (p DescribeFriendsByUserIdResult) Pointer() *DescribeFriendsByUserIdResult 
 }
 
 type DescribeBlackListResult struct {
-    Items []string `json:"items"`
+    Items []*string `json:"items"`
     NextPageToken *string `json:"nextPageToken"`
 }
 
@@ -476,7 +476,7 @@ func (p DescribeBlackListResult) Pointer() *DescribeBlackListResult {
 }
 
 type DescribeBlackListByUserIdResult struct {
-    Items []string `json:"items"`
+    Items []*string `json:"items"`
     NextPageToken *string `json:"nextPageToken"`
 }
 

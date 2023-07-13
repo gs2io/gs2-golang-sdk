@@ -473,7 +473,7 @@ type ReceiveStatus struct {
 	ReceiveStatusId *string `json:"receiveStatusId"`
 	BonusModelName *string `json:"bonusModelName"`
 	UserId *string `json:"userId"`
-	ReceivedSteps []bool `json:"receivedSteps"`
+	ReceivedSteps []*bool `json:"receivedSteps"`
 	LastReceivedAt *int64 `json:"lastReceivedAt"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`

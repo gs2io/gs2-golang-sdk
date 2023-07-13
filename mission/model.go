@@ -25,8 +25,8 @@ type Complete struct {
 	CompleteId *string `json:"completeId"`
 	UserId *string `json:"userId"`
 	MissionGroupName *string `json:"missionGroupName"`
-	CompletedMissionTaskNames []string `json:"completedMissionTaskNames"`
-	ReceivedMissionTaskNames []string `json:"receivedMissionTaskNames"`
+	CompletedMissionTaskNames []*string `json:"completedMissionTaskNames"`
+	ReceivedMissionTaskNames []*string `json:"receivedMissionTaskNames"`
 	NextResetAt *int64 `json:"nextResetAt"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`

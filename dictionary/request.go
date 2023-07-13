@@ -525,7 +525,7 @@ type AddEntriesByUserIdRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
-    EntryModelNames []string `json:"entryModelNames"`
+    EntryModelNames []*string `json:"entryModelNames"`
 }
 
 func NewAddEntriesByUserIdRequestFromJson(data string) AddEntriesByUserIdRequest {

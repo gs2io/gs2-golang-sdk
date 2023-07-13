@@ -316,7 +316,7 @@ func CastPasswordsFromDict(data []Password) []interface{} {
 
 type AttachSecurityPolicy struct {
 	UserId *string `json:"userId"`
-	SecurityPolicyIds []string `json:"securityPolicyIds"`
+	SecurityPolicyIds []*string `json:"securityPolicyIds"`
 	AttachedAt *int64 `json:"attachedAt"`
 }
 

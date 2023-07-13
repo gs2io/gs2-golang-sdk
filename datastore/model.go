@@ -183,7 +183,7 @@ type DataObject struct {
 	Name *string `json:"name"`
 	UserId *string `json:"userId"`
 	Scope *string `json:"scope"`
-	AllowUserIds []string `json:"allowUserIds"`
+	AllowUserIds []*string `json:"allowUserIds"`
 	Status *string `json:"status"`
 	Generation *string `json:"generation"`
 	PreviousGeneration *string `json:"previousGeneration"`

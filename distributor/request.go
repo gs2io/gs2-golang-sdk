@@ -258,7 +258,7 @@ type CreateDistributorModelMasterRequest struct {
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
     InboxNamespaceId *string `json:"inboxNamespaceId"`
-    WhiteListTargetIds []string `json:"whiteListTargetIds"`
+    WhiteListTargetIds []*string `json:"whiteListTargetIds"`
 }
 
 func NewCreateDistributorModelMasterRequestFromJson(data string) CreateDistributorModelMasterRequest {
@@ -334,7 +334,7 @@ type UpdateDistributorModelMasterRequest struct {
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
     InboxNamespaceId *string `json:"inboxNamespaceId"`
-    WhiteListTargetIds []string `json:"whiteListTargetIds"`
+    WhiteListTargetIds []*string `json:"whiteListTargetIds"`
 }
 
 func NewUpdateDistributorModelMasterRequestFromJson(data string) UpdateDistributorModelMasterRequest {

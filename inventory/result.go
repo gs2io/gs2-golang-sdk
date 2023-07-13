@@ -2005,7 +2005,7 @@ func (p ConsumeItemSetByStampTaskResult) Pointer() *ConsumeItemSetByStampTaskRes
 }
 
 type DescribeReferenceOfResult struct {
-    Items []string `json:"items"`
+    Items []*string `json:"items"`
     ItemSet *ItemSet `json:"itemSet"`
     ItemModel *ItemModel `json:"itemModel"`
     Inventory *Inventory `json:"inventory"`
@@ -2047,7 +2047,7 @@ func (p DescribeReferenceOfResult) Pointer() *DescribeReferenceOfResult {
 }
 
 type DescribeReferenceOfByUserIdResult struct {
-    Items []string `json:"items"`
+    Items []*string `json:"items"`
     ItemSet *ItemSet `json:"itemSet"`
     ItemModel *ItemModel `json:"itemModel"`
     Inventory *Inventory `json:"inventory"`
@@ -2089,7 +2089,7 @@ func (p DescribeReferenceOfByUserIdResult) Pointer() *DescribeReferenceOfByUserI
 }
 
 type GetReferenceOfResult struct {
-    Item []string `json:"item"`
+    Item []*string `json:"item"`
     ItemSet *ItemSet `json:"itemSet"`
     ItemModel *ItemModel `json:"itemModel"`
     Inventory *Inventory `json:"inventory"`
@@ -2131,7 +2131,7 @@ func (p GetReferenceOfResult) Pointer() *GetReferenceOfResult {
 }
 
 type GetReferenceOfByUserIdResult struct {
-    Item []string `json:"item"`
+    Item []*string `json:"item"`
     ItemSet *ItemSet `json:"itemSet"`
     ItemModel *ItemModel `json:"itemModel"`
     Inventory *Inventory `json:"inventory"`
@@ -2173,7 +2173,7 @@ func (p GetReferenceOfByUserIdResult) Pointer() *GetReferenceOfByUserIdResult {
 }
 
 type VerifyReferenceOfResult struct {
-    Item []string `json:"item"`
+    Item []*string `json:"item"`
     ItemSet *ItemSet `json:"itemSet"`
     ItemModel *ItemModel `json:"itemModel"`
     Inventory *Inventory `json:"inventory"`
@@ -2215,7 +2215,7 @@ func (p VerifyReferenceOfResult) Pointer() *VerifyReferenceOfResult {
 }
 
 type VerifyReferenceOfByUserIdResult struct {
-    Item []string `json:"item"`
+    Item []*string `json:"item"`
     ItemSet *ItemSet `json:"itemSet"`
     ItemModel *ItemModel `json:"itemModel"`
     Inventory *Inventory `json:"inventory"`
@@ -2257,7 +2257,7 @@ func (p VerifyReferenceOfByUserIdResult) Pointer() *VerifyReferenceOfByUserIdRes
 }
 
 type AddReferenceOfResult struct {
-    Item []string `json:"item"`
+    Item []*string `json:"item"`
     ItemSet *ItemSet `json:"itemSet"`
     ItemModel *ItemModel `json:"itemModel"`
     Inventory *Inventory `json:"inventory"`
@@ -2299,7 +2299,7 @@ func (p AddReferenceOfResult) Pointer() *AddReferenceOfResult {
 }
 
 type AddReferenceOfByUserIdResult struct {
-    Item []string `json:"item"`
+    Item []*string `json:"item"`
     ItemSet *ItemSet `json:"itemSet"`
     ItemModel *ItemModel `json:"itemModel"`
     Inventory *Inventory `json:"inventory"`
@@ -2341,7 +2341,7 @@ func (p AddReferenceOfByUserIdResult) Pointer() *AddReferenceOfByUserIdResult {
 }
 
 type DeleteReferenceOfResult struct {
-    Item []string `json:"item"`
+    Item []*string `json:"item"`
     ItemSet *ItemSet `json:"itemSet"`
     ItemModel *ItemModel `json:"itemModel"`
     Inventory *Inventory `json:"inventory"`
@@ -2383,7 +2383,7 @@ func (p DeleteReferenceOfResult) Pointer() *DeleteReferenceOfResult {
 }
 
 type DeleteReferenceOfByUserIdResult struct {
-    Item []string `json:"item"`
+    Item []*string `json:"item"`
     ItemSet *ItemSet `json:"itemSet"`
     ItemModel *ItemModel `json:"itemModel"`
     Inventory *Inventory `json:"inventory"`
@@ -2425,7 +2425,7 @@ func (p DeleteReferenceOfByUserIdResult) Pointer() *DeleteReferenceOfByUserIdRes
 }
 
 type AddReferenceOfItemSetByStampSheetResult struct {
-    Item []string `json:"item"`
+    Item []*string `json:"item"`
     ItemSet *ItemSet `json:"itemSet"`
     ItemModel *ItemModel `json:"itemModel"`
     Inventory *Inventory `json:"inventory"`
@@ -2467,7 +2467,7 @@ func (p AddReferenceOfItemSetByStampSheetResult) Pointer() *AddReferenceOfItemSe
 }
 
 type DeleteReferenceOfItemSetByStampSheetResult struct {
-    Item []string `json:"item"`
+    Item []*string `json:"item"`
     ItemSet *ItemSet `json:"itemSet"`
     ItemModel *ItemModel `json:"itemModel"`
     Inventory *Inventory `json:"inventory"`
@@ -2509,7 +2509,7 @@ func (p DeleteReferenceOfItemSetByStampSheetResult) Pointer() *DeleteReferenceOf
 }
 
 type VerifyReferenceOfByStampTaskResult struct {
-    Item []string `json:"item"`
+    Item []*string `json:"item"`
     ItemSet *ItemSet `json:"itemSet"`
     ItemModel *ItemModel `json:"itemModel"`
     Inventory *Inventory `json:"inventory"`

@@ -962,7 +962,7 @@ type ItemSet struct {
 	UserId *string `json:"userId"`
 	ItemName *string `json:"itemName"`
 	Count *int64 `json:"count"`
-	ReferenceOf []string `json:"referenceOf"`
+	ReferenceOf []*string `json:"referenceOf"`
 	SortValue *int32 `json:"sortValue"`
 	ExpiresAt *int64 `json:"expiresAt"`
 	CreatedAt *int64 `json:"createdAt"`

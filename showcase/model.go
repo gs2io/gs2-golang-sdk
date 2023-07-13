@@ -238,7 +238,7 @@ type SalesItemGroupMaster struct {
 	Name *string `json:"name"`
 	Description *string `json:"description"`
 	Metadata *string `json:"metadata"`
-	SalesItemNames []string `json:"salesItemNames"`
+	SalesItemNames []*string `json:"salesItemNames"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }

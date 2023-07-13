@@ -254,7 +254,7 @@ type MaxStaminaTableMaster struct {
 	Metadata *string `json:"metadata"`
 	Description *string `json:"description"`
 	ExperienceModelId *string `json:"experienceModelId"`
-	Values []int32 `json:"values"`
+	Values []*int32 `json:"values"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -352,7 +352,7 @@ type RecoverIntervalTableMaster struct {
 	Metadata *string `json:"metadata"`
 	Description *string `json:"description"`
 	ExperienceModelId *string `json:"experienceModelId"`
-	Values []int32 `json:"values"`
+	Values []*int32 `json:"values"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -450,7 +450,7 @@ type RecoverValueTableMaster struct {
 	Metadata *string `json:"metadata"`
 	Description *string `json:"description"`
 	ExperienceModelId *string `json:"experienceModelId"`
-	Values []int32 `json:"values"`
+	Values []*int32 `json:"values"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -718,7 +718,7 @@ type MaxStaminaTable struct {
 	Name *string `json:"name"`
 	Metadata *string `json:"metadata"`
 	ExperienceModelId *string `json:"experienceModelId"`
-	Values []int32 `json:"values"`
+	Values []*int32 `json:"values"`
 }
 
 func NewMaxStaminaTableFromJson(data string) MaxStaminaTable {
@@ -795,7 +795,7 @@ type RecoverIntervalTable struct {
 	Name *string `json:"name"`
 	Metadata *string `json:"metadata"`
 	ExperienceModelId *string `json:"experienceModelId"`
-	Values []int32 `json:"values"`
+	Values []*int32 `json:"values"`
 }
 
 func NewRecoverIntervalTableFromJson(data string) RecoverIntervalTable {
@@ -872,7 +872,7 @@ type RecoverValueTable struct {
 	Name *string `json:"name"`
 	Metadata *string `json:"metadata"`
 	ExperienceModelId *string `json:"experienceModelId"`
-	Values []int32 `json:"values"`
+	Values []*int32 `json:"values"`
 }
 
 func NewRecoverValueTableFromJson(data string) RecoverValueTable {

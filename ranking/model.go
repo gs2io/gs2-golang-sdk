@@ -127,7 +127,7 @@ type CategoryModel struct {
 	CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
 	EntryPeriodEventId *string `json:"entryPeriodEventId"`
 	AccessPeriodEventId *string `json:"accessPeriodEventId"`
-	IgnoreUserIds []string `json:"ignoreUserIds"`
+	IgnoreUserIds []*string `json:"ignoreUserIds"`
 	Generation *string `json:"generation"`
 }
 
@@ -282,7 +282,7 @@ type CategoryModelMaster struct {
 	CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
 	EntryPeriodEventId *string `json:"entryPeriodEventId"`
 	AccessPeriodEventId *string `json:"accessPeriodEventId"`
-	IgnoreUserIds []string `json:"ignoreUserIds"`
+	IgnoreUserIds []*string `json:"ignoreUserIds"`
 	Generation *string `json:"generation"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
@@ -445,8 +445,8 @@ type Subscribe struct {
 	SubscribeId *string `json:"subscribeId"`
 	CategoryName *string `json:"categoryName"`
 	UserId *string `json:"userId"`
-	TargetUserIds []string `json:"targetUserIds"`
-	SubscribedUserIds []string `json:"subscribedUserIds"`
+	TargetUserIds []*string `json:"targetUserIds"`
+	SubscribedUserIds []*string `json:"subscribedUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 }
 

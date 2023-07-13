@@ -130,7 +130,7 @@ type Room struct {
 	IpAddress *string `json:"ipAddress"`
 	Port *int32 `json:"port"`
 	EncryptionKey *string `json:"encryptionKey"`
-	NotificationUserIds []string `json:"notificationUserIds"`
+	NotificationUserIds []*string `json:"notificationUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }

@@ -529,39 +529,6 @@ func (p DescribeBonusModelsResult) Pointer() *DescribeBonusModelsResult {
     return &p
 }
 
-type DescribeBonusModelsByUserIdResult struct {
-    Items []BonusModel `json:"items"`
-}
-
-type DescribeBonusModelsByUserIdAsyncResult struct {
-	result *DescribeBonusModelsByUserIdResult
-	err    error
-}
-
-func NewDescribeBonusModelsByUserIdResultFromJson(data string) DescribeBonusModelsByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeBonusModelsByUserIdResultFromDict(dict)
-}
-
-func NewDescribeBonusModelsByUserIdResultFromDict(data map[string]interface{}) DescribeBonusModelsByUserIdResult {
-    return DescribeBonusModelsByUserIdResult {
-        Items: CastBonusModels(core.CastArray(data["items"])),
-    }
-}
-
-func (p DescribeBonusModelsByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastBonusModelsFromDict(
-            p.Items,
-        ),
-    }
-}
-
-func (p DescribeBonusModelsByUserIdResult) Pointer() *DescribeBonusModelsByUserIdResult {
-    return &p
-}
-
 type GetBonusModelResult struct {
     Item *BonusModel `json:"item"`
 }
@@ -590,37 +557,6 @@ func (p GetBonusModelResult) ToDict() map[string]interface{} {
 }
 
 func (p GetBonusModelResult) Pointer() *GetBonusModelResult {
-    return &p
-}
-
-type GetBonusModelByUserIdResult struct {
-    Item *BonusModel `json:"item"`
-}
-
-type GetBonusModelByUserIdAsyncResult struct {
-	result *GetBonusModelByUserIdResult
-	err    error
-}
-
-func NewGetBonusModelByUserIdResultFromJson(data string) GetBonusModelByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetBonusModelByUserIdResultFromDict(dict)
-}
-
-func NewGetBonusModelByUserIdResultFromDict(data map[string]interface{}) GetBonusModelByUserIdResult {
-    return GetBonusModelByUserIdResult {
-        Item: NewBonusModelFromDict(core.CastMap(data["item"])).Pointer(),
-    }
-}
-
-func (p GetBonusModelByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
-}
-
-func (p GetBonusModelByUserIdResult) Pointer() *GetBonusModelByUserIdResult {
     return &p
 }
 

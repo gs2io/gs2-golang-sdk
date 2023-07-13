@@ -272,7 +272,7 @@ func CastProfilesFromDict(data []Profile) []interface{} {
 type Follow struct {
 	FollowId *string `json:"followId"`
 	UserId *string `json:"userId"`
-	TargetUserIds []string `json:"targetUserIds"`
+	TargetUserIds []*string `json:"targetUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -349,7 +349,7 @@ func CastFollowsFromDict(data []Follow) []interface{} {
 type Friend struct {
 	FriendId *string `json:"friendId"`
 	UserId *string `json:"userId"`
-	TargetUserIds []string `json:"targetUserIds"`
+	TargetUserIds []*string `json:"targetUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -426,7 +426,7 @@ func CastFriendsFromDict(data []Friend) []interface{} {
 type SendBox struct {
 	SendBoxId *string `json:"sendBoxId"`
 	UserId *string `json:"userId"`
-	TargetUserIds []string `json:"targetUserIds"`
+	TargetUserIds []*string `json:"targetUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -503,7 +503,7 @@ func CastSendBoxesFromDict(data []SendBox) []interface{} {
 type Inbox struct {
 	InboxId *string `json:"inboxId"`
 	UserId *string `json:"userId"`
-	FromUserIds []string `json:"fromUserIds"`
+	FromUserIds []*string `json:"fromUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -580,7 +580,7 @@ func CastInboxesFromDict(data []Inbox) []interface{} {
 type BlackList struct {
 	BlackListId *string `json:"blackListId"`
 	UserId *string `json:"userId"`
-	TargetUserIds []string `json:"targetUserIds"`
+	TargetUserIds []*string `json:"targetUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }

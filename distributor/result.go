@@ -697,7 +697,7 @@ func (p RunStampSheetResult) Pointer() *RunStampSheetResult {
 }
 
 type RunStampSheetExpressResult struct {
-    TaskResults []string `json:"taskResults"`
+    TaskResults []*string `json:"taskResults"`
     SheetResult *string `json:"sheetResult"`
 }
 
@@ -798,7 +798,7 @@ func (p RunStampSheetWithoutNamespaceResult) Pointer() *RunStampSheetWithoutName
 }
 
 type RunStampSheetExpressWithoutNamespaceResult struct {
-    TaskResults []string `json:"taskResults"`
+    TaskResults []*string `json:"taskResults"`
     SheetResult *string `json:"sheetResult"`
 }
 

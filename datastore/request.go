@@ -299,7 +299,7 @@ type PrepareUploadRequest struct {
     Name *string `json:"name"`
     ContentType *string `json:"contentType"`
     Scope *string `json:"scope"`
-    AllowUserIds []string `json:"allowUserIds"`
+    AllowUserIds []*string `json:"allowUserIds"`
     UpdateIfExists *bool `json:"updateIfExists"`
 }
 
@@ -348,7 +348,7 @@ type PrepareUploadByUserIdRequest struct {
     Name *string `json:"name"`
     ContentType *string `json:"contentType"`
     Scope *string `json:"scope"`
-    AllowUserIds []string `json:"allowUserIds"`
+    AllowUserIds []*string `json:"allowUserIds"`
     UpdateIfExists *bool `json:"updateIfExists"`
 }
 
@@ -396,7 +396,7 @@ type UpdateDataObjectRequest struct {
     DataObjectName *string `json:"dataObjectName"`
     AccessToken *string `json:"accessToken"`
     Scope *string `json:"scope"`
-    AllowUserIds []string `json:"allowUserIds"`
+    AllowUserIds []*string `json:"allowUserIds"`
 }
 
 func NewUpdateDataObjectRequestFromJson(data string) UpdateDataObjectRequest {
@@ -439,7 +439,7 @@ type UpdateDataObjectByUserIdRequest struct {
     DataObjectName *string `json:"dataObjectName"`
     UserId *string `json:"userId"`
     Scope *string `json:"scope"`
-    AllowUserIds []string `json:"allowUserIds"`
+    AllowUserIds []*string `json:"allowUserIds"`
 }
 
 func NewUpdateDataObjectByUserIdRequestFromJson(data string) UpdateDataObjectByUserIdRequest {

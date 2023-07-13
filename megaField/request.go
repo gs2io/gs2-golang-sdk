@@ -903,7 +903,7 @@ type FetchPositionRequest struct {
     AccessToken *string `json:"accessToken"`
     AreaModelName *string `json:"areaModelName"`
     LayerModelName *string `json:"layerModelName"`
-    UserIds []string `json:"userIds"`
+    UserIds []*string `json:"userIds"`
 }
 
 func NewFetchPositionRequestFromJson(data string) FetchPositionRequest {
@@ -945,7 +945,7 @@ type FetchPositionFromSystemRequest struct {
     NamespaceName *string `json:"namespaceName"`
     AreaModelName *string `json:"areaModelName"`
     LayerModelName *string `json:"layerModelName"`
-    UserIds []string `json:"userIds"`
+    UserIds []*string `json:"userIds"`
 }
 
 func NewFetchPositionFromSystemRequestFromJson(data string) FetchPositionFromSystemRequest {

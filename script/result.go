@@ -439,7 +439,7 @@ type InvokeScriptResult struct {
     Result *string `json:"result"`
     ExecuteTime *int32 `json:"executeTime"`
     Charged *int32 `json:"charged"`
-    Output []string `json:"output"`
+    Output []*string `json:"output"`
 }
 
 type InvokeScriptAsyncResult struct {
@@ -484,7 +484,7 @@ type DebugInvokeResult struct {
     Result *string `json:"result"`
     ExecuteTime *int32 `json:"executeTime"`
     Charged *int32 `json:"charged"`
-    Output []string `json:"output"`
+    Output []*string `json:"output"`
 }
 
 type DebugInvokeAsyncResult struct {

@@ -341,7 +341,7 @@ type CreateRateModelMasterRequest struct {
     TargetInventoryModelId *string `json:"targetInventoryModelId"`
     AcquireExperienceSuffix *string `json:"acquireExperienceSuffix"`
     MaterialInventoryModelId *string `json:"materialInventoryModelId"`
-    AcquireExperienceHierarchy []string `json:"acquireExperienceHierarchy"`
+    AcquireExperienceHierarchy []*string `json:"acquireExperienceHierarchy"`
     ExperienceModelId *string `json:"experienceModelId"`
     BonusRates []BonusRate `json:"bonusRates"`
 }
@@ -431,7 +431,7 @@ type UpdateRateModelMasterRequest struct {
     TargetInventoryModelId *string `json:"targetInventoryModelId"`
     AcquireExperienceSuffix *string `json:"acquireExperienceSuffix"`
     MaterialInventoryModelId *string `json:"materialInventoryModelId"`
-    AcquireExperienceHierarchy []string `json:"acquireExperienceHierarchy"`
+    AcquireExperienceHierarchy []*string `json:"acquireExperienceHierarchy"`
     ExperienceModelId *string `json:"experienceModelId"`
     BonusRates []BonusRate `json:"bonusRates"`
 }

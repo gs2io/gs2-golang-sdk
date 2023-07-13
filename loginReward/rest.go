@@ -1476,7 +1476,7 @@ func (p Gs2LoginRewardRestClient) DescribeBonusModelsAsync(
 	request *DescribeBonusModelsRequest,
 	callback chan<- DescribeBonusModelsAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/bonusModel"
+	path := "/{namespaceName}/model/bonusModel"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -1489,9 +1489,6 @@ func (p Gs2LoginRewardRestClient) DescribeBonusModelsAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
 
 	go describeBonusModelsAsyncHandler(
@@ -1511,95 +1508,6 @@ func (p Gs2LoginRewardRestClient) DescribeBonusModels(
 ) (*DescribeBonusModelsResult, error) {
 	callback := make(chan DescribeBonusModelsAsyncResult, 1)
 	go p.DescribeBonusModelsAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func describeBonusModelsByUserIdAsyncHandler(
-	client Gs2LoginRewardRestClient,
-	job *core.NetworkJob,
-	callback chan<- DescribeBonusModelsByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeBonusModelsByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeBonusModelsByUserIdResult
-	if asyncResult.Err != nil {
-		callback <- DescribeBonusModelsByUserIdAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeBonusModelsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeBonusModelsByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2LoginRewardRestClient) DescribeBonusModelsByUserIdAsync(
-	request *DescribeBonusModelsByUserIdRequest,
-	callback chan<- DescribeBonusModelsByUserIdAsyncResult,
-) {
-	path := "/{namespaceName}/user/{userId}/bonusModel"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go describeBonusModelsByUserIdAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
-			Method:       core.Get,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2LoginRewardRestClient) DescribeBonusModelsByUserId(
-	request *DescribeBonusModelsByUserIdRequest,
-) (*DescribeBonusModelsByUserIdResult, error) {
-	callback := make(chan DescribeBonusModelsByUserIdAsyncResult, 1)
-	go p.DescribeBonusModelsByUserIdAsync(
 		request,
 		callback,
 	)
@@ -1652,7 +1560,7 @@ func (p Gs2LoginRewardRestClient) GetBonusModelAsync(
 	request *GetBonusModelRequest,
 	callback chan<- GetBonusModelAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/bonusModel/{bonusModelName}"
+	path := "/{namespaceName}/model/bonusModel/{bonusModelName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -1670,9 +1578,6 @@ func (p Gs2LoginRewardRestClient) GetBonusModelAsync(
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
     }
 
 	go getBonusModelAsyncHandler(
@@ -1692,100 +1597,6 @@ func (p Gs2LoginRewardRestClient) GetBonusModel(
 ) (*GetBonusModelResult, error) {
 	callback := make(chan GetBonusModelAsyncResult, 1)
 	go p.GetBonusModelAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func getBonusModelByUserIdAsyncHandler(
-	client Gs2LoginRewardRestClient,
-	job *core.NetworkJob,
-	callback chan<- GetBonusModelByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetBonusModelByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetBonusModelByUserIdResult
-	if asyncResult.Err != nil {
-		callback <- GetBonusModelByUserIdAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetBonusModelByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- GetBonusModelByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2LoginRewardRestClient) GetBonusModelByUserIdAsync(
-	request *GetBonusModelByUserIdRequest,
-	callback chan<- GetBonusModelByUserIdAsyncResult,
-) {
-	path := "/{namespaceName}/user/{userId}/bonusModel/{bonusModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.BonusModelName != nil && *request.BonusModelName != ""  {
-        path = strings.ReplaceAll(path, "{bonusModelName}", core.ToString(*request.BonusModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{bonusModelName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go getBonusModelByUserIdAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
-			Method:       core.Get,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2LoginRewardRestClient) GetBonusModelByUserId(
-	request *GetBonusModelByUserIdRequest,
-) (*GetBonusModelByUserIdResult, error) {
-	callback := make(chan GetBonusModelByUserIdAsyncResult, 1)
-	go p.GetBonusModelByUserIdAsync(
 		request,
 		callback,
 	)
@@ -2843,7 +2654,13 @@ func (p Gs2LoginRewardRestClient) MarkReceivedAsync(
     }
 
 	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
+    var bodies = core.Bodies{}
+    if request.StepNumber != nil {
+        bodies["stepNumber"] = *request.StepNumber
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
 
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
@@ -2860,9 +2677,9 @@ func (p Gs2LoginRewardRestClient) MarkReceivedAsync(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
-			Method:       core.Get,
+			Method:       core.Post,
 			Headers:      headers,
-			QueryStrings: queryStrings,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2943,7 +2760,13 @@ func (p Gs2LoginRewardRestClient) MarkReceivedByUserIdAsync(
     }
 
 	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
+    var bodies = core.Bodies{}
+    if request.StepNumber != nil {
+        bodies["stepNumber"] = *request.StepNumber
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
 
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
@@ -2957,9 +2780,9 @@ func (p Gs2LoginRewardRestClient) MarkReceivedByUserIdAsync(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
-			Method:       core.Get,
+			Method:       core.Post,
 			Headers:      headers,
-			QueryStrings: queryStrings,
+			Bodies: bodies,
 		},
 		callback,
 	)

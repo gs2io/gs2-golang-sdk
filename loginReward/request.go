@@ -558,7 +558,6 @@ type DescribeBonusModelsRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
-    AccessToken *string `json:"accessToken"`
 }
 
 func NewDescribeBonusModelsRequestFromJson(data string) DescribeBonusModelsRequest {
@@ -570,49 +569,16 @@ func NewDescribeBonusModelsRequestFromJson(data string) DescribeBonusModelsReque
 func NewDescribeBonusModelsRequestFromDict(data map[string]interface{}) DescribeBonusModelsRequest {
     return DescribeBonusModelsRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
-        AccessToken: core.CastString(data["accessToken"]),
     }
 }
 
 func (p DescribeBonusModelsRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
-        "accessToken": p.AccessToken,
     }
 }
 
 func (p DescribeBonusModelsRequest) Pointer() *DescribeBonusModelsRequest {
-    return &p
-}
-
-type DescribeBonusModelsByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    UserId *string `json:"userId"`
-}
-
-func NewDescribeBonusModelsByUserIdRequestFromJson(data string) DescribeBonusModelsByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeBonusModelsByUserIdRequestFromDict(dict)
-}
-
-func NewDescribeBonusModelsByUserIdRequestFromDict(data map[string]interface{}) DescribeBonusModelsByUserIdRequest {
-    return DescribeBonusModelsByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        UserId: core.CastString(data["userId"]),
-    }
-}
-
-func (p DescribeBonusModelsByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "userId": p.UserId,
-    }
-}
-
-func (p DescribeBonusModelsByUserIdRequest) Pointer() *DescribeBonusModelsByUserIdRequest {
     return &p
 }
 
@@ -621,7 +587,6 @@ type GetBonusModelRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     BonusModelName *string `json:"bonusModelName"`
-    AccessToken *string `json:"accessToken"`
 }
 
 func NewGetBonusModelRequestFromJson(data string) GetBonusModelRequest {
@@ -634,7 +599,6 @@ func NewGetBonusModelRequestFromDict(data map[string]interface{}) GetBonusModelR
     return GetBonusModelRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         BonusModelName: core.CastString(data["bonusModelName"]),
-        AccessToken: core.CastString(data["accessToken"]),
     }
 }
 
@@ -642,45 +606,10 @@ func (p GetBonusModelRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "bonusModelName": p.BonusModelName,
-        "accessToken": p.AccessToken,
     }
 }
 
 func (p GetBonusModelRequest) Pointer() *GetBonusModelRequest {
-    return &p
-}
-
-type GetBonusModelByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    BonusModelName *string `json:"bonusModelName"`
-    UserId *string `json:"userId"`
-}
-
-func NewGetBonusModelByUserIdRequestFromJson(data string) GetBonusModelByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetBonusModelByUserIdRequestFromDict(dict)
-}
-
-func NewGetBonusModelByUserIdRequestFromDict(data map[string]interface{}) GetBonusModelByUserIdRequest {
-    return GetBonusModelByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        BonusModelName: core.CastString(data["bonusModelName"]),
-        UserId: core.CastString(data["userId"]),
-    }
-}
-
-func (p GetBonusModelByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "bonusModelName": p.BonusModelName,
-        "userId": p.UserId,
-    }
-}
-
-func (p GetBonusModelByUserIdRequest) Pointer() *GetBonusModelByUserIdRequest {
     return &p
 }
 

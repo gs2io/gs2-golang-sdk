@@ -317,15 +317,15 @@ func CastArray(value interface{}) []interface{} {
 	return nil
 }
 
-func CastStrings(value []interface{}) []string {
-	v := make([]string, 0)
+func CastStrings(value []interface{}) []*string {
+	v := make([]*string, 0)
 	for _, d := range value {
-		v = append(v, *CastString(d))
+		v = append(v, CastString(d))
 	}
 	return v
 }
 
-func CastStringsFromDict(value []string) []interface{} {
+func CastStringsFromDict(value []*string) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
 		v = append(v, d)
@@ -333,15 +333,15 @@ func CastStringsFromDict(value []string) []interface{} {
 	return v
 }
 
-func Cast2Strings(value []interface{}) [][]string {
-	v := make([][]string, 0)
+func Cast2Strings(value []interface{}) [][]*string {
+	v := make([][]*string, 0)
 	for _, d := range value {
 		v = append(v, CastStrings(CastArray(d)))
 	}
 	return v
 }
 
-func Cast2StringsFromDict(value [][]string) []interface{} {
+func Cast2StringsFromDict(value [][]*string) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
 		v = append(v, d)
@@ -349,15 +349,15 @@ func Cast2StringsFromDict(value [][]string) []interface{} {
 	return v
 }
 
-func CastInt32s(value []interface{}) []int32 {
-	v := make([]int32, 0)
+func CastInt32s(value []interface{}) []*int32 {
+	v := make([]*int32, 0)
 	for _, d := range value {
-		v = append(v, *CastInt32(d))
+		v = append(v, CastInt32(d))
 	}
 	return v
 }
 
-func CastInt32sFromDict(value []int32) []interface{} {
+func CastInt32sFromDict(value []*int32) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
 		v = append(v, d)
@@ -365,15 +365,15 @@ func CastInt32sFromDict(value []int32) []interface{} {
 	return v
 }
 
-func CastInt64s(value []interface{}) []int64 {
-	v := make([]int64, 0)
+func CastInt64s(value []interface{}) []*int64 {
+	v := make([]*int64, 0)
 	for _, d := range value {
-		v = append(v, *CastInt64(d))
+		v = append(v, CastInt64(d))
 	}
 	return v
 }
 
-func CastInt64sFromDict(value []int64) []interface{} {
+func CastInt64sFromDict(value []*int64) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
 		v = append(v, d)
@@ -381,15 +381,15 @@ func CastInt64sFromDict(value []int64) []interface{} {
 	return v
 }
 
-func CastFloat32s(value []interface{}) []float32 {
-	v := make([]float32, 0)
+func CastFloat32s(value []interface{}) []*float32 {
+	v := make([]*float32, 0)
 	for _, d := range value {
-		v = append(v, *CastFloat32(d))
+		v = append(v, CastFloat32(d))
 	}
 	return v
 }
 
-func CastFloat32sFromDict(value []float32) []interface{} {
+func CastFloat32sFromDict(value []*float32) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
 		v = append(v, d)
@@ -397,15 +397,15 @@ func CastFloat32sFromDict(value []float32) []interface{} {
 	return v
 }
 
-func CastFloat64s(value []interface{}) []float64 {
-	v := make([]float64, 0)
+func CastFloat64s(value []interface{}) []*float64 {
+	v := make([]*float64, 0)
 	for _, d := range value {
-		v = append(v, *CastFloat64(d))
+		v = append(v, CastFloat64(d))
 	}
 	return v
 }
 
-func CastFloat64sFromDict(value []float64) []interface{} {
+func CastFloat64sFromDict(value []*float64) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
 		v = append(v, d)
@@ -413,15 +413,15 @@ func CastFloat64sFromDict(value []float64) []interface{} {
 	return v
 }
 
-func CastBools(value []interface{}) []bool {
-	v := make([]bool, 0)
+func CastBools(value []interface{}) []*bool {
+	v := make([]*bool, 0)
 	for _, d := range value {
-		v = append(v, *CastBool(d))
+		v = append(v, CastBool(d))
 	}
 	return v
 }
 
-func CastBoolsFromDict(value []bool) []interface{} {
+func CastBoolsFromDict(value []*bool) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
 		v = append(v, d)
@@ -429,15 +429,15 @@ func CastBoolsFromDict(value []bool) []interface{} {
 	return v
 }
 
-func CastUserIds(value []interface{}) []string {
-	v := make([]string, 0)
+func CastUserIds(value []interface{}) []*string {
+	v := make([]*string, 0)
 	for _, d := range value {
-		v = append(v, *CastUserId(d))
+		v = append(v, CastUserId(d))
 	}
 	return v
 }
 
-func CastUserIdsFromDict(value []string) []interface{} {
+func CastUserIdsFromDict(value []*string) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range value {
 		v = append(v, d)

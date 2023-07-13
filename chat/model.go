@@ -158,7 +158,7 @@ type Room struct {
 	UserId *string `json:"userId"`
 	Metadata *string `json:"metadata"`
 	Password *string `json:"password"`
-	WhiteListUserIds []string `json:"whiteListUserIds"`
+	WhiteListUserIds []*string `json:"whiteListUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }

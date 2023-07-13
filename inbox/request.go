@@ -1190,7 +1190,7 @@ type UpdateReceivedByUserIdRequest struct {
     DuplicationAvoider *string `json:"duplicationAvoider"`
     NamespaceName *string `json:"namespaceName"`
     UserId *string `json:"userId"`
-    ReceivedGlobalMessageNames []string `json:"receivedGlobalMessageNames"`
+    ReceivedGlobalMessageNames []*string `json:"receivedGlobalMessageNames"`
 }
 
 func NewUpdateReceivedByUserIdRequestFromJson(data string) UpdateReceivedByUserIdRequest {

@@ -289,7 +289,7 @@ type WantRoomRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     Name *string `json:"name"`
-    NotificationUserIds []string `json:"notificationUserIds"`
+    NotificationUserIds []*string `json:"notificationUserIds"`
 }
 
 func NewWantRoomRequestFromJson(data string) WantRoomRequest {

@@ -315,7 +315,7 @@ type CreateCategoryModelMasterRequest struct {
     CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
     EntryPeriodEventId *string `json:"entryPeriodEventId"`
     AccessPeriodEventId *string `json:"accessPeriodEventId"`
-    IgnoreUserIds []string `json:"ignoreUserIds"`
+    IgnoreUserIds []*string `json:"ignoreUserIds"`
     Generation *string `json:"generation"`
 }
 
@@ -424,7 +424,7 @@ type UpdateCategoryModelMasterRequest struct {
     CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
     EntryPeriodEventId *string `json:"entryPeriodEventId"`
     AccessPeriodEventId *string `json:"accessPeriodEventId"`
-    IgnoreUserIds []string `json:"ignoreUserIds"`
+    IgnoreUserIds []*string `json:"ignoreUserIds"`
     Generation *string `json:"generation"`
 }
 

@@ -247,7 +247,7 @@ type QuestModelMaster struct {
 	FirstCompleteAcquireActions []AcquireAction `json:"firstCompleteAcquireActions"`
 	ConsumeActions []ConsumeAction `json:"consumeActions"`
 	FailedAcquireActions []AcquireAction `json:"failedAcquireActions"`
-	PremiseQuestNames []string `json:"premiseQuestNames"`
+	PremiseQuestNames []*string `json:"premiseQuestNames"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -671,7 +671,7 @@ type CompletedQuestList struct {
 	CompletedQuestListId *string `json:"completedQuestListId"`
 	UserId *string `json:"userId"`
 	QuestGroupName *string `json:"questGroupName"`
-	CompleteQuestNames []string `json:"completeQuestNames"`
+	CompleteQuestNames []*string `json:"completeQuestNames"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -837,7 +837,7 @@ type QuestModel struct {
 	FirstCompleteAcquireActions []AcquireAction `json:"firstCompleteAcquireActions"`
 	ConsumeActions []ConsumeAction `json:"consumeActions"`
 	FailedAcquireActions []AcquireAction `json:"failedAcquireActions"`
-	PremiseQuestNames []string `json:"premiseQuestNames"`
+	PremiseQuestNames []*string `json:"premiseQuestNames"`
 }
 
 func NewQuestModelFromJson(data string) QuestModel {

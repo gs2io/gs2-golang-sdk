@@ -913,7 +913,7 @@ func (p FetchPositionFromSystemResult) Pointer() *FetchPositionFromSystemResult 
 }
 
 type NearUserIdsResult struct {
-    Items []string `json:"items"`
+    Items []*string `json:"items"`
 }
 
 type NearUserIdsAsyncResult struct {
@@ -946,7 +946,7 @@ func (p NearUserIdsResult) Pointer() *NearUserIdsResult {
 }
 
 type NearUserIdsFromSystemResult struct {
-    Items []string `json:"items"`
+    Items []*string `json:"items"`
 }
 
 type NearUserIdsFromSystemAsyncResult struct {

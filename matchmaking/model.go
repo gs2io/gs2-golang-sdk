@@ -192,7 +192,7 @@ type Gathering struct {
 	Name *string `json:"name"`
 	AttributeRanges []AttributeRange `json:"attributeRanges"`
 	CapacityOfRoles []CapacityOfRole `json:"capacityOfRoles"`
-	AllowUserIds []string `json:"allowUserIds"`
+	AllowUserIds []*string `json:"allowUserIds"`
 	Metadata *string `json:"metadata"`
 	ExpiresAt *int64 `json:"expiresAt"`
 	CreatedAt *int64 `json:"createdAt"`
@@ -849,7 +849,7 @@ func CastAttributeRangesFromDict(data []AttributeRange) []interface{} {
 
 type CapacityOfRole struct {
 	RoleName *string `json:"roleName"`
-	RoleAliases []string `json:"roleAliases"`
+	RoleAliases []*string `json:"roleAliases"`
 	Capacity *int32 `json:"capacity"`
 	Participants []Player `json:"participants"`
 }
@@ -977,7 +977,7 @@ type Player struct {
 	UserId *string `json:"userId"`
 	Attributes []Attribute `json:"attributes"`
 	RoleName *string `json:"roleName"`
-	DenyUserIds []string `json:"denyUserIds"`
+	DenyUserIds []*string `json:"denyUserIds"`
 }
 
 func NewPlayerFromJson(data string) Player {

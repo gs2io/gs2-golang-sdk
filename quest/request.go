@@ -470,7 +470,7 @@ type CreateQuestModelMasterRequest struct {
     FirstCompleteAcquireActions []AcquireAction `json:"firstCompleteAcquireActions"`
     ConsumeActions []ConsumeAction `json:"consumeActions"`
     FailedAcquireActions []AcquireAction `json:"failedAcquireActions"`
-    PremiseQuestNames []string `json:"premiseQuestNames"`
+    PremiseQuestNames []*string `json:"premiseQuestNames"`
 }
 
 func NewCreateQuestModelMasterRequestFromJson(data string) CreateQuestModelMasterRequest {
@@ -572,7 +572,7 @@ type UpdateQuestModelMasterRequest struct {
     FirstCompleteAcquireActions []AcquireAction `json:"firstCompleteAcquireActions"`
     ConsumeActions []ConsumeAction `json:"consumeActions"`
     FailedAcquireActions []AcquireAction `json:"failedAcquireActions"`
-    PremiseQuestNames []string `json:"premiseQuestNames"`
+    PremiseQuestNames []*string `json:"premiseQuestNames"`
 }
 
 func NewUpdateQuestModelMasterRequestFromJson(data string) UpdateQuestModelMasterRequest {

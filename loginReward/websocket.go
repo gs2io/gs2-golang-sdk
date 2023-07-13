@@ -1422,15 +1422,9 @@ func (p Gs2LoginRewardWebSocketClient) DescribeBonusModelsAsync(
     if request.NamespaceName != nil && *request.NamespaceName != "" {
         bodies["namespaceName"] = *request.NamespaceName
     }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
 
 	go p.describeBonusModelsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1446,90 +1440,6 @@ func (p Gs2LoginRewardWebSocketClient) DescribeBonusModels(
 ) (*DescribeBonusModelsResult, error) {
 	callback := make(chan DescribeBonusModelsAsyncResult, 1)
 	go p.DescribeBonusModelsAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2LoginRewardWebSocketClient) describeBonusModelsByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeBonusModelsByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeBonusModelsByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeBonusModelsByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeBonusModelsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-    if asyncResult.Err != nil {
-    }
-	callback <- DescribeBonusModelsByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2LoginRewardWebSocketClient) DescribeBonusModelsByUserIdAsync(
-	request *DescribeBonusModelsByUserIdRequest,
-	callback chan<- DescribeBonusModelsByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "login_reward",
-    		"component": "bonusModel",
-    		"function": "describeBonusModelsByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.describeBonusModelsByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2LoginRewardWebSocketClient) DescribeBonusModelsByUserId(
-	request *DescribeBonusModelsByUserIdRequest,
-) (*DescribeBonusModelsByUserIdResult, error) {
-	callback := make(chan DescribeBonusModelsByUserIdAsyncResult, 1)
-	go p.DescribeBonusModelsByUserIdAsync(
 		request,
 		callback,
 	)
@@ -1596,15 +1506,9 @@ func (p Gs2LoginRewardWebSocketClient) GetBonusModelAsync(
     if request.BonusModelName != nil && *request.BonusModelName != "" {
         bodies["bonusModelName"] = *request.BonusModelName
     }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
 
 	go p.getBonusModelAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1620,93 +1524,6 @@ func (p Gs2LoginRewardWebSocketClient) GetBonusModel(
 ) (*GetBonusModelResult, error) {
 	callback := make(chan GetBonusModelAsyncResult, 1)
 	go p.GetBonusModelAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2LoginRewardWebSocketClient) getBonusModelByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetBonusModelByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetBonusModelByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetBonusModelByUserIdResult
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetBonusModelByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-    if asyncResult.Err != nil {
-    }
-	callback <- GetBonusModelByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2LoginRewardWebSocketClient) GetBonusModelByUserIdAsync(
-	request *GetBonusModelByUserIdRequest,
-	callback chan<- GetBonusModelByUserIdAsyncResult,
-) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "login_reward",
-    		"component": "bonusModel",
-    		"function": "getBonusModelByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.BonusModelName != nil && *request.BonusModelName != "" {
-        bodies["bonusModelName"] = *request.BonusModelName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-	go p.getBonusModelByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2LoginRewardWebSocketClient) GetBonusModelByUserId(
-	request *GetBonusModelByUserIdRequest,
-) (*GetBonusModelByUserIdResult, error) {
-	callback := make(chan GetBonusModelByUserIdAsyncResult, 1)
-	go p.GetBonusModelByUserIdAsync(
 		request,
 		callback,
 	)

@@ -470,7 +470,7 @@ type CreateMaxStaminaTableMasterRequest struct {
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
     ExperienceModelId *string `json:"experienceModelId"`
-    Values []int32 `json:"values"`
+    Values []*int32 `json:"values"`
 }
 
 func NewCreateMaxStaminaTableMasterRequestFromJson(data string) CreateMaxStaminaTableMasterRequest {
@@ -546,7 +546,7 @@ type UpdateMaxStaminaTableMasterRequest struct {
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
     ExperienceModelId *string `json:"experienceModelId"`
-    Values []int32 `json:"values"`
+    Values []*int32 `json:"values"`
 }
 
 func NewUpdateMaxStaminaTableMasterRequestFromJson(data string) UpdateMaxStaminaTableMasterRequest {
@@ -656,7 +656,7 @@ type CreateRecoverIntervalTableMasterRequest struct {
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
     ExperienceModelId *string `json:"experienceModelId"`
-    Values []int32 `json:"values"`
+    Values []*int32 `json:"values"`
 }
 
 func NewCreateRecoverIntervalTableMasterRequestFromJson(data string) CreateRecoverIntervalTableMasterRequest {
@@ -732,7 +732,7 @@ type UpdateRecoverIntervalTableMasterRequest struct {
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
     ExperienceModelId *string `json:"experienceModelId"`
-    Values []int32 `json:"values"`
+    Values []*int32 `json:"values"`
 }
 
 func NewUpdateRecoverIntervalTableMasterRequestFromJson(data string) UpdateRecoverIntervalTableMasterRequest {
@@ -842,7 +842,7 @@ type CreateRecoverValueTableMasterRequest struct {
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
     ExperienceModelId *string `json:"experienceModelId"`
-    Values []int32 `json:"values"`
+    Values []*int32 `json:"values"`
 }
 
 func NewCreateRecoverValueTableMasterRequestFromJson(data string) CreateRecoverValueTableMasterRequest {
@@ -918,7 +918,7 @@ type UpdateRecoverValueTableMasterRequest struct {
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
     ExperienceModelId *string `json:"experienceModelId"`
-    Values []int32 `json:"values"`
+    Values []*int32 `json:"values"`
 }
 
 func NewUpdateRecoverValueTableMasterRequestFromJson(data string) UpdateRecoverValueTableMasterRequest {

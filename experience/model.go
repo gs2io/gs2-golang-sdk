@@ -342,7 +342,7 @@ type ThresholdMaster struct {
 	Name *string `json:"name"`
 	Description *string `json:"description"`
 	Metadata *string `json:"metadata"`
-	Values []int64 `json:"values"`
+	Values []*int64 `json:"values"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -430,7 +430,7 @@ func CastThresholdMastersFromDict(data []ThresholdMaster) []interface{} {
 
 type Threshold struct {
 	Metadata *string `json:"metadata"`
-	Values []int64 `json:"values"`
+	Values []*int64 `json:"values"`
 }
 
 func NewThresholdFromJson(data string) Threshold {

@@ -463,7 +463,7 @@ type CreateSalesItemGroupMasterRequest struct {
     Name *string `json:"name"`
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
-    SalesItemNames []string `json:"salesItemNames"`
+    SalesItemNames []*string `json:"salesItemNames"`
 }
 
 func NewCreateSalesItemGroupMasterRequestFromJson(data string) CreateSalesItemGroupMasterRequest {
@@ -536,7 +536,7 @@ type UpdateSalesItemGroupMasterRequest struct {
     SalesItemGroupName *string `json:"salesItemGroupName"`
     Description *string `json:"description"`
     Metadata *string `json:"metadata"`
-    SalesItemNames []string `json:"salesItemNames"`
+    SalesItemNames []*string `json:"salesItemNames"`
 }
 
 func NewUpdateSalesItemGroupMasterRequestFromJson(data string) UpdateSalesItemGroupMasterRequest {
