@@ -324,7 +324,7 @@ type IssueStampSheetLog struct {
 	UserId *string `json:"userId"`
 	Action *string `json:"action"`
 	Args *string `json:"args"`
-	Tasks []string `json:"tasks"`
+	Tasks []*string `json:"tasks"`
 }
 
 func NewIssueStampSheetLogFromJson(data string) IssueStampSheetLog {
