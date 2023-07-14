@@ -838,6 +838,449 @@ func CastDisplayItemMastersFromDict(data []DisplayItemMaster) []interface{} {
     return v
 }
 
+type RandomShowcaseMaster struct {
+	ShowcaseId *string `json:"showcaseId"`
+	Name *string `json:"name"`
+	Description *string `json:"description"`
+	Metadata *string `json:"metadata"`
+	MaximumNumberOfChoice *int32 `json:"maximumNumberOfChoice"`
+	DisplayItems []RandomDisplayItemModel `json:"displayItems"`
+	BaseTimestamp *int64 `json:"baseTimestamp"`
+	ResetIntervalHours *int32 `json:"resetIntervalHours"`
+	SalesPeriodEventId *string `json:"salesPeriodEventId"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
+}
+
+func NewRandomShowcaseMasterFromJson(data string) RandomShowcaseMaster {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRandomShowcaseMasterFromDict(dict)
+}
+
+func NewRandomShowcaseMasterFromDict(data map[string]interface{}) RandomShowcaseMaster {
+    return RandomShowcaseMaster {
+        ShowcaseId: core.CastString(data["showcaseId"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        MaximumNumberOfChoice: core.CastInt32(data["maximumNumberOfChoice"]),
+        DisplayItems: CastRandomDisplayItemModels(core.CastArray(data["displayItems"])),
+        BaseTimestamp: core.CastInt64(data["baseTimestamp"]),
+        ResetIntervalHours: core.CastInt32(data["resetIntervalHours"]),
+        SalesPeriodEventId: core.CastString(data["salesPeriodEventId"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
+}
+
+func (p RandomShowcaseMaster) ToDict() map[string]interface{} {
+    
+    var showcaseId *string
+    if p.ShowcaseId != nil {
+        showcaseId = p.ShowcaseId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var description *string
+    if p.Description != nil {
+        description = p.Description
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var maximumNumberOfChoice *int32
+    if p.MaximumNumberOfChoice != nil {
+        maximumNumberOfChoice = p.MaximumNumberOfChoice
+    }
+    var displayItems []interface{}
+    if p.DisplayItems != nil {
+        displayItems = CastRandomDisplayItemModelsFromDict(
+            p.DisplayItems,
+        )
+    }
+    var baseTimestamp *int64
+    if p.BaseTimestamp != nil {
+        baseTimestamp = p.BaseTimestamp
+    }
+    var resetIntervalHours *int32
+    if p.ResetIntervalHours != nil {
+        resetIntervalHours = p.ResetIntervalHours
+    }
+    var salesPeriodEventId *string
+    if p.SalesPeriodEventId != nil {
+        salesPeriodEventId = p.SalesPeriodEventId
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "showcaseId": showcaseId,
+        "name": name,
+        "description": description,
+        "metadata": metadata,
+        "maximumNumberOfChoice": maximumNumberOfChoice,
+        "displayItems": displayItems,
+        "baseTimestamp": baseTimestamp,
+        "resetIntervalHours": resetIntervalHours,
+        "salesPeriodEventId": salesPeriodEventId,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
+}
+
+func (p RandomShowcaseMaster) Pointer() *RandomShowcaseMaster {
+    return &p
+}
+
+func CastRandomShowcaseMasters(data []interface{}) []RandomShowcaseMaster {
+	v := make([]RandomShowcaseMaster, 0)
+	for _, d := range data {
+		v = append(v, NewRandomShowcaseMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRandomShowcaseMastersFromDict(data []RandomShowcaseMaster) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type RandomShowcase struct {
+	RandomShowcaseId *string `json:"randomShowcaseId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	MaximumNumberOfChoice *int32 `json:"maximumNumberOfChoice"`
+	DisplayItems []RandomDisplayItemModel `json:"displayItems"`
+	BaseTimestamp *int64 `json:"baseTimestamp"`
+	ResetIntervalHours *int32 `json:"resetIntervalHours"`
+	SalesPeriodEventId *string `json:"salesPeriodEventId"`
+}
+
+func NewRandomShowcaseFromJson(data string) RandomShowcase {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRandomShowcaseFromDict(dict)
+}
+
+func NewRandomShowcaseFromDict(data map[string]interface{}) RandomShowcase {
+    return RandomShowcase {
+        RandomShowcaseId: core.CastString(data["randomShowcaseId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        MaximumNumberOfChoice: core.CastInt32(data["maximumNumberOfChoice"]),
+        DisplayItems: CastRandomDisplayItemModels(core.CastArray(data["displayItems"])),
+        BaseTimestamp: core.CastInt64(data["baseTimestamp"]),
+        ResetIntervalHours: core.CastInt32(data["resetIntervalHours"]),
+        SalesPeriodEventId: core.CastString(data["salesPeriodEventId"]),
+    }
+}
+
+func (p RandomShowcase) ToDict() map[string]interface{} {
+    
+    var randomShowcaseId *string
+    if p.RandomShowcaseId != nil {
+        randomShowcaseId = p.RandomShowcaseId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var maximumNumberOfChoice *int32
+    if p.MaximumNumberOfChoice != nil {
+        maximumNumberOfChoice = p.MaximumNumberOfChoice
+    }
+    var displayItems []interface{}
+    if p.DisplayItems != nil {
+        displayItems = CastRandomDisplayItemModelsFromDict(
+            p.DisplayItems,
+        )
+    }
+    var baseTimestamp *int64
+    if p.BaseTimestamp != nil {
+        baseTimestamp = p.BaseTimestamp
+    }
+    var resetIntervalHours *int32
+    if p.ResetIntervalHours != nil {
+        resetIntervalHours = p.ResetIntervalHours
+    }
+    var salesPeriodEventId *string
+    if p.SalesPeriodEventId != nil {
+        salesPeriodEventId = p.SalesPeriodEventId
+    }
+    return map[string]interface{} {
+        "randomShowcaseId": randomShowcaseId,
+        "name": name,
+        "metadata": metadata,
+        "maximumNumberOfChoice": maximumNumberOfChoice,
+        "displayItems": displayItems,
+        "baseTimestamp": baseTimestamp,
+        "resetIntervalHours": resetIntervalHours,
+        "salesPeriodEventId": salesPeriodEventId,
+    }
+}
+
+func (p RandomShowcase) Pointer() *RandomShowcase {
+    return &p
+}
+
+func CastRandomShowcases(data []interface{}) []RandomShowcase {
+	v := make([]RandomShowcase, 0)
+	for _, d := range data {
+		v = append(v, NewRandomShowcaseFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRandomShowcasesFromDict(data []RandomShowcase) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type PurchaseCount struct {
+	Name *string `json:"name"`
+	Count *int32 `json:"count"`
+}
+
+func NewPurchaseCountFromJson(data string) PurchaseCount {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewPurchaseCountFromDict(dict)
+}
+
+func NewPurchaseCountFromDict(data map[string]interface{}) PurchaseCount {
+    return PurchaseCount {
+        Name: core.CastString(data["name"]),
+        Count: core.CastInt32(data["count"]),
+    }
+}
+
+func (p PurchaseCount) ToDict() map[string]interface{} {
+    
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var count *int32
+    if p.Count != nil {
+        count = p.Count
+    }
+    return map[string]interface{} {
+        "name": name,
+        "count": count,
+    }
+}
+
+func (p PurchaseCount) Pointer() *PurchaseCount {
+    return &p
+}
+
+func CastPurchaseCounts(data []interface{}) []PurchaseCount {
+	v := make([]PurchaseCount, 0)
+	for _, d := range data {
+		v = append(v, NewPurchaseCountFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastPurchaseCountsFromDict(data []PurchaseCount) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type RandomDisplayItem struct {
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	ConsumeActions []ConsumeAction `json:"consumeActions"`
+	AcquireActions []AcquireAction `json:"acquireActions"`
+	CurrentPurchaseCount *int32 `json:"currentPurchaseCount"`
+	MaximumPurchaseCount *int32 `json:"maximumPurchaseCount"`
+}
+
+func NewRandomDisplayItemFromJson(data string) RandomDisplayItem {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRandomDisplayItemFromDict(dict)
+}
+
+func NewRandomDisplayItemFromDict(data map[string]interface{}) RandomDisplayItem {
+    return RandomDisplayItem {
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+        CurrentPurchaseCount: core.CastInt32(data["currentPurchaseCount"]),
+        MaximumPurchaseCount: core.CastInt32(data["maximumPurchaseCount"]),
+    }
+}
+
+func (p RandomDisplayItem) ToDict() map[string]interface{} {
+    
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var consumeActions []interface{}
+    if p.ConsumeActions != nil {
+        consumeActions = CastConsumeActionsFromDict(
+            p.ConsumeActions,
+        )
+    }
+    var acquireActions []interface{}
+    if p.AcquireActions != nil {
+        acquireActions = CastAcquireActionsFromDict(
+            p.AcquireActions,
+        )
+    }
+    var currentPurchaseCount *int32
+    if p.CurrentPurchaseCount != nil {
+        currentPurchaseCount = p.CurrentPurchaseCount
+    }
+    var maximumPurchaseCount *int32
+    if p.MaximumPurchaseCount != nil {
+        maximumPurchaseCount = p.MaximumPurchaseCount
+    }
+    return map[string]interface{} {
+        "name": name,
+        "metadata": metadata,
+        "consumeActions": consumeActions,
+        "acquireActions": acquireActions,
+        "currentPurchaseCount": currentPurchaseCount,
+        "maximumPurchaseCount": maximumPurchaseCount,
+    }
+}
+
+func (p RandomDisplayItem) Pointer() *RandomDisplayItem {
+    return &p
+}
+
+func CastRandomDisplayItems(data []interface{}) []RandomDisplayItem {
+	v := make([]RandomDisplayItem, 0)
+	for _, d := range data {
+		v = append(v, NewRandomDisplayItemFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRandomDisplayItemsFromDict(data []RandomDisplayItem) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type RandomDisplayItemModel struct {
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	ConsumeActions []ConsumeAction `json:"consumeActions"`
+	AcquireActions []AcquireAction `json:"acquireActions"`
+	Stock *int32 `json:"stock"`
+	Weight *int32 `json:"weight"`
+}
+
+func NewRandomDisplayItemModelFromJson(data string) RandomDisplayItemModel {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRandomDisplayItemModelFromDict(dict)
+}
+
+func NewRandomDisplayItemModelFromDict(data map[string]interface{}) RandomDisplayItemModel {
+    return RandomDisplayItemModel {
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+        Stock: core.CastInt32(data["stock"]),
+        Weight: core.CastInt32(data["weight"]),
+    }
+}
+
+func (p RandomDisplayItemModel) ToDict() map[string]interface{} {
+    
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var consumeActions []interface{}
+    if p.ConsumeActions != nil {
+        consumeActions = CastConsumeActionsFromDict(
+            p.ConsumeActions,
+        )
+    }
+    var acquireActions []interface{}
+    if p.AcquireActions != nil {
+        acquireActions = CastAcquireActionsFromDict(
+            p.AcquireActions,
+        )
+    }
+    var stock *int32
+    if p.Stock != nil {
+        stock = p.Stock
+    }
+    var weight *int32
+    if p.Weight != nil {
+        weight = p.Weight
+    }
+    return map[string]interface{} {
+        "name": name,
+        "metadata": metadata,
+        "consumeActions": consumeActions,
+        "acquireActions": acquireActions,
+        "stock": stock,
+        "weight": weight,
+    }
+}
+
+func (p RandomDisplayItemModel) Pointer() *RandomDisplayItemModel {
+    return &p
+}
+
+func CastRandomDisplayItemModels(data []interface{}) []RandomDisplayItemModel {
+	v := make([]RandomDisplayItemModel, 0)
+	for _, d := range data {
+		v = append(v, NewRandomDisplayItemModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRandomDisplayItemModelsFromDict(data []RandomDisplayItemModel) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
 type ConsumeAction struct {
 	Action *string `json:"action"`
 	Request *string `json:"request"`

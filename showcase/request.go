@@ -1127,3 +1127,439 @@ func (p BuyByUserIdRequest) ToDict() map[string]interface{} {
 func (p BuyByUserIdRequest) Pointer() *BuyByUserIdRequest {
     return &p
 }
+
+type DescribeRandomShowcaseMastersRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeRandomShowcaseMastersRequestFromJson(data string) DescribeRandomShowcaseMastersRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeRandomShowcaseMastersRequestFromDict(dict)
+}
+
+func NewDescribeRandomShowcaseMastersRequestFromDict(data map[string]interface{}) DescribeRandomShowcaseMastersRequest {
+    return DescribeRandomShowcaseMastersRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeRandomShowcaseMastersRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeRandomShowcaseMastersRequest) Pointer() *DescribeRandomShowcaseMastersRequest {
+    return &p
+}
+
+type CreateRandomShowcaseMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Name *string `json:"name"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+    MaximumNumberOfChoice *int32 `json:"maximumNumberOfChoice"`
+    DisplayItems []RandomDisplayItemModel `json:"displayItems"`
+    BaseTimestamp *int64 `json:"baseTimestamp"`
+    ResetIntervalHours *int32 `json:"resetIntervalHours"`
+    SalesPeriodEventId *string `json:"salesPeriodEventId"`
+}
+
+func NewCreateRandomShowcaseMasterRequestFromJson(data string) CreateRandomShowcaseMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateRandomShowcaseMasterRequestFromDict(dict)
+}
+
+func NewCreateRandomShowcaseMasterRequestFromDict(data map[string]interface{}) CreateRandomShowcaseMasterRequest {
+    return CreateRandomShowcaseMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        MaximumNumberOfChoice: core.CastInt32(data["maximumNumberOfChoice"]),
+        DisplayItems: CastRandomDisplayItemModels(core.CastArray(data["displayItems"])),
+        BaseTimestamp: core.CastInt64(data["baseTimestamp"]),
+        ResetIntervalHours: core.CastInt32(data["resetIntervalHours"]),
+        SalesPeriodEventId: core.CastString(data["salesPeriodEventId"]),
+    }
+}
+
+func (p CreateRandomShowcaseMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "name": p.Name,
+        "description": p.Description,
+        "metadata": p.Metadata,
+        "maximumNumberOfChoice": p.MaximumNumberOfChoice,
+        "displayItems": CastRandomDisplayItemModelsFromDict(
+            p.DisplayItems,
+        ),
+        "baseTimestamp": p.BaseTimestamp,
+        "resetIntervalHours": p.ResetIntervalHours,
+        "salesPeriodEventId": p.SalesPeriodEventId,
+    }
+}
+
+func (p CreateRandomShowcaseMasterRequest) Pointer() *CreateRandomShowcaseMasterRequest {
+    return &p
+}
+
+type GetRandomShowcaseMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    ShowcaseName *string `json:"showcaseName"`
+}
+
+func NewGetRandomShowcaseMasterRequestFromJson(data string) GetRandomShowcaseMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetRandomShowcaseMasterRequestFromDict(dict)
+}
+
+func NewGetRandomShowcaseMasterRequestFromDict(data map[string]interface{}) GetRandomShowcaseMasterRequest {
+    return GetRandomShowcaseMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        ShowcaseName: core.CastString(data["showcaseName"]),
+    }
+}
+
+func (p GetRandomShowcaseMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "showcaseName": p.ShowcaseName,
+    }
+}
+
+func (p GetRandomShowcaseMasterRequest) Pointer() *GetRandomShowcaseMasterRequest {
+    return &p
+}
+
+type UpdateRandomShowcaseMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    ShowcaseName *string `json:"showcaseName"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+    MaximumNumberOfChoice *int32 `json:"maximumNumberOfChoice"`
+    DisplayItems []RandomDisplayItemModel `json:"displayItems"`
+    BaseTimestamp *int64 `json:"baseTimestamp"`
+    ResetIntervalHours *int32 `json:"resetIntervalHours"`
+    SalesPeriodEventId *string `json:"salesPeriodEventId"`
+}
+
+func NewUpdateRandomShowcaseMasterRequestFromJson(data string) UpdateRandomShowcaseMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateRandomShowcaseMasterRequestFromDict(dict)
+}
+
+func NewUpdateRandomShowcaseMasterRequestFromDict(data map[string]interface{}) UpdateRandomShowcaseMasterRequest {
+    return UpdateRandomShowcaseMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        ShowcaseName: core.CastString(data["showcaseName"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        MaximumNumberOfChoice: core.CastInt32(data["maximumNumberOfChoice"]),
+        DisplayItems: CastRandomDisplayItemModels(core.CastArray(data["displayItems"])),
+        BaseTimestamp: core.CastInt64(data["baseTimestamp"]),
+        ResetIntervalHours: core.CastInt32(data["resetIntervalHours"]),
+        SalesPeriodEventId: core.CastString(data["salesPeriodEventId"]),
+    }
+}
+
+func (p UpdateRandomShowcaseMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "showcaseName": p.ShowcaseName,
+        "description": p.Description,
+        "metadata": p.Metadata,
+        "maximumNumberOfChoice": p.MaximumNumberOfChoice,
+        "displayItems": CastRandomDisplayItemModelsFromDict(
+            p.DisplayItems,
+        ),
+        "baseTimestamp": p.BaseTimestamp,
+        "resetIntervalHours": p.ResetIntervalHours,
+        "salesPeriodEventId": p.SalesPeriodEventId,
+    }
+}
+
+func (p UpdateRandomShowcaseMasterRequest) Pointer() *UpdateRandomShowcaseMasterRequest {
+    return &p
+}
+
+type DeleteRandomShowcaseMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    ShowcaseName *string `json:"showcaseName"`
+}
+
+func NewDeleteRandomShowcaseMasterRequestFromJson(data string) DeleteRandomShowcaseMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteRandomShowcaseMasterRequestFromDict(dict)
+}
+
+func NewDeleteRandomShowcaseMasterRequestFromDict(data map[string]interface{}) DeleteRandomShowcaseMasterRequest {
+    return DeleteRandomShowcaseMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        ShowcaseName: core.CastString(data["showcaseName"]),
+    }
+}
+
+func (p DeleteRandomShowcaseMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "showcaseName": p.ShowcaseName,
+    }
+}
+
+func (p DeleteRandomShowcaseMasterRequest) Pointer() *DeleteRandomShowcaseMasterRequest {
+    return &p
+}
+
+type DescribeRandomShowcaseSalesItemsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    ShowcaseName *string `json:"showcaseName"`
+    AccessToken *string `json:"accessToken"`
+}
+
+func NewDescribeRandomShowcaseSalesItemsRequestFromJson(data string) DescribeRandomShowcaseSalesItemsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeRandomShowcaseSalesItemsRequestFromDict(dict)
+}
+
+func NewDescribeRandomShowcaseSalesItemsRequestFromDict(data map[string]interface{}) DescribeRandomShowcaseSalesItemsRequest {
+    return DescribeRandomShowcaseSalesItemsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        ShowcaseName: core.CastString(data["showcaseName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+    }
+}
+
+func (p DescribeRandomShowcaseSalesItemsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "showcaseName": p.ShowcaseName,
+        "accessToken": p.AccessToken,
+    }
+}
+
+func (p DescribeRandomShowcaseSalesItemsRequest) Pointer() *DescribeRandomShowcaseSalesItemsRequest {
+    return &p
+}
+
+type DescribeRandomShowcaseSalesItemsByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    ShowcaseName *string `json:"showcaseName"`
+    UserId *string `json:"userId"`
+}
+
+func NewDescribeRandomShowcaseSalesItemsByUserIdRequestFromJson(data string) DescribeRandomShowcaseSalesItemsByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeRandomShowcaseSalesItemsByUserIdRequestFromDict(dict)
+}
+
+func NewDescribeRandomShowcaseSalesItemsByUserIdRequestFromDict(data map[string]interface{}) DescribeRandomShowcaseSalesItemsByUserIdRequest {
+    return DescribeRandomShowcaseSalesItemsByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        ShowcaseName: core.CastString(data["showcaseName"]),
+        UserId: core.CastString(data["userId"]),
+    }
+}
+
+func (p DescribeRandomShowcaseSalesItemsByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "showcaseName": p.ShowcaseName,
+        "userId": p.UserId,
+    }
+}
+
+func (p DescribeRandomShowcaseSalesItemsByUserIdRequest) Pointer() *DescribeRandomShowcaseSalesItemsByUserIdRequest {
+    return &p
+}
+
+type RandomShowcaseBuyRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    ShowcaseName *string `json:"showcaseName"`
+    DisplayItemName *string `json:"displayItemName"`
+    AccessToken *string `json:"accessToken"`
+    Quantity *int32 `json:"quantity"`
+    Config []Config `json:"config"`
+}
+
+func NewRandomShowcaseBuyRequestFromJson(data string) RandomShowcaseBuyRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRandomShowcaseBuyRequestFromDict(dict)
+}
+
+func NewRandomShowcaseBuyRequestFromDict(data map[string]interface{}) RandomShowcaseBuyRequest {
+    return RandomShowcaseBuyRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        ShowcaseName: core.CastString(data["showcaseName"]),
+        DisplayItemName: core.CastString(data["displayItemName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        Quantity: core.CastInt32(data["quantity"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
+}
+
+func (p RandomShowcaseBuyRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "showcaseName": p.ShowcaseName,
+        "displayItemName": p.DisplayItemName,
+        "accessToken": p.AccessToken,
+        "quantity": p.Quantity,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
+}
+
+func (p RandomShowcaseBuyRequest) Pointer() *RandomShowcaseBuyRequest {
+    return &p
+}
+
+type RandomShowcaseBuyByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    ShowcaseName *string `json:"showcaseName"`
+    DisplayItemName *string `json:"displayItemName"`
+    UserId *string `json:"userId"`
+    Quantity *int32 `json:"quantity"`
+    Config []Config `json:"config"`
+}
+
+func NewRandomShowcaseBuyByUserIdRequestFromJson(data string) RandomShowcaseBuyByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewRandomShowcaseBuyByUserIdRequestFromDict(dict)
+}
+
+func NewRandomShowcaseBuyByUserIdRequestFromDict(data map[string]interface{}) RandomShowcaseBuyByUserIdRequest {
+    return RandomShowcaseBuyByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        ShowcaseName: core.CastString(data["showcaseName"]),
+        DisplayItemName: core.CastString(data["displayItemName"]),
+        UserId: core.CastString(data["userId"]),
+        Quantity: core.CastInt32(data["quantity"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
+}
+
+func (p RandomShowcaseBuyByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "showcaseName": p.ShowcaseName,
+        "displayItemName": p.DisplayItemName,
+        "userId": p.UserId,
+        "quantity": p.Quantity,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
+}
+
+func (p RandomShowcaseBuyByUserIdRequest) Pointer() *RandomShowcaseBuyByUserIdRequest {
+    return &p
+}
+
+type IncrementPurchaseCountByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    ShowcaseName *string `json:"showcaseName"`
+    DisplayItemName *string `json:"displayItemName"`
+    UserId *string `json:"userId"`
+    Count *int32 `json:"count"`
+}
+
+func NewIncrementPurchaseCountByUserIdRequestFromJson(data string) IncrementPurchaseCountByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementPurchaseCountByUserIdRequestFromDict(dict)
+}
+
+func NewIncrementPurchaseCountByUserIdRequestFromDict(data map[string]interface{}) IncrementPurchaseCountByUserIdRequest {
+    return IncrementPurchaseCountByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        ShowcaseName: core.CastString(data["showcaseName"]),
+        DisplayItemName: core.CastString(data["displayItemName"]),
+        UserId: core.CastString(data["userId"]),
+        Count: core.CastInt32(data["count"]),
+    }
+}
+
+func (p IncrementPurchaseCountByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "showcaseName": p.ShowcaseName,
+        "displayItemName": p.DisplayItemName,
+        "userId": p.UserId,
+        "count": p.Count,
+    }
+}
+
+func (p IncrementPurchaseCountByUserIdRequest) Pointer() *IncrementPurchaseCountByUserIdRequest {
+    return &p
+}
+
+type IncrementPurchaseCountByStampTaskRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampTask *string `json:"stampTask"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewIncrementPurchaseCountByStampTaskRequestFromJson(data string) IncrementPurchaseCountByStampTaskRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementPurchaseCountByStampTaskRequestFromDict(dict)
+}
+
+func NewIncrementPurchaseCountByStampTaskRequestFromDict(data map[string]interface{}) IncrementPurchaseCountByStampTaskRequest {
+    return IncrementPurchaseCountByStampTaskRequest {
+        StampTask: core.CastString(data["stampTask"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p IncrementPurchaseCountByStampTaskRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampTask": p.StampTask,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p IncrementPurchaseCountByStampTaskRequest) Pointer() *IncrementPurchaseCountByStampTaskRequest {
+    return &p
+}
