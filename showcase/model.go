@@ -1110,6 +1110,7 @@ func CastPurchaseCountsFromDict(data []PurchaseCount) []interface{} {
 }
 
 type RandomDisplayItem struct {
+	ShowcaseName *string `json:"showcaseName"`
 	Name *string `json:"name"`
 	Metadata *string `json:"metadata"`
 	ConsumeActions []ConsumeAction `json:"consumeActions"`
@@ -1126,6 +1127,7 @@ func NewRandomDisplayItemFromJson(data string) RandomDisplayItem {
 
 func NewRandomDisplayItemFromDict(data map[string]interface{}) RandomDisplayItem {
     return RandomDisplayItem {
+        ShowcaseName: core.CastString(data["showcaseName"]),
         Name: core.CastString(data["name"]),
         Metadata: core.CastString(data["metadata"]),
         ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
@@ -1137,6 +1139,10 @@ func NewRandomDisplayItemFromDict(data map[string]interface{}) RandomDisplayItem
 
 func (p RandomDisplayItem) ToDict() map[string]interface{} {
     
+    var showcaseName *string
+    if p.ShowcaseName != nil {
+        showcaseName = p.ShowcaseName
+    }
     var name *string
     if p.Name != nil {
         name = p.Name
@@ -1166,6 +1172,7 @@ func (p RandomDisplayItem) ToDict() map[string]interface{} {
         maximumPurchaseCount = p.MaximumPurchaseCount
     }
     return map[string]interface{} {
+        "showcaseName": showcaseName,
         "name": name,
         "metadata": metadata,
         "consumeActions": consumeActions,

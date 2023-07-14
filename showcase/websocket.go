@@ -3459,9 +3459,9 @@ func (p Gs2ShowcaseWebSocketClient) DescribeRandomShowcaseSalesItemsByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2ShowcaseWebSocketClient) randomShowcaseBuyAsyncHandler(
+func (p Gs2ShowcaseWebSocketClient) getRandomShowcaseSalesItemAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- RandomShowcaseBuyAsyncResult,
+	callback chan<- GetRandomShowcaseSalesItemAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -3470,17 +3470,17 @@ func (p Gs2ShowcaseWebSocketClient) randomShowcaseBuyAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- RandomShowcaseBuyAsyncResult{
+		callback <- GetRandomShowcaseSalesItemAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result RandomShowcaseBuyResult
+	var result GetRandomShowcaseSalesItemResult
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- RandomShowcaseBuyAsyncResult{
+            callback <- GetRandomShowcaseSalesItemAsyncResult{
                 err: err,
             }
             return
@@ -3488,23 +3488,23 @@ func (p Gs2ShowcaseWebSocketClient) randomShowcaseBuyAsyncHandler(
 	}
     if asyncResult.Err != nil {
     }
-	callback <- RandomShowcaseBuyAsyncResult{
+	callback <- GetRandomShowcaseSalesItemAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2ShowcaseWebSocketClient) RandomShowcaseBuyAsync(
-	request *RandomShowcaseBuyRequest,
-	callback chan<- RandomShowcaseBuyAsyncResult,
+func (p Gs2ShowcaseWebSocketClient) GetRandomShowcaseSalesItemAsync(
+	request *GetRandomShowcaseSalesItemRequest,
+	callback chan<- GetRandomShowcaseSalesItemAsyncResult,
 ) {
     requestId := core.WebSocketRequestId(uuid.New().String())
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "showcase",
     		"component": "randomShowcase",
-    		"function": "randomShowcaseBuy",
+    		"function": "getRandomShowcaseSalesItem",
             "contentType": "application/json",
     		"requestId": requestId,
 		},
@@ -3524,27 +3524,14 @@ func (p Gs2ShowcaseWebSocketClient) RandomShowcaseBuyAsync(
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
     }
-    if request.Quantity != nil {
-        bodies["quantity"] = *request.Quantity
-    }
-    if request.Config != nil {
-        var _config []interface {}
-        for _, item := range request.Config {
-            _config = append(_config, item)
-        }
-        bodies["config"] = _config
-    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
     if request.AccessToken != nil {
         bodies["xGs2AccessToken"] = string(*request.AccessToken)
     }
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
 
-	go p.randomShowcaseBuyAsyncHandler(
+	go p.getRandomShowcaseSalesItemAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies: bodies,
@@ -3553,11 +3540,11 @@ func (p Gs2ShowcaseWebSocketClient) RandomShowcaseBuyAsync(
 	)
 }
 
-func (p Gs2ShowcaseWebSocketClient) RandomShowcaseBuy(
-	request *RandomShowcaseBuyRequest,
-) (*RandomShowcaseBuyResult, error) {
-	callback := make(chan RandomShowcaseBuyAsyncResult, 1)
-	go p.RandomShowcaseBuyAsync(
+func (p Gs2ShowcaseWebSocketClient) GetRandomShowcaseSalesItem(
+	request *GetRandomShowcaseSalesItemRequest,
+) (*GetRandomShowcaseSalesItemResult, error) {
+	callback := make(chan GetRandomShowcaseSalesItemAsyncResult, 1)
+	go p.GetRandomShowcaseSalesItemAsync(
 		request,
 		callback,
 	)
@@ -3565,9 +3552,9 @@ func (p Gs2ShowcaseWebSocketClient) RandomShowcaseBuy(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2ShowcaseWebSocketClient) randomShowcaseBuyByUserIdAsyncHandler(
+func (p Gs2ShowcaseWebSocketClient) getRandomShowcaseSalesItemByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- RandomShowcaseBuyByUserIdAsyncResult,
+	callback chan<- GetRandomShowcaseSalesItemByUserIdAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -3576,17 +3563,17 @@ func (p Gs2ShowcaseWebSocketClient) randomShowcaseBuyByUserIdAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- RandomShowcaseBuyByUserIdAsyncResult{
+		callback <- GetRandomShowcaseSalesItemByUserIdAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result RandomShowcaseBuyByUserIdResult
+	var result GetRandomShowcaseSalesItemByUserIdResult
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- RandomShowcaseBuyByUserIdAsyncResult{
+            callback <- GetRandomShowcaseSalesItemByUserIdAsyncResult{
                 err: err,
             }
             return
@@ -3594,23 +3581,23 @@ func (p Gs2ShowcaseWebSocketClient) randomShowcaseBuyByUserIdAsyncHandler(
 	}
     if asyncResult.Err != nil {
     }
-	callback <- RandomShowcaseBuyByUserIdAsyncResult{
+	callback <- GetRandomShowcaseSalesItemByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2ShowcaseWebSocketClient) RandomShowcaseBuyByUserIdAsync(
-	request *RandomShowcaseBuyByUserIdRequest,
-	callback chan<- RandomShowcaseBuyByUserIdAsyncResult,
+func (p Gs2ShowcaseWebSocketClient) GetRandomShowcaseSalesItemByUserIdAsync(
+	request *GetRandomShowcaseSalesItemByUserIdRequest,
+	callback chan<- GetRandomShowcaseSalesItemByUserIdAsyncResult,
 ) {
     requestId := core.WebSocketRequestId(uuid.New().String())
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "showcase",
     		"component": "randomShowcase",
-    		"function": "randomShowcaseBuyByUserId",
+    		"function": "getRandomShowcaseSalesItemByUserId",
             "contentType": "application/json",
     		"requestId": requestId,
 		},
@@ -3630,24 +3617,11 @@ func (p Gs2ShowcaseWebSocketClient) RandomShowcaseBuyByUserIdAsync(
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
     }
-    if request.Quantity != nil {
-        bodies["quantity"] = *request.Quantity
-    }
-    if request.Config != nil {
-        var _config []interface {}
-        for _, item := range request.Config {
-            _config = append(_config, item)
-        }
-        bodies["config"] = _config
-    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
 
-	go p.randomShowcaseBuyByUserIdAsyncHandler(
+	go p.getRandomShowcaseSalesItemByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies: bodies,
@@ -3656,11 +3630,11 @@ func (p Gs2ShowcaseWebSocketClient) RandomShowcaseBuyByUserIdAsync(
 	)
 }
 
-func (p Gs2ShowcaseWebSocketClient) RandomShowcaseBuyByUserId(
-	request *RandomShowcaseBuyByUserIdRequest,
-) (*RandomShowcaseBuyByUserIdResult, error) {
-	callback := make(chan RandomShowcaseBuyByUserIdAsyncResult, 1)
-	go p.RandomShowcaseBuyByUserIdAsync(
+func (p Gs2ShowcaseWebSocketClient) GetRandomShowcaseSalesItemByUserId(
+	request *GetRandomShowcaseSalesItemByUserIdRequest,
+) (*GetRandomShowcaseSalesItemByUserIdResult, error) {
+	callback := make(chan GetRandomShowcaseSalesItemByUserIdAsyncResult, 1)
+	go p.GetRandomShowcaseSalesItemByUserIdAsync(
 		request,
 		callback,
 	)
@@ -3841,6 +3815,389 @@ func (p Gs2ShowcaseWebSocketClient) IncrementPurchaseCountByStampTask(
 ) (*IncrementPurchaseCountByStampTaskResult, error) {
 	callback := make(chan IncrementPurchaseCountByStampTaskAsyncResult, 1)
 	go p.IncrementPurchaseCountByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ShowcaseWebSocketClient) forceReDrawByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ForceReDrawByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ForceReDrawByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ForceReDrawByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ForceReDrawByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- ForceReDrawByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ShowcaseWebSocketClient) ForceReDrawByUserIdAsync(
+	request *ForceReDrawByUserIdRequest,
+	callback chan<- ForceReDrawByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "randomShowcaseStatus",
+    		"function": "forceReDrawByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+        bodies["showcaseName"] = *request.ShowcaseName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.forceReDrawByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ShowcaseWebSocketClient) ForceReDrawByUserId(
+	request *ForceReDrawByUserIdRequest,
+) (*ForceReDrawByUserIdResult, error) {
+	callback := make(chan ForceReDrawByUserIdAsyncResult, 1)
+	go p.ForceReDrawByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ShowcaseWebSocketClient) forceReDrawByUserIdByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ForceReDrawByUserIdByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ForceReDrawByUserIdByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ForceReDrawByUserIdByStampSheetResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ForceReDrawByUserIdByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- ForceReDrawByUserIdByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ShowcaseWebSocketClient) ForceReDrawByUserIdByStampSheetAsync(
+	request *ForceReDrawByUserIdByStampSheetRequest,
+	callback chan<- ForceReDrawByUserIdByStampSheetAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "randomShowcaseStatus",
+    		"function": "forceReDrawByUserIdByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.forceReDrawByUserIdByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ShowcaseWebSocketClient) ForceReDrawByUserIdByStampSheet(
+	request *ForceReDrawByUserIdByStampSheetRequest,
+) (*ForceReDrawByUserIdByStampSheetResult, error) {
+	callback := make(chan ForceReDrawByUserIdByStampSheetAsyncResult, 1)
+	go p.ForceReDrawByUserIdByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ShowcaseWebSocketClient) randomShowcaseBuyAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- RandomShowcaseBuyAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RandomShowcaseBuyAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RandomShowcaseBuyResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RandomShowcaseBuyAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- RandomShowcaseBuyAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ShowcaseWebSocketClient) RandomShowcaseBuyAsync(
+	request *RandomShowcaseBuyRequest,
+	callback chan<- RandomShowcaseBuyAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "randomDisplayItem",
+    		"function": "randomShowcaseBuy",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+        bodies["showcaseName"] = *request.ShowcaseName
+    }
+    if request.DisplayItemName != nil && *request.DisplayItemName != "" {
+        bodies["displayItemName"] = *request.DisplayItemName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.Quantity != nil {
+        bodies["quantity"] = *request.Quantity
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.randomShowcaseBuyAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ShowcaseWebSocketClient) RandomShowcaseBuy(
+	request *RandomShowcaseBuyRequest,
+) (*RandomShowcaseBuyResult, error) {
+	callback := make(chan RandomShowcaseBuyAsyncResult, 1)
+	go p.RandomShowcaseBuyAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ShowcaseWebSocketClient) randomShowcaseBuyByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- RandomShowcaseBuyByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RandomShowcaseBuyByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RandomShowcaseBuyByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RandomShowcaseBuyByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- RandomShowcaseBuyByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ShowcaseWebSocketClient) RandomShowcaseBuyByUserIdAsync(
+	request *RandomShowcaseBuyByUserIdRequest,
+	callback chan<- RandomShowcaseBuyByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "showcase",
+    		"component": "randomDisplayItem",
+    		"function": "randomShowcaseBuyByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+        bodies["showcaseName"] = *request.ShowcaseName
+    }
+    if request.DisplayItemName != nil && *request.DisplayItemName != "" {
+        bodies["displayItemName"] = *request.DisplayItemName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Quantity != nil {
+        bodies["quantity"] = *request.Quantity
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.randomShowcaseBuyByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ShowcaseWebSocketClient) RandomShowcaseBuyByUserId(
+	request *RandomShowcaseBuyByUserIdRequest,
+) (*RandomShowcaseBuyByUserIdResult, error) {
+	callback := make(chan RandomShowcaseBuyByUserIdAsyncResult, 1)
+	go p.RandomShowcaseBuyByUserIdAsync(
 		request,
 		callback,
 	)

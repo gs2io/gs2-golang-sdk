@@ -3647,6 +3647,583 @@ func (p Gs2ShowcaseRestClient) DescribeRandomShowcaseSalesItemsByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func getRandomShowcaseSalesItemAsyncHandler(
+	client Gs2ShowcaseRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetRandomShowcaseSalesItemAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetRandomShowcaseSalesItemAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetRandomShowcaseSalesItemResult
+	if asyncResult.Err != nil {
+		callback <- GetRandomShowcaseSalesItemAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetRandomShowcaseSalesItemAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetRandomShowcaseSalesItemAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ShowcaseRestClient) GetRandomShowcaseSalesItemAsync(
+	request *GetRandomShowcaseSalesItemRequest,
+	callback chan<- GetRandomShowcaseSalesItemAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/random/showcase/{showcaseName}/displayItem/{displayItemName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.DisplayItemName != nil && *request.DisplayItemName != ""  {
+        path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{displayItemName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+
+	go getRandomShowcaseSalesItemAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ShowcaseRestClient) GetRandomShowcaseSalesItem(
+	request *GetRandomShowcaseSalesItemRequest,
+) (*GetRandomShowcaseSalesItemResult, error) {
+	callback := make(chan GetRandomShowcaseSalesItemAsyncResult, 1)
+	go p.GetRandomShowcaseSalesItemAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getRandomShowcaseSalesItemByUserIdAsyncHandler(
+	client Gs2ShowcaseRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetRandomShowcaseSalesItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetRandomShowcaseSalesItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetRandomShowcaseSalesItemByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- GetRandomShowcaseSalesItemByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetRandomShowcaseSalesItemByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetRandomShowcaseSalesItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ShowcaseRestClient) GetRandomShowcaseSalesItemByUserIdAsync(
+	request *GetRandomShowcaseSalesItemByUserIdRequest,
+	callback chan<- GetRandomShowcaseSalesItemByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/random/showcase/{showcaseName}/displayItem/{displayItemName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.DisplayItemName != nil && *request.DisplayItemName != ""  {
+        path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{displayItemName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getRandomShowcaseSalesItemByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ShowcaseRestClient) GetRandomShowcaseSalesItemByUserId(
+	request *GetRandomShowcaseSalesItemByUserIdRequest,
+) (*GetRandomShowcaseSalesItemByUserIdResult, error) {
+	callback := make(chan GetRandomShowcaseSalesItemByUserIdAsyncResult, 1)
+	go p.GetRandomShowcaseSalesItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func incrementPurchaseCountByUserIdAsyncHandler(
+	client Gs2ShowcaseRestClient,
+	job *core.NetworkJob,
+	callback chan<- IncrementPurchaseCountByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IncrementPurchaseCountByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IncrementPurchaseCountByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- IncrementPurchaseCountByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IncrementPurchaseCountByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- IncrementPurchaseCountByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ShowcaseRestClient) IncrementPurchaseCountByUserIdAsync(
+	request *IncrementPurchaseCountByUserIdRequest,
+	callback chan<- IncrementPurchaseCountByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/random/showcase/user/{userId}/status/{showcaseName}/{displayItemName}/purchase/count"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.DisplayItemName != nil && *request.DisplayItemName != ""  {
+        path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{displayItemName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go incrementPurchaseCountByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ShowcaseRestClient) IncrementPurchaseCountByUserId(
+	request *IncrementPurchaseCountByUserIdRequest,
+) (*IncrementPurchaseCountByUserIdResult, error) {
+	callback := make(chan IncrementPurchaseCountByUserIdAsyncResult, 1)
+	go p.IncrementPurchaseCountByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func incrementPurchaseCountByStampTaskAsyncHandler(
+	client Gs2ShowcaseRestClient,
+	job *core.NetworkJob,
+	callback chan<- IncrementPurchaseCountByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IncrementPurchaseCountByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IncrementPurchaseCountByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- IncrementPurchaseCountByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IncrementPurchaseCountByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- IncrementPurchaseCountByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ShowcaseRestClient) IncrementPurchaseCountByStampTaskAsync(
+	request *IncrementPurchaseCountByStampTaskRequest,
+	callback chan<- IncrementPurchaseCountByStampTaskAsyncResult,
+) {
+	path := "/stamp/random/showcase/status/purchase/count"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go incrementPurchaseCountByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ShowcaseRestClient) IncrementPurchaseCountByStampTask(
+	request *IncrementPurchaseCountByStampTaskRequest,
+) (*IncrementPurchaseCountByStampTaskResult, error) {
+	callback := make(chan IncrementPurchaseCountByStampTaskAsyncResult, 1)
+	go p.IncrementPurchaseCountByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func forceReDrawByUserIdAsyncHandler(
+	client Gs2ShowcaseRestClient,
+	job *core.NetworkJob,
+	callback chan<- ForceReDrawByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ForceReDrawByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ForceReDrawByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- ForceReDrawByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ForceReDrawByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- ForceReDrawByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ShowcaseRestClient) ForceReDrawByUserIdAsync(
+	request *ForceReDrawByUserIdRequest,
+	callback chan<- ForceReDrawByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/random/showcase/{showcaseName}/user/{userId}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go forceReDrawByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ShowcaseRestClient) ForceReDrawByUserId(
+	request *ForceReDrawByUserIdRequest,
+) (*ForceReDrawByUserIdResult, error) {
+	callback := make(chan ForceReDrawByUserIdAsyncResult, 1)
+	go p.ForceReDrawByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func forceReDrawByUserIdByStampSheetAsyncHandler(
+	client Gs2ShowcaseRestClient,
+	job *core.NetworkJob,
+	callback chan<- ForceReDrawByUserIdByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ForceReDrawByUserIdByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ForceReDrawByUserIdByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- ForceReDrawByUserIdByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ForceReDrawByUserIdByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- ForceReDrawByUserIdByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ShowcaseRestClient) ForceReDrawByUserIdByStampSheetAsync(
+	request *ForceReDrawByUserIdByStampSheetRequest,
+	callback chan<- ForceReDrawByUserIdByStampSheetAsyncResult,
+) {
+	path := "/stamp/random/showcase/status/redraw"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go forceReDrawByUserIdByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ShowcaseRestClient) ForceReDrawByUserIdByStampSheet(
+	request *ForceReDrawByUserIdByStampSheetRequest,
+) (*ForceReDrawByUserIdByStampSheetResult, error) {
+	callback := make(chan ForceReDrawByUserIdByStampSheetAsyncResult, 1)
+	go p.ForceReDrawByUserIdByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func randomShowcaseBuyAsyncHandler(
 	client Gs2ShowcaseRestClient,
 	job *core.NetworkJob,
@@ -3868,202 +4445,6 @@ func (p Gs2ShowcaseRestClient) RandomShowcaseBuyByUserId(
 ) (*RandomShowcaseBuyByUserIdResult, error) {
 	callback := make(chan RandomShowcaseBuyByUserIdAsyncResult, 1)
 	go p.RandomShowcaseBuyByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func incrementPurchaseCountByUserIdAsyncHandler(
-	client Gs2ShowcaseRestClient,
-	job *core.NetworkJob,
-	callback chan<- IncrementPurchaseCountByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- IncrementPurchaseCountByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result IncrementPurchaseCountByUserIdResult
-	if asyncResult.Err != nil {
-		callback <- IncrementPurchaseCountByUserIdAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- IncrementPurchaseCountByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- IncrementPurchaseCountByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2ShowcaseRestClient) IncrementPurchaseCountByUserIdAsync(
-	request *IncrementPurchaseCountByUserIdRequest,
-	callback chan<- IncrementPurchaseCountByUserIdAsyncResult,
-) {
-	path := "/{namespaceName}/random/showcase/user/{userId}/status/{showcaseName}/{displayItemName}/purchase/count"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
-        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-    } else {
-        path = strings.ReplaceAll(path, "{showcaseName}", "null")
-    }
-    if request.DisplayItemName != nil && *request.DisplayItemName != ""  {
-        path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
-    } else {
-        path = strings.ReplaceAll(path, "{displayItemName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Count != nil {
-        bodies["count"] = *request.Count
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
-
-	go incrementPurchaseCountByUserIdAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2ShowcaseRestClient) IncrementPurchaseCountByUserId(
-	request *IncrementPurchaseCountByUserIdRequest,
-) (*IncrementPurchaseCountByUserIdResult, error) {
-	callback := make(chan IncrementPurchaseCountByUserIdAsyncResult, 1)
-	go p.IncrementPurchaseCountByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func incrementPurchaseCountByStampTaskAsyncHandler(
-	client Gs2ShowcaseRestClient,
-	job *core.NetworkJob,
-	callback chan<- IncrementPurchaseCountByStampTaskAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- IncrementPurchaseCountByStampTaskAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result IncrementPurchaseCountByStampTaskResult
-	if asyncResult.Err != nil {
-		callback <- IncrementPurchaseCountByStampTaskAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- IncrementPurchaseCountByStampTaskAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- IncrementPurchaseCountByStampTaskAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2ShowcaseRestClient) IncrementPurchaseCountByStampTaskAsync(
-	request *IncrementPurchaseCountByStampTaskRequest,
-	callback chan<- IncrementPurchaseCountByStampTaskAsyncResult,
-) {
-	path := "/stamp/random/showcase/status/purchase/count"
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampTask != nil && *request.StampTask != "" {
-        bodies["stampTask"] = *request.StampTask
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
-	}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go incrementPurchaseCountByStampTaskAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2ShowcaseRestClient) IncrementPurchaseCountByStampTask(
-	request *IncrementPurchaseCountByStampTaskRequest,
-) (*IncrementPurchaseCountByStampTaskResult, error) {
-	callback := make(chan IncrementPurchaseCountByStampTaskAsyncResult, 1)
-	go p.IncrementPurchaseCountByStampTaskAsync(
 		request,
 		callback,
 	)

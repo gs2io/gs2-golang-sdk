@@ -1256,6 +1256,199 @@ func (p DescribeRandomShowcaseSalesItemsByUserIdResult) Pointer() *DescribeRando
     return &p
 }
 
+type GetRandomShowcaseSalesItemResult struct {
+    Item *RandomDisplayItem `json:"item"`
+}
+
+type GetRandomShowcaseSalesItemAsyncResult struct {
+	result *GetRandomShowcaseSalesItemResult
+	err    error
+}
+
+func NewGetRandomShowcaseSalesItemResultFromJson(data string) GetRandomShowcaseSalesItemResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetRandomShowcaseSalesItemResultFromDict(dict)
+}
+
+func NewGetRandomShowcaseSalesItemResultFromDict(data map[string]interface{}) GetRandomShowcaseSalesItemResult {
+    return GetRandomShowcaseSalesItemResult {
+        Item: NewRandomDisplayItemFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetRandomShowcaseSalesItemResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetRandomShowcaseSalesItemResult) Pointer() *GetRandomShowcaseSalesItemResult {
+    return &p
+}
+
+type GetRandomShowcaseSalesItemByUserIdResult struct {
+    Item *RandomDisplayItem `json:"item"`
+}
+
+type GetRandomShowcaseSalesItemByUserIdAsyncResult struct {
+	result *GetRandomShowcaseSalesItemByUserIdResult
+	err    error
+}
+
+func NewGetRandomShowcaseSalesItemByUserIdResultFromJson(data string) GetRandomShowcaseSalesItemByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetRandomShowcaseSalesItemByUserIdResultFromDict(dict)
+}
+
+func NewGetRandomShowcaseSalesItemByUserIdResultFromDict(data map[string]interface{}) GetRandomShowcaseSalesItemByUserIdResult {
+    return GetRandomShowcaseSalesItemByUserIdResult {
+        Item: NewRandomDisplayItemFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetRandomShowcaseSalesItemByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetRandomShowcaseSalesItemByUserIdResult) Pointer() *GetRandomShowcaseSalesItemByUserIdResult {
+    return &p
+}
+
+type IncrementPurchaseCountByUserIdResult struct {
+    Item *RandomDisplayItem `json:"item"`
+}
+
+type IncrementPurchaseCountByUserIdAsyncResult struct {
+	result *IncrementPurchaseCountByUserIdResult
+	err    error
+}
+
+func NewIncrementPurchaseCountByUserIdResultFromJson(data string) IncrementPurchaseCountByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementPurchaseCountByUserIdResultFromDict(dict)
+}
+
+func NewIncrementPurchaseCountByUserIdResultFromDict(data map[string]interface{}) IncrementPurchaseCountByUserIdResult {
+    return IncrementPurchaseCountByUserIdResult {
+        Item: NewRandomDisplayItemFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p IncrementPurchaseCountByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p IncrementPurchaseCountByUserIdResult) Pointer() *IncrementPurchaseCountByUserIdResult {
+    return &p
+}
+
+type IncrementPurchaseCountByStampTaskResult struct {
+    Item *RandomDisplayItem `json:"item"`
+    NewContextStack *string `json:"newContextStack"`
+}
+
+type IncrementPurchaseCountByStampTaskAsyncResult struct {
+	result *IncrementPurchaseCountByStampTaskResult
+	err    error
+}
+
+func NewIncrementPurchaseCountByStampTaskResultFromJson(data string) IncrementPurchaseCountByStampTaskResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementPurchaseCountByStampTaskResultFromDict(dict)
+}
+
+func NewIncrementPurchaseCountByStampTaskResultFromDict(data map[string]interface{}) IncrementPurchaseCountByStampTaskResult {
+    return IncrementPurchaseCountByStampTaskResult {
+        Item: NewRandomDisplayItemFromDict(core.CastMap(data["item"])).Pointer(),
+        NewContextStack: core.CastString(data["newContextStack"]),
+    }
+}
+
+func (p IncrementPurchaseCountByStampTaskResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "newContextStack": p.NewContextStack,
+    }
+}
+
+func (p IncrementPurchaseCountByStampTaskResult) Pointer() *IncrementPurchaseCountByStampTaskResult {
+    return &p
+}
+
+type ForceReDrawByUserIdResult struct {
+    Items []RandomDisplayItem `json:"items"`
+}
+
+type ForceReDrawByUserIdAsyncResult struct {
+	result *ForceReDrawByUserIdResult
+	err    error
+}
+
+func NewForceReDrawByUserIdResultFromJson(data string) ForceReDrawByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewForceReDrawByUserIdResultFromDict(dict)
+}
+
+func NewForceReDrawByUserIdResultFromDict(data map[string]interface{}) ForceReDrawByUserIdResult {
+    return ForceReDrawByUserIdResult {
+        Items: CastRandomDisplayItems(core.CastArray(data["items"])),
+    }
+}
+
+func (p ForceReDrawByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastRandomDisplayItemsFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p ForceReDrawByUserIdResult) Pointer() *ForceReDrawByUserIdResult {
+    return &p
+}
+
+type ForceReDrawByUserIdByStampSheetResult struct {
+    Items []RandomDisplayItem `json:"items"`
+}
+
+type ForceReDrawByUserIdByStampSheetAsyncResult struct {
+	result *ForceReDrawByUserIdByStampSheetResult
+	err    error
+}
+
+func NewForceReDrawByUserIdByStampSheetResultFromJson(data string) ForceReDrawByUserIdByStampSheetResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewForceReDrawByUserIdByStampSheetResultFromDict(dict)
+}
+
+func NewForceReDrawByUserIdByStampSheetResultFromDict(data map[string]interface{}) ForceReDrawByUserIdByStampSheetResult {
+    return ForceReDrawByUserIdByStampSheetResult {
+        Items: CastRandomDisplayItems(core.CastArray(data["items"])),
+    }
+}
+
+func (p ForceReDrawByUserIdByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastRandomDisplayItemsFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p ForceReDrawByUserIdByStampSheetResult) Pointer() *ForceReDrawByUserIdByStampSheetResult {
+    return &p
+}
+
 type RandomShowcaseBuyResult struct {
     Item *RandomDisplayItem `json:"item"`
     TransactionId *string `json:"transactionId"`
@@ -1339,70 +1532,5 @@ func (p RandomShowcaseBuyByUserIdResult) ToDict() map[string]interface{} {
 }
 
 func (p RandomShowcaseBuyByUserIdResult) Pointer() *RandomShowcaseBuyByUserIdResult {
-    return &p
-}
-
-type IncrementPurchaseCountByUserIdResult struct {
-    Item *RandomDisplayItem `json:"item"`
-}
-
-type IncrementPurchaseCountByUserIdAsyncResult struct {
-	result *IncrementPurchaseCountByUserIdResult
-	err    error
-}
-
-func NewIncrementPurchaseCountByUserIdResultFromJson(data string) IncrementPurchaseCountByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewIncrementPurchaseCountByUserIdResultFromDict(dict)
-}
-
-func NewIncrementPurchaseCountByUserIdResultFromDict(data map[string]interface{}) IncrementPurchaseCountByUserIdResult {
-    return IncrementPurchaseCountByUserIdResult {
-        Item: NewRandomDisplayItemFromDict(core.CastMap(data["item"])).Pointer(),
-    }
-}
-
-func (p IncrementPurchaseCountByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
-}
-
-func (p IncrementPurchaseCountByUserIdResult) Pointer() *IncrementPurchaseCountByUserIdResult {
-    return &p
-}
-
-type IncrementPurchaseCountByStampTaskResult struct {
-    Item *RandomDisplayItem `json:"item"`
-    NewContextStack *string `json:"newContextStack"`
-}
-
-type IncrementPurchaseCountByStampTaskAsyncResult struct {
-	result *IncrementPurchaseCountByStampTaskResult
-	err    error
-}
-
-func NewIncrementPurchaseCountByStampTaskResultFromJson(data string) IncrementPurchaseCountByStampTaskResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewIncrementPurchaseCountByStampTaskResultFromDict(dict)
-}
-
-func NewIncrementPurchaseCountByStampTaskResultFromDict(data map[string]interface{}) IncrementPurchaseCountByStampTaskResult {
-    return IncrementPurchaseCountByStampTaskResult {
-        Item: NewRandomDisplayItemFromDict(core.CastMap(data["item"])).Pointer(),
-        NewContextStack: core.CastString(data["newContextStack"]),
-    }
-}
-
-func (p IncrementPurchaseCountByStampTaskResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "newContextStack": p.NewContextStack,
-    }
-}
-
-func (p IncrementPurchaseCountByStampTaskResult) Pointer() *IncrementPurchaseCountByStampTaskResult {
     return &p
 }
