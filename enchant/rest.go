@@ -1971,10 +1971,10 @@ func (p Gs2EnchantRestClient) ExportMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func getCurrentParameterModelMasterAsyncHandler(
+func getCurrentParameterMasterAsyncHandler(
 	client Gs2EnchantRestClient,
 	job *core.NetworkJob,
-	callback chan<- GetCurrentParameterModelMasterAsyncResult,
+	callback chan<- GetCurrentParameterMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -1983,15 +1983,15 @@ func getCurrentParameterModelMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- GetCurrentParameterModelMasterAsyncResult{
+		callback <- GetCurrentParameterMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result GetCurrentParameterModelMasterResult
+	var result GetCurrentParameterMasterResult
 	if asyncResult.Err != nil {
-		callback <- GetCurrentParameterModelMasterAsyncResult{
+		callback <- GetCurrentParameterMasterAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -1999,22 +1999,22 @@ func getCurrentParameterModelMasterAsyncHandler(
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- GetCurrentParameterModelMasterAsyncResult{
+            callback <- GetCurrentParameterMasterAsyncResult{
                 err: err,
             }
             return
         }
 	}
-	callback <- GetCurrentParameterModelMasterAsyncResult{
+	callback <- GetCurrentParameterMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2EnchantRestClient) GetCurrentParameterModelMasterAsync(
-	request *GetCurrentParameterModelMasterRequest,
-	callback chan<- GetCurrentParameterModelMasterAsyncResult,
+func (p Gs2EnchantRestClient) GetCurrentParameterMasterAsync(
+	request *GetCurrentParameterMasterRequest,
+	callback chan<- GetCurrentParameterMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
@@ -2031,7 +2031,7 @@ func (p Gs2EnchantRestClient) GetCurrentParameterModelMasterAsync(
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
 
-	go getCurrentParameterModelMasterAsyncHandler(
+	go getCurrentParameterMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
@@ -2043,11 +2043,11 @@ func (p Gs2EnchantRestClient) GetCurrentParameterModelMasterAsync(
 	)
 }
 
-func (p Gs2EnchantRestClient) GetCurrentParameterModelMaster(
-	request *GetCurrentParameterModelMasterRequest,
-) (*GetCurrentParameterModelMasterResult, error) {
-	callback := make(chan GetCurrentParameterModelMasterAsyncResult, 1)
-	go p.GetCurrentParameterModelMasterAsync(
+func (p Gs2EnchantRestClient) GetCurrentParameterMaster(
+	request *GetCurrentParameterMasterRequest,
+) (*GetCurrentParameterMasterResult, error) {
+	callback := make(chan GetCurrentParameterMasterAsyncResult, 1)
+	go p.GetCurrentParameterMasterAsync(
 		request,
 		callback,
 	)
@@ -2055,10 +2055,10 @@ func (p Gs2EnchantRestClient) GetCurrentParameterModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func updateCurrentParameterModelMasterAsyncHandler(
+func updateCurrentParameterMasterAsyncHandler(
 	client Gs2EnchantRestClient,
 	job *core.NetworkJob,
-	callback chan<- UpdateCurrentParameterModelMasterAsyncResult,
+	callback chan<- UpdateCurrentParameterMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2067,15 +2067,15 @@ func updateCurrentParameterModelMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentParameterModelMasterAsyncResult{
+		callback <- UpdateCurrentParameterMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentParameterModelMasterResult
+	var result UpdateCurrentParameterMasterResult
 	if asyncResult.Err != nil {
-		callback <- UpdateCurrentParameterModelMasterAsyncResult{
+		callback <- UpdateCurrentParameterMasterAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -2083,22 +2083,22 @@ func updateCurrentParameterModelMasterAsyncHandler(
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- UpdateCurrentParameterModelMasterAsyncResult{
+            callback <- UpdateCurrentParameterMasterAsyncResult{
                 err: err,
             }
             return
         }
 	}
-	callback <- UpdateCurrentParameterModelMasterAsyncResult{
+	callback <- UpdateCurrentParameterMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2EnchantRestClient) UpdateCurrentParameterModelMasterAsync(
-	request *UpdateCurrentParameterModelMasterRequest,
-	callback chan<- UpdateCurrentParameterModelMasterAsyncResult,
+func (p Gs2EnchantRestClient) UpdateCurrentParameterMasterAsync(
+	request *UpdateCurrentParameterMasterRequest,
+	callback chan<- UpdateCurrentParameterMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
@@ -2121,7 +2121,7 @@ func (p Gs2EnchantRestClient) UpdateCurrentParameterModelMasterAsync(
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
 
-	go updateCurrentParameterModelMasterAsyncHandler(
+	go updateCurrentParameterMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
@@ -2133,11 +2133,11 @@ func (p Gs2EnchantRestClient) UpdateCurrentParameterModelMasterAsync(
 	)
 }
 
-func (p Gs2EnchantRestClient) UpdateCurrentParameterModelMaster(
-	request *UpdateCurrentParameterModelMasterRequest,
-) (*UpdateCurrentParameterModelMasterResult, error) {
-	callback := make(chan UpdateCurrentParameterModelMasterAsyncResult, 1)
-	go p.UpdateCurrentParameterModelMasterAsync(
+func (p Gs2EnchantRestClient) UpdateCurrentParameterMaster(
+	request *UpdateCurrentParameterMasterRequest,
+) (*UpdateCurrentParameterMasterResult, error) {
+	callback := make(chan UpdateCurrentParameterMasterAsyncResult, 1)
+	go p.UpdateCurrentParameterMasterAsync(
 		request,
 		callback,
 	)
@@ -2145,10 +2145,10 @@ func (p Gs2EnchantRestClient) UpdateCurrentParameterModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func updateCurrentParameterModelMasterFromGitHubAsyncHandler(
+func updateCurrentParameterMasterFromGitHubAsyncHandler(
 	client Gs2EnchantRestClient,
 	job *core.NetworkJob,
-	callback chan<- UpdateCurrentParameterModelMasterFromGitHubAsyncResult,
+	callback chan<- UpdateCurrentParameterMasterFromGitHubAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2157,15 +2157,15 @@ func updateCurrentParameterModelMasterFromGitHubAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentParameterModelMasterFromGitHubAsyncResult{
+		callback <- UpdateCurrentParameterMasterFromGitHubAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentParameterModelMasterFromGitHubResult
+	var result UpdateCurrentParameterMasterFromGitHubResult
 	if asyncResult.Err != nil {
-		callback <- UpdateCurrentParameterModelMasterFromGitHubAsyncResult{
+		callback <- UpdateCurrentParameterMasterFromGitHubAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -2173,22 +2173,22 @@ func updateCurrentParameterModelMasterFromGitHubAsyncHandler(
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- UpdateCurrentParameterModelMasterFromGitHubAsyncResult{
+            callback <- UpdateCurrentParameterMasterFromGitHubAsyncResult{
                 err: err,
             }
             return
         }
 	}
-	callback <- UpdateCurrentParameterModelMasterFromGitHubAsyncResult{
+	callback <- UpdateCurrentParameterMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2EnchantRestClient) UpdateCurrentParameterModelMasterFromGitHubAsync(
-	request *UpdateCurrentParameterModelMasterFromGitHubRequest,
-	callback chan<- UpdateCurrentParameterModelMasterFromGitHubAsyncResult,
+func (p Gs2EnchantRestClient) UpdateCurrentParameterMasterFromGitHubAsync(
+	request *UpdateCurrentParameterMasterFromGitHubRequest,
+	callback chan<- UpdateCurrentParameterMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
@@ -2211,7 +2211,7 @@ func (p Gs2EnchantRestClient) UpdateCurrentParameterModelMasterFromGitHubAsync(
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
 
-	go updateCurrentParameterModelMasterFromGitHubAsyncHandler(
+	go updateCurrentParameterMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
@@ -2223,11 +2223,11 @@ func (p Gs2EnchantRestClient) UpdateCurrentParameterModelMasterFromGitHubAsync(
 	)
 }
 
-func (p Gs2EnchantRestClient) UpdateCurrentParameterModelMasterFromGitHub(
-	request *UpdateCurrentParameterModelMasterFromGitHubRequest,
-) (*UpdateCurrentParameterModelMasterFromGitHubResult, error) {
-	callback := make(chan UpdateCurrentParameterModelMasterFromGitHubAsyncResult, 1)
-	go p.UpdateCurrentParameterModelMasterFromGitHubAsync(
+func (p Gs2EnchantRestClient) UpdateCurrentParameterMasterFromGitHub(
+	request *UpdateCurrentParameterMasterFromGitHubRequest,
+) (*UpdateCurrentParameterMasterFromGitHubResult, error) {
+	callback := make(chan UpdateCurrentParameterMasterFromGitHubAsyncResult, 1)
+	go p.UpdateCurrentParameterMasterFromGitHubAsync(
 		request,
 		callback,
 	)

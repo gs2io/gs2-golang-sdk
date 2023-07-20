@@ -1878,9 +1878,9 @@ func (p Gs2EnchantWebSocketClient) ExportMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2EnchantWebSocketClient) getCurrentParameterModelMasterAsyncHandler(
+func (p Gs2EnchantWebSocketClient) getCurrentParameterMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- GetCurrentParameterModelMasterAsyncResult,
+	callback chan<- GetCurrentParameterMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -1889,17 +1889,17 @@ func (p Gs2EnchantWebSocketClient) getCurrentParameterModelMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- GetCurrentParameterModelMasterAsyncResult{
+		callback <- GetCurrentParameterMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result GetCurrentParameterModelMasterResult
+	var result GetCurrentParameterMasterResult
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- GetCurrentParameterModelMasterAsyncResult{
+            callback <- GetCurrentParameterMasterAsyncResult{
                 err: err,
             }
             return
@@ -1907,23 +1907,23 @@ func (p Gs2EnchantWebSocketClient) getCurrentParameterModelMasterAsyncHandler(
 	}
     if asyncResult.Err != nil {
     }
-	callback <- GetCurrentParameterModelMasterAsyncResult{
+	callback <- GetCurrentParameterMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2EnchantWebSocketClient) GetCurrentParameterModelMasterAsync(
-	request *GetCurrentParameterModelMasterRequest,
-	callback chan<- GetCurrentParameterModelMasterAsyncResult,
+func (p Gs2EnchantWebSocketClient) GetCurrentParameterMasterAsync(
+	request *GetCurrentParameterMasterRequest,
+	callback chan<- GetCurrentParameterMasterAsyncResult,
 ) {
     requestId := core.WebSocketRequestId(uuid.New().String())
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "enchant",
     		"component": "currentParameterMaster",
-    		"function": "getCurrentParameterModelMaster",
+    		"function": "getCurrentParameterMaster",
             "contentType": "application/json",
     		"requestId": requestId,
 		},
@@ -1938,7 +1938,7 @@ func (p Gs2EnchantWebSocketClient) GetCurrentParameterModelMasterAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	go p.getCurrentParameterModelMasterAsyncHandler(
+	go p.getCurrentParameterMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies: bodies,
@@ -1947,11 +1947,11 @@ func (p Gs2EnchantWebSocketClient) GetCurrentParameterModelMasterAsync(
 	)
 }
 
-func (p Gs2EnchantWebSocketClient) GetCurrentParameterModelMaster(
-	request *GetCurrentParameterModelMasterRequest,
-) (*GetCurrentParameterModelMasterResult, error) {
-	callback := make(chan GetCurrentParameterModelMasterAsyncResult, 1)
-	go p.GetCurrentParameterModelMasterAsync(
+func (p Gs2EnchantWebSocketClient) GetCurrentParameterMaster(
+	request *GetCurrentParameterMasterRequest,
+) (*GetCurrentParameterMasterResult, error) {
+	callback := make(chan GetCurrentParameterMasterAsyncResult, 1)
+	go p.GetCurrentParameterMasterAsync(
 		request,
 		callback,
 	)
@@ -1959,9 +1959,9 @@ func (p Gs2EnchantWebSocketClient) GetCurrentParameterModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2EnchantWebSocketClient) updateCurrentParameterModelMasterAsyncHandler(
+func (p Gs2EnchantWebSocketClient) updateCurrentParameterMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- UpdateCurrentParameterModelMasterAsyncResult,
+	callback chan<- UpdateCurrentParameterMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -1970,17 +1970,17 @@ func (p Gs2EnchantWebSocketClient) updateCurrentParameterModelMasterAsyncHandler
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentParameterModelMasterAsyncResult{
+		callback <- UpdateCurrentParameterMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentParameterModelMasterResult
+	var result UpdateCurrentParameterMasterResult
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- UpdateCurrentParameterModelMasterAsyncResult{
+            callback <- UpdateCurrentParameterMasterAsyncResult{
                 err: err,
             }
             return
@@ -1988,23 +1988,23 @@ func (p Gs2EnchantWebSocketClient) updateCurrentParameterModelMasterAsyncHandler
 	}
     if asyncResult.Err != nil {
     }
-	callback <- UpdateCurrentParameterModelMasterAsyncResult{
+	callback <- UpdateCurrentParameterMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterModelMasterAsync(
-	request *UpdateCurrentParameterModelMasterRequest,
-	callback chan<- UpdateCurrentParameterModelMasterAsyncResult,
+func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterMasterAsync(
+	request *UpdateCurrentParameterMasterRequest,
+	callback chan<- UpdateCurrentParameterMasterAsyncResult,
 ) {
     requestId := core.WebSocketRequestId(uuid.New().String())
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "enchant",
     		"component": "currentParameterMaster",
-    		"function": "updateCurrentParameterModelMaster",
+    		"function": "updateCurrentParameterMaster",
             "contentType": "application/json",
     		"requestId": requestId,
 		},
@@ -2022,7 +2022,7 @@ func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterModelMasterAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	go p.updateCurrentParameterModelMasterAsyncHandler(
+	go p.updateCurrentParameterMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies: bodies,
@@ -2031,11 +2031,11 @@ func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterModelMasterAsync(
 	)
 }
 
-func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterModelMaster(
-	request *UpdateCurrentParameterModelMasterRequest,
-) (*UpdateCurrentParameterModelMasterResult, error) {
-	callback := make(chan UpdateCurrentParameterModelMasterAsyncResult, 1)
-	go p.UpdateCurrentParameterModelMasterAsync(
+func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterMaster(
+	request *UpdateCurrentParameterMasterRequest,
+) (*UpdateCurrentParameterMasterResult, error) {
+	callback := make(chan UpdateCurrentParameterMasterAsyncResult, 1)
+	go p.UpdateCurrentParameterMasterAsync(
 		request,
 		callback,
 	)
@@ -2043,9 +2043,9 @@ func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2EnchantWebSocketClient) updateCurrentParameterModelMasterFromGitHubAsyncHandler(
+func (p Gs2EnchantWebSocketClient) updateCurrentParameterMasterFromGitHubAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- UpdateCurrentParameterModelMasterFromGitHubAsyncResult,
+	callback chan<- UpdateCurrentParameterMasterFromGitHubAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2054,17 +2054,17 @@ func (p Gs2EnchantWebSocketClient) updateCurrentParameterModelMasterFromGitHubAs
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentParameterModelMasterFromGitHubAsyncResult{
+		callback <- UpdateCurrentParameterMasterFromGitHubAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentParameterModelMasterFromGitHubResult
+	var result UpdateCurrentParameterMasterFromGitHubResult
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- UpdateCurrentParameterModelMasterFromGitHubAsyncResult{
+            callback <- UpdateCurrentParameterMasterFromGitHubAsyncResult{
                 err: err,
             }
             return
@@ -2072,23 +2072,23 @@ func (p Gs2EnchantWebSocketClient) updateCurrentParameterModelMasterFromGitHubAs
 	}
     if asyncResult.Err != nil {
     }
-	callback <- UpdateCurrentParameterModelMasterFromGitHubAsyncResult{
+	callback <- UpdateCurrentParameterMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterModelMasterFromGitHubAsync(
-	request *UpdateCurrentParameterModelMasterFromGitHubRequest,
-	callback chan<- UpdateCurrentParameterModelMasterFromGitHubAsyncResult,
+func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterMasterFromGitHubAsync(
+	request *UpdateCurrentParameterMasterFromGitHubRequest,
+	callback chan<- UpdateCurrentParameterMasterFromGitHubAsyncResult,
 ) {
     requestId := core.WebSocketRequestId(uuid.New().String())
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "enchant",
     		"component": "currentParameterMaster",
-    		"function": "updateCurrentParameterModelMasterFromGitHub",
+    		"function": "updateCurrentParameterMasterFromGitHub",
             "contentType": "application/json",
     		"requestId": requestId,
 		},
@@ -2106,7 +2106,7 @@ func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterModelMasterFromGitHubAs
     	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	go p.updateCurrentParameterModelMasterFromGitHubAsyncHandler(
+	go p.updateCurrentParameterMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies: bodies,
@@ -2115,11 +2115,11 @@ func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterModelMasterFromGitHubAs
 	)
 }
 
-func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterModelMasterFromGitHub(
-	request *UpdateCurrentParameterModelMasterFromGitHubRequest,
-) (*UpdateCurrentParameterModelMasterFromGitHubResult, error) {
-	callback := make(chan UpdateCurrentParameterModelMasterFromGitHubAsyncResult, 1)
-	go p.UpdateCurrentParameterModelMasterFromGitHubAsync(
+func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterMasterFromGitHub(
+	request *UpdateCurrentParameterMasterFromGitHubRequest,
+) (*UpdateCurrentParameterMasterFromGitHubResult, error) {
+	callback := make(chan UpdateCurrentParameterMasterFromGitHubAsyncResult, 1)
+	go p.UpdateCurrentParameterMasterFromGitHubAsync(
 		request,
 		callback,
 	)

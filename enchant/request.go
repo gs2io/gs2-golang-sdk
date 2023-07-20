@@ -744,93 +744,93 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
     return &p
 }
 
-type GetCurrentParameterModelMasterRequest struct {
+type GetCurrentParameterMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
 }
 
-func NewGetCurrentParameterModelMasterRequestFromJson(data string) GetCurrentParameterModelMasterRequest {
+func NewGetCurrentParameterMasterRequestFromJson(data string) GetCurrentParameterMasterRequest {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetCurrentParameterModelMasterRequestFromDict(dict)
+    return NewGetCurrentParameterMasterRequestFromDict(dict)
 }
 
-func NewGetCurrentParameterModelMasterRequestFromDict(data map[string]interface{}) GetCurrentParameterModelMasterRequest {
-    return GetCurrentParameterModelMasterRequest {
+func NewGetCurrentParameterMasterRequestFromDict(data map[string]interface{}) GetCurrentParameterMasterRequest {
+    return GetCurrentParameterMasterRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
     }
 }
 
-func (p GetCurrentParameterModelMasterRequest) ToDict() map[string]interface{} {
+func (p GetCurrentParameterMasterRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
     }
 }
 
-func (p GetCurrentParameterModelMasterRequest) Pointer() *GetCurrentParameterModelMasterRequest {
+func (p GetCurrentParameterMasterRequest) Pointer() *GetCurrentParameterMasterRequest {
     return &p
 }
 
-type UpdateCurrentParameterModelMasterRequest struct {
+type UpdateCurrentParameterMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     Settings *string `json:"settings"`
 }
 
-func NewUpdateCurrentParameterModelMasterRequestFromJson(data string) UpdateCurrentParameterModelMasterRequest {
+func NewUpdateCurrentParameterMasterRequestFromJson(data string) UpdateCurrentParameterMasterRequest {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateCurrentParameterModelMasterRequestFromDict(dict)
+    return NewUpdateCurrentParameterMasterRequestFromDict(dict)
 }
 
-func NewUpdateCurrentParameterModelMasterRequestFromDict(data map[string]interface{}) UpdateCurrentParameterModelMasterRequest {
-    return UpdateCurrentParameterModelMasterRequest {
+func NewUpdateCurrentParameterMasterRequestFromDict(data map[string]interface{}) UpdateCurrentParameterMasterRequest {
+    return UpdateCurrentParameterMasterRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         Settings: core.CastString(data["settings"]),
     }
 }
 
-func (p UpdateCurrentParameterModelMasterRequest) ToDict() map[string]interface{} {
+func (p UpdateCurrentParameterMasterRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "settings": p.Settings,
     }
 }
 
-func (p UpdateCurrentParameterModelMasterRequest) Pointer() *UpdateCurrentParameterModelMasterRequest {
+func (p UpdateCurrentParameterMasterRequest) Pointer() *UpdateCurrentParameterMasterRequest {
     return &p
 }
 
-type UpdateCurrentParameterModelMasterFromGitHubRequest struct {
+type UpdateCurrentParameterMasterFromGitHubRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
-func NewUpdateCurrentParameterModelMasterFromGitHubRequestFromJson(data string) UpdateCurrentParameterModelMasterFromGitHubRequest {
+func NewUpdateCurrentParameterMasterFromGitHubRequestFromJson(data string) UpdateCurrentParameterMasterFromGitHubRequest {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateCurrentParameterModelMasterFromGitHubRequestFromDict(dict)
+    return NewUpdateCurrentParameterMasterFromGitHubRequestFromDict(dict)
 }
 
-func NewUpdateCurrentParameterModelMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentParameterModelMasterFromGitHubRequest {
-    return UpdateCurrentParameterModelMasterFromGitHubRequest {
+func NewUpdateCurrentParameterMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentParameterMasterFromGitHubRequest {
+    return UpdateCurrentParameterMasterFromGitHubRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
     }
 }
 
-func (p UpdateCurrentParameterModelMasterFromGitHubRequest) ToDict() map[string]interface{} {
+func (p UpdateCurrentParameterMasterFromGitHubRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "checkoutSetting": p.CheckoutSetting.ToDict(),
     }
 }
 
-func (p UpdateCurrentParameterModelMasterFromGitHubRequest) Pointer() *UpdateCurrentParameterModelMasterFromGitHubRequest {
+func (p UpdateCurrentParameterMasterFromGitHubRequest) Pointer() *UpdateCurrentParameterMasterFromGitHubRequest {
     return &p
 }
 

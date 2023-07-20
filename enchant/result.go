@@ -691,96 +691,96 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
     return &p
 }
 
-type GetCurrentParameterModelMasterResult struct {
+type GetCurrentParameterMasterResult struct {
     Item *CurrentParameterMaster `json:"item"`
 }
 
-type GetCurrentParameterModelMasterAsyncResult struct {
-	result *GetCurrentParameterModelMasterResult
+type GetCurrentParameterMasterAsyncResult struct {
+	result *GetCurrentParameterMasterResult
 	err    error
 }
 
-func NewGetCurrentParameterModelMasterResultFromJson(data string) GetCurrentParameterModelMasterResult {
+func NewGetCurrentParameterMasterResultFromJson(data string) GetCurrentParameterMasterResult {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetCurrentParameterModelMasterResultFromDict(dict)
+    return NewGetCurrentParameterMasterResultFromDict(dict)
 }
 
-func NewGetCurrentParameterModelMasterResultFromDict(data map[string]interface{}) GetCurrentParameterModelMasterResult {
-    return GetCurrentParameterModelMasterResult {
+func NewGetCurrentParameterMasterResultFromDict(data map[string]interface{}) GetCurrentParameterMasterResult {
+    return GetCurrentParameterMasterResult {
         Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
-func (p GetCurrentParameterModelMasterResult) ToDict() map[string]interface{} {
+func (p GetCurrentParameterMasterResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
     }
 }
 
-func (p GetCurrentParameterModelMasterResult) Pointer() *GetCurrentParameterModelMasterResult {
+func (p GetCurrentParameterMasterResult) Pointer() *GetCurrentParameterMasterResult {
     return &p
 }
 
-type UpdateCurrentParameterModelMasterResult struct {
+type UpdateCurrentParameterMasterResult struct {
     Item *CurrentParameterMaster `json:"item"`
 }
 
-type UpdateCurrentParameterModelMasterAsyncResult struct {
-	result *UpdateCurrentParameterModelMasterResult
+type UpdateCurrentParameterMasterAsyncResult struct {
+	result *UpdateCurrentParameterMasterResult
 	err    error
 }
 
-func NewUpdateCurrentParameterModelMasterResultFromJson(data string) UpdateCurrentParameterModelMasterResult {
+func NewUpdateCurrentParameterMasterResultFromJson(data string) UpdateCurrentParameterMasterResult {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateCurrentParameterModelMasterResultFromDict(dict)
+    return NewUpdateCurrentParameterMasterResultFromDict(dict)
 }
 
-func NewUpdateCurrentParameterModelMasterResultFromDict(data map[string]interface{}) UpdateCurrentParameterModelMasterResult {
-    return UpdateCurrentParameterModelMasterResult {
+func NewUpdateCurrentParameterMasterResultFromDict(data map[string]interface{}) UpdateCurrentParameterMasterResult {
+    return UpdateCurrentParameterMasterResult {
         Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
-func (p UpdateCurrentParameterModelMasterResult) ToDict() map[string]interface{} {
+func (p UpdateCurrentParameterMasterResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
     }
 }
 
-func (p UpdateCurrentParameterModelMasterResult) Pointer() *UpdateCurrentParameterModelMasterResult {
+func (p UpdateCurrentParameterMasterResult) Pointer() *UpdateCurrentParameterMasterResult {
     return &p
 }
 
-type UpdateCurrentParameterModelMasterFromGitHubResult struct {
+type UpdateCurrentParameterMasterFromGitHubResult struct {
     Item *CurrentParameterMaster `json:"item"`
 }
 
-type UpdateCurrentParameterModelMasterFromGitHubAsyncResult struct {
-	result *UpdateCurrentParameterModelMasterFromGitHubResult
+type UpdateCurrentParameterMasterFromGitHubAsyncResult struct {
+	result *UpdateCurrentParameterMasterFromGitHubResult
 	err    error
 }
 
-func NewUpdateCurrentParameterModelMasterFromGitHubResultFromJson(data string) UpdateCurrentParameterModelMasterFromGitHubResult {
+func NewUpdateCurrentParameterMasterFromGitHubResultFromJson(data string) UpdateCurrentParameterMasterFromGitHubResult {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateCurrentParameterModelMasterFromGitHubResultFromDict(dict)
+    return NewUpdateCurrentParameterMasterFromGitHubResultFromDict(dict)
 }
 
-func NewUpdateCurrentParameterModelMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentParameterModelMasterFromGitHubResult {
-    return UpdateCurrentParameterModelMasterFromGitHubResult {
+func NewUpdateCurrentParameterMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentParameterMasterFromGitHubResult {
+    return UpdateCurrentParameterMasterFromGitHubResult {
         Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
-func (p UpdateCurrentParameterModelMasterFromGitHubResult) ToDict() map[string]interface{} {
+func (p UpdateCurrentParameterMasterFromGitHubResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
     }
 }
 
-func (p UpdateCurrentParameterModelMasterFromGitHubResult) Pointer() *UpdateCurrentParameterModelMasterFromGitHubResult {
+func (p UpdateCurrentParameterMasterFromGitHubResult) Pointer() *UpdateCurrentParameterMasterFromGitHubResult {
     return &p
 }
 
