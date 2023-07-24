@@ -1417,10 +1417,10 @@ func (p Gs2StateMachineRestClient) StartStateMachineByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func startStateMachineByStampTaskAsyncHandler(
+func startStateMachineByStampSheetAsyncHandler(
 	client Gs2StateMachineRestClient,
 	job *core.NetworkJob,
-	callback chan<- StartStateMachineByStampTaskAsyncResult,
+	callback chan<- StartStateMachineByStampSheetAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -1429,15 +1429,15 @@ func startStateMachineByStampTaskAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- StartStateMachineByStampTaskAsyncResult{
+		callback <- StartStateMachineByStampSheetAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result StartStateMachineByStampTaskResult
+	var result StartStateMachineByStampSheetResult
 	if asyncResult.Err != nil {
-		callback <- StartStateMachineByStampTaskAsyncResult{
+		callback <- StartStateMachineByStampSheetAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -1445,22 +1445,22 @@ func startStateMachineByStampTaskAsyncHandler(
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- StartStateMachineByStampTaskAsyncResult{
+            callback <- StartStateMachineByStampSheetAsyncResult{
                 err: err,
             }
             return
         }
 	}
-	callback <- StartStateMachineByStampTaskAsyncResult{
+	callback <- StartStateMachineByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2StateMachineRestClient) StartStateMachineByStampTaskAsync(
-	request *StartStateMachineByStampTaskRequest,
-	callback chan<- StartStateMachineByStampTaskAsyncResult,
+func (p Gs2StateMachineRestClient) StartStateMachineByStampSheetAsync(
+	request *StartStateMachineByStampSheetRequest,
+	callback chan<- StartStateMachineByStampSheetAsyncResult,
 ) {
 	path := "/stamp/stateMachine/start"
 
@@ -1481,7 +1481,7 @@ func (p Gs2StateMachineRestClient) StartStateMachineByStampTaskAsync(
         headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
     }
 
-	go startStateMachineByStampTaskAsyncHandler(
+	go startStateMachineByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
@@ -1493,11 +1493,11 @@ func (p Gs2StateMachineRestClient) StartStateMachineByStampTaskAsync(
 	)
 }
 
-func (p Gs2StateMachineRestClient) StartStateMachineByStampTask(
-	request *StartStateMachineByStampTaskRequest,
-) (*StartStateMachineByStampTaskResult, error) {
-	callback := make(chan StartStateMachineByStampTaskAsyncResult, 1)
-	go p.StartStateMachineByStampTaskAsync(
+func (p Gs2StateMachineRestClient) StartStateMachineByStampSheet(
+	request *StartStateMachineByStampSheetRequest,
+) (*StartStateMachineByStampSheetResult, error) {
+	callback := make(chan StartStateMachineByStampSheetAsyncResult, 1)
+	go p.StartStateMachineByStampSheetAsync(
 		request,
 		callback,
 	)

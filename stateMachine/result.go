@@ -506,34 +506,34 @@ func (p StartStateMachineByUserIdResult) Pointer() *StartStateMachineByUserIdRes
     return &p
 }
 
-type StartStateMachineByStampTaskResult struct {
+type StartStateMachineByStampSheetResult struct {
     Item *Status `json:"item"`
 }
 
-type StartStateMachineByStampTaskAsyncResult struct {
-	result *StartStateMachineByStampTaskResult
+type StartStateMachineByStampSheetAsyncResult struct {
+	result *StartStateMachineByStampSheetResult
 	err    error
 }
 
-func NewStartStateMachineByStampTaskResultFromJson(data string) StartStateMachineByStampTaskResult {
+func NewStartStateMachineByStampSheetResultFromJson(data string) StartStateMachineByStampSheetResult {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewStartStateMachineByStampTaskResultFromDict(dict)
+    return NewStartStateMachineByStampSheetResultFromDict(dict)
 }
 
-func NewStartStateMachineByStampTaskResultFromDict(data map[string]interface{}) StartStateMachineByStampTaskResult {
-    return StartStateMachineByStampTaskResult {
+func NewStartStateMachineByStampSheetResultFromDict(data map[string]interface{}) StartStateMachineByStampSheetResult {
+    return StartStateMachineByStampSheetResult {
         Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
     }
 }
 
-func (p StartStateMachineByStampTaskResult) ToDict() map[string]interface{} {
+func (p StartStateMachineByStampSheetResult) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "item": p.Item.ToDict(),
     }
 }
 
-func (p StartStateMachineByStampTaskResult) Pointer() *StartStateMachineByStampTaskResult {
+func (p StartStateMachineByStampSheetResult) Pointer() *StartStateMachineByStampSheetResult {
     return &p
 }
 

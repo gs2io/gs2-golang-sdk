@@ -544,34 +544,34 @@ func (p StartStateMachineByUserIdRequest) Pointer() *StartStateMachineByUserIdRe
     return &p
 }
 
-type StartStateMachineByStampTaskRequest struct {
+type StartStateMachineByStampSheetRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
     StampSheet *string `json:"stampSheet"`
     KeyId *string `json:"keyId"`
 }
 
-func NewStartStateMachineByStampTaskRequestFromJson(data string) StartStateMachineByStampTaskRequest {
+func NewStartStateMachineByStampSheetRequestFromJson(data string) StartStateMachineByStampSheetRequest {
     dict := map[string]interface{}{}
     _ = json.Unmarshal([]byte(data), &dict)
-    return NewStartStateMachineByStampTaskRequestFromDict(dict)
+    return NewStartStateMachineByStampSheetRequestFromDict(dict)
 }
 
-func NewStartStateMachineByStampTaskRequestFromDict(data map[string]interface{}) StartStateMachineByStampTaskRequest {
-    return StartStateMachineByStampTaskRequest {
+func NewStartStateMachineByStampSheetRequestFromDict(data map[string]interface{}) StartStateMachineByStampSheetRequest {
+    return StartStateMachineByStampSheetRequest {
         StampSheet: core.CastString(data["stampSheet"]),
         KeyId: core.CastString(data["keyId"]),
     }
 }
 
-func (p StartStateMachineByStampTaskRequest) ToDict() map[string]interface{} {
+func (p StartStateMachineByStampSheetRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "stampSheet": p.StampSheet,
         "keyId": p.KeyId,
     }
 }
 
-func (p StartStateMachineByStampTaskRequest) Pointer() *StartStateMachineByStampTaskRequest {
+func (p StartStateMachineByStampSheetRequest) Pointer() *StartStateMachineByStampSheetRequest {
     return &p
 }
 

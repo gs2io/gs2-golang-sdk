@@ -1356,9 +1356,9 @@ func (p Gs2StateMachineWebSocketClient) StartStateMachineByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2StateMachineWebSocketClient) startStateMachineByStampTaskAsyncHandler(
+func (p Gs2StateMachineWebSocketClient) startStateMachineByStampSheetAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- StartStateMachineByStampTaskAsyncResult,
+	callback chan<- StartStateMachineByStampSheetAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -1367,17 +1367,17 @@ func (p Gs2StateMachineWebSocketClient) startStateMachineByStampTaskAsyncHandler
 		false,
 	)
 	if err != nil {
-		callback <- StartStateMachineByStampTaskAsyncResult{
+		callback <- StartStateMachineByStampSheetAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result StartStateMachineByStampTaskResult
+	var result StartStateMachineByStampSheetResult
 	if asyncResult.Payload != "" {
         err = json.Unmarshal([]byte(asyncResult.Payload), &result)
         if err != nil {
-            callback <- StartStateMachineByStampTaskAsyncResult{
+            callback <- StartStateMachineByStampSheetAsyncResult{
                 err: err,
             }
             return
@@ -1385,23 +1385,23 @@ func (p Gs2StateMachineWebSocketClient) startStateMachineByStampTaskAsyncHandler
 	}
     if asyncResult.Err != nil {
     }
-	callback <- StartStateMachineByStampTaskAsyncResult{
+	callback <- StartStateMachineByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2StateMachineWebSocketClient) StartStateMachineByStampTaskAsync(
-	request *StartStateMachineByStampTaskRequest,
-	callback chan<- StartStateMachineByStampTaskAsyncResult,
+func (p Gs2StateMachineWebSocketClient) StartStateMachineByStampSheetAsync(
+	request *StartStateMachineByStampSheetRequest,
+	callback chan<- StartStateMachineByStampSheetAsyncResult,
 ) {
     requestId := core.WebSocketRequestId(uuid.New().String())
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "state_machine",
     		"component": "status",
-    		"function": "startStateMachineByStampTask",
+    		"function": "startStateMachineByStampSheet",
             "contentType": "application/json",
     		"requestId": requestId,
 		},
@@ -1419,7 +1419,7 @@ func (p Gs2StateMachineWebSocketClient) StartStateMachineByStampTaskAsync(
     	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	go p.startStateMachineByStampTaskAsyncHandler(
+	go p.startStateMachineByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies: bodies,
@@ -1428,11 +1428,11 @@ func (p Gs2StateMachineWebSocketClient) StartStateMachineByStampTaskAsync(
 	)
 }
 
-func (p Gs2StateMachineWebSocketClient) StartStateMachineByStampTask(
-	request *StartStateMachineByStampTaskRequest,
-) (*StartStateMachineByStampTaskResult, error) {
-	callback := make(chan StartStateMachineByStampTaskAsyncResult, 1)
-	go p.StartStateMachineByStampTaskAsync(
+func (p Gs2StateMachineWebSocketClient) StartStateMachineByStampSheet(
+	request *StartStateMachineByStampSheetRequest,
+) (*StartStateMachineByStampSheetResult, error) {
+	callback := make(chan StartStateMachineByStampSheetAsyncResult, 1)
+	go p.StartStateMachineByStampSheetAsync(
 		request,
 		callback,
 	)
