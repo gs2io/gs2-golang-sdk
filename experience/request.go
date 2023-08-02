@@ -57,6 +57,7 @@ type CreateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     Name *string `json:"name"`
     Description *string `json:"description"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     ExperienceCapScriptId *string `json:"experienceCapScriptId"`
     ChangeExperienceScript *ScriptSetting `json:"changeExperienceScript"`
     ChangeRankScript *ScriptSetting `json:"changeRankScript"`
@@ -75,6 +76,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
     return CreateNamespaceRequest {
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         ExperienceCapScriptId: core.CastString(data["experienceCapScriptId"]),
         ChangeExperienceScript: NewScriptSettingFromDict(core.CastMap(data["changeExperienceScript"])).Pointer(),
         ChangeRankScript: NewScriptSettingFromDict(core.CastMap(data["changeRankScript"])).Pointer(),
@@ -88,6 +90,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "name": p.Name,
         "description": p.Description,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "experienceCapScriptId": p.ExperienceCapScriptId,
         "changeExperienceScript": p.ChangeExperienceScript.ToDict(),
         "changeRankScript": p.ChangeRankScript.ToDict(),
@@ -162,6 +165,7 @@ type UpdateNamespaceRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     Description *string `json:"description"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
     ExperienceCapScriptId *string `json:"experienceCapScriptId"`
     ChangeExperienceScript *ScriptSetting `json:"changeExperienceScript"`
     ChangeRankScript *ScriptSetting `json:"changeRankScript"`
@@ -180,6 +184,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
     return UpdateNamespaceRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         Description: core.CastString(data["description"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         ExperienceCapScriptId: core.CastString(data["experienceCapScriptId"]),
         ChangeExperienceScript: NewScriptSettingFromDict(core.CastMap(data["changeExperienceScript"])).Pointer(),
         ChangeRankScript: NewScriptSettingFromDict(core.CastMap(data["changeRankScript"])).Pointer(),
@@ -193,6 +198,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "description": p.Description,
+        "transactionSetting": p.TransactionSetting.ToDict(),
         "experienceCapScriptId": p.ExperienceCapScriptId,
         "changeExperienceScript": p.ChangeExperienceScript.ToDict(),
         "changeRankScript": p.ChangeRankScript.ToDict(),
@@ -279,6 +285,7 @@ type CreateExperienceModelMasterRequest struct {
     DefaultRankCap *int64 `json:"defaultRankCap"`
     MaxRankCap *int64 `json:"maxRankCap"`
     RankThresholdName *string `json:"rankThresholdName"`
+    AcquireActionRates []AcquireActionRate `json:"acquireActionRates"`
 }
 
 func NewCreateExperienceModelMasterRequestFromJson(data string) CreateExperienceModelMasterRequest {
@@ -297,6 +304,7 @@ func NewCreateExperienceModelMasterRequestFromDict(data map[string]interface{}) 
         DefaultRankCap: core.CastInt64(data["defaultRankCap"]),
         MaxRankCap: core.CastInt64(data["maxRankCap"]),
         RankThresholdName: core.CastString(data["rankThresholdName"]),
+        AcquireActionRates: CastAcquireActionRates(core.CastArray(data["acquireActionRates"])),
     }
 }
 
@@ -310,6 +318,9 @@ func (p CreateExperienceModelMasterRequest) ToDict() map[string]interface{} {
         "defaultRankCap": p.DefaultRankCap,
         "maxRankCap": p.MaxRankCap,
         "rankThresholdName": p.RankThresholdName,
+        "acquireActionRates": CastAcquireActionRatesFromDict(
+            p.AcquireActionRates,
+        ),
     }
 }
 
@@ -359,6 +370,7 @@ type UpdateExperienceModelMasterRequest struct {
     DefaultRankCap *int64 `json:"defaultRankCap"`
     MaxRankCap *int64 `json:"maxRankCap"`
     RankThresholdName *string `json:"rankThresholdName"`
+    AcquireActionRates []AcquireActionRate `json:"acquireActionRates"`
 }
 
 func NewUpdateExperienceModelMasterRequestFromJson(data string) UpdateExperienceModelMasterRequest {
@@ -377,6 +389,7 @@ func NewUpdateExperienceModelMasterRequestFromDict(data map[string]interface{}) 
         DefaultRankCap: core.CastInt64(data["defaultRankCap"]),
         MaxRankCap: core.CastInt64(data["maxRankCap"]),
         RankThresholdName: core.CastString(data["rankThresholdName"]),
+        AcquireActionRates: CastAcquireActionRates(core.CastArray(data["acquireActionRates"])),
     }
 }
 
@@ -390,6 +403,9 @@ func (p UpdateExperienceModelMasterRequest) ToDict() map[string]interface{} {
         "defaultRankCap": p.DefaultRankCap,
         "maxRankCap": p.MaxRankCap,
         "rankThresholdName": p.RankThresholdName,
+        "acquireActionRates": CastAcquireActionRatesFromDict(
+            p.AcquireActionRates,
+        ),
     }
 }
 
@@ -1311,5 +1327,82 @@ func (p SetRankCapByStampSheetRequest) ToDict() map[string]interface{} {
 }
 
 func (p SetRankCapByStampSheetRequest) Pointer() *SetRankCapByStampSheetRequest {
+    return &p
+}
+
+type MultiplyAcquireActionsByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    ExperienceName *string `json:"experienceName"`
+    PropertyId *string `json:"propertyId"`
+    RateName *string `json:"rateName"`
+    AcquireActions []AcquireAction `json:"acquireActions"`
+}
+
+func NewMultiplyAcquireActionsByUserIdRequestFromJson(data string) MultiplyAcquireActionsByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewMultiplyAcquireActionsByUserIdRequestFromDict(dict)
+}
+
+func NewMultiplyAcquireActionsByUserIdRequestFromDict(data map[string]interface{}) MultiplyAcquireActionsByUserIdRequest {
+    return MultiplyAcquireActionsByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        ExperienceName: core.CastString(data["experienceName"]),
+        PropertyId: core.CastString(data["propertyId"]),
+        RateName: core.CastString(data["rateName"]),
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+    }
+}
+
+func (p MultiplyAcquireActionsByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "experienceName": p.ExperienceName,
+        "propertyId": p.PropertyId,
+        "rateName": p.RateName,
+        "acquireActions": CastAcquireActionsFromDict(
+            p.AcquireActions,
+        ),
+    }
+}
+
+func (p MultiplyAcquireActionsByUserIdRequest) Pointer() *MultiplyAcquireActionsByUserIdRequest {
+    return &p
+}
+
+type MultiplyAcquireActionsByStampSheetRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewMultiplyAcquireActionsByStampSheetRequestFromJson(data string) MultiplyAcquireActionsByStampSheetRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewMultiplyAcquireActionsByStampSheetRequestFromDict(dict)
+}
+
+func NewMultiplyAcquireActionsByStampSheetRequestFromDict(data map[string]interface{}) MultiplyAcquireActionsByStampSheetRequest {
+    return MultiplyAcquireActionsByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p MultiplyAcquireActionsByStampSheetRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p MultiplyAcquireActionsByStampSheetRequest) Pointer() *MultiplyAcquireActionsByStampSheetRequest {
     return &p
 }

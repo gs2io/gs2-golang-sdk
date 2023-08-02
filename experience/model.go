@@ -25,6 +25,7 @@ type Namespace struct {
 	NamespaceId *string `json:"namespaceId"`
 	Name *string `json:"name"`
 	Description *string `json:"description"`
+	TransactionSetting *TransactionSetting `json:"transactionSetting"`
 	ExperienceCapScriptId *string `json:"experienceCapScriptId"`
 	ChangeExperienceScript *ScriptSetting `json:"changeExperienceScript"`
 	ChangeRankScript *ScriptSetting `json:"changeRankScript"`
@@ -46,6 +47,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         NamespaceId: core.CastString(data["namespaceId"]),
         Name: core.CastString(data["name"]),
         Description: core.CastString(data["description"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
         ExperienceCapScriptId: core.CastString(data["experienceCapScriptId"]),
         ChangeExperienceScript: NewScriptSettingFromDict(core.CastMap(data["changeExperienceScript"])).Pointer(),
         ChangeRankScript: NewScriptSettingFromDict(core.CastMap(data["changeRankScript"])).Pointer(),
@@ -70,6 +72,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     var description *string
     if p.Description != nil {
         description = p.Description
+    }
+    var transactionSetting map[string]interface{}
+    if p.TransactionSetting != nil {
+        transactionSetting = p.TransactionSetting.ToDict()
     }
     var experienceCapScriptId *string
     if p.ExperienceCapScriptId != nil {
@@ -107,6 +113,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
         "description": description,
+        "transactionSetting": transactionSetting,
         "experienceCapScriptId": experienceCapScriptId,
         "changeExperienceScript": changeExperienceScript,
         "changeRankScript": changeRankScript,
@@ -147,6 +154,7 @@ type ExperienceModelMaster struct {
 	DefaultRankCap *int64 `json:"defaultRankCap"`
 	MaxRankCap *int64 `json:"maxRankCap"`
 	RankThresholdName *string `json:"rankThresholdName"`
+	AcquireActionRates []AcquireActionRate `json:"acquireActionRates"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -167,6 +175,7 @@ func NewExperienceModelMasterFromDict(data map[string]interface{}) ExperienceMod
         DefaultRankCap: core.CastInt64(data["defaultRankCap"]),
         MaxRankCap: core.CastInt64(data["maxRankCap"]),
         RankThresholdName: core.CastString(data["rankThresholdName"]),
+        AcquireActionRates: CastAcquireActionRates(core.CastArray(data["acquireActionRates"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
     }
@@ -206,6 +215,12 @@ func (p ExperienceModelMaster) ToDict() map[string]interface{} {
     if p.RankThresholdName != nil {
         rankThresholdName = p.RankThresholdName
     }
+    var acquireActionRates []interface{}
+    if p.AcquireActionRates != nil {
+        acquireActionRates = CastAcquireActionRatesFromDict(
+            p.AcquireActionRates,
+        )
+    }
     var createdAt *int64
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
@@ -223,6 +238,7 @@ func (p ExperienceModelMaster) ToDict() map[string]interface{} {
         "defaultRankCap": defaultRankCap,
         "maxRankCap": maxRankCap,
         "rankThresholdName": rankThresholdName,
+        "acquireActionRates": acquireActionRates,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
     }
@@ -256,6 +272,7 @@ type ExperienceModel struct {
 	DefaultRankCap *int64 `json:"defaultRankCap"`
 	MaxRankCap *int64 `json:"maxRankCap"`
 	RankThreshold *Threshold `json:"rankThreshold"`
+	AcquireActionRates []AcquireActionRate `json:"acquireActionRates"`
 }
 
 func NewExperienceModelFromJson(data string) ExperienceModel {
@@ -273,6 +290,7 @@ func NewExperienceModelFromDict(data map[string]interface{}) ExperienceModel {
         DefaultRankCap: core.CastInt64(data["defaultRankCap"]),
         MaxRankCap: core.CastInt64(data["maxRankCap"]),
         RankThreshold: NewThresholdFromDict(core.CastMap(data["rankThreshold"])).Pointer(),
+        AcquireActionRates: CastAcquireActionRates(core.CastArray(data["acquireActionRates"])),
     }
 }
 
@@ -306,6 +324,12 @@ func (p ExperienceModel) ToDict() map[string]interface{} {
     if p.RankThreshold != nil {
         rankThreshold = p.RankThreshold.ToDict()
     }
+    var acquireActionRates []interface{}
+    if p.AcquireActionRates != nil {
+        acquireActionRates = CastAcquireActionRatesFromDict(
+            p.AcquireActionRates,
+        )
+    }
     return map[string]interface{} {
         "experienceModelId": experienceModelId,
         "name": name,
@@ -314,6 +338,7 @@ func (p ExperienceModel) ToDict() map[string]interface{} {
         "defaultRankCap": defaultRankCap,
         "maxRankCap": maxRankCap,
         "rankThreshold": rankThreshold,
+        "acquireActionRates": acquireActionRates,
     }
 }
 
@@ -484,6 +509,62 @@ func CastThresholdsFromDict(data []Threshold) []interface{} {
     return v
 }
 
+type AcquireActionRate struct {
+	Name *string `json:"name"`
+	Rates []*float64 `json:"rates"`
+}
+
+func NewAcquireActionRateFromJson(data string) AcquireActionRate {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireActionRateFromDict(dict)
+}
+
+func NewAcquireActionRateFromDict(data map[string]interface{}) AcquireActionRate {
+    return AcquireActionRate {
+        Name: core.CastString(data["name"]),
+        Rates: core.CastFloat64s(core.CastArray(data["rates"])),
+    }
+}
+
+func (p AcquireActionRate) ToDict() map[string]interface{} {
+    
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var rates []interface{}
+    if p.Rates != nil {
+        rates = core.CastFloat64sFromDict(
+            p.Rates,
+        )
+    }
+    return map[string]interface{} {
+        "name": name,
+        "rates": rates,
+    }
+}
+
+func (p AcquireActionRate) Pointer() *AcquireActionRate {
+    return &p
+}
+
+func CastAcquireActionRates(data []interface{}) []AcquireActionRate {
+	v := make([]AcquireActionRate, 0)
+	for _, d := range data {
+		v = append(v, NewAcquireActionRateFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAcquireActionRatesFromDict(data []AcquireActionRate) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
 type CurrentExperienceMaster struct {
 	NamespaceId *string `json:"namespaceId"`
 	Settings *string `json:"settings"`
@@ -641,6 +722,60 @@ func CastStatuses(data []interface{}) []Status {
 }
 
 func CastStatusesFromDict(data []Status) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type AcquireAction struct {
+	Action *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func NewAcquireActionFromJson(data string) AcquireAction {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireActionFromDict(dict)
+}
+
+func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
+    return AcquireAction {
+        Action: core.CastString(data["action"]),
+        Request: core.CastString(data["request"]),
+    }
+}
+
+func (p AcquireAction) ToDict() map[string]interface{} {
+    
+    var action *string
+    if p.Action != nil {
+        action = p.Action
+    }
+    var request *string
+    if p.Request != nil {
+        request = p.Request
+    }
+    return map[string]interface{} {
+        "action": action,
+        "request": request,
+    }
+}
+
+func (p AcquireAction) Pointer() *AcquireAction {
+    return &p
+}
+
+func CastAcquireActions(data []interface{}) []AcquireAction {
+	v := make([]AcquireAction, 0)
+	for _, d := range data {
+		v = append(v, NewAcquireActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())
@@ -845,6 +980,74 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type TransactionSetting struct {
+	EnableAutoRun *bool `json:"enableAutoRun"`
+	DistributorNamespaceId *string `json:"distributorNamespaceId"`
+	KeyId *string `json:"keyId"`
+	QueueNamespaceId *string `json:"queueNamespaceId"`
+}
+
+func NewTransactionSettingFromJson(data string) TransactionSetting {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewTransactionSettingFromDict(dict)
+}
+
+func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
+    return TransactionSetting {
+        EnableAutoRun: core.CastBool(data["enableAutoRun"]),
+        DistributorNamespaceId: core.CastString(data["distributorNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+    }
+}
+
+func (p TransactionSetting) ToDict() map[string]interface{} {
+    
+    var enableAutoRun *bool
+    if p.EnableAutoRun != nil {
+        enableAutoRun = p.EnableAutoRun
+    }
+    var distributorNamespaceId *string
+    if p.DistributorNamespaceId != nil {
+        distributorNamespaceId = p.DistributorNamespaceId
+    }
+    var keyId *string
+    if p.KeyId != nil {
+        keyId = p.KeyId
+    }
+    var queueNamespaceId *string
+    if p.QueueNamespaceId != nil {
+        queueNamespaceId = p.QueueNamespaceId
+    }
+    return map[string]interface{} {
+        "enableAutoRun": enableAutoRun,
+        "distributorNamespaceId": distributorNamespaceId,
+        "keyId": keyId,
+        "queueNamespaceId": queueNamespaceId,
+    }
+}
+
+func (p TransactionSetting) Pointer() *TransactionSetting {
+    return &p
+}
+
+func CastTransactionSettings(data []interface{}) []TransactionSetting {
+	v := make([]TransactionSetting, 0)
+	for _, d := range data {
+		v = append(v, NewTransactionSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTransactionSettingsFromDict(data []TransactionSetting) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

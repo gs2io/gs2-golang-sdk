@@ -170,6 +170,9 @@ func (p Gs2ExperienceRestClient) CreateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
     if request.ExperienceCapScriptId != nil && *request.ExperienceCapScriptId != "" {
         bodies["experienceCapScriptId"] = *request.ExperienceCapScriptId
     }
@@ -445,6 +448,9 @@ func (p Gs2ExperienceRestClient) UpdateNamespaceAsync(
     var bodies = core.Bodies{}
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
+    }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
     }
     if request.ExperienceCapScriptId != nil && *request.ExperienceCapScriptId != "" {
         bodies["experienceCapScriptId"] = *request.ExperienceCapScriptId
@@ -746,6 +752,13 @@ func (p Gs2ExperienceRestClient) CreateExperienceModelMasterAsync(
     if request.RankThresholdName != nil && *request.RankThresholdName != "" {
         bodies["rankThresholdName"] = *request.RankThresholdName
     }
+    if request.AcquireActionRates != nil {
+        var _acquireActionRates []interface {}
+        for _, item := range request.AcquireActionRates {
+            _acquireActionRates = append(_acquireActionRates, item)
+        }
+        bodies["acquireActionRates"] = _acquireActionRates
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -944,6 +957,13 @@ func (p Gs2ExperienceRestClient) UpdateExperienceModelMasterAsync(
     }
     if request.RankThresholdName != nil && *request.RankThresholdName != "" {
         bodies["rankThresholdName"] = *request.RankThresholdName
+    }
+    if request.AcquireActionRates != nil {
+        var _acquireActionRates []interface {}
+        for _, item := range request.AcquireActionRates {
+            _acquireActionRates = append(_acquireActionRates, item)
+        }
+        bodies["acquireActionRates"] = _acquireActionRates
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -3447,6 +3467,211 @@ func (p Gs2ExperienceRestClient) SetRankCapByStampSheet(
 ) (*SetRankCapByStampSheetResult, error) {
 	callback := make(chan SetRankCapByStampSheetAsyncResult, 1)
 	go p.SetRankCapByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func multiplyAcquireActionsByUserIdAsyncHandler(
+	client Gs2ExperienceRestClient,
+	job *core.NetworkJob,
+	callback chan<- MultiplyAcquireActionsByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- MultiplyAcquireActionsByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result MultiplyAcquireActionsByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- MultiplyAcquireActionsByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- MultiplyAcquireActionsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- MultiplyAcquireActionsByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceRestClient) MultiplyAcquireActionsByUserIdAsync(
+	request *MultiplyAcquireActionsByUserIdRequest,
+	callback chan<- MultiplyAcquireActionsByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/status/model/{experienceName}/property/{propertyId}/acquire/rate/{rateName}/multiply"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ExperienceName != nil && *request.ExperienceName != ""  {
+        path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
+    } else {
+        path = strings.ReplaceAll(path, "{experienceName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
+    if request.RateName != nil && *request.RateName != ""  {
+        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+    } else {
+        path = strings.ReplaceAll(path, "{rateName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.AcquireActions != nil {
+        var _acquireActions []interface {}
+        for _, item := range request.AcquireActions {
+            _acquireActions = append(_acquireActions, item)
+        }
+        bodies["acquireActions"] = _acquireActions
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go multiplyAcquireActionsByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceRestClient) MultiplyAcquireActionsByUserId(
+	request *MultiplyAcquireActionsByUserIdRequest,
+) (*MultiplyAcquireActionsByUserIdResult, error) {
+	callback := make(chan MultiplyAcquireActionsByUserIdAsyncResult, 1)
+	go p.MultiplyAcquireActionsByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func multiplyAcquireActionsByStampSheetAsyncHandler(
+	client Gs2ExperienceRestClient,
+	job *core.NetworkJob,
+	callback chan<- MultiplyAcquireActionsByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- MultiplyAcquireActionsByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result MultiplyAcquireActionsByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- MultiplyAcquireActionsByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- MultiplyAcquireActionsByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- MultiplyAcquireActionsByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceRestClient) MultiplyAcquireActionsByStampSheetAsync(
+	request *MultiplyAcquireActionsByStampSheetRequest,
+	callback chan<- MultiplyAcquireActionsByStampSheetAsyncResult,
+) {
+	path := "/stamp/form/acquire"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go multiplyAcquireActionsByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceRestClient) MultiplyAcquireActionsByStampSheet(
+	request *MultiplyAcquireActionsByStampSheetRequest,
+) (*MultiplyAcquireActionsByStampSheetResult, error) {
+	callback := make(chan MultiplyAcquireActionsByStampSheetAsyncResult, 1)
+	go p.MultiplyAcquireActionsByStampSheetAsync(
 		request,
 		callback,
 	)

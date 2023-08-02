@@ -173,6 +173,9 @@ func (p Gs2ExperienceWebSocketClient) CreateNamespaceAsync(
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
     }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
     if request.ExperienceCapScriptId != nil && *request.ExperienceCapScriptId != "" {
         bodies["experienceCapScriptId"] = *request.ExperienceCapScriptId
     }
@@ -436,6 +439,9 @@ func (p Gs2ExperienceWebSocketClient) UpdateNamespaceAsync(
     }
     if request.Description != nil && *request.Description != "" {
         bodies["description"] = *request.Description
+    }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
     }
     if request.ExperienceCapScriptId != nil && *request.ExperienceCapScriptId != "" {
         bodies["experienceCapScriptId"] = *request.ExperienceCapScriptId
@@ -725,6 +731,13 @@ func (p Gs2ExperienceWebSocketClient) CreateExperienceModelMasterAsync(
     if request.RankThresholdName != nil && *request.RankThresholdName != "" {
         bodies["rankThresholdName"] = *request.RankThresholdName
     }
+    if request.AcquireActionRates != nil {
+        var _acquireActionRates []interface {}
+        for _, item := range request.AcquireActionRates {
+            _acquireActionRates = append(_acquireActionRates, item)
+        }
+        bodies["acquireActionRates"] = _acquireActionRates
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -910,6 +923,13 @@ func (p Gs2ExperienceWebSocketClient) UpdateExperienceModelMasterAsync(
     }
     if request.RankThresholdName != nil && *request.RankThresholdName != "" {
         bodies["rankThresholdName"] = *request.RankThresholdName
+    }
+    if request.AcquireActionRates != nil {
+        var _acquireActionRates []interface {}
+        for _, item := range request.AcquireActionRates {
+            _acquireActionRates = append(_acquireActionRates, item)
+        }
+        bodies["acquireActionRates"] = _acquireActionRates
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -3247,6 +3267,193 @@ func (p Gs2ExperienceWebSocketClient) SetRankCapByStampSheet(
 ) (*SetRankCapByStampSheetResult, error) {
 	callback := make(chan SetRankCapByStampSheetAsyncResult, 1)
 	go p.SetRankCapByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExperienceWebSocketClient) multiplyAcquireActionsByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- MultiplyAcquireActionsByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- MultiplyAcquireActionsByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result MultiplyAcquireActionsByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- MultiplyAcquireActionsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- MultiplyAcquireActionsByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceWebSocketClient) MultiplyAcquireActionsByUserIdAsync(
+	request *MultiplyAcquireActionsByUserIdRequest,
+	callback chan<- MultiplyAcquireActionsByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "experience",
+    		"component": "status",
+    		"function": "multiplyAcquireActionsByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ExperienceName != nil && *request.ExperienceName != "" {
+        bodies["experienceName"] = *request.ExperienceName
+    }
+    if request.PropertyId != nil && *request.PropertyId != "" {
+        bodies["propertyId"] = *request.PropertyId
+    }
+    if request.RateName != nil && *request.RateName != "" {
+        bodies["rateName"] = *request.RateName
+    }
+    if request.AcquireActions != nil {
+        var _acquireActions []interface {}
+        for _, item := range request.AcquireActions {
+            _acquireActions = append(_acquireActions, item)
+        }
+        bodies["acquireActions"] = _acquireActions
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.multiplyAcquireActionsByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceWebSocketClient) MultiplyAcquireActionsByUserId(
+	request *MultiplyAcquireActionsByUserIdRequest,
+) (*MultiplyAcquireActionsByUserIdResult, error) {
+	callback := make(chan MultiplyAcquireActionsByUserIdAsyncResult, 1)
+	go p.MultiplyAcquireActionsByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExperienceWebSocketClient) multiplyAcquireActionsByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- MultiplyAcquireActionsByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- MultiplyAcquireActionsByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result MultiplyAcquireActionsByStampSheetResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- MultiplyAcquireActionsByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- MultiplyAcquireActionsByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceWebSocketClient) MultiplyAcquireActionsByStampSheetAsync(
+	request *MultiplyAcquireActionsByStampSheetRequest,
+	callback chan<- MultiplyAcquireActionsByStampSheetAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "experience",
+    		"component": "status",
+    		"function": "multiplyAcquireActionsByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.multiplyAcquireActionsByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceWebSocketClient) MultiplyAcquireActionsByStampSheet(
+	request *MultiplyAcquireActionsByStampSheetRequest,
+) (*MultiplyAcquireActionsByStampSheetResult, error) {
+	callback := make(chan MultiplyAcquireActionsByStampSheetAsyncResult, 1)
+	go p.MultiplyAcquireActionsByStampSheetAsync(
 		request,
 		callback,
 	)

@@ -1175,3 +1175,93 @@ func (p SetRankCapByStampSheetResult) ToDict() map[string]interface{} {
 func (p SetRankCapByStampSheetResult) Pointer() *SetRankCapByStampSheetResult {
     return &p
 }
+
+type MultiplyAcquireActionsByUserIdResult struct {
+    Items []AcquireAction `json:"items"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
+}
+
+type MultiplyAcquireActionsByUserIdAsyncResult struct {
+	result *MultiplyAcquireActionsByUserIdResult
+	err    error
+}
+
+func NewMultiplyAcquireActionsByUserIdResultFromJson(data string) MultiplyAcquireActionsByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewMultiplyAcquireActionsByUserIdResultFromDict(dict)
+}
+
+func NewMultiplyAcquireActionsByUserIdResultFromDict(data map[string]interface{}) MultiplyAcquireActionsByUserIdResult {
+    return MultiplyAcquireActionsByUserIdResult {
+        Items: CastAcquireActions(core.CastArray(data["items"])),
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+    }
+}
+
+func (p MultiplyAcquireActionsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastAcquireActionsFromDict(
+            p.Items,
+        ),
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+    }
+}
+
+func (p MultiplyAcquireActionsByUserIdResult) Pointer() *MultiplyAcquireActionsByUserIdResult {
+    return &p
+}
+
+type MultiplyAcquireActionsByStampSheetResult struct {
+    Items []AcquireAction `json:"items"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
+}
+
+type MultiplyAcquireActionsByStampSheetAsyncResult struct {
+	result *MultiplyAcquireActionsByStampSheetResult
+	err    error
+}
+
+func NewMultiplyAcquireActionsByStampSheetResultFromJson(data string) MultiplyAcquireActionsByStampSheetResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewMultiplyAcquireActionsByStampSheetResultFromDict(dict)
+}
+
+func NewMultiplyAcquireActionsByStampSheetResultFromDict(data map[string]interface{}) MultiplyAcquireActionsByStampSheetResult {
+    return MultiplyAcquireActionsByStampSheetResult {
+        Items: CastAcquireActions(core.CastArray(data["items"])),
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+    }
+}
+
+func (p MultiplyAcquireActionsByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastAcquireActionsFromDict(
+            p.Items,
+        ),
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+    }
+}
+
+func (p MultiplyAcquireActionsByStampSheetResult) Pointer() *MultiplyAcquireActionsByStampSheetResult {
+    return &p
+}
