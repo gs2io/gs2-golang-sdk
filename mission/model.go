@@ -923,6 +923,7 @@ type MissionTaskModel struct {
 	Name *string `json:"name"`
 	Metadata *string `json:"metadata"`
 	CounterName *string `json:"counterName"`
+	TargetResetType *string `json:"targetResetType"`
 	TargetValue *int64 `json:"targetValue"`
 	CompleteAcquireActions []AcquireAction `json:"completeAcquireActions"`
 	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
@@ -941,6 +942,7 @@ func NewMissionTaskModelFromDict(data map[string]interface{}) MissionTaskModel {
         Name: core.CastString(data["name"]),
         Metadata: core.CastString(data["metadata"]),
         CounterName: core.CastString(data["counterName"]),
+        TargetResetType: core.CastString(data["targetResetType"]),
         TargetValue: core.CastInt64(data["targetValue"]),
         CompleteAcquireActions: CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
         ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
@@ -966,6 +968,10 @@ func (p MissionTaskModel) ToDict() map[string]interface{} {
     if p.CounterName != nil {
         counterName = p.CounterName
     }
+    var targetResetType *string
+    if p.TargetResetType != nil {
+        targetResetType = p.TargetResetType
+    }
     var targetValue *int64
     if p.TargetValue != nil {
         targetValue = p.TargetValue
@@ -989,6 +995,7 @@ func (p MissionTaskModel) ToDict() map[string]interface{} {
         "name": name,
         "metadata": metadata,
         "counterName": counterName,
+        "targetResetType": targetResetType,
         "targetValue": targetValue,
         "completeAcquireActions": completeAcquireActions,
         "challengePeriodEventId": challengePeriodEventId,
@@ -1090,6 +1097,7 @@ type MissionTaskModelMaster struct {
 	Metadata *string `json:"metadata"`
 	Description *string `json:"description"`
 	CounterName *string `json:"counterName"`
+	TargetResetType *string `json:"targetResetType"`
 	TargetValue *int64 `json:"targetValue"`
 	CompleteAcquireActions []AcquireAction `json:"completeAcquireActions"`
 	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
@@ -1111,6 +1119,7 @@ func NewMissionTaskModelMasterFromDict(data map[string]interface{}) MissionTaskM
         Metadata: core.CastString(data["metadata"]),
         Description: core.CastString(data["description"]),
         CounterName: core.CastString(data["counterName"]),
+        TargetResetType: core.CastString(data["targetResetType"]),
         TargetValue: core.CastInt64(data["targetValue"]),
         CompleteAcquireActions: CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
         ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
@@ -1141,6 +1150,10 @@ func (p MissionTaskModelMaster) ToDict() map[string]interface{} {
     var counterName *string
     if p.CounterName != nil {
         counterName = p.CounterName
+    }
+    var targetResetType *string
+    if p.TargetResetType != nil {
+        targetResetType = p.TargetResetType
     }
     var targetValue *int64
     if p.TargetValue != nil {
@@ -1174,6 +1187,7 @@ func (p MissionTaskModelMaster) ToDict() map[string]interface{} {
         "metadata": metadata,
         "description": description,
         "counterName": counterName,
+        "targetResetType": targetResetType,
         "targetValue": targetValue,
         "completeAcquireActions": completeAcquireActions,
         "challengePeriodEventId": challengePeriodEventId,

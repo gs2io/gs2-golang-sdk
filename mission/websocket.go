@@ -3948,6 +3948,9 @@ func (p Gs2MissionWebSocketClient) CreateMissionTaskModelMasterAsync(
     if request.CounterName != nil && *request.CounterName != "" {
         bodies["counterName"] = *request.CounterName
     }
+    if request.TargetResetType != nil && *request.TargetResetType != "" {
+        bodies["targetResetType"] = *request.TargetResetType
+    }
     if request.TargetValue != nil {
         bodies["targetValue"] = *request.TargetValue
     }
@@ -4146,6 +4149,9 @@ func (p Gs2MissionWebSocketClient) UpdateMissionTaskModelMasterAsync(
     }
     if request.CounterName != nil && *request.CounterName != "" {
         bodies["counterName"] = *request.CounterName
+    }
+    if request.TargetResetType != nil && *request.TargetResetType != "" {
+        bodies["targetResetType"] = *request.TargetResetType
     }
     if request.TargetValue != nil {
         bodies["targetValue"] = *request.TargetValue
