@@ -1011,6 +1011,68 @@ func (p ReDrawBalanceParameterStatusByStampSheetResult) Pointer() *ReDrawBalance
     return &p
 }
 
+type SetBalanceParameterStatusByUserIdResult struct {
+    Item *BalanceParameterStatus `json:"item"`
+}
+
+type SetBalanceParameterStatusByUserIdAsyncResult struct {
+	result *SetBalanceParameterStatusByUserIdResult
+	err    error
+}
+
+func NewSetBalanceParameterStatusByUserIdResultFromJson(data string) SetBalanceParameterStatusByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetBalanceParameterStatusByUserIdResultFromDict(dict)
+}
+
+func NewSetBalanceParameterStatusByUserIdResultFromDict(data map[string]interface{}) SetBalanceParameterStatusByUserIdResult {
+    return SetBalanceParameterStatusByUserIdResult {
+        Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p SetBalanceParameterStatusByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p SetBalanceParameterStatusByUserIdResult) Pointer() *SetBalanceParameterStatusByUserIdResult {
+    return &p
+}
+
+type SetBalanceParameterStatusByStampSheetResult struct {
+    Item *BalanceParameterStatus `json:"item"`
+}
+
+type SetBalanceParameterStatusByStampSheetAsyncResult struct {
+	result *SetBalanceParameterStatusByStampSheetResult
+	err    error
+}
+
+func NewSetBalanceParameterStatusByStampSheetResultFromJson(data string) SetBalanceParameterStatusByStampSheetResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetBalanceParameterStatusByStampSheetResultFromDict(dict)
+}
+
+func NewSetBalanceParameterStatusByStampSheetResultFromDict(data map[string]interface{}) SetBalanceParameterStatusByStampSheetResult {
+    return SetBalanceParameterStatusByStampSheetResult {
+        Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p SetBalanceParameterStatusByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p SetBalanceParameterStatusByStampSheetResult) Pointer() *SetBalanceParameterStatusByStampSheetResult {
+    return &p
+}
+
 type DescribeRarityParameterStatusesResult struct {
     Items []RarityParameterStatus `json:"items"`
     NextPageToken *string `json:"nextPageToken"`
@@ -1393,5 +1455,67 @@ func (p VerifyRarityParameterStatusByStampTaskResult) ToDict() map[string]interf
 }
 
 func (p VerifyRarityParameterStatusByStampTaskResult) Pointer() *VerifyRarityParameterStatusByStampTaskResult {
+    return &p
+}
+
+type SetRarityParameterStatusByUserIdResult struct {
+    Item *RarityParameterStatus `json:"item"`
+}
+
+type SetRarityParameterStatusByUserIdAsyncResult struct {
+	result *SetRarityParameterStatusByUserIdResult
+	err    error
+}
+
+func NewSetRarityParameterStatusByUserIdResultFromJson(data string) SetRarityParameterStatusByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetRarityParameterStatusByUserIdResultFromDict(dict)
+}
+
+func NewSetRarityParameterStatusByUserIdResultFromDict(data map[string]interface{}) SetRarityParameterStatusByUserIdResult {
+    return SetRarityParameterStatusByUserIdResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p SetRarityParameterStatusByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p SetRarityParameterStatusByUserIdResult) Pointer() *SetRarityParameterStatusByUserIdResult {
+    return &p
+}
+
+type SetRarityParameterStatusByStampSheetResult struct {
+    Item *RarityParameterStatus `json:"item"`
+}
+
+type SetRarityParameterStatusByStampSheetAsyncResult struct {
+	result *SetRarityParameterStatusByStampSheetResult
+	err    error
+}
+
+func NewSetRarityParameterStatusByStampSheetResultFromJson(data string) SetRarityParameterStatusByStampSheetResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetRarityParameterStatusByStampSheetResultFromDict(dict)
+}
+
+func NewSetRarityParameterStatusByStampSheetResultFromDict(data map[string]interface{}) SetRarityParameterStatusByStampSheetResult {
+    return SetRarityParameterStatusByStampSheetResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p SetRarityParameterStatusByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p SetRarityParameterStatusByStampSheetResult) Pointer() *SetRarityParameterStatusByStampSheetResult {
     return &p
 }

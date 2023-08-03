@@ -2927,6 +2927,206 @@ func (p Gs2EnchantRestClient) ReDrawBalanceParameterStatusByStampSheet(
 	return asyncResult.result, asyncResult.err
 }
 
+func setBalanceParameterStatusByUserIdAsyncHandler(
+	client Gs2EnchantRestClient,
+	job *core.NetworkJob,
+	callback chan<- SetBalanceParameterStatusByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetBalanceParameterStatusByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetBalanceParameterStatusByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- SetBalanceParameterStatusByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetBalanceParameterStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- SetBalanceParameterStatusByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnchantRestClient) SetBalanceParameterStatusByUserIdAsync(
+	request *SetBalanceParameterStatusByUserIdRequest,
+	callback chan<- SetBalanceParameterStatusByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/status/balance/{parameterName}/{propertyId}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.ParameterValues != nil {
+        var _parameterValues []interface {}
+        for _, item := range request.ParameterValues {
+            _parameterValues = append(_parameterValues, item)
+        }
+        bodies["parameterValues"] = _parameterValues
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go setBalanceParameterStatusByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnchantRestClient) SetBalanceParameterStatusByUserId(
+	request *SetBalanceParameterStatusByUserIdRequest,
+) (*SetBalanceParameterStatusByUserIdResult, error) {
+	callback := make(chan SetBalanceParameterStatusByUserIdAsyncResult, 1)
+	go p.SetBalanceParameterStatusByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func setBalanceParameterStatusByStampSheetAsyncHandler(
+	client Gs2EnchantRestClient,
+	job *core.NetworkJob,
+	callback chan<- SetBalanceParameterStatusByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetBalanceParameterStatusByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetBalanceParameterStatusByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- SetBalanceParameterStatusByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetBalanceParameterStatusByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- SetBalanceParameterStatusByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnchantRestClient) SetBalanceParameterStatusByStampSheetAsync(
+	request *SetBalanceParameterStatusByStampSheetRequest,
+	callback chan<- SetBalanceParameterStatusByStampSheetAsyncResult,
+) {
+	path := "/stamp/balance/set"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go setBalanceParameterStatusByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnchantRestClient) SetBalanceParameterStatusByStampSheet(
+	request *SetBalanceParameterStatusByStampSheetRequest,
+) (*SetBalanceParameterStatusByStampSheetResult, error) {
+	callback := make(chan SetBalanceParameterStatusByStampSheetAsyncResult, 1)
+	go p.SetBalanceParameterStatusByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describeRarityParameterStatusesAsyncHandler(
 	client Gs2EnchantRestClient,
 	job *core.NetworkJob,
@@ -4126,6 +4326,206 @@ func (p Gs2EnchantRestClient) VerifyRarityParameterStatusByStampTask(
 ) (*VerifyRarityParameterStatusByStampTaskResult, error) {
 	callback := make(chan VerifyRarityParameterStatusByStampTaskAsyncResult, 1)
 	go p.VerifyRarityParameterStatusByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func setRarityParameterStatusByUserIdAsyncHandler(
+	client Gs2EnchantRestClient,
+	job *core.NetworkJob,
+	callback chan<- SetRarityParameterStatusByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetRarityParameterStatusByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetRarityParameterStatusByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- SetRarityParameterStatusByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetRarityParameterStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- SetRarityParameterStatusByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnchantRestClient) SetRarityParameterStatusByUserIdAsync(
+	request *SetRarityParameterStatusByUserIdRequest,
+	callback chan<- SetRarityParameterStatusByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/status/rarity/{parameterName}/{propertyId}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.ParameterValues != nil {
+        var _parameterValues []interface {}
+        for _, item := range request.ParameterValues {
+            _parameterValues = append(_parameterValues, item)
+        }
+        bodies["parameterValues"] = _parameterValues
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go setRarityParameterStatusByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnchantRestClient) SetRarityParameterStatusByUserId(
+	request *SetRarityParameterStatusByUserIdRequest,
+) (*SetRarityParameterStatusByUserIdResult, error) {
+	callback := make(chan SetRarityParameterStatusByUserIdAsyncResult, 1)
+	go p.SetRarityParameterStatusByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func setRarityParameterStatusByStampSheetAsyncHandler(
+	client Gs2EnchantRestClient,
+	job *core.NetworkJob,
+	callback chan<- SetRarityParameterStatusByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetRarityParameterStatusByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetRarityParameterStatusByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- SetRarityParameterStatusByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetRarityParameterStatusByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- SetRarityParameterStatusByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnchantRestClient) SetRarityParameterStatusByStampSheetAsync(
+	request *SetRarityParameterStatusByStampSheetRequest,
+	callback chan<- SetRarityParameterStatusByStampSheetAsyncResult,
+) {
+	path := "/stamp/rarity/parameter/set"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go setRarityParameterStatusByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnchantRestClient) SetRarityParameterStatusByStampSheet(
+	request *SetRarityParameterStatusByStampSheetRequest,
+) (*SetRarityParameterStatusByStampSheetResult, error) {
+	callback := make(chan SetRarityParameterStatusByStampSheetAsyncResult, 1)
+	go p.SetRarityParameterStatusByStampSheetAsync(
 		request,
 		callback,
 	)

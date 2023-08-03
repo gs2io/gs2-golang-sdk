@@ -1100,6 +1100,80 @@ func (p ReDrawBalanceParameterStatusByStampSheetRequest) Pointer() *ReDrawBalanc
     return &p
 }
 
+type SetBalanceParameterStatusByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    ParameterName *string `json:"parameterName"`
+    PropertyId *string `json:"propertyId"`
+    ParameterValues []BalanceParameterValue `json:"parameterValues"`
+}
+
+func NewSetBalanceParameterStatusByUserIdRequestFromJson(data string) SetBalanceParameterStatusByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetBalanceParameterStatusByUserIdRequestFromDict(dict)
+}
+
+func NewSetBalanceParameterStatusByUserIdRequestFromDict(data map[string]interface{}) SetBalanceParameterStatusByUserIdRequest {
+    return SetBalanceParameterStatusByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        ParameterName: core.CastString(data["parameterName"]),
+        PropertyId: core.CastString(data["propertyId"]),
+        ParameterValues: CastBalanceParameterValues(core.CastArray(data["parameterValues"])),
+    }
+}
+
+func (p SetBalanceParameterStatusByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "parameterName": p.ParameterName,
+        "propertyId": p.PropertyId,
+        "parameterValues": CastBalanceParameterValuesFromDict(
+            p.ParameterValues,
+        ),
+    }
+}
+
+func (p SetBalanceParameterStatusByUserIdRequest) Pointer() *SetBalanceParameterStatusByUserIdRequest {
+    return &p
+}
+
+type SetBalanceParameterStatusByStampSheetRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewSetBalanceParameterStatusByStampSheetRequestFromJson(data string) SetBalanceParameterStatusByStampSheetRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetBalanceParameterStatusByStampSheetRequestFromDict(dict)
+}
+
+func NewSetBalanceParameterStatusByStampSheetRequestFromDict(data map[string]interface{}) SetBalanceParameterStatusByStampSheetRequest {
+    return SetBalanceParameterStatusByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p SetBalanceParameterStatusByStampSheetRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p SetBalanceParameterStatusByStampSheetRequest) Pointer() *SetBalanceParameterStatusByStampSheetRequest {
+    return &p
+}
+
 type DescribeRarityParameterStatusesRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
@@ -1560,5 +1634,79 @@ func (p VerifyRarityParameterStatusByStampTaskRequest) ToDict() map[string]inter
 }
 
 func (p VerifyRarityParameterStatusByStampTaskRequest) Pointer() *VerifyRarityParameterStatusByStampTaskRequest {
+    return &p
+}
+
+type SetRarityParameterStatusByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    ParameterName *string `json:"parameterName"`
+    PropertyId *string `json:"propertyId"`
+    ParameterValues []RarityParameterValue `json:"parameterValues"`
+}
+
+func NewSetRarityParameterStatusByUserIdRequestFromJson(data string) SetRarityParameterStatusByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetRarityParameterStatusByUserIdRequestFromDict(dict)
+}
+
+func NewSetRarityParameterStatusByUserIdRequestFromDict(data map[string]interface{}) SetRarityParameterStatusByUserIdRequest {
+    return SetRarityParameterStatusByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        ParameterName: core.CastString(data["parameterName"]),
+        PropertyId: core.CastString(data["propertyId"]),
+        ParameterValues: CastRarityParameterValues(core.CastArray(data["parameterValues"])),
+    }
+}
+
+func (p SetRarityParameterStatusByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "parameterName": p.ParameterName,
+        "propertyId": p.PropertyId,
+        "parameterValues": CastRarityParameterValuesFromDict(
+            p.ParameterValues,
+        ),
+    }
+}
+
+func (p SetRarityParameterStatusByUserIdRequest) Pointer() *SetRarityParameterStatusByUserIdRequest {
+    return &p
+}
+
+type SetRarityParameterStatusByStampSheetRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewSetRarityParameterStatusByStampSheetRequestFromJson(data string) SetRarityParameterStatusByStampSheetRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetRarityParameterStatusByStampSheetRequestFromDict(dict)
+}
+
+func NewSetRarityParameterStatusByStampSheetRequestFromDict(data map[string]interface{}) SetRarityParameterStatusByStampSheetRequest {
+    return SetRarityParameterStatusByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p SetRarityParameterStatusByStampSheetRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p SetRarityParameterStatusByStampSheetRequest) Pointer() *SetRarityParameterStatusByStampSheetRequest {
     return &p
 }
