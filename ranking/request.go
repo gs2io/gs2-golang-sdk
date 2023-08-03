@@ -313,6 +313,7 @@ type CreateCategoryModelMasterRequest struct {
     CalculateFixedTimingHour *int32 `json:"calculateFixedTimingHour"`
     CalculateFixedTimingMinute *int32 `json:"calculateFixedTimingMinute"`
     CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
+    AdditionalScopes []Scope `json:"additionalScopes"`
     EntryPeriodEventId *string `json:"entryPeriodEventId"`
     AccessPeriodEventId *string `json:"accessPeriodEventId"`
     IgnoreUserIds []*string `json:"ignoreUserIds"`
@@ -340,6 +341,7 @@ func NewCreateCategoryModelMasterRequestFromDict(data map[string]interface{}) Cr
         CalculateFixedTimingHour: core.CastInt32(data["calculateFixedTimingHour"]),
         CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
         CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
+        AdditionalScopes: CastScopes(core.CastArray(data["additionalScopes"])),
         EntryPeriodEventId: core.CastString(data["entryPeriodEventId"]),
         AccessPeriodEventId: core.CastString(data["accessPeriodEventId"]),
         IgnoreUserIds: core.CastStrings(core.CastArray(data["ignoreUserIds"])),
@@ -362,6 +364,9 @@ func (p CreateCategoryModelMasterRequest) ToDict() map[string]interface{} {
         "calculateFixedTimingHour": p.CalculateFixedTimingHour,
         "calculateFixedTimingMinute": p.CalculateFixedTimingMinute,
         "calculateIntervalMinutes": p.CalculateIntervalMinutes,
+        "additionalScopes": CastScopesFromDict(
+            p.AdditionalScopes,
+        ),
         "entryPeriodEventId": p.EntryPeriodEventId,
         "accessPeriodEventId": p.AccessPeriodEventId,
         "ignoreUserIds": core.CastStringsFromDict(
@@ -422,6 +427,7 @@ type UpdateCategoryModelMasterRequest struct {
     CalculateFixedTimingHour *int32 `json:"calculateFixedTimingHour"`
     CalculateFixedTimingMinute *int32 `json:"calculateFixedTimingMinute"`
     CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
+    AdditionalScopes []Scope `json:"additionalScopes"`
     EntryPeriodEventId *string `json:"entryPeriodEventId"`
     AccessPeriodEventId *string `json:"accessPeriodEventId"`
     IgnoreUserIds []*string `json:"ignoreUserIds"`
@@ -449,6 +455,7 @@ func NewUpdateCategoryModelMasterRequestFromDict(data map[string]interface{}) Up
         CalculateFixedTimingHour: core.CastInt32(data["calculateFixedTimingHour"]),
         CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
         CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
+        AdditionalScopes: CastScopes(core.CastArray(data["additionalScopes"])),
         EntryPeriodEventId: core.CastString(data["entryPeriodEventId"]),
         AccessPeriodEventId: core.CastString(data["accessPeriodEventId"]),
         IgnoreUserIds: core.CastStrings(core.CastArray(data["ignoreUserIds"])),
@@ -471,6 +478,9 @@ func (p UpdateCategoryModelMasterRequest) ToDict() map[string]interface{} {
         "calculateFixedTimingHour": p.CalculateFixedTimingHour,
         "calculateFixedTimingMinute": p.CalculateFixedTimingMinute,
         "calculateIntervalMinutes": p.CalculateIntervalMinutes,
+        "additionalScopes": CastScopesFromDict(
+            p.AdditionalScopes,
+        ),
         "entryPeriodEventId": p.EntryPeriodEventId,
         "accessPeriodEventId": p.AccessPeriodEventId,
         "ignoreUserIds": core.CastStringsFromDict(
@@ -763,6 +773,7 @@ type DescribeRankingsRequest struct {
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     AccessToken *string `json:"accessToken"`
+    AdditionalScopeName *string `json:"additionalScopeName"`
     StartIndex *int64 `json:"startIndex"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -779,6 +790,7 @@ func NewDescribeRankingsRequestFromDict(data map[string]interface{}) DescribeRan
         NamespaceName: core.CastString(data["namespaceName"]),
         CategoryName: core.CastString(data["categoryName"]),
         AccessToken: core.CastString(data["accessToken"]),
+        AdditionalScopeName: core.CastString(data["additionalScopeName"]),
         StartIndex: core.CastInt64(data["startIndex"]),
         PageToken: core.CastString(data["pageToken"]),
         Limit: core.CastInt32(data["limit"]),
@@ -790,6 +802,7 @@ func (p DescribeRankingsRequest) ToDict() map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "categoryName": p.CategoryName,
         "accessToken": p.AccessToken,
+        "additionalScopeName": p.AdditionalScopeName,
         "startIndex": p.StartIndex,
         "pageToken": p.PageToken,
         "limit": p.Limit,
@@ -806,6 +819,7 @@ type DescribeRankingssByUserIdRequest struct {
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
     UserId *string `json:"userId"`
+    AdditionalScopeName *string `json:"additionalScopeName"`
     StartIndex *int64 `json:"startIndex"`
     PageToken *string `json:"pageToken"`
     Limit *int32 `json:"limit"`
@@ -822,6 +836,7 @@ func NewDescribeRankingssByUserIdRequestFromDict(data map[string]interface{}) De
         NamespaceName: core.CastString(data["namespaceName"]),
         CategoryName: core.CastString(data["categoryName"]),
         UserId: core.CastString(data["userId"]),
+        AdditionalScopeName: core.CastString(data["additionalScopeName"]),
         StartIndex: core.CastInt64(data["startIndex"]),
         PageToken: core.CastString(data["pageToken"]),
         Limit: core.CastInt32(data["limit"]),
@@ -833,6 +848,7 @@ func (p DescribeRankingssByUserIdRequest) ToDict() map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "categoryName": p.CategoryName,
         "userId": p.UserId,
+        "additionalScopeName": p.AdditionalScopeName,
         "startIndex": p.StartIndex,
         "pageToken": p.PageToken,
         "limit": p.Limit,
@@ -848,6 +864,7 @@ type DescribeNearRankingsRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
+    AdditionalScopeName *string `json:"additionalScopeName"`
     Score *int64 `json:"score"`
 }
 
@@ -861,6 +878,7 @@ func NewDescribeNearRankingsRequestFromDict(data map[string]interface{}) Describ
     return DescribeNearRankingsRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         CategoryName: core.CastString(data["categoryName"]),
+        AdditionalScopeName: core.CastString(data["additionalScopeName"]),
         Score: core.CastInt64(data["score"]),
     }
 }
@@ -869,6 +887,7 @@ func (p DescribeNearRankingsRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "categoryName": p.CategoryName,
+        "additionalScopeName": p.AdditionalScopeName,
         "score": p.Score,
     }
 }
@@ -885,6 +904,7 @@ type GetRankingRequest struct {
     AccessToken *string `json:"accessToken"`
     ScorerUserId *string `json:"scorerUserId"`
     UniqueId *string `json:"uniqueId"`
+    AdditionalScopeName *string `json:"additionalScopeName"`
 }
 
 func NewGetRankingRequestFromJson(data string) GetRankingRequest {
@@ -900,6 +920,7 @@ func NewGetRankingRequestFromDict(data map[string]interface{}) GetRankingRequest
         AccessToken: core.CastString(data["accessToken"]),
         ScorerUserId: core.CastString(data["scorerUserId"]),
         UniqueId: core.CastString(data["uniqueId"]),
+        AdditionalScopeName: core.CastString(data["additionalScopeName"]),
     }
 }
 
@@ -910,6 +931,7 @@ func (p GetRankingRequest) ToDict() map[string]interface{} {
         "accessToken": p.AccessToken,
         "scorerUserId": p.ScorerUserId,
         "uniqueId": p.UniqueId,
+        "additionalScopeName": p.AdditionalScopeName,
     }
 }
 
@@ -925,6 +947,7 @@ type GetRankingByUserIdRequest struct {
     UserId *string `json:"userId"`
     ScorerUserId *string `json:"scorerUserId"`
     UniqueId *string `json:"uniqueId"`
+    AdditionalScopeName *string `json:"additionalScopeName"`
 }
 
 func NewGetRankingByUserIdRequestFromJson(data string) GetRankingByUserIdRequest {
@@ -940,6 +963,7 @@ func NewGetRankingByUserIdRequestFromDict(data map[string]interface{}) GetRankin
         UserId: core.CastString(data["userId"]),
         ScorerUserId: core.CastString(data["scorerUserId"]),
         UniqueId: core.CastString(data["uniqueId"]),
+        AdditionalScopeName: core.CastString(data["additionalScopeName"]),
     }
 }
 
@@ -950,6 +974,7 @@ func (p GetRankingByUserIdRequest) ToDict() map[string]interface{} {
         "userId": p.UserId,
         "scorerUserId": p.ScorerUserId,
         "uniqueId": p.UniqueId,
+        "additionalScopeName": p.AdditionalScopeName,
     }
 }
 
@@ -1044,6 +1069,7 @@ type CalcRankingRequest struct {
     ContextStack *string `json:"contextStack"`
     NamespaceName *string `json:"namespaceName"`
     CategoryName *string `json:"categoryName"`
+    AdditionalScopeName *string `json:"additionalScopeName"`
 }
 
 func NewCalcRankingRequestFromJson(data string) CalcRankingRequest {
@@ -1056,6 +1082,7 @@ func NewCalcRankingRequestFromDict(data map[string]interface{}) CalcRankingReque
     return CalcRankingRequest {
         NamespaceName: core.CastString(data["namespaceName"]),
         CategoryName: core.CastString(data["categoryName"]),
+        AdditionalScopeName: core.CastString(data["additionalScopeName"]),
     }
 }
 
@@ -1063,6 +1090,7 @@ func (p CalcRankingRequest) ToDict() map[string]interface{} {
     return map[string]interface{} {
         "namespaceName": p.NamespaceName,
         "categoryName": p.CategoryName,
+        "additionalScopeName": p.AdditionalScopeName,
     }
 }
 

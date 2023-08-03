@@ -875,6 +875,13 @@ func (p Gs2RankingWebSocketClient) CreateCategoryModelMasterAsync(
     if request.CalculateIntervalMinutes != nil {
         bodies["calculateIntervalMinutes"] = *request.CalculateIntervalMinutes
     }
+    if request.AdditionalScopes != nil {
+        var _additionalScopes []interface {}
+        for _, item := range request.AdditionalScopes {
+            _additionalScopes = append(_additionalScopes, item)
+        }
+        bodies["additionalScopes"] = _additionalScopes
+    }
     if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
         bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
     }
@@ -1091,6 +1098,13 @@ func (p Gs2RankingWebSocketClient) UpdateCategoryModelMasterAsync(
     }
     if request.CalculateIntervalMinutes != nil {
         bodies["calculateIntervalMinutes"] = *request.CalculateIntervalMinutes
+    }
+    if request.AdditionalScopes != nil {
+        var _additionalScopes []interface {}
+        for _, item := range request.AdditionalScopes {
+            _additionalScopes = append(_additionalScopes, item)
+        }
+        bodies["additionalScopes"] = _additionalScopes
     }
     if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
         bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
@@ -1852,6 +1866,9 @@ func (p Gs2RankingWebSocketClient) DescribeRankingsAsync(
     if request.AccessToken != nil && *request.AccessToken != "" {
         bodies["accessToken"] = *request.AccessToken
     }
+    if request.AdditionalScopeName != nil && *request.AdditionalScopeName != "" {
+        bodies["additionalScopeName"] = *request.AdditionalScopeName
+    }
     if request.StartIndex != nil {
         bodies["startIndex"] = *request.StartIndex
     }
@@ -1951,6 +1968,9 @@ func (p Gs2RankingWebSocketClient) DescribeRankingssByUserIdAsync(
     if request.UserId != nil && *request.UserId != "" {
         bodies["userId"] = *request.UserId
     }
+    if request.AdditionalScopeName != nil && *request.AdditionalScopeName != "" {
+        bodies["additionalScopeName"] = *request.AdditionalScopeName
+    }
     if request.StartIndex != nil {
         bodies["startIndex"] = *request.StartIndex
     }
@@ -2043,6 +2063,9 @@ func (p Gs2RankingWebSocketClient) DescribeNearRankingsAsync(
     }
     if request.CategoryName != nil && *request.CategoryName != "" {
         bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AdditionalScopeName != nil && *request.AdditionalScopeName != "" {
+        bodies["additionalScopeName"] = *request.AdditionalScopeName
     }
     if request.Score != nil {
         bodies["score"] = *request.Score
@@ -2140,6 +2163,9 @@ func (p Gs2RankingWebSocketClient) GetRankingAsync(
     if request.UniqueId != nil && *request.UniqueId != "" {
         bodies["uniqueId"] = *request.UniqueId
     }
+    if request.AdditionalScopeName != nil && *request.AdditionalScopeName != "" {
+        bodies["additionalScopeName"] = *request.AdditionalScopeName
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}
@@ -2235,6 +2261,9 @@ func (p Gs2RankingWebSocketClient) GetRankingByUserIdAsync(
     }
     if request.UniqueId != nil && *request.UniqueId != "" {
         bodies["uniqueId"] = *request.UniqueId
+    }
+    if request.AdditionalScopeName != nil && *request.AdditionalScopeName != "" {
+        bodies["additionalScopeName"] = *request.AdditionalScopeName
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
@@ -2514,6 +2543,9 @@ func (p Gs2RankingWebSocketClient) CalcRankingAsync(
     }
     if request.CategoryName != nil && *request.CategoryName != "" {
         bodies["categoryName"] = *request.CategoryName
+    }
+    if request.AdditionalScopeName != nil && *request.AdditionalScopeName != "" {
+        bodies["additionalScopeName"] = *request.AdditionalScopeName
     }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;

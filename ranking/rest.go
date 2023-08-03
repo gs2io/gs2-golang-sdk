@@ -904,6 +904,13 @@ func (p Gs2RankingRestClient) CreateCategoryModelMasterAsync(
     if request.CalculateIntervalMinutes != nil {
         bodies["calculateIntervalMinutes"] = *request.CalculateIntervalMinutes
     }
+    if request.AdditionalScopes != nil {
+        var _additionalScopes []interface {}
+        for _, item := range request.AdditionalScopes {
+            _additionalScopes = append(_additionalScopes, item)
+        }
+        bodies["additionalScopes"] = _additionalScopes
+    }
     if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
         bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
     }
@@ -1133,6 +1140,13 @@ func (p Gs2RankingRestClient) UpdateCategoryModelMasterAsync(
     }
     if request.CalculateIntervalMinutes != nil {
         bodies["calculateIntervalMinutes"] = *request.CalculateIntervalMinutes
+    }
+    if request.AdditionalScopes != nil {
+        var _additionalScopes []interface {}
+        for _, item := range request.AdditionalScopes {
+            _additionalScopes = append(_additionalScopes, item)
+        }
+        bodies["additionalScopes"] = _additionalScopes
     }
     if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
         bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
@@ -1953,6 +1967,9 @@ func (p Gs2RankingRestClient) DescribeRankingsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.AdditionalScopeName != nil {
+		queryStrings["additionalScopeName"] = core.ToString(*request.AdditionalScopeName)
+	}
 	if request.StartIndex != nil {
 		queryStrings["startIndex"] = core.ToString(*request.StartIndex)
 	}
@@ -2059,6 +2076,9 @@ func (p Gs2RankingRestClient) DescribeRankingssByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.AdditionalScopeName != nil {
+		queryStrings["additionalScopeName"] = core.ToString(*request.AdditionalScopeName)
+	}
 	if request.StartIndex != nil {
 		queryStrings["startIndex"] = core.ToString(*request.StartIndex)
 	}
@@ -2157,6 +2177,9 @@ func (p Gs2RankingRestClient) DescribeNearRankingsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.AdditionalScopeName != nil {
+		queryStrings["additionalScopeName"] = core.ToString(*request.AdditionalScopeName)
+	}
 	if request.Score != nil {
 		queryStrings["score"] = core.ToString(*request.Score)
 	}
@@ -2259,6 +2282,9 @@ func (p Gs2RankingRestClient) GetRankingAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.AdditionalScopeName != nil {
+		queryStrings["additionalScopeName"] = core.ToString(*request.AdditionalScopeName)
+	}
 
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
@@ -2366,6 +2392,9 @@ func (p Gs2RankingRestClient) GetRankingByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.AdditionalScopeName != nil {
+		queryStrings["additionalScopeName"] = core.ToString(*request.AdditionalScopeName)
+	}
 
     headers := p.CreateAuthorizedHeaders()
     if request.RequestId != nil {
@@ -2665,6 +2694,9 @@ func (p Gs2RankingRestClient) CalcRankingAsync(
 
 	replacer := strings.NewReplacer()
     var bodies = core.Bodies{}
+    if request.AdditionalScopeName != nil && *request.AdditionalScopeName != "" {
+        bodies["additionalScopeName"] = *request.AdditionalScopeName
+    }
 	if request.ContextStack != nil {
     	bodies["contextStack"] = *request.ContextStack;
 	}

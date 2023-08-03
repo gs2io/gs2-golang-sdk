@@ -125,6 +125,7 @@ type CategoryModel struct {
 	CalculateFixedTimingHour *int32 `json:"calculateFixedTimingHour"`
 	CalculateFixedTimingMinute *int32 `json:"calculateFixedTimingMinute"`
 	CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
+	AdditionalScopes []Scope `json:"additionalScopes"`
 	EntryPeriodEventId *string `json:"entryPeriodEventId"`
 	AccessPeriodEventId *string `json:"accessPeriodEventId"`
 	IgnoreUserIds []*string `json:"ignoreUserIds"`
@@ -151,6 +152,7 @@ func NewCategoryModelFromDict(data map[string]interface{}) CategoryModel {
         CalculateFixedTimingHour: core.CastInt32(data["calculateFixedTimingHour"]),
         CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
         CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
+        AdditionalScopes: CastScopes(core.CastArray(data["additionalScopes"])),
         EntryPeriodEventId: core.CastString(data["entryPeriodEventId"]),
         AccessPeriodEventId: core.CastString(data["accessPeriodEventId"]),
         IgnoreUserIds: core.CastStrings(core.CastArray(data["ignoreUserIds"])),
@@ -208,6 +210,12 @@ func (p CategoryModel) ToDict() map[string]interface{} {
     if p.CalculateIntervalMinutes != nil {
         calculateIntervalMinutes = p.CalculateIntervalMinutes
     }
+    var additionalScopes []interface{}
+    if p.AdditionalScopes != nil {
+        additionalScopes = CastScopesFromDict(
+            p.AdditionalScopes,
+        )
+    }
     var entryPeriodEventId *string
     if p.EntryPeriodEventId != nil {
         entryPeriodEventId = p.EntryPeriodEventId
@@ -239,6 +247,7 @@ func (p CategoryModel) ToDict() map[string]interface{} {
         "calculateFixedTimingHour": calculateFixedTimingHour,
         "calculateFixedTimingMinute": calculateFixedTimingMinute,
         "calculateIntervalMinutes": calculateIntervalMinutes,
+        "additionalScopes": additionalScopes,
         "entryPeriodEventId": entryPeriodEventId,
         "accessPeriodEventId": accessPeriodEventId,
         "ignoreUserIds": ignoreUserIds,
@@ -280,6 +289,7 @@ type CategoryModelMaster struct {
 	CalculateFixedTimingHour *int32 `json:"calculateFixedTimingHour"`
 	CalculateFixedTimingMinute *int32 `json:"calculateFixedTimingMinute"`
 	CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
+	AdditionalScopes []Scope `json:"additionalScopes"`
 	EntryPeriodEventId *string `json:"entryPeriodEventId"`
 	AccessPeriodEventId *string `json:"accessPeriodEventId"`
 	IgnoreUserIds []*string `json:"ignoreUserIds"`
@@ -309,6 +319,7 @@ func NewCategoryModelMasterFromDict(data map[string]interface{}) CategoryModelMa
         CalculateFixedTimingHour: core.CastInt32(data["calculateFixedTimingHour"]),
         CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
         CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
+        AdditionalScopes: CastScopes(core.CastArray(data["additionalScopes"])),
         EntryPeriodEventId: core.CastString(data["entryPeriodEventId"]),
         AccessPeriodEventId: core.CastString(data["accessPeriodEventId"]),
         IgnoreUserIds: core.CastStrings(core.CastArray(data["ignoreUserIds"])),
@@ -372,6 +383,12 @@ func (p CategoryModelMaster) ToDict() map[string]interface{} {
     if p.CalculateIntervalMinutes != nil {
         calculateIntervalMinutes = p.CalculateIntervalMinutes
     }
+    var additionalScopes []interface{}
+    if p.AdditionalScopes != nil {
+        additionalScopes = CastScopesFromDict(
+            p.AdditionalScopes,
+        )
+    }
     var entryPeriodEventId *string
     if p.EntryPeriodEventId != nil {
         entryPeriodEventId = p.EntryPeriodEventId
@@ -412,6 +429,7 @@ func (p CategoryModelMaster) ToDict() map[string]interface{} {
         "calculateFixedTimingHour": calculateFixedTimingHour,
         "calculateFixedTimingMinute": calculateFixedTimingMinute,
         "calculateIntervalMinutes": calculateIntervalMinutes,
+        "additionalScopes": additionalScopes,
         "entryPeriodEventId": entryPeriodEventId,
         "accessPeriodEventId": accessPeriodEventId,
         "ignoreUserIds": ignoreUserIds,
@@ -705,6 +723,60 @@ func CastRankings(data []interface{}) []Ranking {
 }
 
 func CastRankingsFromDict(data []Ranking) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type Scope struct {
+	Name *string `json:"name"`
+	TargetDays *int64 `json:"targetDays"`
+}
+
+func NewScopeFromJson(data string) Scope {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewScopeFromDict(dict)
+}
+
+func NewScopeFromDict(data map[string]interface{}) Scope {
+    return Scope {
+        Name: core.CastString(data["name"]),
+        TargetDays: core.CastInt64(data["targetDays"]),
+    }
+}
+
+func (p Scope) ToDict() map[string]interface{} {
+    
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var targetDays *int64
+    if p.TargetDays != nil {
+        targetDays = p.TargetDays
+    }
+    return map[string]interface{} {
+        "name": name,
+        "targetDays": targetDays,
+    }
+}
+
+func (p Scope) Pointer() *Scope {
+    return &p
+}
+
+func CastScopes(data []interface{}) []Scope {
+	v := make([]Scope, 0)
+	for _, d := range data {
+		v = append(v, NewScopeFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScopesFromDict(data []Scope) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())
