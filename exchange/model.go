@@ -396,6 +396,7 @@ type IncrementalRateModel struct {
 	CoefficientValue *int64 `json:"coefficientValue"`
 	CalculateScriptId *string `json:"calculateScriptId"`
 	ExchangeCountId *string `json:"exchangeCountId"`
+	MaximumExchangeCount *int32 `json:"maximumExchangeCount"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
 }
 
@@ -416,6 +417,7 @@ func NewIncrementalRateModelFromDict(data map[string]interface{}) IncrementalRat
         CoefficientValue: core.CastInt64(data["coefficientValue"]),
         CalculateScriptId: core.CastString(data["calculateScriptId"]),
         ExchangeCountId: core.CastString(data["exchangeCountId"]),
+        MaximumExchangeCount: core.CastInt32(data["maximumExchangeCount"]),
         AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
     }
 }
@@ -458,6 +460,10 @@ func (p IncrementalRateModel) ToDict() map[string]interface{} {
     if p.ExchangeCountId != nil {
         exchangeCountId = p.ExchangeCountId
     }
+    var maximumExchangeCount *int32
+    if p.MaximumExchangeCount != nil {
+        maximumExchangeCount = p.MaximumExchangeCount
+    }
     var acquireActions []interface{}
     if p.AcquireActions != nil {
         acquireActions = CastAcquireActionsFromDict(
@@ -474,6 +480,7 @@ func (p IncrementalRateModel) ToDict() map[string]interface{} {
         "coefficientValue": coefficientValue,
         "calculateScriptId": calculateScriptId,
         "exchangeCountId": exchangeCountId,
+        "maximumExchangeCount": maximumExchangeCount,
         "acquireActions": acquireActions,
     }
 }
@@ -509,6 +516,7 @@ type IncrementalRateModelMaster struct {
 	CoefficientValue *int64 `json:"coefficientValue"`
 	CalculateScriptId *string `json:"calculateScriptId"`
 	ExchangeCountId *string `json:"exchangeCountId"`
+	MaximumExchangeCount *int32 `json:"maximumExchangeCount"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
@@ -532,6 +540,7 @@ func NewIncrementalRateModelMasterFromDict(data map[string]interface{}) Incremen
         CoefficientValue: core.CastInt64(data["coefficientValue"]),
         CalculateScriptId: core.CastString(data["calculateScriptId"]),
         ExchangeCountId: core.CastString(data["exchangeCountId"]),
+        MaximumExchangeCount: core.CastInt32(data["maximumExchangeCount"]),
         AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
@@ -580,6 +589,10 @@ func (p IncrementalRateModelMaster) ToDict() map[string]interface{} {
     if p.ExchangeCountId != nil {
         exchangeCountId = p.ExchangeCountId
     }
+    var maximumExchangeCount *int32
+    if p.MaximumExchangeCount != nil {
+        maximumExchangeCount = p.MaximumExchangeCount
+    }
     var acquireActions []interface{}
     if p.AcquireActions != nil {
         acquireActions = CastAcquireActionsFromDict(
@@ -605,6 +618,7 @@ func (p IncrementalRateModelMaster) ToDict() map[string]interface{} {
         "coefficientValue": coefficientValue,
         "calculateScriptId": calculateScriptId,
         "exchangeCountId": exchangeCountId,
+        "maximumExchangeCount": maximumExchangeCount,
         "acquireActions": acquireActions,
         "createdAt": createdAt,
         "updatedAt": updatedAt,

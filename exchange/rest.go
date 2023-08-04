@@ -1626,6 +1626,9 @@ func (p Gs2ExchangeRestClient) CreateIncrementalRateModelMasterAsync(
     if request.ExchangeCountId != nil && *request.ExchangeCountId != "" {
         bodies["exchangeCountId"] = *request.ExchangeCountId
     }
+    if request.MaximumExchangeCount != nil {
+        bodies["maximumExchangeCount"] = *request.MaximumExchangeCount
+    }
     if request.AcquireActions != nil {
         var _acquireActions []interface {}
         for _, item := range request.AcquireActions {
@@ -1837,6 +1840,9 @@ func (p Gs2ExchangeRestClient) UpdateIncrementalRateModelMasterAsync(
     }
     if request.ExchangeCountId != nil && *request.ExchangeCountId != "" {
         bodies["exchangeCountId"] = *request.ExchangeCountId
+    }
+    if request.MaximumExchangeCount != nil {
+        bodies["maximumExchangeCount"] = *request.MaximumExchangeCount
     }
     if request.AcquireActions != nil {
         var _acquireActions []interface {}
