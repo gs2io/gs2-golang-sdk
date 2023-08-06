@@ -2644,7 +2644,7 @@ func (p Gs2ShowcaseWebSocketClient) BuyAsync(
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "showcase",
-    		"component": "showcase",
+    		"component": "displayItem",
     		"function": "buy",
             "contentType": "application/json",
     		"requestId": requestId,
@@ -2750,7 +2750,7 @@ func (p Gs2ShowcaseWebSocketClient) BuyByUserIdAsync(
     var bodies = core.WebSocketBodies{
     	"x_gs2": map[string]interface{} {
     		"service": "showcase",
-    		"component": "showcase",
+    		"component": "displayItem",
     		"function": "buyByUserId",
             "contentType": "application/json",
     		"requestId": requestId,
