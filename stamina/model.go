@@ -714,7 +714,6 @@ func CastStaminaModelsFromDict(data []StaminaModel) []interface{} {
 }
 
 type MaxStaminaTable struct {
-	MaxStaminaTableId *string `json:"maxStaminaTableId"`
 	Name *string `json:"name"`
 	Metadata *string `json:"metadata"`
 	ExperienceModelId *string `json:"experienceModelId"`
@@ -729,7 +728,6 @@ func NewMaxStaminaTableFromJson(data string) MaxStaminaTable {
 
 func NewMaxStaminaTableFromDict(data map[string]interface{}) MaxStaminaTable {
     return MaxStaminaTable {
-        MaxStaminaTableId: core.CastString(data["maxStaminaTableId"]),
         Name: core.CastString(data["name"]),
         Metadata: core.CastString(data["metadata"]),
         ExperienceModelId: core.CastString(data["experienceModelId"]),
@@ -739,10 +737,6 @@ func NewMaxStaminaTableFromDict(data map[string]interface{}) MaxStaminaTable {
 
 func (p MaxStaminaTable) ToDict() map[string]interface{} {
     
-    var maxStaminaTableId *string
-    if p.MaxStaminaTableId != nil {
-        maxStaminaTableId = p.MaxStaminaTableId
-    }
     var name *string
     if p.Name != nil {
         name = p.Name
@@ -762,7 +756,6 @@ func (p MaxStaminaTable) ToDict() map[string]interface{} {
         )
     }
     return map[string]interface{} {
-        "maxStaminaTableId": maxStaminaTableId,
         "name": name,
         "metadata": metadata,
         "experienceModelId": experienceModelId,
@@ -791,7 +784,6 @@ func CastMaxStaminaTablesFromDict(data []MaxStaminaTable) []interface{} {
 }
 
 type RecoverIntervalTable struct {
-	RecoverIntervalTableId *string `json:"recoverIntervalTableId"`
 	Name *string `json:"name"`
 	Metadata *string `json:"metadata"`
 	ExperienceModelId *string `json:"experienceModelId"`
@@ -806,7 +798,6 @@ func NewRecoverIntervalTableFromJson(data string) RecoverIntervalTable {
 
 func NewRecoverIntervalTableFromDict(data map[string]interface{}) RecoverIntervalTable {
     return RecoverIntervalTable {
-        RecoverIntervalTableId: core.CastString(data["recoverIntervalTableId"]),
         Name: core.CastString(data["name"]),
         Metadata: core.CastString(data["metadata"]),
         ExperienceModelId: core.CastString(data["experienceModelId"]),
@@ -816,10 +807,6 @@ func NewRecoverIntervalTableFromDict(data map[string]interface{}) RecoverInterva
 
 func (p RecoverIntervalTable) ToDict() map[string]interface{} {
     
-    var recoverIntervalTableId *string
-    if p.RecoverIntervalTableId != nil {
-        recoverIntervalTableId = p.RecoverIntervalTableId
-    }
     var name *string
     if p.Name != nil {
         name = p.Name
@@ -839,7 +826,6 @@ func (p RecoverIntervalTable) ToDict() map[string]interface{} {
         )
     }
     return map[string]interface{} {
-        "recoverIntervalTableId": recoverIntervalTableId,
         "name": name,
         "metadata": metadata,
         "experienceModelId": experienceModelId,
@@ -868,7 +854,6 @@ func CastRecoverIntervalTablesFromDict(data []RecoverIntervalTable) []interface{
 }
 
 type RecoverValueTable struct {
-	RecoverValueTableId *string `json:"recoverValueTableId"`
 	Name *string `json:"name"`
 	Metadata *string `json:"metadata"`
 	ExperienceModelId *string `json:"experienceModelId"`
@@ -883,7 +868,6 @@ func NewRecoverValueTableFromJson(data string) RecoverValueTable {
 
 func NewRecoverValueTableFromDict(data map[string]interface{}) RecoverValueTable {
     return RecoverValueTable {
-        RecoverValueTableId: core.CastString(data["recoverValueTableId"]),
         Name: core.CastString(data["name"]),
         Metadata: core.CastString(data["metadata"]),
         ExperienceModelId: core.CastString(data["experienceModelId"]),
@@ -893,10 +877,6 @@ func NewRecoverValueTableFromDict(data map[string]interface{}) RecoverValueTable
 
 func (p RecoverValueTable) ToDict() map[string]interface{} {
     
-    var recoverValueTableId *string
-    if p.RecoverValueTableId != nil {
-        recoverValueTableId = p.RecoverValueTableId
-    }
     var name *string
     if p.Name != nil {
         name = p.Name
@@ -916,7 +896,6 @@ func (p RecoverValueTable) ToDict() map[string]interface{} {
         )
     }
     return map[string]interface{} {
-        "recoverValueTableId": recoverValueTableId,
         "name": name,
         "metadata": metadata,
         "experienceModelId": experienceModelId,
