@@ -1108,6 +1108,454 @@ func (p GetSimpleItemModelResult) Pointer() *GetSimpleItemModelResult {
     return &p
 }
 
+type DescribeBigInventoryModelMastersResult struct {
+    Items []BigInventoryModelMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeBigInventoryModelMastersAsyncResult struct {
+	result *DescribeBigInventoryModelMastersResult
+	err    error
+}
+
+func NewDescribeBigInventoryModelMastersResultFromJson(data string) DescribeBigInventoryModelMastersResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBigInventoryModelMastersResultFromDict(dict)
+}
+
+func NewDescribeBigInventoryModelMastersResultFromDict(data map[string]interface{}) DescribeBigInventoryModelMastersResult {
+    return DescribeBigInventoryModelMastersResult {
+        Items: CastBigInventoryModelMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeBigInventoryModelMastersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastBigInventoryModelMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeBigInventoryModelMastersResult) Pointer() *DescribeBigInventoryModelMastersResult {
+    return &p
+}
+
+type CreateBigInventoryModelMasterResult struct {
+    Item *BigInventoryModelMaster `json:"item"`
+}
+
+type CreateBigInventoryModelMasterAsyncResult struct {
+	result *CreateBigInventoryModelMasterResult
+	err    error
+}
+
+func NewCreateBigInventoryModelMasterResultFromJson(data string) CreateBigInventoryModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateBigInventoryModelMasterResultFromDict(dict)
+}
+
+func NewCreateBigInventoryModelMasterResultFromDict(data map[string]interface{}) CreateBigInventoryModelMasterResult {
+    return CreateBigInventoryModelMasterResult {
+        Item: NewBigInventoryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p CreateBigInventoryModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p CreateBigInventoryModelMasterResult) Pointer() *CreateBigInventoryModelMasterResult {
+    return &p
+}
+
+type GetBigInventoryModelMasterResult struct {
+    Item *BigInventoryModelMaster `json:"item"`
+}
+
+type GetBigInventoryModelMasterAsyncResult struct {
+	result *GetBigInventoryModelMasterResult
+	err    error
+}
+
+func NewGetBigInventoryModelMasterResultFromJson(data string) GetBigInventoryModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBigInventoryModelMasterResultFromDict(dict)
+}
+
+func NewGetBigInventoryModelMasterResultFromDict(data map[string]interface{}) GetBigInventoryModelMasterResult {
+    return GetBigInventoryModelMasterResult {
+        Item: NewBigInventoryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetBigInventoryModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetBigInventoryModelMasterResult) Pointer() *GetBigInventoryModelMasterResult {
+    return &p
+}
+
+type UpdateBigInventoryModelMasterResult struct {
+    Item *BigInventoryModelMaster `json:"item"`
+}
+
+type UpdateBigInventoryModelMasterAsyncResult struct {
+	result *UpdateBigInventoryModelMasterResult
+	err    error
+}
+
+func NewUpdateBigInventoryModelMasterResultFromJson(data string) UpdateBigInventoryModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateBigInventoryModelMasterResultFromDict(dict)
+}
+
+func NewUpdateBigInventoryModelMasterResultFromDict(data map[string]interface{}) UpdateBigInventoryModelMasterResult {
+    return UpdateBigInventoryModelMasterResult {
+        Item: NewBigInventoryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UpdateBigInventoryModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateBigInventoryModelMasterResult) Pointer() *UpdateBigInventoryModelMasterResult {
+    return &p
+}
+
+type DeleteBigInventoryModelMasterResult struct {
+    Item *BigInventoryModelMaster `json:"item"`
+}
+
+type DeleteBigInventoryModelMasterAsyncResult struct {
+	result *DeleteBigInventoryModelMasterResult
+	err    error
+}
+
+func NewDeleteBigInventoryModelMasterResultFromJson(data string) DeleteBigInventoryModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteBigInventoryModelMasterResultFromDict(dict)
+}
+
+func NewDeleteBigInventoryModelMasterResultFromDict(data map[string]interface{}) DeleteBigInventoryModelMasterResult {
+    return DeleteBigInventoryModelMasterResult {
+        Item: NewBigInventoryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p DeleteBigInventoryModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p DeleteBigInventoryModelMasterResult) Pointer() *DeleteBigInventoryModelMasterResult {
+    return &p
+}
+
+type DescribeBigInventoryModelsResult struct {
+    Items []BigInventoryModel `json:"items"`
+}
+
+type DescribeBigInventoryModelsAsyncResult struct {
+	result *DescribeBigInventoryModelsResult
+	err    error
+}
+
+func NewDescribeBigInventoryModelsResultFromJson(data string) DescribeBigInventoryModelsResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBigInventoryModelsResultFromDict(dict)
+}
+
+func NewDescribeBigInventoryModelsResultFromDict(data map[string]interface{}) DescribeBigInventoryModelsResult {
+    return DescribeBigInventoryModelsResult {
+        Items: CastBigInventoryModels(core.CastArray(data["items"])),
+    }
+}
+
+func (p DescribeBigInventoryModelsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastBigInventoryModelsFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p DescribeBigInventoryModelsResult) Pointer() *DescribeBigInventoryModelsResult {
+    return &p
+}
+
+type GetBigInventoryModelResult struct {
+    Item *BigInventoryModel `json:"item"`
+}
+
+type GetBigInventoryModelAsyncResult struct {
+	result *GetBigInventoryModelResult
+	err    error
+}
+
+func NewGetBigInventoryModelResultFromJson(data string) GetBigInventoryModelResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBigInventoryModelResultFromDict(dict)
+}
+
+func NewGetBigInventoryModelResultFromDict(data map[string]interface{}) GetBigInventoryModelResult {
+    return GetBigInventoryModelResult {
+        Item: NewBigInventoryModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetBigInventoryModelResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetBigInventoryModelResult) Pointer() *GetBigInventoryModelResult {
+    return &p
+}
+
+type DescribeBigItemModelMastersResult struct {
+    Items []BigItemModelMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeBigItemModelMastersAsyncResult struct {
+	result *DescribeBigItemModelMastersResult
+	err    error
+}
+
+func NewDescribeBigItemModelMastersResultFromJson(data string) DescribeBigItemModelMastersResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBigItemModelMastersResultFromDict(dict)
+}
+
+func NewDescribeBigItemModelMastersResultFromDict(data map[string]interface{}) DescribeBigItemModelMastersResult {
+    return DescribeBigItemModelMastersResult {
+        Items: CastBigItemModelMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeBigItemModelMastersResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastBigItemModelMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeBigItemModelMastersResult) Pointer() *DescribeBigItemModelMastersResult {
+    return &p
+}
+
+type CreateBigItemModelMasterResult struct {
+    Item *BigItemModelMaster `json:"item"`
+}
+
+type CreateBigItemModelMasterAsyncResult struct {
+	result *CreateBigItemModelMasterResult
+	err    error
+}
+
+func NewCreateBigItemModelMasterResultFromJson(data string) CreateBigItemModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateBigItemModelMasterResultFromDict(dict)
+}
+
+func NewCreateBigItemModelMasterResultFromDict(data map[string]interface{}) CreateBigItemModelMasterResult {
+    return CreateBigItemModelMasterResult {
+        Item: NewBigItemModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p CreateBigItemModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p CreateBigItemModelMasterResult) Pointer() *CreateBigItemModelMasterResult {
+    return &p
+}
+
+type GetBigItemModelMasterResult struct {
+    Item *BigItemModelMaster `json:"item"`
+}
+
+type GetBigItemModelMasterAsyncResult struct {
+	result *GetBigItemModelMasterResult
+	err    error
+}
+
+func NewGetBigItemModelMasterResultFromJson(data string) GetBigItemModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBigItemModelMasterResultFromDict(dict)
+}
+
+func NewGetBigItemModelMasterResultFromDict(data map[string]interface{}) GetBigItemModelMasterResult {
+    return GetBigItemModelMasterResult {
+        Item: NewBigItemModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetBigItemModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetBigItemModelMasterResult) Pointer() *GetBigItemModelMasterResult {
+    return &p
+}
+
+type UpdateBigItemModelMasterResult struct {
+    Item *BigItemModelMaster `json:"item"`
+}
+
+type UpdateBigItemModelMasterAsyncResult struct {
+	result *UpdateBigItemModelMasterResult
+	err    error
+}
+
+func NewUpdateBigItemModelMasterResultFromJson(data string) UpdateBigItemModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateBigItemModelMasterResultFromDict(dict)
+}
+
+func NewUpdateBigItemModelMasterResultFromDict(data map[string]interface{}) UpdateBigItemModelMasterResult {
+    return UpdateBigItemModelMasterResult {
+        Item: NewBigItemModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p UpdateBigItemModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p UpdateBigItemModelMasterResult) Pointer() *UpdateBigItemModelMasterResult {
+    return &p
+}
+
+type DeleteBigItemModelMasterResult struct {
+    Item *BigItemModelMaster `json:"item"`
+}
+
+type DeleteBigItemModelMasterAsyncResult struct {
+	result *DeleteBigItemModelMasterResult
+	err    error
+}
+
+func NewDeleteBigItemModelMasterResultFromJson(data string) DeleteBigItemModelMasterResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteBigItemModelMasterResultFromDict(dict)
+}
+
+func NewDeleteBigItemModelMasterResultFromDict(data map[string]interface{}) DeleteBigItemModelMasterResult {
+    return DeleteBigItemModelMasterResult {
+        Item: NewBigItemModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p DeleteBigItemModelMasterResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p DeleteBigItemModelMasterResult) Pointer() *DeleteBigItemModelMasterResult {
+    return &p
+}
+
+type DescribeBigItemModelsResult struct {
+    Items []BigItemModel `json:"items"`
+}
+
+type DescribeBigItemModelsAsyncResult struct {
+	result *DescribeBigItemModelsResult
+	err    error
+}
+
+func NewDescribeBigItemModelsResultFromJson(data string) DescribeBigItemModelsResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBigItemModelsResultFromDict(dict)
+}
+
+func NewDescribeBigItemModelsResultFromDict(data map[string]interface{}) DescribeBigItemModelsResult {
+    return DescribeBigItemModelsResult {
+        Items: CastBigItemModels(core.CastArray(data["items"])),
+    }
+}
+
+func (p DescribeBigItemModelsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastBigItemModelsFromDict(
+            p.Items,
+        ),
+    }
+}
+
+func (p DescribeBigItemModelsResult) Pointer() *DescribeBigItemModelsResult {
+    return &p
+}
+
+type GetBigItemModelResult struct {
+    Item *BigItemModel `json:"item"`
+}
+
+type GetBigItemModelAsyncResult struct {
+	result *GetBigItemModelResult
+	err    error
+}
+
+func NewGetBigItemModelResultFromJson(data string) GetBigItemModelResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBigItemModelResultFromDict(dict)
+}
+
+func NewGetBigItemModelResultFromDict(data map[string]interface{}) GetBigItemModelResult {
+    return GetBigItemModelResult {
+        Item: NewBigItemModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p GetBigItemModelResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p GetBigItemModelResult) Pointer() *GetBigItemModelResult {
+    return &p
+}
+
 type ExportMasterResult struct {
     Item *CurrentItemModelMaster `json:"item"`
 }
@@ -2966,5 +3414,334 @@ func (p ConsumeSimpleItemsByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeSimpleItemsByStampTaskResult) Pointer() *ConsumeSimpleItemsByStampTaskResult {
+    return &p
+}
+
+type DescribeBigItemsResult struct {
+    Items []BigItem `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeBigItemsAsyncResult struct {
+	result *DescribeBigItemsResult
+	err    error
+}
+
+func NewDescribeBigItemsResultFromJson(data string) DescribeBigItemsResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBigItemsResultFromDict(dict)
+}
+
+func NewDescribeBigItemsResultFromDict(data map[string]interface{}) DescribeBigItemsResult {
+    return DescribeBigItemsResult {
+        Items: CastBigItems(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeBigItemsResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastBigItemsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeBigItemsResult) Pointer() *DescribeBigItemsResult {
+    return &p
+}
+
+type DescribeBigItemsByUserIdResult struct {
+    Items []BigItem `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
+}
+
+type DescribeBigItemsByUserIdAsyncResult struct {
+	result *DescribeBigItemsByUserIdResult
+	err    error
+}
+
+func NewDescribeBigItemsByUserIdResultFromJson(data string) DescribeBigItemsByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBigItemsByUserIdResultFromDict(dict)
+}
+
+func NewDescribeBigItemsByUserIdResultFromDict(data map[string]interface{}) DescribeBigItemsByUserIdResult {
+    return DescribeBigItemsByUserIdResult {
+        Items: CastBigItems(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
+}
+
+func (p DescribeBigItemsByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "items": CastBigItemsFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
+}
+
+func (p DescribeBigItemsByUserIdResult) Pointer() *DescribeBigItemsByUserIdResult {
+    return &p
+}
+
+type GetBigItemResult struct {
+    Item *BigItem `json:"item"`
+    ItemModel *BigItemModel `json:"itemModel"`
+}
+
+type GetBigItemAsyncResult struct {
+	result *GetBigItemResult
+	err    error
+}
+
+func NewGetBigItemResultFromJson(data string) GetBigItemResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBigItemResultFromDict(dict)
+}
+
+func NewGetBigItemResultFromDict(data map[string]interface{}) GetBigItemResult {
+    return GetBigItemResult {
+        Item: NewBigItemFromDict(core.CastMap(data["item"])).Pointer(),
+        ItemModel: NewBigItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
+    }
+}
+
+func (p GetBigItemResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "itemModel": p.ItemModel.ToDict(),
+    }
+}
+
+func (p GetBigItemResult) Pointer() *GetBigItemResult {
+    return &p
+}
+
+type GetBigItemByUserIdResult struct {
+    Item *BigItem `json:"item"`
+    ItemModel *BigItemModel `json:"itemModel"`
+}
+
+type GetBigItemByUserIdAsyncResult struct {
+	result *GetBigItemByUserIdResult
+	err    error
+}
+
+func NewGetBigItemByUserIdResultFromJson(data string) GetBigItemByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBigItemByUserIdResultFromDict(dict)
+}
+
+func NewGetBigItemByUserIdResultFromDict(data map[string]interface{}) GetBigItemByUserIdResult {
+    return GetBigItemByUserIdResult {
+        Item: NewBigItemFromDict(core.CastMap(data["item"])).Pointer(),
+        ItemModel: NewBigItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
+    }
+}
+
+func (p GetBigItemByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "itemModel": p.ItemModel.ToDict(),
+    }
+}
+
+func (p GetBigItemByUserIdResult) Pointer() *GetBigItemByUserIdResult {
+    return &p
+}
+
+type AcquireBigItemByUserIdResult struct {
+    Item *BigItem `json:"item"`
+}
+
+type AcquireBigItemByUserIdAsyncResult struct {
+	result *AcquireBigItemByUserIdResult
+	err    error
+}
+
+func NewAcquireBigItemByUserIdResultFromJson(data string) AcquireBigItemByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireBigItemByUserIdResultFromDict(dict)
+}
+
+func NewAcquireBigItemByUserIdResultFromDict(data map[string]interface{}) AcquireBigItemByUserIdResult {
+    return AcquireBigItemByUserIdResult {
+        Item: NewBigItemFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p AcquireBigItemByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p AcquireBigItemByUserIdResult) Pointer() *AcquireBigItemByUserIdResult {
+    return &p
+}
+
+type ConsumeBigItemResult struct {
+    Item *BigItem `json:"item"`
+}
+
+type ConsumeBigItemAsyncResult struct {
+	result *ConsumeBigItemResult
+	err    error
+}
+
+func NewConsumeBigItemResultFromJson(data string) ConsumeBigItemResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeBigItemResultFromDict(dict)
+}
+
+func NewConsumeBigItemResultFromDict(data map[string]interface{}) ConsumeBigItemResult {
+    return ConsumeBigItemResult {
+        Item: NewBigItemFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p ConsumeBigItemResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p ConsumeBigItemResult) Pointer() *ConsumeBigItemResult {
+    return &p
+}
+
+type ConsumeBigItemByUserIdResult struct {
+    Item *BigItem `json:"item"`
+}
+
+type ConsumeBigItemByUserIdAsyncResult struct {
+	result *ConsumeBigItemByUserIdResult
+	err    error
+}
+
+func NewConsumeBigItemByUserIdResultFromJson(data string) ConsumeBigItemByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeBigItemByUserIdResultFromDict(dict)
+}
+
+func NewConsumeBigItemByUserIdResultFromDict(data map[string]interface{}) ConsumeBigItemByUserIdResult {
+    return ConsumeBigItemByUserIdResult {
+        Item: NewBigItemFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p ConsumeBigItemByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p ConsumeBigItemByUserIdResult) Pointer() *ConsumeBigItemByUserIdResult {
+    return &p
+}
+
+type DeleteBigItemByUserIdResult struct {
+    Item *BigItem `json:"item"`
+}
+
+type DeleteBigItemByUserIdAsyncResult struct {
+	result *DeleteBigItemByUserIdResult
+	err    error
+}
+
+func NewDeleteBigItemByUserIdResultFromJson(data string) DeleteBigItemByUserIdResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteBigItemByUserIdResultFromDict(dict)
+}
+
+func NewDeleteBigItemByUserIdResultFromDict(data map[string]interface{}) DeleteBigItemByUserIdResult {
+    return DeleteBigItemByUserIdResult {
+        Item: NewBigItemFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p DeleteBigItemByUserIdResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p DeleteBigItemByUserIdResult) Pointer() *DeleteBigItemByUserIdResult {
+    return &p
+}
+
+type AcquireBigItemByStampSheetResult struct {
+    Item *BigItem `json:"item"`
+}
+
+type AcquireBigItemByStampSheetAsyncResult struct {
+	result *AcquireBigItemByStampSheetResult
+	err    error
+}
+
+func NewAcquireBigItemByStampSheetResultFromJson(data string) AcquireBigItemByStampSheetResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireBigItemByStampSheetResultFromDict(dict)
+}
+
+func NewAcquireBigItemByStampSheetResultFromDict(data map[string]interface{}) AcquireBigItemByStampSheetResult {
+    return AcquireBigItemByStampSheetResult {
+        Item: NewBigItemFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p AcquireBigItemByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p AcquireBigItemByStampSheetResult) Pointer() *AcquireBigItemByStampSheetResult {
+    return &p
+}
+
+type ConsumeBigItemByStampTaskResult struct {
+    Item *BigItem `json:"item"`
+    NewContextStack *string `json:"newContextStack"`
+}
+
+type ConsumeBigItemByStampTaskAsyncResult struct {
+	result *ConsumeBigItemByStampTaskResult
+	err    error
+}
+
+func NewConsumeBigItemByStampTaskResultFromJson(data string) ConsumeBigItemByStampTaskResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeBigItemByStampTaskResultFromDict(dict)
+}
+
+func NewConsumeBigItemByStampTaskResultFromDict(data map[string]interface{}) ConsumeBigItemByStampTaskResult {
+    return ConsumeBigItemByStampTaskResult {
+        Item: NewBigItemFromDict(core.CastMap(data["item"])).Pointer(),
+        NewContextStack: core.CastString(data["newContextStack"]),
+    }
+}
+
+func (p ConsumeBigItemByStampTaskResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "newContextStack": p.NewContextStack,
+    }
+}
+
+func (p ConsumeBigItemByStampTaskResult) Pointer() *ConsumeBigItemByStampTaskResult {
     return &p
 }

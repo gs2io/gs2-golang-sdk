@@ -3215,6 +3215,1311 @@ func (p Gs2InventoryRestClient) GetSimpleItemModel(
 	return asyncResult.result, asyncResult.err
 }
 
+func describeBigInventoryModelMastersAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeBigInventoryModelMastersAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBigInventoryModelMastersAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBigInventoryModelMastersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeBigInventoryModelMastersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBigInventoryModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeBigInventoryModelMastersAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) DescribeBigInventoryModelMastersAsync(
+	request *DescribeBigInventoryModelMastersRequest,
+	callback chan<- DescribeBigInventoryModelMastersAsyncResult,
+) {
+	path := "/{namespaceName}/master/big/inventory"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go describeBigInventoryModelMastersAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) DescribeBigInventoryModelMasters(
+	request *DescribeBigInventoryModelMastersRequest,
+) (*DescribeBigInventoryModelMastersResult, error) {
+	callback := make(chan DescribeBigInventoryModelMastersAsyncResult, 1)
+	go p.DescribeBigInventoryModelMastersAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func createBigInventoryModelMasterAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- CreateBigInventoryModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateBigInventoryModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateBigInventoryModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- CreateBigInventoryModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateBigInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- CreateBigInventoryModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) CreateBigInventoryModelMasterAsync(
+	request *CreateBigInventoryModelMasterRequest,
+	callback chan<- CreateBigInventoryModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/big/inventory"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go createBigInventoryModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) CreateBigInventoryModelMaster(
+	request *CreateBigInventoryModelMasterRequest,
+) (*CreateBigInventoryModelMasterResult, error) {
+	callback := make(chan CreateBigInventoryModelMasterAsyncResult, 1)
+	go p.CreateBigInventoryModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getBigInventoryModelMasterAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetBigInventoryModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBigInventoryModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBigInventoryModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- GetBigInventoryModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBigInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetBigInventoryModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) GetBigInventoryModelMasterAsync(
+	request *GetBigInventoryModelMasterRequest,
+	callback chan<- GetBigInventoryModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/big/inventory/{inventoryName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getBigInventoryModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) GetBigInventoryModelMaster(
+	request *GetBigInventoryModelMasterRequest,
+) (*GetBigInventoryModelMasterResult, error) {
+	callback := make(chan GetBigInventoryModelMasterAsyncResult, 1)
+	go p.GetBigInventoryModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func updateBigInventoryModelMasterAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- UpdateBigInventoryModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateBigInventoryModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateBigInventoryModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- UpdateBigInventoryModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateBigInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- UpdateBigInventoryModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) UpdateBigInventoryModelMasterAsync(
+	request *UpdateBigInventoryModelMasterRequest,
+	callback chan<- UpdateBigInventoryModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/big/inventory/{inventoryName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go updateBigInventoryModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) UpdateBigInventoryModelMaster(
+	request *UpdateBigInventoryModelMasterRequest,
+) (*UpdateBigInventoryModelMasterResult, error) {
+	callback := make(chan UpdateBigInventoryModelMasterAsyncResult, 1)
+	go p.UpdateBigInventoryModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteBigInventoryModelMasterAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteBigInventoryModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteBigInventoryModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteBigInventoryModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- DeleteBigInventoryModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteBigInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteBigInventoryModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) DeleteBigInventoryModelMasterAsync(
+	request *DeleteBigInventoryModelMasterRequest,
+	callback chan<- DeleteBigInventoryModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/big/inventory/{inventoryName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go deleteBigInventoryModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) DeleteBigInventoryModelMaster(
+	request *DeleteBigInventoryModelMasterRequest,
+) (*DeleteBigInventoryModelMasterResult, error) {
+	callback := make(chan DeleteBigInventoryModelMasterAsyncResult, 1)
+	go p.DeleteBigInventoryModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeBigInventoryModelsAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeBigInventoryModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBigInventoryModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBigInventoryModelsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeBigInventoryModelsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBigInventoryModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeBigInventoryModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) DescribeBigInventoryModelsAsync(
+	request *DescribeBigInventoryModelsRequest,
+	callback chan<- DescribeBigInventoryModelsAsyncResult,
+) {
+	path := "/{namespaceName}/big/inventory"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go describeBigInventoryModelsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) DescribeBigInventoryModels(
+	request *DescribeBigInventoryModelsRequest,
+) (*DescribeBigInventoryModelsResult, error) {
+	callback := make(chan DescribeBigInventoryModelsAsyncResult, 1)
+	go p.DescribeBigInventoryModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getBigInventoryModelAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetBigInventoryModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBigInventoryModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBigInventoryModelResult
+	if asyncResult.Err != nil {
+		callback <- GetBigInventoryModelAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBigInventoryModelAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetBigInventoryModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) GetBigInventoryModelAsync(
+	request *GetBigInventoryModelRequest,
+	callback chan<- GetBigInventoryModelAsyncResult,
+) {
+	path := "/{namespaceName}/big/inventory/{inventoryName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getBigInventoryModelAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) GetBigInventoryModel(
+	request *GetBigInventoryModelRequest,
+) (*GetBigInventoryModelResult, error) {
+	callback := make(chan GetBigInventoryModelAsyncResult, 1)
+	go p.GetBigInventoryModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeBigItemModelMastersAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeBigItemModelMastersAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBigItemModelMastersAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBigItemModelMastersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeBigItemModelMastersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBigItemModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeBigItemModelMastersAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) DescribeBigItemModelMastersAsync(
+	request *DescribeBigItemModelMastersRequest,
+	callback chan<- DescribeBigItemModelMastersAsyncResult,
+) {
+	path := "/{namespaceName}/master/big/inventory/{inventoryName}/item"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go describeBigItemModelMastersAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) DescribeBigItemModelMasters(
+	request *DescribeBigItemModelMastersRequest,
+) (*DescribeBigItemModelMastersResult, error) {
+	callback := make(chan DescribeBigItemModelMastersAsyncResult, 1)
+	go p.DescribeBigItemModelMastersAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func createBigItemModelMasterAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- CreateBigItemModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateBigItemModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateBigItemModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- CreateBigItemModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateBigItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- CreateBigItemModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) CreateBigItemModelMasterAsync(
+	request *CreateBigItemModelMasterRequest,
+	callback chan<- CreateBigItemModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/big/inventory/{inventoryName}/item"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go createBigItemModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) CreateBigItemModelMaster(
+	request *CreateBigItemModelMasterRequest,
+) (*CreateBigItemModelMasterResult, error) {
+	callback := make(chan CreateBigItemModelMasterAsyncResult, 1)
+	go p.CreateBigItemModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getBigItemModelMasterAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetBigItemModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBigItemModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBigItemModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- GetBigItemModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBigItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetBigItemModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) GetBigItemModelMasterAsync(
+	request *GetBigItemModelMasterRequest,
+	callback chan<- GetBigItemModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/big/inventory/{inventoryName}/item/{itemName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getBigItemModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) GetBigItemModelMaster(
+	request *GetBigItemModelMasterRequest,
+) (*GetBigItemModelMasterResult, error) {
+	callback := make(chan GetBigItemModelMasterAsyncResult, 1)
+	go p.GetBigItemModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func updateBigItemModelMasterAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- UpdateBigItemModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateBigItemModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateBigItemModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- UpdateBigItemModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateBigItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- UpdateBigItemModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) UpdateBigItemModelMasterAsync(
+	request *UpdateBigItemModelMasterRequest,
+	callback chan<- UpdateBigItemModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/big/inventory/{inventoryName}/item/{itemName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go updateBigItemModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) UpdateBigItemModelMaster(
+	request *UpdateBigItemModelMasterRequest,
+) (*UpdateBigItemModelMasterResult, error) {
+	callback := make(chan UpdateBigItemModelMasterAsyncResult, 1)
+	go p.UpdateBigItemModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteBigItemModelMasterAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteBigItemModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteBigItemModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteBigItemModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- DeleteBigItemModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteBigItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteBigItemModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) DeleteBigItemModelMasterAsync(
+	request *DeleteBigItemModelMasterRequest,
+	callback chan<- DeleteBigItemModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/big/inventory/{inventoryName}/item/{itemName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go deleteBigItemModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) DeleteBigItemModelMaster(
+	request *DeleteBigItemModelMasterRequest,
+) (*DeleteBigItemModelMasterResult, error) {
+	callback := make(chan DeleteBigItemModelMasterAsyncResult, 1)
+	go p.DeleteBigItemModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeBigItemModelsAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeBigItemModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBigItemModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBigItemModelsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeBigItemModelsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBigItemModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeBigItemModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) DescribeBigItemModelsAsync(
+	request *DescribeBigItemModelsRequest,
+	callback chan<- DescribeBigItemModelsAsyncResult,
+) {
+	path := "/{namespaceName}/big/inventory/{inventoryName}/item"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go describeBigItemModelsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) DescribeBigItemModels(
+	request *DescribeBigItemModelsRequest,
+) (*DescribeBigItemModelsResult, error) {
+	callback := make(chan DescribeBigItemModelsAsyncResult, 1)
+	go p.DescribeBigItemModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getBigItemModelAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetBigItemModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBigItemModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBigItemModelResult
+	if asyncResult.Err != nil {
+		callback <- GetBigItemModelAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBigItemModelAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetBigItemModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) GetBigItemModelAsync(
+	request *GetBigItemModelRequest,
+	callback chan<- GetBigItemModelAsyncResult,
+) {
+	path := "/{namespaceName}/big/inventory/{inventoryName}/item/{itemName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getBigItemModelAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) GetBigItemModel(
+	request *GetBigItemModelRequest,
+) (*GetBigItemModelResult, error) {
+	callback := make(chan GetBigItemModelAsyncResult, 1)
+	go p.GetBigItemModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func exportMasterAsyncHandler(
 	client Gs2InventoryRestClient,
 	job *core.NetworkJob,
@@ -8241,6 +9546,1024 @@ func (p Gs2InventoryRestClient) ConsumeSimpleItemsByStampTask(
 ) (*ConsumeSimpleItemsByStampTaskResult, error) {
 	callback := make(chan ConsumeSimpleItemsByStampTaskAsyncResult, 1)
 	go p.ConsumeSimpleItemsByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeBigItemsAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeBigItemsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBigItemsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBigItemsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeBigItemsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBigItemsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeBigItemsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) DescribeBigItemsAsync(
+	request *DescribeBigItemsRequest,
+	callback chan<- DescribeBigItemsAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/big/inventory/{inventoryName}/item"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+
+	go describeBigItemsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) DescribeBigItems(
+	request *DescribeBigItemsRequest,
+) (*DescribeBigItemsResult, error) {
+	callback := make(chan DescribeBigItemsAsyncResult, 1)
+	go p.DescribeBigItemsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeBigItemsByUserIdAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeBigItemsByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBigItemsByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBigItemsByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DescribeBigItemsByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBigItemsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DescribeBigItemsByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) DescribeBigItemsByUserIdAsync(
+	request *DescribeBigItemsByUserIdRequest,
+	callback chan<- DescribeBigItemsByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/item"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go describeBigItemsByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) DescribeBigItemsByUserId(
+	request *DescribeBigItemsByUserIdRequest,
+) (*DescribeBigItemsByUserIdResult, error) {
+	callback := make(chan DescribeBigItemsByUserIdAsyncResult, 1)
+	go p.DescribeBigItemsByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getBigItemAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetBigItemAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBigItemAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBigItemResult
+	if asyncResult.Err != nil {
+		callback <- GetBigItemAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBigItemAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetBigItemAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) GetBigItemAsync(
+	request *GetBigItemRequest,
+	callback chan<- GetBigItemAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/big/inventory/{inventoryName}/item/{itemName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+
+	go getBigItemAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) GetBigItem(
+	request *GetBigItemRequest,
+) (*GetBigItemResult, error) {
+	callback := make(chan GetBigItemAsyncResult, 1)
+	go p.GetBigItemAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getBigItemByUserIdAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetBigItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBigItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBigItemByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- GetBigItemByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBigItemByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- GetBigItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) GetBigItemByUserIdAsync(
+	request *GetBigItemByUserIdRequest,
+	callback chan<- GetBigItemByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/item/{itemName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go getBigItemByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) GetBigItemByUserId(
+	request *GetBigItemByUserIdRequest,
+) (*GetBigItemByUserIdResult, error) {
+	callback := make(chan GetBigItemByUserIdAsyncResult, 1)
+	go p.GetBigItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func acquireBigItemByUserIdAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- AcquireBigItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcquireBigItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcquireBigItemByUserIdResult
+	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+        }
+		callback <- AcquireBigItemByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcquireBigItemByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- AcquireBigItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) AcquireBigItemByUserIdAsync(
+	request *AcquireBigItemByUserIdRequest,
+	callback chan<- AcquireBigItemByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/{itemName}/acquire"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.AcquireCount != nil && *request.AcquireCount != "" {
+        bodies["acquireCount"] = *request.AcquireCount
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go acquireBigItemByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) AcquireBigItemByUserId(
+	request *AcquireBigItemByUserIdRequest,
+) (*AcquireBigItemByUserIdResult, error) {
+	callback := make(chan AcquireBigItemByUserIdAsyncResult, 1)
+	go p.AcquireBigItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func consumeBigItemAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- ConsumeBigItemAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ConsumeBigItemAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ConsumeBigItemResult
+	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.count.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
+		callback <- ConsumeBigItemAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ConsumeBigItemAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- ConsumeBigItemAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) ConsumeBigItemAsync(
+	request *ConsumeBigItemRequest,
+	callback chan<- ConsumeBigItemAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/big/inventory/{inventoryName}/{itemName}/consume"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.ConsumeCount != nil && *request.ConsumeCount != "" {
+        bodies["consumeCount"] = *request.ConsumeCount
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go consumeBigItemAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) ConsumeBigItem(
+	request *ConsumeBigItemRequest,
+) (*ConsumeBigItemResult, error) {
+	callback := make(chan ConsumeBigItemAsyncResult, 1)
+	go p.ConsumeBigItemAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func consumeBigItemByUserIdAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- ConsumeBigItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ConsumeBigItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ConsumeBigItemByUserIdResult
+	if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.count.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
+		callback <- ConsumeBigItemByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ConsumeBigItemByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- ConsumeBigItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) ConsumeBigItemByUserIdAsync(
+	request *ConsumeBigItemByUserIdRequest,
+	callback chan<- ConsumeBigItemByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/{itemName}/consume"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.ConsumeCount != nil && *request.ConsumeCount != "" {
+        bodies["consumeCount"] = *request.ConsumeCount
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go consumeBigItemByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) ConsumeBigItemByUserId(
+	request *ConsumeBigItemByUserIdRequest,
+) (*ConsumeBigItemByUserIdResult, error) {
+	callback := make(chan ConsumeBigItemByUserIdAsyncResult, 1)
+	go p.ConsumeBigItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteBigItemByUserIdAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteBigItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteBigItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteBigItemByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DeleteBigItemByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteBigItemByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- DeleteBigItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) DeleteBigItemByUserIdAsync(
+	request *DeleteBigItemByUserIdRequest,
+	callback chan<- DeleteBigItemByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}"
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.InventoryName != nil && *request.InventoryName != ""  {
+        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+    } else {
+        path = strings.ReplaceAll(path, "{inventoryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ItemName != nil && *request.ItemName != ""  {
+        path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{itemName}", "null")
+    }
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
+
+	go deleteBigItemByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) DeleteBigItemByUserId(
+	request *DeleteBigItemByUserIdRequest,
+) (*DeleteBigItemByUserIdResult, error) {
+	callback := make(chan DeleteBigItemByUserIdAsyncResult, 1)
+	go p.DeleteBigItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func acquireBigItemByStampSheetAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- AcquireBigItemByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcquireBigItemByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcquireBigItemByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- AcquireBigItemByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcquireBigItemByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- AcquireBigItemByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) AcquireBigItemByStampSheetAsync(
+	request *AcquireBigItemByStampSheetRequest,
+	callback chan<- AcquireBigItemByStampSheetAsyncResult,
+) {
+	path := "/stamp/big/item/acquire"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go acquireBigItemByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) AcquireBigItemByStampSheet(
+	request *AcquireBigItemByStampSheetRequest,
+) (*AcquireBigItemByStampSheetResult, error) {
+	callback := make(chan AcquireBigItemByStampSheetAsyncResult, 1)
+	go p.AcquireBigItemByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func consumeBigItemByStampTaskAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- ConsumeBigItemByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ConsumeBigItemByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ConsumeBigItemByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- ConsumeBigItemByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ConsumeBigItemByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- ConsumeBigItemByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) ConsumeBigItemByStampTaskAsync(
+	request *ConsumeBigItemByStampTaskRequest,
+	callback chan<- ConsumeBigItemByStampTaskAsyncResult,
+) {
+	path := "/stamp/big/item/consume"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go consumeBigItemByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) ConsumeBigItemByStampTask(
+	request *ConsumeBigItemByStampTaskRequest,
+) (*ConsumeBigItemByStampTaskResult, error) {
+	callback := make(chan ConsumeBigItemByStampTaskAsyncResult, 1)
+	go p.ConsumeBigItemByStampTaskAsync(
 		request,
 		callback,
 	)

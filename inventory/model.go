@@ -805,6 +805,301 @@ func CastSimpleItemModelsFromDict(data []SimpleItemModel) []interface{} {
     return v
 }
 
+type BigInventoryModelMaster struct {
+	InventoryModelId *string `json:"inventoryModelId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	Description *string `json:"description"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
+}
+
+func NewBigInventoryModelMasterFromJson(data string) BigInventoryModelMaster {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewBigInventoryModelMasterFromDict(dict)
+}
+
+func NewBigInventoryModelMasterFromDict(data map[string]interface{}) BigInventoryModelMaster {
+    return BigInventoryModelMaster {
+        InventoryModelId: core.CastString(data["inventoryModelId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        Description: core.CastString(data["description"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
+}
+
+func (p BigInventoryModelMaster) ToDict() map[string]interface{} {
+    
+    var inventoryModelId *string
+    if p.InventoryModelId != nil {
+        inventoryModelId = p.InventoryModelId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var description *string
+    if p.Description != nil {
+        description = p.Description
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "inventoryModelId": inventoryModelId,
+        "name": name,
+        "metadata": metadata,
+        "description": description,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
+}
+
+func (p BigInventoryModelMaster) Pointer() *BigInventoryModelMaster {
+    return &p
+}
+
+func CastBigInventoryModelMasters(data []interface{}) []BigInventoryModelMaster {
+	v := make([]BigInventoryModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewBigInventoryModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBigInventoryModelMastersFromDict(data []BigInventoryModelMaster) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type BigInventoryModel struct {
+	InventoryModelId *string `json:"inventoryModelId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+	BigItemModels []BigItemModel `json:"bigItemModels"`
+}
+
+func NewBigInventoryModelFromJson(data string) BigInventoryModel {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewBigInventoryModelFromDict(dict)
+}
+
+func NewBigInventoryModelFromDict(data map[string]interface{}) BigInventoryModel {
+    return BigInventoryModel {
+        InventoryModelId: core.CastString(data["inventoryModelId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+        BigItemModels: CastBigItemModels(core.CastArray(data["bigItemModels"])),
+    }
+}
+
+func (p BigInventoryModel) ToDict() map[string]interface{} {
+    
+    var inventoryModelId *string
+    if p.InventoryModelId != nil {
+        inventoryModelId = p.InventoryModelId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var bigItemModels []interface{}
+    if p.BigItemModels != nil {
+        bigItemModels = CastBigItemModelsFromDict(
+            p.BigItemModels,
+        )
+    }
+    return map[string]interface{} {
+        "inventoryModelId": inventoryModelId,
+        "name": name,
+        "metadata": metadata,
+        "bigItemModels": bigItemModels,
+    }
+}
+
+func (p BigInventoryModel) Pointer() *BigInventoryModel {
+    return &p
+}
+
+func CastBigInventoryModels(data []interface{}) []BigInventoryModel {
+	v := make([]BigInventoryModel, 0)
+	for _, d := range data {
+		v = append(v, NewBigInventoryModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBigInventoryModelsFromDict(data []BigInventoryModel) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type BigItemModelMaster struct {
+	ItemModelId *string `json:"itemModelId"`
+	Name *string `json:"name"`
+	Description *string `json:"description"`
+	Metadata *string `json:"metadata"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
+}
+
+func NewBigItemModelMasterFromJson(data string) BigItemModelMaster {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewBigItemModelMasterFromDict(dict)
+}
+
+func NewBigItemModelMasterFromDict(data map[string]interface{}) BigItemModelMaster {
+    return BigItemModelMaster {
+        ItemModelId: core.CastString(data["itemModelId"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
+}
+
+func (p BigItemModelMaster) ToDict() map[string]interface{} {
+    
+    var itemModelId *string
+    if p.ItemModelId != nil {
+        itemModelId = p.ItemModelId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var description *string
+    if p.Description != nil {
+        description = p.Description
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "itemModelId": itemModelId,
+        "name": name,
+        "description": description,
+        "metadata": metadata,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
+}
+
+func (p BigItemModelMaster) Pointer() *BigItemModelMaster {
+    return &p
+}
+
+func CastBigItemModelMasters(data []interface{}) []BigItemModelMaster {
+	v := make([]BigItemModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewBigItemModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBigItemModelMastersFromDict(data []BigItemModelMaster) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type BigItemModel struct {
+	ItemModelId *string `json:"itemModelId"`
+	Name *string `json:"name"`
+	Metadata *string `json:"metadata"`
+}
+
+func NewBigItemModelFromJson(data string) BigItemModel {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewBigItemModelFromDict(dict)
+}
+
+func NewBigItemModelFromDict(data map[string]interface{}) BigItemModel {
+    return BigItemModel {
+        ItemModelId: core.CastString(data["itemModelId"]),
+        Name: core.CastString(data["name"]),
+        Metadata: core.CastString(data["metadata"]),
+    }
+}
+
+func (p BigItemModel) ToDict() map[string]interface{} {
+    
+    var itemModelId *string
+    if p.ItemModelId != nil {
+        itemModelId = p.ItemModelId
+    }
+    var name *string
+    if p.Name != nil {
+        name = p.Name
+    }
+    var metadata *string
+    if p.Metadata != nil {
+        metadata = p.Metadata
+    }
+    return map[string]interface{} {
+        "itemModelId": itemModelId,
+        "name": name,
+        "metadata": metadata,
+    }
+}
+
+func (p BigItemModel) Pointer() *BigItemModel {
+    return &p
+}
+
+func CastBigItemModels(data []interface{}) []BigItemModel {
+	v := make([]BigItemModel, 0)
+	for _, d := range data {
+		v = append(v, NewBigItemModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBigItemModelsFromDict(data []BigItemModel) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
 type CurrentItemModelMaster struct {
 	NamespaceId *string `json:"namespaceId"`
 	Settings *string `json:"settings"`
@@ -867,7 +1162,6 @@ type Inventory struct {
 	CurrentInventoryMaxCapacity *int32 `json:"currentInventoryMaxCapacity"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
-	Revision *int64 `json:"revision"`
 }
 
 func NewInventoryFromJson(data string) Inventory {
@@ -885,7 +1179,6 @@ func NewInventoryFromDict(data map[string]interface{}) Inventory {
         CurrentInventoryMaxCapacity: core.CastInt32(data["currentInventoryMaxCapacity"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
-        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -919,10 +1212,6 @@ func (p Inventory) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
-    var revision *int64
-    if p.Revision != nil {
-        revision = p.Revision
-    }
     return map[string]interface{} {
         "inventoryId": inventoryId,
         "inventoryName": inventoryName,
@@ -931,7 +1220,6 @@ func (p Inventory) ToDict() map[string]interface{} {
         "currentInventoryMaxCapacity": currentInventoryMaxCapacity,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
-        "revision": revision,
     }
 }
 
@@ -1132,6 +1420,7 @@ type SimpleInventory struct {
 	InventoryId *string `json:"inventoryId"`
 	InventoryName *string `json:"inventoryName"`
 	UserId *string `json:"userId"`
+	SimpleItems []SimpleItem `json:"simpleItems"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
 }
@@ -1147,6 +1436,7 @@ func NewSimpleInventoryFromDict(data map[string]interface{}) SimpleInventory {
         InventoryId: core.CastString(data["inventoryId"]),
         InventoryName: core.CastString(data["inventoryName"]),
         UserId: core.CastString(data["userId"]),
+        SimpleItems: CastSimpleItems(core.CastArray(data["simpleItems"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
     }
@@ -1166,6 +1456,12 @@ func (p SimpleInventory) ToDict() map[string]interface{} {
     if p.UserId != nil {
         userId = p.UserId
     }
+    var simpleItems []interface{}
+    if p.SimpleItems != nil {
+        simpleItems = CastSimpleItemsFromDict(
+            p.SimpleItems,
+        )
+    }
     var createdAt *int64
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
@@ -1178,6 +1474,7 @@ func (p SimpleInventory) ToDict() map[string]interface{} {
         "inventoryId": inventoryId,
         "inventoryName": inventoryName,
         "userId": userId,
+        "simpleItems": simpleItems,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
     }
@@ -1264,6 +1561,149 @@ func CastSimpleItems(data []interface{}) []SimpleItem {
 }
 
 func CastSimpleItemsFromDict(data []SimpleItem) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type BigInventory struct {
+	InventoryId *string `json:"inventoryId"`
+	InventoryName *string `json:"inventoryName"`
+	UserId *string `json:"userId"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
+}
+
+func NewBigInventoryFromJson(data string) BigInventory {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewBigInventoryFromDict(dict)
+}
+
+func NewBigInventoryFromDict(data map[string]interface{}) BigInventory {
+    return BigInventory {
+        InventoryId: core.CastString(data["inventoryId"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+    }
+}
+
+func (p BigInventory) ToDict() map[string]interface{} {
+    
+    var inventoryId *string
+    if p.InventoryId != nil {
+        inventoryId = p.InventoryId
+    }
+    var inventoryName *string
+    if p.InventoryName != nil {
+        inventoryName = p.InventoryName
+    }
+    var userId *string
+    if p.UserId != nil {
+        userId = p.UserId
+    }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    return map[string]interface{} {
+        "inventoryId": inventoryId,
+        "inventoryName": inventoryName,
+        "userId": userId,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+    }
+}
+
+func (p BigInventory) Pointer() *BigInventory {
+    return &p
+}
+
+func CastBigInventories(data []interface{}) []BigInventory {
+	v := make([]BigInventory, 0)
+	for _, d := range data {
+		v = append(v, NewBigInventoryFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBigInventoriesFromDict(data []BigInventory) []interface{} {
+    v := make([]interface{}, 0)
+    for _, d := range data {
+        v = append(v, d.ToDict())
+    }
+    return v
+}
+
+type BigItem struct {
+	ItemId *string `json:"itemId"`
+	UserId *string `json:"userId"`
+	ItemName *string `json:"itemName"`
+	Count *string `json:"count"`
+}
+
+func NewBigItemFromJson(data string) BigItem {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewBigItemFromDict(dict)
+}
+
+func NewBigItemFromDict(data map[string]interface{}) BigItem {
+    return BigItem {
+        ItemId: core.CastString(data["itemId"]),
+        UserId: core.CastString(data["userId"]),
+        ItemName: core.CastString(data["itemName"]),
+        Count: core.CastString(data["count"]),
+    }
+}
+
+func (p BigItem) ToDict() map[string]interface{} {
+    
+    var itemId *string
+    if p.ItemId != nil {
+        itemId = p.ItemId
+    }
+    var userId *string
+    if p.UserId != nil {
+        userId = p.UserId
+    }
+    var itemName *string
+    if p.ItemName != nil {
+        itemName = p.ItemName
+    }
+    var count *string
+    if p.Count != nil {
+        count = p.Count
+    }
+    return map[string]interface{} {
+        "itemId": itemId,
+        "userId": userId,
+        "itemName": itemName,
+        "count": count,
+    }
+}
+
+func (p BigItem) Pointer() *BigItem {
+    return &p
+}
+
+func CastBigItems(data []interface{}) []BigItem {
+	v := make([]BigItem, 0)
+	for _, d := range data {
+		v = append(v, NewBigItemFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBigItemsFromDict(data []BigItem) []interface{} {
     v := make([]interface{}, 0)
     for _, d := range data {
         v = append(v, d.ToDict())

@@ -1216,6 +1216,485 @@ func (p GetSimpleItemModelRequest) Pointer() *GetSimpleItemModelRequest {
     return &p
 }
 
+type DescribeBigInventoryModelMastersRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeBigInventoryModelMastersRequestFromJson(data string) DescribeBigInventoryModelMastersRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBigInventoryModelMastersRequestFromDict(dict)
+}
+
+func NewDescribeBigInventoryModelMastersRequestFromDict(data map[string]interface{}) DescribeBigInventoryModelMastersRequest {
+    return DescribeBigInventoryModelMastersRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeBigInventoryModelMastersRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeBigInventoryModelMastersRequest) Pointer() *DescribeBigInventoryModelMastersRequest {
+    return &p
+}
+
+type CreateBigInventoryModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Name *string `json:"name"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+}
+
+func NewCreateBigInventoryModelMasterRequestFromJson(data string) CreateBigInventoryModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateBigInventoryModelMasterRequestFromDict(dict)
+}
+
+func NewCreateBigInventoryModelMasterRequestFromDict(data map[string]interface{}) CreateBigInventoryModelMasterRequest {
+    return CreateBigInventoryModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+    }
+}
+
+func (p CreateBigInventoryModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "name": p.Name,
+        "description": p.Description,
+        "metadata": p.Metadata,
+    }
+}
+
+func (p CreateBigInventoryModelMasterRequest) Pointer() *CreateBigInventoryModelMasterRequest {
+    return &p
+}
+
+type GetBigInventoryModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+}
+
+func NewGetBigInventoryModelMasterRequestFromJson(data string) GetBigInventoryModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBigInventoryModelMasterRequestFromDict(dict)
+}
+
+func NewGetBigInventoryModelMasterRequestFromDict(data map[string]interface{}) GetBigInventoryModelMasterRequest {
+    return GetBigInventoryModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+    }
+}
+
+func (p GetBigInventoryModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+    }
+}
+
+func (p GetBigInventoryModelMasterRequest) Pointer() *GetBigInventoryModelMasterRequest {
+    return &p
+}
+
+type UpdateBigInventoryModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+}
+
+func NewUpdateBigInventoryModelMasterRequestFromJson(data string) UpdateBigInventoryModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateBigInventoryModelMasterRequestFromDict(dict)
+}
+
+func NewUpdateBigInventoryModelMasterRequestFromDict(data map[string]interface{}) UpdateBigInventoryModelMasterRequest {
+    return UpdateBigInventoryModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+    }
+}
+
+func (p UpdateBigInventoryModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "description": p.Description,
+        "metadata": p.Metadata,
+    }
+}
+
+func (p UpdateBigInventoryModelMasterRequest) Pointer() *UpdateBigInventoryModelMasterRequest {
+    return &p
+}
+
+type DeleteBigInventoryModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+}
+
+func NewDeleteBigInventoryModelMasterRequestFromJson(data string) DeleteBigInventoryModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteBigInventoryModelMasterRequestFromDict(dict)
+}
+
+func NewDeleteBigInventoryModelMasterRequestFromDict(data map[string]interface{}) DeleteBigInventoryModelMasterRequest {
+    return DeleteBigInventoryModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+    }
+}
+
+func (p DeleteBigInventoryModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+    }
+}
+
+func (p DeleteBigInventoryModelMasterRequest) Pointer() *DeleteBigInventoryModelMasterRequest {
+    return &p
+}
+
+type DescribeBigInventoryModelsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+}
+
+func NewDescribeBigInventoryModelsRequestFromJson(data string) DescribeBigInventoryModelsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBigInventoryModelsRequestFromDict(dict)
+}
+
+func NewDescribeBigInventoryModelsRequestFromDict(data map[string]interface{}) DescribeBigInventoryModelsRequest {
+    return DescribeBigInventoryModelsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
+}
+
+func (p DescribeBigInventoryModelsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
+}
+
+func (p DescribeBigInventoryModelsRequest) Pointer() *DescribeBigInventoryModelsRequest {
+    return &p
+}
+
+type GetBigInventoryModelRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+}
+
+func NewGetBigInventoryModelRequestFromJson(data string) GetBigInventoryModelRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBigInventoryModelRequestFromDict(dict)
+}
+
+func NewGetBigInventoryModelRequestFromDict(data map[string]interface{}) GetBigInventoryModelRequest {
+    return GetBigInventoryModelRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+    }
+}
+
+func (p GetBigInventoryModelRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+    }
+}
+
+func (p GetBigInventoryModelRequest) Pointer() *GetBigInventoryModelRequest {
+    return &p
+}
+
+type DescribeBigItemModelMastersRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeBigItemModelMastersRequestFromJson(data string) DescribeBigItemModelMastersRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBigItemModelMastersRequestFromDict(dict)
+}
+
+func NewDescribeBigItemModelMastersRequestFromDict(data map[string]interface{}) DescribeBigItemModelMastersRequest {
+    return DescribeBigItemModelMastersRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeBigItemModelMastersRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeBigItemModelMastersRequest) Pointer() *DescribeBigItemModelMastersRequest {
+    return &p
+}
+
+type CreateBigItemModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    Name *string `json:"name"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+}
+
+func NewCreateBigItemModelMasterRequestFromJson(data string) CreateBigItemModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateBigItemModelMasterRequestFromDict(dict)
+}
+
+func NewCreateBigItemModelMasterRequestFromDict(data map[string]interface{}) CreateBigItemModelMasterRequest {
+    return CreateBigItemModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+    }
+}
+
+func (p CreateBigItemModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "name": p.Name,
+        "description": p.Description,
+        "metadata": p.Metadata,
+    }
+}
+
+func (p CreateBigItemModelMasterRequest) Pointer() *CreateBigItemModelMasterRequest {
+    return &p
+}
+
+type GetBigItemModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    ItemName *string `json:"itemName"`
+}
+
+func NewGetBigItemModelMasterRequestFromJson(data string) GetBigItemModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBigItemModelMasterRequestFromDict(dict)
+}
+
+func NewGetBigItemModelMasterRequestFromDict(data map[string]interface{}) GetBigItemModelMasterRequest {
+    return GetBigItemModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        ItemName: core.CastString(data["itemName"]),
+    }
+}
+
+func (p GetBigItemModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "itemName": p.ItemName,
+    }
+}
+
+func (p GetBigItemModelMasterRequest) Pointer() *GetBigItemModelMasterRequest {
+    return &p
+}
+
+type UpdateBigItemModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    ItemName *string `json:"itemName"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+}
+
+func NewUpdateBigItemModelMasterRequestFromJson(data string) UpdateBigItemModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateBigItemModelMasterRequestFromDict(dict)
+}
+
+func NewUpdateBigItemModelMasterRequestFromDict(data map[string]interface{}) UpdateBigItemModelMasterRequest {
+    return UpdateBigItemModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        ItemName: core.CastString(data["itemName"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+    }
+}
+
+func (p UpdateBigItemModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "itemName": p.ItemName,
+        "description": p.Description,
+        "metadata": p.Metadata,
+    }
+}
+
+func (p UpdateBigItemModelMasterRequest) Pointer() *UpdateBigItemModelMasterRequest {
+    return &p
+}
+
+type DeleteBigItemModelMasterRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    ItemName *string `json:"itemName"`
+}
+
+func NewDeleteBigItemModelMasterRequestFromJson(data string) DeleteBigItemModelMasterRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteBigItemModelMasterRequestFromDict(dict)
+}
+
+func NewDeleteBigItemModelMasterRequestFromDict(data map[string]interface{}) DeleteBigItemModelMasterRequest {
+    return DeleteBigItemModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        ItemName: core.CastString(data["itemName"]),
+    }
+}
+
+func (p DeleteBigItemModelMasterRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "itemName": p.ItemName,
+    }
+}
+
+func (p DeleteBigItemModelMasterRequest) Pointer() *DeleteBigItemModelMasterRequest {
+    return &p
+}
+
+type DescribeBigItemModelsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+}
+
+func NewDescribeBigItemModelsRequestFromJson(data string) DescribeBigItemModelsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBigItemModelsRequestFromDict(dict)
+}
+
+func NewDescribeBigItemModelsRequestFromDict(data map[string]interface{}) DescribeBigItemModelsRequest {
+    return DescribeBigItemModelsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+    }
+}
+
+func (p DescribeBigItemModelsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+    }
+}
+
+func (p DescribeBigItemModelsRequest) Pointer() *DescribeBigItemModelsRequest {
+    return &p
+}
+
+type GetBigItemModelRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    ItemName *string `json:"itemName"`
+}
+
+func NewGetBigItemModelRequestFromJson(data string) GetBigItemModelRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBigItemModelRequestFromDict(dict)
+}
+
+func NewGetBigItemModelRequestFromDict(data map[string]interface{}) GetBigItemModelRequest {
+    return GetBigItemModelRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        ItemName: core.CastString(data["itemName"]),
+    }
+}
+
+func (p GetBigItemModelRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "itemName": p.ItemName,
+    }
+}
+
+func (p GetBigItemModelRequest) Pointer() *GetBigItemModelRequest {
+    return &p
+}
+
 type ExportMasterRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
@@ -3113,5 +3592,382 @@ func (p ConsumeSimpleItemsByStampTaskRequest) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeSimpleItemsByStampTaskRequest) Pointer() *ConsumeSimpleItemsByStampTaskRequest {
+    return &p
+}
+
+type DescribeBigItemsRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    AccessToken *string `json:"accessToken"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeBigItemsRequestFromJson(data string) DescribeBigItemsRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBigItemsRequestFromDict(dict)
+}
+
+func NewDescribeBigItemsRequestFromDict(data map[string]interface{}) DescribeBigItemsRequest {
+    return DescribeBigItemsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeBigItemsRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "accessToken": p.AccessToken,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeBigItemsRequest) Pointer() *DescribeBigItemsRequest {
+    return &p
+}
+
+type DescribeBigItemsByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    UserId *string `json:"userId"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
+}
+
+func NewDescribeBigItemsByUserIdRequestFromJson(data string) DescribeBigItemsByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBigItemsByUserIdRequestFromDict(dict)
+}
+
+func NewDescribeBigItemsByUserIdRequestFromDict(data map[string]interface{}) DescribeBigItemsByUserIdRequest {
+    return DescribeBigItemsByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
+}
+
+func (p DescribeBigItemsByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "userId": p.UserId,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
+}
+
+func (p DescribeBigItemsByUserIdRequest) Pointer() *DescribeBigItemsByUserIdRequest {
+    return &p
+}
+
+type GetBigItemRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    AccessToken *string `json:"accessToken"`
+    ItemName *string `json:"itemName"`
+}
+
+func NewGetBigItemRequestFromJson(data string) GetBigItemRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBigItemRequestFromDict(dict)
+}
+
+func NewGetBigItemRequestFromDict(data map[string]interface{}) GetBigItemRequest {
+    return GetBigItemRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        ItemName: core.CastString(data["itemName"]),
+    }
+}
+
+func (p GetBigItemRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "accessToken": p.AccessToken,
+        "itemName": p.ItemName,
+    }
+}
+
+func (p GetBigItemRequest) Pointer() *GetBigItemRequest {
+    return &p
+}
+
+type GetBigItemByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    UserId *string `json:"userId"`
+    ItemName *string `json:"itemName"`
+}
+
+func NewGetBigItemByUserIdRequestFromJson(data string) GetBigItemByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBigItemByUserIdRequestFromDict(dict)
+}
+
+func NewGetBigItemByUserIdRequestFromDict(data map[string]interface{}) GetBigItemByUserIdRequest {
+    return GetBigItemByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        ItemName: core.CastString(data["itemName"]),
+    }
+}
+
+func (p GetBigItemByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "userId": p.UserId,
+        "itemName": p.ItemName,
+    }
+}
+
+func (p GetBigItemByUserIdRequest) Pointer() *GetBigItemByUserIdRequest {
+    return &p
+}
+
+type AcquireBigItemByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    UserId *string `json:"userId"`
+    ItemName *string `json:"itemName"`
+    AcquireCount *string `json:"acquireCount"`
+}
+
+func NewAcquireBigItemByUserIdRequestFromJson(data string) AcquireBigItemByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireBigItemByUserIdRequestFromDict(dict)
+}
+
+func NewAcquireBigItemByUserIdRequestFromDict(data map[string]interface{}) AcquireBigItemByUserIdRequest {
+    return AcquireBigItemByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        ItemName: core.CastString(data["itemName"]),
+        AcquireCount: core.CastString(data["acquireCount"]),
+    }
+}
+
+func (p AcquireBigItemByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "userId": p.UserId,
+        "itemName": p.ItemName,
+        "acquireCount": p.AcquireCount,
+    }
+}
+
+func (p AcquireBigItemByUserIdRequest) Pointer() *AcquireBigItemByUserIdRequest {
+    return &p
+}
+
+type ConsumeBigItemRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    AccessToken *string `json:"accessToken"`
+    ItemName *string `json:"itemName"`
+    ConsumeCount *string `json:"consumeCount"`
+}
+
+func NewConsumeBigItemRequestFromJson(data string) ConsumeBigItemRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeBigItemRequestFromDict(dict)
+}
+
+func NewConsumeBigItemRequestFromDict(data map[string]interface{}) ConsumeBigItemRequest {
+    return ConsumeBigItemRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        ItemName: core.CastString(data["itemName"]),
+        ConsumeCount: core.CastString(data["consumeCount"]),
+    }
+}
+
+func (p ConsumeBigItemRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "accessToken": p.AccessToken,
+        "itemName": p.ItemName,
+        "consumeCount": p.ConsumeCount,
+    }
+}
+
+func (p ConsumeBigItemRequest) Pointer() *ConsumeBigItemRequest {
+    return &p
+}
+
+type ConsumeBigItemByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    UserId *string `json:"userId"`
+    ItemName *string `json:"itemName"`
+    ConsumeCount *string `json:"consumeCount"`
+}
+
+func NewConsumeBigItemByUserIdRequestFromJson(data string) ConsumeBigItemByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeBigItemByUserIdRequestFromDict(dict)
+}
+
+func NewConsumeBigItemByUserIdRequestFromDict(data map[string]interface{}) ConsumeBigItemByUserIdRequest {
+    return ConsumeBigItemByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        ItemName: core.CastString(data["itemName"]),
+        ConsumeCount: core.CastString(data["consumeCount"]),
+    }
+}
+
+func (p ConsumeBigItemByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "userId": p.UserId,
+        "itemName": p.ItemName,
+        "consumeCount": p.ConsumeCount,
+    }
+}
+
+func (p ConsumeBigItemByUserIdRequest) Pointer() *ConsumeBigItemByUserIdRequest {
+    return &p
+}
+
+type DeleteBigItemByUserIdRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    InventoryName *string `json:"inventoryName"`
+    UserId *string `json:"userId"`
+    ItemName *string `json:"itemName"`
+}
+
+func NewDeleteBigItemByUserIdRequestFromJson(data string) DeleteBigItemByUserIdRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteBigItemByUserIdRequestFromDict(dict)
+}
+
+func NewDeleteBigItemByUserIdRequestFromDict(data map[string]interface{}) DeleteBigItemByUserIdRequest {
+    return DeleteBigItemByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        InventoryName: core.CastString(data["inventoryName"]),
+        UserId: core.CastString(data["userId"]),
+        ItemName: core.CastString(data["itemName"]),
+    }
+}
+
+func (p DeleteBigItemByUserIdRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "inventoryName": p.InventoryName,
+        "userId": p.UserId,
+        "itemName": p.ItemName,
+    }
+}
+
+func (p DeleteBigItemByUserIdRequest) Pointer() *DeleteBigItemByUserIdRequest {
+    return &p
+}
+
+type AcquireBigItemByStampSheetRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewAcquireBigItemByStampSheetRequestFromJson(data string) AcquireBigItemByStampSheetRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireBigItemByStampSheetRequestFromDict(dict)
+}
+
+func NewAcquireBigItemByStampSheetRequestFromDict(data map[string]interface{}) AcquireBigItemByStampSheetRequest {
+    return AcquireBigItemByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p AcquireBigItemByStampSheetRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p AcquireBigItemByStampSheetRequest) Pointer() *AcquireBigItemByStampSheetRequest {
+    return &p
+}
+
+type ConsumeBigItemByStampTaskRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampTask *string `json:"stampTask"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewConsumeBigItemByStampTaskRequestFromJson(data string) ConsumeBigItemByStampTaskRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewConsumeBigItemByStampTaskRequestFromDict(dict)
+}
+
+func NewConsumeBigItemByStampTaskRequestFromDict(data map[string]interface{}) ConsumeBigItemByStampTaskRequest {
+    return ConsumeBigItemByStampTaskRequest {
+        StampTask: core.CastString(data["stampTask"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p ConsumeBigItemByStampTaskRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampTask": p.StampTask,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p ConsumeBigItemByStampTaskRequest) Pointer() *ConsumeBigItemByStampTaskRequest {
     return &p
 }

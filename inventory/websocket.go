@@ -3027,6 +3027,1227 @@ func (p Gs2InventoryWebSocketClient) GetSimpleItemModel(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2InventoryWebSocketClient) describeBigInventoryModelMastersAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeBigInventoryModelMastersAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBigInventoryModelMastersAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBigInventoryModelMastersResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBigInventoryModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DescribeBigInventoryModelMastersAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeBigInventoryModelMastersAsync(
+	request *DescribeBigInventoryModelMastersRequest,
+	callback chan<- DescribeBigInventoryModelMastersAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigInventoryModelMaster",
+    		"function": "describeBigInventoryModelMasters",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeBigInventoryModelMastersAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeBigInventoryModelMasters(
+	request *DescribeBigInventoryModelMastersRequest,
+) (*DescribeBigInventoryModelMastersResult, error) {
+	callback := make(chan DescribeBigInventoryModelMastersAsyncResult, 1)
+	go p.DescribeBigInventoryModelMastersAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) createBigInventoryModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- CreateBigInventoryModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateBigInventoryModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateBigInventoryModelMasterResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateBigInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- CreateBigInventoryModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) CreateBigInventoryModelMasterAsync(
+	request *CreateBigInventoryModelMasterRequest,
+	callback chan<- CreateBigInventoryModelMasterAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigInventoryModelMaster",
+    		"function": "createBigInventoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.createBigInventoryModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) CreateBigInventoryModelMaster(
+	request *CreateBigInventoryModelMasterRequest,
+) (*CreateBigInventoryModelMasterResult, error) {
+	callback := make(chan CreateBigInventoryModelMasterAsyncResult, 1)
+	go p.CreateBigInventoryModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) getBigInventoryModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetBigInventoryModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBigInventoryModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBigInventoryModelMasterResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBigInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- GetBigInventoryModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) GetBigInventoryModelMasterAsync(
+	request *GetBigInventoryModelMasterRequest,
+	callback chan<- GetBigInventoryModelMasterAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigInventoryModelMaster",
+    		"function": "getBigInventoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getBigInventoryModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) GetBigInventoryModelMaster(
+	request *GetBigInventoryModelMasterRequest,
+) (*GetBigInventoryModelMasterResult, error) {
+	callback := make(chan GetBigInventoryModelMasterAsyncResult, 1)
+	go p.GetBigInventoryModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) updateBigInventoryModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UpdateBigInventoryModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateBigInventoryModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateBigInventoryModelMasterResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateBigInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- UpdateBigInventoryModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) UpdateBigInventoryModelMasterAsync(
+	request *UpdateBigInventoryModelMasterRequest,
+	callback chan<- UpdateBigInventoryModelMasterAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigInventoryModelMaster",
+    		"function": "updateBigInventoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.updateBigInventoryModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) UpdateBigInventoryModelMaster(
+	request *UpdateBigInventoryModelMasterRequest,
+) (*UpdateBigInventoryModelMasterResult, error) {
+	callback := make(chan UpdateBigInventoryModelMasterAsyncResult, 1)
+	go p.UpdateBigInventoryModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) deleteBigInventoryModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteBigInventoryModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteBigInventoryModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteBigInventoryModelMasterResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteBigInventoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DeleteBigInventoryModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DeleteBigInventoryModelMasterAsync(
+	request *DeleteBigInventoryModelMasterRequest,
+	callback chan<- DeleteBigInventoryModelMasterAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigInventoryModelMaster",
+    		"function": "deleteBigInventoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.deleteBigInventoryModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DeleteBigInventoryModelMaster(
+	request *DeleteBigInventoryModelMasterRequest,
+) (*DeleteBigInventoryModelMasterResult, error) {
+	callback := make(chan DeleteBigInventoryModelMasterAsyncResult, 1)
+	go p.DeleteBigInventoryModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) describeBigInventoryModelsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeBigInventoryModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBigInventoryModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBigInventoryModelsResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBigInventoryModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DescribeBigInventoryModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeBigInventoryModelsAsync(
+	request *DescribeBigInventoryModelsRequest,
+	callback chan<- DescribeBigInventoryModelsAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigInventoryModel",
+    		"function": "describeBigInventoryModels",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeBigInventoryModelsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeBigInventoryModels(
+	request *DescribeBigInventoryModelsRequest,
+) (*DescribeBigInventoryModelsResult, error) {
+	callback := make(chan DescribeBigInventoryModelsAsyncResult, 1)
+	go p.DescribeBigInventoryModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) getBigInventoryModelAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetBigInventoryModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBigInventoryModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBigInventoryModelResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBigInventoryModelAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- GetBigInventoryModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) GetBigInventoryModelAsync(
+	request *GetBigInventoryModelRequest,
+	callback chan<- GetBigInventoryModelAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigInventoryModel",
+    		"function": "getBigInventoryModel",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getBigInventoryModelAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) GetBigInventoryModel(
+	request *GetBigInventoryModelRequest,
+) (*GetBigInventoryModelResult, error) {
+	callback := make(chan GetBigInventoryModelAsyncResult, 1)
+	go p.GetBigInventoryModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) describeBigItemModelMastersAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeBigItemModelMastersAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBigItemModelMastersAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBigItemModelMastersResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBigItemModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DescribeBigItemModelMastersAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeBigItemModelMastersAsync(
+	request *DescribeBigItemModelMastersRequest,
+	callback chan<- DescribeBigItemModelMastersAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItemModelMaster",
+    		"function": "describeBigItemModelMasters",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeBigItemModelMastersAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeBigItemModelMasters(
+	request *DescribeBigItemModelMastersRequest,
+) (*DescribeBigItemModelMastersResult, error) {
+	callback := make(chan DescribeBigItemModelMastersAsyncResult, 1)
+	go p.DescribeBigItemModelMastersAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) createBigItemModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- CreateBigItemModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateBigItemModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateBigItemModelMasterResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateBigItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- CreateBigItemModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) CreateBigItemModelMasterAsync(
+	request *CreateBigItemModelMasterRequest,
+	callback chan<- CreateBigItemModelMasterAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItemModelMaster",
+    		"function": "createBigItemModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.createBigItemModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) CreateBigItemModelMaster(
+	request *CreateBigItemModelMasterRequest,
+) (*CreateBigItemModelMasterResult, error) {
+	callback := make(chan CreateBigItemModelMasterAsyncResult, 1)
+	go p.CreateBigItemModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) getBigItemModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetBigItemModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBigItemModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBigItemModelMasterResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBigItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- GetBigItemModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) GetBigItemModelMasterAsync(
+	request *GetBigItemModelMasterRequest,
+	callback chan<- GetBigItemModelMasterAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItemModelMaster",
+    		"function": "getBigItemModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getBigItemModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) GetBigItemModelMaster(
+	request *GetBigItemModelMasterRequest,
+) (*GetBigItemModelMasterResult, error) {
+	callback := make(chan GetBigItemModelMasterAsyncResult, 1)
+	go p.GetBigItemModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) updateBigItemModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UpdateBigItemModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateBigItemModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateBigItemModelMasterResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateBigItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- UpdateBigItemModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) UpdateBigItemModelMasterAsync(
+	request *UpdateBigItemModelMasterRequest,
+	callback chan<- UpdateBigItemModelMasterAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItemModelMaster",
+    		"function": "updateBigItemModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.updateBigItemModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) UpdateBigItemModelMaster(
+	request *UpdateBigItemModelMasterRequest,
+) (*UpdateBigItemModelMasterResult, error) {
+	callback := make(chan UpdateBigItemModelMasterAsyncResult, 1)
+	go p.UpdateBigItemModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) deleteBigItemModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteBigItemModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteBigItemModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteBigItemModelMasterResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteBigItemModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DeleteBigItemModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DeleteBigItemModelMasterAsync(
+	request *DeleteBigItemModelMasterRequest,
+	callback chan<- DeleteBigItemModelMasterAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItemModelMaster",
+    		"function": "deleteBigItemModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.deleteBigItemModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DeleteBigItemModelMaster(
+	request *DeleteBigItemModelMasterRequest,
+) (*DeleteBigItemModelMasterResult, error) {
+	callback := make(chan DeleteBigItemModelMasterAsyncResult, 1)
+	go p.DeleteBigItemModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) describeBigItemModelsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeBigItemModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBigItemModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBigItemModelsResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBigItemModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DescribeBigItemModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeBigItemModelsAsync(
+	request *DescribeBigItemModelsRequest,
+	callback chan<- DescribeBigItemModelsAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItemModel",
+    		"function": "describeBigItemModels",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeBigItemModelsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeBigItemModels(
+	request *DescribeBigItemModelsRequest,
+) (*DescribeBigItemModelsResult, error) {
+	callback := make(chan DescribeBigItemModelsAsyncResult, 1)
+	go p.DescribeBigItemModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) getBigItemModelAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetBigItemModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBigItemModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBigItemModelResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBigItemModelAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- GetBigItemModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) GetBigItemModelAsync(
+	request *GetBigItemModelRequest,
+	callback chan<- GetBigItemModelAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItemModel",
+    		"function": "getBigItemModel",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getBigItemModelAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) GetBigItemModel(
+	request *GetBigItemModelRequest,
+) (*GetBigItemModelResult, error) {
+	callback := make(chan GetBigItemModelAsyncResult, 1)
+	go p.GetBigItemModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2InventoryWebSocketClient) exportMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- ExportMasterAsyncResult,
@@ -7703,6 +8924,954 @@ func (p Gs2InventoryWebSocketClient) ConsumeSimpleItemsByStampTask(
 ) (*ConsumeSimpleItemsByStampTaskResult, error) {
 	callback := make(chan ConsumeSimpleItemsByStampTaskAsyncResult, 1)
 	go p.ConsumeSimpleItemsByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) describeBigItemsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeBigItemsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBigItemsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBigItemsResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBigItemsAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DescribeBigItemsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeBigItemsAsync(
+	request *DescribeBigItemsRequest,
+	callback chan<- DescribeBigItemsAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItem",
+    		"function": "describeBigItems",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.describeBigItemsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeBigItems(
+	request *DescribeBigItemsRequest,
+) (*DescribeBigItemsResult, error) {
+	callback := make(chan DescribeBigItemsAsyncResult, 1)
+	go p.DescribeBigItemsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) describeBigItemsByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeBigItemsByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeBigItemsByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeBigItemsByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBigItemsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DescribeBigItemsByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeBigItemsByUserIdAsync(
+	request *DescribeBigItemsByUserIdRequest,
+	callback chan<- DescribeBigItemsByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItem",
+    		"function": "describeBigItemsByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.describeBigItemsByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DescribeBigItemsByUserId(
+	request *DescribeBigItemsByUserIdRequest,
+) (*DescribeBigItemsByUserIdResult, error) {
+	callback := make(chan DescribeBigItemsByUserIdAsyncResult, 1)
+	go p.DescribeBigItemsByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) getBigItemAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetBigItemAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBigItemAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBigItemResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBigItemAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- GetBigItemAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) GetBigItemAsync(
+	request *GetBigItemRequest,
+	callback chan<- GetBigItemAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItem",
+    		"function": "getBigItem",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+
+	go p.getBigItemAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) GetBigItem(
+	request *GetBigItemRequest,
+) (*GetBigItemResult, error) {
+	callback := make(chan GetBigItemAsyncResult, 1)
+	go p.GetBigItemAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) getBigItemByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetBigItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBigItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBigItemByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBigItemByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- GetBigItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) GetBigItemByUserIdAsync(
+	request *GetBigItemByUserIdRequest,
+	callback chan<- GetBigItemByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItem",
+    		"function": "getBigItemByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.getBigItemByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) GetBigItemByUserId(
+	request *GetBigItemByUserIdRequest,
+) (*GetBigItemByUserIdResult, error) {
+	callback := make(chan GetBigItemByUserIdAsyncResult, 1)
+	go p.GetBigItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) acquireBigItemByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- AcquireBigItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcquireBigItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcquireBigItemByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcquireBigItemByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+        }
+    }
+	callback <- AcquireBigItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) AcquireBigItemByUserIdAsync(
+	request *AcquireBigItemByUserIdRequest,
+	callback chan<- AcquireBigItemByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItem",
+    		"function": "acquireBigItemByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.AcquireCount != nil && *request.AcquireCount != "" {
+        bodies["acquireCount"] = *request.AcquireCount
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.acquireBigItemByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) AcquireBigItemByUserId(
+	request *AcquireBigItemByUserIdRequest,
+) (*AcquireBigItemByUserIdResult, error) {
+	callback := make(chan AcquireBigItemByUserIdAsyncResult, 1)
+	go p.AcquireBigItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) consumeBigItemAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ConsumeBigItemAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ConsumeBigItemAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ConsumeBigItemResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ConsumeBigItemAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.count.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
+    }
+	callback <- ConsumeBigItemAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) ConsumeBigItemAsync(
+	request *ConsumeBigItemRequest,
+	callback chan<- ConsumeBigItemAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItem",
+    		"function": "consumeBigItem",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ConsumeCount != nil && *request.ConsumeCount != "" {
+        bodies["consumeCount"] = *request.ConsumeCount
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.consumeBigItemAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) ConsumeBigItem(
+	request *ConsumeBigItemRequest,
+) (*ConsumeBigItemResult, error) {
+	callback := make(chan ConsumeBigItemAsyncResult, 1)
+	go p.ConsumeBigItemAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) consumeBigItemByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ConsumeBigItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ConsumeBigItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ConsumeBigItemByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ConsumeBigItemByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+            }
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.count.insufficient" {
+				asyncResult.Err = gs2err.SetClientError(Insufficient{})
+            }
+        }
+    }
+	callback <- ConsumeBigItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) ConsumeBigItemByUserIdAsync(
+	request *ConsumeBigItemByUserIdRequest,
+	callback chan<- ConsumeBigItemByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItem",
+    		"function": "consumeBigItemByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+    if request.ConsumeCount != nil && *request.ConsumeCount != "" {
+        bodies["consumeCount"] = *request.ConsumeCount
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.consumeBigItemByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) ConsumeBigItemByUserId(
+	request *ConsumeBigItemByUserIdRequest,
+) (*ConsumeBigItemByUserIdResult, error) {
+	callback := make(chan ConsumeBigItemByUserIdAsyncResult, 1)
+	go p.ConsumeBigItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) deleteBigItemByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteBigItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteBigItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteBigItemByUserIdResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteBigItemByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- DeleteBigItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) DeleteBigItemByUserIdAsync(
+	request *DeleteBigItemByUserIdRequest,
+	callback chan<- DeleteBigItemByUserIdAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItem",
+    		"function": "deleteBigItemByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.InventoryName != nil && *request.InventoryName != "" {
+        bodies["inventoryName"] = *request.InventoryName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.ItemName != nil && *request.ItemName != "" {
+        bodies["itemName"] = *request.ItemName
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
+
+	go p.deleteBigItemByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) DeleteBigItemByUserId(
+	request *DeleteBigItemByUserIdRequest,
+) (*DeleteBigItemByUserIdResult, error) {
+	callback := make(chan DeleteBigItemByUserIdAsyncResult, 1)
+	go p.DeleteBigItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) acquireBigItemByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- AcquireBigItemByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcquireBigItemByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcquireBigItemByStampSheetResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AcquireBigItemByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- AcquireBigItemByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) AcquireBigItemByStampSheetAsync(
+	request *AcquireBigItemByStampSheetRequest,
+	callback chan<- AcquireBigItemByStampSheetAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItem",
+    		"function": "acquireBigItemByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.acquireBigItemByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) AcquireBigItemByStampSheet(
+	request *AcquireBigItemByStampSheetRequest,
+) (*AcquireBigItemByStampSheetResult, error) {
+	callback := make(chan AcquireBigItemByStampSheetAsyncResult, 1)
+	go p.AcquireBigItemByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) consumeBigItemByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ConsumeBigItemByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ConsumeBigItemByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ConsumeBigItemByStampTaskResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ConsumeBigItemByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- ConsumeBigItemByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) ConsumeBigItemByStampTaskAsync(
+	request *ConsumeBigItemByStampTaskRequest,
+	callback chan<- ConsumeBigItemByStampTaskAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "inventory",
+    		"component": "bigItem",
+    		"function": "consumeBigItemByStampTask",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.consumeBigItemByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) ConsumeBigItemByStampTask(
+	request *ConsumeBigItemByStampTaskRequest,
+) (*ConsumeBigItemByStampTaskResult, error) {
+	callback := make(chan ConsumeBigItemByStampTaskAsyncResult, 1)
+	go p.ConsumeBigItemByStampTaskAsync(
 		request,
 		callback,
 	)
