@@ -31,6 +31,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -50,6 +51,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -91,6 +93,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -101,6 +107,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -134,6 +141,7 @@ type InventoryModelMaster struct {
 	ProtectReferencedItem *bool `json:"protectReferencedItem"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewInventoryModelMasterFromJson(data string) InventoryModelMaster {
@@ -153,6 +161,7 @@ func NewInventoryModelMasterFromDict(data map[string]interface{}) InventoryModel
         ProtectReferencedItem: core.CastBool(data["protectReferencedItem"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -194,6 +203,10 @@ func (p InventoryModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "inventoryModelId": inventoryModelId,
         "name": name,
@@ -204,6 +217,7 @@ func (p InventoryModelMaster) ToDict() map[string]interface{} {
         "protectReferencedItem": protectReferencedItem,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -329,6 +343,7 @@ type ItemModelMaster struct {
 	SortValue *int32 `json:"sortValue"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewItemModelMasterFromJson(data string) ItemModelMaster {
@@ -349,6 +364,7 @@ func NewItemModelMasterFromDict(data map[string]interface{}) ItemModelMaster {
         SortValue: core.CastInt32(data["sortValue"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -394,6 +410,10 @@ func (p ItemModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "itemModelId": itemModelId,
         "inventoryName": inventoryName,
@@ -405,6 +425,7 @@ func (p ItemModelMaster) ToDict() map[string]interface{} {
         "sortValue": sortValue,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -517,6 +538,7 @@ type SimpleInventoryModelMaster struct {
 	Description *string `json:"description"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewSimpleInventoryModelMasterFromJson(data string) SimpleInventoryModelMaster {
@@ -533,6 +555,7 @@ func NewSimpleInventoryModelMasterFromDict(data map[string]interface{}) SimpleIn
         Description: core.CastString(data["description"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -562,6 +585,10 @@ func (p SimpleInventoryModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "inventoryModelId": inventoryModelId,
         "name": name,
@@ -569,6 +596,7 @@ func (p SimpleInventoryModelMaster) ToDict() map[string]interface{} {
         "description": description,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -669,6 +697,7 @@ type SimpleItemModelMaster struct {
 	Metadata *string `json:"metadata"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewSimpleItemModelMasterFromJson(data string) SimpleItemModelMaster {
@@ -685,6 +714,7 @@ func NewSimpleItemModelMasterFromDict(data map[string]interface{}) SimpleItemMod
         Metadata: core.CastString(data["metadata"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -714,6 +744,10 @@ func (p SimpleItemModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "itemModelId": itemModelId,
         "name": name,
@@ -721,6 +755,7 @@ func (p SimpleItemModelMaster) ToDict() map[string]interface{} {
         "metadata": metadata,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -812,6 +847,7 @@ type BigInventoryModelMaster struct {
 	Description *string `json:"description"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewBigInventoryModelMasterFromJson(data string) BigInventoryModelMaster {
@@ -828,6 +864,7 @@ func NewBigInventoryModelMasterFromDict(data map[string]interface{}) BigInventor
         Description: core.CastString(data["description"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -857,6 +894,10 @@ func (p BigInventoryModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "inventoryModelId": inventoryModelId,
         "name": name,
@@ -864,6 +905,7 @@ func (p BigInventoryModelMaster) ToDict() map[string]interface{} {
         "description": description,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -964,6 +1006,7 @@ type BigItemModelMaster struct {
 	Metadata *string `json:"metadata"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewBigItemModelMasterFromJson(data string) BigItemModelMaster {
@@ -980,6 +1023,7 @@ func NewBigItemModelMasterFromDict(data map[string]interface{}) BigItemModelMast
         Metadata: core.CastString(data["metadata"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -1009,6 +1053,10 @@ func (p BigItemModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "itemModelId": itemModelId,
         "name": name,
@@ -1016,6 +1064,7 @@ func (p BigItemModelMaster) ToDict() map[string]interface{} {
         "metadata": metadata,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -1162,6 +1211,7 @@ type Inventory struct {
 	CurrentInventoryMaxCapacity *int32 `json:"currentInventoryMaxCapacity"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewInventoryFromJson(data string) Inventory {
@@ -1179,6 +1229,7 @@ func NewInventoryFromDict(data map[string]interface{}) Inventory {
         CurrentInventoryMaxCapacity: core.CastInt32(data["currentInventoryMaxCapacity"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -1212,6 +1263,10 @@ func (p Inventory) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "inventoryId": inventoryId,
         "inventoryName": inventoryName,
@@ -1220,6 +1275,7 @@ func (p Inventory) ToDict() map[string]interface{} {
         "currentInventoryMaxCapacity": currentInventoryMaxCapacity,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -1423,6 +1479,7 @@ type SimpleInventory struct {
 	SimpleItems []SimpleItem `json:"simpleItems"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewSimpleInventoryFromJson(data string) SimpleInventory {
@@ -1439,6 +1496,7 @@ func NewSimpleInventoryFromDict(data map[string]interface{}) SimpleInventory {
         SimpleItems: CastSimpleItems(core.CastArray(data["simpleItems"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -1470,6 +1528,10 @@ func (p SimpleInventory) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "inventoryId": inventoryId,
         "inventoryName": inventoryName,
@@ -1477,6 +1539,7 @@ func (p SimpleInventory) ToDict() map[string]interface{} {
         "simpleItems": simpleItems,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -1505,6 +1568,7 @@ type SimpleItem struct {
 	UserId *string `json:"userId"`
 	ItemName *string `json:"itemName"`
 	Count *int64 `json:"count"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewSimpleItemFromJson(data string) SimpleItem {
@@ -1519,6 +1583,7 @@ func NewSimpleItemFromDict(data map[string]interface{}) SimpleItem {
         UserId: core.CastString(data["userId"]),
         ItemName: core.CastString(data["itemName"]),
         Count: core.CastInt64(data["count"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -1540,11 +1605,16 @@ func (p SimpleItem) ToDict() map[string]interface{} {
     if p.Count != nil {
         count = p.Count
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "itemId": itemId,
         "userId": userId,
         "itemName": itemName,
         "count": count,
+        "revision": revision,
     }
 }
 
@@ -1648,6 +1718,9 @@ type BigItem struct {
 	UserId *string `json:"userId"`
 	ItemName *string `json:"itemName"`
 	Count *string `json:"count"`
+	CreatedAt *int64 `json:"createdAt"`
+	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewBigItemFromJson(data string) BigItem {
@@ -1662,6 +1735,9 @@ func NewBigItemFromDict(data map[string]interface{}) BigItem {
         UserId: core.CastString(data["userId"]),
         ItemName: core.CastString(data["itemName"]),
         Count: core.CastString(data["count"]),
+        CreatedAt: core.CastInt64(data["createdAt"]),
+        UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -1683,11 +1759,26 @@ func (p BigItem) ToDict() map[string]interface{} {
     if p.Count != nil {
         count = p.Count
     }
+    var createdAt *int64
+    if p.CreatedAt != nil {
+        createdAt = p.CreatedAt
+    }
+    var updatedAt *int64
+    if p.UpdatedAt != nil {
+        updatedAt = p.UpdatedAt
+    }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "itemId": itemId,
         "userId": userId,
         "itemName": itemName,
         "count": count,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
