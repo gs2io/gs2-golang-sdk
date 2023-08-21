@@ -34,6 +34,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -56,6 +57,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -109,6 +111,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -122,6 +128,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -157,6 +164,7 @@ type ExperienceModelMaster struct {
 	AcquireActionRates []AcquireActionRate `json:"acquireActionRates"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewExperienceModelMasterFromJson(data string) ExperienceModelMaster {
@@ -178,6 +186,7 @@ func NewExperienceModelMasterFromDict(data map[string]interface{}) ExperienceMod
         AcquireActionRates: CastAcquireActionRates(core.CastArray(data["acquireActionRates"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -229,6 +238,10 @@ func (p ExperienceModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "experienceModelId": experienceModelId,
         "name": name,
@@ -241,6 +254,7 @@ func (p ExperienceModelMaster) ToDict() map[string]interface{} {
         "acquireActionRates": acquireActionRates,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -370,6 +384,7 @@ type ThresholdMaster struct {
 	Values []*int64 `json:"values"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewThresholdMasterFromJson(data string) ThresholdMaster {
@@ -387,6 +402,7 @@ func NewThresholdMasterFromDict(data map[string]interface{}) ThresholdMaster {
         Values: core.CastInt64s(core.CastArray(data["values"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -422,6 +438,10 @@ func (p ThresholdMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "thresholdId": thresholdId,
         "name": name,
@@ -430,6 +450,7 @@ func (p ThresholdMaster) ToDict() map[string]interface{} {
         "values": values,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -630,6 +651,7 @@ type Status struct {
 	NextRankUpExperienceValue *int64 `json:"nextRankUpExperienceValue"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewStatusFromJson(data string) Status {
@@ -650,6 +672,7 @@ func NewStatusFromDict(data map[string]interface{}) Status {
         NextRankUpExperienceValue: core.CastInt64(data["nextRankUpExperienceValue"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -695,6 +718,10 @@ func (p Status) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "statusId": statusId,
         "experienceName": experienceName,
@@ -706,6 +733,7 @@ func (p Status) ToDict() map[string]interface{} {
         "nextRankUpExperienceValue": nextRankUpExperienceValue,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

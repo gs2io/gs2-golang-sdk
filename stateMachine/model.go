@@ -32,6 +32,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -52,6 +53,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -97,6 +99,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -108,6 +114,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -138,6 +145,7 @@ type StateMachineMaster struct {
 	Version *int64 `json:"version"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewStateMachineMasterFromJson(data string) StateMachineMaster {
@@ -154,6 +162,7 @@ func NewStateMachineMasterFromDict(data map[string]interface{}) StateMachineMast
         Version: core.CastInt64(data["version"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -183,6 +192,10 @@ func (p StateMachineMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "stateMachineId": stateMachineId,
         "mainStateMachineName": mainStateMachineName,
@@ -190,6 +203,7 @@ func (p StateMachineMaster) ToDict() map[string]interface{} {
         "version": version,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

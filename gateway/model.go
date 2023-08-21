@@ -29,6 +29,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -46,6 +47,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -79,6 +81,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -87,6 +93,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -117,6 +124,7 @@ type WebSocketSession struct {
 	UserId *string `json:"userId"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewWebSocketSessionFromJson(data string) WebSocketSession {
@@ -133,6 +141,7 @@ func NewWebSocketSessionFromDict(data map[string]interface{}) WebSocketSession {
         UserId: core.CastString(data["userId"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -162,6 +171,10 @@ func (p WebSocketSession) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "webSocketSessionId": webSocketSessionId,
         "connectionId": connectionId,
@@ -169,6 +182,7 @@ func (p WebSocketSession) ToDict() map[string]interface{} {
         "userId": userId,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -198,6 +212,7 @@ type FirebaseToken struct {
 	Token *string `json:"token"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewFirebaseTokenFromJson(data string) FirebaseToken {
@@ -213,6 +228,7 @@ func NewFirebaseTokenFromDict(data map[string]interface{}) FirebaseToken {
         Token: core.CastString(data["token"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -238,12 +254,17 @@ func (p FirebaseToken) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "firebaseTokenId": firebaseTokenId,
         "userId": userId,
         "token": token,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

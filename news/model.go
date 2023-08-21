@@ -29,6 +29,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -46,6 +47,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -79,6 +81,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -87,6 +93,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -117,6 +124,7 @@ type Progress struct {
 	PatternCount *int32 `json:"patternCount"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewProgressFromJson(data string) Progress {
@@ -133,6 +141,7 @@ func NewProgressFromDict(data map[string]interface{}) Progress {
         PatternCount: core.CastInt32(data["patternCount"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -162,6 +171,10 @@ func (p Progress) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "progressId": progressId,
         "uploadToken": uploadToken,
@@ -169,6 +182,7 @@ func (p Progress) ToDict() map[string]interface{} {
         "patternCount": patternCount,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -197,6 +211,7 @@ type Output struct {
 	Name *string `json:"name"`
 	Text *string `json:"text"`
 	CreatedAt *int64 `json:"createdAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewOutputFromJson(data string) Output {
@@ -211,6 +226,7 @@ func NewOutputFromDict(data map[string]interface{}) Output {
         Name: core.CastString(data["name"]),
         Text: core.CastString(data["text"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -232,11 +248,16 @@ func (p Output) ToDict() map[string]interface{} {
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "outputId": outputId,
         "name": name,
         "text": text,
         "createdAt": createdAt,
+        "revision": revision,
     }
 }
 

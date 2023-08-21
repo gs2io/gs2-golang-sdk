@@ -29,6 +29,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -46,6 +47,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -79,6 +81,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -87,6 +93,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -125,6 +132,7 @@ type StaminaModelMaster struct {
 	RecoverValueTableName *string `json:"recoverValueTableName"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewStaminaModelMasterFromJson(data string) StaminaModelMaster {
@@ -149,6 +157,7 @@ func NewStaminaModelMasterFromDict(data map[string]interface{}) StaminaModelMast
         RecoverValueTableName: core.CastString(data["recoverValueTableName"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -210,6 +219,10 @@ func (p StaminaModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "staminaModelId": staminaModelId,
         "name": name,
@@ -225,6 +238,7 @@ func (p StaminaModelMaster) ToDict() map[string]interface{} {
         "recoverValueTableName": recoverValueTableName,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -257,6 +271,7 @@ type MaxStaminaTableMaster struct {
 	Values []*int32 `json:"values"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewMaxStaminaTableMasterFromJson(data string) MaxStaminaTableMaster {
@@ -275,6 +290,7 @@ func NewMaxStaminaTableMasterFromDict(data map[string]interface{}) MaxStaminaTab
         Values: core.CastInt32s(core.CastArray(data["values"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -314,6 +330,10 @@ func (p MaxStaminaTableMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "maxStaminaTableId": maxStaminaTableId,
         "name": name,
@@ -323,6 +343,7 @@ func (p MaxStaminaTableMaster) ToDict() map[string]interface{} {
         "values": values,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -355,6 +376,7 @@ type RecoverIntervalTableMaster struct {
 	Values []*int32 `json:"values"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewRecoverIntervalTableMasterFromJson(data string) RecoverIntervalTableMaster {
@@ -373,6 +395,7 @@ func NewRecoverIntervalTableMasterFromDict(data map[string]interface{}) RecoverI
         Values: core.CastInt32s(core.CastArray(data["values"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -412,6 +435,10 @@ func (p RecoverIntervalTableMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "recoverIntervalTableId": recoverIntervalTableId,
         "name": name,
@@ -421,6 +448,7 @@ func (p RecoverIntervalTableMaster) ToDict() map[string]interface{} {
         "values": values,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -453,6 +481,7 @@ type RecoverValueTableMaster struct {
 	Values []*int32 `json:"values"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewRecoverValueTableMasterFromJson(data string) RecoverValueTableMaster {
@@ -471,6 +500,7 @@ func NewRecoverValueTableMasterFromDict(data map[string]interface{}) RecoverValu
         Values: core.CastInt32s(core.CastArray(data["values"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -510,6 +540,10 @@ func (p RecoverValueTableMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "recoverValueTableId": recoverValueTableId,
         "name": name,
@@ -519,6 +553,7 @@ func (p RecoverValueTableMaster) ToDict() map[string]interface{} {
         "values": values,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -936,6 +971,7 @@ type Stamina struct {
 	LastRecoveredAt *int64 `json:"lastRecoveredAt"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewStaminaFromJson(data string) Stamina {
@@ -958,6 +994,7 @@ func NewStaminaFromDict(data map[string]interface{}) Stamina {
         LastRecoveredAt: core.CastInt64(data["lastRecoveredAt"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -1011,6 +1048,10 @@ func (p Stamina) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "staminaId": staminaId,
         "staminaName": staminaName,
@@ -1024,6 +1065,7 @@ func (p Stamina) ToDict() map[string]interface{} {
         "lastRecoveredAt": lastRecoveredAt,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

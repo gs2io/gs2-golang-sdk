@@ -30,6 +30,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -48,6 +49,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -85,6 +87,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -94,6 +100,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -185,6 +192,7 @@ type EntryModelMaster struct {
 	Metadata *string `json:"metadata"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewEntryModelMasterFromJson(data string) EntryModelMaster {
@@ -201,6 +209,7 @@ func NewEntryModelMasterFromDict(data map[string]interface{}) EntryModelMaster {
         Metadata: core.CastString(data["metadata"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -230,6 +239,10 @@ func (p EntryModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "entryModelId": entryModelId,
         "name": name,
@@ -237,6 +250,7 @@ func (p EntryModelMaster) ToDict() map[string]interface{} {
         "metadata": metadata,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -265,6 +279,7 @@ type Entry struct {
 	UserId *string `json:"userId"`
 	Name *string `json:"name"`
 	AcquiredAt *int64 `json:"acquiredAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewEntryFromJson(data string) Entry {
@@ -279,6 +294,7 @@ func NewEntryFromDict(data map[string]interface{}) Entry {
         UserId: core.CastString(data["userId"]),
         Name: core.CastString(data["name"]),
         AcquiredAt: core.CastInt64(data["acquiredAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -300,11 +316,16 @@ func (p Entry) ToDict() map[string]interface{} {
     if p.AcquiredAt != nil {
         acquiredAt = p.AcquiredAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "entryId": entryId,
         "userId": userId,
         "name": name,
         "acquiredAt": acquiredAt,
+        "revision": revision,
     }
 }
 

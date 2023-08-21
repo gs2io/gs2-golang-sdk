@@ -31,6 +31,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -50,6 +51,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -91,6 +93,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -101,6 +107,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -137,6 +144,7 @@ type VersionModelMaster struct {
 	SignatureKeyId *string `json:"signatureKeyId"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewVersionModelMasterFromJson(data string) VersionModelMaster {
@@ -159,6 +167,7 @@ func NewVersionModelMasterFromDict(data map[string]interface{}) VersionModelMast
         SignatureKeyId: core.CastString(data["signatureKeyId"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -212,6 +221,10 @@ func (p VersionModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "versionModelId": versionModelId,
         "name": name,
@@ -225,6 +238,7 @@ func (p VersionModelMaster) ToDict() map[string]interface{} {
         "signatureKeyId": signatureKeyId,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -419,6 +433,7 @@ type AcceptVersion struct {
 	Version *Version `json:"version"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewAcceptVersionFromJson(data string) AcceptVersion {
@@ -435,6 +450,7 @@ func NewAcceptVersionFromDict(data map[string]interface{}) AcceptVersion {
         Version: NewVersionFromDict(core.CastMap(data["version"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -464,6 +480,10 @@ func (p AcceptVersion) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "acceptVersionId": acceptVersionId,
         "versionName": versionName,
@@ -471,6 +491,7 @@ func (p AcceptVersion) ToDict() map[string]interface{} {
         "version": version,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

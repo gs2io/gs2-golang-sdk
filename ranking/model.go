@@ -29,6 +29,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -46,6 +47,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -81,6 +83,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -89,6 +95,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -296,6 +303,7 @@ type CategoryModelMaster struct {
 	Generation *string `json:"generation"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewCategoryModelMasterFromJson(data string) CategoryModelMaster {
@@ -326,6 +334,7 @@ func NewCategoryModelMasterFromDict(data map[string]interface{}) CategoryModelMa
         Generation: core.CastString(data["generation"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -415,6 +424,10 @@ func (p CategoryModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "categoryModelId": categoryModelId,
         "name": name,
@@ -436,6 +449,7 @@ func (p CategoryModelMaster) ToDict() map[string]interface{} {
         "generation": generation,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -466,6 +480,7 @@ type Subscribe struct {
 	TargetUserIds []*string `json:"targetUserIds"`
 	SubscribedUserIds []*string `json:"subscribedUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewSubscribeFromJson(data string) Subscribe {
@@ -482,6 +497,7 @@ func NewSubscribeFromDict(data map[string]interface{}) Subscribe {
         TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
         SubscribedUserIds: core.CastStrings(core.CastArray(data["subscribedUserIds"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -515,6 +531,10 @@ func (p Subscribe) ToDict() map[string]interface{} {
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "subscribeId": subscribeId,
         "categoryName": categoryName,
@@ -522,6 +542,7 @@ func (p Subscribe) ToDict() map[string]interface{} {
         "targetUserIds": targetUserIds,
         "subscribedUserIds": subscribedUserIds,
         "createdAt": createdAt,
+        "revision": revision,
     }
 }
 

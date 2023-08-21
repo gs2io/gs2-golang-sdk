@@ -27,6 +27,7 @@ type User struct {
 	Description *string `json:"description"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewUserFromJson(data string) User {
@@ -42,6 +43,7 @@ func NewUserFromDict(data map[string]interface{}) User {
         Description: core.CastString(data["description"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -67,12 +69,17 @@ func (p User) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "userId": userId,
         "name": name,
         "description": description,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -183,6 +190,7 @@ type Identifier struct {
 	UserName *string `json:"userName"`
 	ClientSecret *string `json:"clientSecret"`
 	CreatedAt *int64 `json:"createdAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewIdentifierFromJson(data string) Identifier {
@@ -197,6 +205,7 @@ func NewIdentifierFromDict(data map[string]interface{}) Identifier {
         UserName: core.CastString(data["userName"]),
         ClientSecret: core.CastString(data["clientSecret"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -218,11 +227,16 @@ func (p Identifier) ToDict() map[string]interface{} {
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "clientId": clientId,
         "userName": userName,
         "clientSecret": clientSecret,
         "createdAt": createdAt,
+        "revision": revision,
     }
 }
 
@@ -251,6 +265,7 @@ type Password struct {
 	UserId *string `json:"userId"`
 	UserName *string `json:"userName"`
 	CreatedAt *int64 `json:"createdAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewPasswordFromJson(data string) Password {
@@ -265,6 +280,7 @@ func NewPasswordFromDict(data map[string]interface{}) Password {
         UserId: core.CastString(data["userId"]),
         UserName: core.CastString(data["userName"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -286,11 +302,16 @@ func (p Password) ToDict() map[string]interface{} {
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "passwordId": passwordId,
         "userId": userId,
         "userName": userName,
         "createdAt": createdAt,
+        "revision": revision,
     }
 }
 
@@ -318,6 +339,7 @@ type AttachSecurityPolicy struct {
 	UserId *string `json:"userId"`
 	SecurityPolicyIds []*string `json:"securityPolicyIds"`
 	AttachedAt *int64 `json:"attachedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewAttachSecurityPolicyFromJson(data string) AttachSecurityPolicy {
@@ -331,6 +353,7 @@ func NewAttachSecurityPolicyFromDict(data map[string]interface{}) AttachSecurity
         UserId: core.CastString(data["userId"]),
         SecurityPolicyIds: core.CastStrings(core.CastArray(data["securityPolicyIds"])),
         AttachedAt: core.CastInt64(data["attachedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -350,10 +373,15 @@ func (p AttachSecurityPolicy) ToDict() map[string]interface{} {
     if p.AttachedAt != nil {
         attachedAt = p.AttachedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "userId": userId,
         "securityPolicyIds": securityPolicyIds,
         "attachedAt": attachedAt,
+        "revision": revision,
     }
 }
 

@@ -34,6 +34,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -56,6 +57,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -109,6 +111,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -122,6 +128,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -152,6 +159,7 @@ type Account struct {
 	TimeOffset *int32 `json:"timeOffset"`
 	Banned *bool `json:"banned"`
 	CreatedAt *int64 `json:"createdAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewAccountFromJson(data string) Account {
@@ -168,6 +176,7 @@ func NewAccountFromDict(data map[string]interface{}) Account {
         TimeOffset: core.CastInt32(data["timeOffset"]),
         Banned: core.CastBool(data["banned"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -197,6 +206,10 @@ func (p Account) ToDict() map[string]interface{} {
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "accountId": accountId,
         "userId": userId,
@@ -204,6 +217,7 @@ func (p Account) ToDict() map[string]interface{} {
         "timeOffset": timeOffset,
         "banned": banned,
         "createdAt": createdAt,
+        "revision": revision,
     }
 }
 
@@ -234,6 +248,7 @@ type TakeOver struct {
 	UserIdentifier *string `json:"userIdentifier"`
 	Password *string `json:"password"`
 	CreatedAt *int64 `json:"createdAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewTakeOverFromJson(data string) TakeOver {
@@ -250,6 +265,7 @@ func NewTakeOverFromDict(data map[string]interface{}) TakeOver {
         UserIdentifier: core.CastString(data["userIdentifier"]),
         Password: core.CastString(data["password"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -279,6 +295,10 @@ func (p TakeOver) ToDict() map[string]interface{} {
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "takeOverId": takeOverId,
         "userId": userId,
@@ -286,6 +306,7 @@ func (p TakeOver) ToDict() map[string]interface{} {
         "userIdentifier": userIdentifier,
         "password": password,
         "createdAt": createdAt,
+        "revision": revision,
     }
 }
 
@@ -314,6 +335,7 @@ type DataOwner struct {
 	UserId *string `json:"userId"`
 	Name *string `json:"name"`
 	CreatedAt *int64 `json:"createdAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewDataOwnerFromJson(data string) DataOwner {
@@ -328,6 +350,7 @@ func NewDataOwnerFromDict(data map[string]interface{}) DataOwner {
         UserId: core.CastString(data["userId"]),
         Name: core.CastString(data["name"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -349,11 +372,16 @@ func (p DataOwner) ToDict() map[string]interface{} {
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "dataOwnerId": dataOwnerId,
         "userId": userId,
         "name": name,
         "createdAt": createdAt,
+        "revision": revision,
     }
 }
 

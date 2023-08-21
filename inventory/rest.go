@@ -9998,7 +9998,7 @@ func (p Gs2InventoryRestClient) AcquireBigItemByUserIdAsync(
 	request *AcquireBigItemByUserIdRequest,
 	callback chan<- AcquireBigItemByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/{itemName}/acquire"
+	path := "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/item/{itemName}/acquire"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -10115,7 +10115,7 @@ func (p Gs2InventoryRestClient) ConsumeBigItemAsync(
 	request *ConsumeBigItemRequest,
 	callback chan<- ConsumeBigItemAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/big/inventory/{inventoryName}/{itemName}/consume"
+	path := "/{namespaceName}/user/me/big/inventory/{inventoryName}/item/{itemName}/consume"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -10230,7 +10230,7 @@ func (p Gs2InventoryRestClient) ConsumeBigItemByUserIdAsync(
 	request *ConsumeBigItemByUserIdRequest,
 	callback chan<- ConsumeBigItemByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/{itemName}/consume"
+	path := "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/item/{itemName}/consume"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {
@@ -10338,7 +10338,7 @@ func (p Gs2InventoryRestClient) DeleteBigItemByUserIdAsync(
 	request *DeleteBigItemByUserIdRequest,
 	callback chan<- DeleteBigItemByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}"
+	path := "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/item/{itemName}"
     if request.NamespaceName != nil && *request.NamespaceName != ""  {
         path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
     } else {

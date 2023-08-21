@@ -34,6 +34,7 @@ type Namespace struct {
 	QueueNamespaceId *string `json:"queueNamespaceId"`
     // Deprecated: should not be used
 	KeyId *string `json:"keyId"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -54,6 +55,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         UpdatedAt: core.CastInt64(data["updatedAt"]),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -99,6 +101,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.KeyId != nil {
         keyId = p.KeyId
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -110,6 +116,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "updatedAt": updatedAt,
         "queueNamespaceId": queueNamespaceId,
         "keyId": keyId,
+        "revision": revision,
     }
 }
 
@@ -142,6 +149,7 @@ type SalesItemMaster struct {
 	AcquireActions []AcquireAction `json:"acquireActions"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewSalesItemMasterFromJson(data string) SalesItemMaster {
@@ -160,6 +168,7 @@ func NewSalesItemMasterFromDict(data map[string]interface{}) SalesItemMaster {
         AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -201,6 +210,10 @@ func (p SalesItemMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "salesItemId": salesItemId,
         "name": name,
@@ -210,6 +223,7 @@ func (p SalesItemMaster) ToDict() map[string]interface{} {
         "acquireActions": acquireActions,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -241,6 +255,7 @@ type SalesItemGroupMaster struct {
 	SalesItemNames []*string `json:"salesItemNames"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewSalesItemGroupMasterFromJson(data string) SalesItemGroupMaster {
@@ -258,6 +273,7 @@ func NewSalesItemGroupMasterFromDict(data map[string]interface{}) SalesItemGroup
         SalesItemNames: core.CastStrings(core.CastArray(data["salesItemNames"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -293,6 +309,10 @@ func (p SalesItemGroupMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "salesItemGroupId": salesItemGroupId,
         "name": name,
@@ -301,6 +321,7 @@ func (p SalesItemGroupMaster) ToDict() map[string]interface{} {
         "salesItemNames": salesItemNames,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -333,6 +354,7 @@ type ShowcaseMaster struct {
 	DisplayItems []DisplayItemMaster `json:"displayItems"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewShowcaseMasterFromJson(data string) ShowcaseMaster {
@@ -351,6 +373,7 @@ func NewShowcaseMasterFromDict(data map[string]interface{}) ShowcaseMaster {
         DisplayItems: CastDisplayItemMasters(core.CastArray(data["displayItems"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -390,6 +413,10 @@ func (p ShowcaseMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "showcaseId": showcaseId,
         "name": name,
@@ -399,6 +426,7 @@ func (p ShowcaseMaster) ToDict() map[string]interface{} {
         "displayItems": displayItems,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -769,6 +797,7 @@ type DisplayItemMaster struct {
 	SalesItemName *string `json:"salesItemName"`
 	SalesItemGroupName *string `json:"salesItemGroupName"`
 	SalesPeriodEventId *string `json:"salesPeriodEventId"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewDisplayItemMasterFromJson(data string) DisplayItemMaster {
@@ -784,6 +813,7 @@ func NewDisplayItemMasterFromDict(data map[string]interface{}) DisplayItemMaster
         SalesItemName: core.CastString(data["salesItemName"]),
         SalesItemGroupName: core.CastString(data["salesItemGroupName"]),
         SalesPeriodEventId: core.CastString(data["salesPeriodEventId"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -809,12 +839,17 @@ func (p DisplayItemMaster) ToDict() map[string]interface{} {
     if p.SalesPeriodEventId != nil {
         salesPeriodEventId = p.SalesPeriodEventId
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "displayItemId": displayItemId,
         "type": _type,
         "salesItemName": salesItemName,
         "salesItemGroupName": salesItemGroupName,
         "salesPeriodEventId": salesPeriodEventId,
+        "revision": revision,
     }
 }
 
@@ -850,6 +885,7 @@ type RandomShowcaseMaster struct {
 	SalesPeriodEventId *string `json:"salesPeriodEventId"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewRandomShowcaseMasterFromJson(data string) RandomShowcaseMaster {
@@ -871,6 +907,7 @@ func NewRandomShowcaseMasterFromDict(data map[string]interface{}) RandomShowcase
         SalesPeriodEventId: core.CastString(data["salesPeriodEventId"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -922,6 +959,10 @@ func (p RandomShowcaseMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "showcaseId": showcaseId,
         "name": name,
@@ -934,6 +975,7 @@ func (p RandomShowcaseMaster) ToDict() map[string]interface{} {
         "salesPeriodEventId": salesPeriodEventId,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

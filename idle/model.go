@@ -30,6 +30,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -48,6 +49,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -85,6 +87,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -94,6 +100,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -129,6 +136,7 @@ type CategoryModelMaster struct {
 	ReceivePeriodScheduleId *string `json:"receivePeriodScheduleId"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewCategoryModelMasterFromJson(data string) CategoryModelMaster {
@@ -150,6 +158,7 @@ func NewCategoryModelMasterFromDict(data map[string]interface{}) CategoryModelMa
         ReceivePeriodScheduleId: core.CastString(data["receivePeriodScheduleId"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -201,6 +210,10 @@ func (p CategoryModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "categoryModelId": categoryModelId,
         "name": name,
@@ -213,6 +226,7 @@ func (p CategoryModelMaster) ToDict() map[string]interface{} {
         "receivePeriodScheduleId": receivePeriodScheduleId,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -343,6 +357,7 @@ type Status struct {
 	MaximumIdleMinutes *int32 `json:"maximumIdleMinutes"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewStatusFromJson(data string) Status {
@@ -361,6 +376,7 @@ func NewStatusFromDict(data map[string]interface{}) Status {
         MaximumIdleMinutes: core.CastInt32(data["maximumIdleMinutes"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -398,6 +414,10 @@ func (p Status) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "statusId": statusId,
         "categoryName": categoryName,
@@ -407,6 +427,7 @@ func (p Status) ToDict() map[string]interface{} {
         "maximumIdleMinutes": maximumIdleMinutes,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

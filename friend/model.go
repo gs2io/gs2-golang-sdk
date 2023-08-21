@@ -39,6 +39,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -66,6 +67,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -139,6 +141,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -157,6 +163,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -188,6 +195,7 @@ type Profile struct {
 	FriendProfile *string `json:"friendProfile"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewProfileFromJson(data string) Profile {
@@ -205,6 +213,7 @@ func NewProfileFromDict(data map[string]interface{}) Profile {
         FriendProfile: core.CastString(data["friendProfile"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -238,6 +247,10 @@ func (p Profile) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "profileId": profileId,
         "userId": userId,
@@ -246,6 +259,7 @@ func (p Profile) ToDict() map[string]interface{} {
         "friendProfile": friendProfile,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -275,6 +289,7 @@ type Follow struct {
 	TargetUserIds []*string `json:"targetUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewFollowFromJson(data string) Follow {
@@ -290,6 +305,7 @@ func NewFollowFromDict(data map[string]interface{}) Follow {
         TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -317,12 +333,17 @@ func (p Follow) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "followId": followId,
         "userId": userId,
         "targetUserIds": targetUserIds,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -352,6 +373,7 @@ type Friend struct {
 	TargetUserIds []*string `json:"targetUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewFriendFromJson(data string) Friend {
@@ -367,6 +389,7 @@ func NewFriendFromDict(data map[string]interface{}) Friend {
         TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -394,12 +417,17 @@ func (p Friend) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "friendId": friendId,
         "userId": userId,
         "targetUserIds": targetUserIds,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -429,6 +457,7 @@ type SendBox struct {
 	TargetUserIds []*string `json:"targetUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewSendBoxFromJson(data string) SendBox {
@@ -444,6 +473,7 @@ func NewSendBoxFromDict(data map[string]interface{}) SendBox {
         TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -471,12 +501,17 @@ func (p SendBox) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "sendBoxId": sendBoxId,
         "userId": userId,
         "targetUserIds": targetUserIds,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -506,6 +541,7 @@ type Inbox struct {
 	FromUserIds []*string `json:"fromUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewInboxFromJson(data string) Inbox {
@@ -521,6 +557,7 @@ func NewInboxFromDict(data map[string]interface{}) Inbox {
         FromUserIds: core.CastStrings(core.CastArray(data["fromUserIds"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -548,12 +585,17 @@ func (p Inbox) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "inboxId": inboxId,
         "userId": userId,
         "fromUserIds": fromUserIds,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -583,6 +625,7 @@ type BlackList struct {
 	TargetUserIds []*string `json:"targetUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewBlackListFromJson(data string) BlackList {
@@ -598,6 +641,7 @@ func NewBlackListFromDict(data map[string]interface{}) BlackList {
         TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -625,12 +669,17 @@ func (p BlackList) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "blackListId": blackListId,
         "userId": userId,
         "targetUserIds": targetUserIds,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

@@ -30,6 +30,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -48,6 +49,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -85,6 +87,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -94,6 +100,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -126,6 +133,7 @@ type DistributorModelMaster struct {
 	WhiteListTargetIds []*string `json:"whiteListTargetIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewDistributorModelMasterFromJson(data string) DistributorModelMaster {
@@ -144,6 +152,7 @@ func NewDistributorModelMasterFromDict(data map[string]interface{}) DistributorM
         WhiteListTargetIds: core.CastStrings(core.CastArray(data["whiteListTargetIds"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -183,6 +192,10 @@ func (p DistributorModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "distributorModelId": distributorModelId,
         "name": name,
@@ -192,6 +205,7 @@ func (p DistributorModelMaster) ToDict() map[string]interface{} {
         "whiteListTargetIds": whiteListTargetIds,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -356,6 +370,7 @@ type StampSheetResult struct {
 	SheetResult *string `json:"sheetResult"`
 	NextTransactionId *string `json:"nextTransactionId"`
 	CreatedAt *int64 `json:"createdAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewStampSheetResultFromJson(data string) StampSheetResult {
@@ -375,6 +390,7 @@ func NewStampSheetResultFromDict(data map[string]interface{}) StampSheetResult {
         SheetResult: core.CastString(data["sheetResult"]),
         NextTransactionId: core.CastString(data["nextTransactionId"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -420,6 +436,10 @@ func (p StampSheetResult) ToDict() map[string]interface{} {
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "stampSheetResultId": stampSheetResultId,
         "userId": userId,
@@ -430,6 +450,7 @@ func (p StampSheetResult) ToDict() map[string]interface{} {
         "sheetResult": sheetResult,
         "nextTransactionId": nextTransactionId,
         "createdAt": createdAt,
+        "revision": revision,
     }
 }
 

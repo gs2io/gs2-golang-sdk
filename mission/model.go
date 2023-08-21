@@ -30,6 +30,7 @@ type Complete struct {
 	NextResetAt *int64 `json:"nextResetAt"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewCompleteFromJson(data string) Complete {
@@ -48,6 +49,7 @@ func NewCompleteFromDict(data map[string]interface{}) Complete {
         NextResetAt: core.CastInt64(data["nextResetAt"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -89,6 +91,10 @@ func (p Complete) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "completeId": completeId,
         "userId": userId,
@@ -98,6 +104,7 @@ func (p Complete) ToDict() map[string]interface{} {
         "nextResetAt": nextResetAt,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -191,6 +198,7 @@ type CounterModelMaster struct {
 	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewCounterModelMasterFromJson(data string) CounterModelMaster {
@@ -209,6 +217,7 @@ func NewCounterModelMasterFromDict(data map[string]interface{}) CounterModelMast
         ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -248,6 +257,10 @@ func (p CounterModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "counterId": counterId,
         "name": name,
@@ -257,6 +270,7 @@ func (p CounterModelMaster) ToDict() map[string]interface{} {
         "challengePeriodEventId": challengePeriodEventId,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -360,6 +374,7 @@ type MissionGroupModelMaster struct {
 	CompleteNotificationNamespaceId *string `json:"completeNotificationNamespaceId"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewMissionGroupModelMasterFromJson(data string) MissionGroupModelMaster {
@@ -381,6 +396,7 @@ func NewMissionGroupModelMasterFromDict(data map[string]interface{}) MissionGrou
         CompleteNotificationNamespaceId: core.CastString(data["completeNotificationNamespaceId"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -430,6 +446,10 @@ func (p MissionGroupModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "missionGroupId": missionGroupId,
         "name": name,
@@ -442,6 +462,7 @@ func (p MissionGroupModelMaster) ToDict() map[string]interface{} {
         "completeNotificationNamespaceId": completeNotificationNamespaceId,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -481,6 +502,7 @@ type Namespace struct {
 	QueueNamespaceId *string `json:"queueNamespaceId"`
     // Deprecated: should not be used
 	KeyId *string `json:"keyId"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -504,6 +526,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         UpdatedAt: core.CastInt64(data["updatedAt"]),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -561,6 +584,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.KeyId != nil {
         keyId = p.KeyId
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -575,6 +602,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "updatedAt": updatedAt,
         "queueNamespaceId": queueNamespaceId,
         "keyId": keyId,
+        "revision": revision,
     }
 }
 
@@ -605,6 +633,7 @@ type Counter struct {
 	Values []ScopedValue `json:"values"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewCounterFromJson(data string) Counter {
@@ -621,6 +650,7 @@ func NewCounterFromDict(data map[string]interface{}) Counter {
         Values: CastScopedValues(core.CastArray(data["values"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -652,6 +682,10 @@ func (p Counter) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "counterId": counterId,
         "userId": userId,
@@ -659,6 +693,7 @@ func (p Counter) ToDict() map[string]interface{} {
         "values": values,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -1104,6 +1139,7 @@ type MissionTaskModelMaster struct {
 	PremiseMissionTaskName *string `json:"premiseMissionTaskName"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewMissionTaskModelMasterFromJson(data string) MissionTaskModelMaster {
@@ -1126,6 +1162,7 @@ func NewMissionTaskModelMasterFromDict(data map[string]interface{}) MissionTaskM
         PremiseMissionTaskName: core.CastString(data["premiseMissionTaskName"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -1181,6 +1218,10 @@ func (p MissionTaskModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "missionTaskId": missionTaskId,
         "name": name,
@@ -1194,6 +1235,7 @@ func (p MissionTaskModelMaster) ToDict() map[string]interface{} {
         "premiseMissionTaskName": premiseMissionTaskName,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

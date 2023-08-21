@@ -40,6 +40,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -68,6 +69,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -145,6 +147,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -164,6 +170,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -197,6 +204,7 @@ type Gathering struct {
 	ExpiresAt *int64 `json:"expiresAt"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewGatheringFromJson(data string) Gathering {
@@ -216,6 +224,7 @@ func NewGatheringFromDict(data map[string]interface{}) Gathering {
         ExpiresAt: core.CastInt64(data["expiresAt"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -263,6 +272,10 @@ func (p Gathering) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "gatheringId": gatheringId,
         "name": name,
@@ -273,6 +286,7 @@ func (p Gathering) ToDict() map[string]interface{} {
         "expiresAt": expiresAt,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -305,6 +319,7 @@ type RatingModelMaster struct {
 	Volatility *int32 `json:"volatility"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewRatingModelMasterFromJson(data string) RatingModelMaster {
@@ -323,6 +338,7 @@ func NewRatingModelMasterFromDict(data map[string]interface{}) RatingModelMaster
         Volatility: core.CastInt32(data["volatility"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -360,6 +376,10 @@ func (p RatingModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "ratingModelId": ratingModelId,
         "name": name,
@@ -369,6 +389,7 @@ func (p RatingModelMaster) ToDict() map[string]interface{} {
         "volatility": volatility,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -1052,6 +1073,7 @@ type Rating struct {
 	RateValue *float32 `json:"rateValue"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewRatingFromJson(data string) Rating {
@@ -1068,6 +1090,7 @@ func NewRatingFromDict(data map[string]interface{}) Rating {
         RateValue: core.CastFloat32(data["rateValue"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -1097,6 +1120,10 @@ func (p Rating) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "ratingId": ratingId,
         "name": name,
@@ -1104,6 +1131,7 @@ func (p Rating) ToDict() map[string]interface{} {
         "rateValue": rateValue,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -1366,6 +1394,7 @@ type Vote struct {
 	WrittenBallots []WrittenBallot `json:"writtenBallots"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewVoteFromJson(data string) Vote {
@@ -1382,6 +1411,7 @@ func NewVoteFromDict(data map[string]interface{}) Vote {
         WrittenBallots: CastWrittenBallots(core.CastArray(data["writtenBallots"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -1413,6 +1443,10 @@ func (p Vote) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "voteId": voteId,
         "ratingName": ratingName,
@@ -1420,6 +1454,7 @@ func (p Vote) ToDict() map[string]interface{} {
         "writtenBallots": writtenBallots,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

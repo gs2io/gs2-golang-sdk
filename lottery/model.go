@@ -35,6 +35,7 @@ type Namespace struct {
 	QueueNamespaceId *string `json:"queueNamespaceId"`
     // Deprecated: should not be used
 	KeyId *string `json:"keyId"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -56,6 +57,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         UpdatedAt: core.CastInt64(data["updatedAt"]),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -105,6 +107,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.KeyId != nil {
         keyId = p.KeyId
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -117,6 +123,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "updatedAt": updatedAt,
         "queueNamespaceId": queueNamespaceId,
         "keyId": keyId,
+        "revision": revision,
     }
 }
 
@@ -151,6 +158,7 @@ type LotteryModelMaster struct {
 	ChoicePrizeTableScriptId *string `json:"choicePrizeTableScriptId"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewLotteryModelMasterFromJson(data string) LotteryModelMaster {
@@ -171,6 +179,7 @@ func NewLotteryModelMasterFromDict(data map[string]interface{}) LotteryModelMast
         ChoicePrizeTableScriptId: core.CastString(data["choicePrizeTableScriptId"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -216,6 +225,10 @@ func (p LotteryModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "lotteryModelId": lotteryModelId,
         "name": name,
@@ -227,6 +240,7 @@ func (p LotteryModelMaster) ToDict() map[string]interface{} {
         "choicePrizeTableScriptId": choicePrizeTableScriptId,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -258,6 +272,7 @@ type PrizeTableMaster struct {
 	Prizes []Prize `json:"prizes"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewPrizeTableMasterFromJson(data string) PrizeTableMaster {
@@ -275,6 +290,7 @@ func NewPrizeTableMasterFromDict(data map[string]interface{}) PrizeTableMaster {
         Prizes: CastPrizes(core.CastArray(data["prizes"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -310,6 +326,10 @@ func (p PrizeTableMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "prizeTableId": prizeTableId,
         "name": name,
@@ -318,6 +338,7 @@ func (p PrizeTableMaster) ToDict() map[string]interface{} {
         "prizes": prizes,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -705,6 +726,7 @@ type PrizeLimit struct {
 	DrawnCount *int32 `json:"drawnCount"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewPrizeLimitFromJson(data string) PrizeLimit {
@@ -720,6 +742,7 @@ func NewPrizeLimitFromDict(data map[string]interface{}) PrizeLimit {
         DrawnCount: core.CastInt32(data["drawnCount"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -745,12 +768,17 @@ func (p PrizeLimit) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "prizeLimitId": prizeLimitId,
         "prizeId": prizeId,
         "drawnCount": drawnCount,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

@@ -28,6 +28,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -44,6 +45,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -73,6 +75,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -80,6 +86,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -121,6 +128,7 @@ type EventMaster struct {
 	RelativeTriggerName *string `json:"relativeTriggerName"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewEventMasterFromJson(data string) EventMaster {
@@ -148,6 +156,7 @@ func NewEventMasterFromDict(data map[string]interface{}) EventMaster {
         RelativeTriggerName: core.CastString(data["relativeTriggerName"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -221,6 +230,10 @@ func (p EventMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "eventId": eventId,
         "name": name,
@@ -239,6 +252,7 @@ func (p EventMaster) ToDict() map[string]interface{} {
         "relativeTriggerName": relativeTriggerName,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -268,6 +282,7 @@ type Trigger struct {
 	UserId *string `json:"userId"`
 	CreatedAt *int64 `json:"createdAt"`
 	ExpiresAt *int64 `json:"expiresAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewTriggerFromJson(data string) Trigger {
@@ -283,6 +298,7 @@ func NewTriggerFromDict(data map[string]interface{}) Trigger {
         UserId: core.CastString(data["userId"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         ExpiresAt: core.CastInt64(data["expiresAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -308,12 +324,17 @@ func (p Trigger) ToDict() map[string]interface{} {
     if p.ExpiresAt != nil {
         expiresAt = p.ExpiresAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "triggerId": triggerId,
         "name": name,
         "userId": userId,
         "createdAt": createdAt,
         "expiresAt": expiresAt,
+        "revision": revision,
     }
 }
 

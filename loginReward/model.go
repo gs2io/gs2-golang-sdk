@@ -30,6 +30,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -48,6 +49,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -85,6 +87,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -94,6 +100,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -131,6 +138,7 @@ type BonusModelMaster struct {
 	MissedReceiveReliefConsumeActions []ConsumeAction `json:"missedReceiveReliefConsumeActions"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewBonusModelMasterFromJson(data string) BonusModelMaster {
@@ -154,6 +162,7 @@ func NewBonusModelMasterFromDict(data map[string]interface{}) BonusModelMaster {
         MissedReceiveReliefConsumeActions: CastConsumeActions(core.CastArray(data["missedReceiveReliefConsumeActions"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -215,6 +224,10 @@ func (p BonusModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "bonusModelId": bonusModelId,
         "name": name,
@@ -229,6 +242,7 @@ func (p BonusModelMaster) ToDict() map[string]interface{} {
         "missedReceiveReliefConsumeActions": missedReceiveReliefConsumeActions,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -477,6 +491,7 @@ type ReceiveStatus struct {
 	LastReceivedAt *int64 `json:"lastReceivedAt"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewReceiveStatusFromJson(data string) ReceiveStatus {
@@ -494,6 +509,7 @@ func NewReceiveStatusFromDict(data map[string]interface{}) ReceiveStatus {
         LastReceivedAt: core.CastInt64(data["lastReceivedAt"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -529,6 +545,10 @@ func (p ReceiveStatus) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "receiveStatusId": receiveStatusId,
         "bonusModelName": bonusModelName,
@@ -537,6 +557,7 @@ func (p ReceiveStatus) ToDict() map[string]interface{} {
         "lastReceivedAt": lastReceivedAt,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

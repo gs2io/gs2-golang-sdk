@@ -35,6 +35,7 @@ type Namespace struct {
 	QueueNamespaceId *string `json:"queueNamespaceId"`
     // Deprecated: should not be used
 	KeyId *string `json:"keyId"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -56,6 +57,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         UpdatedAt: core.CastInt64(data["updatedAt"]),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -105,6 +107,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.KeyId != nil {
         keyId = p.KeyId
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -117,6 +123,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "updatedAt": updatedAt,
         "queueNamespaceId": queueNamespaceId,
         "keyId": keyId,
+        "revision": revision,
     }
 }
 
@@ -267,6 +274,7 @@ type RateModelMaster struct {
 	BonusRates []BonusRate `json:"bonusRates"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewRateModelMasterFromJson(data string) RateModelMaster {
@@ -289,6 +297,7 @@ func NewRateModelMasterFromDict(data map[string]interface{}) RateModelMaster {
         BonusRates: CastBonusRates(core.CastArray(data["bonusRates"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -346,6 +355,10 @@ func (p RateModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "rateModelId": rateModelId,
         "name": name,
@@ -359,6 +372,7 @@ func (p RateModelMaster) ToDict() map[string]interface{} {
         "bonusRates": bonusRates,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -392,6 +406,7 @@ type Progress struct {
 	Rate *float32 `json:"rate"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewProgressFromJson(data string) Progress {
@@ -411,6 +426,7 @@ func NewProgressFromDict(data map[string]interface{}) Progress {
         Rate: core.CastFloat32(data["rate"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -452,6 +468,10 @@ func (p Progress) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "progressId": progressId,
         "userId": userId,
@@ -462,6 +482,7 @@ func (p Progress) ToDict() map[string]interface{} {
         "rate": rate,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

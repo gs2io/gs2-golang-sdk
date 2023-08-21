@@ -38,6 +38,7 @@ type Namespace struct {
 	QueueNamespaceId *string `json:"queueNamespaceId"`
     // Deprecated: should not be used
 	KeyId *string `json:"keyId"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -62,6 +63,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         UpdatedAt: core.CastInt64(data["updatedAt"]),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -123,6 +125,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.KeyId != nil {
         keyId = p.KeyId
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -138,6 +144,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "updatedAt": updatedAt,
         "queueNamespaceId": queueNamespaceId,
         "keyId": keyId,
+        "revision": revision,
     }
 }
 
@@ -171,6 +178,7 @@ type Message struct {
 	ReceivedAt *int64 `json:"receivedAt"`
 	ReadAt *int64 `json:"readAt"`
 	ExpiresAt *int64 `json:"expiresAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewMessageFromJson(data string) Message {
@@ -190,6 +198,7 @@ func NewMessageFromDict(data map[string]interface{}) Message {
         ReceivedAt: core.CastInt64(data["receivedAt"]),
         ReadAt: core.CastInt64(data["readAt"]),
         ExpiresAt: core.CastInt64(data["expiresAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -233,6 +242,10 @@ func (p Message) ToDict() map[string]interface{} {
     if p.ExpiresAt != nil {
         expiresAt = p.ExpiresAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "messageId": messageId,
         "name": name,
@@ -243,6 +256,7 @@ func (p Message) ToDict() map[string]interface{} {
         "receivedAt": receivedAt,
         "readAt": readAt,
         "expiresAt": expiresAt,
+        "revision": revision,
     }
 }
 
@@ -328,6 +342,7 @@ type GlobalMessageMaster struct {
 	ExpiresTimeSpan *TimeSpan `json:"expiresTimeSpan"`
 	CreatedAt *int64 `json:"createdAt"`
 	ExpiresAt *int64 `json:"expiresAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewGlobalMessageMasterFromJson(data string) GlobalMessageMaster {
@@ -345,6 +360,7 @@ func NewGlobalMessageMasterFromDict(data map[string]interface{}) GlobalMessageMa
         ExpiresTimeSpan: NewTimeSpanFromDict(core.CastMap(data["expiresTimeSpan"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         ExpiresAt: core.CastInt64(data["expiresAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -380,6 +396,10 @@ func (p GlobalMessageMaster) ToDict() map[string]interface{} {
     if p.ExpiresAt != nil {
         expiresAt = p.ExpiresAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "globalMessageId": globalMessageId,
         "name": name,
@@ -388,6 +408,7 @@ func (p GlobalMessageMaster) ToDict() map[string]interface{} {
         "expiresTimeSpan": expiresTimeSpan,
         "createdAt": createdAt,
         "expiresAt": expiresAt,
+        "revision": revision,
     }
 }
 
@@ -501,6 +522,7 @@ type Received struct {
 	ReceivedGlobalMessageNames []*string `json:"receivedGlobalMessageNames"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewReceivedFromJson(data string) Received {
@@ -516,6 +538,7 @@ func NewReceivedFromDict(data map[string]interface{}) Received {
         ReceivedGlobalMessageNames: core.CastStrings(core.CastArray(data["receivedGlobalMessageNames"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -543,12 +566,17 @@ func (p Received) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "receivedId": receivedId,
         "userId": userId,
         "receivedGlobalMessageNames": receivedGlobalMessageNames,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

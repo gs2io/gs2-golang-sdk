@@ -31,6 +31,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -50,6 +51,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -91,6 +93,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -101,6 +107,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -202,6 +209,7 @@ type FormModelMaster struct {
 	Slots []SlotModel `json:"slots"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewFormModelMasterFromJson(data string) FormModelMaster {
@@ -219,6 +227,7 @@ func NewFormModelMasterFromDict(data map[string]interface{}) FormModelMaster {
         Slots: CastSlotModels(core.CastArray(data["slots"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -254,6 +263,10 @@ func (p FormModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "formModelId": formModelId,
         "name": name,
@@ -262,6 +275,7 @@ func (p FormModelMaster) ToDict() map[string]interface{} {
         "slots": slots,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -377,6 +391,7 @@ type MoldModelMaster struct {
 	FormModelName *string `json:"formModelName"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewMoldModelMasterFromJson(data string) MoldModelMaster {
@@ -396,6 +411,7 @@ func NewMoldModelMasterFromDict(data map[string]interface{}) MoldModelMaster {
         FormModelName: core.CastString(data["formModelName"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -437,6 +453,10 @@ func (p MoldModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "moldModelId": moldModelId,
         "name": name,
@@ -447,6 +467,7 @@ func (p MoldModelMaster) ToDict() map[string]interface{} {
         "formModelName": formModelName,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -531,6 +552,7 @@ type Mold struct {
 	Capacity *int32 `json:"capacity"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewMoldFromJson(data string) Mold {
@@ -547,6 +569,7 @@ func NewMoldFromDict(data map[string]interface{}) Mold {
         Capacity: core.CastInt32(data["capacity"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -576,6 +599,10 @@ func (p Mold) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "moldId": moldId,
         "name": name,
@@ -583,6 +610,7 @@ func (p Mold) ToDict() map[string]interface{} {
         "capacity": capacity,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -613,6 +641,7 @@ type Form struct {
 	Slots []Slot `json:"slots"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewFormFromJson(data string) Form {
@@ -629,6 +658,7 @@ func NewFormFromDict(data map[string]interface{}) Form {
         Slots: CastSlots(core.CastArray(data["slots"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -660,6 +690,10 @@ func (p Form) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "formId": formId,
         "name": name,
@@ -667,6 +701,7 @@ func (p Form) ToDict() map[string]interface{} {
         "slots": slots,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -698,6 +733,7 @@ type PropertyForm struct {
 	Slots []Slot `json:"slots"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewPropertyFormFromJson(data string) PropertyForm {
@@ -715,6 +751,7 @@ func NewPropertyFormFromDict(data map[string]interface{}) PropertyForm {
         Slots: CastSlots(core.CastArray(data["slots"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -750,6 +787,10 @@ func (p PropertyForm) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "formId": formId,
         "userId": userId,
@@ -758,6 +799,7 @@ func (p PropertyForm) ToDict() map[string]interface{} {
         "slots": slots,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

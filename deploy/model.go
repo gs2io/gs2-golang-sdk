@@ -29,6 +29,7 @@ type Stack struct {
 	Status *string `json:"status"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewStackFromJson(data string) Stack {
@@ -46,6 +47,7 @@ func NewStackFromDict(data map[string]interface{}) Stack {
         Status: core.CastString(data["status"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -79,6 +81,10 @@ func (p Stack) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "stackId": stackId,
         "name": name,
@@ -87,6 +93,7 @@ func (p Stack) ToDict() map[string]interface{} {
         "status": status,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -238,6 +245,7 @@ type Event struct {
 	Type *string `json:"type"`
 	Message *string `json:"message"`
 	EventAt *int64 `json:"eventAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewEventFromJson(data string) Event {
@@ -254,6 +262,7 @@ func NewEventFromDict(data map[string]interface{}) Event {
         Type: core.CastString(data["type"]),
         Message: core.CastString(data["message"]),
         EventAt: core.CastInt64(data["eventAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -283,6 +292,10 @@ func (p Event) ToDict() map[string]interface{} {
     if p.EventAt != nil {
         eventAt = p.EventAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "eventId": eventId,
         "name": name,
@@ -290,6 +303,7 @@ func (p Event) ToDict() map[string]interface{} {
         "type": _type,
         "message": message,
         "eventAt": eventAt,
+        "revision": revision,
     }
 }
 

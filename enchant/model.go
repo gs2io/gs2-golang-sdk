@@ -29,6 +29,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -46,6 +47,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -79,6 +81,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -87,6 +93,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -204,6 +211,7 @@ type BalanceParameterModelMaster struct {
 	Parameters []BalanceParameterValueModel `json:"parameters"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewBalanceParameterModelMasterFromJson(data string) BalanceParameterModelMaster {
@@ -223,6 +231,7 @@ func NewBalanceParameterModelMasterFromDict(data map[string]interface{}) Balance
         Parameters: CastBalanceParameterValueModels(core.CastArray(data["parameters"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -266,6 +275,10 @@ func (p BalanceParameterModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "balanceParameterModelId": balanceParameterModelId,
         "name": name,
@@ -276,6 +289,7 @@ func (p BalanceParameterModelMaster) ToDict() map[string]interface{} {
         "parameters": parameters,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -395,6 +409,7 @@ type RarityParameterModelMaster struct {
 	Parameters []RarityParameterValueModel `json:"parameters"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewRarityParameterModelMasterFromJson(data string) RarityParameterModelMaster {
@@ -414,6 +429,7 @@ func NewRarityParameterModelMasterFromDict(data map[string]interface{}) RarityPa
         Parameters: CastRarityParameterValueModels(core.CastArray(data["parameters"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -459,6 +475,10 @@ func (p RarityParameterModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "rarityParameterModelId": rarityParameterModelId,
         "name": name,
@@ -469,6 +489,7 @@ func (p RarityParameterModelMaster) ToDict() map[string]interface{} {
         "parameters": parameters,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -554,6 +575,7 @@ type BalanceParameterStatus struct {
 	ParameterValues []BalanceParameterValue `json:"parameterValues"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewBalanceParameterStatusFromJson(data string) BalanceParameterStatus {
@@ -571,6 +593,7 @@ func NewBalanceParameterStatusFromDict(data map[string]interface{}) BalanceParam
         ParameterValues: CastBalanceParameterValues(core.CastArray(data["parameterValues"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -606,6 +629,10 @@ func (p BalanceParameterStatus) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "balanceParameterStatusId": balanceParameterStatusId,
         "userId": userId,
@@ -614,6 +641,7 @@ func (p BalanceParameterStatus) ToDict() map[string]interface{} {
         "parameterValues": parameterValues,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -645,6 +673,7 @@ type RarityParameterStatus struct {
 	ParameterValues []RarityParameterValue `json:"parameterValues"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewRarityParameterStatusFromJson(data string) RarityParameterStatus {
@@ -662,6 +691,7 @@ func NewRarityParameterStatusFromDict(data map[string]interface{}) RarityParamet
         ParameterValues: CastRarityParameterValues(core.CastArray(data["parameterValues"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -697,6 +727,10 @@ func (p RarityParameterStatus) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "rarityParameterStatusId": rarityParameterStatusId,
         "userId": userId,
@@ -705,6 +739,7 @@ func (p RarityParameterStatus) ToDict() map[string]interface{} {
         "parameterValues": parameterValues,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

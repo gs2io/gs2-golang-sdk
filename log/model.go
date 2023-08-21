@@ -36,6 +36,7 @@ type Namespace struct {
 	Status *string `json:"status"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -60,6 +61,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         Status: core.CastString(data["status"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -121,6 +123,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -136,6 +142,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "status": status,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -825,6 +832,7 @@ type Insight struct {
 	Password *string `json:"password"`
 	Status *string `json:"status"`
 	CreatedAt *int64 `json:"createdAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewInsightFromJson(data string) Insight {
@@ -842,6 +850,7 @@ func NewInsightFromDict(data map[string]interface{}) Insight {
         Password: core.CastString(data["password"]),
         Status: core.CastString(data["status"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -875,6 +884,10 @@ func (p Insight) ToDict() map[string]interface{} {
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "insightId": insightId,
         "name": name,
@@ -883,6 +896,7 @@ func (p Insight) ToDict() map[string]interface{} {
         "password": password,
         "status": status,
         "createdAt": createdAt,
+        "revision": revision,
     }
 }
 

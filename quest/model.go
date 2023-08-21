@@ -36,6 +36,7 @@ type Namespace struct {
 	QueueNamespaceId *string `json:"queueNamespaceId"`
     // Deprecated: should not be used
 	KeyId *string `json:"keyId"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -58,6 +59,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         UpdatedAt: core.CastInt64(data["updatedAt"]),
         QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
         KeyId: core.CastString(data["keyId"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -111,6 +113,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.KeyId != nil {
         keyId = p.KeyId
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -124,6 +130,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "updatedAt": updatedAt,
         "queueNamespaceId": queueNamespaceId,
         "keyId": keyId,
+        "revision": revision,
     }
 }
 
@@ -155,6 +162,7 @@ type QuestGroupModelMaster struct {
 	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewQuestGroupModelMasterFromJson(data string) QuestGroupModelMaster {
@@ -172,6 +180,7 @@ func NewQuestGroupModelMasterFromDict(data map[string]interface{}) QuestGroupMod
         ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -205,6 +214,10 @@ func (p QuestGroupModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "questGroupModelId": questGroupModelId,
         "name": name,
@@ -213,6 +226,7 @@ func (p QuestGroupModelMaster) ToDict() map[string]interface{} {
         "challengePeriodEventId": challengePeriodEventId,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -250,6 +264,7 @@ type QuestModelMaster struct {
 	PremiseQuestNames []*string `json:"premiseQuestNames"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewQuestModelMasterFromJson(data string) QuestModelMaster {
@@ -273,6 +288,7 @@ func NewQuestModelMasterFromDict(data map[string]interface{}) QuestModelMaster {
         PremiseQuestNames: core.CastStrings(core.CastArray(data["premiseQuestNames"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -340,6 +356,10 @@ func (p QuestModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "questModelId": questModelId,
         "questGroupName": questGroupName,
@@ -354,6 +374,7 @@ func (p QuestModelMaster) ToDict() map[string]interface{} {
         "premiseQuestNames": premiseQuestNames,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -572,6 +593,7 @@ type Progress struct {
 	Metadata *string `json:"metadata"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewProgressFromJson(data string) Progress {
@@ -591,6 +613,7 @@ func NewProgressFromDict(data map[string]interface{}) Progress {
         Metadata: core.CastString(data["metadata"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -634,6 +657,10 @@ func (p Progress) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "progressId": progressId,
         "userId": userId,
@@ -644,6 +671,7 @@ func (p Progress) ToDict() map[string]interface{} {
         "metadata": metadata,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -674,6 +702,7 @@ type CompletedQuestList struct {
 	CompleteQuestNames []*string `json:"completeQuestNames"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewCompletedQuestListFromJson(data string) CompletedQuestList {
@@ -690,6 +719,7 @@ func NewCompletedQuestListFromDict(data map[string]interface{}) CompletedQuestLi
         CompleteQuestNames: core.CastStrings(core.CastArray(data["completeQuestNames"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -721,6 +751,10 @@ func (p CompletedQuestList) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "completedQuestListId": completedQuestListId,
         "userId": userId,
@@ -728,6 +762,7 @@ func (p CompletedQuestList) ToDict() map[string]interface{} {
         "completeQuestNames": completeQuestNames,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

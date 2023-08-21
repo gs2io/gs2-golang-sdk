@@ -28,6 +28,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -44,6 +45,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -73,6 +75,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -80,6 +86,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -111,6 +118,7 @@ type IssueJob struct {
 	IssueRequestCount *int32 `json:"issueRequestCount"`
 	Status *string `json:"status"`
 	CreatedAt *int64 `json:"createdAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewIssueJobFromJson(data string) IssueJob {
@@ -128,6 +136,7 @@ func NewIssueJobFromDict(data map[string]interface{}) IssueJob {
         IssueRequestCount: core.CastInt32(data["issueRequestCount"]),
         Status: core.CastString(data["status"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -161,6 +170,10 @@ func (p IssueJob) ToDict() map[string]interface{} {
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "issueJobId": issueJobId,
         "name": name,
@@ -169,6 +182,7 @@ func (p IssueJob) ToDict() map[string]interface{} {
         "issueRequestCount": issueRequestCount,
         "status": status,
         "createdAt": createdAt,
+        "revision": revision,
     }
 }
 
@@ -202,6 +216,7 @@ type SerialKey struct {
 	CreatedAt *int64 `json:"createdAt"`
 	UsedAt *int64 `json:"usedAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewSerialKeyFromJson(data string) SerialKey {
@@ -221,6 +236,7 @@ func NewSerialKeyFromDict(data map[string]interface{}) SerialKey {
         CreatedAt: core.CastInt64(data["createdAt"]),
         UsedAt: core.CastInt64(data["usedAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -262,6 +278,10 @@ func (p SerialKey) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "serialKeyId": serialKeyId,
         "campaignModelName": campaignModelName,
@@ -272,6 +292,7 @@ func (p SerialKey) ToDict() map[string]interface{} {
         "createdAt": createdAt,
         "usedAt": usedAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -371,6 +392,7 @@ type CampaignModelMaster struct {
 	EnableCampaignCode *bool `json:"enableCampaignCode"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewCampaignModelMasterFromJson(data string) CampaignModelMaster {
@@ -388,6 +410,7 @@ func NewCampaignModelMasterFromDict(data map[string]interface{}) CampaignModelMa
         EnableCampaignCode: core.CastBool(data["enableCampaignCode"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -421,6 +444,10 @@ func (p CampaignModelMaster) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "campaignId": campaignId,
         "name": name,
@@ -429,6 +456,7 @@ func (p CampaignModelMaster) ToDict() map[string]interface{} {
         "enableCampaignCode": enableCampaignCode,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 

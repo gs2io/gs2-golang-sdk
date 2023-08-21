@@ -38,6 +38,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -64,6 +65,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -133,6 +135,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -150,6 +156,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -182,6 +189,7 @@ type Wallet struct {
 	Detail []WalletDetail `json:"detail"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewWalletFromJson(data string) Wallet {
@@ -200,6 +208,7 @@ func NewWalletFromDict(data map[string]interface{}) Wallet {
         Detail: CastWalletDetails(core.CastArray(data["detail"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -239,6 +248,10 @@ func (p Wallet) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "walletId": walletId,
         "userId": userId,
@@ -248,6 +261,7 @@ func (p Wallet) ToDict() map[string]interface{} {
         "detail": detail,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -284,6 +298,7 @@ type Receipt struct {
 	Total *int32 `json:"total"`
 	ContentsId *string `json:"contentsId"`
 	CreatedAt *int64 `json:"createdAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewReceiptFromJson(data string) Receipt {
@@ -306,6 +321,7 @@ func NewReceiptFromDict(data map[string]interface{}) Receipt {
         Total: core.CastInt32(data["total"]),
         ContentsId: core.CastString(data["contentsId"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -359,6 +375,10 @@ func (p Receipt) ToDict() map[string]interface{} {
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "receiptId": receiptId,
         "transactionId": transactionId,
@@ -372,6 +392,7 @@ func (p Receipt) ToDict() map[string]interface{} {
         "total": total,
         "contentsId": contentsId,
         "createdAt": createdAt,
+        "revision": revision,
     }
 }
 

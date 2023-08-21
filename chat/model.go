@@ -35,6 +35,7 @@ type Namespace struct {
 	LogSetting *LogSetting `json:"logSetting"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -58,6 +59,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
         LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -115,6 +117,10 @@ func (p Namespace) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "namespaceId": namespaceId,
         "name": name,
@@ -129,6 +135,7 @@ func (p Namespace) ToDict() map[string]interface{} {
         "logSetting": logSetting,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -161,6 +168,7 @@ type Room struct {
 	WhiteListUserIds []*string `json:"whiteListUserIds"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewRoomFromJson(data string) Room {
@@ -179,6 +187,7 @@ func NewRoomFromDict(data map[string]interface{}) Room {
         WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -218,6 +227,10 @@ func (p Room) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "roomId": roomId,
         "name": name,
@@ -227,6 +240,7 @@ func (p Room) ToDict() map[string]interface{} {
         "whiteListUserIds": whiteListUserIds,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "revision": revision,
     }
 }
 
@@ -258,6 +272,7 @@ type Message struct {
 	Category *int32 `json:"category"`
 	Metadata *string `json:"metadata"`
 	CreatedAt *int64 `json:"createdAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewMessageFromJson(data string) Message {
@@ -275,6 +290,7 @@ func NewMessageFromDict(data map[string]interface{}) Message {
         Category: core.CastInt32(data["category"]),
         Metadata: core.CastString(data["metadata"]),
         CreatedAt: core.CastInt64(data["createdAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -308,6 +324,10 @@ func (p Message) ToDict() map[string]interface{} {
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "messageId": messageId,
         "roomName": roomName,
@@ -316,6 +336,7 @@ func (p Message) ToDict() map[string]interface{} {
         "category": category,
         "metadata": metadata,
         "createdAt": createdAt,
+        "revision": revision,
     }
 }
 
@@ -345,6 +366,7 @@ type Subscribe struct {
 	RoomName *string `json:"roomName"`
 	NotificationTypes []NotificationType `json:"notificationTypes"`
 	CreatedAt *int64 `json:"createdAt"`
+	Revision *int64 `json:"revision"`
 }
 
 func NewSubscribeFromJson(data string) Subscribe {
@@ -360,6 +382,7 @@ func NewSubscribeFromDict(data map[string]interface{}) Subscribe {
         RoomName: core.CastString(data["roomName"]),
         NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
+        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -387,12 +410,17 @@ func (p Subscribe) ToDict() map[string]interface{} {
     if p.CreatedAt != nil {
         createdAt = p.CreatedAt
     }
+    var revision *int64
+    if p.Revision != nil {
+        revision = p.Revision
+    }
     return map[string]interface{} {
         "subscribeId": subscribeId,
         "userId": userId,
         "roomName": roomName,
         "notificationTypes": notificationTypes,
         "createdAt": createdAt,
+        "revision": revision,
     }
 }
 
