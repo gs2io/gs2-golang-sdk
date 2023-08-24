@@ -1394,7 +1394,6 @@ type Vote struct {
 	WrittenBallots []WrittenBallot `json:"writtenBallots"`
 	CreatedAt *int64 `json:"createdAt"`
 	UpdatedAt *int64 `json:"updatedAt"`
-	Revision *int64 `json:"revision"`
 }
 
 func NewVoteFromJson(data string) Vote {
@@ -1411,7 +1410,6 @@ func NewVoteFromDict(data map[string]interface{}) Vote {
         WrittenBallots: CastWrittenBallots(core.CastArray(data["writtenBallots"])),
         CreatedAt: core.CastInt64(data["createdAt"]),
         UpdatedAt: core.CastInt64(data["updatedAt"]),
-        Revision: core.CastInt64(data["revision"]),
     }
 }
 
@@ -1443,10 +1441,6 @@ func (p Vote) ToDict() map[string]interface{} {
     if p.UpdatedAt != nil {
         updatedAt = p.UpdatedAt
     }
-    var revision *int64
-    if p.Revision != nil {
-        revision = p.Revision
-    }
     return map[string]interface{} {
         "voteId": voteId,
         "ratingName": ratingName,
@@ -1454,7 +1448,6 @@ func (p Vote) ToDict() map[string]interface{} {
         "writtenBallots": writtenBallots,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
-        "revision": revision,
     }
 }
 
