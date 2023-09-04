@@ -1488,6 +1488,90 @@ func (p Gs2ScheduleWebSocketClient) TriggerByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2ScheduleWebSocketClient) triggerByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- TriggerByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- TriggerByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result TriggerByStampSheetResult
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- TriggerByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+    if asyncResult.Err != nil {
+    }
+	callback <- TriggerByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ScheduleWebSocketClient) TriggerByStampSheetAsync(
+	request *TriggerByStampSheetRequest,
+	callback chan<- TriggerByStampSheetAsyncResult,
+) {
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "schedule",
+    		"component": "trigger",
+    		"function": "triggerByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+	go p.triggerByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ScheduleWebSocketClient) TriggerByStampSheet(
+	request *TriggerByStampSheetRequest,
+) (*TriggerByStampSheetResult, error) {
+	callback := make(chan TriggerByStampSheetAsyncResult, 1)
+	go p.TriggerByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2ScheduleWebSocketClient) deleteTriggerAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DeleteTriggerAsyncResult,

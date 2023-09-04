@@ -1559,6 +1559,94 @@ func (p Gs2ScheduleRestClient) TriggerByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func triggerByStampSheetAsyncHandler(
+	client Gs2ScheduleRestClient,
+	job *core.NetworkJob,
+	callback chan<- TriggerByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- TriggerByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result TriggerByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- TriggerByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- TriggerByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
+	}
+	callback <- TriggerByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ScheduleRestClient) TriggerByStampSheetAsync(
+	request *TriggerByStampSheetRequest,
+	callback chan<- TriggerByStampSheetAsyncResult,
+) {
+	path := "/stamp/trigger"
+
+	replacer := strings.NewReplacer()
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+	if request.ContextStack != nil {
+    	bodies["contextStack"] = *request.ContextStack;
+	}
+
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+
+	go triggerByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ScheduleRestClient) TriggerByStampSheet(
+	request *TriggerByStampSheetRequest,
+) (*TriggerByStampSheetResult, error) {
+	callback := make(chan TriggerByStampSheetAsyncResult, 1)
+	go p.TriggerByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteTriggerAsyncHandler(
 	client Gs2ScheduleRestClient,
 	job *core.NetworkJob,

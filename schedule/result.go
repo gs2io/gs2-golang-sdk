@@ -537,6 +537,37 @@ func (p TriggerByUserIdResult) Pointer() *TriggerByUserIdResult {
     return &p
 }
 
+type TriggerByStampSheetResult struct {
+    Item *Trigger `json:"item"`
+}
+
+type TriggerByStampSheetAsyncResult struct {
+	result *TriggerByStampSheetResult
+	err    error
+}
+
+func NewTriggerByStampSheetResultFromJson(data string) TriggerByStampSheetResult {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewTriggerByStampSheetResultFromDict(dict)
+}
+
+func NewTriggerByStampSheetResultFromDict(data map[string]interface{}) TriggerByStampSheetResult {
+    return TriggerByStampSheetResult {
+        Item: NewTriggerFromDict(core.CastMap(data["item"])).Pointer(),
+    }
+}
+
+func (p TriggerByStampSheetResult) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
+}
+
+func (p TriggerByStampSheetResult) Pointer() *TriggerByStampSheetResult {
+    return &p
+}
+
 type DeleteTriggerResult struct {
     Item *Trigger `json:"item"`
 }

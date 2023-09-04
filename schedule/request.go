@@ -623,6 +623,37 @@ func (p TriggerByUserIdRequest) Pointer() *TriggerByUserIdRequest {
     return &p
 }
 
+type TriggerByStampSheetRequest struct {
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
+}
+
+func NewTriggerByStampSheetRequestFromJson(data string) TriggerByStampSheetRequest {
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewTriggerByStampSheetRequestFromDict(dict)
+}
+
+func NewTriggerByStampSheetRequestFromDict(data map[string]interface{}) TriggerByStampSheetRequest {
+    return TriggerByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
+}
+
+func (p TriggerByStampSheetRequest) ToDict() map[string]interface{} {
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
+}
+
+func (p TriggerByStampSheetRequest) Pointer() *TriggerByStampSheetRequest {
+    return &p
+}
+
 type DeleteTriggerRequest struct {
     RequestId *string `json:"requestId"`
     ContextStack *string `json:"contextStack"`
