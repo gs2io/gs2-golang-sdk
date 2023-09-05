@@ -20,9 +20,9 @@ type Insufficient struct {
 }
 
 func (p Insufficient) Type() string {
-    return "StaminaInsufficient"
+	return "StaminaInsufficient"
 }
 
 func (p Insufficient) Code() string {
-    return "stamina.stamina.insufficient"
+	return "stamina.stamina.insufficient"
 }

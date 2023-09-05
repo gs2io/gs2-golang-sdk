@@ -17,90 +17,91 @@ permissions and limitations under the License.
 package ranking
 
 import (
-    "encoding/json"
-    "github.com/gs2io/gs2-golang-sdk/core"
+	"encoding/json"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Namespace struct {
-	NamespaceId *string `json:"namespaceId"`
-	Name *string `json:"name"`
-	Description *string `json:"description"`
+	NamespaceId       *string        `json:"namespaceId"`
+	Name              *string        `json:"name"`
+	Description       *string        `json:"description"`
 	LastCalculatedAts []CalculatedAt `json:"lastCalculatedAts"`
-	LogSetting *LogSetting `json:"logSetting"`
-	CreatedAt *int64 `json:"createdAt"`
-	UpdatedAt *int64 `json:"updatedAt"`
-	Revision *int64 `json:"revision"`
+	LogSetting        *LogSetting    `json:"logSetting"`
+	CreatedAt         *int64         `json:"createdAt"`
+	UpdatedAt         *int64         `json:"updatedAt"`
+	Revision          *int64         `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewNamespaceFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
-    return Namespace {
-        NamespaceId: core.CastString(data["namespaceId"]),
-        Name: core.CastString(data["name"]),
-        Description: core.CastString(data["description"]),
-        LastCalculatedAts: CastCalculatedAts(core.CastArray(data["lastCalculatedAts"])),
-        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-        UpdatedAt: core.CastInt64(data["updatedAt"]),
-        Revision: core.CastInt64(data["revision"]),
-    }
+	return Namespace{
+		NamespaceId:       core.CastString(data["namespaceId"]),
+		Name:              core.CastString(data["name"]),
+		Description:       core.CastString(data["description"]),
+		LastCalculatedAts: CastCalculatedAts(core.CastArray(data["lastCalculatedAts"])),
+		LogSetting:        NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:         core.CastInt64(data["createdAt"]),
+		UpdatedAt:         core.CastInt64(data["updatedAt"]),
+		Revision:          core.CastInt64(data["revision"]),
+	}
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-    
-    var namespaceId *string
-    if p.NamespaceId != nil {
-        namespaceId = p.NamespaceId
-    }
-    var name *string
-    if p.Name != nil {
-        name = p.Name
-    }
-    var description *string
-    if p.Description != nil {
-        description = p.Description
-    }
-    var lastCalculatedAts []interface{}
-    if p.LastCalculatedAts != nil {
-        lastCalculatedAts = CastCalculatedAtsFromDict(
-            p.LastCalculatedAts,
-        )
-    }
-    var logSetting map[string]interface{}
-    if p.LogSetting != nil {
-        logSetting = p.LogSetting.ToDict()
-    }
-    var createdAt *int64
-    if p.CreatedAt != nil {
-        createdAt = p.CreatedAt
-    }
-    var updatedAt *int64
-    if p.UpdatedAt != nil {
-        updatedAt = p.UpdatedAt
-    }
-    var revision *int64
-    if p.Revision != nil {
-        revision = p.Revision
-    }
-    return map[string]interface{} {
-        "namespaceId": namespaceId,
-        "name": name,
-        "description": description,
-        "lastCalculatedAts": lastCalculatedAts,
-        "logSetting": logSetting,
-        "createdAt": createdAt,
-        "updatedAt": updatedAt,
-        "revision": revision,
-    }
+
+	var namespaceId *string
+	if p.NamespaceId != nil {
+		namespaceId = p.NamespaceId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var description *string
+	if p.Description != nil {
+		description = p.Description
+	}
+	var lastCalculatedAts []interface{}
+	if p.LastCalculatedAts != nil {
+		lastCalculatedAts = CastCalculatedAtsFromDict(
+			p.LastCalculatedAts,
+		)
+	}
+	var logSetting map[string]interface{}
+	if p.LogSetting != nil {
+		logSetting = p.LogSetting.ToDict()
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	return map[string]interface{}{
+		"namespaceId":       namespaceId,
+		"name":              name,
+		"description":       description,
+		"lastCalculatedAts": lastCalculatedAts,
+		"logSetting":        logSetting,
+		"createdAt":         createdAt,
+		"updatedAt":         updatedAt,
+		"revision":          revision,
+	}
 }
 
 func (p Namespace) Pointer() *Namespace {
-    return &p
+	return &p
 }
 
 func CastNamespaces(data []interface{}) []Namespace {
@@ -112,158 +113,158 @@ func CastNamespaces(data []interface{}) []Namespace {
 }
 
 func CastNamespacesFromDict(data []Namespace) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CategoryModel struct {
-	CategoryModelId *string `json:"categoryModelId"`
-	Name *string `json:"name"`
-	Metadata *string `json:"metadata"`
-	MinimumValue *int64 `json:"minimumValue"`
-	MaximumValue *int64 `json:"maximumValue"`
-	OrderDirection *string `json:"orderDirection"`
-	Scope *string `json:"scope"`
-	UniqueByUserId *bool `json:"uniqueByUserId"`
-	Sum *bool `json:"sum"`
-	CalculateFixedTimingHour *int32 `json:"calculateFixedTimingHour"`
-	CalculateFixedTimingMinute *int32 `json:"calculateFixedTimingMinute"`
-	CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
-	AdditionalScopes []Scope `json:"additionalScopes"`
-	EntryPeriodEventId *string `json:"entryPeriodEventId"`
-	AccessPeriodEventId *string `json:"accessPeriodEventId"`
-	IgnoreUserIds []*string `json:"ignoreUserIds"`
-	Generation *string `json:"generation"`
+	CategoryModelId            *string   `json:"categoryModelId"`
+	Name                       *string   `json:"name"`
+	Metadata                   *string   `json:"metadata"`
+	MinimumValue               *int64    `json:"minimumValue"`
+	MaximumValue               *int64    `json:"maximumValue"`
+	OrderDirection             *string   `json:"orderDirection"`
+	Scope                      *string   `json:"scope"`
+	UniqueByUserId             *bool     `json:"uniqueByUserId"`
+	Sum                        *bool     `json:"sum"`
+	CalculateFixedTimingHour   *int32    `json:"calculateFixedTimingHour"`
+	CalculateFixedTimingMinute *int32    `json:"calculateFixedTimingMinute"`
+	CalculateIntervalMinutes   *int32    `json:"calculateIntervalMinutes"`
+	AdditionalScopes           []Scope   `json:"additionalScopes"`
+	EntryPeriodEventId         *string   `json:"entryPeriodEventId"`
+	AccessPeriodEventId        *string   `json:"accessPeriodEventId"`
+	IgnoreUserIds              []*string `json:"ignoreUserIds"`
+	Generation                 *string   `json:"generation"`
 }
 
 func NewCategoryModelFromJson(data string) CategoryModel {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCategoryModelFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCategoryModelFromDict(dict)
 }
 
 func NewCategoryModelFromDict(data map[string]interface{}) CategoryModel {
-    return CategoryModel {
-        CategoryModelId: core.CastString(data["categoryModelId"]),
-        Name: core.CastString(data["name"]),
-        Metadata: core.CastString(data["metadata"]),
-        MinimumValue: core.CastInt64(data["minimumValue"]),
-        MaximumValue: core.CastInt64(data["maximumValue"]),
-        OrderDirection: core.CastString(data["orderDirection"]),
-        Scope: core.CastString(data["scope"]),
-        UniqueByUserId: core.CastBool(data["uniqueByUserId"]),
-        Sum: core.CastBool(data["sum"]),
-        CalculateFixedTimingHour: core.CastInt32(data["calculateFixedTimingHour"]),
-        CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
-        CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
-        AdditionalScopes: CastScopes(core.CastArray(data["additionalScopes"])),
-        EntryPeriodEventId: core.CastString(data["entryPeriodEventId"]),
-        AccessPeriodEventId: core.CastString(data["accessPeriodEventId"]),
-        IgnoreUserIds: core.CastStrings(core.CastArray(data["ignoreUserIds"])),
-        Generation: core.CastString(data["generation"]),
-    }
+	return CategoryModel{
+		CategoryModelId:            core.CastString(data["categoryModelId"]),
+		Name:                       core.CastString(data["name"]),
+		Metadata:                   core.CastString(data["metadata"]),
+		MinimumValue:               core.CastInt64(data["minimumValue"]),
+		MaximumValue:               core.CastInt64(data["maximumValue"]),
+		OrderDirection:             core.CastString(data["orderDirection"]),
+		Scope:                      core.CastString(data["scope"]),
+		UniqueByUserId:             core.CastBool(data["uniqueByUserId"]),
+		Sum:                        core.CastBool(data["sum"]),
+		CalculateFixedTimingHour:   core.CastInt32(data["calculateFixedTimingHour"]),
+		CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
+		CalculateIntervalMinutes:   core.CastInt32(data["calculateIntervalMinutes"]),
+		AdditionalScopes:           CastScopes(core.CastArray(data["additionalScopes"])),
+		EntryPeriodEventId:         core.CastString(data["entryPeriodEventId"]),
+		AccessPeriodEventId:        core.CastString(data["accessPeriodEventId"]),
+		IgnoreUserIds:              core.CastStrings(core.CastArray(data["ignoreUserIds"])),
+		Generation:                 core.CastString(data["generation"]),
+	}
 }
 
 func (p CategoryModel) ToDict() map[string]interface{} {
-    
-    var categoryModelId *string
-    if p.CategoryModelId != nil {
-        categoryModelId = p.CategoryModelId
-    }
-    var name *string
-    if p.Name != nil {
-        name = p.Name
-    }
-    var metadata *string
-    if p.Metadata != nil {
-        metadata = p.Metadata
-    }
-    var minimumValue *int64
-    if p.MinimumValue != nil {
-        minimumValue = p.MinimumValue
-    }
-    var maximumValue *int64
-    if p.MaximumValue != nil {
-        maximumValue = p.MaximumValue
-    }
-    var orderDirection *string
-    if p.OrderDirection != nil {
-        orderDirection = p.OrderDirection
-    }
-    var scope *string
-    if p.Scope != nil {
-        scope = p.Scope
-    }
-    var uniqueByUserId *bool
-    if p.UniqueByUserId != nil {
-        uniqueByUserId = p.UniqueByUserId
-    }
-    var sum *bool
-    if p.Sum != nil {
-        sum = p.Sum
-    }
-    var calculateFixedTimingHour *int32
-    if p.CalculateFixedTimingHour != nil {
-        calculateFixedTimingHour = p.CalculateFixedTimingHour
-    }
-    var calculateFixedTimingMinute *int32
-    if p.CalculateFixedTimingMinute != nil {
-        calculateFixedTimingMinute = p.CalculateFixedTimingMinute
-    }
-    var calculateIntervalMinutes *int32
-    if p.CalculateIntervalMinutes != nil {
-        calculateIntervalMinutes = p.CalculateIntervalMinutes
-    }
-    var additionalScopes []interface{}
-    if p.AdditionalScopes != nil {
-        additionalScopes = CastScopesFromDict(
-            p.AdditionalScopes,
-        )
-    }
-    var entryPeriodEventId *string
-    if p.EntryPeriodEventId != nil {
-        entryPeriodEventId = p.EntryPeriodEventId
-    }
-    var accessPeriodEventId *string
-    if p.AccessPeriodEventId != nil {
-        accessPeriodEventId = p.AccessPeriodEventId
-    }
-    var ignoreUserIds []interface{}
-    if p.IgnoreUserIds != nil {
-        ignoreUserIds = core.CastStringsFromDict(
-            p.IgnoreUserIds,
-        )
-    }
-    var generation *string
-    if p.Generation != nil {
-        generation = p.Generation
-    }
-    return map[string]interface{} {
-        "categoryModelId": categoryModelId,
-        "name": name,
-        "metadata": metadata,
-        "minimumValue": minimumValue,
-        "maximumValue": maximumValue,
-        "orderDirection": orderDirection,
-        "scope": scope,
-        "uniqueByUserId": uniqueByUserId,
-        "sum": sum,
-        "calculateFixedTimingHour": calculateFixedTimingHour,
-        "calculateFixedTimingMinute": calculateFixedTimingMinute,
-        "calculateIntervalMinutes": calculateIntervalMinutes,
-        "additionalScopes": additionalScopes,
-        "entryPeriodEventId": entryPeriodEventId,
-        "accessPeriodEventId": accessPeriodEventId,
-        "ignoreUserIds": ignoreUserIds,
-        "generation": generation,
-    }
+
+	var categoryModelId *string
+	if p.CategoryModelId != nil {
+		categoryModelId = p.CategoryModelId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var metadata *string
+	if p.Metadata != nil {
+		metadata = p.Metadata
+	}
+	var minimumValue *int64
+	if p.MinimumValue != nil {
+		minimumValue = p.MinimumValue
+	}
+	var maximumValue *int64
+	if p.MaximumValue != nil {
+		maximumValue = p.MaximumValue
+	}
+	var orderDirection *string
+	if p.OrderDirection != nil {
+		orderDirection = p.OrderDirection
+	}
+	var scope *string
+	if p.Scope != nil {
+		scope = p.Scope
+	}
+	var uniqueByUserId *bool
+	if p.UniqueByUserId != nil {
+		uniqueByUserId = p.UniqueByUserId
+	}
+	var sum *bool
+	if p.Sum != nil {
+		sum = p.Sum
+	}
+	var calculateFixedTimingHour *int32
+	if p.CalculateFixedTimingHour != nil {
+		calculateFixedTimingHour = p.CalculateFixedTimingHour
+	}
+	var calculateFixedTimingMinute *int32
+	if p.CalculateFixedTimingMinute != nil {
+		calculateFixedTimingMinute = p.CalculateFixedTimingMinute
+	}
+	var calculateIntervalMinutes *int32
+	if p.CalculateIntervalMinutes != nil {
+		calculateIntervalMinutes = p.CalculateIntervalMinutes
+	}
+	var additionalScopes []interface{}
+	if p.AdditionalScopes != nil {
+		additionalScopes = CastScopesFromDict(
+			p.AdditionalScopes,
+		)
+	}
+	var entryPeriodEventId *string
+	if p.EntryPeriodEventId != nil {
+		entryPeriodEventId = p.EntryPeriodEventId
+	}
+	var accessPeriodEventId *string
+	if p.AccessPeriodEventId != nil {
+		accessPeriodEventId = p.AccessPeriodEventId
+	}
+	var ignoreUserIds []interface{}
+	if p.IgnoreUserIds != nil {
+		ignoreUserIds = core.CastStringsFromDict(
+			p.IgnoreUserIds,
+		)
+	}
+	var generation *string
+	if p.Generation != nil {
+		generation = p.Generation
+	}
+	return map[string]interface{}{
+		"categoryModelId":            categoryModelId,
+		"name":                       name,
+		"metadata":                   metadata,
+		"minimumValue":               minimumValue,
+		"maximumValue":               maximumValue,
+		"orderDirection":             orderDirection,
+		"scope":                      scope,
+		"uniqueByUserId":             uniqueByUserId,
+		"sum":                        sum,
+		"calculateFixedTimingHour":   calculateFixedTimingHour,
+		"calculateFixedTimingMinute": calculateFixedTimingMinute,
+		"calculateIntervalMinutes":   calculateIntervalMinutes,
+		"additionalScopes":           additionalScopes,
+		"entryPeriodEventId":         entryPeriodEventId,
+		"accessPeriodEventId":        accessPeriodEventId,
+		"ignoreUserIds":              ignoreUserIds,
+		"generation":                 generation,
+	}
 }
 
 func (p CategoryModel) Pointer() *CategoryModel {
-    return &p
+	return &p
 }
 
 func CastCategoryModels(data []interface{}) []CategoryModel {
@@ -275,186 +276,186 @@ func CastCategoryModels(data []interface{}) []CategoryModel {
 }
 
 func CastCategoryModelsFromDict(data []CategoryModel) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CategoryModelMaster struct {
-	CategoryModelId *string `json:"categoryModelId"`
-	Name *string `json:"name"`
-	Description *string `json:"description"`
-	Metadata *string `json:"metadata"`
-	MinimumValue *int64 `json:"minimumValue"`
-	MaximumValue *int64 `json:"maximumValue"`
-	OrderDirection *string `json:"orderDirection"`
-	Scope *string `json:"scope"`
-	UniqueByUserId *bool `json:"uniqueByUserId"`
-	Sum *bool `json:"sum"`
-	CalculateFixedTimingHour *int32 `json:"calculateFixedTimingHour"`
-	CalculateFixedTimingMinute *int32 `json:"calculateFixedTimingMinute"`
-	CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
-	AdditionalScopes []Scope `json:"additionalScopes"`
-	EntryPeriodEventId *string `json:"entryPeriodEventId"`
-	AccessPeriodEventId *string `json:"accessPeriodEventId"`
-	IgnoreUserIds []*string `json:"ignoreUserIds"`
-	Generation *string `json:"generation"`
-	CreatedAt *int64 `json:"createdAt"`
-	UpdatedAt *int64 `json:"updatedAt"`
-	Revision *int64 `json:"revision"`
+	CategoryModelId            *string   `json:"categoryModelId"`
+	Name                       *string   `json:"name"`
+	Description                *string   `json:"description"`
+	Metadata                   *string   `json:"metadata"`
+	MinimumValue               *int64    `json:"minimumValue"`
+	MaximumValue               *int64    `json:"maximumValue"`
+	OrderDirection             *string   `json:"orderDirection"`
+	Scope                      *string   `json:"scope"`
+	UniqueByUserId             *bool     `json:"uniqueByUserId"`
+	Sum                        *bool     `json:"sum"`
+	CalculateFixedTimingHour   *int32    `json:"calculateFixedTimingHour"`
+	CalculateFixedTimingMinute *int32    `json:"calculateFixedTimingMinute"`
+	CalculateIntervalMinutes   *int32    `json:"calculateIntervalMinutes"`
+	AdditionalScopes           []Scope   `json:"additionalScopes"`
+	EntryPeriodEventId         *string   `json:"entryPeriodEventId"`
+	AccessPeriodEventId        *string   `json:"accessPeriodEventId"`
+	IgnoreUserIds              []*string `json:"ignoreUserIds"`
+	Generation                 *string   `json:"generation"`
+	CreatedAt                  *int64    `json:"createdAt"`
+	UpdatedAt                  *int64    `json:"updatedAt"`
+	Revision                   *int64    `json:"revision"`
 }
 
 func NewCategoryModelMasterFromJson(data string) CategoryModelMaster {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCategoryModelMasterFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCategoryModelMasterFromDict(dict)
 }
 
 func NewCategoryModelMasterFromDict(data map[string]interface{}) CategoryModelMaster {
-    return CategoryModelMaster {
-        CategoryModelId: core.CastString(data["categoryModelId"]),
-        Name: core.CastString(data["name"]),
-        Description: core.CastString(data["description"]),
-        Metadata: core.CastString(data["metadata"]),
-        MinimumValue: core.CastInt64(data["minimumValue"]),
-        MaximumValue: core.CastInt64(data["maximumValue"]),
-        OrderDirection: core.CastString(data["orderDirection"]),
-        Scope: core.CastString(data["scope"]),
-        UniqueByUserId: core.CastBool(data["uniqueByUserId"]),
-        Sum: core.CastBool(data["sum"]),
-        CalculateFixedTimingHour: core.CastInt32(data["calculateFixedTimingHour"]),
-        CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
-        CalculateIntervalMinutes: core.CastInt32(data["calculateIntervalMinutes"]),
-        AdditionalScopes: CastScopes(core.CastArray(data["additionalScopes"])),
-        EntryPeriodEventId: core.CastString(data["entryPeriodEventId"]),
-        AccessPeriodEventId: core.CastString(data["accessPeriodEventId"]),
-        IgnoreUserIds: core.CastStrings(core.CastArray(data["ignoreUserIds"])),
-        Generation: core.CastString(data["generation"]),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-        UpdatedAt: core.CastInt64(data["updatedAt"]),
-        Revision: core.CastInt64(data["revision"]),
-    }
+	return CategoryModelMaster{
+		CategoryModelId:            core.CastString(data["categoryModelId"]),
+		Name:                       core.CastString(data["name"]),
+		Description:                core.CastString(data["description"]),
+		Metadata:                   core.CastString(data["metadata"]),
+		MinimumValue:               core.CastInt64(data["minimumValue"]),
+		MaximumValue:               core.CastInt64(data["maximumValue"]),
+		OrderDirection:             core.CastString(data["orderDirection"]),
+		Scope:                      core.CastString(data["scope"]),
+		UniqueByUserId:             core.CastBool(data["uniqueByUserId"]),
+		Sum:                        core.CastBool(data["sum"]),
+		CalculateFixedTimingHour:   core.CastInt32(data["calculateFixedTimingHour"]),
+		CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
+		CalculateIntervalMinutes:   core.CastInt32(data["calculateIntervalMinutes"]),
+		AdditionalScopes:           CastScopes(core.CastArray(data["additionalScopes"])),
+		EntryPeriodEventId:         core.CastString(data["entryPeriodEventId"]),
+		AccessPeriodEventId:        core.CastString(data["accessPeriodEventId"]),
+		IgnoreUserIds:              core.CastStrings(core.CastArray(data["ignoreUserIds"])),
+		Generation:                 core.CastString(data["generation"]),
+		CreatedAt:                  core.CastInt64(data["createdAt"]),
+		UpdatedAt:                  core.CastInt64(data["updatedAt"]),
+		Revision:                   core.CastInt64(data["revision"]),
+	}
 }
 
 func (p CategoryModelMaster) ToDict() map[string]interface{} {
-    
-    var categoryModelId *string
-    if p.CategoryModelId != nil {
-        categoryModelId = p.CategoryModelId
-    }
-    var name *string
-    if p.Name != nil {
-        name = p.Name
-    }
-    var description *string
-    if p.Description != nil {
-        description = p.Description
-    }
-    var metadata *string
-    if p.Metadata != nil {
-        metadata = p.Metadata
-    }
-    var minimumValue *int64
-    if p.MinimumValue != nil {
-        minimumValue = p.MinimumValue
-    }
-    var maximumValue *int64
-    if p.MaximumValue != nil {
-        maximumValue = p.MaximumValue
-    }
-    var orderDirection *string
-    if p.OrderDirection != nil {
-        orderDirection = p.OrderDirection
-    }
-    var scope *string
-    if p.Scope != nil {
-        scope = p.Scope
-    }
-    var uniqueByUserId *bool
-    if p.UniqueByUserId != nil {
-        uniqueByUserId = p.UniqueByUserId
-    }
-    var sum *bool
-    if p.Sum != nil {
-        sum = p.Sum
-    }
-    var calculateFixedTimingHour *int32
-    if p.CalculateFixedTimingHour != nil {
-        calculateFixedTimingHour = p.CalculateFixedTimingHour
-    }
-    var calculateFixedTimingMinute *int32
-    if p.CalculateFixedTimingMinute != nil {
-        calculateFixedTimingMinute = p.CalculateFixedTimingMinute
-    }
-    var calculateIntervalMinutes *int32
-    if p.CalculateIntervalMinutes != nil {
-        calculateIntervalMinutes = p.CalculateIntervalMinutes
-    }
-    var additionalScopes []interface{}
-    if p.AdditionalScopes != nil {
-        additionalScopes = CastScopesFromDict(
-            p.AdditionalScopes,
-        )
-    }
-    var entryPeriodEventId *string
-    if p.EntryPeriodEventId != nil {
-        entryPeriodEventId = p.EntryPeriodEventId
-    }
-    var accessPeriodEventId *string
-    if p.AccessPeriodEventId != nil {
-        accessPeriodEventId = p.AccessPeriodEventId
-    }
-    var ignoreUserIds []interface{}
-    if p.IgnoreUserIds != nil {
-        ignoreUserIds = core.CastStringsFromDict(
-            p.IgnoreUserIds,
-        )
-    }
-    var generation *string
-    if p.Generation != nil {
-        generation = p.Generation
-    }
-    var createdAt *int64
-    if p.CreatedAt != nil {
-        createdAt = p.CreatedAt
-    }
-    var updatedAt *int64
-    if p.UpdatedAt != nil {
-        updatedAt = p.UpdatedAt
-    }
-    var revision *int64
-    if p.Revision != nil {
-        revision = p.Revision
-    }
-    return map[string]interface{} {
-        "categoryModelId": categoryModelId,
-        "name": name,
-        "description": description,
-        "metadata": metadata,
-        "minimumValue": minimumValue,
-        "maximumValue": maximumValue,
-        "orderDirection": orderDirection,
-        "scope": scope,
-        "uniqueByUserId": uniqueByUserId,
-        "sum": sum,
-        "calculateFixedTimingHour": calculateFixedTimingHour,
-        "calculateFixedTimingMinute": calculateFixedTimingMinute,
-        "calculateIntervalMinutes": calculateIntervalMinutes,
-        "additionalScopes": additionalScopes,
-        "entryPeriodEventId": entryPeriodEventId,
-        "accessPeriodEventId": accessPeriodEventId,
-        "ignoreUserIds": ignoreUserIds,
-        "generation": generation,
-        "createdAt": createdAt,
-        "updatedAt": updatedAt,
-        "revision": revision,
-    }
+
+	var categoryModelId *string
+	if p.CategoryModelId != nil {
+		categoryModelId = p.CategoryModelId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var description *string
+	if p.Description != nil {
+		description = p.Description
+	}
+	var metadata *string
+	if p.Metadata != nil {
+		metadata = p.Metadata
+	}
+	var minimumValue *int64
+	if p.MinimumValue != nil {
+		minimumValue = p.MinimumValue
+	}
+	var maximumValue *int64
+	if p.MaximumValue != nil {
+		maximumValue = p.MaximumValue
+	}
+	var orderDirection *string
+	if p.OrderDirection != nil {
+		orderDirection = p.OrderDirection
+	}
+	var scope *string
+	if p.Scope != nil {
+		scope = p.Scope
+	}
+	var uniqueByUserId *bool
+	if p.UniqueByUserId != nil {
+		uniqueByUserId = p.UniqueByUserId
+	}
+	var sum *bool
+	if p.Sum != nil {
+		sum = p.Sum
+	}
+	var calculateFixedTimingHour *int32
+	if p.CalculateFixedTimingHour != nil {
+		calculateFixedTimingHour = p.CalculateFixedTimingHour
+	}
+	var calculateFixedTimingMinute *int32
+	if p.CalculateFixedTimingMinute != nil {
+		calculateFixedTimingMinute = p.CalculateFixedTimingMinute
+	}
+	var calculateIntervalMinutes *int32
+	if p.CalculateIntervalMinutes != nil {
+		calculateIntervalMinutes = p.CalculateIntervalMinutes
+	}
+	var additionalScopes []interface{}
+	if p.AdditionalScopes != nil {
+		additionalScopes = CastScopesFromDict(
+			p.AdditionalScopes,
+		)
+	}
+	var entryPeriodEventId *string
+	if p.EntryPeriodEventId != nil {
+		entryPeriodEventId = p.EntryPeriodEventId
+	}
+	var accessPeriodEventId *string
+	if p.AccessPeriodEventId != nil {
+		accessPeriodEventId = p.AccessPeriodEventId
+	}
+	var ignoreUserIds []interface{}
+	if p.IgnoreUserIds != nil {
+		ignoreUserIds = core.CastStringsFromDict(
+			p.IgnoreUserIds,
+		)
+	}
+	var generation *string
+	if p.Generation != nil {
+		generation = p.Generation
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	return map[string]interface{}{
+		"categoryModelId":            categoryModelId,
+		"name":                       name,
+		"description":                description,
+		"metadata":                   metadata,
+		"minimumValue":               minimumValue,
+		"maximumValue":               maximumValue,
+		"orderDirection":             orderDirection,
+		"scope":                      scope,
+		"uniqueByUserId":             uniqueByUserId,
+		"sum":                        sum,
+		"calculateFixedTimingHour":   calculateFixedTimingHour,
+		"calculateFixedTimingMinute": calculateFixedTimingMinute,
+		"calculateIntervalMinutes":   calculateIntervalMinutes,
+		"additionalScopes":           additionalScopes,
+		"entryPeriodEventId":         entryPeriodEventId,
+		"accessPeriodEventId":        accessPeriodEventId,
+		"ignoreUserIds":              ignoreUserIds,
+		"generation":                 generation,
+		"createdAt":                  createdAt,
+		"updatedAt":                  updatedAt,
+		"revision":                   revision,
+	}
 }
 
 func (p CategoryModelMaster) Pointer() *CategoryModelMaster {
-    return &p
+	return &p
 }
 
 func CastCategoryModelMasters(data []interface{}) []CategoryModelMaster {
@@ -466,88 +467,88 @@ func CastCategoryModelMasters(data []interface{}) []CategoryModelMaster {
 }
 
 func CastCategoryModelMastersFromDict(data []CategoryModelMaster) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Subscribe struct {
-	SubscribeId *string `json:"subscribeId"`
-	CategoryName *string `json:"categoryName"`
-	UserId *string `json:"userId"`
-	TargetUserIds []*string `json:"targetUserIds"`
+	SubscribeId       *string   `json:"subscribeId"`
+	CategoryName      *string   `json:"categoryName"`
+	UserId            *string   `json:"userId"`
+	TargetUserIds     []*string `json:"targetUserIds"`
 	SubscribedUserIds []*string `json:"subscribedUserIds"`
-	CreatedAt *int64 `json:"createdAt"`
-	Revision *int64 `json:"revision"`
+	CreatedAt         *int64    `json:"createdAt"`
+	Revision          *int64    `json:"revision"`
 }
 
 func NewSubscribeFromJson(data string) Subscribe {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewSubscribeFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSubscribeFromDict(dict)
 }
 
 func NewSubscribeFromDict(data map[string]interface{}) Subscribe {
-    return Subscribe {
-        SubscribeId: core.CastString(data["subscribeId"]),
-        CategoryName: core.CastString(data["categoryName"]),
-        UserId: core.CastString(data["userId"]),
-        TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
-        SubscribedUserIds: core.CastStrings(core.CastArray(data["subscribedUserIds"])),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-        Revision: core.CastInt64(data["revision"]),
-    }
+	return Subscribe{
+		SubscribeId:       core.CastString(data["subscribeId"]),
+		CategoryName:      core.CastString(data["categoryName"]),
+		UserId:            core.CastString(data["userId"]),
+		TargetUserIds:     core.CastStrings(core.CastArray(data["targetUserIds"])),
+		SubscribedUserIds: core.CastStrings(core.CastArray(data["subscribedUserIds"])),
+		CreatedAt:         core.CastInt64(data["createdAt"]),
+		Revision:          core.CastInt64(data["revision"]),
+	}
 }
 
 func (p Subscribe) ToDict() map[string]interface{} {
-    
-    var subscribeId *string
-    if p.SubscribeId != nil {
-        subscribeId = p.SubscribeId
-    }
-    var categoryName *string
-    if p.CategoryName != nil {
-        categoryName = p.CategoryName
-    }
-    var userId *string
-    if p.UserId != nil {
-        userId = p.UserId
-    }
-    var targetUserIds []interface{}
-    if p.TargetUserIds != nil {
-        targetUserIds = core.CastStringsFromDict(
-            p.TargetUserIds,
-        )
-    }
-    var subscribedUserIds []interface{}
-    if p.SubscribedUserIds != nil {
-        subscribedUserIds = core.CastStringsFromDict(
-            p.SubscribedUserIds,
-        )
-    }
-    var createdAt *int64
-    if p.CreatedAt != nil {
-        createdAt = p.CreatedAt
-    }
-    var revision *int64
-    if p.Revision != nil {
-        revision = p.Revision
-    }
-    return map[string]interface{} {
-        "subscribeId": subscribeId,
-        "categoryName": categoryName,
-        "userId": userId,
-        "targetUserIds": targetUserIds,
-        "subscribedUserIds": subscribedUserIds,
-        "createdAt": createdAt,
-        "revision": revision,
-    }
+
+	var subscribeId *string
+	if p.SubscribeId != nil {
+		subscribeId = p.SubscribeId
+	}
+	var categoryName *string
+	if p.CategoryName != nil {
+		categoryName = p.CategoryName
+	}
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var targetUserIds []interface{}
+	if p.TargetUserIds != nil {
+		targetUserIds = core.CastStringsFromDict(
+			p.TargetUserIds,
+		)
+	}
+	var subscribedUserIds []interface{}
+	if p.SubscribedUserIds != nil {
+		subscribedUserIds = core.CastStringsFromDict(
+			p.SubscribedUserIds,
+		)
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	return map[string]interface{}{
+		"subscribeId":       subscribeId,
+		"categoryName":      categoryName,
+		"userId":            userId,
+		"targetUserIds":     targetUserIds,
+		"subscribedUserIds": subscribedUserIds,
+		"createdAt":         createdAt,
+		"revision":          revision,
+	}
 }
 
 func (p Subscribe) Pointer() *Subscribe {
-    return &p
+	return &p
 }
 
 func CastSubscribes(data []interface{}) []Subscribe {
@@ -559,91 +560,91 @@ func CastSubscribes(data []interface{}) []Subscribe {
 }
 
 func CastSubscribesFromDict(data []Subscribe) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Score struct {
-	ScoreId *string `json:"scoreId"`
+	ScoreId      *string `json:"scoreId"`
 	CategoryName *string `json:"categoryName"`
-	UserId *string `json:"userId"`
-	UniqueId *string `json:"uniqueId"`
+	UserId       *string `json:"userId"`
+	UniqueId     *string `json:"uniqueId"`
 	ScorerUserId *string `json:"scorerUserId"`
-	Score *int64 `json:"score"`
-	Metadata *string `json:"metadata"`
-	CreatedAt *int64 `json:"createdAt"`
+	Score        *int64  `json:"score"`
+	Metadata     *string `json:"metadata"`
+	CreatedAt    *int64  `json:"createdAt"`
 }
 
 func NewScoreFromJson(data string) Score {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewScoreFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScoreFromDict(dict)
 }
 
 func NewScoreFromDict(data map[string]interface{}) Score {
-    return Score {
-        ScoreId: core.CastString(data["scoreId"]),
-        CategoryName: core.CastString(data["categoryName"]),
-        UserId: core.CastString(data["userId"]),
-        UniqueId: core.CastString(data["uniqueId"]),
-        ScorerUserId: core.CastString(data["scorerUserId"]),
-        Score: core.CastInt64(data["score"]),
-        Metadata: core.CastString(data["metadata"]),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-    }
+	return Score{
+		ScoreId:      core.CastString(data["scoreId"]),
+		CategoryName: core.CastString(data["categoryName"]),
+		UserId:       core.CastString(data["userId"]),
+		UniqueId:     core.CastString(data["uniqueId"]),
+		ScorerUserId: core.CastString(data["scorerUserId"]),
+		Score:        core.CastInt64(data["score"]),
+		Metadata:     core.CastString(data["metadata"]),
+		CreatedAt:    core.CastInt64(data["createdAt"]),
+	}
 }
 
 func (p Score) ToDict() map[string]interface{} {
-    
-    var scoreId *string
-    if p.ScoreId != nil {
-        scoreId = p.ScoreId
-    }
-    var categoryName *string
-    if p.CategoryName != nil {
-        categoryName = p.CategoryName
-    }
-    var userId *string
-    if p.UserId != nil {
-        userId = p.UserId
-    }
-    var uniqueId *string
-    if p.UniqueId != nil {
-        uniqueId = p.UniqueId
-    }
-    var scorerUserId *string
-    if p.ScorerUserId != nil {
-        scorerUserId = p.ScorerUserId
-    }
-    var score *int64
-    if p.Score != nil {
-        score = p.Score
-    }
-    var metadata *string
-    if p.Metadata != nil {
-        metadata = p.Metadata
-    }
-    var createdAt *int64
-    if p.CreatedAt != nil {
-        createdAt = p.CreatedAt
-    }
-    return map[string]interface{} {
-        "scoreId": scoreId,
-        "categoryName": categoryName,
-        "userId": userId,
-        "uniqueId": uniqueId,
-        "scorerUserId": scorerUserId,
-        "score": score,
-        "metadata": metadata,
-        "createdAt": createdAt,
-    }
+
+	var scoreId *string
+	if p.ScoreId != nil {
+		scoreId = p.ScoreId
+	}
+	var categoryName *string
+	if p.CategoryName != nil {
+		categoryName = p.CategoryName
+	}
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var uniqueId *string
+	if p.UniqueId != nil {
+		uniqueId = p.UniqueId
+	}
+	var scorerUserId *string
+	if p.ScorerUserId != nil {
+		scorerUserId = p.ScorerUserId
+	}
+	var score *int64
+	if p.Score != nil {
+		score = p.Score
+	}
+	var metadata *string
+	if p.Metadata != nil {
+		metadata = p.Metadata
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	return map[string]interface{}{
+		"scoreId":      scoreId,
+		"categoryName": categoryName,
+		"userId":       userId,
+		"uniqueId":     uniqueId,
+		"scorerUserId": scorerUserId,
+		"score":        score,
+		"metadata":     metadata,
+		"createdAt":    createdAt,
+	}
 }
 
 func (p Score) Pointer() *Score {
-    return &p
+	return &p
 }
 
 func CastScores(data []interface{}) []Score {
@@ -655,84 +656,84 @@ func CastScores(data []interface{}) []Score {
 }
 
 func CastScoresFromDict(data []Score) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Ranking struct {
-	Rank *int64 `json:"rank"`
-	Index *int64 `json:"index"`
+	Rank         *int64  `json:"rank"`
+	Index        *int64  `json:"index"`
 	CategoryName *string `json:"categoryName"`
-	UserId *string `json:"userId"`
-	Score *int64 `json:"score"`
-	Metadata *string `json:"metadata"`
-	CreatedAt *int64 `json:"createdAt"`
+	UserId       *string `json:"userId"`
+	Score        *int64  `json:"score"`
+	Metadata     *string `json:"metadata"`
+	CreatedAt    *int64  `json:"createdAt"`
 }
 
 func NewRankingFromJson(data string) Ranking {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewRankingFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRankingFromDict(dict)
 }
 
 func NewRankingFromDict(data map[string]interface{}) Ranking {
-    return Ranking {
-        Rank: core.CastInt64(data["rank"]),
-        Index: core.CastInt64(data["index"]),
-        CategoryName: core.CastString(data["categoryName"]),
-        UserId: core.CastString(data["userId"]),
-        Score: core.CastInt64(data["score"]),
-        Metadata: core.CastString(data["metadata"]),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-    }
+	return Ranking{
+		Rank:         core.CastInt64(data["rank"]),
+		Index:        core.CastInt64(data["index"]),
+		CategoryName: core.CastString(data["categoryName"]),
+		UserId:       core.CastString(data["userId"]),
+		Score:        core.CastInt64(data["score"]),
+		Metadata:     core.CastString(data["metadata"]),
+		CreatedAt:    core.CastInt64(data["createdAt"]),
+	}
 }
 
 func (p Ranking) ToDict() map[string]interface{} {
-    
-    var rank *int64
-    if p.Rank != nil {
-        rank = p.Rank
-    }
-    var index *int64
-    if p.Index != nil {
-        index = p.Index
-    }
-    var categoryName *string
-    if p.CategoryName != nil {
-        categoryName = p.CategoryName
-    }
-    var userId *string
-    if p.UserId != nil {
-        userId = p.UserId
-    }
-    var score *int64
-    if p.Score != nil {
-        score = p.Score
-    }
-    var metadata *string
-    if p.Metadata != nil {
-        metadata = p.Metadata
-    }
-    var createdAt *int64
-    if p.CreatedAt != nil {
-        createdAt = p.CreatedAt
-    }
-    return map[string]interface{} {
-        "rank": rank,
-        "index": index,
-        "categoryName": categoryName,
-        "userId": userId,
-        "score": score,
-        "metadata": metadata,
-        "createdAt": createdAt,
-    }
+
+	var rank *int64
+	if p.Rank != nil {
+		rank = p.Rank
+	}
+	var index *int64
+	if p.Index != nil {
+		index = p.Index
+	}
+	var categoryName *string
+	if p.CategoryName != nil {
+		categoryName = p.CategoryName
+	}
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var score *int64
+	if p.Score != nil {
+		score = p.Score
+	}
+	var metadata *string
+	if p.Metadata != nil {
+		metadata = p.Metadata
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	return map[string]interface{}{
+		"rank":         rank,
+		"index":        index,
+		"categoryName": categoryName,
+		"userId":       userId,
+		"score":        score,
+		"metadata":     metadata,
+		"createdAt":    createdAt,
+	}
 }
 
 func (p Ranking) Pointer() *Ranking {
-    return &p
+	return &p
 }
 
 func CastRankings(data []interface{}) []Ranking {
@@ -744,49 +745,49 @@ func CastRankings(data []interface{}) []Ranking {
 }
 
 func CastRankingsFromDict(data []Ranking) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Scope struct {
-	Name *string `json:"name"`
-	TargetDays *int64 `json:"targetDays"`
+	Name       *string `json:"name"`
+	TargetDays *int64  `json:"targetDays"`
 }
 
 func NewScopeFromJson(data string) Scope {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewScopeFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScopeFromDict(dict)
 }
 
 func NewScopeFromDict(data map[string]interface{}) Scope {
-    return Scope {
-        Name: core.CastString(data["name"]),
-        TargetDays: core.CastInt64(data["targetDays"]),
-    }
+	return Scope{
+		Name:       core.CastString(data["name"]),
+		TargetDays: core.CastInt64(data["targetDays"]),
+	}
 }
 
 func (p Scope) ToDict() map[string]interface{} {
-    
-    var name *string
-    if p.Name != nil {
-        name = p.Name
-    }
-    var targetDays *int64
-    if p.TargetDays != nil {
-        targetDays = p.TargetDays
-    }
-    return map[string]interface{} {
-        "name": name,
-        "targetDays": targetDays,
-    }
+
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var targetDays *int64
+	if p.TargetDays != nil {
+		targetDays = p.TargetDays
+	}
+	return map[string]interface{}{
+		"name":       name,
+		"targetDays": targetDays,
+	}
 }
 
 func (p Scope) Pointer() *Scope {
-    return &p
+	return &p
 }
 
 func CastScopes(data []interface{}) []Scope {
@@ -798,49 +799,49 @@ func CastScopes(data []interface{}) []Scope {
 }
 
 func CastScopesFromDict(data []Scope) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CurrentRankingMaster struct {
 	NamespaceId *string `json:"namespaceId"`
-	Settings *string `json:"settings"`
+	Settings    *string `json:"settings"`
 }
 
 func NewCurrentRankingMasterFromJson(data string) CurrentRankingMaster {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCurrentRankingMasterFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCurrentRankingMasterFromDict(dict)
 }
 
 func NewCurrentRankingMasterFromDict(data map[string]interface{}) CurrentRankingMaster {
-    return CurrentRankingMaster {
-        NamespaceId: core.CastString(data["namespaceId"]),
-        Settings: core.CastString(data["settings"]),
-    }
+	return CurrentRankingMaster{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Settings:    core.CastString(data["settings"]),
+	}
 }
 
 func (p CurrentRankingMaster) ToDict() map[string]interface{} {
-    
-    var namespaceId *string
-    if p.NamespaceId != nil {
-        namespaceId = p.NamespaceId
-    }
-    var settings *string
-    if p.Settings != nil {
-        settings = p.Settings
-    }
-    return map[string]interface{} {
-        "namespaceId": namespaceId,
-        "settings": settings,
-    }
+
+	var namespaceId *string
+	if p.NamespaceId != nil {
+		namespaceId = p.NamespaceId
+	}
+	var settings *string
+	if p.Settings != nil {
+		settings = p.Settings
+	}
+	return map[string]interface{}{
+		"namespaceId": namespaceId,
+		"settings":    settings,
+	}
 }
 
 func (p CurrentRankingMaster) Pointer() *CurrentRankingMaster {
-    return &p
+	return &p
 }
 
 func CastCurrentRankingMasters(data []interface{}) []CurrentRankingMaster {
@@ -852,49 +853,49 @@ func CastCurrentRankingMasters(data []interface{}) []CurrentRankingMaster {
 }
 
 func CastCurrentRankingMastersFromDict(data []CurrentRankingMaster) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type CalculatedAt struct {
 	CategoryName *string `json:"categoryName"`
-	CalculatedAt *int64 `json:"calculatedAt"`
+	CalculatedAt *int64  `json:"calculatedAt"`
 }
 
 func NewCalculatedAtFromJson(data string) CalculatedAt {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCalculatedAtFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCalculatedAtFromDict(dict)
 }
 
 func NewCalculatedAtFromDict(data map[string]interface{}) CalculatedAt {
-    return CalculatedAt {
-        CategoryName: core.CastString(data["categoryName"]),
-        CalculatedAt: core.CastInt64(data["calculatedAt"]),
-    }
+	return CalculatedAt{
+		CategoryName: core.CastString(data["categoryName"]),
+		CalculatedAt: core.CastInt64(data["calculatedAt"]),
+	}
 }
 
 func (p CalculatedAt) ToDict() map[string]interface{} {
-    
-    var categoryName *string
-    if p.CategoryName != nil {
-        categoryName = p.CategoryName
-    }
-    var calculatedAt *int64
-    if p.CalculatedAt != nil {
-        calculatedAt = p.CalculatedAt
-    }
-    return map[string]interface{} {
-        "categoryName": categoryName,
-        "calculatedAt": calculatedAt,
-    }
+
+	var categoryName *string
+	if p.CategoryName != nil {
+		categoryName = p.CategoryName
+	}
+	var calculatedAt *int64
+	if p.CalculatedAt != nil {
+		calculatedAt = p.CalculatedAt
+	}
+	return map[string]interface{}{
+		"categoryName": categoryName,
+		"calculatedAt": calculatedAt,
+	}
 }
 
 func (p CalculatedAt) Pointer() *CalculatedAt {
-    return &p
+	return &p
 }
 
 func CastCalculatedAts(data []interface{}) []CalculatedAt {
@@ -906,63 +907,63 @@ func CastCalculatedAts(data []interface{}) []CalculatedAt {
 }
 
 func CastCalculatedAtsFromDict(data []CalculatedAt) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type SubscribeUser struct {
 	SubscribeUserId *string `json:"subscribeUserId"`
-	CategoryName *string `json:"categoryName"`
-	UserId *string `json:"userId"`
-	TargetUserId *string `json:"targetUserId"`
+	CategoryName    *string `json:"categoryName"`
+	UserId          *string `json:"userId"`
+	TargetUserId    *string `json:"targetUserId"`
 }
 
 func NewSubscribeUserFromJson(data string) SubscribeUser {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewSubscribeUserFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSubscribeUserFromDict(dict)
 }
 
 func NewSubscribeUserFromDict(data map[string]interface{}) SubscribeUser {
-    return SubscribeUser {
-        SubscribeUserId: core.CastString(data["subscribeUserId"]),
-        CategoryName: core.CastString(data["categoryName"]),
-        UserId: core.CastString(data["userId"]),
-        TargetUserId: core.CastString(data["targetUserId"]),
-    }
+	return SubscribeUser{
+		SubscribeUserId: core.CastString(data["subscribeUserId"]),
+		CategoryName:    core.CastString(data["categoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		TargetUserId:    core.CastString(data["targetUserId"]),
+	}
 }
 
 func (p SubscribeUser) ToDict() map[string]interface{} {
-    
-    var subscribeUserId *string
-    if p.SubscribeUserId != nil {
-        subscribeUserId = p.SubscribeUserId
-    }
-    var categoryName *string
-    if p.CategoryName != nil {
-        categoryName = p.CategoryName
-    }
-    var userId *string
-    if p.UserId != nil {
-        userId = p.UserId
-    }
-    var targetUserId *string
-    if p.TargetUserId != nil {
-        targetUserId = p.TargetUserId
-    }
-    return map[string]interface{} {
-        "subscribeUserId": subscribeUserId,
-        "categoryName": categoryName,
-        "userId": userId,
-        "targetUserId": targetUserId,
-    }
+
+	var subscribeUserId *string
+	if p.SubscribeUserId != nil {
+		subscribeUserId = p.SubscribeUserId
+	}
+	var categoryName *string
+	if p.CategoryName != nil {
+		categoryName = p.CategoryName
+	}
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var targetUserId *string
+	if p.TargetUserId != nil {
+		targetUserId = p.TargetUserId
+	}
+	return map[string]interface{}{
+		"subscribeUserId": subscribeUserId,
+		"categoryName":    categoryName,
+		"userId":          userId,
+		"targetUserId":    targetUserId,
+	}
 }
 
 func (p SubscribeUser) Pointer() *SubscribeUser {
-    return &p
+	return &p
 }
 
 func CastSubscribeUsers(data []interface{}) []SubscribeUser {
@@ -974,84 +975,84 @@ func CastSubscribeUsers(data []interface{}) []SubscribeUser {
 }
 
 func CastSubscribeUsersFromDict(data []SubscribeUser) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type GitHubCheckoutSetting struct {
-	ApiKeyId *string `json:"apiKeyId"`
+	ApiKeyId       *string `json:"apiKeyId"`
 	RepositoryName *string `json:"repositoryName"`
-	SourcePath *string `json:"sourcePath"`
-	ReferenceType *string `json:"referenceType"`
-	CommitHash *string `json:"commitHash"`
-	BranchName *string `json:"branchName"`
-	TagName *string `json:"tagName"`
+	SourcePath     *string `json:"sourcePath"`
+	ReferenceType  *string `json:"referenceType"`
+	CommitHash     *string `json:"commitHash"`
+	BranchName     *string `json:"branchName"`
+	TagName        *string `json:"tagName"`
 }
 
 func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGitHubCheckoutSettingFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGitHubCheckoutSettingFromDict(dict)
 }
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
-    return GitHubCheckoutSetting {
-        ApiKeyId: core.CastString(data["apiKeyId"]),
-        RepositoryName: core.CastString(data["repositoryName"]),
-        SourcePath: core.CastString(data["sourcePath"]),
-        ReferenceType: core.CastString(data["referenceType"]),
-        CommitHash: core.CastString(data["commitHash"]),
-        BranchName: core.CastString(data["branchName"]),
-        TagName: core.CastString(data["tagName"]),
-    }
+	return GitHubCheckoutSetting{
+		ApiKeyId:       core.CastString(data["apiKeyId"]),
+		RepositoryName: core.CastString(data["repositoryName"]),
+		SourcePath:     core.CastString(data["sourcePath"]),
+		ReferenceType:  core.CastString(data["referenceType"]),
+		CommitHash:     core.CastString(data["commitHash"]),
+		BranchName:     core.CastString(data["branchName"]),
+		TagName:        core.CastString(data["tagName"]),
+	}
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-    
-    var apiKeyId *string
-    if p.ApiKeyId != nil {
-        apiKeyId = p.ApiKeyId
-    }
-    var repositoryName *string
-    if p.RepositoryName != nil {
-        repositoryName = p.RepositoryName
-    }
-    var sourcePath *string
-    if p.SourcePath != nil {
-        sourcePath = p.SourcePath
-    }
-    var referenceType *string
-    if p.ReferenceType != nil {
-        referenceType = p.ReferenceType
-    }
-    var commitHash *string
-    if p.CommitHash != nil {
-        commitHash = p.CommitHash
-    }
-    var branchName *string
-    if p.BranchName != nil {
-        branchName = p.BranchName
-    }
-    var tagName *string
-    if p.TagName != nil {
-        tagName = p.TagName
-    }
-    return map[string]interface{} {
-        "apiKeyId": apiKeyId,
-        "repositoryName": repositoryName,
-        "sourcePath": sourcePath,
-        "referenceType": referenceType,
-        "commitHash": commitHash,
-        "branchName": branchName,
-        "tagName": tagName,
-    }
+
+	var apiKeyId *string
+	if p.ApiKeyId != nil {
+		apiKeyId = p.ApiKeyId
+	}
+	var repositoryName *string
+	if p.RepositoryName != nil {
+		repositoryName = p.RepositoryName
+	}
+	var sourcePath *string
+	if p.SourcePath != nil {
+		sourcePath = p.SourcePath
+	}
+	var referenceType *string
+	if p.ReferenceType != nil {
+		referenceType = p.ReferenceType
+	}
+	var commitHash *string
+	if p.CommitHash != nil {
+		commitHash = p.CommitHash
+	}
+	var branchName *string
+	if p.BranchName != nil {
+		branchName = p.BranchName
+	}
+	var tagName *string
+	if p.TagName != nil {
+		tagName = p.TagName
+	}
+	return map[string]interface{}{
+		"apiKeyId":       apiKeyId,
+		"repositoryName": repositoryName,
+		"sourcePath":     sourcePath,
+		"referenceType":  referenceType,
+		"commitHash":     commitHash,
+		"branchName":     branchName,
+		"tagName":        tagName,
+	}
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
-    return &p
+	return &p
 }
 
 func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
@@ -1063,11 +1064,11 @@ func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
 }
 
 func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
@@ -1075,30 +1076,30 @@ type LogSetting struct {
 }
 
 func NewLogSettingFromJson(data string) LogSetting {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewLogSettingFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
-    return LogSetting {
-        LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
-    }
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-    
-    var loggingNamespaceId *string
-    if p.LoggingNamespaceId != nil {
-        loggingNamespaceId = p.LoggingNamespaceId
-    }
-    return map[string]interface{} {
-        "loggingNamespaceId": loggingNamespaceId,
-    }
+
+	var loggingNamespaceId *string
+	if p.LoggingNamespaceId != nil {
+		loggingNamespaceId = p.LoggingNamespaceId
+	}
+	return map[string]interface{}{
+		"loggingNamespaceId": loggingNamespaceId,
+	}
 }
 
 func (p LogSetting) Pointer() *LogSetting {
-    return &p
+	return &p
 }
 
 func CastLogSettings(data []interface{}) []LogSetting {
@@ -1110,9 +1111,9 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

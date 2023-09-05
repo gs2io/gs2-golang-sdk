@@ -20,20 +20,20 @@ type InvalidStatus struct {
 }
 
 func (p InvalidStatus) Type() string {
-    return "DatastoreInvalidStatus"
+	return "DatastoreInvalidStatus"
 }
 
 func (p InvalidStatus) Code() string {
-    return "dataObject.status.invalid"
+	return "dataObject.status.invalid"
 }
 
 type NotUploaded struct {
 }
 
 func (p NotUploaded) Type() string {
-    return "DatastoreNotUploaded"
+	return "DatastoreNotUploaded"
 }
 
 func (p NotUploaded) Code() string {
-    return "dataObject.file.notUploaded"
+	return "dataObject.file.notUploaded"
 }

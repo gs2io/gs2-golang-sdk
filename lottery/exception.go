@@ -20,9 +20,9 @@ type Empty struct {
 }
 
 func (p Empty) Type() string {
-    return "LotteryEmpty"
+	return "LotteryEmpty"
 }
 
 func (p Empty) Code() string {
-    return "box.items.empty"
+	return "box.items.empty"
 }

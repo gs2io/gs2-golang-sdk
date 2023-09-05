@@ -18,6 +18,7 @@ package gateway
 
 import (
 	"encoding/json"
+
 	"github.com/google/uuid"
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -49,16 +50,16 @@ func (p Gs2GatewayWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeNamespacesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeNamespacesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -70,33 +71,33 @@ func (p Gs2GatewayWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "namespace",
-    		"function": "describeNamespaces",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "namespace",
+			"function":    "describeNamespaces",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -133,16 +134,16 @@ func (p Gs2GatewayWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -154,39 +155,39 @@ func (p Gs2GatewayWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "namespace",
-    		"function": "createNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "namespace",
+			"function":    "createNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.FirebaseSecret != nil && *request.FirebaseSecret != "" {
-        bodies["firebaseSecret"] = *request.FirebaseSecret
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.FirebaseSecret != nil && *request.FirebaseSecret != "" {
+		bodies["firebaseSecret"] = *request.FirebaseSecret
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -223,16 +224,16 @@ func (p Gs2GatewayWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -244,30 +245,30 @@ func (p Gs2GatewayWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "namespace",
-    		"function": "getNamespaceStatus",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "namespace",
+			"function":    "getNamespaceStatus",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -304,16 +305,16 @@ func (p Gs2GatewayWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -325,30 +326,30 @@ func (p Gs2GatewayWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "namespace",
-    		"function": "getNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "namespace",
+			"function":    "getNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -385,16 +386,16 @@ func (p Gs2GatewayWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -406,39 +407,39 @@ func (p Gs2GatewayWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "namespace",
-    		"function": "updateNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "namespace",
+			"function":    "updateNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.FirebaseSecret != nil && *request.FirebaseSecret != "" {
-        bodies["firebaseSecret"] = *request.FirebaseSecret
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.FirebaseSecret != nil && *request.FirebaseSecret != "" {
+		bodies["firebaseSecret"] = *request.FirebaseSecret
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -475,16 +476,16 @@ func (p Gs2GatewayWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -496,30 +497,30 @@ func (p Gs2GatewayWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "namespace",
-    		"function": "deleteNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "namespace",
+			"function":    "deleteNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -556,16 +557,16 @@ func (p Gs2GatewayWebSocketClient) describeWebSocketSessionsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeWebSocketSessionsResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeWebSocketSessionsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeWebSocketSessionsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeWebSocketSessionsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -577,42 +578,42 @@ func (p Gs2GatewayWebSocketClient) DescribeWebSocketSessionsAsync(
 	request *DescribeWebSocketSessionsRequest,
 	callback chan<- DescribeWebSocketSessionsAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "webSocketSession",
-    		"function": "describeWebSocketSessions",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "webSocketSession",
+			"function":    "describeWebSocketSessions",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
 
 	go p.describeWebSocketSessionsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -649,16 +650,16 @@ func (p Gs2GatewayWebSocketClient) describeWebSocketSessionsByUserIdAsyncHandler
 	asyncResult := <-internalCallback
 	var result DescribeWebSocketSessionsByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeWebSocketSessionsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeWebSocketSessionsByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeWebSocketSessionsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -670,39 +671,39 @@ func (p Gs2GatewayWebSocketClient) DescribeWebSocketSessionsByUserIdAsync(
 	request *DescribeWebSocketSessionsByUserIdRequest,
 	callback chan<- DescribeWebSocketSessionsByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "webSocketSession",
-    		"function": "describeWebSocketSessionsByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "webSocketSession",
+			"function":    "describeWebSocketSessionsByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeWebSocketSessionsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -739,16 +740,16 @@ func (p Gs2GatewayWebSocketClient) setUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SetUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -760,42 +761,42 @@ func (p Gs2GatewayWebSocketClient) SetUserIdAsync(
 	request *SetUserIdRequest,
 	callback chan<- SetUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "webSocketSession",
-    		"function": "setUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "webSocketSession",
+			"function":    "setUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.AllowConcurrentAccess != nil {
-        bodies["allowConcurrentAccess"] = *request.AllowConcurrentAccess
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.AllowConcurrentAccess != nil {
+		bodies["allowConcurrentAccess"] = *request.AllowConcurrentAccess
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.setUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -832,16 +833,16 @@ func (p Gs2GatewayWebSocketClient) setUserIdByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetUserIdByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetUserIdByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetUserIdByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SetUserIdByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -853,39 +854,39 @@ func (p Gs2GatewayWebSocketClient) SetUserIdByUserIdAsync(
 	request *SetUserIdByUserIdRequest,
 	callback chan<- SetUserIdByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "webSocketSession",
-    		"function": "setUserIdByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "webSocketSession",
+			"function":    "setUserIdByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.AllowConcurrentAccess != nil {
-        bodies["allowConcurrentAccess"] = *request.AllowConcurrentAccess
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.AllowConcurrentAccess != nil {
+		bodies["allowConcurrentAccess"] = *request.AllowConcurrentAccess
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.setUserIdByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -922,16 +923,16 @@ func (p Gs2GatewayWebSocketClient) sendNotificationAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SendNotificationResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SendNotificationAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SendNotificationAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SendNotificationAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -943,48 +944,48 @@ func (p Gs2GatewayWebSocketClient) SendNotificationAsync(
 	request *SendNotificationRequest,
 	callback chan<- SendNotificationAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "webSocketSession",
-    		"function": "sendNotification",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "webSocketSession",
+			"function":    "sendNotification",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.Subject != nil && *request.Subject != "" {
-        bodies["subject"] = *request.Subject
-    }
-    if request.Payload != nil && *request.Payload != "" {
-        bodies["payload"] = *request.Payload
-    }
-    if request.EnableTransferMobileNotification != nil {
-        bodies["enableTransferMobileNotification"] = *request.EnableTransferMobileNotification
-    }
-    if request.Sound != nil && *request.Sound != "" {
-        bodies["sound"] = *request.Sound
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Subject != nil && *request.Subject != "" {
+		bodies["subject"] = *request.Subject
+	}
+	if request.Payload != nil && *request.Payload != "" {
+		bodies["payload"] = *request.Payload
+	}
+	if request.EnableTransferMobileNotification != nil {
+		bodies["enableTransferMobileNotification"] = *request.EnableTransferMobileNotification
+	}
+	if request.Sound != nil && *request.Sound != "" {
+		bodies["sound"] = *request.Sound
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.sendNotificationAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1021,16 +1022,16 @@ func (p Gs2GatewayWebSocketClient) disconnectByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DisconnectByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DisconnectByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DisconnectByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DisconnectByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1042,36 +1043,36 @@ func (p Gs2GatewayWebSocketClient) DisconnectByUserIdAsync(
 	request *DisconnectByUserIdRequest,
 	callback chan<- DisconnectByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "webSocketSession",
-    		"function": "disconnectByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "webSocketSession",
+			"function":    "disconnectByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.disconnectByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1108,16 +1109,16 @@ func (p Gs2GatewayWebSocketClient) disconnectAllAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DisconnectAllResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DisconnectAllAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DisconnectAllAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DisconnectAllAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1129,30 +1130,30 @@ func (p Gs2GatewayWebSocketClient) DisconnectAllAsync(
 	request *DisconnectAllRequest,
 	callback chan<- DisconnectAllAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "webSocketSession",
-    		"function": "disconnectAll",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "webSocketSession",
+			"function":    "disconnectAll",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.disconnectAllAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1189,16 +1190,16 @@ func (p Gs2GatewayWebSocketClient) setFirebaseTokenAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetFirebaseTokenResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetFirebaseTokenAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetFirebaseTokenAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SetFirebaseTokenAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1210,42 +1211,42 @@ func (p Gs2GatewayWebSocketClient) SetFirebaseTokenAsync(
 	request *SetFirebaseTokenRequest,
 	callback chan<- SetFirebaseTokenAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "firebaseToken",
-    		"function": "setFirebaseToken",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "firebaseToken",
+			"function":    "setFirebaseToken",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.Token != nil && *request.Token != "" {
-        bodies["token"] = *request.Token
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.Token != nil && *request.Token != "" {
+		bodies["token"] = *request.Token
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.setFirebaseTokenAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1282,16 +1283,16 @@ func (p Gs2GatewayWebSocketClient) setFirebaseTokenByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetFirebaseTokenByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetFirebaseTokenByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetFirebaseTokenByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SetFirebaseTokenByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1303,39 +1304,39 @@ func (p Gs2GatewayWebSocketClient) SetFirebaseTokenByUserIdAsync(
 	request *SetFirebaseTokenByUserIdRequest,
 	callback chan<- SetFirebaseTokenByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "firebaseToken",
-    		"function": "setFirebaseTokenByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "firebaseToken",
+			"function":    "setFirebaseTokenByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.Token != nil && *request.Token != "" {
-        bodies["token"] = *request.Token
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Token != nil && *request.Token != "" {
+		bodies["token"] = *request.Token
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.setFirebaseTokenByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1372,16 +1373,16 @@ func (p Gs2GatewayWebSocketClient) getFirebaseTokenAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetFirebaseTokenResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFirebaseTokenAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetFirebaseTokenAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetFirebaseTokenAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1393,36 +1394,36 @@ func (p Gs2GatewayWebSocketClient) GetFirebaseTokenAsync(
 	request *GetFirebaseTokenRequest,
 	callback chan<- GetFirebaseTokenAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "firebaseToken",
-    		"function": "getFirebaseToken",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "firebaseToken",
+			"function":    "getFirebaseToken",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
 
 	go p.getFirebaseTokenAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1459,16 +1460,16 @@ func (p Gs2GatewayWebSocketClient) getFirebaseTokenByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetFirebaseTokenByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFirebaseTokenByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetFirebaseTokenByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetFirebaseTokenByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1480,33 +1481,33 @@ func (p Gs2GatewayWebSocketClient) GetFirebaseTokenByUserIdAsync(
 	request *GetFirebaseTokenByUserIdRequest,
 	callback chan<- GetFirebaseTokenByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "firebaseToken",
-    		"function": "getFirebaseTokenByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "firebaseToken",
+			"function":    "getFirebaseTokenByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getFirebaseTokenByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1543,16 +1544,16 @@ func (p Gs2GatewayWebSocketClient) deleteFirebaseTokenAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteFirebaseTokenResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteFirebaseTokenAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteFirebaseTokenAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteFirebaseTokenAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1564,39 +1565,39 @@ func (p Gs2GatewayWebSocketClient) DeleteFirebaseTokenAsync(
 	request *DeleteFirebaseTokenRequest,
 	callback chan<- DeleteFirebaseTokenAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "firebaseToken",
-    		"function": "deleteFirebaseToken",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "firebaseToken",
+			"function":    "deleteFirebaseToken",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.deleteFirebaseTokenAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1633,16 +1634,16 @@ func (p Gs2GatewayWebSocketClient) deleteFirebaseTokenByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteFirebaseTokenByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteFirebaseTokenByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteFirebaseTokenByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteFirebaseTokenByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1654,36 +1655,36 @@ func (p Gs2GatewayWebSocketClient) DeleteFirebaseTokenByUserIdAsync(
 	request *DeleteFirebaseTokenByUserIdRequest,
 	callback chan<- DeleteFirebaseTokenByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "firebaseToken",
-    		"function": "deleteFirebaseTokenByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "firebaseToken",
+			"function":    "deleteFirebaseTokenByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.deleteFirebaseTokenByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1720,16 +1721,16 @@ func (p Gs2GatewayWebSocketClient) sendMobileNotificationByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SendMobileNotificationByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SendMobileNotificationByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SendMobileNotificationByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SendMobileNotificationByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1741,45 +1742,45 @@ func (p Gs2GatewayWebSocketClient) SendMobileNotificationByUserIdAsync(
 	request *SendMobileNotificationByUserIdRequest,
 	callback chan<- SendMobileNotificationByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "gateway",
-    		"component": "firebaseToken",
-    		"function": "sendMobileNotificationByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "gateway",
+			"component":   "firebaseToken",
+			"function":    "sendMobileNotificationByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.Subject != nil && *request.Subject != "" {
-        bodies["subject"] = *request.Subject
-    }
-    if request.Payload != nil && *request.Payload != "" {
-        bodies["payload"] = *request.Payload
-    }
-    if request.Sound != nil && *request.Sound != "" {
-        bodies["sound"] = *request.Sound
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Subject != nil && *request.Subject != "" {
+		bodies["subject"] = *request.Subject
+	}
+	if request.Payload != nil && *request.Payload != "" {
+		bodies["payload"] = *request.Payload
+	}
+	if request.Sound != nil && *request.Sound != "" {
+		bodies["sound"] = *request.Sound
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.sendMobileNotificationByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)

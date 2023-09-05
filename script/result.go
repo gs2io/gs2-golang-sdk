@@ -17,13 +17,14 @@ permissions and limitations under the License.
 package script
 
 import (
-    "encoding/json"
-    "github.com/gs2io/gs2-golang-sdk/core"
+	"encoding/json"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type DescribeNamespacesResult struct {
-    Items []Namespace `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Namespace `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -32,33 +33,33 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeNamespacesResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
-    return DescribeNamespacesResult {
-        Items: CastNamespaces(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeNamespacesResult{
+		Items:         CastNamespaces(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastNamespacesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastNamespacesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
-    return &p
+	return &p
 }
 
 type CreateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -67,29 +68,29 @@ type CreateNamespaceAsyncResult struct {
 }
 
 func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCreateNamespaceResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
 }
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
-    return CreateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceStatusResult struct {
-    Status *string `json:"status"`
+	Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -98,29 +99,29 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetNamespaceStatusResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
-    return GetNamespaceStatusResult {
-        Status: core.CastString(data["status"]),
-    }
+	return GetNamespaceStatusResult{
+		Status: core.CastString(data["status"]),
+	}
 }
 
 func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "status": p.Status,
-    }
+	return map[string]interface{}{
+		"status": p.Status,
+	}
 }
 
 func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -129,29 +130,29 @@ type GetNamespaceAsyncResult struct {
 }
 
 func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetNamespaceResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
 }
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
-    return GetNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
-    return &p
+	return &p
 }
 
 type UpdateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -160,29 +161,29 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateNamespaceResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
-    return UpdateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
-    return &p
+	return &p
 }
 
 type DeleteNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -191,30 +192,30 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteNamespaceResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
 }
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
-    return DeleteNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
-    return &p
+	return &p
 }
 
 type DescribeScriptsResult struct {
-    Items []Script `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Script `json:"items"`
+	NextPageToken *string  `json:"nextPageToken"`
 }
 
 type DescribeScriptsAsyncResult struct {
@@ -223,33 +224,33 @@ type DescribeScriptsAsyncResult struct {
 }
 
 func NewDescribeScriptsResultFromJson(data string) DescribeScriptsResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeScriptsResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeScriptsResultFromDict(dict)
 }
 
 func NewDescribeScriptsResultFromDict(data map[string]interface{}) DescribeScriptsResult {
-    return DescribeScriptsResult {
-        Items: CastScripts(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeScriptsResult{
+		Items:         CastScripts(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeScriptsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastScriptsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastScriptsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeScriptsResult) Pointer() *DescribeScriptsResult {
-    return &p
+	return &p
 }
 
 type CreateScriptResult struct {
-    Item *Script `json:"item"`
+	Item *Script `json:"item"`
 }
 
 type CreateScriptAsyncResult struct {
@@ -258,29 +259,29 @@ type CreateScriptAsyncResult struct {
 }
 
 func NewCreateScriptResultFromJson(data string) CreateScriptResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCreateScriptResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateScriptResultFromDict(dict)
 }
 
 func NewCreateScriptResultFromDict(data map[string]interface{}) CreateScriptResult {
-    return CreateScriptResult {
-        Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateScriptResult{
+		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateScriptResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateScriptResult) Pointer() *CreateScriptResult {
-    return &p
+	return &p
 }
 
 type CreateScriptFromGitHubResult struct {
-    Item *Script `json:"item"`
+	Item *Script `json:"item"`
 }
 
 type CreateScriptFromGitHubAsyncResult struct {
@@ -289,29 +290,29 @@ type CreateScriptFromGitHubAsyncResult struct {
 }
 
 func NewCreateScriptFromGitHubResultFromJson(data string) CreateScriptFromGitHubResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCreateScriptFromGitHubResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateScriptFromGitHubResultFromDict(dict)
 }
 
 func NewCreateScriptFromGitHubResultFromDict(data map[string]interface{}) CreateScriptFromGitHubResult {
-    return CreateScriptFromGitHubResult {
-        Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateScriptFromGitHubResult{
+		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateScriptFromGitHubResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateScriptFromGitHubResult) Pointer() *CreateScriptFromGitHubResult {
-    return &p
+	return &p
 }
 
 type GetScriptResult struct {
-    Item *Script `json:"item"`
+	Item *Script `json:"item"`
 }
 
 type GetScriptAsyncResult struct {
@@ -320,29 +321,29 @@ type GetScriptAsyncResult struct {
 }
 
 func NewGetScriptResultFromJson(data string) GetScriptResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetScriptResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetScriptResultFromDict(dict)
 }
 
 func NewGetScriptResultFromDict(data map[string]interface{}) GetScriptResult {
-    return GetScriptResult {
-        Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetScriptResult{
+		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetScriptResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetScriptResult) Pointer() *GetScriptResult {
-    return &p
+	return &p
 }
 
 type UpdateScriptResult struct {
-    Item *Script `json:"item"`
+	Item *Script `json:"item"`
 }
 
 type UpdateScriptAsyncResult struct {
@@ -351,29 +352,29 @@ type UpdateScriptAsyncResult struct {
 }
 
 func NewUpdateScriptResultFromJson(data string) UpdateScriptResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateScriptResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateScriptResultFromDict(dict)
 }
 
 func NewUpdateScriptResultFromDict(data map[string]interface{}) UpdateScriptResult {
-    return UpdateScriptResult {
-        Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateScriptResult{
+		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateScriptResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateScriptResult) Pointer() *UpdateScriptResult {
-    return &p
+	return &p
 }
 
 type UpdateScriptFromGitHubResult struct {
-    Item *Script `json:"item"`
+	Item *Script `json:"item"`
 }
 
 type UpdateScriptFromGitHubAsyncResult struct {
@@ -382,29 +383,29 @@ type UpdateScriptFromGitHubAsyncResult struct {
 }
 
 func NewUpdateScriptFromGitHubResultFromJson(data string) UpdateScriptFromGitHubResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateScriptFromGitHubResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateScriptFromGitHubResultFromDict(dict)
 }
 
 func NewUpdateScriptFromGitHubResultFromDict(data map[string]interface{}) UpdateScriptFromGitHubResult {
-    return UpdateScriptFromGitHubResult {
-        Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateScriptFromGitHubResult{
+		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateScriptFromGitHubResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateScriptFromGitHubResult) Pointer() *UpdateScriptFromGitHubResult {
-    return &p
+	return &p
 }
 
 type DeleteScriptResult struct {
-    Item *Script `json:"item"`
+	Item *Script `json:"item"`
 }
 
 type DeleteScriptAsyncResult struct {
@@ -413,33 +414,33 @@ type DeleteScriptAsyncResult struct {
 }
 
 func NewDeleteScriptResultFromJson(data string) DeleteScriptResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteScriptResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteScriptResultFromDict(dict)
 }
 
 func NewDeleteScriptResultFromDict(data map[string]interface{}) DeleteScriptResult {
-    return DeleteScriptResult {
-        Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteScriptResult{
+		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteScriptResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteScriptResult) Pointer() *DeleteScriptResult {
-    return &p
+	return &p
 }
 
 type InvokeScriptResult struct {
-    Code *int32 `json:"code"`
-    Result *string `json:"result"`
-    ExecuteTime *int32 `json:"executeTime"`
-    Charged *int32 `json:"charged"`
-    Output []*string `json:"output"`
+	Code        *int32    `json:"code"`
+	Result      *string   `json:"result"`
+	ExecuteTime *int32    `json:"executeTime"`
+	Charged     *int32    `json:"charged"`
+	Output      []*string `json:"output"`
 }
 
 type InvokeScriptAsyncResult struct {
@@ -448,43 +449,43 @@ type InvokeScriptAsyncResult struct {
 }
 
 func NewInvokeScriptResultFromJson(data string) InvokeScriptResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewInvokeScriptResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewInvokeScriptResultFromDict(dict)
 }
 
 func NewInvokeScriptResultFromDict(data map[string]interface{}) InvokeScriptResult {
-    return InvokeScriptResult {
-        Code: core.CastInt32(data["code"]),
-        Result: core.CastString(data["result"]),
-        ExecuteTime: core.CastInt32(data["executeTime"]),
-        Charged: core.CastInt32(data["charged"]),
-        Output: core.CastStrings(core.CastArray(data["output"])),
-    }
+	return InvokeScriptResult{
+		Code:        core.CastInt32(data["code"]),
+		Result:      core.CastString(data["result"]),
+		ExecuteTime: core.CastInt32(data["executeTime"]),
+		Charged:     core.CastInt32(data["charged"]),
+		Output:      core.CastStrings(core.CastArray(data["output"])),
+	}
 }
 
 func (p InvokeScriptResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "code": p.Code,
-        "result": p.Result,
-        "executeTime": p.ExecuteTime,
-        "charged": p.Charged,
-        "output": core.CastStringsFromDict(
-            p.Output,
-        ),
-    }
+	return map[string]interface{}{
+		"code":        p.Code,
+		"result":      p.Result,
+		"executeTime": p.ExecuteTime,
+		"charged":     p.Charged,
+		"output": core.CastStringsFromDict(
+			p.Output,
+		),
+	}
 }
 
 func (p InvokeScriptResult) Pointer() *InvokeScriptResult {
-    return &p
+	return &p
 }
 
 type DebugInvokeResult struct {
-    Code *int32 `json:"code"`
-    Result *string `json:"result"`
-    ExecuteTime *int32 `json:"executeTime"`
-    Charged *int32 `json:"charged"`
-    Output []*string `json:"output"`
+	Code        *int32    `json:"code"`
+	Result      *string   `json:"result"`
+	ExecuteTime *int32    `json:"executeTime"`
+	Charged     *int32    `json:"charged"`
+	Output      []*string `json:"output"`
 }
 
 type DebugInvokeAsyncResult struct {
@@ -493,33 +494,33 @@ type DebugInvokeAsyncResult struct {
 }
 
 func NewDebugInvokeResultFromJson(data string) DebugInvokeResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDebugInvokeResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDebugInvokeResultFromDict(dict)
 }
 
 func NewDebugInvokeResultFromDict(data map[string]interface{}) DebugInvokeResult {
-    return DebugInvokeResult {
-        Code: core.CastInt32(data["code"]),
-        Result: core.CastString(data["result"]),
-        ExecuteTime: core.CastInt32(data["executeTime"]),
-        Charged: core.CastInt32(data["charged"]),
-        Output: core.CastStrings(core.CastArray(data["output"])),
-    }
+	return DebugInvokeResult{
+		Code:        core.CastInt32(data["code"]),
+		Result:      core.CastString(data["result"]),
+		ExecuteTime: core.CastInt32(data["executeTime"]),
+		Charged:     core.CastInt32(data["charged"]),
+		Output:      core.CastStrings(core.CastArray(data["output"])),
+	}
 }
 
 func (p DebugInvokeResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "code": p.Code,
-        "result": p.Result,
-        "executeTime": p.ExecuteTime,
-        "charged": p.Charged,
-        "output": core.CastStringsFromDict(
-            p.Output,
-        ),
-    }
+	return map[string]interface{}{
+		"code":        p.Code,
+		"result":      p.Result,
+		"executeTime": p.ExecuteTime,
+		"charged":     p.Charged,
+		"output": core.CastStringsFromDict(
+			p.Output,
+		),
+	}
 }
 
 func (p DebugInvokeResult) Pointer() *DebugInvokeResult {
-    return &p
+	return &p
 }

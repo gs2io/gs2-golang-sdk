@@ -18,13 +18,14 @@ package core
 import (
 	"encoding/json"
 	"fmt"
+	"os"
+	"strings"
+	"time"
+
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
 	"github.com/opentracing/opentracing-go/log"
 	"github.com/pkg/errors"
-	"os"
-	"strings"
-	"time"
 )
 
 type WebSocketRequestId string

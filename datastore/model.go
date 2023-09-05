@@ -17,88 +17,89 @@ permissions and limitations under the License.
 package datastore
 
 import (
-    "encoding/json"
-    "github.com/gs2io/gs2-golang-sdk/core"
+	"encoding/json"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Namespace struct {
-	NamespaceId *string `json:"namespaceId"`
-	Name *string `json:"name"`
-	Description *string `json:"description"`
+	NamespaceId      *string        `json:"namespaceId"`
+	Name             *string        `json:"name"`
+	Description      *string        `json:"description"`
 	DoneUploadScript *ScriptSetting `json:"doneUploadScript"`
-	LogSetting *LogSetting `json:"logSetting"`
-	CreatedAt *int64 `json:"createdAt"`
-	UpdatedAt *int64 `json:"updatedAt"`
-	Revision *int64 `json:"revision"`
+	LogSetting       *LogSetting    `json:"logSetting"`
+	CreatedAt        *int64         `json:"createdAt"`
+	UpdatedAt        *int64         `json:"updatedAt"`
+	Revision         *int64         `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewNamespaceFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
-    return Namespace {
-        NamespaceId: core.CastString(data["namespaceId"]),
-        Name: core.CastString(data["name"]),
-        Description: core.CastString(data["description"]),
-        DoneUploadScript: NewScriptSettingFromDict(core.CastMap(data["doneUploadScript"])).Pointer(),
-        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-        UpdatedAt: core.CastInt64(data["updatedAt"]),
-        Revision: core.CastInt64(data["revision"]),
-    }
+	return Namespace{
+		NamespaceId:      core.CastString(data["namespaceId"]),
+		Name:             core.CastString(data["name"]),
+		Description:      core.CastString(data["description"]),
+		DoneUploadScript: NewScriptSettingFromDict(core.CastMap(data["doneUploadScript"])).Pointer(),
+		LogSetting:       NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:        core.CastInt64(data["createdAt"]),
+		UpdatedAt:        core.CastInt64(data["updatedAt"]),
+		Revision:         core.CastInt64(data["revision"]),
+	}
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-    
-    var namespaceId *string
-    if p.NamespaceId != nil {
-        namespaceId = p.NamespaceId
-    }
-    var name *string
-    if p.Name != nil {
-        name = p.Name
-    }
-    var description *string
-    if p.Description != nil {
-        description = p.Description
-    }
-    var doneUploadScript map[string]interface{}
-    if p.DoneUploadScript != nil {
-        doneUploadScript = p.DoneUploadScript.ToDict()
-    }
-    var logSetting map[string]interface{}
-    if p.LogSetting != nil {
-        logSetting = p.LogSetting.ToDict()
-    }
-    var createdAt *int64
-    if p.CreatedAt != nil {
-        createdAt = p.CreatedAt
-    }
-    var updatedAt *int64
-    if p.UpdatedAt != nil {
-        updatedAt = p.UpdatedAt
-    }
-    var revision *int64
-    if p.Revision != nil {
-        revision = p.Revision
-    }
-    return map[string]interface{} {
-        "namespaceId": namespaceId,
-        "name": name,
-        "description": description,
-        "doneUploadScript": doneUploadScript,
-        "logSetting": logSetting,
-        "createdAt": createdAt,
-        "updatedAt": updatedAt,
-        "revision": revision,
-    }
+
+	var namespaceId *string
+	if p.NamespaceId != nil {
+		namespaceId = p.NamespaceId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var description *string
+	if p.Description != nil {
+		description = p.Description
+	}
+	var doneUploadScript map[string]interface{}
+	if p.DoneUploadScript != nil {
+		doneUploadScript = p.DoneUploadScript.ToDict()
+	}
+	var logSetting map[string]interface{}
+	if p.LogSetting != nil {
+		logSetting = p.LogSetting.ToDict()
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	return map[string]interface{}{
+		"namespaceId":      namespaceId,
+		"name":             name,
+		"description":      description,
+		"doneUploadScript": doneUploadScript,
+		"logSetting":       logSetting,
+		"createdAt":        createdAt,
+		"updatedAt":        updatedAt,
+		"revision":         revision,
+	}
 }
 
 func (p Namespace) Pointer() *Namespace {
-    return &p
+	return &p
 }
 
 func CastNamespaces(data []interface{}) []Namespace {
@@ -110,63 +111,63 @@ func CastNamespaces(data []interface{}) []Namespace {
 }
 
 func CastNamespacesFromDict(data []Namespace) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type ScriptSetting struct {
-	TriggerScriptId *string `json:"triggerScriptId"`
-	DoneTriggerTargetType *string `json:"doneTriggerTargetType"`
-	DoneTriggerScriptId *string `json:"doneTriggerScriptId"`
+	TriggerScriptId             *string `json:"triggerScriptId"`
+	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
 func NewScriptSettingFromJson(data string) ScriptSetting {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewScriptSettingFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScriptSettingFromDict(dict)
 }
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
-    return ScriptSetting {
-        TriggerScriptId: core.CastString(data["triggerScriptId"]),
-        DoneTriggerTargetType: core.CastString(data["doneTriggerTargetType"]),
-        DoneTriggerScriptId: core.CastString(data["doneTriggerScriptId"]),
-        DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
-    }
+	return ScriptSetting{
+		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
+		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
+		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
+		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+	}
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-    
-    var triggerScriptId *string
-    if p.TriggerScriptId != nil {
-        triggerScriptId = p.TriggerScriptId
-    }
-    var doneTriggerTargetType *string
-    if p.DoneTriggerTargetType != nil {
-        doneTriggerTargetType = p.DoneTriggerTargetType
-    }
-    var doneTriggerScriptId *string
-    if p.DoneTriggerScriptId != nil {
-        doneTriggerScriptId = p.DoneTriggerScriptId
-    }
-    var doneTriggerQueueNamespaceId *string
-    if p.DoneTriggerQueueNamespaceId != nil {
-        doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
-    }
-    return map[string]interface{} {
-        "triggerScriptId": triggerScriptId,
-        "doneTriggerTargetType": doneTriggerTargetType,
-        "doneTriggerScriptId": doneTriggerScriptId,
-        "doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-    }
+
+	var triggerScriptId *string
+	if p.TriggerScriptId != nil {
+		triggerScriptId = p.TriggerScriptId
+	}
+	var doneTriggerTargetType *string
+	if p.DoneTriggerTargetType != nil {
+		doneTriggerTargetType = p.DoneTriggerTargetType
+	}
+	var doneTriggerScriptId *string
+	if p.DoneTriggerScriptId != nil {
+		doneTriggerScriptId = p.DoneTriggerScriptId
+	}
+	var doneTriggerQueueNamespaceId *string
+	if p.DoneTriggerQueueNamespaceId != nil {
+		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+	}
+	return map[string]interface{}{
+		"triggerScriptId":             triggerScriptId,
+		"doneTriggerTargetType":       doneTriggerTargetType,
+		"doneTriggerScriptId":         doneTriggerScriptId,
+		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
+	}
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
-    return &p
+	return &p
 }
 
 func CastScriptSettings(data []interface{}) []ScriptSetting {
@@ -178,114 +179,114 @@ func CastScriptSettings(data []interface{}) []ScriptSetting {
 }
 
 func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type DataObject struct {
-	DataObjectId *string `json:"dataObjectId"`
-	Name *string `json:"name"`
-	UserId *string `json:"userId"`
-	Scope *string `json:"scope"`
-	AllowUserIds []*string `json:"allowUserIds"`
-	Status *string `json:"status"`
-	Generation *string `json:"generation"`
-	PreviousGeneration *string `json:"previousGeneration"`
-	CreatedAt *int64 `json:"createdAt"`
-	UpdatedAt *int64 `json:"updatedAt"`
-	Revision *int64 `json:"revision"`
+	DataObjectId       *string   `json:"dataObjectId"`
+	Name               *string   `json:"name"`
+	UserId             *string   `json:"userId"`
+	Scope              *string   `json:"scope"`
+	AllowUserIds       []*string `json:"allowUserIds"`
+	Status             *string   `json:"status"`
+	Generation         *string   `json:"generation"`
+	PreviousGeneration *string   `json:"previousGeneration"`
+	CreatedAt          *int64    `json:"createdAt"`
+	UpdatedAt          *int64    `json:"updatedAt"`
+	Revision           *int64    `json:"revision"`
 }
 
 func NewDataObjectFromJson(data string) DataObject {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDataObjectFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDataObjectFromDict(dict)
 }
 
 func NewDataObjectFromDict(data map[string]interface{}) DataObject {
-    return DataObject {
-        DataObjectId: core.CastString(data["dataObjectId"]),
-        Name: core.CastString(data["name"]),
-        UserId: core.CastString(data["userId"]),
-        Scope: core.CastString(data["scope"]),
-        AllowUserIds: core.CastStrings(core.CastArray(data["allowUserIds"])),
-        Status: core.CastString(data["status"]),
-        Generation: core.CastString(data["generation"]),
-        PreviousGeneration: core.CastString(data["previousGeneration"]),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-        UpdatedAt: core.CastInt64(data["updatedAt"]),
-        Revision: core.CastInt64(data["revision"]),
-    }
+	return DataObject{
+		DataObjectId:       core.CastString(data["dataObjectId"]),
+		Name:               core.CastString(data["name"]),
+		UserId:             core.CastString(data["userId"]),
+		Scope:              core.CastString(data["scope"]),
+		AllowUserIds:       core.CastStrings(core.CastArray(data["allowUserIds"])),
+		Status:             core.CastString(data["status"]),
+		Generation:         core.CastString(data["generation"]),
+		PreviousGeneration: core.CastString(data["previousGeneration"]),
+		CreatedAt:          core.CastInt64(data["createdAt"]),
+		UpdatedAt:          core.CastInt64(data["updatedAt"]),
+		Revision:           core.CastInt64(data["revision"]),
+	}
 }
 
 func (p DataObject) ToDict() map[string]interface{} {
-    
-    var dataObjectId *string
-    if p.DataObjectId != nil {
-        dataObjectId = p.DataObjectId
-    }
-    var name *string
-    if p.Name != nil {
-        name = p.Name
-    }
-    var userId *string
-    if p.UserId != nil {
-        userId = p.UserId
-    }
-    var scope *string
-    if p.Scope != nil {
-        scope = p.Scope
-    }
-    var allowUserIds []interface{}
-    if p.AllowUserIds != nil {
-        allowUserIds = core.CastStringsFromDict(
-            p.AllowUserIds,
-        )
-    }
-    var status *string
-    if p.Status != nil {
-        status = p.Status
-    }
-    var generation *string
-    if p.Generation != nil {
-        generation = p.Generation
-    }
-    var previousGeneration *string
-    if p.PreviousGeneration != nil {
-        previousGeneration = p.PreviousGeneration
-    }
-    var createdAt *int64
-    if p.CreatedAt != nil {
-        createdAt = p.CreatedAt
-    }
-    var updatedAt *int64
-    if p.UpdatedAt != nil {
-        updatedAt = p.UpdatedAt
-    }
-    var revision *int64
-    if p.Revision != nil {
-        revision = p.Revision
-    }
-    return map[string]interface{} {
-        "dataObjectId": dataObjectId,
-        "name": name,
-        "userId": userId,
-        "scope": scope,
-        "allowUserIds": allowUserIds,
-        "status": status,
-        "generation": generation,
-        "previousGeneration": previousGeneration,
-        "createdAt": createdAt,
-        "updatedAt": updatedAt,
-        "revision": revision,
-    }
+
+	var dataObjectId *string
+	if p.DataObjectId != nil {
+		dataObjectId = p.DataObjectId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var scope *string
+	if p.Scope != nil {
+		scope = p.Scope
+	}
+	var allowUserIds []interface{}
+	if p.AllowUserIds != nil {
+		allowUserIds = core.CastStringsFromDict(
+			p.AllowUserIds,
+		)
+	}
+	var status *string
+	if p.Status != nil {
+		status = p.Status
+	}
+	var generation *string
+	if p.Generation != nil {
+		generation = p.Generation
+	}
+	var previousGeneration *string
+	if p.PreviousGeneration != nil {
+		previousGeneration = p.PreviousGeneration
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	return map[string]interface{}{
+		"dataObjectId":       dataObjectId,
+		"name":               name,
+		"userId":             userId,
+		"scope":              scope,
+		"allowUserIds":       allowUserIds,
+		"status":             status,
+		"generation":         generation,
+		"previousGeneration": previousGeneration,
+		"createdAt":          createdAt,
+		"updatedAt":          updatedAt,
+		"revision":           revision,
+	}
 }
 
 func (p DataObject) Pointer() *DataObject {
-    return &p
+	return &p
 }
 
 func CastDataObjects(data []interface{}) []DataObject {
@@ -297,77 +298,77 @@ func CastDataObjects(data []interface{}) []DataObject {
 }
 
 func CastDataObjectsFromDict(data []DataObject) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type DataObjectHistory struct {
 	DataObjectHistoryId *string `json:"dataObjectHistoryId"`
-	DataObjectName *string `json:"dataObjectName"`
-	Generation *string `json:"generation"`
-	ContentLength *int64 `json:"contentLength"`
-	CreatedAt *int64 `json:"createdAt"`
-	Revision *int64 `json:"revision"`
+	DataObjectName      *string `json:"dataObjectName"`
+	Generation          *string `json:"generation"`
+	ContentLength       *int64  `json:"contentLength"`
+	CreatedAt           *int64  `json:"createdAt"`
+	Revision            *int64  `json:"revision"`
 }
 
 func NewDataObjectHistoryFromJson(data string) DataObjectHistory {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDataObjectHistoryFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDataObjectHistoryFromDict(dict)
 }
 
 func NewDataObjectHistoryFromDict(data map[string]interface{}) DataObjectHistory {
-    return DataObjectHistory {
-        DataObjectHistoryId: core.CastString(data["dataObjectHistoryId"]),
-        DataObjectName: core.CastString(data["dataObjectName"]),
-        Generation: core.CastString(data["generation"]),
-        ContentLength: core.CastInt64(data["contentLength"]),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-        Revision: core.CastInt64(data["revision"]),
-    }
+	return DataObjectHistory{
+		DataObjectHistoryId: core.CastString(data["dataObjectHistoryId"]),
+		DataObjectName:      core.CastString(data["dataObjectName"]),
+		Generation:          core.CastString(data["generation"]),
+		ContentLength:       core.CastInt64(data["contentLength"]),
+		CreatedAt:           core.CastInt64(data["createdAt"]),
+		Revision:            core.CastInt64(data["revision"]),
+	}
 }
 
 func (p DataObjectHistory) ToDict() map[string]interface{} {
-    
-    var dataObjectHistoryId *string
-    if p.DataObjectHistoryId != nil {
-        dataObjectHistoryId = p.DataObjectHistoryId
-    }
-    var dataObjectName *string
-    if p.DataObjectName != nil {
-        dataObjectName = p.DataObjectName
-    }
-    var generation *string
-    if p.Generation != nil {
-        generation = p.Generation
-    }
-    var contentLength *int64
-    if p.ContentLength != nil {
-        contentLength = p.ContentLength
-    }
-    var createdAt *int64
-    if p.CreatedAt != nil {
-        createdAt = p.CreatedAt
-    }
-    var revision *int64
-    if p.Revision != nil {
-        revision = p.Revision
-    }
-    return map[string]interface{} {
-        "dataObjectHistoryId": dataObjectHistoryId,
-        "dataObjectName": dataObjectName,
-        "generation": generation,
-        "contentLength": contentLength,
-        "createdAt": createdAt,
-        "revision": revision,
-    }
+
+	var dataObjectHistoryId *string
+	if p.DataObjectHistoryId != nil {
+		dataObjectHistoryId = p.DataObjectHistoryId
+	}
+	var dataObjectName *string
+	if p.DataObjectName != nil {
+		dataObjectName = p.DataObjectName
+	}
+	var generation *string
+	if p.Generation != nil {
+		generation = p.Generation
+	}
+	var contentLength *int64
+	if p.ContentLength != nil {
+		contentLength = p.ContentLength
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	return map[string]interface{}{
+		"dataObjectHistoryId": dataObjectHistoryId,
+		"dataObjectName":      dataObjectName,
+		"generation":          generation,
+		"contentLength":       contentLength,
+		"createdAt":           createdAt,
+		"revision":            revision,
+	}
 }
 
 func (p DataObjectHistory) Pointer() *DataObjectHistory {
-    return &p
+	return &p
 }
 
 func CastDataObjectHistories(data []interface{}) []DataObjectHistory {
@@ -379,11 +380,11 @@ func CastDataObjectHistories(data []interface{}) []DataObjectHistory {
 }
 
 func CastDataObjectHistoriesFromDict(data []DataObjectHistory) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
@@ -391,30 +392,30 @@ type LogSetting struct {
 }
 
 func NewLogSettingFromJson(data string) LogSetting {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewLogSettingFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
-    return LogSetting {
-        LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
-    }
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-    
-    var loggingNamespaceId *string
-    if p.LoggingNamespaceId != nil {
-        loggingNamespaceId = p.LoggingNamespaceId
-    }
-    return map[string]interface{} {
-        "loggingNamespaceId": loggingNamespaceId,
-    }
+
+	var loggingNamespaceId *string
+	if p.LoggingNamespaceId != nil {
+		loggingNamespaceId = p.LoggingNamespaceId
+	}
+	return map[string]interface{}{
+		"loggingNamespaceId": loggingNamespaceId,
+	}
 }
 
 func (p LogSetting) Pointer() *LogSetting {
-    return &p
+	return &p
 }
 
 func CastLogSettings(data []interface{}) []LogSetting {
@@ -426,9 +427,9 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

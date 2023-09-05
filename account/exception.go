@@ -20,20 +20,20 @@ type PasswordIncorrect struct {
 }
 
 func (p PasswordIncorrect) Type() string {
-    return "AccountPasswordIncorrect"
+	return "AccountPasswordIncorrect"
 }
 
 func (p PasswordIncorrect) Code() string {
-    return "account.password.invalid"
+	return "account.password.invalid"
 }
 
 type BannedInfinity struct {
 }
 
 func (p BannedInfinity) Type() string {
-    return "AccountBannedInfinity"
+	return "AccountBannedInfinity"
 }
 
 func (p BannedInfinity) Code() string {
-    return "account.banned.infinity"
+	return "account.banned.infinity"
 }

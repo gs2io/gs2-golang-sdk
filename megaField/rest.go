@@ -18,8 +18,9 @@ package megaField
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
 	"strings"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Gs2MegaFieldRestClient struct {
@@ -56,13 +57,13 @@ func describeNamespacesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeNamespacesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeNamespacesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -86,10 +87,10 @@ func (p Gs2MegaFieldRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -141,13 +142,13 @@ func createNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -163,32 +164,32 @@ func (p Gs2MegaFieldRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -232,13 +233,13 @@ func getNamespaceStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -252,19 +253,19 @@ func (p Gs2MegaFieldRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -316,13 +317,13 @@ func getNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -336,19 +337,19 @@ func (p Gs2MegaFieldRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -400,13 +401,13 @@ func updateNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -420,36 +421,36 @@ func (p Gs2MegaFieldRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -493,13 +494,13 @@ func deleteNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -513,19 +514,19 @@ func (p Gs2MegaFieldRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -577,13 +578,13 @@ func describeAreaModelsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeAreaModelsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeAreaModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeAreaModelsAsyncResult{
 		result: &result,
@@ -597,19 +598,19 @@ func (p Gs2MegaFieldRestClient) DescribeAreaModelsAsync(
 	callback chan<- DescribeAreaModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/area"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeAreaModelsAsyncHandler(
 		p,
@@ -661,13 +662,13 @@ func getAreaModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetAreaModelAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetAreaModelAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetAreaModelAsyncResult{
 		result: &result,
@@ -681,24 +682,24 @@ func (p Gs2MegaFieldRestClient) GetAreaModelAsync(
 	callback chan<- GetAreaModelAsyncResult,
 ) {
 	path := "/{namespaceName}/area/{areaModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getAreaModelAsyncHandler(
 		p,
@@ -750,13 +751,13 @@ func describeAreaModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeAreaModelMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeAreaModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeAreaModelMastersAsyncResult{
 		result: &result,
@@ -770,11 +771,11 @@ func (p Gs2MegaFieldRestClient) DescribeAreaModelMastersAsync(
 	callback chan<- DescribeAreaModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/area"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -785,10 +786,10 @@ func (p Gs2MegaFieldRestClient) DescribeAreaModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeAreaModelMastersAsyncHandler(
 		p,
@@ -840,13 +841,13 @@ func createAreaModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateAreaModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateAreaModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateAreaModelMasterAsyncResult{
 		result: &result,
@@ -860,39 +861,39 @@ func (p Gs2MegaFieldRestClient) CreateAreaModelMasterAsync(
 	callback chan<- CreateAreaModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/area"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createAreaModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -936,13 +937,13 @@ func getAreaModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetAreaModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetAreaModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetAreaModelMasterAsyncResult{
 		result: &result,
@@ -956,24 +957,24 @@ func (p Gs2MegaFieldRestClient) GetAreaModelMasterAsync(
 	callback chan<- GetAreaModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/area/{areaModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getAreaModelMasterAsyncHandler(
 		p,
@@ -1025,13 +1026,13 @@ func updateAreaModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateAreaModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateAreaModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateAreaModelMasterAsyncResult{
 		result: &result,
@@ -1045,41 +1046,41 @@ func (p Gs2MegaFieldRestClient) UpdateAreaModelMasterAsync(
 	callback chan<- UpdateAreaModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/area/{areaModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateAreaModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1123,13 +1124,13 @@ func deleteAreaModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteAreaModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteAreaModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteAreaModelMasterAsyncResult{
 		result: &result,
@@ -1143,24 +1144,24 @@ func (p Gs2MegaFieldRestClient) DeleteAreaModelMasterAsync(
 	callback chan<- DeleteAreaModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/area/{areaModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteAreaModelMasterAsyncHandler(
 		p,
@@ -1212,13 +1213,13 @@ func describeLayerModelsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeLayerModelsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeLayerModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeLayerModelsAsyncResult{
 		result: &result,
@@ -1232,24 +1233,24 @@ func (p Gs2MegaFieldRestClient) DescribeLayerModelsAsync(
 	callback chan<- DescribeLayerModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/area/{areaModelName}/layer"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeLayerModelsAsyncHandler(
 		p,
@@ -1301,13 +1302,13 @@ func getLayerModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetLayerModelAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetLayerModelAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetLayerModelAsyncResult{
 		result: &result,
@@ -1321,29 +1322,29 @@ func (p Gs2MegaFieldRestClient) GetLayerModelAsync(
 	callback chan<- GetLayerModelAsyncResult,
 ) {
 	path := "/{namespaceName}/area/{areaModelName}/layer/{layerModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-    if request.LayerModelName != nil && *request.LayerModelName != ""  {
-        path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{layerModelName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
+	if request.LayerModelName != nil && *request.LayerModelName != "" {
+		path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{layerModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getLayerModelAsyncHandler(
 		p,
@@ -1395,13 +1396,13 @@ func describeLayerModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeLayerModelMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeLayerModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeLayerModelMastersAsyncResult{
 		result: &result,
@@ -1415,16 +1416,16 @@ func (p Gs2MegaFieldRestClient) DescribeLayerModelMastersAsync(
 	callback chan<- DescribeLayerModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/area/{areaModelName}/layer"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1435,10 +1436,10 @@ func (p Gs2MegaFieldRestClient) DescribeLayerModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeLayerModelMastersAsyncHandler(
 		p,
@@ -1490,13 +1491,13 @@ func createLayerModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateLayerModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateLayerModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateLayerModelMasterAsyncResult{
 		result: &result,
@@ -1510,44 +1511,44 @@ func (p Gs2MegaFieldRestClient) CreateLayerModelMasterAsync(
 	callback chan<- CreateLayerModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/area/{areaModelName}/layer"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createLayerModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1591,13 +1592,13 @@ func getLayerModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetLayerModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetLayerModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetLayerModelMasterAsyncResult{
 		result: &result,
@@ -1611,29 +1612,29 @@ func (p Gs2MegaFieldRestClient) GetLayerModelMasterAsync(
 	callback chan<- GetLayerModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/area/{areaModelName}/layer/{layerModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-    if request.LayerModelName != nil && *request.LayerModelName != ""  {
-        path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{layerModelName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
+	if request.LayerModelName != nil && *request.LayerModelName != "" {
+		path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{layerModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getLayerModelMasterAsyncHandler(
 		p,
@@ -1685,13 +1686,13 @@ func updateLayerModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateLayerModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateLayerModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateLayerModelMasterAsyncResult{
 		result: &result,
@@ -1705,46 +1706,46 @@ func (p Gs2MegaFieldRestClient) UpdateLayerModelMasterAsync(
 	callback chan<- UpdateLayerModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/area/{areaModelName}/layer/{layerModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-    if request.LayerModelName != nil && *request.LayerModelName != ""  {
-        path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{layerModelName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
+	if request.LayerModelName != nil && *request.LayerModelName != "" {
+		path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{layerModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateLayerModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1788,13 +1789,13 @@ func deleteLayerModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteLayerModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteLayerModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteLayerModelMasterAsyncResult{
 		result: &result,
@@ -1808,29 +1809,29 @@ func (p Gs2MegaFieldRestClient) DeleteLayerModelMasterAsync(
 	callback chan<- DeleteLayerModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/area/{areaModelName}/layer/{layerModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-    if request.LayerModelName != nil && *request.LayerModelName != ""  {
-        path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{layerModelName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
+	if request.LayerModelName != nil && *request.LayerModelName != "" {
+		path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{layerModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteLayerModelMasterAsyncHandler(
 		p,
@@ -1882,13 +1883,13 @@ func exportMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ExportMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExportMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -1902,19 +1903,19 @@ func (p Gs2MegaFieldRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go exportMasterAsyncHandler(
 		p,
@@ -1966,13 +1967,13 @@ func getCurrentFieldMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCurrentFieldMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCurrentFieldMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetCurrentFieldMasterAsyncResult{
 		result: &result,
@@ -1986,19 +1987,19 @@ func (p Gs2MegaFieldRestClient) GetCurrentFieldMasterAsync(
 	callback chan<- GetCurrentFieldMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getCurrentFieldMasterAsyncHandler(
 		p,
@@ -2050,13 +2051,13 @@ func updateCurrentFieldMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentFieldMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentFieldMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateCurrentFieldMasterAsyncResult{
 		result: &result,
@@ -2070,33 +2071,33 @@ func (p Gs2MegaFieldRestClient) UpdateCurrentFieldMasterAsync(
 	callback chan<- UpdateCurrentFieldMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Settings != nil && *request.Settings != "" {
-        bodies["settings"] = *request.Settings
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Settings != nil && *request.Settings != "" {
+		bodies["settings"] = *request.Settings
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateCurrentFieldMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2140,13 +2141,13 @@ func updateCurrentFieldMasterFromGitHubAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentFieldMasterFromGitHubAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentFieldMasterFromGitHubAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateCurrentFieldMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2160,33 +2161,33 @@ func (p Gs2MegaFieldRestClient) UpdateCurrentFieldMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentFieldMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.CheckoutSetting != nil {
-        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.CheckoutSetting != nil {
+		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateCurrentFieldMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2230,13 +2231,13 @@ func putPositionAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- PutPositionAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PutPositionAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- PutPositionAsyncResult{
 		result: &result,
@@ -2250,55 +2251,55 @@ func (p Gs2MegaFieldRestClient) PutPositionAsync(
 	callback chan<- PutPositionAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/spatial/{areaModelName}/{layerModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-    if request.LayerModelName != nil && *request.LayerModelName != ""  {
-        path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{layerModelName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Position != nil {
-        bodies["position"] = request.Position.ToDict()
-    }
-    if request.Vector != nil {
-        bodies["vector"] = request.Vector.ToDict()
-    }
-    if request.R != nil {
-        bodies["r"] = *request.R
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
+	if request.LayerModelName != nil && *request.LayerModelName != "" {
+		path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{layerModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Position != nil {
+		bodies["position"] = request.Position.ToDict()
+	}
+	if request.Vector != nil {
+		bodies["vector"] = request.Vector.ToDict()
+	}
+	if request.R != nil {
+		bodies["r"] = *request.R
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go putPositionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2342,13 +2343,13 @@ func putPositionByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- PutPositionByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PutPositionByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- PutPositionByUserIdAsyncResult{
 		result: &result,
@@ -2362,57 +2363,57 @@ func (p Gs2MegaFieldRestClient) PutPositionByUserIdAsync(
 	callback chan<- PutPositionByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/spatial/{areaModelName}/{layerModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-    if request.LayerModelName != nil && *request.LayerModelName != ""  {
-        path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{layerModelName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Position != nil {
-        bodies["position"] = request.Position.ToDict()
-    }
-    if request.Vector != nil {
-        bodies["vector"] = request.Vector.ToDict()
-    }
-    if request.R != nil {
-        bodies["r"] = *request.R
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
+	if request.LayerModelName != nil && *request.LayerModelName != "" {
+		path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{layerModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Position != nil {
+		bodies["position"] = request.Position.ToDict()
+	}
+	if request.Vector != nil {
+		bodies["vector"] = request.Vector.ToDict()
+	}
+	if request.R != nil {
+		bodies["r"] = *request.R
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go putPositionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2456,13 +2457,13 @@ func fetchPositionAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- FetchPositionAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- FetchPositionAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- FetchPositionAsyncResult{
 		result: &result,
@@ -2476,53 +2477,53 @@ func (p Gs2MegaFieldRestClient) FetchPositionAsync(
 	callback chan<- FetchPositionAsyncResult,
 ) {
 	path := "/{namespaceName}/area/{areaModelName}/layer/{layerModelName}/spatial/fetch"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-    if request.LayerModelName != nil && *request.LayerModelName != ""  {
-        path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{layerModelName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.UserIds != nil {
-        var _userIds []interface {}
-        for _, item := range request.UserIds {
-            _userIds = append(_userIds, item)
-        }
-        bodies["userIds"] = _userIds
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
+	if request.LayerModelName != nil && *request.LayerModelName != "" {
+		path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{layerModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.UserIds != nil {
+		var _userIds []interface{}
+		for _, item := range request.UserIds {
+			_userIds = append(_userIds, item)
+		}
+		bodies["userIds"] = _userIds
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go fetchPositionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2566,13 +2567,13 @@ func fetchPositionFromSystemAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- FetchPositionFromSystemAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- FetchPositionFromSystemAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- FetchPositionFromSystemAsyncResult{
 		result: &result,
@@ -2586,50 +2587,50 @@ func (p Gs2MegaFieldRestClient) FetchPositionFromSystemAsync(
 	callback chan<- FetchPositionFromSystemAsyncResult,
 ) {
 	path := "/{namespaceName}/system/area/{areaModelName}/layer/{layerModelName}/spatial/fetch"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-    if request.LayerModelName != nil && *request.LayerModelName != ""  {
-        path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{layerModelName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.UserIds != nil {
-        var _userIds []interface {}
-        for _, item := range request.UserIds {
-            _userIds = append(_userIds, item)
-        }
-        bodies["userIds"] = _userIds
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
+	if request.LayerModelName != nil && *request.LayerModelName != "" {
+		path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{layerModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.UserIds != nil {
+		var _userIds []interface{}
+		for _, item := range request.UserIds {
+			_userIds = append(_userIds, item)
+		}
+		bodies["userIds"] = _userIds
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go fetchPositionFromSystemAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2673,13 +2674,13 @@ func nearUserIdsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- NearUserIdsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- NearUserIdsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- NearUserIdsAsyncResult{
 		result: &result,
@@ -2693,55 +2694,55 @@ func (p Gs2MegaFieldRestClient) NearUserIdsAsync(
 	callback chan<- NearUserIdsAsyncResult,
 ) {
 	path := "/{namespaceName}/area/{areaModelName}/layer/{layerModelName}/spatial/near"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-    if request.LayerModelName != nil && *request.LayerModelName != ""  {
-        path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{layerModelName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Point != nil {
-        bodies["point"] = request.Point.ToDict()
-    }
-    if request.R != nil {
-        bodies["r"] = *request.R
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
+	if request.LayerModelName != nil && *request.LayerModelName != "" {
+		path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{layerModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Point != nil {
+		bodies["point"] = request.Point.ToDict()
+	}
+	if request.R != nil {
+		bodies["r"] = *request.R
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go nearUserIdsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2785,13 +2786,13 @@ func nearUserIdsFromSystemAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- NearUserIdsFromSystemAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- NearUserIdsFromSystemAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- NearUserIdsFromSystemAsyncResult{
 		result: &result,
@@ -2805,52 +2806,52 @@ func (p Gs2MegaFieldRestClient) NearUserIdsFromSystemAsync(
 	callback chan<- NearUserIdsFromSystemAsyncResult,
 ) {
 	path := "/{namespaceName}/system/area/{areaModelName}/layer/{layerModelName}/spatial/near"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-    if request.LayerModelName != nil && *request.LayerModelName != ""  {
-        path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{layerModelName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Point != nil {
-        bodies["point"] = request.Point.ToDict()
-    }
-    if request.R != nil {
-        bodies["r"] = *request.R
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
+	if request.LayerModelName != nil && *request.LayerModelName != "" {
+		path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{layerModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Point != nil {
+		bodies["point"] = request.Point.ToDict()
+	}
+	if request.R != nil {
+		bodies["r"] = *request.R
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go nearUserIdsFromSystemAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2894,13 +2895,13 @@ func actionAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ActionAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ActionAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ActionAsyncResult{
 		result: &result,
@@ -2914,56 +2915,56 @@ func (p Gs2MegaFieldRestClient) ActionAsync(
 	callback chan<- ActionAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/spatial/{areaModelName}/{layerModelName}/action"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-    if request.LayerModelName != nil && *request.LayerModelName != ""  {
-        path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{layerModelName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Position != nil {
-        bodies["position"] = request.Position.ToDict()
-    }
-    if request.Scopes != nil {
-        var _scopes []interface {}
-        for _, item := range request.Scopes {
-            _scopes = append(_scopes, item)
-        }
-        bodies["scopes"] = _scopes
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
+	if request.LayerModelName != nil && *request.LayerModelName != "" {
+		path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{layerModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Position != nil {
+		bodies["position"] = request.Position.ToDict()
+	}
+	if request.Scopes != nil {
+		var _scopes []interface{}
+		for _, item := range request.Scopes {
+			_scopes = append(_scopes, item)
+		}
+		bodies["scopes"] = _scopes
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go actionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3007,13 +3008,13 @@ func actionByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ActionByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ActionByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ActionByUserIdAsyncResult{
 		result: &result,
@@ -3027,58 +3028,58 @@ func (p Gs2MegaFieldRestClient) ActionByUserIdAsync(
 	callback chan<- ActionByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/spatial/{areaModelName}/{layerModelName}/action"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.AreaModelName != nil && *request.AreaModelName != ""  {
-        path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{areaModelName}", "null")
-    }
-    if request.LayerModelName != nil && *request.LayerModelName != ""  {
-        path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{layerModelName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Position != nil {
-        bodies["position"] = request.Position.ToDict()
-    }
-    if request.Scopes != nil {
-        var _scopes []interface {}
-        for _, item := range request.Scopes {
-            _scopes = append(_scopes, item)
-        }
-        bodies["scopes"] = _scopes
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.AreaModelName != nil && *request.AreaModelName != "" {
+		path = strings.ReplaceAll(path, "{areaModelName}", core.ToString(*request.AreaModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{areaModelName}", "null")
+	}
+	if request.LayerModelName != nil && *request.LayerModelName != "" {
+		path = strings.ReplaceAll(path, "{layerModelName}", core.ToString(*request.LayerModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{layerModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Position != nil {
+		bodies["position"] = request.Position.ToDict()
+	}
+	if request.Scopes != nil {
+		var _scopes []interface{}
+		for _, item := range request.Scopes {
+			_scopes = append(_scopes, item)
+		}
+		bodies["scopes"] = _scopes
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go actionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)

@@ -17,13 +17,14 @@ permissions and limitations under the License.
 package chat
 
 import (
-    "encoding/json"
-    "github.com/gs2io/gs2-golang-sdk/core"
+	"encoding/json"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type DescribeNamespacesResult struct {
-    Items []Namespace `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Namespace `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -32,33 +33,33 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeNamespacesResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
-    return DescribeNamespacesResult {
-        Items: CastNamespaces(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeNamespacesResult{
+		Items:         CastNamespaces(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastNamespacesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastNamespacesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
-    return &p
+	return &p
 }
 
 type CreateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -67,29 +68,29 @@ type CreateNamespaceAsyncResult struct {
 }
 
 func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCreateNamespaceResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
 }
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
-    return CreateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceStatusResult struct {
-    Status *string `json:"status"`
+	Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -98,29 +99,29 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetNamespaceStatusResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
-    return GetNamespaceStatusResult {
-        Status: core.CastString(data["status"]),
-    }
+	return GetNamespaceStatusResult{
+		Status: core.CastString(data["status"]),
+	}
 }
 
 func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "status": p.Status,
-    }
+	return map[string]interface{}{
+		"status": p.Status,
+	}
 }
 
 func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -129,29 +130,29 @@ type GetNamespaceAsyncResult struct {
 }
 
 func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetNamespaceResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
 }
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
-    return GetNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
-    return &p
+	return &p
 }
 
 type UpdateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -160,29 +161,29 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateNamespaceResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
-    return UpdateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
-    return &p
+	return &p
 }
 
 type DeleteNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -191,30 +192,30 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteNamespaceResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
 }
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
-    return DeleteNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
-    return &p
+	return &p
 }
 
 type DescribeRoomsResult struct {
-    Items []Room `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Room  `json:"items"`
+	NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeRoomsAsyncResult struct {
@@ -223,33 +224,33 @@ type DescribeRoomsAsyncResult struct {
 }
 
 func NewDescribeRoomsResultFromJson(data string) DescribeRoomsResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeRoomsResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeRoomsResultFromDict(dict)
 }
 
 func NewDescribeRoomsResultFromDict(data map[string]interface{}) DescribeRoomsResult {
-    return DescribeRoomsResult {
-        Items: CastRooms(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeRoomsResult{
+		Items:         CastRooms(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeRoomsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastRoomsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastRoomsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeRoomsResult) Pointer() *DescribeRoomsResult {
-    return &p
+	return &p
 }
 
 type CreateRoomResult struct {
-    Item *Room `json:"item"`
+	Item *Room `json:"item"`
 }
 
 type CreateRoomAsyncResult struct {
@@ -258,29 +259,29 @@ type CreateRoomAsyncResult struct {
 }
 
 func NewCreateRoomResultFromJson(data string) CreateRoomResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCreateRoomResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateRoomResultFromDict(dict)
 }
 
 func NewCreateRoomResultFromDict(data map[string]interface{}) CreateRoomResult {
-    return CreateRoomResult {
-        Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateRoomResult{
+		Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateRoomResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateRoomResult) Pointer() *CreateRoomResult {
-    return &p
+	return &p
 }
 
 type CreateRoomFromBackendResult struct {
-    Item *Room `json:"item"`
+	Item *Room `json:"item"`
 }
 
 type CreateRoomFromBackendAsyncResult struct {
@@ -289,29 +290,29 @@ type CreateRoomFromBackendAsyncResult struct {
 }
 
 func NewCreateRoomFromBackendResultFromJson(data string) CreateRoomFromBackendResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCreateRoomFromBackendResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateRoomFromBackendResultFromDict(dict)
 }
 
 func NewCreateRoomFromBackendResultFromDict(data map[string]interface{}) CreateRoomFromBackendResult {
-    return CreateRoomFromBackendResult {
-        Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateRoomFromBackendResult{
+		Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateRoomFromBackendResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateRoomFromBackendResult) Pointer() *CreateRoomFromBackendResult {
-    return &p
+	return &p
 }
 
 type GetRoomResult struct {
-    Item *Room `json:"item"`
+	Item *Room `json:"item"`
 }
 
 type GetRoomAsyncResult struct {
@@ -320,29 +321,29 @@ type GetRoomAsyncResult struct {
 }
 
 func NewGetRoomResultFromJson(data string) GetRoomResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetRoomResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetRoomResultFromDict(dict)
 }
 
 func NewGetRoomResultFromDict(data map[string]interface{}) GetRoomResult {
-    return GetRoomResult {
-        Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetRoomResult{
+		Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetRoomResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetRoomResult) Pointer() *GetRoomResult {
-    return &p
+	return &p
 }
 
 type UpdateRoomResult struct {
-    Item *Room `json:"item"`
+	Item *Room `json:"item"`
 }
 
 type UpdateRoomAsyncResult struct {
@@ -351,29 +352,29 @@ type UpdateRoomAsyncResult struct {
 }
 
 func NewUpdateRoomResultFromJson(data string) UpdateRoomResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateRoomResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateRoomResultFromDict(dict)
 }
 
 func NewUpdateRoomResultFromDict(data map[string]interface{}) UpdateRoomResult {
-    return UpdateRoomResult {
-        Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateRoomResult{
+		Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateRoomResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateRoomResult) Pointer() *UpdateRoomResult {
-    return &p
+	return &p
 }
 
 type UpdateRoomFromBackendResult struct {
-    Item *Room `json:"item"`
+	Item *Room `json:"item"`
 }
 
 type UpdateRoomFromBackendAsyncResult struct {
@@ -382,29 +383,29 @@ type UpdateRoomFromBackendAsyncResult struct {
 }
 
 func NewUpdateRoomFromBackendResultFromJson(data string) UpdateRoomFromBackendResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateRoomFromBackendResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateRoomFromBackendResultFromDict(dict)
 }
 
 func NewUpdateRoomFromBackendResultFromDict(data map[string]interface{}) UpdateRoomFromBackendResult {
-    return UpdateRoomFromBackendResult {
-        Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateRoomFromBackendResult{
+		Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateRoomFromBackendResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateRoomFromBackendResult) Pointer() *UpdateRoomFromBackendResult {
-    return &p
+	return &p
 }
 
 type DeleteRoomResult struct {
-    Item *Room `json:"item"`
+	Item *Room `json:"item"`
 }
 
 type DeleteRoomAsyncResult struct {
@@ -413,29 +414,29 @@ type DeleteRoomAsyncResult struct {
 }
 
 func NewDeleteRoomResultFromJson(data string) DeleteRoomResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteRoomResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteRoomResultFromDict(dict)
 }
 
 func NewDeleteRoomResultFromDict(data map[string]interface{}) DeleteRoomResult {
-    return DeleteRoomResult {
-        Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteRoomResult{
+		Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteRoomResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteRoomResult) Pointer() *DeleteRoomResult {
-    return &p
+	return &p
 }
 
 type DeleteRoomFromBackendResult struct {
-    Item *Room `json:"item"`
+	Item *Room `json:"item"`
 }
 
 type DeleteRoomFromBackendAsyncResult struct {
@@ -444,29 +445,29 @@ type DeleteRoomFromBackendAsyncResult struct {
 }
 
 func NewDeleteRoomFromBackendResultFromJson(data string) DeleteRoomFromBackendResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteRoomFromBackendResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteRoomFromBackendResultFromDict(dict)
 }
 
 func NewDeleteRoomFromBackendResultFromDict(data map[string]interface{}) DeleteRoomFromBackendResult {
-    return DeleteRoomFromBackendResult {
-        Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteRoomFromBackendResult{
+		Item: NewRoomFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteRoomFromBackendResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteRoomFromBackendResult) Pointer() *DeleteRoomFromBackendResult {
-    return &p
+	return &p
 }
 
 type DescribeMessagesResult struct {
-    Items []Message `json:"items"`
+	Items []Message `json:"items"`
 }
 
 type DescribeMessagesAsyncResult struct {
@@ -475,31 +476,31 @@ type DescribeMessagesAsyncResult struct {
 }
 
 func NewDescribeMessagesResultFromJson(data string) DescribeMessagesResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeMessagesResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMessagesResultFromDict(dict)
 }
 
 func NewDescribeMessagesResultFromDict(data map[string]interface{}) DescribeMessagesResult {
-    return DescribeMessagesResult {
-        Items: CastMessages(core.CastArray(data["items"])),
-    }
+	return DescribeMessagesResult{
+		Items: CastMessages(core.CastArray(data["items"])),
+	}
 }
 
 func (p DescribeMessagesResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastMessagesFromDict(
-            p.Items,
-        ),
-    }
+	return map[string]interface{}{
+		"items": CastMessagesFromDict(
+			p.Items,
+		),
+	}
 }
 
 func (p DescribeMessagesResult) Pointer() *DescribeMessagesResult {
-    return &p
+	return &p
 }
 
 type DescribeMessagesByUserIdResult struct {
-    Items []Message `json:"items"`
+	Items []Message `json:"items"`
 }
 
 type DescribeMessagesByUserIdAsyncResult struct {
@@ -508,31 +509,31 @@ type DescribeMessagesByUserIdAsyncResult struct {
 }
 
 func NewDescribeMessagesByUserIdResultFromJson(data string) DescribeMessagesByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeMessagesByUserIdResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMessagesByUserIdResultFromDict(dict)
 }
 
 func NewDescribeMessagesByUserIdResultFromDict(data map[string]interface{}) DescribeMessagesByUserIdResult {
-    return DescribeMessagesByUserIdResult {
-        Items: CastMessages(core.CastArray(data["items"])),
-    }
+	return DescribeMessagesByUserIdResult{
+		Items: CastMessages(core.CastArray(data["items"])),
+	}
 }
 
 func (p DescribeMessagesByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastMessagesFromDict(
-            p.Items,
-        ),
-    }
+	return map[string]interface{}{
+		"items": CastMessagesFromDict(
+			p.Items,
+		),
+	}
 }
 
 func (p DescribeMessagesByUserIdResult) Pointer() *DescribeMessagesByUserIdResult {
-    return &p
+	return &p
 }
 
 type PostResult struct {
-    Item *Message `json:"item"`
+	Item *Message `json:"item"`
 }
 
 type PostAsyncResult struct {
@@ -541,29 +542,29 @@ type PostAsyncResult struct {
 }
 
 func NewPostResultFromJson(data string) PostResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewPostResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPostResultFromDict(dict)
 }
 
 func NewPostResultFromDict(data map[string]interface{}) PostResult {
-    return PostResult {
-        Item: NewMessageFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return PostResult{
+		Item: NewMessageFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p PostResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p PostResult) Pointer() *PostResult {
-    return &p
+	return &p
 }
 
 type PostByUserIdResult struct {
-    Item *Message `json:"item"`
+	Item *Message `json:"item"`
 }
 
 type PostByUserIdAsyncResult struct {
@@ -572,29 +573,29 @@ type PostByUserIdAsyncResult struct {
 }
 
 func NewPostByUserIdResultFromJson(data string) PostByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewPostByUserIdResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPostByUserIdResultFromDict(dict)
 }
 
 func NewPostByUserIdResultFromDict(data map[string]interface{}) PostByUserIdResult {
-    return PostByUserIdResult {
-        Item: NewMessageFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return PostByUserIdResult{
+		Item: NewMessageFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p PostByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p PostByUserIdResult) Pointer() *PostByUserIdResult {
-    return &p
+	return &p
 }
 
 type GetMessageResult struct {
-    Item *Message `json:"item"`
+	Item *Message `json:"item"`
 }
 
 type GetMessageAsyncResult struct {
@@ -603,29 +604,29 @@ type GetMessageAsyncResult struct {
 }
 
 func NewGetMessageResultFromJson(data string) GetMessageResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetMessageResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMessageResultFromDict(dict)
 }
 
 func NewGetMessageResultFromDict(data map[string]interface{}) GetMessageResult {
-    return GetMessageResult {
-        Item: NewMessageFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetMessageResult{
+		Item: NewMessageFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetMessageResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetMessageResult) Pointer() *GetMessageResult {
-    return &p
+	return &p
 }
 
 type GetMessageByUserIdResult struct {
-    Item *Message `json:"item"`
+	Item *Message `json:"item"`
 }
 
 type GetMessageByUserIdAsyncResult struct {
@@ -634,29 +635,29 @@ type GetMessageByUserIdAsyncResult struct {
 }
 
 func NewGetMessageByUserIdResultFromJson(data string) GetMessageByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetMessageByUserIdResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMessageByUserIdResultFromDict(dict)
 }
 
 func NewGetMessageByUserIdResultFromDict(data map[string]interface{}) GetMessageByUserIdResult {
-    return GetMessageByUserIdResult {
-        Item: NewMessageFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetMessageByUserIdResult{
+		Item: NewMessageFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetMessageByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetMessageByUserIdResult) Pointer() *GetMessageByUserIdResult {
-    return &p
+	return &p
 }
 
 type DeleteMessageResult struct {
-    Item *Message `json:"item"`
+	Item *Message `json:"item"`
 }
 
 type DeleteMessageAsyncResult struct {
@@ -665,30 +666,30 @@ type DeleteMessageAsyncResult struct {
 }
 
 func NewDeleteMessageResultFromJson(data string) DeleteMessageResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteMessageResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteMessageResultFromDict(dict)
 }
 
 func NewDeleteMessageResultFromDict(data map[string]interface{}) DeleteMessageResult {
-    return DeleteMessageResult {
-        Item: NewMessageFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteMessageResult{
+		Item: NewMessageFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteMessageResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteMessageResult) Pointer() *DeleteMessageResult {
-    return &p
+	return &p
 }
 
 type DescribeSubscribesResult struct {
-    Items []Subscribe `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Subscribe `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
 }
 
 type DescribeSubscribesAsyncResult struct {
@@ -697,34 +698,34 @@ type DescribeSubscribesAsyncResult struct {
 }
 
 func NewDescribeSubscribesResultFromJson(data string) DescribeSubscribesResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeSubscribesResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSubscribesResultFromDict(dict)
 }
 
 func NewDescribeSubscribesResultFromDict(data map[string]interface{}) DescribeSubscribesResult {
-    return DescribeSubscribesResult {
-        Items: CastSubscribes(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeSubscribesResult{
+		Items:         CastSubscribes(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeSubscribesResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastSubscribesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastSubscribesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeSubscribesResult) Pointer() *DescribeSubscribesResult {
-    return &p
+	return &p
 }
 
 type DescribeSubscribesByUserIdResult struct {
-    Items []Subscribe `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Subscribe `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
 }
 
 type DescribeSubscribesByUserIdAsyncResult struct {
@@ -733,34 +734,34 @@ type DescribeSubscribesByUserIdAsyncResult struct {
 }
 
 func NewDescribeSubscribesByUserIdResultFromJson(data string) DescribeSubscribesByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeSubscribesByUserIdResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSubscribesByUserIdResultFromDict(dict)
 }
 
 func NewDescribeSubscribesByUserIdResultFromDict(data map[string]interface{}) DescribeSubscribesByUserIdResult {
-    return DescribeSubscribesByUserIdResult {
-        Items: CastSubscribes(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeSubscribesByUserIdResult{
+		Items:         CastSubscribes(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeSubscribesByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastSubscribesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastSubscribesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeSubscribesByUserIdResult) Pointer() *DescribeSubscribesByUserIdResult {
-    return &p
+	return &p
 }
 
 type DescribeSubscribesByRoomNameResult struct {
-    Items []Subscribe `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Subscribe `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
 }
 
 type DescribeSubscribesByRoomNameAsyncResult struct {
@@ -769,33 +770,33 @@ type DescribeSubscribesByRoomNameAsyncResult struct {
 }
 
 func NewDescribeSubscribesByRoomNameResultFromJson(data string) DescribeSubscribesByRoomNameResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeSubscribesByRoomNameResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSubscribesByRoomNameResultFromDict(dict)
 }
 
 func NewDescribeSubscribesByRoomNameResultFromDict(data map[string]interface{}) DescribeSubscribesByRoomNameResult {
-    return DescribeSubscribesByRoomNameResult {
-        Items: CastSubscribes(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeSubscribesByRoomNameResult{
+		Items:         CastSubscribes(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeSubscribesByRoomNameResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastSubscribesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastSubscribesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeSubscribesByRoomNameResult) Pointer() *DescribeSubscribesByRoomNameResult {
-    return &p
+	return &p
 }
 
 type SubscribeResult struct {
-    Item *Subscribe `json:"item"`
+	Item *Subscribe `json:"item"`
 }
 
 type SubscribeAsyncResult struct {
@@ -804,29 +805,29 @@ type SubscribeAsyncResult struct {
 }
 
 func NewSubscribeResultFromJson(data string) SubscribeResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewSubscribeResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSubscribeResultFromDict(dict)
 }
 
 func NewSubscribeResultFromDict(data map[string]interface{}) SubscribeResult {
-    return SubscribeResult {
-        Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return SubscribeResult{
+		Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p SubscribeResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p SubscribeResult) Pointer() *SubscribeResult {
-    return &p
+	return &p
 }
 
 type SubscribeByUserIdResult struct {
-    Item *Subscribe `json:"item"`
+	Item *Subscribe `json:"item"`
 }
 
 type SubscribeByUserIdAsyncResult struct {
@@ -835,29 +836,29 @@ type SubscribeByUserIdAsyncResult struct {
 }
 
 func NewSubscribeByUserIdResultFromJson(data string) SubscribeByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewSubscribeByUserIdResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSubscribeByUserIdResultFromDict(dict)
 }
 
 func NewSubscribeByUserIdResultFromDict(data map[string]interface{}) SubscribeByUserIdResult {
-    return SubscribeByUserIdResult {
-        Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return SubscribeByUserIdResult{
+		Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p SubscribeByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p SubscribeByUserIdResult) Pointer() *SubscribeByUserIdResult {
-    return &p
+	return &p
 }
 
 type GetSubscribeResult struct {
-    Item *Subscribe `json:"item"`
+	Item *Subscribe `json:"item"`
 }
 
 type GetSubscribeAsyncResult struct {
@@ -866,29 +867,29 @@ type GetSubscribeAsyncResult struct {
 }
 
 func NewGetSubscribeResultFromJson(data string) GetSubscribeResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetSubscribeResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSubscribeResultFromDict(dict)
 }
 
 func NewGetSubscribeResultFromDict(data map[string]interface{}) GetSubscribeResult {
-    return GetSubscribeResult {
-        Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetSubscribeResult{
+		Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetSubscribeResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetSubscribeResult) Pointer() *GetSubscribeResult {
-    return &p
+	return &p
 }
 
 type GetSubscribeByUserIdResult struct {
-    Item *Subscribe `json:"item"`
+	Item *Subscribe `json:"item"`
 }
 
 type GetSubscribeByUserIdAsyncResult struct {
@@ -897,29 +898,29 @@ type GetSubscribeByUserIdAsyncResult struct {
 }
 
 func NewGetSubscribeByUserIdResultFromJson(data string) GetSubscribeByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetSubscribeByUserIdResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSubscribeByUserIdResultFromDict(dict)
 }
 
 func NewGetSubscribeByUserIdResultFromDict(data map[string]interface{}) GetSubscribeByUserIdResult {
-    return GetSubscribeByUserIdResult {
-        Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetSubscribeByUserIdResult{
+		Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetSubscribeByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetSubscribeByUserIdResult) Pointer() *GetSubscribeByUserIdResult {
-    return &p
+	return &p
 }
 
 type UpdateNotificationTypeResult struct {
-    Item *Subscribe `json:"item"`
+	Item *Subscribe `json:"item"`
 }
 
 type UpdateNotificationTypeAsyncResult struct {
@@ -928,29 +929,29 @@ type UpdateNotificationTypeAsyncResult struct {
 }
 
 func NewUpdateNotificationTypeResultFromJson(data string) UpdateNotificationTypeResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateNotificationTypeResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNotificationTypeResultFromDict(dict)
 }
 
 func NewUpdateNotificationTypeResultFromDict(data map[string]interface{}) UpdateNotificationTypeResult {
-    return UpdateNotificationTypeResult {
-        Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateNotificationTypeResult{
+		Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateNotificationTypeResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateNotificationTypeResult) Pointer() *UpdateNotificationTypeResult {
-    return &p
+	return &p
 }
 
 type UpdateNotificationTypeByUserIdResult struct {
-    Item *Subscribe `json:"item"`
+	Item *Subscribe `json:"item"`
 }
 
 type UpdateNotificationTypeByUserIdAsyncResult struct {
@@ -959,29 +960,29 @@ type UpdateNotificationTypeByUserIdAsyncResult struct {
 }
 
 func NewUpdateNotificationTypeByUserIdResultFromJson(data string) UpdateNotificationTypeByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateNotificationTypeByUserIdResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNotificationTypeByUserIdResultFromDict(dict)
 }
 
 func NewUpdateNotificationTypeByUserIdResultFromDict(data map[string]interface{}) UpdateNotificationTypeByUserIdResult {
-    return UpdateNotificationTypeByUserIdResult {
-        Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateNotificationTypeByUserIdResult{
+		Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateNotificationTypeByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateNotificationTypeByUserIdResult) Pointer() *UpdateNotificationTypeByUserIdResult {
-    return &p
+	return &p
 }
 
 type UnsubscribeResult struct {
-    Item *Subscribe `json:"item"`
+	Item *Subscribe `json:"item"`
 }
 
 type UnsubscribeAsyncResult struct {
@@ -990,29 +991,29 @@ type UnsubscribeAsyncResult struct {
 }
 
 func NewUnsubscribeResultFromJson(data string) UnsubscribeResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUnsubscribeResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnsubscribeResultFromDict(dict)
 }
 
 func NewUnsubscribeResultFromDict(data map[string]interface{}) UnsubscribeResult {
-    return UnsubscribeResult {
-        Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UnsubscribeResult{
+		Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UnsubscribeResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UnsubscribeResult) Pointer() *UnsubscribeResult {
-    return &p
+	return &p
 }
 
 type UnsubscribeByUserIdResult struct {
-    Item *Subscribe `json:"item"`
+	Item *Subscribe `json:"item"`
 }
 
 type UnsubscribeByUserIdAsyncResult struct {
@@ -1021,23 +1022,23 @@ type UnsubscribeByUserIdAsyncResult struct {
 }
 
 func NewUnsubscribeByUserIdResultFromJson(data string) UnsubscribeByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUnsubscribeByUserIdResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnsubscribeByUserIdResultFromDict(dict)
 }
 
 func NewUnsubscribeByUserIdResultFromDict(data map[string]interface{}) UnsubscribeByUserIdResult {
-    return UnsubscribeByUserIdResult {
-        Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UnsubscribeByUserIdResult{
+		Item: NewSubscribeFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UnsubscribeByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UnsubscribeByUserIdResult) Pointer() *UnsubscribeByUserIdResult {
-    return &p
+	return &p
 }

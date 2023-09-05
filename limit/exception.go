@@ -20,9 +20,9 @@ type Overflow struct {
 }
 
 func (p Overflow) Type() string {
-    return "LimitOverflow"
+	return "LimitOverflow"
 }
 
 func (p Overflow) Code() string {
-    return "limit.counter.overflow"
+	return "limit.counter.overflow"
 }

@@ -20,31 +20,31 @@ type NoAccessPrivileges struct {
 }
 
 func (p NoAccessPrivileges) Type() string {
-    return "ChatNoAccessPrivileges"
+	return "ChatNoAccessPrivileges"
 }
 
 func (p NoAccessPrivileges) Code() string {
-    return "room.allowUserIds.notInclude"
+	return "room.allowUserIds.notInclude"
 }
 
 type PasswordRequired struct {
 }
 
 func (p PasswordRequired) Type() string {
-    return "ChatPasswordRequired"
+	return "ChatPasswordRequired"
 }
 
 func (p PasswordRequired) Code() string {
-    return "room.password.require"
+	return "room.password.require"
 }
 
 type PasswordIncorrect struct {
 }
 
 func (p PasswordIncorrect) Type() string {
-    return "ChatPasswordIncorrect"
+	return "ChatPasswordIncorrect"
 }
 
 func (p PasswordIncorrect) Code() string {
-    return "room.password.invalid"
+	return "room.password.invalid"
 }

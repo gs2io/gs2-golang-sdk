@@ -17,13 +17,14 @@ permissions and limitations under the License.
 package serialKey
 
 import (
-    "encoding/json"
-    "github.com/gs2io/gs2-golang-sdk/core"
+	"encoding/json"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type DescribeNamespacesResult struct {
-    Items []Namespace `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []Namespace `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -32,33 +33,33 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeNamespacesResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
-    return DescribeNamespacesResult {
-        Items: CastNamespaces(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeNamespacesResult{
+		Items:         CastNamespaces(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastNamespacesFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastNamespacesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
-    return &p
+	return &p
 }
 
 type CreateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -67,29 +68,29 @@ type CreateNamespaceAsyncResult struct {
 }
 
 func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCreateNamespaceResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
 }
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
-    return CreateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceStatusResult struct {
-    Status *string `json:"status"`
+	Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -98,29 +99,29 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetNamespaceStatusResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
-    return GetNamespaceStatusResult {
-        Status: core.CastString(data["status"]),
-    }
+	return GetNamespaceStatusResult{
+		Status: core.CastString(data["status"]),
+	}
 }
 
 func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "status": p.Status,
-    }
+	return map[string]interface{}{
+		"status": p.Status,
+	}
 }
 
 func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
-    return &p
+	return &p
 }
 
 type GetNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -129,29 +130,29 @@ type GetNamespaceAsyncResult struct {
 }
 
 func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetNamespaceResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
 }
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
-    return GetNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
-    return &p
+	return &p
 }
 
 type UpdateNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -160,29 +161,29 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateNamespaceResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
-    return UpdateNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
-    return &p
+	return &p
 }
 
 type DeleteNamespaceResult struct {
-    Item *Namespace `json:"item"`
+	Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -191,30 +192,30 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteNamespaceResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
 }
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
-    return DeleteNamespaceResult {
-        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
-    return &p
+	return &p
 }
 
 type DescribeIssueJobsResult struct {
-    Items []IssueJob `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []IssueJob `json:"items"`
+	NextPageToken *string    `json:"nextPageToken"`
 }
 
 type DescribeIssueJobsAsyncResult struct {
@@ -223,33 +224,33 @@ type DescribeIssueJobsAsyncResult struct {
 }
 
 func NewDescribeIssueJobsResultFromJson(data string) DescribeIssueJobsResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeIssueJobsResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeIssueJobsResultFromDict(dict)
 }
 
 func NewDescribeIssueJobsResultFromDict(data map[string]interface{}) DescribeIssueJobsResult {
-    return DescribeIssueJobsResult {
-        Items: CastIssueJobs(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeIssueJobsResult{
+		Items:         CastIssueJobs(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeIssueJobsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastIssueJobsFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastIssueJobsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeIssueJobsResult) Pointer() *DescribeIssueJobsResult {
-    return &p
+	return &p
 }
 
 type GetIssueJobResult struct {
-    Item *IssueJob `json:"item"`
+	Item *IssueJob `json:"item"`
 }
 
 type GetIssueJobAsyncResult struct {
@@ -258,29 +259,29 @@ type GetIssueJobAsyncResult struct {
 }
 
 func NewGetIssueJobResultFromJson(data string) GetIssueJobResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetIssueJobResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetIssueJobResultFromDict(dict)
 }
 
 func NewGetIssueJobResultFromDict(data map[string]interface{}) GetIssueJobResult {
-    return GetIssueJobResult {
-        Item: NewIssueJobFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetIssueJobResult{
+		Item: NewIssueJobFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetIssueJobResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetIssueJobResult) Pointer() *GetIssueJobResult {
-    return &p
+	return &p
 }
 
 type IssueResult struct {
-    Item *IssueJob `json:"item"`
+	Item *IssueJob `json:"item"`
 }
 
 type IssueAsyncResult struct {
@@ -289,30 +290,30 @@ type IssueAsyncResult struct {
 }
 
 func NewIssueResultFromJson(data string) IssueResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewIssueResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIssueResultFromDict(dict)
 }
 
 func NewIssueResultFromDict(data map[string]interface{}) IssueResult {
-    return IssueResult {
-        Item: NewIssueJobFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return IssueResult{
+		Item: NewIssueJobFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p IssueResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p IssueResult) Pointer() *IssueResult {
-    return &p
+	return &p
 }
 
 type DescribeSerialKeysResult struct {
-    Items []SerialKey `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []SerialKey `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
 }
 
 type DescribeSerialKeysAsyncResult struct {
@@ -321,33 +322,33 @@ type DescribeSerialKeysAsyncResult struct {
 }
 
 func NewDescribeSerialKeysResultFromJson(data string) DescribeSerialKeysResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeSerialKeysResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSerialKeysResultFromDict(dict)
 }
 
 func NewDescribeSerialKeysResultFromDict(data map[string]interface{}) DescribeSerialKeysResult {
-    return DescribeSerialKeysResult {
-        Items: CastSerialKeys(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeSerialKeysResult{
+		Items:         CastSerialKeys(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeSerialKeysResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastSerialKeysFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastSerialKeysFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeSerialKeysResult) Pointer() *DescribeSerialKeysResult {
-    return &p
+	return &p
 }
 
 type DownloadSerialCodesResult struct {
-    Url *string `json:"url"`
+	Url *string `json:"url"`
 }
 
 type DownloadSerialCodesAsyncResult struct {
@@ -356,30 +357,30 @@ type DownloadSerialCodesAsyncResult struct {
 }
 
 func NewDownloadSerialCodesResultFromJson(data string) DownloadSerialCodesResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDownloadSerialCodesResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDownloadSerialCodesResultFromDict(dict)
 }
 
 func NewDownloadSerialCodesResultFromDict(data map[string]interface{}) DownloadSerialCodesResult {
-    return DownloadSerialCodesResult {
-        Url: core.CastString(data["url"]),
-    }
+	return DownloadSerialCodesResult{
+		Url: core.CastString(data["url"]),
+	}
 }
 
 func (p DownloadSerialCodesResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "url": p.Url,
-    }
+	return map[string]interface{}{
+		"url": p.Url,
+	}
 }
 
 func (p DownloadSerialCodesResult) Pointer() *DownloadSerialCodesResult {
-    return &p
+	return &p
 }
 
 type GetSerialKeyResult struct {
-    Item *SerialKey `json:"item"`
-    CampaignModel *CampaignModel `json:"campaignModel"`
+	Item          *SerialKey     `json:"item"`
+	CampaignModel *CampaignModel `json:"campaignModel"`
 }
 
 type GetSerialKeyAsyncResult struct {
@@ -388,32 +389,32 @@ type GetSerialKeyAsyncResult struct {
 }
 
 func NewGetSerialKeyResultFromJson(data string) GetSerialKeyResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetSerialKeyResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSerialKeyResultFromDict(dict)
 }
 
 func NewGetSerialKeyResultFromDict(data map[string]interface{}) GetSerialKeyResult {
-    return GetSerialKeyResult {
-        Item: NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
-        CampaignModel: NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer(),
-    }
+	return GetSerialKeyResult{
+		Item:          NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
+		CampaignModel: NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer(),
+	}
 }
 
 func (p GetSerialKeyResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "campaignModel": p.CampaignModel.ToDict(),
-    }
+	return map[string]interface{}{
+		"item":          p.Item.ToDict(),
+		"campaignModel": p.CampaignModel.ToDict(),
+	}
 }
 
 func (p GetSerialKeyResult) Pointer() *GetSerialKeyResult {
-    return &p
+	return &p
 }
 
 type UseResult struct {
-    Item *SerialKey `json:"item"`
-    CampaignModel *CampaignModel `json:"campaignModel"`
+	Item          *SerialKey     `json:"item"`
+	CampaignModel *CampaignModel `json:"campaignModel"`
 }
 
 type UseAsyncResult struct {
@@ -422,32 +423,32 @@ type UseAsyncResult struct {
 }
 
 func NewUseResultFromJson(data string) UseResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUseResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUseResultFromDict(dict)
 }
 
 func NewUseResultFromDict(data map[string]interface{}) UseResult {
-    return UseResult {
-        Item: NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
-        CampaignModel: NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer(),
-    }
+	return UseResult{
+		Item:          NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
+		CampaignModel: NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer(),
+	}
 }
 
 func (p UseResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "campaignModel": p.CampaignModel.ToDict(),
-    }
+	return map[string]interface{}{
+		"item":          p.Item.ToDict(),
+		"campaignModel": p.CampaignModel.ToDict(),
+	}
 }
 
 func (p UseResult) Pointer() *UseResult {
-    return &p
+	return &p
 }
 
 type UseByUserIdResult struct {
-    Item *SerialKey `json:"item"`
-    CampaignModel *CampaignModel `json:"campaignModel"`
+	Item          *SerialKey     `json:"item"`
+	CampaignModel *CampaignModel `json:"campaignModel"`
 }
 
 type UseByUserIdAsyncResult struct {
@@ -456,33 +457,67 @@ type UseByUserIdAsyncResult struct {
 }
 
 func NewUseByUserIdResultFromJson(data string) UseByUserIdResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUseByUserIdResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUseByUserIdResultFromDict(dict)
 }
 
 func NewUseByUserIdResultFromDict(data map[string]interface{}) UseByUserIdResult {
-    return UseByUserIdResult {
-        Item: NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
-        CampaignModel: NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer(),
-    }
+	return UseByUserIdResult{
+		Item:          NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
+		CampaignModel: NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer(),
+	}
 }
 
 func (p UseByUserIdResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "campaignModel": p.CampaignModel.ToDict(),
-    }
+	return map[string]interface{}{
+		"item":          p.Item.ToDict(),
+		"campaignModel": p.CampaignModel.ToDict(),
+	}
 }
 
 func (p UseByUserIdResult) Pointer() *UseByUserIdResult {
-    return &p
+	return &p
+}
+
+type RevertUseByUserIdResult struct {
+	Item          *SerialKey     `json:"item"`
+	CampaignModel *CampaignModel `json:"campaignModel"`
+}
+
+type RevertUseByUserIdAsyncResult struct {
+	result *RevertUseByUserIdResult
+	err    error
+}
+
+func NewRevertUseByUserIdResultFromJson(data string) RevertUseByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRevertUseByUserIdResultFromDict(dict)
+}
+
+func NewRevertUseByUserIdResultFromDict(data map[string]interface{}) RevertUseByUserIdResult {
+	return RevertUseByUserIdResult{
+		Item:          NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
+		CampaignModel: NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer(),
+	}
+}
+
+func (p RevertUseByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":          p.Item.ToDict(),
+		"campaignModel": p.CampaignModel.ToDict(),
+	}
+}
+
+func (p RevertUseByUserIdResult) Pointer() *RevertUseByUserIdResult {
+	return &p
 }
 
 type UseByStampTaskResult struct {
-    Item *SerialKey `json:"item"`
-    CampaignModel *CampaignModel `json:"campaignModel"`
-    NewContextStack *string `json:"newContextStack"`
+	Item            *SerialKey     `json:"item"`
+	CampaignModel   *CampaignModel `json:"campaignModel"`
+	NewContextStack *string        `json:"newContextStack"`
 }
 
 type UseByStampTaskAsyncResult struct {
@@ -491,33 +526,67 @@ type UseByStampTaskAsyncResult struct {
 }
 
 func NewUseByStampTaskResultFromJson(data string) UseByStampTaskResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUseByStampTaskResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUseByStampTaskResultFromDict(dict)
 }
 
 func NewUseByStampTaskResultFromDict(data map[string]interface{}) UseByStampTaskResult {
-    return UseByStampTaskResult {
-        Item: NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
-        CampaignModel: NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer(),
-        NewContextStack: core.CastString(data["newContextStack"]),
-    }
+	return UseByStampTaskResult{
+		Item:            NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
+		CampaignModel:   NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer(),
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
 }
 
 func (p UseByStampTaskResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-        "campaignModel": p.CampaignModel.ToDict(),
-        "newContextStack": p.NewContextStack,
-    }
+	return map[string]interface{}{
+		"item":            p.Item.ToDict(),
+		"campaignModel":   p.CampaignModel.ToDict(),
+		"newContextStack": p.NewContextStack,
+	}
 }
 
 func (p UseByStampTaskResult) Pointer() *UseByStampTaskResult {
-    return &p
+	return &p
+}
+
+type RevertUseByStampSheetResult struct {
+	Item          *SerialKey     `json:"item"`
+	CampaignModel *CampaignModel `json:"campaignModel"`
+}
+
+type RevertUseByStampSheetAsyncResult struct {
+	result *RevertUseByStampSheetResult
+	err    error
+}
+
+func NewRevertUseByStampSheetResultFromJson(data string) RevertUseByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRevertUseByStampSheetResultFromDict(dict)
+}
+
+func NewRevertUseByStampSheetResultFromDict(data map[string]interface{}) RevertUseByStampSheetResult {
+	return RevertUseByStampSheetResult{
+		Item:          NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
+		CampaignModel: NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer(),
+	}
+}
+
+func (p RevertUseByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":          p.Item.ToDict(),
+		"campaignModel": p.CampaignModel.ToDict(),
+	}
+}
+
+func (p RevertUseByStampSheetResult) Pointer() *RevertUseByStampSheetResult {
+	return &p
 }
 
 type DescribeCampaignModelsResult struct {
-    Items []CampaignModel `json:"items"`
+	Items []CampaignModel `json:"items"`
 }
 
 type DescribeCampaignModelsAsyncResult struct {
@@ -526,31 +595,31 @@ type DescribeCampaignModelsAsyncResult struct {
 }
 
 func NewDescribeCampaignModelsResultFromJson(data string) DescribeCampaignModelsResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeCampaignModelsResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeCampaignModelsResultFromDict(dict)
 }
 
 func NewDescribeCampaignModelsResultFromDict(data map[string]interface{}) DescribeCampaignModelsResult {
-    return DescribeCampaignModelsResult {
-        Items: CastCampaignModels(core.CastArray(data["items"])),
-    }
+	return DescribeCampaignModelsResult{
+		Items: CastCampaignModels(core.CastArray(data["items"])),
+	}
 }
 
 func (p DescribeCampaignModelsResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastCampaignModelsFromDict(
-            p.Items,
-        ),
-    }
+	return map[string]interface{}{
+		"items": CastCampaignModelsFromDict(
+			p.Items,
+		),
+	}
 }
 
 func (p DescribeCampaignModelsResult) Pointer() *DescribeCampaignModelsResult {
-    return &p
+	return &p
 }
 
 type GetCampaignModelResult struct {
-    Item *CampaignModel `json:"item"`
+	Item *CampaignModel `json:"item"`
 }
 
 type GetCampaignModelAsyncResult struct {
@@ -559,30 +628,30 @@ type GetCampaignModelAsyncResult struct {
 }
 
 func NewGetCampaignModelResultFromJson(data string) GetCampaignModelResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetCampaignModelResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCampaignModelResultFromDict(dict)
 }
 
 func NewGetCampaignModelResultFromDict(data map[string]interface{}) GetCampaignModelResult {
-    return GetCampaignModelResult {
-        Item: NewCampaignModelFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetCampaignModelResult{
+		Item: NewCampaignModelFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetCampaignModelResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetCampaignModelResult) Pointer() *GetCampaignModelResult {
-    return &p
+	return &p
 }
 
 type DescribeCampaignModelMastersResult struct {
-    Items []CampaignModelMaster `json:"items"`
-    NextPageToken *string `json:"nextPageToken"`
+	Items         []CampaignModelMaster `json:"items"`
+	NextPageToken *string               `json:"nextPageToken"`
 }
 
 type DescribeCampaignModelMastersAsyncResult struct {
@@ -591,33 +660,33 @@ type DescribeCampaignModelMastersAsyncResult struct {
 }
 
 func NewDescribeCampaignModelMastersResultFromJson(data string) DescribeCampaignModelMastersResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeCampaignModelMastersResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeCampaignModelMastersResultFromDict(dict)
 }
 
 func NewDescribeCampaignModelMastersResultFromDict(data map[string]interface{}) DescribeCampaignModelMastersResult {
-    return DescribeCampaignModelMastersResult {
-        Items: CastCampaignModelMasters(core.CastArray(data["items"])),
-        NextPageToken: core.CastString(data["nextPageToken"]),
-    }
+	return DescribeCampaignModelMastersResult{
+		Items:         CastCampaignModelMasters(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
 }
 
 func (p DescribeCampaignModelMastersResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "items": CastCampaignModelMastersFromDict(
-            p.Items,
-        ),
-        "nextPageToken": p.NextPageToken,
-    }
+	return map[string]interface{}{
+		"items": CastCampaignModelMastersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
 }
 
 func (p DescribeCampaignModelMastersResult) Pointer() *DescribeCampaignModelMastersResult {
-    return &p
+	return &p
 }
 
 type CreateCampaignModelMasterResult struct {
-    Item *CampaignModelMaster `json:"item"`
+	Item *CampaignModelMaster `json:"item"`
 }
 
 type CreateCampaignModelMasterAsyncResult struct {
@@ -626,29 +695,29 @@ type CreateCampaignModelMasterAsyncResult struct {
 }
 
 func NewCreateCampaignModelMasterResultFromJson(data string) CreateCampaignModelMasterResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCreateCampaignModelMasterResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateCampaignModelMasterResultFromDict(dict)
 }
 
 func NewCreateCampaignModelMasterResultFromDict(data map[string]interface{}) CreateCampaignModelMasterResult {
-    return CreateCampaignModelMasterResult {
-        Item: NewCampaignModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return CreateCampaignModelMasterResult{
+		Item: NewCampaignModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p CreateCampaignModelMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p CreateCampaignModelMasterResult) Pointer() *CreateCampaignModelMasterResult {
-    return &p
+	return &p
 }
 
 type GetCampaignModelMasterResult struct {
-    Item *CampaignModelMaster `json:"item"`
+	Item *CampaignModelMaster `json:"item"`
 }
 
 type GetCampaignModelMasterAsyncResult struct {
@@ -657,29 +726,29 @@ type GetCampaignModelMasterAsyncResult struct {
 }
 
 func NewGetCampaignModelMasterResultFromJson(data string) GetCampaignModelMasterResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetCampaignModelMasterResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCampaignModelMasterResultFromDict(dict)
 }
 
 func NewGetCampaignModelMasterResultFromDict(data map[string]interface{}) GetCampaignModelMasterResult {
-    return GetCampaignModelMasterResult {
-        Item: NewCampaignModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetCampaignModelMasterResult{
+		Item: NewCampaignModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetCampaignModelMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetCampaignModelMasterResult) Pointer() *GetCampaignModelMasterResult {
-    return &p
+	return &p
 }
 
 type UpdateCampaignModelMasterResult struct {
-    Item *CampaignModelMaster `json:"item"`
+	Item *CampaignModelMaster `json:"item"`
 }
 
 type UpdateCampaignModelMasterAsyncResult struct {
@@ -688,29 +757,29 @@ type UpdateCampaignModelMasterAsyncResult struct {
 }
 
 func NewUpdateCampaignModelMasterResultFromJson(data string) UpdateCampaignModelMasterResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateCampaignModelMasterResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCampaignModelMasterResultFromDict(dict)
 }
 
 func NewUpdateCampaignModelMasterResultFromDict(data map[string]interface{}) UpdateCampaignModelMasterResult {
-    return UpdateCampaignModelMasterResult {
-        Item: NewCampaignModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateCampaignModelMasterResult{
+		Item: NewCampaignModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateCampaignModelMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateCampaignModelMasterResult) Pointer() *UpdateCampaignModelMasterResult {
-    return &p
+	return &p
 }
 
 type DeleteCampaignModelMasterResult struct {
-    Item *CampaignModelMaster `json:"item"`
+	Item *CampaignModelMaster `json:"item"`
 }
 
 type DeleteCampaignModelMasterAsyncResult struct {
@@ -719,29 +788,29 @@ type DeleteCampaignModelMasterAsyncResult struct {
 }
 
 func NewDeleteCampaignModelMasterResultFromJson(data string) DeleteCampaignModelMasterResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteCampaignModelMasterResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteCampaignModelMasterResultFromDict(dict)
 }
 
 func NewDeleteCampaignModelMasterResultFromDict(data map[string]interface{}) DeleteCampaignModelMasterResult {
-    return DeleteCampaignModelMasterResult {
-        Item: NewCampaignModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return DeleteCampaignModelMasterResult{
+		Item: NewCampaignModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteCampaignModelMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteCampaignModelMasterResult) Pointer() *DeleteCampaignModelMasterResult {
-    return &p
+	return &p
 }
 
 type ExportMasterResult struct {
-    Item *CurrentCampaignMaster `json:"item"`
+	Item *CurrentCampaignMaster `json:"item"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -750,29 +819,29 @@ type ExportMasterAsyncResult struct {
 }
 
 func NewExportMasterResultFromJson(data string) ExportMasterResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewExportMasterResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterResultFromDict(dict)
 }
 
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
-    return ExportMasterResult {
-        Item: NewCurrentCampaignMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return ExportMasterResult{
+		Item: NewCurrentCampaignMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p ExportMasterResult) Pointer() *ExportMasterResult {
-    return &p
+	return &p
 }
 
 type GetCurrentCampaignMasterResult struct {
-    Item *CurrentCampaignMaster `json:"item"`
+	Item *CurrentCampaignMaster `json:"item"`
 }
 
 type GetCurrentCampaignMasterAsyncResult struct {
@@ -781,29 +850,29 @@ type GetCurrentCampaignMasterAsyncResult struct {
 }
 
 func NewGetCurrentCampaignMasterResultFromJson(data string) GetCurrentCampaignMasterResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetCurrentCampaignMasterResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentCampaignMasterResultFromDict(dict)
 }
 
 func NewGetCurrentCampaignMasterResultFromDict(data map[string]interface{}) GetCurrentCampaignMasterResult {
-    return GetCurrentCampaignMasterResult {
-        Item: NewCurrentCampaignMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return GetCurrentCampaignMasterResult{
+		Item: NewCurrentCampaignMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p GetCurrentCampaignMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p GetCurrentCampaignMasterResult) Pointer() *GetCurrentCampaignMasterResult {
-    return &p
+	return &p
 }
 
 type UpdateCurrentCampaignMasterResult struct {
-    Item *CurrentCampaignMaster `json:"item"`
+	Item *CurrentCampaignMaster `json:"item"`
 }
 
 type UpdateCurrentCampaignMasterAsyncResult struct {
@@ -812,29 +881,29 @@ type UpdateCurrentCampaignMasterAsyncResult struct {
 }
 
 func NewUpdateCurrentCampaignMasterResultFromJson(data string) UpdateCurrentCampaignMasterResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateCurrentCampaignMasterResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentCampaignMasterResultFromDict(dict)
 }
 
 func NewUpdateCurrentCampaignMasterResultFromDict(data map[string]interface{}) UpdateCurrentCampaignMasterResult {
-    return UpdateCurrentCampaignMasterResult {
-        Item: NewCurrentCampaignMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateCurrentCampaignMasterResult{
+		Item: NewCurrentCampaignMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateCurrentCampaignMasterResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateCurrentCampaignMasterResult) Pointer() *UpdateCurrentCampaignMasterResult {
-    return &p
+	return &p
 }
 
 type UpdateCurrentCampaignMasterFromGitHubResult struct {
-    Item *CurrentCampaignMaster `json:"item"`
+	Item *CurrentCampaignMaster `json:"item"`
 }
 
 type UpdateCurrentCampaignMasterFromGitHubAsyncResult struct {
@@ -843,23 +912,23 @@ type UpdateCurrentCampaignMasterFromGitHubAsyncResult struct {
 }
 
 func NewUpdateCurrentCampaignMasterFromGitHubResultFromJson(data string) UpdateCurrentCampaignMasterFromGitHubResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateCurrentCampaignMasterFromGitHubResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentCampaignMasterFromGitHubResultFromDict(dict)
 }
 
 func NewUpdateCurrentCampaignMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentCampaignMasterFromGitHubResult {
-    return UpdateCurrentCampaignMasterFromGitHubResult {
-        Item: NewCurrentCampaignMasterFromDict(core.CastMap(data["item"])).Pointer(),
-    }
+	return UpdateCurrentCampaignMasterFromGitHubResult{
+		Item: NewCurrentCampaignMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p UpdateCurrentCampaignMasterFromGitHubResult) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "item": p.Item.ToDict(),
-    }
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p UpdateCurrentCampaignMasterFromGitHubResult) Pointer() *UpdateCurrentCampaignMasterFromGitHubResult {
-    return &p
+	return &p
 }

@@ -18,6 +18,7 @@ package enchant
 
 import (
 	"encoding/json"
+
 	"github.com/google/uuid"
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -49,16 +50,16 @@ func (p Gs2EnchantWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeNamespacesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeNamespacesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -70,33 +71,33 @@ func (p Gs2EnchantWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "namespace",
-    		"function": "describeNamespaces",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "namespace",
+			"function":    "describeNamespaces",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -133,16 +134,16 @@ func (p Gs2EnchantWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -154,39 +155,39 @@ func (p Gs2EnchantWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "namespace",
-    		"function": "createNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "namespace",
+			"function":    "createNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.TransactionSetting != nil {
-        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -223,16 +224,16 @@ func (p Gs2EnchantWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -244,30 +245,30 @@ func (p Gs2EnchantWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "namespace",
-    		"function": "getNamespaceStatus",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "namespace",
+			"function":    "getNamespaceStatus",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -304,16 +305,16 @@ func (p Gs2EnchantWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -325,30 +326,30 @@ func (p Gs2EnchantWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "namespace",
-    		"function": "getNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "namespace",
+			"function":    "getNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -385,16 +386,16 @@ func (p Gs2EnchantWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -406,39 +407,39 @@ func (p Gs2EnchantWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "namespace",
-    		"function": "updateNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "namespace",
+			"function":    "updateNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.TransactionSetting != nil {
-        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -475,16 +476,16 @@ func (p Gs2EnchantWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -496,30 +497,30 @@ func (p Gs2EnchantWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "namespace",
-    		"function": "deleteNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "namespace",
+			"function":    "deleteNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -556,16 +557,16 @@ func (p Gs2EnchantWebSocketClient) describeBalanceParameterModelsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeBalanceParameterModelsResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeBalanceParameterModelsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeBalanceParameterModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeBalanceParameterModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -577,30 +578,30 @@ func (p Gs2EnchantWebSocketClient) DescribeBalanceParameterModelsAsync(
 	request *DescribeBalanceParameterModelsRequest,
 	callback chan<- DescribeBalanceParameterModelsAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterModel",
-    		"function": "describeBalanceParameterModels",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterModel",
+			"function":    "describeBalanceParameterModels",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeBalanceParameterModelsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -637,16 +638,16 @@ func (p Gs2EnchantWebSocketClient) getBalanceParameterModelAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetBalanceParameterModelResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetBalanceParameterModelAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetBalanceParameterModelAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetBalanceParameterModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -658,33 +659,33 @@ func (p Gs2EnchantWebSocketClient) GetBalanceParameterModelAsync(
 	request *GetBalanceParameterModelRequest,
 	callback chan<- GetBalanceParameterModelAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterModel",
-    		"function": "getBalanceParameterModel",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterModel",
+			"function":    "getBalanceParameterModel",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getBalanceParameterModelAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -721,16 +722,16 @@ func (p Gs2EnchantWebSocketClient) describeBalanceParameterModelMastersAsyncHand
 	asyncResult := <-internalCallback
 	var result DescribeBalanceParameterModelMastersResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeBalanceParameterModelMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeBalanceParameterModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeBalanceParameterModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -742,36 +743,36 @@ func (p Gs2EnchantWebSocketClient) DescribeBalanceParameterModelMastersAsync(
 	request *DescribeBalanceParameterModelMastersRequest,
 	callback chan<- DescribeBalanceParameterModelMastersAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterModelMaster",
-    		"function": "describeBalanceParameterModelMasters",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterModelMaster",
+			"function":    "describeBalanceParameterModelMasters",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeBalanceParameterModelMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -808,16 +809,16 @@ func (p Gs2EnchantWebSocketClient) createBalanceParameterModelMasterAsyncHandler
 	asyncResult := <-internalCallback
 	var result CreateBalanceParameterModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateBalanceParameterModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateBalanceParameterModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- CreateBalanceParameterModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -829,52 +830,52 @@ func (p Gs2EnchantWebSocketClient) CreateBalanceParameterModelMasterAsync(
 	request *CreateBalanceParameterModelMasterRequest,
 	callback chan<- CreateBalanceParameterModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterModelMaster",
-    		"function": "createBalanceParameterModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterModelMaster",
+			"function":    "createBalanceParameterModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.TotalValue != nil {
-        bodies["totalValue"] = *request.TotalValue
-    }
-    if request.InitialValueStrategy != nil && *request.InitialValueStrategy != "" {
-        bodies["initialValueStrategy"] = *request.InitialValueStrategy
-    }
-    if request.Parameters != nil {
-        var _parameters []interface {}
-        for _, item := range request.Parameters {
-            _parameters = append(_parameters, item)
-        }
-        bodies["parameters"] = _parameters
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.TotalValue != nil {
+		bodies["totalValue"] = *request.TotalValue
+	}
+	if request.InitialValueStrategy != nil && *request.InitialValueStrategy != "" {
+		bodies["initialValueStrategy"] = *request.InitialValueStrategy
+	}
+	if request.Parameters != nil {
+		var _parameters []interface{}
+		for _, item := range request.Parameters {
+			_parameters = append(_parameters, item)
+		}
+		bodies["parameters"] = _parameters
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.createBalanceParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -911,16 +912,16 @@ func (p Gs2EnchantWebSocketClient) getBalanceParameterModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetBalanceParameterModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetBalanceParameterModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetBalanceParameterModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetBalanceParameterModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -932,33 +933,33 @@ func (p Gs2EnchantWebSocketClient) GetBalanceParameterModelMasterAsync(
 	request *GetBalanceParameterModelMasterRequest,
 	callback chan<- GetBalanceParameterModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterModelMaster",
-    		"function": "getBalanceParameterModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterModelMaster",
+			"function":    "getBalanceParameterModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getBalanceParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -995,16 +996,16 @@ func (p Gs2EnchantWebSocketClient) updateBalanceParameterModelMasterAsyncHandler
 	asyncResult := <-internalCallback
 	var result UpdateBalanceParameterModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateBalanceParameterModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateBalanceParameterModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateBalanceParameterModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1016,52 +1017,52 @@ func (p Gs2EnchantWebSocketClient) UpdateBalanceParameterModelMasterAsync(
 	request *UpdateBalanceParameterModelMasterRequest,
 	callback chan<- UpdateBalanceParameterModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterModelMaster",
-    		"function": "updateBalanceParameterModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterModelMaster",
+			"function":    "updateBalanceParameterModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.TotalValue != nil {
-        bodies["totalValue"] = *request.TotalValue
-    }
-    if request.InitialValueStrategy != nil && *request.InitialValueStrategy != "" {
-        bodies["initialValueStrategy"] = *request.InitialValueStrategy
-    }
-    if request.Parameters != nil {
-        var _parameters []interface {}
-        for _, item := range request.Parameters {
-            _parameters = append(_parameters, item)
-        }
-        bodies["parameters"] = _parameters
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.TotalValue != nil {
+		bodies["totalValue"] = *request.TotalValue
+	}
+	if request.InitialValueStrategy != nil && *request.InitialValueStrategy != "" {
+		bodies["initialValueStrategy"] = *request.InitialValueStrategy
+	}
+	if request.Parameters != nil {
+		var _parameters []interface{}
+		for _, item := range request.Parameters {
+			_parameters = append(_parameters, item)
+		}
+		bodies["parameters"] = _parameters
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateBalanceParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1098,16 +1099,16 @@ func (p Gs2EnchantWebSocketClient) deleteBalanceParameterModelMasterAsyncHandler
 	asyncResult := <-internalCallback
 	var result DeleteBalanceParameterModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteBalanceParameterModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteBalanceParameterModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteBalanceParameterModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1119,33 +1120,33 @@ func (p Gs2EnchantWebSocketClient) DeleteBalanceParameterModelMasterAsync(
 	request *DeleteBalanceParameterModelMasterRequest,
 	callback chan<- DeleteBalanceParameterModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterModelMaster",
-    		"function": "deleteBalanceParameterModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterModelMaster",
+			"function":    "deleteBalanceParameterModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteBalanceParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1182,16 +1183,16 @@ func (p Gs2EnchantWebSocketClient) describeRarityParameterModelsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeRarityParameterModelsResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeRarityParameterModelsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRarityParameterModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeRarityParameterModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1203,30 +1204,30 @@ func (p Gs2EnchantWebSocketClient) DescribeRarityParameterModelsAsync(
 	request *DescribeRarityParameterModelsRequest,
 	callback chan<- DescribeRarityParameterModelsAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterModel",
-    		"function": "describeRarityParameterModels",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterModel",
+			"function":    "describeRarityParameterModels",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeRarityParameterModelsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1263,16 +1264,16 @@ func (p Gs2EnchantWebSocketClient) getRarityParameterModelAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetRarityParameterModelResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRarityParameterModelAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRarityParameterModelAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetRarityParameterModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1284,33 +1285,33 @@ func (p Gs2EnchantWebSocketClient) GetRarityParameterModelAsync(
 	request *GetRarityParameterModelRequest,
 	callback chan<- GetRarityParameterModelAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterModel",
-    		"function": "getRarityParameterModel",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterModel",
+			"function":    "getRarityParameterModel",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getRarityParameterModelAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1347,16 +1348,16 @@ func (p Gs2EnchantWebSocketClient) describeRarityParameterModelMastersAsyncHandl
 	asyncResult := <-internalCallback
 	var result DescribeRarityParameterModelMastersResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeRarityParameterModelMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRarityParameterModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeRarityParameterModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1368,36 +1369,36 @@ func (p Gs2EnchantWebSocketClient) DescribeRarityParameterModelMastersAsync(
 	request *DescribeRarityParameterModelMastersRequest,
 	callback chan<- DescribeRarityParameterModelMastersAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterModelMaster",
-    		"function": "describeRarityParameterModelMasters",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterModelMaster",
+			"function":    "describeRarityParameterModelMasters",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeRarityParameterModelMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1434,16 +1435,16 @@ func (p Gs2EnchantWebSocketClient) createRarityParameterModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateRarityParameterModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateRarityParameterModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateRarityParameterModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- CreateRarityParameterModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1455,56 +1456,56 @@ func (p Gs2EnchantWebSocketClient) CreateRarityParameterModelMasterAsync(
 	request *CreateRarityParameterModelMasterRequest,
 	callback chan<- CreateRarityParameterModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterModelMaster",
-    		"function": "createRarityParameterModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterModelMaster",
+			"function":    "createRarityParameterModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.MaximumParameterCount != nil {
-        bodies["maximumParameterCount"] = *request.MaximumParameterCount
-    }
-    if request.ParameterCounts != nil {
-        var _parameterCounts []interface {}
-        for _, item := range request.ParameterCounts {
-            _parameterCounts = append(_parameterCounts, item)
-        }
-        bodies["parameterCounts"] = _parameterCounts
-    }
-    if request.Parameters != nil {
-        var _parameters []interface {}
-        for _, item := range request.Parameters {
-            _parameters = append(_parameters, item)
-        }
-        bodies["parameters"] = _parameters
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.MaximumParameterCount != nil {
+		bodies["maximumParameterCount"] = *request.MaximumParameterCount
+	}
+	if request.ParameterCounts != nil {
+		var _parameterCounts []interface{}
+		for _, item := range request.ParameterCounts {
+			_parameterCounts = append(_parameterCounts, item)
+		}
+		bodies["parameterCounts"] = _parameterCounts
+	}
+	if request.Parameters != nil {
+		var _parameters []interface{}
+		for _, item := range request.Parameters {
+			_parameters = append(_parameters, item)
+		}
+		bodies["parameters"] = _parameters
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.createRarityParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1541,16 +1542,16 @@ func (p Gs2EnchantWebSocketClient) getRarityParameterModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetRarityParameterModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRarityParameterModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRarityParameterModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetRarityParameterModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1562,33 +1563,33 @@ func (p Gs2EnchantWebSocketClient) GetRarityParameterModelMasterAsync(
 	request *GetRarityParameterModelMasterRequest,
 	callback chan<- GetRarityParameterModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterModelMaster",
-    		"function": "getRarityParameterModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterModelMaster",
+			"function":    "getRarityParameterModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getRarityParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1625,16 +1626,16 @@ func (p Gs2EnchantWebSocketClient) updateRarityParameterModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateRarityParameterModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateRarityParameterModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateRarityParameterModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateRarityParameterModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1646,56 +1647,56 @@ func (p Gs2EnchantWebSocketClient) UpdateRarityParameterModelMasterAsync(
 	request *UpdateRarityParameterModelMasterRequest,
 	callback chan<- UpdateRarityParameterModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterModelMaster",
-    		"function": "updateRarityParameterModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterModelMaster",
+			"function":    "updateRarityParameterModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.MaximumParameterCount != nil {
-        bodies["maximumParameterCount"] = *request.MaximumParameterCount
-    }
-    if request.ParameterCounts != nil {
-        var _parameterCounts []interface {}
-        for _, item := range request.ParameterCounts {
-            _parameterCounts = append(_parameterCounts, item)
-        }
-        bodies["parameterCounts"] = _parameterCounts
-    }
-    if request.Parameters != nil {
-        var _parameters []interface {}
-        for _, item := range request.Parameters {
-            _parameters = append(_parameters, item)
-        }
-        bodies["parameters"] = _parameters
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.MaximumParameterCount != nil {
+		bodies["maximumParameterCount"] = *request.MaximumParameterCount
+	}
+	if request.ParameterCounts != nil {
+		var _parameterCounts []interface{}
+		for _, item := range request.ParameterCounts {
+			_parameterCounts = append(_parameterCounts, item)
+		}
+		bodies["parameterCounts"] = _parameterCounts
+	}
+	if request.Parameters != nil {
+		var _parameters []interface{}
+		for _, item := range request.Parameters {
+			_parameters = append(_parameters, item)
+		}
+		bodies["parameters"] = _parameters
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateRarityParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1732,16 +1733,16 @@ func (p Gs2EnchantWebSocketClient) deleteRarityParameterModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteRarityParameterModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteRarityParameterModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteRarityParameterModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteRarityParameterModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1753,33 +1754,33 @@ func (p Gs2EnchantWebSocketClient) DeleteRarityParameterModelMasterAsync(
 	request *DeleteRarityParameterModelMasterRequest,
 	callback chan<- DeleteRarityParameterModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterModelMaster",
-    		"function": "deleteRarityParameterModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterModelMaster",
+			"function":    "deleteRarityParameterModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteRarityParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1816,16 +1817,16 @@ func (p Gs2EnchantWebSocketClient) exportMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ExportMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ExportMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExportMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1837,30 +1838,30 @@ func (p Gs2EnchantWebSocketClient) ExportMasterAsync(
 	request *ExportMasterRequest,
 	callback chan<- ExportMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "currentParameterMaster",
-    		"function": "exportMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "currentParameterMaster",
+			"function":    "exportMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1897,16 +1898,16 @@ func (p Gs2EnchantWebSocketClient) getCurrentParameterMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCurrentParameterMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCurrentParameterMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCurrentParameterMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetCurrentParameterMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1918,30 +1919,30 @@ func (p Gs2EnchantWebSocketClient) GetCurrentParameterMasterAsync(
 	request *GetCurrentParameterMasterRequest,
 	callback chan<- GetCurrentParameterMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "currentParameterMaster",
-    		"function": "getCurrentParameterMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "currentParameterMaster",
+			"function":    "getCurrentParameterMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getCurrentParameterMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1978,16 +1979,16 @@ func (p Gs2EnchantWebSocketClient) updateCurrentParameterMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCurrentParameterMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentParameterMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentParameterMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateCurrentParameterMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1999,33 +2000,33 @@ func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterMasterAsync(
 	request *UpdateCurrentParameterMasterRequest,
 	callback chan<- UpdateCurrentParameterMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "currentParameterMaster",
-    		"function": "updateCurrentParameterMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "currentParameterMaster",
+			"function":    "updateCurrentParameterMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Settings != nil && *request.Settings != "" {
-        bodies["settings"] = *request.Settings
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Settings != nil && *request.Settings != "" {
+		bodies["settings"] = *request.Settings
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateCurrentParameterMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2062,16 +2063,16 @@ func (p Gs2EnchantWebSocketClient) updateCurrentParameterMasterFromGitHubAsyncHa
 	asyncResult := <-internalCallback
 	var result UpdateCurrentParameterMasterFromGitHubResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentParameterMasterFromGitHubAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentParameterMasterFromGitHubAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateCurrentParameterMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2083,33 +2084,33 @@ func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterMasterFromGitHubAsync(
 	request *UpdateCurrentParameterMasterFromGitHubRequest,
 	callback chan<- UpdateCurrentParameterMasterFromGitHubAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "currentParameterMaster",
-    		"function": "updateCurrentParameterMasterFromGitHub",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "currentParameterMaster",
+			"function":    "updateCurrentParameterMasterFromGitHub",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CheckoutSetting != nil {
-        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CheckoutSetting != nil {
+		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateCurrentParameterMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2146,16 +2147,16 @@ func (p Gs2EnchantWebSocketClient) describeBalanceParameterStatusesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeBalanceParameterStatusesResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeBalanceParameterStatusesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeBalanceParameterStatusesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeBalanceParameterStatusesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2167,45 +2168,45 @@ func (p Gs2EnchantWebSocketClient) DescribeBalanceParameterStatusesAsync(
 	request *DescribeBalanceParameterStatusesRequest,
 	callback chan<- DescribeBalanceParameterStatusesAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterStatus",
-    		"function": "describeBalanceParameterStatuses",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterStatus",
+			"function":    "describeBalanceParameterStatuses",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
 
 	go p.describeBalanceParameterStatusesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2242,16 +2243,16 @@ func (p Gs2EnchantWebSocketClient) describeBalanceParameterStatusesByUserIdAsync
 	asyncResult := <-internalCallback
 	var result DescribeBalanceParameterStatusesByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeBalanceParameterStatusesByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeBalanceParameterStatusesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeBalanceParameterStatusesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2263,42 +2264,42 @@ func (p Gs2EnchantWebSocketClient) DescribeBalanceParameterStatusesByUserIdAsync
 	request *DescribeBalanceParameterStatusesByUserIdRequest,
 	callback chan<- DescribeBalanceParameterStatusesByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterStatus",
-    		"function": "describeBalanceParameterStatusesByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterStatus",
+			"function":    "describeBalanceParameterStatusesByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeBalanceParameterStatusesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2335,16 +2336,16 @@ func (p Gs2EnchantWebSocketClient) getBalanceParameterStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetBalanceParameterStatusResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetBalanceParameterStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetBalanceParameterStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetBalanceParameterStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2356,42 +2357,42 @@ func (p Gs2EnchantWebSocketClient) GetBalanceParameterStatusAsync(
 	request *GetBalanceParameterStatusRequest,
 	callback chan<- GetBalanceParameterStatusAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterStatus",
-    		"function": "getBalanceParameterStatus",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterStatus",
+			"function":    "getBalanceParameterStatus",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
 
 	go p.getBalanceParameterStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2428,16 +2429,16 @@ func (p Gs2EnchantWebSocketClient) getBalanceParameterStatusByUserIdAsyncHandler
 	asyncResult := <-internalCallback
 	var result GetBalanceParameterStatusByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetBalanceParameterStatusByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetBalanceParameterStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetBalanceParameterStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2449,39 +2450,39 @@ func (p Gs2EnchantWebSocketClient) GetBalanceParameterStatusByUserIdAsync(
 	request *GetBalanceParameterStatusByUserIdRequest,
 	callback chan<- GetBalanceParameterStatusByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterStatus",
-    		"function": "getBalanceParameterStatusByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterStatus",
+			"function":    "getBalanceParameterStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getBalanceParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2518,16 +2519,16 @@ func (p Gs2EnchantWebSocketClient) deleteBalanceParameterStatusByUserIdAsyncHand
 	asyncResult := <-internalCallback
 	var result DeleteBalanceParameterStatusByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteBalanceParameterStatusByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteBalanceParameterStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteBalanceParameterStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2539,42 +2540,42 @@ func (p Gs2EnchantWebSocketClient) DeleteBalanceParameterStatusByUserIdAsync(
 	request *DeleteBalanceParameterStatusByUserIdRequest,
 	callback chan<- DeleteBalanceParameterStatusByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterStatus",
-    		"function": "deleteBalanceParameterStatusByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterStatus",
+			"function":    "deleteBalanceParameterStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.deleteBalanceParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2611,16 +2612,16 @@ func (p Gs2EnchantWebSocketClient) reDrawBalanceParameterStatusByUserIdAsyncHand
 	asyncResult := <-internalCallback
 	var result ReDrawBalanceParameterStatusByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ReDrawBalanceParameterStatusByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ReDrawBalanceParameterStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- ReDrawBalanceParameterStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2632,49 +2633,49 @@ func (p Gs2EnchantWebSocketClient) ReDrawBalanceParameterStatusByUserIdAsync(
 	request *ReDrawBalanceParameterStatusByUserIdRequest,
 	callback chan<- ReDrawBalanceParameterStatusByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterStatus",
-    		"function": "reDrawBalanceParameterStatusByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterStatus",
+			"function":    "reDrawBalanceParameterStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.FixedParameterNames != nil {
-        var _fixedParameterNames []interface {}
-        for _, item := range request.FixedParameterNames {
-            _fixedParameterNames = append(_fixedParameterNames, item)
-        }
-        bodies["fixedParameterNames"] = _fixedParameterNames
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.FixedParameterNames != nil {
+		var _fixedParameterNames []interface{}
+		for _, item := range request.FixedParameterNames {
+			_fixedParameterNames = append(_fixedParameterNames, item)
+		}
+		bodies["fixedParameterNames"] = _fixedParameterNames
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.reDrawBalanceParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2711,16 +2712,16 @@ func (p Gs2EnchantWebSocketClient) reDrawBalanceParameterStatusByStampSheetAsync
 	asyncResult := <-internalCallback
 	var result ReDrawBalanceParameterStatusByStampSheetResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ReDrawBalanceParameterStatusByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ReDrawBalanceParameterStatusByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- ReDrawBalanceParameterStatusByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2732,33 +2733,33 @@ func (p Gs2EnchantWebSocketClient) ReDrawBalanceParameterStatusByStampSheetAsync
 	request *ReDrawBalanceParameterStatusByStampSheetRequest,
 	callback chan<- ReDrawBalanceParameterStatusByStampSheetAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterStatus",
-    		"function": "reDrawBalanceParameterStatusByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterStatus",
+			"function":    "reDrawBalanceParameterStatusByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.reDrawBalanceParameterStatusByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2795,16 +2796,16 @@ func (p Gs2EnchantWebSocketClient) setBalanceParameterStatusByUserIdAsyncHandler
 	asyncResult := <-internalCallback
 	var result SetBalanceParameterStatusByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetBalanceParameterStatusByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetBalanceParameterStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SetBalanceParameterStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2816,49 +2817,49 @@ func (p Gs2EnchantWebSocketClient) SetBalanceParameterStatusByUserIdAsync(
 	request *SetBalanceParameterStatusByUserIdRequest,
 	callback chan<- SetBalanceParameterStatusByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterStatus",
-    		"function": "setBalanceParameterStatusByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterStatus",
+			"function":    "setBalanceParameterStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.ParameterValues != nil {
-        var _parameterValues []interface {}
-        for _, item := range request.ParameterValues {
-            _parameterValues = append(_parameterValues, item)
-        }
-        bodies["parameterValues"] = _parameterValues
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ParameterValues != nil {
+		var _parameterValues []interface{}
+		for _, item := range request.ParameterValues {
+			_parameterValues = append(_parameterValues, item)
+		}
+		bodies["parameterValues"] = _parameterValues
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.setBalanceParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2895,16 +2896,16 @@ func (p Gs2EnchantWebSocketClient) setBalanceParameterStatusByStampSheetAsyncHan
 	asyncResult := <-internalCallback
 	var result SetBalanceParameterStatusByStampSheetResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetBalanceParameterStatusByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetBalanceParameterStatusByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SetBalanceParameterStatusByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2916,33 +2917,33 @@ func (p Gs2EnchantWebSocketClient) SetBalanceParameterStatusByStampSheetAsync(
 	request *SetBalanceParameterStatusByStampSheetRequest,
 	callback chan<- SetBalanceParameterStatusByStampSheetAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "balanceParameterStatus",
-    		"function": "setBalanceParameterStatusByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterStatus",
+			"function":    "setBalanceParameterStatusByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.setBalanceParameterStatusByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2979,16 +2980,16 @@ func (p Gs2EnchantWebSocketClient) describeRarityParameterStatusesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeRarityParameterStatusesResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeRarityParameterStatusesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRarityParameterStatusesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeRarityParameterStatusesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3000,45 +3001,45 @@ func (p Gs2EnchantWebSocketClient) DescribeRarityParameterStatusesAsync(
 	request *DescribeRarityParameterStatusesRequest,
 	callback chan<- DescribeRarityParameterStatusesAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "describeRarityParameterStatuses",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "describeRarityParameterStatuses",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
 
 	go p.describeRarityParameterStatusesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3075,16 +3076,16 @@ func (p Gs2EnchantWebSocketClient) describeRarityParameterStatusesByUserIdAsyncH
 	asyncResult := <-internalCallback
 	var result DescribeRarityParameterStatusesByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeRarityParameterStatusesByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRarityParameterStatusesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeRarityParameterStatusesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3096,42 +3097,42 @@ func (p Gs2EnchantWebSocketClient) DescribeRarityParameterStatusesByUserIdAsync(
 	request *DescribeRarityParameterStatusesByUserIdRequest,
 	callback chan<- DescribeRarityParameterStatusesByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "describeRarityParameterStatusesByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "describeRarityParameterStatusesByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeRarityParameterStatusesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3168,16 +3169,16 @@ func (p Gs2EnchantWebSocketClient) getRarityParameterStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetRarityParameterStatusResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRarityParameterStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRarityParameterStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetRarityParameterStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3189,42 +3190,42 @@ func (p Gs2EnchantWebSocketClient) GetRarityParameterStatusAsync(
 	request *GetRarityParameterStatusRequest,
 	callback chan<- GetRarityParameterStatusAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "getRarityParameterStatus",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "getRarityParameterStatus",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
 
 	go p.getRarityParameterStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3261,16 +3262,16 @@ func (p Gs2EnchantWebSocketClient) getRarityParameterStatusByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetRarityParameterStatusByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRarityParameterStatusByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRarityParameterStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetRarityParameterStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3282,39 +3283,39 @@ func (p Gs2EnchantWebSocketClient) GetRarityParameterStatusByUserIdAsync(
 	request *GetRarityParameterStatusByUserIdRequest,
 	callback chan<- GetRarityParameterStatusByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "getRarityParameterStatusByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "getRarityParameterStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getRarityParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3351,16 +3352,16 @@ func (p Gs2EnchantWebSocketClient) deleteRarityParameterStatusByUserIdAsyncHandl
 	asyncResult := <-internalCallback
 	var result DeleteRarityParameterStatusByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteRarityParameterStatusByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteRarityParameterStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteRarityParameterStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3372,42 +3373,42 @@ func (p Gs2EnchantWebSocketClient) DeleteRarityParameterStatusByUserIdAsync(
 	request *DeleteRarityParameterStatusByUserIdRequest,
 	callback chan<- DeleteRarityParameterStatusByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "deleteRarityParameterStatusByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "deleteRarityParameterStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.deleteRarityParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3444,16 +3445,16 @@ func (p Gs2EnchantWebSocketClient) reDrawRarityParameterStatusByUserIdAsyncHandl
 	asyncResult := <-internalCallback
 	var result ReDrawRarityParameterStatusByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ReDrawRarityParameterStatusByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ReDrawRarityParameterStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- ReDrawRarityParameterStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3465,49 +3466,49 @@ func (p Gs2EnchantWebSocketClient) ReDrawRarityParameterStatusByUserIdAsync(
 	request *ReDrawRarityParameterStatusByUserIdRequest,
 	callback chan<- ReDrawRarityParameterStatusByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "reDrawRarityParameterStatusByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "reDrawRarityParameterStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.FixedParameterNames != nil {
-        var _fixedParameterNames []interface {}
-        for _, item := range request.FixedParameterNames {
-            _fixedParameterNames = append(_fixedParameterNames, item)
-        }
-        bodies["fixedParameterNames"] = _fixedParameterNames
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.FixedParameterNames != nil {
+		var _fixedParameterNames []interface{}
+		for _, item := range request.FixedParameterNames {
+			_fixedParameterNames = append(_fixedParameterNames, item)
+		}
+		bodies["fixedParameterNames"] = _fixedParameterNames
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.reDrawRarityParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3544,16 +3545,16 @@ func (p Gs2EnchantWebSocketClient) reDrawRarityParameterStatusByStampSheetAsyncH
 	asyncResult := <-internalCallback
 	var result ReDrawRarityParameterStatusByStampSheetResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ReDrawRarityParameterStatusByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ReDrawRarityParameterStatusByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- ReDrawRarityParameterStatusByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3565,33 +3566,33 @@ func (p Gs2EnchantWebSocketClient) ReDrawRarityParameterStatusByStampSheetAsync(
 	request *ReDrawRarityParameterStatusByStampSheetRequest,
 	callback chan<- ReDrawRarityParameterStatusByStampSheetAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "reDrawRarityParameterStatusByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "reDrawRarityParameterStatusByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.reDrawRarityParameterStatusByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3628,16 +3629,16 @@ func (p Gs2EnchantWebSocketClient) addRarityParameterStatusByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AddRarityParameterStatusByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AddRarityParameterStatusByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AddRarityParameterStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- AddRarityParameterStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3649,45 +3650,45 @@ func (p Gs2EnchantWebSocketClient) AddRarityParameterStatusByUserIdAsync(
 	request *AddRarityParameterStatusByUserIdRequest,
 	callback chan<- AddRarityParameterStatusByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "addRarityParameterStatusByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "addRarityParameterStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.Count != nil {
-        bodies["count"] = *request.Count
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.addRarityParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3724,16 +3725,16 @@ func (p Gs2EnchantWebSocketClient) addRarityParameterStatusByStampSheetAsyncHand
 	asyncResult := <-internalCallback
 	var result AddRarityParameterStatusByStampSheetResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AddRarityParameterStatusByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AddRarityParameterStatusByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- AddRarityParameterStatusByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3745,33 +3746,33 @@ func (p Gs2EnchantWebSocketClient) AddRarityParameterStatusByStampSheetAsync(
 	request *AddRarityParameterStatusByStampSheetRequest,
 	callback chan<- AddRarityParameterStatusByStampSheetAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "addRarityParameterStatusByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "addRarityParameterStatusByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.addRarityParameterStatusByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3808,16 +3809,16 @@ func (p Gs2EnchantWebSocketClient) verifyRarityParameterStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result VerifyRarityParameterStatusResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- VerifyRarityParameterStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRarityParameterStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- VerifyRarityParameterStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3829,54 +3830,54 @@ func (p Gs2EnchantWebSocketClient) VerifyRarityParameterStatusAsync(
 	request *VerifyRarityParameterStatusRequest,
 	callback chan<- VerifyRarityParameterStatusAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "verifyRarityParameterStatus",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "verifyRarityParameterStatus",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.VerifyType != nil && *request.VerifyType != "" {
-        bodies["verifyType"] = *request.VerifyType
-    }
-    if request.ParameterValueName != nil && *request.ParameterValueName != "" {
-        bodies["parameterValueName"] = *request.ParameterValueName
-    }
-    if request.ParameterCount != nil {
-        bodies["parameterCount"] = *request.ParameterCount
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.ParameterValueName != nil && *request.ParameterValueName != "" {
+		bodies["parameterValueName"] = *request.ParameterValueName
+	}
+	if request.ParameterCount != nil {
+		bodies["parameterCount"] = *request.ParameterCount
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.verifyRarityParameterStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3913,16 +3914,16 @@ func (p Gs2EnchantWebSocketClient) verifyRarityParameterStatusByUserIdAsyncHandl
 	asyncResult := <-internalCallback
 	var result VerifyRarityParameterStatusByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- VerifyRarityParameterStatusByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRarityParameterStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- VerifyRarityParameterStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3934,51 +3935,51 @@ func (p Gs2EnchantWebSocketClient) VerifyRarityParameterStatusByUserIdAsync(
 	request *VerifyRarityParameterStatusByUserIdRequest,
 	callback chan<- VerifyRarityParameterStatusByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "verifyRarityParameterStatusByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "verifyRarityParameterStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.VerifyType != nil && *request.VerifyType != "" {
-        bodies["verifyType"] = *request.VerifyType
-    }
-    if request.ParameterValueName != nil && *request.ParameterValueName != "" {
-        bodies["parameterValueName"] = *request.ParameterValueName
-    }
-    if request.ParameterCount != nil {
-        bodies["parameterCount"] = *request.ParameterCount
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.ParameterValueName != nil && *request.ParameterValueName != "" {
+		bodies["parameterValueName"] = *request.ParameterValueName
+	}
+	if request.ParameterCount != nil {
+		bodies["parameterCount"] = *request.ParameterCount
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.verifyRarityParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -4015,16 +4016,16 @@ func (p Gs2EnchantWebSocketClient) verifyRarityParameterStatusByStampTaskAsyncHa
 	asyncResult := <-internalCallback
 	var result VerifyRarityParameterStatusByStampTaskResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- VerifyRarityParameterStatusByStampTaskAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRarityParameterStatusByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- VerifyRarityParameterStatusByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4036,33 +4037,33 @@ func (p Gs2EnchantWebSocketClient) VerifyRarityParameterStatusByStampTaskAsync(
 	request *VerifyRarityParameterStatusByStampTaskRequest,
 	callback chan<- VerifyRarityParameterStatusByStampTaskAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "verifyRarityParameterStatusByStampTask",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "verifyRarityParameterStatusByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampTask != nil && *request.StampTask != "" {
-        bodies["stampTask"] = *request.StampTask
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.verifyRarityParameterStatusByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -4099,16 +4100,16 @@ func (p Gs2EnchantWebSocketClient) setRarityParameterStatusByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetRarityParameterStatusByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetRarityParameterStatusByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetRarityParameterStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SetRarityParameterStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4120,49 +4121,49 @@ func (p Gs2EnchantWebSocketClient) SetRarityParameterStatusByUserIdAsync(
 	request *SetRarityParameterStatusByUserIdRequest,
 	callback chan<- SetRarityParameterStatusByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "setRarityParameterStatusByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "setRarityParameterStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ParameterName != nil && *request.ParameterName != "" {
-        bodies["parameterName"] = *request.ParameterName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.ParameterValues != nil {
-        var _parameterValues []interface {}
-        for _, item := range request.ParameterValues {
-            _parameterValues = append(_parameterValues, item)
-        }
-        bodies["parameterValues"] = _parameterValues
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ParameterValues != nil {
+		var _parameterValues []interface{}
+		for _, item := range request.ParameterValues {
+			_parameterValues = append(_parameterValues, item)
+		}
+		bodies["parameterValues"] = _parameterValues
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.setRarityParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -4199,16 +4200,16 @@ func (p Gs2EnchantWebSocketClient) setRarityParameterStatusByStampSheetAsyncHand
 	asyncResult := <-internalCallback
 	var result SetRarityParameterStatusByStampSheetResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetRarityParameterStatusByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetRarityParameterStatusByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SetRarityParameterStatusByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -4220,33 +4221,33 @@ func (p Gs2EnchantWebSocketClient) SetRarityParameterStatusByStampSheetAsync(
 	request *SetRarityParameterStatusByStampSheetRequest,
 	callback chan<- SetRarityParameterStatusByStampSheetAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "enchant",
-    		"component": "rarityParameterStatus",
-    		"function": "setRarityParameterStatusByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "rarityParameterStatus",
+			"function":    "setRarityParameterStatusByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.setRarityParameterStatusByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)

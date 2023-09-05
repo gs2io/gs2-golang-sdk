@@ -17,1251 +17,1252 @@ permissions and limitations under the License.
 package chat
 
 import (
-    "encoding/json"
-    "github.com/gs2io/gs2-golang-sdk/core"
+	"encoding/json"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type DescribeNamespacesRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    PageToken *string `json:"pageToken"`
-    Limit *int32 `json:"limit"`
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
 }
 
 func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeNamespacesRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
-    return DescribeNamespacesRequest {
-        PageToken: core.CastString(data["pageToken"]),
-        Limit: core.CastInt32(data["limit"]),
-    }
+	return DescribeNamespacesRequest{
+		PageToken: core.CastString(data["pageToken"]),
+		Limit:     core.CastInt32(data["limit"]),
+	}
 }
 
 func (p DescribeNamespacesRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "pageToken": p.PageToken,
-        "limit": p.Limit,
-    }
+	return map[string]interface{}{
+		"pageToken": p.PageToken,
+		"limit":     p.Limit,
+	}
 }
 
 func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
-    return &p
+	return &p
 }
 
 type CreateNamespaceRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    Name *string `json:"name"`
-    Description *string `json:"description"`
-    AllowCreateRoom *bool `json:"allowCreateRoom"`
-    PostMessageScript *ScriptSetting `json:"postMessageScript"`
-    CreateRoomScript *ScriptSetting `json:"createRoomScript"`
-    DeleteRoomScript *ScriptSetting `json:"deleteRoomScript"`
-    SubscribeRoomScript *ScriptSetting `json:"subscribeRoomScript"`
-    UnsubscribeRoomScript *ScriptSetting `json:"unsubscribeRoomScript"`
-    PostNotification *NotificationSetting `json:"postNotification"`
-    LogSetting *LogSetting `json:"logSetting"`
+	RequestId             *string              `json:"requestId"`
+	ContextStack          *string              `json:"contextStack"`
+	Name                  *string              `json:"name"`
+	Description           *string              `json:"description"`
+	AllowCreateRoom       *bool                `json:"allowCreateRoom"`
+	PostMessageScript     *ScriptSetting       `json:"postMessageScript"`
+	CreateRoomScript      *ScriptSetting       `json:"createRoomScript"`
+	DeleteRoomScript      *ScriptSetting       `json:"deleteRoomScript"`
+	SubscribeRoomScript   *ScriptSetting       `json:"subscribeRoomScript"`
+	UnsubscribeRoomScript *ScriptSetting       `json:"unsubscribeRoomScript"`
+	PostNotification      *NotificationSetting `json:"postNotification"`
+	LogSetting            *LogSetting          `json:"logSetting"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCreateNamespaceRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
-    return CreateNamespaceRequest {
-        Name: core.CastString(data["name"]),
-        Description: core.CastString(data["description"]),
-        AllowCreateRoom: core.CastBool(data["allowCreateRoom"]),
-        PostMessageScript: NewScriptSettingFromDict(core.CastMap(data["postMessageScript"])).Pointer(),
-        CreateRoomScript: NewScriptSettingFromDict(core.CastMap(data["createRoomScript"])).Pointer(),
-        DeleteRoomScript: NewScriptSettingFromDict(core.CastMap(data["deleteRoomScript"])).Pointer(),
-        SubscribeRoomScript: NewScriptSettingFromDict(core.CastMap(data["subscribeRoomScript"])).Pointer(),
-        UnsubscribeRoomScript: NewScriptSettingFromDict(core.CastMap(data["unsubscribeRoomScript"])).Pointer(),
-        PostNotification: NewNotificationSettingFromDict(core.CastMap(data["postNotification"])).Pointer(),
-        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-    }
+	return CreateNamespaceRequest{
+		Name:                  core.CastString(data["name"]),
+		Description:           core.CastString(data["description"]),
+		AllowCreateRoom:       core.CastBool(data["allowCreateRoom"]),
+		PostMessageScript:     NewScriptSettingFromDict(core.CastMap(data["postMessageScript"])).Pointer(),
+		CreateRoomScript:      NewScriptSettingFromDict(core.CastMap(data["createRoomScript"])).Pointer(),
+		DeleteRoomScript:      NewScriptSettingFromDict(core.CastMap(data["deleteRoomScript"])).Pointer(),
+		SubscribeRoomScript:   NewScriptSettingFromDict(core.CastMap(data["subscribeRoomScript"])).Pointer(),
+		UnsubscribeRoomScript: NewScriptSettingFromDict(core.CastMap(data["unsubscribeRoomScript"])).Pointer(),
+		PostNotification:      NewNotificationSettingFromDict(core.CastMap(data["postNotification"])).Pointer(),
+		LogSetting:            NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+	}
 }
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "name": p.Name,
-        "description": p.Description,
-        "allowCreateRoom": p.AllowCreateRoom,
-        "postMessageScript": p.PostMessageScript.ToDict(),
-        "createRoomScript": p.CreateRoomScript.ToDict(),
-        "deleteRoomScript": p.DeleteRoomScript.ToDict(),
-        "subscribeRoomScript": p.SubscribeRoomScript.ToDict(),
-        "unsubscribeRoomScript": p.UnsubscribeRoomScript.ToDict(),
-        "postNotification": p.PostNotification.ToDict(),
-        "logSetting": p.LogSetting.ToDict(),
-    }
+	return map[string]interface{}{
+		"name":                  p.Name,
+		"description":           p.Description,
+		"allowCreateRoom":       p.AllowCreateRoom,
+		"postMessageScript":     p.PostMessageScript.ToDict(),
+		"createRoomScript":      p.CreateRoomScript.ToDict(),
+		"deleteRoomScript":      p.DeleteRoomScript.ToDict(),
+		"subscribeRoomScript":   p.SubscribeRoomScript.ToDict(),
+		"unsubscribeRoomScript": p.UnsubscribeRoomScript.ToDict(),
+		"postNotification":      p.PostNotification.ToDict(),
+		"logSetting":            p.LogSetting.ToDict(),
+	}
 }
 
 func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
-    return &p
+	return &p
 }
 
 type GetNamespaceStatusRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetNamespaceStatusRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusRequestFromDict(dict)
 }
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
-    return GetNamespaceStatusRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-    }
+	return GetNamespaceStatusRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+	}
 }
 
 func (p GetNamespaceStatusRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+	}
 }
 
 func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
-    return &p
+	return &p
 }
 
 type GetNamespaceRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetNamespaceRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
-    return GetNamespaceRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-    }
+	return GetNamespaceRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+	}
 }
 
 func (p GetNamespaceRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+	}
 }
 
 func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
-    return &p
+	return &p
 }
 
 type UpdateNamespaceRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    Description *string `json:"description"`
-    AllowCreateRoom *bool `json:"allowCreateRoom"`
-    PostMessageScript *ScriptSetting `json:"postMessageScript"`
-    CreateRoomScript *ScriptSetting `json:"createRoomScript"`
-    DeleteRoomScript *ScriptSetting `json:"deleteRoomScript"`
-    SubscribeRoomScript *ScriptSetting `json:"subscribeRoomScript"`
-    UnsubscribeRoomScript *ScriptSetting `json:"unsubscribeRoomScript"`
-    PostNotification *NotificationSetting `json:"postNotification"`
-    LogSetting *LogSetting `json:"logSetting"`
+	RequestId             *string              `json:"requestId"`
+	ContextStack          *string              `json:"contextStack"`
+	NamespaceName         *string              `json:"namespaceName"`
+	Description           *string              `json:"description"`
+	AllowCreateRoom       *bool                `json:"allowCreateRoom"`
+	PostMessageScript     *ScriptSetting       `json:"postMessageScript"`
+	CreateRoomScript      *ScriptSetting       `json:"createRoomScript"`
+	DeleteRoomScript      *ScriptSetting       `json:"deleteRoomScript"`
+	SubscribeRoomScript   *ScriptSetting       `json:"subscribeRoomScript"`
+	UnsubscribeRoomScript *ScriptSetting       `json:"unsubscribeRoomScript"`
+	PostNotification      *NotificationSetting `json:"postNotification"`
+	LogSetting            *LogSetting          `json:"logSetting"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateNamespaceRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
-    return UpdateNamespaceRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        Description: core.CastString(data["description"]),
-        AllowCreateRoom: core.CastBool(data["allowCreateRoom"]),
-        PostMessageScript: NewScriptSettingFromDict(core.CastMap(data["postMessageScript"])).Pointer(),
-        CreateRoomScript: NewScriptSettingFromDict(core.CastMap(data["createRoomScript"])).Pointer(),
-        DeleteRoomScript: NewScriptSettingFromDict(core.CastMap(data["deleteRoomScript"])).Pointer(),
-        SubscribeRoomScript: NewScriptSettingFromDict(core.CastMap(data["subscribeRoomScript"])).Pointer(),
-        UnsubscribeRoomScript: NewScriptSettingFromDict(core.CastMap(data["unsubscribeRoomScript"])).Pointer(),
-        PostNotification: NewNotificationSettingFromDict(core.CastMap(data["postNotification"])).Pointer(),
-        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-    }
+	return UpdateNamespaceRequest{
+		NamespaceName:         core.CastString(data["namespaceName"]),
+		Description:           core.CastString(data["description"]),
+		AllowCreateRoom:       core.CastBool(data["allowCreateRoom"]),
+		PostMessageScript:     NewScriptSettingFromDict(core.CastMap(data["postMessageScript"])).Pointer(),
+		CreateRoomScript:      NewScriptSettingFromDict(core.CastMap(data["createRoomScript"])).Pointer(),
+		DeleteRoomScript:      NewScriptSettingFromDict(core.CastMap(data["deleteRoomScript"])).Pointer(),
+		SubscribeRoomScript:   NewScriptSettingFromDict(core.CastMap(data["subscribeRoomScript"])).Pointer(),
+		UnsubscribeRoomScript: NewScriptSettingFromDict(core.CastMap(data["unsubscribeRoomScript"])).Pointer(),
+		PostNotification:      NewNotificationSettingFromDict(core.CastMap(data["postNotification"])).Pointer(),
+		LogSetting:            NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+	}
 }
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "description": p.Description,
-        "allowCreateRoom": p.AllowCreateRoom,
-        "postMessageScript": p.PostMessageScript.ToDict(),
-        "createRoomScript": p.CreateRoomScript.ToDict(),
-        "deleteRoomScript": p.DeleteRoomScript.ToDict(),
-        "subscribeRoomScript": p.SubscribeRoomScript.ToDict(),
-        "unsubscribeRoomScript": p.UnsubscribeRoomScript.ToDict(),
-        "postNotification": p.PostNotification.ToDict(),
-        "logSetting": p.LogSetting.ToDict(),
-    }
+	return map[string]interface{}{
+		"namespaceName":         p.NamespaceName,
+		"description":           p.Description,
+		"allowCreateRoom":       p.AllowCreateRoom,
+		"postMessageScript":     p.PostMessageScript.ToDict(),
+		"createRoomScript":      p.CreateRoomScript.ToDict(),
+		"deleteRoomScript":      p.DeleteRoomScript.ToDict(),
+		"subscribeRoomScript":   p.SubscribeRoomScript.ToDict(),
+		"unsubscribeRoomScript": p.UnsubscribeRoomScript.ToDict(),
+		"postNotification":      p.PostNotification.ToDict(),
+		"logSetting":            p.LogSetting.ToDict(),
+	}
 }
 
 func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
-    return &p
+	return &p
 }
 
 type DeleteNamespaceRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
 }
 
 func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteNamespaceRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceRequestFromDict(dict)
 }
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
-    return DeleteNamespaceRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-    }
+	return DeleteNamespaceRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+	}
 }
 
 func (p DeleteNamespaceRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+	}
 }
 
 func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
-    return &p
+	return &p
 }
 
 type DescribeRoomsRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    PageToken *string `json:"pageToken"`
-    Limit *int32 `json:"limit"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
 }
 
 func NewDescribeRoomsRequestFromJson(data string) DescribeRoomsRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeRoomsRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeRoomsRequestFromDict(dict)
 }
 
 func NewDescribeRoomsRequestFromDict(data map[string]interface{}) DescribeRoomsRequest {
-    return DescribeRoomsRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        PageToken: core.CastString(data["pageToken"]),
-        Limit: core.CastInt32(data["limit"]),
-    }
+	return DescribeRoomsRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
 }
 
 func (p DescribeRoomsRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "pageToken": p.PageToken,
-        "limit": p.Limit,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
 }
 
 func (p DescribeRoomsRequest) Pointer() *DescribeRoomsRequest {
-    return &p
+	return &p
 }
 
 type CreateRoomRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    AccessToken *string `json:"accessToken"`
-    Name *string `json:"name"`
-    Metadata *string `json:"metadata"`
-    Password *string `json:"password"`
-    WhiteListUserIds []*string `json:"whiteListUserIds"`
+	RequestId          *string   `json:"requestId"`
+	ContextStack       *string   `json:"contextStack"`
+	DuplicationAvoider *string   `json:"duplicationAvoider"`
+	NamespaceName      *string   `json:"namespaceName"`
+	AccessToken        *string   `json:"accessToken"`
+	Name               *string   `json:"name"`
+	Metadata           *string   `json:"metadata"`
+	Password           *string   `json:"password"`
+	WhiteListUserIds   []*string `json:"whiteListUserIds"`
 }
 
 func NewCreateRoomRequestFromJson(data string) CreateRoomRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCreateRoomRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateRoomRequestFromDict(dict)
 }
 
 func NewCreateRoomRequestFromDict(data map[string]interface{}) CreateRoomRequest {
-    return CreateRoomRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-        Name: core.CastString(data["name"]),
-        Metadata: core.CastString(data["metadata"]),
-        Password: core.CastString(data["password"]),
-        WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
-    }
+	return CreateRoomRequest{
+		NamespaceName:    core.CastString(data["namespaceName"]),
+		AccessToken:      core.CastString(data["accessToken"]),
+		Name:             core.CastString(data["name"]),
+		Metadata:         core.CastString(data["metadata"]),
+		Password:         core.CastString(data["password"]),
+		WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
+	}
 }
 
 func (p CreateRoomRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "accessToken": p.AccessToken,
-        "name": p.Name,
-        "metadata": p.Metadata,
-        "password": p.Password,
-        "whiteListUserIds": core.CastStringsFromDict(
-            p.WhiteListUserIds,
-        ),
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"name":          p.Name,
+		"metadata":      p.Metadata,
+		"password":      p.Password,
+		"whiteListUserIds": core.CastStringsFromDict(
+			p.WhiteListUserIds,
+		),
+	}
 }
 
 func (p CreateRoomRequest) Pointer() *CreateRoomRequest {
-    return &p
+	return &p
 }
 
 type CreateRoomFromBackendRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    Name *string `json:"name"`
-    UserId *string `json:"userId"`
-    Metadata *string `json:"metadata"`
-    Password *string `json:"password"`
-    WhiteListUserIds []*string `json:"whiteListUserIds"`
+	RequestId          *string   `json:"requestId"`
+	ContextStack       *string   `json:"contextStack"`
+	DuplicationAvoider *string   `json:"duplicationAvoider"`
+	NamespaceName      *string   `json:"namespaceName"`
+	Name               *string   `json:"name"`
+	UserId             *string   `json:"userId"`
+	Metadata           *string   `json:"metadata"`
+	Password           *string   `json:"password"`
+	WhiteListUserIds   []*string `json:"whiteListUserIds"`
 }
 
 func NewCreateRoomFromBackendRequestFromJson(data string) CreateRoomFromBackendRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewCreateRoomFromBackendRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateRoomFromBackendRequestFromDict(dict)
 }
 
 func NewCreateRoomFromBackendRequestFromDict(data map[string]interface{}) CreateRoomFromBackendRequest {
-    return CreateRoomFromBackendRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        Name: core.CastString(data["name"]),
-        UserId: core.CastString(data["userId"]),
-        Metadata: core.CastString(data["metadata"]),
-        Password: core.CastString(data["password"]),
-        WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
-    }
+	return CreateRoomFromBackendRequest{
+		NamespaceName:    core.CastString(data["namespaceName"]),
+		Name:             core.CastString(data["name"]),
+		UserId:           core.CastString(data["userId"]),
+		Metadata:         core.CastString(data["metadata"]),
+		Password:         core.CastString(data["password"]),
+		WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
+	}
 }
 
 func (p CreateRoomFromBackendRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "name": p.Name,
-        "userId": p.UserId,
-        "metadata": p.Metadata,
-        "password": p.Password,
-        "whiteListUserIds": core.CastStringsFromDict(
-            p.WhiteListUserIds,
-        ),
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"name":          p.Name,
+		"userId":        p.UserId,
+		"metadata":      p.Metadata,
+		"password":      p.Password,
+		"whiteListUserIds": core.CastStringsFromDict(
+			p.WhiteListUserIds,
+		),
+	}
 }
 
 func (p CreateRoomFromBackendRequest) Pointer() *CreateRoomFromBackendRequest {
-    return &p
+	return &p
 }
 
 type GetRoomRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
 }
 
 func NewGetRoomRequestFromJson(data string) GetRoomRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetRoomRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetRoomRequestFromDict(dict)
 }
 
 func NewGetRoomRequestFromDict(data map[string]interface{}) GetRoomRequest {
-    return GetRoomRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-    }
+	return GetRoomRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+	}
 }
 
 func (p GetRoomRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+	}
 }
 
 func (p GetRoomRequest) Pointer() *GetRoomRequest {
-    return &p
+	return &p
 }
 
 type UpdateRoomRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    Metadata *string `json:"metadata"`
-    Password *string `json:"password"`
-    WhiteListUserIds []*string `json:"whiteListUserIds"`
-    AccessToken *string `json:"accessToken"`
+	RequestId          *string   `json:"requestId"`
+	ContextStack       *string   `json:"contextStack"`
+	DuplicationAvoider *string   `json:"duplicationAvoider"`
+	NamespaceName      *string   `json:"namespaceName"`
+	RoomName           *string   `json:"roomName"`
+	Metadata           *string   `json:"metadata"`
+	Password           *string   `json:"password"`
+	WhiteListUserIds   []*string `json:"whiteListUserIds"`
+	AccessToken        *string   `json:"accessToken"`
 }
 
 func NewUpdateRoomRequestFromJson(data string) UpdateRoomRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateRoomRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateRoomRequestFromDict(dict)
 }
 
 func NewUpdateRoomRequestFromDict(data map[string]interface{}) UpdateRoomRequest {
-    return UpdateRoomRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        Metadata: core.CastString(data["metadata"]),
-        Password: core.CastString(data["password"]),
-        WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
-        AccessToken: core.CastString(data["accessToken"]),
-    }
+	return UpdateRoomRequest{
+		NamespaceName:    core.CastString(data["namespaceName"]),
+		RoomName:         core.CastString(data["roomName"]),
+		Metadata:         core.CastString(data["metadata"]),
+		Password:         core.CastString(data["password"]),
+		WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
+		AccessToken:      core.CastString(data["accessToken"]),
+	}
 }
 
 func (p UpdateRoomRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "metadata": p.Metadata,
-        "password": p.Password,
-        "whiteListUserIds": core.CastStringsFromDict(
-            p.WhiteListUserIds,
-        ),
-        "accessToken": p.AccessToken,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"metadata":      p.Metadata,
+		"password":      p.Password,
+		"whiteListUserIds": core.CastStringsFromDict(
+			p.WhiteListUserIds,
+		),
+		"accessToken": p.AccessToken,
+	}
 }
 
 func (p UpdateRoomRequest) Pointer() *UpdateRoomRequest {
-    return &p
+	return &p
 }
 
 type UpdateRoomFromBackendRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    Metadata *string `json:"metadata"`
-    Password *string `json:"password"`
-    WhiteListUserIds []*string `json:"whiteListUserIds"`
-    UserId *string `json:"userId"`
+	RequestId          *string   `json:"requestId"`
+	ContextStack       *string   `json:"contextStack"`
+	DuplicationAvoider *string   `json:"duplicationAvoider"`
+	NamespaceName      *string   `json:"namespaceName"`
+	RoomName           *string   `json:"roomName"`
+	Metadata           *string   `json:"metadata"`
+	Password           *string   `json:"password"`
+	WhiteListUserIds   []*string `json:"whiteListUserIds"`
+	UserId             *string   `json:"userId"`
 }
 
 func NewUpdateRoomFromBackendRequestFromJson(data string) UpdateRoomFromBackendRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateRoomFromBackendRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateRoomFromBackendRequestFromDict(dict)
 }
 
 func NewUpdateRoomFromBackendRequestFromDict(data map[string]interface{}) UpdateRoomFromBackendRequest {
-    return UpdateRoomFromBackendRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        Metadata: core.CastString(data["metadata"]),
-        Password: core.CastString(data["password"]),
-        WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
-        UserId: core.CastString(data["userId"]),
-    }
+	return UpdateRoomFromBackendRequest{
+		NamespaceName:    core.CastString(data["namespaceName"]),
+		RoomName:         core.CastString(data["roomName"]),
+		Metadata:         core.CastString(data["metadata"]),
+		Password:         core.CastString(data["password"]),
+		WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
+		UserId:           core.CastString(data["userId"]),
+	}
 }
 
 func (p UpdateRoomFromBackendRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "metadata": p.Metadata,
-        "password": p.Password,
-        "whiteListUserIds": core.CastStringsFromDict(
-            p.WhiteListUserIds,
-        ),
-        "userId": p.UserId,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"metadata":      p.Metadata,
+		"password":      p.Password,
+		"whiteListUserIds": core.CastStringsFromDict(
+			p.WhiteListUserIds,
+		),
+		"userId": p.UserId,
+	}
 }
 
 func (p UpdateRoomFromBackendRequest) Pointer() *UpdateRoomFromBackendRequest {
-    return &p
+	return &p
 }
 
 type DeleteRoomRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    AccessToken *string `json:"accessToken"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	RoomName           *string `json:"roomName"`
+	AccessToken        *string `json:"accessToken"`
 }
 
 func NewDeleteRoomRequestFromJson(data string) DeleteRoomRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteRoomRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteRoomRequestFromDict(dict)
 }
 
 func NewDeleteRoomRequestFromDict(data map[string]interface{}) DeleteRoomRequest {
-    return DeleteRoomRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-    }
+	return DeleteRoomRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+	}
 }
 
 func (p DeleteRoomRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "accessToken": p.AccessToken,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"accessToken":   p.AccessToken,
+	}
 }
 
 func (p DeleteRoomRequest) Pointer() *DeleteRoomRequest {
-    return &p
+	return &p
 }
 
 type DeleteRoomFromBackendRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    UserId *string `json:"userId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	RoomName           *string `json:"roomName"`
+	UserId             *string `json:"userId"`
 }
 
 func NewDeleteRoomFromBackendRequestFromJson(data string) DeleteRoomFromBackendRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteRoomFromBackendRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteRoomFromBackendRequestFromDict(dict)
 }
 
 func NewDeleteRoomFromBackendRequestFromDict(data map[string]interface{}) DeleteRoomFromBackendRequest {
-    return DeleteRoomFromBackendRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        UserId: core.CastString(data["userId"]),
-    }
+	return DeleteRoomFromBackendRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		UserId:        core.CastString(data["userId"]),
+	}
 }
 
 func (p DeleteRoomFromBackendRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "userId": p.UserId,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"userId":        p.UserId,
+	}
 }
 
 func (p DeleteRoomFromBackendRequest) Pointer() *DeleteRoomFromBackendRequest {
-    return &p
+	return &p
 }
 
 type DescribeMessagesRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    Password *string `json:"password"`
-    AccessToken *string `json:"accessToken"`
-    StartAt *int64 `json:"startAt"`
-    Limit *int32 `json:"limit"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
+	Password      *string `json:"password"`
+	AccessToken   *string `json:"accessToken"`
+	StartAt       *int64  `json:"startAt"`
+	Limit         *int32  `json:"limit"`
 }
 
 func NewDescribeMessagesRequestFromJson(data string) DescribeMessagesRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeMessagesRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMessagesRequestFromDict(dict)
 }
 
 func NewDescribeMessagesRequestFromDict(data map[string]interface{}) DescribeMessagesRequest {
-    return DescribeMessagesRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        Password: core.CastString(data["password"]),
-        AccessToken: core.CastString(data["accessToken"]),
-        StartAt: core.CastInt64(data["startAt"]),
-        Limit: core.CastInt32(data["limit"]),
-    }
+	return DescribeMessagesRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		Password:      core.CastString(data["password"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		StartAt:       core.CastInt64(data["startAt"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
 }
 
 func (p DescribeMessagesRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "password": p.Password,
-        "accessToken": p.AccessToken,
-        "startAt": p.StartAt,
-        "limit": p.Limit,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"password":      p.Password,
+		"accessToken":   p.AccessToken,
+		"startAt":       p.StartAt,
+		"limit":         p.Limit,
+	}
 }
 
 func (p DescribeMessagesRequest) Pointer() *DescribeMessagesRequest {
-    return &p
+	return &p
 }
 
 type DescribeMessagesByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    Password *string `json:"password"`
-    UserId *string `json:"userId"`
-    StartAt *int64 `json:"startAt"`
-    Limit *int32 `json:"limit"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
+	Password      *string `json:"password"`
+	UserId        *string `json:"userId"`
+	StartAt       *int64  `json:"startAt"`
+	Limit         *int32  `json:"limit"`
 }
 
 func NewDescribeMessagesByUserIdRequestFromJson(data string) DescribeMessagesByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeMessagesByUserIdRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMessagesByUserIdRequestFromDict(dict)
 }
 
 func NewDescribeMessagesByUserIdRequestFromDict(data map[string]interface{}) DescribeMessagesByUserIdRequest {
-    return DescribeMessagesByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        Password: core.CastString(data["password"]),
-        UserId: core.CastString(data["userId"]),
-        StartAt: core.CastInt64(data["startAt"]),
-        Limit: core.CastInt32(data["limit"]),
-    }
+	return DescribeMessagesByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		Password:      core.CastString(data["password"]),
+		UserId:        core.CastString(data["userId"]),
+		StartAt:       core.CastInt64(data["startAt"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
 }
 
 func (p DescribeMessagesByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "password": p.Password,
-        "userId": p.UserId,
-        "startAt": p.StartAt,
-        "limit": p.Limit,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"password":      p.Password,
+		"userId":        p.UserId,
+		"startAt":       p.StartAt,
+		"limit":         p.Limit,
+	}
 }
 
 func (p DescribeMessagesByUserIdRequest) Pointer() *DescribeMessagesByUserIdRequest {
-    return &p
+	return &p
 }
 
 type PostRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    AccessToken *string `json:"accessToken"`
-    Category *int32 `json:"category"`
-    Metadata *string `json:"metadata"`
-    Password *string `json:"password"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	RoomName           *string `json:"roomName"`
+	AccessToken        *string `json:"accessToken"`
+	Category           *int32  `json:"category"`
+	Metadata           *string `json:"metadata"`
+	Password           *string `json:"password"`
 }
 
 func NewPostRequestFromJson(data string) PostRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewPostRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPostRequestFromDict(dict)
 }
 
 func NewPostRequestFromDict(data map[string]interface{}) PostRequest {
-    return PostRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-        Category: core.CastInt32(data["category"]),
-        Metadata: core.CastString(data["metadata"]),
-        Password: core.CastString(data["password"]),
-    }
+	return PostRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		Category:      core.CastInt32(data["category"]),
+		Metadata:      core.CastString(data["metadata"]),
+		Password:      core.CastString(data["password"]),
+	}
 }
 
 func (p PostRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "accessToken": p.AccessToken,
-        "category": p.Category,
-        "metadata": p.Metadata,
-        "password": p.Password,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"accessToken":   p.AccessToken,
+		"category":      p.Category,
+		"metadata":      p.Metadata,
+		"password":      p.Password,
+	}
 }
 
 func (p PostRequest) Pointer() *PostRequest {
-    return &p
+	return &p
 }
 
 type PostByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    UserId *string `json:"userId"`
-    Category *int32 `json:"category"`
-    Metadata *string `json:"metadata"`
-    Password *string `json:"password"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	RoomName           *string `json:"roomName"`
+	UserId             *string `json:"userId"`
+	Category           *int32  `json:"category"`
+	Metadata           *string `json:"metadata"`
+	Password           *string `json:"password"`
 }
 
 func NewPostByUserIdRequestFromJson(data string) PostByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewPostByUserIdRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPostByUserIdRequestFromDict(dict)
 }
 
 func NewPostByUserIdRequestFromDict(data map[string]interface{}) PostByUserIdRequest {
-    return PostByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        UserId: core.CastString(data["userId"]),
-        Category: core.CastInt32(data["category"]),
-        Metadata: core.CastString(data["metadata"]),
-        Password: core.CastString(data["password"]),
-    }
+	return PostByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		UserId:        core.CastString(data["userId"]),
+		Category:      core.CastInt32(data["category"]),
+		Metadata:      core.CastString(data["metadata"]),
+		Password:      core.CastString(data["password"]),
+	}
 }
 
 func (p PostByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "userId": p.UserId,
-        "category": p.Category,
-        "metadata": p.Metadata,
-        "password": p.Password,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"userId":        p.UserId,
+		"category":      p.Category,
+		"metadata":      p.Metadata,
+		"password":      p.Password,
+	}
 }
 
 func (p PostByUserIdRequest) Pointer() *PostByUserIdRequest {
-    return &p
+	return &p
 }
 
 type GetMessageRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    MessageName *string `json:"messageName"`
-    Password *string `json:"password"`
-    AccessToken *string `json:"accessToken"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
+	MessageName   *string `json:"messageName"`
+	Password      *string `json:"password"`
+	AccessToken   *string `json:"accessToken"`
 }
 
 func NewGetMessageRequestFromJson(data string) GetMessageRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetMessageRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMessageRequestFromDict(dict)
 }
 
 func NewGetMessageRequestFromDict(data map[string]interface{}) GetMessageRequest {
-    return GetMessageRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        MessageName: core.CastString(data["messageName"]),
-        Password: core.CastString(data["password"]),
-        AccessToken: core.CastString(data["accessToken"]),
-    }
+	return GetMessageRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		MessageName:   core.CastString(data["messageName"]),
+		Password:      core.CastString(data["password"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+	}
 }
 
 func (p GetMessageRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "messageName": p.MessageName,
-        "password": p.Password,
-        "accessToken": p.AccessToken,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"messageName":   p.MessageName,
+		"password":      p.Password,
+		"accessToken":   p.AccessToken,
+	}
 }
 
 func (p GetMessageRequest) Pointer() *GetMessageRequest {
-    return &p
+	return &p
 }
 
 type GetMessageByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    MessageName *string `json:"messageName"`
-    Password *string `json:"password"`
-    UserId *string `json:"userId"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
+	MessageName   *string `json:"messageName"`
+	Password      *string `json:"password"`
+	UserId        *string `json:"userId"`
 }
 
 func NewGetMessageByUserIdRequestFromJson(data string) GetMessageByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetMessageByUserIdRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetMessageByUserIdRequestFromDict(dict)
 }
 
 func NewGetMessageByUserIdRequestFromDict(data map[string]interface{}) GetMessageByUserIdRequest {
-    return GetMessageByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        MessageName: core.CastString(data["messageName"]),
-        Password: core.CastString(data["password"]),
-        UserId: core.CastString(data["userId"]),
-    }
+	return GetMessageByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		MessageName:   core.CastString(data["messageName"]),
+		Password:      core.CastString(data["password"]),
+		UserId:        core.CastString(data["userId"]),
+	}
 }
 
 func (p GetMessageByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "messageName": p.MessageName,
-        "password": p.Password,
-        "userId": p.UserId,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"messageName":   p.MessageName,
+		"password":      p.Password,
+		"userId":        p.UserId,
+	}
 }
 
 func (p GetMessageByUserIdRequest) Pointer() *GetMessageByUserIdRequest {
-    return &p
+	return &p
 }
 
 type DeleteMessageRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    UserId *string `json:"userId"`
-    MessageName *string `json:"messageName"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	RoomName           *string `json:"roomName"`
+	UserId             *string `json:"userId"`
+	MessageName        *string `json:"messageName"`
 }
 
 func NewDeleteMessageRequestFromJson(data string) DeleteMessageRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeleteMessageRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteMessageRequestFromDict(dict)
 }
 
 func NewDeleteMessageRequestFromDict(data map[string]interface{}) DeleteMessageRequest {
-    return DeleteMessageRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        UserId: core.CastString(data["userId"]),
-        MessageName: core.CastString(data["messageName"]),
-    }
+	return DeleteMessageRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		UserId:        core.CastString(data["userId"]),
+		MessageName:   core.CastString(data["messageName"]),
+	}
 }
 
 func (p DeleteMessageRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "userId": p.UserId,
-        "messageName": p.MessageName,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"userId":        p.UserId,
+		"messageName":   p.MessageName,
+	}
 }
 
 func (p DeleteMessageRequest) Pointer() *DeleteMessageRequest {
-    return &p
+	return &p
 }
 
 type DescribeSubscribesRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    AccessToken *string `json:"accessToken"`
-    PageToken *string `json:"pageToken"`
-    Limit *int32 `json:"limit"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
 }
 
 func NewDescribeSubscribesRequestFromJson(data string) DescribeSubscribesRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeSubscribesRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSubscribesRequestFromDict(dict)
 }
 
 func NewDescribeSubscribesRequestFromDict(data map[string]interface{}) DescribeSubscribesRequest {
-    return DescribeSubscribesRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-        PageToken: core.CastString(data["pageToken"]),
-        Limit: core.CastInt32(data["limit"]),
-    }
+	return DescribeSubscribesRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
 }
 
 func (p DescribeSubscribesRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "accessToken": p.AccessToken,
-        "pageToken": p.PageToken,
-        "limit": p.Limit,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
 }
 
 func (p DescribeSubscribesRequest) Pointer() *DescribeSubscribesRequest {
-    return &p
+	return &p
 }
 
 type DescribeSubscribesByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    UserId *string `json:"userId"`
-    PageToken *string `json:"pageToken"`
-    Limit *int32 `json:"limit"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	UserId        *string `json:"userId"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
 }
 
 func NewDescribeSubscribesByUserIdRequestFromJson(data string) DescribeSubscribesByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeSubscribesByUserIdRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSubscribesByUserIdRequestFromDict(dict)
 }
 
 func NewDescribeSubscribesByUserIdRequestFromDict(data map[string]interface{}) DescribeSubscribesByUserIdRequest {
-    return DescribeSubscribesByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        UserId: core.CastString(data["userId"]),
-        PageToken: core.CastString(data["pageToken"]),
-        Limit: core.CastInt32(data["limit"]),
-    }
+	return DescribeSubscribesByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		UserId:        core.CastString(data["userId"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
 }
 
 func (p DescribeSubscribesByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "userId": p.UserId,
-        "pageToken": p.PageToken,
-        "limit": p.Limit,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
 }
 
 func (p DescribeSubscribesByUserIdRequest) Pointer() *DescribeSubscribesByUserIdRequest {
-    return &p
+	return &p
 }
 
 type DescribeSubscribesByRoomNameRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    PageToken *string `json:"pageToken"`
-    Limit *int32 `json:"limit"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
 }
 
 func NewDescribeSubscribesByRoomNameRequestFromJson(data string) DescribeSubscribesByRoomNameRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDescribeSubscribesByRoomNameRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSubscribesByRoomNameRequestFromDict(dict)
 }
 
 func NewDescribeSubscribesByRoomNameRequestFromDict(data map[string]interface{}) DescribeSubscribesByRoomNameRequest {
-    return DescribeSubscribesByRoomNameRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        PageToken: core.CastString(data["pageToken"]),
-        Limit: core.CastInt32(data["limit"]),
-    }
+	return DescribeSubscribesByRoomNameRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
 }
 
 func (p DescribeSubscribesByRoomNameRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "pageToken": p.PageToken,
-        "limit": p.Limit,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
 }
 
 func (p DescribeSubscribesByRoomNameRequest) Pointer() *DescribeSubscribesByRoomNameRequest {
-    return &p
+	return &p
 }
 
 type SubscribeRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    AccessToken *string `json:"accessToken"`
-    NotificationTypes []NotificationType `json:"notificationTypes"`
+	RequestId          *string            `json:"requestId"`
+	ContextStack       *string            `json:"contextStack"`
+	DuplicationAvoider *string            `json:"duplicationAvoider"`
+	NamespaceName      *string            `json:"namespaceName"`
+	RoomName           *string            `json:"roomName"`
+	AccessToken        *string            `json:"accessToken"`
+	NotificationTypes  []NotificationType `json:"notificationTypes"`
 }
 
 func NewSubscribeRequestFromJson(data string) SubscribeRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewSubscribeRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSubscribeRequestFromDict(dict)
 }
 
 func NewSubscribeRequestFromDict(data map[string]interface{}) SubscribeRequest {
-    return SubscribeRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-        NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
-    }
+	return SubscribeRequest{
+		NamespaceName:     core.CastString(data["namespaceName"]),
+		RoomName:          core.CastString(data["roomName"]),
+		AccessToken:       core.CastString(data["accessToken"]),
+		NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
+	}
 }
 
 func (p SubscribeRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "accessToken": p.AccessToken,
-        "notificationTypes": CastNotificationTypesFromDict(
-            p.NotificationTypes,
-        ),
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"accessToken":   p.AccessToken,
+		"notificationTypes": CastNotificationTypesFromDict(
+			p.NotificationTypes,
+		),
+	}
 }
 
 func (p SubscribeRequest) Pointer() *SubscribeRequest {
-    return &p
+	return &p
 }
 
 type SubscribeByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    UserId *string `json:"userId"`
-    NotificationTypes []NotificationType `json:"notificationTypes"`
+	RequestId          *string            `json:"requestId"`
+	ContextStack       *string            `json:"contextStack"`
+	DuplicationAvoider *string            `json:"duplicationAvoider"`
+	NamespaceName      *string            `json:"namespaceName"`
+	RoomName           *string            `json:"roomName"`
+	UserId             *string            `json:"userId"`
+	NotificationTypes  []NotificationType `json:"notificationTypes"`
 }
 
 func NewSubscribeByUserIdRequestFromJson(data string) SubscribeByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewSubscribeByUserIdRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSubscribeByUserIdRequestFromDict(dict)
 }
 
 func NewSubscribeByUserIdRequestFromDict(data map[string]interface{}) SubscribeByUserIdRequest {
-    return SubscribeByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        UserId: core.CastString(data["userId"]),
-        NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
-    }
+	return SubscribeByUserIdRequest{
+		NamespaceName:     core.CastString(data["namespaceName"]),
+		RoomName:          core.CastString(data["roomName"]),
+		UserId:            core.CastString(data["userId"]),
+		NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
+	}
 }
 
 func (p SubscribeByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "userId": p.UserId,
-        "notificationTypes": CastNotificationTypesFromDict(
-            p.NotificationTypes,
-        ),
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"userId":        p.UserId,
+		"notificationTypes": CastNotificationTypesFromDict(
+			p.NotificationTypes,
+		),
+	}
 }
 
 func (p SubscribeByUserIdRequest) Pointer() *SubscribeByUserIdRequest {
-    return &p
+	return &p
 }
 
 type GetSubscribeRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    AccessToken *string `json:"accessToken"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
+	AccessToken   *string `json:"accessToken"`
 }
 
 func NewGetSubscribeRequestFromJson(data string) GetSubscribeRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetSubscribeRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSubscribeRequestFromDict(dict)
 }
 
 func NewGetSubscribeRequestFromDict(data map[string]interface{}) GetSubscribeRequest {
-    return GetSubscribeRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-    }
+	return GetSubscribeRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+	}
 }
 
 func (p GetSubscribeRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "accessToken": p.AccessToken,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"accessToken":   p.AccessToken,
+	}
 }
 
 func (p GetSubscribeRequest) Pointer() *GetSubscribeRequest {
-    return &p
+	return &p
 }
 
 type GetSubscribeByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    UserId *string `json:"userId"`
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
+	UserId        *string `json:"userId"`
 }
 
 func NewGetSubscribeByUserIdRequestFromJson(data string) GetSubscribeByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewGetSubscribeByUserIdRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSubscribeByUserIdRequestFromDict(dict)
 }
 
 func NewGetSubscribeByUserIdRequestFromDict(data map[string]interface{}) GetSubscribeByUserIdRequest {
-    return GetSubscribeByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        UserId: core.CastString(data["userId"]),
-    }
+	return GetSubscribeByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		UserId:        core.CastString(data["userId"]),
+	}
 }
 
 func (p GetSubscribeByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "userId": p.UserId,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"userId":        p.UserId,
+	}
 }
 
 func (p GetSubscribeByUserIdRequest) Pointer() *GetSubscribeByUserIdRequest {
-    return &p
+	return &p
 }
 
 type UpdateNotificationTypeRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    AccessToken *string `json:"accessToken"`
-    NotificationTypes []NotificationType `json:"notificationTypes"`
+	RequestId          *string            `json:"requestId"`
+	ContextStack       *string            `json:"contextStack"`
+	DuplicationAvoider *string            `json:"duplicationAvoider"`
+	NamespaceName      *string            `json:"namespaceName"`
+	RoomName           *string            `json:"roomName"`
+	AccessToken        *string            `json:"accessToken"`
+	NotificationTypes  []NotificationType `json:"notificationTypes"`
 }
 
 func NewUpdateNotificationTypeRequestFromJson(data string) UpdateNotificationTypeRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateNotificationTypeRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNotificationTypeRequestFromDict(dict)
 }
 
 func NewUpdateNotificationTypeRequestFromDict(data map[string]interface{}) UpdateNotificationTypeRequest {
-    return UpdateNotificationTypeRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-        NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
-    }
+	return UpdateNotificationTypeRequest{
+		NamespaceName:     core.CastString(data["namespaceName"]),
+		RoomName:          core.CastString(data["roomName"]),
+		AccessToken:       core.CastString(data["accessToken"]),
+		NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
+	}
 }
 
 func (p UpdateNotificationTypeRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "accessToken": p.AccessToken,
-        "notificationTypes": CastNotificationTypesFromDict(
-            p.NotificationTypes,
-        ),
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"accessToken":   p.AccessToken,
+		"notificationTypes": CastNotificationTypesFromDict(
+			p.NotificationTypes,
+		),
+	}
 }
 
 func (p UpdateNotificationTypeRequest) Pointer() *UpdateNotificationTypeRequest {
-    return &p
+	return &p
 }
 
 type UpdateNotificationTypeByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    UserId *string `json:"userId"`
-    NotificationTypes []NotificationType `json:"notificationTypes"`
+	RequestId          *string            `json:"requestId"`
+	ContextStack       *string            `json:"contextStack"`
+	DuplicationAvoider *string            `json:"duplicationAvoider"`
+	NamespaceName      *string            `json:"namespaceName"`
+	RoomName           *string            `json:"roomName"`
+	UserId             *string            `json:"userId"`
+	NotificationTypes  []NotificationType `json:"notificationTypes"`
 }
 
 func NewUpdateNotificationTypeByUserIdRequestFromJson(data string) UpdateNotificationTypeByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUpdateNotificationTypeByUserIdRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNotificationTypeByUserIdRequestFromDict(dict)
 }
 
 func NewUpdateNotificationTypeByUserIdRequestFromDict(data map[string]interface{}) UpdateNotificationTypeByUserIdRequest {
-    return UpdateNotificationTypeByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        UserId: core.CastString(data["userId"]),
-        NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
-    }
+	return UpdateNotificationTypeByUserIdRequest{
+		NamespaceName:     core.CastString(data["namespaceName"]),
+		RoomName:          core.CastString(data["roomName"]),
+		UserId:            core.CastString(data["userId"]),
+		NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
+	}
 }
 
 func (p UpdateNotificationTypeByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "userId": p.UserId,
-        "notificationTypes": CastNotificationTypesFromDict(
-            p.NotificationTypes,
-        ),
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"userId":        p.UserId,
+		"notificationTypes": CastNotificationTypesFromDict(
+			p.NotificationTypes,
+		),
+	}
 }
 
 func (p UpdateNotificationTypeByUserIdRequest) Pointer() *UpdateNotificationTypeByUserIdRequest {
-    return &p
+	return &p
 }
 
 type UnsubscribeRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    AccessToken *string `json:"accessToken"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	RoomName           *string `json:"roomName"`
+	AccessToken        *string `json:"accessToken"`
 }
 
 func NewUnsubscribeRequestFromJson(data string) UnsubscribeRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUnsubscribeRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnsubscribeRequestFromDict(dict)
 }
 
 func NewUnsubscribeRequestFromDict(data map[string]interface{}) UnsubscribeRequest {
-    return UnsubscribeRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        AccessToken: core.CastString(data["accessToken"]),
-    }
+	return UnsubscribeRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+	}
 }
 
 func (p UnsubscribeRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "accessToken": p.AccessToken,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"accessToken":   p.AccessToken,
+	}
 }
 
 func (p UnsubscribeRequest) Pointer() *UnsubscribeRequest {
-    return &p
+	return &p
 }
 
 type UnsubscribeByUserIdRequest struct {
-    RequestId *string `json:"requestId"`
-    ContextStack *string `json:"contextStack"`
-    DuplicationAvoider *string `json:"duplicationAvoider"`
-    NamespaceName *string `json:"namespaceName"`
-    RoomName *string `json:"roomName"`
-    UserId *string `json:"userId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	RoomName           *string `json:"roomName"`
+	UserId             *string `json:"userId"`
 }
 
 func NewUnsubscribeByUserIdRequestFromJson(data string) UnsubscribeByUserIdRequest {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewUnsubscribeByUserIdRequestFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnsubscribeByUserIdRequestFromDict(dict)
 }
 
 func NewUnsubscribeByUserIdRequestFromDict(data map[string]interface{}) UnsubscribeByUserIdRequest {
-    return UnsubscribeByUserIdRequest {
-        NamespaceName: core.CastString(data["namespaceName"]),
-        RoomName: core.CastString(data["roomName"]),
-        UserId: core.CastString(data["userId"]),
-    }
+	return UnsubscribeByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		UserId:        core.CastString(data["userId"]),
+	}
 }
 
 func (p UnsubscribeByUserIdRequest) ToDict() map[string]interface{} {
-    return map[string]interface{} {
-        "namespaceName": p.NamespaceName,
-        "roomName": p.RoomName,
-        "userId": p.UserId,
-    }
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"userId":        p.UserId,
+	}
 }
 
 func (p UnsubscribeByUserIdRequest) Pointer() *UnsubscribeByUserIdRequest {
-    return &p
+	return &p
 }
