@@ -18,9 +18,8 @@ package enchant
 
 import (
 	"encoding/json"
-	"strings"
-
 	"github.com/gs2io/gs2-golang-sdk/core"
+	"strings"
 )
 
 type Gs2EnchantRestClient struct {
@@ -57,13 +56,13 @@ func describeNamespacesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -87,10 +86,10 @@ func (p Gs2EnchantRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -142,13 +141,13 @@ func createNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -164,35 +163,35 @@ func (p Gs2EnchantRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.TransactionSetting != nil {
-		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -236,13 +235,13 @@ func getNamespaceStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -256,19 +255,19 @@ func (p Gs2EnchantRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -320,13 +319,13 @@ func getNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -340,19 +339,19 @@ func (p Gs2EnchantRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -404,13 +403,13 @@ func updateNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -424,39 +423,39 @@ func (p Gs2EnchantRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.TransactionSetting != nil {
-		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -500,13 +499,13 @@ func deleteNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -520,19 +519,19 @@ func (p Gs2EnchantRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -584,13 +583,13 @@ func describeBalanceParameterModelsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBalanceParameterModelsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBalanceParameterModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeBalanceParameterModelsAsyncResult{
 		result: &result,
@@ -604,19 +603,19 @@ func (p Gs2EnchantRestClient) DescribeBalanceParameterModelsAsync(
 	callback chan<- DescribeBalanceParameterModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/model/balance"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeBalanceParameterModelsAsyncHandler(
 		p,
@@ -668,13 +667,13 @@ func getBalanceParameterModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetBalanceParameterModelAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBalanceParameterModelAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetBalanceParameterModelAsyncResult{
 		result: &result,
@@ -688,24 +687,24 @@ func (p Gs2EnchantRestClient) GetBalanceParameterModelAsync(
 	callback chan<- GetBalanceParameterModelAsyncResult,
 ) {
 	path := "/{namespaceName}/model/balance/{parameterName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getBalanceParameterModelAsyncHandler(
 		p,
@@ -757,13 +756,13 @@ func describeBalanceParameterModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBalanceParameterModelMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBalanceParameterModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeBalanceParameterModelMastersAsyncResult{
 		result: &result,
@@ -777,11 +776,11 @@ func (p Gs2EnchantRestClient) DescribeBalanceParameterModelMastersAsync(
 	callback chan<- DescribeBalanceParameterModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/balance"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -792,10 +791,10 @@ func (p Gs2EnchantRestClient) DescribeBalanceParameterModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeBalanceParameterModelMastersAsyncHandler(
 		p,
@@ -847,13 +846,13 @@ func createBalanceParameterModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateBalanceParameterModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateBalanceParameterModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateBalanceParameterModelMasterAsyncResult{
 		result: &result,
@@ -867,52 +866,52 @@ func (p Gs2EnchantRestClient) CreateBalanceParameterModelMasterAsync(
 	callback chan<- CreateBalanceParameterModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/balance"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.TotalValue != nil {
-		bodies["totalValue"] = *request.TotalValue
-	}
-	if request.InitialValueStrategy != nil && *request.InitialValueStrategy != "" {
-		bodies["initialValueStrategy"] = *request.InitialValueStrategy
-	}
-	if request.Parameters != nil {
-		var _parameters []interface{}
-		for _, item := range request.Parameters {
-			_parameters = append(_parameters, item)
-		}
-		bodies["parameters"] = _parameters
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.TotalValue != nil {
+        bodies["totalValue"] = *request.TotalValue
+    }
+    if request.InitialValueStrategy != nil && *request.InitialValueStrategy != "" {
+        bodies["initialValueStrategy"] = *request.InitialValueStrategy
+    }
+    if request.Parameters != nil {
+        var _parameters []interface {}
+        for _, item := range request.Parameters {
+            _parameters = append(_parameters, item)
+        }
+        bodies["parameters"] = _parameters
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createBalanceParameterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -956,13 +955,13 @@ func getBalanceParameterModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetBalanceParameterModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBalanceParameterModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetBalanceParameterModelMasterAsyncResult{
 		result: &result,
@@ -976,24 +975,24 @@ func (p Gs2EnchantRestClient) GetBalanceParameterModelMasterAsync(
 	callback chan<- GetBalanceParameterModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/balance/{parameterName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getBalanceParameterModelMasterAsyncHandler(
 		p,
@@ -1045,13 +1044,13 @@ func updateBalanceParameterModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateBalanceParameterModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateBalanceParameterModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateBalanceParameterModelMasterAsyncResult{
 		result: &result,
@@ -1065,54 +1064,54 @@ func (p Gs2EnchantRestClient) UpdateBalanceParameterModelMasterAsync(
 	callback chan<- UpdateBalanceParameterModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/balance/{parameterName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.TotalValue != nil {
-		bodies["totalValue"] = *request.TotalValue
-	}
-	if request.InitialValueStrategy != nil && *request.InitialValueStrategy != "" {
-		bodies["initialValueStrategy"] = *request.InitialValueStrategy
-	}
-	if request.Parameters != nil {
-		var _parameters []interface{}
-		for _, item := range request.Parameters {
-			_parameters = append(_parameters, item)
-		}
-		bodies["parameters"] = _parameters
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.TotalValue != nil {
+        bodies["totalValue"] = *request.TotalValue
+    }
+    if request.InitialValueStrategy != nil && *request.InitialValueStrategy != "" {
+        bodies["initialValueStrategy"] = *request.InitialValueStrategy
+    }
+    if request.Parameters != nil {
+        var _parameters []interface {}
+        for _, item := range request.Parameters {
+            _parameters = append(_parameters, item)
+        }
+        bodies["parameters"] = _parameters
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateBalanceParameterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1156,13 +1155,13 @@ func deleteBalanceParameterModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteBalanceParameterModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteBalanceParameterModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteBalanceParameterModelMasterAsyncResult{
 		result: &result,
@@ -1176,24 +1175,24 @@ func (p Gs2EnchantRestClient) DeleteBalanceParameterModelMasterAsync(
 	callback chan<- DeleteBalanceParameterModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/balance/{parameterName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteBalanceParameterModelMasterAsyncHandler(
 		p,
@@ -1245,13 +1244,13 @@ func describeRarityParameterModelsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeRarityParameterModelsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeRarityParameterModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeRarityParameterModelsAsyncResult{
 		result: &result,
@@ -1265,19 +1264,19 @@ func (p Gs2EnchantRestClient) DescribeRarityParameterModelsAsync(
 	callback chan<- DescribeRarityParameterModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/model/rarity"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeRarityParameterModelsAsyncHandler(
 		p,
@@ -1329,13 +1328,13 @@ func getRarityParameterModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetRarityParameterModelAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetRarityParameterModelAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetRarityParameterModelAsyncResult{
 		result: &result,
@@ -1349,24 +1348,24 @@ func (p Gs2EnchantRestClient) GetRarityParameterModelAsync(
 	callback chan<- GetRarityParameterModelAsyncResult,
 ) {
 	path := "/{namespaceName}/model/rarity/{parameterName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getRarityParameterModelAsyncHandler(
 		p,
@@ -1418,13 +1417,13 @@ func describeRarityParameterModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeRarityParameterModelMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeRarityParameterModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeRarityParameterModelMastersAsyncResult{
 		result: &result,
@@ -1438,11 +1437,11 @@ func (p Gs2EnchantRestClient) DescribeRarityParameterModelMastersAsync(
 	callback chan<- DescribeRarityParameterModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/rarity"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1453,10 +1452,10 @@ func (p Gs2EnchantRestClient) DescribeRarityParameterModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeRarityParameterModelMastersAsyncHandler(
 		p,
@@ -1508,13 +1507,13 @@ func createRarityParameterModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateRarityParameterModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateRarityParameterModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateRarityParameterModelMasterAsyncResult{
 		result: &result,
@@ -1528,56 +1527,56 @@ func (p Gs2EnchantRestClient) CreateRarityParameterModelMasterAsync(
 	callback chan<- CreateRarityParameterModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/rarity"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.MaximumParameterCount != nil {
-		bodies["maximumParameterCount"] = *request.MaximumParameterCount
-	}
-	if request.ParameterCounts != nil {
-		var _parameterCounts []interface{}
-		for _, item := range request.ParameterCounts {
-			_parameterCounts = append(_parameterCounts, item)
-		}
-		bodies["parameterCounts"] = _parameterCounts
-	}
-	if request.Parameters != nil {
-		var _parameters []interface{}
-		for _, item := range request.Parameters {
-			_parameters = append(_parameters, item)
-		}
-		bodies["parameters"] = _parameters
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.MaximumParameterCount != nil {
+        bodies["maximumParameterCount"] = *request.MaximumParameterCount
+    }
+    if request.ParameterCounts != nil {
+        var _parameterCounts []interface {}
+        for _, item := range request.ParameterCounts {
+            _parameterCounts = append(_parameterCounts, item)
+        }
+        bodies["parameterCounts"] = _parameterCounts
+    }
+    if request.Parameters != nil {
+        var _parameters []interface {}
+        for _, item := range request.Parameters {
+            _parameters = append(_parameters, item)
+        }
+        bodies["parameters"] = _parameters
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createRarityParameterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1621,13 +1620,13 @@ func getRarityParameterModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetRarityParameterModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetRarityParameterModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetRarityParameterModelMasterAsyncResult{
 		result: &result,
@@ -1641,24 +1640,24 @@ func (p Gs2EnchantRestClient) GetRarityParameterModelMasterAsync(
 	callback chan<- GetRarityParameterModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/rarity/{parameterName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getRarityParameterModelMasterAsyncHandler(
 		p,
@@ -1710,13 +1709,13 @@ func updateRarityParameterModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateRarityParameterModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateRarityParameterModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateRarityParameterModelMasterAsyncResult{
 		result: &result,
@@ -1730,58 +1729,58 @@ func (p Gs2EnchantRestClient) UpdateRarityParameterModelMasterAsync(
 	callback chan<- UpdateRarityParameterModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/rarity/{parameterName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.MaximumParameterCount != nil {
-		bodies["maximumParameterCount"] = *request.MaximumParameterCount
-	}
-	if request.ParameterCounts != nil {
-		var _parameterCounts []interface{}
-		for _, item := range request.ParameterCounts {
-			_parameterCounts = append(_parameterCounts, item)
-		}
-		bodies["parameterCounts"] = _parameterCounts
-	}
-	if request.Parameters != nil {
-		var _parameters []interface{}
-		for _, item := range request.Parameters {
-			_parameters = append(_parameters, item)
-		}
-		bodies["parameters"] = _parameters
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.MaximumParameterCount != nil {
+        bodies["maximumParameterCount"] = *request.MaximumParameterCount
+    }
+    if request.ParameterCounts != nil {
+        var _parameterCounts []interface {}
+        for _, item := range request.ParameterCounts {
+            _parameterCounts = append(_parameterCounts, item)
+        }
+        bodies["parameterCounts"] = _parameterCounts
+    }
+    if request.Parameters != nil {
+        var _parameters []interface {}
+        for _, item := range request.Parameters {
+            _parameters = append(_parameters, item)
+        }
+        bodies["parameters"] = _parameters
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateRarityParameterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1825,13 +1824,13 @@ func deleteRarityParameterModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteRarityParameterModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteRarityParameterModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteRarityParameterModelMasterAsyncResult{
 		result: &result,
@@ -1845,24 +1844,24 @@ func (p Gs2EnchantRestClient) DeleteRarityParameterModelMasterAsync(
 	callback chan<- DeleteRarityParameterModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/rarity/{parameterName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteRarityParameterModelMasterAsyncHandler(
 		p,
@@ -1914,13 +1913,13 @@ func exportMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ExportMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ExportMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -1934,19 +1933,19 @@ func (p Gs2EnchantRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go exportMasterAsyncHandler(
 		p,
@@ -1998,13 +1997,13 @@ func getCurrentParameterMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCurrentParameterMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCurrentParameterMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCurrentParameterMasterAsyncResult{
 		result: &result,
@@ -2018,19 +2017,19 @@ func (p Gs2EnchantRestClient) GetCurrentParameterMasterAsync(
 	callback chan<- GetCurrentParameterMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getCurrentParameterMasterAsyncHandler(
 		p,
@@ -2082,13 +2081,13 @@ func updateCurrentParameterMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentParameterMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentParameterMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentParameterMasterAsyncResult{
 		result: &result,
@@ -2102,33 +2101,33 @@ func (p Gs2EnchantRestClient) UpdateCurrentParameterMasterAsync(
 	callback chan<- UpdateCurrentParameterMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Settings != nil && *request.Settings != "" {
-		bodies["settings"] = *request.Settings
-	}
+    var bodies = core.Bodies{}
+    if request.Settings != nil && *request.Settings != "" {
+        bodies["settings"] = *request.Settings
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentParameterMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2172,13 +2171,13 @@ func updateCurrentParameterMasterFromGitHubAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentParameterMasterFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentParameterMasterFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentParameterMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2192,33 +2191,33 @@ func (p Gs2EnchantRestClient) UpdateCurrentParameterMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentParameterMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentParameterMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2262,13 +2261,13 @@ func describeBalanceParameterStatusesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBalanceParameterStatusesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBalanceParameterStatusesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeBalanceParameterStatusesAsyncResult{
 		result: &result,
@@ -2282,11 +2281,11 @@ func (p Gs2EnchantRestClient) DescribeBalanceParameterStatusesAsync(
 	callback chan<- DescribeBalanceParameterStatusesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/status/balance"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2300,13 +2299,13 @@ func (p Gs2EnchantRestClient) DescribeBalanceParameterStatusesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeBalanceParameterStatusesAsyncHandler(
 		p,
@@ -2358,13 +2357,13 @@ func describeBalanceParameterStatusesByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBalanceParameterStatusesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBalanceParameterStatusesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeBalanceParameterStatusesByUserIdAsyncResult{
 		result: &result,
@@ -2378,16 +2377,16 @@ func (p Gs2EnchantRestClient) DescribeBalanceParameterStatusesByUserIdAsync(
 	callback chan<- DescribeBalanceParameterStatusesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/balance"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2401,10 +2400,10 @@ func (p Gs2EnchantRestClient) DescribeBalanceParameterStatusesByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeBalanceParameterStatusesByUserIdAsyncHandler(
 		p,
@@ -2456,13 +2455,13 @@ func getBalanceParameterStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetBalanceParameterStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBalanceParameterStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetBalanceParameterStatusAsyncResult{
 		result: &result,
@@ -2476,32 +2475,32 @@ func (p Gs2EnchantRestClient) GetBalanceParameterStatusAsync(
 	callback chan<- GetBalanceParameterStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/status/balance/{parameterName}/{propertyId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-	} else {
-		path = strings.ReplaceAll(path, "{propertyId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getBalanceParameterStatusAsyncHandler(
 		p,
@@ -2553,13 +2552,13 @@ func getBalanceParameterStatusByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetBalanceParameterStatusByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBalanceParameterStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetBalanceParameterStatusByUserIdAsyncResult{
 		result: &result,
@@ -2573,34 +2572,34 @@ func (p Gs2EnchantRestClient) GetBalanceParameterStatusByUserIdAsync(
 	callback chan<- GetBalanceParameterStatusByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/balance/{parameterName}/{propertyId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-	} else {
-		path = strings.ReplaceAll(path, "{propertyId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getBalanceParameterStatusByUserIdAsyncHandler(
 		p,
@@ -2652,13 +2651,13 @@ func deleteBalanceParameterStatusByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteBalanceParameterStatusByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteBalanceParameterStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteBalanceParameterStatusByUserIdAsyncResult{
 		result: &result,
@@ -2672,37 +2671,37 @@ func (p Gs2EnchantRestClient) DeleteBalanceParameterStatusByUserIdAsync(
 	callback chan<- DeleteBalanceParameterStatusByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/balance/{parameterName}/{propertyId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-	} else {
-		path = strings.ReplaceAll(path, "{propertyId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go deleteBalanceParameterStatusByUserIdAsyncHandler(
 		p,
@@ -2754,13 +2753,13 @@ func reDrawBalanceParameterStatusByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ReDrawBalanceParameterStatusByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ReDrawBalanceParameterStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ReDrawBalanceParameterStatusByUserIdAsyncResult{
 		result: &result,
@@ -2774,55 +2773,55 @@ func (p Gs2EnchantRestClient) ReDrawBalanceParameterStatusByUserIdAsync(
 	callback chan<- ReDrawBalanceParameterStatusByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/balance/{parameterName}/{propertyId}/redraw"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-	} else {
-		path = strings.ReplaceAll(path, "{propertyId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.FixedParameterNames != nil {
-		var _fixedParameterNames []interface{}
-		for _, item := range request.FixedParameterNames {
-			_fixedParameterNames = append(_fixedParameterNames, item)
-		}
-		bodies["fixedParameterNames"] = _fixedParameterNames
-	}
+    var bodies = core.Bodies{}
+    if request.FixedParameterNames != nil {
+        var _fixedParameterNames []interface {}
+        for _, item := range request.FixedParameterNames {
+            _fixedParameterNames = append(_fixedParameterNames, item)
+        }
+        bodies["fixedParameterNames"] = _fixedParameterNames
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go reDrawBalanceParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2866,13 +2865,13 @@ func reDrawBalanceParameterStatusByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ReDrawBalanceParameterStatusByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ReDrawBalanceParameterStatusByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ReDrawBalanceParameterStatusByStampSheetAsyncResult{
 		result: &result,
@@ -2888,29 +2887,29 @@ func (p Gs2EnchantRestClient) ReDrawBalanceParameterStatusByStampSheetAsync(
 	path := "/stamp/balance/redraw"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go reDrawBalanceParameterStatusByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2954,13 +2953,13 @@ func setBalanceParameterStatusByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SetBalanceParameterStatusByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetBalanceParameterStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SetBalanceParameterStatusByUserIdAsyncResult{
 		result: &result,
@@ -2974,55 +2973,55 @@ func (p Gs2EnchantRestClient) SetBalanceParameterStatusByUserIdAsync(
 	callback chan<- SetBalanceParameterStatusByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/balance/{parameterName}/{propertyId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-	} else {
-		path = strings.ReplaceAll(path, "{propertyId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.ParameterValues != nil {
-		var _parameterValues []interface{}
-		for _, item := range request.ParameterValues {
-			_parameterValues = append(_parameterValues, item)
-		}
-		bodies["parameterValues"] = _parameterValues
-	}
+    var bodies = core.Bodies{}
+    if request.ParameterValues != nil {
+        var _parameterValues []interface {}
+        for _, item := range request.ParameterValues {
+            _parameterValues = append(_parameterValues, item)
+        }
+        bodies["parameterValues"] = _parameterValues
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go setBalanceParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3066,13 +3065,13 @@ func setBalanceParameterStatusByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SetBalanceParameterStatusByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetBalanceParameterStatusByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SetBalanceParameterStatusByStampSheetAsyncResult{
 		result: &result,
@@ -3088,29 +3087,29 @@ func (p Gs2EnchantRestClient) SetBalanceParameterStatusByStampSheetAsync(
 	path := "/stamp/balance/set"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go setBalanceParameterStatusByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3154,13 +3153,13 @@ func describeRarityParameterStatusesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeRarityParameterStatusesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeRarityParameterStatusesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeRarityParameterStatusesAsyncResult{
 		result: &result,
@@ -3174,11 +3173,11 @@ func (p Gs2EnchantRestClient) DescribeRarityParameterStatusesAsync(
 	callback chan<- DescribeRarityParameterStatusesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/status/rarity"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3192,13 +3191,13 @@ func (p Gs2EnchantRestClient) DescribeRarityParameterStatusesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeRarityParameterStatusesAsyncHandler(
 		p,
@@ -3250,13 +3249,13 @@ func describeRarityParameterStatusesByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeRarityParameterStatusesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeRarityParameterStatusesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeRarityParameterStatusesByUserIdAsyncResult{
 		result: &result,
@@ -3270,16 +3269,16 @@ func (p Gs2EnchantRestClient) DescribeRarityParameterStatusesByUserIdAsync(
 	callback chan<- DescribeRarityParameterStatusesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/rarity"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3293,10 +3292,10 @@ func (p Gs2EnchantRestClient) DescribeRarityParameterStatusesByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeRarityParameterStatusesByUserIdAsyncHandler(
 		p,
@@ -3348,13 +3347,13 @@ func getRarityParameterStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetRarityParameterStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetRarityParameterStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetRarityParameterStatusAsyncResult{
 		result: &result,
@@ -3368,32 +3367,32 @@ func (p Gs2EnchantRestClient) GetRarityParameterStatusAsync(
 	callback chan<- GetRarityParameterStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/status/rarity/{parameterName}/{propertyId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-	} else {
-		path = strings.ReplaceAll(path, "{propertyId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getRarityParameterStatusAsyncHandler(
 		p,
@@ -3445,13 +3444,13 @@ func getRarityParameterStatusByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetRarityParameterStatusByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetRarityParameterStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetRarityParameterStatusByUserIdAsyncResult{
 		result: &result,
@@ -3465,34 +3464,34 @@ func (p Gs2EnchantRestClient) GetRarityParameterStatusByUserIdAsync(
 	callback chan<- GetRarityParameterStatusByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/rarity/{parameterName}/{propertyId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-	} else {
-		path = strings.ReplaceAll(path, "{propertyId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getRarityParameterStatusByUserIdAsyncHandler(
 		p,
@@ -3544,13 +3543,13 @@ func deleteRarityParameterStatusByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteRarityParameterStatusByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteRarityParameterStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteRarityParameterStatusByUserIdAsyncResult{
 		result: &result,
@@ -3564,37 +3563,37 @@ func (p Gs2EnchantRestClient) DeleteRarityParameterStatusByUserIdAsync(
 	callback chan<- DeleteRarityParameterStatusByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/rarity/{parameterName}/{propertyId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-	} else {
-		path = strings.ReplaceAll(path, "{propertyId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go deleteRarityParameterStatusByUserIdAsyncHandler(
 		p,
@@ -3646,13 +3645,13 @@ func reDrawRarityParameterStatusByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ReDrawRarityParameterStatusByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ReDrawRarityParameterStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ReDrawRarityParameterStatusByUserIdAsyncResult{
 		result: &result,
@@ -3666,55 +3665,55 @@ func (p Gs2EnchantRestClient) ReDrawRarityParameterStatusByUserIdAsync(
 	callback chan<- ReDrawRarityParameterStatusByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/rarity/{parameterName}/{propertyId}/redraw"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-	} else {
-		path = strings.ReplaceAll(path, "{propertyId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.FixedParameterNames != nil {
-		var _fixedParameterNames []interface{}
-		for _, item := range request.FixedParameterNames {
-			_fixedParameterNames = append(_fixedParameterNames, item)
-		}
-		bodies["fixedParameterNames"] = _fixedParameterNames
-	}
+    var bodies = core.Bodies{}
+    if request.FixedParameterNames != nil {
+        var _fixedParameterNames []interface {}
+        for _, item := range request.FixedParameterNames {
+            _fixedParameterNames = append(_fixedParameterNames, item)
+        }
+        bodies["fixedParameterNames"] = _fixedParameterNames
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go reDrawRarityParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3758,13 +3757,13 @@ func reDrawRarityParameterStatusByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ReDrawRarityParameterStatusByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ReDrawRarityParameterStatusByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ReDrawRarityParameterStatusByStampSheetAsyncResult{
 		result: &result,
@@ -3780,29 +3779,29 @@ func (p Gs2EnchantRestClient) ReDrawRarityParameterStatusByStampSheetAsync(
 	path := "/stamp/rarity/parameter/redraw"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go reDrawRarityParameterStatusByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3846,13 +3845,13 @@ func addRarityParameterStatusByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AddRarityParameterStatusByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddRarityParameterStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AddRarityParameterStatusByUserIdAsyncResult{
 		result: &result,
@@ -3866,51 +3865,51 @@ func (p Gs2EnchantRestClient) AddRarityParameterStatusByUserIdAsync(
 	callback chan<- AddRarityParameterStatusByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/rarity/{parameterName}/{propertyId}/add"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-	} else {
-		path = strings.ReplaceAll(path, "{propertyId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Count != nil {
-		bodies["count"] = *request.Count
-	}
+    var bodies = core.Bodies{}
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go addRarityParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3954,13 +3953,13 @@ func addRarityParameterStatusByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- AddRarityParameterStatusByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- AddRarityParameterStatusByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- AddRarityParameterStatusByStampSheetAsyncResult{
 		result: &result,
@@ -3976,29 +3975,29 @@ func (p Gs2EnchantRestClient) AddRarityParameterStatusByStampSheetAsync(
 	path := "/stamp/rarity/parameter/add"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go addRarityParameterStatusByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4042,13 +4041,13 @@ func verifyRarityParameterStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- VerifyRarityParameterStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- VerifyRarityParameterStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- VerifyRarityParameterStatusAsyncResult{
 		result: &result,
@@ -4062,57 +4061,57 @@ func (p Gs2EnchantRestClient) VerifyRarityParameterStatusAsync(
 	callback chan<- VerifyRarityParameterStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/status/rarity/{parameterName}/{propertyId}/verify/{verifyType}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-	} else {
-		path = strings.ReplaceAll(path, "{propertyId}", "null")
-	}
-	if request.VerifyType != nil && *request.VerifyType != "" {
-		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
-	} else {
-		path = strings.ReplaceAll(path, "{verifyType}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
+    if request.VerifyType != nil && *request.VerifyType != ""  {
+        path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+    } else {
+        path = strings.ReplaceAll(path, "{verifyType}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.ParameterValueName != nil && *request.ParameterValueName != "" {
-		bodies["parameterValueName"] = *request.ParameterValueName
-	}
-	if request.ParameterCount != nil {
-		bodies["parameterCount"] = *request.ParameterCount
-	}
+    var bodies = core.Bodies{}
+    if request.ParameterValueName != nil && *request.ParameterValueName != "" {
+        bodies["parameterValueName"] = *request.ParameterValueName
+    }
+    if request.ParameterCount != nil {
+        bodies["parameterCount"] = *request.ParameterCount
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go verifyRarityParameterStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4156,13 +4155,13 @@ func verifyRarityParameterStatusByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- VerifyRarityParameterStatusByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- VerifyRarityParameterStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- VerifyRarityParameterStatusByUserIdAsyncResult{
 		result: &result,
@@ -4176,59 +4175,59 @@ func (p Gs2EnchantRestClient) VerifyRarityParameterStatusByUserIdAsync(
 	callback chan<- VerifyRarityParameterStatusByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/rarity/{parameterName}/{propertyId}/verify/{verifyType}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-	} else {
-		path = strings.ReplaceAll(path, "{propertyId}", "null")
-	}
-	if request.VerifyType != nil && *request.VerifyType != "" {
-		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
-	} else {
-		path = strings.ReplaceAll(path, "{verifyType}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
+    if request.VerifyType != nil && *request.VerifyType != ""  {
+        path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+    } else {
+        path = strings.ReplaceAll(path, "{verifyType}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.ParameterValueName != nil && *request.ParameterValueName != "" {
-		bodies["parameterValueName"] = *request.ParameterValueName
-	}
-	if request.ParameterCount != nil {
-		bodies["parameterCount"] = *request.ParameterCount
-	}
+    var bodies = core.Bodies{}
+    if request.ParameterValueName != nil && *request.ParameterValueName != "" {
+        bodies["parameterValueName"] = *request.ParameterValueName
+    }
+    if request.ParameterCount != nil {
+        bodies["parameterCount"] = *request.ParameterCount
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go verifyRarityParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4272,13 +4271,13 @@ func verifyRarityParameterStatusByStampTaskAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- VerifyRarityParameterStatusByStampTaskAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- VerifyRarityParameterStatusByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- VerifyRarityParameterStatusByStampTaskAsyncResult{
 		result: &result,
@@ -4294,29 +4293,29 @@ func (p Gs2EnchantRestClient) VerifyRarityParameterStatusByStampTaskAsync(
 	path := "/stamp/rarity/parameter/verify"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go verifyRarityParameterStatusByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4360,13 +4359,13 @@ func setRarityParameterStatusByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SetRarityParameterStatusByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetRarityParameterStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SetRarityParameterStatusByUserIdAsyncResult{
 		result: &result,
@@ -4380,55 +4379,55 @@ func (p Gs2EnchantRestClient) SetRarityParameterStatusByUserIdAsync(
 	callback chan<- SetRarityParameterStatusByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/rarity/{parameterName}/{propertyId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.ParameterName != nil && *request.ParameterName != "" {
-		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
-	} else {
-		path = strings.ReplaceAll(path, "{parameterName}", "null")
-	}
-	if request.PropertyId != nil && *request.PropertyId != "" {
-		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-	} else {
-		path = strings.ReplaceAll(path, "{propertyId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
+    if request.ParameterName != nil && *request.ParameterName != ""  {
+        path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+    } else {
+        path = strings.ReplaceAll(path, "{parameterName}", "null")
+    }
+    if request.PropertyId != nil && *request.PropertyId != ""  {
+        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+    } else {
+        path = strings.ReplaceAll(path, "{propertyId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.ParameterValues != nil {
-		var _parameterValues []interface{}
-		for _, item := range request.ParameterValues {
-			_parameterValues = append(_parameterValues, item)
-		}
-		bodies["parameterValues"] = _parameterValues
-	}
+    var bodies = core.Bodies{}
+    if request.ParameterValues != nil {
+        var _parameterValues []interface {}
+        for _, item := range request.ParameterValues {
+            _parameterValues = append(_parameterValues, item)
+        }
+        bodies["parameterValues"] = _parameterValues
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go setRarityParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4472,13 +4471,13 @@ func setRarityParameterStatusByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SetRarityParameterStatusByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- SetRarityParameterStatusByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- SetRarityParameterStatusByStampSheetAsyncResult{
 		result: &result,
@@ -4494,29 +4493,29 @@ func (p Gs2EnchantRestClient) SetRarityParameterStatusByStampSheetAsync(
 	path := "/stamp/rarity/parameter/set"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go setRarityParameterStatusByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)

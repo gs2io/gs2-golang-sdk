@@ -20,9 +20,9 @@ type InProgress struct {
 }
 
 func (p InProgress) Type() string {
-	return "QuestInProgress"
+    return "QuestInProgress"
 }
 
 func (p InProgress) Code() string {
-	return "quest.progress.exists"
+    return "quest.progress.exists"
 }

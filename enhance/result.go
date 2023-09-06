@@ -17,14 +17,13 @@ permissions and limitations under the License.
 package enhance
 
 import (
-	"encoding/json"
-
-	"github.com/gs2io/gs2-golang-sdk/core"
+    "encoding/json"
+    "github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -33,33 +32,33 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeNamespacesResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
-	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastNamespacesFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
-	return &p
+    return &p
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -68,29 +67,29 @@ type CreateNamespaceAsyncResult struct {
 }
 
 func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateNamespaceResultFromDict(dict)
 }
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
-	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
-	return &p
+    return &p
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -99,29 +98,29 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceStatusResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
-	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
-	}
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
 func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"status": p.Status,
-	}
+    return map[string]interface{} {
+        "status": p.Status,
+    }
 }
 
 func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
-	return &p
+    return &p
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -130,29 +129,29 @@ type GetNamespaceAsyncResult struct {
 }
 
 func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetNamespaceResultFromDict(dict)
 }
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
-	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
-	return &p
+    return &p
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -161,29 +160,29 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
-	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
-	return &p
+    return &p
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -192,29 +191,29 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteNamespaceResultFromDict(dict)
 }
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
-	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
-	return &p
+    return &p
 }
 
 type DescribeRateModelsResult struct {
-	Items []RateModel `json:"items"`
+    Items []RateModel `json:"items"`
 }
 
 type DescribeRateModelsAsyncResult struct {
@@ -223,31 +222,31 @@ type DescribeRateModelsAsyncResult struct {
 }
 
 func NewDescribeRateModelsResultFromJson(data string) DescribeRateModelsResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRateModelsResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeRateModelsResultFromDict(dict)
 }
 
 func NewDescribeRateModelsResultFromDict(data map[string]interface{}) DescribeRateModelsResult {
-	return DescribeRateModelsResult{
-		Items: CastRateModels(core.CastArray(data["items"])),
-	}
+    return DescribeRateModelsResult {
+        Items: CastRateModels(core.CastArray(data["items"])),
+    }
 }
 
 func (p DescribeRateModelsResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastRateModelsFromDict(
-			p.Items,
-		),
-	}
+    return map[string]interface{} {
+        "items": CastRateModelsFromDict(
+            p.Items,
+        ),
+    }
 }
 
 func (p DescribeRateModelsResult) Pointer() *DescribeRateModelsResult {
-	return &p
+    return &p
 }
 
 type GetRateModelResult struct {
-	Item *RateModel `json:"item"`
+    Item *RateModel `json:"item"`
 }
 
 type GetRateModelAsyncResult struct {
@@ -256,30 +255,30 @@ type GetRateModelAsyncResult struct {
 }
 
 func NewGetRateModelResultFromJson(data string) GetRateModelResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRateModelResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetRateModelResultFromDict(dict)
 }
 
 func NewGetRateModelResultFromDict(data map[string]interface{}) GetRateModelResult {
-	return GetRateModelResult{
-		Item: NewRateModelFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetRateModelResult {
+        Item: NewRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetRateModelResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetRateModelResult) Pointer() *GetRateModelResult {
-	return &p
+    return &p
 }
 
 type DescribeRateModelMastersResult struct {
-	Items         []RateModelMaster `json:"items"`
-	NextPageToken *string           `json:"nextPageToken"`
+    Items []RateModelMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeRateModelMastersAsyncResult struct {
@@ -288,33 +287,33 @@ type DescribeRateModelMastersAsyncResult struct {
 }
 
 func NewDescribeRateModelMastersResultFromJson(data string) DescribeRateModelMastersResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRateModelMastersResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeRateModelMastersResultFromDict(dict)
 }
 
 func NewDescribeRateModelMastersResultFromDict(data map[string]interface{}) DescribeRateModelMastersResult {
-	return DescribeRateModelMastersResult{
-		Items:         CastRateModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeRateModelMastersResult {
+        Items: CastRateModelMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeRateModelMastersResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastRateModelMastersFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastRateModelMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeRateModelMastersResult) Pointer() *DescribeRateModelMastersResult {
-	return &p
+    return &p
 }
 
 type CreateRateModelMasterResult struct {
-	Item *RateModelMaster `json:"item"`
+    Item *RateModelMaster `json:"item"`
 }
 
 type CreateRateModelMasterAsyncResult struct {
@@ -323,29 +322,29 @@ type CreateRateModelMasterAsyncResult struct {
 }
 
 func NewCreateRateModelMasterResultFromJson(data string) CreateRateModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateRateModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateRateModelMasterResultFromDict(dict)
 }
 
 func NewCreateRateModelMasterResultFromDict(data map[string]interface{}) CreateRateModelMasterResult {
-	return CreateRateModelMasterResult{
-		Item: NewRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return CreateRateModelMasterResult {
+        Item: NewRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p CreateRateModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p CreateRateModelMasterResult) Pointer() *CreateRateModelMasterResult {
-	return &p
+    return &p
 }
 
 type GetRateModelMasterResult struct {
-	Item *RateModelMaster `json:"item"`
+    Item *RateModelMaster `json:"item"`
 }
 
 type GetRateModelMasterAsyncResult struct {
@@ -354,29 +353,29 @@ type GetRateModelMasterAsyncResult struct {
 }
 
 func NewGetRateModelMasterResultFromJson(data string) GetRateModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRateModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetRateModelMasterResultFromDict(dict)
 }
 
 func NewGetRateModelMasterResultFromDict(data map[string]interface{}) GetRateModelMasterResult {
-	return GetRateModelMasterResult{
-		Item: NewRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetRateModelMasterResult {
+        Item: NewRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetRateModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetRateModelMasterResult) Pointer() *GetRateModelMasterResult {
-	return &p
+    return &p
 }
 
 type UpdateRateModelMasterResult struct {
-	Item *RateModelMaster `json:"item"`
+    Item *RateModelMaster `json:"item"`
 }
 
 type UpdateRateModelMasterAsyncResult struct {
@@ -385,29 +384,29 @@ type UpdateRateModelMasterAsyncResult struct {
 }
 
 func NewUpdateRateModelMasterResultFromJson(data string) UpdateRateModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateRateModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateRateModelMasterResultFromDict(dict)
 }
 
 func NewUpdateRateModelMasterResultFromDict(data map[string]interface{}) UpdateRateModelMasterResult {
-	return UpdateRateModelMasterResult{
-		Item: NewRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateRateModelMasterResult {
+        Item: NewRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateRateModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateRateModelMasterResult) Pointer() *UpdateRateModelMasterResult {
-	return &p
+    return &p
 }
 
 type DeleteRateModelMasterResult struct {
-	Item *RateModelMaster `json:"item"`
+    Item *RateModelMaster `json:"item"`
 }
 
 type DeleteRateModelMasterAsyncResult struct {
@@ -416,35 +415,35 @@ type DeleteRateModelMasterAsyncResult struct {
 }
 
 func NewDeleteRateModelMasterResultFromJson(data string) DeleteRateModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteRateModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteRateModelMasterResultFromDict(dict)
 }
 
 func NewDeleteRateModelMasterResultFromDict(data map[string]interface{}) DeleteRateModelMasterResult {
-	return DeleteRateModelMasterResult{
-		Item: NewRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteRateModelMasterResult {
+        Item: NewRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteRateModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteRateModelMasterResult) Pointer() *DeleteRateModelMasterResult {
-	return &p
+    return &p
 }
 
 type DirectEnhanceResult struct {
-	Item                      *RateModel `json:"item"`
-	TransactionId             *string    `json:"transactionId"`
-	StampSheet                *string    `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string    `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool      `json:"autoRunStampSheet"`
-	AcquireExperience         *int64     `json:"acquireExperience"`
-	BonusRate                 *float32   `json:"bonusRate"`
+    Item *RateModel `json:"item"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
+    AcquireExperience *int64 `json:"acquireExperience"`
+    BonusRate *float32 `json:"bonusRate"`
 }
 
 type DirectEnhanceAsyncResult struct {
@@ -453,47 +452,47 @@ type DirectEnhanceAsyncResult struct {
 }
 
 func NewDirectEnhanceResultFromJson(data string) DirectEnhanceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDirectEnhanceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDirectEnhanceResultFromDict(dict)
 }
 
 func NewDirectEnhanceResultFromDict(data map[string]interface{}) DirectEnhanceResult {
-	return DirectEnhanceResult{
-		Item:                      NewRateModelFromDict(core.CastMap(data["item"])).Pointer(),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
-		AcquireExperience:         core.CastInt64(data["acquireExperience"]),
-		BonusRate:                 core.CastFloat32(data["bonusRate"]),
-	}
+    return DirectEnhanceResult {
+        Item: NewRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+        AcquireExperience: core.CastInt64(data["acquireExperience"]),
+        BonusRate: core.CastFloat32(data["bonusRate"]),
+    }
 }
 
 func (p DirectEnhanceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":                      p.Item.ToDict(),
-		"transactionId":             p.TransactionId,
-		"stampSheet":                p.StampSheet,
-		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-		"autoRunStampSheet":         p.AutoRunStampSheet,
-		"acquireExperience":         p.AcquireExperience,
-		"bonusRate":                 p.BonusRate,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+        "acquireExperience": p.AcquireExperience,
+        "bonusRate": p.BonusRate,
+    }
 }
 
 func (p DirectEnhanceResult) Pointer() *DirectEnhanceResult {
-	return &p
+    return &p
 }
 
 type DirectEnhanceByUserIdResult struct {
-	Item                      *RateModel `json:"item"`
-	TransactionId             *string    `json:"transactionId"`
-	StampSheet                *string    `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string    `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool      `json:"autoRunStampSheet"`
-	AcquireExperience         *int64     `json:"acquireExperience"`
-	BonusRate                 *float32   `json:"bonusRate"`
+    Item *RateModel `json:"item"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
+    AcquireExperience *int64 `json:"acquireExperience"`
+    BonusRate *float32 `json:"bonusRate"`
 }
 
 type DirectEnhanceByUserIdAsyncResult struct {
@@ -502,47 +501,47 @@ type DirectEnhanceByUserIdAsyncResult struct {
 }
 
 func NewDirectEnhanceByUserIdResultFromJson(data string) DirectEnhanceByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDirectEnhanceByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDirectEnhanceByUserIdResultFromDict(dict)
 }
 
 func NewDirectEnhanceByUserIdResultFromDict(data map[string]interface{}) DirectEnhanceByUserIdResult {
-	return DirectEnhanceByUserIdResult{
-		Item:                      NewRateModelFromDict(core.CastMap(data["item"])).Pointer(),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
-		AcquireExperience:         core.CastInt64(data["acquireExperience"]),
-		BonusRate:                 core.CastFloat32(data["bonusRate"]),
-	}
+    return DirectEnhanceByUserIdResult {
+        Item: NewRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+        AcquireExperience: core.CastInt64(data["acquireExperience"]),
+        BonusRate: core.CastFloat32(data["bonusRate"]),
+    }
 }
 
 func (p DirectEnhanceByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":                      p.Item.ToDict(),
-		"transactionId":             p.TransactionId,
-		"stampSheet":                p.StampSheet,
-		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-		"autoRunStampSheet":         p.AutoRunStampSheet,
-		"acquireExperience":         p.AcquireExperience,
-		"bonusRate":                 p.BonusRate,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+        "acquireExperience": p.AcquireExperience,
+        "bonusRate": p.BonusRate,
+    }
 }
 
 func (p DirectEnhanceByUserIdResult) Pointer() *DirectEnhanceByUserIdResult {
-	return &p
+    return &p
 }
 
 type DirectEnhanceByStampSheetResult struct {
-	Item                      *RateModel `json:"item"`
-	TransactionId             *string    `json:"transactionId"`
-	StampSheet                *string    `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string    `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool      `json:"autoRunStampSheet"`
-	AcquireExperience         *int64     `json:"acquireExperience"`
-	BonusRate                 *float32   `json:"bonusRate"`
+    Item *RateModel `json:"item"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
+    AcquireExperience *int64 `json:"acquireExperience"`
+    BonusRate *float32 `json:"bonusRate"`
 }
 
 type DirectEnhanceByStampSheetAsyncResult struct {
@@ -551,41 +550,41 @@ type DirectEnhanceByStampSheetAsyncResult struct {
 }
 
 func NewDirectEnhanceByStampSheetResultFromJson(data string) DirectEnhanceByStampSheetResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDirectEnhanceByStampSheetResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDirectEnhanceByStampSheetResultFromDict(dict)
 }
 
 func NewDirectEnhanceByStampSheetResultFromDict(data map[string]interface{}) DirectEnhanceByStampSheetResult {
-	return DirectEnhanceByStampSheetResult{
-		Item:                      NewRateModelFromDict(core.CastMap(data["item"])).Pointer(),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
-		AcquireExperience:         core.CastInt64(data["acquireExperience"]),
-		BonusRate:                 core.CastFloat32(data["bonusRate"]),
-	}
+    return DirectEnhanceByStampSheetResult {
+        Item: NewRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+        AcquireExperience: core.CastInt64(data["acquireExperience"]),
+        BonusRate: core.CastFloat32(data["bonusRate"]),
+    }
 }
 
 func (p DirectEnhanceByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":                      p.Item.ToDict(),
-		"transactionId":             p.TransactionId,
-		"stampSheet":                p.StampSheet,
-		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-		"autoRunStampSheet":         p.AutoRunStampSheet,
-		"acquireExperience":         p.AcquireExperience,
-		"bonusRate":                 p.BonusRate,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+        "acquireExperience": p.AcquireExperience,
+        "bonusRate": p.BonusRate,
+    }
 }
 
 func (p DirectEnhanceByStampSheetResult) Pointer() *DirectEnhanceByStampSheetResult {
-	return &p
+    return &p
 }
 
 type CreateProgressByUserIdResult struct {
-	Item *Progress `json:"item"`
+    Item *Progress `json:"item"`
 }
 
 type CreateProgressByUserIdAsyncResult struct {
@@ -594,29 +593,29 @@ type CreateProgressByUserIdAsyncResult struct {
 }
 
 func NewCreateProgressByUserIdResultFromJson(data string) CreateProgressByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateProgressByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateProgressByUserIdResultFromDict(dict)
 }
 
 func NewCreateProgressByUserIdResultFromDict(data map[string]interface{}) CreateProgressByUserIdResult {
-	return CreateProgressByUserIdResult{
-		Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return CreateProgressByUserIdResult {
+        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p CreateProgressByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p CreateProgressByUserIdResult) Pointer() *CreateProgressByUserIdResult {
-	return &p
+    return &p
 }
 
 type GetProgressResult struct {
-	Item *Progress `json:"item"`
+    Item *Progress `json:"item"`
 }
 
 type GetProgressAsyncResult struct {
@@ -625,29 +624,29 @@ type GetProgressAsyncResult struct {
 }
 
 func NewGetProgressResultFromJson(data string) GetProgressResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetProgressResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetProgressResultFromDict(dict)
 }
 
 func NewGetProgressResultFromDict(data map[string]interface{}) GetProgressResult {
-	return GetProgressResult{
-		Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetProgressResult {
+        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetProgressResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetProgressResult) Pointer() *GetProgressResult {
-	return &p
+    return &p
 }
 
 type GetProgressByUserIdResult struct {
-	Item *Progress `json:"item"`
+    Item *Progress `json:"item"`
 }
 
 type GetProgressByUserIdAsyncResult struct {
@@ -656,32 +655,32 @@ type GetProgressByUserIdAsyncResult struct {
 }
 
 func NewGetProgressByUserIdResultFromJson(data string) GetProgressByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetProgressByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetProgressByUserIdResultFromDict(dict)
 }
 
 func NewGetProgressByUserIdResultFromDict(data map[string]interface{}) GetProgressByUserIdResult {
-	return GetProgressByUserIdResult{
-		Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetProgressByUserIdResult {
+        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetProgressByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetProgressByUserIdResult) Pointer() *GetProgressByUserIdResult {
-	return &p
+    return &p
 }
 
 type StartResult struct {
-	TransactionId             *string `json:"transactionId"`
-	StampSheet                *string `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool   `json:"autoRunStampSheet"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type StartAsyncResult struct {
@@ -690,38 +689,38 @@ type StartAsyncResult struct {
 }
 
 func NewStartResultFromJson(data string) StartResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStartResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewStartResultFromDict(dict)
 }
 
 func NewStartResultFromDict(data map[string]interface{}) StartResult {
-	return StartResult{
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
-	}
+    return StartResult {
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+    }
 }
 
 func (p StartResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"transactionId":             p.TransactionId,
-		"stampSheet":                p.StampSheet,
-		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-		"autoRunStampSheet":         p.AutoRunStampSheet,
-	}
+    return map[string]interface{} {
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+    }
 }
 
 func (p StartResult) Pointer() *StartResult {
-	return &p
+    return &p
 }
 
 type StartByUserIdResult struct {
-	TransactionId             *string `json:"transactionId"`
-	StampSheet                *string `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool   `json:"autoRunStampSheet"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
 }
 
 type StartByUserIdAsyncResult struct {
@@ -730,41 +729,41 @@ type StartByUserIdAsyncResult struct {
 }
 
 func NewStartByUserIdResultFromJson(data string) StartByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStartByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewStartByUserIdResultFromDict(dict)
 }
 
 func NewStartByUserIdResultFromDict(data map[string]interface{}) StartByUserIdResult {
-	return StartByUserIdResult{
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
-	}
+    return StartByUserIdResult {
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+    }
 }
 
 func (p StartByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"transactionId":             p.TransactionId,
-		"stampSheet":                p.StampSheet,
-		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-		"autoRunStampSheet":         p.AutoRunStampSheet,
-	}
+    return map[string]interface{} {
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+    }
 }
 
 func (p StartByUserIdResult) Pointer() *StartByUserIdResult {
-	return &p
+    return &p
 }
 
 type EndResult struct {
-	Item                      *Progress `json:"item"`
-	TransactionId             *string   `json:"transactionId"`
-	StampSheet                *string   `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string   `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool     `json:"autoRunStampSheet"`
-	AcquireExperience         *int64    `json:"acquireExperience"`
-	BonusRate                 *float32  `json:"bonusRate"`
+    Item *Progress `json:"item"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
+    AcquireExperience *int64 `json:"acquireExperience"`
+    BonusRate *float32 `json:"bonusRate"`
 }
 
 type EndAsyncResult struct {
@@ -773,47 +772,47 @@ type EndAsyncResult struct {
 }
 
 func NewEndResultFromJson(data string) EndResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewEndResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewEndResultFromDict(dict)
 }
 
 func NewEndResultFromDict(data map[string]interface{}) EndResult {
-	return EndResult{
-		Item:                      NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
-		AcquireExperience:         core.CastInt64(data["acquireExperience"]),
-		BonusRate:                 core.CastFloat32(data["bonusRate"]),
-	}
+    return EndResult {
+        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+        AcquireExperience: core.CastInt64(data["acquireExperience"]),
+        BonusRate: core.CastFloat32(data["bonusRate"]),
+    }
 }
 
 func (p EndResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":                      p.Item.ToDict(),
-		"transactionId":             p.TransactionId,
-		"stampSheet":                p.StampSheet,
-		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-		"autoRunStampSheet":         p.AutoRunStampSheet,
-		"acquireExperience":         p.AcquireExperience,
-		"bonusRate":                 p.BonusRate,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+        "acquireExperience": p.AcquireExperience,
+        "bonusRate": p.BonusRate,
+    }
 }
 
 func (p EndResult) Pointer() *EndResult {
-	return &p
+    return &p
 }
 
 type EndByUserIdResult struct {
-	Item                      *Progress `json:"item"`
-	TransactionId             *string   `json:"transactionId"`
-	StampSheet                *string   `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string   `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool     `json:"autoRunStampSheet"`
-	AcquireExperience         *int64    `json:"acquireExperience"`
-	BonusRate                 *float32  `json:"bonusRate"`
+    Item *Progress `json:"item"`
+    TransactionId *string `json:"transactionId"`
+    StampSheet *string `json:"stampSheet"`
+    StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+    AutoRunStampSheet *bool `json:"autoRunStampSheet"`
+    AcquireExperience *int64 `json:"acquireExperience"`
+    BonusRate *float32 `json:"bonusRate"`
 }
 
 type EndByUserIdAsyncResult struct {
@@ -822,41 +821,41 @@ type EndByUserIdAsyncResult struct {
 }
 
 func NewEndByUserIdResultFromJson(data string) EndByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewEndByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewEndByUserIdResultFromDict(dict)
 }
 
 func NewEndByUserIdResultFromDict(data map[string]interface{}) EndByUserIdResult {
-	return EndByUserIdResult{
-		Item:                      NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
-		AcquireExperience:         core.CastInt64(data["acquireExperience"]),
-		BonusRate:                 core.CastFloat32(data["bonusRate"]),
-	}
+    return EndByUserIdResult {
+        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+        TransactionId: core.CastString(data["transactionId"]),
+        StampSheet: core.CastString(data["stampSheet"]),
+        StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+        AutoRunStampSheet: core.CastBool(data["autoRunStampSheet"]),
+        AcquireExperience: core.CastInt64(data["acquireExperience"]),
+        BonusRate: core.CastFloat32(data["bonusRate"]),
+    }
 }
 
 func (p EndByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":                      p.Item.ToDict(),
-		"transactionId":             p.TransactionId,
-		"stampSheet":                p.StampSheet,
-		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-		"autoRunStampSheet":         p.AutoRunStampSheet,
-		"acquireExperience":         p.AcquireExperience,
-		"bonusRate":                 p.BonusRate,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "transactionId": p.TransactionId,
+        "stampSheet": p.StampSheet,
+        "stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+        "autoRunStampSheet": p.AutoRunStampSheet,
+        "acquireExperience": p.AcquireExperience,
+        "bonusRate": p.BonusRate,
+    }
 }
 
 func (p EndByUserIdResult) Pointer() *EndByUserIdResult {
-	return &p
+    return &p
 }
 
 type DeleteProgressResult struct {
-	Item *Progress `json:"item"`
+    Item *Progress `json:"item"`
 }
 
 type DeleteProgressAsyncResult struct {
@@ -865,29 +864,29 @@ type DeleteProgressAsyncResult struct {
 }
 
 func NewDeleteProgressResultFromJson(data string) DeleteProgressResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteProgressResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteProgressResultFromDict(dict)
 }
 
 func NewDeleteProgressResultFromDict(data map[string]interface{}) DeleteProgressResult {
-	return DeleteProgressResult{
-		Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteProgressResult {
+        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteProgressResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteProgressResult) Pointer() *DeleteProgressResult {
-	return &p
+    return &p
 }
 
 type DeleteProgressByUserIdResult struct {
-	Item *Progress `json:"item"`
+    Item *Progress `json:"item"`
 }
 
 type DeleteProgressByUserIdAsyncResult struct {
@@ -896,29 +895,29 @@ type DeleteProgressByUserIdAsyncResult struct {
 }
 
 func NewDeleteProgressByUserIdResultFromJson(data string) DeleteProgressByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteProgressByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteProgressByUserIdResultFromDict(dict)
 }
 
 func NewDeleteProgressByUserIdResultFromDict(data map[string]interface{}) DeleteProgressByUserIdResult {
-	return DeleteProgressByUserIdResult{
-		Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteProgressByUserIdResult {
+        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteProgressByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteProgressByUserIdResult) Pointer() *DeleteProgressByUserIdResult {
-	return &p
+    return &p
 }
 
 type CreateProgressByStampSheetResult struct {
-	Item *Progress `json:"item"`
+    Item *Progress `json:"item"`
 }
 
 type CreateProgressByStampSheetAsyncResult struct {
@@ -927,30 +926,30 @@ type CreateProgressByStampSheetAsyncResult struct {
 }
 
 func NewCreateProgressByStampSheetResultFromJson(data string) CreateProgressByStampSheetResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateProgressByStampSheetResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateProgressByStampSheetResultFromDict(dict)
 }
 
 func NewCreateProgressByStampSheetResultFromDict(data map[string]interface{}) CreateProgressByStampSheetResult {
-	return CreateProgressByStampSheetResult{
-		Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return CreateProgressByStampSheetResult {
+        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p CreateProgressByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p CreateProgressByStampSheetResult) Pointer() *CreateProgressByStampSheetResult {
-	return &p
+    return &p
 }
 
 type DeleteProgressByStampTaskResult struct {
-	Item            *Progress `json:"item"`
-	NewContextStack *string   `json:"newContextStack"`
+    Item *Progress `json:"item"`
+    NewContextStack *string `json:"newContextStack"`
 }
 
 type DeleteProgressByStampTaskAsyncResult struct {
@@ -959,31 +958,31 @@ type DeleteProgressByStampTaskAsyncResult struct {
 }
 
 func NewDeleteProgressByStampTaskResultFromJson(data string) DeleteProgressByStampTaskResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteProgressByStampTaskResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteProgressByStampTaskResultFromDict(dict)
 }
 
 func NewDeleteProgressByStampTaskResultFromDict(data map[string]interface{}) DeleteProgressByStampTaskResult {
-	return DeleteProgressByStampTaskResult{
-		Item:            NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
-	}
+    return DeleteProgressByStampTaskResult {
+        Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+        NewContextStack: core.CastString(data["newContextStack"]),
+    }
 }
 
 func (p DeleteProgressByStampTaskResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
-		"newContextStack": p.NewContextStack,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "newContextStack": p.NewContextStack,
+    }
 }
 
 func (p DeleteProgressByStampTaskResult) Pointer() *DeleteProgressByStampTaskResult {
-	return &p
+    return &p
 }
 
 type ExportMasterResult struct {
-	Item *CurrentRateMaster `json:"item"`
+    Item *CurrentRateMaster `json:"item"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -992,29 +991,29 @@ type ExportMasterAsyncResult struct {
 }
 
 func NewExportMasterResultFromJson(data string) ExportMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExportMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewExportMasterResultFromDict(dict)
 }
 
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
-	return ExportMasterResult{
-		Item: NewCurrentRateMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return ExportMasterResult {
+        Item: NewCurrentRateMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p ExportMasterResult) Pointer() *ExportMasterResult {
-	return &p
+    return &p
 }
 
 type GetCurrentRateMasterResult struct {
-	Item *CurrentRateMaster `json:"item"`
+    Item *CurrentRateMaster `json:"item"`
 }
 
 type GetCurrentRateMasterAsyncResult struct {
@@ -1023,29 +1022,29 @@ type GetCurrentRateMasterAsyncResult struct {
 }
 
 func NewGetCurrentRateMasterResultFromJson(data string) GetCurrentRateMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetCurrentRateMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetCurrentRateMasterResultFromDict(dict)
 }
 
 func NewGetCurrentRateMasterResultFromDict(data map[string]interface{}) GetCurrentRateMasterResult {
-	return GetCurrentRateMasterResult{
-		Item: NewCurrentRateMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetCurrentRateMasterResult {
+        Item: NewCurrentRateMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetCurrentRateMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetCurrentRateMasterResult) Pointer() *GetCurrentRateMasterResult {
-	return &p
+    return &p
 }
 
 type UpdateCurrentRateMasterResult struct {
-	Item *CurrentRateMaster `json:"item"`
+    Item *CurrentRateMaster `json:"item"`
 }
 
 type UpdateCurrentRateMasterAsyncResult struct {
@@ -1054,29 +1053,29 @@ type UpdateCurrentRateMasterAsyncResult struct {
 }
 
 func NewUpdateCurrentRateMasterResultFromJson(data string) UpdateCurrentRateMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentRateMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateCurrentRateMasterResultFromDict(dict)
 }
 
 func NewUpdateCurrentRateMasterResultFromDict(data map[string]interface{}) UpdateCurrentRateMasterResult {
-	return UpdateCurrentRateMasterResult{
-		Item: NewCurrentRateMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateCurrentRateMasterResult {
+        Item: NewCurrentRateMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateCurrentRateMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateCurrentRateMasterResult) Pointer() *UpdateCurrentRateMasterResult {
-	return &p
+    return &p
 }
 
 type UpdateCurrentRateMasterFromGitHubResult struct {
-	Item *CurrentRateMaster `json:"item"`
+    Item *CurrentRateMaster `json:"item"`
 }
 
 type UpdateCurrentRateMasterFromGitHubAsyncResult struct {
@@ -1085,23 +1084,23 @@ type UpdateCurrentRateMasterFromGitHubAsyncResult struct {
 }
 
 func NewUpdateCurrentRateMasterFromGitHubResultFromJson(data string) UpdateCurrentRateMasterFromGitHubResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentRateMasterFromGitHubResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateCurrentRateMasterFromGitHubResultFromDict(dict)
 }
 
 func NewUpdateCurrentRateMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentRateMasterFromGitHubResult {
-	return UpdateCurrentRateMasterFromGitHubResult{
-		Item: NewCurrentRateMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateCurrentRateMasterFromGitHubResult {
+        Item: NewCurrentRateMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateCurrentRateMasterFromGitHubResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateCurrentRateMasterFromGitHubResult) Pointer() *UpdateCurrentRateMasterFromGitHubResult {
-	return &p
+    return &p
 }

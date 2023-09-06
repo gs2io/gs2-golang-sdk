@@ -17,14 +17,13 @@ permissions and limitations under the License.
 package enchant
 
 import (
-	"encoding/json"
-
-	"github.com/gs2io/gs2-golang-sdk/core"
+    "encoding/json"
+    "github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+    Items []Namespace `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -33,33 +32,33 @@ type DescribeNamespacesAsyncResult struct {
 }
 
 func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeNamespacesResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeNamespacesResultFromDict(dict)
 }
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
-	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeNamespacesResult {
+        Items: CastNamespaces(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastNamespacesFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastNamespacesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
-	return &p
+    return &p
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -68,29 +67,29 @@ type CreateNamespaceAsyncResult struct {
 }
 
 func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateNamespaceResultFromDict(dict)
 }
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
-	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return CreateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
-	return &p
+    return &p
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+    Status *string `json:"status"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -99,29 +98,29 @@ type GetNamespaceStatusAsyncResult struct {
 }
 
 func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceStatusResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetNamespaceStatusResultFromDict(dict)
 }
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
-	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
-	}
+    return GetNamespaceStatusResult {
+        Status: core.CastString(data["status"]),
+    }
 }
 
 func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"status": p.Status,
-	}
+    return map[string]interface{} {
+        "status": p.Status,
+    }
 }
 
 func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
-	return &p
+    return &p
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -130,29 +129,29 @@ type GetNamespaceAsyncResult struct {
 }
 
 func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetNamespaceResultFromDict(dict)
 }
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
-	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
-	return &p
+    return &p
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -161,29 +160,29 @@ type UpdateNamespaceAsyncResult struct {
 }
 
 func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateNamespaceResultFromDict(dict)
 }
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
-	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
-	return &p
+    return &p
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+    Item *Namespace `json:"item"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -192,29 +191,29 @@ type DeleteNamespaceAsyncResult struct {
 }
 
 func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteNamespaceResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteNamespaceResultFromDict(dict)
 }
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
-	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteNamespaceResult {
+        Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
-	return &p
+    return &p
 }
 
 type DescribeBalanceParameterModelsResult struct {
-	Items []BalanceParameterModel `json:"items"`
+    Items []BalanceParameterModel `json:"items"`
 }
 
 type DescribeBalanceParameterModelsAsyncResult struct {
@@ -223,31 +222,31 @@ type DescribeBalanceParameterModelsAsyncResult struct {
 }
 
 func NewDescribeBalanceParameterModelsResultFromJson(data string) DescribeBalanceParameterModelsResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeBalanceParameterModelsResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBalanceParameterModelsResultFromDict(dict)
 }
 
 func NewDescribeBalanceParameterModelsResultFromDict(data map[string]interface{}) DescribeBalanceParameterModelsResult {
-	return DescribeBalanceParameterModelsResult{
-		Items: CastBalanceParameterModels(core.CastArray(data["items"])),
-	}
+    return DescribeBalanceParameterModelsResult {
+        Items: CastBalanceParameterModels(core.CastArray(data["items"])),
+    }
 }
 
 func (p DescribeBalanceParameterModelsResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastBalanceParameterModelsFromDict(
-			p.Items,
-		),
-	}
+    return map[string]interface{} {
+        "items": CastBalanceParameterModelsFromDict(
+            p.Items,
+        ),
+    }
 }
 
 func (p DescribeBalanceParameterModelsResult) Pointer() *DescribeBalanceParameterModelsResult {
-	return &p
+    return &p
 }
 
 type GetBalanceParameterModelResult struct {
-	Item *BalanceParameterModel `json:"item"`
+    Item *BalanceParameterModel `json:"item"`
 }
 
 type GetBalanceParameterModelAsyncResult struct {
@@ -256,30 +255,30 @@ type GetBalanceParameterModelAsyncResult struct {
 }
 
 func NewGetBalanceParameterModelResultFromJson(data string) GetBalanceParameterModelResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetBalanceParameterModelResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBalanceParameterModelResultFromDict(dict)
 }
 
 func NewGetBalanceParameterModelResultFromDict(data map[string]interface{}) GetBalanceParameterModelResult {
-	return GetBalanceParameterModelResult{
-		Item: NewBalanceParameterModelFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetBalanceParameterModelResult {
+        Item: NewBalanceParameterModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetBalanceParameterModelResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetBalanceParameterModelResult) Pointer() *GetBalanceParameterModelResult {
-	return &p
+    return &p
 }
 
 type DescribeBalanceParameterModelMastersResult struct {
-	Items         []BalanceParameterModelMaster `json:"items"`
-	NextPageToken *string                       `json:"nextPageToken"`
+    Items []BalanceParameterModelMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeBalanceParameterModelMastersAsyncResult struct {
@@ -288,33 +287,33 @@ type DescribeBalanceParameterModelMastersAsyncResult struct {
 }
 
 func NewDescribeBalanceParameterModelMastersResultFromJson(data string) DescribeBalanceParameterModelMastersResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeBalanceParameterModelMastersResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBalanceParameterModelMastersResultFromDict(dict)
 }
 
 func NewDescribeBalanceParameterModelMastersResultFromDict(data map[string]interface{}) DescribeBalanceParameterModelMastersResult {
-	return DescribeBalanceParameterModelMastersResult{
-		Items:         CastBalanceParameterModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeBalanceParameterModelMastersResult {
+        Items: CastBalanceParameterModelMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeBalanceParameterModelMastersResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastBalanceParameterModelMastersFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastBalanceParameterModelMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeBalanceParameterModelMastersResult) Pointer() *DescribeBalanceParameterModelMastersResult {
-	return &p
+    return &p
 }
 
 type CreateBalanceParameterModelMasterResult struct {
-	Item *BalanceParameterModelMaster `json:"item"`
+    Item *BalanceParameterModelMaster `json:"item"`
 }
 
 type CreateBalanceParameterModelMasterAsyncResult struct {
@@ -323,29 +322,29 @@ type CreateBalanceParameterModelMasterAsyncResult struct {
 }
 
 func NewCreateBalanceParameterModelMasterResultFromJson(data string) CreateBalanceParameterModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateBalanceParameterModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateBalanceParameterModelMasterResultFromDict(dict)
 }
 
 func NewCreateBalanceParameterModelMasterResultFromDict(data map[string]interface{}) CreateBalanceParameterModelMasterResult {
-	return CreateBalanceParameterModelMasterResult{
-		Item: NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return CreateBalanceParameterModelMasterResult {
+        Item: NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p CreateBalanceParameterModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p CreateBalanceParameterModelMasterResult) Pointer() *CreateBalanceParameterModelMasterResult {
-	return &p
+    return &p
 }
 
 type GetBalanceParameterModelMasterResult struct {
-	Item *BalanceParameterModelMaster `json:"item"`
+    Item *BalanceParameterModelMaster `json:"item"`
 }
 
 type GetBalanceParameterModelMasterAsyncResult struct {
@@ -354,29 +353,29 @@ type GetBalanceParameterModelMasterAsyncResult struct {
 }
 
 func NewGetBalanceParameterModelMasterResultFromJson(data string) GetBalanceParameterModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetBalanceParameterModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBalanceParameterModelMasterResultFromDict(dict)
 }
 
 func NewGetBalanceParameterModelMasterResultFromDict(data map[string]interface{}) GetBalanceParameterModelMasterResult {
-	return GetBalanceParameterModelMasterResult{
-		Item: NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetBalanceParameterModelMasterResult {
+        Item: NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetBalanceParameterModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetBalanceParameterModelMasterResult) Pointer() *GetBalanceParameterModelMasterResult {
-	return &p
+    return &p
 }
 
 type UpdateBalanceParameterModelMasterResult struct {
-	Item *BalanceParameterModelMaster `json:"item"`
+    Item *BalanceParameterModelMaster `json:"item"`
 }
 
 type UpdateBalanceParameterModelMasterAsyncResult struct {
@@ -385,29 +384,29 @@ type UpdateBalanceParameterModelMasterAsyncResult struct {
 }
 
 func NewUpdateBalanceParameterModelMasterResultFromJson(data string) UpdateBalanceParameterModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateBalanceParameterModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateBalanceParameterModelMasterResultFromDict(dict)
 }
 
 func NewUpdateBalanceParameterModelMasterResultFromDict(data map[string]interface{}) UpdateBalanceParameterModelMasterResult {
-	return UpdateBalanceParameterModelMasterResult{
-		Item: NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateBalanceParameterModelMasterResult {
+        Item: NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateBalanceParameterModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateBalanceParameterModelMasterResult) Pointer() *UpdateBalanceParameterModelMasterResult {
-	return &p
+    return &p
 }
 
 type DeleteBalanceParameterModelMasterResult struct {
-	Item *BalanceParameterModelMaster `json:"item"`
+    Item *BalanceParameterModelMaster `json:"item"`
 }
 
 type DeleteBalanceParameterModelMasterAsyncResult struct {
@@ -416,29 +415,29 @@ type DeleteBalanceParameterModelMasterAsyncResult struct {
 }
 
 func NewDeleteBalanceParameterModelMasterResultFromJson(data string) DeleteBalanceParameterModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteBalanceParameterModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteBalanceParameterModelMasterResultFromDict(dict)
 }
 
 func NewDeleteBalanceParameterModelMasterResultFromDict(data map[string]interface{}) DeleteBalanceParameterModelMasterResult {
-	return DeleteBalanceParameterModelMasterResult{
-		Item: NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteBalanceParameterModelMasterResult {
+        Item: NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteBalanceParameterModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteBalanceParameterModelMasterResult) Pointer() *DeleteBalanceParameterModelMasterResult {
-	return &p
+    return &p
 }
 
 type DescribeRarityParameterModelsResult struct {
-	Items []RarityParameterModel `json:"items"`
+    Items []RarityParameterModel `json:"items"`
 }
 
 type DescribeRarityParameterModelsAsyncResult struct {
@@ -447,31 +446,31 @@ type DescribeRarityParameterModelsAsyncResult struct {
 }
 
 func NewDescribeRarityParameterModelsResultFromJson(data string) DescribeRarityParameterModelsResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRarityParameterModelsResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeRarityParameterModelsResultFromDict(dict)
 }
 
 func NewDescribeRarityParameterModelsResultFromDict(data map[string]interface{}) DescribeRarityParameterModelsResult {
-	return DescribeRarityParameterModelsResult{
-		Items: CastRarityParameterModels(core.CastArray(data["items"])),
-	}
+    return DescribeRarityParameterModelsResult {
+        Items: CastRarityParameterModels(core.CastArray(data["items"])),
+    }
 }
 
 func (p DescribeRarityParameterModelsResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastRarityParameterModelsFromDict(
-			p.Items,
-		),
-	}
+    return map[string]interface{} {
+        "items": CastRarityParameterModelsFromDict(
+            p.Items,
+        ),
+    }
 }
 
 func (p DescribeRarityParameterModelsResult) Pointer() *DescribeRarityParameterModelsResult {
-	return &p
+    return &p
 }
 
 type GetRarityParameterModelResult struct {
-	Item *RarityParameterModel `json:"item"`
+    Item *RarityParameterModel `json:"item"`
 }
 
 type GetRarityParameterModelAsyncResult struct {
@@ -480,30 +479,30 @@ type GetRarityParameterModelAsyncResult struct {
 }
 
 func NewGetRarityParameterModelResultFromJson(data string) GetRarityParameterModelResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRarityParameterModelResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetRarityParameterModelResultFromDict(dict)
 }
 
 func NewGetRarityParameterModelResultFromDict(data map[string]interface{}) GetRarityParameterModelResult {
-	return GetRarityParameterModelResult{
-		Item: NewRarityParameterModelFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetRarityParameterModelResult {
+        Item: NewRarityParameterModelFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetRarityParameterModelResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetRarityParameterModelResult) Pointer() *GetRarityParameterModelResult {
-	return &p
+    return &p
 }
 
 type DescribeRarityParameterModelMastersResult struct {
-	Items         []RarityParameterModelMaster `json:"items"`
-	NextPageToken *string                      `json:"nextPageToken"`
+    Items []RarityParameterModelMaster `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeRarityParameterModelMastersAsyncResult struct {
@@ -512,33 +511,33 @@ type DescribeRarityParameterModelMastersAsyncResult struct {
 }
 
 func NewDescribeRarityParameterModelMastersResultFromJson(data string) DescribeRarityParameterModelMastersResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRarityParameterModelMastersResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeRarityParameterModelMastersResultFromDict(dict)
 }
 
 func NewDescribeRarityParameterModelMastersResultFromDict(data map[string]interface{}) DescribeRarityParameterModelMastersResult {
-	return DescribeRarityParameterModelMastersResult{
-		Items:         CastRarityParameterModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeRarityParameterModelMastersResult {
+        Items: CastRarityParameterModelMasters(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeRarityParameterModelMastersResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastRarityParameterModelMastersFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastRarityParameterModelMastersFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeRarityParameterModelMastersResult) Pointer() *DescribeRarityParameterModelMastersResult {
-	return &p
+    return &p
 }
 
 type CreateRarityParameterModelMasterResult struct {
-	Item *RarityParameterModelMaster `json:"item"`
+    Item *RarityParameterModelMaster `json:"item"`
 }
 
 type CreateRarityParameterModelMasterAsyncResult struct {
@@ -547,29 +546,29 @@ type CreateRarityParameterModelMasterAsyncResult struct {
 }
 
 func NewCreateRarityParameterModelMasterResultFromJson(data string) CreateRarityParameterModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateRarityParameterModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateRarityParameterModelMasterResultFromDict(dict)
 }
 
 func NewCreateRarityParameterModelMasterResultFromDict(data map[string]interface{}) CreateRarityParameterModelMasterResult {
-	return CreateRarityParameterModelMasterResult{
-		Item: NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return CreateRarityParameterModelMasterResult {
+        Item: NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p CreateRarityParameterModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p CreateRarityParameterModelMasterResult) Pointer() *CreateRarityParameterModelMasterResult {
-	return &p
+    return &p
 }
 
 type GetRarityParameterModelMasterResult struct {
-	Item *RarityParameterModelMaster `json:"item"`
+    Item *RarityParameterModelMaster `json:"item"`
 }
 
 type GetRarityParameterModelMasterAsyncResult struct {
@@ -578,29 +577,29 @@ type GetRarityParameterModelMasterAsyncResult struct {
 }
 
 func NewGetRarityParameterModelMasterResultFromJson(data string) GetRarityParameterModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRarityParameterModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetRarityParameterModelMasterResultFromDict(dict)
 }
 
 func NewGetRarityParameterModelMasterResultFromDict(data map[string]interface{}) GetRarityParameterModelMasterResult {
-	return GetRarityParameterModelMasterResult{
-		Item: NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetRarityParameterModelMasterResult {
+        Item: NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetRarityParameterModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetRarityParameterModelMasterResult) Pointer() *GetRarityParameterModelMasterResult {
-	return &p
+    return &p
 }
 
 type UpdateRarityParameterModelMasterResult struct {
-	Item *RarityParameterModelMaster `json:"item"`
+    Item *RarityParameterModelMaster `json:"item"`
 }
 
 type UpdateRarityParameterModelMasterAsyncResult struct {
@@ -609,29 +608,29 @@ type UpdateRarityParameterModelMasterAsyncResult struct {
 }
 
 func NewUpdateRarityParameterModelMasterResultFromJson(data string) UpdateRarityParameterModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateRarityParameterModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateRarityParameterModelMasterResultFromDict(dict)
 }
 
 func NewUpdateRarityParameterModelMasterResultFromDict(data map[string]interface{}) UpdateRarityParameterModelMasterResult {
-	return UpdateRarityParameterModelMasterResult{
-		Item: NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateRarityParameterModelMasterResult {
+        Item: NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateRarityParameterModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateRarityParameterModelMasterResult) Pointer() *UpdateRarityParameterModelMasterResult {
-	return &p
+    return &p
 }
 
 type DeleteRarityParameterModelMasterResult struct {
-	Item *RarityParameterModelMaster `json:"item"`
+    Item *RarityParameterModelMaster `json:"item"`
 }
 
 type DeleteRarityParameterModelMasterAsyncResult struct {
@@ -640,29 +639,29 @@ type DeleteRarityParameterModelMasterAsyncResult struct {
 }
 
 func NewDeleteRarityParameterModelMasterResultFromJson(data string) DeleteRarityParameterModelMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteRarityParameterModelMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteRarityParameterModelMasterResultFromDict(dict)
 }
 
 func NewDeleteRarityParameterModelMasterResultFromDict(data map[string]interface{}) DeleteRarityParameterModelMasterResult {
-	return DeleteRarityParameterModelMasterResult{
-		Item: NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteRarityParameterModelMasterResult {
+        Item: NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteRarityParameterModelMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteRarityParameterModelMasterResult) Pointer() *DeleteRarityParameterModelMasterResult {
-	return &p
+    return &p
 }
 
 type ExportMasterResult struct {
-	Item *CurrentParameterMaster `json:"item"`
+    Item *CurrentParameterMaster `json:"item"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -671,29 +670,29 @@ type ExportMasterAsyncResult struct {
 }
 
 func NewExportMasterResultFromJson(data string) ExportMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExportMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewExportMasterResultFromDict(dict)
 }
 
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
-	return ExportMasterResult{
-		Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return ExportMasterResult {
+        Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p ExportMasterResult) Pointer() *ExportMasterResult {
-	return &p
+    return &p
 }
 
 type GetCurrentParameterMasterResult struct {
-	Item *CurrentParameterMaster `json:"item"`
+    Item *CurrentParameterMaster `json:"item"`
 }
 
 type GetCurrentParameterMasterAsyncResult struct {
@@ -702,29 +701,29 @@ type GetCurrentParameterMasterAsyncResult struct {
 }
 
 func NewGetCurrentParameterMasterResultFromJson(data string) GetCurrentParameterMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetCurrentParameterMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetCurrentParameterMasterResultFromDict(dict)
 }
 
 func NewGetCurrentParameterMasterResultFromDict(data map[string]interface{}) GetCurrentParameterMasterResult {
-	return GetCurrentParameterMasterResult{
-		Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetCurrentParameterMasterResult {
+        Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetCurrentParameterMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetCurrentParameterMasterResult) Pointer() *GetCurrentParameterMasterResult {
-	return &p
+    return &p
 }
 
 type UpdateCurrentParameterMasterResult struct {
-	Item *CurrentParameterMaster `json:"item"`
+    Item *CurrentParameterMaster `json:"item"`
 }
 
 type UpdateCurrentParameterMasterAsyncResult struct {
@@ -733,29 +732,29 @@ type UpdateCurrentParameterMasterAsyncResult struct {
 }
 
 func NewUpdateCurrentParameterMasterResultFromJson(data string) UpdateCurrentParameterMasterResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentParameterMasterResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateCurrentParameterMasterResultFromDict(dict)
 }
 
 func NewUpdateCurrentParameterMasterResultFromDict(data map[string]interface{}) UpdateCurrentParameterMasterResult {
-	return UpdateCurrentParameterMasterResult{
-		Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateCurrentParameterMasterResult {
+        Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateCurrentParameterMasterResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateCurrentParameterMasterResult) Pointer() *UpdateCurrentParameterMasterResult {
-	return &p
+    return &p
 }
 
 type UpdateCurrentParameterMasterFromGitHubResult struct {
-	Item *CurrentParameterMaster `json:"item"`
+    Item *CurrentParameterMaster `json:"item"`
 }
 
 type UpdateCurrentParameterMasterFromGitHubAsyncResult struct {
@@ -764,30 +763,30 @@ type UpdateCurrentParameterMasterFromGitHubAsyncResult struct {
 }
 
 func NewUpdateCurrentParameterMasterFromGitHubResultFromJson(data string) UpdateCurrentParameterMasterFromGitHubResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentParameterMasterFromGitHubResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateCurrentParameterMasterFromGitHubResultFromDict(dict)
 }
 
 func NewUpdateCurrentParameterMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentParameterMasterFromGitHubResult {
-	return UpdateCurrentParameterMasterFromGitHubResult{
-		Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return UpdateCurrentParameterMasterFromGitHubResult {
+        Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p UpdateCurrentParameterMasterFromGitHubResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p UpdateCurrentParameterMasterFromGitHubResult) Pointer() *UpdateCurrentParameterMasterFromGitHubResult {
-	return &p
+    return &p
 }
 
 type DescribeBalanceParameterStatusesResult struct {
-	Items         []BalanceParameterStatus `json:"items"`
-	NextPageToken *string                  `json:"nextPageToken"`
+    Items []BalanceParameterStatus `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeBalanceParameterStatusesAsyncResult struct {
@@ -796,34 +795,34 @@ type DescribeBalanceParameterStatusesAsyncResult struct {
 }
 
 func NewDescribeBalanceParameterStatusesResultFromJson(data string) DescribeBalanceParameterStatusesResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeBalanceParameterStatusesResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBalanceParameterStatusesResultFromDict(dict)
 }
 
 func NewDescribeBalanceParameterStatusesResultFromDict(data map[string]interface{}) DescribeBalanceParameterStatusesResult {
-	return DescribeBalanceParameterStatusesResult{
-		Items:         CastBalanceParameterStatuses(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeBalanceParameterStatusesResult {
+        Items: CastBalanceParameterStatuses(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeBalanceParameterStatusesResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastBalanceParameterStatusesFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastBalanceParameterStatusesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeBalanceParameterStatusesResult) Pointer() *DescribeBalanceParameterStatusesResult {
-	return &p
+    return &p
 }
 
 type DescribeBalanceParameterStatusesByUserIdResult struct {
-	Items         []BalanceParameterStatus `json:"items"`
-	NextPageToken *string                  `json:"nextPageToken"`
+    Items []BalanceParameterStatus `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeBalanceParameterStatusesByUserIdAsyncResult struct {
@@ -832,33 +831,33 @@ type DescribeBalanceParameterStatusesByUserIdAsyncResult struct {
 }
 
 func NewDescribeBalanceParameterStatusesByUserIdResultFromJson(data string) DescribeBalanceParameterStatusesByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeBalanceParameterStatusesByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeBalanceParameterStatusesByUserIdResultFromDict(dict)
 }
 
 func NewDescribeBalanceParameterStatusesByUserIdResultFromDict(data map[string]interface{}) DescribeBalanceParameterStatusesByUserIdResult {
-	return DescribeBalanceParameterStatusesByUserIdResult{
-		Items:         CastBalanceParameterStatuses(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeBalanceParameterStatusesByUserIdResult {
+        Items: CastBalanceParameterStatuses(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeBalanceParameterStatusesByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastBalanceParameterStatusesFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastBalanceParameterStatusesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeBalanceParameterStatusesByUserIdResult) Pointer() *DescribeBalanceParameterStatusesByUserIdResult {
-	return &p
+    return &p
 }
 
 type GetBalanceParameterStatusResult struct {
-	Item *BalanceParameterStatus `json:"item"`
+    Item *BalanceParameterStatus `json:"item"`
 }
 
 type GetBalanceParameterStatusAsyncResult struct {
@@ -867,29 +866,29 @@ type GetBalanceParameterStatusAsyncResult struct {
 }
 
 func NewGetBalanceParameterStatusResultFromJson(data string) GetBalanceParameterStatusResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetBalanceParameterStatusResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBalanceParameterStatusResultFromDict(dict)
 }
 
 func NewGetBalanceParameterStatusResultFromDict(data map[string]interface{}) GetBalanceParameterStatusResult {
-	return GetBalanceParameterStatusResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetBalanceParameterStatusResult {
+        Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetBalanceParameterStatusResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetBalanceParameterStatusResult) Pointer() *GetBalanceParameterStatusResult {
-	return &p
+    return &p
 }
 
 type GetBalanceParameterStatusByUserIdResult struct {
-	Item *BalanceParameterStatus `json:"item"`
+    Item *BalanceParameterStatus `json:"item"`
 }
 
 type GetBalanceParameterStatusByUserIdAsyncResult struct {
@@ -898,29 +897,29 @@ type GetBalanceParameterStatusByUserIdAsyncResult struct {
 }
 
 func NewGetBalanceParameterStatusByUserIdResultFromJson(data string) GetBalanceParameterStatusByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetBalanceParameterStatusByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetBalanceParameterStatusByUserIdResultFromDict(dict)
 }
 
 func NewGetBalanceParameterStatusByUserIdResultFromDict(data map[string]interface{}) GetBalanceParameterStatusByUserIdResult {
-	return GetBalanceParameterStatusByUserIdResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetBalanceParameterStatusByUserIdResult {
+        Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetBalanceParameterStatusByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetBalanceParameterStatusByUserIdResult) Pointer() *GetBalanceParameterStatusByUserIdResult {
-	return &p
+    return &p
 }
 
 type DeleteBalanceParameterStatusByUserIdResult struct {
-	Item *BalanceParameterStatus `json:"item"`
+    Item *BalanceParameterStatus `json:"item"`
 }
 
 type DeleteBalanceParameterStatusByUserIdAsyncResult struct {
@@ -929,30 +928,30 @@ type DeleteBalanceParameterStatusByUserIdAsyncResult struct {
 }
 
 func NewDeleteBalanceParameterStatusByUserIdResultFromJson(data string) DeleteBalanceParameterStatusByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteBalanceParameterStatusByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteBalanceParameterStatusByUserIdResultFromDict(dict)
 }
 
 func NewDeleteBalanceParameterStatusByUserIdResultFromDict(data map[string]interface{}) DeleteBalanceParameterStatusByUserIdResult {
-	return DeleteBalanceParameterStatusByUserIdResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteBalanceParameterStatusByUserIdResult {
+        Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteBalanceParameterStatusByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteBalanceParameterStatusByUserIdResult) Pointer() *DeleteBalanceParameterStatusByUserIdResult {
-	return &p
+    return &p
 }
 
 type ReDrawBalanceParameterStatusByUserIdResult struct {
-	Item *BalanceParameterStatus `json:"item"`
-	Old  *BalanceParameterStatus `json:"old"`
+    Item *BalanceParameterStatus `json:"item"`
+    Old *BalanceParameterStatus `json:"old"`
 }
 
 type ReDrawBalanceParameterStatusByUserIdAsyncResult struct {
@@ -961,32 +960,32 @@ type ReDrawBalanceParameterStatusByUserIdAsyncResult struct {
 }
 
 func NewReDrawBalanceParameterStatusByUserIdResultFromJson(data string) ReDrawBalanceParameterStatusByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewReDrawBalanceParameterStatusByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewReDrawBalanceParameterStatusByUserIdResultFromDict(dict)
 }
 
 func NewReDrawBalanceParameterStatusByUserIdResultFromDict(data map[string]interface{}) ReDrawBalanceParameterStatusByUserIdResult {
-	return ReDrawBalanceParameterStatusByUserIdResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
-	}
+    return ReDrawBalanceParameterStatusByUserIdResult {
+        Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+        Old: NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+    }
 }
 
 func (p ReDrawBalanceParameterStatusByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "old": p.Old.ToDict(),
+    }
 }
 
 func (p ReDrawBalanceParameterStatusByUserIdResult) Pointer() *ReDrawBalanceParameterStatusByUserIdResult {
-	return &p
+    return &p
 }
 
 type ReDrawBalanceParameterStatusByStampSheetResult struct {
-	Item *BalanceParameterStatus `json:"item"`
-	Old  *BalanceParameterStatus `json:"old"`
+    Item *BalanceParameterStatus `json:"item"`
+    Old *BalanceParameterStatus `json:"old"`
 }
 
 type ReDrawBalanceParameterStatusByStampSheetAsyncResult struct {
@@ -995,32 +994,32 @@ type ReDrawBalanceParameterStatusByStampSheetAsyncResult struct {
 }
 
 func NewReDrawBalanceParameterStatusByStampSheetResultFromJson(data string) ReDrawBalanceParameterStatusByStampSheetResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewReDrawBalanceParameterStatusByStampSheetResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewReDrawBalanceParameterStatusByStampSheetResultFromDict(dict)
 }
 
 func NewReDrawBalanceParameterStatusByStampSheetResultFromDict(data map[string]interface{}) ReDrawBalanceParameterStatusByStampSheetResult {
-	return ReDrawBalanceParameterStatusByStampSheetResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
-	}
+    return ReDrawBalanceParameterStatusByStampSheetResult {
+        Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+        Old: NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+    }
 }
 
 func (p ReDrawBalanceParameterStatusByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "old": p.Old.ToDict(),
+    }
 }
 
 func (p ReDrawBalanceParameterStatusByStampSheetResult) Pointer() *ReDrawBalanceParameterStatusByStampSheetResult {
-	return &p
+    return &p
 }
 
 type SetBalanceParameterStatusByUserIdResult struct {
-	Item *BalanceParameterStatus `json:"item"`
-	Old  *BalanceParameterStatus `json:"old"`
+    Item *BalanceParameterStatus `json:"item"`
+    Old *BalanceParameterStatus `json:"old"`
 }
 
 type SetBalanceParameterStatusByUserIdAsyncResult struct {
@@ -1029,32 +1028,32 @@ type SetBalanceParameterStatusByUserIdAsyncResult struct {
 }
 
 func NewSetBalanceParameterStatusByUserIdResultFromJson(data string) SetBalanceParameterStatusByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetBalanceParameterStatusByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetBalanceParameterStatusByUserIdResultFromDict(dict)
 }
 
 func NewSetBalanceParameterStatusByUserIdResultFromDict(data map[string]interface{}) SetBalanceParameterStatusByUserIdResult {
-	return SetBalanceParameterStatusByUserIdResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
-	}
+    return SetBalanceParameterStatusByUserIdResult {
+        Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+        Old: NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+    }
 }
 
 func (p SetBalanceParameterStatusByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "old": p.Old.ToDict(),
+    }
 }
 
 func (p SetBalanceParameterStatusByUserIdResult) Pointer() *SetBalanceParameterStatusByUserIdResult {
-	return &p
+    return &p
 }
 
 type SetBalanceParameterStatusByStampSheetResult struct {
-	Item *BalanceParameterStatus `json:"item"`
-	Old  *BalanceParameterStatus `json:"old"`
+    Item *BalanceParameterStatus `json:"item"`
+    Old *BalanceParameterStatus `json:"old"`
 }
 
 type SetBalanceParameterStatusByStampSheetAsyncResult struct {
@@ -1063,32 +1062,32 @@ type SetBalanceParameterStatusByStampSheetAsyncResult struct {
 }
 
 func NewSetBalanceParameterStatusByStampSheetResultFromJson(data string) SetBalanceParameterStatusByStampSheetResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetBalanceParameterStatusByStampSheetResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetBalanceParameterStatusByStampSheetResultFromDict(dict)
 }
 
 func NewSetBalanceParameterStatusByStampSheetResultFromDict(data map[string]interface{}) SetBalanceParameterStatusByStampSheetResult {
-	return SetBalanceParameterStatusByStampSheetResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
-	}
+    return SetBalanceParameterStatusByStampSheetResult {
+        Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+        Old: NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+    }
 }
 
 func (p SetBalanceParameterStatusByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "old": p.Old.ToDict(),
+    }
 }
 
 func (p SetBalanceParameterStatusByStampSheetResult) Pointer() *SetBalanceParameterStatusByStampSheetResult {
-	return &p
+    return &p
 }
 
 type DescribeRarityParameterStatusesResult struct {
-	Items         []RarityParameterStatus `json:"items"`
-	NextPageToken *string                 `json:"nextPageToken"`
+    Items []RarityParameterStatus `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeRarityParameterStatusesAsyncResult struct {
@@ -1097,34 +1096,34 @@ type DescribeRarityParameterStatusesAsyncResult struct {
 }
 
 func NewDescribeRarityParameterStatusesResultFromJson(data string) DescribeRarityParameterStatusesResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRarityParameterStatusesResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeRarityParameterStatusesResultFromDict(dict)
 }
 
 func NewDescribeRarityParameterStatusesResultFromDict(data map[string]interface{}) DescribeRarityParameterStatusesResult {
-	return DescribeRarityParameterStatusesResult{
-		Items:         CastRarityParameterStatuses(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeRarityParameterStatusesResult {
+        Items: CastRarityParameterStatuses(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeRarityParameterStatusesResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastRarityParameterStatusesFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastRarityParameterStatusesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeRarityParameterStatusesResult) Pointer() *DescribeRarityParameterStatusesResult {
-	return &p
+    return &p
 }
 
 type DescribeRarityParameterStatusesByUserIdResult struct {
-	Items         []RarityParameterStatus `json:"items"`
-	NextPageToken *string                 `json:"nextPageToken"`
+    Items []RarityParameterStatus `json:"items"`
+    NextPageToken *string `json:"nextPageToken"`
 }
 
 type DescribeRarityParameterStatusesByUserIdAsyncResult struct {
@@ -1133,33 +1132,33 @@ type DescribeRarityParameterStatusesByUserIdAsyncResult struct {
 }
 
 func NewDescribeRarityParameterStatusesByUserIdResultFromJson(data string) DescribeRarityParameterStatusesByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRarityParameterStatusesByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeRarityParameterStatusesByUserIdResultFromDict(dict)
 }
 
 func NewDescribeRarityParameterStatusesByUserIdResultFromDict(data map[string]interface{}) DescribeRarityParameterStatusesByUserIdResult {
-	return DescribeRarityParameterStatusesByUserIdResult{
-		Items:         CastRarityParameterStatuses(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-	}
+    return DescribeRarityParameterStatusesByUserIdResult {
+        Items: CastRarityParameterStatuses(core.CastArray(data["items"])),
+        NextPageToken: core.CastString(data["nextPageToken"]),
+    }
 }
 
 func (p DescribeRarityParameterStatusesByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"items": CastRarityParameterStatusesFromDict(
-			p.Items,
-		),
-		"nextPageToken": p.NextPageToken,
-	}
+    return map[string]interface{} {
+        "items": CastRarityParameterStatusesFromDict(
+            p.Items,
+        ),
+        "nextPageToken": p.NextPageToken,
+    }
 }
 
 func (p DescribeRarityParameterStatusesByUserIdResult) Pointer() *DescribeRarityParameterStatusesByUserIdResult {
-	return &p
+    return &p
 }
 
 type GetRarityParameterStatusResult struct {
-	Item *RarityParameterStatus `json:"item"`
+    Item *RarityParameterStatus `json:"item"`
 }
 
 type GetRarityParameterStatusAsyncResult struct {
@@ -1168,29 +1167,29 @@ type GetRarityParameterStatusAsyncResult struct {
 }
 
 func NewGetRarityParameterStatusResultFromJson(data string) GetRarityParameterStatusResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRarityParameterStatusResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetRarityParameterStatusResultFromDict(dict)
 }
 
 func NewGetRarityParameterStatusResultFromDict(data map[string]interface{}) GetRarityParameterStatusResult {
-	return GetRarityParameterStatusResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetRarityParameterStatusResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetRarityParameterStatusResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetRarityParameterStatusResult) Pointer() *GetRarityParameterStatusResult {
-	return &p
+    return &p
 }
 
 type GetRarityParameterStatusByUserIdResult struct {
-	Item *RarityParameterStatus `json:"item"`
+    Item *RarityParameterStatus `json:"item"`
 }
 
 type GetRarityParameterStatusByUserIdAsyncResult struct {
@@ -1199,29 +1198,29 @@ type GetRarityParameterStatusByUserIdAsyncResult struct {
 }
 
 func NewGetRarityParameterStatusByUserIdResultFromJson(data string) GetRarityParameterStatusByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRarityParameterStatusByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetRarityParameterStatusByUserIdResultFromDict(dict)
 }
 
 func NewGetRarityParameterStatusByUserIdResultFromDict(data map[string]interface{}) GetRarityParameterStatusByUserIdResult {
-	return GetRarityParameterStatusByUserIdResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return GetRarityParameterStatusByUserIdResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p GetRarityParameterStatusByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p GetRarityParameterStatusByUserIdResult) Pointer() *GetRarityParameterStatusByUserIdResult {
-	return &p
+    return &p
 }
 
 type DeleteRarityParameterStatusByUserIdResult struct {
-	Item *RarityParameterStatus `json:"item"`
+    Item *RarityParameterStatus `json:"item"`
 }
 
 type DeleteRarityParameterStatusByUserIdAsyncResult struct {
@@ -1230,30 +1229,30 @@ type DeleteRarityParameterStatusByUserIdAsyncResult struct {
 }
 
 func NewDeleteRarityParameterStatusByUserIdResultFromJson(data string) DeleteRarityParameterStatusByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteRarityParameterStatusByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteRarityParameterStatusByUserIdResultFromDict(dict)
 }
 
 func NewDeleteRarityParameterStatusByUserIdResultFromDict(data map[string]interface{}) DeleteRarityParameterStatusByUserIdResult {
-	return DeleteRarityParameterStatusByUserIdResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return DeleteRarityParameterStatusByUserIdResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p DeleteRarityParameterStatusByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p DeleteRarityParameterStatusByUserIdResult) Pointer() *DeleteRarityParameterStatusByUserIdResult {
-	return &p
+    return &p
 }
 
 type ReDrawRarityParameterStatusByUserIdResult struct {
-	Item *RarityParameterStatus `json:"item"`
-	Old  *RarityParameterStatus `json:"old"`
+    Item *RarityParameterStatus `json:"item"`
+    Old *RarityParameterStatus `json:"old"`
 }
 
 type ReDrawRarityParameterStatusByUserIdAsyncResult struct {
@@ -1262,32 +1261,32 @@ type ReDrawRarityParameterStatusByUserIdAsyncResult struct {
 }
 
 func NewReDrawRarityParameterStatusByUserIdResultFromJson(data string) ReDrawRarityParameterStatusByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewReDrawRarityParameterStatusByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewReDrawRarityParameterStatusByUserIdResultFromDict(dict)
 }
 
 func NewReDrawRarityParameterStatusByUserIdResultFromDict(data map[string]interface{}) ReDrawRarityParameterStatusByUserIdResult {
-	return ReDrawRarityParameterStatusByUserIdResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
-	}
+    return ReDrawRarityParameterStatusByUserIdResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+        Old: NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+    }
 }
 
 func (p ReDrawRarityParameterStatusByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "old": p.Old.ToDict(),
+    }
 }
 
 func (p ReDrawRarityParameterStatusByUserIdResult) Pointer() *ReDrawRarityParameterStatusByUserIdResult {
-	return &p
+    return &p
 }
 
 type ReDrawRarityParameterStatusByStampSheetResult struct {
-	Item *RarityParameterStatus `json:"item"`
-	Old  *RarityParameterStatus `json:"old"`
+    Item *RarityParameterStatus `json:"item"`
+    Old *RarityParameterStatus `json:"old"`
 }
 
 type ReDrawRarityParameterStatusByStampSheetAsyncResult struct {
@@ -1296,32 +1295,32 @@ type ReDrawRarityParameterStatusByStampSheetAsyncResult struct {
 }
 
 func NewReDrawRarityParameterStatusByStampSheetResultFromJson(data string) ReDrawRarityParameterStatusByStampSheetResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewReDrawRarityParameterStatusByStampSheetResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewReDrawRarityParameterStatusByStampSheetResultFromDict(dict)
 }
 
 func NewReDrawRarityParameterStatusByStampSheetResultFromDict(data map[string]interface{}) ReDrawRarityParameterStatusByStampSheetResult {
-	return ReDrawRarityParameterStatusByStampSheetResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
-	}
+    return ReDrawRarityParameterStatusByStampSheetResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+        Old: NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+    }
 }
 
 func (p ReDrawRarityParameterStatusByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "old": p.Old.ToDict(),
+    }
 }
 
 func (p ReDrawRarityParameterStatusByStampSheetResult) Pointer() *ReDrawRarityParameterStatusByStampSheetResult {
-	return &p
+    return &p
 }
 
 type AddRarityParameterStatusByUserIdResult struct {
-	Item *RarityParameterStatus `json:"item"`
-	Old  *RarityParameterStatus `json:"old"`
+    Item *RarityParameterStatus `json:"item"`
+    Old *RarityParameterStatus `json:"old"`
 }
 
 type AddRarityParameterStatusByUserIdAsyncResult struct {
@@ -1330,32 +1329,32 @@ type AddRarityParameterStatusByUserIdAsyncResult struct {
 }
 
 func NewAddRarityParameterStatusByUserIdResultFromJson(data string) AddRarityParameterStatusByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAddRarityParameterStatusByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAddRarityParameterStatusByUserIdResultFromDict(dict)
 }
 
 func NewAddRarityParameterStatusByUserIdResultFromDict(data map[string]interface{}) AddRarityParameterStatusByUserIdResult {
-	return AddRarityParameterStatusByUserIdResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
-	}
+    return AddRarityParameterStatusByUserIdResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+        Old: NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+    }
 }
 
 func (p AddRarityParameterStatusByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "old": p.Old.ToDict(),
+    }
 }
 
 func (p AddRarityParameterStatusByUserIdResult) Pointer() *AddRarityParameterStatusByUserIdResult {
-	return &p
+    return &p
 }
 
 type AddRarityParameterStatusByStampSheetResult struct {
-	Item *RarityParameterStatus `json:"item"`
-	Old  *RarityParameterStatus `json:"old"`
+    Item *RarityParameterStatus `json:"item"`
+    Old *RarityParameterStatus `json:"old"`
 }
 
 type AddRarityParameterStatusByStampSheetAsyncResult struct {
@@ -1364,31 +1363,31 @@ type AddRarityParameterStatusByStampSheetAsyncResult struct {
 }
 
 func NewAddRarityParameterStatusByStampSheetResultFromJson(data string) AddRarityParameterStatusByStampSheetResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAddRarityParameterStatusByStampSheetResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAddRarityParameterStatusByStampSheetResultFromDict(dict)
 }
 
 func NewAddRarityParameterStatusByStampSheetResultFromDict(data map[string]interface{}) AddRarityParameterStatusByStampSheetResult {
-	return AddRarityParameterStatusByStampSheetResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
-	}
+    return AddRarityParameterStatusByStampSheetResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+        Old: NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+    }
 }
 
 func (p AddRarityParameterStatusByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "old": p.Old.ToDict(),
+    }
 }
 
 func (p AddRarityParameterStatusByStampSheetResult) Pointer() *AddRarityParameterStatusByStampSheetResult {
-	return &p
+    return &p
 }
 
 type VerifyRarityParameterStatusResult struct {
-	Item *RarityParameterStatus `json:"item"`
+    Item *RarityParameterStatus `json:"item"`
 }
 
 type VerifyRarityParameterStatusAsyncResult struct {
@@ -1397,29 +1396,29 @@ type VerifyRarityParameterStatusAsyncResult struct {
 }
 
 func NewVerifyRarityParameterStatusResultFromJson(data string) VerifyRarityParameterStatusResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewVerifyRarityParameterStatusResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewVerifyRarityParameterStatusResultFromDict(dict)
 }
 
 func NewVerifyRarityParameterStatusResultFromDict(data map[string]interface{}) VerifyRarityParameterStatusResult {
-	return VerifyRarityParameterStatusResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return VerifyRarityParameterStatusResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p VerifyRarityParameterStatusResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p VerifyRarityParameterStatusResult) Pointer() *VerifyRarityParameterStatusResult {
-	return &p
+    return &p
 }
 
 type VerifyRarityParameterStatusByUserIdResult struct {
-	Item *RarityParameterStatus `json:"item"`
+    Item *RarityParameterStatus `json:"item"`
 }
 
 type VerifyRarityParameterStatusByUserIdAsyncResult struct {
@@ -1428,30 +1427,30 @@ type VerifyRarityParameterStatusByUserIdAsyncResult struct {
 }
 
 func NewVerifyRarityParameterStatusByUserIdResultFromJson(data string) VerifyRarityParameterStatusByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewVerifyRarityParameterStatusByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewVerifyRarityParameterStatusByUserIdResultFromDict(dict)
 }
 
 func NewVerifyRarityParameterStatusByUserIdResultFromDict(data map[string]interface{}) VerifyRarityParameterStatusByUserIdResult {
-	return VerifyRarityParameterStatusByUserIdResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-	}
+    return VerifyRarityParameterStatusByUserIdResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+    }
 }
 
 func (p VerifyRarityParameterStatusByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+    }
 }
 
 func (p VerifyRarityParameterStatusByUserIdResult) Pointer() *VerifyRarityParameterStatusByUserIdResult {
-	return &p
+    return &p
 }
 
 type VerifyRarityParameterStatusByStampTaskResult struct {
-	Item            *RarityParameterStatus `json:"item"`
-	NewContextStack *string                `json:"newContextStack"`
+    Item *RarityParameterStatus `json:"item"`
+    NewContextStack *string `json:"newContextStack"`
 }
 
 type VerifyRarityParameterStatusByStampTaskAsyncResult struct {
@@ -1460,32 +1459,32 @@ type VerifyRarityParameterStatusByStampTaskAsyncResult struct {
 }
 
 func NewVerifyRarityParameterStatusByStampTaskResultFromJson(data string) VerifyRarityParameterStatusByStampTaskResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewVerifyRarityParameterStatusByStampTaskResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewVerifyRarityParameterStatusByStampTaskResultFromDict(dict)
 }
 
 func NewVerifyRarityParameterStatusByStampTaskResultFromDict(data map[string]interface{}) VerifyRarityParameterStatusByStampTaskResult {
-	return VerifyRarityParameterStatusByStampTaskResult{
-		Item:            NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
-	}
+    return VerifyRarityParameterStatusByStampTaskResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+        NewContextStack: core.CastString(data["newContextStack"]),
+    }
 }
 
 func (p VerifyRarityParameterStatusByStampTaskResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
-		"newContextStack": p.NewContextStack,
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "newContextStack": p.NewContextStack,
+    }
 }
 
 func (p VerifyRarityParameterStatusByStampTaskResult) Pointer() *VerifyRarityParameterStatusByStampTaskResult {
-	return &p
+    return &p
 }
 
 type SetRarityParameterStatusByUserIdResult struct {
-	Item *RarityParameterStatus `json:"item"`
-	Old  *RarityParameterStatus `json:"old"`
+    Item *RarityParameterStatus `json:"item"`
+    Old *RarityParameterStatus `json:"old"`
 }
 
 type SetRarityParameterStatusByUserIdAsyncResult struct {
@@ -1494,32 +1493,32 @@ type SetRarityParameterStatusByUserIdAsyncResult struct {
 }
 
 func NewSetRarityParameterStatusByUserIdResultFromJson(data string) SetRarityParameterStatusByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetRarityParameterStatusByUserIdResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetRarityParameterStatusByUserIdResultFromDict(dict)
 }
 
 func NewSetRarityParameterStatusByUserIdResultFromDict(data map[string]interface{}) SetRarityParameterStatusByUserIdResult {
-	return SetRarityParameterStatusByUserIdResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
-	}
+    return SetRarityParameterStatusByUserIdResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+        Old: NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+    }
 }
 
 func (p SetRarityParameterStatusByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "old": p.Old.ToDict(),
+    }
 }
 
 func (p SetRarityParameterStatusByUserIdResult) Pointer() *SetRarityParameterStatusByUserIdResult {
-	return &p
+    return &p
 }
 
 type SetRarityParameterStatusByStampSheetResult struct {
-	Item *RarityParameterStatus `json:"item"`
-	Old  *RarityParameterStatus `json:"old"`
+    Item *RarityParameterStatus `json:"item"`
+    Old *RarityParameterStatus `json:"old"`
 }
 
 type SetRarityParameterStatusByStampSheetAsyncResult struct {
@@ -1528,25 +1527,25 @@ type SetRarityParameterStatusByStampSheetAsyncResult struct {
 }
 
 func NewSetRarityParameterStatusByStampSheetResultFromJson(data string) SetRarityParameterStatusByStampSheetResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetRarityParameterStatusByStampSheetResultFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSetRarityParameterStatusByStampSheetResultFromDict(dict)
 }
 
 func NewSetRarityParameterStatusByStampSheetResultFromDict(data map[string]interface{}) SetRarityParameterStatusByStampSheetResult {
-	return SetRarityParameterStatusByStampSheetResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
-	}
+    return SetRarityParameterStatusByStampSheetResult {
+        Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+        Old: NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+    }
 }
 
 func (p SetRarityParameterStatusByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
-	}
+    return map[string]interface{} {
+        "item": p.Item.ToDict(),
+        "old": p.Old.ToDict(),
+    }
 }
 
 func (p SetRarityParameterStatusByStampSheetResult) Pointer() *SetRarityParameterStatusByStampSheetResult {
-	return &p
+    return &p
 }

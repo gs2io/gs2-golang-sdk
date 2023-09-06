@@ -18,9 +18,8 @@ package showcase
 
 import (
 	"encoding/json"
-	"strings"
-
 	"github.com/gs2io/gs2-golang-sdk/core"
+	"strings"
 )
 
 type Gs2ShowcaseRestClient struct {
@@ -57,13 +56,13 @@ func describeNamespacesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -87,10 +86,10 @@ func (p Gs2ShowcaseRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -142,13 +141,13 @@ func createNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -164,44 +163,44 @@ func (p Gs2ShowcaseRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.TransactionSetting != nil {
-		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-	}
-	if request.BuyScript != nil {
-		bodies["buyScript"] = request.BuyScript.ToDict()
-	}
-	if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
-		bodies["queueNamespaceId"] = *request.QueueNamespaceId
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
+    if request.BuyScript != nil {
+        bodies["buyScript"] = request.BuyScript.ToDict()
+    }
+    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
+        bodies["queueNamespaceId"] = *request.QueueNamespaceId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -245,13 +244,13 @@ func getNamespaceStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -265,19 +264,19 @@ func (p Gs2ShowcaseRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -329,13 +328,13 @@ func getNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -349,19 +348,19 @@ func (p Gs2ShowcaseRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -413,13 +412,13 @@ func updateNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -433,48 +432,48 @@ func (p Gs2ShowcaseRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.TransactionSetting != nil {
-		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-	}
-	if request.BuyScript != nil {
-		bodies["buyScript"] = request.BuyScript.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
-	if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
-		bodies["queueNamespaceId"] = *request.QueueNamespaceId
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
+    if request.BuyScript != nil {
+        bodies["buyScript"] = request.BuyScript.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
+    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
+        bodies["queueNamespaceId"] = *request.QueueNamespaceId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -518,13 +517,13 @@ func deleteNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -538,19 +537,19 @@ func (p Gs2ShowcaseRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -602,13 +601,13 @@ func describeSalesItemMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeSalesItemMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeSalesItemMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeSalesItemMastersAsyncResult{
 		result: &result,
@@ -622,11 +621,11 @@ func (p Gs2ShowcaseRestClient) DescribeSalesItemMastersAsync(
 	callback chan<- DescribeSalesItemMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/salesItem"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -637,10 +636,10 @@ func (p Gs2ShowcaseRestClient) DescribeSalesItemMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeSalesItemMastersAsyncHandler(
 		p,
@@ -692,13 +691,13 @@ func createSalesItemMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateSalesItemMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateSalesItemMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateSalesItemMasterAsyncResult{
 		result: &result,
@@ -712,53 +711,53 @@ func (p Gs2ShowcaseRestClient) CreateSalesItemMasterAsync(
 	callback chan<- CreateSalesItemMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/salesItem"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.ConsumeActions != nil {
-		var _consumeActions []interface{}
-		for _, item := range request.ConsumeActions {
-			_consumeActions = append(_consumeActions, item)
-		}
-		bodies["consumeActions"] = _consumeActions
-	}
-	if request.AcquireActions != nil {
-		var _acquireActions []interface{}
-		for _, item := range request.AcquireActions {
-			_acquireActions = append(_acquireActions, item)
-		}
-		bodies["acquireActions"] = _acquireActions
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ConsumeActions != nil {
+        var _consumeActions []interface {}
+        for _, item := range request.ConsumeActions {
+            _consumeActions = append(_consumeActions, item)
+        }
+        bodies["consumeActions"] = _consumeActions
+    }
+    if request.AcquireActions != nil {
+        var _acquireActions []interface {}
+        for _, item := range request.AcquireActions {
+            _acquireActions = append(_acquireActions, item)
+        }
+        bodies["acquireActions"] = _acquireActions
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createSalesItemMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -802,13 +801,13 @@ func getSalesItemMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSalesItemMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSalesItemMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetSalesItemMasterAsyncResult{
 		result: &result,
@@ -822,24 +821,24 @@ func (p Gs2ShowcaseRestClient) GetSalesItemMasterAsync(
 	callback chan<- GetSalesItemMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/salesItem/{salesItemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.SalesItemName != nil && *request.SalesItemName != "" {
-		path = strings.ReplaceAll(path, "{salesItemName}", core.ToString(*request.SalesItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{salesItemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.SalesItemName != nil && *request.SalesItemName != ""  {
+        path = strings.ReplaceAll(path, "{salesItemName}", core.ToString(*request.SalesItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{salesItemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getSalesItemMasterAsyncHandler(
 		p,
@@ -891,13 +890,13 @@ func updateSalesItemMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateSalesItemMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateSalesItemMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateSalesItemMasterAsyncResult{
 		result: &result,
@@ -911,55 +910,55 @@ func (p Gs2ShowcaseRestClient) UpdateSalesItemMasterAsync(
 	callback chan<- UpdateSalesItemMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/salesItem/{salesItemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.SalesItemName != nil && *request.SalesItemName != "" {
-		path = strings.ReplaceAll(path, "{salesItemName}", core.ToString(*request.SalesItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{salesItemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.SalesItemName != nil && *request.SalesItemName != ""  {
+        path = strings.ReplaceAll(path, "{salesItemName}", core.ToString(*request.SalesItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{salesItemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.ConsumeActions != nil {
-		var _consumeActions []interface{}
-		for _, item := range request.ConsumeActions {
-			_consumeActions = append(_consumeActions, item)
-		}
-		bodies["consumeActions"] = _consumeActions
-	}
-	if request.AcquireActions != nil {
-		var _acquireActions []interface{}
-		for _, item := range request.AcquireActions {
-			_acquireActions = append(_acquireActions, item)
-		}
-		bodies["acquireActions"] = _acquireActions
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.ConsumeActions != nil {
+        var _consumeActions []interface {}
+        for _, item := range request.ConsumeActions {
+            _consumeActions = append(_consumeActions, item)
+        }
+        bodies["consumeActions"] = _consumeActions
+    }
+    if request.AcquireActions != nil {
+        var _acquireActions []interface {}
+        for _, item := range request.AcquireActions {
+            _acquireActions = append(_acquireActions, item)
+        }
+        bodies["acquireActions"] = _acquireActions
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateSalesItemMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1003,13 +1002,13 @@ func deleteSalesItemMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteSalesItemMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteSalesItemMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteSalesItemMasterAsyncResult{
 		result: &result,
@@ -1023,24 +1022,24 @@ func (p Gs2ShowcaseRestClient) DeleteSalesItemMasterAsync(
 	callback chan<- DeleteSalesItemMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/salesItem/{salesItemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.SalesItemName != nil && *request.SalesItemName != "" {
-		path = strings.ReplaceAll(path, "{salesItemName}", core.ToString(*request.SalesItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{salesItemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.SalesItemName != nil && *request.SalesItemName != ""  {
+        path = strings.ReplaceAll(path, "{salesItemName}", core.ToString(*request.SalesItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{salesItemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteSalesItemMasterAsyncHandler(
 		p,
@@ -1092,13 +1091,13 @@ func describeSalesItemGroupMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeSalesItemGroupMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeSalesItemGroupMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeSalesItemGroupMastersAsyncResult{
 		result: &result,
@@ -1112,11 +1111,11 @@ func (p Gs2ShowcaseRestClient) DescribeSalesItemGroupMastersAsync(
 	callback chan<- DescribeSalesItemGroupMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1127,10 +1126,10 @@ func (p Gs2ShowcaseRestClient) DescribeSalesItemGroupMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeSalesItemGroupMastersAsyncHandler(
 		p,
@@ -1182,13 +1181,13 @@ func createSalesItemGroupMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateSalesItemGroupMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateSalesItemGroupMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateSalesItemGroupMasterAsyncResult{
 		result: &result,
@@ -1202,46 +1201,46 @@ func (p Gs2ShowcaseRestClient) CreateSalesItemGroupMasterAsync(
 	callback chan<- CreateSalesItemGroupMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.SalesItemNames != nil {
-		var _salesItemNames []interface{}
-		for _, item := range request.SalesItemNames {
-			_salesItemNames = append(_salesItemNames, item)
-		}
-		bodies["salesItemNames"] = _salesItemNames
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.SalesItemNames != nil {
+        var _salesItemNames []interface {}
+        for _, item := range request.SalesItemNames {
+            _salesItemNames = append(_salesItemNames, item)
+        }
+        bodies["salesItemNames"] = _salesItemNames
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createSalesItemGroupMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1285,13 +1284,13 @@ func getSalesItemGroupMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSalesItemGroupMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetSalesItemGroupMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetSalesItemGroupMasterAsyncResult{
 		result: &result,
@@ -1305,24 +1304,24 @@ func (p Gs2ShowcaseRestClient) GetSalesItemGroupMasterAsync(
 	callback chan<- GetSalesItemGroupMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{salesItemGroupName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.SalesItemGroupName != nil && *request.SalesItemGroupName != "" {
-		path = strings.ReplaceAll(path, "{salesItemGroupName}", core.ToString(*request.SalesItemGroupName))
-	} else {
-		path = strings.ReplaceAll(path, "{salesItemGroupName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.SalesItemGroupName != nil && *request.SalesItemGroupName != ""  {
+        path = strings.ReplaceAll(path, "{salesItemGroupName}", core.ToString(*request.SalesItemGroupName))
+    } else {
+        path = strings.ReplaceAll(path, "{salesItemGroupName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getSalesItemGroupMasterAsyncHandler(
 		p,
@@ -1374,13 +1373,13 @@ func updateSalesItemGroupMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateSalesItemGroupMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateSalesItemGroupMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateSalesItemGroupMasterAsyncResult{
 		result: &result,
@@ -1394,48 +1393,48 @@ func (p Gs2ShowcaseRestClient) UpdateSalesItemGroupMasterAsync(
 	callback chan<- UpdateSalesItemGroupMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{salesItemGroupName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.SalesItemGroupName != nil && *request.SalesItemGroupName != "" {
-		path = strings.ReplaceAll(path, "{salesItemGroupName}", core.ToString(*request.SalesItemGroupName))
-	} else {
-		path = strings.ReplaceAll(path, "{salesItemGroupName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.SalesItemGroupName != nil && *request.SalesItemGroupName != ""  {
+        path = strings.ReplaceAll(path, "{salesItemGroupName}", core.ToString(*request.SalesItemGroupName))
+    } else {
+        path = strings.ReplaceAll(path, "{salesItemGroupName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.SalesItemNames != nil {
-		var _salesItemNames []interface{}
-		for _, item := range request.SalesItemNames {
-			_salesItemNames = append(_salesItemNames, item)
-		}
-		bodies["salesItemNames"] = _salesItemNames
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.SalesItemNames != nil {
+        var _salesItemNames []interface {}
+        for _, item := range request.SalesItemNames {
+            _salesItemNames = append(_salesItemNames, item)
+        }
+        bodies["salesItemNames"] = _salesItemNames
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateSalesItemGroupMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1479,13 +1478,13 @@ func deleteSalesItemGroupMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteSalesItemGroupMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteSalesItemGroupMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteSalesItemGroupMasterAsyncResult{
 		result: &result,
@@ -1499,24 +1498,24 @@ func (p Gs2ShowcaseRestClient) DeleteSalesItemGroupMasterAsync(
 	callback chan<- DeleteSalesItemGroupMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/group/{salesItemGroupName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.SalesItemGroupName != nil && *request.SalesItemGroupName != "" {
-		path = strings.ReplaceAll(path, "{salesItemGroupName}", core.ToString(*request.SalesItemGroupName))
-	} else {
-		path = strings.ReplaceAll(path, "{salesItemGroupName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.SalesItemGroupName != nil && *request.SalesItemGroupName != ""  {
+        path = strings.ReplaceAll(path, "{salesItemGroupName}", core.ToString(*request.SalesItemGroupName))
+    } else {
+        path = strings.ReplaceAll(path, "{salesItemGroupName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteSalesItemGroupMasterAsyncHandler(
 		p,
@@ -1568,13 +1567,13 @@ func describeShowcaseMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeShowcaseMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeShowcaseMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeShowcaseMastersAsyncResult{
 		result: &result,
@@ -1588,11 +1587,11 @@ func (p Gs2ShowcaseRestClient) DescribeShowcaseMastersAsync(
 	callback chan<- DescribeShowcaseMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/showcase"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1603,10 +1602,10 @@ func (p Gs2ShowcaseRestClient) DescribeShowcaseMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeShowcaseMastersAsyncHandler(
 		p,
@@ -1658,13 +1657,13 @@ func createShowcaseMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateShowcaseMasterAsyncResult{
 		result: &result,
@@ -1678,49 +1677,49 @@ func (p Gs2ShowcaseRestClient) CreateShowcaseMasterAsync(
 	callback chan<- CreateShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/showcase"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.DisplayItems != nil {
-		var _displayItems []interface{}
-		for _, item := range request.DisplayItems {
-			_displayItems = append(_displayItems, item)
-		}
-		bodies["displayItems"] = _displayItems
-	}
-	if request.SalesPeriodEventId != nil && *request.SalesPeriodEventId != "" {
-		bodies["salesPeriodEventId"] = *request.SalesPeriodEventId
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.DisplayItems != nil {
+        var _displayItems []interface {}
+        for _, item := range request.DisplayItems {
+            _displayItems = append(_displayItems, item)
+        }
+        bodies["displayItems"] = _displayItems
+    }
+    if request.SalesPeriodEventId != nil && *request.SalesPeriodEventId != "" {
+        bodies["salesPeriodEventId"] = *request.SalesPeriodEventId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1764,13 +1763,13 @@ func getShowcaseMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetShowcaseMasterAsyncResult{
 		result: &result,
@@ -1784,24 +1783,24 @@ func (p Gs2ShowcaseRestClient) GetShowcaseMasterAsync(
 	callback chan<- GetShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/showcase/{showcaseName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getShowcaseMasterAsyncHandler(
 		p,
@@ -1853,13 +1852,13 @@ func updateShowcaseMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateShowcaseMasterAsyncResult{
 		result: &result,
@@ -1873,51 +1872,51 @@ func (p Gs2ShowcaseRestClient) UpdateShowcaseMasterAsync(
 	callback chan<- UpdateShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/showcase/{showcaseName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.DisplayItems != nil {
-		var _displayItems []interface{}
-		for _, item := range request.DisplayItems {
-			_displayItems = append(_displayItems, item)
-		}
-		bodies["displayItems"] = _displayItems
-	}
-	if request.SalesPeriodEventId != nil && *request.SalesPeriodEventId != "" {
-		bodies["salesPeriodEventId"] = *request.SalesPeriodEventId
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.DisplayItems != nil {
+        var _displayItems []interface {}
+        for _, item := range request.DisplayItems {
+            _displayItems = append(_displayItems, item)
+        }
+        bodies["displayItems"] = _displayItems
+    }
+    if request.SalesPeriodEventId != nil && *request.SalesPeriodEventId != "" {
+        bodies["salesPeriodEventId"] = *request.SalesPeriodEventId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1961,13 +1960,13 @@ func deleteShowcaseMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteShowcaseMasterAsyncResult{
 		result: &result,
@@ -1981,24 +1980,24 @@ func (p Gs2ShowcaseRestClient) DeleteShowcaseMasterAsync(
 	callback chan<- DeleteShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/showcase/{showcaseName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteShowcaseMasterAsyncHandler(
 		p,
@@ -2050,13 +2049,13 @@ func exportMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ExportMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ExportMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -2070,19 +2069,19 @@ func (p Gs2ShowcaseRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go exportMasterAsyncHandler(
 		p,
@@ -2134,13 +2133,13 @@ func getCurrentShowcaseMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCurrentShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCurrentShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCurrentShowcaseMasterAsyncResult{
 		result: &result,
@@ -2154,19 +2153,19 @@ func (p Gs2ShowcaseRestClient) GetCurrentShowcaseMasterAsync(
 	callback chan<- GetCurrentShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getCurrentShowcaseMasterAsyncHandler(
 		p,
@@ -2218,13 +2217,13 @@ func updateCurrentShowcaseMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentShowcaseMasterAsyncResult{
 		result: &result,
@@ -2238,33 +2237,33 @@ func (p Gs2ShowcaseRestClient) UpdateCurrentShowcaseMasterAsync(
 	callback chan<- UpdateCurrentShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Settings != nil && *request.Settings != "" {
-		bodies["settings"] = *request.Settings
-	}
+    var bodies = core.Bodies{}
+    if request.Settings != nil && *request.Settings != "" {
+        bodies["settings"] = *request.Settings
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2308,13 +2307,13 @@ func updateCurrentShowcaseMasterFromGitHubAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentShowcaseMasterFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentShowcaseMasterFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentShowcaseMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2328,33 +2327,33 @@ func (p Gs2ShowcaseRestClient) UpdateCurrentShowcaseMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentShowcaseMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentShowcaseMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2398,13 +2397,13 @@ func describeShowcasesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeShowcasesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeShowcasesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeShowcasesAsyncResult{
 		result: &result,
@@ -2418,22 +2417,22 @@ func (p Gs2ShowcaseRestClient) DescribeShowcasesAsync(
 	callback chan<- DescribeShowcasesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/showcase"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeShowcasesAsyncHandler(
 		p,
@@ -2485,13 +2484,13 @@ func describeShowcasesByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeShowcasesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeShowcasesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeShowcasesByUserIdAsyncResult{
 		result: &result,
@@ -2505,24 +2504,24 @@ func (p Gs2ShowcaseRestClient) DescribeShowcasesByUserIdAsync(
 	callback chan<- DescribeShowcasesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/showcase"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeShowcasesByUserIdAsyncHandler(
 		p,
@@ -2574,13 +2573,13 @@ func getShowcaseAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetShowcaseAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetShowcaseAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetShowcaseAsyncResult{
 		result: &result,
@@ -2594,27 +2593,27 @@ func (p Gs2ShowcaseRestClient) GetShowcaseAsync(
 	callback chan<- GetShowcaseAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/showcase/{showcaseName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getShowcaseAsyncHandler(
 		p,
@@ -2666,13 +2665,13 @@ func getShowcaseByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetShowcaseByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetShowcaseByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetShowcaseByUserIdAsyncResult{
 		result: &result,
@@ -2686,29 +2685,29 @@ func (p Gs2ShowcaseRestClient) GetShowcaseByUserIdAsync(
 	callback chan<- GetShowcaseByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/showcase/{showcaseName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getShowcaseByUserIdAsyncHandler(
 		p,
@@ -2760,13 +2759,13 @@ func buyAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- BuyAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- BuyAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- BuyAsyncResult{
 		result: &result,
@@ -2780,56 +2779,56 @@ func (p Gs2ShowcaseRestClient) BuyAsync(
 	callback chan<- BuyAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/showcase/{showcaseName}/{displayItemId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
-	if request.DisplayItemId != nil && *request.DisplayItemId != "" {
-		path = strings.ReplaceAll(path, "{displayItemId}", core.ToString(*request.DisplayItemId))
-	} else {
-		path = strings.ReplaceAll(path, "{displayItemId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.DisplayItemId != nil && *request.DisplayItemId != ""  {
+        path = strings.ReplaceAll(path, "{displayItemId}", core.ToString(*request.DisplayItemId))
+    } else {
+        path = strings.ReplaceAll(path, "{displayItemId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Quantity != nil {
-		bodies["quantity"] = *request.Quantity
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    var bodies = core.Bodies{}
+    if request.Quantity != nil {
+        bodies["quantity"] = *request.Quantity
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go buyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2873,13 +2872,13 @@ func buyByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- BuyByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- BuyByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- BuyByUserIdAsyncResult{
 		result: &result,
@@ -2893,58 +2892,58 @@ func (p Gs2ShowcaseRestClient) BuyByUserIdAsync(
 	callback chan<- BuyByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/showcase/{showcaseName}/{displayItemId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
-	if request.DisplayItemId != nil && *request.DisplayItemId != "" {
-		path = strings.ReplaceAll(path, "{displayItemId}", core.ToString(*request.DisplayItemId))
-	} else {
-		path = strings.ReplaceAll(path, "{displayItemId}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.DisplayItemId != nil && *request.DisplayItemId != ""  {
+        path = strings.ReplaceAll(path, "{displayItemId}", core.ToString(*request.DisplayItemId))
+    } else {
+        path = strings.ReplaceAll(path, "{displayItemId}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Quantity != nil {
-		bodies["quantity"] = *request.Quantity
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    var bodies = core.Bodies{}
+    if request.Quantity != nil {
+        bodies["quantity"] = *request.Quantity
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go buyByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2988,13 +2987,13 @@ func describeRandomShowcaseMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeRandomShowcaseMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeRandomShowcaseMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeRandomShowcaseMastersAsyncResult{
 		result: &result,
@@ -3008,11 +3007,11 @@ func (p Gs2ShowcaseRestClient) DescribeRandomShowcaseMastersAsync(
 	callback chan<- DescribeRandomShowcaseMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/random/showcase"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3023,10 +3022,10 @@ func (p Gs2ShowcaseRestClient) DescribeRandomShowcaseMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeRandomShowcaseMastersAsyncHandler(
 		p,
@@ -3078,13 +3077,13 @@ func createRandomShowcaseMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateRandomShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateRandomShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateRandomShowcaseMasterAsyncResult{
 		result: &result,
@@ -3098,58 +3097,58 @@ func (p Gs2ShowcaseRestClient) CreateRandomShowcaseMasterAsync(
 	callback chan<- CreateRandomShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/random/showcase"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.MaximumNumberOfChoice != nil {
-		bodies["maximumNumberOfChoice"] = *request.MaximumNumberOfChoice
-	}
-	if request.DisplayItems != nil {
-		var _displayItems []interface{}
-		for _, item := range request.DisplayItems {
-			_displayItems = append(_displayItems, item)
-		}
-		bodies["displayItems"] = _displayItems
-	}
-	if request.BaseTimestamp != nil {
-		bodies["baseTimestamp"] = *request.BaseTimestamp
-	}
-	if request.ResetIntervalHours != nil {
-		bodies["resetIntervalHours"] = *request.ResetIntervalHours
-	}
-	if request.SalesPeriodEventId != nil && *request.SalesPeriodEventId != "" {
-		bodies["salesPeriodEventId"] = *request.SalesPeriodEventId
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.MaximumNumberOfChoice != nil {
+        bodies["maximumNumberOfChoice"] = *request.MaximumNumberOfChoice
+    }
+    if request.DisplayItems != nil {
+        var _displayItems []interface {}
+        for _, item := range request.DisplayItems {
+            _displayItems = append(_displayItems, item)
+        }
+        bodies["displayItems"] = _displayItems
+    }
+    if request.BaseTimestamp != nil {
+        bodies["baseTimestamp"] = *request.BaseTimestamp
+    }
+    if request.ResetIntervalHours != nil {
+        bodies["resetIntervalHours"] = *request.ResetIntervalHours
+    }
+    if request.SalesPeriodEventId != nil && *request.SalesPeriodEventId != "" {
+        bodies["salesPeriodEventId"] = *request.SalesPeriodEventId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createRandomShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3193,13 +3192,13 @@ func getRandomShowcaseMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetRandomShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetRandomShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetRandomShowcaseMasterAsyncResult{
 		result: &result,
@@ -3213,24 +3212,24 @@ func (p Gs2ShowcaseRestClient) GetRandomShowcaseMasterAsync(
 	callback chan<- GetRandomShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/random/showcase/{showcaseName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getRandomShowcaseMasterAsyncHandler(
 		p,
@@ -3282,13 +3281,13 @@ func updateRandomShowcaseMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateRandomShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateRandomShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateRandomShowcaseMasterAsyncResult{
 		result: &result,
@@ -3302,60 +3301,60 @@ func (p Gs2ShowcaseRestClient) UpdateRandomShowcaseMasterAsync(
 	callback chan<- UpdateRandomShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/random/showcase/{showcaseName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.MaximumNumberOfChoice != nil {
-		bodies["maximumNumberOfChoice"] = *request.MaximumNumberOfChoice
-	}
-	if request.DisplayItems != nil {
-		var _displayItems []interface{}
-		for _, item := range request.DisplayItems {
-			_displayItems = append(_displayItems, item)
-		}
-		bodies["displayItems"] = _displayItems
-	}
-	if request.BaseTimestamp != nil {
-		bodies["baseTimestamp"] = *request.BaseTimestamp
-	}
-	if request.ResetIntervalHours != nil {
-		bodies["resetIntervalHours"] = *request.ResetIntervalHours
-	}
-	if request.SalesPeriodEventId != nil && *request.SalesPeriodEventId != "" {
-		bodies["salesPeriodEventId"] = *request.SalesPeriodEventId
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.MaximumNumberOfChoice != nil {
+        bodies["maximumNumberOfChoice"] = *request.MaximumNumberOfChoice
+    }
+    if request.DisplayItems != nil {
+        var _displayItems []interface {}
+        for _, item := range request.DisplayItems {
+            _displayItems = append(_displayItems, item)
+        }
+        bodies["displayItems"] = _displayItems
+    }
+    if request.BaseTimestamp != nil {
+        bodies["baseTimestamp"] = *request.BaseTimestamp
+    }
+    if request.ResetIntervalHours != nil {
+        bodies["resetIntervalHours"] = *request.ResetIntervalHours
+    }
+    if request.SalesPeriodEventId != nil && *request.SalesPeriodEventId != "" {
+        bodies["salesPeriodEventId"] = *request.SalesPeriodEventId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateRandomShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3399,13 +3398,13 @@ func deleteRandomShowcaseMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteRandomShowcaseMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteRandomShowcaseMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteRandomShowcaseMasterAsyncResult{
 		result: &result,
@@ -3419,24 +3418,24 @@ func (p Gs2ShowcaseRestClient) DeleteRandomShowcaseMasterAsync(
 	callback chan<- DeleteRandomShowcaseMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/random/showcase/{showcaseName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteRandomShowcaseMasterAsyncHandler(
 		p,
@@ -3488,13 +3487,13 @@ func incrementPurchaseCountByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- IncrementPurchaseCountByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IncrementPurchaseCountByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- IncrementPurchaseCountByUserIdAsyncResult{
 		result: &result,
@@ -3508,51 +3507,51 @@ func (p Gs2ShowcaseRestClient) IncrementPurchaseCountByUserIdAsync(
 	callback chan<- IncrementPurchaseCountByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/random/showcase/user/{userId}/status/{showcaseName}/{displayItemName}/purchase/count"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
-	if request.DisplayItemName != nil && *request.DisplayItemName != "" {
-		path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{displayItemName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.DisplayItemName != nil && *request.DisplayItemName != ""  {
+        path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{displayItemName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Count != nil {
-		bodies["count"] = *request.Count
-	}
+    var bodies = core.Bodies{}
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go incrementPurchaseCountByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3596,13 +3595,13 @@ func decrementPurchaseCountByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DecrementPurchaseCountByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DecrementPurchaseCountByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DecrementPurchaseCountByUserIdAsyncResult{
 		result: &result,
@@ -3616,51 +3615,51 @@ func (p Gs2ShowcaseRestClient) DecrementPurchaseCountByUserIdAsync(
 	callback chan<- DecrementPurchaseCountByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/random/showcase/user/{userId}/status/{showcaseName}/{displayItemName}/purchase/count/decrease"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
-	if request.DisplayItemName != nil && *request.DisplayItemName != "" {
-		path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{displayItemName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.DisplayItemName != nil && *request.DisplayItemName != ""  {
+        path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{displayItemName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Count != nil {
-		bodies["count"] = *request.Count
-	}
+    var bodies = core.Bodies{}
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go decrementPurchaseCountByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3704,13 +3703,13 @@ func incrementPurchaseCountByStampTaskAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- IncrementPurchaseCountByStampTaskAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IncrementPurchaseCountByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- IncrementPurchaseCountByStampTaskAsyncResult{
 		result: &result,
@@ -3726,29 +3725,29 @@ func (p Gs2ShowcaseRestClient) IncrementPurchaseCountByStampTaskAsync(
 	path := "/stamp/random/showcase/status/purchase/count"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go incrementPurchaseCountByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3792,13 +3791,13 @@ func decrementPurchaseCountByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DecrementPurchaseCountByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DecrementPurchaseCountByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DecrementPurchaseCountByStampSheetAsyncResult{
 		result: &result,
@@ -3814,29 +3813,29 @@ func (p Gs2ShowcaseRestClient) DecrementPurchaseCountByStampSheetAsync(
 	path := "/stamp/random/showcase/status/purchase/count/decrease"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go decrementPurchaseCountByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -3880,13 +3879,13 @@ func forceReDrawByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ForceReDrawByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ForceReDrawByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ForceReDrawByUserIdAsyncResult{
 		result: &result,
@@ -3900,32 +3899,32 @@ func (p Gs2ShowcaseRestClient) ForceReDrawByUserIdAsync(
 	callback chan<- ForceReDrawByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/random/showcase/{showcaseName}/user/{userId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go forceReDrawByUserIdAsyncHandler(
 		p,
@@ -3977,13 +3976,13 @@ func forceReDrawByUserIdByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ForceReDrawByUserIdByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ForceReDrawByUserIdByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ForceReDrawByUserIdByStampSheetAsyncResult{
 		result: &result,
@@ -3999,29 +3998,29 @@ func (p Gs2ShowcaseRestClient) ForceReDrawByUserIdByStampSheetAsync(
 	path := "/stamp/random/showcase/status/redraw"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go forceReDrawByUserIdByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4065,13 +4064,13 @@ func describeRandomDisplayItemsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeRandomDisplayItemsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeRandomDisplayItemsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeRandomDisplayItemsAsyncResult{
 		result: &result,
@@ -4085,27 +4084,27 @@ func (p Gs2ShowcaseRestClient) DescribeRandomDisplayItemsAsync(
 	callback chan<- DescribeRandomDisplayItemsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/random/showcase/{showcaseName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeRandomDisplayItemsAsyncHandler(
 		p,
@@ -4157,13 +4156,13 @@ func describeRandomDisplayItemsByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeRandomDisplayItemsByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeRandomDisplayItemsByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeRandomDisplayItemsByUserIdAsyncResult{
 		result: &result,
@@ -4177,29 +4176,29 @@ func (p Gs2ShowcaseRestClient) DescribeRandomDisplayItemsByUserIdAsync(
 	callback chan<- DescribeRandomDisplayItemsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/random/showcase/{showcaseName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeRandomDisplayItemsByUserIdAsyncHandler(
 		p,
@@ -4251,13 +4250,13 @@ func getRandomDisplayItemAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetRandomDisplayItemAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetRandomDisplayItemAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetRandomDisplayItemAsyncResult{
 		result: &result,
@@ -4271,32 +4270,32 @@ func (p Gs2ShowcaseRestClient) GetRandomDisplayItemAsync(
 	callback chan<- GetRandomDisplayItemAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/random/showcase/{showcaseName}/displayItem/{displayItemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
-	if request.DisplayItemName != nil && *request.DisplayItemName != "" {
-		path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{displayItemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.DisplayItemName != nil && *request.DisplayItemName != ""  {
+        path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{displayItemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getRandomDisplayItemAsyncHandler(
 		p,
@@ -4348,13 +4347,13 @@ func getRandomDisplayItemByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetRandomDisplayItemByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetRandomDisplayItemByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetRandomDisplayItemByUserIdAsyncResult{
 		result: &result,
@@ -4368,34 +4367,34 @@ func (p Gs2ShowcaseRestClient) GetRandomDisplayItemByUserIdAsync(
 	callback chan<- GetRandomDisplayItemByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/random/showcase/{showcaseName}/displayItem/{displayItemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
-	if request.DisplayItemName != nil && *request.DisplayItemName != "" {
-		path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{displayItemName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.DisplayItemName != nil && *request.DisplayItemName != ""  {
+        path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{displayItemName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getRandomDisplayItemByUserIdAsyncHandler(
 		p,
@@ -4447,13 +4446,13 @@ func randomShowcaseBuyAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RandomShowcaseBuyAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RandomShowcaseBuyAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RandomShowcaseBuyAsyncResult{
 		result: &result,
@@ -4467,56 +4466,56 @@ func (p Gs2ShowcaseRestClient) RandomShowcaseBuyAsync(
 	callback chan<- RandomShowcaseBuyAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/random/showcase/{showcaseName}/{displayItemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
-	if request.DisplayItemName != nil && *request.DisplayItemName != "" {
-		path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{displayItemName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.DisplayItemName != nil && *request.DisplayItemName != ""  {
+        path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{displayItemName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Quantity != nil {
-		bodies["quantity"] = *request.Quantity
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    var bodies = core.Bodies{}
+    if request.Quantity != nil {
+        bodies["quantity"] = *request.Quantity
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go randomShowcaseBuyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -4560,13 +4559,13 @@ func randomShowcaseBuyByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- RandomShowcaseBuyByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- RandomShowcaseBuyByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- RandomShowcaseBuyByUserIdAsyncResult{
 		result: &result,
@@ -4580,58 +4579,58 @@ func (p Gs2ShowcaseRestClient) RandomShowcaseBuyByUserIdAsync(
 	callback chan<- RandomShowcaseBuyByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/random/showcase/{showcaseName}/{displayItemName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
-		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-	} else {
-		path = strings.ReplaceAll(path, "{showcaseName}", "null")
-	}
-	if request.DisplayItemName != nil && *request.DisplayItemName != "" {
-		path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
-	} else {
-		path = strings.ReplaceAll(path, "{displayItemName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
+        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+    } else {
+        path = strings.ReplaceAll(path, "{showcaseName}", "null")
+    }
+    if request.DisplayItemName != nil && *request.DisplayItemName != ""  {
+        path = strings.ReplaceAll(path, "{displayItemName}", core.ToString(*request.DisplayItemName))
+    } else {
+        path = strings.ReplaceAll(path, "{displayItemName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Quantity != nil {
-		bodies["quantity"] = *request.Quantity
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    var bodies = core.Bodies{}
+    if request.Quantity != nil {
+        bodies["quantity"] = *request.Quantity
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go randomShowcaseBuyByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)

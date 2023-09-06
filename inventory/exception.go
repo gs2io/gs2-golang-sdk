@@ -20,20 +20,20 @@ type Conflict struct {
 }
 
 func (p Conflict) Type() string {
-	return "InventoryConflict"
+    return "InventoryConflict"
 }
 
 func (p Conflict) Code() string {
-	return "itemSet.operation.conflict"
+    return "itemSet.operation.conflict"
 }
 
 type Insufficient struct {
 }
 
 func (p Insufficient) Type() string {
-	return "InventoryInsufficient"
+    return "InventoryInsufficient"
 }
 
 func (p Insufficient) Code() string {
-	return "itemSet.count.insufficient"
+    return "itemSet.count.insufficient"
 }

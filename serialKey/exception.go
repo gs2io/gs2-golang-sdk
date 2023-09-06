@@ -20,20 +20,20 @@ type AlreadyUsed struct {
 }
 
 func (p AlreadyUsed) Type() string {
-	return "SerialKeyAlreadyUsed"
+    return "SerialKeyAlreadyUsed"
 }
 
 func (p AlreadyUsed) Code() string {
-	return "code.status.invalid"
+    return "code.status.invalid"
 }
 
 type CodeNotFound struct {
 }
 
 func (p CodeNotFound) Type() string {
-	return "SerialKeyCodeNotFound"
+    return "SerialKeyCodeNotFound"
 }
 
 func (p CodeNotFound) Code() string {
-	return "code.code.notFound"
+    return "code.code.notFound"
 }

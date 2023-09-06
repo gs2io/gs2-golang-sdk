@@ -17,1727 +17,1726 @@ permissions and limitations under the License.
 package exchange
 
 import (
-	"encoding/json"
-
-	"github.com/gs2io/gs2-golang-sdk/core"
+    "encoding/json"
+    "github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
 }
 
 func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeNamespacesRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
-	return DescribeNamespacesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
-	}
+    return DescribeNamespacesRequest {
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
 }
 
 func (p DescribeNamespacesRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"pageToken": p.PageToken,
-		"limit":     p.Limit,
-	}
+    return map[string]interface{} {
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
 }
 
 func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
-	return &p
+    return &p
 }
 
 type CreateNamespaceRequest struct {
-	RequestId            *string             `json:"requestId"`
-	ContextStack         *string             `json:"contextStack"`
-	Name                 *string             `json:"name"`
-	Description          *string             `json:"description"`
-	EnableAwaitExchange  *bool               `json:"enableAwaitExchange"`
-	EnableDirectExchange *bool               `json:"enableDirectExchange"`
-	TransactionSetting   *TransactionSetting `json:"transactionSetting"`
-	ExchangeScript       *ScriptSetting      `json:"exchangeScript"`
-	LogSetting           *LogSetting         `json:"logSetting"`
-	// Deprecated: should not be used
-	QueueNamespaceId *string `json:"queueNamespaceId"`
-	// Deprecated: should not be used
-	KeyId *string `json:"keyId"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    Name *string `json:"name"`
+    Description *string `json:"description"`
+    EnableAwaitExchange *bool `json:"enableAwaitExchange"`
+    EnableDirectExchange *bool `json:"enableDirectExchange"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
+    ExchangeScript *ScriptSetting `json:"exchangeScript"`
+    LogSetting *LogSetting `json:"logSetting"`
+    // Deprecated: should not be used
+    QueueNamespaceId *string `json:"queueNamespaceId"`
+    // Deprecated: should not be used
+    KeyId *string `json:"keyId"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateNamespaceRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
-	return CreateNamespaceRequest{
-		Name:                 core.CastString(data["name"]),
-		Description:          core.CastString(data["description"]),
-		EnableAwaitExchange:  core.CastBool(data["enableAwaitExchange"]),
-		EnableDirectExchange: core.CastBool(data["enableDirectExchange"]),
-		TransactionSetting:   NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		ExchangeScript:       NewScriptSettingFromDict(core.CastMap(data["exchangeScript"])).Pointer(),
-		LogSetting:           NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		QueueNamespaceId:     core.CastString(data["queueNamespaceId"]),
-		KeyId:                core.CastString(data["keyId"]),
-	}
+    return CreateNamespaceRequest {
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        EnableAwaitExchange: core.CastBool(data["enableAwaitExchange"]),
+        EnableDirectExchange: core.CastBool(data["enableDirectExchange"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+        ExchangeScript: NewScriptSettingFromDict(core.CastMap(data["exchangeScript"])).Pointer(),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
 }
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"name":                 p.Name,
-		"description":          p.Description,
-		"enableAwaitExchange":  p.EnableAwaitExchange,
-		"enableDirectExchange": p.EnableDirectExchange,
-		"transactionSetting":   p.TransactionSetting.ToDict(),
-		"exchangeScript":       p.ExchangeScript.ToDict(),
-		"logSetting":           p.LogSetting.ToDict(),
-		"queueNamespaceId":     p.QueueNamespaceId,
-		"keyId":                p.KeyId,
-	}
+    return map[string]interface{} {
+        "name": p.Name,
+        "description": p.Description,
+        "enableAwaitExchange": p.EnableAwaitExchange,
+        "enableDirectExchange": p.EnableDirectExchange,
+        "transactionSetting": p.TransactionSetting.ToDict(),
+        "exchangeScript": p.ExchangeScript.ToDict(),
+        "logSetting": p.LogSetting.ToDict(),
+        "queueNamespaceId": p.QueueNamespaceId,
+        "keyId": p.KeyId,
+    }
 }
 
 func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
-	return &p
+    return &p
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceStatusRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetNamespaceStatusRequestFromDict(dict)
 }
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
-	return GetNamespaceStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-	}
+    return GetNamespaceStatusRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
 }
 
 func (p GetNamespaceStatusRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
 }
 
 func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
-	return &p
+    return &p
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
-	return GetNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-	}
+    return GetNamespaceRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
 }
 
 func (p GetNamespaceRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
 }
 
 func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
-	return &p
+    return &p
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId            *string             `json:"requestId"`
-	ContextStack         *string             `json:"contextStack"`
-	NamespaceName        *string             `json:"namespaceName"`
-	Description          *string             `json:"description"`
-	EnableAwaitExchange  *bool               `json:"enableAwaitExchange"`
-	EnableDirectExchange *bool               `json:"enableDirectExchange"`
-	TransactionSetting   *TransactionSetting `json:"transactionSetting"`
-	ExchangeScript       *ScriptSetting      `json:"exchangeScript"`
-	LogSetting           *LogSetting         `json:"logSetting"`
-	// Deprecated: should not be used
-	QueueNamespaceId *string `json:"queueNamespaceId"`
-	// Deprecated: should not be used
-	KeyId *string `json:"keyId"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Description *string `json:"description"`
+    EnableAwaitExchange *bool `json:"enableAwaitExchange"`
+    EnableDirectExchange *bool `json:"enableDirectExchange"`
+    TransactionSetting *TransactionSetting `json:"transactionSetting"`
+    ExchangeScript *ScriptSetting `json:"exchangeScript"`
+    LogSetting *LogSetting `json:"logSetting"`
+    // Deprecated: should not be used
+    QueueNamespaceId *string `json:"queueNamespaceId"`
+    // Deprecated: should not be used
+    KeyId *string `json:"keyId"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateNamespaceRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
-	return UpdateNamespaceRequest{
-		NamespaceName:        core.CastString(data["namespaceName"]),
-		Description:          core.CastString(data["description"]),
-		EnableAwaitExchange:  core.CastBool(data["enableAwaitExchange"]),
-		EnableDirectExchange: core.CastBool(data["enableDirectExchange"]),
-		TransactionSetting:   NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		ExchangeScript:       NewScriptSettingFromDict(core.CastMap(data["exchangeScript"])).Pointer(),
-		LogSetting:           NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		QueueNamespaceId:     core.CastString(data["queueNamespaceId"]),
-		KeyId:                core.CastString(data["keyId"]),
-	}
+    return UpdateNamespaceRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Description: core.CastString(data["description"]),
+        EnableAwaitExchange: core.CastBool(data["enableAwaitExchange"]),
+        EnableDirectExchange: core.CastBool(data["enableDirectExchange"]),
+        TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+        ExchangeScript: NewScriptSettingFromDict(core.CastMap(data["exchangeScript"])).Pointer(),
+        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+        QueueNamespaceId: core.CastString(data["queueNamespaceId"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
 }
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName":        p.NamespaceName,
-		"description":          p.Description,
-		"enableAwaitExchange":  p.EnableAwaitExchange,
-		"enableDirectExchange": p.EnableDirectExchange,
-		"transactionSetting":   p.TransactionSetting.ToDict(),
-		"exchangeScript":       p.ExchangeScript.ToDict(),
-		"logSetting":           p.LogSetting.ToDict(),
-		"queueNamespaceId":     p.QueueNamespaceId,
-		"keyId":                p.KeyId,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "description": p.Description,
+        "enableAwaitExchange": p.EnableAwaitExchange,
+        "enableDirectExchange": p.EnableDirectExchange,
+        "transactionSetting": p.TransactionSetting.ToDict(),
+        "exchangeScript": p.ExchangeScript.ToDict(),
+        "logSetting": p.LogSetting.ToDict(),
+        "queueNamespaceId": p.QueueNamespaceId,
+        "keyId": p.KeyId,
+    }
 }
 
 func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
-	return &p
+    return &p
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
 }
 
 func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteNamespaceRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteNamespaceRequestFromDict(dict)
 }
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
-	return DeleteNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-	}
+    return DeleteNamespaceRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
 }
 
 func (p DeleteNamespaceRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
 }
 
 func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
-	return &p
+    return &p
 }
 
 type DescribeRateModelsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
 }
 
 func NewDescribeRateModelsRequestFromJson(data string) DescribeRateModelsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRateModelsRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeRateModelsRequestFromDict(dict)
 }
 
 func NewDescribeRateModelsRequestFromDict(data map[string]interface{}) DescribeRateModelsRequest {
-	return DescribeRateModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-	}
+    return DescribeRateModelsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
 }
 
 func (p DescribeRateModelsRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
 }
 
 func (p DescribeRateModelsRequest) Pointer() *DescribeRateModelsRequest {
-	return &p
+    return &p
 }
 
 type GetRateModelRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	RateName      *string `json:"rateName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
 }
 
 func NewGetRateModelRequestFromJson(data string) GetRateModelRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRateModelRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetRateModelRequestFromDict(dict)
 }
 
 func NewGetRateModelRequestFromDict(data map[string]interface{}) GetRateModelRequest {
-	return GetRateModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RateName:      core.CastString(data["rateName"]),
-	}
+    return GetRateModelRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+    }
 }
 
 func (p GetRateModelRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"rateName":      p.RateName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+    }
 }
 
 func (p GetRateModelRequest) Pointer() *GetRateModelRequest {
-	return &p
+    return &p
 }
 
 type DescribeRateModelMastersRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
 }
 
 func NewDescribeRateModelMastersRequestFromJson(data string) DescribeRateModelMastersRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRateModelMastersRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeRateModelMastersRequestFromDict(dict)
 }
 
 func NewDescribeRateModelMastersRequestFromDict(data map[string]interface{}) DescribeRateModelMastersRequest {
-	return DescribeRateModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
-	}
+    return DescribeRateModelMastersRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
 }
 
 func (p DescribeRateModelMastersRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
 }
 
 func (p DescribeRateModelMastersRequest) Pointer() *DescribeRateModelMastersRequest {
-	return &p
+    return &p
 }
 
 type CreateRateModelMasterRequest struct {
-	RequestId          *string         `json:"requestId"`
-	ContextStack       *string         `json:"contextStack"`
-	NamespaceName      *string         `json:"namespaceName"`
-	Name               *string         `json:"name"`
-	Description        *string         `json:"description"`
-	Metadata           *string         `json:"metadata"`
-	TimingType         *string         `json:"timingType"`
-	LockTime           *int32          `json:"lockTime"`
-	EnableSkip         *bool           `json:"enableSkip"`
-	SkipConsumeActions []ConsumeAction `json:"skipConsumeActions"`
-	AcquireActions     []AcquireAction `json:"acquireActions"`
-	ConsumeActions     []ConsumeAction `json:"consumeActions"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Name *string `json:"name"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+    TimingType *string `json:"timingType"`
+    LockTime *int32 `json:"lockTime"`
+    EnableSkip *bool `json:"enableSkip"`
+    SkipConsumeActions []ConsumeAction `json:"skipConsumeActions"`
+    AcquireActions []AcquireAction `json:"acquireActions"`
+    ConsumeActions []ConsumeAction `json:"consumeActions"`
 }
 
 func NewCreateRateModelMasterRequestFromJson(data string) CreateRateModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateRateModelMasterRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateRateModelMasterRequestFromDict(dict)
 }
 
 func NewCreateRateModelMasterRequestFromDict(data map[string]interface{}) CreateRateModelMasterRequest {
-	return CreateRateModelMasterRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		Metadata:           core.CastString(data["metadata"]),
-		TimingType:         core.CastString(data["timingType"]),
-		LockTime:           core.CastInt32(data["lockTime"]),
-		EnableSkip:         core.CastBool(data["enableSkip"]),
-		SkipConsumeActions: CastConsumeActions(core.CastArray(data["skipConsumeActions"])),
-		AcquireActions:     CastAcquireActions(core.CastArray(data["acquireActions"])),
-		ConsumeActions:     CastConsumeActions(core.CastArray(data["consumeActions"])),
-	}
+    return CreateRateModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        TimingType: core.CastString(data["timingType"]),
+        LockTime: core.CastInt32(data["lockTime"]),
+        EnableSkip: core.CastBool(data["enableSkip"]),
+        SkipConsumeActions: CastConsumeActions(core.CastArray(data["skipConsumeActions"])),
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+        ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
+    }
 }
 
 func (p CreateRateModelMasterRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"name":          p.Name,
-		"description":   p.Description,
-		"metadata":      p.Metadata,
-		"timingType":    p.TimingType,
-		"lockTime":      p.LockTime,
-		"enableSkip":    p.EnableSkip,
-		"skipConsumeActions": CastConsumeActionsFromDict(
-			p.SkipConsumeActions,
-		),
-		"acquireActions": CastAcquireActionsFromDict(
-			p.AcquireActions,
-		),
-		"consumeActions": CastConsumeActionsFromDict(
-			p.ConsumeActions,
-		),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "name": p.Name,
+        "description": p.Description,
+        "metadata": p.Metadata,
+        "timingType": p.TimingType,
+        "lockTime": p.LockTime,
+        "enableSkip": p.EnableSkip,
+        "skipConsumeActions": CastConsumeActionsFromDict(
+            p.SkipConsumeActions,
+        ),
+        "acquireActions": CastAcquireActionsFromDict(
+            p.AcquireActions,
+        ),
+        "consumeActions": CastConsumeActionsFromDict(
+            p.ConsumeActions,
+        ),
+    }
 }
 
 func (p CreateRateModelMasterRequest) Pointer() *CreateRateModelMasterRequest {
-	return &p
+    return &p
 }
 
 type GetRateModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	RateName      *string `json:"rateName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
 }
 
 func NewGetRateModelMasterRequestFromJson(data string) GetRateModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRateModelMasterRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetRateModelMasterRequestFromDict(dict)
 }
 
 func NewGetRateModelMasterRequestFromDict(data map[string]interface{}) GetRateModelMasterRequest {
-	return GetRateModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RateName:      core.CastString(data["rateName"]),
-	}
+    return GetRateModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+    }
 }
 
 func (p GetRateModelMasterRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"rateName":      p.RateName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+    }
 }
 
 func (p GetRateModelMasterRequest) Pointer() *GetRateModelMasterRequest {
-	return &p
+    return &p
 }
 
 type UpdateRateModelMasterRequest struct {
-	RequestId          *string         `json:"requestId"`
-	ContextStack       *string         `json:"contextStack"`
-	NamespaceName      *string         `json:"namespaceName"`
-	RateName           *string         `json:"rateName"`
-	Description        *string         `json:"description"`
-	Metadata           *string         `json:"metadata"`
-	TimingType         *string         `json:"timingType"`
-	LockTime           *int32          `json:"lockTime"`
-	EnableSkip         *bool           `json:"enableSkip"`
-	SkipConsumeActions []ConsumeAction `json:"skipConsumeActions"`
-	AcquireActions     []AcquireAction `json:"acquireActions"`
-	ConsumeActions     []ConsumeAction `json:"consumeActions"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+    TimingType *string `json:"timingType"`
+    LockTime *int32 `json:"lockTime"`
+    EnableSkip *bool `json:"enableSkip"`
+    SkipConsumeActions []ConsumeAction `json:"skipConsumeActions"`
+    AcquireActions []AcquireAction `json:"acquireActions"`
+    ConsumeActions []ConsumeAction `json:"consumeActions"`
 }
 
 func NewUpdateRateModelMasterRequestFromJson(data string) UpdateRateModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateRateModelMasterRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateRateModelMasterRequestFromDict(dict)
 }
 
 func NewUpdateRateModelMasterRequestFromDict(data map[string]interface{}) UpdateRateModelMasterRequest {
-	return UpdateRateModelMasterRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		RateName:           core.CastString(data["rateName"]),
-		Description:        core.CastString(data["description"]),
-		Metadata:           core.CastString(data["metadata"]),
-		TimingType:         core.CastString(data["timingType"]),
-		LockTime:           core.CastInt32(data["lockTime"]),
-		EnableSkip:         core.CastBool(data["enableSkip"]),
-		SkipConsumeActions: CastConsumeActions(core.CastArray(data["skipConsumeActions"])),
-		AcquireActions:     CastAcquireActions(core.CastArray(data["acquireActions"])),
-		ConsumeActions:     CastConsumeActions(core.CastArray(data["consumeActions"])),
-	}
+    return UpdateRateModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        TimingType: core.CastString(data["timingType"]),
+        LockTime: core.CastInt32(data["lockTime"]),
+        EnableSkip: core.CastBool(data["enableSkip"]),
+        SkipConsumeActions: CastConsumeActions(core.CastArray(data["skipConsumeActions"])),
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+        ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
+    }
 }
 
 func (p UpdateRateModelMasterRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"rateName":      p.RateName,
-		"description":   p.Description,
-		"metadata":      p.Metadata,
-		"timingType":    p.TimingType,
-		"lockTime":      p.LockTime,
-		"enableSkip":    p.EnableSkip,
-		"skipConsumeActions": CastConsumeActionsFromDict(
-			p.SkipConsumeActions,
-		),
-		"acquireActions": CastAcquireActionsFromDict(
-			p.AcquireActions,
-		),
-		"consumeActions": CastConsumeActionsFromDict(
-			p.ConsumeActions,
-		),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+        "description": p.Description,
+        "metadata": p.Metadata,
+        "timingType": p.TimingType,
+        "lockTime": p.LockTime,
+        "enableSkip": p.EnableSkip,
+        "skipConsumeActions": CastConsumeActionsFromDict(
+            p.SkipConsumeActions,
+        ),
+        "acquireActions": CastAcquireActionsFromDict(
+            p.AcquireActions,
+        ),
+        "consumeActions": CastConsumeActionsFromDict(
+            p.ConsumeActions,
+        ),
+    }
 }
 
 func (p UpdateRateModelMasterRequest) Pointer() *UpdateRateModelMasterRequest {
-	return &p
+    return &p
 }
 
 type DeleteRateModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	RateName      *string `json:"rateName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
 }
 
 func NewDeleteRateModelMasterRequestFromJson(data string) DeleteRateModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteRateModelMasterRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteRateModelMasterRequestFromDict(dict)
 }
 
 func NewDeleteRateModelMasterRequestFromDict(data map[string]interface{}) DeleteRateModelMasterRequest {
-	return DeleteRateModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RateName:      core.CastString(data["rateName"]),
-	}
+    return DeleteRateModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+    }
 }
 
 func (p DeleteRateModelMasterRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"rateName":      p.RateName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+    }
 }
 
 func (p DeleteRateModelMasterRequest) Pointer() *DeleteRateModelMasterRequest {
-	return &p
+    return &p
 }
 
 type DescribeIncrementalRateModelsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
 }
 
 func NewDescribeIncrementalRateModelsRequestFromJson(data string) DescribeIncrementalRateModelsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeIncrementalRateModelsRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeIncrementalRateModelsRequestFromDict(dict)
 }
 
 func NewDescribeIncrementalRateModelsRequestFromDict(data map[string]interface{}) DescribeIncrementalRateModelsRequest {
-	return DescribeIncrementalRateModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-	}
+    return DescribeIncrementalRateModelsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
 }
 
 func (p DescribeIncrementalRateModelsRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
 }
 
 func (p DescribeIncrementalRateModelsRequest) Pointer() *DescribeIncrementalRateModelsRequest {
-	return &p
+    return &p
 }
 
 type GetIncrementalRateModelRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	RateName      *string `json:"rateName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
 }
 
 func NewGetIncrementalRateModelRequestFromJson(data string) GetIncrementalRateModelRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetIncrementalRateModelRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetIncrementalRateModelRequestFromDict(dict)
 }
 
 func NewGetIncrementalRateModelRequestFromDict(data map[string]interface{}) GetIncrementalRateModelRequest {
-	return GetIncrementalRateModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RateName:      core.CastString(data["rateName"]),
-	}
+    return GetIncrementalRateModelRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+    }
 }
 
 func (p GetIncrementalRateModelRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"rateName":      p.RateName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+    }
 }
 
 func (p GetIncrementalRateModelRequest) Pointer() *GetIncrementalRateModelRequest {
-	return &p
+    return &p
 }
 
 type DescribeIncrementalRateModelMastersRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
 }
 
 func NewDescribeIncrementalRateModelMastersRequestFromJson(data string) DescribeIncrementalRateModelMastersRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeIncrementalRateModelMastersRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeIncrementalRateModelMastersRequestFromDict(dict)
 }
 
 func NewDescribeIncrementalRateModelMastersRequestFromDict(data map[string]interface{}) DescribeIncrementalRateModelMastersRequest {
-	return DescribeIncrementalRateModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
-	}
+    return DescribeIncrementalRateModelMastersRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
 }
 
 func (p DescribeIncrementalRateModelMastersRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
 }
 
 func (p DescribeIncrementalRateModelMastersRequest) Pointer() *DescribeIncrementalRateModelMastersRequest {
-	return &p
+    return &p
 }
 
 type CreateIncrementalRateModelMasterRequest struct {
-	RequestId            *string         `json:"requestId"`
-	ContextStack         *string         `json:"contextStack"`
-	NamespaceName        *string         `json:"namespaceName"`
-	Name                 *string         `json:"name"`
-	Description          *string         `json:"description"`
-	Metadata             *string         `json:"metadata"`
-	ConsumeAction        *ConsumeAction  `json:"consumeAction"`
-	CalculateType        *string         `json:"calculateType"`
-	BaseValue            *int64          `json:"baseValue"`
-	CoefficientValue     *int64          `json:"coefficientValue"`
-	CalculateScriptId    *string         `json:"calculateScriptId"`
-	ExchangeCountId      *string         `json:"exchangeCountId"`
-	MaximumExchangeCount *int32          `json:"maximumExchangeCount"`
-	AcquireActions       []AcquireAction `json:"acquireActions"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Name *string `json:"name"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+    ConsumeAction *ConsumeAction `json:"consumeAction"`
+    CalculateType *string `json:"calculateType"`
+    BaseValue *int64 `json:"baseValue"`
+    CoefficientValue *int64 `json:"coefficientValue"`
+    CalculateScriptId *string `json:"calculateScriptId"`
+    ExchangeCountId *string `json:"exchangeCountId"`
+    MaximumExchangeCount *int32 `json:"maximumExchangeCount"`
+    AcquireActions []AcquireAction `json:"acquireActions"`
 }
 
 func NewCreateIncrementalRateModelMasterRequestFromJson(data string) CreateIncrementalRateModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateIncrementalRateModelMasterRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateIncrementalRateModelMasterRequestFromDict(dict)
 }
 
 func NewCreateIncrementalRateModelMasterRequestFromDict(data map[string]interface{}) CreateIncrementalRateModelMasterRequest {
-	return CreateIncrementalRateModelMasterRequest{
-		NamespaceName:        core.CastString(data["namespaceName"]),
-		Name:                 core.CastString(data["name"]),
-		Description:          core.CastString(data["description"]),
-		Metadata:             core.CastString(data["metadata"]),
-		ConsumeAction:        NewConsumeActionFromDict(core.CastMap(data["consumeAction"])).Pointer(),
-		CalculateType:        core.CastString(data["calculateType"]),
-		BaseValue:            core.CastInt64(data["baseValue"]),
-		CoefficientValue:     core.CastInt64(data["coefficientValue"]),
-		CalculateScriptId:    core.CastString(data["calculateScriptId"]),
-		ExchangeCountId:      core.CastString(data["exchangeCountId"]),
-		MaximumExchangeCount: core.CastInt32(data["maximumExchangeCount"]),
-		AcquireActions:       CastAcquireActions(core.CastArray(data["acquireActions"])),
-	}
+    return CreateIncrementalRateModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Name: core.CastString(data["name"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        ConsumeAction: NewConsumeActionFromDict(core.CastMap(data["consumeAction"])).Pointer(),
+        CalculateType: core.CastString(data["calculateType"]),
+        BaseValue: core.CastInt64(data["baseValue"]),
+        CoefficientValue: core.CastInt64(data["coefficientValue"]),
+        CalculateScriptId: core.CastString(data["calculateScriptId"]),
+        ExchangeCountId: core.CastString(data["exchangeCountId"]),
+        MaximumExchangeCount: core.CastInt32(data["maximumExchangeCount"]),
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+    }
 }
 
 func (p CreateIncrementalRateModelMasterRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName":        p.NamespaceName,
-		"name":                 p.Name,
-		"description":          p.Description,
-		"metadata":             p.Metadata,
-		"consumeAction":        p.ConsumeAction.ToDict(),
-		"calculateType":        p.CalculateType,
-		"baseValue":            p.BaseValue,
-		"coefficientValue":     p.CoefficientValue,
-		"calculateScriptId":    p.CalculateScriptId,
-		"exchangeCountId":      p.ExchangeCountId,
-		"maximumExchangeCount": p.MaximumExchangeCount,
-		"acquireActions": CastAcquireActionsFromDict(
-			p.AcquireActions,
-		),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "name": p.Name,
+        "description": p.Description,
+        "metadata": p.Metadata,
+        "consumeAction": p.ConsumeAction.ToDict(),
+        "calculateType": p.CalculateType,
+        "baseValue": p.BaseValue,
+        "coefficientValue": p.CoefficientValue,
+        "calculateScriptId": p.CalculateScriptId,
+        "exchangeCountId": p.ExchangeCountId,
+        "maximumExchangeCount": p.MaximumExchangeCount,
+        "acquireActions": CastAcquireActionsFromDict(
+            p.AcquireActions,
+        ),
+    }
 }
 
 func (p CreateIncrementalRateModelMasterRequest) Pointer() *CreateIncrementalRateModelMasterRequest {
-	return &p
+    return &p
 }
 
 type GetIncrementalRateModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	RateName      *string `json:"rateName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
 }
 
 func NewGetIncrementalRateModelMasterRequestFromJson(data string) GetIncrementalRateModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetIncrementalRateModelMasterRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetIncrementalRateModelMasterRequestFromDict(dict)
 }
 
 func NewGetIncrementalRateModelMasterRequestFromDict(data map[string]interface{}) GetIncrementalRateModelMasterRequest {
-	return GetIncrementalRateModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RateName:      core.CastString(data["rateName"]),
-	}
+    return GetIncrementalRateModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+    }
 }
 
 func (p GetIncrementalRateModelMasterRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"rateName":      p.RateName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+    }
 }
 
 func (p GetIncrementalRateModelMasterRequest) Pointer() *GetIncrementalRateModelMasterRequest {
-	return &p
+    return &p
 }
 
 type UpdateIncrementalRateModelMasterRequest struct {
-	RequestId            *string         `json:"requestId"`
-	ContextStack         *string         `json:"contextStack"`
-	NamespaceName        *string         `json:"namespaceName"`
-	RateName             *string         `json:"rateName"`
-	Description          *string         `json:"description"`
-	Metadata             *string         `json:"metadata"`
-	ConsumeAction        *ConsumeAction  `json:"consumeAction"`
-	CalculateType        *string         `json:"calculateType"`
-	BaseValue            *int64          `json:"baseValue"`
-	CoefficientValue     *int64          `json:"coefficientValue"`
-	CalculateScriptId    *string         `json:"calculateScriptId"`
-	ExchangeCountId      *string         `json:"exchangeCountId"`
-	MaximumExchangeCount *int32          `json:"maximumExchangeCount"`
-	AcquireActions       []AcquireAction `json:"acquireActions"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+    Description *string `json:"description"`
+    Metadata *string `json:"metadata"`
+    ConsumeAction *ConsumeAction `json:"consumeAction"`
+    CalculateType *string `json:"calculateType"`
+    BaseValue *int64 `json:"baseValue"`
+    CoefficientValue *int64 `json:"coefficientValue"`
+    CalculateScriptId *string `json:"calculateScriptId"`
+    ExchangeCountId *string `json:"exchangeCountId"`
+    MaximumExchangeCount *int32 `json:"maximumExchangeCount"`
+    AcquireActions []AcquireAction `json:"acquireActions"`
 }
 
 func NewUpdateIncrementalRateModelMasterRequestFromJson(data string) UpdateIncrementalRateModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateIncrementalRateModelMasterRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateIncrementalRateModelMasterRequestFromDict(dict)
 }
 
 func NewUpdateIncrementalRateModelMasterRequestFromDict(data map[string]interface{}) UpdateIncrementalRateModelMasterRequest {
-	return UpdateIncrementalRateModelMasterRequest{
-		NamespaceName:        core.CastString(data["namespaceName"]),
-		RateName:             core.CastString(data["rateName"]),
-		Description:          core.CastString(data["description"]),
-		Metadata:             core.CastString(data["metadata"]),
-		ConsumeAction:        NewConsumeActionFromDict(core.CastMap(data["consumeAction"])).Pointer(),
-		CalculateType:        core.CastString(data["calculateType"]),
-		BaseValue:            core.CastInt64(data["baseValue"]),
-		CoefficientValue:     core.CastInt64(data["coefficientValue"]),
-		CalculateScriptId:    core.CastString(data["calculateScriptId"]),
-		ExchangeCountId:      core.CastString(data["exchangeCountId"]),
-		MaximumExchangeCount: core.CastInt32(data["maximumExchangeCount"]),
-		AcquireActions:       CastAcquireActions(core.CastArray(data["acquireActions"])),
-	}
+    return UpdateIncrementalRateModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+        Description: core.CastString(data["description"]),
+        Metadata: core.CastString(data["metadata"]),
+        ConsumeAction: NewConsumeActionFromDict(core.CastMap(data["consumeAction"])).Pointer(),
+        CalculateType: core.CastString(data["calculateType"]),
+        BaseValue: core.CastInt64(data["baseValue"]),
+        CoefficientValue: core.CastInt64(data["coefficientValue"]),
+        CalculateScriptId: core.CastString(data["calculateScriptId"]),
+        ExchangeCountId: core.CastString(data["exchangeCountId"]),
+        MaximumExchangeCount: core.CastInt32(data["maximumExchangeCount"]),
+        AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+    }
 }
 
 func (p UpdateIncrementalRateModelMasterRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName":        p.NamespaceName,
-		"rateName":             p.RateName,
-		"description":          p.Description,
-		"metadata":             p.Metadata,
-		"consumeAction":        p.ConsumeAction.ToDict(),
-		"calculateType":        p.CalculateType,
-		"baseValue":            p.BaseValue,
-		"coefficientValue":     p.CoefficientValue,
-		"calculateScriptId":    p.CalculateScriptId,
-		"exchangeCountId":      p.ExchangeCountId,
-		"maximumExchangeCount": p.MaximumExchangeCount,
-		"acquireActions": CastAcquireActionsFromDict(
-			p.AcquireActions,
-		),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+        "description": p.Description,
+        "metadata": p.Metadata,
+        "consumeAction": p.ConsumeAction.ToDict(),
+        "calculateType": p.CalculateType,
+        "baseValue": p.BaseValue,
+        "coefficientValue": p.CoefficientValue,
+        "calculateScriptId": p.CalculateScriptId,
+        "exchangeCountId": p.ExchangeCountId,
+        "maximumExchangeCount": p.MaximumExchangeCount,
+        "acquireActions": CastAcquireActionsFromDict(
+            p.AcquireActions,
+        ),
+    }
 }
 
 func (p UpdateIncrementalRateModelMasterRequest) Pointer() *UpdateIncrementalRateModelMasterRequest {
-	return &p
+    return &p
 }
 
 type DeleteIncrementalRateModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	RateName      *string `json:"rateName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
 }
 
 func NewDeleteIncrementalRateModelMasterRequestFromJson(data string) DeleteIncrementalRateModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteIncrementalRateModelMasterRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteIncrementalRateModelMasterRequestFromDict(dict)
 }
 
 func NewDeleteIncrementalRateModelMasterRequestFromDict(data map[string]interface{}) DeleteIncrementalRateModelMasterRequest {
-	return DeleteIncrementalRateModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RateName:      core.CastString(data["rateName"]),
-	}
+    return DeleteIncrementalRateModelMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+    }
 }
 
 func (p DeleteIncrementalRateModelMasterRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"rateName":      p.RateName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+    }
 }
 
 func (p DeleteIncrementalRateModelMasterRequest) Pointer() *DeleteIncrementalRateModelMasterRequest {
-	return &p
+    return &p
 }
 
 type ExchangeRequest struct {
-	RequestId          *string  `json:"requestId"`
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	RateName           *string  `json:"rateName"`
-	AccessToken        *string  `json:"accessToken"`
-	Count              *int32   `json:"count"`
-	Config             []Config `json:"config"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+    AccessToken *string `json:"accessToken"`
+    Count *int32 `json:"count"`
+    Config []Config `json:"config"`
 }
 
 func NewExchangeRequestFromJson(data string) ExchangeRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewExchangeRequestFromDict(dict)
 }
 
 func NewExchangeRequestFromDict(data map[string]interface{}) ExchangeRequest {
-	return ExchangeRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RateName:      core.CastString(data["rateName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		Count:         core.CastInt32(data["count"]),
-		Config:        CastConfigs(core.CastArray(data["config"])),
-	}
+    return ExchangeRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        Count: core.CastInt32(data["count"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
 }
 
 func (p ExchangeRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"rateName":      p.RateName,
-		"accessToken":   p.AccessToken,
-		"count":         p.Count,
-		"config": CastConfigsFromDict(
-			p.Config,
-		),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+        "accessToken": p.AccessToken,
+        "count": p.Count,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
 }
 
 func (p ExchangeRequest) Pointer() *ExchangeRequest {
-	return &p
+    return &p
 }
 
 type ExchangeByUserIdRequest struct {
-	RequestId          *string  `json:"requestId"`
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	RateName           *string  `json:"rateName"`
-	UserId             *string  `json:"userId"`
-	Count              *int32   `json:"count"`
-	Config             []Config `json:"config"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+    UserId *string `json:"userId"`
+    Count *int32 `json:"count"`
+    Config []Config `json:"config"`
 }
 
 func NewExchangeByUserIdRequestFromJson(data string) ExchangeByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeByUserIdRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewExchangeByUserIdRequestFromDict(dict)
 }
 
 func NewExchangeByUserIdRequestFromDict(data map[string]interface{}) ExchangeByUserIdRequest {
-	return ExchangeByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RateName:      core.CastString(data["rateName"]),
-		UserId:        core.CastString(data["userId"]),
-		Count:         core.CastInt32(data["count"]),
-		Config:        CastConfigs(core.CastArray(data["config"])),
-	}
+    return ExchangeByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+        UserId: core.CastString(data["userId"]),
+        Count: core.CastInt32(data["count"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
 }
 
 func (p ExchangeByUserIdRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"rateName":      p.RateName,
-		"userId":        p.UserId,
-		"count":         p.Count,
-		"config": CastConfigsFromDict(
-			p.Config,
-		),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+        "userId": p.UserId,
+        "count": p.Count,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
 }
 
 func (p ExchangeByUserIdRequest) Pointer() *ExchangeByUserIdRequest {
-	return &p
+    return &p
 }
 
 type ExchangeByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewExchangeByStampSheetRequestFromJson(data string) ExchangeByStampSheetRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeByStampSheetRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewExchangeByStampSheetRequestFromDict(dict)
 }
 
 func NewExchangeByStampSheetRequestFromDict(data map[string]interface{}) ExchangeByStampSheetRequest {
-	return ExchangeByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
-	}
+    return ExchangeByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
 }
 
 func (p ExchangeByStampSheetRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"stampSheet": p.StampSheet,
-		"keyId":      p.KeyId,
-	}
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
 }
 
 func (p ExchangeByStampSheetRequest) Pointer() *ExchangeByStampSheetRequest {
-	return &p
+    return &p
 }
 
 type IncrementalExchangeRequest struct {
-	RequestId          *string  `json:"requestId"`
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	RateName           *string  `json:"rateName"`
-	AccessToken        *string  `json:"accessToken"`
-	Count              *int32   `json:"count"`
-	Config             []Config `json:"config"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+    AccessToken *string `json:"accessToken"`
+    Count *int32 `json:"count"`
+    Config []Config `json:"config"`
 }
 
 func NewIncrementalExchangeRequestFromJson(data string) IncrementalExchangeRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewIncrementalExchangeRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementalExchangeRequestFromDict(dict)
 }
 
 func NewIncrementalExchangeRequestFromDict(data map[string]interface{}) IncrementalExchangeRequest {
-	return IncrementalExchangeRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RateName:      core.CastString(data["rateName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		Count:         core.CastInt32(data["count"]),
-		Config:        CastConfigs(core.CastArray(data["config"])),
-	}
+    return IncrementalExchangeRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        Count: core.CastInt32(data["count"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
 }
 
 func (p IncrementalExchangeRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"rateName":      p.RateName,
-		"accessToken":   p.AccessToken,
-		"count":         p.Count,
-		"config": CastConfigsFromDict(
-			p.Config,
-		),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+        "accessToken": p.AccessToken,
+        "count": p.Count,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
 }
 
 func (p IncrementalExchangeRequest) Pointer() *IncrementalExchangeRequest {
-	return &p
+    return &p
 }
 
 type IncrementalExchangeByUserIdRequest struct {
-	RequestId          *string  `json:"requestId"`
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	RateName           *string  `json:"rateName"`
-	UserId             *string  `json:"userId"`
-	Count              *int32   `json:"count"`
-	Config             []Config `json:"config"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+    UserId *string `json:"userId"`
+    Count *int32 `json:"count"`
+    Config []Config `json:"config"`
 }
 
 func NewIncrementalExchangeByUserIdRequestFromJson(data string) IncrementalExchangeByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewIncrementalExchangeByUserIdRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementalExchangeByUserIdRequestFromDict(dict)
 }
 
 func NewIncrementalExchangeByUserIdRequestFromDict(data map[string]interface{}) IncrementalExchangeByUserIdRequest {
-	return IncrementalExchangeByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RateName:      core.CastString(data["rateName"]),
-		UserId:        core.CastString(data["userId"]),
-		Count:         core.CastInt32(data["count"]),
-		Config:        CastConfigs(core.CastArray(data["config"])),
-	}
+    return IncrementalExchangeByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+        UserId: core.CastString(data["userId"]),
+        Count: core.CastInt32(data["count"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
 }
 
 func (p IncrementalExchangeByUserIdRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"rateName":      p.RateName,
-		"userId":        p.UserId,
-		"count":         p.Count,
-		"config": CastConfigsFromDict(
-			p.Config,
-		),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+        "userId": p.UserId,
+        "count": p.Count,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
 }
 
 func (p IncrementalExchangeByUserIdRequest) Pointer() *IncrementalExchangeByUserIdRequest {
-	return &p
+    return &p
 }
 
 type IncrementalExchangeByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewIncrementalExchangeByStampSheetRequestFromJson(data string) IncrementalExchangeByStampSheetRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewIncrementalExchangeByStampSheetRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewIncrementalExchangeByStampSheetRequestFromDict(dict)
 }
 
 func NewIncrementalExchangeByStampSheetRequestFromDict(data map[string]interface{}) IncrementalExchangeByStampSheetRequest {
-	return IncrementalExchangeByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
-	}
+    return IncrementalExchangeByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
 }
 
 func (p IncrementalExchangeByStampSheetRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"stampSheet": p.StampSheet,
-		"keyId":      p.KeyId,
-	}
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
 }
 
 func (p IncrementalExchangeByStampSheetRequest) Pointer() *IncrementalExchangeByStampSheetRequest {
-	return &p
+    return &p
 }
 
 type UnlockIncrementalExchangeByUserIdRequest struct {
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	RateName           *string `json:"rateName"`
-	UserId             *string `json:"userId"`
-	LockTransactionId  *string `json:"lockTransactionId"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    RateName *string `json:"rateName"`
+    UserId *string `json:"userId"`
+    LockTransactionId *string `json:"lockTransactionId"`
 }
 
 func NewUnlockIncrementalExchangeByUserIdRequestFromJson(data string) UnlockIncrementalExchangeByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUnlockIncrementalExchangeByUserIdRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnlockIncrementalExchangeByUserIdRequestFromDict(dict)
 }
 
 func NewUnlockIncrementalExchangeByUserIdRequestFromDict(data map[string]interface{}) UnlockIncrementalExchangeByUserIdRequest {
-	return UnlockIncrementalExchangeByUserIdRequest{
-		NamespaceName:     core.CastString(data["namespaceName"]),
-		RateName:          core.CastString(data["rateName"]),
-		UserId:            core.CastString(data["userId"]),
-		LockTransactionId: core.CastString(data["lockTransactionId"]),
-	}
+    return UnlockIncrementalExchangeByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        RateName: core.CastString(data["rateName"]),
+        UserId: core.CastString(data["userId"]),
+        LockTransactionId: core.CastString(data["lockTransactionId"]),
+    }
 }
 
 func (p UnlockIncrementalExchangeByUserIdRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName":     p.NamespaceName,
-		"rateName":          p.RateName,
-		"userId":            p.UserId,
-		"lockTransactionId": p.LockTransactionId,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "rateName": p.RateName,
+        "userId": p.UserId,
+        "lockTransactionId": p.LockTransactionId,
+    }
 }
 
 func (p UnlockIncrementalExchangeByUserIdRequest) Pointer() *UnlockIncrementalExchangeByUserIdRequest {
-	return &p
+    return &p
 }
 
 type UnlockIncrementalExchangeByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewUnlockIncrementalExchangeByStampSheetRequestFromJson(data string) UnlockIncrementalExchangeByStampSheetRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUnlockIncrementalExchangeByStampSheetRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUnlockIncrementalExchangeByStampSheetRequestFromDict(dict)
 }
 
 func NewUnlockIncrementalExchangeByStampSheetRequestFromDict(data map[string]interface{}) UnlockIncrementalExchangeByStampSheetRequest {
-	return UnlockIncrementalExchangeByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
-	}
+    return UnlockIncrementalExchangeByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
 }
 
 func (p UnlockIncrementalExchangeByStampSheetRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"stampSheet": p.StampSheet,
-		"keyId":      p.KeyId,
-	}
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
 }
 
 func (p UnlockIncrementalExchangeByStampSheetRequest) Pointer() *UnlockIncrementalExchangeByStampSheetRequest {
-	return &p
+    return &p
 }
 
 type ExportMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
 }
 
 func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExportMasterRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewExportMasterRequestFromDict(dict)
 }
 
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
-	return ExportMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-	}
+    return ExportMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
 }
 
 func (p ExportMasterRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
 }
 
 func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
-	return &p
+    return &p
 }
 
 type GetCurrentRateMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
 }
 
 func NewGetCurrentRateMasterRequestFromJson(data string) GetCurrentRateMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetCurrentRateMasterRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetCurrentRateMasterRequestFromDict(dict)
 }
 
 func NewGetCurrentRateMasterRequestFromDict(data map[string]interface{}) GetCurrentRateMasterRequest {
-	return GetCurrentRateMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-	}
+    return GetCurrentRateMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+    }
 }
 
 func (p GetCurrentRateMasterRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+    }
 }
 
 func (p GetCurrentRateMasterRequest) Pointer() *GetCurrentRateMasterRequest {
-	return &p
+    return &p
 }
 
 type UpdateCurrentRateMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Settings      *string `json:"settings"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    Settings *string `json:"settings"`
 }
 
 func NewUpdateCurrentRateMasterRequestFromJson(data string) UpdateCurrentRateMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentRateMasterRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateCurrentRateMasterRequestFromDict(dict)
 }
 
 func NewUpdateCurrentRateMasterRequestFromDict(data map[string]interface{}) UpdateCurrentRateMasterRequest {
-	return UpdateCurrentRateMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Settings:      core.CastString(data["settings"]),
-	}
+    return UpdateCurrentRateMasterRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        Settings: core.CastString(data["settings"]),
+    }
 }
 
 func (p UpdateCurrentRateMasterRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"settings":      p.Settings,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "settings": p.Settings,
+    }
 }
 
 func (p UpdateCurrentRateMasterRequest) Pointer() *UpdateCurrentRateMasterRequest {
-	return &p
+    return &p
 }
 
 type UpdateCurrentRateMasterFromGitHubRequest struct {
-	RequestId       *string                `json:"requestId"`
-	ContextStack    *string                `json:"contextStack"`
-	NamespaceName   *string                `json:"namespaceName"`
-	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
 func NewUpdateCurrentRateMasterFromGitHubRequestFromJson(data string) UpdateCurrentRateMasterFromGitHubRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentRateMasterFromGitHubRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewUpdateCurrentRateMasterFromGitHubRequestFromDict(dict)
 }
 
 func NewUpdateCurrentRateMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentRateMasterFromGitHubRequest {
-	return UpdateCurrentRateMasterFromGitHubRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
-	}
+    return UpdateCurrentRateMasterFromGitHubRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+    }
 }
 
 func (p UpdateCurrentRateMasterFromGitHubRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "checkoutSetting": p.CheckoutSetting.ToDict(),
+    }
 }
 
 func (p UpdateCurrentRateMasterFromGitHubRequest) Pointer() *UpdateCurrentRateMasterFromGitHubRequest {
-	return &p
+    return &p
 }
 
 type CreateAwaitByUserIdRequest struct {
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	RateName           *string `json:"rateName"`
-	Count              *int32  `json:"count"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    RateName *string `json:"rateName"`
+    Count *int32 `json:"count"`
 }
 
 func NewCreateAwaitByUserIdRequestFromJson(data string) CreateAwaitByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateAwaitByUserIdRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateAwaitByUserIdRequestFromDict(dict)
 }
 
 func NewCreateAwaitByUserIdRequestFromDict(data map[string]interface{}) CreateAwaitByUserIdRequest {
-	return CreateAwaitByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		RateName:      core.CastString(data["rateName"]),
-		Count:         core.CastInt32(data["count"]),
-	}
+    return CreateAwaitByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        RateName: core.CastString(data["rateName"]),
+        Count: core.CastInt32(data["count"]),
+    }
 }
 
 func (p CreateAwaitByUserIdRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"rateName":      p.RateName,
-		"count":         p.Count,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "rateName": p.RateName,
+        "count": p.Count,
+    }
 }
 
 func (p CreateAwaitByUserIdRequest) Pointer() *CreateAwaitByUserIdRequest {
-	return &p
+    return &p
 }
 
 type DescribeAwaitsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AccessToken   *string `json:"accessToken"`
-	RateName      *string `json:"rateName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    RateName *string `json:"rateName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
 }
 
 func NewDescribeAwaitsRequestFromJson(data string) DescribeAwaitsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeAwaitsRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeAwaitsRequestFromDict(dict)
 }
 
 func NewDescribeAwaitsRequestFromDict(data map[string]interface{}) DescribeAwaitsRequest {
-	return DescribeAwaitsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		RateName:      core.CastString(data["rateName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
-	}
+    return DescribeAwaitsRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        RateName: core.CastString(data["rateName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
 }
 
 func (p DescribeAwaitsRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"accessToken":   p.AccessToken,
-		"rateName":      p.RateName,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "rateName": p.RateName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
 }
 
 func (p DescribeAwaitsRequest) Pointer() *DescribeAwaitsRequest {
-	return &p
+    return &p
 }
 
 type DescribeAwaitsByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
-	RateName      *string `json:"rateName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    RateName *string `json:"rateName"`
+    PageToken *string `json:"pageToken"`
+    Limit *int32 `json:"limit"`
 }
 
 func NewDescribeAwaitsByUserIdRequestFromJson(data string) DescribeAwaitsByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeAwaitsByUserIdRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDescribeAwaitsByUserIdRequestFromDict(dict)
 }
 
 func NewDescribeAwaitsByUserIdRequestFromDict(data map[string]interface{}) DescribeAwaitsByUserIdRequest {
-	return DescribeAwaitsByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		RateName:      core.CastString(data["rateName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
-	}
+    return DescribeAwaitsByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        RateName: core.CastString(data["rateName"]),
+        PageToken: core.CastString(data["pageToken"]),
+        Limit: core.CastInt32(data["limit"]),
+    }
 }
 
 func (p DescribeAwaitsByUserIdRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"rateName":      p.RateName,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "rateName": p.RateName,
+        "pageToken": p.PageToken,
+        "limit": p.Limit,
+    }
 }
 
 func (p DescribeAwaitsByUserIdRequest) Pointer() *DescribeAwaitsByUserIdRequest {
-	return &p
+    return &p
 }
 
 type GetAwaitRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AccessToken   *string `json:"accessToken"`
-	AwaitName     *string `json:"awaitName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    AwaitName *string `json:"awaitName"`
 }
 
 func NewGetAwaitRequestFromJson(data string) GetAwaitRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetAwaitRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetAwaitRequestFromDict(dict)
 }
 
 func NewGetAwaitRequestFromDict(data map[string]interface{}) GetAwaitRequest {
-	return GetAwaitRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		AwaitName:     core.CastString(data["awaitName"]),
-	}
+    return GetAwaitRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        AwaitName: core.CastString(data["awaitName"]),
+    }
 }
 
 func (p GetAwaitRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"accessToken":   p.AccessToken,
-		"awaitName":     p.AwaitName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "awaitName": p.AwaitName,
+    }
 }
 
 func (p GetAwaitRequest) Pointer() *GetAwaitRequest {
-	return &p
+    return &p
 }
 
 type GetAwaitByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
-	AwaitName     *string `json:"awaitName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    AwaitName *string `json:"awaitName"`
 }
 
 func NewGetAwaitByUserIdRequestFromJson(data string) GetAwaitByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetAwaitByUserIdRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewGetAwaitByUserIdRequestFromDict(dict)
 }
 
 func NewGetAwaitByUserIdRequestFromDict(data map[string]interface{}) GetAwaitByUserIdRequest {
-	return GetAwaitByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		AwaitName:     core.CastString(data["awaitName"]),
-	}
+    return GetAwaitByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        AwaitName: core.CastString(data["awaitName"]),
+    }
 }
 
 func (p GetAwaitByUserIdRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"awaitName":     p.AwaitName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "awaitName": p.AwaitName,
+    }
 }
 
 func (p GetAwaitByUserIdRequest) Pointer() *GetAwaitByUserIdRequest {
-	return &p
+    return &p
 }
 
 type AcquireRequest struct {
-	RequestId          *string  `json:"requestId"`
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	AccessToken        *string  `json:"accessToken"`
-	AwaitName          *string  `json:"awaitName"`
-	Config             []Config `json:"config"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    AwaitName *string `json:"awaitName"`
+    Config []Config `json:"config"`
 }
 
 func NewAcquireRequestFromJson(data string) AcquireRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAcquireRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireRequestFromDict(dict)
 }
 
 func NewAcquireRequestFromDict(data map[string]interface{}) AcquireRequest {
-	return AcquireRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		AwaitName:     core.CastString(data["awaitName"]),
-		Config:        CastConfigs(core.CastArray(data["config"])),
-	}
+    return AcquireRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        AwaitName: core.CastString(data["awaitName"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
 }
 
 func (p AcquireRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"accessToken":   p.AccessToken,
-		"awaitName":     p.AwaitName,
-		"config": CastConfigsFromDict(
-			p.Config,
-		),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "awaitName": p.AwaitName,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
 }
 
 func (p AcquireRequest) Pointer() *AcquireRequest {
-	return &p
+    return &p
 }
 
 type AcquireByUserIdRequest struct {
-	RequestId          *string  `json:"requestId"`
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	UserId             *string  `json:"userId"`
-	AwaitName          *string  `json:"awaitName"`
-	Config             []Config `json:"config"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    AwaitName *string `json:"awaitName"`
+    Config []Config `json:"config"`
 }
 
 func NewAcquireByUserIdRequestFromJson(data string) AcquireByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAcquireByUserIdRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireByUserIdRequestFromDict(dict)
 }
 
 func NewAcquireByUserIdRequestFromDict(data map[string]interface{}) AcquireByUserIdRequest {
-	return AcquireByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		AwaitName:     core.CastString(data["awaitName"]),
-		Config:        CastConfigs(core.CastArray(data["config"])),
-	}
+    return AcquireByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        AwaitName: core.CastString(data["awaitName"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
 }
 
 func (p AcquireByUserIdRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"awaitName":     p.AwaitName,
-		"config": CastConfigsFromDict(
-			p.Config,
-		),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "awaitName": p.AwaitName,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
 }
 
 func (p AcquireByUserIdRequest) Pointer() *AcquireByUserIdRequest {
-	return &p
+    return &p
 }
 
 type AcquireForceByUserIdRequest struct {
-	RequestId          *string  `json:"requestId"`
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	UserId             *string  `json:"userId"`
-	AwaitName          *string  `json:"awaitName"`
-	Config             []Config `json:"config"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    AwaitName *string `json:"awaitName"`
+    Config []Config `json:"config"`
 }
 
 func NewAcquireForceByUserIdRequestFromJson(data string) AcquireForceByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAcquireForceByUserIdRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewAcquireForceByUserIdRequestFromDict(dict)
 }
 
 func NewAcquireForceByUserIdRequestFromDict(data map[string]interface{}) AcquireForceByUserIdRequest {
-	return AcquireForceByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		AwaitName:     core.CastString(data["awaitName"]),
-		Config:        CastConfigs(core.CastArray(data["config"])),
-	}
+    return AcquireForceByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        AwaitName: core.CastString(data["awaitName"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
 }
 
 func (p AcquireForceByUserIdRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"awaitName":     p.AwaitName,
-		"config": CastConfigsFromDict(
-			p.Config,
-		),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "awaitName": p.AwaitName,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
 }
 
 func (p AcquireForceByUserIdRequest) Pointer() *AcquireForceByUserIdRequest {
-	return &p
+    return &p
 }
 
 type SkipRequest struct {
-	RequestId          *string  `json:"requestId"`
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	AccessToken        *string  `json:"accessToken"`
-	AwaitName          *string  `json:"awaitName"`
-	Config             []Config `json:"config"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    AwaitName *string `json:"awaitName"`
+    Config []Config `json:"config"`
 }
 
 func NewSkipRequestFromJson(data string) SkipRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSkipRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSkipRequestFromDict(dict)
 }
 
 func NewSkipRequestFromDict(data map[string]interface{}) SkipRequest {
-	return SkipRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		AwaitName:     core.CastString(data["awaitName"]),
-		Config:        CastConfigs(core.CastArray(data["config"])),
-	}
+    return SkipRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        AwaitName: core.CastString(data["awaitName"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
 }
 
 func (p SkipRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"accessToken":   p.AccessToken,
-		"awaitName":     p.AwaitName,
-		"config": CastConfigsFromDict(
-			p.Config,
-		),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "awaitName": p.AwaitName,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
 }
 
 func (p SkipRequest) Pointer() *SkipRequest {
-	return &p
+    return &p
 }
 
 type SkipByUserIdRequest struct {
-	RequestId          *string  `json:"requestId"`
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	UserId             *string  `json:"userId"`
-	AwaitName          *string  `json:"awaitName"`
-	Config             []Config `json:"config"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    AwaitName *string `json:"awaitName"`
+    Config []Config `json:"config"`
 }
 
 func NewSkipByUserIdRequestFromJson(data string) SkipByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSkipByUserIdRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewSkipByUserIdRequestFromDict(dict)
 }
 
 func NewSkipByUserIdRequestFromDict(data map[string]interface{}) SkipByUserIdRequest {
-	return SkipByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		AwaitName:     core.CastString(data["awaitName"]),
-		Config:        CastConfigs(core.CastArray(data["config"])),
-	}
+    return SkipByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        AwaitName: core.CastString(data["awaitName"]),
+        Config: CastConfigs(core.CastArray(data["config"])),
+    }
 }
 
 func (p SkipByUserIdRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"awaitName":     p.AwaitName,
-		"config": CastConfigsFromDict(
-			p.Config,
-		),
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "awaitName": p.AwaitName,
+        "config": CastConfigsFromDict(
+            p.Config,
+        ),
+    }
 }
 
 func (p SkipByUserIdRequest) Pointer() *SkipByUserIdRequest {
-	return &p
+    return &p
 }
 
 type DeleteAwaitRequest struct {
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	AwaitName          *string `json:"awaitName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    AccessToken *string `json:"accessToken"`
+    AwaitName *string `json:"awaitName"`
 }
 
 func NewDeleteAwaitRequestFromJson(data string) DeleteAwaitRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteAwaitRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteAwaitRequestFromDict(dict)
 }
 
 func NewDeleteAwaitRequestFromDict(data map[string]interface{}) DeleteAwaitRequest {
-	return DeleteAwaitRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		AwaitName:     core.CastString(data["awaitName"]),
-	}
+    return DeleteAwaitRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        AccessToken: core.CastString(data["accessToken"]),
+        AwaitName: core.CastString(data["awaitName"]),
+    }
 }
 
 func (p DeleteAwaitRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"accessToken":   p.AccessToken,
-		"awaitName":     p.AwaitName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "accessToken": p.AccessToken,
+        "awaitName": p.AwaitName,
+    }
 }
 
 func (p DeleteAwaitRequest) Pointer() *DeleteAwaitRequest {
-	return &p
+    return &p
 }
 
 type DeleteAwaitByUserIdRequest struct {
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	AwaitName          *string `json:"awaitName"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    DuplicationAvoider *string `json:"duplicationAvoider"`
+    NamespaceName *string `json:"namespaceName"`
+    UserId *string `json:"userId"`
+    AwaitName *string `json:"awaitName"`
 }
 
 func NewDeleteAwaitByUserIdRequestFromJson(data string) DeleteAwaitByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteAwaitByUserIdRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteAwaitByUserIdRequestFromDict(dict)
 }
 
 func NewDeleteAwaitByUserIdRequestFromDict(data map[string]interface{}) DeleteAwaitByUserIdRequest {
-	return DeleteAwaitByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		AwaitName:     core.CastString(data["awaitName"]),
-	}
+    return DeleteAwaitByUserIdRequest {
+        NamespaceName: core.CastString(data["namespaceName"]),
+        UserId: core.CastString(data["userId"]),
+        AwaitName: core.CastString(data["awaitName"]),
+    }
 }
 
 func (p DeleteAwaitByUserIdRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"awaitName":     p.AwaitName,
-	}
+    return map[string]interface{} {
+        "namespaceName": p.NamespaceName,
+        "userId": p.UserId,
+        "awaitName": p.AwaitName,
+    }
 }
 
 func (p DeleteAwaitByUserIdRequest) Pointer() *DeleteAwaitByUserIdRequest {
-	return &p
+    return &p
 }
 
 type CreateAwaitByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampSheet *string `json:"stampSheet"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewCreateAwaitByStampSheetRequestFromJson(data string) CreateAwaitByStampSheetRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateAwaitByStampSheetRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewCreateAwaitByStampSheetRequestFromDict(dict)
 }
 
 func NewCreateAwaitByStampSheetRequestFromDict(data map[string]interface{}) CreateAwaitByStampSheetRequest {
-	return CreateAwaitByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
-	}
+    return CreateAwaitByStampSheetRequest {
+        StampSheet: core.CastString(data["stampSheet"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
 }
 
 func (p CreateAwaitByStampSheetRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"stampSheet": p.StampSheet,
-		"keyId":      p.KeyId,
-	}
+    return map[string]interface{} {
+        "stampSheet": p.StampSheet,
+        "keyId": p.KeyId,
+    }
 }
 
 func (p CreateAwaitByStampSheetRequest) Pointer() *CreateAwaitByStampSheetRequest {
-	return &p
+    return &p
 }
 
 type DeleteAwaitByStampTaskRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampTask    *string `json:"stampTask"`
-	KeyId        *string `json:"keyId"`
+    RequestId *string `json:"requestId"`
+    ContextStack *string `json:"contextStack"`
+    StampTask *string `json:"stampTask"`
+    KeyId *string `json:"keyId"`
 }
 
 func NewDeleteAwaitByStampTaskRequestFromJson(data string) DeleteAwaitByStampTaskRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteAwaitByStampTaskRequestFromDict(dict)
+    dict := map[string]interface{}{}
+    _ = json.Unmarshal([]byte(data), &dict)
+    return NewDeleteAwaitByStampTaskRequestFromDict(dict)
 }
 
 func NewDeleteAwaitByStampTaskRequestFromDict(data map[string]interface{}) DeleteAwaitByStampTaskRequest {
-	return DeleteAwaitByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
-	}
+    return DeleteAwaitByStampTaskRequest {
+        StampTask: core.CastString(data["stampTask"]),
+        KeyId: core.CastString(data["keyId"]),
+    }
 }
 
 func (p DeleteAwaitByStampTaskRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"stampTask": p.StampTask,
-		"keyId":     p.KeyId,
-	}
+    return map[string]interface{} {
+        "stampTask": p.StampTask,
+        "keyId": p.KeyId,
+    }
 }
 
 func (p DeleteAwaitByStampTaskRequest) Pointer() *DeleteAwaitByStampTaskRequest {
-	return &p
+    return &p
 }

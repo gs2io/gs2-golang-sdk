@@ -20,9 +20,9 @@ type AlreadyReceived struct {
 }
 
 func (p AlreadyReceived) Type() string {
-	return "LoginRewardAlreadyReceived"
+    return "LoginRewardAlreadyReceived"
 }
 
 func (p AlreadyReceived) Code() string {
-	return "loginReward.bonus.alreadyReceived"
+    return "loginReward.bonus.alreadyReceived"
 }

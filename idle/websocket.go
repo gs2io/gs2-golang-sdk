@@ -18,7 +18,6 @@ package idle
 
 import (
 	"encoding/json"
-
 	"github.com/google/uuid"
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -50,16 +49,16 @@ func (p Gs2IdleWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -71,33 +70,33 @@ func (p Gs2IdleWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "namespace",
-			"function":    "describeNamespaces",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "namespace",
+    		"function": "describeNamespaces",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -134,16 +133,16 @@ func (p Gs2IdleWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -155,42 +154,42 @@ func (p Gs2IdleWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "namespace",
-			"function":    "createNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "namespace",
+    		"function": "createNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.TransactionSetting != nil {
-		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-	}
-	if request.ReceiveScript != nil {
-		bodies["receiveScript"] = request.ReceiveScript.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
+    if request.ReceiveScript != nil {
+        bodies["receiveScript"] = request.ReceiveScript.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -227,16 +226,16 @@ func (p Gs2IdleWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -248,30 +247,30 @@ func (p Gs2IdleWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "namespace",
-			"function":    "getNamespaceStatus",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "namespace",
+    		"function": "getNamespaceStatus",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -308,16 +307,16 @@ func (p Gs2IdleWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -329,30 +328,30 @@ func (p Gs2IdleWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "namespace",
-			"function":    "getNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "namespace",
+    		"function": "getNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -389,16 +388,16 @@ func (p Gs2IdleWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -410,42 +409,42 @@ func (p Gs2IdleWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "namespace",
-			"function":    "updateNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "namespace",
+    		"function": "updateNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.TransactionSetting != nil {
-		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-	}
-	if request.ReceiveScript != nil {
-		bodies["receiveScript"] = request.ReceiveScript.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
+    if request.ReceiveScript != nil {
+        bodies["receiveScript"] = request.ReceiveScript.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -482,16 +481,16 @@ func (p Gs2IdleWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -503,30 +502,30 @@ func (p Gs2IdleWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "namespace",
-			"function":    "deleteNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "namespace",
+    		"function": "deleteNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -563,16 +562,16 @@ func (p Gs2IdleWebSocketClient) describeCategoryModelMastersAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeCategoryModelMastersResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeCategoryModelMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeCategoryModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCategoryModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -584,36 +583,36 @@ func (p Gs2IdleWebSocketClient) DescribeCategoryModelMastersAsync(
 	request *DescribeCategoryModelMastersRequest,
 	callback chan<- DescribeCategoryModelMastersAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "categoryModelMaster",
-			"function":    "describeCategoryModelMasters",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "categoryModelMaster",
+    		"function": "describeCategoryModelMasters",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeCategoryModelMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -650,16 +649,16 @@ func (p Gs2IdleWebSocketClient) createCategoryModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateCategoryModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateCategoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateCategoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateCategoryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -671,58 +670,58 @@ func (p Gs2IdleWebSocketClient) CreateCategoryModelMasterAsync(
 	request *CreateCategoryModelMasterRequest,
 	callback chan<- CreateCategoryModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "categoryModelMaster",
-			"function":    "createCategoryModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "categoryModelMaster",
+    		"function": "createCategoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.RewardIntervalMinutes != nil {
-		bodies["rewardIntervalMinutes"] = *request.RewardIntervalMinutes
-	}
-	if request.DefaultMaximumIdleMinutes != nil {
-		bodies["defaultMaximumIdleMinutes"] = *request.DefaultMaximumIdleMinutes
-	}
-	if request.AcquireActions != nil {
-		var _acquireActions []interface{}
-		for _, item := range request.AcquireActions {
-			_acquireActions = append(_acquireActions, item)
-		}
-		bodies["acquireActions"] = _acquireActions
-	}
-	if request.IdlePeriodScheduleId != nil && *request.IdlePeriodScheduleId != "" {
-		bodies["idlePeriodScheduleId"] = *request.IdlePeriodScheduleId
-	}
-	if request.ReceivePeriodScheduleId != nil && *request.ReceivePeriodScheduleId != "" {
-		bodies["receivePeriodScheduleId"] = *request.ReceivePeriodScheduleId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.RewardIntervalMinutes != nil {
+        bodies["rewardIntervalMinutes"] = *request.RewardIntervalMinutes
+    }
+    if request.DefaultMaximumIdleMinutes != nil {
+        bodies["defaultMaximumIdleMinutes"] = *request.DefaultMaximumIdleMinutes
+    }
+    if request.AcquireActions != nil {
+        var _acquireActions []interface {}
+        for _, item := range request.AcquireActions {
+            _acquireActions = append(_acquireActions, item)
+        }
+        bodies["acquireActions"] = _acquireActions
+    }
+    if request.IdlePeriodScheduleId != nil && *request.IdlePeriodScheduleId != "" {
+        bodies["idlePeriodScheduleId"] = *request.IdlePeriodScheduleId
+    }
+    if request.ReceivePeriodScheduleId != nil && *request.ReceivePeriodScheduleId != "" {
+        bodies["receivePeriodScheduleId"] = *request.ReceivePeriodScheduleId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createCategoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -759,16 +758,16 @@ func (p Gs2IdleWebSocketClient) getCategoryModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCategoryModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCategoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCategoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCategoryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -780,33 +779,33 @@ func (p Gs2IdleWebSocketClient) GetCategoryModelMasterAsync(
 	request *GetCategoryModelMasterRequest,
 	callback chan<- GetCategoryModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "categoryModelMaster",
-			"function":    "getCategoryModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "categoryModelMaster",
+    		"function": "getCategoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getCategoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -843,16 +842,16 @@ func (p Gs2IdleWebSocketClient) updateCategoryModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCategoryModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCategoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCategoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCategoryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -864,58 +863,58 @@ func (p Gs2IdleWebSocketClient) UpdateCategoryModelMasterAsync(
 	request *UpdateCategoryModelMasterRequest,
 	callback chan<- UpdateCategoryModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "categoryModelMaster",
-			"function":    "updateCategoryModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "categoryModelMaster",
+    		"function": "updateCategoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.RewardIntervalMinutes != nil {
-		bodies["rewardIntervalMinutes"] = *request.RewardIntervalMinutes
-	}
-	if request.DefaultMaximumIdleMinutes != nil {
-		bodies["defaultMaximumIdleMinutes"] = *request.DefaultMaximumIdleMinutes
-	}
-	if request.AcquireActions != nil {
-		var _acquireActions []interface{}
-		for _, item := range request.AcquireActions {
-			_acquireActions = append(_acquireActions, item)
-		}
-		bodies["acquireActions"] = _acquireActions
-	}
-	if request.IdlePeriodScheduleId != nil && *request.IdlePeriodScheduleId != "" {
-		bodies["idlePeriodScheduleId"] = *request.IdlePeriodScheduleId
-	}
-	if request.ReceivePeriodScheduleId != nil && *request.ReceivePeriodScheduleId != "" {
-		bodies["receivePeriodScheduleId"] = *request.ReceivePeriodScheduleId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.RewardIntervalMinutes != nil {
+        bodies["rewardIntervalMinutes"] = *request.RewardIntervalMinutes
+    }
+    if request.DefaultMaximumIdleMinutes != nil {
+        bodies["defaultMaximumIdleMinutes"] = *request.DefaultMaximumIdleMinutes
+    }
+    if request.AcquireActions != nil {
+        var _acquireActions []interface {}
+        for _, item := range request.AcquireActions {
+            _acquireActions = append(_acquireActions, item)
+        }
+        bodies["acquireActions"] = _acquireActions
+    }
+    if request.IdlePeriodScheduleId != nil && *request.IdlePeriodScheduleId != "" {
+        bodies["idlePeriodScheduleId"] = *request.IdlePeriodScheduleId
+    }
+    if request.ReceivePeriodScheduleId != nil && *request.ReceivePeriodScheduleId != "" {
+        bodies["receivePeriodScheduleId"] = *request.ReceivePeriodScheduleId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateCategoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -952,16 +951,16 @@ func (p Gs2IdleWebSocketClient) deleteCategoryModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteCategoryModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteCategoryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteCategoryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteCategoryModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -973,33 +972,33 @@ func (p Gs2IdleWebSocketClient) DeleteCategoryModelMasterAsync(
 	request *DeleteCategoryModelMasterRequest,
 	callback chan<- DeleteCategoryModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "categoryModelMaster",
-			"function":    "deleteCategoryModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "categoryModelMaster",
+    		"function": "deleteCategoryModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteCategoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1036,16 +1035,16 @@ func (p Gs2IdleWebSocketClient) describeCategoryModelsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeCategoryModelsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeCategoryModelsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeCategoryModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeCategoryModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1057,30 +1056,30 @@ func (p Gs2IdleWebSocketClient) DescribeCategoryModelsAsync(
 	request *DescribeCategoryModelsRequest,
 	callback chan<- DescribeCategoryModelsAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "categoryModel",
-			"function":    "describeCategoryModels",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "categoryModel",
+    		"function": "describeCategoryModels",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeCategoryModelsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1117,16 +1116,16 @@ func (p Gs2IdleWebSocketClient) getCategoryModelAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCategoryModelResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCategoryModelAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCategoryModelAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCategoryModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1138,33 +1137,33 @@ func (p Gs2IdleWebSocketClient) GetCategoryModelAsync(
 	request *GetCategoryModelRequest,
 	callback chan<- GetCategoryModelAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "categoryModel",
-			"function":    "getCategoryModel",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "categoryModel",
+    		"function": "getCategoryModel",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getCategoryModelAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1201,16 +1200,16 @@ func (p Gs2IdleWebSocketClient) describeStatusesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeStatusesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeStatusesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeStatusesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeStatusesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1222,42 +1221,42 @@ func (p Gs2IdleWebSocketClient) DescribeStatusesAsync(
 	request *DescribeStatusesRequest,
 	callback chan<- DescribeStatusesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "status",
-			"function":    "describeStatuses",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "status",
+    		"function": "describeStatuses",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.describeStatusesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1294,16 +1293,16 @@ func (p Gs2IdleWebSocketClient) describeStatusesByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeStatusesByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeStatusesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeStatusesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeStatusesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1315,39 +1314,39 @@ func (p Gs2IdleWebSocketClient) DescribeStatusesByUserIdAsync(
 	request *DescribeStatusesByUserIdRequest,
 	callback chan<- DescribeStatusesByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "status",
-			"function":    "describeStatusesByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "status",
+    		"function": "describeStatusesByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeStatusesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1384,16 +1383,16 @@ func (p Gs2IdleWebSocketClient) getStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1405,39 +1404,39 @@ func (p Gs2IdleWebSocketClient) GetStatusAsync(
 	request *GetStatusRequest,
 	callback chan<- GetStatusAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "status",
-			"function":    "getStatus",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "status",
+    		"function": "getStatus",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.getStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1474,16 +1473,16 @@ func (p Gs2IdleWebSocketClient) getStatusByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetStatusByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetStatusByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1495,36 +1494,36 @@ func (p Gs2IdleWebSocketClient) GetStatusByUserIdAsync(
 	request *GetStatusByUserIdRequest,
 	callback chan<- GetStatusByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "status",
-			"function":    "getStatusByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "status",
+    		"function": "getStatusByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1561,16 +1560,16 @@ func (p Gs2IdleWebSocketClient) predictionAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PredictionResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PredictionAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PredictionAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PredictionAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1582,42 +1581,42 @@ func (p Gs2IdleWebSocketClient) PredictionAsync(
 	request *PredictionRequest,
 	callback chan<- PredictionAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "status",
-			"function":    "prediction",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "status",
+    		"function": "prediction",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.predictionAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1654,16 +1653,16 @@ func (p Gs2IdleWebSocketClient) predictionByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result PredictionByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PredictionByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PredictionByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- PredictionByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1675,39 +1674,39 @@ func (p Gs2IdleWebSocketClient) PredictionByUserIdAsync(
 	request *PredictionByUserIdRequest,
 	callback chan<- PredictionByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "status",
-			"function":    "predictionByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "status",
+    		"function": "predictionByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.predictionByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1744,16 +1743,16 @@ func (p Gs2IdleWebSocketClient) receiveAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ReceiveResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ReceiveAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ReceiveAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ReceiveAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1765,49 +1764,49 @@ func (p Gs2IdleWebSocketClient) ReceiveAsync(
 	request *ReceiveRequest,
 	callback chan<- ReceiveAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "status",
-			"function":    "receive",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "status",
+    		"function": "receive",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.receiveAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1844,16 +1843,16 @@ func (p Gs2IdleWebSocketClient) receiveByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ReceiveByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ReceiveByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ReceiveByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ReceiveByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1865,46 +1864,46 @@ func (p Gs2IdleWebSocketClient) ReceiveByUserIdAsync(
 	request *ReceiveByUserIdRequest,
 	callback chan<- ReceiveByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "status",
-			"function":    "receiveByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "status",
+    		"function": "receiveByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.receiveByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1941,16 +1940,16 @@ func (p Gs2IdleWebSocketClient) increaseMaximumIdleMinutesByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result IncreaseMaximumIdleMinutesByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- IncreaseMaximumIdleMinutesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IncreaseMaximumIdleMinutesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- IncreaseMaximumIdleMinutesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1962,42 +1961,42 @@ func (p Gs2IdleWebSocketClient) IncreaseMaximumIdleMinutesByUserIdAsync(
 	request *IncreaseMaximumIdleMinutesByUserIdRequest,
 	callback chan<- IncreaseMaximumIdleMinutesByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "status",
-			"function":    "increaseMaximumIdleMinutesByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "status",
+    		"function": "increaseMaximumIdleMinutesByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.IncreaseMinutes != nil {
-		bodies["increaseMinutes"] = *request.IncreaseMinutes
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.IncreaseMinutes != nil {
+        bodies["increaseMinutes"] = *request.IncreaseMinutes
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.increaseMaximumIdleMinutesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2034,16 +2033,16 @@ func (p Gs2IdleWebSocketClient) decreaseMaximumIdleMinutesByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DecreaseMaximumIdleMinutesByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DecreaseMaximumIdleMinutesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DecreaseMaximumIdleMinutesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DecreaseMaximumIdleMinutesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2055,42 +2054,42 @@ func (p Gs2IdleWebSocketClient) DecreaseMaximumIdleMinutesByUserIdAsync(
 	request *DecreaseMaximumIdleMinutesByUserIdRequest,
 	callback chan<- DecreaseMaximumIdleMinutesByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "status",
-			"function":    "decreaseMaximumIdleMinutesByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "status",
+    		"function": "decreaseMaximumIdleMinutesByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.CategoryName != nil && *request.CategoryName != "" {
-		bodies["categoryName"] = *request.CategoryName
-	}
-	if request.DecreaseMinutes != nil {
-		bodies["decreaseMinutes"] = *request.DecreaseMinutes
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.CategoryName != nil && *request.CategoryName != "" {
+        bodies["categoryName"] = *request.CategoryName
+    }
+    if request.DecreaseMinutes != nil {
+        bodies["decreaseMinutes"] = *request.DecreaseMinutes
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.decreaseMaximumIdleMinutesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2127,16 +2126,16 @@ func (p Gs2IdleWebSocketClient) increaseMaximumIdleMinutesByStampSheetAsyncHandl
 	asyncResult := <-internalCallback
 	var result IncreaseMaximumIdleMinutesByStampSheetResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- IncreaseMaximumIdleMinutesByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- IncreaseMaximumIdleMinutesByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- IncreaseMaximumIdleMinutesByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2148,33 +2147,33 @@ func (p Gs2IdleWebSocketClient) IncreaseMaximumIdleMinutesByStampSheetAsync(
 	request *IncreaseMaximumIdleMinutesByStampSheetRequest,
 	callback chan<- IncreaseMaximumIdleMinutesByStampSheetAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "status",
-			"function":    "increaseMaximumIdleMinutesByStampSheet",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "status",
+    		"function": "increaseMaximumIdleMinutesByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.increaseMaximumIdleMinutesByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2211,16 +2210,16 @@ func (p Gs2IdleWebSocketClient) decreaseMaximumIdleMinutesByStampTaskAsyncHandle
 	asyncResult := <-internalCallback
 	var result DecreaseMaximumIdleMinutesByStampTaskResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DecreaseMaximumIdleMinutesByStampTaskAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DecreaseMaximumIdleMinutesByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DecreaseMaximumIdleMinutesByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2232,33 +2231,33 @@ func (p Gs2IdleWebSocketClient) DecreaseMaximumIdleMinutesByStampTaskAsync(
 	request *DecreaseMaximumIdleMinutesByStampTaskRequest,
 	callback chan<- DecreaseMaximumIdleMinutesByStampTaskAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "status",
-			"function":    "decreaseMaximumIdleMinutesByStampTask",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "status",
+    		"function": "decreaseMaximumIdleMinutesByStampTask",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.decreaseMaximumIdleMinutesByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2295,16 +2294,16 @@ func (p Gs2IdleWebSocketClient) exportMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ExportMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ExportMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ExportMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2316,30 +2315,30 @@ func (p Gs2IdleWebSocketClient) ExportMasterAsync(
 	request *ExportMasterRequest,
 	callback chan<- ExportMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "currentCategoryMaster",
-			"function":    "exportMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "currentCategoryMaster",
+    		"function": "exportMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2376,16 +2375,16 @@ func (p Gs2IdleWebSocketClient) getCurrentCategoryMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCurrentCategoryMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCurrentCategoryMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCurrentCategoryMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentCategoryMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2397,30 +2396,30 @@ func (p Gs2IdleWebSocketClient) GetCurrentCategoryMasterAsync(
 	request *GetCurrentCategoryMasterRequest,
 	callback chan<- GetCurrentCategoryMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "currentCategoryMaster",
-			"function":    "getCurrentCategoryMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "currentCategoryMaster",
+    		"function": "getCurrentCategoryMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getCurrentCategoryMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2457,16 +2456,16 @@ func (p Gs2IdleWebSocketClient) updateCurrentCategoryMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCurrentCategoryMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentCategoryMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentCategoryMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentCategoryMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2478,33 +2477,33 @@ func (p Gs2IdleWebSocketClient) UpdateCurrentCategoryMasterAsync(
 	request *UpdateCurrentCategoryMasterRequest,
 	callback chan<- UpdateCurrentCategoryMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "currentCategoryMaster",
-			"function":    "updateCurrentCategoryMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "currentCategoryMaster",
+    		"function": "updateCurrentCategoryMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Settings != nil && *request.Settings != "" {
-		bodies["settings"] = *request.Settings
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Settings != nil && *request.Settings != "" {
+        bodies["settings"] = *request.Settings
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateCurrentCategoryMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2541,16 +2540,16 @@ func (p Gs2IdleWebSocketClient) updateCurrentCategoryMasterFromGitHubAsyncHandle
 	asyncResult := <-internalCallback
 	var result UpdateCurrentCategoryMasterFromGitHubResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentCategoryMasterFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentCategoryMasterFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentCategoryMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2562,33 +2561,33 @@ func (p Gs2IdleWebSocketClient) UpdateCurrentCategoryMasterFromGitHubAsync(
 	request *UpdateCurrentCategoryMasterFromGitHubRequest,
 	callback chan<- UpdateCurrentCategoryMasterFromGitHubAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "idle",
-			"component":   "currentCategoryMaster",
-			"function":    "updateCurrentCategoryMasterFromGitHub",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "idle",
+    		"component": "currentCategoryMaster",
+    		"function": "updateCurrentCategoryMasterFromGitHub",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateCurrentCategoryMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)

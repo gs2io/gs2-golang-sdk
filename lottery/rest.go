@@ -18,9 +18,8 @@ package lottery
 
 import (
 	"encoding/json"
-	"strings"
-
 	"github.com/gs2io/gs2-golang-sdk/core"
+	"strings"
 )
 
 type Gs2LotteryRestClient struct {
@@ -57,13 +56,13 @@ func describeNamespacesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -87,10 +86,10 @@ func (p Gs2LotteryRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -142,13 +141,13 @@ func createNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -164,47 +163,47 @@ func (p Gs2LotteryRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.TransactionSetting != nil {
-		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-	}
-	if request.LotteryTriggerScriptId != nil && *request.LotteryTriggerScriptId != "" {
-		bodies["lotteryTriggerScriptId"] = *request.LotteryTriggerScriptId
-	}
-	if request.ChoicePrizeTableScriptId != nil && *request.ChoicePrizeTableScriptId != "" {
-		bodies["choicePrizeTableScriptId"] = *request.ChoicePrizeTableScriptId
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
-	if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
-		bodies["queueNamespaceId"] = *request.QueueNamespaceId
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
+    if request.LotteryTriggerScriptId != nil && *request.LotteryTriggerScriptId != "" {
+        bodies["lotteryTriggerScriptId"] = *request.LotteryTriggerScriptId
+    }
+    if request.ChoicePrizeTableScriptId != nil && *request.ChoicePrizeTableScriptId != "" {
+        bodies["choicePrizeTableScriptId"] = *request.ChoicePrizeTableScriptId
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
+    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
+        bodies["queueNamespaceId"] = *request.QueueNamespaceId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -248,13 +247,13 @@ func getNamespaceStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -268,19 +267,19 @@ func (p Gs2LotteryRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -332,13 +331,13 @@ func getNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -352,19 +351,19 @@ func (p Gs2LotteryRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -416,13 +415,13 @@ func updateNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -436,51 +435,51 @@ func (p Gs2LotteryRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.TransactionSetting != nil {
-		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-	}
-	if request.LotteryTriggerScriptId != nil && *request.LotteryTriggerScriptId != "" {
-		bodies["lotteryTriggerScriptId"] = *request.LotteryTriggerScriptId
-	}
-	if request.ChoicePrizeTableScriptId != nil && *request.ChoicePrizeTableScriptId != "" {
-		bodies["choicePrizeTableScriptId"] = *request.ChoicePrizeTableScriptId
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
-	if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
-		bodies["queueNamespaceId"] = *request.QueueNamespaceId
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
+    if request.LotteryTriggerScriptId != nil && *request.LotteryTriggerScriptId != "" {
+        bodies["lotteryTriggerScriptId"] = *request.LotteryTriggerScriptId
+    }
+    if request.ChoicePrizeTableScriptId != nil && *request.ChoicePrizeTableScriptId != "" {
+        bodies["choicePrizeTableScriptId"] = *request.ChoicePrizeTableScriptId
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
+    if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
+        bodies["queueNamespaceId"] = *request.QueueNamespaceId
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -524,13 +523,13 @@ func deleteNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -544,19 +543,19 @@ func (p Gs2LotteryRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -608,13 +607,13 @@ func describeLotteryModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeLotteryModelMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeLotteryModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeLotteryModelMastersAsyncResult{
 		result: &result,
@@ -628,11 +627,11 @@ func (p Gs2LotteryRestClient) DescribeLotteryModelMastersAsync(
 	callback chan<- DescribeLotteryModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/lottery"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -643,10 +642,10 @@ func (p Gs2LotteryRestClient) DescribeLotteryModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeLotteryModelMastersAsyncHandler(
 		p,
@@ -698,13 +697,13 @@ func createLotteryModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateLotteryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateLotteryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreateLotteryModelMasterAsyncResult{
 		result: &result,
@@ -718,51 +717,51 @@ func (p Gs2LotteryRestClient) CreateLotteryModelMasterAsync(
 	callback chan<- CreateLotteryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/lottery"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.Mode != nil && *request.Mode != "" {
-		bodies["mode"] = *request.Mode
-	}
-	if request.Method != nil && *request.Method != "" {
-		bodies["method"] = *request.Method
-	}
-	if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-		bodies["prizeTableName"] = *request.PrizeTableName
-	}
-	if request.ChoicePrizeTableScriptId != nil && *request.ChoicePrizeTableScriptId != "" {
-		bodies["choicePrizeTableScriptId"] = *request.ChoicePrizeTableScriptId
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.Mode != nil && *request.Mode != "" {
+        bodies["mode"] = *request.Mode
+    }
+    if request.Method != nil && *request.Method != "" {
+        bodies["method"] = *request.Method
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != "" {
+        bodies["prizeTableName"] = *request.PrizeTableName
+    }
+    if request.ChoicePrizeTableScriptId != nil && *request.ChoicePrizeTableScriptId != "" {
+        bodies["choicePrizeTableScriptId"] = *request.ChoicePrizeTableScriptId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createLotteryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -806,13 +805,13 @@ func getLotteryModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetLotteryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetLotteryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetLotteryModelMasterAsyncResult{
 		result: &result,
@@ -826,24 +825,24 @@ func (p Gs2LotteryRestClient) GetLotteryModelMasterAsync(
 	callback chan<- GetLotteryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/lottery/{lotteryName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LotteryName != nil && *request.LotteryName != "" {
-		path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
-	} else {
-		path = strings.ReplaceAll(path, "{lotteryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LotteryName != nil && *request.LotteryName != ""  {
+        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+    } else {
+        path = strings.ReplaceAll(path, "{lotteryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getLotteryModelMasterAsyncHandler(
 		p,
@@ -895,13 +894,13 @@ func updateLotteryModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateLotteryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateLotteryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateLotteryModelMasterAsyncResult{
 		result: &result,
@@ -915,53 +914,53 @@ func (p Gs2LotteryRestClient) UpdateLotteryModelMasterAsync(
 	callback chan<- UpdateLotteryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/lottery/{lotteryName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LotteryName != nil && *request.LotteryName != "" {
-		path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
-	} else {
-		path = strings.ReplaceAll(path, "{lotteryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LotteryName != nil && *request.LotteryName != ""  {
+        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+    } else {
+        path = strings.ReplaceAll(path, "{lotteryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.Mode != nil && *request.Mode != "" {
-		bodies["mode"] = *request.Mode
-	}
-	if request.Method != nil && *request.Method != "" {
-		bodies["method"] = *request.Method
-	}
-	if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-		bodies["prizeTableName"] = *request.PrizeTableName
-	}
-	if request.ChoicePrizeTableScriptId != nil && *request.ChoicePrizeTableScriptId != "" {
-		bodies["choicePrizeTableScriptId"] = *request.ChoicePrizeTableScriptId
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.Mode != nil && *request.Mode != "" {
+        bodies["mode"] = *request.Mode
+    }
+    if request.Method != nil && *request.Method != "" {
+        bodies["method"] = *request.Method
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != "" {
+        bodies["prizeTableName"] = *request.PrizeTableName
+    }
+    if request.ChoicePrizeTableScriptId != nil && *request.ChoicePrizeTableScriptId != "" {
+        bodies["choicePrizeTableScriptId"] = *request.ChoicePrizeTableScriptId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateLotteryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1005,13 +1004,13 @@ func deleteLotteryModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteLotteryModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteLotteryModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeleteLotteryModelMasterAsyncResult{
 		result: &result,
@@ -1025,24 +1024,24 @@ func (p Gs2LotteryRestClient) DeleteLotteryModelMasterAsync(
 	callback chan<- DeleteLotteryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/lottery/{lotteryName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LotteryName != nil && *request.LotteryName != "" {
-		path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
-	} else {
-		path = strings.ReplaceAll(path, "{lotteryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LotteryName != nil && *request.LotteryName != ""  {
+        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+    } else {
+        path = strings.ReplaceAll(path, "{lotteryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deleteLotteryModelMasterAsyncHandler(
 		p,
@@ -1094,13 +1093,13 @@ func describePrizeTableMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribePrizeTableMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribePrizeTableMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribePrizeTableMastersAsyncResult{
 		result: &result,
@@ -1114,11 +1113,11 @@ func (p Gs2LotteryRestClient) DescribePrizeTableMastersAsync(
 	callback chan<- DescribePrizeTableMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/table"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1129,10 +1128,10 @@ func (p Gs2LotteryRestClient) DescribePrizeTableMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describePrizeTableMastersAsyncHandler(
 		p,
@@ -1184,13 +1183,13 @@ func createPrizeTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreatePrizeTableMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreatePrizeTableMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- CreatePrizeTableMasterAsyncResult{
 		result: &result,
@@ -1204,46 +1203,46 @@ func (p Gs2LotteryRestClient) CreatePrizeTableMasterAsync(
 	callback chan<- CreatePrizeTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/table"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.Prizes != nil {
-		var _prizes []interface{}
-		for _, item := range request.Prizes {
-			_prizes = append(_prizes, item)
-		}
-		bodies["prizes"] = _prizes
-	}
+    var bodies = core.Bodies{}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.Prizes != nil {
+        var _prizes []interface {}
+        for _, item := range request.Prizes {
+            _prizes = append(_prizes, item)
+        }
+        bodies["prizes"] = _prizes
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go createPrizeTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1287,13 +1286,13 @@ func getPrizeTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetPrizeTableMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetPrizeTableMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetPrizeTableMasterAsyncResult{
 		result: &result,
@@ -1307,24 +1306,24 @@ func (p Gs2LotteryRestClient) GetPrizeTableMasterAsync(
 	callback chan<- GetPrizeTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/table/{prizeTableName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-		path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
-	} else {
-		path = strings.ReplaceAll(path, "{prizeTableName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getPrizeTableMasterAsyncHandler(
 		p,
@@ -1376,13 +1375,13 @@ func updatePrizeTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdatePrizeTableMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdatePrizeTableMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdatePrizeTableMasterAsyncResult{
 		result: &result,
@@ -1396,48 +1395,48 @@ func (p Gs2LotteryRestClient) UpdatePrizeTableMasterAsync(
 	callback chan<- UpdatePrizeTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/table/{prizeTableName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-		path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
-	} else {
-		path = strings.ReplaceAll(path, "{prizeTableName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.Prizes != nil {
-		var _prizes []interface{}
-		for _, item := range request.Prizes {
-			_prizes = append(_prizes, item)
-		}
-		bodies["prizes"] = _prizes
-	}
+    var bodies = core.Bodies{}
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.Prizes != nil {
+        var _prizes []interface {}
+        for _, item := range request.Prizes {
+            _prizes = append(_prizes, item)
+        }
+        bodies["prizes"] = _prizes
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updatePrizeTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1481,13 +1480,13 @@ func deletePrizeTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeletePrizeTableMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeletePrizeTableMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DeletePrizeTableMasterAsyncResult{
 		result: &result,
@@ -1501,24 +1500,24 @@ func (p Gs2LotteryRestClient) DeletePrizeTableMasterAsync(
 	callback chan<- DeletePrizeTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/table/{prizeTableName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-		path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
-	} else {
-		path = strings.ReplaceAll(path, "{prizeTableName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go deletePrizeTableMasterAsyncHandler(
 		p,
@@ -1570,13 +1569,13 @@ func describeLotteryModelsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeLotteryModelsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeLotteryModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeLotteryModelsAsyncResult{
 		result: &result,
@@ -1590,19 +1589,19 @@ func (p Gs2LotteryRestClient) DescribeLotteryModelsAsync(
 	callback chan<- DescribeLotteryModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/lottery"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeLotteryModelsAsyncHandler(
 		p,
@@ -1654,13 +1653,13 @@ func getLotteryModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetLotteryModelAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetLotteryModelAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetLotteryModelAsyncResult{
 		result: &result,
@@ -1674,24 +1673,24 @@ func (p Gs2LotteryRestClient) GetLotteryModelAsync(
 	callback chan<- GetLotteryModelAsyncResult,
 ) {
 	path := "/{namespaceName}/lottery/{lotteryName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LotteryName != nil && *request.LotteryName != "" {
-		path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
-	} else {
-		path = strings.ReplaceAll(path, "{lotteryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LotteryName != nil && *request.LotteryName != ""  {
+        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+    } else {
+        path = strings.ReplaceAll(path, "{lotteryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getLotteryModelAsyncHandler(
 		p,
@@ -1743,13 +1742,13 @@ func describePrizeTablesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribePrizeTablesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribePrizeTablesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribePrizeTablesAsyncResult{
 		result: &result,
@@ -1763,19 +1762,19 @@ func (p Gs2LotteryRestClient) DescribePrizeTablesAsync(
 	callback chan<- DescribePrizeTablesAsyncResult,
 ) {
 	path := "/{namespaceName}/table"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describePrizeTablesAsyncHandler(
 		p,
@@ -1827,13 +1826,13 @@ func getPrizeTableAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetPrizeTableAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetPrizeTableAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetPrizeTableAsyncResult{
 		result: &result,
@@ -1847,24 +1846,24 @@ func (p Gs2LotteryRestClient) GetPrizeTableAsync(
 	callback chan<- GetPrizeTableAsyncResult,
 ) {
 	path := "/{namespaceName}/table/{prizeTableName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-		path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
-	} else {
-		path = strings.ReplaceAll(path, "{prizeTableName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getPrizeTableAsyncHandler(
 		p,
@@ -1910,25 +1909,25 @@ func drawByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DrawByUserIdResult
 	if asyncResult.Err != nil {
-		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
-		if ok {
-			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "box.items.empty" {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "box.items.empty" {
 				asyncResult.Err = gs2err.SetClientError(Empty{})
-			}
-		}
+            }
+        }
 		callback <- DrawByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DrawByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DrawByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DrawByUserIdAsyncResult{
 		result: &result,
@@ -1942,53 +1941,53 @@ func (p Gs2LotteryRestClient) DrawByUserIdAsync(
 	callback chan<- DrawByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/lottery/{lotteryName}/draw"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LotteryName != nil && *request.LotteryName != "" {
-		path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
-	} else {
-		path = strings.ReplaceAll(path, "{lotteryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LotteryName != nil && *request.LotteryName != ""  {
+        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+    } else {
+        path = strings.ReplaceAll(path, "{lotteryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Count != nil {
-		bodies["count"] = *request.Count
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    var bodies = core.Bodies{}
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go drawByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2032,13 +2031,13 @@ func predictionAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PredictionAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PredictionAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PredictionAsyncResult{
 		result: &result,
@@ -2052,47 +2051,47 @@ func (p Gs2LotteryRestClient) PredictionAsync(
 	callback chan<- PredictionAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/lottery/{lotteryName}/prediction"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LotteryName != nil && *request.LotteryName != "" {
-		path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
-	} else {
-		path = strings.ReplaceAll(path, "{lotteryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LotteryName != nil && *request.LotteryName != ""  {
+        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+    } else {
+        path = strings.ReplaceAll(path, "{lotteryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.RandomSeed != nil {
-		bodies["randomSeed"] = *request.RandomSeed
-	}
-	if request.Count != nil {
-		bodies["count"] = *request.Count
-	}
+    var bodies = core.Bodies{}
+    if request.RandomSeed != nil {
+        bodies["randomSeed"] = *request.RandomSeed
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go predictionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2136,13 +2135,13 @@ func predictionByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- PredictionByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- PredictionByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- PredictionByUserIdAsyncResult{
 		result: &result,
@@ -2156,49 +2155,49 @@ func (p Gs2LotteryRestClient) PredictionByUserIdAsync(
 	callback chan<- PredictionByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/lottery/{lotteryName}/prediction"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LotteryName != nil && *request.LotteryName != "" {
-		path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
-	} else {
-		path = strings.ReplaceAll(path, "{lotteryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LotteryName != nil && *request.LotteryName != ""  {
+        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+    } else {
+        path = strings.ReplaceAll(path, "{lotteryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.RandomSeed != nil {
-		bodies["randomSeed"] = *request.RandomSeed
-	}
-	if request.Count != nil {
-		bodies["count"] = *request.Count
-	}
+    var bodies = core.Bodies{}
+    if request.RandomSeed != nil {
+        bodies["randomSeed"] = *request.RandomSeed
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go predictionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2242,13 +2241,13 @@ func drawWithRandomSeedByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DrawWithRandomSeedByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DrawWithRandomSeedByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DrawWithRandomSeedByUserIdAsyncResult{
 		result: &result,
@@ -2262,56 +2261,56 @@ func (p Gs2LotteryRestClient) DrawWithRandomSeedByUserIdAsync(
 	callback chan<- DrawWithRandomSeedByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/lottery/{lotteryName}/draw/withSeed"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LotteryName != nil && *request.LotteryName != "" {
-		path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
-	} else {
-		path = strings.ReplaceAll(path, "{lotteryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LotteryName != nil && *request.LotteryName != ""  {
+        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+    } else {
+        path = strings.ReplaceAll(path, "{lotteryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.RandomSeed != nil {
-		bodies["randomSeed"] = *request.RandomSeed
-	}
-	if request.Count != nil {
-		bodies["count"] = *request.Count
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    var bodies = core.Bodies{}
+    if request.RandomSeed != nil {
+        bodies["randomSeed"] = *request.RandomSeed
+    }
+    if request.Count != nil {
+        bodies["count"] = *request.Count
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go drawWithRandomSeedByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2355,13 +2354,13 @@ func drawByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DrawByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DrawByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DrawByStampSheetAsyncResult{
 		result: &result,
@@ -2377,29 +2376,29 @@ func (p Gs2LotteryRestClient) DrawByStampSheetAsync(
 	path := "/stamp/draw"
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    var bodies = core.Bodies{}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go drawByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Post,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2443,13 +2442,13 @@ func describeProbabilitiesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeProbabilitiesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeProbabilitiesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeProbabilitiesAsyncResult{
 		result: &result,
@@ -2463,27 +2462,27 @@ func (p Gs2LotteryRestClient) DescribeProbabilitiesAsync(
 	callback chan<- DescribeProbabilitiesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/lottery/{lotteryName}/probability"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LotteryName != nil && *request.LotteryName != "" {
-		path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
-	} else {
-		path = strings.ReplaceAll(path, "{lotteryName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LotteryName != nil && *request.LotteryName != ""  {
+        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+    } else {
+        path = strings.ReplaceAll(path, "{lotteryName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeProbabilitiesAsyncHandler(
 		p,
@@ -2535,13 +2534,13 @@ func describeProbabilitiesByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeProbabilitiesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeProbabilitiesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeProbabilitiesByUserIdAsyncResult{
 		result: &result,
@@ -2555,29 +2554,29 @@ func (p Gs2LotteryRestClient) DescribeProbabilitiesByUserIdAsync(
 	callback chan<- DescribeProbabilitiesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/lottery/{lotteryName}/probability"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.LotteryName != nil && *request.LotteryName != "" {
-		path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
-	} else {
-		path = strings.ReplaceAll(path, "{lotteryName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.LotteryName != nil && *request.LotteryName != ""  {
+        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+    } else {
+        path = strings.ReplaceAll(path, "{lotteryName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeProbabilitiesByUserIdAsyncHandler(
 		p,
@@ -2629,13 +2628,13 @@ func exportMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ExportMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ExportMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -2649,19 +2648,19 @@ func (p Gs2LotteryRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go exportMasterAsyncHandler(
 		p,
@@ -2713,13 +2712,13 @@ func getCurrentLotteryMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCurrentLotteryMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCurrentLotteryMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetCurrentLotteryMasterAsyncResult{
 		result: &result,
@@ -2733,19 +2732,19 @@ func (p Gs2LotteryRestClient) GetCurrentLotteryMasterAsync(
 	callback chan<- GetCurrentLotteryMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getCurrentLotteryMasterAsyncHandler(
 		p,
@@ -2797,13 +2796,13 @@ func updateCurrentLotteryMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentLotteryMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentLotteryMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentLotteryMasterAsyncResult{
 		result: &result,
@@ -2817,33 +2816,33 @@ func (p Gs2LotteryRestClient) UpdateCurrentLotteryMasterAsync(
 	callback chan<- UpdateCurrentLotteryMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Settings != nil && *request.Settings != "" {
-		bodies["settings"] = *request.Settings
-	}
+    var bodies = core.Bodies{}
+    if request.Settings != nil && *request.Settings != "" {
+        bodies["settings"] = *request.Settings
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentLotteryMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2887,13 +2886,13 @@ func updateCurrentLotteryMasterFromGitHubAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentLotteryMasterFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentLotteryMasterFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- UpdateCurrentLotteryMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2907,33 +2906,33 @@ func (p Gs2LotteryRestClient) UpdateCurrentLotteryMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentLotteryMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    var bodies = core.Bodies{}
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go updateCurrentLotteryMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
+			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:       core.Put,
+			Headers:      headers,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2977,13 +2976,13 @@ func describePrizeLimitsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribePrizeLimitsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribePrizeLimitsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribePrizeLimitsAsyncResult{
 		result: &result,
@@ -2997,16 +2996,16 @@ func (p Gs2LotteryRestClient) DescribePrizeLimitsAsync(
 	callback chan<- DescribePrizeLimitsAsyncResult,
 ) {
 	path := "/{namespaceName}/prizeLimit/{prizeTableName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-		path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
-	} else {
-		path = strings.ReplaceAll(path, "{prizeTableName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3017,10 +3016,10 @@ func (p Gs2LotteryRestClient) DescribePrizeLimitsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describePrizeLimitsAsyncHandler(
 		p,
@@ -3072,13 +3071,13 @@ func getPrizeLimitAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetPrizeLimitAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetPrizeLimitAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetPrizeLimitAsyncResult{
 		result: &result,
@@ -3092,29 +3091,29 @@ func (p Gs2LotteryRestClient) GetPrizeLimitAsync(
 	callback chan<- GetPrizeLimitAsyncResult,
 ) {
 	path := "/{namespaceName}/prizeLimit/{prizeTableName}/{prizeId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-		path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
-	} else {
-		path = strings.ReplaceAll(path, "{prizeTableName}", "null")
-	}
-	if request.PrizeId != nil && *request.PrizeId != "" {
-		path = strings.ReplaceAll(path, "{prizeId}", core.ToString(*request.PrizeId))
-	} else {
-		path = strings.ReplaceAll(path, "{prizeId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
+    if request.PrizeId != nil && *request.PrizeId != ""  {
+        path = strings.ReplaceAll(path, "{prizeId}", core.ToString(*request.PrizeId))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getPrizeLimitAsyncHandler(
 		p,
@@ -3166,13 +3165,13 @@ func resetPrizeLimitAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ResetPrizeLimitAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ResetPrizeLimitAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ResetPrizeLimitAsyncResult{
 		result: &result,
@@ -3186,29 +3185,29 @@ func (p Gs2LotteryRestClient) ResetPrizeLimitAsync(
 	callback chan<- ResetPrizeLimitAsyncResult,
 ) {
 	path := "/{namespaceName}/prizeLimit/{prizeTableName}/{prizeId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-		path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
-	} else {
-		path = strings.ReplaceAll(path, "{prizeTableName}", "null")
-	}
-	if request.PrizeId != nil && *request.PrizeId != "" {
-		path = strings.ReplaceAll(path, "{prizeId}", core.ToString(*request.PrizeId))
-	} else {
-		path = strings.ReplaceAll(path, "{prizeId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
+    if request.PrizeId != nil && *request.PrizeId != ""  {
+        path = strings.ReplaceAll(path, "{prizeId}", core.ToString(*request.PrizeId))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go resetPrizeLimitAsyncHandler(
 		p,
@@ -3260,13 +3259,13 @@ func describeBoxesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBoxesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBoxesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeBoxesAsyncResult{
 		result: &result,
@@ -3280,11 +3279,11 @@ func (p Gs2LotteryRestClient) DescribeBoxesAsync(
 	callback chan<- DescribeBoxesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/box"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3295,13 +3294,13 @@ func (p Gs2LotteryRestClient) DescribeBoxesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go describeBoxesAsyncHandler(
 		p,
@@ -3353,13 +3352,13 @@ func describeBoxesByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBoxesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBoxesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- DescribeBoxesByUserIdAsyncResult{
 		result: &result,
@@ -3373,16 +3372,16 @@ func (p Gs2LotteryRestClient) DescribeBoxesByUserIdAsync(
 	callback chan<- DescribeBoxesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/box"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3393,10 +3392,10 @@ func (p Gs2LotteryRestClient) DescribeBoxesByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go describeBoxesByUserIdAsyncHandler(
 		p,
@@ -3448,13 +3447,13 @@ func getBoxAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetBoxAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBoxAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetBoxAsyncResult{
 		result: &result,
@@ -3468,27 +3467,27 @@ func (p Gs2LotteryRestClient) GetBoxAsync(
 	callback chan<- GetBoxAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/box/{prizeTableName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-		path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
-	} else {
-		path = strings.ReplaceAll(path, "{prizeTableName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
 
 	go getBoxAsyncHandler(
 		p,
@@ -3540,13 +3539,13 @@ func getBoxByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetBoxByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBoxByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- GetBoxByUserIdAsyncResult{
 		result: &result,
@@ -3560,29 +3559,29 @@ func (p Gs2LotteryRestClient) GetBoxByUserIdAsync(
 	callback chan<- GetBoxByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/box/{prizeTableName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-		path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
-	} else {
-		path = strings.ReplaceAll(path, "{prizeTableName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
 
 	go getBoxByUserIdAsyncHandler(
 		p,
@@ -3634,13 +3633,13 @@ func resetBoxAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ResetBoxAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ResetBoxAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ResetBoxAsyncResult{
 		result: &result,
@@ -3654,30 +3653,30 @@ func (p Gs2LotteryRestClient) ResetBoxAsync(
 	callback chan<- ResetBoxAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/box/{prizeTableName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-		path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
-	} else {
-		path = strings.ReplaceAll(path, "{prizeTableName}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.AccessToken != nil {
+        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go resetBoxAsyncHandler(
 		p,
@@ -3729,13 +3728,13 @@ func resetBoxByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ResetBoxByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ResetBoxByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
 	callback <- ResetBoxByUserIdAsyncResult{
 		result: &result,
@@ -3749,32 +3748,32 @@ func (p Gs2LotteryRestClient) ResetBoxByUserIdAsync(
 	callback chan<- ResetBoxByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/box/{prizeTableName}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.PrizeTableName != nil && *request.PrizeTableName != "" {
-		path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
-	} else {
-		path = strings.ReplaceAll(path, "{prizeTableName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != ""  {
+        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+    } else {
+        path = strings.ReplaceAll(path, "{namespaceName}", "null")
+    }
+    if request.PrizeTableName != nil && *request.PrizeTableName != ""  {
+        path = strings.ReplaceAll(path, "{prizeTableName}", core.ToString(*request.PrizeTableName))
+    } else {
+        path = strings.ReplaceAll(path, "{prizeTableName}", "null")
+    }
+    if request.UserId != nil && *request.UserId != ""  {
+        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+    } else {
+        path = strings.ReplaceAll(path, "{userId}", "null")
+    }
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-	headers := p.CreateAuthorizedHeaders()
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
+    headers := p.CreateAuthorizedHeaders()
+    if request.RequestId != nil {
+        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+    }
+    if request.DuplicationAvoider != nil {
+      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+    }
 
 	go resetBoxByUserIdAsyncHandler(
 		p,

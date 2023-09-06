@@ -20,9 +20,9 @@ type Conflict struct {
 }
 
 func (p Conflict) Type() string {
-	return "MissionConflict"
+    return "MissionConflict"
 }
 
 func (p Conflict) Code() string {
-	return "counter.increase.conflict"
+    return "counter.increase.conflict"
 }

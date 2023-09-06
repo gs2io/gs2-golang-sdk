@@ -18,7 +18,6 @@ package loginReward
 
 import (
 	"encoding/json"
-
 	"github.com/google/uuid"
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -50,16 +49,16 @@ func (p Gs2LoginRewardWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeNamespacesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeNamespacesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -71,33 +70,33 @@ func (p Gs2LoginRewardWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "namespace",
-			"function":    "describeNamespaces",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "namespace",
+    		"function": "describeNamespaces",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -134,16 +133,16 @@ func (p Gs2LoginRewardWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -155,42 +154,42 @@ func (p Gs2LoginRewardWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "namespace",
-			"function":    "createNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "namespace",
+    		"function": "createNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.TransactionSetting != nil {
-		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-	}
-	if request.ReceiveScript != nil {
-		bodies["receiveScript"] = request.ReceiveScript.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
+    if request.ReceiveScript != nil {
+        bodies["receiveScript"] = request.ReceiveScript.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -227,16 +226,16 @@ func (p Gs2LoginRewardWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -248,30 +247,30 @@ func (p Gs2LoginRewardWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "namespace",
-			"function":    "getNamespaceStatus",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "namespace",
+    		"function": "getNamespaceStatus",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -308,16 +307,16 @@ func (p Gs2LoginRewardWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -329,30 +328,30 @@ func (p Gs2LoginRewardWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "namespace",
-			"function":    "getNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "namespace",
+    		"function": "getNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -389,16 +388,16 @@ func (p Gs2LoginRewardWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -410,42 +409,42 @@ func (p Gs2LoginRewardWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "namespace",
-			"function":    "updateNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "namespace",
+    		"function": "updateNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.TransactionSetting != nil {
-		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-	}
-	if request.ReceiveScript != nil {
-		bodies["receiveScript"] = request.ReceiveScript.ToDict()
-	}
-	if request.LogSetting != nil {
-		bodies["logSetting"] = request.LogSetting.ToDict()
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.TransactionSetting != nil {
+        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+    }
+    if request.ReceiveScript != nil {
+        bodies["receiveScript"] = request.ReceiveScript.ToDict()
+    }
+    if request.LogSetting != nil {
+        bodies["logSetting"] = request.LogSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -482,16 +481,16 @@ func (p Gs2LoginRewardWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteNamespaceAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteNamespaceAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -503,30 +502,30 @@ func (p Gs2LoginRewardWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "namespace",
-			"function":    "deleteNamespace",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "namespace",
+    		"function": "deleteNamespace",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -563,16 +562,16 @@ func (p Gs2LoginRewardWebSocketClient) describeBonusModelMastersAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeBonusModelMastersResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBonusModelMastersAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBonusModelMastersAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeBonusModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -584,36 +583,36 @@ func (p Gs2LoginRewardWebSocketClient) DescribeBonusModelMastersAsync(
 	request *DescribeBonusModelMastersRequest,
 	callback chan<- DescribeBonusModelMastersAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "bonusModelMaster",
-			"function":    "describeBonusModelMasters",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "bonusModelMaster",
+    		"function": "describeBonusModelMasters",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeBonusModelMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -650,16 +649,16 @@ func (p Gs2LoginRewardWebSocketClient) createBonusModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateBonusModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- CreateBonusModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- CreateBonusModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- CreateBonusModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -671,68 +670,68 @@ func (p Gs2LoginRewardWebSocketClient) CreateBonusModelMasterAsync(
 	request *CreateBonusModelMasterRequest,
 	callback chan<- CreateBonusModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "bonusModelMaster",
-			"function":    "createBonusModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "bonusModelMaster",
+    		"function": "createBonusModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Name != nil && *request.Name != "" {
-		bodies["name"] = *request.Name
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.Mode != nil && *request.Mode != "" {
-		bodies["mode"] = *request.Mode
-	}
-	if request.PeriodEventId != nil && *request.PeriodEventId != "" {
-		bodies["periodEventId"] = *request.PeriodEventId
-	}
-	if request.ResetHour != nil {
-		bodies["resetHour"] = *request.ResetHour
-	}
-	if request.Repeat != nil && *request.Repeat != "" {
-		bodies["repeat"] = *request.Repeat
-	}
-	if request.Rewards != nil {
-		var _rewards []interface{}
-		for _, item := range request.Rewards {
-			_rewards = append(_rewards, item)
-		}
-		bodies["rewards"] = _rewards
-	}
-	if request.MissedReceiveRelief != nil && *request.MissedReceiveRelief != "" {
-		bodies["missedReceiveRelief"] = *request.MissedReceiveRelief
-	}
-	if request.MissedReceiveReliefConsumeActions != nil {
-		var _missedReceiveReliefConsumeActions []interface{}
-		for _, item := range request.MissedReceiveReliefConsumeActions {
-			_missedReceiveReliefConsumeActions = append(_missedReceiveReliefConsumeActions, item)
-		}
-		bodies["missedReceiveReliefConsumeActions"] = _missedReceiveReliefConsumeActions
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Name != nil && *request.Name != "" {
+        bodies["name"] = *request.Name
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.Mode != nil && *request.Mode != "" {
+        bodies["mode"] = *request.Mode
+    }
+    if request.PeriodEventId != nil && *request.PeriodEventId != "" {
+        bodies["periodEventId"] = *request.PeriodEventId
+    }
+    if request.ResetHour != nil {
+        bodies["resetHour"] = *request.ResetHour
+    }
+    if request.Repeat != nil && *request.Repeat != "" {
+        bodies["repeat"] = *request.Repeat
+    }
+    if request.Rewards != nil {
+        var _rewards []interface {}
+        for _, item := range request.Rewards {
+            _rewards = append(_rewards, item)
+        }
+        bodies["rewards"] = _rewards
+    }
+    if request.MissedReceiveRelief != nil && *request.MissedReceiveRelief != "" {
+        bodies["missedReceiveRelief"] = *request.MissedReceiveRelief
+    }
+    if request.MissedReceiveReliefConsumeActions != nil {
+        var _missedReceiveReliefConsumeActions []interface {}
+        for _, item := range request.MissedReceiveReliefConsumeActions {
+            _missedReceiveReliefConsumeActions = append(_missedReceiveReliefConsumeActions, item)
+        }
+        bodies["missedReceiveReliefConsumeActions"] = _missedReceiveReliefConsumeActions
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.createBonusModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -769,16 +768,16 @@ func (p Gs2LoginRewardWebSocketClient) getBonusModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetBonusModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetBonusModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBonusModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetBonusModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -790,33 +789,33 @@ func (p Gs2LoginRewardWebSocketClient) GetBonusModelMasterAsync(
 	request *GetBonusModelMasterRequest,
 	callback chan<- GetBonusModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "bonusModelMaster",
-			"function":    "getBonusModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "bonusModelMaster",
+    		"function": "getBonusModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getBonusModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -853,16 +852,16 @@ func (p Gs2LoginRewardWebSocketClient) updateBonusModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateBonusModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateBonusModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateBonusModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateBonusModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -874,68 +873,68 @@ func (p Gs2LoginRewardWebSocketClient) UpdateBonusModelMasterAsync(
 	request *UpdateBonusModelMasterRequest,
 	callback chan<- UpdateBonusModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "bonusModelMaster",
-			"function":    "updateBonusModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "bonusModelMaster",
+    		"function": "updateBonusModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
-	}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.Mode != nil && *request.Mode != "" {
-		bodies["mode"] = *request.Mode
-	}
-	if request.PeriodEventId != nil && *request.PeriodEventId != "" {
-		bodies["periodEventId"] = *request.PeriodEventId
-	}
-	if request.ResetHour != nil {
-		bodies["resetHour"] = *request.ResetHour
-	}
-	if request.Repeat != nil && *request.Repeat != "" {
-		bodies["repeat"] = *request.Repeat
-	}
-	if request.Rewards != nil {
-		var _rewards []interface{}
-		for _, item := range request.Rewards {
-			_rewards = append(_rewards, item)
-		}
-		bodies["rewards"] = _rewards
-	}
-	if request.MissedReceiveRelief != nil && *request.MissedReceiveRelief != "" {
-		bodies["missedReceiveRelief"] = *request.MissedReceiveRelief
-	}
-	if request.MissedReceiveReliefConsumeActions != nil {
-		var _missedReceiveReliefConsumeActions []interface{}
-		for _, item := range request.MissedReceiveReliefConsumeActions {
-			_missedReceiveReliefConsumeActions = append(_missedReceiveReliefConsumeActions, item)
-		}
-		bodies["missedReceiveReliefConsumeActions"] = _missedReceiveReliefConsumeActions
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
+    if request.Description != nil && *request.Description != "" {
+        bodies["description"] = *request.Description
+    }
+    if request.Metadata != nil && *request.Metadata != "" {
+        bodies["metadata"] = *request.Metadata
+    }
+    if request.Mode != nil && *request.Mode != "" {
+        bodies["mode"] = *request.Mode
+    }
+    if request.PeriodEventId != nil && *request.PeriodEventId != "" {
+        bodies["periodEventId"] = *request.PeriodEventId
+    }
+    if request.ResetHour != nil {
+        bodies["resetHour"] = *request.ResetHour
+    }
+    if request.Repeat != nil && *request.Repeat != "" {
+        bodies["repeat"] = *request.Repeat
+    }
+    if request.Rewards != nil {
+        var _rewards []interface {}
+        for _, item := range request.Rewards {
+            _rewards = append(_rewards, item)
+        }
+        bodies["rewards"] = _rewards
+    }
+    if request.MissedReceiveRelief != nil && *request.MissedReceiveRelief != "" {
+        bodies["missedReceiveRelief"] = *request.MissedReceiveRelief
+    }
+    if request.MissedReceiveReliefConsumeActions != nil {
+        var _missedReceiveReliefConsumeActions []interface {}
+        for _, item := range request.MissedReceiveReliefConsumeActions {
+            _missedReceiveReliefConsumeActions = append(_missedReceiveReliefConsumeActions, item)
+        }
+        bodies["missedReceiveReliefConsumeActions"] = _missedReceiveReliefConsumeActions
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateBonusModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -972,16 +971,16 @@ func (p Gs2LoginRewardWebSocketClient) deleteBonusModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteBonusModelMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteBonusModelMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteBonusModelMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteBonusModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -993,33 +992,33 @@ func (p Gs2LoginRewardWebSocketClient) DeleteBonusModelMasterAsync(
 	request *DeleteBonusModelMasterRequest,
 	callback chan<- DeleteBonusModelMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "bonusModelMaster",
-			"function":    "deleteBonusModelMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "bonusModelMaster",
+    		"function": "deleteBonusModelMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteBonusModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1056,16 +1055,16 @@ func (p Gs2LoginRewardWebSocketClient) exportMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ExportMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ExportMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ExportMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1077,30 +1076,30 @@ func (p Gs2LoginRewardWebSocketClient) ExportMasterAsync(
 	request *ExportMasterRequest,
 	callback chan<- ExportMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "currentBonusMaster",
-			"function":    "exportMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "currentBonusMaster",
+    		"function": "exportMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1137,16 +1136,16 @@ func (p Gs2LoginRewardWebSocketClient) getCurrentBonusMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCurrentBonusMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetCurrentBonusMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetCurrentBonusMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetCurrentBonusMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1158,30 +1157,30 @@ func (p Gs2LoginRewardWebSocketClient) GetCurrentBonusMasterAsync(
 	request *GetCurrentBonusMasterRequest,
 	callback chan<- GetCurrentBonusMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "currentBonusMaster",
-			"function":    "getCurrentBonusMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "currentBonusMaster",
+    		"function": "getCurrentBonusMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getCurrentBonusMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1218,16 +1217,16 @@ func (p Gs2LoginRewardWebSocketClient) updateCurrentBonusMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCurrentBonusMasterResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentBonusMasterAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentBonusMasterAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentBonusMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1239,33 +1238,33 @@ func (p Gs2LoginRewardWebSocketClient) UpdateCurrentBonusMasterAsync(
 	request *UpdateCurrentBonusMasterRequest,
 	callback chan<- UpdateCurrentBonusMasterAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "currentBonusMaster",
-			"function":    "updateCurrentBonusMaster",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "currentBonusMaster",
+    		"function": "updateCurrentBonusMaster",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.Settings != nil && *request.Settings != "" {
-		bodies["settings"] = *request.Settings
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.Settings != nil && *request.Settings != "" {
+        bodies["settings"] = *request.Settings
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateCurrentBonusMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1302,16 +1301,16 @@ func (p Gs2LoginRewardWebSocketClient) updateCurrentBonusMasterFromGitHubAsyncHa
 	asyncResult := <-internalCallback
 	var result UpdateCurrentBonusMasterFromGitHubResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateCurrentBonusMasterFromGitHubAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UpdateCurrentBonusMasterFromGitHubAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UpdateCurrentBonusMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1323,33 +1322,33 @@ func (p Gs2LoginRewardWebSocketClient) UpdateCurrentBonusMasterFromGitHubAsync(
 	request *UpdateCurrentBonusMasterFromGitHubRequest,
 	callback chan<- UpdateCurrentBonusMasterFromGitHubAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "currentBonusMaster",
-			"function":    "updateCurrentBonusMasterFromGitHub",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "currentBonusMaster",
+    		"function": "updateCurrentBonusMasterFromGitHub",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.CheckoutSetting != nil {
-		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.CheckoutSetting != nil {
+        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.updateCurrentBonusMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1386,16 +1385,16 @@ func (p Gs2LoginRewardWebSocketClient) describeBonusModelsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeBonusModelsResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeBonusModelsAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeBonusModelsAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeBonusModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1407,30 +1406,30 @@ func (p Gs2LoginRewardWebSocketClient) DescribeBonusModelsAsync(
 	request *DescribeBonusModelsRequest,
 	callback chan<- DescribeBonusModelsAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "bonusModel",
-			"function":    "describeBonusModels",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "bonusModel",
+    		"function": "describeBonusModels",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeBonusModelsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1467,16 +1466,16 @@ func (p Gs2LoginRewardWebSocketClient) getBonusModelAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetBonusModelResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetBonusModelAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetBonusModelAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetBonusModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1488,33 +1487,33 @@ func (p Gs2LoginRewardWebSocketClient) GetBonusModelAsync(
 	request *GetBonusModelRequest,
 	callback chan<- GetBonusModelAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "bonusModel",
-			"function":    "getBonusModel",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "bonusModel",
+    		"function": "getBonusModel",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getBonusModelAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1551,22 +1550,22 @@ func (p Gs2LoginRewardWebSocketClient) receiveAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ReceiveResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ReceiveAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ReceiveAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
-		if ok {
-			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
 				asyncResult.Err = gs2err.SetClientError(AlreadyReceived{})
-			}
-		}
-	}
+            }
+        }
+    }
 	callback <- ReceiveAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1578,49 +1577,49 @@ func (p Gs2LoginRewardWebSocketClient) ReceiveAsync(
 	request *ReceiveRequest,
 	callback chan<- ReceiveAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "bonus",
-			"function":    "receive",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "bonus",
+    		"function": "receive",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.receiveAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1657,22 +1656,22 @@ func (p Gs2LoginRewardWebSocketClient) receiveByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ReceiveByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- ReceiveByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- ReceiveByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
-		if ok {
-			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
 				asyncResult.Err = gs2err.SetClientError(AlreadyReceived{})
-			}
-		}
-	}
+            }
+        }
+    }
 	callback <- ReceiveByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1684,46 +1683,46 @@ func (p Gs2LoginRewardWebSocketClient) ReceiveByUserIdAsync(
 	request *ReceiveByUserIdRequest,
 	callback chan<- ReceiveByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "bonus",
-			"function":    "receiveByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "bonus",
+    		"function": "receiveByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.receiveByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1760,22 +1759,22 @@ func (p Gs2LoginRewardWebSocketClient) missedReceiveAsyncHandler(
 	asyncResult := <-internalCallback
 	var result MissedReceiveResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- MissedReceiveAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- MissedReceiveAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
-		if ok {
-			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
 				asyncResult.Err = gs2err.SetClientError(AlreadyReceived{})
-			}
-		}
-	}
+            }
+        }
+    }
 	callback <- MissedReceiveAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1787,52 +1786,52 @@ func (p Gs2LoginRewardWebSocketClient) MissedReceiveAsync(
 	request *MissedReceiveRequest,
 	callback chan<- MissedReceiveAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "bonus",
-			"function":    "missedReceive",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "bonus",
+    		"function": "missedReceive",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.StepNumber != nil {
-		bodies["stepNumber"] = *request.StepNumber
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.StepNumber != nil {
+        bodies["stepNumber"] = *request.StepNumber
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.missedReceiveAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1869,22 +1868,22 @@ func (p Gs2LoginRewardWebSocketClient) missedReceiveByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result MissedReceiveByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- MissedReceiveByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- MissedReceiveByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
-		if ok {
-			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
+    if asyncResult.Err != nil {
+        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+        if ok {
+            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "loginReward.bonus.alreadyReceived" {
 				asyncResult.Err = gs2err.SetClientError(AlreadyReceived{})
-			}
-		}
-	}
+            }
+        }
+    }
 	callback <- MissedReceiveByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1896,49 +1895,49 @@ func (p Gs2LoginRewardWebSocketClient) MissedReceiveByUserIdAsync(
 	request *MissedReceiveByUserIdRequest,
 	callback chan<- MissedReceiveByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "bonus",
-			"function":    "missedReceiveByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "bonus",
+    		"function": "missedReceiveByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.StepNumber != nil {
-		bodies["stepNumber"] = *request.StepNumber
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.StepNumber != nil {
+        bodies["stepNumber"] = *request.StepNumber
+    }
+    if request.Config != nil {
+        var _config []interface {}
+        for _, item := range request.Config {
+            _config = append(_config, item)
+        }
+        bodies["config"] = _config
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.missedReceiveByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -1975,16 +1974,16 @@ func (p Gs2LoginRewardWebSocketClient) describeReceiveStatusesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeReceiveStatusesResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeReceiveStatusesAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReceiveStatusesAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeReceiveStatusesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1996,42 +1995,42 @@ func (p Gs2LoginRewardWebSocketClient) DescribeReceiveStatusesAsync(
 	request *DescribeReceiveStatusesRequest,
 	callback chan<- DescribeReceiveStatusesAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "receiveStatus",
-			"function":    "describeReceiveStatuses",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "receiveStatus",
+    		"function": "describeReceiveStatuses",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.describeReceiveStatusesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2068,16 +2067,16 @@ func (p Gs2LoginRewardWebSocketClient) describeReceiveStatusesByUserIdAsyncHandl
 	asyncResult := <-internalCallback
 	var result DescribeReceiveStatusesByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DescribeReceiveStatusesByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DescribeReceiveStatusesByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DescribeReceiveStatusesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2089,39 +2088,39 @@ func (p Gs2LoginRewardWebSocketClient) DescribeReceiveStatusesByUserIdAsync(
 	request *DescribeReceiveStatusesByUserIdRequest,
 	callback chan<- DescribeReceiveStatusesByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "receiveStatus",
-			"function":    "describeReceiveStatusesByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "receiveStatus",
+    		"function": "describeReceiveStatusesByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.PageToken != nil && *request.PageToken != "" {
-		bodies["pageToken"] = *request.PageToken
-	}
-	if request.Limit != nil {
-		bodies["limit"] = *request.Limit
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.PageToken != nil && *request.PageToken != "" {
+        bodies["pageToken"] = *request.PageToken
+    }
+    if request.Limit != nil {
+        bodies["limit"] = *request.Limit
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.describeReceiveStatusesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2158,16 +2157,16 @@ func (p Gs2LoginRewardWebSocketClient) getReceiveStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetReceiveStatusResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetReceiveStatusAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetReceiveStatusAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetReceiveStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2179,39 +2178,39 @@ func (p Gs2LoginRewardWebSocketClient) GetReceiveStatusAsync(
 	request *GetReceiveStatusRequest,
 	callback chan<- GetReceiveStatusAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "receiveStatus",
-			"function":    "getReceiveStatus",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "receiveStatus",
+    		"function": "getReceiveStatus",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
 
 	go p.getReceiveStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2248,16 +2247,16 @@ func (p Gs2LoginRewardWebSocketClient) getReceiveStatusByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetReceiveStatusByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetReceiveStatusByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- GetReceiveStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- GetReceiveStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2269,36 +2268,36 @@ func (p Gs2LoginRewardWebSocketClient) GetReceiveStatusByUserIdAsync(
 	request *GetReceiveStatusByUserIdRequest,
 	callback chan<- GetReceiveStatusByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "receiveStatus",
-			"function":    "getReceiveStatusByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "receiveStatus",
+    		"function": "getReceiveStatusByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.getReceiveStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2335,16 +2334,16 @@ func (p Gs2LoginRewardWebSocketClient) deleteReceiveStatusByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteReceiveStatusByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteReceiveStatusByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteReceiveStatusByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteReceiveStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2356,39 +2355,39 @@ func (p Gs2LoginRewardWebSocketClient) DeleteReceiveStatusByUserIdAsync(
 	request *DeleteReceiveStatusByUserIdRequest,
 	callback chan<- DeleteReceiveStatusByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "receiveStatus",
-			"function":    "deleteReceiveStatusByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "receiveStatus",
+    		"function": "deleteReceiveStatusByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.deleteReceiveStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2425,16 +2424,16 @@ func (p Gs2LoginRewardWebSocketClient) deleteReceiveStatusByStampSheetAsyncHandl
 	asyncResult := <-internalCallback
 	var result DeleteReceiveStatusByStampSheetResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteReceiveStatusByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- DeleteReceiveStatusByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- DeleteReceiveStatusByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2446,33 +2445,33 @@ func (p Gs2LoginRewardWebSocketClient) DeleteReceiveStatusByStampSheetAsync(
 	request *DeleteReceiveStatusByStampSheetRequest,
 	callback chan<- DeleteReceiveStatusByStampSheetAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "receiveStatus",
-			"function":    "deleteReceiveStatusByStampSheet",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "receiveStatus",
+    		"function": "deleteReceiveStatusByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.deleteReceiveStatusByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2509,16 +2508,16 @@ func (p Gs2LoginRewardWebSocketClient) markReceivedAsyncHandler(
 	asyncResult := <-internalCallback
 	var result MarkReceivedResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- MarkReceivedAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- MarkReceivedAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- MarkReceivedAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2530,45 +2529,45 @@ func (p Gs2LoginRewardWebSocketClient) MarkReceivedAsync(
 	request *MarkReceivedRequest,
 	callback chan<- MarkReceivedAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "receiveStatus",
-			"function":    "markReceived",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "receiveStatus",
+    		"function": "markReceived",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.StepNumber != nil {
-		bodies["stepNumber"] = *request.StepNumber
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
+    if request.AccessToken != nil && *request.AccessToken != "" {
+        bodies["accessToken"] = *request.AccessToken
+    }
+    if request.StepNumber != nil {
+        bodies["stepNumber"] = *request.StepNumber
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.AccessToken != nil {
+        bodies["xGs2AccessToken"] = string(*request.AccessToken)
+    }
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.markReceivedAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2605,16 +2604,16 @@ func (p Gs2LoginRewardWebSocketClient) markReceivedByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result MarkReceivedByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- MarkReceivedByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- MarkReceivedByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- MarkReceivedByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2626,42 +2625,42 @@ func (p Gs2LoginRewardWebSocketClient) MarkReceivedByUserIdAsync(
 	request *MarkReceivedByUserIdRequest,
 	callback chan<- MarkReceivedByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "receiveStatus",
-			"function":    "markReceivedByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "receiveStatus",
+    		"function": "markReceivedByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.StepNumber != nil {
-		bodies["stepNumber"] = *request.StepNumber
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.StepNumber != nil {
+        bodies["stepNumber"] = *request.StepNumber
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.markReceivedByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2698,16 +2697,16 @@ func (p Gs2LoginRewardWebSocketClient) unmarkReceivedByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UnmarkReceivedByUserIdResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UnmarkReceivedByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnmarkReceivedByUserIdAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UnmarkReceivedByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2719,42 +2718,42 @@ func (p Gs2LoginRewardWebSocketClient) UnmarkReceivedByUserIdAsync(
 	request *UnmarkReceivedByUserIdRequest,
 	callback chan<- UnmarkReceivedByUserIdAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "receiveStatus",
-			"function":    "unmarkReceivedByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "receiveStatus",
+    		"function": "unmarkReceivedByUserId",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.BonusModelName != nil && *request.BonusModelName != "" {
-		bodies["bonusModelName"] = *request.BonusModelName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.StepNumber != nil {
-		bodies["stepNumber"] = *request.StepNumber
-	}
+    if request.NamespaceName != nil && *request.NamespaceName != "" {
+        bodies["namespaceName"] = *request.NamespaceName
+    }
+    if request.BonusModelName != nil && *request.BonusModelName != "" {
+        bodies["bonusModelName"] = *request.BonusModelName
+    }
+    if request.UserId != nil && *request.UserId != "" {
+        bodies["userId"] = *request.UserId
+    }
+    if request.StepNumber != nil {
+        bodies["stepNumber"] = *request.StepNumber
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
+    if request.DuplicationAvoider != nil {
+      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+    }
 
 	go p.unmarkReceivedByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2791,16 +2790,16 @@ func (p Gs2LoginRewardWebSocketClient) markReceivedByStampTaskAsyncHandler(
 	asyncResult := <-internalCallback
 	var result MarkReceivedByStampTaskResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- MarkReceivedByStampTaskAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- MarkReceivedByStampTaskAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- MarkReceivedByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2812,33 +2811,33 @@ func (p Gs2LoginRewardWebSocketClient) MarkReceivedByStampTaskAsync(
 	request *MarkReceivedByStampTaskRequest,
 	callback chan<- MarkReceivedByStampTaskAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "receiveStatus",
-			"function":    "markReceivedByStampTask",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "receiveStatus",
+    		"function": "markReceivedByStampTask",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampTask != nil && *request.StampTask != "" {
-		bodies["stampTask"] = *request.StampTask
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampTask != nil && *request.StampTask != "" {
+        bodies["stampTask"] = *request.StampTask
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.markReceivedByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
@@ -2875,16 +2874,16 @@ func (p Gs2LoginRewardWebSocketClient) unmarkReceivedByStampSheetAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UnmarkReceivedByStampSheetResult
 	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UnmarkReceivedByStampSheetAsyncResult{
-				err: err,
-			}
-			return
-		}
+        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+        if err != nil {
+            callback <- UnmarkReceivedByStampSheetAsyncResult{
+                err: err,
+            }
+            return
+        }
 	}
-	if asyncResult.Err != nil {
-	}
+    if asyncResult.Err != nil {
+    }
 	callback <- UnmarkReceivedByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2896,33 +2895,33 @@ func (p Gs2LoginRewardWebSocketClient) UnmarkReceivedByStampSheetAsync(
 	request *UnmarkReceivedByStampSheetRequest,
 	callback chan<- UnmarkReceivedByStampSheetAsyncResult,
 ) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "login_reward",
-			"component":   "receiveStatus",
-			"function":    "unmarkReceivedByStampSheet",
-			"contentType": "application/json",
-			"requestId":   requestId,
+    requestId := core.WebSocketRequestId(uuid.New().String())
+    var bodies = core.WebSocketBodies{
+    	"x_gs2": map[string]interface{} {
+    		"service": "login_reward",
+    		"component": "receiveStatus",
+    		"function": "unmarkReceivedByStampSheet",
+            "contentType": "application/json",
+    		"requestId": requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-	if request.StampSheet != nil && *request.StampSheet != "" {
-		bodies["stampSheet"] = *request.StampSheet
-	}
-	if request.KeyId != nil && *request.KeyId != "" {
-		bodies["keyId"] = *request.KeyId
-	}
+    if request.StampSheet != nil && *request.StampSheet != "" {
+        bodies["stampSheet"] = *request.StampSheet
+    }
+    if request.KeyId != nil && *request.KeyId != "" {
+        bodies["keyId"] = *request.KeyId
+    }
 	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
+    	bodies["contextStack"] = *request.ContextStack;
 	}
 
 	go p.unmarkReceivedByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies:    bodies,
+			Bodies: bodies,
 		},
 		callback,
 	)
