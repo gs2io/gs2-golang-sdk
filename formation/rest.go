@@ -18,8 +18,9 @@ package formation
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
 	"strings"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Gs2FormationRestClient struct {
@@ -56,13 +57,13 @@ func describeNamespacesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeNamespacesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeNamespacesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -86,10 +87,10 @@ func (p Gs2FormationRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -141,13 +142,13 @@ func createNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -163,41 +164,41 @@ func (p Gs2FormationRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.TransactionSetting != nil {
-        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-    }
-    if request.UpdateMoldScript != nil {
-        bodies["updateMoldScript"] = request.UpdateMoldScript.ToDict()
-    }
-    if request.UpdateFormScript != nil {
-        bodies["updateFormScript"] = request.UpdateFormScript.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.UpdateMoldScript != nil {
+		bodies["updateMoldScript"] = request.UpdateMoldScript.ToDict()
+	}
+	if request.UpdateFormScript != nil {
+		bodies["updateFormScript"] = request.UpdateFormScript.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -241,13 +242,13 @@ func getNamespaceStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -261,19 +262,19 @@ func (p Gs2FormationRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -325,13 +326,13 @@ func getNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -345,19 +346,19 @@ func (p Gs2FormationRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -409,13 +410,13 @@ func updateNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -429,45 +430,45 @@ func (p Gs2FormationRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.TransactionSetting != nil {
-        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-    }
-    if request.UpdateMoldScript != nil {
-        bodies["updateMoldScript"] = request.UpdateMoldScript.ToDict()
-    }
-    if request.UpdateFormScript != nil {
-        bodies["updateFormScript"] = request.UpdateFormScript.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.UpdateMoldScript != nil {
+		bodies["updateMoldScript"] = request.UpdateMoldScript.ToDict()
+	}
+	if request.UpdateFormScript != nil {
+		bodies["updateFormScript"] = request.UpdateFormScript.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -511,13 +512,13 @@ func deleteNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -531,19 +532,19 @@ func (p Gs2FormationRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -562,90 +563,6 @@ func (p Gs2FormationRestClient) DeleteNamespace(
 ) (*DeleteNamespaceResult, error) {
 	callback := make(chan DeleteNamespaceAsyncResult, 1)
 	go p.DeleteNamespaceAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func describeFormModelsAsyncHandler(
-	client Gs2FormationRestClient,
-	job *core.NetworkJob,
-	callback chan<- DescribeFormModelsAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DescribeFormModelsAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DescribeFormModelsResult
-	if asyncResult.Err != nil {
-		callback <- DescribeFormModelsAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeFormModelsAsyncResult{
-                err: err,
-            }
-            return
-        }
-	}
-	callback <- DescribeFormModelsAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2FormationRestClient) DescribeFormModelsAsync(
-	request *DescribeFormModelsRequest,
-	callback chan<- DescribeFormModelsAsyncResult,
-) {
-	path := "/{namespaceName}/model/form"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-
-	go describeFormModelsAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Get,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2FormationRestClient) DescribeFormModels(
-	request *DescribeFormModelsRequest,
-) (*DescribeFormModelsResult, error) {
-	callback := make(chan DescribeFormModelsAsyncResult, 1)
-	go p.DescribeFormModelsAsync(
 		request,
 		callback,
 	)
@@ -679,13 +596,13 @@ func getFormModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFormModelAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetFormModelAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetFormModelAsyncResult{
 		result: &result,
@@ -698,25 +615,30 @@ func (p Gs2FormationRestClient) GetFormModelAsync(
 	request *GetFormModelRequest,
 	callback chan<- GetFormModelAsyncResult,
 ) {
-	path := "/{namespaceName}/model/form/{formModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
+	path := "/{namespaceName}/model/{moldModelName}/form/{formModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.FormModelName != nil && *request.FormModelName != "" {
+		path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{formModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getFormModelAsyncHandler(
 		p,
@@ -768,13 +690,13 @@ func describeFormModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeFormModelMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeFormModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeFormModelMastersAsyncResult{
 		result: &result,
@@ -788,11 +710,11 @@ func (p Gs2FormationRestClient) DescribeFormModelMastersAsync(
 	callback chan<- DescribeFormModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/form"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -803,10 +725,10 @@ func (p Gs2FormationRestClient) DescribeFormModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeFormModelMastersAsyncHandler(
 		p,
@@ -858,13 +780,13 @@ func createFormModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateFormModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateFormModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateFormModelMasterAsyncResult{
 		result: &result,
@@ -878,46 +800,46 @@ func (p Gs2FormationRestClient) CreateFormModelMasterAsync(
 	callback chan<- CreateFormModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/form"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.Slots != nil {
-        var _slots []interface {}
-        for _, item := range request.Slots {
-            _slots = append(_slots, item)
-        }
-        bodies["slots"] = _slots
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.Slots != nil {
+		var _slots []interface{}
+		for _, item := range request.Slots {
+			_slots = append(_slots, item)
+		}
+		bodies["slots"] = _slots
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createFormModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -961,13 +883,13 @@ func getFormModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFormModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetFormModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetFormModelMasterAsyncResult{
 		result: &result,
@@ -981,24 +903,24 @@ func (p Gs2FormationRestClient) GetFormModelMasterAsync(
 	callback chan<- GetFormModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/form/{formModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.FormModelName != nil && *request.FormModelName != "" {
+		path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{formModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getFormModelMasterAsyncHandler(
 		p,
@@ -1050,13 +972,13 @@ func updateFormModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateFormModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateFormModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateFormModelMasterAsyncResult{
 		result: &result,
@@ -1070,48 +992,48 @@ func (p Gs2FormationRestClient) UpdateFormModelMasterAsync(
 	callback chan<- UpdateFormModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/form/{formModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.Slots != nil {
-        var _slots []interface {}
-        for _, item := range request.Slots {
-            _slots = append(_slots, item)
-        }
-        bodies["slots"] = _slots
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.FormModelName != nil && *request.FormModelName != "" {
+		path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{formModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.Slots != nil {
+		var _slots []interface{}
+		for _, item := range request.Slots {
+			_slots = append(_slots, item)
+		}
+		bodies["slots"] = _slots
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateFormModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1155,13 +1077,13 @@ func deleteFormModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteFormModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteFormModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteFormModelMasterAsyncResult{
 		result: &result,
@@ -1175,24 +1097,24 @@ func (p Gs2FormationRestClient) DeleteFormModelMasterAsync(
 	callback chan<- DeleteFormModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/form/{formModelName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.FormModelName != nil && *request.FormModelName != "" {
+		path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{formModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteFormModelMasterAsyncHandler(
 		p,
@@ -1244,13 +1166,13 @@ func describeMoldModelsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeMoldModelsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMoldModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeMoldModelsAsyncResult{
 		result: &result,
@@ -1264,19 +1186,19 @@ func (p Gs2FormationRestClient) DescribeMoldModelsAsync(
 	callback chan<- DescribeMoldModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/model/mold"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeMoldModelsAsyncHandler(
 		p,
@@ -1328,13 +1250,13 @@ func getMoldModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetMoldModelAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetMoldModelAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetMoldModelAsyncResult{
 		result: &result,
@@ -1347,25 +1269,25 @@ func (p Gs2FormationRestClient) GetMoldModelAsync(
 	request *GetMoldModelRequest,
 	callback chan<- GetMoldModelAsyncResult,
 ) {
-	path := "/{namespaceName}/model/mold/{moldName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
+	path := "/{namespaceName}/model/mold/{moldModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getMoldModelAsyncHandler(
 		p,
@@ -1417,13 +1339,13 @@ func describeMoldModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeMoldModelMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMoldModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeMoldModelMastersAsyncResult{
 		result: &result,
@@ -1437,11 +1359,11 @@ func (p Gs2FormationRestClient) DescribeMoldModelMastersAsync(
 	callback chan<- DescribeMoldModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/mold"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1452,10 +1374,10 @@ func (p Gs2FormationRestClient) DescribeMoldModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeMoldModelMastersAsyncHandler(
 		p,
@@ -1507,13 +1429,13 @@ func createMoldModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateMoldModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateMoldModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateMoldModelMasterAsyncResult{
 		result: &result,
@@ -1527,48 +1449,48 @@ func (p Gs2FormationRestClient) CreateMoldModelMasterAsync(
 	callback chan<- CreateMoldModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/mold"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.FormModelName != nil && *request.FormModelName != "" {
-        bodies["formModelName"] = *request.FormModelName
-    }
-    if request.InitialMaxCapacity != nil {
-        bodies["initialMaxCapacity"] = *request.InitialMaxCapacity
-    }
-    if request.MaxCapacity != nil {
-        bodies["maxCapacity"] = *request.MaxCapacity
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.FormModelName != nil && *request.FormModelName != "" {
+		bodies["formModelName"] = *request.FormModelName
+	}
+	if request.InitialMaxCapacity != nil {
+		bodies["initialMaxCapacity"] = *request.InitialMaxCapacity
+	}
+	if request.MaxCapacity != nil {
+		bodies["maxCapacity"] = *request.MaxCapacity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createMoldModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1612,13 +1534,13 @@ func getMoldModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetMoldModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetMoldModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetMoldModelMasterAsyncResult{
 		result: &result,
@@ -1631,25 +1553,25 @@ func (p Gs2FormationRestClient) GetMoldModelMasterAsync(
 	request *GetMoldModelMasterRequest,
 	callback chan<- GetMoldModelMasterAsyncResult,
 ) {
-	path := "/{namespaceName}/master/model/mold/{moldName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
+	path := "/{namespaceName}/master/model/mold/{moldModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getMoldModelMasterAsyncHandler(
 		p,
@@ -1701,13 +1623,13 @@ func updateMoldModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateMoldModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateMoldModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateMoldModelMasterAsyncResult{
 		result: &result,
@@ -1720,51 +1642,51 @@ func (p Gs2FormationRestClient) UpdateMoldModelMasterAsync(
 	request *UpdateMoldModelMasterRequest,
 	callback chan<- UpdateMoldModelMasterAsyncResult,
 ) {
-	path := "/{namespaceName}/master/model/mold/{moldName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.FormModelName != nil && *request.FormModelName != "" {
-        bodies["formModelName"] = *request.FormModelName
-    }
-    if request.InitialMaxCapacity != nil {
-        bodies["initialMaxCapacity"] = *request.InitialMaxCapacity
-    }
-    if request.MaxCapacity != nil {
-        bodies["maxCapacity"] = *request.MaxCapacity
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	path := "/{namespaceName}/master/model/mold/{moldModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.FormModelName != nil && *request.FormModelName != "" {
+		bodies["formModelName"] = *request.FormModelName
+	}
+	if request.InitialMaxCapacity != nil {
+		bodies["initialMaxCapacity"] = *request.InitialMaxCapacity
+	}
+	if request.MaxCapacity != nil {
+		bodies["maxCapacity"] = *request.MaxCapacity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateMoldModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1808,13 +1730,13 @@ func deleteMoldModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteMoldModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteMoldModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteMoldModelMasterAsyncResult{
 		result: &result,
@@ -1827,25 +1749,25 @@ func (p Gs2FormationRestClient) DeleteMoldModelMasterAsync(
 	request *DeleteMoldModelMasterRequest,
 	callback chan<- DeleteMoldModelMasterAsyncResult,
 ) {
-	path := "/{namespaceName}/master/model/mold/{moldName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
+	path := "/{namespaceName}/master/model/mold/{moldModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteMoldModelMasterAsyncHandler(
 		p,
@@ -1864,6 +1786,655 @@ func (p Gs2FormationRestClient) DeleteMoldModelMaster(
 ) (*DeleteMoldModelMasterResult, error) {
 	callback := make(chan DeleteMoldModelMasterAsyncResult, 1)
 	go p.DeleteMoldModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describePropertyFormModelsAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribePropertyFormModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribePropertyFormModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribePropertyFormModelsResult
+	if asyncResult.Err != nil {
+		callback <- DescribePropertyFormModelsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribePropertyFormModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribePropertyFormModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) DescribePropertyFormModelsAsync(
+	request *DescribePropertyFormModelsRequest,
+	callback chan<- DescribePropertyFormModelsAsyncResult,
+) {
+	path := "/{namespaceName}/model/propertyForm"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go describePropertyFormModelsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) DescribePropertyFormModels(
+	request *DescribePropertyFormModelsRequest,
+) (*DescribePropertyFormModelsResult, error) {
+	callback := make(chan DescribePropertyFormModelsAsyncResult, 1)
+	go p.DescribePropertyFormModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getPropertyFormModelAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetPropertyFormModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetPropertyFormModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetPropertyFormModelResult
+	if asyncResult.Err != nil {
+		callback <- GetPropertyFormModelAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetPropertyFormModelAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetPropertyFormModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) GetPropertyFormModelAsync(
+	request *GetPropertyFormModelRequest,
+	callback chan<- GetPropertyFormModelAsyncResult,
+) {
+	path := "/{namespaceName}/model/propertyForm/{propertyFormModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go getPropertyFormModelAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) GetPropertyFormModel(
+	request *GetPropertyFormModelRequest,
+) (*GetPropertyFormModelResult, error) {
+	callback := make(chan GetPropertyFormModelAsyncResult, 1)
+	go p.GetPropertyFormModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describePropertyFormModelMastersAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribePropertyFormModelMastersAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribePropertyFormModelMastersAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribePropertyFormModelMastersResult
+	if asyncResult.Err != nil {
+		callback <- DescribePropertyFormModelMastersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribePropertyFormModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribePropertyFormModelMastersAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) DescribePropertyFormModelMastersAsync(
+	request *DescribePropertyFormModelMastersRequest,
+	callback chan<- DescribePropertyFormModelMastersAsyncResult,
+) {
+	path := "/{namespaceName}/master/model/propertyForm"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go describePropertyFormModelMastersAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) DescribePropertyFormModelMasters(
+	request *DescribePropertyFormModelMastersRequest,
+) (*DescribePropertyFormModelMastersResult, error) {
+	callback := make(chan DescribePropertyFormModelMastersAsyncResult, 1)
+	go p.DescribePropertyFormModelMastersAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func createPropertyFormModelMasterAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- CreatePropertyFormModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreatePropertyFormModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreatePropertyFormModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- CreatePropertyFormModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreatePropertyFormModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- CreatePropertyFormModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) CreatePropertyFormModelMasterAsync(
+	request *CreatePropertyFormModelMasterRequest,
+	callback chan<- CreatePropertyFormModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/model/propertyForm"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.Slots != nil {
+		var _slots []interface{}
+		for _, item := range request.Slots {
+			_slots = append(_slots, item)
+		}
+		bodies["slots"] = _slots
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go createPropertyFormModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) CreatePropertyFormModelMaster(
+	request *CreatePropertyFormModelMasterRequest,
+) (*CreatePropertyFormModelMasterResult, error) {
+	callback := make(chan CreatePropertyFormModelMasterAsyncResult, 1)
+	go p.CreatePropertyFormModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getPropertyFormModelMasterAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetPropertyFormModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetPropertyFormModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetPropertyFormModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- GetPropertyFormModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetPropertyFormModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetPropertyFormModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) GetPropertyFormModelMasterAsync(
+	request *GetPropertyFormModelMasterRequest,
+	callback chan<- GetPropertyFormModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/model/propertyForm/{propertyFormModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go getPropertyFormModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) GetPropertyFormModelMaster(
+	request *GetPropertyFormModelMasterRequest,
+) (*GetPropertyFormModelMasterResult, error) {
+	callback := make(chan GetPropertyFormModelMasterAsyncResult, 1)
+	go p.GetPropertyFormModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func updatePropertyFormModelMasterAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- UpdatePropertyFormModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdatePropertyFormModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdatePropertyFormModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- UpdatePropertyFormModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdatePropertyFormModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- UpdatePropertyFormModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) UpdatePropertyFormModelMasterAsync(
+	request *UpdatePropertyFormModelMasterRequest,
+	callback chan<- UpdatePropertyFormModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/model/propertyForm/{propertyFormModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.Slots != nil {
+		var _slots []interface{}
+		for _, item := range request.Slots {
+			_slots = append(_slots, item)
+		}
+		bodies["slots"] = _slots
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go updatePropertyFormModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) UpdatePropertyFormModelMaster(
+	request *UpdatePropertyFormModelMasterRequest,
+) (*UpdatePropertyFormModelMasterResult, error) {
+	callback := make(chan UpdatePropertyFormModelMasterAsyncResult, 1)
+	go p.UpdatePropertyFormModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deletePropertyFormModelMasterAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeletePropertyFormModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeletePropertyFormModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeletePropertyFormModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- DeletePropertyFormModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeletePropertyFormModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DeletePropertyFormModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) DeletePropertyFormModelMasterAsync(
+	request *DeletePropertyFormModelMasterRequest,
+	callback chan<- DeletePropertyFormModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/model/propertyForm/{propertyFormModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go deletePropertyFormModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) DeletePropertyFormModelMaster(
+	request *DeletePropertyFormModelMasterRequest,
+) (*DeletePropertyFormModelMasterResult, error) {
+	callback := make(chan DeletePropertyFormModelMasterAsyncResult, 1)
+	go p.DeletePropertyFormModelMasterAsync(
 		request,
 		callback,
 	)
@@ -1897,13 +2468,13 @@ func exportMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ExportMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExportMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -1917,19 +2488,19 @@ func (p Gs2FormationRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go exportMasterAsyncHandler(
 		p,
@@ -1981,13 +2552,13 @@ func getCurrentFormMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCurrentFormMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCurrentFormMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetCurrentFormMasterAsyncResult{
 		result: &result,
@@ -2001,19 +2572,19 @@ func (p Gs2FormationRestClient) GetCurrentFormMasterAsync(
 	callback chan<- GetCurrentFormMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getCurrentFormMasterAsyncHandler(
 		p,
@@ -2065,13 +2636,13 @@ func updateCurrentFormMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentFormMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentFormMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateCurrentFormMasterAsyncResult{
 		result: &result,
@@ -2085,33 +2656,33 @@ func (p Gs2FormationRestClient) UpdateCurrentFormMasterAsync(
 	callback chan<- UpdateCurrentFormMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Settings != nil && *request.Settings != "" {
-        bodies["settings"] = *request.Settings
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Settings != nil && *request.Settings != "" {
+		bodies["settings"] = *request.Settings
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateCurrentFormMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2155,13 +2726,13 @@ func updateCurrentFormMasterFromGitHubAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentFormMasterFromGitHubAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentFormMasterFromGitHubAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateCurrentFormMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2175,33 +2746,33 @@ func (p Gs2FormationRestClient) UpdateCurrentFormMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentFormMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.CheckoutSetting != nil {
-        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.CheckoutSetting != nil {
+		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateCurrentFormMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2245,13 +2816,13 @@ func describeMoldsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeMoldsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMoldsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeMoldsAsyncResult{
 		result: &result,
@@ -2265,11 +2836,11 @@ func (p Gs2FormationRestClient) DescribeMoldsAsync(
 	callback chan<- DescribeMoldsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/mold"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2280,13 +2851,13 @@ func (p Gs2FormationRestClient) DescribeMoldsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go describeMoldsAsyncHandler(
 		p,
@@ -2338,13 +2909,13 @@ func describeMoldsByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeMoldsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMoldsByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeMoldsByUserIdAsyncResult{
 		result: &result,
@@ -2358,16 +2929,16 @@ func (p Gs2FormationRestClient) DescribeMoldsByUserIdAsync(
 	callback chan<- DescribeMoldsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/mold"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2378,10 +2949,10 @@ func (p Gs2FormationRestClient) DescribeMoldsByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeMoldsByUserIdAsyncHandler(
 		p,
@@ -2433,13 +3004,13 @@ func getMoldAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetMoldAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetMoldAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetMoldAsyncResult{
 		result: &result,
@@ -2452,28 +3023,28 @@ func (p Gs2FormationRestClient) GetMoldAsync(
 	request *GetMoldRequest,
 	callback chan<- GetMoldAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/mold/{moldName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
+	path := "/{namespaceName}/user/me/mold/{moldModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go getMoldAsyncHandler(
 		p,
@@ -2525,13 +3096,13 @@ func getMoldByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetMoldByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetMoldByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetMoldByUserIdAsyncResult{
 		result: &result,
@@ -2544,30 +3115,30 @@ func (p Gs2FormationRestClient) GetMoldByUserIdAsync(
 	request *GetMoldByUserIdRequest,
 	callback chan<- GetMoldByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/mold/{moldName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
+	path := "/{namespaceName}/user/{userId}/mold/{moldModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getMoldByUserIdAsyncHandler(
 		p,
@@ -2619,13 +3190,13 @@ func setMoldCapacityByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetMoldCapacityByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetMoldCapacityByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetMoldCapacityByUserIdAsyncResult{
 		result: &result,
@@ -2638,47 +3209,47 @@ func (p Gs2FormationRestClient) SetMoldCapacityByUserIdAsync(
 	request *SetMoldCapacityByUserIdRequest,
 	callback chan<- SetMoldCapacityByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/mold/{moldName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Capacity != nil {
-        bodies["capacity"] = *request.Capacity
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	path := "/{namespaceName}/user/{userId}/mold/{moldModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Capacity != nil {
+		bodies["capacity"] = *request.Capacity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go setMoldCapacityByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2722,13 +3293,13 @@ func addMoldCapacityByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AddMoldCapacityByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AddMoldCapacityByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- AddMoldCapacityByUserIdAsyncResult{
 		result: &result,
@@ -2741,47 +3312,47 @@ func (p Gs2FormationRestClient) AddMoldCapacityByUserIdAsync(
 	request *AddMoldCapacityByUserIdRequest,
 	callback chan<- AddMoldCapacityByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/mold/{moldName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Capacity != nil {
-        bodies["capacity"] = *request.Capacity
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	path := "/{namespaceName}/user/{userId}/mold/{moldModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Capacity != nil {
+		bodies["capacity"] = *request.Capacity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go addMoldCapacityByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2825,13 +3396,13 @@ func subMoldCapacityByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SubMoldCapacityByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SubMoldCapacityByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SubMoldCapacityByUserIdAsyncResult{
 		result: &result,
@@ -2844,47 +3415,47 @@ func (p Gs2FormationRestClient) SubMoldCapacityByUserIdAsync(
 	request *SubMoldCapacityByUserIdRequest,
 	callback chan<- SubMoldCapacityByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/mold/{moldName}/sub"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Capacity != nil {
-        bodies["capacity"] = *request.Capacity
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	path := "/{namespaceName}/user/{userId}/mold/{moldModelName}/sub"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Capacity != nil {
+		bodies["capacity"] = *request.Capacity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go subMoldCapacityByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2928,13 +3499,13 @@ func deleteMoldAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteMoldAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteMoldAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteMoldAsyncResult{
 		result: &result,
@@ -2947,31 +3518,31 @@ func (p Gs2FormationRestClient) DeleteMoldAsync(
 	request *DeleteMoldRequest,
 	callback chan<- DeleteMoldAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/mold/{moldName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
+	path := "/{namespaceName}/user/me/mold/{moldModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go deleteMoldAsyncHandler(
 		p,
@@ -3023,13 +3594,13 @@ func deleteMoldByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteMoldByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteMoldByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteMoldByUserIdAsyncResult{
 		result: &result,
@@ -3042,33 +3613,33 @@ func (p Gs2FormationRestClient) DeleteMoldByUserIdAsync(
 	request *DeleteMoldByUserIdRequest,
 	callback chan<- DeleteMoldByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/mold/{moldName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
+	path := "/{namespaceName}/user/{userId}/mold/{moldModelName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go deleteMoldByUserIdAsyncHandler(
 		p,
@@ -3120,13 +3691,13 @@ func addCapacityByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AddCapacityByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AddCapacityByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- AddCapacityByStampSheetAsyncResult{
 		result: &result,
@@ -3142,29 +3713,29 @@ func (p Gs2FormationRestClient) AddCapacityByStampSheetAsync(
 	path := "/stamp/mold/capacity/add"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go addCapacityByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3208,13 +3779,13 @@ func subCapacityByStampTaskAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SubCapacityByStampTaskAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SubCapacityByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SubCapacityByStampTaskAsyncResult{
 		result: &result,
@@ -3230,29 +3801,29 @@ func (p Gs2FormationRestClient) SubCapacityByStampTaskAsync(
 	path := "/stamp/mold/capacity/sub"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampTask != nil && *request.StampTask != "" {
-        bodies["stampTask"] = *request.StampTask
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go subCapacityByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3296,13 +3867,13 @@ func setCapacityByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetCapacityByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetCapacityByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetCapacityByStampSheetAsyncResult{
 		result: &result,
@@ -3318,29 +3889,29 @@ func (p Gs2FormationRestClient) SetCapacityByStampSheetAsync(
 	path := "/stamp/mold/capacity/set"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go setCapacityByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3384,13 +3955,13 @@ func describeFormsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeFormsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeFormsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeFormsAsyncResult{
 		result: &result,
@@ -3403,17 +3974,17 @@ func (p Gs2FormationRestClient) DescribeFormsAsync(
 	request *DescribeFormsRequest,
 	callback chan<- DescribeFormsAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/mold/{moldName}/form"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
+	path := "/{namespaceName}/user/me/mold/{moldModelName}/form"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3424,13 +3995,13 @@ func (p Gs2FormationRestClient) DescribeFormsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go describeFormsAsyncHandler(
 		p,
@@ -3482,13 +4053,13 @@ func describeFormsByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeFormsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeFormsByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeFormsByUserIdAsyncResult{
 		result: &result,
@@ -3501,22 +4072,22 @@ func (p Gs2FormationRestClient) DescribeFormsByUserIdAsync(
 	request *DescribeFormsByUserIdRequest,
 	callback chan<- DescribeFormsByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/mold/{moldName}/form"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
+	path := "/{namespaceName}/user/{userId}/mold/{moldModelName}/form"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3527,10 +4098,10 @@ func (p Gs2FormationRestClient) DescribeFormsByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeFormsByUserIdAsyncHandler(
 		p,
@@ -3582,13 +4153,13 @@ func getFormAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFormAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetFormAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetFormAsyncResult{
 		result: &result,
@@ -3601,33 +4172,33 @@ func (p Gs2FormationRestClient) GetFormAsync(
 	request *GetFormRequest,
 	callback chan<- GetFormAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/mold/{moldName}/form/{index}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-    if request.Index != nil {
-        path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
-    } else {
-        path = strings.ReplaceAll(path, "{index}", "null")
-    }
+	path := "/{namespaceName}/user/me/mold/{moldModelName}/form/{index}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.Index != nil {
+		path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
+	} else {
+		path = strings.ReplaceAll(path, "{index}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go getFormAsyncHandler(
 		p,
@@ -3679,13 +4250,13 @@ func getFormByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFormByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetFormByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetFormByUserIdAsyncResult{
 		result: &result,
@@ -3698,35 +4269,35 @@ func (p Gs2FormationRestClient) GetFormByUserIdAsync(
 	request *GetFormByUserIdRequest,
 	callback chan<- GetFormByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/mold/{moldName}/form/{index}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-    if request.Index != nil {
-        path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
-    } else {
-        path = strings.ReplaceAll(path, "{index}", "null")
-    }
+	path := "/{namespaceName}/user/{userId}/mold/{moldModelName}/form/{index}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.Index != nil {
+		path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
+	} else {
+		path = strings.ReplaceAll(path, "{index}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getFormByUserIdAsyncHandler(
 		p,
@@ -3778,13 +4349,13 @@ func getFormWithSignatureAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFormWithSignatureAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetFormWithSignatureAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetFormWithSignatureAsyncResult{
 		result: &result,
@@ -3797,22 +4368,22 @@ func (p Gs2FormationRestClient) GetFormWithSignatureAsync(
 	request *GetFormWithSignatureRequest,
 	callback chan<- GetFormWithSignatureAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/mold/{moldName}/form/{index}/signature"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-    if request.Index != nil {
-        path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
-    } else {
-        path = strings.ReplaceAll(path, "{index}", "null")
-    }
+	path := "/{namespaceName}/user/me/mold/{moldModelName}/form/{index}/signature"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.Index != nil {
+		path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
+	} else {
+		path = strings.ReplaceAll(path, "{index}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3820,13 +4391,13 @@ func (p Gs2FormationRestClient) GetFormWithSignatureAsync(
 		queryStrings["keyId"] = core.ToString(*request.KeyId)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go getFormWithSignatureAsyncHandler(
 		p,
@@ -3878,13 +4449,13 @@ func getFormWithSignatureByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFormWithSignatureByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetFormWithSignatureByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetFormWithSignatureByUserIdAsyncResult{
 		result: &result,
@@ -3897,27 +4468,27 @@ func (p Gs2FormationRestClient) GetFormWithSignatureByUserIdAsync(
 	request *GetFormWithSignatureByUserIdRequest,
 	callback chan<- GetFormWithSignatureByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/mold/{moldName}/form/{index}/signature"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-    if request.Index != nil {
-        path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
-    } else {
-        path = strings.ReplaceAll(path, "{index}", "null")
-    }
+	path := "/{namespaceName}/user/{userId}/mold/{moldModelName}/form/{index}/signature"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.Index != nil {
+		path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
+	} else {
+		path = strings.ReplaceAll(path, "{index}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3925,10 +4496,10 @@ func (p Gs2FormationRestClient) GetFormWithSignatureByUserIdAsync(
 		queryStrings["keyId"] = core.ToString(*request.KeyId)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getFormWithSignatureByUserIdAsyncHandler(
 		p,
@@ -3980,13 +4551,13 @@ func setFormByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetFormByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetFormByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetFormByUserIdAsyncResult{
 		result: &result,
@@ -3999,56 +4570,56 @@ func (p Gs2FormationRestClient) SetFormByUserIdAsync(
 	request *SetFormByUserIdRequest,
 	callback chan<- SetFormByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/mold/{moldName}/form/{index}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-    if request.Index != nil {
-        path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
-    } else {
-        path = strings.ReplaceAll(path, "{index}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Slots != nil {
-        var _slots []interface {}
-        for _, item := range request.Slots {
-            _slots = append(_slots, item)
-        }
-        bodies["slots"] = _slots
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	path := "/{namespaceName}/user/{userId}/mold/{moldModelName}/form/{index}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.Index != nil {
+		path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
+	} else {
+		path = strings.ReplaceAll(path, "{index}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Slots != nil {
+		var _slots []interface{}
+		for _, item := range request.Slots {
+			_slots = append(_slots, item)
+		}
+		bodies["slots"] = _slots
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go setFormByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -4092,13 +4663,13 @@ func setFormWithSignatureAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetFormWithSignatureAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetFormWithSignatureAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetFormWithSignatureAsyncResult{
 		result: &result,
@@ -4111,57 +4682,57 @@ func (p Gs2FormationRestClient) SetFormWithSignatureAsync(
 	request *SetFormWithSignatureRequest,
 	callback chan<- SetFormWithSignatureAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/mold/{moldName}/form/{index}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-    if request.Index != nil {
-        path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
-    } else {
-        path = strings.ReplaceAll(path, "{index}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Slots != nil {
-        var _slots []interface {}
-        for _, item := range request.Slots {
-            _slots = append(_slots, item)
-        }
-        bodies["slots"] = _slots
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	path := "/{namespaceName}/user/me/mold/{moldModelName}/form/{index}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.Index != nil {
+		path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
+	} else {
+		path = strings.ReplaceAll(path, "{index}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Slots != nil {
+		var _slots []interface{}
+		for _, item := range request.Slots {
+			_slots = append(_slots, item)
+		}
+		bodies["slots"] = _slots
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go setFormWithSignatureAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -4205,13 +4776,13 @@ func acquireActionsToFormPropertiesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AcquireActionsToFormPropertiesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AcquireActionsToFormPropertiesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- AcquireActionsToFormPropertiesAsyncResult{
 		result: &result,
@@ -4224,59 +4795,59 @@ func (p Gs2FormationRestClient) AcquireActionsToFormPropertiesAsync(
 	request *AcquireActionsToFormPropertiesRequest,
 	callback chan<- AcquireActionsToFormPropertiesAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/mold/{moldName}/form/{index}/stamp/delegate"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-    if request.Index != nil {
-        path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
-    } else {
-        path = strings.ReplaceAll(path, "{index}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.AcquireAction != nil {
-        bodies["acquireAction"] = request.AcquireAction.ToDict()
-    }
-    if request.Config != nil {
-        var _config []interface {}
-        for _, item := range request.Config {
-            _config = append(_config, item)
-        }
-        bodies["config"] = _config
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	path := "/{namespaceName}/user/{userId}/mold/{moldModelName}/form/{index}/stamp/delegate"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.Index != nil {
+		path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
+	} else {
+		path = strings.ReplaceAll(path, "{index}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.AcquireAction != nil {
+		bodies["acquireAction"] = request.AcquireAction.ToDict()
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go acquireActionsToFormPropertiesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -4320,13 +4891,13 @@ func deleteFormAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteFormAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteFormAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteFormAsyncResult{
 		result: &result,
@@ -4339,36 +4910,36 @@ func (p Gs2FormationRestClient) DeleteFormAsync(
 	request *DeleteFormRequest,
 	callback chan<- DeleteFormAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/mold/{moldName}/form/{index}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-    if request.Index != nil {
-        path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
-    } else {
-        path = strings.ReplaceAll(path, "{index}", "null")
-    }
+	path := "/{namespaceName}/user/me/mold/{moldModelName}/form/{index}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.Index != nil {
+		path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
+	} else {
+		path = strings.ReplaceAll(path, "{index}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go deleteFormAsyncHandler(
 		p,
@@ -4420,13 +4991,13 @@ func deleteFormByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteFormByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteFormByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteFormByUserIdAsyncResult{
 		result: &result,
@@ -4439,38 +5010,38 @@ func (p Gs2FormationRestClient) DeleteFormByUserIdAsync(
 	request *DeleteFormByUserIdRequest,
 	callback chan<- DeleteFormByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/mold/{moldName}/form/{index}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
-    if request.Index != nil {
-        path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
-    } else {
-        path = strings.ReplaceAll(path, "{index}", "null")
-    }
+	path := "/{namespaceName}/user/{userId}/mold/{moldModelName}/form/{index}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.Index != nil {
+		path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
+	} else {
+		path = strings.ReplaceAll(path, "{index}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go deleteFormByUserIdAsyncHandler(
 		p,
@@ -4522,13 +5093,13 @@ func acquireActionToFormPropertiesByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AcquireActionToFormPropertiesByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AcquireActionToFormPropertiesByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- AcquireActionToFormPropertiesByStampSheetAsyncResult{
 		result: &result,
@@ -4544,29 +5115,29 @@ func (p Gs2FormationRestClient) AcquireActionToFormPropertiesByStampSheetAsync(
 	path := "/stamp/form/acquire"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go acquireActionToFormPropertiesByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -4610,13 +5181,13 @@ func describePropertyFormsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribePropertyFormsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribePropertyFormsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribePropertyFormsAsyncResult{
 		result: &result,
@@ -4629,17 +5200,17 @@ func (p Gs2FormationRestClient) DescribePropertyFormsAsync(
 	request *DescribePropertyFormsRequest,
 	callback chan<- DescribePropertyFormsAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/property/{formModelName}/form"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
+	path := "/{namespaceName}/user/me/property/{propertyFormModelName}/form"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -4650,13 +5221,13 @@ func (p Gs2FormationRestClient) DescribePropertyFormsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go describePropertyFormsAsyncHandler(
 		p,
@@ -4708,13 +5279,13 @@ func describePropertyFormsByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribePropertyFormsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribePropertyFormsByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribePropertyFormsByUserIdAsyncResult{
 		result: &result,
@@ -4727,22 +5298,22 @@ func (p Gs2FormationRestClient) DescribePropertyFormsByUserIdAsync(
 	request *DescribePropertyFormsByUserIdRequest,
 	callback chan<- DescribePropertyFormsByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/property/{formModelName}/form"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
+	path := "/{namespaceName}/user/{userId}/property/{propertyFormModelName}/form"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -4753,10 +5324,10 @@ func (p Gs2FormationRestClient) DescribePropertyFormsByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describePropertyFormsByUserIdAsyncHandler(
 		p,
@@ -4808,13 +5379,13 @@ func getPropertyFormAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetPropertyFormAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetPropertyFormAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetPropertyFormAsyncResult{
 		result: &result,
@@ -4827,33 +5398,33 @@ func (p Gs2FormationRestClient) GetPropertyFormAsync(
 	request *GetPropertyFormRequest,
 	callback chan<- GetPropertyFormAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/property/{formModelName}/form/{propertyId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
-    if request.PropertyId != nil && *request.PropertyId != ""  {
-        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-    } else {
-        path = strings.ReplaceAll(path, "{propertyId}", "null")
-    }
+	path := "/{namespaceName}/user/me/property/{propertyFormModelName}/form/{propertyId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go getPropertyFormAsyncHandler(
 		p,
@@ -4905,13 +5476,13 @@ func getPropertyFormByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetPropertyFormByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetPropertyFormByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetPropertyFormByUserIdAsyncResult{
 		result: &result,
@@ -4924,35 +5495,35 @@ func (p Gs2FormationRestClient) GetPropertyFormByUserIdAsync(
 	request *GetPropertyFormByUserIdRequest,
 	callback chan<- GetPropertyFormByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/property/{formModelName}/form/{propertyId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
-    if request.PropertyId != nil && *request.PropertyId != ""  {
-        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-    } else {
-        path = strings.ReplaceAll(path, "{propertyId}", "null")
-    }
+	path := "/{namespaceName}/user/{userId}/property/{propertyFormModelName}/form/{propertyId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getPropertyFormByUserIdAsyncHandler(
 		p,
@@ -5004,13 +5575,13 @@ func getPropertyFormWithSignatureAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetPropertyFormWithSignatureAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetPropertyFormWithSignatureAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetPropertyFormWithSignatureAsyncResult{
 		result: &result,
@@ -5023,22 +5594,22 @@ func (p Gs2FormationRestClient) GetPropertyFormWithSignatureAsync(
 	request *GetPropertyFormWithSignatureRequest,
 	callback chan<- GetPropertyFormWithSignatureAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/property/{formModelName}/form/{propertyId}/signature"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
-    if request.PropertyId != nil && *request.PropertyId != ""  {
-        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-    } else {
-        path = strings.ReplaceAll(path, "{propertyId}", "null")
-    }
+	path := "/{namespaceName}/user/me/property/{propertyFormModelName}/form/{propertyId}/signature"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -5046,13 +5617,13 @@ func (p Gs2FormationRestClient) GetPropertyFormWithSignatureAsync(
 		queryStrings["keyId"] = core.ToString(*request.KeyId)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go getPropertyFormWithSignatureAsyncHandler(
 		p,
@@ -5104,13 +5675,13 @@ func getPropertyFormWithSignatureByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetPropertyFormWithSignatureByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetPropertyFormWithSignatureByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetPropertyFormWithSignatureByUserIdAsyncResult{
 		result: &result,
@@ -5123,27 +5694,27 @@ func (p Gs2FormationRestClient) GetPropertyFormWithSignatureByUserIdAsync(
 	request *GetPropertyFormWithSignatureByUserIdRequest,
 	callback chan<- GetPropertyFormWithSignatureByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/property/{formModelName}/form/{propertyId}/signature"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
-    if request.PropertyId != nil && *request.PropertyId != ""  {
-        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-    } else {
-        path = strings.ReplaceAll(path, "{propertyId}", "null")
-    }
+	path := "/{namespaceName}/user/{userId}/property/{propertyFormModelName}/form/{propertyId}/signature"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -5151,10 +5722,10 @@ func (p Gs2FormationRestClient) GetPropertyFormWithSignatureByUserIdAsync(
 		queryStrings["keyId"] = core.ToString(*request.KeyId)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getPropertyFormWithSignatureByUserIdAsyncHandler(
 		p,
@@ -5206,13 +5777,13 @@ func setPropertyFormByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetPropertyFormByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetPropertyFormByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetPropertyFormByUserIdAsyncResult{
 		result: &result,
@@ -5225,56 +5796,56 @@ func (p Gs2FormationRestClient) SetPropertyFormByUserIdAsync(
 	request *SetPropertyFormByUserIdRequest,
 	callback chan<- SetPropertyFormByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/property/{formModelName}/form/{propertyId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
-    if request.PropertyId != nil && *request.PropertyId != ""  {
-        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-    } else {
-        path = strings.ReplaceAll(path, "{propertyId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Slots != nil {
-        var _slots []interface {}
-        for _, item := range request.Slots {
-            _slots = append(_slots, item)
-        }
-        bodies["slots"] = _slots
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	path := "/{namespaceName}/user/{userId}/property/{propertyFormModelName}/form/{propertyId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Slots != nil {
+		var _slots []interface{}
+		for _, item := range request.Slots {
+			_slots = append(_slots, item)
+		}
+		bodies["slots"] = _slots
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go setPropertyFormByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -5318,13 +5889,13 @@ func setPropertyFormWithSignatureAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetPropertyFormWithSignatureAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetPropertyFormWithSignatureAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetPropertyFormWithSignatureAsyncResult{
 		result: &result,
@@ -5337,57 +5908,57 @@ func (p Gs2FormationRestClient) SetPropertyFormWithSignatureAsync(
 	request *SetPropertyFormWithSignatureRequest,
 	callback chan<- SetPropertyFormWithSignatureAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/property/{formModelName}/form/{propertyId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
-    if request.PropertyId != nil && *request.PropertyId != ""  {
-        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-    } else {
-        path = strings.ReplaceAll(path, "{propertyId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Slots != nil {
-        var _slots []interface {}
-        for _, item := range request.Slots {
-            _slots = append(_slots, item)
-        }
-        bodies["slots"] = _slots
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	path := "/{namespaceName}/user/me/property/{propertyFormModelName}/form/{propertyId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Slots != nil {
+		var _slots []interface{}
+		for _, item := range request.Slots {
+			_slots = append(_slots, item)
+		}
+		bodies["slots"] = _slots
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go setPropertyFormWithSignatureAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -5431,13 +6002,13 @@ func acquireActionsToPropertyFormPropertiesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AcquireActionsToPropertyFormPropertiesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AcquireActionsToPropertyFormPropertiesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- AcquireActionsToPropertyFormPropertiesAsyncResult{
 		result: &result,
@@ -5450,59 +6021,59 @@ func (p Gs2FormationRestClient) AcquireActionsToPropertyFormPropertiesAsync(
 	request *AcquireActionsToPropertyFormPropertiesRequest,
 	callback chan<- AcquireActionsToPropertyFormPropertiesAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/property/{formModelName}/form/{propertyId}/stamp/delegate"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
-    if request.PropertyId != nil && *request.PropertyId != ""  {
-        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-    } else {
-        path = strings.ReplaceAll(path, "{propertyId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.AcquireAction != nil {
-        bodies["acquireAction"] = request.AcquireAction.ToDict()
-    }
-    if request.Config != nil {
-        var _config []interface {}
-        for _, item := range request.Config {
-            _config = append(_config, item)
-        }
-        bodies["config"] = _config
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	path := "/{namespaceName}/user/{userId}/property/{propertyFormModelName}/form/{propertyId}/stamp/delegate"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.AcquireAction != nil {
+		bodies["acquireAction"] = request.AcquireAction.ToDict()
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go acquireActionsToPropertyFormPropertiesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -5546,13 +6117,13 @@ func deletePropertyFormAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeletePropertyFormAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeletePropertyFormAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeletePropertyFormAsyncResult{
 		result: &result,
@@ -5565,36 +6136,36 @@ func (p Gs2FormationRestClient) DeletePropertyFormAsync(
 	request *DeletePropertyFormRequest,
 	callback chan<- DeletePropertyFormAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/property/{formModelName}/form/{propertyId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
-    if request.PropertyId != nil && *request.PropertyId != ""  {
-        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-    } else {
-        path = strings.ReplaceAll(path, "{propertyId}", "null")
-    }
+	path := "/{namespaceName}/user/me/property/{propertyFormModelName}/form/{propertyId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go deletePropertyFormAsyncHandler(
 		p,
@@ -5646,13 +6217,13 @@ func deletePropertyFormByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeletePropertyFormByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeletePropertyFormByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeletePropertyFormByUserIdAsyncResult{
 		result: &result,
@@ -5665,38 +6236,38 @@ func (p Gs2FormationRestClient) DeletePropertyFormByUserIdAsync(
 	request *DeletePropertyFormByUserIdRequest,
 	callback chan<- DeletePropertyFormByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/property/{formModelName}/form/{propertyId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.FormModelName != nil && *request.FormModelName != ""  {
-        path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-    } else {
-        path = strings.ReplaceAll(path, "{formModelName}", "null")
-    }
-    if request.PropertyId != nil && *request.PropertyId != ""  {
-        path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
-    } else {
-        path = strings.ReplaceAll(path, "{propertyId}", "null")
-    }
+	path := "/{namespaceName}/user/{userId}/property/{propertyFormModelName}/form/{propertyId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go deletePropertyFormByUserIdAsyncHandler(
 		p,
@@ -5748,13 +6319,13 @@ func acquireActionToPropertyFormPropertiesByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AcquireActionToPropertyFormPropertiesByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AcquireActionToPropertyFormPropertiesByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- AcquireActionToPropertyFormPropertiesByStampSheetAsyncResult{
 		result: &result,
@@ -5770,29 +6341,29 @@ func (p Gs2FormationRestClient) AcquireActionToPropertyFormPropertiesByStampShee
 	path := "/stamp/property/form/acquire"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go acquireActionToPropertyFormPropertiesByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
